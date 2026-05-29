@@ -672,6 +672,9 @@
                     } else {
                         showLoginScreen();
                     }
+                }).catch(err => {
+                    console.error("Erro ao obter sessão do Supabase:", err);
+                    showLoginScreen();
                 });
             }
         }
@@ -796,19 +799,23 @@
             
             // Registrar listener de mudanças no estado de autenticação (Supabase Auth)
             if (supabase) {
-                supabase.auth.onAuthStateChange((event, session) => {
-                    if (session) {
-                        const email = session.user.email;
-                        if (!email.toLowerCase().endsWith('@jletelecom.com.br')) {
-                            alert('Acesso restrito: Apenas e-mails corporativos @jletelecom.com.br são permitidos.');
-                            supabase.auth.signOut();
-                            return;
+                try {
+                    supabase.auth.onAuthStateChange((event, session) => {
+                        if (session) {
+                            const email = session.user.email;
+                            if (!email.toLowerCase().endsWith('@jletelecom.com.br')) {
+                                alert('Acesso restrito: Apenas e-mails corporativos @jletelecom.com.br são permitidos.');
+                                supabase.auth.signOut();
+                                return;
+                            }
+                            showDashboard(session.user);
+                        } else {
+                            showLoginScreen();
                         }
-                        showDashboard(session.user);
-                    } else {
-                        showLoginScreen();
-                    }
-                });
+                    });
+                } catch (err) {
+                    console.error("Erro ao registrar onAuthStateChange:", err);
+                }
             }
             
             // Verificar sessão inicial
