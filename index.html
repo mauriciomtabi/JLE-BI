@@ -425,6 +425,32 @@
 
     <!-- Logica Frontend -->
     <script>
+        // Utilitário de armazenamento seguro contra restrições de localStorage em browsers corporativos
+        const safeStorage = {
+            getItem(key) {
+                try {
+                    return localStorage.getItem(key);
+                } catch (e) {
+                    return safeStorage._data[key] || null;
+                }
+            },
+            setItem(key, value) {
+                try {
+                    localStorage.setItem(key, value);
+                } catch (e) {
+                    safeStorage._data[key] = value;
+                }
+            },
+            removeItem(key) {
+                try {
+                    localStorage.removeItem(key);
+                } catch (e) {
+                    delete safeStorage._data[key];
+                }
+            },
+            _data: {}
+        };
+
         // Registrar plugin de Datalabels e desativar exibição global
         Chart.register(ChartDataLabels);
         Chart.defaults.set('plugins.datalabels', { display: false });
@@ -519,8 +545,8 @@
                     btnSubmit.disabled = false;
                     btnSubmit.innerHTML = '<i class="fa-solid fa-user-plus"></i> Cadastrar';
                     showAuthAlert('[MODO DEMO] Cadastro simulado! Confirme clicando na aba Entrar (admin@jletelecom.com.br / 123456 ou use este cadastro).', 'success');
-                    localStorage.setItem('demo_user_email', email);
-                    localStorage.setItem('demo_user_password', password);
+                    safeStorage.setItem('demo_user_email', email);
+                    safeStorage.setItem('demo_user_password', password);
                 }, 1000);
             } else {
                 try {
@@ -571,11 +597,11 @@
                     btnSubmit.disabled = false;
                     btnSubmit.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Entrar';
                     
-                    const savedEmail = localStorage.getItem('demo_user_email') || 'admin@jletelecom.com.br';
-                    const savedPass = localStorage.getItem('demo_user_password') || '123456';
+                    const savedEmail = safeStorage.getItem('demo_user_email') || 'admin@jletelecom.com.br';
+                    const savedPass = safeStorage.getItem('demo_user_password') || '123456';
                     
                     if (email.toLowerCase() === savedEmail.toLowerCase() && password === savedPass) {
-                        localStorage.setItem('demo_session', JSON.stringify({ email: email }));
+                        safeStorage.setItem('demo_session', JSON.stringify({ email: email }));
                         checkAuth();
                     } else {
                         showAuthAlert('E-mail ou senha incorretos. (No modo demo, utilize: admin@jletelecom.com.br / 123456)', 'error');
@@ -605,7 +631,7 @@
         // Logout
         async function handleLogout() {
             if (isDemoMode || !supabase) {
-                localStorage.removeItem('demo_session');
+                safeStorage.removeItem('demo_session');
                 checkAuth();
             } else {
                 try {
@@ -619,7 +645,7 @@
         // Verificar sessão na carga
         function checkAuth() {
             if (isDemoMode || !supabase) {
-                const session = localStorage.getItem('demo_session');
+                const session = safeStorage.getItem('demo_session');
                 if (session) {
                     const user = JSON.parse(session);
                     showDashboard(user);
