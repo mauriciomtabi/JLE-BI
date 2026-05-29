@@ -1,0 +1,328 @@
+﻿[
+    {
+        "Name":  "Instruções",
+        "Visible":  0,
+        "TotalRows":  9,
+        "TotalCols":  7,
+        "HeaderRowIndex":  -1,
+        "Headers":  [
+
+                    ]
+    },
+    {
+        "Name":  "Cartão de Crédito",
+        "Visible":  -1,
+        "TotalRows":  685,
+        "TotalCols":  17,
+        "HeaderRowIndex":  9,
+        "Headers":  [
+                        "1: Data",
+                        "2: UF",
+                        "3: Entrada / Saída",
+                        "4: Receitas / Despesas",
+                        "5: Detalhamento",
+                        "6: R$ (Valores)",
+                        "7: Tipo Transação",
+                        "8: Saldo R$",
+                        "9: Valores Receitas / Despesas"
+                    ]
+    },
+    {
+        "Name":  "Jun_2025 SICOOB",
+        "Visible":  0,
+        "TotalRows":  685,
+        "TotalCols":  17,
+        "HeaderRowIndex":  9,
+        "Headers":  [
+                        "1: Data",
+                        "2: UF",
+                        "3: Entrada / Saída",
+                        "4: Receitas / Despesas",
+                        "5: Detalhamento",
+                        "6: R$ (Valores)",
+                        "7: Tipo Transação",
+                        "8: Saldo R$",
+                        "9: Valores Receitas / Despesas"
+                    ]
+    },
+    {
+        "Name":  "Jun_2025 BRADESCO",
+        "Visible":  0,
+        "TotalRows":  309,
+        "TotalCols":  16,
+        "HeaderRowIndex":  9,
+        "Headers":  [
+                        "0: Data",
+                        "1: UF",
+                        "2: Entrada / Saída",
+                        "3: Receitas / Despesas",
+                        "4: Detalhamento",
+                        "5: R$ (Valores)",
+                        "6: Tipo Transação",
+                        "7: Saldo R$",
+                        "8: Valores Receitas / Despesas"
+                    ]
+    },
+    {
+        "Name":  "JAN_2026 CONFIANÇA",
+        "Visible":  -1,
+        "TotalRows":  1583,
+        "TotalCols":  16,
+        "HeaderRowIndex":  9,
+        "Headers":  [
+                        "0: Data",
+                        "1: UF",
+                        "2: Entrada / Saída",
+                        "3: d",
+                        "4: Coluna1",
+                        "5: R$ (Valores)",
+                        "6: Tipo Transação",
+                        "7: Saldo R$",
+                        "8: Valores Receitas / Despesas"
+                    ]
+    },
+    {
+        "Name":  "JAN_2026 MAXICREDITO",
+        "Visible":  -1,
+        "TotalRows":  613,
+        "TotalCols":  16,
+        "HeaderRowIndex":  9,
+        "Headers":  [
+                        "0: Data",
+                        "1: UF",
+                        "2: Entrada / Saída",
+                        "3: Fornecedores",
+                        "4: Coluna1",
+                        "5: R$ (Valores)",
+                        "6: Tipo Transação",
+                        "7: Saldo R$",
+                        "8: Valores Receitas / Despesas"
+                    ]
+    },
+    {
+        "Name":  "JAN_2026 BRADESCO ",
+        "Visible":  -1,
+        "TotalRows":  107,
+        "TotalCols":  16,
+        "HeaderRowIndex":  9,
+        "Headers":  [
+                        "0: Data",
+                        "1: UF",
+                        "2: Entrada / Saída",
+                        "3: Receitas / Despesas",
+                        "4: Detalhamento",
+                        "5: R$ (Valores)",
+                        "6: Tipo Transação",
+                        "7: Saldo R$",
+                        "8: Valores Receitas / Despesas"
+                    ]
+    },
+    {
+        "Name":  "FEV_2026 CONFIANÇA ",
+        "Visible":  -1,
+        "TotalRows":  834,
+        "TotalCols":  16,
+        "HeaderRowIndex":  9,
+        "Headers":  [
+                        "0: Data",
+                        "1: UF",
+                        "2: Entrada / Saída",
+                        "3: Fornecedores",
+                        "4: Coluna1",
+                        "5: R$ (Valores)",
+                        "6: Tipo Transação",
+                        "7: Saldo R$",
+                        "8: Valores Receitas / Despesas"
+                    ]
+    },
+    {
+        "Name":  "FEV_2026 MAXICREDITO",
+        "Visible":  -1,
+        "TotalRows":  692,
+        "TotalCols":  16,
+        "HeaderRowIndex":  9,
+        "Headers":  [
+                        "0: Data",
+                        "1: UF",
+                        "2: Entrada / Saída",
+                        "3: Fornecedores",
+                        "4: Coluna1",
+                        "5: R$ (Valores)",
+                        "6: Tipo Transação",
+                        "7: Saldo R$",
+                        "8: Valores Receitas / Despesas"
+                    ]
+    },
+    {
+        "Name":  "FEV_2026 BRADESCO",
+        "Visible":  -1,
+        "TotalRows":  107,
+        "TotalCols":  16,
+        "HeaderRowIndex":  9,
+        "Headers":  [
+                        "0: Data",
+                        "1: UF",
+                        "2: Entrada / Saída",
+                        "3: Receitas / Despesas",
+                        "4: Detalhamento",
+                        "5: R$ (Valores)",
+                        "6: Tipo Transação",
+                        "7: Saldo R$",
+                        "8: Valores Receitas / Despesas"
+                    ]
+    },
+    {
+        "Name":  "MAR_2026 CONFIANÇA",
+        "Visible":  -1,
+        "TotalRows":  834,
+        "TotalCols":  16,
+        "HeaderRowIndex":  9,
+        "Headers":  [
+                        "0: Data",
+                        "1: UF",
+                        "2: Entrada / Saída",
+                        "3: Fornecedores",
+                        "4: Coluna1",
+                        "5: R$ (Valores)",
+                        "6: Tipo Transação",
+                        "7: Saldo R$",
+                        "8: Valores Receitas / Despesas"
+                    ]
+    },
+    {
+        "Name":  "MAR_2026 MAXICREDITO",
+        "Visible":  -1,
+        "TotalRows":  752,
+        "TotalCols":  16,
+        "HeaderRowIndex":  9,
+        "Headers":  [
+                        "0: Data",
+                        "1: UF",
+                        "2: Entrada / Saída",
+                        "3: Fornecedores",
+                        "4: Coluna1",
+                        "5: R$ (Valores)",
+                        "6: Tipo Transação",
+                        "7: Saldo R$",
+                        "8: Valores Receitas / Despesas"
+                    ]
+    },
+    {
+        "Name":  "MAR_2026 BRADESCO",
+        "Visible":  -1,
+        "TotalRows":  118,
+        "TotalCols":  16,
+        "HeaderRowIndex":  9,
+        "Headers":  [
+                        "0: Data",
+                        "1: UF",
+                        "2: Entrada / Saída",
+                        "3: Receitas / Despesas",
+                        "4: Detalhamento",
+                        "5: R$ (Valores)",
+                        "6: Tipo Transação",
+                        "7: Saldo R$",
+                        "8: Valores Receitas / Despesas"
+                    ]
+    },
+    {
+        "Name":  "ABR_2026 CONFIANÇA ",
+        "Visible":  -1,
+        "TotalRows":  1583,
+        "TotalCols":  18,
+        "HeaderRowIndex":  9,
+        "Headers":  [
+                        "0: Remessa",
+                        "1: Competência",
+                        "2: Data",
+                        "3: UF",
+                        "4: Entrada / Saída",
+                        "5: Movimento",
+                        "6: Descrição",
+                        "7: R$ (Valores)",
+                        "8: Tipo Transação",
+                        "9: Saldo R$",
+                        "10: Valores Receitas / Despesas"
+                    ]
+    },
+    {
+        "Name":  "ABR_2026 MAXCREDITO",
+        "Visible":  -1,
+        "TotalRows":  1583,
+        "TotalCols":  18,
+        "HeaderRowIndex":  9,
+        "Headers":  [
+                        "0: Remessa",
+                        "1: Competência",
+                        "2: Data",
+                        "3: UF",
+                        "4: Entrada / Saída",
+                        "5: Movimento",
+                        "6: Descrição",
+                        "7: R$ (Valores)",
+                        "8: Tipo Transação",
+                        "9: Saldo R$",
+                        "10: Valores Receitas / Despesas"
+                    ]
+    },
+    {
+        "Name":  "ABR_2026 BRADESCO",
+        "Visible":  -1,
+        "TotalRows":  1583,
+        "TotalCols":  18,
+        "HeaderRowIndex":  9,
+        "Headers":  [
+                        "0: Remessa",
+                        "1: Competência",
+                        "2: Data",
+                        "3: UF",
+                        "4: Entrada / Saída",
+                        "5: Movimento",
+                        "6: Descrição",
+                        "7: R$ (Valores)",
+                        "8: Tipo Transação",
+                        "9: Saldo R$",
+                        "10: Valores Receitas / Despesas"
+                    ]
+    },
+    {
+        "Name":  "MAI_2026 CONFIANÇA ",
+        "Visible":  -1,
+        "TotalRows":  1583,
+        "TotalCols":  18,
+        "HeaderRowIndex":  9,
+        "Headers":  [
+                        "0: Remessa",
+                        "1: Competência",
+                        "2: Data",
+                        "3: UF",
+                        "4: Entrada / Saída",
+                        "5: Movimento",
+                        "6: Descrição",
+                        "7: R$ (Valores)",
+                        "8: Tipo Transação",
+                        "9: Saldo R$",
+                        "10: Valores Receitas / Despesas"
+                    ]
+    },
+    {
+        "Name":  "MAI_2026 MAXCREDITO ",
+        "Visible":  -1,
+        "TotalRows":  1583,
+        "TotalCols":  18,
+        "HeaderRowIndex":  9,
+        "Headers":  [
+                        "0: Remessa",
+                        "1: Competência",
+                        "2: Data",
+                        "3: UF",
+                        "4: Entrada / Saída",
+                        "5: Movimento",
+                        "6: Descrição",
+                        "7: R$ (Valores)",
+                        "8: Tipo Transação",
+                        "9: Saldo R$",
+                        "10: Valores Receitas / Despesas"
+                    ]
+    }
+]

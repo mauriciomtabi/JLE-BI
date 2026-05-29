@@ -1,0 +1,588 @@
+﻿{
+    "Name":  "Origem de Dados ",
+    "RowCount":  83,
+    "ColCount":  5,
+    "Data":  [
+                 [
+                     "Entrada",
+                     "",
+                     "Saída",
+                     "",
+                     "Tipo Transação"
+                 ],
+                 [
+                     "Vendas",
+                     "",
+                     "13º Salário",
+                     "",
+                     "Dinheiro"
+                 ],
+                 [
+                     "Cobranças",
+                     "",
+                     "Ação Trabalhista",
+                     "",
+                     "Pix"
+                 ],
+                 [
+                     "Empréstimo / Injeção de Dinheiro",
+                     "",
+                     "Advogado",
+                     "",
+                     "Cartão Crédito"
+                 ],
+                 [
+                     "Rendimentos de Juros",
+                     "",
+                     "Água",
+                     "",
+                     "Transferência Bancária"
+                 ],
+                 [
+                     "Restituição de Impostos",
+                     "",
+                     "Alimentação",
+                     "",
+                     ""
+                 ],
+                 [
+                     "Outros Recebimentos",
+                     "",
+                     "Aluguel",
+                     "",
+                     ""
+                 ],
+                 [
+                     "Transferência entre contas",
+                     "",
+                     "Aplicação/Rentabilidade",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Assinaturas e Mensalidades",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Assistência Médica",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Benefícios Folha de Pagamento",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Bens de valor irrelevante ",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Capital de Giro",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Cartão de Crédito",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Combustíveis",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Confraternização Funcionários",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Consórcios",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Contabilidade",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Contribuição Sindical ",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Correio",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Custas de cartório",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Desenvolvimento Web",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Despachante ",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Despesas Bancárias",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Despesas com Veículos/Documentos",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Despesas Diversas",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Despesas Financeiras",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Despesas Operacionais",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Domínio E Hospedagem Da Web",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Empréstimo Pessoal",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Empréstimos Bancários",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Encargos Bancários",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Endomarketing",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Energia Elétrica",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "EPIs",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Estacionamento",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Estadias",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Férias",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Ferramentas",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "FGTS",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Financiamento Veículos",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Folha De Pagamento",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Fornecedores",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Frete",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Imobilizado",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Impostos",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Impostos MEI",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Impostos Sobre a Folha De Pagamento / Benefícios",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Impressão",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "INSS a Recolher",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Internet",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Investimentos",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Licenças / Licenças",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Locação de Equipamentos",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Manut. De Veículos",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Manutenção Predial",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Material de Copa e Cozinha",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Material de Escritório",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Material de Limpeza",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Material de Uso e Consumo",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Material utilizado em serviços",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Medicina do Trabalho ",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Multas de transito",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Novo CNPJ",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Outros Pagamentos",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Passagens",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Pedágio",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Prestadores de Serviços",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Publicidade",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Refeição",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Rescisão",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Retiradas Sócios",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Seguro",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Taxas de Aluguel",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Taxas e Tarifas",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Telefone",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Terceiros",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Transferência entre contas",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Treinamentos",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Uniformes",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Vale Transporte",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Verbas Para Rescisão",
+                     "",
+                     ""
+                 ],
+                 [
+                     "",
+                     "",
+                     "Vigilância e Monitoramento",
+                     "",
+                     ""
+                 ]
+             ]
+}

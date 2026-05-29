@@ -1,0 +1,253 @@
+﻿==================================================
+SHEET: Instruçoes
+Dimensions: 9 rows x 7 columns
+Visible: 0
+--------------------------------------------------
+First 5 rows (truncated to first 12 columns):
+  Row 0:  |  |  |  |  | Saiba mais sobre a nossa soluçao  |  | 
+  Row 1:  | ORIENTAÇOES SOBRE A PLANILHA FLUXO DE CAIXA |  |  |  |  |  | 
+  Row 2:  | 1. A planilha Modelo do Fluxo de Caixa possui duas abas principais: Fluxo de Caixa e Origem de Dados.  |  |  |  |  |  | 
+  Row 3:  | 2. Como preencher a aba Fluxo de Caixa: 
+a. Comece preenchendo a célula I8 com o valor do saldo inicial (que é o saldo em caixa quando começar a usar a planilha). 
+b. As colunas Entrada / Saída - Receitas / Despesas e Tipo Transaçao estao predefinidas. Basta escolher na seta a opçao desejada para completar a célula. 
+c. As colunas Data, Detalhamento e R$ (Valores) devem ser preenchidas manualmente.  
+d. Para inserir uma nova linha na planilha, basta preencher a coluna data e seguir com as demais. Por ser uma tabela dinâmica, ela incorporará a fórmula automaticamente. 
+
+Importante: a planilha está preenchida para melhor entendimento de seu funcionamento. Basta apagar as informaçoes para dar início a sua planilha customizável. A linha do saldo inicial pode ter datas e valores alteradas, mas nao deve ser apagada.  |  |  |  |  |  | 
+  Row 4:  | 3. Como usar a aba Fluxo de Caixa:  Por meio das caixas de filtros Entrada/Saída e Mês (localizadas no topo da planilha), é possível comparar diversos dados, Entrada, Saída ou Saldo. Basta escolher qual valor ou valores que quer verificar e selecionar o mês ou meses. Se nao selecionar nada, terá a visao completa da movimentaçao.   |  |  |  |  |  | 
+==================================================
+
+==================================================
+SHEET: Origem de Dados 
+Dimensions: 83 rows x 5 columns
+Visible: 0
+--------------------------------------------------
+First 5 rows (truncated to first 12 columns):
+  Row 0:  | Entrada |  | Saída |  | Tipo Transaçao
+  Row 1:  | Vendas |  | 13º Salário |  | Dinheiro
+  Row 2:  | Cobranças |  | Açao Trabalhista |  | Pix
+  Row 3:  | Empréstimo / Injeçao de Dinheiro |  | Advogado |  | Cartao Crédito
+  Row 4:  | Rendimentos de Juros |  | Agua |  | Transferência Bancária
+==================================================
+
+==================================================
+SHEET: Cartao de Crédito
+Dimensions: 685 rows x 17 columns
+Visible: -1
+--------------------------------------------------
+First 5 rows (truncated to first 12 columns):
+  Row 0:  |  | FL |  |  | CARTAO DE CRÉDITO  - SICOOB |  |  |  |  |  |  | 
+  Row 1:  |  |  |  |  |  |  |  |  |  |  |  | 
+  Row 2:  |  | RESUMO GERENCIAL |  |  |  |  |  |  |  |  |  | 
+  Row 3:  |  | Entradas |  | 0 |  |  |  |  |  |  |  | 
+  Row 4:  |  | Saídas |  | 0 |  |  |  |  |  |  |  | 
+==================================================
+
+==================================================
+SHEET: Jun_2025 SICOOB
+Dimensions: 685 rows x 17 columns
+Visible: 0
+--------------------------------------------------
+First 5 rows (truncated to first 12 columns):
+  Row 0:  |  | FL |  |  | FLUXO DE CAIXA - SICOOB |  |  |  |  |  |  | 
+  Row 1:  |  |  |  |  |  |  |  |  |  |  |  | 
+  Row 2:  |  | RESUMO GERENCIAL |  |  |  |  |  |  |  |  |  | 
+  Row 3:  |  | Entradas |  | 1103612,45 |  |  |  |  |  |  |  | 
+  Row 4:  |  | Saídas |  | 732319,549999999 |  |  |  |  |  |  |  | 
+==================================================
+
+==================================================
+SHEET: Jun_2025 BRADESCO
+Dimensions: 309 rows x 16 columns
+Visible: 0
+--------------------------------------------------
+First 5 rows (truncated to first 12 columns):
+  Row 0:  | FL |  |  | FLUXO DE CAIXA - BRADESCO |  |  |  |  |  |  |  | 
+  Row 1:  |  |  |  |  |  |  |  |  |  |  |  | 
+  Row 2:  | RESUMO GERENCIAL |  |  |  |  |  |  |  |  |  |  | 
+  Row 3:  | Entradas |  | 9358561,56 |  |  |  |  |  |  |  |  | 
+  Row 4:  | Saídas |  | 5908317,42000001 |  |  |  |  |  |  |  |  | 
+==================================================
+
+==================================================
+SHEET: JAN_2026 CONFIANÇA
+Dimensions: 1583 rows x 16 columns
+Visible: -1
+--------------------------------------------------
+First 5 rows (truncated to first 12 columns):
+  Row 0:  | FL |  |  | FLUXO DE CAIXA - SICOOB |  |  |  |  |  |  |  | 
+  Row 1:  |  |  |  |  |  |  |  |  |  |  |  | 
+  Row 2:  | RESUMO GERENCIAL |  |  |  |  |  |  |  |  |  |  | 
+  Row 3:  | Entradas |  | 1453261,23 |  |  |  |  |  |  |  |  | 
+  Row 4:  | Saídas |  | 1453329,98999999 |  |  |  |  |  |  |  |  | 
+==================================================
+
+==================================================
+SHEET: JAN_2026 MAXICREDITO
+Dimensions: 613 rows x 16 columns
+Visible: -1
+--------------------------------------------------
+First 5 rows (truncated to first 12 columns):
+  Row 0:  | FL |  |  | FLUXO DE CAIXA - SICOOB |  |  |  |  |  |  |  | 
+  Row 1:  |  |  |  |  |  |  |  |  |  |  |  | 
+  Row 2:  | RESUMO GERENCIAL |  |  |  |  |  |  |  |  |  |  | 
+  Row 3:  | Entradas |  | 0 |  |  |  |  |  |  |  |  | 
+  Row 4:  | Saídas |  | 3804,21 |  |  |  |  |  |  |  |  | 
+==================================================
+
+==================================================
+SHEET: JAN_2026 BRADESCO 
+Dimensions: 107 rows x 16 columns
+Visible: -1
+--------------------------------------------------
+First 5 rows (truncated to first 12 columns):
+  Row 0:  | FL |  |  | FLUXO DE CAIXA - BRADESCO |  |  |  |  |  |  |  | 
+  Row 1:  |  |  |  |  |  |  |  |  |  |  |  | 
+  Row 2:  | RESUMO GERENCIAL |  |  |  |  |  |  |  |  |  |  | 
+  Row 3:  | Entradas |  | 8471369,52 |  |  |  |  |  |  |  |  | 
+  Row 4:  | Saídas |  | 2975168,72 |  |  |  |  |  |  |  |  | 
+==================================================
+
+==================================================
+SHEET: FEV_2026 CONFIANÇA 
+Dimensions: 834 rows x 16 columns
+Visible: -1
+--------------------------------------------------
+First 5 rows (truncated to first 12 columns):
+  Row 0:  | FL |  |  | FLUXO DE CAIXA - SICOOB |  |  |  |  |  |  |  | 
+  Row 1:  |  |  |  |  |  |  |  |  |  |  |  | 
+  Row 2:  | RESUMO GERENCIAL |  |  |  |  |  |  |  |  |  |  | 
+  Row 3:  | Entradas |  | 0 |  |  |  |  |  |  |  |  | 
+  Row 4:  | Saídas |  | 10394,31 |  |  |  |  |  |  |  |  | 
+==================================================
+
+==================================================
+SHEET: FEV_2026 MAXICREDITO
+Dimensions: 692 rows x 16 columns
+Visible: -1
+--------------------------------------------------
+First 5 rows (truncated to first 12 columns):
+  Row 0:  | FL |  |  | FLUXO DE CAIXA - SICOOB |  |  |  |  |  |  |  | 
+  Row 1:  |  |  |  |  |  |  |  |  |  |  |  | 
+  Row 2:  | RESUMO GERENCIAL |  |  |  |  |  |  |  |  |  |  | 
+  Row 3:  | Entradas |  | 0 |  |  |  |  |  |  |  |  | 
+  Row 4:  | Saídas |  | 15299,8 |  |  |  |  |  |  |  |  | 
+==================================================
+
+==================================================
+SHEET: FEV_2026 BRADESCO
+Dimensions: 107 rows x 16 columns
+Visible: -1
+--------------------------------------------------
+First 5 rows (truncated to first 12 columns):
+  Row 0:  | FL |  |  | FLUXO DE CAIXA - BRADESCO |  |  |  |  |  |  |  | 
+  Row 1:  |  |  |  |  |  |  |  |  |  |  |  | 
+  Row 2:  | RESUMO GERENCIAL |  |  |  |  |  |  |  |  |  |  | 
+  Row 3:  | Entradas |  | 8006673,16 |  |  |  |  |  |  |  |  | 
+  Row 4:  | Saídas |  | 3463300,04 |  |  |  |  |  |  |  |  | 
+==================================================
+
+==================================================
+SHEET: MAR_2026 CONFIANÇA
+Dimensions: 834 rows x 16 columns
+Visible: -1
+--------------------------------------------------
+First 5 rows (truncated to first 12 columns):
+  Row 0:  | FL |  |  | FLUXO DE CAIXA - SICOOB |  |  |  |  |  |  |  | 
+  Row 1:  |  |  |  |  |  |  |  |  |  |  |  | 
+  Row 2:  | RESUMO GERENCIAL |  |  |  |  |  |  |  |  |  |  | 
+  Row 3:  | Entradas |  | 604217,77 |  |  |  |  |  |  |  |  | 
+  Row 4:  | Saídas |  | 589850,08 |  |  |  |  |  |  |  |  | 
+==================================================
+
+==================================================
+SHEET: MAR_2026 MAXICREDITO
+Dimensions: 752 rows x 16 columns
+Visible: -1
+--------------------------------------------------
+First 5 rows (truncated to first 12 columns):
+  Row 0:  | FL |  |  | FLUXO DE CAIXA - SICOOB |  |  |  |  |  |  |  | 
+  Row 1:  |  |  |  |  |  |  |  |  |  |  |  | 
+  Row 2:  | RESUMO GERENCIAL |  |  |  |  |  |  |  |  |  |  | 
+  Row 3:  | Entradas |  | 0 |  |  |  |  |  |  |  |  | 
+  Row 4:  | Saídas |  | 13350 |  |  |  |  |  |  |  |  | 
+==================================================
+
+==================================================
+SHEET: MAR_2026 BRADESCO
+Dimensions: 118 rows x 16 columns
+Visible: -1
+--------------------------------------------------
+First 5 rows (truncated to first 12 columns):
+  Row 0:  | FL |  |  | FLUXO DE CAIXA - BRADESCO |  |  |  |  |  |  |  | 
+  Row 1:  |  |  |  |  |  |  |  |  |  |  |  | 
+  Row 2:  | RESUMO GERENCIAL |  |  |  |  |  |  |  |  |  |  | 
+  Row 3:  | Entradas |  | 4543373,12 |  |  |  |  |  |  |  |  | 
+  Row 4:  | Saídas |  | 0 |  |  |  |  |  |  |  |  | 
+==================================================
+
+==================================================
+SHEET: ABR_2026 CONFIANÇA 
+Dimensions: 1583 rows x 18 columns
+Visible: -1
+--------------------------------------------------
+First 5 rows (truncated to first 12 columns):
+  Row 0:  |  |  | FL |  |  | FLUXO DE CAIXA - SICOOB CONFIANÇA |  |  |  |  |  | 
+  Row 1:  |  |  |  |  |  |  |  |  |  |  |  | 
+  Row 2:  | RESUMO GERENCIAL |  |  |  |  |  |  |  |  |  |  | 
+  Row 3:  | Entradas |  | 507636,08 |  |  |  |  |  |  |  |  | 
+  Row 4:  | Saídas |  | 507427,17 |  |  |  |  |  |  |  |  | 
+==================================================
+
+==================================================
+SHEET: ABR_2026 MAXCREDITO
+Dimensions: 1583 rows x 18 columns
+Visible: -1
+--------------------------------------------------
+First 5 rows (truncated to first 12 columns):
+  Row 0:  |  |  | FL |  |  | FLUXO DE CAIXA - SICOOB CONFIANÇA |  |  |  |  |  | 
+  Row 1:  |  |  |  |  |  |  |  |  |  |  |  | 
+  Row 2:  | RESUMO GERENCIAL |  |  |  |  |  |  |  |  |  |  | 
+  Row 3:  | Entradas |  | 3123700,18 |  |  |  |  |  |  |  |  | 
+  Row 4:  | Saídas |  | 3101819,25 |  |  |  |  |  |  |  |  | 
+==================================================
+
+==================================================
+SHEET: ABR_2026 BRADESCO
+Dimensions: 1583 rows x 18 columns
+Visible: -1
+--------------------------------------------------
+First 5 rows (truncated to first 12 columns):
+  Row 0:  |  |  | FL |  |  | FLUXO DE CAIXA - SICOOB CONFIANÇA |  |  |  |  |  | 
+  Row 1:  |  |  |  |  |  |  |  |  |  |  |  | 
+  Row 2:  | RESUMO GERENCIAL |  |  |  |  |  |  |  |  |  |  | 
+  Row 3:  | Entradas |  | 6118835,68 |  |  |  |  |  |  |  |  | 
+  Row 4:  | Saídas |  | 2813025,41 |  |  |  |  |  |  |  |  | 
+==================================================
+
+==================================================
+SHEET: MAI_2026 CONFIANÇA 
+Dimensions: 1583 rows x 18 columns
+Visible: -1
+--------------------------------------------------
+First 5 rows (truncated to first 12 columns):
+  Row 0:  |  |  | FL |  |  | FLUXO DE CAIXA - SICOOB CONFIANÇA |  |  |  |  |  | 
+  Row 1:  |  |  |  |  |  |  |  |  |  |  |  | 
+  Row 2:  | RESUMO GERENCIAL |  |  |  |  |  |  |  |  |  |  | 
+  Row 3:  | Entradas |  | 394426,98 |  |  |  |  |  |  |  |  | 
+  Row 4:  | Saídas |  | 384984,93 |  |  |  |  |  |  |  |  | 
+==================================================
+
+==================================================
+SHEET: MAI_2026 MAXCREDITO 
+Dimensions: 1583 rows x 18 columns
+Visible: -1
+--------------------------------------------------
+First 5 rows (truncated to first 12 columns):
+  Row 0:  |  |  | FL |  |  | 0,59 |  |  |  |  |  | 
+  Row 1:  |  |  |  |  |  |  |  |  |  |  |  | 
+  Row 2:  | RESUMO GERENCIAL |  |  |  |  |  |  |  |  |  |  | 
+  Row 3:  | Entradas |  | 2832880,93 |  |  |  |  |  |  |  |  | 
+  Row 4:  | Saídas |  | 2831942,81 |  |  |  |  |  |  |  |  | 
+==================================================
+

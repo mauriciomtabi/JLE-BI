@@ -1,0 +1,172 @@
+﻿[
+    {
+        "Name":  "Cartão de Crédito",
+        "Visible":  -1,
+        "DeclaredRows":  685,
+        "ActualTransactions":  1,
+        "SumEntradas":  0,
+        "SumSaidas":  0,
+        "FirstDate":  "2026-01-01",
+        "LastDate":  "2026-01-01"
+    },
+    {
+        "Name":  "Jun_2025 SICOOB",
+        "Visible":  0,
+        "DeclaredRows":  685,
+        "ActualTransactions":  235,
+        "SumEntradas":  7292705,
+        "SumSaidas":  40429403,
+        "FirstDate":  "2025-05-30",
+        "LastDate":  "2025-06-06"
+    },
+    {
+        "Name":  "Jun_2025 BRADESCO",
+        "Visible":  0,
+        "DeclaredRows":  309,
+        "ActualTransactions":  299,
+        "SumEntradas":  931578177,
+        "SumSaidas":  66224424,
+        "FirstDate":  "2025-05-02",
+        "LastDate":  "30/06/2025"
+    },
+    {
+        "Name":  "JAN_2026 CONFIANÇA",
+        "Visible":  -1,
+        "DeclaredRows":  1583,
+        "ActualTransactions":  721,
+        "SumEntradas":  7973523,
+        "SumSaidas":  55339173,
+        "FirstDate":  "2026-01-01",
+        "LastDate":  "2026-01-30"
+    },
+    {
+        "Name":  "JAN_2026 MAXICREDITO",
+        "Visible":  -1,
+        "DeclaredRows":  613,
+        "ActualTransactions":  599,
+        "SumEntradas":  8077822,
+        "SumSaidas":  130523447,
+        "FirstDate":  "2026-01-01",
+        "LastDate":  "2026-01-30"
+    },
+    {
+        "Name":  "JAN_2026 BRADESCO ",
+        "Visible":  -1,
+        "DeclaredRows":  107,
+        "ActualTransactions":  79,
+        "SumEntradas":  412189812,
+        "SumSaidas":  5930147,
+        "FirstDate":  "2026-01-01",
+        "LastDate":  "2026-01-30"
+    },
+    {
+        "Name":  "FEV_2026 CONFIANÇA ",
+        "Visible":  -1,
+        "DeclaredRows":  834,
+        "ActualTransactions":  711,
+        "SumEntradas":  1847001,
+        "SumSaidas":  26883301,
+        "FirstDate":  "2026-02-01",
+        "LastDate":  "2026-02-27"
+    },
+    {
+        "Name":  "FEV_2026 MAXICREDITO",
+        "Visible":  -1,
+        "DeclaredRows":  692,
+        "ActualTransactions":  677,
+        "SumEntradas":  21524604,
+        "SumSaidas":  73080551,
+        "FirstDate":  "2026-02-01",
+        "LastDate":  "2026-02-27"
+    },
+    {
+        "Name":  "FEV_2026 BRADESCO",
+        "Visible":  -1,
+        "DeclaredRows":  107,
+        "ActualTransactions":  59,
+        "SumEntradas":  306009244,
+        "SumSaidas":  52298465,
+        "FirstDate":  "2026-02-01",
+        "LastDate":  "2026-02-27"
+    },
+    {
+        "Name":  "MAR_2026 CONFIANÇA",
+        "Visible":  -1,
+        "DeclaredRows":  834,
+        "ActualTransactions":  725,
+        "SumEntradas":  13752691,
+        "SumSaidas":  28807504,
+        "FirstDate":  "2026-03-01",
+        "LastDate":  "2026-03-31"
+    },
+    {
+        "Name":  "MAR_2026 MAXICREDITO",
+        "Visible":  -1,
+        "DeclaredRows":  752,
+        "ActualTransactions":  739,
+        "SumEntradas":  5749262,
+        "SumSaidas":  162370458,
+        "FirstDate":  "2026-03-01",
+        "LastDate":  "2026-03-31"
+    },
+    {
+        "Name":  "MAR_2026 BRADESCO",
+        "Visible":  -1,
+        "DeclaredRows":  118,
+        "ActualTransactions":  103,
+        "SumEntradas":  457565002.46,
+        "SumSaidas":  -5231353.37,
+        "FirstDate":  "27/02/2026",
+        "LastDate":  "31/03/2026"
+    },
+    {
+        "Name":  "ABR_2026 CONFIANÇA ",
+        "Visible":  -1,
+        "DeclaredRows":  1583,
+        "ActualTransactions":  481,
+        "SumEntradas":  10855304,
+        "SumSaidas":  20560263,
+        "FirstDate":  "2026-04-01",
+        "LastDate":  "2026-04-30"
+    },
+    {
+        "Name":  "ABR_2026 MAXCREDITO",
+        "Visible":  -1,
+        "DeclaredRows":  1583,
+        "ActualTransactions":  731,
+        "SumEntradas":  3938713,
+        "SumSaidas":  99063957,
+        "FirstDate":  "2026-04-01",
+        "LastDate":  "2026-04-30"
+    },
+    {
+        "Name":  "ABR_2026 BRADESCO",
+        "Visible":  -1,
+        "DeclaredRows":  1583,
+        "ActualTransactions":  66,
+        "SumEntradas":  611883226,
+        "SumSaidas":  5272028,
+        "FirstDate":  "2026-04-01",
+        "LastDate":  "2026-04-30"
+    },
+    {
+        "Name":  "MAI_2026 CONFIANÇA ",
+        "Visible":  -1,
+        "DeclaredRows":  1583,
+        "ActualTransactions":  90,
+        "SumEntradas":  10727649,
+        "SumSaidas":  30924660,
+        "FirstDate":  "2026-05-01",
+        "LastDate":  "2026-05-26"
+    },
+    {
+        "Name":  "MAI_2026 MAXCREDITO ",
+        "Visible":  -1,
+        "DeclaredRows":  1583,
+        "ActualTransactions":  622,
+        "SumEntradas":  4999093,
+        "SumSaidas":  85211471,
+        "FirstDate":  "2026-05-01",
+        "LastDate":  "2026-05-27"
+    }
+]
