@@ -423,7 +423,7 @@
     <!-- Carga de Dados Dinâmica -->
     <script src="data.js"></script>
 
-    <!-- Logica Frontend -->
+    <!-- Logica de UI Autônoma (Sem Dependências de CDNs) -->
     <script>
         // Utilitário de armazenamento seguro contra restrições de localStorage em browsers corporativos
         const safeStorage = {
@@ -451,6 +451,36 @@
             _data: {}
         };
 
+        // Alternância de abas de autenticação
+        function switchAuthTab(tab) {
+            const btnLogin = document.getElementById('tab-login');
+            const btnRegister = document.getElementById('tab-register');
+            const formLogin = document.getElementById('form-login');
+            const formRegister = document.getElementById('form-register');
+            const alertBox = document.getElementById('auth-alert');
+            
+            if (alertBox) alertBox.style.display = 'none';
+            
+            if (tab === 'login') {
+                if (btnLogin) btnLogin.classList.add('active');
+                if (btnRegister) btnRegister.classList.remove('active');
+                if (formLogin) formLogin.style.display = 'flex';
+                if (formRegister) formRegister.style.display = 'none';
+                const subtitle = document.getElementById('auth-subtitle');
+                if (subtitle) subtitle.innerText = 'Acesse com sua conta corporativa';
+            } else {
+                if (btnRegister) btnRegister.classList.add('active');
+                if (btnLogin) btnLogin.classList.remove('active');
+                if (formLogin) formLogin.style.display = 'none';
+                if (formRegister) formRegister.style.display = 'flex';
+                const subtitle = document.getElementById('auth-subtitle');
+                if (subtitle) subtitle.innerText = 'Crie sua conta corporativa';
+            }
+        }
+    </script>
+
+    <!-- Logica Frontend Geral -->
+    <script>
         // Registrar plugin de Datalabels e desativar exibição global com segurança
         try {
             if (typeof Chart !== 'undefined' && typeof ChartDataLabels !== 'undefined') {
@@ -484,31 +514,6 @@
             }
         } else {
             console.warn("Credenciais do Supabase não configuradas em supabase_config.js. O painel funcionará em modo demonstração local.");
-        }
-
-        // Alternância de abas de autenticação
-        function switchAuthTab(tab) {
-            const btnLogin = document.getElementById('tab-login');
-            const btnRegister = document.getElementById('tab-register');
-            const formLogin = document.getElementById('form-login');
-            const formRegister = document.getElementById('form-register');
-            const alertBox = document.getElementById('auth-alert');
-            
-            alertBox.style.display = 'none';
-            
-            if (tab === 'login') {
-                btnLogin.classList.add('active');
-                btnRegister.classList.remove('active');
-                formLogin.style.display = 'flex';
-                formRegister.style.display = 'none';
-                document.getElementById('auth-subtitle').innerText = 'Acesse com sua conta corporativa';
-            } else {
-                btnRegister.classList.add('active');
-                btnLogin.classList.remove('active');
-                formLogin.style.display = 'none';
-                formRegister.style.display = 'flex';
-                document.getElementById('auth-subtitle').innerText = 'Crie sua conta corporativa';
-            }
         }
 
         function showAuthAlert(message, type) {
