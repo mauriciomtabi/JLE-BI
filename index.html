@@ -451,17 +451,24 @@
             _data: {}
         };
 
-        // Registrar plugin de Datalabels e desativar exibição global
-        Chart.register(ChartDataLabels);
-        Chart.defaults.set('plugins.datalabels', { display: false });
-
-        // Registrar posicionador de tooltip customizado para seguir o cursor do mouse
-        Chart.Tooltip.positioners.cursor = function(chartElements, eventPosition) {
-            return {
-                x: eventPosition.x,
-                y: eventPosition.y
-            };
-        };
+        // Registrar plugin de Datalabels e desativar exibição global com segurança
+        try {
+            if (typeof Chart !== 'undefined' && typeof ChartDataLabels !== 'undefined') {
+                Chart.register(ChartDataLabels);
+                Chart.defaults.set('plugins.datalabels', { display: false });
+            }
+            if (typeof Chart !== 'undefined') {
+                // Registrar posicionador de tooltip customizado para seguir o cursor do mouse
+                Chart.Tooltip.positioners.cursor = function(chartElements, eventPosition) {
+                    return {
+                        x: eventPosition.x,
+                        y: eventPosition.y
+                    };
+                };
+            }
+        } catch (e) {
+            console.error("Erro ao inicializar configurações do Chart.js:", e);
+        }
 
         // --- CONFIGURAÇÃO SUPABASE AUTH E MODO DEMO ---
         let supabase = null;
