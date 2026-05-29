@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BI de Fluxo de Caixa - JLE Telecom</title>
+    <title>BI JLE - JLE Telecom</title>
     <!-- Google Fonts & Lucide Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -11,13 +11,17 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Chart.js Datalabels Plugin via CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <!-- Supabase JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Supabase Local Configuration -->
+    <script src="supabase_config.js"></script>
     <!-- Local Stylesheet -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
     <!-- SIDEBAR -->
-    <aside class="sidebar">
+    <aside class="sidebar" id="dashboard-sidebar" style="display: none;">
         <!-- Botão de Colapso Flutuante -->
         <button class="sidebar-toggle-btn" onclick="toggleSidebar()" id="sidebar-toggle-btn">
             <i class="fa-solid fa-chevron-left" id="sidebar-toggle-icon"></i>
@@ -36,18 +40,28 @@
         </nav>
         
         <div class="sidebar-footer">
+            <!-- Usuário Logado -->
+            <div class="user-profile-badge" id="user-profile-info-box">
+                <i class="fa-solid fa-circle-user"></i>
+                <div class="user-profile-info">
+                    <span class="user-profile-email" id="user-display-email">...</span>
+                    <span class="user-profile-role">Usuário Corporativo</span>
+                </div>
+            </div>
+            
             <button class="theme-toggle-btn" onclick="toggleTheme()">
                 <i class="fa-solid fa-moon" id="theme-icon"></i>
                 <span id="theme-text">Modo Escuro</span>
             </button>
-            <button class="update-btn" onclick="openUpdateModal()">
-                <i class="fa-solid fa-rotate"></i> <span id="update-text">Atualizar Dados</span>
+            
+            <button class="logout-btn" id="sidebar-logout-btn" onclick="handleLogout()">
+                <i class="fa-solid fa-right-from-bracket"></i> <span>Sair</span>
             </button>
         </div>
     </aside>
 
     <!-- MAIN CONTENT -->
-    <main class="main-content">
+    <main class="main-content" id="dashboard-main-content" style="display: none;">
         
         <!-- HEADER -->
         <header>
@@ -350,6 +364,62 @@
         </div>
     </div>
 
+    <!-- AUTH PANEL (SUPABASE) -->
+    <div class="auth-container" id="auth-panel" style="display: flex;">
+        <div class="auth-card">
+            <div class="auth-logo">
+                <img src="logo.png" alt="JLE Telecom">
+            </div>
+            
+            <div class="auth-title">
+                <h2>BI JLE</h2>
+                <p id="auth-subtitle">Acesse com sua conta corporativa</p>
+            </div>
+            
+            <div class="auth-tabs">
+                <button class="auth-tab-btn active" id="tab-login" onclick="switchAuthTab('login')">Entrar</button>
+                <button class="auth-tab-btn" id="tab-register" onclick="switchAuthTab('register')">Cadastrar</button>
+            </div>
+            
+            <!-- ALERTA DE MENSAGENS -->
+            <div class="auth-alert" id="auth-alert"></div>
+            
+            <!-- FORMULÁRIO DE LOGIN -->
+            <form class="auth-form" id="form-login" onsubmit="handleLoginSubmit(event)">
+                <div class="auth-input-group">
+                    <label for="login-email">E-mail Corporativo</label>
+                    <input type="email" id="login-email" required placeholder="seu.nome@jletelecom.com.br">
+                </div>
+                <div class="auth-input-group">
+                    <label for="login-password">Senha</label>
+                    <input type="password" id="login-password" required placeholder="Sua senha">
+                </div>
+                <button type="submit" class="auth-btn" id="btn-login-submit">
+                    <i class="fa-solid fa-right-to-bracket"></i> Entrar
+                </button>
+            </form>
+            
+            <!-- FORMULÁRIO DE CADASTRO -->
+            <form class="auth-form" id="form-register" onsubmit="handleRegisterSubmit(event)" style="display: none;">
+                <div class="auth-input-group">
+                    <label for="register-email">E-mail Corporativo</label>
+                    <input type="email" id="register-email" required placeholder="seu.nome@jletelecom.com.br">
+                </div>
+                <div class="auth-input-group">
+                    <label for="register-password">Senha (mín. 6 caracteres)</label>
+                    <input type="password" id="register-password" required placeholder="Sua senha" minlength="6">
+                </div>
+                <div class="auth-input-group">
+                    <label for="register-confirm-password">Confirmar Senha</label>
+                    <input type="password" id="register-confirm-password" required placeholder="Confirme sua senha" minlength="6">
+                </div>
+                <button type="submit" class="auth-btn" id="btn-register-submit">
+                    <i class="fa-solid fa-user-plus"></i> Cadastrar
+                </button>
+            </form>
+        </div>
+    </div>
+
     <!-- Carga de Dados Dinâmica -->
     <script src="data.js"></script>
 
@@ -366,6 +436,231 @@
                 y: eventPosition.y
             };
         };
+
+        // --- CONFIGURAÇÃO SUPABASE AUTH E MODO DEMO ---
+        let supabase = null;
+        const isDemoMode = (typeof window.SUPABASE_CONFIG === 'undefined' || 
+                            window.SUPABASE_CONFIG.url === 'SUA_SUPABASE_URL_AQUI' || 
+                            window.SUPABASE_CONFIG.anonKey === 'SUA_SUPABASE_ANON_KEY_AQUI');
+        
+        if (!isDemoMode) {
+            try {
+                supabase = window.supabase.createClient(window.SUPABASE_CONFIG.url, window.SUPABASE_CONFIG.anonKey);
+            } catch (err) {
+                console.error("Falha ao inicializar o Supabase client:", err);
+            }
+        } else {
+            console.warn("Credenciais do Supabase não configuradas em supabase_config.js. O painel funcionará em modo demonstração local.");
+        }
+
+        // Alternância de abas de autenticação
+        function switchAuthTab(tab) {
+            const btnLogin = document.getElementById('tab-login');
+            const btnRegister = document.getElementById('tab-register');
+            const formLogin = document.getElementById('form-login');
+            const formRegister = document.getElementById('form-register');
+            const alertBox = document.getElementById('auth-alert');
+            
+            alertBox.style.display = 'none';
+            
+            if (tab === 'login') {
+                btnLogin.classList.add('active');
+                btnRegister.classList.remove('active');
+                formLogin.style.display = 'flex';
+                formRegister.style.display = 'none';
+                document.getElementById('auth-subtitle').innerText = 'Acesse com sua conta corporativa';
+            } else {
+                btnRegister.classList.add('active');
+                btnLogin.classList.remove('active');
+                formLogin.style.display = 'none';
+                formRegister.style.display = 'flex';
+                document.getElementById('auth-subtitle').innerText = 'Crie sua conta corporativa';
+            }
+        }
+
+        function showAuthAlert(message, type) {
+            const alertBox = document.getElementById('auth-alert');
+            alertBox.innerText = message;
+            alertBox.className = `auth-alert ${type}`;
+            alertBox.style.display = 'block';
+        }
+
+        // Submissão do Cadastro
+        async function handleRegisterSubmit(event) {
+            event.preventDefault();
+            const email = document.getElementById('register-email').value.trim();
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('register-confirm-password').value;
+            
+            const alertBox = document.getElementById('auth-alert');
+            alertBox.style.display = 'none';
+            
+            if (!email.toLowerCase().endsWith('@jletelecom.com.br')) {
+                showAuthAlert('Acesso restrito: Apenas e-mails corporativos @jletelecom.com.br são permitidos.', 'error');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showAuthAlert('As senhas não coincidem.', 'error');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showAuthAlert('A senha deve conter no mínimo 6 caracteres.', 'error');
+                return;
+            }
+
+            const btnSubmit = document.getElementById('btn-register-submit');
+            btnSubmit.disabled = true;
+            btnSubmit.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Cadastrando...';
+            
+            if (isDemoMode || !supabase) {
+                setTimeout(() => {
+                    btnSubmit.disabled = false;
+                    btnSubmit.innerHTML = '<i class="fa-solid fa-user-plus"></i> Cadastrar';
+                    showAuthAlert('[MODO DEMO] Cadastro simulado! Confirme clicando na aba Entrar (admin@jletelecom.com.br / 123456 ou use este cadastro).', 'success');
+                    localStorage.setItem('demo_user_email', email);
+                    localStorage.setItem('demo_user_password', password);
+                }, 1000);
+            } else {
+                try {
+                    const { data, error } = await supabase.auth.signUp({
+                        email: email,
+                        password: password
+                    });
+                    
+                    btnSubmit.disabled = false;
+                    btnSubmit.innerHTML = '<i class="fa-solid fa-user-plus"></i> Cadastrar';
+                    
+                    if (error) {
+                        showAuthAlert(error.message, 'error');
+                    } else {
+                        showAuthAlert('Cadastro realizado com sucesso! Verifique seu e-mail corporativo para confirmar a conta.', 'success');
+                        document.getElementById('register-email').value = '';
+                        document.getElementById('register-password').value = '';
+                        document.getElementById('register-confirm-password').value = '';
+                    }
+                } catch (err) {
+                    btnSubmit.disabled = false;
+                    btnSubmit.innerHTML = '<i class="fa-solid fa-user-plus"></i> Cadastrar';
+                    showAuthAlert('Erro ao cadastrar: ' + err.message, 'error');
+                }
+            }
+        }
+
+        // Submissão do Login
+        async function handleLoginSubmit(event) {
+            event.preventDefault();
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value;
+            
+            const alertBox = document.getElementById('auth-alert');
+            alertBox.style.display = 'none';
+            
+            if (!email.toLowerCase().endsWith('@jletelecom.com.br')) {
+                showAuthAlert('Acesso restrito: Apenas e-mails corporativos @jletelecom.com.br são permitidos.', 'error');
+                return;
+            }
+
+            const btnSubmit = document.getElementById('btn-login-submit');
+            btnSubmit.disabled = true;
+            btnSubmit.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Entrando...';
+            
+            if (isDemoMode || !supabase) {
+                setTimeout(() => {
+                    btnSubmit.disabled = false;
+                    btnSubmit.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Entrar';
+                    
+                    const savedEmail = localStorage.getItem('demo_user_email') || 'admin@jletelecom.com.br';
+                    const savedPass = localStorage.getItem('demo_user_password') || '123456';
+                    
+                    if (email.toLowerCase() === savedEmail.toLowerCase() && password === savedPass) {
+                        localStorage.setItem('demo_session', JSON.stringify({ email: email }));
+                        checkAuth();
+                    } else {
+                        showAuthAlert('E-mail ou senha incorretos. (No modo demo, utilize: admin@jletelecom.com.br / 123456)', 'error');
+                    }
+                }, 800);
+            } else {
+                try {
+                    const { data, error } = await supabase.auth.signInWithPassword({
+                        email: email,
+                        password: password
+                    });
+                    
+                    btnSubmit.disabled = false;
+                    btnSubmit.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Entrar';
+                    
+                    if (error) {
+                        showAuthAlert(error.message, 'error');
+                    }
+                } catch (err) {
+                    btnSubmit.disabled = false;
+                    btnSubmit.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Entrar';
+                    showAuthAlert('Erro ao entrar: ' + err.message, 'error');
+                }
+            }
+        }
+
+        // Logout
+        async function handleLogout() {
+            if (isDemoMode || !supabase) {
+                localStorage.removeItem('demo_session');
+                checkAuth();
+            } else {
+                try {
+                    await supabase.auth.signOut();
+                } catch (err) {
+                    console.error("Erro ao deslogar:", err);
+                }
+            }
+        }
+
+        // Verificar sessão na carga
+        function checkAuth() {
+            if (isDemoMode || !supabase) {
+                const session = localStorage.getItem('demo_session');
+                if (session) {
+                    const user = JSON.parse(session);
+                    showDashboard(user);
+                } else {
+                    showLoginScreen();
+                }
+            } else {
+                supabase.auth.getSession().then(({ data: { session } }) => {
+                    if (session) {
+                        const email = session.user.email;
+                        if (!email.toLowerCase().endsWith('@jletelecom.com.br')) {
+                            alert('Acesso restrito: Apenas e-mails corporativos @jletelecom.com.br são permitidos.');
+                            supabase.auth.signOut();
+                            return;
+                        }
+                        showDashboard(session.user);
+                    } else {
+                        showLoginScreen();
+                    }
+                });
+            }
+        }
+
+        function showDashboard(user) {
+            document.getElementById('auth-panel').style.display = 'none';
+            document.getElementById('dashboard-sidebar').style.display = 'flex';
+            document.getElementById('dashboard-main-content').style.display = 'flex';
+            document.getElementById('user-display-email').innerText = user.email;
+            
+            // Força redimensionamento dos gráficos e aplicação de filtros iniciais
+            setTimeout(() => {
+                window.dispatchEvent(new Event('resize'));
+                applyFilters();
+            }, 50);
+        }
+
+        function showLoginScreen() {
+            document.getElementById('auth-panel').style.display = 'flex';
+            document.getElementById('dashboard-sidebar').style.display = 'none';
+            document.getElementById('dashboard-main-content').style.display = 'none';
+        }
 
         // Configuração de Dados e Estado Global
         let transactions = [];
@@ -466,7 +761,25 @@
             }
             monthSelect.value = monthToSelect;
             
-            applyFilters();
+            // Registrar listener de mudanças no estado de autenticação (Supabase Auth)
+            if (supabase) {
+                supabase.auth.onAuthStateChange((event, session) => {
+                    if (session) {
+                        const email = session.user.email;
+                        if (!email.toLowerCase().endsWith('@jletelecom.com.br')) {
+                            alert('Acesso restrito: Apenas e-mails corporativos @jletelecom.com.br são permitidos.');
+                            supabase.auth.signOut();
+                            return;
+                        }
+                        showDashboard(session.user);
+                    } else {
+                        showLoginScreen();
+                    }
+                });
+            }
+            
+            // Verificar sessão inicial
+            checkAuth();
         });
 
         function getUniqueValuesFromData(filterField, filterVal, extractField) {
