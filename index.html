@@ -407,8 +407,8 @@
             <!-- FORMULÁRIO DE CADASTRO -->
             <form class="auth-form" id="form-register" onsubmit="handleRegisterSubmit(event)" style="display: none;">
                 <div class="auth-input-group">
-                    <label for="register-name">Nome Completo</label>
-                    <input type="text" id="register-name" required placeholder="Maurício Maciel e Silva">
+                    <label for="register-name">Nome</label>
+                    <input type="text" id="register-name" required placeholder="Maurício">
                 </div>
                 <div class="auth-input-group">
                     <label for="register-email">E-mail Corporativo</label>
@@ -580,11 +580,6 @@
             
             const alertBox = document.getElementById('auth-alert');
             alertBox.style.display = 'none';
-            
-            if (nameInput.split(/\s+/).length < 2) {
-                showAuthAlert('Por favor, informe seu nome e pelo menos um sobrenome.', 'error');
-                return;
-            }
             
             const formattedName = formatFullName(nameInput);
             
