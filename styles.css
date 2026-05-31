@@ -988,107 +988,60 @@ td.cell-saida {
     border: 1px solid var(--border-color);
 }
 
-/* Painel de UFs Premium - Mapa Centralizado e Cards Flutuantes (Saindo do Estado) */
+/* Painel de UFs Premium - Layout Encaixado Lado a Lado (Mapa e Estatísticas) */
 .uf-premium-container {
-    position: relative;
-    width: 100%;
-    height: 400px;
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    gap: 8px;
     align-items: center;
-    overflow: visible; /* Permite que as sombras e linhas apareçam perfeitamente */
-    border-radius: 12px;
-    padding: 10px;
-    background: radial-gradient(circle at center, rgba(0, 79, 113, 0.05) 0%, transparent 70%);
+    justify-content: space-between;
+    overflow: visible;
+    position: relative;
+}
+
+.uf-map-side {
+    width: 36%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+    position: relative;
+}
+
+.uf-panels-side {
+    width: 62%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 6px;
+    overflow: visible;
+    position: relative;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 
 .map-svg-centered {
-    width: auto;
-    height: 100%;
-    max-height: 380px;
-    max-width: 45%;
+    width: 100%;
+    height: auto;
+    max-height: 320px;
     z-index: 5;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.35));
+    transition: all 0.4s ease;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
     overflow: visible;
 }
 
-/* Cards Flutuantes com Glassmorphism de Alta Fidelidade */
-.uf-floating-card {
-    position: absolute;
-    width: 290px;
-    background: rgba(17, 28, 36, 0.82);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    border-radius: 14px;
-    padding: 12px 16px;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 10;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.light-theme .uf-floating-card {
-    background: rgba(255, 255, 255, 0.82);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.8);
-}
-
-.uf-floating-card:hover, .uf-floating-card.hovered {
-    transform: translateY(-5px) scale(1.03);
-    border-color: var(--color-primary-light);
-    box-shadow: 0 16px 45px rgba(0, 79, 113, 0.45);
-    z-index: 15;
-}
-
-.uf-floating-card.active {
-    border-color: var(--color-secondary);
-    box-shadow: 0 0 25px rgba(243, 159, 24, 0.4);
-    background: rgba(243, 159, 24, 0.12);
-}
-
-.light-theme .uf-floating-card.active {
-    background: rgba(243, 159, 24, 0.06);
-}
-
-/* Dimmed state when another card is selected */
-.uf-floating-card.dimmed {
-    opacity: 0.35;
-    filter: scale(0.98) blur(0.2px);
-}
-.uf-floating-card.dimmed:hover {
-    opacity: 0.8;
-    filter: none;
-}
-
-/* Posições Perfeitas dos Cards ao redor do Mapa */
-.uf-floating-card.pr-card {
-    left: 10px;
-    top: 15px;
-}
-
-.uf-floating-card.sc-card {
-    right: 10px;
-    top: 130px;
-}
-
-.uf-floating-card.rs-card {
-    left: 10px;
-    bottom: 15px;
-}
-
-/* Linhas Conectoras de Fluxo de Dados (saindo dos estados) */
+/* Curved Glowing Connection Lines */
 .map-connection-line {
     fill: none;
-    stroke: rgba(0, 79, 113, 0.3);
-    stroke-width: 1px;
+    stroke: rgba(0, 79, 113, 0.25);
+    stroke-width: 0.8px;
     stroke-dasharray: 4 3;
     animation: flowDash 30s linear infinite;
-    filter: drop-shadow(0 0 2px rgba(0, 79, 113, 0.3));
+    filter: drop-shadow(0 0 1px rgba(0, 79, 113, 0.2));
     transition: all 0.4s ease;
 }
 
@@ -1100,44 +1053,105 @@ td.cell-saida {
 
 .map-connection-line.active {
     stroke: var(--color-secondary);
-    stroke-width: 1.5px;
-    filter: drop-shadow(0 0 5px rgba(243, 159, 24, 0.8));
+    stroke-width: 1.2px;
+    filter: drop-shadow(0 0 4px rgba(243, 159, 24, 0.7));
     animation-duration: 10s;
 }
 
 .map-connection-line.dimmed {
-    opacity: 0.1;
+    opacity: 0.05;
 }
 
-/* Elementos Internos de Alta Fidelidade */
-.uf-float-header {
+/* Compact Glassmorphism Cards */
+.uf-compact-card {
+    background: rgba(17, 28, 36, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-left: 3px solid transparent;
+    border-radius: 10px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.light-theme .uf-compact-card {
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-left: 3px solid transparent;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Custom left glowing border fused with the connection lines */
+.uf-compact-card.pr-card { border-left-color: #00b4d8; }
+.uf-compact-card.sc-card { border-left-color: #f39f18; }
+.uf-compact-card.rs-card { border-left-color: #2ecc71; }
+
+.uf-compact-card:hover, .uf-compact-card.hovered {
+    transform: translateX(4px) scale(1.02);
+    border-color: var(--color-primary-light);
+    border-left-width: 4px;
+    box-shadow: 0 6px 20px rgba(0, 79, 113, 0.35);
+}
+
+/* Hover highlights for active state */
+.uf-compact-card.pr-card:hover, .uf-compact-card.pr-card.hovered { border-left-color: #00b4d8; }
+.uf-compact-card.sc-card:hover, .uf-compact-card.sc-card.hovered { border-left-color: #f39f18; }
+.uf-compact-card.rs-card:hover, .uf-compact-card.rs-card.hovered { border-left-color: #2ecc71; }
+
+.uf-compact-card.active {
+    border-color: var(--color-secondary);
+    border-left-width: 4px;
+    box-shadow: 0 0 15px rgba(243, 159, 24, 0.3);
+    background: rgba(243, 159, 24, 0.08);
+}
+
+.light-theme .uf-compact-card.active {
+    background: rgba(243, 159, 24, 0.04);
+}
+
+.uf-compact-card.dimmed {
+    opacity: 0.35;
+    filter: scale(0.98);
+}
+
+.uf-compact-card.dimmed:hover {
+    opacity: 0.8;
+}
+
+/* Card Header */
+.uf-compact-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    padding-bottom: 6px;
-    margin-bottom: 6px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 4px;
+    margin-bottom: 2px;
 }
 
-.light-theme .uf-float-header {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+.light-theme .uf-compact-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
 }
 
-.uf-float-name {
-    font-size: 13px;
+.uf-compact-name {
+    font-size: 11px;
     font-weight: 700;
     color: var(--text-primary);
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
 }
 
 .uf-status-indicator {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     display: inline-block;
-    box-shadow: 0 0 8px currentColor;
+    box-shadow: 0 0 6px currentColor;
 }
 
 .pr-dot {
@@ -1155,65 +1169,44 @@ td.cell-saida {
     color: rgba(46, 204, 113, 0.6);
 }
 
-.uf-float-pct {
-    font-size: 13px;
+.uf-compact-pct {
+    font-size: 11px;
     font-weight: 800;
     color: var(--color-secondary);
 }
 
-.uf-float-body {
-    display: flex;
-    justify-content: space-between;
-    gap: 8px;
-}
-
-.uf-float-col {
+/* Card Body Rows */
+.uf-compact-body {
     display: flex;
     flex-direction: column;
-    gap: 2px;
-    flex: 1;
+    gap: 1px;
 }
 
-.uf-float-label {
-    font-size: 8.5px;
-    text-transform: uppercase;
+.uf-compact-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 9.5px;
+}
+
+.uf-compact-label {
     color: var(--text-secondary);
-    font-weight: 600;
-    letter-spacing: 0.5px;
     display: flex;
     align-items: center;
     gap: 4px;
-    white-space: nowrap;
 }
 
-.uf-float-label.success {
-    color: var(--color-success);
-}
+.uf-compact-label.success { color: var(--color-success); }
+.uf-compact-label.danger { color: var(--color-danger); }
 
-.uf-float-label.danger {
-    color: var(--color-danger);
-}
-
-.uf-float-number {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--text-primary);
-}
-
-.uf-float-val {
-    font-size: 11px;
+.uf-compact-val {
     font-weight: 700;
     color: var(--text-primary);
     white-space: nowrap;
 }
 
-.uf-float-val.success {
-    color: var(--color-success);
-}
-
-.uf-float-val.danger {
-    color: var(--color-danger);
-}
+.uf-compact-val.success { color: var(--color-success); }
+.uf-compact-val.danger { color: var(--color-danger); }
 
 /* Polígonos de Estado e Textos do SVG */
 .map-state {
@@ -1262,54 +1255,36 @@ td.cell-saida {
     opacity: 0.15;
 }
 
-/* Legenda do Mapa */
-.map-legend {
-    position: absolute;
-    bottom: 12px;
-    right: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 10px;
-    color: var(--text-secondary);
-    background: rgba(17, 28, 36, 0.6);
-    padding: 4px 10px;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(8px);
-    z-index: 10;
-}
-
-.light-theme .map-legend {
-    background: rgba(255, 255, 255, 0.6);
-    border: 1px solid rgba(0, 0, 0, 0.04);
-}
-
 /* Responsividade Mobile Fluida */
-@media (max-width: 991px) {
+@media (max-width: 768px) {
     .uf-premium-container {
         flex-direction: column;
         height: auto;
-        padding: 10px;
-        gap: 15px;
+        gap: 12px;
+    }
+    
+    .uf-map-side {
+        width: 100%;
+        height: 220px;
+    }
+    
+    .uf-panels-side {
+        width: 100%;
+        height: auto;
+        gap: 6px;
     }
     
     .map-svg-centered {
-        max-width: 80%;
-        height: 240px;
+        max-width: 60%;
+        height: 200px;
     }
     
-    .uf-floating-card {
-        position: relative !important;
-        left: auto !important;
-        right: auto !important;
-        top: auto !important;
-        bottom: auto !important;
+    .uf-compact-card {
         width: 100% !important;
-        box-shadow: var(--shadow-main);
+        transform: none !important;
     }
     
-    .uf-floating-card::before, .map-connection-line {
+    .map-connection-line {
         display: none !important;
     }
     

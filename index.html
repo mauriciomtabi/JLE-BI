@@ -244,19 +244,6 @@
             <!-- Charts Grid Row 2 -->
             <div class="charts-grid categories-uf-row">
                 <div class="chart-card">
-                    <div class="chart-header">
-                        <div class="chart-title">
-                            <h2>Distribuição por UF</h2>
-                        </div>
-                    </div>
-                    <div class="chart-body map-chart-body">
-                        <div class="map-wrapper" id="map-container" style="width: 100%; height: 100%; position: relative;">
-                            <!-- SVG Map will be injected here -->
-                        </div>
-                    </div>
-                </div>
-
-                <div class="chart-card">
                     <div class="chart-header" style="flex-wrap: wrap; gap: 10px;">
                         <div class="chart-title">
                             <h2 id="categories-chart-title">Categorias</h2>
@@ -270,6 +257,19 @@
                     <div class="chart-body map-chart-body" style="align-items: flex-start; justify-content: flex-start; overflow-y: auto;">
                         <div id="categories-scroll-wrapper" style="width: 100%; height: 380px; position: relative;">
                             <canvas id="chart-categories"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <div class="chart-title">
+                            <h2>Distribuição por UF</h2>
+                        </div>
+                    </div>
+                    <div class="chart-body map-chart-body">
+                        <div class="map-wrapper" id="map-container" style="width: 100%; height: 100%; position: relative;">
+                            <!-- SVG Map will be injected here -->
                         </div>
                     </div>
                 </div>
@@ -2449,7 +2449,7 @@
             renderCategoryChart();
         }
 
-        // Renderização do Mapa Choropleth de UFs (RS, SC, PR) com Cards Flutuantes Premium
+        // Renderização do Mapa Choropleth de UFs (RS, SC, PR) com Cards Compactos Premium
         function renderUFMap() {
             const mapContainer = document.getElementById('map-container');
             const tooltip = document.getElementById('map-tooltip');
@@ -2502,161 +2502,160 @@
 
             mapContainer.innerHTML = `
                 <div class="uf-premium-container">
-                    <!-- FLOATING CARD: PARANÁ (PR) -->
-                    <div class="uf-floating-card pr-card ${isSelectPR}" id="card-UF-PR" onclick="toggleUFFromMap('PR')" onmouseenter="handleCardHover('PR')" onmouseleave="handleCardLeave('PR')">
-                        <div class="uf-float-header">
-                            <span class="uf-float-name">
-                                <span class="uf-status-indicator pr-dot"></span>
-                                <strong>Paraná (PR)</strong>
-                            </span>
-                            <span class="uf-float-pct">${pctPR.toFixed(1).replace('.', ',')}%</span>
-                        </div>
-                        <div class="uf-float-body">
-                            <div class="uf-float-col">
-                                <div class="uf-float-label"><i class="fa-solid fa-list-ol"></i> Lanç.</div>
-                                <div class="uf-float-number">${ufMetrics['PR'].txCount}</div>
-                            </div>
-                            <div class="uf-float-col">
-                                <div class="uf-float-label success"><i class="fa-solid fa-arrow-up"></i> Entradas</div>
-                                <div class="uf-float-val success">${formatCurrency(ufMetrics['PR'].entradas)}</div>
-                            </div>
-                            <div class="uf-float-col">
-                                <div class="uf-float-label danger"><i class="fa-solid fa-arrow-down"></i> Saídas</div>
-                                <div class="uf-float-val danger">${formatCurrency(ufMetrics['PR'].saidas)}</div>
-                            </div>
-                        </div>
+                    <!-- LEFT COLUMN: GEOGRAPHIC REGION MAP -->
+                    <div class="uf-map-side">
+                        <svg class="map-svg-centered" viewBox="140 245 150 135" style="overflow: visible;">
+                            <!-- GLOWING CURVED DATA CONNECTION FLOW PATHS -->
+                            <path class="map-connection-line pr-line ${filterUf === 'PR' ? 'active' : ''} ${filterUf !== 'ALL' && filterUf !== 'PR' ? 'dimmed' : ''}" id="line-PR" d="M 205,272 C 230,272 250,265 285,265" />
+                            <path class="map-connection-line sc-line ${filterUf === 'SC' ? 'active' : ''} ${filterUf !== 'ALL' && filterUf !== 'SC' ? 'dimmed' : ''}" id="line-SC" d="M 215,298 C 235,298 255,298 285,298" />
+                            <path class="map-connection-line rs-line ${filterUf === 'RS' ? 'active' : ''} ${filterUf !== 'ALL' && filterUf !== 'RS' ? 'dimmed' : ''}" id="line-RS" d="M 186,335 C 220,335 240,331 285,331" />
+
+                            <!-- PARANÁ POLYGON -->
+                            <polygon class="map-state ${isSelectPR}" id="state-PR" points="
+                                234.456,277.734 235.218,274.689 232.173,276.213 229.318,273.357 228.368,269.744 224.942,269.172 221.898,269.363
+                                220.375,266.127 220.757,263.463 220.945,258.326 218.663,256.424 212.384,257.186 207.056,254.33 203.061,254.33 202.109,254.33
+                                201.158,252.809 199.635,253.189 196.591,253.949 193.356,254.141 190.407,253.475 186.887,256.709 185.364,259.564
+                                184.604,263.369 183.556,265.082 180.196,265.885 177.763,274.082 177.664,278.756 176.28,281.801 182.956,283.033
+                                184.454,288.203 183.603,290.621 186.648,288.984 189.502,290.197 192.356,289.484 193.927,291.41 196.425,291.34
+                                199.706,292.695 204.844,293.695 206.058,292.98 205.985,291.197 207.199,289.414 212.052,286.273 214.478,286.844
+                                217.401,286.346 220.686,288.344 224.823,285.988 228.248,287.129 230.233,287.793 230.184,284.873 229.085,284.475
+                                230.033,284.375 231.132,282.336 232.28,281.49 231.682,281.291 231.082,281.49 231.032,280.943 229.585,281.043 229.085,281.143
+                                229.385,280.695 228.485,279.9 229.934,280.396 230.482,280.098 230.932,279.6 231.381,278.807 231.932,279.004
+                                232.33,278.705 232.28,279.502 232.879,279.9 233.478,279.451 233.777,279.65 233.029,280.297 233.129,281.143 233.528,281.094
+                                234.377,279.65 236.125,278.635" 
+                                style="fill: ${getColorForUF('PR')};" 
+                                onmouseenter="handleMapHover(event, 'PR')" 
+                                onmousemove="handleMapMove(event)" 
+                                onmouseleave="handleMapLeave()"
+                                onclick="toggleUFFromMap('PR')">
+                            </polygon>
+                            <text class="map-label ${isSelectPR}" x="205" y="272" style="font-size: 3.5px;" onclick="toggleUFFromMap('PR')">PR</text>
+
+                            <!-- SANTA CATARINA POLYGON -->
+                            <polygon class="map-state ${isSelectSC}" id="state-SC" points="
+                                224.823,285.988 220.686,288.344 217.401,286.346 214.478,286.844 212.052,286.273 207.199,289.414 205.985,291.197
+                                206.058,292.98 204.844,293.695 199.706,292.695 196.425,291.34 193.927,291.41 192.356,289.484 189.502,290.197 186.648,288.984
+                                183.603,290.621 185.153,294.27 183.62,298.275 185.364,298.57 188.98,298.191 192.976,298.191 196.211,298.762 198.873,300.379
+                                201.348,301.615 205.153,302.566 207.342,303.613 209.054,306.941 211.053,310.463 213.052,312.271 214.478,312.271
+                                216.569,311.32 218.378,310.844 219.71,311.795 219.899,313.508 217.235,316.076 214.667,320.357 215.714,320.738 217.33,319.502
+                                218.663,320.547 226.838,312.867 227.688,313.016 228.336,312.471 227.937,311.176 228.186,310.182 229.285,309.934
+                                229.435,308.641 229.885,308.59 229.535,310.133 229.834,309.982 230.282,307.746 230.333,305.807 230.184,305.605
+                                230.433,304.465 229.834,302.873 230.033,301.68 230.433,301.23 229.834,300.834 229.885,300.039 230.732,299.691
+                                230.832,299.393 230.533,298.893 231.432,298.348 231.932,298.646 232.33,298.1 231.381,297.203 231.032,297.75 230.533,297.551
+                                230.732,296.756 230.184,296.707 230.033,295.762 230.533,294.867 229.783,294.619 229.634,292.777 230.083,290.689
+                                229.285,289.496 228.535,289.695 227.786,289.545 228.685,288.998 227.837,287.955 229.034,288.75 230.233,287.793
+                                228.248,287.129" 
+                                style="fill: ${getColorForUF('SC')};" 
+                                onmouseenter="handleMapHover(event, 'SC')" 
+                                onmousemove="handleMapMove(event)" 
+                                onmouseleave="handleMapLeave()"
+                                onclick="toggleUFFromMap('SC')">
+                            </polygon>
+                            <text class="map-label ${isSelectSC}" x="215" y="298" style="font-size: 3.5px;" onclick="toggleUFFromMap('SC')">SC</text>
+
+                            <!-- RIO GRANDE DO SUL POLYGON -->
+                            <polygon class="map-state ${isSelectRS}" id="state-RS" points="
+                                215.714,320.738 214.667,320.357 217.235,316.076 219.899,313.508 219.71,311.795 218.378,310.844 216.569,311.32
+                                214.478,312.271 213.052,312.271 211.053,310.463 209.054,306.941 207.342,303.613 205.153,302.566 201.348,301.615
+                                198.873,300.379 196.211,298.762 192.976,298.191 188.98,298.191 185.364,298.57 183.62,298.275 171.023,304.363 165.032,310.133
+                                159.191,319.432 151.903,325.398 150.604,328.383 155.53,328.646 158.924,331.697 161.122,332.293 161.988,334.215
+                                163.452,335.875 163.384,336.668 164.583,337.729 165.981,336.934 166.381,335.875 168.843,335.807 171.04,338.459
+                                180.825,347.012 183.354,347.674 189.013,354.637 186.883,359.477 187.082,362.857 185.951,366.57 186.449,367.764
+                                187.647,364.881 192.641,360.205 195.536,356.029 197.033,350.758 200.129,348.77 199.829,348.371 198.532,348.869
+                                198.432,347.773 199.629,347.477 197.934,346.879 198.232,346.082 199.23,345.984 199.829,344.988 200.129,342.803
+                                201.527,341.707 202.725,341.906 203.125,340.613 203.724,340.912 203.923,338.027 205.021,336.535 205.121,337.631
+                                205.722,335.74 206.818,334.547 206.818,333.752 205.121,333.156 205.021,332.559 205.621,331.762 206.021,332.758
+                                207.019,333.254 208.616,333.156 209.614,331.861 211.612,331.166 212.012,333.254 211.312,333.553 211.212,332.857
+                                210.612,332.758 210.812,336.535 209.314,337.232 209.216,338.027 208.117,338.525 207.917,341.111 206.52,342.305
+                                205.321,342.404 203.623,345.189 202.825,345.189 202.226,346.184 200.629,345.785 200.329,346.283 201.028,347.277
+                                200.43,348.172 200.828,348.57 201.327,347.477 204.822,345.389 211.312,338.824 211.312,338.824 216.604,326.889 218.351,320.922
+                                218.663,320.547 217.33,319.502" 
+                                style="fill: ${getColorForUF('RS')};" 
+                                onmouseenter="handleMapHover(event, 'RS')" 
+                                onmousemove="handleMapMove(event)" 
+                                onmouseleave="handleMapLeave()"
+                                onclick="toggleUFFromMap('RS')">
+                            </polygon>
+                            <text class="map-label ${isSelectRS}" x="186" y="335" style="font-size: 3.5px;" onclick="toggleUFFromMap('RS')">RS</text>
+                        </svg>
                     </div>
 
-                    <!-- GEOGRAPHIC REGION MAP (SVG CENTERED) -->
-                    <svg class="map-svg-centered" viewBox="110 240 160 140" style="overflow: visible;">
-                        <!-- GLOWING DATA CONNECTION FLOW PATHS -->
-                        <path class="map-connection-line pr-line ${filterUf === 'PR' ? 'active' : ''} ${filterUf !== 'ALL' && filterUf !== 'PR' ? 'dimmed' : ''}" id="line-PR" d="M 205,272 L 145,260" />
-                        <path class="map-connection-line sc-line ${filterUf === 'SC' ? 'active' : ''} ${filterUf !== 'ALL' && filterUf !== 'SC' ? 'dimmed' : ''}" id="line-SC" d="M 215,298 L 275,298" />
-                        <path class="map-connection-line rs-line ${filterUf === 'RS' ? 'active' : ''} ${filterUf !== 'ALL' && filterUf !== 'RS' ? 'dimmed' : ''}" id="line-RS" d="M 186,335 L 145,350" />
-
-                        <!-- PARANÁ POLYGON -->
-                        <polygon class="map-state ${isSelectPR}" id="state-PR" points="
-                            234.456,277.734 235.218,274.689 232.173,276.213 229.318,273.357 228.368,269.744 224.942,269.172 221.898,269.363
-                            220.375,266.127 220.757,263.463 220.945,258.326 218.663,256.424 212.384,257.186 207.056,254.33 203.061,254.33 202.109,254.33
-                            201.158,252.809 199.635,253.189 196.591,253.949 193.356,254.141 190.407,253.475 186.887,256.709 185.364,259.564
-                            184.604,263.369 183.556,265.082 180.196,265.885 177.763,274.082 177.664,278.756 176.28,281.801 182.956,283.033
-                            184.454,288.203 183.603,290.621 186.648,288.984 189.502,290.197 192.356,289.484 193.927,291.41 196.425,291.34
-                            199.706,292.695 204.844,293.695 206.058,292.98 205.985,291.197 207.199,289.414 212.052,286.273 214.478,286.844
-                            217.401,286.346 220.686,288.344 224.823,285.988 228.248,287.129 230.233,287.793 230.184,284.873 229.085,284.475
-                            230.033,284.375 231.132,282.336 232.28,281.49 231.682,281.291 231.082,281.49 231.032,280.943 229.585,281.043 229.085,281.143
-                            229.385,280.695 228.485,279.9 229.934,280.396 230.482,280.098 230.932,280.695 231.631,279.6 231.381,278.807 231.932,279.004
-                            232.33,278.705 232.28,279.502 232.879,279.9 233.478,279.451 233.777,279.65 233.029,280.297 233.129,281.143 233.528,281.094
-                            234.377,279.65 236.125,278.635" 
-                            style="fill: ${getColorForUF('PR')};" 
-                            onmouseenter="handleMapHover(event, 'PR')" 
-                            onmousemove="handleMapMove(event)" 
-                            onmouseleave="handleMapLeave()"
-                            onclick="toggleUFFromMap('PR')">
-                        </polygon>
-                        <text class="map-label ${isSelectPR}" x="205" y="272" style="font-size: 3.5px;" onclick="toggleUFFromMap('PR')">PR</text>
-
-                        <!-- SANTA CATARINA POLYGON -->
-                        <polygon class="map-state ${isSelectSC}" id="state-SC" points="
-                            224.823,285.988 220.686,288.344 217.401,286.346 214.478,286.844 212.052,286.273 207.199,289.414 205.985,291.197
-                            206.058,292.98 204.844,293.695 199.706,292.695 196.425,291.34 193.927,291.41 192.356,289.484 189.502,290.197 186.648,288.984
-                            183.603,290.621 185.153,294.27 183.62,298.275 185.364,298.57 188.98,298.191 192.976,298.191 196.211,298.762 198.873,300.379
-                            201.348,301.615 205.153,302.566 207.342,303.613 209.054,306.941 211.053,310.463 213.052,312.271 214.478,312.271
-                            216.569,311.32 218.378,310.844 219.71,311.795 219.899,313.508 217.235,316.076 214.667,320.357 215.714,320.738 217.33,319.502
-                            218.663,320.547 226.838,312.867 227.688,313.016 228.336,312.471 227.937,311.176 228.186,310.182 229.285,309.934
-                            229.435,308.641 229.885,308.59 229.535,310.133 229.834,309.982 230.282,307.746 230.333,305.807 230.184,305.605
-                            230.433,304.465 229.834,302.873 230.033,301.68 230.433,301.23 229.834,300.834 229.885,300.039 230.732,299.691
-                            230.832,299.393 230.533,298.893 231.432,298.348 231.932,298.646 232.33,298.1 231.381,297.203 231.032,297.75 230.533,297.551
-                            230.732,296.756 230.184,296.707 230.033,295.762 230.533,294.867 229.783,294.619 229.634,292.777 230.083,290.689
-                            229.285,289.496 228.535,289.695 227.786,289.545 228.685,288.998 227.837,287.955 229.034,288.75 230.233,287.793
-                            228.248,287.129" 
-                            style="fill: ${getColorForUF('SC')};" 
-                            onmouseenter="handleMapHover(event, 'SC')" 
-                            onmousemove="handleMapMove(event)" 
-                            onmouseleave="handleMapLeave()"
-                            onclick="toggleUFFromMap('SC')">
-                        </polygon>
-                        <text class="map-label ${isSelectSC}" x="215" y="298" style="font-size: 3.5px;" onclick="toggleUFFromMap('SC')">SC</text>
-
-                        <!-- RIO GRANDE DO SUL POLYGON -->
-                        <polygon class="map-state ${isSelectRS}" id="state-RS" points="
-                            215.714,320.738 214.667,320.357 217.235,316.076 219.899,313.508 219.71,311.795 218.378,310.844 216.569,311.32
-                            214.478,312.271 213.052,312.271 211.053,310.463 209.054,306.941 207.342,303.613 205.153,302.566 201.348,301.615
-                            198.873,300.379 196.211,298.762 192.976,298.191 188.98,298.191 185.364,298.57 183.62,298.275 171.023,304.363 165.032,310.133
-                            159.191,319.432 151.903,325.398 150.604,328.383 155.53,328.646 158.924,331.697 161.122,332.293 161.988,334.215
-                            163.452,335.875 163.384,336.668 164.583,337.729 165.981,336.934 166.381,335.875 168.843,335.807 171.04,338.459
-                            180.825,347.012 183.354,347.674 189.013,354.637 186.883,359.477 187.082,362.857 185.951,366.57 186.449,367.764
-                            187.647,364.881 192.641,360.205 195.536,356.029 197.033,350.758 200.129,348.77 199.829,348.371 198.532,348.869
-                            198.432,347.773 199.629,347.477 197.934,346.879 198.232,346.082 199.23,345.984 199.829,344.988 200.129,342.803
-                            201.527,341.707 202.725,341.906 203.125,340.613 203.724,340.912 203.923,338.027 205.021,336.535 205.121,337.631
-                            205.722,335.74 206.818,334.547 206.818,333.752 205.121,333.156 205.021,332.559 205.621,331.762 206.021,332.758
-                            207.019,333.254 208.616,333.156 209.614,331.861 211.612,331.166 212.012,333.254 211.312,333.553 211.212,332.857
-                            210.612,332.758 210.812,336.535 209.314,337.232 209.216,338.027 208.117,338.525 207.917,341.111 206.52,342.305
-                            205.321,342.404 203.623,345.189 202.825,345.189 202.226,346.184 200.629,345.785 200.329,346.283 201.028,347.277
-                            200.43,348.172 200.828,348.57 201.327,347.477 204.822,345.389 211.312,338.824 211.312,338.824 216.604,326.889 218.351,320.922
-                            218.663,320.547 217.33,319.502" 
-                            style="fill: ${getColorForUF('RS')};" 
-                            onmouseenter="handleMapHover(event, 'RS')" 
-                            onmousemove="handleMapMove(event)" 
-                            onmouseleave="handleMapLeave()"
-                            onclick="toggleUFFromMap('RS')">
-                        </polygon>
-                        <text class="map-label ${isSelectRS}" x="186" y="335" style="font-size: 3.5px;" onclick="toggleUFFromMap('RS')">RS</text>
-                    </svg>
-
-                    <!-- FLOATING CARD: SANTA CATARINA (SC) -->
-                    <div class="uf-floating-card sc-card ${isSelectSC}" id="card-UF-SC" onclick="toggleUFFromMap('SC')" onmouseenter="handleCardHover('SC')" onmouseleave="handleCardLeave('SC')">
-                        <div class="uf-float-header">
-                            <span class="uf-float-name">
-                                <span class="uf-status-indicator sc-dot"></span>
-                                <strong>Santa Catarina (SC)</strong>
-                            </span>
-                            <span class="uf-float-pct">${pctSC.toFixed(1).replace('.', ',')}%</span>
-                        </div>
-                        <div class="uf-float-body">
-                            <div class="uf-float-col">
-                                <div class="uf-float-label"><i class="fa-solid fa-list-ol"></i> Lanç.</div>
-                                <div class="uf-float-number">${ufMetrics['SC'].txCount}</div>
+                    <!-- RIGHT COLUMN: STACKED COMPACT STATS CAPSULES -->
+                    <div class="uf-panels-side">
+                        <!-- PARANÁ CAPSULE -->
+                        <div class="uf-compact-card pr-card ${isSelectPR}" id="card-UF-PR" onclick="toggleUFFromMap('PR')" onmouseenter="handleCardHover('PR')" onmouseleave="handleCardLeave('PR')">
+                            <div class="uf-compact-header">
+                                <span class="uf-compact-name">
+                                    <span class="uf-status-indicator pr-dot"></span>
+                                    Paraná (PR)
+                                </span>
+                                <span class="uf-compact-pct">${pctPR.toFixed(1).replace('.', ',')}%</span>
                             </div>
-                            <div class="uf-float-col">
-                                <div class="uf-float-label success"><i class="fa-solid fa-arrow-up"></i> Entradas</div>
-                                <div class="uf-float-val success">${formatCurrency(ufMetrics['SC'].entradas)}</div>
-                            </div>
-                            <div class="uf-float-col">
-                                <div class="uf-float-label danger"><i class="fa-solid fa-arrow-down"></i> Saídas</div>
-                                <div class="uf-float-val danger">${formatCurrency(ufMetrics['SC'].saidas)}</div>
+                            <div class="uf-compact-body">
+                                <div class="uf-compact-row">
+                                    <span class="uf-compact-label"><i class="fa-solid fa-list-ol"></i> Lançamentos:</span>
+                                    <span class="uf-compact-val">${ufMetrics['PR'].txCount}</span>
+                                </div>
+                                <div class="uf-compact-row">
+                                    <span class="uf-compact-label success"><i class="fa-solid fa-arrow-up"></i> Entradas:</span>
+                                    <span class="uf-compact-val success">${formatCurrency(ufMetrics['PR'].entradas)}</span>
+                                </div>
+                                <div class="uf-compact-row">
+                                    <span class="uf-compact-label danger"><i class="fa-solid fa-arrow-down"></i> Saídas:</span>
+                                    <span class="uf-compact-val danger">${formatCurrency(ufMetrics['PR'].saidas)}</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- FLOATING CARD: RIO GRANDE DO SUL (RS) -->
-                    <div class="uf-floating-card rs-card ${isSelectRS}" id="card-UF-RS" onclick="toggleUFFromMap('RS')" onmouseenter="handleCardHover('RS')" onmouseleave="handleCardLeave('RS')">
-                        <div class="uf-float-header">
-                            <span class="uf-float-name">
-                                <span class="uf-status-indicator rs-dot"></span>
-                                <strong>Rio Grande do Sul (RS)</strong>
-                            </span>
-                            <span class="uf-float-pct">${pctRS.toFixed(1).replace('.', ',')}%</span>
+                        <!-- SANTA CATARINA CAPSULE -->
+                        <div class="uf-compact-card sc-card ${isSelectSC}" id="card-UF-SC" onclick="toggleUFFromMap('SC')" onmouseenter="handleCardHover('SC')" onmouseleave="handleCardLeave('SC')">
+                            <div class="uf-compact-header">
+                                <span class="uf-compact-name">
+                                    <span class="uf-status-indicator sc-dot"></span>
+                                    Santa Catarina (SC)
+                                </span>
+                                <span class="uf-compact-pct">${pctSC.toFixed(1).replace('.', ',')}%</span>
+                            </div>
+                            <div class="uf-compact-body">
+                                <div class="uf-compact-row">
+                                    <span class="uf-compact-label"><i class="fa-solid fa-list-ol"></i> Lançamentos:</span>
+                                    <span class="uf-compact-val">${ufMetrics['SC'].txCount}</span>
+                                </div>
+                                <div class="uf-compact-row">
+                                    <span class="uf-compact-label success"><i class="fa-solid fa-arrow-up"></i> Entradas:</span>
+                                    <span class="uf-compact-val success">${formatCurrency(ufMetrics['SC'].entradas)}</span>
+                                </div>
+                                <div class="uf-compact-row">
+                                    <span class="uf-compact-label danger"><i class="fa-solid fa-arrow-down"></i> Saídas:</span>
+                                    <span class="uf-compact-val danger">${formatCurrency(ufMetrics['SC'].saidas)}</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="uf-float-body">
-                            <div class="uf-float-col">
-                                <div class="uf-float-label"><i class="fa-solid fa-list-ol"></i> Lanç.</div>
-                                <div class="uf-float-number">${ufMetrics['RS'].txCount}</div>
+
+                        <!-- RIO GRANDE DO SUL CAPSULE -->
+                        <div class="uf-compact-card rs-card ${isSelectRS}" id="card-UF-RS" onclick="toggleUFFromMap('RS')" onmouseenter="handleCardHover('RS')" onmouseleave="handleCardLeave('RS')">
+                            <div class="uf-compact-header">
+                                <span class="uf-compact-name">
+                                    <span class="uf-status-indicator rs-dot"></span>
+                                    Rio Grande do Sul (RS)
+                                </span>
+                                <span class="uf-compact-pct">${pctRS.toFixed(1).replace('.', ',')}%</span>
                             </div>
-                            <div class="uf-float-col">
-                                <div class="uf-float-label success"><i class="fa-solid fa-arrow-up"></i> Entradas</div>
-                                <div class="uf-float-val success">${formatCurrency(ufMetrics['RS'].entradas)}</div>
-                            </div>
-                            <div class="uf-float-col">
-                                <div class="uf-float-label danger"><i class="fa-solid fa-arrow-down"></i> Saídas</div>
-                                <div class="uf-float-val danger">${formatCurrency(ufMetrics['RS'].saidas)}</div>
+                            <div class="uf-compact-body">
+                                <div class="uf-compact-row">
+                                    <span class="uf-compact-label"><i class="fa-solid fa-list-ol"></i> Lançamentos:</span>
+                                    <span class="uf-compact-val">${ufMetrics['RS'].txCount}</span>
+                                </div>
+                                <div class="uf-compact-row">
+                                    <span class="uf-compact-label success"><i class="fa-solid fa-arrow-up"></i> Entradas:</span>
+                                    <span class="uf-compact-val success">${formatCurrency(ufMetrics['RS'].entradas)}</span>
+                                </div>
+                                <div class="uf-compact-row">
+                                    <span class="uf-compact-label danger"><i class="fa-solid fa-arrow-down"></i> Saídas:</span>
+                                    <span class="uf-compact-val danger">${formatCurrency(ufMetrics['RS'].saidas)}</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="map-legend">
-                        <span>Menor Vol.</span>
-                        <div class="legend-gradient"></div>
-                        <span>Maior Vol.</span>
                     </div>
                 </div>
             `;
