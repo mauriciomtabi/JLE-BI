@@ -44,6 +44,12 @@
             <a class="nav-item" id="nav-transactions" onclick="switchView('transactions')">
                 <i class="fa-solid fa-list-ol"></i> <span>Lançamentos</span>
             </a>
+            <a class="nav-item" id="nav-dictionary" onclick="switchView('dictionary')" style="display:none;">
+                <i class="fa-solid fa-book"></i> <span>Dicionário</span>
+            </a>
+            <a class="nav-item" id="nav-admin" onclick="switchView('admin')" style="display:none;">
+                <i class="fa-solid fa-shield-halved"></i> <span>Admin</span>
+            </a>
         </nav>
         
         <div class="sidebar-footer">
@@ -353,6 +359,102 @@
                     <div class="category-tags" id="tags-tipos">
                         <!-- Loaded dynamically -->
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 4: ADMIN PANEL -->
+        <div id="view-admin-container" class="view-panel" style="display: none;">
+            <div class="admin-panel-grid">
+
+                <!-- Card: Páginas Padrão para Novos Usuários -->
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <div class="admin-card-icon" style="background: linear-gradient(135deg, rgba(0,79,113,0.2), rgba(0,119,170,0.3));">
+                            <i class="fa-solid fa-sliders" style="color: var(--color-primary-light);"></i>
+                        </div>
+                        <div>
+                            <h3>Acesso Padrão</h3>
+                            <p class="admin-card-subtitle">Páginas habilitadas para novos usuários</p>
+                        </div>
+                    </div>
+                    <div class="admin-pages-checkboxes" id="default-pages-list">
+                        <!-- Populated by JS -->
+                    </div>
+                    <button class="admin-save-btn" onclick="saveDefaultPages()">
+                        <i class="fa-solid fa-save"></i> Salvar Padrão
+                    </button>
+                </div>
+
+                <!-- Card: Gerenciar Usuários -->
+                <div class="admin-card admin-card-wide">
+                    <div class="admin-card-header">
+                        <div class="admin-card-icon" style="background: linear-gradient(135deg, rgba(243,159,24,0.15), rgba(255,184,61,0.25));">
+                            <i class="fa-solid fa-users-gear" style="color: var(--color-secondary);"></i>
+                        </div>
+                        <div>
+                            <h3>Usuários e Permissões</h3>
+                            <p class="admin-card-subtitle">Gerencie o acesso de cada colaborador</p>
+                        </div>
+                        <button class="admin-add-btn" onclick="openAddUserModal()" style="margin-left:auto;">
+                            <i class="fa-solid fa-plus"></i> Adicionar Usuário
+                        </button>
+                    </div>
+                    <div class="admin-table-container">
+                        <table class="admin-users-table">
+                            <thead>
+                                <tr>
+                                    <th>E-mail</th>
+                                    <th>Perfil</th>
+                                    <th>Páginas Permitidas</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-users-tbody">
+                                <tr><td colspan="4" style="text-align:center; color: var(--text-secondary);">Carregando...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Modal: Adicionar/Editar Usuário -->
+        <div class="modal-overlay" id="user-permission-modal" onclick="closeUserModal(event)">
+            <div class="modal-card" style="max-width: 520px;">
+                <div class="modal-header">
+                    <h3 id="modal-user-title">Adicionar Usuário</h3>
+                    <button class="modal-close" onclick="document.getElementById('user-permission-modal').classList.remove('active')">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div style="display: flex; flex-direction: column; gap: 16px;">
+                        <div class="filter-group">
+                            <label>E-mail corporativo</label>
+                            <input type="email" id="modal-user-email" placeholder="usuario@jletelecom.com.br">
+                        </div>
+                        <div class="filter-group">
+                            <label>Perfil de acesso</label>
+                            <select id="modal-user-is-admin">
+                                <option value="false">Usuário Padrão</option>
+                                <option value="true">Administrador</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Páginas Permitidas</label>
+                            <div class="admin-pages-checkboxes" id="modal-pages-list">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 12px; padding-top: 16px; border-top: 1px solid var(--border-color); margin-top: 4px;">
+                    <button class="admin-save-btn" onclick="saveUserPermission()" style="flex:1;">
+                        <i class="fa-solid fa-save"></i> Salvar
+                    </button>
+                    <button class="btn-secondary" onclick="document.getElementById('user-permission-modal').classList.remove('active')" style="flex:0 0 auto;">
+                        Cancelar
+                    </button>
                 </div>
             </div>
         </div>
@@ -1056,7 +1158,18 @@
             return str;
         }
 
-        function showDashboard(user) {
+        // Known pages registry (for admin panel)
+        const ALL_PAGES = [
+            { id: 'dashboard',    label: 'Dashboard Financeiro',    icon: 'fa-chart-pie',       navId: 'nav-dashboard' },
+            { id: 'transactions', label: 'Lançamentos Analíticos', icon: 'fa-list-ol',          navId: 'nav-transactions' },
+            { id: 'dictionary',   label: 'Dicionário de Categorias',icon: 'fa-book',             navId: 'nav-dictionary' },
+            { id: 'admin',        label: 'Painel Admin',            icon: 'fa-shield-halved',    navId: 'nav-admin',        adminOnly: true },
+        ];
+
+        let currentUserIsAdmin = false;
+        let currentUserEmail = '';
+
+        async function showDashboard(user) {
             document.getElementById('auth-panel').style.display = 'none';
             document.getElementById('dashboard-sidebar').style.display = 'flex';
             document.getElementById('dashboard-main-content').style.display = 'flex';
@@ -1070,12 +1183,66 @@
                 nameEl.innerText = isCollapsed ? nameEl.getAttribute('data-initials') : fullName;
             }
             document.getElementById('user-display-email').innerText = user.email;
-            
+            currentUserEmail = user.email;
+
+            // Buscar permissões do usuário
+            await loadUserPermissions(user.email);
+
             // Força redimensionamento dos gráficos e aplicação de filtros iniciais
             setTimeout(() => {
                 window.dispatchEvent(new Event('resize'));
                 applyFilters();
             }, 50);
+        }
+
+        async function loadUserPermissions(email) {
+            if (!supabaseClient) return;
+            try {
+                // Buscar permissão do usuário
+                const { data: permData, error: permErr } = await supabaseClient
+                    .from('bi_permissions')
+                    .select('*')
+                    .eq('email', email)
+                    .maybeSingle();
+
+                let allowedPages;
+
+                if (!permErr && permData) {
+                    allowedPages = permData.allowed_pages || [];
+                    currentUserIsAdmin = permData.is_admin === true;
+                } else {
+                    // Usuário não cadastrado - buscar padrão
+                    const { data: settData } = await supabaseClient
+                        .from('bi_settings')
+                        .select('value')
+                        .eq('key', 'default_pages')
+                        .maybeSingle();
+                    allowedPages = (settData && settData.value) ? settData.value : ['dashboard', 'transactions'];
+                    currentUserIsAdmin = false;
+                }
+
+                // Se admin, garante acesso a tudo
+                if (currentUserIsAdmin) {
+                    allowedPages = ALL_PAGES.map(p => p.id);
+                }
+
+                // Aplicar visibilidade no menu
+                ALL_PAGES.forEach(page => {
+                    const navEl = document.getElementById(page.navId);
+                    if (!navEl) return;
+                    const canSee = currentUserIsAdmin || allowedPages.includes(page.id);
+                    navEl.style.display = canSee ? 'flex' : 'none';
+                });
+
+                // Se o usuário não tem acesso ao dashboard (primeira página padrão),
+                // navegar para a primeira página permitida
+                if (!allowedPages.includes('dashboard') && allowedPages.length > 0) {
+                    switchView(allowedPages[0]);
+                }
+
+            } catch (err) {
+                console.warn('Erro ao carregar permissões:', err);
+            }
         }
 
         function showLoginScreen() {
@@ -1242,15 +1409,27 @@
             document.querySelectorAll('.view-panel').forEach(panel => panel.style.display = 'none');
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             
-            document.getElementById(`view-${viewName}-container`).style.display = 'block';
-            document.getElementById(`nav-${viewName}`).classList.add('active');
+            const container = document.getElementById(`view-${viewName}-container`);
+            if (container) container.style.display = 'block';
+            const navEl = document.getElementById(`nav-${viewName}`);
+            if (navEl) navEl.classList.add('active');
+            
+            const mobileToggleBtn = document.getElementById('mobile-filter-toggle');
             
             if (viewName === 'dictionary') {
                 document.getElementById('filters-container').style.display = 'none';
+                if (mobileToggleBtn) mobileToggleBtn.style.display = 'none';
                 document.getElementById('view-title').innerText = 'Dicionário de Categorias';
                 document.getElementById('view-subtitle').innerText = 'Categorias oficiais cadastradas e validadas no Fluxo de Caixa';
+            } else if (viewName === 'admin') {
+                document.getElementById('filters-container').style.display = 'none';
+                if (mobileToggleBtn) mobileToggleBtn.style.display = 'none';
+                document.getElementById('view-title').innerText = 'Painel Administrativo';
+                document.getElementById('view-subtitle').innerHTML = 'Gerencie usuários, perfis de acesso e páginas do BI <span class="badge-competencia">Admin</span>';
+                loadAdminPanel();
             } else {
                 document.getElementById('filters-container').style.display = 'grid';
+                if (mobileToggleBtn) mobileToggleBtn.style.display = '';
                 
                 const mesSelect = document.getElementById('filter-mes');
                 const mesText = mesSelect ? mesSelect.options[mesSelect.selectedIndex].text : '';
@@ -1266,6 +1445,183 @@
                 }
             }
         }
+
+        // ---- ADMIN PANEL FUNCTIONS ----
+
+        const PAGES_CATALOG = [
+            { id: 'dashboard',    label: 'Dashboard Financeiro',     icon: '📊' },
+            { id: 'transactions', label: 'Lançamentos Analíticos',   icon: '📋' },
+            { id: 'dictionary',   label: 'Dicionário de Categorias', icon: '📖' },
+            { id: 'comercial',    label: 'Comercial (Em breve)',      icon: '🤝', disabled: true },
+            { id: 'rh',           label: 'Recursos Humanos (Em breve)', icon: '👥', disabled: true },
+            { id: 'operacoes',    label: 'Operações (Em breve)',      icon: '⚙️', disabled: true },
+        ];
+
+        function renderPageCheckboxes(containerId, selectedPages = []) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            container.innerHTML = '';
+            PAGES_CATALOG.forEach(page => {
+                const label = document.createElement('label');
+                label.className = 'admin-page-checkbox-label' + (page.disabled ? ' disabled' : '');
+                label.innerHTML = `
+                    <input type="checkbox" name="${containerId}-page" value="${page.id}"
+                        ${selectedPages.includes(page.id) ? 'checked' : ''}
+                        ${page.disabled ? 'disabled' : ''}>
+                    <span>${page.icon} ${page.label}</span>
+                `;
+                container.appendChild(label);
+            });
+        }
+
+        function getCheckedPages(containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return [];
+            return [...container.querySelectorAll(`input[name="${containerId}-page"]:checked`)]
+                .map(cb => cb.value);
+        }
+
+        async function loadAdminPanel() {
+            if (!supabaseClient || !currentUserIsAdmin) return;
+
+            // Load default pages
+            const { data: settData } = await supabaseClient
+                .from('bi_settings').select('value').eq('key', 'default_pages').maybeSingle();
+            const defaultPages = (settData && settData.value) ? settData.value : ['dashboard', 'transactions'];
+            renderPageCheckboxes('default-pages-list', defaultPages);
+
+            // Load users list
+            const { data: usersData, error } = await supabaseClient
+                .from('bi_permissions').select('*').order('email');
+            
+            const tbody = document.getElementById('admin-users-tbody');
+            if (!tbody) return;
+
+            if (error || !usersData || usersData.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color: var(--text-secondary); padding: 24px;">Nenhum usuário cadastrado ainda.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = usersData.map(u => {
+                const pages = (u.allowed_pages || []).map(p => {
+                    const found = PAGES_CATALOG.find(c => c.id === p);
+                    return found ? `<span class="tag" style="font-size:10px; padding: 3px 8px;">${found.icon} ${found.label.split(' ')[0]}</span>` : '';
+                }).join('');
+                const adminBadge = u.is_admin
+                    ? `<span class="badge-competencia" style="background: rgba(231,76,60,0.1); color: #e74c3c; border-color: rgba(231,76,60,0.25);">Admin</span>`
+                    : `<span class="badge-competencia" style="background: rgba(46,204,113,0.08); color: var(--color-success); border-color: rgba(46,204,113,0.2);">Usuário</span>`;
+                const isSelf = u.email === currentUserEmail;
+                return `<tr>
+                    <td style="font-weight:600;">${u.email}${isSelf ? ' <span style="font-size:10px; color:var(--text-secondary);">(você)</span>' : ''}</td>
+                    <td>${adminBadge}</td>
+                    <td style="max-width: 320px; white-space: normal;">${pages || '<span style="color:var(--text-secondary);font-size:12px;">Nenhuma</span>'}</td>
+                    <td>
+                        <button onclick="openEditUserModal(${JSON.stringify(u).replace(/"/g, '&quot;')})" title="Editar" style="background:none;border:1px solid var(--border-color);color:var(--text-secondary);padding:6px 10px;border-radius:6px;cursor:pointer;margin-right:6px;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--color-primary)'" onmouseout="this.style.borderColor='var(--border-color)'">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        ${!isSelf ? `<button onclick="deleteUserPermission('${u.email}')" title="Remover acesso" style="background:none;border:1px solid rgba(231,76,60,0.3);color:var(--color-danger);padding:6px 10px;border-radius:6px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.backgroundColor='rgba(231,76,60,0.08)'" onmouseout="this.style.backgroundColor='transparent'">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>` : ''}
+                    </td>
+                </tr>`;
+            }).join('');
+        }
+
+        async function saveDefaultPages() {
+            if (!supabaseClient || !currentUserIsAdmin) return;
+            const pages = getCheckedPages('default-pages-list');
+            const { error } = await supabaseClient
+                .from('bi_settings')
+                .upsert({ key: 'default_pages', value: pages });
+            if (error) {
+                alert('Erro ao salvar: ' + error.message);
+            } else {
+                showAdminToast('Acesso padrão atualizado com sucesso!');
+            }
+        }
+
+        let editingEmail = null;
+
+        function openAddUserModal() {
+            editingEmail = null;
+            document.getElementById('modal-user-title').innerText = 'Adicionar Usuário';
+            document.getElementById('modal-user-email').value = '';
+            document.getElementById('modal-user-email').disabled = false;
+            document.getElementById('modal-user-is-admin').value = 'false';
+            renderPageCheckboxes('modal-pages-list', ['dashboard', 'transactions']);
+            document.getElementById('user-permission-modal').classList.add('active');
+        }
+
+        function openEditUserModal(userData) {
+            editingEmail = userData.email;
+            document.getElementById('modal-user-title').innerText = 'Editar Permissões';
+            document.getElementById('modal-user-email').value = userData.email;
+            document.getElementById('modal-user-email').disabled = true;
+            document.getElementById('modal-user-is-admin').value = userData.is_admin ? 'true' : 'false';
+            const pages = userData.is_admin ? PAGES_CATALOG.filter(p => !p.disabled).map(p => p.id) : (userData.allowed_pages || []);
+            renderPageCheckboxes('modal-pages-list', pages);
+            document.getElementById('user-permission-modal').classList.add('active');
+        }
+
+        function closeUserModal(e) {
+            if (e.target === document.getElementById('user-permission-modal')) {
+                document.getElementById('user-permission-modal').classList.remove('active');
+            }
+        }
+
+        async function saveUserPermission() {
+            if (!supabaseClient || !currentUserIsAdmin) return;
+            const email = editingEmail || document.getElementById('modal-user-email').value.trim();
+            const isAdmin = document.getElementById('modal-user-is-admin').value === 'true';
+            const pages = isAdmin ? PAGES_CATALOG.filter(p => !p.disabled).map(p => p.id) : getCheckedPages('modal-pages-list');
+
+            if (!email || !email.includes('@')) {
+                alert('Por favor, informe um e-mail válido.');
+                return;
+            }
+
+            const { error } = await supabaseClient
+                .from('bi_permissions')
+                .upsert({ email, is_admin: isAdmin, allowed_pages: pages, updated_at: new Date().toISOString() });
+
+            if (error) {
+                alert('Erro ao salvar: ' + error.message);
+            } else {
+                document.getElementById('user-permission-modal').classList.remove('active');
+                showAdminToast('Permissões salvas com sucesso!');
+                loadAdminPanel();
+            }
+        }
+
+        async function deleteUserPermission(email) {
+            if (!supabaseClient || !currentUserIsAdmin) return;
+            if (!confirm(`Remover acesso de ${email}?`)) return;
+            const { error } = await supabaseClient.from('bi_permissions').delete().eq('email', email);
+            if (error) {
+                alert('Erro ao remover: ' + error.message);
+            } else {
+                showAdminToast('Acesso removido com sucesso!');
+                loadAdminPanel();
+            }
+        }
+
+        function showAdminToast(msg) {
+            const existing = document.getElementById('admin-toast');
+            if (existing) existing.remove();
+            const toast = document.createElement('div');
+            toast.id = 'admin-toast';
+            toast.style.cssText = `
+                position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
+                background: var(--color-primary); color: white; padding: 12px 24px;
+                border-radius: 30px; font-size: 14px; font-weight: 600;
+                box-shadow: 0 8px 20px rgba(0,79,113,0.35); z-index: 9999;
+                animation: fadeInUp 0.3s ease;
+            `;
+            toast.innerHTML = `<i class="fa-solid fa-circle-check" style="margin-right:8px;"></i>${msg}`;
+            document.body.appendChild(toast);
+            setTimeout(() => { if (toast.parentNode) toast.remove(); }, 3000);
+        }
+
 
         // Popular Tags do Dicionário
         function populateDictionaryUI() {

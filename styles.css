@@ -2089,3 +2089,283 @@ body.light-theme .auth-alert.success {
         grid-template-columns: 1fr !important; /* 1 coluna para bancos */
     }
 }
+
+/* ============================================================
+   ADMIN PANEL
+   ============================================================ */
+
+.admin-panel-grid {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+@media (max-width: 960px) {
+    .admin-panel-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.admin-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.admin-card-wide {
+    /* spans full width in the grid */
+}
+
+.admin-card-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.admin-card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.admin-card h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.admin-card-subtitle {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin: 2px 0 0;
+}
+
+/* Checkboxes de páginas */
+.admin-pages-checkboxes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.admin-page-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.admin-page-checkbox-label:hover:not(.disabled) {
+    border-color: var(--color-primary-light);
+    background: rgba(0,119,170,0.05);
+}
+
+.admin-page-checkbox-label.disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.admin-page-checkbox-label input[type="checkbox"] {
+    accent-color: var(--color-primary);
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+.admin-page-checkbox-label span {
+    flex: 1;
+}
+
+/* Botão salvar */
+.admin-save-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+}
+
+.admin-save-btn:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+}
+
+/* Botão adicionar */
+.admin-add-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--color-secondary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+    white-space: nowrap;
+}
+
+.admin-add-btn:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+}
+
+/* Tabela de usuários */
+.admin-table-container {
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.admin-users-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.admin-users-table th {
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    white-space: nowrap;
+}
+
+.admin-users-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+    color: var(--text-primary);
+}
+
+.admin-users-table tr:last-child td {
+    border-bottom: none;
+}
+
+.admin-users-table tr:hover td {
+    background: var(--bg-secondary);
+}
+
+/* Modal overlay */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(4px);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 28px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+    animation: slideIn 0.25s ease;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    line-height: 1;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: color 0.2s;
+}
+
+.modal-close:hover {
+    color: var(--text-primary);
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* Secondary button */
+.btn-secondary {
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+    border-color: var(--text-secondary);
+    color: var(--text-primary);
+}
+
