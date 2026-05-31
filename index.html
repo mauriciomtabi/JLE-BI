@@ -1004,13 +1004,52 @@
             }
         }
 
+        function getInitials(name) {
+            if (!name) return '';
+            const parts = name.trim().split(/\s+/).filter(part => {
+                const lower = part.toLowerCase();
+                return !['e', 'de', 'da', 'do', 'dos', 'das', 'com', 'em'].includes(lower);
+            });
+            if (parts.length === 0) return '';
+            if (parts.length === 1) return parts[0].substring(0, 2).toUpperCase();
+            return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+        }
+
+        function formatTimestamp(str) {
+            if (!str) return 'N/D';
+            const cleanStr = str.trim();
+            const match = cleanStr.match(/^(\d{4})-(\d{2})-(\d{2})\s+(\d{2}):(\d{2})/);
+            if (match) {
+                const [_, year, month, day, hour, minute] = match;
+                return `${day}/${month}/${year} ${hour}:${minute}`;
+            }
+            try {
+                const d = new Date(cleanStr.replace(/-/g, '/'));
+                if (!isNaN(d.getTime())) {
+                    const day = String(d.getDate()).padStart(2, '0');
+                    const month = String(d.getMonth() + 1).padStart(2, '0');
+                    const year = d.getFullYear();
+                    const hour = String(d.getHours()).padStart(2, '0');
+                    const minute = String(d.getMinutes()).padStart(2, '0');
+                    return `${day}/${month}/${year} ${hour}:${minute}`;
+                }
+            } catch (e) {}
+            return str;
+        }
+
         function showDashboard(user) {
             document.getElementById('auth-panel').style.display = 'none';
             document.getElementById('dashboard-sidebar').style.display = 'flex';
             document.getElementById('dashboard-main-content').style.display = 'flex';
             
             const fullName = (user.user_metadata && user.user_metadata.full_name) || user.email.split('@')[0];
-            document.getElementById('user-display-name').innerText = fullName;
+            const nameEl = document.getElementById('user-display-name');
+            if (nameEl) {
+                nameEl.setAttribute('data-fullname', fullName);
+                nameEl.setAttribute('data-initials', getInitials(fullName));
+                const isCollapsed = document.body.classList.contains('sidebar-collapsed');
+                nameEl.innerText = isCollapsed ? nameEl.getAttribute('data-initials') : fullName;
+            }
             document.getElementById('user-display-email').innerText = user.email;
             
             // Força redimensionamento dos gráficos e aplicação de filtros iniciais
@@ -1070,7 +1109,7 @@
         window.addEventListener('DOMContentLoaded', () => {
             if (typeof window.CASH_FLOW_DATA !== 'undefined') {
                 transactions = window.CASH_FLOW_DATA.transactions || [];
-                document.getElementById('data-timestamp').innerText = window.CASH_FLOW_DATA.generated_at || 'Desconhecido';
+                document.getElementById('data-timestamp').innerText = formatTimestamp(window.CASH_FLOW_DATA.generated_at) || 'Desconhecido';
                 
                 // Popula dicionários
                 dictionary.entradas = window.CASH_FLOW_DATA.categories_origin.entradas.length > 0 
@@ -1256,6 +1295,14 @@
                 icon.className = 'fa-solid fa-chevron-right';
             } else {
                 icon.className = 'fa-solid fa-chevron-left';
+            }
+            
+            // Alternar exibição do nome do usuário (completo vs iniciais)
+            const nameEl = document.getElementById('user-display-name');
+            if (nameEl) {
+                const fullName = nameEl.getAttribute('data-fullname') || '';
+                const initials = nameEl.getAttribute('data-initials') || '';
+                nameEl.innerText = isCollapsed ? initials : fullName;
             }
             
             // Força o redimensionamento do canvas do Chart.js após a transição da barra lateral

@@ -60,7 +60,7 @@ body {
     border-right: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
-    padding: 24px;
+    padding: 0 24px 24px 24px;
     height: 100vh;
     position: fixed;
     left: 0;
@@ -74,7 +74,8 @@ body {
     justify-content: center;
     align-items: center;
     margin-bottom: 30px;
-    padding: 10px 0 20px 0;
+    height: 90px;
+    box-sizing: border-box;
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -181,7 +182,7 @@ body {
     margin-left: 260px;
     width: calc(100% - 260px);
     flex-grow: 1;
-    padding: 30px;
+    padding: 0 30px 30px 30px;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -194,7 +195,8 @@ header {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid var(--border-color);
-    padding-bottom: 20px;
+    height: 90px;
+    box-sizing: border-box;
 }
 
 .header-title h1 {
@@ -910,7 +912,7 @@ td.cell-saida {
 /* Modificações do tema quando colapsado */
 body.sidebar-collapsed .sidebar {
     width: 70px;
-    padding: 24px 10px;
+    padding: 0 10px 24px 10px;
 }
 
 body.sidebar-collapsed .main-content {
@@ -919,7 +921,6 @@ body.sidebar-collapsed .main-content {
 }
 
 body.sidebar-collapsed .sidebar .logo-container {
-    padding: 10px 0;
     margin-bottom: 20px;
 }
 
@@ -952,6 +953,32 @@ body.sidebar-collapsed .sidebar .update-btn {
     padding: 0;
     border-radius: 8px;
     justify-content: center;
+}
+
+body.sidebar-collapsed .sidebar .user-profile-badge {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 8px;
+    margin: 0 auto 4px auto;
+}
+
+body.sidebar-collapsed .sidebar .user-profile-badge i {
+    display: none;
+}
+
+body.sidebar-collapsed .sidebar .user-profile-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+body.sidebar-collapsed .sidebar #user-display-name {
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
 }
 
 /* Redefinição do grid categories/UF para destaque do mapa */
@@ -1625,6 +1652,7 @@ body.light-theme .auth-alert.success {
     font-size: 12px;
     margin-bottom: 4px;
     overflow: hidden;
+    transition: all var(--transition-speed) ease;
 }
 
 .user-profile-badge i {
@@ -1648,9 +1676,7 @@ body.light-theme .auth-alert.success {
 }
 
 .user-profile-role {
-    font-size: 10px;
-    color: var(--text-secondary);
-    font-weight: 500;
+    display: none; /* Ocultar e-mail na sidebar a pedido do usuário */
 }
 
 .logout-btn {
@@ -1670,4 +1696,261 @@ body.light-theme .auth-alert.success {
 
 .logout-btn:hover {
     background-color: var(--color-danger-bg);
+}
+
+/* --- ADAPTAÇÃO MOBILE (MELHORIAS JLE) --- */
+@media (max-width: 768px) {
+    /* Barra de Navegação Inferior Fixa */
+    .sidebar {
+        width: 100% !important;
+        height: 65px !important;
+        position: fixed !important;
+        left: 0 !important;
+        top: auto !important;
+        bottom: 0 !important;
+        z-index: 1000 !important;
+        background-color: var(--bg-card) !important;
+        border-right: none !important;
+        border-top: 1px solid var(--border-color) !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        flex-direction: row !important;
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        align-items: center !important;
+        justify-items: center !important;
+        box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    /* Ocultar elementos desnecessários na barra inferior */
+    .sidebar .logo-container,
+    .sidebar .sidebar-toggle-btn,
+    .sidebar .user-profile-badge {
+        display: none !important;
+    }
+
+    /* Fazer o nav-menu e o sidebar-footer agirem como contêineres transparentes */
+    .sidebar .nav-menu,
+    .sidebar .sidebar-footer {
+        display: contents !important;
+    }
+
+    /* Estilização dos links do menu e botões do rodapé */
+    .sidebar .nav-item,
+    .sidebar .theme-toggle-btn,
+    .sidebar .logout-btn {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 4px !important;
+        width: 100% !important;
+        height: 100% !important;
+        padding: 8px 0 !important;
+        color: var(--text-secondary) !important;
+        text-decoration: none !important;
+        background: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        font-size: 10px !important;
+        font-weight: 500 !important;
+        cursor: pointer !important;
+        box-sizing: border-box !important;
+        transition: all 0.2s ease !important;
+        margin: 0 !important;
+    }
+
+    /* Alinhamento de botões de controle de fonte */
+    .sidebar .nav-item span,
+    .sidebar .theme-toggle-btn span,
+    .sidebar .logout-btn span {
+        display: block !important;
+        font-size: 9px !important;
+        font-weight: 600 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.3px !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+        max-width: 80px !important;
+    }
+
+    .sidebar .nav-item i,
+    .sidebar .theme-toggle-btn i,
+    .sidebar .logout-btn i {
+        font-size: 16px !important;
+        margin: 0 !important;
+    }
+
+    /* Item ativo da navegação no mobile */
+    .sidebar .nav-item:hover,
+    .sidebar .nav-item.active {
+        background-color: transparent !important;
+        color: var(--color-secondary) !important;
+        border-left: none !important;
+        border-top: 3px solid var(--color-secondary) !important;
+        padding: 5px 0 8px 0 !important;
+    }
+
+    .sidebar .nav-item.active i {
+        color: var(--color-secondary) !important;
+    }
+
+    .sidebar .theme-toggle-btn:hover,
+    .sidebar .logout-btn:hover {
+        color: var(--text-primary) !important;
+        background-color: transparent !important;
+    }
+
+    .sidebar .logout-btn {
+        color: var(--color-danger) !important;
+    }
+
+    /* Adaptar Área Principal no Mobile */
+    .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+        padding: 15px 15px 85px 15px !important; /* Espaço para a barra inferior */
+        gap: 16px !important;
+    }
+
+    body.sidebar-collapsed .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+
+    /* Header Responsivo */
+    header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+        height: auto !important;
+        padding: 10px 0 20px 0 !important;
+        border-bottom: 1px solid var(--border-color) !important;
+    }
+
+    .header-title h1 {
+        font-size: 20px !important;
+    }
+
+    .header-title p {
+        font-size: 12px !important;
+    }
+
+    .last-update-badge {
+        width: auto !important;
+        align-self: flex-start !important;
+        font-size: 11px !important;
+        padding: 6px 12px !important;
+    }
+
+    /* Filtros Responsivos */
+    .filter-bar {
+        grid-template-columns: repeat(2, 1fr) !important; /* 2 colunas no mobile */
+        padding: 16px !important;
+        gap: 12px !important;
+    }
+
+    .filter-group select, 
+    .filter-group input {
+        font-size: 13px !important;
+        padding: 8px 10px !important;
+    }
+
+    /* KPI Cards no Mobile */
+    .kpi-container {
+        grid-template-columns: 1fr !important; /* Coluna única no celular */
+        gap: 14px !important;
+    }
+
+    .kpi-card {
+        padding: 16px 20px !important;
+    }
+
+    .kpi-card h3 {
+        font-size: 22px !important;
+    }
+
+    /* Grades de Bancos e Gráficos */
+    .banks-grid {
+        grid-template-columns: repeat(2, 1fr) !important; /* 2 colunas para bancos no mobile */
+        gap: 10px !important;
+    }
+
+    .bank-card-item {
+        padding: 12px !important;
+    }
+
+    .bank-item-header h4 {
+        font-size: 12px !important;
+    }
+
+    .bank-card-item .bank-balance {
+        font-size: 14px !important;
+    }
+
+    .charts-grid {
+        grid-template-columns: 1fr !important; /* Sempre 1 coluna no mobile */
+        gap: 16px !important;
+    }
+
+    .chart-card {
+        padding: 16px !important;
+    }
+
+    .chart-header h2 {
+        font-size: 14px !important;
+    }
+
+    /* Tabela de Lançamentos */
+    .data-table-card {
+        padding: 16px !important;
+    }
+
+    .table-controls {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+    }
+
+    .search-wrapper {
+        width: 100% !important;
+    }
+
+    .table-actions {
+        width: 100% !important;
+        justify-content: space-between !important;
+    }
+
+    .table-actions button {
+        flex-grow: 1 !important;
+        justify-content: center !important;
+    }
+
+    /* Fazer tabela rolar horizontalmente com segurança */
+    .table-container {
+        width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+
+    table {
+        min-width: 600px !important; /* Garante que a tabela não esmague os campos */
+    }
+
+    th, td {
+        padding: 10px 12px !important;
+        font-size: 12px !important;
+    }
+}
+
+/* Telas muito pequenas (ex: iPhones antigos, < 400px) */
+@media (max-width: 400px) {
+    .filter-bar {
+        grid-template-columns: 1fr !important; /* 1 coluna de filtro */
+    }
+
+    .banks-grid {
+        grid-template-columns: 1fr !important; /* 1 coluna para bancos */
+    }
 }
