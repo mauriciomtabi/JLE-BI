@@ -1263,21 +1263,21 @@ td.cell-saida {
 /* Polígonos de Estado e Textos do SVG */
 .map-state {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    stroke: rgba(255, 255, 255, 0.25);
-    stroke-width: 0.25;
+    stroke: rgba(255, 255, 255, 0.55); /* Stronger and more opaque border */
+    stroke-width: 0.55; /* Thicker standard borders as requested */
 }
 
 .map-state:hover, .map-state.hovered {
     filter: drop-shadow(0 0 10px rgba(0, 79, 113, 0.7));
     stroke: var(--color-primary-light);
-    stroke-width: 0.6;
+    stroke-width: 0.85; /* Even bolder on hover */
     opacity: 0.95;
 }
 
 .map-state.active {
     filter: drop-shadow(0 0 14px rgba(243, 159, 24, 0.9));
     stroke: var(--color-secondary);
-    stroke-width: 0.8;
+    stroke-width: 1.0; /* Bolder when active */
     opacity: 1;
 }
 
