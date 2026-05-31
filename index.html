@@ -23,7 +23,7 @@
     <!-- Supabase Local Configuration -->
     <script src="supabase_config.js"></script>
     <!-- Local Stylesheet -->
-    <link rel="stylesheet" href="styles.css?v=2.1.4">
+    <link rel="stylesheet" href="styles.css?v=2.1.5">
 </head>
 <body>
 
@@ -1804,7 +1804,11 @@
             document.getElementById('kpi-saldo-final').innerText = formatCurrency(saldoFinal);
 
             // --- Cálculos de Indicadores Analíticos Avançados ---
+            // Declarações hoistadas para evitar Temporal Dead Zone em closures
             const selectedMonth = document.getElementById('filter-mes').value;
+            const filterUf = document.getElementById('filter-uf').value;
+            const filterCategoria = document.getElementById('filter-categoria').value;
+            const monthOrder = ["JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO"];
             const daysInMonth = { 'JANEIRO': 31, 'FEVEREIRO': 28, 'MARÇO': 31, 'ABRIL': 30, 'MAIO': 31 };
             const periodDays = selectedMonth === 'ALL' ? 151 : (daysInMonth[selectedMonth] || 30);
 
@@ -1815,10 +1819,42 @@
             document.getElementById('sub-entradas-diaria').innerHTML = `Média: <strong>${formatCurrency(mediaDiariaEntradas)}</strong>/dia`;
             document.getElementById('sub-saidas-diaria').innerHTML = `Média: <strong>${formatCurrency(mediaDiariaSaidas)}</strong>/dia`;
 
-            // 2. Comprometimento de Despesas (Saídas / Entradas)
-            const comprometimento = totalEntradas > 0 ? (totalSaidas / totalEntradas) * 100 : 0;
-            const compClass = comprometimento > 90 ? 'trend-down' : 'trend-up';
-            document.getElementById('sub-saidas-comp').innerHTML = `Comprometimento: <span class="${compClass}"><strong>${comprometimento.toFixed(1)}%</strong></span>`;
+            // 2. Comparativo vs. Mês Anterior (Saídas)
+            const getMonthSaidas = (m) => {
+                return transactions.filter(t => {
+                    if (t.categoria === 'Saldo Inicial') return false;
+                    if (t.competencia !== m) return false;
+                    if (t.fluxo !== 'Saída') return false;
+                    if (filterBanco !== 'ALL' && t.banco !== filterBanco) return false;
+                    if (filterUf !== 'ALL' && t.uf !== filterUf) return false;
+                    if (filterCategoria !== 'ALL' && t.categoria !== filterCategoria) return false;
+                    return true;
+                }).reduce((sum, t) => sum + t.valor_nominal, 0);
+            };
+
+            let compSaidasText = "";
+            if (selectedMonth !== 'ALL') {
+                const currentIdxS = monthOrder.indexOf(selectedMonth);
+                if (currentIdxS > 0) {
+                    const prevMonthS = monthOrder[currentIdxS - 1];
+                    const prevSaidas = getMonthSaidas(prevMonthS);
+                    if (prevSaidas > 0) {
+                        const diffPctS = ((totalSaidas - prevSaidas) / prevSaidas) * 100;
+                        const signS = diffPctS >= 0 ? "+" : "";
+                        // Para saídas: aumento é ruim (trend-down), redução é bom (trend-up)
+                        const trendClassS = diffPctS >= 0 ? 'trend-down' : 'trend-up';
+                        compSaidasText = `vs. Mês Ant.: <span class="${trendClassS}"><strong>${signS}${diffPctS.toFixed(1)}%</strong></span>`;
+                    } else {
+                        compSaidasText = "vs. Mês Ant.: <strong>N/D</strong>";
+                    }
+                } else {
+                    compSaidasText = "vs. Mês Ant.: <strong>N/D</strong>";
+                }
+            } else {
+                const mediaMensalS = totalSaidas / 5;
+                compSaidasText = `Média Mensal: <strong>${formatShortCurrency(mediaMensalS)}</strong>`;
+            }
+            document.getElementById('sub-saidas-comp').innerHTML = compSaidasText;
 
             // 3. Eficiência de Caixa (Margem Sobra Líquida)
             const sobraLiquida = totalEntradas > 0 ? ((totalEntradas - totalSaidas) / totalEntradas) * 100 : 0;
@@ -1827,10 +1863,6 @@
             document.getElementById('sub-saldo-sobra').innerHTML = `Conversão: <span class="${sobraClass}"><strong>${sobraSign}${sobraLiquida.toFixed(1)}%</strong></span>`;
 
             // 4. Comparativo vs. Mês Anterior (Entradas)
-            const monthOrder = ["JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO"];
-            const filterUf = document.getElementById('filter-uf').value;
-            const filterCategoria = document.getElementById('filter-categoria').value;
-            
             const getMonthEntradas = (m) => {
                 return transactions.filter(t => {
                     if (t.categoria === 'Saldo Inicial') return false;
@@ -1866,18 +1898,18 @@
             }
             document.getElementById('sub-entradas-comp').innerHTML = compEntradasText;
 
-            // 5. Crescimento / Variação do Saldo do período
-            const netPeriodChange = totalEntradas - totalSaidas;
-            const saldoInicialPeriodo = saldoFinal - netPeriodChange;
-            let saldoVarText = "";
-            if (saldoInicialPeriodo !== 0) {
-                const varPct = (netPeriodChange / Math.abs(saldoInicialPeriodo)) * 100;
-                const sign = varPct >= 0 ? "+" : "";
-                const trendClass = varPct >= 0 ? 'trend-up' : 'trend-down';
-                saldoVarText = `Var. Saldo: <span class="${trendClass}"><strong>${sign}${varPct.toFixed(1)}%</strong></span>`;
-            } else {
-                saldoVarText = `Var. Saldo: <strong>${netPeriodChange >= 0 ? '+' : ''}${formatShortCurrency(netPeriodChange)}</strong>`;
-            }
+            // 5. Geração / Consumo de Caixa (Fluxo Líquido Real em R$, excluindo Saldo Inicial)
+            const realEntradas = filteredTransactions
+                .filter(t => t.fluxo === 'Entrada' && t.categoria !== 'Saldo Inicial')
+                .reduce((sum, t) => sum + t.valor_nominal, 0);
+            const realSaidas = filteredTransactions
+                .filter(t => t.fluxo === 'Saída')
+                .reduce((sum, t) => sum + t.valor_nominal, 0);
+            const geracaoCaixa = realEntradas - realSaidas;
+            const geracaoSign = geracaoCaixa >= 0 ? "+" : "";
+            const geracaoClass = geracaoCaixa >= 0 ? 'trend-up' : 'trend-down';
+            const geracaoLabel = geracaoCaixa >= 0 ? "Geração" : "Consumo";
+            const saldoVarText = `${geracaoLabel}: <span class="${geracaoClass}"><strong>${geracaoSign}${formatCurrency(geracaoCaixa)}</strong></span>`;
             document.getElementById('sub-saldo-var').innerHTML = saldoVarText;
         }
 
