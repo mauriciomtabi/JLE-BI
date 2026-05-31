@@ -23,7 +23,7 @@
     <!-- Supabase Local Configuration -->
     <script src="supabase_config.js"></script>
     <!-- Local Stylesheet -->
-    <link rel="stylesheet" href="styles.css?v=2.0.4">
+    <link rel="stylesheet" href="styles.css?v=2.0.5">
 </head>
 <body>
 
@@ -2504,7 +2504,7 @@
                 <div class="uf-premium-container">
                     <!-- LEFT COLUMN: GEOGRAPHIC REGION MAP -->
                     <div class="uf-map-side">
-                        <svg class="map-svg-centered" viewBox="140 245 150 135" style="overflow: visible;">
+                        <svg class="map-svg-centered" viewBox="125 242 136 136" style="overflow: visible;">
                             <!-- GLOWING CURVED DATA CONNECTION FLOW PATHS REMOVED AS REQUESTED -->
 
                             <!-- PARANÁ POLYGON -->
@@ -2582,9 +2582,8 @@
                         <div class="uf-compact-header">
                             <span class="uf-compact-name">
                                 <span class="uf-status-indicator pr-dot"></span>
-                                <strong>Paraná (PR)</strong>
+                                <strong>Paraná</strong>
                             </span>
-                            <span class="uf-compact-pct">${pctPR.toFixed(1).replace('.', ',')}%</span>
                         </div>
                         <div class="uf-compact-content">
                             <div class="uf-compact-main-stat">
@@ -2593,11 +2592,11 @@
                             </div>
                             <div class="uf-compact-sub-stats">
                                 <div class="uf-sub-stat success">
-                                    <span class="uf-sub-label success"><i class="fa-solid fa-arrow-trend-up"></i> Entradas</span>
+                                    <span class="uf-sub-label success"><i class="fa-solid fa-arrow-trend-up"></i></span>
                                     <span class="uf-sub-val success">${formatCurrency(ufMetrics['PR'].entradas)}</span>
                                 </div>
                                 <div class="uf-sub-stat danger">
-                                    <span class="uf-sub-label danger"><i class="fa-solid fa-arrow-trend-down"></i> Saídas</span>
+                                    <span class="uf-sub-label danger"><i class="fa-solid fa-arrow-trend-down"></i></span>
                                     <span class="uf-sub-val danger">${formatCurrency(ufMetrics['PR'].saidas)}</span>
                                 </div>
                             </div>
@@ -2609,9 +2608,8 @@
                         <div class="uf-compact-header">
                             <span class="uf-compact-name">
                                 <span class="uf-status-indicator sc-dot"></span>
-                                <strong>Santa Catarina (SC)</strong>
+                                <strong>Santa Catarina</strong>
                             </span>
-                            <span class="uf-compact-pct">${pctSC.toFixed(1).replace('.', ',')}%</span>
                         </div>
                         <div class="uf-compact-content">
                             <div class="uf-compact-main-stat">
@@ -2620,11 +2618,11 @@
                             </div>
                             <div class="uf-compact-sub-stats">
                                 <div class="uf-sub-stat success">
-                                    <span class="uf-sub-label success"><i class="fa-solid fa-arrow-trend-up"></i> Entradas</span>
+                                    <span class="uf-sub-label success"><i class="fa-solid fa-arrow-trend-up"></i></span>
                                     <span class="uf-sub-val success">${formatCurrency(ufMetrics['SC'].entradas)}</span>
                                 </div>
                                 <div class="uf-sub-stat danger">
-                                    <span class="uf-sub-label danger"><i class="fa-solid fa-arrow-trend-down"></i> Saídas</span>
+                                    <span class="uf-sub-label danger"><i class="fa-solid fa-arrow-trend-down"></i></span>
                                     <span class="uf-sub-val danger">${formatCurrency(ufMetrics['SC'].saidas)}</span>
                                 </div>
                             </div>
@@ -2636,9 +2634,8 @@
                         <div class="uf-compact-header">
                             <span class="uf-compact-name">
                                 <span class="uf-status-indicator rs-dot"></span>
-                                <strong>Rio Grande do Sul (RS)</strong>
+                                <strong>Rio Grande do Sul</strong>
                             </span>
-                            <span class="uf-compact-pct">${pctRS.toFixed(1).replace('.', ',')}%</span>
                         </div>
                         <div class="uf-compact-content">
                             <div class="uf-compact-main-stat">
@@ -2647,11 +2644,11 @@
                             </div>
                             <div class="uf-compact-sub-stats">
                                 <div class="uf-sub-stat success">
-                                    <span class="uf-sub-label success"><i class="fa-solid fa-arrow-trend-up"></i> Entradas</span>
+                                    <span class="uf-sub-label success"><i class="fa-solid fa-arrow-trend-up"></i></span>
                                     <span class="uf-sub-val success">${formatCurrency(ufMetrics['RS'].entradas)}</span>
                                 </div>
                                 <div class="uf-sub-stat danger">
-                                    <span class="uf-sub-label danger"><i class="fa-solid fa-arrow-trend-down"></i> Saídas</span>
+                                    <span class="uf-sub-label danger"><i class="fa-solid fa-arrow-trend-down"></i></span>
                                     <span class="uf-sub-val danger">${formatCurrency(ufMetrics['RS'].saidas)}</span>
                                 </div>
                             </div>
