@@ -102,8 +102,8 @@ body {
 }
 
 .logo-full {
-    max-height: 56px; /* Reduced from 68px to avoid proximity to the top border */
-    max-width: 120px;
+    max-height: 90px;
+    max-width: 192px;
     object-fit: contain;
     border-radius: 10px;
     display: block;
@@ -1527,8 +1527,8 @@ body.sidebar-collapsed .sidebar .logo-glow-wrapper {
 }
 
 body.sidebar-collapsed .sidebar .logo-full {
-    max-height: 36px;
-    max-width: 56px;
+    max-height: 58px;
+    max-width: 90px;
 }
 
 body.sidebar-collapsed .sidebar .nav-item span {
