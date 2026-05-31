@@ -1251,13 +1251,17 @@
                 document.getElementById('view-subtitle').innerText = 'Categorias oficiais cadastradas e validadas no Fluxo de Caixa';
             } else {
                 document.getElementById('filters-container').style.display = 'grid';
+                
+                const mesSelect = document.getElementById('filter-mes');
+                const mesText = mesSelect ? mesSelect.options[mesSelect.selectedIndex].text : '';
+                
                 if (viewName === 'dashboard') {
                     document.getElementById('view-title').innerText = 'Dashboard Financeiro';
-                    document.getElementById('view-subtitle').innerText = 'Análise consolidada e integrada das contas da JLE Telecom';
+                    document.getElementById('view-subtitle').innerText = `Análise consolidada e integrada das contas da JLE Telecom${mesText ? ' | Competência: ' + mesText : ''}`;
                     renderCharts();
                 } else {
                     document.getElementById('view-title').innerText = 'Lançamentos Analíticos';
-                    document.getElementById('view-subtitle').innerText = 'Relação completa de transações com ferramentas de busca e auditoria';
+                    document.getElementById('view-subtitle').innerText = `Relação completa de transações com ferramentas de busca e auditoria${mesText ? ' | Competência: ' + mesText : ''}`;
                     renderTable();
                 }
             }
@@ -1393,6 +1397,20 @@
             calculateKPIs();
             renderCharts();
             renderTable();
+
+            // Atualizar o mês de referência no subtítulo
+            const mesSelect = document.getElementById('filter-mes');
+            if (mesSelect) {
+                const mesText = mesSelect.options[mesSelect.selectedIndex].text;
+                const subtitleEl = document.getElementById('view-subtitle');
+                if (subtitleEl) {
+                    if (activeView === 'dashboard') {
+                        subtitleEl.innerText = `Análise consolidada e integrada das contas da JLE Telecom | Competência: ${mesText}`;
+                    } else if (activeView === 'transactions') {
+                        subtitleEl.innerText = `Relação completa de transações com ferramentas de busca e auditoria | Competência: ${mesText}`;
+                    }
+                }
+            }
         }
 
         function toggleCustomerFilter(customerName) {

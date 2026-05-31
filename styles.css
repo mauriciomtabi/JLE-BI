@@ -261,6 +261,63 @@ header {
     box-shadow: var(--shadow-main);
 }
 
+@media (min-width: 769px) {
+    .filter-bar {
+        grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+        gap: 10px !important;
+        padding: 14px 16px !important;
+    }
+    
+    .filter-group label {
+        font-size: 11px !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .filter-group select, 
+    .filter-group input {
+        font-size: 13px !important;
+        padding: 8px 8px !important;
+        height: 38px;
+    }
+    
+    .filter-group div button {
+        padding: 8px 10px !important;
+        height: 38px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+    .main-content {
+        padding: 0 16px 20px 16px !important;
+        gap: 16px !important;
+    }
+    
+    .filter-bar {
+        gap: 8px !important;
+        padding: 10px 12px !important;
+    }
+    
+    .filter-group label {
+        font-size: 10px !important;
+    }
+    
+    .filter-group select, 
+    .filter-group input {
+        font-size: 12px !important;
+        padding: 8px 4px !important;
+    }
+    
+    .filter-group div {
+        gap: 4px !important;
+    }
+    
+    .filter-group div button {
+        padding: 8px 8px !important;
+    }
+}
+
 .filter-group {
     display: flex;
     flex-direction: column;
