@@ -665,6 +665,8 @@
                     
                     if (error) {
                         showAuthAlert(error.message, 'error');
+                    } else if (data && data.user) {
+                        showDashboard(data.user);
                     }
                 } catch (err) {
                     btnSubmit.disabled = false;
