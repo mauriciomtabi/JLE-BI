@@ -46,8 +46,8 @@
             <div class="user-profile-badge" id="user-profile-info-box">
                 <i class="fa-solid fa-circle-user"></i>
                 <div class="user-profile-info">
-                    <span class="user-profile-email" id="user-display-email">...</span>
-                    <span class="user-profile-role">Usuário Corporativo</span>
+                    <span class="user-profile-email" id="user-display-name">...</span>
+                    <span class="user-profile-role" id="user-display-email">...</span>
                 </div>
             </div>
             
@@ -407,6 +407,10 @@
             <!-- FORMULÁRIO DE CADASTRO -->
             <form class="auth-form" id="form-register" onsubmit="handleRegisterSubmit(event)" style="display: none;">
                 <div class="auth-input-group">
+                    <label for="register-name">Nome Completo</label>
+                    <input type="text" id="register-name" required placeholder="Maurício Maciel e Silva">
+                </div>
+                <div class="auth-input-group">
                     <label for="register-email">E-mail Corporativo</label>
                     <input type="email" id="register-email" required placeholder="seu.nome@jletelecom.com.br">
                 </div>
@@ -550,15 +554,39 @@
             alertBox.style.display = 'block';
         }
 
+        // Formatar nome com a primeira letra maiúscula e as demais minúsculas, exceto preposições comuns em português
+        function formatFullName(name) {
+            const lowercaseExceptions = ['e', 'de', 'da', 'do', 'das', 'dos', 'com', 'em'];
+            return name
+                .trim()
+                .toLowerCase()
+                .split(/\s+/)
+                .map((word, index) => {
+                    if (lowercaseExceptions.includes(word) && index > 0) {
+                        return word;
+                    }
+                    return word.charAt(0).toUpperCase() + word.slice(1);
+                })
+                .join(' ');
+        }
+
         // Submissão do Cadastro
         async function handleRegisterSubmit(event) {
             event.preventDefault();
+            const nameInput = document.getElementById('register-name').value.trim();
             const email = document.getElementById('register-email').value.trim();
             const password = document.getElementById('register-password').value;
             const confirmPassword = document.getElementById('register-confirm-password').value;
             
             const alertBox = document.getElementById('auth-alert');
             alertBox.style.display = 'none';
+            
+            if (nameInput.split(/\s+/).length < 2) {
+                showAuthAlert('Por favor, informe seu nome e pelo menos um sobrenome.', 'error');
+                return;
+            }
+            
+            const formattedName = formatFullName(nameInput);
             
             if (!email.toLowerCase().endsWith('@jletelecom.com.br')) {
                 showAuthAlert('Acesso restrito: Apenas e-mails corporativos @jletelecom.com.br são permitidos.', 'error');
@@ -593,12 +621,18 @@
                     showAuthAlert('[MODO DEMO] Cadastro simulado! Em produção, você receberá um e-mail de confirmação para liberar o acesso. No modo demo, o acesso já está disponível para login na aba Entrar.', 'success');
                     safeStorage.setItem('demo_user_email', email);
                     safeStorage.setItem('demo_user_password', password);
+                    safeStorage.setItem('demo_user_name', formattedName);
                 }, 1000);
             } else {
                 try {
                     const { data, error } = await supabaseClient.auth.signUp({
                         email: email,
-                        password: password
+                        password: password,
+                        options: {
+                            data: {
+                                full_name: formattedName
+                            }
+                        }
                     });
                     
                     btnSubmit.disabled = false;
@@ -608,6 +642,7 @@
                         showAuthAlert(error.message, 'error');
                     } else {
                         showAuthAlert('Cadastro realizado com sucesso! Você receberá um e-mail de confirmação em breve. Atenção: seu acesso só será liberado após você confirmar o cadastro pelo e-mail recebido.', 'success');
+                        document.getElementById('register-name').value = '';
                         document.getElementById('register-email').value = '';
                         document.getElementById('register-password').value = '';
                         document.getElementById('register-confirm-password').value = '';
@@ -645,9 +680,13 @@
                     
                     const savedEmail = safeStorage.getItem('demo_user_email') || 'admin@jletelecom.com.br';
                     const savedPass = safeStorage.getItem('demo_user_password') || '123456';
+                    const savedName = safeStorage.getItem('demo_user_name') || 'Administrador JLE';
                     
                     if (email.toLowerCase() === savedEmail.toLowerCase() && password === savedPass) {
-                        safeStorage.setItem('demo_session', JSON.stringify({ email: email }));
+                        safeStorage.setItem('demo_session', JSON.stringify({ 
+                            email: email,
+                            user_metadata: { full_name: savedName }
+                        }));
                         checkAuth();
                     } else {
                         showAuthAlert('E-mail ou senha incorretos. (No modo demo, utilize: admin@jletelecom.com.br / 123456)', 'error');
@@ -724,6 +763,9 @@
             document.getElementById('auth-panel').style.display = 'none';
             document.getElementById('dashboard-sidebar').style.display = 'flex';
             document.getElementById('dashboard-main-content').style.display = 'flex';
+            
+            const fullName = (user.user_metadata && user.user_metadata.full_name) || user.email.split('@')[0];
+            document.getElementById('user-display-name').innerText = fullName;
             document.getElementById('user-display-email').innerText = user.email;
             
             // Força redimensionamento dos gráficos e aplicação de filtros iniciais
