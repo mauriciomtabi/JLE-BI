@@ -1007,7 +1007,12 @@
                             supabaseClient.auth.signOut();
                             return;
                         }
-                        showDashboard(session.user);
+                        // Obter os dados atualizados do usuário diretamente do servidor para evitar caches locais antigos
+                        supabaseClient.auth.getUser().then(({ data: { user } }) => {
+                            showDashboard(user || session.user);
+                        }).catch(() => {
+                            showDashboard(session.user);
+                        });
                     } else {
                         showLoginScreen();
                     }
@@ -1189,7 +1194,13 @@
                                 supabaseClient.auth.signOut();
                                 return;
                             }
-                            showDashboard(session.user);
+                            
+                            // Buscar metadados atualizados do servidor para garantir o nome cadastrado
+                            supabaseClient.auth.getUser().then(({ data: { user } }) => {
+                                showDashboard(user || session.user);
+                            }).catch(() => {
+                                showDashboard(session.user);
+                            });
                         } else {
                             showLoginScreen();
                         }
