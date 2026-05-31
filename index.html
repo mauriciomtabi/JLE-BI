@@ -398,6 +398,9 @@
                         <input type="password" id="login-password" required placeholder="Sua senha">
                         <i class="fa-solid fa-eye password-toggle-icon" onclick="togglePasswordVisibility('login-password', this)"></i>
                     </div>
+                    <div style="text-align: right; margin-top: 6px;">
+                        <a href="#" onclick="showForgotPasswordForm(event)" style="font-size: 11px; color: var(--color-primary); text-decoration: none; font-weight: 500; transition: color 0.2s;" onmouseover="this.style.color='var(--color-secondary)'" onmouseout="this.style.color='var(--color-primary)'">Esqueci minha senha</a>
+                    </div>
                 </div>
                 <button type="submit" class="auth-btn" id="btn-login-submit">
                     <i class="fa-solid fa-right-to-bracket"></i> Entrar
@@ -430,6 +433,41 @@
                 </div>
                 <button type="submit" class="auth-btn" id="btn-register-submit">
                     <i class="fa-solid fa-user-plus"></i> Cadastrar
+                </button>
+            </form>
+            
+            <!-- FORMULÁRIO DE RECUPERAÇÃO DE SENHA -->
+            <form class="auth-form" id="form-forgot" onsubmit="handleForgotSubmit(event)" style="display: none;">
+                <div class="auth-input-group">
+                    <label for="forgot-email">E-mail Corporativo</label>
+                    <input type="email" id="forgot-email" required placeholder="seu.nome@jletelecom.com.br">
+                </div>
+                <button type="submit" class="auth-btn" id="btn-forgot-submit">
+                    <i class="fa-solid fa-paper-plane"></i> Enviar Link de Recuperação
+                </button>
+                <div style="text-align: center; margin-top: 15px;">
+                    <a href="#" onclick="showLoginForm(event)" style="font-size: 12px; color: var(--text-secondary); text-decoration: none; font-weight: 500;" onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-secondary)'">Voltar para o Login</a>
+                </div>
+            </form>
+            
+            <!-- FORMULÁRIO DE NOVA SENHA -->
+            <form class="auth-form" id="form-reset-password" onsubmit="handleResetPasswordSubmit(event)" style="display: none;">
+                <div class="auth-input-group">
+                    <label for="reset-new-password">Nova Senha (mín. 6 caracteres, com letras e números)</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="reset-new-password" required placeholder="Nova senha" minlength="6">
+                        <i class="fa-solid fa-eye password-toggle-icon" onclick="togglePasswordVisibility('reset-new-password', this)"></i>
+                    </div>
+                </div>
+                <div class="auth-input-group">
+                    <label for="reset-confirm-new-password">Confirmar Nova Senha</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="reset-confirm-new-password" required placeholder="Confirme a nova senha" minlength="6">
+                        <i class="fa-solid fa-eye password-toggle-icon" onclick="togglePasswordVisibility('reset-confirm-new-password', this)"></i>
+                    </div>
+                </div>
+                <button type="submit" class="auth-btn" id="btn-reset-password-submit">
+                    <i class="fa-solid fa-key"></i> Salvar Nova Senha
                 </button>
             </form>
         </div>
@@ -472,9 +510,13 @@
             const btnRegister = document.getElementById('tab-register');
             const formLogin = document.getElementById('form-login');
             const formRegister = document.getElementById('form-register');
+            const formForgot = document.getElementById('form-forgot');
+            const formResetPassword = document.getElementById('form-reset-password');
             const alertBox = document.getElementById('auth-alert');
             
             if (alertBox) alertBox.style.display = 'none';
+            if (formForgot) formForgot.style.display = 'none';
+            if (formResetPassword) formResetPassword.style.display = 'none';
             
             if (tab === 'login') {
                 if (btnLogin) btnLogin.classList.add('active');
@@ -491,6 +533,62 @@
                 const subtitle = document.getElementById('auth-subtitle');
                 if (subtitle) subtitle.innerText = 'Crie sua conta corporativa';
             }
+        }
+
+        function showForgotPasswordForm(event) {
+            if (event) event.preventDefault();
+            document.getElementById('form-login').style.display = 'none';
+            document.getElementById('form-register').style.display = 'none';
+            document.getElementById('form-forgot').style.display = 'flex';
+            
+            const subtitle = document.getElementById('auth-subtitle');
+            if (subtitle) subtitle.innerText = 'Recupere sua senha corporativa';
+            
+            document.getElementById('tab-login').classList.remove('active');
+            document.getElementById('tab-register').classList.remove('active');
+            
+            const alertBox = document.getElementById('auth-alert');
+            if (alertBox) alertBox.style.display = 'none';
+        }
+
+        function showLoginForm(event) {
+            if (event) event.preventDefault();
+            document.getElementById('form-login').style.display = 'flex';
+            document.getElementById('form-register').style.display = 'none';
+            document.getElementById('form-forgot').style.display = 'none';
+            document.getElementById('form-reset-password').style.display = 'none';
+            
+            const subtitle = document.getElementById('auth-subtitle');
+            if (subtitle) subtitle.innerText = 'Acesse com sua conta corporativa';
+            
+            document.getElementById('tab-login').classList.add('active');
+            document.getElementById('tab-register').classList.remove('active');
+            
+            document.getElementById('tab-login').style.display = 'block';
+            document.getElementById('tab-register').style.display = 'block';
+            
+            const alertBox = document.getElementById('auth-alert');
+            if (alertBox) alertBox.style.display = 'none';
+        }
+
+        function showResetPasswordForm() {
+            document.getElementById('auth-panel').style.display = 'flex';
+            document.getElementById('dashboard-sidebar').style.display = 'none';
+            document.getElementById('dashboard-main-content').style.display = 'none';
+            
+            document.getElementById('form-login').style.display = 'none';
+            document.getElementById('form-register').style.display = 'none';
+            document.getElementById('form-forgot').style.display = 'none';
+            document.getElementById('form-reset-password').style.display = 'flex';
+            
+            const subtitle = document.getElementById('auth-subtitle');
+            if (subtitle) subtitle.innerText = 'Crie uma nova senha corporativa';
+            
+            document.getElementById('tab-login').style.display = 'none';
+            document.getElementById('tab-register').style.display = 'none';
+            
+            const alertBox = document.getElementById('auth-alert');
+            if (alertBox) alertBox.style.display = 'none';
         }
 
         // Função para mostrar/esconder senha
@@ -710,6 +808,128 @@
             }
         }
 
+        // Solicitação de link de recuperação de senha
+        async function handleForgotSubmit(event) {
+            event.preventDefault();
+            const email = document.getElementById('forgot-email').value.trim();
+            
+            const alertBox = document.getElementById('auth-alert');
+            alertBox.style.display = 'none';
+            
+            if (!email.toLowerCase().endsWith('@jletelecom.com.br')) {
+                showAuthAlert('Acesso restrito: Apenas e-mails corporativos @jletelecom.com.br são permitidos.', 'error');
+                return;
+            }
+            
+            const btnSubmit = document.getElementById('btn-forgot-submit');
+            btnSubmit.disabled = true;
+            btnSubmit.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando...';
+            
+            if (isDemoMode || !supabaseClient) {
+                setTimeout(() => {
+                    btnSubmit.disabled = false;
+                    btnSubmit.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Enviar Link de Recuperação';
+                    showAuthAlert('[MODO DEMO] Link de recuperação enviado para ' + email + ' (simulado).', 'success');
+                }, 1000);
+            } else {
+                try {
+                    const redirectUrl = window.location.origin + window.location.pathname;
+                    const { data, error } = await supabaseClient.auth.resetPasswordForEmail(email, {
+                        redirectTo: redirectUrl
+                    });
+                    
+                    btnSubmit.disabled = false;
+                    btnSubmit.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Enviar Link de Recuperação';
+                    
+                    if (error) {
+                        showAuthAlert(error.message, 'error');
+                    } else {
+                        showAuthAlert('Link de recuperação enviado com sucesso! Verifique sua caixa de entrada e spam para redefinir sua senha.', 'success');
+                        document.getElementById('forgot-email').value = '';
+                    }
+                } catch (err) {
+                    btnSubmit.disabled = false;
+                    btnSubmit.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Enviar Link de Recuperação';
+                    showAuthAlert('Erro ao solicitar recuperação: ' + err.message, 'error');
+                }
+            }
+        }
+
+        // Submissão de alteração da senha
+        async function handleResetPasswordSubmit(event) {
+            event.preventDefault();
+            const newPassword = document.getElementById('reset-new-password').value;
+            const confirmNewPassword = document.getElementById('reset-confirm-new-password').value;
+            
+            const alertBox = document.getElementById('auth-alert');
+            alertBox.style.display = 'none';
+            
+            if (newPassword !== confirmNewPassword) {
+                showAuthAlert('As senhas não coincidem.', 'error');
+                return;
+            }
+            
+            if (newPassword.length < 6) {
+                showAuthAlert('A senha deve conter no mínimo 6 caracteres.', 'error');
+                return;
+            }
+            
+            const hasLetter = /[a-zA-Z]/.test(newPassword);
+            const hasNumber = /[0-9]/.test(newPassword);
+            if (!hasLetter || !hasNumber) {
+                showAuthAlert('A senha deve conter letras e números (pelo menos uma letra e um número).', 'error');
+                return;
+            }
+
+            const btnSubmit = document.getElementById('btn-reset-password-submit');
+            btnSubmit.disabled = true;
+            btnSubmit.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Salvando...';
+            
+            if (isDemoMode || !supabaseClient) {
+                setTimeout(() => {
+                    btnSubmit.disabled = false;
+                    btnSubmit.innerHTML = '<i class="fa-solid fa-key"></i> Salvar Nova Senha';
+                    showAuthAlert('Senha alterada com sucesso! Você já pode entrar com a nova senha.', 'success');
+                    safeStorage.setItem('demo_user_password', newPassword);
+                    
+                    setTimeout(() => {
+                        showLoginForm();
+                    }, 2000);
+                }, 1000);
+            } else {
+                try {
+                    const { data, error } = await supabaseClient.auth.updateUser({
+                        password: newPassword
+                    });
+                    
+                    btnSubmit.disabled = false;
+                    btnSubmit.innerHTML = '<i class="fa-solid fa-key"></i> Salvar Nova Senha';
+                    
+                    if (error) {
+                        showAuthAlert(error.message, 'error');
+                    } else {
+                        showAuthAlert('Senha redefinida com sucesso! Você já pode acessar o BI com a sua nova senha.', 'success');
+                        document.getElementById('reset-new-password').value = '';
+                        document.getElementById('reset-confirm-new-password').value = '';
+                        
+                        if (window.history.pushState) {
+                            window.history.pushState("", document.title, window.location.pathname + window.location.search);
+                        } else {
+                            window.location.hash = "";
+                        }
+                        
+                        setTimeout(() => {
+                            showLoginForm();
+                        }, 2500);
+                    }
+                } catch (err) {
+                    btnSubmit.disabled = false;
+                    btnSubmit.innerHTML = '<i class="fa-solid fa-key"></i> Salvar Nova Senha';
+                    showAuthAlert('Erro ao salvar nova senha: ' + err.message, 'error');
+                }
+            }
+        }
+
         // Logout
         async function handleLogout() {
             if (isDemoMode || !supabaseClient) {
@@ -726,6 +946,14 @@
 
         // Verificar sessão na carga
         function checkAuth() {
+            // Verificar se o usuário veio por link de recuperação de senha na URL hash
+            if (window.location.hash && (window.location.hash.includes('type=recovery') || window.location.hash.includes('recovery_token='))) {
+                setTimeout(() => {
+                    showResetPasswordForm();
+                }, 100);
+                return;
+            }
+
             if (isDemoMode || !supabaseClient) {
                 const session = safeStorage.getItem('demo_session');
                 if (session) {
@@ -735,6 +963,17 @@
                     showLoginScreen();
                 }
             } else {
+                // Registrar listener de alteração de autenticação nativo
+                try {
+                    supabaseClient.auth.onAuthStateChange((event, session) => {
+                        if (event === 'PASSWORD_RECOVERY') {
+                            showResetPasswordForm();
+                        }
+                    });
+                } catch (e) {
+                    console.error("Erro ao registrar listener onAuthStateChange:", e);
+                }
+
                 supabaseClient.auth.getSession().then(({ data: { session } }) => {
                     if (session) {
                         const email = session.user.email;
