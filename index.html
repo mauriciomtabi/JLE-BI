@@ -368,14 +368,25 @@
 
     <!-- AUTH PANEL (SUPABASE) -->
     <div class="auth-container" id="auth-panel" style="display: flex;">
+        <!-- Blobs de Gradiente Animados de Fundo -->
+        <div class="auth-bg-blobs">
+            <div class="auth-blob blob-1"></div>
+            <div class="auth-blob blob-2"></div>
+            <div class="auth-blob blob-3"></div>
+        </div>
+
+        <!-- Botão de Alternância de Tema -->
+        <button class="auth-theme-toggle" onclick="toggleTheme()" type="button" title="Alternar tema">
+            <i class="fa-solid fa-moon" id="auth-theme-icon"></i>
+        </button>
+
         <div class="auth-card">
             <div class="auth-logo">
                 <img src="logo.png" alt="JLE Telecom">
             </div>
             
             <div class="auth-title">
-                <h2>BI JLE</h2>
-                <p id="auth-subtitle">Acesse com sua conta corporativa</p>
+                <p id="auth-subtitle" class="auth-subtitle-incorporated">Acesse o <strong>BI JLE</strong> com sua conta corporativa</p>
             </div>
             
             <div class="auth-tabs">
@@ -1223,8 +1234,14 @@
             body.classList.toggle('light-theme');
             const isLight = body.classList.contains('light-theme');
             
-            document.getElementById('theme-icon').className = isLight ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
-            document.getElementById('theme-text').innerText = isLight ? 'Modo Claro' : 'Modo Escuro';
+            const themeIcon = document.getElementById('theme-icon');
+            if (themeIcon) themeIcon.className = isLight ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+            
+            const themeText = document.getElementById('theme-text');
+            if (themeText) themeText.innerText = isLight ? 'Modo Claro' : 'Modo Escuro';
+            
+            const authThemeIcon = document.getElementById('auth-theme-icon');
+            if (authThemeIcon) authThemeIcon.className = isLight ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
             
             renderCharts();
         }
