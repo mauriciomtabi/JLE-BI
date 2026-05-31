@@ -1332,15 +1332,51 @@ td.cell-saida {
     text-anchor: middle;
     pointer-events: none;
     transition: all 0.4s ease;
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6);
 }
 
 .light-theme .map-label {
-    fill: rgba(17, 28, 36, 0.85);
+    fill: #004f71; /* Highly visible, premium deep teal corporate brand color */
+    stroke: #ffffff;
+    stroke-width: 0.6px;
+    paint-order: stroke fill;
+    stroke-linejoin: round;
+    font-weight: 800;
+    text-shadow: none;
 }
 
 .map-label.active {
-    fill: var(--color-secondary);
+    fill: var(--color-secondary) !important;
     font-weight: 900;
+    text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+}
+
+.light-theme .map-label.active {
+    fill: #f39f18 !important; /* Beautiful golden orange for active state */
+    stroke: #ffffff !important;
+    stroke-width: 0.7px !important;
+    paint-order: stroke fill !important;
+    font-weight: 900;
+    text-shadow: none;
+}
+
+/* Hover cruzado no label quando o estado correspondente é focado */
+.map-state:hover + .map-label,
+.map-state.hovered + .map-label {
+    fill: #ffffff !important;
+    stroke: #004f71 !important;
+    stroke-width: 0.6px !important;
+    paint-order: stroke fill !important;
+    font-weight: 900 !important;
+}
+
+.light-theme .map-state:hover + .map-label,
+.light-theme .map-state.hovered + .map-label {
+    fill: #ffffff !important;
+    stroke: #f39f18 !important;
+    stroke-width: 0.6px !important;
+    paint-order: stroke fill !important;
+    font-weight: 900 !important;
 }
 
 .map-label.dimmed {
