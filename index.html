@@ -1257,11 +1257,11 @@
                 
                 if (viewName === 'dashboard') {
                     document.getElementById('view-title').innerText = 'Dashboard Financeiro';
-                    document.getElementById('view-subtitle').innerText = `Análise consolidada e integrada das contas da JLE Telecom${mesText ? ' | Competência: ' + mesText : ''}`;
+                    document.getElementById('view-subtitle').innerHTML = `Análise consolidada e integrada das contas da JLE Telecom${mesText ? ' <span class="badge-competencia">Competência: ' + mesText + '</span>' : ''}`;
                     renderCharts();
                 } else {
                     document.getElementById('view-title').innerText = 'Lançamentos Analíticos';
-                    document.getElementById('view-subtitle').innerText = `Relação completa de transações com ferramentas de busca e auditoria${mesText ? ' | Competência: ' + mesText : ''}`;
+                    document.getElementById('view-subtitle').innerHTML = `Relação completa de transações com ferramentas de busca e auditoria${mesText ? ' <span class="badge-competencia">Competência: ' + mesText + '</span>' : ''}`;
                     renderTable();
                 }
             }
@@ -1405,9 +1405,9 @@
                 const subtitleEl = document.getElementById('view-subtitle');
                 if (subtitleEl) {
                     if (activeView === 'dashboard') {
-                        subtitleEl.innerText = `Análise consolidada e integrada das contas da JLE Telecom | Competência: ${mesText}`;
+                        subtitleEl.innerHTML = `Análise consolidada e integrada das contas da JLE Telecom <span class="badge-competencia">Competência: ${mesText}</span>`;
                     } else if (activeView === 'transactions') {
-                        subtitleEl.innerText = `Relação completa de transações com ferramentas de busca e auditoria | Competência: ${mesText}`;
+                        subtitleEl.innerHTML = `Relação completa de transações com ferramentas de busca e auditoria <span class="badge-competencia">Competência: ${mesText}</span>`;
                     }
                 }
             }
