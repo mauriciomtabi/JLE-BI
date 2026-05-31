@@ -1,0 +1,21 @@
+{
+  "name": "BI JLE - JLE Telecom",
+  "short_name": "BI JLE",
+  "description": "Dashboard de fluxo de caixa e análise financeira da JLE Telecom",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#070d14",
+  "theme_color": "#005073",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -80,7 +80,7 @@ body {
 }
 
 .logo-img {
-    max-height: 90px;
+    max-height: 60px;
     max-width: 100%;
     object-fit: contain;
     filter: drop-shadow(0 0 8px rgba(0, 79, 113, 0.2));
@@ -154,6 +154,29 @@ body {
 
 .theme-toggle-btn:hover {
     background-color: var(--bg-input);
+}
+
+.install-pwa-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    border-radius: 8px;
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.install-pwa-btn:hover {
+    background-color: var(--bg-input);
+}
+
+.mobile-filter-toggle {
+    display: none;
 }
 
 .update-btn {
@@ -947,6 +970,7 @@ body.sidebar-collapsed .sidebar .sidebar-footer {
 }
 
 body.sidebar-collapsed .sidebar .theme-toggle-btn,
+body.sidebar-collapsed .sidebar .install-pwa-btn,
 body.sidebar-collapsed .sidebar .update-btn {
     width: 40px;
     height: 40px;
@@ -1725,7 +1749,8 @@ body.light-theme .auth-alert.success {
     /* Ocultar elementos desnecessários na barra inferior */
     .sidebar .logo-container,
     .sidebar .sidebar-toggle-btn,
-    .sidebar .user-profile-badge {
+    .sidebar .user-profile-badge,
+    .sidebar .install-pwa-btn {
         display: none !important;
     }
 
@@ -1844,11 +1869,41 @@ body.light-theme .auth-alert.success {
         padding: 6px 12px !important;
     }
 
-    /* Filtros Responsivos */
+    /* Toggle de Filtros e Filtros Responsivos */
+    .mobile-filter-toggle {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background-color: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 12px;
+        color: var(--text-primary);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom: 12px;
+        transition: all 0.2s ease;
+        box-sizing: border-box;
+    }
+
+    .mobile-filter-toggle:hover {
+        background-color: var(--bg-input);
+        border-color: var(--color-primary);
+    }
+
     .filter-bar {
+        display: none !important; /* Escondido por padrão no mobile */
+    }
+
+    .filter-bar.mobile-expanded {
+        display: grid !important; /* Exibido em grade quando expandido */
         grid-template-columns: repeat(2, 1fr) !important; /* 2 colunas no mobile */
         padding: 16px !important;
         gap: 12px !important;
+        margin-bottom: 12px;
     }
 
     .filter-group select, 

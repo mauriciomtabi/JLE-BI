@@ -6,6 +6,11 @@
     <title>BI JLE - JLE Telecom</title>
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="favicon.png">
+    <!-- PWA Manifest & iOS Support -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#005073">
     <!-- Google Fonts & Lucide Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -51,6 +56,10 @@
                 </div>
             </div>
             
+            <button class="install-pwa-btn" id="install-pwa-btn" onclick="triggerPwaInstall()" style="display: none;">
+                <i class="fa-solid fa-download"></i> <span>Instalar App</span>
+            </button>
+            
             <button class="theme-toggle-btn" onclick="toggleTheme()">
                 <i class="fa-solid fa-moon" id="theme-icon"></i>
                 <span id="theme-text">Modo Escuro</span>
@@ -75,6 +84,11 @@
                 <i class="fa-solid fa-clock"></i> Atualizado: <span id="data-timestamp">N/D</span>
             </div>
         </header>
+
+        <!-- Toggle de Filtros para Mobile -->
+        <button class="mobile-filter-toggle" id="mobile-filter-toggle" onclick="toggleMobileFilters()">
+            <i class="fa-solid : fa-filter"></i> <span>Mostrar Filtros</span>
+        </button>
 
         <!-- FILTROS -->
         <section class="filter-bar" id="filters-container">
@@ -2457,6 +2471,52 @@
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+        }
+
+        // Lógica de Filtros Mobile (Expandir/Recolher)
+        function toggleMobileFilters() {
+            const filterBar = document.getElementById('filters-container');
+            const toggleBtn = document.getElementById('mobile-filter-toggle');
+            if (filterBar.classList.contains('mobile-expanded')) {
+                filterBar.classList.remove('mobile-expanded');
+                toggleBtn.innerHTML = '<i class="fa-solid fa-filter"></i> <span>Mostrar Filtros</span>';
+            } else {
+                filterBar.classList.add('mobile-expanded');
+                toggleBtn.innerHTML = '<i class="fa-solid fa-filter-slash"></i> <span>Ocultar Filtros</span>';
+            }
+        }
+
+        // Lógica de Instalação PWA (Instalação no celular)
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            const installBtn = document.getElementById('install-pwa-btn');
+            if (installBtn) installBtn.style.display = 'flex';
+        });
+
+        function triggerPwaInstall() {
+            if (!deferredPrompt) return;
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('Usuário aceitou a instalação do PWA');
+                } else {
+                    console.log('Usuário rejeitou a instalação do PWA');
+                }
+                deferredPrompt = null;
+                const installBtn = document.getElementById('install-pwa-btn');
+                if (installBtn) installBtn.style.display = 'none';
+            });
+        }
+
+        // Registro do Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('Service Worker registrado com sucesso!', reg))
+                    .catch(err => console.error('Erro ao registrar Service Worker:', err));
+            });
         }
     </script>
 </body>
