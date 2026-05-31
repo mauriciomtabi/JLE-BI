@@ -23,7 +23,7 @@
     <!-- Supabase Local Configuration -->
     <script src="supabase_config.js"></script>
     <!-- Local Stylesheet -->
-    <link rel="stylesheet" href="styles.css?v=2.1.1">
+    <link rel="stylesheet" href="styles.css?v=2.1.2">
 </head>
 <body>
 
@@ -45,9 +45,6 @@
             </a>
             <a class="nav-item" id="nav-transactions" onclick="switchView('transactions')">
                 <i class="fa-solid fa-list-ol"></i> <span>Lançamentos</span>
-            </a>
-            <a class="nav-item" id="nav-dictionary" onclick="switchView('dictionary')" style="display:none;">
-                <i class="fa-solid fa-book"></i> <span>Dicionário</span>
             </a>
             <a class="nav-item" id="nav-admin" onclick="switchView('admin')" style="display:none;">
                 <i class="fa-solid fa-shield-halved"></i> <span>Admin</span>
@@ -322,44 +319,6 @@
                         <button class="pagination-btn" id="pagination-next" onclick="changePage(1)">
                             <i class="fa-solid fa-chevron-right"></i>
                         </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- VIEW 3: DICTIONARY OF CATEGORIES -->
-        <div id="view-dictionary-container" class="view-panel" style="display: none;">
-            <div class="dictionary-grid">
-                <div class="dictionary-card">
-                    <div class="chart-header">
-                        <div class="chart-title">
-                            <h2>Categorias de Entrada (Receitas)</h2>
-                        </div>
-                    </div>
-                    <div class="category-tags" id="tags-entradas">
-                        <!-- Loaded dynamically -->
-                    </div>
-                </div>
-                
-                <div class="dictionary-card">
-                    <div class="chart-header">
-                        <div class="chart-title">
-                            <h2>Categorias de Saída (Despesas)</h2>
-                        </div>
-                    </div>
-                    <div class="category-tags" id="tags-saidas">
-                        <!-- Loaded dynamically -->
-                    </div>
-                </div>
-                
-                <div class="dictionary-card">
-                    <div class="chart-header">
-                        <div class="chart-title">
-                            <h2>Meios de Pagamento Cadastrados</h2>
-                        </div>
-                    </div>
-                    <div class="category-tags" id="tags-tipos">
-                        <!-- Loaded dynamically -->
                     </div>
                 </div>
             </div>
@@ -1164,7 +1123,6 @@
         const ALL_PAGES = [
             { id: 'dashboard',    label: 'Dashboard Financeiro',    icon: 'fa-chart-pie',       navId: 'nav-dashboard' },
             { id: 'transactions', label: 'Lançamentos Analíticos', icon: 'fa-list-ol',          navId: 'nav-transactions' },
-            { id: 'dictionary',   label: 'Dicionário de Categorias',icon: 'fa-book',             navId: 'nav-dictionary' },
             { id: 'admin',        label: 'Painel Admin',            icon: 'fa-shield-halved',    navId: 'nav-admin',        adminOnly: true },
         ];
 
@@ -1271,7 +1229,6 @@
         // Configuração de Dados e Estado Global
         let transactions = [];
         let filteredTransactions = [];
-        let dictionary = { entradas: [], saidas: [], tipos: [] };
         
         let currentPage = 1;
         const rowsPerPage = 15;
@@ -1313,26 +1270,12 @@
             if (typeof window.CASH_FLOW_DATA !== 'undefined') {
                 transactions = window.CASH_FLOW_DATA.transactions || [];
                 document.getElementById('data-timestamp').innerText = formatTimestamp(window.CASH_FLOW_DATA.generated_at) || 'Desconhecido';
-                
-                // Popula dicionários
-                dictionary.entradas = window.CASH_FLOW_DATA.categories_origin.entradas.length > 0 
-                    ? window.CASH_FLOW_DATA.categories_origin.entradas 
-                    : getUniqueValuesFromData('fluxo', 'Entrada', 'categoria');
-                    
-                dictionary.saidas = window.CASH_FLOW_DATA.categories_origin.saidas.length > 0 
-                    ? window.CASH_FLOW_DATA.categories_origin.saidas 
-                    : getUniqueValuesFromData('fluxo', 'Saída', 'categoria');
-                    
-                dictionary.tipos = window.CASH_FLOW_DATA.categories_origin.tipos.length > 0 
-                    ? window.CASH_FLOW_DATA.categories_origin.tipos 
-                    : [...new Set(transactions.map(t => t.meio_pagamento))];
             } else {
                 alert("Arquivo data.js não encontrado. Por favor, execute o script de ETL para gerar a base de dados.");
             }
             
             // Popular filtros de Categoria dinamicamente
             populateCategoryFilter();
-            populateDictionaryUI();
             
             // Popular filtros de Competência/Mês dinamicamente
             const monthOrder = {
@@ -1433,12 +1376,7 @@
             
             const mobileToggleBtn = document.getElementById('mobile-filter-toggle');
             
-            if (viewName === 'dictionary') {
-                document.getElementById('filters-container').style.display = 'none';
-                if (mobileToggleBtn) mobileToggleBtn.style.display = 'none';
-                document.getElementById('view-title').innerText = 'Dicionário de Categorias';
-                document.getElementById('view-subtitle').innerText = 'Categorias oficiais cadastradas e validadas no Fluxo de Caixa';
-            } else if (viewName === 'admin') {
+            if (viewName === 'admin') {
                 document.getElementById('filters-container').style.display = 'none';
                 if (mobileToggleBtn) mobileToggleBtn.style.display = 'none';
                 document.getElementById('view-title').innerText = 'Painel Administrativo';
@@ -1466,12 +1404,8 @@
         // ---- ADMIN PANEL FUNCTIONS ----
 
         const PAGES_CATALOG = [
-            { id: 'dashboard',    label: 'Dashboard Financeiro',     icon: '📊' },
-            { id: 'transactions', label: 'Lançamentos Analíticos',   icon: '📋' },
-            { id: 'dictionary',   label: 'Dicionário de Categorias', icon: '📖' },
-            { id: 'comercial',    label: 'Comercial (Em breve)',      icon: '🤝', disabled: true },
-            { id: 'rh',           label: 'Recursos Humanos (Em breve)', icon: '👥', disabled: true },
-            { id: 'operacoes',    label: 'Operações (Em breve)',      icon: '⚙️', disabled: true },
+            { id: 'dashboard',    label: 'Dashboard Financeiro',     icon: 'fa-chart-pie' },
+            { id: 'transactions', label: 'Lançamentos Analíticos',   icon: 'fa-list-ol' },
         ];
 
         function renderPageCheckboxes(containerId, selectedPages = []) {
@@ -1480,12 +1414,11 @@
             container.innerHTML = '';
             PAGES_CATALOG.forEach(page => {
                 const label = document.createElement('label');
-                label.className = 'admin-page-checkbox-label' + (page.disabled ? ' disabled' : '');
+                label.className = 'admin-page-checkbox-label';
                 label.innerHTML = `
                     <input type="checkbox" name="${containerId}-page" value="${page.id}"
-                        ${selectedPages.includes(page.id) ? 'checked' : ''}
-                        ${page.disabled ? 'disabled' : ''}>
-                    <span>${page.icon} ${page.label}</span>
+                        ${selectedPages.includes(page.id) ? 'checked' : ''}>
+                    <span><i class="fa-solid ${page.icon}" style="margin-right: 8px; color: var(--color-primary-light);"></i> ${page.label}</span>
                 `;
                 container.appendChild(label);
             });
@@ -1522,7 +1455,7 @@
             tbody.innerHTML = usersData.map(u => {
                 const pages = (u.allowed_pages || []).map(p => {
                     const found = PAGES_CATALOG.find(c => c.id === p);
-                    return found ? `<span class="tag" style="font-size:10px; padding: 3px 8px;">${found.icon} ${found.label.split(' ')[0]}</span>` : '';
+                    return found ? `<span class="tag" style="font-size:10.5px; padding: 4px 10px; display: inline-flex; align-items: center; gap: 6px; margin: 2px;"><i class="fa-solid ${found.icon}" style="color: var(--color-primary-light); font-size: 11px;"></i> ${found.label}</span>` : '';
                 }).join('');
                 const adminBadge = u.is_admin
                     ? `<span class="badge-competencia" style="background: rgba(231,76,60,0.1); color: #e74c3c; border-color: rgba(231,76,60,0.25);">Admin</span>`
@@ -1640,27 +1573,7 @@
         }
 
 
-        // Popular Tags do Dicionário
-        function populateDictionaryUI() {
-            const createTags = (containerId, items) => {
-                const container = document.getElementById(containerId);
-                container.innerHTML = '';
-                if (items.length === 0) {
-                    container.innerHTML = '<span class="tag">Nenhuma categoria registrada</span>';
-                    return;
-                }
-                items.forEach(item => {
-                    const span = document.createElement('span');
-                    span.className = 'tag';
-                    span.innerText = item;
-                    container.appendChild(span);
-                });
-            };
-            
-            createTags('tags-entradas', dictionary.entradas.filter(e => e !== 'Saldo Inicial'));
-            createTags('tags-saidas', dictionary.saidas);
-            createTags('tags-tipos', dictionary.tipos);
-        }
+        
 
         function openUpdateModal() {
             document.getElementById('update-modal').classList.add('active');

@@ -116,6 +116,10 @@ body {
     display: block;
 }
 
+body:not(.light-theme) .logo-full {
+    mix-blend-mode: screen;
+}
+
 .logo-text {
     font-size: 20px;
     font-weight: 800;
