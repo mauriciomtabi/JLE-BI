@@ -1171,7 +1171,7 @@ body.light-theme .auth-container {
 }
 
 body.light-theme .auth-blob {
-    opacity: 0.15;
+    opacity: 0.25;
     mix-blend-mode: multiply;
 }
 
@@ -1255,15 +1255,17 @@ body.light-theme .auth-blob {
 }
 
 body.light-theme .auth-theme-toggle {
-    background: rgba(0, 80, 115, 0.06);
+    background: rgba(0, 80, 115, 0.08);
     border: 1px solid rgba(0, 80, 115, 0.15);
     color: #005073;
+    box-shadow: 0 4px 12px rgba(0, 80, 115, 0.08);
 }
 
 body.light-theme .auth-theme-toggle:hover {
-    background: rgba(0, 80, 115, 0.1);
-    border-color: rgba(0, 80, 115, 0.3);
+    background: rgba(0, 80, 115, 0.12);
+    border-color: rgba(0, 80, 115, 0.35);
     box-shadow: 0 0 15px rgba(0, 80, 115, 0.15);
+    color: #0077aa;
 }
 
 .auth-card {
@@ -1338,7 +1340,7 @@ body.light-theme .auth-logo img {
 }
 
 body.light-theme .auth-subtitle-incorporated {
-    color: #637381;
+    color: #475569;
 }
 
 .auth-subtitle-incorporated strong {
@@ -1352,7 +1354,7 @@ body.light-theme .auth-subtitle-incorporated {
 }
 
 body.light-theme .auth-subtitle-incorporated strong {
-    background: linear-gradient(135deg, #005073 0%, #0c3e5d 100%);
+    background: linear-gradient(135deg, #005073 0%, #0077aa 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -1366,8 +1368,8 @@ body.light-theme .auth-subtitle-incorporated strong {
 }
 
 body.light-theme .auth-tabs {
-    background-color: rgba(244, 246, 248, 0.7);
-    border: 1px solid rgba(224, 230, 237, 0.8);
+    background-color: rgba(241, 245, 249, 0.8);
+    border: 1px solid rgba(226, 232, 240, 0.8);
 }
 
 .auth-tab-btn {
@@ -1385,7 +1387,7 @@ body.light-theme .auth-tabs {
 }
 
 body.light-theme .auth-tab-btn {
-    color: #637381;
+    color: #64748b;
 }
 
 .auth-tab-btn:hover:not(.active) {
@@ -1404,7 +1406,8 @@ body.light-theme .auth-tab-btn:hover:not(.active) {
 
 body.light-theme .auth-tab-btn.active {
     background: linear-gradient(135deg, #005073 0%, #0c3e5d 100%);
-    box-shadow: 0 4px 10px rgba(0, 80, 115, 0.15);
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(0, 80, 115, 0.2);
 }
 
 .auth-form {
@@ -1443,9 +1446,9 @@ body.light-theme .auth-input-group label {
 }
 
 body.light-theme .auth-input-group input {
-    background-color: rgba(244, 246, 248, 0.6) !important;
-    border: 1px solid rgba(224, 230, 237, 0.8) !important;
-    color: #1a2731 !important;
+    background-color: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    color: #0f172a !important;
 }
 
 .password-wrapper {
@@ -1475,7 +1478,7 @@ body.light-theme .auth-input-group input {
 }
 
 body.light-theme .password-toggle-icon {
-    color: #8898a5;
+    color: #94a3b8;
 }
 
 body.light-theme .password-toggle-icon:hover {
@@ -1487,7 +1490,7 @@ body.light-theme .password-toggle-icon:hover {
 }
 
 body.light-theme .auth-input-group input::placeholder {
-    color: #919eab !important;
+    color: #94a3b8 !important;
 }
 
 .auth-input-group input:focus {
@@ -1500,6 +1503,33 @@ body.light-theme .auth-input-group input:focus {
     border-color: #005073 !important;
     box-shadow: 0 0 0 3px rgba(0, 80, 115, 0.08) !important;
     background-color: #ffffff !important;
+}
+
+/* Correção do Autofill do Chrome para Modo Escuro e Claro */
+.auth-input-group input:-webkit-autofill,
+.auth-input-group input:-webkit-autofill:hover, 
+.auth-input-group input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #ffffff !important;
+    -webkit-box-shadow: 0 0 0px 1000px #0a1118 inset !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+body.light-theme .auth-input-group input:-webkit-autofill,
+body.light-theme .auth-input-group input:-webkit-autofill:hover, 
+body.light-theme .auth-input-group input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #0f172a !important;
+    -webkit-box-shadow: 0 0 0px 1000px #f8fafc inset !important;
+}
+
+/* Seletor dinâmico para os links interativos no login */
+body.light-theme a[onclick^="showForgotPasswordForm"],
+body.light-theme a[onclick^="showLoginForm"] {
+    color: #005073 !important;
+}
+
+body.light-theme a[onclick^="showForgotPasswordForm"]:hover,
+body.light-theme a[onclick^="showLoginForm"]:hover {
+    color: #0077aa !important;
 }
 
 .auth-btn {
@@ -1520,15 +1550,32 @@ body.light-theme .auth-input-group input:focus {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
+body.light-theme .auth-btn {
+    background: linear-gradient(135deg, #005073 0%, #0077aa 100%);
+    box-shadow: 0 4px 15px rgba(0, 80, 115, 0.18);
+    color: #ffffff !important;
+}
+
 .auth-btn:hover {
     background: linear-gradient(135deg, #0077aa 0%, #005073 100%);
     box-shadow: 0 8px 20px rgba(0, 79, 113, 0.35);
     transform: translateY(-1.5px);
 }
 
+body.light-theme .auth-btn:hover {
+    background: linear-gradient(135deg, #0077aa 0%, #005073 100%);
+    box-shadow: 0 8px 20px rgba(0, 80, 115, 0.28);
+    transform: translateY(-1.5px);
+}
+
 .auth-btn:active {
     transform: translateY(0);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+body.light-theme .auth-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 80, 115, 0.18);
 }
 
 .auth-alert {
