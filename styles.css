@@ -988,98 +988,137 @@ td.cell-saida {
     border: 1px solid var(--border-color);
 }
 
-/* Painel de Estatísticas de UFs Harmonioso */
-.uf-stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+/* Painel de Estatísticas de UFs Split com Degrade Fundido */
+.map-split-container {
+    display: flex;
+    flex-direction: row;
     width: 100%;
-    margin-top: 15px;
-    border-top: 1px solid var(--border-color);
-    padding-top: 15px;
+    height: 100%;
+    gap: 20px;
+    align-items: center;
 }
 
-.uf-stat-card {
+.map-left-col {
+    flex: 1.1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.map-right-col {
+    flex: 1.9;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.uf-stat-bar-item {
     background-color: var(--bg-card);
     border: 1px solid var(--border-color);
-    border-radius: 10px;
-    padding: 10px 8px;
+    border-radius: 12px;
+    padding: 12px 16px;
     cursor: pointer;
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
 }
 
-.uf-stat-card::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background-color: var(--color-primary);
-    opacity: 0.6;
-}
-
-.uf-stat-card.active {
-    border-color: var(--color-secondary);
-    box-shadow: 0 0 10px rgba(243, 159, 24, 0.15);
-    background-color: rgba(243, 159, 24, 0.04);
-}
-
-.uf-stat-card.active::before {
-    background-color: var(--color-secondary);
-    opacity: 1;
-}
-
-.uf-stat-card:hover {
-    transform: translateY(-2px);
+.uf-stat-bar-item:hover {
+    transform: translateX(4px);
     border-color: var(--color-primary);
     box-shadow: var(--shadow-main);
 }
 
-.uf-stat-header {
+.uf-stat-bar-item.active {
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 12px rgba(243, 159, 24, 0.2);
+}
+
+.uf-bar-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 2;
 }
 
-.uf-stat-badge {
-    background-color: var(--bg-input);
-    color: var(--text-primary);
-    padding: 2px 6px;
-    border-radius: 6px;
-    font-size: 11px;
+.uf-bar-name {
     font-weight: 700;
-    border: 1px solid var(--border-color);
+    font-size: 14px;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.uf-stat-label {
-    font-size: 10px;
-    color: var(--text-secondary);
-    font-weight: 500;
+.uf-bar-name::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
 }
 
-.uf-stat-val-in {
+.uf-stat-bar-item.active .uf-bar-name::before {
+    background-color: var(--color-secondary);
+}
+
+.uf-bar-pct {
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--color-secondary);
+}
+
+.uf-bar-metrics {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
     font-size: 11px;
-    font-weight: 600;
+    color: var(--text-secondary);
+    margin-top: 4px;
+    z-index: 2;
+}
+
+.uf-metric-val {
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.uf-metric-val.success {
     color: var(--color-success);
 }
 
-.uf-stat-val-out {
-    font-size: 11px;
-    font-weight: 600;
+.uf-metric-val.danger {
     color: var(--color-danger);
 }
 
-.uf-stat-pct {
-    font-size: 9px;
-    color: var(--text-secondary);
-    font-weight: 600;
+/* Responsividade Mobile para o Split de UFs */
+@media (max-width: 991px) {
+    .map-split-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .map-left-col {
+        width: 100%;
+        max-height: 250px;
+    }
+    
+    .map-right-col {
+        width: 100%;
+    }
+    
+    .map-chart-body {
+        height: auto !important;
+    }
 }
 
 
