@@ -1056,7 +1056,7 @@ td.cell-saida {
 
 /* Compact Glassmorphism Cards */
 .uf-compact-card {
-    background: rgba(11, 20, 28, 0.82);
+    background: rgba(11, 20, 28, 0.42);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -1075,7 +1075,7 @@ td.cell-saida {
 }
 
 .light-theme .uf-compact-card {
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.42);
     border: 1px solid rgba(0, 0, 0, 0.08);
     border-left: 4px solid transparent;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);

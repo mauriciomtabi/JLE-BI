@@ -23,7 +23,7 @@
     <!-- Supabase Local Configuration -->
     <script src="supabase_config.js"></script>
     <!-- Local Stylesheet -->
-    <link rel="stylesheet" href="styles.css?v=2.0.2">
+    <link rel="stylesheet" href="styles.css?v=2.0.3">
 </head>
 <body>
 
@@ -2505,10 +2505,7 @@
                     <!-- LEFT COLUMN: GEOGRAPHIC REGION MAP -->
                     <div class="uf-map-side">
                         <svg class="map-svg-centered" viewBox="140 245 150 135" style="overflow: visible;">
-                            <!-- GLOWING CURVED DATA CONNECTION FLOW PATHS (FAIL-SAFE INLINE ATTRIBUTES TO PREVENT CACHED BLACK FILL) -->
-                            <path fill="none" stroke="rgba(0, 79, 113, 0.25)" stroke-width="0.8" stroke-dasharray="4,3" class="map-connection-line pr-line ${filterUf === 'PR' ? 'active' : ''} ${filterUf !== 'ALL' && filterUf !== 'PR' ? 'dimmed' : ''}" id="line-PR" d="M 205,272 C 180,272 165,260 142,260" />
-                            <path fill="none" stroke="rgba(0, 79, 113, 0.25)" stroke-width="0.8" stroke-dasharray="4,3" class="map-connection-line sc-line ${filterUf === 'SC' ? 'active' : ''} ${filterUf !== 'ALL' && filterUf !== 'SC' ? 'dimmed' : ''}" id="line-SC" d="M 215,298 C 240,298 265,298 288,298" />
-                            <path fill="none" stroke="rgba(0, 79, 113, 0.25)" stroke-width="0.8" stroke-dasharray="4,3" class="map-connection-line rs-line ${filterUf === 'RS' ? 'active' : ''} ${filterUf !== 'ALL' && filterUf !== 'RS' ? 'dimmed' : ''}" id="line-RS" d="M 186,335 C 165,335 155,340 142,340" />
+                            <!-- GLOWING CURVED DATA CONNECTION FLOW PATHS REMOVED AS REQUESTED -->
 
                             <!-- PARANÁ POLYGON -->
                             <polygon class="map-state ${isSelectPR}" id="state-PR" points="
