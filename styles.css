@@ -114,8 +114,20 @@ body {
     display: block;
 }
 
-body:not(.light-theme) .logo-full {
-    mix-blend-mode: lighten; /* Uses lighten instead of screen to perfectly transparency-blend dark backgrounds on lighter containers */
+/* Logo no modo escuro: exibe o logo com fundo transparente (branco/laranja) */
+.logo-dark-mode {
+    display: block;
+}
+.logo-light-mode {
+    display: none;
+}
+
+/* No modo claro, inverte a visibilidade */
+body.light-theme .logo-dark-mode {
+    display: none;
+}
+body.light-theme .logo-light-mode {
+    display: block;
 }
 
 .logo-text {
