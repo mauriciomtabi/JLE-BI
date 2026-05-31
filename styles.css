@@ -86,24 +86,19 @@ body {
     filter: drop-shadow(0 0 8px rgba(0, 79, 113, 0.2));
 }
 
-/* Novo logo completo com efeito de contorno iluminado (glow estático premium) */
+/* Wrapper do logo — sem contorno para fundir perfeitamente com o background */
 .logo-glow-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 16px;
-    padding: 4px; /* Reduced padding to shrink overall size and push it away from borders */
+    padding: 4px;
     background: transparent;
-    box-shadow:
-        0 0 16px 4px rgba(255, 184, 61, 0.4),
-        0 0 30px 6px rgba(0, 119, 170, 0.28);
-    transition: box-shadow 0.4s ease;
+    transition: opacity 0.4s ease;
 }
 
 .logo-glow-wrapper:hover {
-    box-shadow:
-        0 0 20px 6px rgba(255, 184, 61, 0.5),
-        0 0 36px 8px rgba(0, 119, 170, 0.38);
+    opacity: 0.85;
 }
 
 .logo-full {
@@ -117,6 +112,7 @@ body {
 /* Logo no modo escuro: exibe o logo com fundo transparente (branco/laranja) */
 .logo-dark-mode {
     display: block;
+    mix-blend-mode: lighten; /* funde o fundo escuro do PNG com o background da sidebar */
 }
 .logo-light-mode {
     display: none;
