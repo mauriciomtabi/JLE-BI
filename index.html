@@ -192,7 +192,6 @@
                         <h3 class="kpi-value" id="kpi-saldo-final">R$ 0,00</h3>
                         <div class="kpi-analytics">
                             <span class="kpi-subvalue" id="sub-saldo-sobra">Eficiência: 0,0%</span>
-                            <span class="kpi-subvalue" id="sub-saldo-var">Crescimento: N/D</span>
                         </div>
                     </div>
                     <div class="kpi-icon-container">
@@ -1898,19 +1897,7 @@
             }
             document.getElementById('sub-entradas-comp').innerHTML = compEntradasText;
 
-            // 5. Geração / Consumo de Caixa (Fluxo Líquido Real em R$, excluindo Saldo Inicial)
-            const realEntradas = filteredTransactions
-                .filter(t => t.fluxo === 'Entrada' && t.categoria !== 'Saldo Inicial')
-                .reduce((sum, t) => sum + t.valor_nominal, 0);
-            const realSaidas = filteredTransactions
-                .filter(t => t.fluxo === 'Saída')
-                .reduce((sum, t) => sum + t.valor_nominal, 0);
-            const geracaoCaixa = realEntradas - realSaidas;
-            const geracaoSign = geracaoCaixa >= 0 ? "+" : "";
-            const geracaoClass = geracaoCaixa >= 0 ? 'trend-up' : 'trend-down';
-            const geracaoLabel = geracaoCaixa >= 0 ? "Geração" : "Consumo";
-            const saldoVarText = `${geracaoLabel}: <span class="${geracaoClass}"><strong>${geracaoSign}${formatCurrency(geracaoCaixa)}</strong></span>`;
-            document.getElementById('sub-saldo-var').innerHTML = saldoVarText;
+            // 5. Geração / Consumo de Caixa removido a pedido do usuário
         }
 
         function getSaldoInicialBanco(banco, mesFiltro) {
