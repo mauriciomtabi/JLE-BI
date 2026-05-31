@@ -1064,7 +1064,7 @@ td.cell-saida {
     transition: all 0.4s ease;
     filter: drop-shadow(0 8px 30px rgba(0, 0, 0, 0.5));
     overflow: visible;
-    transform: scale(1.28);
+    transform: scale(1.23);
 }
 
 /* Curved Glowing Connection Lines */
