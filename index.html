@@ -2480,7 +2480,16 @@
             
             // Encontra maior volume (saídas + entradas) para cálculo do gradiente de preenchimento
             const volumes = Object.keys(ufMetrics).map(k => ufMetrics[k].saidas + ufMetrics[k].entradas);
-            const maxVolume            // Injeta o SVG desenhado com precisão geográfica para o Sul do Brasil (viewBox focado)
+            const maxVolume = Math.max(...volumes, 1); // evita divisão por zero
+            
+            const getColorForUF = (ufCode) => {
+                const vol = ufMetrics[ufCode].saidas + ufMetrics[ufCode].entradas;
+                // Escala de opacidade do Teal (0.15 a 0.9)
+                const opacity = 0.15 + 0.75 * (vol / maxVolume);
+                return `rgba(0, 79, 113, ${opacity})`;
+            };
+
+            // Injeta o SVG desenhado com precisão geográfica para o Sul do Brasil (viewBox focado)
             const filterUf = document.getElementById('filter-uf').value;
             
             const isSelectPR = filterUf === 'PR' ? 'stroke: var(--color-secondary); stroke-width: 0.8; filter: drop-shadow(0 0 3px rgba(243,159,24,0.5));' : 'stroke: rgba(255,255,255,0.25); stroke-width: 0.25;';
