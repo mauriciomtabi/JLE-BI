@@ -1175,38 +1175,79 @@ td.cell-saida {
     color: var(--color-secondary);
 }
 
-/* Card Body Rows */
-.uf-compact-body {
+/* Card Body Content - Telemetria Lado a Lado */
+.uf-compact-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-top: 3px;
+}
+
+.uf-compact-main-stat {
     display: flex;
     flex-direction: column;
     gap: 1px;
+    flex: 0.8;
 }
 
-.uf-compact-row {
+.uf-compact-sub-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1.2;
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    padding-left: 8px;
+}
+
+.light-theme .uf-compact-sub-stats {
+    border-left: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.uf-stat-label {
+    font-size: 8px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+}
+
+.uf-stat-value {
+    font-size: 13px;
+    font-weight: 750;
+    color: var(--text-primary);
+}
+
+.uf-sub-stat {
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 9.5px;
+    width: 100%;
 }
 
-.uf-compact-label {
+.uf-sub-label {
     color: var(--text-secondary);
     display: flex;
     align-items: center;
     gap: 4px;
 }
 
-.uf-compact-label.success { color: var(--color-success); }
-.uf-compact-label.danger { color: var(--color-danger); }
+.uf-sub-label.success { color: var(--color-success); }
+.uf-sub-label.danger { color: var(--color-danger); }
 
-.uf-compact-val {
+.uf-sub-val {
     font-weight: 700;
     color: var(--text-primary);
     white-space: nowrap;
 }
 
-.uf-compact-val.success { color: var(--color-success); }
-.uf-compact-val.danger { color: var(--color-danger); }
+.uf-sub-val.success { color: var(--color-success); }
+.uf-sub-val.danger { color: var(--color-danger); }
 
 /* Polígonos de Estado e Textos do SVG */
 .map-state {
@@ -1433,7 +1474,7 @@ body.sidebar-collapsed .sidebar #user-display-name {
 
 /* Redefinição do grid categories/UF para destaque do mapa */
 .categories-uf-row {
-    grid-template-columns: 1.7fr 1fr !important;
+    grid-template-columns: 1.2fr 1fr !important;
 }
 
 @media (max-width: 1024px) {
