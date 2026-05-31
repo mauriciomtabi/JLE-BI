@@ -23,7 +23,7 @@
     <!-- Supabase Local Configuration -->
     <script src="supabase_config.js"></script>
     <!-- Local Stylesheet -->
-    <link rel="stylesheet" href="styles.css?v=2.1.3">
+    <link rel="stylesheet" href="styles.css?v=2.1.4">
 </head>
 <body>
 
@@ -1713,6 +1713,19 @@
             applyFilters();
         }
 
+        // Função de alternância de filtro de banco ao clicar nos cards
+        function toggleBankFilter(bankName) {
+            const selectEl = document.getElementById('filter-banco');
+            if (!selectEl) return;
+            
+            if (selectEl.value === bankName) {
+                selectEl.value = 'ALL';
+            } else {
+                selectEl.value = bankName;
+            }
+            applyFilters();
+        }
+
         function clearDateRange() {
             document.getElementById('filter-data-inicio').value = '';
             document.getElementById('filter-data-fim').value = '';
@@ -1909,7 +1922,10 @@
                 const pct = totalSaldo > 0 ? (item.saldoFinal / totalSaldo) * 100 : 0;
                 
                 const bankItem = document.createElement('div');
-                bankItem.className = 'bank-card-item';
+                const bancosMapeados = ['Bradesco', 'Sicoob Confiança', 'Sicoob MaxiCrédito', 'Cartão de Crédito'];
+                const isActive = filterBanco === bancosMapeados[idx];
+                bankItem.className = 'bank-card-item' + (isActive ? ' active' : '');
+                bankItem.setAttribute('onclick', `toggleBankFilter('${bancosMapeados[idx]}')`);
                 
                 bankItem.innerHTML = `
                     <div class="bank-item-header">
