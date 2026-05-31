@@ -2729,6 +2729,16 @@
             
             const totalSum = chartData.reduce((sum, val) => sum + val, 0);
             
+            // Garante fatia mínima visível para todos os itens (1.5% do total visualmente)
+            // Os valores reais são preservados no tooltip via context.raw
+            const minSlice = totalSum * 0.015;
+            const chartDataVisual = chartData.map(v => v > 0 ? Math.max(v, minSlice) : 0);
+            // Rebalanceia para que a soma visual seja igual à soma real (evita distorção grave)
+            const visualSum = chartDataVisual.reduce((s, v) => s + v, 0);
+            const chartDataDisplay = totalSum > 0
+                ? chartDataVisual.map(v => (v / visualSum) * totalSum)
+                : chartDataVisual;
+            
             const ctxCustomers = document.getElementById('chart-customers').getContext('2d');
             
             if (charts.customers) charts.customers.destroy();
@@ -2793,7 +2803,7 @@
                 data: {
                     labels: chartLabels,
                     datasets: [{
-                        data: chartData,
+                        data: chartDataDisplay,
                         backgroundColor: colorPalette.slice(0, chartLabels.length),
                         borderColor: isDark ? '#111c24' : '#ffffff',
                         borderWidth: 2,
@@ -2808,7 +2818,7 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    cutout: '80%',
+                    cutout: '65%',
                     onHover: (event, chartElement) => {
                         event.native.target.style.cursor = chartElement.length ? 'pointer' : 'default';
                     },
@@ -2848,9 +2858,10 @@
                             position: 'cursor',
                             callbacks: {
                                 label: (context) => {
-                                    const val = context.raw;
-                                    const pct = totalSum > 0 ? (val / totalSum) * 100 : 0;
-                                    return ` ${context.label}: ${formatCurrency(val)} (${pct.toFixed(1).replace('.', ',')}%)`;
+                                    // Usa o valor REAL (chartData) e não o visual
+                                    const realVal = chartData[context.dataIndex];
+                                    const pct = totalSum > 0 ? (realVal / totalSum) * 100 : 0;
+                                    return ` ${context.label}: ${formatCurrency(realVal)} (${pct.toFixed(1).replace('.', ',')}%)`;
                                 }
                             }
                         }
