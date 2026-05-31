@@ -34,7 +34,9 @@
             <i class="fa-solid fa-chevron-left" id="sidebar-toggle-icon"></i>
         </button>
         <div class="logo-container">
-            <img src="logo.png" alt="JLE Telecom" class="logo-img">
+            <div class="logo-glow-wrapper">
+                <img src="assets/logo_jle_full.png" alt="JLE Telecom" class="logo-img logo-full">
+            </div>
         </div>
         
         <nav class="nav-menu">
@@ -1196,7 +1198,17 @@
         }
 
         async function loadUserPermissions(email) {
-            if (!supabaseClient) return;
+            if (!supabaseClient) {
+                // Modo demo: se for o admin registrado, conceder acesso total
+                if (email && (email.toLowerCase().includes('mauricio') || email === 'admin@jletelecom.com.br')) {
+                    currentUserIsAdmin = true;
+                    ALL_PAGES.forEach(page => {
+                        const navEl = document.getElementById(page.navId);
+                        if (navEl) navEl.style.display = 'flex';
+                    });
+                }
+                return;
+            }
             try {
                 // Buscar permissão do usuário
                 const { data: permData, error: permErr } = await supabaseClient
@@ -1205,13 +1217,16 @@
                     .eq('email', email)
                     .maybeSingle();
 
+                console.log('[Admin] bi_permissions lookup:', { email, permData, permErr });
+
                 let allowedPages;
 
                 if (!permErr && permData) {
                     allowedPages = permData.allowed_pages || [];
                     currentUserIsAdmin = permData.is_admin === true;
                 } else {
-                    // Usuário não cadastrado - buscar padrão
+                    // Usuário não cadastrado ou erro de RLS - buscar padrão
+                    console.warn('[Admin] Sem permissão no DB, usando padrão. Erro:', permErr);
                     const { data: settData } = await supabaseClient
                         .from('bi_settings')
                         .select('value')
@@ -1220,6 +1235,8 @@
                     allowedPages = (settData && settData.value) ? settData.value : ['dashboard', 'transactions'];
                     currentUserIsAdmin = false;
                 }
+
+                console.log('[Admin] isAdmin:', currentUserIsAdmin, '| pages:', allowedPages);
 
                 // Se admin, garante acesso a tudo
                 if (currentUserIsAdmin) {
@@ -1955,8 +1972,20 @@
             container.innerHTML = '';
             
             const displayLabels = ['Bradesco', 'Sicoob Confiança', 'Sicoob MaxiCrédito', 'Cartão SICOOB'];
-            const colors = ['#004f71', '#0077aa', '#ffb83d', '#e74c3c'];
-            const badges = ['BR', 'SC', 'SM', 'CC'];
+            const colors = ['#cc0000', '#0a7c59', '#ffb83d', '#e74c3c'];
+            // Logos: imagem para Bradesco e Sicoob, fallback texto para os demais
+            const badges = [
+                `<img src="assets/logo_bradesco.png" alt="Bradesco" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">`,
+                `<img src="assets/logo_sicoob.png" alt="Sicoob" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">`,
+                `<img src="assets/logo_sicoob.png" alt="Sicoob" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">`,
+                `CC`
+            ];
+            const badgeStyles = [
+                'background: none; padding: 0; overflow: hidden;',
+                'background: none; padding: 0; overflow: hidden;',
+                'background: none; padding: 0; overflow: hidden;',
+                ''
+            ];
             
             const totalSaldo = bankData.reduce((sum, item) => sum + item.saldoFinal, 0);
             
@@ -1973,7 +2002,7 @@
                 bankItem.innerHTML = `
                     <div class="bank-item-header">
                         <div class="bank-name-group">
-                            <div class="bank-badge" style="background-color: ${colors[idx]};">
+                            <div class="bank-badge" style="${badgeStyles[idx]}">
                                 ${badges[idx]}
                             </div>
                             <span class="bank-name">${displayLabels[idx]}</span>
