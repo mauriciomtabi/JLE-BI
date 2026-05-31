@@ -988,132 +988,329 @@ td.cell-saida {
     border: 1px solid var(--border-color);
 }
 
-/* Painel de Estatísticas de UFs Split com Degrade Fundido */
-.map-split-container {
-    display: flex;
-    flex-direction: row;
+/* Painel de UFs Premium - Mapa Centralizado e Cards Flutuantes (Saindo do Estado) */
+.uf-premium-container {
+    position: relative;
     width: 100%;
-    height: 100%;
-    gap: 20px;
-    align-items: center;
-}
-
-.map-left-col {
-    flex: 1.1;
+    height: 400px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    height: 100%;
-}
-
-.map-right-col {
-    flex: 1.9;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-}
-
-.uf-stat-bar-item {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-color);
+    align-items: center;
+    overflow: visible; /* Permite que as sombras e linhas apareçam perfeitamente */
     border-radius: 12px;
+    padding: 10px;
+    background: radial-gradient(circle at center, rgba(0, 79, 113, 0.05) 0%, transparent 70%);
+}
+
+.map-svg-centered {
+    width: auto;
+    height: 100%;
+    max-height: 380px;
+    max-width: 45%;
+    z-index: 5;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.35));
+    overflow: visible;
+}
+
+/* Cards Flutuantes com Glassmorphism de Alta Fidelidade */
+.uf-floating-card {
+    position: absolute;
+    width: 290px;
+    background: rgba(17, 28, 36, 0.82);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 14px;
     padding: 12px 16px;
     cursor: pointer;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+    gap: 4px;
 }
 
-.uf-stat-bar-item:hover {
-    transform: translateX(4px);
-    border-color: var(--color-primary);
-    box-shadow: var(--shadow-main);
+.light-theme .uf-floating-card {
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-.uf-stat-bar-item.active {
+.uf-floating-card:hover, .uf-floating-card.hovered {
+    transform: translateY(-5px) scale(1.03);
+    border-color: var(--color-primary-light);
+    box-shadow: 0 16px 45px rgba(0, 79, 113, 0.45);
+    z-index: 15;
+}
+
+.uf-floating-card.active {
     border-color: var(--color-secondary);
-    box-shadow: 0 0 12px rgba(243, 159, 24, 0.2);
+    box-shadow: 0 0 25px rgba(243, 159, 24, 0.4);
+    background: rgba(243, 159, 24, 0.12);
 }
 
-.uf-bar-header {
+.light-theme .uf-floating-card.active {
+    background: rgba(243, 159, 24, 0.06);
+}
+
+/* Dimmed state when another card is selected */
+.uf-floating-card.dimmed {
+    opacity: 0.35;
+    filter: scale(0.98) blur(0.2px);
+}
+.uf-floating-card.dimmed:hover {
+    opacity: 0.8;
+    filter: none;
+}
+
+/* Posições Perfeitas dos Cards ao redor do Mapa */
+.uf-floating-card.pr-card {
+    left: 10px;
+    top: 15px;
+}
+
+.uf-floating-card.sc-card {
+    right: 10px;
+    top: 130px;
+}
+
+.uf-floating-card.rs-card {
+    left: 10px;
+    bottom: 15px;
+}
+
+/* Linhas Conectoras de Fluxo de Dados (saindo dos estados) */
+.map-connection-line {
+    fill: none;
+    stroke: rgba(0, 79, 113, 0.3);
+    stroke-width: 1px;
+    stroke-dasharray: 4 3;
+    animation: flowDash 30s linear infinite;
+    filter: drop-shadow(0 0 2px rgba(0, 79, 113, 0.3));
+    transition: all 0.4s ease;
+}
+
+@keyframes flowDash {
+    to {
+        stroke-dashoffset: -100;
+    }
+}
+
+.map-connection-line.active {
+    stroke: var(--color-secondary);
+    stroke-width: 1.5px;
+    filter: drop-shadow(0 0 5px rgba(243, 159, 24, 0.8));
+    animation-duration: 10s;
+}
+
+.map-connection-line.dimmed {
+    opacity: 0.1;
+}
+
+/* Elementos Internos de Alta Fidelidade */
+.uf-float-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 2;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 6px;
+    margin-bottom: 6px;
 }
 
-.uf-bar-name {
+.light-theme .uf-float-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.uf-float-name {
+    font-size: 13px;
     font-weight: 700;
-    font-size: 14px;
     color: var(--text-primary);
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-.uf-bar-name::before {
-    content: '';
-    display: inline-block;
+.uf-status-indicator {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background-color: var(--color-primary);
+    display: inline-block;
+    box-shadow: 0 0 8px currentColor;
 }
 
-.uf-stat-bar-item.active .uf-bar-name::before {
-    background-color: var(--color-secondary);
+.pr-dot {
+    background-color: #00b4d8;
+    color: rgba(0, 180, 216, 0.6);
 }
 
-.uf-bar-pct {
+.sc-dot {
+    background-color: #f39f18;
+    color: rgba(243, 159, 24, 0.6);
+}
+
+.rs-dot {
+    background-color: #2ecc71;
+    color: rgba(46, 204, 113, 0.6);
+}
+
+.uf-float-pct {
+    font-size: 13px;
     font-weight: 800;
-    font-size: 14px;
     color: var(--color-secondary);
 }
 
-.uf-bar-metrics {
+.uf-float-body {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    font-size: 11px;
-    color: var(--text-secondary);
-    margin-top: 4px;
-    z-index: 2;
+    gap: 8px;
 }
 
-.uf-metric-val {
+.uf-float-col {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+}
+
+.uf-float-label {
+    font-size: 8.5px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+}
+
+.uf-float-label.success {
+    color: var(--color-success);
+}
+
+.uf-float-label.danger {
+    color: var(--color-danger);
+}
+
+.uf-float-number {
+    font-size: 14px;
     font-weight: 700;
     color: var(--text-primary);
 }
 
-.uf-metric-val.success {
+.uf-float-val {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+.uf-float-val.success {
     color: var(--color-success);
 }
 
-.uf-metric-val.danger {
+.uf-float-val.danger {
     color: var(--color-danger);
 }
 
-/* Responsividade Mobile para o Split de UFs */
+/* Polígonos de Estado e Textos do SVG */
+.map-state {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    stroke: rgba(255, 255, 255, 0.25);
+    stroke-width: 0.25;
+}
+
+.map-state:hover, .map-state.hovered {
+    filter: drop-shadow(0 0 10px rgba(0, 79, 113, 0.7));
+    stroke: var(--color-primary-light);
+    stroke-width: 0.6;
+    opacity: 0.95;
+}
+
+.map-state.active {
+    filter: drop-shadow(0 0 14px rgba(243, 159, 24, 0.9));
+    stroke: var(--color-secondary);
+    stroke-width: 0.8;
+    opacity: 1;
+}
+
+.map-state.dimmed {
+    opacity: 0.2;
+}
+
+.map-label {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    fill: rgba(255, 255, 255, 0.85);
+    text-anchor: middle;
+    pointer-events: none;
+    transition: all 0.4s ease;
+}
+
+.light-theme .map-label {
+    fill: rgba(17, 28, 36, 0.85);
+}
+
+.map-label.active {
+    fill: var(--color-secondary);
+    font-weight: 900;
+}
+
+.map-label.dimmed {
+    opacity: 0.15;
+}
+
+/* Legenda do Mapa */
+.map-legend {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10px;
+    color: var(--text-secondary);
+    background: rgba(17, 28, 36, 0.6);
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    z-index: 10;
+}
+
+.light-theme .map-legend {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* Responsividade Mobile Fluida */
 @media (max-width: 991px) {
-    .map-split-container {
+    .uf-premium-container {
         flex-direction: column;
+        height: auto;
+        padding: 10px;
         gap: 15px;
     }
     
-    .map-left-col {
-        width: 100%;
-        max-height: 250px;
+    .map-svg-centered {
+        max-width: 80%;
+        height: 240px;
     }
     
-    .map-right-col {
-        width: 100%;
+    .uf-floating-card {
+        position: relative !important;
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+        width: 100% !important;
+        box-shadow: var(--shadow-main);
+    }
+    
+    .uf-floating-card::before, .map-connection-line {
+        display: none !important;
     }
     
     .map-chart-body {
