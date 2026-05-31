@@ -528,14 +528,14 @@
         }
 
         // --- CONFIGURAÇÃO SUPABASE AUTH E MODO DEMO ---
-        let supabase = null;
+        let supabaseClient = null;
         const isDemoMode = (typeof window.SUPABASE_CONFIG === 'undefined' || 
                             window.SUPABASE_CONFIG.url === 'SUA_SUPABASE_URL_AQUI' || 
                             window.SUPABASE_CONFIG.anonKey === 'SUA_SUPABASE_ANON_KEY_AQUI');
         
         if (!isDemoMode) {
             try {
-                supabase = window.supabase.createClient(window.SUPABASE_CONFIG.url, window.SUPABASE_CONFIG.anonKey);
+                supabaseClient = window.supabase.createClient(window.SUPABASE_CONFIG.url, window.SUPABASE_CONFIG.anonKey);
             } catch (err) {
                 console.error("Falha ao inicializar o Supabase client:", err);
             }
@@ -586,7 +586,7 @@
             btnSubmit.disabled = true;
             btnSubmit.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Cadastrando...';
             
-            if (isDemoMode || !supabase) {
+            if (isDemoMode || !supabaseClient) {
                 setTimeout(() => {
                     btnSubmit.disabled = false;
                     btnSubmit.innerHTML = '<i class="fa-solid fa-user-plus"></i> Cadastrar';
@@ -596,7 +596,7 @@
                 }, 1000);
             } else {
                 try {
-                    const { data, error } = await supabase.auth.signUp({
+                    const { data, error } = await supabaseClient.auth.signUp({
                         email: email,
                         password: password
                     });
@@ -638,7 +638,7 @@
             btnSubmit.disabled = true;
             btnSubmit.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Entrando...';
             
-            if (isDemoMode || !supabase) {
+            if (isDemoMode || !supabaseClient) {
                 setTimeout(() => {
                     btnSubmit.disabled = false;
                     btnSubmit.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Entrar';
@@ -655,7 +655,7 @@
                 }, 800);
             } else {
                 try {
-                    const { data, error } = await supabase.auth.signInWithPassword({
+                    const { data, error } = await supabaseClient.auth.signInWithPassword({
                         email: email,
                         password: password
                     });
@@ -678,12 +678,12 @@
 
         // Logout
         async function handleLogout() {
-            if (isDemoMode || !supabase) {
+            if (isDemoMode || !supabaseClient) {
                 safeStorage.removeItem('demo_session');
                 checkAuth();
             } else {
                 try {
-                    await supabase.auth.signOut();
+                    await supabaseClient.auth.signOut();
                 } catch (err) {
                     console.error("Erro ao deslogar:", err);
                 }
@@ -692,7 +692,7 @@
 
         // Verificar sessão na carga
         function checkAuth() {
-            if (isDemoMode || !supabase) {
+            if (isDemoMode || !supabaseClient) {
                 const session = safeStorage.getItem('demo_session');
                 if (session) {
                     const user = JSON.parse(session);
@@ -701,12 +701,12 @@
                     showLoginScreen();
                 }
             } else {
-                supabase.auth.getSession().then(({ data: { session } }) => {
+                supabaseClient.auth.getSession().then(({ data: { session } }) => {
                     if (session) {
                         const email = session.user.email;
                         if (!email.toLowerCase().endsWith('@jletelecom.com.br')) {
                             alert('Acesso restrito: Apenas e-mails corporativos @jletelecom.com.br são permitidos.');
-                            supabase.auth.signOut();
+                            supabaseClient.auth.signOut();
                             return;
                         }
                         showDashboard(session.user);
@@ -839,14 +839,14 @@
             monthSelect.value = monthToSelect;
             
             // Registrar listener de mudanças no estado de autenticação (Supabase Auth)
-            if (supabase) {
+            if (supabaseClient) {
                 try {
-                    supabase.auth.onAuthStateChange((event, session) => {
+                    supabaseClient.auth.onAuthStateChange((event, session) => {
                         if (session) {
                             const email = session.user.email;
                             if (!email.toLowerCase().endsWith('@jletelecom.com.br')) {
                                 alert('Acesso restrito: Apenas e-mails corporativos @jletelecom.com.br são permitidos.');
-                                supabase.auth.signOut();
+                                supabaseClient.auth.signOut();
                                 return;
                             }
                             showDashboard(session.user);
