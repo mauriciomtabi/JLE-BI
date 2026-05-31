@@ -1024,6 +1024,7 @@ td.cell-saida {
     transition: all 0.4s ease;
     filter: drop-shadow(0 8px 30px rgba(0, 0, 0, 0.5));
     overflow: visible;
+    transform: scale(1.28);
 }
 
 /* Curved Glowing Connection Lines */
@@ -1331,6 +1332,7 @@ td.cell-saida {
     .map-svg-centered {
         max-width: 80% !important;
         height: 220px !important;
+        transform: scale(1) !important;
     }
     
     .uf-compact-card {
