@@ -1972,19 +1972,19 @@
             container.innerHTML = '';
             
             const displayLabels = ['Bradesco', 'Sicoob Confiança', 'Sicoob MaxiCrédito', 'Cartão SICOOB'];
-            const colors = ['#cc0000', '#0a7c59', '#ffb83d', '#e74c3c'];
+            const colors = ['#cc0000', '#0a7c59', '#ffb83d', '#00ae9d'];
             // Logos: imagem para Bradesco e Sicoob, fallback texto para os demais
             const badges = [
                 `<img src="assets/logo_bradesco.png" alt="Bradesco" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">`,
                 `<img src="assets/logo_sicoob.png" alt="Sicoob" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">`,
                 `<img src="assets/logo_sicoob.png" alt="Sicoob" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">`,
-                `CC`
+                `<img src="assets/logo_sicoob.png" alt="Sicoob" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">`
             ];
             const badgeStyles = [
                 'background: none; padding: 0; overflow: hidden;',
                 'background: none; padding: 0; overflow: hidden;',
                 'background: none; padding: 0; overflow: hidden;',
-                ''
+                'background: none; padding: 0; overflow: hidden;'
             ];
             
             const totalSaldo = bankData.reduce((sum, item) => sum + item.saldoFinal, 0);
@@ -2568,10 +2568,58 @@
                         <text class="map-label" x="186" y="335" style="font-size: 3.5px;">RS</text>
                     </svg>
                     
-                    <div class="map-legend">
+                    <div class="map-legend" style="border-top: none; padding-top: 0; margin-top: 10px;">
                         <span>Menor Vol.</span>
                         <div class="legend-gradient"></div>
                         <span>Maior Vol.</span>
+                    </div>
+                    
+                    <!-- Grid de Estatísticas UFs Harmonioso e Legível -->
+                    <div class="uf-stats-grid">
+                        <div class="uf-stat-card ${filterUf === 'PR' ? 'active' : ''}" onclick="toggleUFFromMap('PR')">
+                            <div class="uf-stat-header">
+                                <span class="uf-stat-badge">PR</span>
+                                <span class="uf-stat-pct" style="color: var(--color-success);">${totalUFEntradas > 0 ? ((ufMetrics['PR'].entradas / totalUFEntradas) * 100).toFixed(1).replace('.', ',') : '0'}%</span>
+                            </div>
+                            <div style="margin-top: 2px;">
+                                <div class="uf-stat-label">Entradas</div>
+                                <div class="uf-stat-val-in">${formatCurrency(ufMetrics['PR'].entradas)}</div>
+                            </div>
+                            <div>
+                                <div class="uf-stat-label">Saídas</div>
+                                <div class="uf-stat-val-out">${formatCurrency(ufMetrics['PR'].saidas)}</div>
+                            </div>
+                        </div>
+
+                        <div class="uf-stat-card ${filterUf === 'SC' ? 'active' : ''}" onclick="toggleUFFromMap('SC')">
+                            <div class="uf-stat-header">
+                                <span class="uf-stat-badge">SC</span>
+                                <span class="uf-stat-pct" style="color: var(--color-success);">${totalUFEntradas > 0 ? ((ufMetrics['SC'].entradas / totalUFEntradas) * 100).toFixed(1).replace('.', ',') : '0'}%</span>
+                            </div>
+                            <div style="margin-top: 2px;">
+                                <div class="uf-stat-label">Entradas</div>
+                                <div class="uf-stat-val-in">${formatCurrency(ufMetrics['SC'].entradas)}</div>
+                            </div>
+                            <div>
+                                <div class="uf-stat-label">Saídas</div>
+                                <div class="uf-stat-val-out">${formatCurrency(ufMetrics['SC'].saidas)}</div>
+                            </div>
+                        </div>
+
+                        <div class="uf-stat-card ${filterUf === 'RS' ? 'active' : ''}" onclick="toggleUFFromMap('RS')">
+                            <div class="uf-stat-header">
+                                <span class="uf-stat-badge">RS</span>
+                                <span class="uf-stat-pct" style="color: var(--color-success);">${totalUFEntradas > 0 ? ((ufMetrics['RS'].entradas / totalUFEntradas) * 100).toFixed(1).replace('.', ',') : '0'}%</span>
+                            </div>
+                            <div style="margin-top: 2px;">
+                                <div class="uf-stat-label">Entradas</div>
+                                <div class="uf-stat-val-in">${formatCurrency(ufMetrics['RS'].entradas)}</div>
+                            </div>
+                            <div>
+                                <div class="uf-stat-label">Saídas</div>
+                                <div class="uf-stat-val-out">${formatCurrency(ufMetrics['RS'].saidas)}</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             `;
@@ -2761,7 +2809,11 @@
                                 return `${pct.toFixed(1).replace('.', ',')}%`;
                             },
                             color: '#ffffff',
-                            font: { family: 'Outfit', size: 10, weight: 'bold' }
+                            font: { family: 'Outfit', size: 11, weight: 'bold' },
+                            textStrokeColor: 'rgba(0, 0, 0, 0.85)',
+                            textStrokeWidth: 3,
+                            textShadowColor: 'rgba(0, 0, 0, 0.6)',
+                            textShadowBlur: 4
                         },
                         tooltip: {
                             position: 'cursor',
