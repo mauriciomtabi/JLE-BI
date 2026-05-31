@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BI JLE - JLE Telecom</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
     <!-- Google Fonts & Lucide Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -392,7 +394,10 @@
                 </div>
                 <div class="auth-input-group">
                     <label for="login-password">Senha</label>
-                    <input type="password" id="login-password" required placeholder="Sua senha">
+                    <div class="password-wrapper">
+                        <input type="password" id="login-password" required placeholder="Sua senha">
+                        <i class="fa-solid fa-eye password-toggle-icon" onclick="togglePasswordVisibility('login-password', this)"></i>
+                    </div>
                 </div>
                 <button type="submit" class="auth-btn" id="btn-login-submit">
                     <i class="fa-solid fa-right-to-bracket"></i> Entrar
@@ -406,12 +411,18 @@
                     <input type="email" id="register-email" required placeholder="seu.nome@jletelecom.com.br">
                 </div>
                 <div class="auth-input-group">
-                    <label for="register-password">Senha (mín. 6 caracteres)</label>
-                    <input type="password" id="register-password" required placeholder="Sua senha" minlength="6">
+                    <label for="register-password">Senha (mín. 6 caracteres, com letras e números)</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="register-password" required placeholder="Sua senha" minlength="6">
+                        <i class="fa-solid fa-eye password-toggle-icon" onclick="togglePasswordVisibility('register-password', this)"></i>
+                    </div>
                 </div>
                 <div class="auth-input-group">
                     <label for="register-confirm-password">Confirmar Senha</label>
-                    <input type="password" id="register-confirm-password" required placeholder="Confirme sua senha" minlength="6">
+                    <div class="password-wrapper">
+                        <input type="password" id="register-confirm-password" required placeholder="Confirme sua senha" minlength="6">
+                        <i class="fa-solid fa-eye password-toggle-icon" onclick="togglePasswordVisibility('register-confirm-password', this)"></i>
+                    </div>
                 </div>
                 <button type="submit" class="auth-btn" id="btn-register-submit">
                     <i class="fa-solid fa-user-plus"></i> Cadastrar
@@ -475,6 +486,22 @@
                 if (formRegister) formRegister.style.display = 'flex';
                 const subtitle = document.getElementById('auth-subtitle');
                 if (subtitle) subtitle.innerText = 'Crie sua conta corporativa';
+            }
+        }
+
+        // Função para mostrar/esconder senha
+        function togglePasswordVisibility(inputId, iconEl) {
+            const input = document.getElementById(inputId);
+            if (input) {
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    iconEl.classList.remove('fa-eye');
+                    iconEl.classList.add('fa-eye-slash');
+                } else {
+                    input.type = 'password';
+                    iconEl.classList.remove('fa-eye-slash');
+                    iconEl.classList.add('fa-eye');
+                }
             }
         }
     </script>
@@ -547,6 +574,13 @@
                 showAuthAlert('A senha deve conter no mínimo 6 caracteres.', 'error');
                 return;
             }
+            
+            const hasLetter = /[a-zA-Z]/.test(password);
+            const hasNumber = /[0-9]/.test(password);
+            if (!hasLetter || !hasNumber) {
+                showAuthAlert('A senha deve conter letras e números (pelo menos uma letra e um número).', 'error');
+                return;
+            }
 
             const btnSubmit = document.getElementById('btn-register-submit');
             btnSubmit.disabled = true;
@@ -556,7 +590,7 @@
                 setTimeout(() => {
                     btnSubmit.disabled = false;
                     btnSubmit.innerHTML = '<i class="fa-solid fa-user-plus"></i> Cadastrar';
-                    showAuthAlert('[MODO DEMO] Cadastro simulado! Confirme clicando na aba Entrar (admin@jletelecom.com.br / 123456 ou use este cadastro).', 'success');
+                    showAuthAlert('[MODO DEMO] Cadastro simulado! Em produção, você receberá um e-mail de confirmação para liberar o acesso. No modo demo, o acesso já está disponível para login na aba Entrar.', 'success');
                     safeStorage.setItem('demo_user_email', email);
                     safeStorage.setItem('demo_user_password', password);
                 }, 1000);
@@ -573,7 +607,7 @@
                     if (error) {
                         showAuthAlert(error.message, 'error');
                     } else {
-                        showAuthAlert('Cadastro realizado com sucesso! Verifique seu e-mail corporativo para confirmar a conta.', 'success');
+                        showAuthAlert('Cadastro realizado com sucesso! Você receberá um e-mail de confirmação em breve. Atenção: seu acesso só será liberado após você confirmar o cadastro pelo e-mail recebido.', 'success');
                         document.getElementById('register-email').value = '';
                         document.getElementById('register-password').value = '';
                         document.getElementById('register-confirm-password').value = '';

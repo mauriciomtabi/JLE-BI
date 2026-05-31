@@ -1247,6 +1247,32 @@ body.light-theme .auth-card {
     transition: all 0.2s ease;
 }
 
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 45px !important;
+}
+
+.password-toggle-icon {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #637381;
+    font-size: 14px;
+    transition: color 0.2s ease;
+    z-index: 10;
+}
+
+.password-toggle-icon:hover {
+    color: #004f71;
+}
+
 .auth-input-group input::placeholder {
     color: #919eab !important;
 }
