@@ -990,47 +990,39 @@ td.cell-saida {
 
 /* Painel de UFs Premium - Layout Encaixado Lado a Lado (Mapa e Estatísticas) */
 .uf-premium-container {
-    display: flex;
-    flex-direction: row;
+    position: relative;
     width: 100%;
     height: 100%;
-    gap: 8px;
-    align-items: center;
-    justify-content: space-between;
+    min-height: 380px;
     overflow: visible;
-    position: relative;
+    display: block;
 }
 
 .uf-map-side {
-    width: 36%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: visible;
-    position: relative;
+    z-index: 1;
 }
 
 .uf-panels-side {
-    width: 62%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 6px;
-    overflow: visible;
-    position: relative;
-    padding-top: 4px;
-    padding-bottom: 4px;
+    display: none; /* Removed wrapper to allow absolute positioning on container */
 }
 
 .map-svg-centered {
     width: 100%;
-    height: auto;
-    max-height: 320px;
-    z-index: 5;
+    height: 100%;
+    max-height: 390px;
+    z-index: 2;
     transition: all 0.4s ease;
-    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(0 8px 30px rgba(0, 0, 0, 0.5));
     overflow: visible;
 }
 
@@ -1064,38 +1056,55 @@ td.cell-saida {
 
 /* Compact Glassmorphism Cards */
 .uf-compact-card {
-    background: rgba(17, 28, 36, 0.75);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-left: 3px solid transparent;
-    border-radius: 10px;
-    padding: 8px 12px;
+    background: rgba(11, 20, 28, 0.82);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-left: 4px solid transparent;
+    border-radius: 12px;
+    padding: 10px 14px;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.05);
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    gap: 4px;
+    position: absolute;
+    width: 245px;
+    z-index: 10;
 }
 
 .light-theme .uf-compact-card {
-    background: rgba(255, 255, 255, 0.75);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    border-left: 3px solid transparent;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-left: 4px solid transparent;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-/* Custom left glowing border fused with the connection lines */
-.uf-compact-card.pr-card { border-left-color: #00b4d8; }
-.uf-compact-card.sc-card { border-left-color: #f39f18; }
-.uf-compact-card.rs-card { border-left-color: #2ecc71; }
+/* Floating Card Coordinates */
+.uf-compact-card.pr-card {
+    left: 8px;
+    top: 15px;
+    border-left-color: #00b4d8;
+}
+
+.uf-compact-card.sc-card {
+    right: 8px;
+    top: 135px;
+    border-left-color: #f39f18;
+}
+
+.uf-compact-card.rs-card {
+    left: 8px;
+    bottom: 15px;
+    border-left-color: #2ecc71;
+}
 
 .uf-compact-card:hover, .uf-compact-card.hovered {
-    transform: translateX(4px) scale(1.02);
+    transform: translateY(-5px) scale(1.02);
     border-color: var(--color-primary-light);
     border-left-width: 4px;
-    box-shadow: 0 6px 20px rgba(0, 79, 113, 0.35);
+    box-shadow: 0 12px 30px rgba(0, 79, 113, 0.45);
 }
 
 /* Hover highlights for active state */
@@ -1106,7 +1115,7 @@ td.cell-saida {
 .uf-compact-card.active {
     border-color: var(--color-secondary);
     border-left-width: 4px;
-    box-shadow: 0 0 15px rgba(243, 159, 24, 0.3);
+    box-shadow: 0 0 18px rgba(243, 159, 24, 0.45);
     background: rgba(243, 159, 24, 0.08);
 }
 
@@ -1115,12 +1124,12 @@ td.cell-saida {
 }
 
 .uf-compact-card.dimmed {
-    opacity: 0.35;
-    filter: scale(0.98);
+    opacity: 0.3;
+    transform: scale(0.97);
 }
 
 .uf-compact-card.dimmed:hover {
-    opacity: 0.8;
+    opacity: 0.85;
 }
 
 /* Card Header */
@@ -1296,33 +1305,44 @@ td.cell-saida {
     opacity: 0.15;
 }
 
-/* Responsividade Mobile Fluida */
 @media (max-width: 768px) {
     .uf-premium-container {
-        flex-direction: column;
-        height: auto;
-        gap: 12px;
+        display: flex !important;
+        flex-direction: column !important;
+        height: auto !important;
+        gap: 12px !important;
     }
     
     .uf-map-side {
-        width: 100%;
-        height: 220px;
+        position: relative !important;
+        left: auto !important;
+        top: auto !important;
+        transform: none !important;
+        width: 100% !important;
+        height: 240px !important;
+        z-index: 1 !important;
+        margin-bottom: 8px;
     }
     
     .uf-panels-side {
-        width: 100%;
-        height: auto;
-        gap: 6px;
+        display: none !important;
     }
     
     .map-svg-centered {
-        max-width: 60%;
-        height: 200px;
+        max-width: 80% !important;
+        height: 220px !important;
     }
     
     .uf-compact-card {
+        position: relative !important;
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        bottom: auto !important;
         width: 100% !important;
+        margin-bottom: 8px !important;
         transform: none !important;
+        z-index: 2 !important;
     }
     
     .map-connection-line {
