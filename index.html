@@ -1393,6 +1393,13 @@
             const navEl = document.getElementById(`nav-${viewName}`);
             if (navEl) navEl.classList.add('active');
             
+            // Controle de visualização da página Admin para regras CSS mobile
+            if (viewName === 'admin') {
+                document.body.classList.add('viewing-admin');
+            } else {
+                document.body.classList.remove('viewing-admin');
+            }
+            
             const mobileToggleBtn = document.getElementById('mobile-filter-toggle');
             
             if (viewName === 'admin') {

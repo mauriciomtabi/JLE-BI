@@ -3220,5 +3220,13 @@ body.light-theme .pwa-toast {
     .admin-users-table td .tag {
         margin: 1px !important;
     }
+
+    /* Ocultar filtros e badge de atualização na página Admin em modo Mobile */
+    body.viewing-admin .mobile-filter-toggle {
+        display: none !important;
+    }
+    body.viewing-admin .last-update-badge {
+        display: none !important;
+    }
 }
 
