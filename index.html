@@ -240,9 +240,12 @@
             <!-- Charts Grid Row 1 -->
             <div class="charts-grid">
                 <div class="chart-card">
-                    <div class="chart-header">
+                    <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;">
                         <div class="chart-title">
                             <h2 id="evolution-chart-title">Evolução de Fluxo Mensal</h2>
+                        </div>
+                        <div class="chart-controls" id="evolution-chart-controls" style="display: flex; gap: 4px; background: rgba(0, 0, 0, 0.2); padding: 2px; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.05);">
+                            <!-- Dinamicamente preenchido por renderCharts() -->
                         </div>
                     </div>
                     <div class="chart-body">
@@ -1360,6 +1363,13 @@
         
         // Armazenamento de instâncias de gráficos
         let charts = {};
+        
+        // Granularidade do gráfico de evolução (sobreposição do filtro global para o gráfico)
+        window.evolutionChartGranularity = null;
+        window.setEvolutionChartGranularity = function(granularity) {
+            window.evolutionChartGranularity = granularity;
+            renderCharts();
+        };
 
         // Carregar dados na inicialização
         window.addEventListener('DOMContentLoaded', () => {
@@ -2171,15 +2181,61 @@
             // 1. GRAFICO 1: EVOLUÇÃO MENSAL OU DIÁRIA (DINÂMICO)
             const ctxEvolution = document.getElementById('chart-evolution').getContext('2d');
             
-            if (selectedMonth === 'ALL') {
-                // VISÃO MENSAL CONSOLIDADA
-                document.getElementById('evolution-chart-title').innerText = 'Evolução de Fluxo Mensal';
+            // Determinar a granularidade ativa
+            const isMobile = window.innerWidth <= 768;
+            const isAllSelected = selectedMonth === 'ALL';
+            let activeGranularity = window.evolutionChartGranularity;
+            
+            if (isAllSelected) {
+                activeGranularity = 'monthly';
+                window.evolutionChartGranularity = null; // Reseta se for 'ALL'
+            } else if (!activeGranularity) {
+                activeGranularity = isMobile ? 'weekly' : 'daily';
+            }
+            
+            // Renderizar botões de controle de granularidade
+            const controlsContainer = document.getElementById('evolution-chart-controls');
+            if (controlsContainer) {
+                controlsContainer.innerHTML = `
+                    <button class="chart-toggle-btn ${activeGranularity === 'monthly' ? 'active' : ''}" 
+                            onclick="setEvolutionChartGranularity('monthly')">
+                        Mensal
+                    </button>
+                    <button class="chart-toggle-btn ${activeGranularity === 'weekly' ? 'active' : ''}" 
+                            ${isAllSelected ? 'disabled style="opacity: 0.35; pointer-events: none;"' : ''} 
+                            onclick="setEvolutionChartGranularity('weekly')">
+                        Semanal
+                    </button>
+                    <button class="chart-toggle-btn ${activeGranularity === 'daily' ? 'active' : ''}" 
+                            ${isAllSelected ? 'disabled style="opacity: 0.35; pointer-events: none;"' : ''} 
+                            onclick="setEvolutionChartGranularity('daily')">
+                        Diário
+                    </button>
+                `;
+            }
+            
+            if (activeGranularity === 'monthly') {
+                // VISÃO MENSAL CONSOLIDADA (PODE IGNORAR O FILTRO DE MÊS INDIVIDUAL)
+                document.getElementById('evolution-chart-title').innerText = isAllSelected 
+                    ? 'Evolução de Fluxo Mensal' 
+                    : `Evolução de Fluxo Mensal (Visão Geral)`;
                 
                 const months = ["JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO"];
                 const monthlyEntradas = [0, 0, 0, 0, 0];
                 const monthlySaidas = [0, 0, 0, 0, 0];
                 
-                filteredTransactions.forEach(t => {
+                // Usamos as transações filtradas por banco/categoria/uf, mas não por mês
+                const evolutionTxs = transactions.filter(t => {
+                    const banco = document.getElementById('filter-banco').value;
+                    const categoria = document.getElementById('filter-categoria').value;
+                    const uf = document.getElementById('filter-uf').value;
+                    if (banco !== 'ALL' && t.banco !== banco) return false;
+                    if (categoria !== 'ALL' && t.categoria !== categoria) return false;
+                    if (uf !== 'ALL' && t.uf !== uf) return false;
+                    return true;
+                });
+                
+                evolutionTxs.forEach(t => {
                     if (t.categoria === 'Saldo Inicial') return;
                     const mIdx = months.indexOf(t.competencia);
                     if (mIdx !== -1) {
@@ -2201,7 +2257,7 @@
                                 data: monthlyEntradas,
                                 backgroundColor: '#004f71',
                                 borderColor: '#004f71',
-                                borderRadius: 4,
+                                borderRadius: isMobile ? 4 : 2,
                                 hoverBackgroundColor: '#0077aa',
                                 hoverBorderColor: '#ffffff',
                                 hoverBorderWidth: 2
@@ -2211,7 +2267,7 @@
                                 data: monthlySaidas,
                                 backgroundColor: '#f39f18',
                                 borderColor: '#f39f18',
-                                borderRadius: 4,
+                                borderRadius: isMobile ? 4 : 2,
                                 hoverBackgroundColor: '#ffb83d',
                                 hoverBorderColor: '#ffffff',
                                 hoverBorderWidth: 2
@@ -2284,10 +2340,10 @@
                     }
                 });
             } else {
-                // VISÃO DIÁRIA DETALHADA PARA O MÊS SELECIONADO
-                const isMobile = window.innerWidth <= 768;
+                // VISÃO DIÁRIA OU SEMANAL PARA O MÊS SELECIONADO
+                const isWeekly = activeGranularity === 'weekly';
                 
-                document.getElementById('evolution-chart-title').innerText = isMobile 
+                document.getElementById('evolution-chart-title').innerText = isWeekly 
                     ? `Evolução de Fluxo Semanal - ${selectedMonth}` 
                     : `Evolução de Fluxo Diário - ${selectedMonth}`;
                 
@@ -2321,12 +2377,12 @@
                     }
                 });
                 
-                // Configuração condicional se for mobile (Semanal) ou desktop (Diário)
+                // Configuração condicional se for Semanal ou Diário
                 let chartLabels = [];
                 let chartEntradas = [];
                 let chartSaidas = [];
                 
-                if (isMobile) {
+                if (isWeekly) {
                     // Agrupamento por Semanas (Semana 1: 1-7, Semana 2: 8-14, Semana 3: 15-21, Semana 4: 22-28, Semana 5: 29-fim)
                     const numWeeks = Math.ceil(maxDays / 7);
                     chartLabels = Array.from({length: numWeeks}, (_, i) => `Semana ${i + 1}`);
@@ -2354,7 +2410,7 @@
                                 data: chartEntradas,
                                 backgroundColor: '#004f71',
                                 borderColor: '#004f71',
-                                borderRadius: isMobile ? 4 : 2, // Cantos mais arredondados e elegantes no mobile
+                                borderRadius: isWeekly ? 4 : 2, // Cantos mais arredondados e elegantes no semanal
                                 hoverBackgroundColor: '#0077aa',
                                 hoverBorderColor: '#ffffff',
                                 hoverBorderWidth: 2
@@ -2364,7 +2420,7 @@
                                 data: chartSaidas,
                                 backgroundColor: '#f39f18',
                                 borderColor: '#f39f18',
-                                borderRadius: isMobile ? 4 : 2, // Cantos mais arredondados e elegantes no mobile
+                                borderRadius: isWeekly ? 4 : 2, // Cantos mais arredondados e elegantes no semanal
                                 hoverBackgroundColor: '#ffb83d',
                                 hoverBorderColor: '#ffffff',
                                 hoverBorderWidth: 2
@@ -2393,11 +2449,11 @@
                                 display: (ctx) => ctx.dataset.data[ctx.dataIndex] > 0,
                                 align: 'end',
                                 anchor: 'end',
-                                rotation: isMobile ? 0 : -90, // No mobile as fontes ficam horizontais para máxima legibilidade
+                                rotation: isWeekly ? 0 : -90, // No semanal as fontes ficam horizontais para máxima legibilidade
                                 color: textColor,
                                 font: { 
                                     family: 'Outfit', 
-                                    size: isMobile ? 9 : 8, 
+                                    size: isWeekly ? 9 : 8, 
                                     weight: '700' 
                                 },
                                 formatter: (val) => {
@@ -2415,7 +2471,7 @@
                                 grid: { color: 'transparent' }, 
                                 ticks: { 
                                     color: textColor, 
-                                    font: { size: isMobile ? 10 : 9 } 
+                                    font: { size: isWeekly ? 10 : 9 } 
                                 } 
                             },
                             y: {
@@ -2436,11 +2492,11 @@
                         onClick: (event, elements) => {
                             if (elements.length > 0) {
                                 const elementIndex = elements[0].index;
-                                if (isMobile) {
-                                    // Drilldown por semana no celular
+                                if (isWeekly) {
+                                    // Drilldown por semana no celular/semanal
                                     filterBySpecificWeek(elementIndex, selectedMonth);
                                 } else {
-                                    // Drilldown por dia no desktop
+                                    // Drilldown por dia no desktop/diário
                                     const clickedDay = days[elementIndex];
                                     filterBySpecificDay(clickedDay, selectedMonth);
                                 }
