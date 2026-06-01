@@ -2080,7 +2080,12 @@
                                 anchor: 'end',
                                 color: textColor,
                                 font: { family: 'Outfit', size: 10, weight: 'bold' },
-                                formatter: (val) => formatShortCurrency(val)
+                                formatter: (val) => {
+                                    const a = Math.abs(val);
+                                    if (a >= 1000000) return (a/1000000).toFixed(1).replace('.', ',') + 'M';
+                                    if (a >= 1000) return (a/1000).toFixed(0) + 'k';
+                                    return a > 0 ? a.toFixed(0) : '';
+                                }
                             }
                         },
                         scales: {
@@ -2089,9 +2094,29 @@
                                 grid: { color: gridColor },
                                 ticks: {
                                     color: textColor,
-                                    callback: (val) => formatShortCurrency(val)
+                                    callback: (val) => {
+                                        const a = Math.abs(val);
+                                        if (val === 0) return '0';
+                                        if (a >= 1000000) return (a/1000000).toFixed(1).replace('.', ',') + 'M';
+                                        if (a >= 1000) return (a/1000).toFixed(0) + 'k';
+                                        return a.toString();
+                                    }
                                 },
                                 grace: '12%'
+                            }
+                        },
+                        onClick: (event, elements) => {
+                            if (elements.length > 0) {
+                                const monthMap = {
+                                    'Jan': 'JANEIRO', 'Fev': 'FEVEREIRO', 'Mar': 'MARÇO',
+                                    'Abr': 'ABRIL', 'Mai': 'MAIO'
+                                };
+                                const label = charts.evolution.data.labels[elements[0].index];
+                                const monthValue = monthMap[label];
+                                if (monthValue) {
+                                    document.getElementById('filter-mes').value = monthValue;
+                                    applyFilters();
+                                }
                             }
                         }
                     }
@@ -2182,7 +2207,12 @@
                                 rotation: -90,
                                 color: textColor,
                                 font: { family: 'Outfit', size: 8, weight: '600' },
-                                formatter: (val) => formatShortCurrency(val),
+                                formatter: (val) => {
+                                    const a = Math.abs(val);
+                                    if (a >= 1000000) return (a/1000000).toFixed(1).replace('.', ',') + 'M';
+                                    if (a >= 1000) return (a/1000).toFixed(0) + 'k';
+                                    return a > 0 ? a.toFixed(0) : '';
+                                },
                                 clamp: true,
                                 clip: false
                             }
@@ -2193,7 +2223,13 @@
                                 grid: { color: gridColor },
                                 ticks: {
                                     color: textColor,
-                                    callback: (val) => formatShortCurrency(val)
+                                    callback: (val) => {
+                                        const a = Math.abs(val);
+                                        if (val === 0) return '0';
+                                        if (a >= 1000000) return (a/1000000).toFixed(1).replace('.', ',') + 'M';
+                                        if (a >= 1000) return (a/1000).toFixed(0) + 'k';
+                                        return a.toString();
+                                    }
                                 },
                                 grace: '15%'
                             }
@@ -2768,10 +2804,42 @@
                 .map(c => ({ name: c, value: customerSum[c] }))
                 .sort((a, b) => b.value - a.value);
                 
-            const chartLabels = sortedCustomers.map(c => c.name);
+            // Abreviação inteligente de nomes de clientes para manter legenda compacta
+            function abbrevClient(name) {
+                let s = name
+                    .replace(/\s+LTDA\.?$/i, '')
+                    .replace(/\s+ME\.?$/i, '')
+                    .replace(/\s+EPP\.?$/i, '')
+                    .replace(/\s+S\/A\.?$/i, '')
+                    .replace(/\s+S\.A\.?$/i, '')
+                    .replace(/\s+BRASIL$/i, '')
+                    .replace(/\s+BR$/i, '')
+                    .trim();
+                // Title Case
+                s = s.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+                return s.length > 12 ? s.substring(0, 11) + '\u2026' : s;
+            }
+
+            const chartLabels = sortedCustomers.map(c => abbrevClient(c.name));
             const chartData = sortedCustomers.map(c => c.value);
             
             const totalSum = chartData.reduce((sum, val) => sum + val, 0);
+
+            // Fatia visual mínima de 2.5% — itens pequenos aparecem, proporção entre grandes é preservada
+            const MIN_PCT = 0.025;
+            const minSliceVal = totalSum * MIN_PCT;
+            let totalBorrowed = 0;
+            const chartDataDisplay = chartData.map(v => {
+                if (v > 0 && v < minSliceVal) { totalBorrowed += minSliceVal - v; return minSliceVal; }
+                return v;
+            });
+            if (totalBorrowed > 0) {
+                const bigSum = chartData.reduce((s, v) => v >= minSliceVal ? s + v : s, 0);
+                for (let i = 0; i < chartDataDisplay.length; i++) {
+                    if (chartData[i] >= minSliceVal && bigSum > 0)
+                        chartDataDisplay[i] -= (chartData[i] / bigSum) * totalBorrowed;
+                }
+            }
             
             const ctxCustomers = document.getElementById('chart-customers').getContext('2d');
             
@@ -2837,13 +2905,13 @@
                 data: {
                     labels: chartLabels,
                     datasets: [{
-                        data: chartData,
+                        data: chartDataDisplay,
                         backgroundColor: colorPalette.slice(0, chartLabels.length),
                         borderColor: isDark ? '#0d1b26' : '#f5f6f8',
                         borderWidth: 1.5,
-                        spacing: 2,
-                        borderRadius: 4,
-                        hoverOffset: 10,
+                        spacing: 1,
+                        borderRadius: 3,
+                        hoverOffset: 8,
                         hoverBorderColor: '#ffffff',
                         hoverBorderWidth: 2
                     }]
@@ -2871,27 +2939,10 @@
                                 color: textColor,
                                 usePointStyle: true,
                                 pointStyle: 'rectRounded',
-                                boxWidth: 30,
+                                boxWidth: 20,
                                 boxHeight: 6,
-                                padding: 18,
-                                font: { family: 'Outfit', size: 11, weight: '500' },
-                                generateLabels: (chart) => {
-                                    return chart.data.labels.map((label, i) => {
-                                        const maxLen = 16;
-                                        const shortLabel = label.length > maxLen
-                                            ? label.substring(0, maxLen - 1) + '\u2026'
-                                            : label;
-                                        return {
-                                            text: shortLabel,
-                                            fillStyle: chart.data.datasets[0].backgroundColor[i],
-                                            strokeStyle: chart.data.datasets[0].backgroundColor[i],
-                                            lineWidth: 0,
-                                            hidden: false,
-                                            index: i,
-                                            datasetIndex: 0
-                                        };
-                                    });
-                                }
+                                padding: 14,
+                                font: { family: 'Outfit', size: 10, weight: '500' }
                             }
                         },
                         datalabels: { display: false },
@@ -2899,9 +2950,10 @@
                             position: 'cursor',
                             callbacks: {
                                 label: (context) => {
-                                    const val = context.raw;
-                                    const pct = totalSum > 0 ? (val / totalSum) * 100 : 0;
-                                    return ` ${context.label}: ${formatCurrency(val)} (${pct.toFixed(1).replace('.', ',')}%)`;
+                                    // Mostra valor real (não o visual ajustado)
+                                    const realVal = chartData[context.dataIndex];
+                                    const pct = totalSum > 0 ? (realVal / totalSum) * 100 : 0;
+                                    return ` ${context.label}: ${formatCurrency(realVal)} (${pct.toFixed(1).replace('.', ',')}%)`;
                                 }
                             }
                         }
