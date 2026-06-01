@@ -1646,6 +1646,22 @@
             return (isNegative ? '-' : '') + 'R$ ' + formatted;
         }
 
+        function formatShortCurrencyNoR$(value) {
+            if (value === 0) return '0';
+            const isNegative = value < 0;
+            const absVal = Math.abs(value);
+            
+            let formatted = "";
+            if (absVal >= 1000000) {
+                formatted = (absVal / 1000000).toFixed(1).replace('.', ',') + 'M';
+            } else if (absVal >= 1000) {
+                formatted = (absVal / 1000).toFixed(0) + 'k';
+            } else {
+                formatted = absVal.toFixed(0);
+            }
+            return (isNegative ? '-' : '') + formatted;
+        }
+
         // Lógica de Filtros Aplicados
         function applyFilters() {
             const banco = document.getElementById('filter-banco').value;
@@ -2412,7 +2428,7 @@
                             font: { family: 'Outfit', size: 10, weight: 'bold' },
                             formatter: (val) => {
                                 const pct = totalSum > 0 ? (val / totalSum) * 100 : 0;
-                                return `${formatShortCurrency(val)} (${pct.toFixed(1).replace('.', ',')}%)`;
+                                return `${formatShortCurrencyNoR$(val)} (${pct.toFixed(1).replace('.', ',')}%)`;
                             }
                         },
                         tooltip: {
@@ -2431,7 +2447,7 @@
                             ticks: { 
                                 color: textColor,
                                 callback: function(value) {
-                                    return formatShortCurrency(value);
+                                    return formatShortCurrencyNoR$(value);
                                 }
                             }, 
                             grace: '28%' 
@@ -2909,8 +2925,8 @@
                         backgroundColor: colorPalette.slice(0, chartLabels.length),
                         borderColor: isDark ? '#0d1b26' : '#f5f6f8',
                         borderWidth: 1.5,
-                        spacing: 1,
-                        borderRadius: 3,
+                        spacing: 2.5,
+                        borderRadius: 4,
                         hoverOffset: 8,
                         hoverBorderColor: '#ffffff',
                         hoverBorderWidth: 2
@@ -2933,7 +2949,7 @@
                     },
                     plugins: {
                         legend: {
-                            position: 'top',
+                            position: 'bottom',
                             align: 'center',
                             labels: {
                                 color: textColor,
@@ -2945,7 +2961,22 @@
                                 font: { family: 'Outfit', size: 10, weight: '500' }
                             }
                         },
-                        datalabels: { display: false },
+                        datalabels: {
+                            display: (context) => {
+                                const realVal = chartData[context.dataIndex] || 0;
+                                const pct = totalSum > 0 ? (realVal / totalSum) * 100 : 0;
+                                return pct >= 5;
+                            },
+                            color: '#ffffff',
+                            font: { family: 'Outfit', size: 10, weight: 'bold' },
+                            textStrokeColor: 'rgba(0, 0, 0, 0.4)',
+                            textStrokeWidth: 2,
+                            formatter: (value, context) => {
+                                const realVal = chartData[context.dataIndex] || 0;
+                                const pct = totalSum > 0 ? (realVal / totalSum) * 100 : 0;
+                                return pct.toFixed(1).replace('.', ',') + '%';
+                            }
+                        },
                         tooltip: {
                             position: 'cursor',
                             callbacks: {
