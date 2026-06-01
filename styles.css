@@ -1479,21 +1479,21 @@ td.cell-saida {
     }
 
     .uf-discreet-legend {
-        bottom: 25px !important;
+        bottom: 8px !important;
         right: auto !important;
-        left: 380px !important;
-        padding: 4px 8px !important;
-        font-size: 8.5px !important;
-        gap: 4px !important;
+        left: 350px !important;
+        padding: 3px 6px !important;
+        font-size: 7.5px !important;
+        gap: 3px !important;
     }
 
     .uf-discreet-legend .legend-gradient-bar {
-        width: 45px !important;
-        height: 5px !important;
+        width: 38px !important;
+        height: 4px !important;
     }
 
     .uf-discreet-legend span {
-        font-size: 8px !important;
+        font-size: 7.2px !important;
     }
     
     .map-chart-body {
