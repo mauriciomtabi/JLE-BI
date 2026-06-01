@@ -2503,10 +2503,22 @@ body.light-theme .auth-alert.success {
         color: var(--color-secondary) !important;
     }
 
-    .sidebar .theme-toggle-btn:hover,
+    .sidebar .theme-toggle-btn {
+        color: var(--color-secondary) !important;
+        background-color: rgba(243, 159, 24, 0.08) !important;
+        border: 1px solid rgba(243, 159, 24, 0.25) !important;
+    }
+
+    .sidebar .theme-toggle-btn:hover {
+        background-color: rgba(243, 159, 24, 0.15) !important;
+        color: #ffb83d !important;
+        box-shadow: 0 0 8px rgba(243, 159, 24, 0.3) !important;
+        border-radius: 12px !important;
+    }
+
     .sidebar .logout-btn:hover {
-        color: var(--text-primary) !important;
-        background-color: rgba(0, 79, 113, 0.08) !important;
+        color: var(--color-danger) !important;
+        background-color: rgba(231, 76, 60, 0.08) !important;
         border-radius: 12px !important;
     }
 
