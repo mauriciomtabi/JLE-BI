@@ -2063,9 +2063,19 @@
                             event.native.target.style.cursor = chartElement.length ? 'pointer' : 'default';
                         },
                         plugins: {
-                            legend: { labels: { color: textColor } },
+                            legend: {
+                                labels: {
+                                    color: textColor,
+                                    usePointStyle: true,
+                                    pointStyle: 'rectRounded',
+                                    boxWidth: 16,
+                                    boxHeight: 8,
+                                    padding: 16,
+                                    font: { family: 'Outfit', size: 11 }
+                                }
+                            },
                             datalabels: {
-                                display: true,
+                                display: (ctx) => ctx.dataset.data[ctx.dataIndex] > 0,
                                 align: 'top',
                                 anchor: 'end',
                                 color: textColor,
@@ -2075,7 +2085,14 @@
                         },
                         scales: {
                             x: { grid: { color: 'transparent' }, ticks: { color: textColor } },
-                            y: { grid: { color: gridColor }, ticks: { color: textColor }, grace: '12%' }
+                            y: {
+                                grid: { color: gridColor },
+                                ticks: {
+                                    color: textColor,
+                                    callback: (val) => formatShortCurrency(val)
+                                },
+                                grace: '12%'
+                            }
                         }
                     }
                 });
@@ -2147,12 +2164,39 @@
                             event.native.target.style.cursor = chartElement.length ? 'pointer' : 'default';
                         },
                         plugins: {
-                            legend: { labels: { color: textColor } },
-                            datalabels: { display: false } // Sem datalabels na visão diária para evitar poluição
+                            legend: {
+                                labels: {
+                                    color: textColor,
+                                    usePointStyle: true,
+                                    pointStyle: 'rectRounded',
+                                    boxWidth: 16,
+                                    boxHeight: 8,
+                                    padding: 16,
+                                    font: { family: 'Outfit', size: 11 }
+                                }
+                            },
+                            datalabels: {
+                                display: (ctx) => ctx.dataset.data[ctx.dataIndex] > 0,
+                                align: 'end',
+                                anchor: 'end',
+                                rotation: -90,
+                                color: textColor,
+                                font: { family: 'Outfit', size: 8, weight: '600' },
+                                formatter: (val) => formatShortCurrency(val),
+                                clamp: true,
+                                clip: false
+                            }
                         },
                         scales: {
                             x: { grid: { color: 'transparent' }, ticks: { color: textColor, font: { size: 9 } } },
-                            y: { grid: { color: gridColor }, ticks: { color: textColor } }
+                            y: {
+                                grid: { color: gridColor },
+                                ticks: {
+                                    color: textColor,
+                                    callback: (val) => formatShortCurrency(val)
+                                },
+                                grace: '15%'
+                            }
                         },
                         onClick: (event, elements) => {
                             if (elements.length > 0) {
@@ -2729,16 +2773,6 @@
             
             const totalSum = chartData.reduce((sum, val) => sum + val, 0);
             
-            // Garante fatia mínima visível para todos os itens (1.5% do total visualmente)
-            // Os valores reais são preservados no tooltip via context.raw
-            const minSlice = totalSum * 0.015;
-            const chartDataVisual = chartData.map(v => v > 0 ? Math.max(v, minSlice) : 0);
-            // Rebalanceia para que a soma visual seja igual à soma real (evita distorção grave)
-            const visualSum = chartDataVisual.reduce((s, v) => s + v, 0);
-            const chartDataDisplay = totalSum > 0
-                ? chartDataVisual.map(v => (v / visualSum) * totalSum)
-                : chartDataVisual;
-            
             const ctxCustomers = document.getElementById('chart-customers').getContext('2d');
             
             if (charts.customers) charts.customers.destroy();
@@ -2803,15 +2837,15 @@
                 data: {
                     labels: chartLabels,
                     datasets: [{
-                        data: chartDataDisplay,
+                        data: chartData,
                         backgroundColor: colorPalette.slice(0, chartLabels.length),
-                        borderColor: isDark ? '#111c24' : '#ffffff',
-                        borderWidth: 2,
-                        spacing: 5,
-                        borderRadius: 8,
-                        hoverOffset: 12,
+                        borderColor: isDark ? '#0d1b26' : '#f5f6f8',
+                        borderWidth: 1.5,
+                        spacing: 2,
+                        borderRadius: 4,
+                        hoverOffset: 10,
                         hoverBorderColor: '#ffffff',
-                        hoverBorderWidth: 3
+                        hoverBorderWidth: 2
                     }]
                 },
                 plugins: [centerTextPlugin],
@@ -2831,37 +2865,43 @@
                     },
                     plugins: {
                         legend: {
-                            position: 'bottom',
+                            position: 'top',
+                            align: 'center',
                             labels: {
-                                boxWidth: 12,
                                 color: textColor,
-                                font: { family: 'Outfit', size: 10 }
+                                usePointStyle: true,
+                                pointStyle: 'rectRounded',
+                                boxWidth: 30,
+                                boxHeight: 6,
+                                padding: 18,
+                                font: { family: 'Outfit', size: 11, weight: '500' },
+                                generateLabels: (chart) => {
+                                    return chart.data.labels.map((label, i) => {
+                                        const maxLen = 16;
+                                        const shortLabel = label.length > maxLen
+                                            ? label.substring(0, maxLen - 1) + '\u2026'
+                                            : label;
+                                        return {
+                                            text: shortLabel,
+                                            fillStyle: chart.data.datasets[0].backgroundColor[i],
+                                            strokeStyle: chart.data.datasets[0].backgroundColor[i],
+                                            lineWidth: 0,
+                                            hidden: false,
+                                            index: i,
+                                            datasetIndex: 0
+                                        };
+                                    });
+                                }
                             }
                         },
-                        datalabels: {
-                            display: (context) => {
-                                const val = context.dataset.data[context.dataIndex];
-                                return totalSum > 0 && (val / totalSum) > 0.03; // mostra apenas se > 3%
-                            },
-                            formatter: (val) => {
-                                const pct = totalSum > 0 ? (val / totalSum) * 100 : 0;
-                                return `${pct.toFixed(1).replace('.', ',')}%`;
-                            },
-                            color: '#ffffff',
-                            font: { family: 'Outfit', size: 11, weight: 'bold' },
-                            textStrokeColor: 'rgba(0, 0, 0, 0.85)',
-                            textStrokeWidth: 3,
-                            textShadowColor: 'rgba(0, 0, 0, 0.6)',
-                            textShadowBlur: 4
-                        },
+                        datalabels: { display: false },
                         tooltip: {
                             position: 'cursor',
                             callbacks: {
                                 label: (context) => {
-                                    // Usa o valor REAL (chartData) e não o visual
-                                    const realVal = chartData[context.dataIndex];
-                                    const pct = totalSum > 0 ? (realVal / totalSum) * 100 : 0;
-                                    return ` ${context.label}: ${formatCurrency(realVal)} (${pct.toFixed(1).replace('.', ',')}%)`;
+                                    const val = context.raw;
+                                    const pct = totalSum > 0 ? (val / totalSum) * 100 : 0;
+                                    return ` ${context.label}: ${formatCurrency(val)} (${pct.toFixed(1).replace('.', ',')}%)`;
                                 }
                             }
                         }
