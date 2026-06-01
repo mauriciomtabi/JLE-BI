@@ -1472,12 +1472,12 @@ td.cell-saida {
     }
     
     .uf-compact-card.sc-card {
-        right: 185px !important;
+        right: 200px !important;
         top: 135px !important;
     }
     
     .uf-compact-card.rs-card {
-        left: 190px !important;
+        left: 170px !important;
         bottom: 30px !important;
     }
     

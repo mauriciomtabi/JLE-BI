@@ -1183,6 +1183,26 @@
                 document.getElementById('user-display-email').innerText = user.email;
                 currentUserEmail = user.email;
 
+                // Auto-atualização de nome para o usuário de teste na base de dados do Supabase
+                if (user.email === 'teste_antigravity@jletelecom.com.br' && (!user.user_metadata || user.user_metadata.full_name !== 'Usuário Teste')) {
+                    if (supabaseClient) {
+                        supabaseClient.auth.updateUser({
+                            data: { full_name: "Usuário Teste" }
+                        }).then(({ data, error }) => {
+                            if (!error && data && data.user) {
+                                console.log("Nome do usuário de teste atualizado no Supabase com sucesso!");
+                                const updatedFullName = "Usuário Teste";
+                                if (nameEl) {
+                                    nameEl.setAttribute('data-fullname', updatedFullName);
+                                    nameEl.setAttribute('data-initials', getInitials(updatedFullName));
+                                    const isCollapsed = document.body.classList.contains('sidebar-collapsed');
+                                    nameEl.innerText = isCollapsed ? nameEl.getAttribute('data-initials') : updatedFullName;
+                                }
+                            }
+                        }).catch(e => console.warn("Erro ao atualizar nome do usuário de teste:", e));
+                    }
+                }
+
                 // Força redimensionamento dos gráficos e aplicação de filtros iniciais
                 setTimeout(() => {
                     window.dispatchEvent(new Event('resize'));
