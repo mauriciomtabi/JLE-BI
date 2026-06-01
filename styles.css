@@ -1477,6 +1477,24 @@ td.cell-saida {
         left: 205px !important;
         bottom: 30px !important;
     }
+
+    .uf-discreet-legend {
+        bottom: 25px !important;
+        right: auto !important;
+        left: 380px !important;
+        padding: 4px 8px !important;
+        font-size: 8.5px !important;
+        gap: 4px !important;
+    }
+
+    .uf-discreet-legend .legend-gradient-bar {
+        width: 45px !important;
+        height: 5px !important;
+    }
+
+    .uf-discreet-legend span {
+        font-size: 8px !important;
+    }
     
     .map-chart-body {
         height: calc(380px * calc((100vw - 64px) / 700) + 40px) !important;
