@@ -2918,3 +2918,115 @@ body.light-theme .auth-alert.success {
     color: var(--text-primary);
 }
 
+/* PWA Update Toast - Estilo Premium Glassmorphic */
+.pwa-toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: rgba(13, 27, 38, 0.85); /* Dark background with glassmorphism */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border-radius: 16px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 9999;
+    transform: translateY(150%);
+    opacity: 0;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+}
+
+body.light-theme .pwa-toast {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 80, 115, 0.12);
+}
+
+.pwa-toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.pwa-toast-content {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.pwa-toast-icon {
+    font-size: 26px;
+    color: var(--color-secondary);
+    animation: pwaIconBounce 2s infinite ease-in-out;
+}
+
+@keyframes pwaIconBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+.pwa-toast-text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.pwa-toast-text strong {
+    font-size: 14px;
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.pwa-toast-text span {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.pwa-toast-btn {
+    background: linear-gradient(135deg, var(--color-secondary), #ffb83d);
+    color: #070d14;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 12px rgba(243, 159, 24, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pwa-toast-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(243, 159, 24, 0.5);
+}
+
+.pwa-toast-btn:active {
+    transform: translateY(0);
+}
+
+/* Responsividade Mobile - Centralizar o Toast na tela do celular */
+@media (max-width: 576px) {
+    .pwa-toast {
+        bottom: 16px;
+        left: 16px;
+        right: 16px;
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+        padding: 14px 16px;
+    }
+    .pwa-toast-btn {
+        justify-content: center;
+    }
+}
+

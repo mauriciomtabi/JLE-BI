@@ -3158,14 +3158,70 @@
             });
         }
 
-        // Registro do Service Worker
+        // Registro do Service Worker com suporte a Atualização em Tempo Real (PWA Update Check)
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('./sw.js')
-                    .then(reg => console.log('Service Worker registrado com sucesso!', reg))
+                    .then(reg => {
+                        console.log('Service Worker registrado com sucesso!', reg);
+                        
+                        // Monitorar atualizações no sw.js
+                        reg.addEventListener('updatefound', () => {
+                            const newWorker = reg.installing;
+                            if (newWorker) {
+                                newWorker.addEventListener('statechange', () => {
+                                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                        // Novo worker está instalado e aguardando (waiting)
+                                        showUpdateToast(newWorker);
+                                    }
+                                });
+                            }
+                        });
+                    })
                     .catch(err => console.error('Erro ao registrar Service Worker:', err));
+                
+                // Verificar se já existe um worker esperando ativamente ao carregar a página
+                navigator.serviceWorker.ready.then(reg => {
+                    if (reg.waiting) {
+                        showUpdateToast(reg.waiting);
+                    }
+                });
+            });
+
+            // Recarregar a página automaticamente ao confirmar a ativação do novo worker
+            let refreshing = false;
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                if (!refreshing) {
+                    refreshing = true;
+                    window.location.reload();
+                }
             });
         }
+
+        function showUpdateToast(worker) {
+            const toast = document.getElementById('pwa-update-toast');
+            const btn = document.getElementById('pwa-update-btn');
+            if (toast && btn) {
+                toast.classList.add('show');
+                btn.onclick = () => {
+                    worker.postMessage({ type: 'SKIP_WAITING' });
+                };
+            }
+        }
     </script>
+
+    <!-- PWA UPDATE TOAST -->
+    <div id="pwa-update-toast" class="pwa-toast">
+        <div class="pwa-toast-content">
+            <i class="fa-solid fa-cloud-arrow-down pwa-toast-icon"></i>
+            <div class="pwa-toast-text">
+                <strong>Nova Atualização Disponível</strong>
+                <span>O dashboard foi atualizado com melhorias.</span>
+            </div>
+        </div>
+        <button id="pwa-update-btn" class="pwa-toast-btn">
+            <i class="fa-solid fa-rotate"></i> Atualizar
+        </button>
+    </div>
 </body>
 </html>
