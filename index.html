@@ -3179,11 +3179,32 @@
 
         // Lógica de Instalação PWA (Instalação no celular)
         let deferredPrompt;
+        
+        // Esconder o botão se já estiver rodando como aplicativo instalado
+        const checkStandaloneMode = () => {
+            const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+            if (isStandalone) {
+                const installBtn = document.getElementById('install-pwa-btn');
+                if (installBtn) {
+                    installBtn.style.display = 'none';
+                    installBtn.classList.remove('show-btn');
+                }
+                return true;
+            }
+            return false;
+        };
+
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
+            
+            if (checkStandaloneMode()) return;
+
             const installBtn = document.getElementById('install-pwa-btn');
-            if (installBtn) installBtn.style.display = 'flex';
+            if (installBtn) {
+                installBtn.style.display = 'flex';
+                installBtn.classList.add('show-btn'); // Ativa estilo no mobile via classe
+            }
         });
 
         function triggerPwaInstall() {
@@ -3197,9 +3218,43 @@
                 }
                 deferredPrompt = null;
                 const installBtn = document.getElementById('install-pwa-btn');
-                if (installBtn) installBtn.style.display = 'none';
+                if (installBtn) {
+                    installBtn.style.display = 'none';
+                    installBtn.classList.remove('show-btn');
+                }
             });
         }
+
+        // Executar verificação standalone imediata na carga
+        setTimeout(checkStandaloneMode, 100);
+
+        // Evento disparado quando a instalação é concluída
+        window.addEventListener('appinstalled', (evt) => {
+            console.log('PWA instalado com sucesso!');
+            const installBtn = document.getElementById('install-pwa-btn');
+            if (installBtn) {
+                installBtn.style.display = 'none';
+                installBtn.classList.remove('show-btn');
+            }
+            deferredPrompt = null;
+
+            // Exibir toast de sucesso premium
+            const installToast = document.getElementById('pwa-install-success-toast');
+            if (installToast) {
+                setTimeout(() => {
+                    installToast.classList.add('show');
+                    
+                    document.getElementById('pwa-open-app-btn').onclick = () => {
+                        installToast.classList.remove('show');
+                        alert('O aplicativo já está instalado e disponível na tela de início do seu celular! Feche esta página do navegador e clique no ícone "BI JLE Telecom" para usá-lo em tela cheia.');
+                    };
+                    
+                    document.getElementById('pwa-close-toast-btn').onclick = () => {
+                        installToast.classList.remove('show');
+                    };
+                }, 800);
+            }
+        });
 
         function checkIosInstallation() {
             const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
@@ -3286,6 +3341,25 @@
         <button id="pwa-update-btn" class="pwa-toast-btn">
             <i class="fa-solid fa-rotate"></i> Atualizar
         </button>
+    </div>
+
+    <!-- PWA INSTALL SUCCESS TOAST -->
+    <div id="pwa-install-success-toast" class="pwa-toast">
+        <div class="pwa-toast-content">
+            <i class="fa-solid fa-circle-check pwa-toast-icon" style="color: var(--color-success) !important; animation: none;"></i>
+            <div class="pwa-toast-text">
+                <strong>Instalação Concluída!</strong>
+                <span>Deseja abrir o aplicativo do BI agora?</span>
+            </div>
+        </div>
+        <div style="display: flex; gap: 8px;">
+            <button id="pwa-open-app-btn" class="pwa-toast-btn" style="background-color: var(--color-success) !important; color: white !important; display: flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-square-arrow-up-right"></i> Sim, Abrir
+            </button>
+            <button id="pwa-close-toast-btn" class="pwa-toast-btn" style="background-color: transparent !important; border: 1px solid var(--border-color) !important; color: var(--text-primary) !important;">
+                Não
+            </button>
+        </div>
     </div>
 </body>
 </html>

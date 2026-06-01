@@ -2409,8 +2409,33 @@ body.light-theme .auth-alert.success {
     /* Estilização dos links do menu e botões do rodapé */
     .sidebar .nav-item,
     .sidebar .theme-toggle-btn,
-    .sidebar .install-pwa-btn,
     .sidebar .logout-btn {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 48px !important; /* Quadrado compacto */
+        height: 48px !important;
+        padding: 0 !important;
+        color: var(--text-secondary) !important;
+        text-decoration: none !important;
+        background: none !important;
+        border: none !important;
+        border-radius: 12px !important;
+        font-size: 10px !important;
+        font-weight: 500 !important;
+        cursor: pointer !important;
+        box-sizing: border-box !important;
+        transition: all 0.2s ease !important;
+        margin: 0 !important;
+        position: relative; /* Para suporte ao tooltip */
+    }
+
+    .sidebar .install-pwa-btn {
+        display: none !important; /* hidden by default on mobile */
+    }
+
+    .sidebar .install-pwa-btn.show-btn {
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
