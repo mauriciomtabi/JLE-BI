@@ -1467,18 +1467,18 @@ td.cell-saida {
     }
 
     .uf-compact-card.pr-card {
-        left: 175px !important;
-        top: 20px !important;
+        left: 220px !important;
+        top: 25px !important;
     }
     
     .uf-compact-card.sc-card {
-        right: 145px !important;
+        right: 185px !important;
         top: 135px !important;
     }
     
     .uf-compact-card.rs-card {
-        left: 140px !important;
-        bottom: 25px !important;
+        left: 190px !important;
+        bottom: 30px !important;
     }
     
     .map-chart-body {
