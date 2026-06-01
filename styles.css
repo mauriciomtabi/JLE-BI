@@ -544,20 +544,28 @@ body.light-theme .kpi-analytics {
 
 .kpi-icon-container {
     position: absolute;
-    right: 12px;
-    bottom: -12px;
-    font-size: 84px;
+    right: 15px;
+    bottom: -8px;
+    font-size: 110px;
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0.10;
+    opacity: 0.15;
     pointer-events: none;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+body.light-theme .kpi-icon-container {
+    opacity: 0.12;
+}
+
 .kpi-card:hover .kpi-icon-container {
-    transform: scale(1.18) rotate(-6deg);
-    opacity: 0.18;
+    transform: scale(1.12) rotate(-5deg);
+    opacity: 0.25;
+}
+
+body.light-theme .kpi-card:hover .kpi-icon-container {
+    opacity: 0.20;
 }
 
 .kpi-card.inflows .kpi-icon-container {
