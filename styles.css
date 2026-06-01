@@ -3135,6 +3135,7 @@ body.light-theme .pwa-toast {
     .admin-users-table tr {
         display: block !important;
         width: 100% !important;
+        min-width: 0 !important; /* Sobrescreve o min-width global de 600px das tabelas, forçando o enquadramento na tela */
         box-sizing: border-box !important;
     }
     
