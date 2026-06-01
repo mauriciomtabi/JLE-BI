@@ -74,16 +74,30 @@ body {
     justify-content: center;
     align-items: center;
     margin-bottom: 30px;
-    height: 90px;
+    height: 80px;
     box-sizing: border-box;
     border-bottom: 1px solid var(--border-color);
 }
 
 .logo-img {
-    max-height: 60px;
+    max-height: 48px;
     max-width: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 0 8px rgba(0, 79, 113, 0.2));
+    filter: drop-shadow(0 0 10px rgba(243, 159, 24, 0.20));
+    animation: logoPulse 4s infinite ease-in-out;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes logoPulse {
+    0% {
+        filter: drop-shadow(0 0 6px rgba(243, 159, 24, 0.15));
+    }
+    50% {
+        filter: drop-shadow(0 0 14px rgba(243, 159, 24, 0.35));
+    }
+    100% {
+        filter: drop-shadow(0 0 6px rgba(243, 159, 24, 0.15));
+    }
 }
 
 /* Wrapper do logo — sem contorno para fundir perfeitamente com o background */
@@ -98,12 +112,17 @@ body {
 }
 
 .logo-glow-wrapper:hover {
-    opacity: 0.85;
+    opacity: 1;
+}
+
+.logo-glow-wrapper:hover .logo-img {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 18px rgba(243, 159, 24, 0.45));
 }
 
 .logo-full {
-    max-height: 90px;
-    max-width: 192px;
+    max-height: 76px;
+    max-width: 160px;
     object-fit: contain;
     border-radius: 10px;
     display: block;
@@ -524,32 +543,33 @@ body.light-theme .kpi-analytics {
 }
 
 .kpi-icon-container {
-    width: 54px;
-    height: 54px;
-    border-radius: 14px;
+    position: absolute;
+    right: 12px;
+    bottom: -12px;
+    font-size: 84px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 22px;
-    transition: all 0.3s ease;
+    opacity: 0.10;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.kpi-card:hover .kpi-icon-container {
+    transform: scale(1.18) rotate(-6deg);
+    opacity: 0.18;
 }
 
 .kpi-card.inflows .kpi-icon-container {
-    background: linear-gradient(135deg, rgba(0, 79, 113, 0.15), rgba(0, 119, 170, 0.25));
-    color: var(--color-primary-light);
-    box-shadow: 0 0 15px rgba(0, 79, 113, 0.25);
+    color: var(--color-primary);
 }
 
 .kpi-card.outflows .kpi-icon-container {
-    background: linear-gradient(135deg, rgba(243, 159, 24, 0.15), rgba(255, 184, 61, 0.25));
     color: var(--color-secondary);
-    box-shadow: 0 0 15px rgba(243, 159, 24, 0.25);
 }
 
 .kpi-card.balance .kpi-icon-container {
-    background: linear-gradient(135deg, rgba(46, 204, 113, 0.15), rgba(46, 204, 113, 0.25));
     color: var(--color-success);
-    box-shadow: 0 0 15px rgba(46, 204, 113, 0.25);
 }
 
 /* Charts Grid */
