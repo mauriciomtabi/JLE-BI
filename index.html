@@ -1481,16 +1481,18 @@
                     : `<span class="badge-competencia" style="background: rgba(46,204,113,0.08); color: var(--color-success); border-color: rgba(46,204,113,0.2);">Usuário</span>`;
                 const isSelf = u.email === currentUserEmail;
                 return `<tr>
-                    <td data-label="E-mail" style="font-weight:600;">${u.email}${isSelf ? ' <span style="font-size:10px; color:var(--text-secondary);">(você)</span>' : ''}</td>
-                    <td data-label="Perfil">${adminBadge}</td>
-                    <td data-label="Páginas Permitidas" style="max-width: 320px; white-space: normal;">${pages || '<span style="color:var(--text-secondary);font-size:12px;">Nenhuma</span>'}</td>
+                    <td data-label="E-mail"><span class="admin-user-email-wrap" style="font-weight:600; word-break: break-all;">${u.email}${isSelf ? ' <span style="font-size:10px; color:var(--text-secondary); font-weight:normal;">(você)</span>' : ''}</span></td>
+                    <td data-label="Perfil"><span class="admin-user-badge-wrap">${adminBadge}</span></td>
+                    <td data-label="Páginas Permitidas" style="max-width: 320px; white-space: normal;"><div class="admin-user-pages-wrap">${pages || '<span style="color:var(--text-secondary);font-size:12px;">Nenhuma</span>'}</div></td>
                     <td data-label="Ações">
-                        <button onclick="openEditUserModal(${JSON.stringify(u).replace(/"/g, '&quot;')})" title="Editar" style="background:none;border:1px solid var(--border-color);color:var(--text-secondary);padding:6px 10px;border-radius:6px;cursor:pointer;margin-right:6px;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--color-primary)'" onmouseout="this.style.borderColor='var(--border-color)'">
-                            <i class="fa-solid fa-pen"></i>
-                        </button>
-                        ${!isSelf ? `<button onclick="deleteUserPermission('${u.email}')" title="Remover acesso" style="background:none;border:1px solid rgba(231,76,60,0.3);color:var(--color-danger);padding:6px 10px;border-radius:6px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.backgroundColor='rgba(231,76,60,0.08)'" onmouseout="this.style.backgroundColor='transparent'">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>` : ''}
+                        <div class="admin-user-actions-wrap" style="display: flex; gap: 8px; justify-content: flex-end; align-items: center; width: 100%;">
+                            <button onclick="openEditUserModal(${JSON.stringify(u).replace(/"/g, '&quot;')})" title="Editar" style="background:none;border:1px solid var(--border-color);color:var(--text-secondary);padding:6px 10px;border-radius:6px;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;justify-content:center;height:32px;width:32px;" onmouseover="this.style.borderColor='var(--color-primary)'" onmouseout="this.style.borderColor='var(--border-color)'">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                            ${!isSelf ? `<button onclick="deleteUserPermission('${u.email}')" title="Remover acesso" style="background:none;border:1px solid rgba(231,76,60,0.3);color:var(--color-danger);padding:6px 10px;border-radius:6px;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;justify-content:center;height:32px;width:32px;" onmouseover="this.style.backgroundColor='rgba(231,76,60,0.08)'" onmouseout="this.style.backgroundColor='transparent'">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>` : ''}
+                        </div>
                     </td>
                 </tr>`;
             }).join('');

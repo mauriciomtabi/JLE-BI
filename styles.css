@@ -1436,18 +1436,48 @@ td.cell-saida {
     }
     
     /* Reposicionar os cards de UF para ficarem mais próximos do mapa no Mobile */
+    .uf-compact-card {
+        width: 150px !important;
+        padding: 6px 10px !important;
+        gap: 2px !important;
+    }
+    
+    .uf-compact-main-stat {
+        display: none !important;
+    }
+    
+    .uf-compact-sub-stats {
+        border-left: none !important;
+        padding-left: 0 !important;
+        flex: 1 !important;
+        gap: 3px !important;
+    }
+    
+    .uf-sub-stat {
+        gap: 4px !important;
+        font-size: 9px !important;
+    }
+    
+    .uf-sub-val {
+        font-size: 9.5px !important;
+    }
+
+    .uf-compact-name {
+        font-size: 10px !important;
+    }
+
     .uf-compact-card.pr-card {
-        left: 110px !important;
-        top: 25px !important;
+        left: 175px !important;
+        top: 20px !important;
     }
     
     .uf-compact-card.sc-card {
-        right: 90px !important;
-        top: 130px !important;
+        right: 145px !important;
+        top: 135px !important;
     }
     
     .uf-compact-card.rs-card {
-        left: 65px !important;
+        left: 140px !important;
         bottom: 25px !important;
     }
     
@@ -3126,14 +3156,14 @@ body.light-theme .pwa-toast {
     
     .admin-users-table td {
         border: none !important;
-        padding: 8px 12px !important;
+        padding: 10px 14px !important;
         display: flex !important;
         align-items: center !important;
         justify-content: space-between !important;
         gap: 12px !important;
         text-align: right !important;
         box-sizing: border-box !important;
-        flex-wrap: wrap !important; /* Garante que os valores quebrem linha e não estiquem a tabela */
+        min-height: 48px !important;
     }
     
     /* Quebra de palavra para e-mails muito longos para não empurrar a tela */
@@ -3143,13 +3173,28 @@ body.light-theme .pwa-toast {
     
     /* Limitar largura do valor à direita para não sobrepor o label da esquerda */
     .admin-users-table td > span,
-    .admin-users-table td > div {
+    .admin-users-table td > div,
+    .admin-user-email-wrap,
+    .admin-user-badge-wrap,
+    .admin-user-pages-wrap,
+    .admin-user-actions-wrap {
         display: flex !important;
         flex-wrap: wrap !important;
         justify-content: flex-end !important;
         gap: 4px !important;
         max-width: 65% !important;
         text-align: right !important;
+        align-items: center !important;
+    }
+
+    .admin-user-email-wrap {
+        word-break: break-all !important;
+        display: inline-block !important;
+        font-size: 12.5px !important;
+    }
+
+    .admin-user-actions-wrap button {
+        flex-shrink: 0 !important;
     }
     
     .admin-users-table td:not(:last-child) {
