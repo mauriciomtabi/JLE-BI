@@ -1,6 +1,6 @@
 {
-  "name": "BI JLE - JLE Telecom",
-  "short_name": "BI JLE",
+  "name": "BI JLE Telecom",
+  "short_name": "BI JLE Telecom",
   "description": "Dashboard de fluxo de caixa e análise financeira da JLE Telecom",
   "start_url": "./index.html",
   "display": "standalone",
