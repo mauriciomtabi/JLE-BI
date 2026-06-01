@@ -1427,51 +1427,22 @@ td.cell-saida {
     }
     
     .uf-premium-container {
-        display: flex !important;
-        flex-direction: column !important;
-        height: auto !important;
-        gap: 12px !important;
-    }
-    
-    .uf-map-side {
-        position: relative !important;
-        left: auto !important;
-        top: auto !important;
-        transform: none !important;
-        width: 100% !important;
-        height: 240px !important;
-        z-index: 1 !important;
-        margin-bottom: 8px;
-    }
-    
-    .uf-panels-side {
-        display: none !important;
-    }
-    
-    .map-svg-centered {
-        max-width: 80% !important;
-        height: 220px !important;
-        transform: scale(1) !important;
-    }
-    
-    .uf-compact-card {
-        position: relative !important;
-        left: auto !important;
-        right: auto !important;
-        top: auto !important;
-        bottom: auto !important;
-        width: 100% !important;
-        margin-bottom: 8px !important;
-        transform: none !important;
-        z-index: 2 !important;
-    }
-    
-    .map-connection-line {
-        display: none !important;
+        display: block !important;
+        width: 700px !important;
+        height: 380px !important;
+        transform: scale(calc((100vw - 64px) / 700)) !important;
+        transform-origin: top left !important;
+        margin: 10px 0 !important;
     }
     
     .map-chart-body {
-        height: auto !important;
+        height: calc(380px * calc((100vw - 64px) / 700) + 40px) !important;
+        overflow: hidden !important;
+    }
+
+    #categories-chart-body-container {
+        height: 400px !important;
+        overflow-y: auto !important;
     }
 }
 
@@ -2414,19 +2385,54 @@ body.light-theme .auth-alert.success {
         margin: 0 !important;
     }
 
-    /* Alinhamento de botões de controle de fonte */
+    /* Ocultar o texto do span no mobile por padrão e preparar para tooltip */
     .sidebar .nav-item span,
     .sidebar .theme-toggle-btn span,
     .sidebar .logout-btn span {
-        display: block !important;
-        font-size: 9px !important;
-        font-weight: 600 !important;
-        text-transform: uppercase !important;
-        letter-spacing: 0.3px !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
+        display: none !important;
+        position: absolute;
+        bottom: 54px; /* Acima do ícone */
+        left: 50%;
+        transform: translate(-50%, 0);
+        background: rgba(13, 27, 38, 0.95);
+        color: #ffffff !important;
+        padding: 6px 10px;
+        border-radius: 8px;
+        font-size: 10px !important;
+        font-weight: 700 !important;
         white-space: nowrap !important;
-        max-width: 80px !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 1000;
+        pointer-events: none; /* Evita que o tooltip atrapalhe o toque */
+    }
+
+    body.light-theme .sidebar .nav-item span,
+    body.light-theme .sidebar .theme-toggle-btn span,
+    body.light-theme .sidebar .logout-btn span {
+        background: rgba(255, 255, 255, 0.98);
+        color: #070d14 !important;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 4px 15px rgba(0, 80, 115, 0.15);
+    }
+
+    /* Exibe o texto como um tooltip flutuante sobre a barra no hover */
+    .sidebar .nav-item:hover span,
+    .sidebar .theme-toggle-btn:hover span,
+    .sidebar .logout-btn:hover span {
+        display: block !important;
+        animation: tooltipFadeIn 0.2s ease forwards;
+    }
+
+    @keyframes tooltipFadeIn {
+        from {
+            opacity: 0;
+            transform: translate(-50%, 4px);
+        }
+        to {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
     }
 
     .sidebar .nav-item i,
@@ -3027,6 +3033,101 @@ body.light-theme .pwa-toast {
     }
     .pwa-toast-btn {
         justify-content: center;
+    }
+}
+
+/* Responsividade Premium para Painel Admin no Mobile */
+@media (max-width: 768px) {
+    .admin-panel-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+    
+    .admin-card {
+        padding: 16px 20px !important;
+        border-radius: 12px !important;
+    }
+    
+    .admin-card-header {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+    }
+    
+    .admin-add-btn {
+        margin-left: 0 !important;
+        width: 100% !important;
+        justify-content: center !important;
+    }
+    
+    .admin-save-btn {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+
+    /* Transformação da tabela de usuários em blocos/cards no Mobile */
+    .admin-table-container {
+        border: none !important;
+    }
+    
+    .admin-users-table, 
+    .admin-users-table thead, 
+    .admin-users-table tbody, 
+    .admin-users-table th, 
+    .admin-users-table td, 
+    .admin-users-table tr {
+        display: block !important;
+        width: 100% !important;
+    }
+    
+    .admin-users-table thead {
+        display: none !important; /* Esconde cabeçalho em grid no mobile */
+    }
+    
+    .admin-users-table tr {
+        background: rgba(255, 255, 255, 0.02) !important;
+        border: 1px solid var(--border-color) !important;
+        border-radius: 12px !important;
+        margin-bottom: 12px !important;
+        padding: 10px 8px !important;
+    }
+    
+    body.light-theme .admin-users-table tr {
+        background: rgba(0, 0, 0, 0.01) !important;
+    }
+    
+    .admin-users-table td {
+        border: none !important;
+        padding: 8px 12px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 10px !important;
+        text-align: right !important;
+        box-sizing: border-box !important;
+    }
+    
+    .admin-users-table td:not(:last-child) {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03) !important;
+    }
+    
+    body.light-theme .admin-users-table td:not(:last-child) {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.03) !important;
+    }
+    
+    .admin-users-table td::before {
+        content: attr(data-label) !important;
+        font-weight: 700 !important;
+        color: var(--text-secondary) !important;
+        text-transform: uppercase !important;
+        font-size: 10px !important;
+        letter-spacing: 0.5px !important;
+        text-align: left !important;
+        flex-shrink: 0 !important;
+    }
+    
+    .admin-users-table td .tag {
+        margin: 1px !important;
     }
 }
 
