@@ -2504,15 +2504,23 @@ body.light-theme .auth-alert.success {
     }
 
     .sidebar .theme-toggle-btn {
-        color: var(--color-secondary) !important;
-        background-color: rgba(243, 159, 24, 0.08) !important;
-        border: 1px solid rgba(243, 159, 24, 0.25) !important;
+        background: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        color: var(--text-secondary) !important;
+    }
+
+    .sidebar .theme-toggle-btn i {
+        color: #ffb83d !important; /* Golden Moon in dark theme */
+        transition: color 0.3s ease !important;
+    }
+
+    body.light-theme .sidebar .theme-toggle-btn i {
+        color: #e67e22 !important; /* Sun Orange in light theme */
     }
 
     .sidebar .theme-toggle-btn:hover {
-        background-color: rgba(243, 159, 24, 0.15) !important;
-        color: #ffb83d !important;
-        box-shadow: 0 0 8px rgba(243, 159, 24, 0.3) !important;
+        background-color: rgba(0, 79, 113, 0.08) !important;
         border-radius: 12px !important;
     }
 
