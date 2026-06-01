@@ -1422,9 +1422,6 @@ td.cell-saida {
 }
 
 @media (max-width: 768px) {
-    .uf-discreet-legend {
-        display: none !important;
-    }
     
     .uf-premium-container {
         display: block !important;
