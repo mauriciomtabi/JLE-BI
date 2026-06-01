@@ -346,6 +346,24 @@ try {
     $jsContent | Out-File -FilePath "C:\Users\jlema\.gemini\antigravity\scratch\fluxo_caixa_mapping\data.js" -Encoding utf8
     
     Write-Output "ETL Finalizado! Dados salvos em data.js com $($allTransactions.Count) lancamentos."
+
+    # 6. Publicar atualizações no GitHub se houver alterações em data.js
+    Write-Output "Verificando se houve alteracoes nos dados para publicar no GitHub..."
+    $gitPath = "C:\Program Files\Git\cmd\git.exe"
+    if (Test-Path $gitPath) {
+        $gitStatus = & $gitPath status --porcelain data.js
+        if ($null -ne $gitStatus -and $gitStatus.ToString().Trim() -ne "") {
+            Write-Output "Novas transacoes detectadas! Fazendo commit e push para o GitHub..."
+            & $gitPath add data.js
+            & $gitPath commit -m "data(auto): atualizacao automatica de dados do fluxo de caixa"
+            & $gitPath push origin main
+            Write-Output "Dados publicados com sucesso no GitHub!"
+        } else {
+            Write-Output "Sem novas alteracoes nos dados. Nenhuma publicacao necessaria."
+        }
+    } else {
+        Write-Warning "Executavel do Git nao encontrado em '$gitPath'. Nao foi possivel publicar no GitHub."
+    }
     
 } catch {
     Write-Error "Ocorreu um erro no ETL: $($_.Exception.Message)"
