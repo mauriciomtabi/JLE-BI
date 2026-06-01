@@ -2286,17 +2286,24 @@
                     }
                 });
                 
+                const isMobile = window.innerWidth <= 768;
+                
                 charts.evolution = new Chart(ctxEvolution, {
-                    type: 'bar',
+                    type: isMobile ? 'line' : 'bar',
                     data: {
                         labels: days.map(d => d.toString()),
                         datasets: [
                             {
                                 label: 'Entradas',
                                 data: dailyEntradas,
-                                backgroundColor: '#004f71',
-                                borderColor: '#004f71',
-                                borderRadius: 2,
+                                backgroundColor: isMobile ? 'rgba(0, 180, 216, 0.12)' : '#004f71',
+                                borderColor: isMobile ? '#00b4d8' : '#004f71',
+                                borderWidth: isMobile ? 2.5 : 1,
+                                fill: isMobile,
+                                tension: isMobile ? 0.35 : 0,
+                                pointRadius: isMobile ? 2.5 : 0,
+                                pointHoverRadius: isMobile ? 4.5 : 0,
+                                borderRadius: isMobile ? 0 : 2,
                                 hoverBackgroundColor: '#0077aa',
                                 hoverBorderColor: '#ffffff',
                                 hoverBorderWidth: 2
@@ -2304,9 +2311,14 @@
                             {
                                 label: 'Saídas',
                                 data: dailySaidas,
-                                backgroundColor: '#f39f18',
-                                borderColor: '#f39f18',
-                                borderRadius: 2,
+                                backgroundColor: isMobile ? 'rgba(243, 159, 24, 0.12)' : '#f39f18',
+                                borderColor: isMobile ? '#f39f18' : '#f39f18',
+                                borderWidth: isMobile ? 2.5 : 1,
+                                fill: isMobile,
+                                tension: isMobile ? 0.35 : 0,
+                                pointRadius: isMobile ? 2.5 : 0,
+                                pointHoverRadius: isMobile ? 4.5 : 0,
+                                borderRadius: isMobile ? 0 : 2,
                                 hoverBackgroundColor: '#ffb83d',
                                 hoverBorderColor: '#ffffff',
                                 hoverBorderWidth: 2
@@ -2324,7 +2336,7 @@
                                 labels: {
                                     color: textColor,
                                     usePointStyle: true,
-                                    pointStyle: 'rectRounded',
+                                    pointStyle: isMobile ? 'line' : 'rectRounded',
                                     boxWidth: 16,
                                     boxHeight: 8,
                                     padding: 16,
@@ -2332,7 +2344,10 @@
                                 }
                             },
                             datalabels: {
-                                display: (ctx) => ctx.dataset.data[ctx.dataIndex] > 0,
+                                display: (ctx) => {
+                                    if (isMobile) return false;
+                                    return ctx.dataset.data[ctx.dataIndex] > 0;
+                                },
                                 align: 'end',
                                 anchor: 'end',
                                 rotation: -90,
@@ -2349,7 +2364,14 @@
                             }
                         },
                         scales: {
-                            x: { grid: { color: 'transparent' }, ticks: { color: textColor, font: { size: 9 } } },
+                            x: { 
+                                grid: { color: 'transparent' }, 
+                                ticks: { 
+                                    color: textColor, 
+                                    font: { size: 9 },
+                                    maxTicksLimit: isMobile ? 8 : undefined
+                                } 
+                            },
                             y: {
                                 grid: { color: gridColor },
                                 ticks: {
