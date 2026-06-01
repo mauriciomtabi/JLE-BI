@@ -176,6 +176,14 @@
 
         <!-- VIEW 1: DASHBOARD OVERVIEW -->
         <div id="view-dashboard-container" class="view-panel">
+            <!-- Banner de Instalação para iOS -->
+            <div class="ios-install-banner" id="ios-install-banner" style="display: none;">
+                <div class="ios-install-content">
+                    <i class="fa-solid fa-circle-info" style="color: var(--color-secondary); font-size: 15px;"></i>
+                    <span>Para instalar no seu iPhone: toque em <i class="fa-solid fa-arrow-up-from-bracket"></i> (Compartilhar) e selecione <strong>"Adicionar à Tela de Início"</strong>.</span>
+                </div>
+                <button class="ios-install-close" onclick="closeIosBanner()">&times;</button>
+            </div>
             <!-- KPI Cards -->
             <div class="kpi-container">
                 <div class="kpi-card inflows">
@@ -1147,31 +1155,44 @@
 
         let currentUserIsAdmin = false;
         let currentUserEmail = '';
+        let isCheckingPermissions = false;
 
         async function showDashboard(user) {
-            document.getElementById('auth-panel').style.display = 'none';
-            document.getElementById('dashboard-sidebar').style.display = 'flex';
-            document.getElementById('dashboard-main-content').style.display = 'flex';
-            
-            const fullName = (user.user_metadata && user.user_metadata.full_name) || user.email.split('@')[0];
-            const nameEl = document.getElementById('user-display-name');
-            if (nameEl) {
-                nameEl.setAttribute('data-fullname', fullName);
-                nameEl.setAttribute('data-initials', getInitials(fullName));
-                const isCollapsed = document.body.classList.contains('sidebar-collapsed');
-                nameEl.innerText = isCollapsed ? nameEl.getAttribute('data-initials') : fullName;
+            if (isCheckingPermissions) return;
+            isCheckingPermissions = true;
+
+            try {
+                // Buscar permissões do usuário ANTES de ocultar o painel de login e exibir o dashboard
+                const hasAccess = await loadUserPermissions(user.email);
+                if (!hasAccess) {
+                    return;
+                }
+
+                document.getElementById('auth-panel').style.display = 'none';
+                document.getElementById('dashboard-sidebar').style.display = 'flex';
+                document.getElementById('dashboard-main-content').style.display = 'flex';
+                
+                const fullName = (user.user_metadata && user.user_metadata.full_name) || user.email.split('@')[0];
+                const nameEl = document.getElementById('user-display-name');
+                if (nameEl) {
+                    nameEl.setAttribute('data-fullname', fullName);
+                    nameEl.setAttribute('data-initials', getInitials(fullName));
+                    const isCollapsed = document.body.classList.contains('sidebar-collapsed');
+                    nameEl.innerText = isCollapsed ? nameEl.getAttribute('data-initials') : fullName;
+                }
+                document.getElementById('user-display-email').innerText = user.email;
+                currentUserEmail = user.email;
+
+                // Força redimensionamento dos gráficos e aplicação de filtros iniciais
+                setTimeout(() => {
+                    window.dispatchEvent(new Event('resize'));
+                    applyFilters();
+                }, 50);
+            } catch (err) {
+                console.error("Erro no fluxo do dashboard:", err);
+            } finally {
+                isCheckingPermissions = false;
             }
-            document.getElementById('user-display-email').innerText = user.email;
-            currentUserEmail = user.email;
-
-            // Buscar permissões do usuário
-            await loadUserPermissions(user.email);
-
-            // Força redimensionamento dos gráficos e aplicação de filtros iniciais
-            setTimeout(() => {
-                window.dispatchEvent(new Event('resize'));
-                applyFilters();
-            }, 50);
         }
 
         async function loadUserPermissions(email) {
@@ -1184,7 +1205,7 @@
                         if (navEl) navEl.style.display = 'flex';
                     });
                 }
-                return;
+                return true;
             }
             try {
                 // Buscar permissão do usuário
@@ -1222,7 +1243,7 @@
                     }
                     showLoginScreen();
                     showAuthAlert('Acesso negado: Você não possui permissão para acessar nenhuma página do BI. Entre em contato com o administrador.', 'error');
-                    return;
+                    return false;
                 }
 
                 // Se admin, garante acesso a tudo
@@ -1244,9 +1265,11 @@
                 } else if (allowedPages.length > 0) {
                     switchView(allowedPages[0]);
                 }
+                return true;
 
             } catch (err) {
                 console.warn('Erro ao carregar permissões:', err);
+                return false;
             }
         }
 
@@ -3176,11 +3199,30 @@
                 const installBtn = document.getElementById('install-pwa-btn');
                 if (installBtn) installBtn.style.display = 'none';
             });
+        function checkIosInstallation() {
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+            const banner = document.getElementById('ios-install-banner');
+            
+            if (isIOS && !isStandalone && banner) {
+                if (!sessionStorage.getItem('ios_banner_dismissed')) {
+                    banner.style.display = 'flex';
+                }
+            }
+        }
+        
+        function closeIosBanner() {
+            const banner = document.getElementById('ios-install-banner');
+            if (banner) {
+                banner.style.display = 'none';
+                sessionStorage.setItem('ios_banner_dismissed', 'true');
+            }
         }
 
         // Registro do Service Worker com suporte a Atualização em Tempo Real (PWA Update Check)
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
+                checkIosInstallation();
                 navigator.serviceWorker.register('./sw.js')
                     .then(reg => {
                         console.log('Service Worker registrado com sucesso!', reg);
