@@ -1215,6 +1215,16 @@
 
                 console.log('[Admin] isAdmin:', currentUserIsAdmin, '| pages:', allowedPages);
 
+                // Se não for admin e não tiver acesso a nenhuma página, bloqueia imediatamente
+                if (!currentUserIsAdmin && (!allowedPages || allowedPages.length === 0)) {
+                    if (supabaseClient) {
+                        await supabaseClient.auth.signOut();
+                    }
+                    showLoginScreen();
+                    showAuthAlert('Acesso negado: Você não possui permissão para acessar nenhuma página do BI. Entre em contato com o administrador.', 'error');
+                    return;
+                }
+
                 // Se admin, garante acesso a tudo
                 if (currentUserIsAdmin) {
                     allowedPages = ALL_PAGES.map(p => p.id);
@@ -1228,9 +1238,10 @@
                     navEl.style.display = canSee ? 'flex' : 'none';
                 });
 
-                // Se o usuário não tem acesso ao dashboard (primeira página padrão),
-                // navegar para a primeira página permitida
-                if (!allowedPages.includes('dashboard') && allowedPages.length > 0) {
+                // Resetar a tela ativa inicial para a página padrão permitida (previne vazamento de sessão anterior)
+                if (allowedPages.includes('dashboard')) {
+                    switchView('dashboard');
+                } else if (allowedPages.length > 0) {
                     switchView(allowedPages[0]);
                 }
 
