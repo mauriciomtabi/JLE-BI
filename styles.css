@@ -1435,6 +1435,22 @@ td.cell-saida {
         margin: 10px 0 !important;
     }
     
+    /* Reposicionar os cards de UF para ficarem mais próximos do mapa no Mobile */
+    .uf-compact-card.pr-card {
+        left: 110px !important;
+        top: 25px !important;
+    }
+    
+    .uf-compact-card.sc-card {
+        right: 90px !important;
+        top: 130px !important;
+    }
+    
+    .uf-compact-card.rs-card {
+        left: 65px !important;
+        bottom: 25px !important;
+    }
+    
     .map-chart-body {
         height: calc(380px * calc((100vw - 64px) / 700) + 40px) !important;
         overflow: hidden !important;
@@ -2324,10 +2340,10 @@ body.light-theme .auth-alert.success {
 
 /* --- ADAPTAÇÃO MOBILE (MELHORIAS JLE) --- */
 @media (max-width: 768px) {
-    /* Barra de Navegação Inferior Fixa */
+    /* Barra de Navegação Inferior Fixa Centrada */
     .sidebar {
         width: 100% !important;
-        height: 65px !important;
+        height: 60px !important;
         position: fixed !important;
         left: 0 !important;
         top: auto !important;
@@ -2338,12 +2354,13 @@ body.light-theme .auth-alert.success {
         border-top: 1px solid var(--border-color) !important;
         padding: 0 !important;
         margin: 0 !important;
+        display: flex !important;
         flex-direction: row !important;
-        display: grid !important;
-        grid-template-columns: repeat(4, 1fr) !important;
         align-items: center !important;
-        justify-items: center !important;
+        justify-content: center !important; /* Centrado e agrupado no meio */
+        gap: 32px !important; /* Ícones mais próximos sem quebrar linha */
         box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.15) !important;
+        box-sizing: border-box !important;
     }
 
     /* Ocultar elementos desnecessários na barra inferior */
@@ -2368,21 +2385,21 @@ body.light-theme .auth-alert.success {
         flex-direction: column !important;
         align-items: center !important;
         justify-content: center !important;
-        gap: 4px !important;
-        width: 100% !important;
-        height: 100% !important;
-        padding: 8px 0 !important;
+        width: 48px !important; /* Quadrado compacto */
+        height: 48px !important;
+        padding: 0 !important;
         color: var(--text-secondary) !important;
         text-decoration: none !important;
         background: none !important;
         border: none !important;
-        border-radius: 0 !important;
+        border-radius: 12px !important;
         font-size: 10px !important;
         font-weight: 500 !important;
         cursor: pointer !important;
         box-sizing: border-box !important;
         transition: all 0.2s ease !important;
         margin: 0 !important;
+        position: relative; /* Para suporte ao tooltip */
     }
 
     /* Ocultar o texto do span no mobile por padrão e preparar para tooltip */
@@ -2438,18 +2455,18 @@ body.light-theme .auth-alert.success {
     .sidebar .nav-item i,
     .sidebar .theme-toggle-btn i,
     .sidebar .logout-btn i {
-        font-size: 16px !important;
+        font-size: 20px !important; /* Ícones maiores e mais fáceis de tocar */
         margin: 0 !important;
     }
 
-    /* Item ativo da navegação no mobile */
+    /* Item ativo da navegação no mobile - Highlight redondo clean */
     .sidebar .nav-item:hover,
     .sidebar .nav-item.active {
-        background-color: transparent !important;
+        background-color: rgba(0, 79, 113, 0.08) !important;
         color: var(--color-secondary) !important;
         border-left: none !important;
-        border-top: 3px solid var(--color-secondary) !important;
-        padding: 5px 0 8px 0 !important;
+        border-top: none !important;
+        border-radius: 12px !important;
     }
 
     .sidebar .nav-item.active i {
@@ -2459,7 +2476,8 @@ body.light-theme .auth-alert.success {
     .sidebar .theme-toggle-btn:hover,
     .sidebar .logout-btn:hover {
         color: var(--text-primary) !important;
-        background-color: transparent !important;
+        background-color: rgba(0, 79, 113, 0.08) !important;
+        border-radius: 12px !important;
     }
 
     .sidebar .logout-btn {
@@ -3039,13 +3057,20 @@ body.light-theme .pwa-toast {
 /* Responsividade Premium para Painel Admin no Mobile */
 @media (max-width: 768px) {
     .admin-panel-grid {
-        grid-template-columns: 1fr !important;
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
         gap: 16px !important;
     }
     
     .admin-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
         padding: 16px 20px !important;
         border-radius: 12px !important;
+        overflow: hidden !important; /* Impede transbordo de elementos internos */
     }
     
     .admin-card-header {
@@ -3068,6 +3093,8 @@ body.light-theme .pwa-toast {
     /* Transformação da tabela de usuários em blocos/cards no Mobile */
     .admin-table-container {
         border: none !important;
+        width: 100% !important;
+        overflow: hidden !important;
     }
     
     .admin-users-table, 
@@ -3078,6 +3105,7 @@ body.light-theme .pwa-toast {
     .admin-users-table tr {
         display: block !important;
         width: 100% !important;
+        box-sizing: border-box !important;
     }
     
     .admin-users-table thead {
@@ -3102,9 +3130,26 @@ body.light-theme .pwa-toast {
         display: flex !important;
         align-items: center !important;
         justify-content: space-between !important;
-        gap: 10px !important;
+        gap: 12px !important;
         text-align: right !important;
         box-sizing: border-box !important;
+        flex-wrap: wrap !important; /* Garante que os valores quebrem linha e não estiquem a tabela */
+    }
+    
+    /* Quebra de palavra para e-mails muito longos para não empurrar a tela */
+    .admin-users-table td[data-label="E-mail"] {
+        word-break: break-all !important;
+    }
+    
+    /* Limitar largura do valor à direita para não sobrepor o label da esquerda */
+    .admin-users-table td > span,
+    .admin-users-table td > div {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: flex-end !important;
+        gap: 4px !important;
+        max-width: 65% !important;
+        text-align: right !important;
     }
     
     .admin-users-table td:not(:last-child) {
