@@ -3327,3 +3327,8 @@ body.light-theme .pwa-toast {
     line-height: 1;
 }
 
+/* Segurança: Forçar ocultação de itens de navegação sem permissão em todas as resoluções */
+.sidebar .nav-item.nav-hidden {
+    display: none !important;
+}
+

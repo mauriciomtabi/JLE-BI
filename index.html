@@ -1155,6 +1155,7 @@
 
         let currentUserIsAdmin = false;
         let currentUserEmail = '';
+        let currentUserAllowedPages = [];
         let isCheckingPermissions = false;
 
         async function showDashboard(user) {
@@ -1220,11 +1221,24 @@
                 // Modo demo: se for o admin registrado, conceder acesso total
                 if (email && (email.toLowerCase().includes('mauricio') || email === 'admin@jletelecom.com.br')) {
                     currentUserIsAdmin = true;
-                    ALL_PAGES.forEach(page => {
-                        const navEl = document.getElementById(page.navId);
-                        if (navEl) navEl.style.display = 'flex';
-                    });
+                    currentUserAllowedPages = ALL_PAGES.map(p => p.id);
+                } else {
+                    currentUserIsAdmin = false;
+                    currentUserAllowedPages = ['dashboard', 'transactions'];
                 }
+                
+                ALL_PAGES.forEach(page => {
+                    const navEl = document.getElementById(page.navId);
+                    if (!navEl) return;
+                    const canSee = currentUserIsAdmin || currentUserAllowedPages.includes(page.id);
+                    if (canSee) {
+                        navEl.classList.remove('nav-hidden');
+                        navEl.style.display = 'flex';
+                    } else {
+                        navEl.classList.add('nav-hidden');
+                        navEl.style.display = 'none';
+                    }
+                });
                 return true;
             }
             try {
@@ -1258,6 +1272,7 @@
 
                 // Se não for admin e não tiver acesso a nenhuma página, bloqueia imediatamente
                 if (!currentUserIsAdmin && (!allowedPages || allowedPages.length === 0)) {
+                    currentUserAllowedPages = [];
                     if (supabaseClient) {
                         await supabaseClient.auth.signOut();
                     }
@@ -1271,12 +1286,20 @@
                     allowedPages = ALL_PAGES.map(p => p.id);
                 }
 
+                currentUserAllowedPages = allowedPages;
+
                 // Aplicar visibilidade no menu
                 ALL_PAGES.forEach(page => {
                     const navEl = document.getElementById(page.navId);
                     if (!navEl) return;
                     const canSee = currentUserIsAdmin || allowedPages.includes(page.id);
-                    navEl.style.display = canSee ? 'flex' : 'none';
+                    if (canSee) {
+                        navEl.classList.remove('nav-hidden');
+                        navEl.style.display = 'flex';
+                    } else {
+                        navEl.classList.add('nav-hidden');
+                        navEl.style.display = 'none';
+                    }
                 });
 
                 // Resetar a tela ativa inicial para a página padrão permitida (previne vazamento de sessão anterior)
@@ -1438,6 +1461,16 @@
 
         // Navegação de Telas
         function switchView(viewName) {
+            // Segurança: Impedir transições para telas não autorizadas de forma fail-secure
+            if (viewName === 'admin' && !currentUserIsAdmin) {
+                console.warn("Acesso bloqueado: O usuário não possui perfil administrativo!");
+                return;
+            }
+            if (viewName !== 'admin' && !currentUserIsAdmin && currentUserAllowedPages && currentUserAllowedPages.length > 0 && !currentUserAllowedPages.includes(viewName)) {
+                console.warn(`Acesso bloqueado: O usuário não possui permissão para ver a tela: ${viewName}`);
+                return;
+            }
+
             activeView = viewName;
             document.querySelectorAll('.view-panel').forEach(panel => panel.style.display = 'none');
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
