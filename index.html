@@ -2071,7 +2071,7 @@
 
         // Renderização de Gráficos (Chart.js)
         function renderCharts() {
-            if (activeView !== 'dashboard') return;
+            if (!currentUserEmail || activeView !== 'dashboard') return;
             
             const isDark = !document.body.classList.contains('light-theme');
             const gridColor = isDark ? '#20313f' : '#e0e6ed';
@@ -3199,6 +3199,8 @@
                 const installBtn = document.getElementById('install-pwa-btn');
                 if (installBtn) installBtn.style.display = 'none';
             });
+        }
+
         function checkIosInstallation() {
             const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
             const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
