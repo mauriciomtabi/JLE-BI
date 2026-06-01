@@ -1882,6 +1882,37 @@
             applyFilters();
         }
 
+        function filterBySpecificWeek(weekIdx, month) {
+            const monthMapping = {
+                'JANEIRO': '01',
+                'FEVEREIRO': '02',
+                'MARÇO': '03',
+                'ABRIL': '04',
+                'MAIO': '05'
+            };
+            const monthNum = monthMapping[month];
+            if (!monthNum) return;
+            
+            const daysInMonth = {
+                'JANEIRO': 31,
+                'FEVEREIRO': 28,
+                'MARÇO': 31,
+                'ABRIL': 30,
+                'MAIO': 31
+            };
+            const maxDays = daysInMonth[month] || 31;
+            
+            const startDay = weekIdx * 7 + 1;
+            const endDay = Math.min((weekIdx + 1) * 7, maxDays);
+            
+            const formattedStart = startDay.toString().padStart(2, '0');
+            const formattedEnd = endDay.toString().padStart(2, '0');
+            
+            document.getElementById('filter-data-inicio').value = `2026-${monthNum}-${formattedStart}`;
+            document.getElementById('filter-data-fim').value = `2026-${monthNum}-${formattedEnd}`;
+            applyFilters();
+        }
+
         // Busca na Tabela
         function handleSearch() {
             const searchVal = document.getElementById('table-search').value.toLowerCase();
@@ -2254,7 +2285,11 @@
                 });
             } else {
                 // VISÃO DIÁRIA DETALHADA PARA O MÊS SELECIONADO
-                document.getElementById('evolution-chart-title').innerText = `Evolução de Fluxo Diário - ${selectedMonth}`;
+                const isMobile = window.innerWidth <= 768;
+                
+                document.getElementById('evolution-chart-title').innerText = isMobile 
+                    ? `Evolução de Fluxo Semanal - ${selectedMonth}` 
+                    : `Evolução de Fluxo Diário - ${selectedMonth}`;
                 
                 // Mapeamento de dias por mês em 2026
                 const daysInMonth = {
@@ -2286,39 +2321,50 @@
                     }
                 });
                 
-                const isMobile = window.innerWidth <= 768;
+                // Configuração condicional se for mobile (Semanal) ou desktop (Diário)
+                let chartLabels = [];
+                let chartEntradas = [];
+                let chartSaidas = [];
+                
+                if (isMobile) {
+                    // Agrupamento por Semanas (Semana 1: 1-7, Semana 2: 8-14, Semana 3: 15-21, Semana 4: 22-28, Semana 5: 29-fim)
+                    const numWeeks = Math.ceil(maxDays / 7);
+                    chartLabels = Array.from({length: numWeeks}, (_, i) => `Semana ${i + 1}`);
+                    chartEntradas = Array(numWeeks).fill(0);
+                    chartSaidas = Array(numWeeks).fill(0);
+                    
+                    for (let d = 1; d <= maxDays; d++) {
+                        const weekIdx = Math.min(Math.floor((d - 1) / 7), numWeeks - 1);
+                        chartEntradas[weekIdx] += dailyEntradas[d - 1];
+                        chartSaidas[weekIdx] += dailySaidas[d - 1];
+                    }
+                } else {
+                    chartLabels = days.map(d => d.toString());
+                    chartEntradas = dailyEntradas;
+                    chartSaidas = dailySaidas;
+                }
                 
                 charts.evolution = new Chart(ctxEvolution, {
-                    type: isMobile ? 'line' : 'bar',
+                    type: 'bar', // Ambos serão do tipo barra vertical duplo
                     data: {
-                        labels: days.map(d => d.toString()),
+                        labels: chartLabels,
                         datasets: [
                             {
                                 label: 'Entradas',
-                                data: dailyEntradas,
-                                backgroundColor: isMobile ? 'rgba(0, 180, 216, 0.12)' : '#004f71',
-                                borderColor: isMobile ? '#00b4d8' : '#004f71',
-                                borderWidth: isMobile ? 2.5 : 1,
-                                fill: isMobile,
-                                tension: isMobile ? 0.35 : 0,
-                                pointRadius: isMobile ? 2.5 : 0,
-                                pointHoverRadius: isMobile ? 4.5 : 0,
-                                borderRadius: isMobile ? 0 : 2,
+                                data: chartEntradas,
+                                backgroundColor: '#004f71',
+                                borderColor: '#004f71',
+                                borderRadius: isMobile ? 4 : 2, // Cantos mais arredondados e elegantes no mobile
                                 hoverBackgroundColor: '#0077aa',
                                 hoverBorderColor: '#ffffff',
                                 hoverBorderWidth: 2
                             },
                             {
                                 label: 'Saídas',
-                                data: dailySaidas,
-                                backgroundColor: isMobile ? 'rgba(243, 159, 24, 0.12)' : '#f39f18',
-                                borderColor: isMobile ? '#f39f18' : '#f39f18',
-                                borderWidth: isMobile ? 2.5 : 1,
-                                fill: isMobile,
-                                tension: isMobile ? 0.35 : 0,
-                                pointRadius: isMobile ? 2.5 : 0,
-                                pointHoverRadius: isMobile ? 4.5 : 0,
-                                borderRadius: isMobile ? 0 : 2,
+                                data: chartSaidas,
+                                backgroundColor: '#f39f18',
+                                borderColor: '#f39f18',
+                                borderRadius: isMobile ? 4 : 2, // Cantos mais arredondados e elegantes no mobile
                                 hoverBackgroundColor: '#ffb83d',
                                 hoverBorderColor: '#ffffff',
                                 hoverBorderWidth: 2
@@ -2336,7 +2382,7 @@
                                 labels: {
                                     color: textColor,
                                     usePointStyle: true,
-                                    pointStyle: isMobile ? 'line' : 'rectRounded',
+                                    pointStyle: 'rectRounded',
                                     boxWidth: 16,
                                     boxHeight: 8,
                                     padding: 16,
@@ -2344,15 +2390,16 @@
                                 }
                             },
                             datalabels: {
-                                display: (ctx) => {
-                                    if (isMobile) return false;
-                                    return ctx.dataset.data[ctx.dataIndex] > 0;
-                                },
+                                display: (ctx) => ctx.dataset.data[ctx.dataIndex] > 0,
                                 align: 'end',
                                 anchor: 'end',
-                                rotation: -90,
+                                rotation: isMobile ? 0 : -90, // No mobile as fontes ficam horizontais para máxima legibilidade
                                 color: textColor,
-                                font: { family: 'Outfit', size: 8, weight: '600' },
+                                font: { 
+                                    family: 'Outfit', 
+                                    size: isMobile ? 9 : 8, 
+                                    weight: '700' 
+                                },
                                 formatter: (val) => {
                                     const a = Math.abs(val);
                                     if (a >= 1000000) return (a/1000000).toFixed(1).replace('.', ',') + 'M';
@@ -2368,8 +2415,7 @@
                                 grid: { color: 'transparent' }, 
                                 ticks: { 
                                     color: textColor, 
-                                    font: { size: 9 },
-                                    maxTicksLimit: isMobile ? 8 : undefined
+                                    font: { size: isMobile ? 10 : 9 } 
                                 } 
                             },
                             y: {
@@ -2390,8 +2436,14 @@
                         onClick: (event, elements) => {
                             if (elements.length > 0) {
                                 const elementIndex = elements[0].index;
-                                const clickedDay = days[elementIndex];
-                                filterBySpecificDay(clickedDay, selectedMonth);
+                                if (isMobile) {
+                                    // Drilldown por semana no celular
+                                    filterBySpecificWeek(elementIndex, selectedMonth);
+                                } else {
+                                    // Drilldown por dia no desktop
+                                    const clickedDay = days[elementIndex];
+                                    filterBySpecificDay(clickedDay, selectedMonth);
+                                }
                             }
                         }
                     }
