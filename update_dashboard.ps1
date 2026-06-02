@@ -9,23 +9,36 @@ $i_acute = [char]237
 $e_circumflex = [char]234
 $c_cedilla_caps = [char]199
 
-$networkPath = "\\10.121.21.252\financeiro\Angelita\2026\FLUXO DIARIO\Fluxo de Caixa Analítico_Atualizado 11.05.2026.xlsx"
+$networkDir = "\\10.121.21.252\financeiro\Angelita\2026\FLUXO DIARIO"
 $localTempPath = "C:\Users\jlema\.gemini\antigravity\scratch\fluxo_caixa_mapping\temp_read.xlsx"
 $fallbackPath = "C:\Users\jlema\.gemini\antigravity\scratch\fluxo_caixa_mapping\local_file.xlsx"
 
 Write-Output "Iniciando processo de ETL..."
 
-# 1. Copiar arquivo da rede localmente
+# 1. Copiar arquivo da rede localmente (utilizando busca com wildcard para tolerar variações de acentuação na rede)
 $useFile = $null
-if (Test-Path $networkPath) {
+$networkPath = $null
+
+if (Test-Path $networkDir) {
     try {
-        Write-Output "Copiando planilha da rede localmente..."
-        Copy-Item -Path $networkPath -Destination $localTempPath -Force
-        $useFile = $localTempPath
-        Write-Output "Cópia realizada com sucesso."
+        $networkFile = Get-ChildItem $networkDir | Where-Object { $_.Name -like "*Fluxo de Caixa*11.05.2026.xlsx" } | Select-Object -First 1
+        if ($null -ne $networkFile) {
+            $networkPath = $networkFile.FullName
+            Write-Output "Arquivo de rede encontrado: $networkPath"
+            Write-Output "Copiando planilha da rede localmente..."
+            Copy-Item -Path $networkPath -Destination $localTempPath -Force
+            # Atualiza também a cópia de fallback local para manter o cache sincronizado
+            Copy-Item -Path $networkPath -Destination $fallbackPath -Force
+            $useFile = $localTempPath
+            Write-Output "Cópia realizada e cache local atualizado com sucesso."
+        } else {
+            Write-Warning "Nenhum arquivo correspondente a '*Fluxo de Caixa*11.05.2026.xlsx' foi encontrado na pasta de rede."
+        }
     } catch {
         Write-Warning "Falha ao copiar da rede: $($_.Exception.Message)"
     }
+} else {
+    Write-Warning "Diretório de rede inacessível: $networkDir"
 }
 
 if ($null -eq $useFile) {
@@ -353,11 +366,27 @@ try {
     if (Test-Path $gitPath) {
         $gitStatus = & $gitPath status --porcelain data.js
         if ($null -ne $gitStatus -and $gitStatus.ToString().Trim() -ne "") {
-            Write-Output "Novas transacoes detectadas! Fazendo commit e push para o GitHub..."
-            & $gitPath add data.js
-            & $gitPath commit -m "data(auto): atualizacao automatica de dados do fluxo de caixa"
+            Write-Output "Novas transacoes detectadas! Atualizando a versao do Cache no Service Worker (sw.js)..."
+            $swPath = "C:\Users\jlema\.gemini\antigravity\scratch\fluxo_caixa_mapping\sw.js"
+            if (Test-Path $swPath) {
+                try {
+                    $swContent = [System.IO.File]::ReadAllText($swPath)
+                    $timestamp = Get-Date -Format "yyyyMMddHHmmss"
+                    $newCacheNameLine = "const CACHE_NAME = 'jle-bi-v3.12.$timestamp';"
+                    $swContent = $swContent -replace "const CACHE_NAME = '([^']+)';", $newCacheNameLine
+                    $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+                    [System.IO.File]::WriteAllText($swPath, $swContent, $utf8NoBom)
+                    Write-Output "Cache do Service Worker atualizado com sucesso para: jle-bi-v3.12.$timestamp"
+                } catch {
+                    Write-Warning "Nao foi possivel atualizar o sw.js: $($_.Exception.Message)"
+                }
+            }
+
+            Write-Output "Fazendo commit e push para o GitHub..."
+            & $gitPath add data.js sw.js
+            & $gitPath commit -m "data(auto): atualizacao automatica de dados e cache do PWA"
             & $gitPath push origin main
-            Write-Output "Dados publicados com sucesso no GitHub!"
+            Write-Output "Dados e Service Worker publicados com sucesso no GitHub!"
         } else {
             Write-Output "Sem novas alteracoes nos dados. Nenhuma publicacao necessaria."
         }

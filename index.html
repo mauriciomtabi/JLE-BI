@@ -3464,7 +3464,7 @@
             }
         }
 
-        // Registro do Service Worker com suporte a Atualização em Tempo Real (PWA Update Check)
+        // Registro do Service Worker com suporte a Atualização Silenciosa Automática
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 checkIosInstallation();
@@ -3478,8 +3478,8 @@
                             if (newWorker) {
                                 newWorker.addEventListener('statechange', () => {
                                     if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                                        // Novo worker está instalado e aguardando (waiting)
-                                        showUpdateToast(newWorker);
+                                        // Novo worker está instalado e aguardando - ativa silenciosamente
+                                        handleSilentUpdate(newWorker);
                                     }
                                 });
                             }
@@ -3490,8 +3490,30 @@
                 // Verificar se já existe um worker esperando ativamente ao carregar a página
                 navigator.serviceWorker.ready.then(reg => {
                     if (reg.waiting) {
-                        showUpdateToast(reg.waiting);
+                        handleSilentUpdate(reg.waiting);
                     }
+
+                    // Checagem ativa inteligente do Service Worker (foco e a cada 1 hora)
+                    let lastCheck = 0;
+                    function checkUpdates() {
+                        const now = Date.now();
+                        if (now - lastCheck > 15000) { // Debounce de 15 segundos para evitar chamadas excessivas
+                            lastCheck = now;
+                            console.log('Verificando atualizações no banco de dados e BI...');
+                            reg.update().catch(err => console.log('Erro ao buscar atualização:', err));
+                        }
+                    }
+
+                    // 1. Checar ao reativar o foco ou visibilidade da aba
+                    document.addEventListener('visibilitychange', () => {
+                        if (document.visibilityState === 'visible') {
+                            checkUpdates();
+                        }
+                    });
+                    window.addEventListener('focus', checkUpdates);
+
+                    // 2. Checar periodicamente a cada 1 hora se mantiver aberto
+                    setInterval(checkUpdates, 3600000);
                 });
             });
 
@@ -3505,31 +3527,14 @@
             });
         }
 
-        function showUpdateToast(worker) {
-            const toast = document.getElementById('pwa-update-toast');
-            const btn = document.getElementById('pwa-update-btn');
-            if (toast && btn) {
-                toast.classList.add('show');
-                btn.onclick = () => {
-                    worker.postMessage({ type: 'SKIP_WAITING' });
-                };
+        function handleSilentUpdate(worker) {
+            if (worker) {
+                console.log('Nova atualização de dados/BI encontrada! Atualizando de forma silenciosa...');
+                worker.postMessage({ type: 'SKIP_WAITING' });
             }
         }
     </script>
 
-    <!-- PWA UPDATE TOAST -->
-    <div id="pwa-update-toast" class="pwa-toast">
-        <div class="pwa-toast-content">
-            <i class="fa-solid fa-cloud-arrow-down pwa-toast-icon"></i>
-            <div class="pwa-toast-text">
-                <strong>Nova Atualização Disponível</strong>
-                <span>O dashboard foi atualizado com melhorias.</span>
-            </div>
-        </div>
-        <button id="pwa-update-btn" class="pwa-toast-btn">
-            <i class="fa-solid fa-rotate"></i> Atualizar
-        </button>
-    </div>
 
     <!-- PWA INSTALL SUCCESS TOAST -->
     <div id="pwa-install-success-toast" class="pwa-toast">
