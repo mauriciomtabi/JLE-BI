@@ -3497,7 +3497,7 @@
                     let lastCheck = 0;
                     function checkUpdates() {
                         const now = Date.now();
-                        if (now - lastCheck > 15000) { // Debounce de 15 segundos para evitar chamadas excessivas
+                        if (now - lastCheck > 600000) { // Debounce de 10 minutos para economizar rede móvel/bateria
                             lastCheck = now;
                             console.log('Verificando atualizações no banco de dados e BI...');
                             reg.update().catch(err => console.log('Erro ao buscar atualização:', err));
@@ -3518,13 +3518,16 @@
             });
 
             // Recarregar a página automaticamente ao confirmar a ativação do novo worker
-            let refreshing = false;
-            navigator.serviceWorker.addEventListener('controllerchange', () => {
-                if (!refreshing) {
-                    refreshing = true;
-                    window.location.reload();
-                }
-            });
+            // Apenas se a página já estivesse sob controle de um worker ativo (evita loops infinitos no mobile/primeira carga)
+            if (navigator.serviceWorker.controller) {
+                let refreshing = false;
+                navigator.serviceWorker.addEventListener('controllerchange', () => {
+                    if (!refreshing) {
+                        refreshing = true;
+                        window.location.reload();
+                    }
+                });
+            }
         }
 
         function handleSilentUpdate(worker) {
