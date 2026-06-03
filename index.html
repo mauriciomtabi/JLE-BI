@@ -1484,11 +1484,10 @@
         function switchDashboardTab(tabName) {
             activeDashboardTab = tabName;
             
-            // Ocultar/exibir subviews
             const indSubview = document.getElementById('subview-indicators');
             const txSubview = document.getElementById('subview-transactions');
-            if (indSubview) indSubview.style.display = tabName === 'indicators' ? 'flex' : 'none';
-            if (txSubview) txSubview.style.display = tabName === 'transactions' ? 'flex' : 'none';
+            if (indSubview) indSubview.style.display = tabName === 'indicators' ? 'block' : 'none';
+            if (txSubview) txSubview.style.display = tabName === 'transactions' ? 'block' : 'none';
             
             // Alterar estado ativo dos botões
             const indBtn = document.getElementById('tab-btn-indicators');

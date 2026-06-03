@@ -319,7 +319,20 @@ header {
     align-self: flex-start;
     width: auto;
     box-shadow: var(--shadow-main);
-    margin-bottom: 8px;
+    margin-top: 16px;
+    margin-bottom: 24px;
+}
+
+@media (max-width: 768px) {
+    .dashboard-tabs {
+        display: none !important;
+    }
+    #subview-indicators {
+        display: block !important;
+    }
+    #subview-transactions {
+        display: none !important;
+    }
 }
 
 .tab-btn {
