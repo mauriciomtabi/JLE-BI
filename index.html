@@ -61,10 +61,7 @@
         
         <nav class="nav-menu">
             <a class="nav-item active" id="nav-dashboard" onclick="switchView('dashboard')">
-                <i class="fa-solid fa-chart-pie"></i> <span>Dashboard</span>
-            </a>
-            <a class="nav-item" id="nav-transactions" onclick="switchView('transactions')">
-                <i class="fa-solid fa-list-ol"></i> <span>Lançamentos</span>
+                <i class="fa-solid fa-sack-dollar"></i> <span>Financeiro</span>
             </a>
             <a class="nav-item" id="nav-admin" onclick="switchView('admin')" style="display:none;">
                 <i class="fa-solid fa-shield-halved"></i> <span>Admin</span>
@@ -184,7 +181,20 @@
                 </div>
                 <button class="ios-install-close" onclick="closeIosBanner()">&times;</button>
             </div>
-            <!-- KPI Cards -->
+
+            <!-- NAVEGAÇÃO INTERNA EM ABAS (TAB SYSTEM) -->
+            <div class="dashboard-tabs">
+                <button class="tab-btn active" id="tab-btn-indicators" onclick="switchDashboardTab('indicators')">
+                    <i class="fa-solid fa-chart-column"></i> Indicadores
+                </button>
+                <button class="tab-btn" id="tab-btn-transactions" onclick="switchDashboardTab('transactions')">
+                    <i class="fa-solid fa-list-ol"></i> Lançamentos
+                </button>
+            </div>
+
+            <!-- SUB-VIEW 1: INDICADORES (KPIs, Bancos e Gráficos) -->
+            <div id="subview-indicators" class="dashboard-subview">
+                <!-- KPI Cards -->
             <div class="kpi-container">
                 <div class="kpi-card inflows">
                     <div class="kpi-info">
@@ -300,55 +310,55 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- VIEW 2: TRANSACTIONS LIST -->
-        <div id="view-transactions-container" class="view-panel" style="display: none;">
-            <div class="data-table-card">
-                <div class="table-controls">
-                    <div class="search-wrapper">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" id="table-search" placeholder="Buscar por descrição ou categoria..." oninput="handleSearch()">
+            </div> <!-- Fim de subview-indicators -->
+            
+            <!-- SUB-VIEW 2: LANÇAMENTOS (Tabela Analítica) -->
+            <div id="subview-transactions" class="dashboard-subview" style="display: none;">
+                <div class="data-table-card">
+                    <div class="table-controls">
+                        <div class="search-wrapper">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" id="table-search" placeholder="Buscar por descrição ou categoria..." oninput="handleSearch()">
+                        </div>
+                        <div class="table-actions">
+                            <button class="btn-secondary" onclick="exportToCSV()">
+                                <i class="fa-solid fa-file-csv"></i> Exportar CSV
+                            </button>
+                        </div>
                     </div>
-                    <div class="table-actions">
-                        <button class="btn-secondary" onclick="exportToCSV()">
-                            <i class="fa-solid fa-file-csv"></i> Exportar CSV
-                        </button>
+                    
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Banco</th>
+                                    <th>Competência</th>
+                                    <th>UF</th>
+                                    <th>Origem</th>
+                                    <th>Fluxo</th>
+                                    <th>Categoria</th>
+                                    <th>Descrição</th>
+                                    <th style="text-align: right;">Valor</th>
+                                    <th>Meio de Pagamento</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-body">
+                                <!-- Rows will be dynamically loaded -->
+                            </tbody>
+                        </table>
                     </div>
-                </div>
-                
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Data</th>
-                                <th>Banco</th>
-                                <th>Competência</th>
-                                <th>UF</th>
-                                <th>Origem</th>
-                                <th>Fluxo</th>
-                                <th>Categoria</th>
-                                <th>Descrição</th>
-                                <th style="text-align: right;">Valor</th>
-                                <th>Meio de Pagamento</th>
-                            </tr>
-                        </thead>
-                        <tbody id="table-body">
-                            <!-- Rows will be dynamically loaded -->
-                        </tbody>
-                    </table>
-                </div>
-                
-                <div class="pagination">
-                    <span class="pagination-info" id="pagination-info">Mostrando 0-0 de 0 transações</span>
-                    <div class="pagination-buttons">
-                        <button class="pagination-btn" id="pagination-prev" onclick="changePage(-1)">
-                            <i class="fa-solid fa-chevron-left"></i>
-                        </button>
-                        <button class="pagination-btn" id="pagination-next" onclick="changePage(1)">
-                            <i class="fa-solid fa-chevron-right"></i>
-                        </button>
+                    
+                    <div class="pagination">
+                        <span class="pagination-info" id="pagination-info">Mostrando 0-0 de 0 transações</span>
+                        <div class="pagination-buttons">
+                            <button class="pagination-btn" id="pagination-prev" onclick="changePage(-1)">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </button>
+                            <button class="pagination-btn" id="pagination-next" onclick="changePage(1)">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1151,8 +1161,7 @@
 
         // Known pages registry (for admin panel)
         const ALL_PAGES = [
-            { id: 'dashboard',    label: 'Dashboard Financeiro',    icon: 'fa-chart-pie',       navId: 'nav-dashboard' },
-            { id: 'transactions', label: 'Lançamentos Analíticos', icon: 'fa-list-ol',          navId: 'nav-transactions' },
+            { id: 'dashboard',    label: 'Dashboard Financeiro',    icon: 'fa-sack-dollar',       navId: 'nav-dashboard' },
             { id: 'admin',        label: 'Painel Admin',            icon: 'fa-shield-halved',    navId: 'nav-admin',        adminOnly: true },
         ];
 
@@ -1469,8 +1478,54 @@
             });
         }
 
+        let activeDashboardTab = 'indicators';
+
+        function switchDashboardTab(tabName) {
+            activeDashboardTab = tabName;
+            
+            // Ocultar/exibir subviews
+            const indSubview = document.getElementById('subview-indicators');
+            const txSubview = document.getElementById('subview-transactions');
+            if (indSubview) indSubview.style.display = tabName === 'indicators' ? 'flex' : 'none';
+            if (txSubview) txSubview.style.display = tabName === 'transactions' ? 'flex' : 'none';
+            
+            // Alterar estado ativo dos botões
+            const indBtn = document.getElementById('tab-btn-indicators');
+            const txBtn = document.getElementById('tab-btn-transactions');
+            if (indBtn) indBtn.classList.toggle('active', tabName === 'indicators');
+            if (txBtn) txBtn.classList.toggle('active', tabName === 'transactions');
+            
+            const mesSelect = document.getElementById('filter-mes');
+            const mesText = mesSelect ? mesSelect.options[mesSelect.selectedIndex].text : '';
+            const subtitleEl = document.getElementById('view-subtitle');
+            
+            // Atualizar título/subtítulo conforme a aba ativa
+            if (subtitleEl) {
+                if (tabName === 'indicators') {
+                    subtitleEl.innerHTML = `Dashboard de Gestão e Análise de Indicadores. <span class="badge-competencia">Competência: ${mesText}</span>`;
+                } else {
+                    subtitleEl.innerHTML = `Relação completa de transações com ferramentas de busca e auditoria <span class="badge-competencia">Competência: ${mesText}</span>`;
+                }
+            }
+            
+            // Redimensionar gráficos ou re-renderizar tabelas para ajustar largura
+            if (tabName === 'indicators') {
+                window.dispatchEvent(new Event('resize'));
+                renderCharts();
+            } else {
+                renderTable();
+            }
+        }
+
         // Navegação de Telas
         function switchView(viewName) {
+            // Se tentar acessar a aba de transações como uma tela separada (legado/redirecionamento)
+            if (viewName === 'transactions') {
+                switchView('dashboard');
+                switchDashboardTab('transactions');
+                return;
+            }
+
             // Segurança: Impedir transições para telas não autorizadas de forma fail-secure
             if (viewName === 'admin' && !currentUserIsAdmin) {
                 console.warn("Acesso bloqueado: O usuário não possui perfil administrativo!");
@@ -1514,12 +1569,13 @@
                 
                 if (viewName === 'dashboard') {
                     document.getElementById('view-title').innerText = 'Dashboard Financeiro';
-                    document.getElementById('view-subtitle').innerHTML = `Dashboard de Gestão e Análise de Indicadores.${mesText ? ' <span class="badge-competencia">Competência: ' + mesText + '</span>' : ''}`;
-                    renderCharts();
-                } else {
-                    document.getElementById('view-title').innerText = 'Lançamentos Analíticos';
-                    document.getElementById('view-subtitle').innerHTML = `Relação completa de transações com ferramentas de busca e auditoria${mesText ? ' <span class="badge-competencia">Competência: ' + mesText + '</span>' : ''}`;
-                    renderTable();
+                    if (activeDashboardTab === 'indicators') {
+                        document.getElementById('view-subtitle').innerHTML = `Dashboard de Gestão e Análise de Indicadores.${mesText ? ' <span class="badge-competencia">Competência: ' + mesText + '</span>' : ''}`;
+                        renderCharts();
+                    } else {
+                        document.getElementById('view-subtitle').innerHTML = `Relação completa de transações com ferramentas de busca e auditoria${mesText ? ' <span class="badge-competencia">Competência: ' + mesText + '</span>' : ''}`;
+                        renderTable();
+                    }
                 }
             }
         }
@@ -1527,8 +1583,7 @@
         // ---- ADMIN PANEL FUNCTIONS ----
 
         const PAGES_CATALOG = [
-            { id: 'dashboard',    label: 'Dashboard Financeiro',     icon: 'fa-chart-pie' },
-            { id: 'transactions', label: 'Lançamentos Analíticos',   icon: 'fa-list-ol' },
+            { id: 'dashboard',    label: 'Dashboard Financeiro',     icon: 'fa-sack-dollar' },
         ];
 
         function renderPageCheckboxes(containerId, selectedPages = []) {
@@ -1832,9 +1887,13 @@
                 const subtitleEl = document.getElementById('view-subtitle');
                 if (subtitleEl) {
                     if (activeView === 'dashboard') {
-                        subtitleEl.innerHTML = `Dashboard de Gestão e Análise de Indicadores. <span class="badge-competencia">Competência: ${mesText}</span>`;
-                    } else if (activeView === 'transactions') {
-                        subtitleEl.innerHTML = `Relação completa de transações com ferramentas de busca e auditoria <span class="badge-competencia">Competência: ${mesText}</span>`;
+                        if (activeDashboardTab === 'indicators') {
+                            subtitleEl.innerHTML = `Dashboard de Gestão e Análise de Indicadores. <span class="badge-competencia">Competência: ${mesText}</span>`;
+                        } else {
+                            subtitleEl.innerHTML = `Relação completa de transações com ferramentas de busca e auditoria <span class="badge-competencia">Competência: ${mesText}</span>`;
+                        }
+                    } else if (activeView === 'admin') {
+                        subtitleEl.innerHTML = `Gerencie usuários, perfis de acesso e páginas do BI <span class="badge-competencia">Admin</span>`;
                     }
                 }
             }
