@@ -362,9 +362,7 @@ body.light-theme .tab-btn:hover {
 }
 
 .dashboard-subview {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+    display: block;
     animation: fadeInSubview 0.4s ease-out;
 }
 

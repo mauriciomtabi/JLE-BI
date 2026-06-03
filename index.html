@@ -310,7 +310,8 @@
                         </div>
                     </div>
                 </div>
-            </div> <!-- Fim de subview-indicators -->
+            </div> <!-- Fim de charts-grid -->
+        </div> <!-- Fim de subview-indicators -->
             
             <!-- SUB-VIEW 2: LANÇAMENTOS (Tabela Analítica) -->
             <div id="subview-transactions" class="dashboard-subview" style="display: none;">
@@ -2235,7 +2236,7 @@
 
         // Renderização de Gráficos (Chart.js)
         function renderCharts() {
-            if (!currentUserEmail || activeView !== 'dashboard') return;
+            if (!currentUserEmail || activeView !== 'dashboard' || activeDashboardTab !== 'indicators') return;
             
             const isDark = !document.body.classList.contains('light-theme');
             const gridColor = isDark ? '#20313f' : '#e0e6ed';
@@ -3322,7 +3323,7 @@
 
         // Renderização da Tabela de Lançamentos
         function renderTable() {
-            if (activeView !== 'transactions') return;
+            if (activeView !== 'dashboard' || activeDashboardTab !== 'transactions') return;
             
             const tbody = document.getElementById('table-body');
             tbody.innerHTML = '';
