@@ -220,12 +220,14 @@ try {
             # 2b. Adicionar Ano à Competência (formato: JANEIRO/2026)
             # Só adiciona se competencia for um nome de mês válido e ainda não tiver o ano
             if ($competencia -ne "N/D" -and $competencia -ne "" -and $competencia -notmatch "/") {
-                # Extrair ano da data da transação (dataStr está no formato yyyy-MM-dd)
+                # Extrair ano da data da transação (aceita yyyy-MM-dd ou dd/MM/yyyy)
                 $anoTx = ""
                 if ($dataStr -match "^(\d{4})-") {
                     $anoTx = $Matches[1]
-                } elseif ($name -match "\b(20\d{2}|19\d{2})\b") {
-                    # Fallback: extrair ano do nome da aba (ex: JAN_2026 CONFIANÇA)
+                } elseif ($dataStr -match "/(20\d{2}|19\d{2})$") {
+                    $anoTx = $Matches[1]
+                } elseif ($name -match "(20\d{2}|19\d{2})") {
+                    # Fallback: extrair ano do nome da aba (ex: JAN_2026 CONFIANÇA ou MAR_2026 BRADESCO)
                     $anoTx = $Matches[1]
                 }
                 if ($anoTx -ne "") {
