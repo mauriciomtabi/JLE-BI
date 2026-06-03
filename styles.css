@@ -319,7 +319,7 @@ header {
     align-self: flex-start;
     width: auto;
     box-shadow: var(--shadow-main);
-    margin-top: 16px;
+    margin-top: 0;
     margin-bottom: 24px;
 }
 
@@ -518,6 +518,7 @@ body.light-theme .badge-competencia {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 20px;
+    margin-bottom: 24px;
 }
 
 .kpi-card {
@@ -667,6 +668,7 @@ body.light-theme .kpi-card:hover .kpi-icon-container {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 20px;
+    margin-bottom: 24px;
 }
 
 @media (max-width: 1024px) {
@@ -1755,6 +1757,7 @@ body.sidebar-collapsed .sidebar #user-display-name {
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
     width: 100%;
+    margin-bottom: 24px;
 }
 
 @media (max-width: 1200px) {
