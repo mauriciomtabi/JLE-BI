@@ -1,5 +1,5 @@
 ﻿window.CASH_FLOW_DATA = {
-    "generated_at":  "2026-06-02 17:02:45",
+    "generated_at":  "2026-06-03 13:05:33",
     "categories_origin":  {
                               "entradas":  [
 
@@ -103674,6 +103674,22 @@
                              "valor_nominal":  33552.57,
                              "valor_liquido":  -33552.57,
                              "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "MAI_2026 BRADESCO_11",
+                             "banco":  "Bradesco",
+                             "aba":  "MAI_2026 BRADESCO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "MAIO",
+                             "data":  "2026-05-01",
+                             "uf":  "RS",
+                             "fluxo":  "Entrada",
+                             "categoria":  "Saldo Inicial",
+                             "descricao":  "Transferência entre contas",
+                             "valor_nominal":  2511924.87,
+                             "valor_liquido":  2511924.87,
+                             "meio_pagamento":  "Transferência Bancária",
                              "is_transfer":  false
                          },
                          {
