@@ -217,6 +217,22 @@ try {
                 if ($null -ne $temp) { $competencia = $temp.ToString().Trim().ToUpper() }
             }
             
+            # 2b. Adicionar Ano à Competência (formato: JANEIRO/2026)
+            # Só adiciona se competencia for um nome de mês válido e ainda não tiver o ano
+            if ($competencia -ne "N/D" -and $competencia -ne "" -and $competencia -notmatch "/") {
+                # Extrair ano da data da transação (dataStr está no formato yyyy-MM-dd)
+                $anoTx = ""
+                if ($dataStr -match "^(\d{4})-") {
+                    $anoTx = $Matches[1]
+                } elseif ($name -match "\b(20\d{2}|19\d{2})\b") {
+                    # Fallback: extrair ano do nome da aba (ex: JAN_2026 CONFIANÇA)
+                    $anoTx = $Matches[1]
+                }
+                if ($anoTx -ne "") {
+                    $competencia = "$competencia/$anoTx"
+                }
+            }
+            
             # 3. UF
             $uf = "N/D"
             if ($isLayoutB -and $colMap.ContainsKey("uf")) {
