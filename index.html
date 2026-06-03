@@ -1875,11 +1875,9 @@
 
         function filterBySpecificDay(day, month) {
             const monthMapping = {
-                'JANEIRO': '01',
-                'FEVEREIRO': '02',
-                'MARÇO': '03',
-                'ABRIL': '04',
-                'MAIO': '05'
+                'JANEIRO': '01', 'FEVEREIRO': '02', 'MARÇO': '03', 'ABRIL': '04',
+                'MAIO': '05', 'JUNHO': '06', 'JULHO': '07', 'AGOSTO': '08',
+                'SETEMBRO': '09', 'OUTUBRO': '10', 'NOVEMBRO': '11', 'DEZEMBRO': '12'
             };
             const monthNum = monthMapping[month];
             if (!monthNum) return;
@@ -1894,21 +1892,16 @@
 
         function filterBySpecificWeek(weekIdx, month) {
             const monthMapping = {
-                'JANEIRO': '01',
-                'FEVEREIRO': '02',
-                'MARÇO': '03',
-                'ABRIL': '04',
-                'MAIO': '05'
+                'JANEIRO': '01', 'FEVEREIRO': '02', 'MARÇO': '03', 'ABRIL': '04',
+                'MAIO': '05', 'JUNHO': '06', 'JULHO': '07', 'AGOSTO': '08',
+                'SETEMBRO': '09', 'OUTUBRO': '10', 'NOVEMBRO': '11', 'DEZEMBRO': '12'
             };
             const monthNum = monthMapping[month];
             if (!monthNum) return;
             
             const daysInMonth = {
-                'JANEIRO': 31,
-                'FEVEREIRO': 28,
-                'MARÇO': 31,
-                'ABRIL': 30,
-                'MAIO': 31
+                'JANEIRO': 31, 'FEVEREIRO': 28, 'MARÇO': 31, 'ABRIL': 30, 'MAIO': 31, 'JUNHO': 30,
+                'JULHO': 31, 'AGOSTO': 31, 'SETEMBRO': 30, 'OUTUBRO': 31, 'NOVEMBRO': 30, 'DEZEMBRO': 31
             };
             const maxDays = daysInMonth[month] || 31;
             
@@ -1980,9 +1973,23 @@
             const selectedMonth = document.getElementById('filter-mes').value;
             const filterUf = document.getElementById('filter-uf').value;
             const filterCategoria = document.getElementById('filter-categoria').value;
-            const monthOrder = ["JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO"];
-            const daysInMonth = { 'JANEIRO': 31, 'FEVEREIRO': 28, 'MARÇO': 31, 'ABRIL': 30, 'MAIO': 31 };
-            const periodDays = selectedMonth === 'ALL' ? 151 : (daysInMonth[selectedMonth] || 30);
+            const monthOrder = [
+                "JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO", "JUNHO",
+                "JULHO", "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"
+            ];
+            const daysInMonth = {
+                'JANEIRO': 31, 'FEVEREIRO': 28, 'MARÇO': 31, 'ABRIL': 30, 'MAIO': 31, 'JUNHO': 30,
+                'JULHO': 31, 'AGOSTO': 31, 'SETEMBRO': 30, 'OUTUBRO': 31, 'NOVEMBRO': 30, 'DEZEMBRO': 31
+            };
+            
+            let periodDays = 30;
+            if (selectedMonth === 'ALL') {
+                const uniqueMonths = [...new Set(transactions.map(t => t.competencia))]
+                    .filter(m => m && m !== 'N/D' && m !== '' && daysInMonth[m]);
+                periodDays = uniqueMonths.reduce((sum, m) => sum + daysInMonth[m], 0) || 181;
+            } else {
+                periodDays = daysInMonth[selectedMonth] || 30;
+            }
 
             // 1. Médias Diárias
             const mediaDiariaEntradas = totalEntradas / periodDays;
@@ -2023,7 +2030,9 @@
                     compSaidasText = "vs. Mês Ant.: <strong>N/D</strong>";
                 }
             } else {
-                const mediaMensalS = totalSaidas / 5;
+                const activeMonthsCount = [...new Set(transactions.map(t => t.competencia))]
+                    .filter(m => m && m !== 'N/D' && m !== '').length || 5;
+                const mediaMensalS = totalSaidas / activeMonthsCount;
                 compSaidasText = `Média Mensal: <strong>${formatShortCurrency(mediaMensalS)}</strong>`;
             }
             document.getElementById('sub-saidas-comp').innerHTML = compSaidasText;
@@ -2065,7 +2074,9 @@
                     compEntradasText = "vs. Mês Ant.: <strong>N/D</strong>";
                 }
             } else {
-                const mediaMensal = totalEntradas / 5;
+                const activeMonthsCount = [...new Set(transactions.map(t => t.competencia))]
+                    .filter(m => m && m !== 'N/D' && m !== '').length || 5;
+                const mediaMensal = totalEntradas / activeMonthsCount;
                 compEntradasText = `Média Mensal: <strong>${formatShortCurrency(mediaMensal)}</strong>`;
             }
             document.getElementById('sub-entradas-comp').innerHTML = compEntradasText;
@@ -2220,9 +2231,16 @@
                     ? 'Evolução de Fluxo Mensal' 
                     : `Evolução de Fluxo Mensal (Visão Geral)`;
                 
-                const months = ["JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO"];
-                const monthlyEntradas = [0, 0, 0, 0, 0];
-                const monthlySaidas = [0, 0, 0, 0, 0];
+                const monthOrderMap = {
+                    'JANEIRO': 1, 'FEVEREIRO': 2, 'MARÇO': 3, 'ABRIL': 4, 'MAIO': 5, 'JUNHO': 6,
+                    'JULHO': 7, 'AGOSTO': 8, 'SETEMBRO': 9, 'OUTUBRO': 10, 'NOVEMBRO': 11, 'DEZEMBRO': 12
+                };
+                const months = [...new Set(transactions.map(t => t.competencia))]
+                    .filter(m => m && m !== 'N/D' && m !== '')
+                    .sort((a, b) => (monthOrderMap[a] || 0) - (monthOrderMap[b] || 0));
+                
+                const monthlyEntradas = new Array(months.length).fill(0);
+                const monthlySaidas = new Array(months.length).fill(0);
                 
                 // Usamos as transações filtradas por banco/categoria/uf, mas não por mês
                 const evolutionTxs = transactions.filter(t => {
@@ -2247,10 +2265,16 @@
                     }
                 });
                 
+                const shortMonthsMap = {
+                    'JANEIRO': 'Jan', 'FEVEREIRO': 'Fev', 'MARÇO': 'Mar', 'ABRIL': 'Abr', 'MAIO': 'Mai', 'JUNHO': 'Jun',
+                    'JULHO': 'Jul', 'AGOSTO': 'Ago', 'SETEMBRO': 'Set', 'OUTUBRO': 'Out', 'NOVEMBRO': 'Nov', 'DEZEMBRO': 'Dez'
+                };
+                const chartLabels = months.map(m => shortMonthsMap[m] || m);
+                
                 charts.evolution = new Chart(ctxEvolution, {
                     type: 'bar',
                     data: {
-                        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai'],
+                        labels: chartLabels,
                         datasets: [
                             {
                                 label: 'Entradas',
@@ -2327,7 +2351,9 @@
                             if (elements.length > 0) {
                                 const monthMap = {
                                     'Jan': 'JANEIRO', 'Fev': 'FEVEREIRO', 'Mar': 'MARÇO',
-                                    'Abr': 'ABRIL', 'Mai': 'MAIO'
+                                    'Abr': 'ABRIL', 'Mai': 'MAIO', 'Jun': 'JUNHO',
+                                    'Jul': 'JULHO', 'Ago': 'AGOSTO', 'Set': 'SETEMBRO',
+                                    'Out': 'OUTUBRO', 'Nov': 'NOVEMBRO', 'Dez': 'DEZEMBRO'
                                 };
                                 const label = charts.evolution.data.labels[elements[0].index];
                                 const monthValue = monthMap[label];
@@ -2349,11 +2375,8 @@
                 
                 // Mapeamento de dias por mês em 2026
                 const daysInMonth = {
-                    'JANEIRO': 31,
-                    'FEVEREIRO': 28,
-                    'MARÇO': 31,
-                    'ABRIL': 30,
-                    'MAIO': 31
+                    'JANEIRO': 31, 'FEVEREIRO': 28, 'MARÇO': 31, 'ABRIL': 30, 'MAIO': 31, 'JUNHO': 30,
+                    'JULHO': 31, 'AGOSTO': 31, 'SETEMBRO': 30, 'OUTUBRO': 31, 'NOVEMBRO': 30, 'DEZEMBRO': 31
                 };
                 const maxDays = daysInMonth[selectedMonth] || 31;
                 const days = Array.from({length: maxDays}, (_, i) => i + 1);
