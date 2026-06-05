@@ -1,5 +1,5 @@
 ﻿window.CASH_FLOW_DATA = {
-    "generated_at":  "2026-06-05 14:03:07",
+    "generated_at":  "2026-06-05 15:02:51",
     "categories_origin":  {
                               "entradas":  [
 
@@ -103837,6 +103837,22 @@
                              "is_transfer":  false
                          },
                          {
+                             "id":  "JUN_2026 CONFIANÇA_20",
+                             "banco":  "Sicoob Confiança",
+                             "aba":  "JUN_2026 CONFIANÇA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "JUNHO/2026",
+                             "data":  "2026-06-02",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Alimentação",
+                             "descricao":  "MERCADO ROSELE DOM PEDRITO",
+                             "valor_nominal":  9.99,
+                             "valor_liquido":  -9.99,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
                              "id":  "JUN_2026 MAXCREDITO_11",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUN_2026 MAXCREDITO",
@@ -105097,6 +105113,54 @@
                              "descricao":  "Pagamento widson Gonçalves dos Santos PR",
                              "valor_nominal":  6000,
                              "valor_liquido":  -6000,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "JUN_2026 MAXCREDITO_90",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "JUN_2026 MAXCREDITO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "JUNHO/2026",
+                             "data":  "2026-06-03",
+                             "uf":  "PR",
+                             "fluxo":  "Saída",
+                             "categoria":  "Material utilizado em serviços",
+                             "descricao":  "MV METAIS LTDA",
+                             "valor_nominal":  10399.95,
+                             "valor_liquido":  -10399.95,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "JUN_2026 MAXCREDITO_91",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "JUN_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "JUNHO/2026",
+                             "data":  "2026-06-03",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Folha De Pagamento",
+                             "descricao":  "SALARIO MAX",
+                             "valor_nominal":  11725.49,
+                             "valor_liquido":  -11725.49,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "JUN_2026 MAXCREDITO_92",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "JUN_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "JUNHO/2026",
+                             "data":  "2026-06-03",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Terceiros",
+                             "descricao":  "Adiantamento Giovane terceiro",
+                             "valor_nominal":  1000,
+                             "valor_liquido":  -1000,
                              "meio_pagamento":  "Pix",
                              "is_transfer":  false
                          }
