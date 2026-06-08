@@ -491,35 +491,51 @@
 
             <!-- Sub Tab Pane: Indicadores -->
             <div id="subview-veiculos-indicators" class="subtab-pane active">
-                <!-- KPI Metrics Grid -->
-                <section class="metrics-grid">
-                    <div class="metric-card emissions">
-                        <h3>TOTAL DE EMISSÕES</h3>
-                        <div class="metric-value" id="kpi-veiculos-total">R$ 0,00</div>
-                        <div class="metric-meta-row">
-                            Média p/ Abast.: <strong id="kpi-veiculos-avg">R$ 0,00</strong>
+
+                <!-- KPI Cards (mesmo padrão do Financeiro) -->
+                <div class="kpi-container">
+                    <div class="kpi-card inflows">
+                        <div class="kpi-info">
+                            <span class="kpi-label">Total de Gastos de Frota</span>
+                            <h3 class="kpi-value" id="kpi-veiculos-total">R$ 0,00</h3>
+                            <div class="kpi-analytics">
+                                <span class="kpi-subvalue">Média p/ Abast.: <span id="kpi-veiculos-avg">R$ 0,00</span></span>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="metric-card count">
-                        <h3>TOTAL DE ABASTECIMENTOS</h3>
-                        <div class="metric-value" id="kpi-veiculos-count">0</div>
-                        <div class="metric-meta-row">
-                            Veículos Ativos: <strong id="kpi-veiculos-active-vehicles">0</strong>
+                        <div class="kpi-icon-container">
+                            <i class="fa-solid fa-gas-pump"></i>
                         </div>
                     </div>
 
-                    <div class="metric-card liters">
-                        <h3>TOTAL DE LITROS</h3>
-                        <div class="metric-value" id="kpi-veiculos-liters">0,0 L</div>
-                        <div class="metric-meta-row">
-                            Motoristas Ativos: <strong id="kpi-veiculos-active-drivers">0</strong>
+                    <div class="kpi-card outflows">
+                        <div class="kpi-info">
+                            <span class="kpi-label">Total de Abastecimentos</span>
+                            <h3 class="kpi-value" id="kpi-veiculos-count">0</h3>
+                            <div class="kpi-analytics">
+                                <span class="kpi-subvalue">Veículos Ativos: <span id="kpi-veiculos-active-vehicles">0</span></span>
+                            </div>
+                        </div>
+                        <div class="kpi-icon-container">
+                            <i class="fa-solid fa-truck"></i>
                         </div>
                     </div>
-                </section>
 
-                <!-- UF Regional Cards (SC, RS, PR) -->
-                <section class="regional-accounts-grid">
+                    <div class="kpi-card balance">
+                        <div class="kpi-info">
+                            <span class="kpi-label">Total de Litros</span>
+                            <h3 class="kpi-value" id="kpi-veiculos-liters">0,0 L</h3>
+                            <div class="kpi-analytics">
+                                <span class="kpi-subvalue">Motoristas Ativos: <span id="kpi-veiculos-active-drivers">0</span></span>
+                            </div>
+                        </div>
+                        <div class="kpi-icon-container">
+                            <i class="fa-solid fa-droplet"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UF Regional Cards (SC, RS, PR) — mesmos account-card do Financeiro -->
+                <div class="banks-grid">
                     <!-- SC Card -->
                     <div class="account-card">
                         <div class="account-header">
@@ -534,12 +550,12 @@
                         </div>
                         <div class="account-details">
                             <div class="detail-row">
-                                <span>Lançamentos</span>
+                                <span>Abastecimentos</span>
                                 <span id="count-veiculos-SC" class="text-white">0</span>
                             </div>
                             <div class="detail-row">
                                 <span>Percentual</span>
-                                <span id="pct-veiculos-SC" class="text-white">0.0%</span>
+                                <span id="pct-veiculos-SC" class="text-white">0,0%</span>
                             </div>
                         </div>
                     </div>
@@ -558,12 +574,12 @@
                         </div>
                         <div class="account-details">
                             <div class="detail-row">
-                                <span>Lançamentos</span>
+                                <span>Abastecimentos</span>
                                 <span id="count-veiculos-RS" class="text-white">0</span>
                             </div>
                             <div class="detail-row">
                                 <span>Percentual</span>
-                                <span id="pct-veiculos-RS" class="text-white">0.0%</span>
+                                <span id="pct-veiculos-RS" class="text-white">0,0%</span>
                             </div>
                         </div>
                     </div>
@@ -582,86 +598,110 @@
                         </div>
                         <div class="account-details">
                             <div class="detail-row">
-                                <span>Lançamentos</span>
+                                <span>Abastecimentos</span>
                                 <span id="count-veiculos-PR" class="text-white">0</span>
                             </div>
                             <div class="detail-row">
                                 <span>Percentual</span>
-                                <span id="pct-veiculos-PR" class="text-white">0.0%</span>
+                                <span id="pct-veiculos-PR" class="text-white">0,0%</span>
                             </div>
                         </div>
                     </div>
-                </section>
+                </div>
 
-                <!-- Charts Container Grid -->
-                <section class="charts-grid">
+                <!-- Charts Row 1: Evolução + Mapa -->
+                <div class="charts-grid">
                     <!-- Evolution Chart -->
-                    <div class="chart-card col-span-2">
-                        <div class="chart-header-row">
-                            <h3 id="veiculos-evolution-title">Evolução de Gastos de Frota (Mensal)</h3>
-                            <div class="chart-filters-sub">
+                    <div class="chart-card">
+                        <div class="chart-header" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+                            <div class="chart-title">
+                                <h2 id="veiculos-evolution-title">Evolução de Gastos de Frota (Mensal)</h2>
+                            </div>
+                            <div class="chart-controls" style="display:flex;gap:4px;background:rgba(0,0,0,0.2);padding:2px;border-radius:6px;border:1px solid rgba(255,255,255,0.05);">
                                 <button class="btn-chart-sub btn-granularidade-veiculos active" data-gran="mensal">Mensal</button>
                                 <button class="btn-chart-sub btn-granularidade-veiculos" data-gran="semanal">Semanal</button>
                                 <button class="btn-chart-sub btn-granularidade-veiculos" data-gran="diario">Diário</button>
                             </div>
                         </div>
-                        <div class="chart-container">
+                        <div class="chart-body">
                             <canvas id="chart-veiculos-evolution"></canvas>
                         </div>
                     </div>
 
-                    <!-- State Breakdown -->
+                    <!-- Mapa SVG Interativo PR/SC/RS -->
                     <div class="chart-card">
                         <div class="chart-header">
-                            <h3>Distribuição Regional</h3>
-                            <p>Proporção dos custos por Estado</p>
+                            <div class="chart-title">
+                                <h2>Distribuição por UF</h2>
+                            </div>
                         </div>
-                        <div class="chart-container centered">
-                            <canvas id="chart-veiculos-uf"></canvas>
+                        <div class="chart-body map-chart-body" style="overflow:hidden !important;">
+                            <div class="map-wrapper" id="veiculos-map-container" style="width:100%;height:100%;position:relative;">
+                                <!-- Mapa SVG gerado dinamicamente por renderVeiculosMap() -->
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Top Drivers com drill-down -->
-                    <div class="chart-card col-span-2">
-                        <div class="chart-header-row">
-                            <h3 id="driver-chart-title">Top 10 Condutores por Gasto</h3>
+                <!-- Charts Row 2: Top Condutores + Top Veículos com drill-down -->
+                <div class="charts-grid categories-uf-row">
+                    <!-- Top Condutores com drill-down -->
+                    <div class="chart-card">
+                        <div class="chart-header" style="flex-wrap:wrap;gap:10px;">
+                            <div class="chart-title">
+                                <h2 id="driver-chart-title">Top Condutores por Gasto</h2>
+                            </div>
                             <div style="display:flex;align-items:center;gap:8px;">
-                                <span id="driver-drill-info" style="display:none;font-size:12px;color:var(--color-primary-light);background:rgba(52,152,219,0.1);border:1px solid rgba(52,152,219,0.25);border-radius:20px;padding:3px 10px;"></span>
-                                <button id="driver-drill-back" onclick="resetDriverDrill()" style="display:none;font-size:12px;padding:4px 10px;background:rgba(52,152,219,0.15);color:var(--color-primary-light);border:1px solid rgba(52,152,219,0.3);border-radius:6px;cursor:pointer;">
-                                    <i class="fa-solid fa-arrow-left" style="margin-right:4px;"></i> Voltar
+                                <span id="driver-drill-info" style="display:none;font-size:11px;font-weight:600;color:var(--color-primary-light);background:rgba(52,152,219,0.12);border:1px solid rgba(52,152,219,0.3);border-radius:20px;padding:3px 12px;"></span>
+                                <button id="driver-drill-back" class="btn-chart-back" onclick="resetDriverDrill()" style="display:none;">
+                                    <i class="fa-solid fa-arrow-left"></i> Voltar
                                 </button>
                             </div>
                         </div>
-                        <p style="font-size:12px;color:var(--text-secondary);margin:0 0 8px;padding: 0 2px;"><i class="fa-solid fa-hand-pointer" style="margin-right:4px;"></i>Clique em um condutor para ver os veículos que utilizou</p>
-                        <div class="chart-container" style="cursor:pointer;">
-                            <canvas id="chart-veiculos-top-drivers"></canvas>
+                        <div id="driver-drill-hint" style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-secondary);margin:0 0 10px;padding:6px 10px;background:rgba(52,152,219,0.06);border-radius:6px;border:1px solid rgba(52,152,219,0.12);">
+                            <i class="fa-solid fa-hand-pointer" style="color:var(--color-primary-light);"></i>
+                            Clique em um condutor para ver os veículos que ele utilizou no período
+                        </div>
+                        <div class="chart-body map-chart-body" style="align-items:flex-start;overflow-y:auto;">
+                            <div style="width:100%;height:380px;position:relative;">
+                                <canvas id="chart-veiculos-top-drivers"></canvas>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Top Vehicles com drill-down -->
-                    <div class="chart-card col-span-2">
-                        <div class="chart-header-row">
-                            <h3 id="vehicle-chart-title">Top 10 Veículos por Gasto</h3>
+                    <!-- Top Veículos com drill-down -->
+                    <div class="chart-card">
+                        <div class="chart-header" style="flex-wrap:wrap;gap:10px;">
+                            <div class="chart-title">
+                                <h2 id="vehicle-chart-title">Top Veículos por Gasto</h2>
+                            </div>
                             <div style="display:flex;align-items:center;gap:8px;">
-                                <span id="vehicle-drill-info" style="display:none;font-size:12px;color:var(--color-secondary);background:rgba(243,159,24,0.1);border:1px solid rgba(243,159,24,0.25);border-radius:20px;padding:3px 10px;"></span>
-                                <button id="vehicle-drill-back" onclick="resetVehicleDrill()" style="display:none;font-size:12px;padding:4px 10px;background:rgba(243,159,24,0.15);color:var(--color-secondary);border:1px solid rgba(243,159,24,0.3);border-radius:6px;cursor:pointer;">
-                                    <i class="fa-solid fa-arrow-left" style="margin-right:4px;"></i> Voltar
+                                <span id="vehicle-drill-info" style="display:none;font-size:11px;font-weight:600;color:var(--color-secondary);background:rgba(243,159,24,0.12);border:1px solid rgba(243,159,24,0.3);border-radius:20px;padding:3px 12px;"></span>
+                                <button id="vehicle-drill-back" class="btn-chart-back" onclick="resetVehicleDrill()" style="display:none;">
+                                    <i class="fa-solid fa-arrow-left"></i> Voltar
                                 </button>
                             </div>
                         </div>
-                        <p style="font-size:12px;color:var(--text-secondary);margin:0 0 8px;padding: 0 2px;"><i class="fa-solid fa-hand-pointer" style="margin-right:4px;"></i>Clique em uma placa para ver os condutores do período</p>
-                        <div class="chart-container" style="cursor:pointer;">
-                            <canvas id="chart-veiculos-top-vehicles"></canvas>
+                        <div id="vehicle-drill-hint" style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-secondary);margin:0 0 10px;padding:6px 10px;background:rgba(243,159,24,0.06);border-radius:6px;border:1px solid rgba(243,159,24,0.12);">
+                            <i class="fa-solid fa-hand-pointer" style="color:var(--color-secondary);"></i>
+                            Clique em um veículo para ver os condutores que o utilizaram no período
+                        </div>
+                        <div class="chart-body map-chart-body" style="align-items:flex-start;overflow-y:auto;">
+                            <div style="width:100%;height:380px;position:relative;">
+                                <canvas id="chart-veiculos-top-vehicles"></canvas>
+                            </div>
                         </div>
                     </div>
-                </section>
-                
-                <!-- Detailed Consumption Section (Feb/May) -->
-                <section class="consumption-insights chart-card data-rich-only hidden">
+                </div>
+
+                <!-- Métricas Detalhadas de Consumo (dados ricos) -->
+                <div class="chart-card data-rich-only hidden">
                     <div class="chart-header">
-                        <h3>Métricas Detalhadas de Consumo & Preços (Fevereiro & Maio)</h3>
-                        <p>Análise de tipos de combustíveis, médias de consumo e oscilações de preço do mercado.</p>
+                        <div class="chart-title">
+                            <h2>Métricas Detalhadas de Consumo &amp; Preços</h2>
+                        </div>
                     </div>
+                    <p style="font-size:12px;color:var(--text-secondary);margin:0 0 16px;">Análise de tipos de combustíveis, médias de consumo e oscilações de preço do mercado.</p>
                     <div class="charts-subgrid">
                         <div class="chart-wrapper">
                             <h4>Consumo por Tipo de Combustível (Litros)</h4>
@@ -682,7 +722,7 @@
                             </div>
                         </div>
                     </div>
-                </section>
+                </div>
             </div>
 
             <!-- Sub Tab Pane: Lançamentos -->
@@ -737,16 +777,6 @@
                 </section>
             </div>
 
-            <!-- Analysis Section (Always Visible or below the tabs) -->
-            <section class="analysis-section chart-card" style="margin-top: 12px;">
-                <div class="analysis-header">
-                    <h2>Relatório de Análise Gerencial</h2>
-                    <p>Consolidação e avaliação técnica dos dados de frota e custos</p>
-                </div>
-                <div class="analysis-body" id="veiculos-analysis-content">
-                    <!-- Loaded dynamically -->
-                </div>
-            </section>
         </div>
 
         <!-- Modal: Adicionar/Editar Usuário -->
