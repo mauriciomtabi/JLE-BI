@@ -3468,3 +3468,37 @@ body.light-theme .pwa-toast {
     background: rgba(0, 0, 0, 0.05);
 }
 
+/* Badges de Status na Tabela de Cobrança */
+.badge-status-cobranca {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.2;
+    border: 1px solid transparent;
+}
+.badge-status-cobranca.critico {
+    background: rgba(231, 76, 60, 0.12);
+    color: #e74c3c;
+    border-color: rgba(231, 76, 60, 0.2);
+}
+.badge-status-cobranca.atencao {
+    background: rgba(243, 156, 18, 0.12);
+    color: #f39c12;
+    border-color: rgba(243, 156, 18, 0.2);
+}
+.badge-status-cobranca.pronto {
+    background: rgba(46, 204, 113, 0.12);
+    color: #2ecc71;
+    border-color: rgba(46, 204, 113, 0.2);
+}
+.badge-status-cobranca.devolvido {
+    background: rgba(149, 165, 166, 0.12);
+    color: #95a5a6;
+    border-color: rgba(149, 165, 166, 0.2);
+}
+
+

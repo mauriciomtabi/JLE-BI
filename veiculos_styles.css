@@ -1,0 +1,731 @@
+/* veiculos_styles.css - Scoped styling for Vehicle Fueling Dashboard inside JLE BI */
+
+/* Local scoped variables */
+#view-veiculos-container {
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --sc-color: var(--color-success, #2ecc71);
+    --rs-color: var(--color-info, #3498db);
+    --pr-color: var(--color-secondary, #f39f18);
+    --sc-glow: rgba(46, 204, 113, 0.15);
+    --rs-glow: rgba(52, 152, 219, 0.15);
+    --pr-glow: rgba(243, 159, 24, 0.15);
+}
+
+/* Base Panel style */
+#view-veiculos-container.view-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    animation: fadeInVeiculos 0.4s ease-out;
+}
+
+@keyframes fadeInVeiculos {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Horizontal Filters Panel (Matching JLE BI filter-bar standard) */
+#view-veiculos-container .filter-bar-veiculos {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    align-items: end;
+    box-shadow: var(--shadow-main);
+}
+
+#view-veiculos-container .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+#view-veiculos-container .filter-group label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#view-veiculos-container .filter-group select,
+#view-veiculos-container .filter-group input {
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    padding: 8px 12px;
+    height: 38px;
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.2s ease;
+}
+
+#view-veiculos-container .filter-group select:hover,
+#view-veiculos-container .filter-group input:hover {
+    border-color: var(--border-hover, #3b5062);
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+#view-veiculos-container .filter-group select:focus,
+#view-veiculos-container .filter-group input:focus {
+    border-color: var(--color-primary-light, #0077aa);
+}
+
+#view-veiculos-container .filter-actions-inline {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#view-veiculos-container .btn-reset {
+    height: 38px;
+    width: 38px;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+#view-veiculos-container .btn-reset:hover {
+    border-color: var(--color-secondary);
+    color: var(--color-secondary-light);
+    background-color: rgba(243, 159, 24, 0.05);
+}
+
+/* Horizontal Sub-tab Nav Selector (JLE BI style) */
+#view-veiculos-container .sub-tabs-container {
+    display: flex;
+    gap: 8px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 5px;
+    border-radius: 12px;
+    align-self: flex-start;
+    box-shadow: var(--shadow-main);
+    margin-bottom: 8px;
+}
+
+#view-veiculos-container .sub-tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: none;
+    padding: 8px 16px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#view-veiculos-container .sub-tab svg,
+#view-veiculos-container .sub-tab i {
+    font-size: 14px;
+}
+
+#view-veiculos-container .sub-tab:hover {
+    color: var(--text-primary);
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+#view-veiculos-container .sub-tab.active {
+    background-color: var(--color-primary);
+    color: white !important;
+    box-shadow: 0 4px 10px rgba(0, 79, 113, 0.25);
+}
+
+/* Sub-pane toggling animations */
+#view-veiculos-container .subtab-pane {
+    display: none;
+    flex-direction: column;
+    gap: 24px;
+    animation: fadeInSubview 0.3s ease-out;
+}
+
+#view-veiculos-container .subtab-pane.active {
+    display: flex;
+}
+
+/* KPI Cards Layout */
+#view-veiculos-container .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+#view-veiculos-container .metric-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 22px 24px;
+    box-shadow: var(--shadow-main);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+#view-veiculos-container .metric-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* Colors and left borders for metrics cards */
+#view-veiculos-container .metric-card.emissions {
+    border-left: 5px solid var(--pr-color);
+    box-shadow: 0 4px 20px rgba(243, 159, 24, 0.05);
+}
+#view-veiculos-container .metric-card.emissions:hover {
+    border-color: var(--color-secondary-light);
+}
+
+#view-veiculos-container .metric-card.count {
+    border-left: 5px solid var(--sc-color);
+    box-shadow: 0 4px 20px rgba(46, 204, 113, 0.05);
+}
+#view-veiculos-container .metric-card.count:hover {
+    border-color: var(--color-success);
+}
+
+#view-veiculos-container .metric-card.liters {
+    border-left: 5px solid var(--rs-color);
+    box-shadow: 0 4px 20px rgba(52, 152, 219, 0.05);
+}
+#view-veiculos-container .metric-card.liters:hover {
+    border-color: var(--color-info);
+}
+
+#view-veiculos-container .metric-card h3 {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+#view-veiculos-container .metric-value {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+}
+
+#view-veiculos-container .metric-meta-row {
+    font-size: 11.5px;
+    color: var(--text-secondary);
+}
+
+#view-veiculos-container .metric-meta-row strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* Regional Progress Cards (Sicoob/Bradesco standard in BI image) */
+#view-veiculos-container .regional-accounts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+#view-veiculos-container .account-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow-main);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: transform 0.2s ease;
+}
+
+#view-veiculos-container .account-card:hover {
+    transform: translateY(-2px);
+}
+
+#view-veiculos-container .account-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#view-veiculos-container .account-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#view-veiculos-container .brand-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+}
+#view-veiculos-container .brand-dot.sc { background-color: var(--sc-color); box-shadow: 0 0 6px var(--sc-color); }
+#view-veiculos-container .brand-dot.rs { background-color: var(--rs-color); box-shadow: 0 0 6px var(--rs-color); }
+#view-veiculos-container .brand-dot.pr { background-color: var(--pr-color); box-shadow: 0 0 6px var(--pr-color); }
+
+#view-veiculos-container .brand-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+#view-veiculos-container .account-balance {
+    font-size: 15px;
+    font-weight: 750;
+    letter-spacing: -0.2px;
+}
+
+#view-veiculos-container .progress-container {
+    height: 4px;
+    width: 100%;
+    background-color: var(--bg-input);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+#view-veiculos-container .progress-bar {
+    height: 100%;
+    border-radius: 2px;
+}
+#view-veiculos-container .progress-bar.sc { background-color: var(--sc-color); }
+#view-veiculos-container .progress-bar.rs { background-color: var(--rs-color); }
+#view-veiculos-container .progress-bar.pr { background-color: var(--pr-color); }
+
+#view-veiculos-container .account-details {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.01);
+    border-radius: var(--radius-sm);
+    padding: 8px 12px;
+    font-size: 11.5px;
+}
+
+body.light-theme #view-veiculos-container .account-details {
+    background-color: rgba(0, 0, 0, 0.01);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+#view-veiculos-container .detail-row {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-secondary);
+}
+
+#view-veiculos-container .detail-row .text-white {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* Charts Card Grid */
+#view-veiculos-container .charts-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+@media (max-width: 1024px) {
+    #view-veiculos-container .charts-grid {
+        grid-template-columns: 1fr;
+    }
+    #view-veiculos-container .col-span-2 {
+        grid-column: span 1;
+    }
+}
+
+#view-veiculos-container .chart-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow-main);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+}
+
+#view-veiculos-container .chart-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#view-veiculos-container .chart-header-row h3 {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+#view-veiculos-container .chart-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+#view-veiculos-container .chart-header h3 {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+#view-veiculos-container .chart-header p {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+#view-veiculos-container .btn-chart-sub {
+    padding: 4px 10px;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    border-radius: 4px;
+    font-size: 10.5px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#view-veiculos-container .btn-chart-sub.active {
+    background-color: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+}
+
+#view-veiculos-container .chart-container {
+    position: relative;
+    height: 250px;
+    width: 100%;
+}
+
+#view-veiculos-container .chart-container.centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 220px;
+}
+
+/* Detailed fuel insights for Feb/May */
+#view-veiculos-container .consumption-insights {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#view-veiculos-container .charts-subgrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+#view-veiculos-container .chart-wrapper {
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#view-veiculos-container .chart-wrapper h4 {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+#view-veiculos-container .chart-container-sm {
+    position: relative;
+    height: 180px;
+    width: 100%;
+}
+
+/* Lançamentos Table pane */
+#view-veiculos-container .table-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#view-veiculos-container .table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+#view-veiculos-container .table-title h3 {
+    font-size: 15.5px;
+    font-weight: 700;
+}
+
+#view-veiculos-container .table-title p {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+#view-veiculos-container .table-search input {
+    width: 280px;
+    height: 36px;
+    padding: 0 12px;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: 13px;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+#view-veiculos-container .table-search input:focus {
+    border-color: var(--color-primary);
+}
+
+#view-veiculos-container .table-responsive {
+    overflow-x: auto;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+}
+
+#view-veiculos-container .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+#view-veiculos-container .data-table th,
+#view-veiculos-container .data-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+#view-veiculos-container .data-table th {
+    background-color: rgba(255, 255, 255, 0.01);
+    color: var(--text-secondary);
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+body.light-theme #view-veiculos-container .data-table th {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+#view-veiculos-container .data-table th:hover {
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+}
+
+#view-veiculos-container .data-table th::after {
+    content: '';
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    opacity: 0.3;
+}
+
+#view-veiculos-container .data-table th.sort-asc::after {
+    border-bottom: 3.5px solid var(--text-primary);
+    opacity: 1;
+}
+
+#view-veiculos-container .data-table th.sort-desc::after {
+    border-top: 3.5px solid var(--text-primary);
+    opacity: 1;
+}
+
+#view-veiculos-container .data-table tbody tr {
+    transition: background-color 0.15s ease;
+}
+
+#view-veiculos-container .data-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.015);
+}
+
+body.light-theme #view-veiculos-container .data-table tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.01);
+}
+
+#view-veiculos-container .data-table td.text-right,
+#view-veiculos-container .data-table th.text-right {
+    text-align: right;
+}
+
+/* Badge for state cells inside table */
+#view-veiculos-container .badge {
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 10.5px;
+    font-weight: 700;
+}
+#view-veiculos-container .badge.sc { background-color: rgba(46, 204, 113, 0.12); color: var(--sc-color); }
+#view-veiculos-container .badge.rs { background-color: rgba(52, 152, 219, 0.12); color: var(--rs-color); }
+#view-veiculos-container .badge.pr { background-color: rgba(243, 159, 24, 0.12); color: var(--pr-color); }
+
+#view-veiculos-container .table-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+#view-veiculos-container .table-info {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+#view-veiculos-container .table-info span {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+#view-veiculos-container .table-pagination {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#view-veiculos-container .page-indicator {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+#view-veiculos-container .btn-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+#view-veiculos-container .btn-icon:hover:not(:disabled) {
+    border-color: var(--color-primary);
+    color: var(--color-primary-light);
+}
+
+#view-veiculos-container .btn-icon:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+#view-veiculos-container .btn-icon svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* Admin / Analysis Report Panel */
+#view-veiculos-container .analysis-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#view-veiculos-container .analysis-header h2 {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+#view-veiculos-container .analysis-header p {
+    color: var(--text-secondary);
+    font-size: 12.5px;
+}
+
+#view-veiculos-container .analysis-body {
+    line-height: 1.6;
+    font-size: 13.5px;
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+#view-veiculos-container .analysis-body h1,
+#view-veiculos-container .analysis-body h2,
+#view-veiculos-container .analysis-body h3 {
+    margin-top: 8px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+#view-veiculos-container .analysis-body h1 { font-size: 17px; border-bottom: 1px solid var(--border-color); padding-bottom: 6px; }
+#view-veiculos-container .analysis-body h2 { font-size: 14.5px; margin-top: 14px; }
+#view-veiculos-container .analysis-body h3 { font-size: 13px; }
+
+#view-veiculos-container .analysis-body p {
+    color: var(--text-secondary);
+}
+
+#view-veiculos-container .analysis-body ul, 
+#view-veiculos-container .analysis-body ol {
+    padding-left: 18px;
+    color: var(--text-secondary);
+}
+
+#view-veiculos-container .analysis-body li {
+    margin-bottom: 4px;
+}
+
+#view-veiculos-container .analysis-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+}
+
+#view-veiculos-container .analysis-body table th,
+#view-veiculos-container .analysis-body table td {
+    padding: 8px 10px;
+    border: 1px solid var(--border-color);
+}
+
+#view-veiculos-container .analysis-body table th {
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+#view-veiculos-container .analysis-body blockquote {
+    padding: 10px 14px;
+    background-color: var(--bg-input);
+    border-left: 4px solid var(--pr-color);
+    border-radius: var(--radius-sm);
+}
+
+#view-veiculos-container .analysis-body blockquote p {
+    margin: 0;
+    font-style: italic;
+    color: var(--text-primary);
+}

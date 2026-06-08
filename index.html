@@ -43,6 +43,7 @@
     <script src="supabase_config.js"></script>
     <!-- Local Stylesheet -->
     <link rel="stylesheet" href="styles.css?v=2.1.5">
+    <link rel="stylesheet" href="veiculos_styles.css?v=1.0.0">
 </head>
 <body>
 
@@ -63,6 +64,12 @@
             <a class="nav-item active" id="nav-dashboard" onclick="switchView('dashboard')">
                 <i class="fa-solid fa-sack-dollar"></i> <span>Financeiro</span>
             </a>
+            <a class="nav-item" id="nav-cobranca" onclick="switchView('cobranca')" style="display:none;">
+                <i class="fa-solid fa-hand-holding-dollar"></i> <span>Cobrança</span>
+            </a>
+            <a class="nav-item" id="nav-veiculos" onclick="switchView('veiculos')" style="display:none;">
+                <i class="fa-solid fa-car"></i> <span>Veículos</span>
+            </a>
             <a class="nav-item" id="nav-admin" onclick="switchView('admin')" style="display:none;">
                 <i class="fa-solid fa-shield-halved"></i> <span>Admin</span>
             </a>
@@ -82,7 +89,7 @@
                 <i class="fa-solid fa-download"></i> <span>Instalar App</span>
             </button>
             
-            <button class="theme-toggle-btn" onclick="toggleTheme()">
+            <button class="theme-toggle-btn" id="theme-toggle-btn" onclick="toggleTheme()">
                 <i class="fa-solid fa-moon" id="theme-icon"></i>
                 <span id="theme-text">Modo Escuro</span>
             </button>
@@ -359,6 +366,205 @@
             </div>
         </div>
 
+        <!-- VIEW 2: COBRANCA -->
+        <div id="view-cobranca-container" class="view-panel" style="display: none;">
+            <!-- NAVEGAÇÃO INTERNA EM ABAS (TAB SYSTEM COBRANCA) -->
+            <div class="dashboard-tabs">
+                <button class="tab-btn active" id="tab-btn-cobranca-indicators" onclick="switchCobrancaTab('indicators')">
+                    <i class="fa-solid fa-chart-column"></i> Painel de Controle
+                </button>
+                <button class="tab-btn" id="tab-btn-cobranca-details" onclick="switchCobrancaTab('details')">
+                    <i class="fa-solid fa-table-list"></i> Detalhado
+                </button>
+            </div>
+
+            <!-- DEDICATED FILTERS FOR COBRANCA -->
+            <section class="filter-bar" id="cobranca-filters-container" style="margin-top: 16px; margin-bottom: 20px;">
+                <div class="filter-group">
+                    <label for="filter-cobranca-uf">UF / Estado</label>
+                    <select id="filter-cobranca-uf" onchange="applyCobrancaFilters()">
+                        <option value="ALL">Todas as UFs</option>
+                        <option value="RS">RS</option>
+                        <option value="SC">SC</option>
+                        <option value="PR">PR</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="filter-cobranca-mes">Mês de Medição</label>
+                    <select id="filter-cobranca-mes" onchange="applyCobrancaFilters()">
+                        <option value="ALL">Todos os Meses</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="filter-cobranca-contrato">Contrato</label>
+                    <select id="filter-cobranca-contrato" onchange="applyCobrancaFilters()">
+                        <option value="ALL">Todos os Contratos</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="filter-cobranca-status">Status OS / Malogro</label>
+                    <select id="filter-cobranca-status" onchange="applyCobrancaFilters()">
+                        <option value="ALL">Todos os Status</option>
+                        <option value="ERRO">Crítico (Com Erro)</option>
+                        <option value="BACKLOG">Atenção (Em Backlog)</option>
+                        <option value="EXECUTADO">Pronto p/ Faturar (Executado)</option>
+                        <option value="DEVOLVIDO">Devolvido</option>
+                    </select>
+                </div>
+            </section>
+
+            <!-- SUB-VIEW 1: PAINEL DE CONTROLE (INDICADORES E GRAFICOS) -->
+            <div id="subview-cobranca-indicators" class="dashboard-subview">
+                <!-- KPI Cards -->
+                <div class="kpi-container">
+                    <div class="kpi-card balance" style="background: linear-gradient(135deg, rgba(0, 80, 115, 0.15) 0%, rgba(0, 120, 170, 0.05) 100%); border-left: 4px solid var(--color-primary);">
+                        <div class="kpi-info">
+                            <span class="kpi-label">Total a Receber</span>
+                            <h3 class="kpi-value" id="kpi-cobranca-total">R$ 0,00</h3>
+                            <div class="kpi-analytics">
+                                <span class="kpi-subvalue" id="sub-cobranca-count">0 itens pendentes</span>
+                            </div>
+                        </div>
+                        <div class="kpi-icon-container" style="color: var(--color-primary-light);">
+                            <i class="fa-solid fa-hand-holding-dollar"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="kpi-card outflows" style="background: linear-gradient(135deg, rgba(231, 76, 60, 0.12) 0%, rgba(231, 76, 60, 0.04) 100%); border-left: 4px solid #e74c3c;">
+                        <div class="kpi-info">
+                            <span class="kpi-label">Crítico (Com Erro)</span>
+                            <h3 class="kpi-value" style="color: #e74c3c;" id="kpi-cobranca-erro">R$ 0,00</h3>
+                            <div class="kpi-analytics">
+                                <span class="kpi-subvalue" id="sub-cobranca-erro-pct">0,0% do total</span>
+                            </div>
+                        </div>
+                        <div class="kpi-icon-container" style="color: #e74c3c;">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="kpi-card outflows" style="background: linear-gradient(135deg, rgba(243, 156, 18, 0.12) 0%, rgba(243, 156, 18, 0.04) 100%); border-left: 4px solid #f39c12;">
+                        <div class="kpi-info">
+                            <span class="kpi-label">Atenção (Em Backlog)</span>
+                            <h3 class="kpi-value" style="color: #f39c12;" id="kpi-cobranca-backlog">R$ 0,00</h3>
+                            <div class="kpi-analytics">
+                                <span class="kpi-subvalue" id="sub-cobranca-backlog-pct">0,0% do total</span>
+                            </div>
+                        </div>
+                        <div class="kpi-icon-container" style="color: #f39c12;">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card inflows" style="background: linear-gradient(135deg, rgba(46, 204, 113, 0.12) 0%, rgba(46, 204, 113, 0.04) 100%); border-left: 4px solid #2ecc71;">
+                        <div class="kpi-info">
+                            <span class="kpi-label">Pronto p/ Faturar (Executado)</span>
+                            <h3 class="kpi-value" style="color: #2ecc71;" id="kpi-cobranca-executado">R$ 0,00</h3>
+                            <div class="kpi-analytics">
+                                <span class="kpi-subvalue" id="sub-cobranca-executado-pct">0,0% do total</span>
+                            </div>
+                        </div>
+                        <div class="kpi-icon-container" style="color: #2ecc71;">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Grid -->
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <div class="chart-title">
+                                <h2>Distribuição por Ano/Mês de Medição</h2>
+                            </div>
+                        </div>
+                        <div class="chart-body">
+                            <canvas id="chart-cobranca-evolution"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-card" style="flex: 0 0 35%; max-width: 35%;">
+                        <div class="chart-header">
+                            <div class="chart-title">
+                                <h2>Status das Pendências</h2>
+                            </div>
+                        </div>
+                        <div class="chart-body" style="position: relative; height: 320px; width: 100%; display: flex; align-items: center; justify-content: center;">
+                            <canvas id="chart-cobranca-status"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-grid" style="margin-top: 20px;">
+                    <div class="chart-card" style="flex: 1 1 100%;">
+                        <div class="chart-header">
+                            <div class="chart-title">
+                                <h2>Top Contratos com Pendências (Valor)</h2>
+                            </div>
+                        </div>
+                        <div class="chart-body" style="height: 380px;">
+                            <canvas id="chart-cobranca-contracts"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUB-VIEW 2: DETALHADO (TABELA ANALÍTICA DE COBRANÇA) -->
+            <div id="subview-cobranca-details" class="dashboard-subview" style="display: none;">
+                <div class="data-table-card">
+                    <div class="table-controls">
+                        <div class="search-wrapper">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" id="cobranca-table-search" placeholder="Buscar por OS, Cidade, Contrato ou Item..." oninput="handleCobrancaSearch()">
+                        </div>
+                        <div class="table-actions">
+                            <button class="btn-secondary" onclick="exportCobrancaToCSV()">
+                                <i class="fa-solid fa-file-csv"></i> Exportar CSV
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>OS</th>
+                                    <th>Competência</th>
+                                    <th>UF</th>
+                                    <th>Cidade</th>
+                                    <th>Contrato</th>
+                                    <th>Fase Atual</th>
+                                    <th>Status OS</th>
+                                    <th>Malogro</th>
+                                    <th>Num Pedido</th>
+                                    <th>Num Medição</th>
+                                    <th style="text-align: right;">Valor</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cobranca-table-body">
+                                <!-- Rows loaded dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="pagination">
+                        <span class="pagination-info" id="cobranca-pagination-info">Mostrando 0-0 de 0 itens</span>
+                        <div class="pagination-buttons">
+                            <button class="pagination-btn" id="cobranca-pagination-prev" onclick="changeCobrancaPage(-1)">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </button>
+                            <button class="pagination-btn" id="cobranca-pagination-next" onclick="changeCobrancaPage(1)">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- VIEW 4: ADMIN PANEL -->
         <div id="view-admin-container" class="view-panel" style="display: none;">
             <div class="admin-panel-grid">
@@ -414,6 +620,315 @@
                 </div>
 
             </div>
+        </div>
+
+        <!-- VIEW 5: VEHICLES FUELING DASHBOARD -->
+        <div id="view-veiculos-container" class="view-panel" style="display: none;">
+            <!-- Horizontal Filter Panel -->
+            <section class="filter-bar-veiculos">
+                <div class="filter-group">
+                    <label for="filter-veiculos-month">Competência / Mês</label>
+                    <select id="filter-veiculos-month">
+                        <option value="all">Todos os Meses</option>
+                        <option value="JANEIRO">Janeiro/2026</option>
+                        <option value="FEVEREIRO">Fevereiro/2026</option>
+                        <option value="MARCO">Março/2026</option>
+                        <option value="ABRIL">Abril/2026</option>
+                        <option value="MAIO">Maio/2026</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="filter-veiculos-uf">UF / Estado</label>
+                    <select id="filter-veiculos-uf">
+                        <option value="all">Todas as UFs</option>
+                        <option value="SC">Santa Catarina (SC)</option>
+                        <option value="RS">Rio Grande do Sul (RS)</option>
+                        <option value="PR">Paraná (PR)</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="filter-veiculos-fuel">Categoria / Combustível</label>
+                    <select id="filter-veiculos-fuel">
+                        <option value="all">Todas as Categorias</option>
+                        <!-- Generated dynamically -->
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="filter-veiculos-driver">Condutor / Motorista</label>
+                    <input type="text" id="filter-veiculos-driver" placeholder="Todos os Condutores" list="veiculos-driver-list">
+                    <datalist id="veiculos-driver-list"></datalist>
+                </div>
+
+                <div class="filter-group">
+                    <label for="filter-veiculos-plate">Veículo / Placa</label>
+                    <input type="text" id="filter-veiculos-plate" placeholder="Todas as Placas" list="veiculos-plate-list">
+                    <datalist id="veiculos-plate-list"></datalist>
+                </div>
+
+                <div class="filter-actions-inline">
+                    <button class="btn-reset" id="btn-veiculos-reset" title="Limpar Filtros">
+                        <i class="fa-solid fa-arrows-rotate"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Sub Tab Selector (Indicadores / Lançamentos) -->
+            <div class="sub-tabs-container">
+                <button class="sub-tab tab-btn active" data-tab="indicators">
+                    <i class="fa-solid fa-chart-column"></i>
+                    <span>Indicadores</span>
+                </button>
+                <button class="sub-tab tab-btn" data-tab="details">
+                    <i class="fa-solid fa-list"></i>
+                    <span>Lançamentos</span>
+                </button>
+            </div>
+
+            <!-- Sub Tab Pane: Indicadores -->
+            <div id="subview-veiculos-indicators" class="subtab-pane active">
+                <!-- KPI Metrics Grid -->
+                <section class="metrics-grid">
+                    <div class="metric-card emissions">
+                        <h3>TOTAL DE EMISSÕES</h3>
+                        <div class="metric-value" id="kpi-veiculos-total">R$ 0,00</div>
+                        <div class="metric-meta-row">
+                            Média p/ Abast.: <strong id="kpi-veiculos-avg">R$ 0,00</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card count">
+                        <h3>TOTAL DE ABASTECIMENTOS</h3>
+                        <div class="metric-value" id="kpi-veiculos-count">0</div>
+                        <div class="metric-meta-row">
+                            Veículos Ativos: <strong id="kpi-veiculos-active-vehicles">0</strong>
+                        </div>
+                    </div>
+
+                    <div class="metric-card liters">
+                        <h3>TOTAL DE LITROS</h3>
+                        <div class="metric-value" id="kpi-veiculos-liters">0,0 L</div>
+                        <div class="metric-meta-row">
+                            Motoristas Ativos: <strong id="kpi-veiculos-active-drivers">0</strong>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- UF Regional Cards (SC, RS, PR) -->
+                <section class="regional-accounts-grid">
+                    <!-- SC Card -->
+                    <div class="account-card">
+                        <div class="account-header">
+                            <div class="account-brand">
+                                <div class="brand-dot sc"></div>
+                                <span class="brand-name">Santa Catarina (SC)</span>
+                            </div>
+                            <div class="account-balance" id="balance-veiculos-SC">R$ 0,00</div>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-bar sc" id="progress-veiculos-SC" style="width: 0%"></div>
+                        </div>
+                        <div class="account-details">
+                            <div class="detail-row">
+                                <span>Lançamentos</span>
+                                <span id="count-veiculos-SC" class="text-white">0</span>
+                            </div>
+                            <div class="detail-row">
+                                <span>Percentual</span>
+                                <span id="pct-veiculos-SC" class="text-white">0.0%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RS Card -->
+                    <div class="account-card">
+                        <div class="account-header">
+                            <div class="account-brand">
+                                <div class="brand-dot rs"></div>
+                                <span class="brand-name">Rio Grande do Sul (RS)</span>
+                            </div>
+                            <div class="account-balance" id="balance-veiculos-RS">R$ 0,00</div>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-bar rs" id="progress-veiculos-RS" style="width: 0%"></div>
+                        </div>
+                        <div class="account-details">
+                            <div class="detail-row">
+                                <span>Lançamentos</span>
+                                <span id="count-veiculos-RS" class="text-white">0</span>
+                            </div>
+                            <div class="detail-row">
+                                <span>Percentual</span>
+                                <span id="pct-veiculos-RS" class="text-white">0.0%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PR Card -->
+                    <div class="account-card">
+                        <div class="account-header">
+                            <div class="account-brand">
+                                <div class="brand-dot pr"></div>
+                                <span class="brand-name">Paraná (PR)</span>
+                            </div>
+                            <div class="account-balance" id="balance-veiculos-PR">R$ 0,00</div>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-bar pr" id="progress-veiculos-PR" style="width: 0%"></div>
+                        </div>
+                        <div class="account-details">
+                            <div class="detail-row">
+                                <span>Lançamentos</span>
+                                <span id="count-veiculos-PR" class="text-white">0</span>
+                            </div>
+                            <div class="detail-row">
+                                <span>Percentual</span>
+                                <span id="pct-veiculos-PR" class="text-white">0.0%</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Charts Container Grid -->
+                <section class="charts-grid">
+                    <!-- Evolution Chart -->
+                    <div class="chart-card col-span-2">
+                        <div class="chart-header-row">
+                            <h3>Evolução de Fluxo Mensal - 2026</h3>
+                            <div class="chart-filters-sub">
+                                <button class="btn-chart-sub active">Mensal</button>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="chart-veiculos-evolution"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- State Breakdown -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Distribuição Regional</h3>
+                            <p>Proporção dos custos por Estado</p>
+                        </div>
+                        <div class="chart-container centered">
+                            <canvas id="chart-veiculos-uf"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Top Drivers -->
+                    <div class="chart-card col-span-2">
+                        <div class="chart-header">
+                            <h3>Top 10 Condutores por Gasto</h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="chart-veiculos-top-drivers"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Top Vehicles -->
+                    <div class="chart-card col-span-2">
+                        <div class="chart-header">
+                            <h3>Top 10 Veículos por Gasto</h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="chart-veiculos-top-vehicles"></canvas>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Detailed Consumption Section (Feb/May) -->
+                <section class="consumption-insights chart-card data-rich-only hidden">
+                    <div class="chart-header">
+                        <h3>Métricas Detalhadas de Consumo & Preços (Fevereiro & Maio)</h3>
+                        <p>Análise de tipos de combustíveis, médias de consumo e oscilações de preço do mercado.</p>
+                    </div>
+                    <div class="charts-subgrid">
+                        <div class="chart-wrapper">
+                            <h4>Consumo por Tipo de Combustível (Litros)</h4>
+                            <div class="chart-container-sm">
+                                <canvas id="chart-veiculos-fuel-dist"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-wrapper">
+                            <h4>Preço Médio por Litro (R$) por Região</h4>
+                            <div class="chart-container-sm">
+                                <canvas id="chart-veiculos-avg-price"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-wrapper">
+                            <h4>Média de Consumo da Frota (KM/L)</h4>
+                            <div class="chart-container-sm">
+                                <canvas id="chart-veiculos-efficiency"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Sub Tab Pane: Lançamentos -->
+            <div id="subview-veiculos-details" class="subtab-pane">
+                <section class="table-section chart-card">
+                    <div class="table-header">
+                        <div class="table-title">
+                            <h3>Lançamentos de Abastecimento</h3>
+                            <p>Visualização de todas as transações registradas</p>
+                        </div>
+                        <div class="table-search">
+                            <input type="text" id="table-veiculos-search" placeholder="Pesquisar por motorista, placa, UF, combustível...">
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th data-sort="date" class="sort-asc">Data Transação</th>
+                                    <th data-sort="plate">Placa</th>
+                                    <th data-sort="model">Modelo</th>
+                                    <th data-sort="driver">Motorista</th>
+                                    <th data-sort="uf">UF</th>
+                                    <th data-sort="value" class="text-right">Valor</th>
+                                    <th data-sort="liters" class="text-right">Litros</th>
+                                    <th data-sort="vlLiter" class="text-right">Preço/L</th>
+                                    <th data-sort="fuel">Combustível</th>
+                                    <th data-sort="km" class="text-right">Km</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-veiculos-body">
+                                <!-- Loaded dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="table-footer">
+                        <div class="table-info">
+                            Mostrando <span id="table-veiculos-row-start">1</span> a <span id="table-veiculos-row-end">50</span> de <span id="table-veiculos-row-total">2020</span> lançamentos
+                        </div>
+                        <div class="table-pagination">
+                            <button class="btn-icon" id="btn-veiculos-page-prev" disabled>
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </button>
+                            <span class="page-indicator" id="veiculos-page-indicator">Pág. 1 / 41</span>
+                            <button class="btn-icon" id="btn-veiculos-page-next">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Analysis Section (Always Visible or below the tabs) -->
+            <section class="analysis-section chart-card" style="margin-top: 12px;">
+                <div class="analysis-header">
+                    <h2>Relatório de Análise Gerencial</h2>
+                    <p>Consolidação e avaliação técnica dos dados de frota e custos</p>
+                </div>
+                <div class="analysis-body" id="veiculos-analysis-content">
+                    <!-- Loaded dynamically -->
+                </div>
+            </section>
         </div>
 
         <!-- Modal: Adicionar/Editar Usuário -->
@@ -598,6 +1113,9 @@
 
     <!-- Carga de Dados Dinâmica -->
     <script src="data.js"></script>
+    <script src="cobranca_data.js"></script>
+    <script src="veiculos_data.js"></script>
+    <script src="veiculos_app.js"></script>
 
     <!-- Logica de UI Autônoma (Sem Dependências de CDNs) -->
     <script>
@@ -1157,6 +1675,8 @@
         // Known pages registry (for admin panel)
         const ALL_PAGES = [
             { id: 'dashboard',    label: 'Dashboard Financeiro',    icon: 'fa-sack-dollar',       navId: 'nav-dashboard' },
+            { id: 'cobranca',     label: 'Controle de Cobrança',     icon: 'fa-hand-holding-dollar', navId: 'nav-cobranca' },
+            { id: 'veiculos',     label: 'Veículos',                icon: 'fa-car',               navId: 'nav-veiculos' },
             { id: 'admin',        label: 'Painel Admin',            icon: 'fa-shield-halved',    navId: 'nav-admin',        adminOnly: true },
         ];
 
@@ -1568,6 +2088,24 @@
                 document.getElementById('view-title').innerText = 'Painel Administrativo';
                 document.getElementById('view-subtitle').innerHTML = 'Gerencie usuários, perfis de acesso e páginas do BI <span class="badge-competencia">Admin</span>';
                 loadAdminPanel();
+            } else if (viewName === 'cobranca') {
+                document.getElementById('filters-container').style.display = 'none';
+                if (mobileToggleBtn) mobileToggleBtn.style.display = 'none';
+                document.getElementById('view-title').innerText = 'Controle de Cobrança';
+                document.getElementById('view-subtitle').innerHTML = 'Análise de pendências de faturamento com o cliente Claro.';
+                if (cobrancaReceivables.length === 0) {
+                    initCobranca();
+                }
+                switchCobrancaTab(activeCobrancaTab);
+            } else if (viewName === 'veiculos') {
+                document.getElementById('filters-container').style.display = 'none';
+                if (mobileToggleBtn) mobileToggleBtn.style.display = 'none';
+                document.getElementById('view-title').innerText = 'Dashboard de Abastecimento';
+                if (!veiculosDataLoaded) {
+                    initVeiculos();
+                } else {
+                    applyVeiculosFilters();
+                }
             } else {
                 document.getElementById('filters-container').style.display = 'grid';
                 if (mobileToggleBtn) mobileToggleBtn.style.display = '';
@@ -1592,6 +2130,8 @@
 
         const PAGES_CATALOG = [
             { id: 'dashboard',    label: 'Dashboard Financeiro',     icon: 'fa-sack-dollar' },
+            { id: 'cobranca',     label: 'Controle de Cobrança',      icon: 'fa-hand-holding-dollar' },
+            { id: 'veiculos',     label: 'Veículos',                 icon: 'fa-car' },
         ];
 
         function renderPageCheckboxes(containerId, selectedPages = []) {
@@ -3654,6 +4194,506 @@
                 console.log('Nova atualização de dados/BI encontrada! Atualizando de forma silenciosa...');
                 worker.postMessage({ type: 'SKIP_WAITING' });
             }
+        }
+
+        // --- LÓGICA DO DASHBOARD DE COBRANÇA ---
+        let cobrancaReceivables = [];
+        let filteredCobrancaReceivables = [];
+        let currentCobrancaPage = 1;
+        const cobrancaPageSize = 25;
+        let activeCobrancaTab = 'indicators';
+        let cobrancaSearchQuery = '';
+        
+        let chartCobrancaEvolution = null;
+        let chartCobrancaStatus = null;
+        let chartCobrancaContracts = null;
+
+        function initCobranca() {
+            if (typeof window.COBRANCA_DATA === 'undefined') {
+                console.warn("window.COBRANCA_DATA não foi carregado!");
+                return;
+            }
+            
+            cobrancaReceivables = window.COBRANCA_DATA.receivables || [];
+            populateCobrancaFilters();
+            applyCobrancaFilters();
+        }
+
+        function populateCobrancaFilters() {
+            const mesSelect = document.getElementById('filter-cobranca-mes');
+            const contratoSelect = document.getElementById('filter-cobranca-contrato');
+            
+            if (!mesSelect || !contratoSelect) return;
+            
+            const uniqueMonths = {};
+            const uniqueContracts = {};
+            
+            cobrancaReceivables.forEach(row => {
+                const mes = row[9]; // index 9: mes_medicao
+                if (mes) uniqueMonths[mes] = true;
+                
+                const contrato = row[3]; // index 3: contrato_numero
+                if (contrato) uniqueContracts[contrato] = true;
+            });
+            
+            const sortedMonths = Object.keys(uniqueMonths).sort();
+            mesSelect.innerHTML = '<option value="ALL">Todos os Meses</option>';
+            sortedMonths.forEach(m => {
+                const opt = document.createElement('option');
+                opt.value = m;
+                opt.innerText = m;
+                mesSelect.appendChild(opt);
+            });
+            
+            const sortedContracts = Object.keys(uniqueContracts).sort();
+            contratoSelect.innerHTML = '<option value="ALL">Todos os Contratos</option>';
+            sortedContracts.forEach(c => {
+                const opt = document.createElement('option');
+                opt.value = c;
+                opt.innerText = c;
+                contratoSelect.appendChild(opt);
+            });
+        }
+
+        function applyCobrancaFilters() {
+            const selectedUf = document.getElementById('filter-cobranca-uf').value;
+            const selectedMes = document.getElementById('filter-cobranca-mes').value;
+            const selectedContrato = document.getElementById('filter-cobranca-contrato').value;
+            const selectedStatus = document.getElementById('filter-cobranca-status').value;
+            
+            filteredCobrancaReceivables = cobrancaReceivables.filter(row => {
+                if (selectedUf !== 'ALL' && row[2] !== selectedUf) return false;
+                if (selectedMes !== 'ALL' && row[9] !== selectedMes) return false;
+                if (selectedContrato !== 'ALL' && row[3] !== selectedContrato) return false;
+                
+                if (selectedStatus !== 'ALL') {
+                    const statusOS = row[5];
+                    const malogro = row[6];
+                    if (selectedStatus === 'ERRO') {
+                        if (statusOS !== 'ERRO - AVALIAR OS' || malogro !== 'ERROR') return false;
+                    } else if (selectedStatus === 'BACKLOG') {
+                        if (statusOS !== 'ERRO - AVALIAR OS' || malogro !== 'BACKLOG') return false;
+                    } else if (selectedStatus === 'EXECUTADO') {
+                        if (statusOS !== 'EXECUTADO') return false;
+                    } else if (selectedStatus === 'DEVOLVIDO') {
+                        if (statusOS !== 'DEVOLVIDO') return false;
+                    }
+                }
+                
+                if (cobrancaSearchQuery) {
+                    const os = String(row[0]).toLowerCase();
+                    const cidade = String(row[1]).toLowerCase();
+                    const contrato = String(row[3]).toLowerCase();
+                    const fase = String(row[4]).toLowerCase();
+                    const statusOS = String(row[5]).toLowerCase();
+                    const malogro = String(row[6]).toLowerCase();
+                    const pedido = String(row[7]).toLowerCase();
+                    const medicao = String(row[8]).toLowerCase();
+                    const query = cobrancaSearchQuery.toLowerCase();
+                    
+                    if (!os.includes(query) && !cidade.includes(query) && !contrato.includes(query) && 
+                        !fase.includes(query) && !statusOS.includes(query) && !malogro.includes(query) && 
+                        !pedido.includes(query) && !medicao.includes(query)) {
+                        return false;
+                    }
+                }
+                
+                return true;
+            });
+            
+            currentCobrancaPage = 1;
+            calculateCobrancaKPIs();
+            
+            if (activeCobrancaTab === 'indicators') {
+                renderCobrancaCharts();
+            } else {
+                renderCobrancaTable();
+            }
+        }
+
+        function calculateCobrancaKPIs() {
+            let total = 0.0;
+            let erro = 0.0;
+            let backlog = 0.0;
+            let executado = 0.0;
+            
+            filteredCobrancaReceivables.forEach(row => {
+                const val = row[10]; // index 10: valor_final
+                const statusOS = row[5];
+                const malogro = row[6];
+                
+                total += val;
+                if (statusOS === 'ERRO - AVALIAR OS') {
+                    if (malogro === 'ERROR') {
+                        erro += val;
+                    } else if (malogro === 'BACKLOG') {
+                        backlog += val;
+                    }
+                } else if (statusOS === 'EXECUTADO') {
+                    executado += val;
+                }
+            });
+            
+            const formatCurr = (val) => {
+                return 'R$ ' + val.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            };
+            
+            document.getElementById('kpi-cobranca-total').innerText = formatCurr(total);
+            document.getElementById('kpi-cobranca-erro').innerText = formatCurr(erro);
+            document.getElementById('kpi-cobranca-backlog').innerText = formatCurr(backlog);
+            document.getElementById('kpi-cobranca-executado').innerText = formatCurr(executado);
+            
+            document.getElementById('sub-cobranca-count').innerText = `${filteredCobrancaReceivables.length} itens pendentes`;
+            
+            const getPct = (val) => {
+                if (total === 0) return '0,0%';
+                return ((val / total) * 100).toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%';
+            };
+            
+            document.getElementById('sub-cobranca-erro-pct').innerText = `${getPct(erro)} do total`;
+            document.getElementById('sub-cobranca-backlog-pct').innerText = `${getPct(backlog)} do total`;
+            document.getElementById('sub-cobranca-executado-pct').innerText = `${getPct(executado)} do total`;
+        }
+
+        function switchCobrancaTab(tab) {
+            activeCobrancaTab = tab;
+            
+            const btnIndicators = document.getElementById('tab-btn-cobranca-indicators');
+            const btnDetails = document.getElementById('tab-btn-cobranca-details');
+            
+            const subviewIndicators = document.getElementById('subview-cobranca-indicators');
+            const subviewDetails = document.getElementById('subview-cobranca-details');
+            
+            if (!btnIndicators || !btnDetails || !subviewIndicators || !subviewDetails) return;
+            
+            if (tab === 'indicators') {
+                btnIndicators.classList.add('active');
+                btnDetails.classList.remove('active');
+                subviewIndicators.style.display = 'block';
+                subviewDetails.style.display = 'none';
+                renderCobrancaCharts();
+            } else {
+                btnDetails.classList.add('active');
+                btnIndicators.classList.remove('active');
+                subviewIndicators.style.display = 'none';
+                subviewDetails.style.display = 'block';
+                renderCobrancaTable();
+            }
+        }
+
+        function renderCobrancaCharts() {
+            if (chartCobrancaEvolution) chartCobrancaEvolution.destroy();
+            if (chartCobrancaStatus) chartCobrancaStatus.destroy();
+            if (chartCobrancaContracts) chartCobrancaContracts.destroy();
+            
+            // 1. Evolution Chart
+            const evolutionData = {};
+            filteredCobrancaReceivables.forEach(row => {
+                const mes = row[9] || 'N/D';
+                const val = row[10];
+                evolutionData[mes] = (evolutionData[mes] || 0) + val;
+            });
+            const evLabels = Object.keys(evolutionData).sort();
+            const evValues = evLabels.map(l => evolutionData[l]);
+            const evColors = evLabels.map(label => {
+                if (label.startsWith('2023')) return 'rgba(231, 76, 60, 0.85)';
+                if (label.startsWith('2024')) return 'rgba(243, 156, 18, 0.85)';
+                if (label.startsWith('2025')) return 'rgba(52, 152, 219, 0.85)';
+                if (label.startsWith('2026')) return 'rgba(46, 204, 113, 0.85)';
+                return 'rgba(155, 89, 182, 0.85)';
+            });
+            
+            const ctxEv = document.getElementById('chart-cobranca-evolution');
+            if (ctxEv) {
+                chartCobrancaEvolution = new Chart(ctxEv, {
+                    type: 'bar',
+                    data: {
+                        labels: evLabels,
+                        datasets: [{
+                            label: 'Valor Pendente',
+                            data: evValues,
+                            backgroundColor: evColors,
+                            borderWidth: 0,
+                            borderRadius: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return 'R$ ' + context.raw.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                                ticks: {
+                                    color: '#8a99a8',
+                                    callback: function(value) {
+                                        if (value >= 1e6) return 'R$ ' + (value / 1e6).toFixed(1) + 'M';
+                                        if (value >= 1e3) return 'R$ ' + (value / 1e3).toFixed(0) + 'k';
+                                        return 'R$ ' + value;
+                                    }
+                                }
+                            },
+                            x: {
+                                grid: { display: false },
+                                ticks: { color: '#8a99a8', font: { size: 10 } }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // 2. Status Chart
+            let critVal = 0, backVal = 0, readyVal = 0, otherVal = 0;
+            filteredCobrancaReceivables.forEach(row => {
+                const statusOS = row[5];
+                const malogro = row[6];
+                const val = row[10];
+                
+                if (statusOS === 'ERRO - AVALIAR OS') {
+                    if (malogro === 'ERROR') critVal += val;
+                    else if (malogro === 'BACKLOG') backVal += val;
+                } else if (statusOS === 'EXECUTADO') {
+                    readyVal += val;
+                } else {
+                    otherVal += val;
+                }
+            });
+            
+            const ctxSt = document.getElementById('chart-cobranca-status');
+            if (ctxSt) {
+                chartCobrancaStatus = new Chart(ctxSt, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Crítico (Erro)', 'Atenção (Backlog)', 'Pronto p/ Faturar', 'Outros'],
+                        datasets: [{
+                            data: [critVal, backVal, readyVal, otherVal],
+                            backgroundColor: ['#e74c3c', '#f39c12', '#2ecc71', '#95a5a6'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: { color: '#8a99a8', font: { size: 11 } }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        const sum = critVal + backVal + readyVal + otherVal;
+                                        const pct = sum > 0 ? ((context.raw / sum) * 100).toFixed(1) + '%' : '0%';
+                                        return context.label + ': R$ ' + context.raw.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) + ' (' + pct + ')';
+                                    }
+                                }
+                            }
+                        },
+                        cutout: '65%'
+                    }
+                });
+            }
+            
+            // 3. Contracts Chart
+            const contractData = {};
+            filteredCobrancaReceivables.forEach(row => {
+                const c = row[3] || 'Sem Contrato';
+                const sys = row[11] || '';
+                const key = c + (sys ? ' (' + sys + ')' : '');
+                contractData[key] = (contractData[key] || 0) + row[10];
+            });
+            const sortedContractsKeys = Object.keys(contractData).sort((a, b) => contractData[b] - contractData[a]).slice(0, 10);
+            const sortedContractsValues = sortedContractsKeys.map(k => contractData[k]);
+            
+            const ctxCt = document.getElementById('chart-cobranca-contracts');
+            if (ctxCt) {
+                chartCobrancaContracts = new Chart(ctxCt, {
+                    type: 'bar',
+                    data: {
+                        labels: sortedContractsKeys,
+                        datasets: [{
+                            label: 'Valor Pendente',
+                            data: sortedContractsValues,
+                            backgroundColor: 'rgba(0, 119, 170, 0.85)',
+                            hoverBackgroundColor: 'rgba(0, 119, 170, 1)',
+                            borderWidth: 0,
+                            borderRadius: 4
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return 'R$ ' + context.raw.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                                ticks: {
+                                    color: '#8a99a8',
+                                    callback: function(value) {
+                                        if (value >= 1e6) return 'R$ ' + (value / 1e6).toFixed(1) + 'M';
+                                        if (value >= 1e3) return 'R$ ' + (value / 1e3).toFixed(0) + 'k';
+                                        return 'R$ ' + value;
+                                    }
+                                }
+                            },
+                            y: {
+                                grid: { display: false },
+                                ticks: { color: '#8a99a8', font: { size: 10 } }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        function renderCobrancaTable() {
+            const tbody = document.getElementById('cobranca-table-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            
+            const totalRecords = filteredCobrancaReceivables.length;
+            const totalPages = Math.ceil(totalRecords / cobrancaPageSize);
+            
+            if (totalRecords === 0) {
+                tbody.innerHTML = `<tr><td colspan="11" style="text-align:center; color: var(--text-secondary); padding: 24px;">Nenhum registro encontrado para os filtros selecionados.</td></tr>`;
+                document.getElementById('cobranca-pagination-info').innerText = 'Mostrando 0 de 0 itens';
+                document.getElementById('cobranca-pagination-prev').disabled = true;
+                document.getElementById('cobranca-pagination-next').disabled = true;
+                return;
+            }
+            
+            const startIdx = (currentCobrancaPage - 1) * cobrancaPageSize;
+            const endIdx = Math.min(startIdx + cobrancaPageSize, totalRecords);
+            const pageData = filteredCobrancaReceivables.slice(startIdx, endIdx);
+            
+            pageData.forEach(row => {
+                const tr = document.createElement('tr');
+                
+                const os = row[0];
+                const cidade = row[1];
+                const uf = row[2];
+                const contrato = row[3];
+                const fase = row[4];
+                const statusOS = row[5];
+                const malogro = row[6];
+                const pedido = row[7] || '-';
+                const medicao = row[8] || '-';
+                const mes = row[9];
+                const valor = row[10];
+                const sistema = row[11];
+                const categoria = row[12];
+                
+                let badgeClass = 'pronto';
+                let statusLabel = statusOS;
+                
+                if (statusOS === 'ERRO - AVALIAR OS') {
+                    if (malogro === 'ERROR') {
+                        badgeClass = 'critico';
+                        statusLabel = 'Crítico (Erro)';
+                    } else {
+                        badgeClass = 'atencao';
+                        statusLabel = 'Atenção (Backlog)';
+                    }
+                } else if (statusOS === 'DEVOLVIDO') {
+                    badgeClass = 'devolvido';
+                    statusLabel = 'Devolvido';
+                } else if (statusOS === 'EXECUTADO') {
+                    badgeClass = 'pronto';
+                    statusLabel = 'Pronto p/ Faturar';
+                }
+                
+                tr.innerHTML = `
+                    <td><strong>${os}</strong></td>
+                    <td>${mes}</td>
+                    <td>${uf}</td>
+                    <td>${cidade}</td>
+                    <td title="${categoria}">${contrato} <span style="font-size: 9px; color: var(--text-secondary);">(${sistema})</span></td>
+                    <td title="${fase}">${fase}</td>
+                    <td><span class="badge-status-cobranca ${badgeClass}">${statusLabel}</span></td>
+                    <td>${malogro || '-'}</td>
+                    <td>${pedido}</td>
+                    <td>${medicao}</td>
+                    <td style="text-align: right;"><strong>R$ ${valor.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</strong></td>
+                `;
+                tbody.appendChild(tr);
+            });
+            
+            document.getElementById('cobranca-pagination-info').innerText = `Mostrando ${startIdx + 1}-${endIdx} de ${totalRecords} itens`;
+            document.getElementById('cobranca-pagination-prev').disabled = currentCobrancaPage === 1;
+            document.getElementById('cobranca-pagination-next').disabled = currentCobrancaPage === totalPages || totalPages === 0;
+        }
+
+        function changeCobrancaPage(direction) {
+            currentCobrancaPage += direction;
+            renderCobrancaTable();
+        }
+
+        function handleCobrancaSearch() {
+            cobrancaSearchQuery = document.getElementById('cobranca-table-search').value.trim();
+            applyCobrancaFilters();
+        }
+
+        function exportCobrancaToCSV() {
+            if (filteredCobrancaReceivables.length === 0) {
+                alert("Nenhum dado para exportar!");
+                return;
+            }
+            
+            let csvContent = "\uFEFF";
+            csvContent += "OS;Mes Medicao;UF;Cidade;Contrato;Sistema;Categoria;Fase Atual;Status OS;Malogro;Pedido;Medicao;Valor Final\n";
+            
+            filteredCobrancaReceivables.forEach(row => {
+                const csvRow = [
+                    row[0],
+                    row[9],
+                    row[2],
+                    row[1],
+                    row[3],
+                    row[11],
+                    row[12].replace(/;/g, ','),
+                    row[4].replace(/;/g, ','),
+                    row[5].replace(/;/g, ','),
+                    row[6],
+                    row[7] || '',
+                    row[8] || '',
+                    row[10].toString().replace(/\./g, ',')
+                ];
+                csvContent += csvRow.join(";") + "\n";
+            });
+            
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            
+            const uf = document.getElementById('filter-cobranca-uf').value;
+            const status = document.getElementById('filter-cobranca-status').value;
+            const dateStr = new Date().toISOString().split('T')[0];
+            
+            link.setAttribute("href", url);
+            link.setAttribute("download", `Controle_Cobranca_${uf}_${status}_${dateStr}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
     </script>
 
