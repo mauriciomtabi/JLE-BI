@@ -1,5 +1,6 @@
 // veiculos_app.js - Dashboard de Veículos JLE BI
 // Padrão visual e funcional idêntico ao Dashboard Financeiro
+// Build trigger: 202606081933
 
 // ── Estado Global ──────────────────────────────────────────────────────────
 let activeVeiculosTab      = 'indicators';
