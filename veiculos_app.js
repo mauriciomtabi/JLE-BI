@@ -23,39 +23,33 @@ let tableVeiculosSearchQuery    = '';
 
 // ── Inicialização ─────────────────────────────────────────────────────────
 function initVeiculos() {
-    if (typeof VEICULOS_DATA === 'undefined') {
-        console.error('VEICULOS_DATA não carregado.');
-        return;
+    try {
+        if (typeof VEICULOS_DATA === 'undefined') {
+            console.error('VEICULOS_DATA não carregado.');
+            return;
+        }
+        filteredVeiculosData = [...VEICULOS_DATA];
+
+        populateVeiculosFilters();
+        initVeiculosEventListeners();
+        applyVeiculosFilters();
+
+        veiculosDataLoaded = true;
+    } catch (err) {
+        console.error("Erro fatal ao inicializar Veículos:", err);
     }
-    filteredVeiculosData = [...VEICULOS_DATA];
-
-    populateVeiculosFilters();
-    initVeiculosEventListeners();
-    applyVeiculosFilters();
-
-    veiculosDataLoaded = true;
 }
 
 // ── Listeners ─────────────────────────────────────────────────────────────
 function initVeiculosEventListeners() {
-    // Abas
-    document.querySelectorAll('#view-veiculos-container .tab-btn').forEach(btn => {
-        btn.addEventListener('click', () => switchVeiculosTab(btn.getAttribute('data-tab')));
-    });
-
-    // Filtros selects
-    ['filter-veiculos-month','filter-veiculos-uf','filter-veiculos-fuel'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.addEventListener('change', applyVeiculosFilters);
-    });
-    // Filtros text
-    ['filter-veiculos-driver','filter-veiculos-plate'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.addEventListener('input', applyVeiculosFilters);
-    });
-
-    const resetBtn = document.getElementById('btn-veiculos-reset');
-    if (resetBtn) resetBtn.addEventListener('click', resetVeiculosFilters);
+    try {
+        // Abas
+        document.querySelectorAll('#view-veiculos-container .tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => switchVeiculosTab(btn.getAttribute('data-tab')));
+        });
+    } catch (err) {
+        console.error("Erro ao registrar listeners de abas:", err);
+    }
 
     // Busca na tabela
     const searchEl = document.getElementById('table-veiculos-search');
@@ -105,99 +99,124 @@ function setVeiculosEvolutionGranularity(g) {
 // ── Popula filtros dinamicamente ──────────────────────────────────────────
 function populateVeiculosFilters() {
     // Competência/Mês
-    const monthSelect = document.getElementById('filter-veiculos-month');
-    if (monthSelect) {
-        const monthOrder = {
-            'JANEIRO':1,'FEVEREIRO':2,'MARÇO':3,'MARCO':3,'ABRIL':4,
-            'MAIO':5,'JUNHO':6,'JULHO':7,'AGOSTO':8,
-            'SETEMBRO':9,'OUTUBRO':10,'NOVEMBRO':11,'DEZEMBRO':12
-        };
-        const uniqueMonths = [...new Set(VEICULOS_DATA.map(r => r.month))]
-            .filter(m => m && m !== '')
-            .sort((a, b) => (monthOrder[a.toUpperCase()] || 99) - (monthOrder[b.toUpperCase()] || 99));
+    try {
+        const monthSelect = document.getElementById('filter-veiculos-month');
+        if (monthSelect) {
+            const monthOrder = {
+                'JANEIRO':1,'FEVEREIRO':2,'MARÇO':3,'MARCO':3,'ABRIL':4,
+                'MAIO':5,'JUNHO':6,'JULHO':7,'AGOSTO':8,
+                'SETEMBRO':9,'OUTUBRO':10,'NOVEMBRO':11,'DEZEMBRO':12
+            };
+            const uniqueMonths = [...new Set(VEICULOS_DATA.map(r => String(r.month || '').trim()))]
+                .filter(m => m && m !== '')
+                .sort((a, b) => (monthOrder[a.toUpperCase()] || 99) - (monthOrder[b.toUpperCase()] || 99));
 
-        monthSelect.innerHTML = '<option value="all">Todos os Meses</option>';
-        uniqueMonths.forEach(m => {
-            const opt = document.createElement('option');
-            opt.value = m;
-            opt.textContent = m.charAt(0) + m.slice(1).toLowerCase();
-            monthSelect.appendChild(opt);
-        });
+            if (uniqueMonths.length > 0) {
+                monthSelect.innerHTML = '<option value="all">Todos os Meses</option>';
+                uniqueMonths.forEach(m => {
+                    const opt = document.createElement('option');
+                    opt.value = m;
+                    const formattedText = m.charAt(0).toUpperCase() + m.slice(1).toLowerCase() + '/2026';
+                    opt.textContent = formattedText;
+                    monthSelect.appendChild(opt);
+                });
+            }
+        }
+    } catch (err) {
+        console.error("Erro ao popular filtro de meses:", err);
     }
 
     // Combustível
-    const fuelSelect = document.getElementById('filter-veiculos-fuel');
-    if (fuelSelect) {
-        const fuels = [...new Set(VEICULOS_DATA.map(r => r.fuel).filter(Boolean))].sort();
-        fuelSelect.innerHTML = '<option value="all">Todas as Categorias</option>';
-        fuels.forEach(f => {
-            const opt = document.createElement('option');
-            opt.value = f;
-            opt.textContent = f;
-            fuelSelect.appendChild(opt);
-        });
+    try {
+        const fuelSelect = document.getElementById('filter-veiculos-fuel');
+        if (fuelSelect) {
+            const fuels = [...new Set(VEICULOS_DATA.map(r => String(r.fuel || '').trim()).filter(Boolean))].sort();
+            if (fuels.length > 0) {
+                fuelSelect.innerHTML = '<option value="all">Todas as Categorias</option>';
+                fuels.forEach(f => {
+                    const opt = document.createElement('option');
+                    opt.value = f;
+                    opt.textContent = f;
+                    fuelSelect.appendChild(opt);
+                });
+            }
+        }
+    } catch (err) {
+        console.error("Erro ao popular filtro de combustível:", err);
     }
 
     // Datalists
-    const drivers = [...new Set(VEICULOS_DATA.map(r => r.driver).filter(Boolean))].sort();
-    const plates  = [...new Set(VEICULOS_DATA.map(r => r.plate).filter(Boolean))].sort();
+    try {
+        const drivers = [...new Set(VEICULOS_DATA.map(r => String(r.driver || '').trim()).filter(Boolean))].sort();
+        const plates  = [...new Set(VEICULOS_DATA.map(r => String(r.plate || '').trim()).filter(Boolean))].sort();
 
-    const driverList = document.getElementById('veiculos-driver-list');
-    if (driverList) {
-        driverList.innerHTML = '';
-        drivers.forEach(d => { const o = document.createElement('option'); o.value = d; driverList.appendChild(o); });
-    }
-    const plateList = document.getElementById('veiculos-plate-list');
-    if (plateList) {
-        plateList.innerHTML = '';
-        plates.forEach(p => { const o = document.createElement('option'); o.value = p; plateList.appendChild(o); });
+        const driverList = document.getElementById('veiculos-driver-list');
+        if (driverList) {
+            driverList.innerHTML = '';
+            drivers.forEach(d => { const o = document.createElement('option'); o.value = d; driverList.appendChild(o); });
+        }
+        const plateList = document.getElementById('veiculos-plate-list');
+        if (plateList) {
+            plateList.innerHTML = '';
+            plates.forEach(p => { const o = document.createElement('option'); o.value = p; plateList.appendChild(o); });
+        }
+    } catch (err) {
+        console.error("Erro ao popular datalists de veículos/condutores:", err);
     }
 }
 
 // ── Reset ─────────────────────────────────────────────────────────────────
 function resetVeiculosFilters() {
-    ['filter-veiculos-month','filter-veiculos-uf','filter-veiculos-fuel'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.value = 'all';
-    });
-    ['filter-veiculos-driver','filter-veiculos-plate'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.value = '';
-    });
-    driverDrillState  = { active: false, driver: null };
-    vehicleDrillState = { active: false, plate: null };
-    applyVeiculosFilters();
+    try {
+        ['filter-veiculos-month','filter-veiculos-uf','filter-veiculos-fuel'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.value = 'all';
+        });
+        ['filter-veiculos-driver','filter-veiculos-plate'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.value = '';
+        });
+        driverDrillState  = { active: false, driver: null };
+        vehicleDrillState = { active: false, plate: null };
+        applyVeiculosFilters();
+    } catch (err) {
+        console.error("Erro ao resetar filtros de veículos:", err);
+    }
 }
 
 // ── Aplicar Filtros ───────────────────────────────────────────────────────
 function applyVeiculosFilters() {
-    const month  = document.getElementById('filter-veiculos-month')?.value || 'all';
-    const uf     = document.getElementById('filter-veiculos-uf')?.value    || 'all';
-    const fuel   = document.getElementById('filter-veiculos-fuel')?.value  || 'all';
-    const driver = (document.getElementById('filter-veiculos-driver')?.value || '').trim().toUpperCase();
-    const plate  = (document.getElementById('filter-veiculos-plate')?.value  || '').trim().toUpperCase();
+    try {
+        const month  = document.getElementById('filter-veiculos-month')?.value || 'all';
+        const uf     = document.getElementById('filter-veiculos-uf')?.value    || 'all';
+        const fuel   = document.getElementById('filter-veiculos-fuel')?.value  || 'all';
+        const driver = (document.getElementById('filter-veiculos-driver')?.value || '').trim().toUpperCase();
+        const plate  = (document.getElementById('filter-veiculos-plate')?.value  || '').trim().toUpperCase();
 
-    filteredVeiculosData = VEICULOS_DATA.filter(r => {
-        if (month !== 'all' && (r.month || '').toUpperCase() !== month.toUpperCase()) return false;
-        if (uf    !== 'all' && r.uf    !== uf)    return false;
-        if (fuel  !== 'all' && r.fuel  !== fuel)  return false;
-        if (driver && !(r.driver || '').toUpperCase().includes(driver)) return false;
-        if (plate  && !(r.plate  || '').toUpperCase().includes(plate))  return false;
-        return true;
-    });
+        filteredVeiculosData = VEICULOS_DATA.filter(r => {
+            if (month !== 'all' && String(r.month || '').toUpperCase() !== month.toUpperCase()) return false;
+            if (uf    !== 'all' && String(r.uf || '') !== uf)    return false;
+            if (fuel  !== 'all' && String(r.fuel || '') !== fuel)  return false;
+            if (driver && !String(r.driver || '').toUpperCase().includes(driver)) return false;
+            if (plate  && !String(r.plate || '').toUpperCase().includes(plate))  return false;
+            return true;
+        });
 
-    // Reset drill-downs ao mudar filtros
-    driverDrillState  = { active: false, driver: null };
-    vehicleDrillState = { active: false, plate: null };
+        // Reset drill-downs ao mudar filtros
+        driverDrillState  = { active: false, driver: null };
+        vehicleDrillState = { active: false, plate: null };
 
-    tableVeiculosPage = 1;
-    updateVeiculosCompetenceBadge();
-    updateVeiculosKPIs();
+        tableVeiculosPage = 1;
+        updateVeiculosCompetenceBadge();
+        updateVeiculosKPIs();
 
-    if (activeVeiculosTab === 'indicators') {
-        updateVeiculosCharts();
-    } else {
-        renderVeiculosTable();
+        if (activeVeiculosTab === 'indicators') {
+            updateVeiculosCharts();
+        } else {
+            renderVeiculosTable();
+        }
+    } catch (err) {
+        console.error("Erro ao aplicar filtros de veículos:", err);
     }
 }
 
@@ -636,38 +655,38 @@ function renderVeiculosMap(th) {
             </div>
         </div>
     `;
+}
 
-    // ── Interatividade do mapa ──
-    window.handleVeiculosCardHover = uf => {
-        const polygon = document.getElementById('veic-state-' + uf);
-        if (polygon) polygon.classList.add('hovered');
-    };
-    window.handleVeiculosCardLeave = uf => {
-        const polygon = document.getElementById('veic-state-' + uf);
-        if (polygon) polygon.classList.remove('hovered');
-    };
-    window.handleVeiculosMapHover = (e, uf) => {
+// ── Interatividade do mapa (Escopo Global) ──
+window.handleVeiculosCardHover = uf => {
+    const polygon = document.getElementById('veic-state-' + uf);
+    if (polygon) polygon.classList.add('hovered');
+};
+window.handleVeiculosCardLeave = uf => {
+    const polygon = document.getElementById('veic-state-' + uf);
+    if (polygon) polygon.classList.remove('hovered');
+};
+window.handleVeiculosMapHover = (e, uf) => {
+    const card    = document.getElementById('veic-card-UF-' + uf);
+    const polygon = document.getElementById('veic-state-' + uf);
+    if (card)    card.classList.add('hovered');
+    if (polygon) polygon.classList.add('hovered');
+};
+window.handleVeiculosMapMove  = () => {};
+window.handleVeiculosMapLeave = () => {
+    ['PR','SC','RS'].forEach(uf => {
         const card    = document.getElementById('veic-card-UF-' + uf);
         const polygon = document.getElementById('veic-state-' + uf);
-        if (card)    card.classList.add('hovered');
-        if (polygon) polygon.classList.add('hovered');
-    };
-    window.handleVeiculosMapMove  = () => {};
-    window.handleVeiculosMapLeave = () => {
-        ['PR','SC','RS'].forEach(uf => {
-            const card    = document.getElementById('veic-card-UF-' + uf);
-            const polygon = document.getElementById('veic-state-' + uf);
-            if (card)    card.classList.remove('hovered');
-            if (polygon) polygon.classList.remove('hovered');
-        });
-    };
-    window.toggleVeiculosUFFromMap = uf => {
-        const sel = document.getElementById('filter-veiculos-uf');
-        if (!sel) return;
-        sel.value = sel.value === uf ? 'all' : uf;
-        applyVeiculosFilters();
-    };
-}
+        if (card)    card.classList.remove('hovered');
+        if (polygon) polygon.classList.remove('hovered');
+    });
+};
+window.toggleVeiculosUFFromMap = uf => {
+    const sel = document.getElementById('filter-veiculos-uf');
+    if (!sel) return;
+    sel.value = sel.value === uf ? 'all' : uf;
+    applyVeiculosFilters();
+};
 
 // ── Drill-Down Condutores → Veículos ─────────────────────────────────────
 function renderDriverChart(th, tooltipBase) {

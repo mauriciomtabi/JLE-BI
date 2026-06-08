@@ -430,7 +430,7 @@
             <section class="filter-bar-veiculos">
                 <div class="filter-group">
                     <label for="filter-veiculos-month">Competência / Mês</label>
-                    <select id="filter-veiculos-month">
+                    <select id="filter-veiculos-month" onchange="applyVeiculosFilters()">
                         <option value="all">Todos os Meses</option>
                         <option value="JANEIRO">Janeiro/2026</option>
                         <option value="FEVEREIRO">Fevereiro/2026</option>
@@ -442,7 +442,7 @@
                 
                 <div class="filter-group">
                     <label for="filter-veiculos-uf">UF / Estado</label>
-                    <select id="filter-veiculos-uf">
+                    <select id="filter-veiculos-uf" onchange="applyVeiculosFilters()">
                         <option value="all">Todas as UFs</option>
                         <option value="SC">Santa Catarina (SC)</option>
                         <option value="RS">Rio Grande do Sul (RS)</option>
@@ -452,7 +452,7 @@
 
                 <div class="filter-group">
                     <label for="filter-veiculos-fuel">Categoria / Combustível</label>
-                    <select id="filter-veiculos-fuel">
+                    <select id="filter-veiculos-fuel" onchange="applyVeiculosFilters()">
                         <option value="all">Todas as Categorias</option>
                         <!-- Generated dynamically -->
                     </select>
@@ -460,18 +460,18 @@
 
                 <div class="filter-group">
                     <label for="filter-veiculos-driver">Condutor / Motorista</label>
-                    <input type="text" id="filter-veiculos-driver" placeholder="Todos os Condutores" list="veiculos-driver-list">
+                    <input type="text" id="filter-veiculos-driver" oninput="applyVeiculosFilters()" placeholder="Todos os Condutores" list="veiculos-driver-list">
                     <datalist id="veiculos-driver-list"></datalist>
                 </div>
 
                 <div class="filter-group">
                     <label for="filter-veiculos-plate">Veículo / Placa</label>
-                    <input type="text" id="filter-veiculos-plate" placeholder="Todas as Placas" list="veiculos-plate-list">
+                    <input type="text" id="filter-veiculos-plate" oninput="applyVeiculosFilters()" placeholder="Todas as Placas" list="veiculos-plate-list">
                     <datalist id="veiculos-plate-list"></datalist>
                 </div>
 
                 <div class="filter-actions-inline">
-                    <button class="btn-reset" id="btn-veiculos-reset" title="Limpar Filtros">
+                    <button class="btn-reset" id="btn-veiculos-reset" onclick="resetVeiculosFilters()" title="Limpar Filtros">
                         <i class="fa-solid fa-arrows-rotate"></i>
                     </button>
                 </div>
