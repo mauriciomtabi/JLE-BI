@@ -117,7 +117,7 @@
     border-radius: 12px;
     align-self: flex-start;
     box-shadow: var(--shadow-main);
-    margin-bottom: 8px;
+    margin-bottom: 24px;
 }
 
 #view-veiculos-container .sub-tab {
@@ -728,4 +728,64 @@ body.light-theme #view-veiculos-container .data-table tbody tr:hover {
     margin: 0;
     font-style: italic;
     color: var(--text-primary);
+}
+
+/* ── Ajustes de Espaçamento e Eliminação de Buracos (Padrão Financeiro) ── */
+
+/* Forçar visibilidade e cores legíveis em todos os cards de KPI de Veículos */
+#view-veiculos-container .kpi-card {
+    background-color: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+}
+#view-veiculos-container .kpi-card .kpi-label {
+    color: var(--text-secondary) !important;
+}
+#view-veiculos-container .kpi-card .kpi-value {
+    color: var(--text-primary) !important;
+}
+#view-veiculos-container .kpi-card .kpi-subvalue {
+    color: var(--text-secondary) !important;
+}
+#view-veiculos-container .kpi-card .kpi-subvalue span,
+#view-veiculos-container .kpi-card .kpi-subvalue strong {
+    color: var(--text-primary) !important;
+}
+#view-veiculos-container .kpi-card .kpi-icon-container {
+    opacity: 0.15 !important;
+}
+#view-veiculos-container .kpi-card:hover .kpi-icon-container {
+    opacity: 0.25 !important;
+}
+
+/* Corrigir cor do texto das opções de select nativo no Chrome (modo escuro/claro) */
+#view-veiculos-container select option {
+    background-color: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+}
+body.dark-theme #view-veiculos-container select option {
+    background-color: #0f1f2b !important;
+    color: #f5f6f8 !important;
+}
+body.light-theme #view-veiculos-container select option {
+    background-color: #ffffff !important;
+    color: #1f2c3d !important;
+}
+
+/* Enquadramento perfeito do mapa SVG na div de 320px sem vazamento ou buracos */
+#view-veiculos-container #veiculos-map-container {
+    height: 320px;
+    width: 100%;
+    position: relative;
+    overflow: visible;
+}
+#view-veiculos-container .uf-premium-container {
+    min-height: 320px !important;
+    height: 320px !important;
+    width: 100% !important;
+    position: relative;
+    display: block;
+}
+#view-veiculos-container .map-svg-centered {
+    transform: scale(1.15) !important; /* Zoom ideal para a região Sul sem cortar */
 }

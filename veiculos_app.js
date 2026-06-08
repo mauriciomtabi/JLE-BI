@@ -1052,3 +1052,12 @@ function handleVeiculosTableSort(column) {
     tableVeiculosPage = 1;
     renderVeiculosTable();
 }
+
+// ── Exportações Globais para Handlers Inline do HTML ──
+window.initVeiculos = initVeiculos;
+window.applyVeiculosFilters = applyVeiculosFilters;
+window.resetVeiculosFilters = resetVeiculosFilters;
+window.resetDriverDrill = resetDriverDrill;
+window.resetVehicleDrill = resetVehicleDrill;
+window.setVeiculosEvolutionGranularity = setVeiculosEvolutionGranularity;
+window.switchVeiculosTab = switchVeiculosTab;
