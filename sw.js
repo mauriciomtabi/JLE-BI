@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jle-bi-v3.12.20260608181000';
+const CACHE_NAME = 'jle-bi-v3.12.20260608183900';
 const ASSETS = [
   './',
   './index.html',
@@ -8,8 +8,7 @@ const ASSETS = [
   './logo.png',
   './veiculos_app.js',
   './veiculos_styles.css',
-  './veiculos_data.js',
-  './cobranca_data.js'
+  './veiculos_data.js'
 ];
 
 self.addEventListener('install', event => {

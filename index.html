@@ -64,9 +64,7 @@
             <a class="nav-item active" id="nav-dashboard" onclick="switchView('dashboard')">
                 <i class="fa-solid fa-sack-dollar"></i> <span>Financeiro</span>
             </a>
-            <a class="nav-item" id="nav-cobranca" onclick="switchView('cobranca')" style="display:none;">
-                <i class="fa-solid fa-hand-holding-dollar"></i> <span>Cobrança</span>
-            </a>
+
             <a class="nav-item" id="nav-veiculos" onclick="switchView('veiculos')" style="display:none;">
                 <i class="fa-solid fa-car"></i> <span>Veículos</span>
             </a>
@@ -366,202 +364,6 @@
             </div>
         </div>
 
-        <!-- VIEW 2: COBRANCA -->
-        <div id="view-cobranca-container" class="view-panel" style="display: none;">
-            <!-- NAVEGAÇÃO INTERNA EM ABAS (TAB SYSTEM COBRANCA) -->
-            <div class="dashboard-tabs">
-                <button class="tab-btn active" id="tab-btn-cobranca-indicators" onclick="switchCobrancaTab('indicators')">
-                    <i class="fa-solid fa-chart-column"></i> Painel de Controle
-                </button>
-                <button class="tab-btn" id="tab-btn-cobranca-details" onclick="switchCobrancaTab('details')">
-                    <i class="fa-solid fa-table-list"></i> Detalhado
-                </button>
-            </div>
-
-            <!-- DEDICATED FILTERS FOR COBRANCA -->
-            <section class="filter-bar" id="cobranca-filters-container" style="margin-top: 16px; margin-bottom: 20px;">
-                <div class="filter-group">
-                    <label for="filter-cobranca-uf">UF / Estado</label>
-                    <select id="filter-cobranca-uf" onchange="applyCobrancaFilters()">
-                        <option value="ALL">Todas as UFs</option>
-                        <option value="RS">RS</option>
-                        <option value="SC">SC</option>
-                        <option value="PR">PR</option>
-                    </select>
-                </div>
-                
-                <div class="filter-group">
-                    <label for="filter-cobranca-mes">Mês de Medição</label>
-                    <select id="filter-cobranca-mes" onchange="applyCobrancaFilters()">
-                        <option value="ALL">Todos os Meses</option>
-                    </select>
-                </div>
-
-                <div class="filter-group">
-                    <label for="filter-cobranca-contrato">Contrato</label>
-                    <select id="filter-cobranca-contrato" onchange="applyCobrancaFilters()">
-                        <option value="ALL">Todos os Contratos</option>
-                    </select>
-                </div>
-
-                <div class="filter-group">
-                    <label for="filter-cobranca-status">Status OS / Malogro</label>
-                    <select id="filter-cobranca-status" onchange="applyCobrancaFilters()">
-                        <option value="ALL">Todos os Status</option>
-                        <option value="ERRO">Crítico (Com Erro)</option>
-                        <option value="BACKLOG">Atenção (Em Backlog)</option>
-                        <option value="EXECUTADO">Pronto p/ Faturar (Executado)</option>
-                        <option value="DEVOLVIDO">Devolvido</option>
-                    </select>
-                </div>
-            </section>
-
-            <!-- SUB-VIEW 1: PAINEL DE CONTROLE (INDICADORES E GRAFICOS) -->
-            <div id="subview-cobranca-indicators" class="dashboard-subview">
-                <!-- KPI Cards -->
-                <div class="kpi-container">
-                    <div class="kpi-card balance" style="background: linear-gradient(135deg, rgba(0, 80, 115, 0.15) 0%, rgba(0, 120, 170, 0.05) 100%); border-left: 4px solid var(--color-primary);">
-                        <div class="kpi-info">
-                            <span class="kpi-label">Total a Receber</span>
-                            <h3 class="kpi-value" id="kpi-cobranca-total">R$ 0,00</h3>
-                            <div class="kpi-analytics">
-                                <span class="kpi-subvalue" id="sub-cobranca-count">0 itens pendentes</span>
-                            </div>
-                        </div>
-                        <div class="kpi-icon-container" style="color: var(--color-primary-light);">
-                            <i class="fa-solid fa-hand-holding-dollar"></i>
-                        </div>
-                    </div>
-                    
-                    <div class="kpi-card outflows" style="background: linear-gradient(135deg, rgba(231, 76, 60, 0.12) 0%, rgba(231, 76, 60, 0.04) 100%); border-left: 4px solid #e74c3c;">
-                        <div class="kpi-info">
-                            <span class="kpi-label">Crítico (Com Erro)</span>
-                            <h3 class="kpi-value" style="color: #e74c3c;" id="kpi-cobranca-erro">R$ 0,00</h3>
-                            <div class="kpi-analytics">
-                                <span class="kpi-subvalue" id="sub-cobranca-erro-pct">0,0% do total</span>
-                            </div>
-                        </div>
-                        <div class="kpi-icon-container" style="color: #e74c3c;">
-                            <i class="fa-solid fa-triangle-exclamation"></i>
-                        </div>
-                    </div>
-                    
-                    <div class="kpi-card outflows" style="background: linear-gradient(135deg, rgba(243, 156, 18, 0.12) 0%, rgba(243, 156, 18, 0.04) 100%); border-left: 4px solid #f39c12;">
-                        <div class="kpi-info">
-                            <span class="kpi-label">Atenção (Em Backlog)</span>
-                            <h3 class="kpi-value" style="color: #f39c12;" id="kpi-cobranca-backlog">R$ 0,00</h3>
-                            <div class="kpi-analytics">
-                                <span class="kpi-subvalue" id="sub-cobranca-backlog-pct">0,0% do total</span>
-                            </div>
-                        </div>
-                        <div class="kpi-icon-container" style="color: #f39c12;">
-                            <i class="fa-solid fa-clock-rotate-left"></i>
-                        </div>
-                    </div>
-
-                    <div class="kpi-card inflows" style="background: linear-gradient(135deg, rgba(46, 204, 113, 0.12) 0%, rgba(46, 204, 113, 0.04) 100%); border-left: 4px solid #2ecc71;">
-                        <div class="kpi-info">
-                            <span class="kpi-label">Pronto p/ Faturar (Executado)</span>
-                            <h3 class="kpi-value" style="color: #2ecc71;" id="kpi-cobranca-executado">R$ 0,00</h3>
-                            <div class="kpi-analytics">
-                                <span class="kpi-subvalue" id="sub-cobranca-executado-pct">0,0% do total</span>
-                            </div>
-                        </div>
-                        <div class="kpi-icon-container" style="color: #2ecc71;">
-                            <i class="fa-solid fa-circle-check"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Charts Grid -->
-                <div class="charts-grid">
-                    <div class="chart-card">
-                        <div class="chart-header">
-                            <div class="chart-title">
-                                <h2>Distribuição por Ano/Mês de Medição</h2>
-                            </div>
-                        </div>
-                        <div class="chart-body">
-                            <canvas id="chart-cobranca-evolution"></canvas>
-                        </div>
-                    </div>
-                    
-                    <div class="chart-card" style="flex: 0 0 35%; max-width: 35%;">
-                        <div class="chart-header">
-                            <div class="chart-title">
-                                <h2>Status das Pendências</h2>
-                            </div>
-                        </div>
-                        <div class="chart-body" style="position: relative; height: 320px; width: 100%; display: flex; align-items: center; justify-content: center;">
-                            <canvas id="chart-cobranca-status"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="charts-grid" style="margin-top: 20px;">
-                    <div class="chart-card" style="flex: 1 1 100%;">
-                        <div class="chart-header">
-                            <div class="chart-title">
-                                <h2>Top Contratos com Pendências (Valor)</h2>
-                            </div>
-                        </div>
-                        <div class="chart-body" style="height: 380px;">
-                            <canvas id="chart-cobranca-contracts"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SUB-VIEW 2: DETALHADO (TABELA ANALÍTICA DE COBRANÇA) -->
-            <div id="subview-cobranca-details" class="dashboard-subview" style="display: none;">
-                <div class="data-table-card">
-                    <div class="table-controls">
-                        <div class="search-wrapper">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                            <input type="text" id="cobranca-table-search" placeholder="Buscar por OS, Cidade, Contrato ou Item..." oninput="handleCobrancaSearch()">
-                        </div>
-                        <div class="table-actions">
-                            <button class="btn-secondary" onclick="exportCobrancaToCSV()">
-                                <i class="fa-solid fa-file-csv"></i> Exportar CSV
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="table-container">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>OS</th>
-                                    <th>Competência</th>
-                                    <th>UF</th>
-                                    <th>Cidade</th>
-                                    <th>Contrato</th>
-                                    <th>Fase Atual</th>
-                                    <th>Status OS</th>
-                                    <th>Malogro</th>
-                                    <th>Num Pedido</th>
-                                    <th>Num Medição</th>
-                                    <th style="text-align: right;">Valor</th>
-                                </tr>
-                            </thead>
-                            <tbody id="cobranca-table-body">
-                                <!-- Rows loaded dynamically -->
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <div class="pagination">
-                        <span class="pagination-info" id="cobranca-pagination-info">Mostrando 0-0 de 0 itens</span>
-                        <div class="pagination-buttons">
-                            <button class="pagination-btn" id="cobranca-pagination-prev" onclick="changeCobrancaPage(-1)">
-                                <i class="fa-solid fa-chevron-left"></i>
-                            </button>
-                            <button class="pagination-btn" id="cobranca-pagination-next" onclick="changeCobrancaPage(1)">
-                                <i class="fa-solid fa-chevron-right"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -796,9 +598,11 @@
                     <!-- Evolution Chart -->
                     <div class="chart-card col-span-2">
                         <div class="chart-header-row">
-                            <h3>Evolução de Fluxo Mensal - 2026</h3>
+                            <h3 id="veiculos-evolution-title">Evolução de Gastos de Frota (Mensal)</h3>
                             <div class="chart-filters-sub">
-                                <button class="btn-chart-sub active">Mensal</button>
+                                <button class="btn-chart-sub btn-granularidade-veiculos active" data-gran="mensal">Mensal</button>
+                                <button class="btn-chart-sub btn-granularidade-veiculos" data-gran="semanal">Semanal</button>
+                                <button class="btn-chart-sub btn-granularidade-veiculos" data-gran="diario">Diário</button>
                             </div>
                         </div>
                         <div class="chart-container">
@@ -817,22 +621,36 @@
                         </div>
                     </div>
 
-                    <!-- Top Drivers -->
+                    <!-- Top Drivers com drill-down -->
                     <div class="chart-card col-span-2">
-                        <div class="chart-header">
-                            <h3>Top 10 Condutores por Gasto</h3>
+                        <div class="chart-header-row">
+                            <h3 id="driver-chart-title">Top 10 Condutores por Gasto</h3>
+                            <div style="display:flex;align-items:center;gap:8px;">
+                                <span id="driver-drill-info" style="display:none;font-size:12px;color:var(--color-primary-light);background:rgba(52,152,219,0.1);border:1px solid rgba(52,152,219,0.25);border-radius:20px;padding:3px 10px;"></span>
+                                <button id="driver-drill-back" onclick="resetDriverDrill()" style="display:none;font-size:12px;padding:4px 10px;background:rgba(52,152,219,0.15);color:var(--color-primary-light);border:1px solid rgba(52,152,219,0.3);border-radius:6px;cursor:pointer;">
+                                    <i class="fa-solid fa-arrow-left" style="margin-right:4px;"></i> Voltar
+                                </button>
+                            </div>
                         </div>
-                        <div class="chart-container">
+                        <p style="font-size:12px;color:var(--text-secondary);margin:0 0 8px;padding: 0 2px;"><i class="fa-solid fa-hand-pointer" style="margin-right:4px;"></i>Clique em um condutor para ver os veículos que utilizou</p>
+                        <div class="chart-container" style="cursor:pointer;">
                             <canvas id="chart-veiculos-top-drivers"></canvas>
                         </div>
                     </div>
 
-                    <!-- Top Vehicles -->
+                    <!-- Top Vehicles com drill-down -->
                     <div class="chart-card col-span-2">
-                        <div class="chart-header">
-                            <h3>Top 10 Veículos por Gasto</h3>
+                        <div class="chart-header-row">
+                            <h3 id="vehicle-chart-title">Top 10 Veículos por Gasto</h3>
+                            <div style="display:flex;align-items:center;gap:8px;">
+                                <span id="vehicle-drill-info" style="display:none;font-size:12px;color:var(--color-secondary);background:rgba(243,159,24,0.1);border:1px solid rgba(243,159,24,0.25);border-radius:20px;padding:3px 10px;"></span>
+                                <button id="vehicle-drill-back" onclick="resetVehicleDrill()" style="display:none;font-size:12px;padding:4px 10px;background:rgba(243,159,24,0.15);color:var(--color-secondary);border:1px solid rgba(243,159,24,0.3);border-radius:6px;cursor:pointer;">
+                                    <i class="fa-solid fa-arrow-left" style="margin-right:4px;"></i> Voltar
+                                </button>
+                            </div>
                         </div>
-                        <div class="chart-container">
+                        <p style="font-size:12px;color:var(--text-secondary);margin:0 0 8px;padding: 0 2px;"><i class="fa-solid fa-hand-pointer" style="margin-right:4px;"></i>Clique em uma placa para ver os condutores do período</p>
+                        <div class="chart-container" style="cursor:pointer;">
                             <canvas id="chart-veiculos-top-vehicles"></canvas>
                         </div>
                     </div>
@@ -1113,7 +931,7 @@
 
     <!-- Carga de Dados Dinâmica -->
     <script src="data.js"></script>
-    <script src="cobranca_data.js"></script>
+
     <script src="veiculos_data.js"></script>
     <script src="veiculos_app.js"></script>
 
@@ -1675,7 +1493,6 @@
         // Known pages registry (for admin panel)
         const ALL_PAGES = [
             { id: 'dashboard',    label: 'Dashboard Financeiro',    icon: 'fa-sack-dollar',       navId: 'nav-dashboard' },
-            { id: 'cobranca',     label: 'Controle de Cobrança',     icon: 'fa-hand-holding-dollar', navId: 'nav-cobranca' },
             { id: 'veiculos',     label: 'Veículos',                icon: 'fa-car',               navId: 'nav-veiculos' },
             { id: 'admin',        label: 'Painel Admin',            icon: 'fa-shield-halved',    navId: 'nav-admin',        adminOnly: true },
         ];
@@ -2088,15 +1905,6 @@
                 document.getElementById('view-title').innerText = 'Painel Administrativo';
                 document.getElementById('view-subtitle').innerHTML = 'Gerencie usuários, perfis de acesso e páginas do BI <span class="badge-competencia">Admin</span>';
                 loadAdminPanel();
-            } else if (viewName === 'cobranca') {
-                document.getElementById('filters-container').style.display = 'none';
-                if (mobileToggleBtn) mobileToggleBtn.style.display = 'none';
-                document.getElementById('view-title').innerText = 'Controle de Cobrança';
-                document.getElementById('view-subtitle').innerHTML = 'Análise de pendências de faturamento com o cliente Claro.';
-                if (cobrancaReceivables.length === 0) {
-                    initCobranca();
-                }
-                switchCobrancaTab(activeCobrancaTab);
             } else if (viewName === 'veiculos') {
                 document.getElementById('filters-container').style.display = 'none';
                 if (mobileToggleBtn) mobileToggleBtn.style.display = 'none';
@@ -2130,7 +1938,6 @@
 
         const PAGES_CATALOG = [
             { id: 'dashboard',    label: 'Dashboard Financeiro',     icon: 'fa-sack-dollar' },
-            { id: 'cobranca',     label: 'Controle de Cobrança',      icon: 'fa-hand-holding-dollar' },
             { id: 'veiculos',     label: 'Veículos',                 icon: 'fa-car' },
         ];
 
@@ -4196,504 +4003,6 @@
             }
         }
 
-        // --- LÓGICA DO DASHBOARD DE COBRANÇA ---
-        let cobrancaReceivables = [];
-        let filteredCobrancaReceivables = [];
-        let currentCobrancaPage = 1;
-        const cobrancaPageSize = 25;
-        let activeCobrancaTab = 'indicators';
-        let cobrancaSearchQuery = '';
-        
-        let chartCobrancaEvolution = null;
-        let chartCobrancaStatus = null;
-        let chartCobrancaContracts = null;
-
-        function initCobranca() {
-            if (typeof window.COBRANCA_DATA === 'undefined') {
-                console.warn("window.COBRANCA_DATA não foi carregado!");
-                return;
-            }
-            
-            cobrancaReceivables = window.COBRANCA_DATA.receivables || [];
-            populateCobrancaFilters();
-            applyCobrancaFilters();
-        }
-
-        function populateCobrancaFilters() {
-            const mesSelect = document.getElementById('filter-cobranca-mes');
-            const contratoSelect = document.getElementById('filter-cobranca-contrato');
-            
-            if (!mesSelect || !contratoSelect) return;
-            
-            const uniqueMonths = {};
-            const uniqueContracts = {};
-            
-            cobrancaReceivables.forEach(row => {
-                const mes = row[9]; // index 9: mes_medicao
-                if (mes) uniqueMonths[mes] = true;
-                
-                const contrato = row[3]; // index 3: contrato_numero
-                if (contrato) uniqueContracts[contrato] = true;
-            });
-            
-            const sortedMonths = Object.keys(uniqueMonths).sort();
-            mesSelect.innerHTML = '<option value="ALL">Todos os Meses</option>';
-            sortedMonths.forEach(m => {
-                const opt = document.createElement('option');
-                opt.value = m;
-                opt.innerText = m;
-                mesSelect.appendChild(opt);
-            });
-            
-            const sortedContracts = Object.keys(uniqueContracts).sort();
-            contratoSelect.innerHTML = '<option value="ALL">Todos os Contratos</option>';
-            sortedContracts.forEach(c => {
-                const opt = document.createElement('option');
-                opt.value = c;
-                opt.innerText = c;
-                contratoSelect.appendChild(opt);
-            });
-        }
-
-        function applyCobrancaFilters() {
-            const selectedUf = document.getElementById('filter-cobranca-uf').value;
-            const selectedMes = document.getElementById('filter-cobranca-mes').value;
-            const selectedContrato = document.getElementById('filter-cobranca-contrato').value;
-            const selectedStatus = document.getElementById('filter-cobranca-status').value;
-            
-            filteredCobrancaReceivables = cobrancaReceivables.filter(row => {
-                if (selectedUf !== 'ALL' && row[2] !== selectedUf) return false;
-                if (selectedMes !== 'ALL' && row[9] !== selectedMes) return false;
-                if (selectedContrato !== 'ALL' && row[3] !== selectedContrato) return false;
-                
-                if (selectedStatus !== 'ALL') {
-                    const statusOS = row[5];
-                    const malogro = row[6];
-                    if (selectedStatus === 'ERRO') {
-                        if (statusOS !== 'ERRO - AVALIAR OS' || malogro !== 'ERROR') return false;
-                    } else if (selectedStatus === 'BACKLOG') {
-                        if (statusOS !== 'ERRO - AVALIAR OS' || malogro !== 'BACKLOG') return false;
-                    } else if (selectedStatus === 'EXECUTADO') {
-                        if (statusOS !== 'EXECUTADO') return false;
-                    } else if (selectedStatus === 'DEVOLVIDO') {
-                        if (statusOS !== 'DEVOLVIDO') return false;
-                    }
-                }
-                
-                if (cobrancaSearchQuery) {
-                    const os = String(row[0]).toLowerCase();
-                    const cidade = String(row[1]).toLowerCase();
-                    const contrato = String(row[3]).toLowerCase();
-                    const fase = String(row[4]).toLowerCase();
-                    const statusOS = String(row[5]).toLowerCase();
-                    const malogro = String(row[6]).toLowerCase();
-                    const pedido = String(row[7]).toLowerCase();
-                    const medicao = String(row[8]).toLowerCase();
-                    const query = cobrancaSearchQuery.toLowerCase();
-                    
-                    if (!os.includes(query) && !cidade.includes(query) && !contrato.includes(query) && 
-                        !fase.includes(query) && !statusOS.includes(query) && !malogro.includes(query) && 
-                        !pedido.includes(query) && !medicao.includes(query)) {
-                        return false;
-                    }
-                }
-                
-                return true;
-            });
-            
-            currentCobrancaPage = 1;
-            calculateCobrancaKPIs();
-            
-            if (activeCobrancaTab === 'indicators') {
-                renderCobrancaCharts();
-            } else {
-                renderCobrancaTable();
-            }
-        }
-
-        function calculateCobrancaKPIs() {
-            let total = 0.0;
-            let erro = 0.0;
-            let backlog = 0.0;
-            let executado = 0.0;
-            
-            filteredCobrancaReceivables.forEach(row => {
-                const val = row[10]; // index 10: valor_final
-                const statusOS = row[5];
-                const malogro = row[6];
-                
-                total += val;
-                if (statusOS === 'ERRO - AVALIAR OS') {
-                    if (malogro === 'ERROR') {
-                        erro += val;
-                    } else if (malogro === 'BACKLOG') {
-                        backlog += val;
-                    }
-                } else if (statusOS === 'EXECUTADO') {
-                    executado += val;
-                }
-            });
-            
-            const formatCurr = (val) => {
-                return 'R$ ' + val.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-            };
-            
-            document.getElementById('kpi-cobranca-total').innerText = formatCurr(total);
-            document.getElementById('kpi-cobranca-erro').innerText = formatCurr(erro);
-            document.getElementById('kpi-cobranca-backlog').innerText = formatCurr(backlog);
-            document.getElementById('kpi-cobranca-executado').innerText = formatCurr(executado);
-            
-            document.getElementById('sub-cobranca-count').innerText = `${filteredCobrancaReceivables.length} itens pendentes`;
-            
-            const getPct = (val) => {
-                if (total === 0) return '0,0%';
-                return ((val / total) * 100).toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%';
-            };
-            
-            document.getElementById('sub-cobranca-erro-pct').innerText = `${getPct(erro)} do total`;
-            document.getElementById('sub-cobranca-backlog-pct').innerText = `${getPct(backlog)} do total`;
-            document.getElementById('sub-cobranca-executado-pct').innerText = `${getPct(executado)} do total`;
-        }
-
-        function switchCobrancaTab(tab) {
-            activeCobrancaTab = tab;
-            
-            const btnIndicators = document.getElementById('tab-btn-cobranca-indicators');
-            const btnDetails = document.getElementById('tab-btn-cobranca-details');
-            
-            const subviewIndicators = document.getElementById('subview-cobranca-indicators');
-            const subviewDetails = document.getElementById('subview-cobranca-details');
-            
-            if (!btnIndicators || !btnDetails || !subviewIndicators || !subviewDetails) return;
-            
-            if (tab === 'indicators') {
-                btnIndicators.classList.add('active');
-                btnDetails.classList.remove('active');
-                subviewIndicators.style.display = 'block';
-                subviewDetails.style.display = 'none';
-                renderCobrancaCharts();
-            } else {
-                btnDetails.classList.add('active');
-                btnIndicators.classList.remove('active');
-                subviewIndicators.style.display = 'none';
-                subviewDetails.style.display = 'block';
-                renderCobrancaTable();
-            }
-        }
-
-        function renderCobrancaCharts() {
-            if (chartCobrancaEvolution) chartCobrancaEvolution.destroy();
-            if (chartCobrancaStatus) chartCobrancaStatus.destroy();
-            if (chartCobrancaContracts) chartCobrancaContracts.destroy();
-            
-            // 1. Evolution Chart
-            const evolutionData = {};
-            filteredCobrancaReceivables.forEach(row => {
-                const mes = row[9] || 'N/D';
-                const val = row[10];
-                evolutionData[mes] = (evolutionData[mes] || 0) + val;
-            });
-            const evLabels = Object.keys(evolutionData).sort();
-            const evValues = evLabels.map(l => evolutionData[l]);
-            const evColors = evLabels.map(label => {
-                if (label.startsWith('2023')) return 'rgba(231, 76, 60, 0.85)';
-                if (label.startsWith('2024')) return 'rgba(243, 156, 18, 0.85)';
-                if (label.startsWith('2025')) return 'rgba(52, 152, 219, 0.85)';
-                if (label.startsWith('2026')) return 'rgba(46, 204, 113, 0.85)';
-                return 'rgba(155, 89, 182, 0.85)';
-            });
-            
-            const ctxEv = document.getElementById('chart-cobranca-evolution');
-            if (ctxEv) {
-                chartCobrancaEvolution = new Chart(ctxEv, {
-                    type: 'bar',
-                    data: {
-                        labels: evLabels,
-                        datasets: [{
-                            label: 'Valor Pendente',
-                            data: evValues,
-                            backgroundColor: evColors,
-                            borderWidth: 0,
-                            borderRadius: 4
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { display: false },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        return 'R$ ' + context.raw.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
-                                    }
-                                }
-                            }
-                        },
-                        scales: {
-                            y: {
-                                grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                                ticks: {
-                                    color: '#8a99a8',
-                                    callback: function(value) {
-                                        if (value >= 1e6) return 'R$ ' + (value / 1e6).toFixed(1) + 'M';
-                                        if (value >= 1e3) return 'R$ ' + (value / 1e3).toFixed(0) + 'k';
-                                        return 'R$ ' + value;
-                                    }
-                                }
-                            },
-                            x: {
-                                grid: { display: false },
-                                ticks: { color: '#8a99a8', font: { size: 10 } }
-                            }
-                        }
-                    }
-                });
-            }
-            
-            // 2. Status Chart
-            let critVal = 0, backVal = 0, readyVal = 0, otherVal = 0;
-            filteredCobrancaReceivables.forEach(row => {
-                const statusOS = row[5];
-                const malogro = row[6];
-                const val = row[10];
-                
-                if (statusOS === 'ERRO - AVALIAR OS') {
-                    if (malogro === 'ERROR') critVal += val;
-                    else if (malogro === 'BACKLOG') backVal += val;
-                } else if (statusOS === 'EXECUTADO') {
-                    readyVal += val;
-                } else {
-                    otherVal += val;
-                }
-            });
-            
-            const ctxSt = document.getElementById('chart-cobranca-status');
-            if (ctxSt) {
-                chartCobrancaStatus = new Chart(ctxSt, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['Crítico (Erro)', 'Atenção (Backlog)', 'Pronto p/ Faturar', 'Outros'],
-                        datasets: [{
-                            data: [critVal, backVal, readyVal, otherVal],
-                            backgroundColor: ['#e74c3c', '#f39c12', '#2ecc71', '#95a5a6'],
-                            borderWidth: 0
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'bottom',
-                                labels: { color: '#8a99a8', font: { size: 11 } }
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        const sum = critVal + backVal + readyVal + otherVal;
-                                        const pct = sum > 0 ? ((context.raw / sum) * 100).toFixed(1) + '%' : '0%';
-                                        return context.label + ': R$ ' + context.raw.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) + ' (' + pct + ')';
-                                    }
-                                }
-                            }
-                        },
-                        cutout: '65%'
-                    }
-                });
-            }
-            
-            // 3. Contracts Chart
-            const contractData = {};
-            filteredCobrancaReceivables.forEach(row => {
-                const c = row[3] || 'Sem Contrato';
-                const sys = row[11] || '';
-                const key = c + (sys ? ' (' + sys + ')' : '');
-                contractData[key] = (contractData[key] || 0) + row[10];
-            });
-            const sortedContractsKeys = Object.keys(contractData).sort((a, b) => contractData[b] - contractData[a]).slice(0, 10);
-            const sortedContractsValues = sortedContractsKeys.map(k => contractData[k]);
-            
-            const ctxCt = document.getElementById('chart-cobranca-contracts');
-            if (ctxCt) {
-                chartCobrancaContracts = new Chart(ctxCt, {
-                    type: 'bar',
-                    data: {
-                        labels: sortedContractsKeys,
-                        datasets: [{
-                            label: 'Valor Pendente',
-                            data: sortedContractsValues,
-                            backgroundColor: 'rgba(0, 119, 170, 0.85)',
-                            hoverBackgroundColor: 'rgba(0, 119, 170, 1)',
-                            borderWidth: 0,
-                            borderRadius: 4
-                        }]
-                    },
-                    options: {
-                        indexAxis: 'y',
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { display: false },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        return 'R$ ' + context.raw.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
-                                    }
-                                }
-                            }
-                        },
-                        scales: {
-                            x: {
-                                grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                                ticks: {
-                                    color: '#8a99a8',
-                                    callback: function(value) {
-                                        if (value >= 1e6) return 'R$ ' + (value / 1e6).toFixed(1) + 'M';
-                                        if (value >= 1e3) return 'R$ ' + (value / 1e3).toFixed(0) + 'k';
-                                        return 'R$ ' + value;
-                                    }
-                                }
-                            },
-                            y: {
-                                grid: { display: false },
-                                ticks: { color: '#8a99a8', font: { size: 10 } }
-                            }
-                        }
-                    }
-                });
-            }
-        }
-
-        function renderCobrancaTable() {
-            const tbody = document.getElementById('cobranca-table-body');
-            if (!tbody) return;
-            tbody.innerHTML = '';
-            
-            const totalRecords = filteredCobrancaReceivables.length;
-            const totalPages = Math.ceil(totalRecords / cobrancaPageSize);
-            
-            if (totalRecords === 0) {
-                tbody.innerHTML = `<tr><td colspan="11" style="text-align:center; color: var(--text-secondary); padding: 24px;">Nenhum registro encontrado para os filtros selecionados.</td></tr>`;
-                document.getElementById('cobranca-pagination-info').innerText = 'Mostrando 0 de 0 itens';
-                document.getElementById('cobranca-pagination-prev').disabled = true;
-                document.getElementById('cobranca-pagination-next').disabled = true;
-                return;
-            }
-            
-            const startIdx = (currentCobrancaPage - 1) * cobrancaPageSize;
-            const endIdx = Math.min(startIdx + cobrancaPageSize, totalRecords);
-            const pageData = filteredCobrancaReceivables.slice(startIdx, endIdx);
-            
-            pageData.forEach(row => {
-                const tr = document.createElement('tr');
-                
-                const os = row[0];
-                const cidade = row[1];
-                const uf = row[2];
-                const contrato = row[3];
-                const fase = row[4];
-                const statusOS = row[5];
-                const malogro = row[6];
-                const pedido = row[7] || '-';
-                const medicao = row[8] || '-';
-                const mes = row[9];
-                const valor = row[10];
-                const sistema = row[11];
-                const categoria = row[12];
-                
-                let badgeClass = 'pronto';
-                let statusLabel = statusOS;
-                
-                if (statusOS === 'ERRO - AVALIAR OS') {
-                    if (malogro === 'ERROR') {
-                        badgeClass = 'critico';
-                        statusLabel = 'Crítico (Erro)';
-                    } else {
-                        badgeClass = 'atencao';
-                        statusLabel = 'Atenção (Backlog)';
-                    }
-                } else if (statusOS === 'DEVOLVIDO') {
-                    badgeClass = 'devolvido';
-                    statusLabel = 'Devolvido';
-                } else if (statusOS === 'EXECUTADO') {
-                    badgeClass = 'pronto';
-                    statusLabel = 'Pronto p/ Faturar';
-                }
-                
-                tr.innerHTML = `
-                    <td><strong>${os}</strong></td>
-                    <td>${mes}</td>
-                    <td>${uf}</td>
-                    <td>${cidade}</td>
-                    <td title="${categoria}">${contrato} <span style="font-size: 9px; color: var(--text-secondary);">(${sistema})</span></td>
-                    <td title="${fase}">${fase}</td>
-                    <td><span class="badge-status-cobranca ${badgeClass}">${statusLabel}</span></td>
-                    <td>${malogro || '-'}</td>
-                    <td>${pedido}</td>
-                    <td>${medicao}</td>
-                    <td style="text-align: right;"><strong>R$ ${valor.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</strong></td>
-                `;
-                tbody.appendChild(tr);
-            });
-            
-            document.getElementById('cobranca-pagination-info').innerText = `Mostrando ${startIdx + 1}-${endIdx} de ${totalRecords} itens`;
-            document.getElementById('cobranca-pagination-prev').disabled = currentCobrancaPage === 1;
-            document.getElementById('cobranca-pagination-next').disabled = currentCobrancaPage === totalPages || totalPages === 0;
-        }
-
-        function changeCobrancaPage(direction) {
-            currentCobrancaPage += direction;
-            renderCobrancaTable();
-        }
-
-        function handleCobrancaSearch() {
-            cobrancaSearchQuery = document.getElementById('cobranca-table-search').value.trim();
-            applyCobrancaFilters();
-        }
-
-        function exportCobrancaToCSV() {
-            if (filteredCobrancaReceivables.length === 0) {
-                alert("Nenhum dado para exportar!");
-                return;
-            }
-            
-            let csvContent = "\uFEFF";
-            csvContent += "OS;Mes Medicao;UF;Cidade;Contrato;Sistema;Categoria;Fase Atual;Status OS;Malogro;Pedido;Medicao;Valor Final\n";
-            
-            filteredCobrancaReceivables.forEach(row => {
-                const csvRow = [
-                    row[0],
-                    row[9],
-                    row[2],
-                    row[1],
-                    row[3],
-                    row[11],
-                    row[12].replace(/;/g, ','),
-                    row[4].replace(/;/g, ','),
-                    row[5].replace(/;/g, ','),
-                    row[6],
-                    row[7] || '',
-                    row[8] || '',
-                    row[10].toString().replace(/\./g, ',')
-                ];
-                csvContent += csvRow.join(";") + "\n";
-            });
-            
-            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement("a");
-            
-            const uf = document.getElementById('filter-cobranca-uf').value;
-            const status = document.getElementById('filter-cobranca-status').value;
-            const dateStr = new Date().toISOString().split('T')[0];
-            
-            link.setAttribute("href", url);
-            link.setAttribute("download", `Controle_Cobranca_${uf}_${status}_${dateStr}.csv`);
-            link.style.visibility = 'hidden';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
         }
     </script>
 
