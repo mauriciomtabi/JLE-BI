@@ -459,6 +459,21 @@
                 </div>
 
                 <div class="filter-group">
+                    <label for="filter-veiculos-data-inicio">Data Início</label>
+                    <input type="date" id="filter-veiculos-data-inicio" onchange="applyVeiculosFilters()">
+                </div>
+
+                <div class="filter-group">
+                    <label for="filter-veiculos-data-fim">Data Fim</label>
+                    <div style="display: flex; gap: 6px; align-items: center; width: 100%;">
+                        <input type="date" id="filter-veiculos-data-fim" onchange="applyVeiculosFilters()" style="flex-grow: 1;">
+                        <button class="btn-reset" onclick="resetVeiculosDateFilter()" title="Limpar Período" style="padding: 10px; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); cursor: pointer; transition: all 0.2s ease;">
+                            <i class="fa-solid fa-calendar-xmark"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="filter-group">
                     <label for="filter-veiculos-driver">Condutor / Motorista</label>
                     <input type="text" id="filter-veiculos-driver" oninput="applyVeiculosFilters()" placeholder="Todos os Condutores" list="veiculos-driver-list">
                     <datalist id="veiculos-driver-list"></datalist>
@@ -534,80 +549,7 @@
                     </div>
                 </div>
 
-                <!-- UF Regional Cards (SC, RS, PR) — mesmos account-card do Financeiro -->
-                <div class="banks-grid">
-                    <!-- SC Card -->
-                    <div class="account-card">
-                        <div class="account-header">
-                            <div class="account-brand">
-                                <div class="brand-dot sc"></div>
-                                <span class="brand-name">Santa Catarina (SC)</span>
-                            </div>
-                            <div class="account-balance" id="balance-veiculos-SC">R$ 0,00</div>
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar sc" id="progress-veiculos-SC" style="width: 0%"></div>
-                        </div>
-                        <div class="account-details">
-                            <div class="detail-row">
-                                <span>Abastecimentos</span>
-                                <span id="count-veiculos-SC" class="text-white">0</span>
-                            </div>
-                            <div class="detail-row">
-                                <span>Percentual</span>
-                                <span id="pct-veiculos-SC" class="text-white">0,0%</span>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- RS Card -->
-                    <div class="account-card">
-                        <div class="account-header">
-                            <div class="account-brand">
-                                <div class="brand-dot rs"></div>
-                                <span class="brand-name">Rio Grande do Sul (RS)</span>
-                            </div>
-                            <div class="account-balance" id="balance-veiculos-RS">R$ 0,00</div>
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar rs" id="progress-veiculos-RS" style="width: 0%"></div>
-                        </div>
-                        <div class="account-details">
-                            <div class="detail-row">
-                                <span>Abastecimentos</span>
-                                <span id="count-veiculos-RS" class="text-white">0</span>
-                            </div>
-                            <div class="detail-row">
-                                <span>Percentual</span>
-                                <span id="pct-veiculos-RS" class="text-white">0,0%</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- PR Card -->
-                    <div class="account-card">
-                        <div class="account-header">
-                            <div class="account-brand">
-                                <div class="brand-dot pr"></div>
-                                <span class="brand-name">Paraná (PR)</span>
-                            </div>
-                            <div class="account-balance" id="balance-veiculos-PR">R$ 0,00</div>
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar pr" id="progress-veiculos-PR" style="width: 0%"></div>
-                        </div>
-                        <div class="account-details">
-                            <div class="detail-row">
-                                <span>Abastecimentos</span>
-                                <span id="count-veiculos-PR" class="text-white">0</span>
-                            </div>
-                            <div class="detail-row">
-                                <span>Percentual</span>
-                                <span id="pct-veiculos-PR" class="text-white">0,0%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- Charts Row 1: Evolução + Mapa -->
                 <div class="charts-grid">

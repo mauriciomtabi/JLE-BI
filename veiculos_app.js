@@ -172,7 +172,7 @@ function resetVeiculosFilters() {
             const el = document.getElementById(id);
             if (el) el.value = 'all';
         });
-        ['filter-veiculos-driver','filter-veiculos-plate'].forEach(id => {
+        ['filter-veiculos-driver','filter-veiculos-plate','filter-veiculos-data-inicio','filter-veiculos-data-fim'].forEach(id => {
             const el = document.getElementById(id);
             if (el) el.value = '';
         });
@@ -184,14 +184,28 @@ function resetVeiculosFilters() {
     }
 }
 
+function resetVeiculosDateFilter() {
+    try {
+        const startEl = document.getElementById('filter-veiculos-data-inicio');
+        const endEl = document.getElementById('filter-veiculos-data-fim');
+        if (startEl) startEl.value = '';
+        if (endEl) endEl.value = '';
+        applyVeiculosFilters();
+    } catch (err) {
+        console.error("Erro ao resetar filtro de datas de veículos:", err);
+    }
+}
+
 // ── Aplicar Filtros ───────────────────────────────────────────────────────
 function applyVeiculosFilters() {
     try {
-        const month  = document.getElementById('filter-veiculos-month')?.value || 'all';
-        const uf     = document.getElementById('filter-veiculos-uf')?.value    || 'all';
-        const fuel   = document.getElementById('filter-veiculos-fuel')?.value  || 'all';
-        const driver = (document.getElementById('filter-veiculos-driver')?.value || '').trim().toUpperCase();
-        const plate  = (document.getElementById('filter-veiculos-plate')?.value  || '').trim().toUpperCase();
+        const month      = document.getElementById('filter-veiculos-month')?.value || 'all';
+        const uf         = document.getElementById('filter-veiculos-uf')?.value    || 'all';
+        const fuel       = document.getElementById('filter-veiculos-fuel')?.value  || 'all';
+        const driver     = (document.getElementById('filter-veiculos-driver')?.value || '').trim().toUpperCase();
+        const plate      = (document.getElementById('filter-veiculos-plate')?.value  || '').trim().toUpperCase();
+        const dataInicio = document.getElementById('filter-veiculos-data-inicio')?.value || '';
+        const dataFim    = document.getElementById('filter-veiculos-data-fim')?.value    || '';
 
         filteredVeiculosData = VEICULOS_DATA.filter(r => {
             if (month !== 'all' && String(r.month || '').toUpperCase() !== month.toUpperCase()) return false;
@@ -199,6 +213,12 @@ function applyVeiculosFilters() {
             if (fuel  !== 'all' && String(r.fuel || '') !== fuel)  return false;
             if (driver && !String(r.driver || '').toUpperCase().includes(driver)) return false;
             if (plate  && !String(r.plate || '').toUpperCase().includes(plate))  return false;
+
+            // Filtro por Período de Data
+            const rDateOnly = r.date ? r.date.substring(0, 10) : '';
+            if (dataInicio && rDateOnly < dataInicio) return false;
+            if (dataFim && rDateOnly > dataFim) return false;
+
             return true;
         });
 
@@ -1057,6 +1077,7 @@ function handleVeiculosTableSort(column) {
 window.initVeiculos = initVeiculos;
 window.applyVeiculosFilters = applyVeiculosFilters;
 window.resetVeiculosFilters = resetVeiculosFilters;
+window.resetVeiculosDateFilter = resetVeiculosDateFilter;
 window.resetDriverDrill = resetDriverDrill;
 window.resetVehicleDrill = resetVehicleDrill;
 window.setVeiculosEvolutionGranularity = setVeiculosEvolutionGranularity;
