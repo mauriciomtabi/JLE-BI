@@ -173,11 +173,6 @@
     margin-bottom: 0 !important;
 }
 
-/* Cancel double-gap: charts-grid already separated by subtab-pane gap */
-#view-veiculos-container .charts-grid {
-    margin-bottom: 0 !important;
-}
-
 #view-veiculos-container .subtab-pane.active {
     display: flex;
 }
@@ -363,13 +358,13 @@ body.light-theme #view-veiculos-container .account-details {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 20px;
-    margin-bottom: 24px;
+    margin-bottom: 0; /* spacing handled by subtab-pane gap */
 }
 
 @media (max-width: 1024px) {
     #view-veiculos-container .charts-grid {
         grid-template-columns: 1fr;
-        margin-bottom: 20px;
+        margin-bottom: 0;
     }
     #view-veiculos-container .col-span-2 {
         grid-column: span 1;
