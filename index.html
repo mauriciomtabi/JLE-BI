@@ -43,7 +43,7 @@
     <script src="supabase_config.js"></script>
     <!-- Local Stylesheet -->
     <link rel="stylesheet" href="styles.css?v=2.1.5">
-    <link rel="stylesheet" href="veiculos_styles.css?v=3.30">
+    <link rel="stylesheet" href="veiculos_styles.css?v=3.31">
 </head>
 <body>
 
@@ -598,77 +598,86 @@
                     </div>
                 </div>
 
-                <!-- Charts Row 2: Top Veículos + Mapa -->
-                <div class="charts-grid vehicles-uf-row vehicles-map-row">
-                    <!-- Top Veículos com drill-down -->
-                    <div class="chart-card">
-                        <div class="chart-header" style="flex-wrap:wrap;gap:10px;">
-                            <div class="chart-title">
-                                <h2 id="vehicle-chart-title">Gasto por Veículos</h2>
-                            </div>
-                            <div style="display:flex;align-items:center;gap:8px;">
-                                <span id="vehicle-drill-info" style="display:none;font-size:11px;font-weight:600;color:var(--color-secondary);background:rgba(243,159,24,0.12);border:1px solid rgba(243,159,24,0.3);border-radius:20px;padding:3px 12px;"></span>
-                                <button id="vehicle-drill-back" class="btn-chart-back" onclick="resetVehicleDrill()" style="display:none;">
-                                    <i class="fa-solid fa-arrow-left"></i> Voltar
-                                </button>
-                            </div>
-                        </div>
-                        <div class="chart-body vehicles-chart-body">
-                            <div style="width:100%;height:320px;position:relative;">
-                                <canvas id="chart-veiculos-top-vehicles"></canvas>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Charts Combined: Left col [Veículos + Condutores] | Right col [Mapa UF + Preço Médio] -->
+                <div class="vehicles-combined-layout">
 
-                    <!-- Mapa SVG Interativo PR/SC/RS -->
-                    <div class="chart-card">
-                        <div class="chart-header">
-                            <div class="chart-title">
-                                <h2>ABASTECIMENTO POR UF</h2>
-                            </div>
-                        </div>
-                        <div class="chart-body map-chart-body" style="overflow:hidden !important;">
-                            <div class="map-wrapper" id="veiculos-map-container" style="width:100%;height:100%;position:relative;">
-                                <!-- Mapa SVG gerado dinamicamente por renderVeiculosMap() -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <!-- Left column: Gasto por Veículos + Gasto por Condutores -->
+                    <div class="vehicles-left-col">
 
-                <!-- Charts Row 3: Top Condutores + Mini Gráficos de Consumo -->
-                <div class="charts-grid vehicles-uf-row">
-                    <!-- Top Condutores com drill-down -->
-                    <div class="chart-card">
-                        <div class="chart-header" style="flex-wrap:wrap;gap:10px;">
-                            <div class="chart-title">
-                                <h2 id="driver-chart-title">Gasto por Condutores</h2>
+                        <!-- Gasto por Veículos -->
+                        <div class="chart-card">
+                            <div class="chart-header" style="flex-wrap:wrap;gap:10px;">
+                                <div class="chart-title">
+                                    <h2 id="vehicle-chart-title">Gasto por Veículos</h2>
+                                </div>
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <span id="vehicle-drill-info" style="display:none;font-size:11px;font-weight:600;color:var(--color-secondary);background:rgba(243,159,24,0.12);border:1px solid rgba(243,159,24,0.3);border-radius:20px;padding:3px 12px;"></span>
+                                    <button id="vehicle-drill-back" class="btn-chart-back" onclick="resetVehicleDrill()" style="display:none;">
+                                        <i class="fa-solid fa-arrow-left"></i> Voltar
+                                    </button>
+                                </div>
                             </div>
-                            <div style="display:flex;align-items:center;gap:8px;">
-                                <span id="driver-drill-info" style="display:none;font-size:11px;font-weight:600;color:var(--color-primary-light);background:rgba(52,152,219,0.12);border:1px solid rgba(52,152,219,0.3);border-radius:20px;padding:3px 12px;"></span>
-                                <button id="driver-drill-back" class="btn-chart-back" onclick="resetDriverDrill()" style="display:none;">
-                                    <i class="fa-solid fa-arrow-left"></i> Voltar
-                                </button>
+                            <div class="chart-body vehicles-chart-body">
+                                <div style="width:100%;height:320px;position:relative;">
+                                    <canvas id="chart-veiculos-top-vehicles"></canvas>
+                                </div>
                             </div>
                         </div>
-                        <div class="chart-body vehicles-chart-body">
-                            <div style="width:100%;height:320px;position:relative;">
-                                <canvas id="chart-veiculos-top-drivers"></canvas>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- Preço Médio por Litro (R$) -->
-                    <div class="chart-card">
-                        <div class="chart-header">
-                            <div class="chart-title">
-                                <h2>Preço Médio por Litro (R$)</h2>
+                        <!-- Gasto por Condutores -->
+                        <div class="chart-card">
+                            <div class="chart-header" style="flex-wrap:wrap;gap:10px;">
+                                <div class="chart-title">
+                                    <h2 id="driver-chart-title">Gasto por Condutores</h2>
+                                </div>
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <span id="driver-drill-info" style="display:none;font-size:11px;font-weight:600;color:var(--color-primary-light);background:rgba(52,152,219,0.12);border:1px solid rgba(52,152,219,0.3);border-radius:20px;padding:3px 12px;"></span>
+                                    <button id="driver-drill-back" class="btn-chart-back" onclick="resetDriverDrill()" style="display:none;">
+                                        <i class="fa-solid fa-arrow-left"></i> Voltar
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="chart-body vehicles-chart-body">
+                                <div style="width:100%;height:320px;position:relative;">
+                                    <canvas id="chart-veiculos-top-drivers"></canvas>
+                                </div>
                             </div>
                         </div>
-                        <div class="chart-body price-chart-body">
-                            <canvas id="chart-veiculos-avg-price"></canvas>
+
+                    </div><!-- end .vehicles-left-col -->
+
+                    <!-- Right column: Mapa UF + Preço Médio -->
+                    <div class="vehicles-right-col">
+
+                        <!-- Mapa SVG Interativo PR/SC/RS -->
+                        <div class="chart-card vehicles-map-card">
+                            <div class="chart-header">
+                                <div class="chart-title">
+                                    <h2>ABASTECIMENTO POR UF</h2>
+                                </div>
+                            </div>
+                            <div class="chart-body map-chart-body" style="overflow:hidden !important;">
+                                <div class="map-wrapper" id="veiculos-map-container" style="width:100%;height:100%;position:relative;">
+                                    <!-- Mapa SVG gerado dinamicamente por renderVeiculosMap() -->
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+
+                        <!-- Preço Médio por Litro (R$) -->
+                        <div class="chart-card vehicles-price-card">
+                            <div class="chart-header">
+                                <div class="chart-title">
+                                    <h2>Preço Médio por Litro (R$)</h2>
+                                </div>
+                            </div>
+                            <div class="chart-body price-chart-body">
+                                <canvas id="chart-veiculos-avg-price"></canvas>
+                            </div>
+                        </div>
+
+                    </div><!-- end .vehicles-right-col -->
+
+                </div><!-- end .vehicles-combined-layout -->
             </div>
 
             <!-- Sub Tab Pane: Lançamentos -->
@@ -908,8 +917,8 @@
     <!-- Carga de Dados Dinâmica -->
     <script src="data.js"></script>
 
-    <script src="veiculos_data.js?v=3.30"></script>
-    <script src="veiculos_app.js?v=3.30"></script>
+    <script src="veiculos_data.js?v=3.31"></script>
+    <script src="veiculos_app.js?v=3.31"></script>
 
     <!-- Logica de UI Autônoma (Sem Dependências de CDNs) -->
     <script>
