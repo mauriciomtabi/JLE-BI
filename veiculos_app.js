@@ -431,75 +431,98 @@ function updateVeiculosCharts() {
     // 1. Evolução
     const evoData = buildEvolutionData();
     const granTitle = { mensal:'Mensal', semanal:'Semanal', diario:'Diário' }[veiculosEvolutionGranularity] || '';
-    renderVeiculosChart('chart-veiculos-evolution', 'line', {
+    const isWeekly = veiculosEvolutionGranularity === 'semanal';
+
+    renderVeiculosChart('chart-veiculos-evolution', 'bar', {
         labels: evoData.labels,
         datasets: [
             {
                 label: 'Santa Catarina (SC)',
                 data: evoData.SC,
+                backgroundColor: '#2ecc71',
                 borderColor: '#2ecc71',
-                backgroundColor: 'rgba(46,204,113,0.08)',
-                tension: 0.35,
-                borderWidth: 2.5,
-                fill: true,
-                pointRadius: 4,
-                pointHoverRadius: 7,
-                pointBackgroundColor: '#2ecc71',
-                pointBorderColor: '#fff',
-                pointBorderWidth: 2,
+                borderRadius: isWeekly ? 4 : 2,
+                borderWidth: 0,
             },
             {
                 label: 'Rio Grande do Sul (RS)',
                 data: evoData.RS,
+                backgroundColor: '#3498db',
                 borderColor: '#3498db',
-                backgroundColor: 'rgba(52,152,219,0.08)',
-                tension: 0.35,
-                borderWidth: 2.5,
-                fill: true,
-                pointRadius: 4,
-                pointHoverRadius: 7,
-                pointBackgroundColor: '#3498db',
-                pointBorderColor: '#fff',
-                pointBorderWidth: 2,
+                borderRadius: isWeekly ? 4 : 2,
+                borderWidth: 0,
             },
             {
                 label: 'Paraná (PR)',
                 data: evoData.PR,
+                backgroundColor: '#f39f18',
                 borderColor: '#f39f18',
-                backgroundColor: 'rgba(243,159,24,0.08)',
-                tension: 0.35,
-                borderWidth: 2.5,
-                fill: true,
-                pointRadius: 4,
-                pointHoverRadius: 7,
-                pointBackgroundColor: '#f39f18',
-                pointBorderColor: '#fff',
-                pointBorderWidth: 2,
+                borderRadius: isWeekly ? 4 : 2,
+                borderWidth: 0,
             },
         ]
     }, {
         responsive: true,
         maintainAspectRatio: false,
+        onHover: (event, chartElement) => {
+            event.native.target.style.cursor = chartElement.length ? 'pointer' : 'default';
+        },
         interaction: { mode: 'index', intersect: false },
         scales: {
             x: {
-                grid: { color: th.gridColor, drawBorder: false },
-                ticks: { color: th.textColor, font: { size: 11, family: "'Outfit', sans-serif" }, maxTicksLimit: 12 },
-            },
-            y: {
-                grid: { color: th.gridColor, drawBorder: false },
+                grid: { color: 'transparent' },
                 ticks: {
                     color: th.textColor,
-                    font: { size: 11, family: "'Outfit', sans-serif" },
-                    callback: v => fmtBRLCompact(v),
+                    font: { size: isWeekly ? 10 : 9, family: "'Outfit', sans-serif" }
                 },
+            },
+            y: {
+                grid: { color: th.gridColor },
+                ticks: {
+                    color: th.textColor,
+                    font: { size: 10, family: "'Outfit', sans-serif" },
+                    callback: (val) => {
+                        const a = Math.abs(val);
+                        if (val === 0) return '0';
+                        if (a >= 1000000) return (a/1000000).toFixed(1).replace('.', ',') + 'M';
+                        if (a >= 1000) return (a/1000).toFixed(0) + 'k';
+                        return a.toString();
+                    }
+                },
+                grace: '15%'
             },
         },
         plugins: {
             legend: {
-                position: 'top',
+                labels: {
+                    color: th.textColor,
+                    usePointStyle: true,
+                    pointStyle: 'rectRounded',
+                    boxWidth: 16,
+                    boxHeight: 8,
+                    padding: 16,
+                    font: { family: 'Outfit', size: 11 }
+                }
+            },
+            datalabels: {
+                display: (ctx) => ctx.dataset.data[ctx.dataIndex] > 0,
                 align: 'end',
-                labels: { boxWidth: 10, boxHeight: 6, color: th.textColor, padding: 16, font: { size: 11 } },
+                anchor: 'end',
+                rotation: isWeekly ? 0 : -90,
+                color: th.textColor,
+                font: {
+                    family: 'Outfit',
+                    size: isWeekly ? 9 : 8,
+                    weight: '700'
+                },
+                formatter: (val) => {
+                    const a = Math.abs(val);
+                    if (a >= 1000000) return (a/1000000).toFixed(1).replace('.', ',') + 'M';
+                    if (a >= 1000) return (a/1000).toFixed(0) + 'k';
+                    return a > 0 ? a.toFixed(0) : '';
+                },
+                clamp: true,
+                clip: false
             },
             tooltip: {
                 ...tooltipBase,
