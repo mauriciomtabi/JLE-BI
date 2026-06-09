@@ -33,10 +33,18 @@
     border-radius: 12px;
     padding: 14px 16px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 12px;
     align-items: end;
     box-shadow: var(--shadow-main);
+}
+
+@media (min-width: 769px) {
+    #view-veiculos-container .filter-bar-veiculos {
+        grid-template-columns: repeat(7, minmax(0, 1fr)) 38px !important;
+        gap: 10px !important;
+        padding: 14px 16px !important;
+    }
 }
 
 #view-veiculos-container .filter-group {
