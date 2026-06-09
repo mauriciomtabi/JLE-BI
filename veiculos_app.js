@@ -840,7 +840,7 @@ function renderDriverChart(th, tooltipBase) {
 
         // Altura dinâmica para rolagem vertical
         if (canvas && canvas.parentElement) {
-            const chartHeight = Math.max(320, items.length * 32);
+            const chartHeight = Math.max(352, items.length * 32);
             canvas.parentElement.style.height = chartHeight + 'px';
         }
 
@@ -864,7 +864,7 @@ function renderDriverChart(th, tooltipBase) {
 
         // Altura dinâmica para rolagem vertical
         if (canvas && canvas.parentElement) {
-            const chartHeight = Math.max(320, allDrivers.length * 32);
+            const chartHeight = Math.max(352, allDrivers.length * 32);
             canvas.parentElement.style.height = chartHeight + 'px';
         }
 
@@ -915,7 +915,7 @@ function renderVehicleChart(th, tooltipBase) {
 
         // Altura dinâmica para rolagem vertical
         if (canvas && canvas.parentElement) {
-            const chartHeight = Math.max(320, items.length * 32);
+            const chartHeight = Math.max(352, items.length * 32);
             canvas.parentElement.style.height = chartHeight + 'px';
         }
 
@@ -942,7 +942,7 @@ function renderVehicleChart(th, tooltipBase) {
 
         // Altura dinâmica para rolagem vertical
         if (canvas && canvas.parentElement) {
-            const chartHeight = Math.max(320, allVehicles.length * 32);
+            const chartHeight = Math.max(352, allVehicles.length * 32);
             canvas.parentElement.style.height = chartHeight + 'px';
         }
 

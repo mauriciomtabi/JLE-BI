@@ -858,7 +858,7 @@ body.light-theme #view-veiculos-container select option {
 }
 
 #view-veiculos-container .vehicles-chart-body {
-    height: 320px !important;
+    height: 352px !important;
     align-items: flex-start;
     overflow-y: auto;
     scrollbar-width: none !important; /* Firefox */
