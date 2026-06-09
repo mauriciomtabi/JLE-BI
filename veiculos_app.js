@@ -424,6 +424,12 @@ function renderVeiculosChart(canvasId, type, data, options) {
         chartVeiculosInstances[canvasId].destroy();
         delete chartVeiculosInstances[canvasId];
     }
+    // Limpar dimensões inline/atributos obsoletos de abas ocultas para forçar redimensionamento correto pelo pai
+    canvas.removeAttribute('width');
+    canvas.removeAttribute('height');
+    canvas.style.width = '';
+    canvas.style.height = '';
+
     const instance = new Chart(canvas, { type, data, options });
     chartVeiculosInstances[canvasId] = instance;
     return instance;
