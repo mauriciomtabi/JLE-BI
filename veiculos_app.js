@@ -996,6 +996,14 @@ function buildHBarOptions(th, tooltipBase, labelCb, isDrillResult) {
                 callbacks: {
                     label: ctx => labelCb(ctx.raw),
                 }
+            },
+            datalabels: {
+                display: true,
+                align: 'right',
+                anchor: 'end',
+                color: th.textColor,
+                font: { family: "'Outfit', sans-serif", size: 10, weight: 'bold' },
+                formatter: v => fmtBRLCompact(v)
             }
         }
     };
@@ -1033,7 +1041,15 @@ function renderRichCharts(th, tooltipBase) {
         },
         plugins: {
             legend: { labels: { color: th.textColor, boxWidth: 10 } },
-            tooltip: { ...tooltipBase, callbacks: { label: ctx => ' ' + ctx.dataset.label + ': R$ ' + ctx.raw.toFixed(2) } }
+            tooltip: { ...tooltipBase, callbacks: { label: ctx => ' ' + ctx.dataset.label + ': R$ ' + ctx.raw.toFixed(2) } },
+            datalabels: {
+                display: ctx => ctx.dataset.data[ctx.dataIndex] > 0,
+                align: 'top',
+                anchor: 'end',
+                color: th.textColor,
+                font: { family: "'Outfit', sans-serif", size: 10, weight: 'bold' },
+                formatter: v => 'R$ ' + v.toFixed(2).replace('.', ',')
+            }
         }
     });
 

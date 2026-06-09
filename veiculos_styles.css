@@ -813,3 +813,15 @@ body.light-theme #view-veiculos-container select option {
     height: 100% !important;
     width: 100% !important;
 }
+
+#view-veiculos-container .vehicles-chart-body {
+    height: 320px !important;
+    align-items: flex-start;
+    overflow-y: auto;
+}
+
+#view-veiculos-container .price-chart-body {
+    height: 320px !important;
+    position: relative;
+    width: 100%;
+}
