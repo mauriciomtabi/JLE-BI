@@ -351,7 +351,29 @@ function buildEvolutionData() {
     if (gran === 'mensal') {
         const monthOrder = ['JANEIRO','FEVEREIRO','MARCO','MARÇO','ABRIL','MAIO','JUNHO','JULHO','AGOSTO','SETEMBRO','OUTUBRO','NOVEMBRO','DEZEMBRO'];
         const buckets = {};
-        filteredVeiculosData.forEach(r => {
+        
+        // Ignorar o filtro de competência/mês na evolução mensal
+        const uf         = document.getElementById('filter-veiculos-uf')?.value    || 'all';
+        const fuel       = document.getElementById('filter-veiculos-fuel')?.value  || 'all';
+        const driver     = (document.getElementById('filter-veiculos-driver')?.value || '').trim().toUpperCase();
+        const plate      = (document.getElementById('filter-veiculos-plate')?.value  || '').trim().toUpperCase();
+        const dataInicio = document.getElementById('filter-veiculos-data-inicio')?.value || '';
+        const dataFim    = document.getElementById('filter-veiculos-data-fim')?.value    || '';
+
+        const dataForMensal = VEICULOS_DATA.filter(r => {
+            if (uf    !== 'all' && String(r.uf || '') !== uf)    return false;
+            if (fuel  !== 'all' && String(r.fuel || '') !== fuel)  return false;
+            if (driver && !String(r.driver || '').toUpperCase().includes(driver)) return false;
+            if (plate  && !String(r.plate || '').toUpperCase().includes(plate))  return false;
+
+            const rDateOnly = r.date ? r.date.substring(0, 10) : '';
+            if (dataInicio && rDateOnly < dataInicio) return false;
+            if (dataFim && rDateOnly > dataFim) return false;
+
+            return true;
+        });
+
+        dataForMensal.forEach(r => {
             const key = (r.month || 'N/D').toUpperCase();
             if (!buckets[key]) buckets[key] = { SC:0, RS:0, PR:0 };
             if (buckets[key][r.uf] !== undefined) buckets[key][r.uf] += (r.value || 0);
@@ -798,6 +820,7 @@ function renderDriverChart(th, tooltipBase) {
     const drillBackBtn = document.getElementById('driver-drill-back');
     const chartTitle   = document.getElementById('driver-chart-title');
     const drillHint    = document.getElementById('driver-drill-hint');
+    const canvas       = document.getElementById('chart-veiculos-top-drivers');
 
     if (driverDrillState.active) {
         const driver = driverDrillState.driver;
@@ -813,15 +836,20 @@ function renderDriverChart(th, tooltipBase) {
 
         const items = Object.keys(vehicleSpends)
             .map(plate => ({ plate, value: vehicleSpends[plate] }))
-            .sort((a, b) => b.value - a.value)
-            .slice(0, 15);
+            .sort((a, b) => b.value - a.value);
+
+        // Altura dinâmica para rolagem vertical
+        if (canvas && canvas.parentElement) {
+            const chartHeight = Math.max(320, items.length * 32);
+            canvas.parentElement.style.height = chartHeight + 'px';
+        }
 
         renderVeiculosChart('chart-veiculos-top-drivers', 'bar', {
             labels: items.map(i => i.plate),
             datasets: [{ label:'Gasto (R$)', data: items.map(i => i.value), backgroundColor: 'rgba(46,204,113,0.85)', hoverBackgroundColor: '#2ecc71', borderRadius: 5, borderSkipped: false }]
         }, buildHBarOptions(th, tooltipBase, v => ` Gasto: ${fmtBRL(v)}`, true));
     } else {
-        if (chartTitle)   chartTitle.textContent = 'Top Condutores por Gasto';
+        if (chartTitle)   chartTitle.textContent = 'Gasto por Condutores';
         if (drillInfo)    drillInfo.style.display = 'none';
         if (drillBackBtn) drillBackBtn.style.display = 'none';
         if (drillHint)    drillHint.style.display = 'flex';
@@ -830,22 +858,27 @@ function renderDriverChart(th, tooltipBase) {
         filteredVeiculosData.forEach(r => {
             if (r.driver) spends[r.driver] = (spends[r.driver] || 0) + (r.value || 0);
         });
-        const topDrivers = Object.keys(spends)
+        const allDrivers = Object.keys(spends)
             .map(name => ({ name, value: spends[name] }))
-            .sort((a, b) => b.value - a.value)
-            .slice(0, 10);
+            .sort((a, b) => b.value - a.value);
+
+        // Altura dinâmica para rolagem vertical
+        if (canvas && canvas.parentElement) {
+            const chartHeight = Math.max(320, allDrivers.length * 32);
+            canvas.parentElement.style.height = chartHeight + 'px';
+        }
 
         const opts = buildHBarOptions(th, tooltipBase, v => ` Gasto: ${fmtBRL(v)}`, false);
         opts.onClick = (evt, elements) => {
             if (!elements.length) return;
-            driverDrillState = { active: true, driver: topDrivers[elements[0].index].name };
+            driverDrillState = { active: true, driver: allDrivers[elements[0].index].name };
             renderDriverChart(th, tooltipBase);
         };
         opts.plugins.tooltip.callbacks.title = items => shortName(items[0].label);
 
         renderVeiculosChart('chart-veiculos-top-drivers', 'bar', {
-            labels: topDrivers.map(d => shortName(d.name)),
-            datasets: [{ label:'Gasto (R$)', data: topDrivers.map(d => d.value), backgroundColor: 'rgba(52,152,219,0.85)', hoverBackgroundColor: '#3498db', borderRadius: 5, borderSkipped: false }]
+            labels: allDrivers.map(d => shortName(d.name)),
+            datasets: [{ label:'Gasto (R$)', data: allDrivers.map(d => d.value), backgroundColor: 'rgba(52,152,219,0.85)', hoverBackgroundColor: '#3498db', borderRadius: 5, borderSkipped: false }]
         }, opts);
     }
 }
@@ -862,6 +895,7 @@ function renderVehicleChart(th, tooltipBase) {
     const drillBackBtn = document.getElementById('vehicle-drill-back');
     const chartTitle   = document.getElementById('vehicle-chart-title');
     const drillHint    = document.getElementById('vehicle-drill-hint');
+    const canvas       = document.getElementById('chart-veiculos-top-vehicles');
 
     if (vehicleDrillState.active) {
         const plate = vehicleDrillState.plate;
@@ -877,8 +911,13 @@ function renderVehicleChart(th, tooltipBase) {
 
         const items = Object.keys(driverSpends)
             .map(driver => ({ driver, value: driverSpends[driver] }))
-            .sort((a, b) => b.value - a.value)
-            .slice(0, 15);
+            .sort((a, b) => b.value - a.value);
+
+        // Altura dinâmica para rolagem vertical
+        if (canvas && canvas.parentElement) {
+            const chartHeight = Math.max(320, items.length * 32);
+            canvas.parentElement.style.height = chartHeight + 'px';
+        }
 
         const opts = buildHBarOptions(th, tooltipBase, v => ` Gasto: ${fmtBRL(v)}`, true);
         opts.plugins.tooltip.callbacks.title = ctxItems => shortName(ctxItems[0].label);
@@ -888,7 +927,7 @@ function renderVehicleChart(th, tooltipBase) {
             datasets: [{ label:'Gasto (R$)', data: items.map(i => i.value), backgroundColor: 'rgba(243,159,24,0.85)', hoverBackgroundColor: '#f39f18', borderRadius: 5, borderSkipped: false }]
         }, opts);
     } else {
-        if (chartTitle)   chartTitle.textContent = 'Top Veículos por Gasto';
+        if (chartTitle)   chartTitle.textContent = 'Gasto por Veículos';
         if (drillInfo)    drillInfo.style.display = 'none';
         if (drillBackBtn) drillBackBtn.style.display = 'none';
         if (drillHint)    drillHint.style.display = 'flex';
@@ -897,21 +936,26 @@ function renderVehicleChart(th, tooltipBase) {
         filteredVeiculosData.forEach(r => {
             if (r.plate) spends[r.plate] = (spends[r.plate] || 0) + (r.value || 0);
         });
-        const topVehicles = Object.keys(spends)
+        const allVehicles = Object.keys(spends)
             .map(plate => ({ plate, value: spends[plate] }))
-            .sort((a, b) => b.value - a.value)
-            .slice(0, 10);
+            .sort((a, b) => b.value - a.value);
+
+        // Altura dinâmica para rolagem vertical
+        if (canvas && canvas.parentElement) {
+            const chartHeight = Math.max(320, allVehicles.length * 32);
+            canvas.parentElement.style.height = chartHeight + 'px';
+        }
 
         const opts = buildHBarOptions(th, tooltipBase, v => ` Gasto: ${fmtBRL(v)}`, false);
         opts.onClick = (evt, elements) => {
             if (!elements.length) return;
-            vehicleDrillState = { active: true, plate: topVehicles[elements[0].index].plate };
+            vehicleDrillState = { active: true, plate: allVehicles[elements[0].index].plate };
             renderVehicleChart(th, tooltipBase);
         };
 
         renderVeiculosChart('chart-veiculos-top-vehicles', 'bar', {
-            labels: topVehicles.map(v => v.plate),
-            datasets: [{ label:'Gasto (R$)', data: topVehicles.map(v => v.value), backgroundColor: 'rgba(243,159,24,0.85)', hoverBackgroundColor: '#f39f18', borderRadius: 5, borderSkipped: false }]
+            labels: allVehicles.map(v => v.plate),
+            datasets: [{ label:'Gasto (R$)', data: allVehicles.map(v => v.value), backgroundColor: 'rgba(243,159,24,0.85)', hoverBackgroundColor: '#f39f18', borderRadius: 5, borderSkipped: false }]
         }, opts);
     }
 }

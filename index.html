@@ -43,7 +43,7 @@
     <script src="supabase_config.js"></script>
     <!-- Local Stylesheet -->
     <link rel="stylesheet" href="styles.css?v=2.1.5">
-    <link rel="stylesheet" href="veiculos_styles.css?v=3.25">
+    <link rel="stylesheet" href="veiculos_styles.css?v=3.26">
 </head>
 <body>
 
@@ -598,28 +598,24 @@
                     </div>
                 </div>
 
-                <!-- Charts Row 2: Top Condutores + Mapa -->
+                <!-- Charts Row 2: Top Veículos + Mapa -->
                 <div class="charts-grid">
-                    <!-- Top Condutores com drill-down -->
+                    <!-- Top Veículos com drill-down -->
                     <div class="chart-card">
                         <div class="chart-header" style="flex-wrap:wrap;gap:10px;">
                             <div class="chart-title">
-                                <h2 id="driver-chart-title">Top Condutores por Gasto</h2>
+                                <h2 id="vehicle-chart-title">Gasto por Veículos</h2>
                             </div>
                             <div style="display:flex;align-items:center;gap:8px;">
-                                <span id="driver-drill-info" style="display:none;font-size:11px;font-weight:600;color:var(--color-primary-light);background:rgba(52,152,219,0.12);border:1px solid rgba(52,152,219,0.3);border-radius:20px;padding:3px 12px;"></span>
-                                <button id="driver-drill-back" class="btn-chart-back" onclick="resetDriverDrill()" style="display:none;">
+                                <span id="vehicle-drill-info" style="display:none;font-size:11px;font-weight:600;color:var(--color-secondary);background:rgba(243,159,24,0.12);border:1px solid rgba(243,159,24,0.3);border-radius:20px;padding:3px 12px;"></span>
+                                <button id="vehicle-drill-back" class="btn-chart-back" onclick="resetVehicleDrill()" style="display:none;">
                                     <i class="fa-solid fa-arrow-left"></i> Voltar
                                 </button>
                             </div>
                         </div>
-                        <div id="driver-drill-hint" style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-secondary);margin:0 0 10px;padding:6px 10px;background:rgba(52,152,219,0.06);border-radius:6px;border:1px solid rgba(52,152,219,0.12);">
-                            <i class="fa-solid fa-hand-pointer" style="color:var(--color-primary-light);"></i>
-                            Clique em um condutor para ver os veículos que ele utilizou no período
-                        </div>
                         <div class="chart-body map-chart-body" style="align-items:flex-start;overflow-y:auto;">
                             <div style="width:100%;height:320px;position:relative;">
-                                <canvas id="chart-veiculos-top-drivers"></canvas>
+                                <canvas id="chart-veiculos-top-vehicles"></canvas>
                             </div>
                         </div>
                     </div>
@@ -639,28 +635,24 @@
                     </div>
                 </div>
 
-                <!-- Charts Row 3: Top Veículos + Mini Gráficos de Consumo -->
+                <!-- Charts Row 3: Top Condutores + Mini Gráficos de Consumo -->
                 <div class="charts-grid">
-                    <!-- Top Veículos com drill-down -->
+                    <!-- Top Condutores com drill-down -->
                     <div class="chart-card">
                         <div class="chart-header" style="flex-wrap:wrap;gap:10px;">
                             <div class="chart-title">
-                                <h2 id="vehicle-chart-title">Top Veículos por Gasto</h2>
+                                <h2 id="driver-chart-title">Gasto por Condutores</h2>
                             </div>
                             <div style="display:flex;align-items:center;gap:8px;">
-                                <span id="vehicle-drill-info" style="display:none;font-size:11px;font-weight:600;color:var(--color-secondary);background:rgba(243,159,24,0.12);border:1px solid rgba(243,159,24,0.3);border-radius:20px;padding:3px 12px;"></span>
-                                <button id="vehicle-drill-back" class="btn-chart-back" onclick="resetVehicleDrill()" style="display:none;">
+                                <span id="driver-drill-info" style="display:none;font-size:11px;font-weight:600;color:var(--color-primary-light);background:rgba(52,152,219,0.12);border:1px solid rgba(52,152,219,0.3);border-radius:20px;padding:3px 12px;"></span>
+                                <button id="driver-drill-back" class="btn-chart-back" onclick="resetDriverDrill()" style="display:none;">
                                     <i class="fa-solid fa-arrow-left"></i> Voltar
                                 </button>
                             </div>
                         </div>
-                        <div id="vehicle-drill-hint" style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-secondary);margin:0 0 10px;padding:6px 10px;background:rgba(243,159,24,0.06);border-radius:6px;border:1px solid rgba(243,159,24,0.12);">
-                            <i class="fa-solid fa-hand-pointer" style="color:var(--color-secondary);"></i>
-                            Clique em um veículo para ver os condutores que o utilizaram no período
-                        </div>
                         <div class="chart-body map-chart-body" style="align-items:flex-start;overflow-y:auto;">
                             <div style="width:100%;height:320px;position:relative;">
-                                <canvas id="chart-veiculos-top-vehicles"></canvas>
+                                <canvas id="chart-veiculos-top-drivers"></canvas>
                             </div>
                         </div>
                     </div>
@@ -668,7 +660,7 @@
                     <!-- Mini Gráficos de Consumo por tipo combustivel e preço por litro -->
                     <div class="chart-card" style="display: flex; flex-direction: column; gap: 16px; padding: 24px; min-height: 320px;">
                         <div style="width: 100%; height: 120px; display: flex; flex-direction: column;">
-                            <h4 style="font-size: 11px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 6px; font-weight: 700; letter-spacing: 0.5px;">Consumo por Combustível (Litros)</h4>
+                           <h4 style="font-size: 11px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 6px; font-weight: 700; letter-spacing: 0.5px;">Consumo por Combustível (Litros)</h4>
                             <div style="position: relative; flex-grow: 1; width: 100%;">
                                 <canvas id="chart-veiculos-fuel-dist"></canvas>
                             </div>
@@ -920,8 +912,8 @@
     <!-- Carga de Dados Dinâmica -->
     <script src="data.js"></script>
 
-    <script src="veiculos_data.js?v=3.25"></script>
-    <script src="veiculos_app.js?v=3.25"></script>
+    <script src="veiculos_data.js?v=3.26"></script>
+    <script src="veiculos_app.js?v=3.26"></script>
 
     <!-- Logica de UI Autônoma (Sem Dependências de CDNs) -->
     <script>
