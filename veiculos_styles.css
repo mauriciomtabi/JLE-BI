@@ -803,9 +803,17 @@ body.light-theme #view-veiculos-container select option {
     grid-template-columns: 1.2fr 1fr !important;
 }
 
+/* Row 2 only: Gasto por Veículos + Mapa — don't stretch Veículos card to map height */
+#view-veiculos-container .charts-grid.vehicles-map-row {
+    align-items: start;
+}
+
 @media (max-width: 1024px) {
     #view-veiculos-container .charts-grid.vehicles-uf-row {
         grid-template-columns: 1fr !important;
+    }
+    #view-veiculos-container .charts-grid.vehicles-map-row {
+        align-items: stretch;
     }
 }
 
