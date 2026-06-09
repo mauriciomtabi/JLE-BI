@@ -43,7 +43,7 @@
     <script src="supabase_config.js"></script>
     <!-- Local Stylesheet -->
     <link rel="stylesheet" href="styles.css?v=2.1.5">
-    <link rel="stylesheet" href="veiculos_styles.css?v=3.26">
+    <link rel="stylesheet" href="veiculos_styles.css?v=3.27">
 </head>
 <body>
 
@@ -599,7 +599,7 @@
                 </div>
 
                 <!-- Charts Row 2: Top Veículos + Mapa -->
-                <div class="charts-grid">
+                <div class="charts-grid vehicles-uf-row">
                     <!-- Top Veículos com drill-down -->
                     <div class="chart-card">
                         <div class="chart-header" style="flex-wrap:wrap;gap:10px;">
@@ -624,7 +624,7 @@
                     <div class="chart-card">
                         <div class="chart-header">
                             <div class="chart-title">
-                                <h2>Distribuição por UF</h2>
+                                <h2>ABASTECIMENTO POR UF</h2>
                             </div>
                         </div>
                         <div class="chart-body map-chart-body" style="overflow:hidden !important;">
@@ -636,7 +636,7 @@
                 </div>
 
                 <!-- Charts Row 3: Top Condutores + Mini Gráficos de Consumo -->
-                <div class="charts-grid">
+                <div class="charts-grid vehicles-uf-row">
                     <!-- Top Condutores com drill-down -->
                     <div class="chart-card">
                         <div class="chart-header" style="flex-wrap:wrap;gap:10px;">
@@ -657,19 +657,15 @@
                         </div>
                     </div>
 
-                    <!-- Mini Gráficos de Consumo por tipo combustivel e preço por litro -->
-                    <div class="chart-card" style="display: flex; flex-direction: column; gap: 16px; padding: 24px; min-height: 320px;">
-                        <div style="width: 100%; height: 120px; display: flex; flex-direction: column;">
-                           <h4 style="font-size: 11px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 6px; font-weight: 700; letter-spacing: 0.5px;">Consumo por Combustível (Litros)</h4>
-                            <div style="position: relative; flex-grow: 1; width: 100%;">
-                                <canvas id="chart-veiculos-fuel-dist"></canvas>
+                    <!-- Preço Médio por Litro (R$) -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <div class="chart-title">
+                                <h2>Preço Médio por Litro (R$)</h2>
                             </div>
                         </div>
-                        <div style="width: 100%; height: 120px; display: flex; flex-direction: column; border-top: 1px solid var(--border-color); padding-top: 12px;">
-                            <h4 style="font-size: 11px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 6px; font-weight: 700; letter-spacing: 0.5px;">Preço Médio por Litro (R$)</h4>
-                            <div style="position: relative; flex-grow: 1; width: 100%;">
-                                <canvas id="chart-veiculos-avg-price"></canvas>
-                            </div>
+                        <div class="chart-body map-chart-body" style="position:relative; width:100%;">
+                            <canvas id="chart-veiculos-avg-price"></canvas>
                         </div>
                     </div>
                 </div>
@@ -912,8 +908,8 @@
     <!-- Carga de Dados Dinâmica -->
     <script src="data.js"></script>
 
-    <script src="veiculos_data.js?v=3.26"></script>
-    <script src="veiculos_app.js?v=3.26"></script>
+    <script src="veiculos_data.js?v=3.27"></script>
+    <script src="veiculos_app.js?v=3.27"></script>
 
     <!-- Logica de UI Autônoma (Sem Dependências de CDNs) -->
     <script>

@@ -798,30 +798,16 @@ body.light-theme #view-veiculos-container select option {
     background-color: #ffffff !important;
     color: #1f2c3d !important;
 }
-
-/* Enquadramento perfeito do mapa SVG na div de 320px sem vazamento ou buracos */
-#view-veiculos-container #veiculos-map-container {
-    height: 320px;
-    width: 100%;
-    position: relative;
-    overflow: visible;
-}
-#view-veiculos-container .uf-premium-container {
-    min-height: 320px !important;
-    height: 320px !important;
-    width: 100% !important;
-    position: relative;
-    display: block;
-}
-#view-veiculos-container .map-svg-centered {
-    transform: scale(1.15) !important; /* Zoom ideal para a região Sul sem cortar */
+/* Custom grid columns for Vehicles Map/Drivers and Price/Vehicles rows */
+#view-veiculos-container .charts-grid.vehicles-uf-row {
+    grid-template-columns: 1.2fr 1fr !important;
 }
 
-#view-veiculos-container .map-chart-body {
-    height: 320px !important;
+@media (max-width: 1024px) {
+    #view-veiculos-container .charts-grid.vehicles-uf-row {
+        grid-template-columns: 1fr !important;
+    }
 }
-
-
 
 #view-veiculos-container .chart-body canvas {
     height: 100% !important;

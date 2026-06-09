@@ -1008,23 +1008,7 @@ function renderRichCharts(th, tooltipBase) {
     richEl.forEach(el => el.classList.toggle('hidden', richRecs.length === 0));
     if (!richRecs.length) return;
 
-    // A. Combustível (litros por tipo)
-    const fuelLiters = {};
-    richRecs.forEach(r => { if (r.fuel) fuelLiters[r.fuel] = (fuelLiters[r.fuel] || 0) + r.liters; });
-    const fuels = Object.keys(fuelLiters).map(f => ({ name: f, liters: fuelLiters[f] })).sort((a,b) => b.liters - a.liters);
-    const fuelPalette = ['#2ecc71','#3498db','#f39f18','#9b59b6','#e74c3c','#34495e','#1abc9c'];
-    renderVeiculosChart('chart-veiculos-fuel-dist', 'doughnut', {
-        labels: fuels.map(f => f.name),
-        datasets: [{ data: fuels.map(f => f.liters), backgroundColor: fuelPalette, borderWidth: th.isLight ? 1 : 2, borderColor: th.isLight ? '#ffffff' : '#111c24' }]
-    }, {
-        cutout: '65%',
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: { position: 'bottom', labels: { boxWidth: 8, font: { size: 9 }, color: th.textColor, padding: 8 } },
-            tooltip: { ...tooltipBase, callbacks: { label: ctx => ` ${ctx.label}: ${ctx.raw.toLocaleString('pt-BR', { minimumFractionDigits: 0 })} L` } }
-        }
-    });
+
 
     // B. Preço médio por litro por UF
     const ufFuelPrices = { SC: { gas: [], diesel: [] }, RS: { gas: [], diesel: [] }, PR: { gas: [], diesel: [] } };
