@@ -871,14 +871,32 @@ function renderDriverChart(th, tooltipBase) {
         const opts = buildHBarOptions(th, tooltipBase, v => ` Gasto: ${fmtBRL(v)}`, false);
         opts.onClick = (evt, elements) => {
             if (!elements.length) return;
-            driverDrillState = { active: true, driver: allDrivers[elements[0].index].name };
-            renderDriverChart(th, tooltipBase);
+            const clickedDriver = allDrivers[elements[0].index].name;
+            const driverInput = document.getElementById('filter-veiculos-driver');
+            if (!driverInput) return;
+            // Toggle: se já filtrado pelo mesmo condutor, limpa o filtro
+            if (driverInput.value.trim().toUpperCase() === clickedDriver.trim().toUpperCase()) {
+                driverInput.value = '';
+            } else {
+                driverInput.value = clickedDriver;
+            }
+            applyVeiculosFilters();
         };
         opts.plugins.tooltip.callbacks.title = items => shortName(items[0].label);
 
+        // Highlight da barra com filtro ativo
+        const activeDriver = (document.getElementById('filter-veiculos-driver')?.value || '').trim().toUpperCase();
+        const driverColors = allDrivers.map(d =>
+            activeDriver && d.name.trim().toUpperCase() === activeDriver
+                ? '#3498db'                       // barra selecionada: cor sólida
+                : activeDriver
+                    ? 'rgba(52,152,219,0.25)'     // demais: esmaecidas
+                    : 'rgba(52,152,219,0.85)'     // sem filtro: cor padrão
+        );
+
         renderVeiculosChart('chart-veiculos-top-drivers', 'bar', {
             labels: allDrivers.map(d => shortName(d.name)),
-            datasets: [{ label:'Gasto (R$)', data: allDrivers.map(d => d.value), backgroundColor: 'rgba(52,152,219,0.85)', hoverBackgroundColor: '#3498db', borderRadius: 5, borderSkipped: false }]
+            datasets: [{ label:'Gasto (R$)', data: allDrivers.map(d => d.value), backgroundColor: driverColors, hoverBackgroundColor: '#3498db', borderRadius: 5, borderSkipped: false }]
         }, opts);
     }
 }
@@ -949,13 +967,31 @@ function renderVehicleChart(th, tooltipBase) {
         const opts = buildHBarOptions(th, tooltipBase, v => ` Gasto: ${fmtBRL(v)}`, false);
         opts.onClick = (evt, elements) => {
             if (!elements.length) return;
-            vehicleDrillState = { active: true, plate: allVehicles[elements[0].index].plate };
-            renderVehicleChart(th, tooltipBase);
+            const clickedPlate = allVehicles[elements[0].index].plate;
+            const plateInput = document.getElementById('filter-veiculos-plate');
+            if (!plateInput) return;
+            // Toggle: se já filtrado pela mesma placa, limpa o filtro
+            if (plateInput.value.trim().toUpperCase() === clickedPlate.trim().toUpperCase()) {
+                plateInput.value = '';
+            } else {
+                plateInput.value = clickedPlate;
+            }
+            applyVeiculosFilters();
         };
+
+        // Highlight da barra com filtro ativo
+        const activePlate = (document.getElementById('filter-veiculos-plate')?.value || '').trim().toUpperCase();
+        const vehicleColors = allVehicles.map(v =>
+            activePlate && v.plate.trim().toUpperCase() === activePlate
+                ? '#f39f18'                        // barra selecionada: cor sólida
+                : activePlate
+                    ? 'rgba(243,159,24,0.25)'      // demais: esmaecidas
+                    : 'rgba(243,159,24,0.85)'      // sem filtro: cor padrão
+        );
 
         renderVeiculosChart('chart-veiculos-top-vehicles', 'bar', {
             labels: allVehicles.map(v => v.plate),
-            datasets: [{ label:'Gasto (R$)', data: allVehicles.map(v => v.value), backgroundColor: 'rgba(243,159,24,0.85)', hoverBackgroundColor: '#f39f18', borderRadius: 5, borderSkipped: false }]
+            datasets: [{ label:'Gasto (R$)', data: allVehicles.map(v => v.value), backgroundColor: vehicleColors, hoverBackgroundColor: '#f39f18', borderRadius: 5, borderSkipped: false }]
         }, opts);
     }
 }
