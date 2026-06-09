@@ -391,8 +391,14 @@ body.light-theme #view-veiculos-container .account-details {
 
 #view-veiculos-container .chart-header {
     display: flex;
-    flex-direction: column;
-    gap: 4px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    text-align: left;
+}
+#view-veiculos-container .chart-title {
+    text-align: left;
 }
 
 #view-veiculos-container .chart-header h3 {

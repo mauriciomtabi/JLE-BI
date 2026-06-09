@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jle-bi-v3.21.20260609021800';
+const CACHE_NAME = 'jle-bi-v3.22.20260609023100';
 const ASSETS = [
   './',
   './index.html',
