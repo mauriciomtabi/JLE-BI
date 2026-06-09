@@ -471,32 +471,50 @@ function updateVeiculosCharts() {
         };
     }
 
-    renderVeiculosChart('chart-veiculos-evolution', 'bar', {
+    renderVeiculosChart('chart-veiculos-evolution', 'line', {
         labels: evoData.labels,
         datasets: [
             {
                 label: 'Santa Catarina (SC)',
                 data: evoData.SC,
-                backgroundColor: '#2ecc71',
                 borderColor: '#2ecc71',
-                borderRadius: isWeekly ? 4 : 2,
-                borderWidth: 0,
+                backgroundColor: 'rgba(46,204,113,0.08)',
+                tension: 0.35,
+                borderWidth: 2.5,
+                fill: true,
+                pointRadius: 4,
+                pointHoverRadius: 7,
+                pointBackgroundColor: '#2ecc71',
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2,
             },
             {
                 label: 'Rio Grande do Sul (RS)',
                 data: evoData.RS,
-                backgroundColor: '#3498db',
                 borderColor: '#3498db',
-                borderRadius: isWeekly ? 4 : 2,
-                borderWidth: 0,
+                backgroundColor: 'rgba(52,152,219,0.08)',
+                tension: 0.35,
+                borderWidth: 2.5,
+                fill: true,
+                pointRadius: 4,
+                pointHoverRadius: 7,
+                pointBackgroundColor: '#3498db',
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2,
             },
             {
                 label: 'Paraná (PR)',
                 data: evoData.PR,
-                backgroundColor: '#f39f18',
                 borderColor: '#f39f18',
-                borderRadius: isWeekly ? 4 : 2,
-                borderWidth: 0,
+                backgroundColor: 'rgba(243,159,24,0.08)',
+                tension: 0.35,
+                borderWidth: 2.5,
+                fill: true,
+                pointRadius: 4,
+                pointHoverRadius: 7,
+                pointBackgroundColor: '#f39f18',
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2,
             },
         ]
     }, {
@@ -583,6 +601,9 @@ function updateVeiculosCharts() {
 
     // 5. Gráficos de consumo detalhado (ricos)
     renderRichCharts(th, tooltipBase);
+
+    // 6. Top 3 Consumos
+    renderTop3Consumo();
 }
 
 // ── Mapa SVG Interativo PR / SC / RS ─────────────────────────────────────
@@ -982,35 +1003,7 @@ function renderRichCharts(th, tooltipBase) {
         }
     });
 
-    // C. Eficiência (KM/L por modelo)
-    const modelEff = {};
-    richRecs.forEach(r => {
-        if (r.model && r.kml > 0 && r.kml < 30) {
-            if (!modelEff[r.model]) modelEff[r.model] = [];
-            modelEff[r.model].push(r.kml);
-        }
-    });
-    const topModels = Object.keys(modelEff)
-        .map(m => ({ name: m, avgKml: avg(modelEff[m]), count: modelEff[m].length }))
-        .filter(x => x.count >= 2)
-        .sort((a, b) => b.avgKml - a.avgKml)
-        .slice(0, 5);
 
-    renderVeiculosChart('chart-veiculos-efficiency', 'bar', {
-        labels: topModels.map(m => m.name),
-        datasets: [{ label: 'Km/L Média', data: topModels.map(m => m.avgKml), backgroundColor: 'rgba(46,204,113,0.85)', borderRadius: 4 }]
-    }, {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            y: { grid: { color: th.gridColor }, ticks: { color: th.textColor, callback: v => v.toFixed(1) + ' Km/L' } },
-            x: { grid: { display: false }, ticks: { color: th.textColor } }
-        },
-        plugins: {
-            legend: { display: false },
-            tooltip: { ...tooltipBase, callbacks: { label: ctx => ' Eficiência: ' + ctx.raw.toFixed(2) + ' Km/L' } }
-        }
-    });
 }
 
 // ── Troca de aba ──────────────────────────────────────────────────────────
@@ -1130,6 +1123,116 @@ function handleVeiculosTableSort(column) {
     renderVeiculosTable();
 }
 
+// ── Componente: Top 3 Motoristas e Veículos com maior consumo ──────────────
+function renderTop3Consumo() {
+    try {
+        const driversContainer = document.getElementById('top-3-drivers-container');
+        const vehiclesContainer = document.getElementById('top-3-vehicles-container');
+        if (!driversContainer || !vehiclesContainer) return;
+
+        // 1. Agrupar motoristas
+        const driverData = {};
+        filteredVeiculosData.forEach(r => {
+            if (!r.driver) return;
+            const driver = r.driver.trim();
+            if (!driverData[driver]) {
+                driverData[driver] = { spent: 0, count: 0, ufs: new Set() };
+            }
+            driverData[driver].spent += (r.value || 0);
+            driverData[driver].count += 1;
+            if (r.uf) driverData[driver].ufs.add(r.uf);
+        });
+
+        // Ordenar e pegar top 3
+        const topDrivers = Object.keys(driverData)
+            .map(name => ({
+                name,
+                spent: driverData[name].spent,
+                count: driverData[name].count,
+                ufs: Array.from(driverData[name].ufs)
+            }))
+            .sort((a, b) => b.spent - a.spent)
+            .slice(0, 3);
+
+        // 2. Agrupar veículos
+        const vehicleData = {};
+        filteredVeiculosData.forEach(r => {
+            if (!r.plate) return;
+            const plate = r.plate.trim();
+            if (!vehicleData[plate]) {
+                vehicleData[plate] = { spent: 0, count: 0, ufs: new Set() };
+            }
+            vehicleData[plate].spent += (r.value || 0);
+            vehicleData[plate].count += 1;
+            if (r.uf) vehicleData[plate].ufs.add(r.uf);
+        });
+
+        // Ordenar e pegar top 3
+        const topVehicles = Object.keys(vehicleData)
+            .map(plate => ({
+                plate,
+                spent: vehicleData[plate].spent,
+                count: vehicleData[plate].count,
+                ufs: Array.from(vehicleData[plate].ufs)
+            }))
+            .sort((a, b) => b.spent - a.spent)
+            .slice(0, 3);
+
+        // Renderizar motoristas
+        if (topDrivers.length === 0) {
+            driversContainer.innerHTML = `<div style="font-size: 11px; color: var(--text-secondary); text-align: center; padding: 8px;">Nenhum dado disponível</div>`;
+        } else {
+            driversContainer.innerHTML = topDrivers.map((d, index) => {
+                const ufsBadges = d.ufs.map(uf => `<span class="badge ${uf.toLowerCase()}" style="margin-left: 4px; padding: 2px 6px; font-size: 9px; border-radius: 4px;">${uf}</span>`).join('');
+                const avgSpent = d.count > 0 ? (d.spent / d.count) : 0;
+                return `
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 12px; font-size: 12px;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <strong style="color: var(--text-primary); font-size: 11px;">#${index + 1}</strong>
+                            <div>
+                                <div style="font-weight: 600; color: var(--text-primary); max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${d.name}">${shortName(d.name)}</div>
+                                <div style="font-size: 10px; color: var(--text-secondary); margin-top: 2px;">
+                                    ${d.count} abast. • Méd. ${fmtBRL(avgSpent)} ${ufsBadges}
+                                </div>
+                            </div>
+                        </div>
+                        <div style="text-align: right; font-weight: 700; color: var(--color-primary-light); font-size: 12.5px;">
+                            ${fmtBRL(d.spent)}
+                        </div>
+                    </div>`;
+            }).join('');
+        }
+
+        // Renderizar veículos
+        if (topVehicles.length === 0) {
+            vehiclesContainer.innerHTML = `<div style="font-size: 11px; color: var(--text-secondary); text-align: center; padding: 8px;">Nenhum dado disponível</div>`;
+        } else {
+            vehiclesContainer.innerHTML = topVehicles.map((v, index) => {
+                const ufsBadges = v.ufs.map(uf => `<span class="badge ${uf.toLowerCase()}" style="margin-left: 4px; padding: 2px 6px; font-size: 9px; border-radius: 4px;">${uf}</span>`).join('');
+                const avgSpent = v.count > 0 ? (v.spent / v.count) : 0;
+                return `
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 12px; font-size: 12px;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <strong style="color: var(--text-primary); font-size: 11px;">#${index + 1}</strong>
+                            <div>
+                                <div style="font-weight: 700; color: var(--text-primary); letter-spacing: 0.5px;">${v.plate}</div>
+                                <div style="font-size: 10px; color: var(--text-secondary); margin-top: 2px;">
+                                    ${v.count} abast. • Méd. ${fmtBRL(avgSpent)} ${ufsBadges}
+                                </div>
+                            </div>
+                        </div>
+                        <div style="text-align: right; font-weight: 700; color: var(--color-secondary-light); font-size: 12.5px;">
+                            ${fmtBRL(v.spent)}
+                        </div>
+                    </div>`;
+            }).join('');
+        }
+
+    } catch (err) {
+        console.error("Erro ao renderizar Top 3 Consumo:", err);
+    }
+}
+
 // ── Exportações Globais para Handlers Inline do HTML ──
 window.initVeiculos = initVeiculos;
 window.applyVeiculosFilters = applyVeiculosFilters;
@@ -1139,3 +1242,4 @@ window.resetDriverDrill = resetDriverDrill;
 window.resetVehicleDrill = resetVehicleDrill;
 window.setVeiculosEvolutionGranularity = setVeiculosEvolutionGranularity;
 window.switchVeiculosTab = switchVeiculosTab;
+window.renderTop3Consumo = renderTop3Consumo;
