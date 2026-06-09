@@ -821,9 +821,7 @@ body.light-theme #view-veiculos-container select option {
     height: 320px !important;
 }
 
-#view-veiculos-container .charts-grid:first-of-type .chart-body {
-    height: 390px !important;
-}
+
 
 #view-veiculos-container .chart-body canvas {
     height: 100% !important;
