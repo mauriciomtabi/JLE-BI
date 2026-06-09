@@ -810,3 +810,7 @@ body.light-theme #view-veiculos-container select option {
 #view-veiculos-container .map-svg-centered {
     transform: scale(1.15) !important; /* Zoom ideal para a região Sul sem cortar */
 }
+
+#view-veiculos-container .map-chart-body {
+    height: 320px !important;
+}

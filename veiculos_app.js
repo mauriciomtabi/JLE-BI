@@ -120,6 +120,18 @@ function populateVeiculosFilters() {
                     opt.textContent = formattedText;
                     monthSelect.appendChild(opt);
                 });
+
+                // Pré-seleção do mês anterior do sistema
+                const monthsPt = ["JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO", "JUNHO", "JULHO", "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"];
+                const prevMonthDate = new Date();
+                prevMonthDate.setMonth(prevMonthDate.getMonth() - 1);
+                const prevMonthName = monthsPt[prevMonthDate.getMonth()];
+
+                if (uniqueMonths.includes(prevMonthName)) {
+                    monthSelect.value = prevMonthName;
+                } else {
+                    monthSelect.value = uniqueMonths[uniqueMonths.length - 1];
+                }
             }
         }
     } catch (err) {
@@ -432,6 +444,32 @@ function updateVeiculosCharts() {
     const evoData = buildEvolutionData();
     const granTitle = { mensal:'Mensal', semanal:'Semanal', diario:'Diário' }[veiculosEvolutionGranularity] || '';
     const isWeekly = veiculosEvolutionGranularity === 'semanal';
+    const isDiario = veiculosEvolutionGranularity === 'diario';
+    const isMensal = veiculosEvolutionGranularity === 'mensal';
+
+    let dlConfig = {};
+    if (isMensal) {
+        dlConfig = {
+            align: 'top',
+            anchor: 'end',
+            rotation: 0,
+            font: { family: 'Outfit', size: 10, weight: 'bold' }
+        };
+    } else if (isWeekly) {
+        dlConfig = {
+            align: 'end',
+            anchor: 'end',
+            rotation: 0,
+            font: { family: 'Outfit', size: 9, weight: '700' }
+        };
+    } else {
+        dlConfig = {
+            align: 'end',
+            anchor: 'end',
+            rotation: -90,
+            font: { family: 'Outfit', size: 8, weight: '700' }
+        };
+    }
 
     renderVeiculosChart('chart-veiculos-evolution', 'bar', {
         labels: evoData.labels,
@@ -506,15 +544,11 @@ function updateVeiculosCharts() {
             },
             datalabels: {
                 display: (ctx) => ctx.dataset.data[ctx.dataIndex] > 0,
-                align: 'end',
-                anchor: 'end',
-                rotation: isWeekly ? 0 : -90,
+                align: dlConfig.align,
+                anchor: dlConfig.anchor,
+                rotation: dlConfig.rotation,
                 color: th.textColor,
-                font: {
-                    family: 'Outfit',
-                    size: isWeekly ? 9 : 8,
-                    weight: '700'
-                },
+                font: dlConfig.font,
                 formatter: (val) => {
                     const a = Math.abs(val);
                     if (a >= 1000000) return (a/1000000).toFixed(1).replace('.', ',') + 'M';
