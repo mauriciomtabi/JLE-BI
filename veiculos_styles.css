@@ -818,6 +818,12 @@ body.light-theme #view-veiculos-container select option {
     height: 320px !important;
     align-items: flex-start;
     overflow-y: auto;
+    scrollbar-width: none !important; /* Firefox */
+    -ms-overflow-style: none !important; /* IE 10+ */
+}
+
+#view-veiculos-container .vehicles-chart-body::-webkit-scrollbar {
+    display: none !important; /* Chrome, Safari, Opera */
 }
 
 #view-veiculos-container .price-chart-body {
