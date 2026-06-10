@@ -980,3 +980,14 @@ body.light-theme #view-veiculos-container select option {
     }
 }
 
+/* ── Garantir que o mapa de veículos tenha a mesma altura do mapa financeiro ── */
+#view-veiculos-container .vehicles-map-card .map-chart-body {
+    height: 460px !important;
+}
+
+@media (max-width: 768px) {
+    #view-veiculos-container .vehicles-map-card .map-chart-body {
+        height: calc(380px * calc((100vw - 64px) / 700) + 40px) !important;
+    }
+}
+
