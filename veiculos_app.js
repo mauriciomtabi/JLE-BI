@@ -1177,16 +1177,16 @@ function renderVeiculosTable() {
         const ufBadge    = r.uf ? `<span class="badge ${(r.uf).toLowerCase()}">${r.uf}</span>` : '-';
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td>${displayDate || '-'}</td>
-            <td><strong>${r.plate || '-'}</strong></td>
-            <td>${r.model  || '-'}</td>
-            <td>${r.driver || '-'}</td>
-            <td>${ufBadge}</td>
-            <td class="text-right"><strong>${fmtBRL(r.value || 0)}</strong></td>
-            <td class="text-right">${r.liters !== null && r.liters !== undefined ? r.liters.toLocaleString('pt-BR', { minimumFractionDigits: 1 }) + ' L' : '-'}</td>
-            <td class="text-right">${r.vlLiter !== null && r.vlLiter !== undefined ? fmtBRL(r.vlLiter) : '-'}</td>
-            <td>${r.fuel || '-'}</td>
-            <td class="text-right">${r.km !== null && r.km !== undefined ? r.km.toLocaleString('pt-BR') : '-'}</td>
+            <td data-label="Data Transação">${displayDate || '-'}</td>
+            <td data-label="Placa"><strong>${r.plate || '-'}</strong></td>
+            <td data-label="Modelo">${r.model  || '-'}</td>
+            <td data-label="Motorista">${r.driver || '-'}</td>
+            <td data-label="UF">${ufBadge}</td>
+            <td data-label="Valor" class="text-right"><strong>${fmtBRL(r.value || 0)}</strong></td>
+            <td data-label="Litros" class="text-right">${r.liters !== null && r.liters !== undefined ? r.liters.toLocaleString('pt-BR', { minimumFractionDigits: 1 }) + ' L' : '-'}</td>
+            <td data-label="Preço/L" class="text-right">${r.vlLiter !== null && r.vlLiter !== undefined ? fmtBRL(r.vlLiter) : '-'}</td>
+            <td data-label="Combustível">${r.fuel || '-'}</td>
+            <td data-label="Km" class="text-right">${r.km !== null && r.km !== undefined ? r.km.toLocaleString('pt-BR') : '-'}</td>
         `;
         tbody.appendChild(tr);
     });

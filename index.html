@@ -43,7 +43,7 @@
     <script src="supabase_config.js"></script>
     <!-- Local Stylesheet -->
     <link rel="stylesheet" href="styles.css?v=2.1.5">
-    <link rel="stylesheet" href="veiculos_styles.css?v=3.37">
+    <link rel="stylesheet" href="veiculos_styles.css?v=3.38">
 </head>
 <body>
 
@@ -428,7 +428,7 @@
         <!-- VIEW 5: VEHICLES FUELING DASHBOARD -->
         <div id="view-veiculos-container" class="view-panel" style="display: none;">
             <!-- Horizontal Filter Panel -->
-            <section class="filter-bar-veiculos">
+            <section class="filter-bar-veiculos" id="veiculos-filters-container">
                 <div class="filter-group">
                     <label for="filter-veiculos-month">Competência / Mês</label>
                     <select id="filter-veiculos-month" onchange="applyVeiculosFilters()">
@@ -572,7 +572,7 @@
                     </div>
 
                     <!-- Top 3 Motoristas e Veículos com maior consumo -->
-                    <div class="chart-card">
+                    <div class="chart-card top-consumos-card">
                         <div class="chart-header">
                             <div class="chart-title">
                                 <h2>Maiores Consumos (Top 3)</h2>
@@ -923,7 +923,7 @@
     <script src="data.js"></script>
 
     <script src="veiculos_data.js?v=3.35"></script>
-    <script src="veiculos_app.js?v=3.37"></script>
+    <script src="veiculos_app.js?v=3.38"></script>
 
     <!-- Logica de UI Autônoma (Sem Dependências de CDNs) -->
     <script>
@@ -1889,6 +1889,15 @@
             
             const mobileToggleBtn = document.getElementById('mobile-filter-toggle');
             
+            // Fechar filtros mobile ao trocar de tela
+            const finFilters = document.getElementById('filters-container');
+            if (finFilters) finFilters.classList.remove('mobile-expanded');
+            const veiFilters = document.getElementById('veiculos-filters-container');
+            if (veiFilters) veiFilters.classList.remove('mobile-expanded');
+            if (mobileToggleBtn) {
+                mobileToggleBtn.innerHTML = '<i class="fa-solid fa-filter"></i> <span>Mostrar Filtros</span>';
+            }
+
             if (viewName === 'admin') {
                 document.getElementById('filters-container').style.display = 'none';
                 if (mobileToggleBtn) mobileToggleBtn.style.display = 'none';
@@ -1897,7 +1906,7 @@
                 loadAdminPanel();
             } else if (viewName === 'veiculos') {
                 document.getElementById('filters-container').style.display = 'none';
-                if (mobileToggleBtn) mobileToggleBtn.style.display = 'none';
+                if (mobileToggleBtn) mobileToggleBtn.style.display = '';
                 document.getElementById('view-title').innerText = 'Dashboard de Abastecimento';
                 if (!veiculosDataLoaded) {
                     initVeiculos();
@@ -3884,8 +3893,10 @@
 
         // Lógica de Filtros Mobile (Expandir/Recolher)
         function toggleMobileFilters() {
-            const filterBar = document.getElementById('filters-container');
+            const containerId = (activeView === 'veiculos') ? 'veiculos-filters-container' : 'filters-container';
+            const filterBar = document.getElementById(containerId);
             const toggleBtn = document.getElementById('mobile-filter-toggle');
+            if (!filterBar) return;
             if (filterBar.classList.contains('mobile-expanded')) {
                 filterBar.classList.remove('mobile-expanded');
                 toggleBtn.innerHTML = '<i class="fa-solid fa-filter"></i> <span>Mostrar Filtros</span>';
