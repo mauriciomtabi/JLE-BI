@@ -43,7 +43,7 @@
     <script src="supabase_config.js"></script>
     <!-- Local Stylesheet -->
     <link rel="stylesheet" href="styles.css?v=2.1.5">
-    <link rel="stylesheet" href="veiculos_styles.css?v=3.35">
+    <link rel="stylesheet" href="veiculos_styles.css?v=3.36">
 </head>
 <body>
 
@@ -748,6 +748,10 @@
                             <input type="email" id="modal-user-email" placeholder="usuario@jletelecom.com.br">
                         </div>
                         <div class="filter-group">
+                            <label id="modal-user-password-label">Senha de acesso</label>
+                            <input type="password" id="modal-user-password" placeholder="Digite a senha">
+                        </div>
+                        <div class="filter-group">
                             <label>Perfil de acesso</label>
                             <select id="modal-user-is-admin">
                                 <option value="false">Usuário Padrão</option>
@@ -918,7 +922,7 @@
     <script src="data.js"></script>
 
     <script src="veiculos_data.js?v=3.35"></script>
-    <script src="veiculos_app.js?v=3.35"></script>
+    <script src="veiculos_app.js?v=3.36"></script>
 
     <!-- Logica de UI Autônoma (Sem Dependências de CDNs) -->
     <script>
@@ -2017,6 +2021,9 @@
             document.getElementById('modal-user-title').innerText = 'Adicionar Usuário';
             document.getElementById('modal-user-email').value = '';
             document.getElementById('modal-user-email').disabled = false;
+            document.getElementById('modal-user-password').value = '';
+            document.getElementById('modal-user-password').placeholder = 'Senha de no mínimo 6 caracteres';
+            document.getElementById('modal-user-password-label').innerText = 'Senha de acesso';
             document.getElementById('modal-user-is-admin').value = 'false';
             renderPageCheckboxes('modal-pages-list', ['dashboard', 'transactions']);
             document.getElementById('user-permission-modal').classList.add('active');
@@ -2027,6 +2034,9 @@
             document.getElementById('modal-user-title').innerText = 'Editar Permissões';
             document.getElementById('modal-user-email').value = userData.email;
             document.getElementById('modal-user-email').disabled = true;
+            document.getElementById('modal-user-password').value = '';
+            document.getElementById('modal-user-password').placeholder = 'Deixe em branco para manter a atual';
+            document.getElementById('modal-user-password-label').innerText = 'Nova senha (opcional)';
             document.getElementById('modal-user-is-admin').value = userData.is_admin ? 'true' : 'false';
             const pages = userData.is_admin ? PAGES_CATALOG.filter(p => !p.disabled).map(p => p.id) : (userData.allowed_pages || []);
             renderPageCheckboxes('modal-pages-list', pages);
@@ -2042,6 +2052,7 @@
         async function saveUserPermission() {
             if (!supabaseClient || !currentUserIsAdmin) return;
             const email = editingEmail || document.getElementById('modal-user-email').value.trim();
+            const password = document.getElementById('modal-user-password').value;
             const isAdmin = document.getElementById('modal-user-is-admin').value === 'true';
             const pages = isAdmin ? PAGES_CATALOG.filter(p => !p.disabled).map(p => p.id) : getCheckedPages('modal-pages-list');
 
@@ -2050,28 +2061,66 @@
                 return;
             }
 
-            const { error } = await supabaseClient
-                .from('bi_permissions')
-                .upsert({ email, is_admin: isAdmin, allowed_pages: pages, updated_at: new Date().toISOString() });
-
-            if (error) {
-                alert('Erro ao salvar: ' + error.message);
+            // Se for novo usuário, senha é obrigatória (mínimo 6 caracteres)
+            if (!editingEmail) {
+                if (!password || password.length < 6) {
+                    alert('Para novos usuários, a senha é obrigatória e deve conter pelo menos 6 caracteres.');
+                    return;
+                }
             } else {
-                document.getElementById('user-permission-modal').classList.remove('active');
-                showAdminToast('Permissões salvas com sucesso!');
-                loadAdminPanel();
+                // Se for edição, e a senha for digitada, deve ter pelo menos 6 caracteres
+                if (password && password.length < 6) {
+                    alert('A nova senha deve conter pelo menos 6 caracteres.');
+                    return;
+                }
+            }
+
+            // Exibir loading no botão
+            const saveBtn = document.querySelector('#user-permission-modal .admin-save-btn');
+            const originalHtml = saveBtn.innerHTML;
+            saveBtn.disabled = true;
+            saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Salvando...';
+
+            const fullName = email.split('@')[0].split('.').map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
+
+            try {
+                const { data, error } = await supabaseClient.rpc('create_or_update_user_admin', {
+                    new_email: email,
+                    new_password: password || '', // opcional na edição se vazio
+                    full_name: fullName,
+                    is_admin_user: isAdmin,
+                    allowed_pages: pages
+                });
+
+                if (error) {
+                    alert('Erro ao salvar usuário: ' + error.message);
+                } else {
+                    document.getElementById('user-permission-modal').classList.remove('active');
+                    showAdminToast('Usuário e permissões salvos com sucesso!');
+                    loadAdminPanel();
+                }
+            } catch (err) {
+                alert('Erro ao processar: ' + err.message);
+            } finally {
+                saveBtn.disabled = false;
+                saveBtn.innerHTML = originalHtml;
             }
         }
 
         async function deleteUserPermission(email) {
             if (!supabaseClient || !currentUserIsAdmin) return;
-            if (!confirm(`Remover acesso de ${email}?`)) return;
-            const { error } = await supabaseClient.from('bi_permissions').delete().eq('email', email);
-            if (error) {
-                alert('Erro ao remover: ' + error.message);
-            } else {
-                showAdminToast('Acesso removido com sucesso!');
-                loadAdminPanel();
+            if (!confirm(`Remover acesso de ${email} e excluir conta de autenticação?`)) return;
+            
+            try {
+                const { error } = await supabaseClient.rpc('delete_user_admin', { user_email: email });
+                if (error) {
+                    alert('Erro ao remover: ' + error.message);
+                } else {
+                    showAdminToast('Usuário e acesso removidos com sucesso!');
+                    loadAdminPanel();
+                }
+            } catch (err) {
+                alert('Erro ao remover: ' + err.message);
             }
         }
 

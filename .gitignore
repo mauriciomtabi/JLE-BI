@@ -9,3 +9,9 @@ origem_dados_content.txt
 origem_dados_content_utf8.txt
 /scratch/
 temp_read.xlsx
+
+# Node.js and local server config
+node_modules/
+package.json
+package-lock.json
+temp_deployed.html
