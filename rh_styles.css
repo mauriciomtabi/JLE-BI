@@ -81,9 +81,8 @@
 }
 
 #view-rh-container .logo-container {
-    display: none; /* Não precisamos do logo de sub-sidebar, já temos o do BI JLE */
+    display: none;
 }
-
 #view-rh-container .roster-section {
     flex: 1;
     display: flex;
@@ -92,7 +91,7 @@
     padding: 20px 16px;
 }
 
-#view-rh-container .roster-.rh-controls-bar {
+#view-rh-container .roster-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -305,7 +304,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100%;
     overflow: hidden;
     position: relative;
 }
@@ -321,19 +320,19 @@
     flex-shrink: 0;
 }
 
-#view-rh-container ..rh-controls-bar-title-area h1 {
+#view-rh-container .rh-header-title-area h1 {
     font-size: 18px;
     font-weight: 700;
     letter-spacing: -0.2px;
 }
 
-#view-rh-container ..rh-controls-bar-title-area p {
+#view-rh-container .rh-header-title-area p {
     font-size: 11px;
     color: var(--text-secondary);
     margin-top: 2px;
 }
 
-#view-rh-container ..rh-controls-bar-controls {
+#view-rh-container .rh-header-controls {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -792,7 +791,7 @@
     right: 0;
 }
 
-#view-rh-container .slide-over-.rh-controls-bar {
+#view-rh-container .slide-over-header {
     padding: 20px 24px;
     border-bottom: 1px solid var(--border-color);
     display: flex;
@@ -979,7 +978,7 @@
     transform: translateY(0);
 }
 
-#view-rh-container .modal-.rh-controls-bar {
+.rh-modal-header {
     padding: 20px 24px;
     border-bottom: 1px solid var(--border-color);
     display: flex;
@@ -987,7 +986,7 @@
     align-items: center;
 }
 
-#view-rh-container .modal-.rh-controls-bar h2 {
+.rh-modal-header h2 {
     font-size: 16px;
     font-weight: 700;
 }
