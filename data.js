@@ -1,5 +1,5 @@
 ﻿window.CASH_FLOW_DATA = {
-    "generated_at":  "2026-06-11 13:02:55",
+    "generated_at":  "2026-06-11 14:06:37",
     "categories_origin":  {
                               "entradas":  [
 
@@ -104185,6 +104185,38 @@
                              "descricao":  "Pagamento alimentação e auxílio combustível Juan fns",
                              "valor_nominal":  888.61,
                              "valor_liquido":  -888.61,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "JUN_2026 CONFIANÇA_42",
+                             "banco":  "Sicoob Confiança",
+                             "aba":  "JUN_2026 CONFIANÇA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "JUNHO/2026",
+                             "data":  "2026-06-09",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Alimentação",
+                             "descricao":  "SUPERMERCADO DOM PEDRITO",
+                             "valor_nominal":  75.39,
+                             "valor_liquido":  -75.39,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "JUN_2026 CONFIANÇA_43",
+                             "banco":  "Sicoob Confiança",
+                             "aba":  "JUN_2026 CONFIANÇA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "JUNHO/2026",
+                             "data":  "2026-06-09",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Material utilizado em serviços",
+                             "descricao":  "Pagamento fio Feb Porto Alegre",
+                             "valor_nominal":  720,
+                             "valor_liquido":  -720,
                              "meio_pagamento":  "Pix",
                              "is_transfer":  false
                          },
