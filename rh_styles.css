@@ -391,76 +391,122 @@
     box-shadow: var(--shadow-glow);
 }
 
-/* Barra de Filtros e Filtros Avançados */
-#view-rh-container .rh-filter-bar {
-    background-color: var(--bg-card);
+/* Barra de Filtros no Painel do Roster (Sidebar) */
+#view-rh-container .roster-filters-container {
+    padding: 10px 4px 14px 4px;
     border-bottom: 1px solid var(--border-color);
-    padding: 12px 24px;
+    margin-bottom: 12px;
     display: flex;
-    align-items: center;
-    gap: 14px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 8px;
     flex-shrink: 0;
 }
 
-#view-rh-container .filter-group {
+#view-rh-container .roster-filter-row {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+}
+
+#view-rh-container .roster-filter-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+#view-rh-container .roster-filter-item label {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    letter-spacing: 0.3px;
+}
+
+#view-rh-container .roster-filter-item select {
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 5px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    outline: none;
+    cursor: pointer;
+    width: 100%;
+    text-overflow: ellipsis;
+}
+
+#view-rh-container .roster-filter-item select:focus {
+    border-color: var(--color-primary);
+}
+
+#view-rh-container .roster-filter-item.align-end {
+    justify-content: flex-end;
+}
+
+#view-rh-container .btn-clear-roster-filters {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--color-danger);
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    height: 25px;
+}
+
+#view-rh-container .btn-clear-roster-filters:hover {
+    background-color: rgba(231, 76, 60, 0.1);
+    border-color: var(--color-danger);
+}
+
+/* Métricas Rápidas Compactas (KPIs estilo Capsule Pills) */
+#view-rh-container .rh-metrics-row {
+    display: flex;
+    gap: 8px;
+    padding: 10px 24px;
+    flex-shrink: 0;
+    overflow-x: auto;
+    background-color: rgba(11, 19, 26, 0.4);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Custom Scrollbar for Metrics Row */
+#view-rh-container .rh-metrics-row::-webkit-scrollbar {
+    height: 3px;
+}
+#view-rh-container .rh-metrics-row::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 1.5px;
+}
+
+#view-rh-container .metric-card {
+    flex: 0 0 auto;
+    background-color: rgba(26, 38, 48, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 4px 12px;
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-#view-rh-container .filter-group label {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--text-secondary);
-}
-
-#view-rh-container .filter-group select {
-    background-color: var(--bg-input);
-    border: 1px solid var(--border-color);
-    color: var(--text-primary);
-    padding: 6px 10px;
-    border-radius: 6px;
-    font-size: 12px;
-    outline: none;
-    cursor: pointer;
-}
-
-#view-rh-container .filter-group select:focus {
-    border-color: var(--color-primary);
-}
-
-/* Métricas Rápidas (KPIs) */
-#view-rh-container .rh-metrics-row {
-    display: flex;
-    gap: 12px;
-    padding: 12px 24px 0 24px;
-    flex-shrink: 0;
-    overflow-x: auto;
-}
-
-#view-rh-container .metric-card {
-    flex: 1;
-    min-width: 140px;
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 10px 14px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
 #view-rh-container .metric-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 6px;
-    background-color: rgba(255, 255, 255, 0.03);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.05);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
+    font-size: 10px;
     color: var(--color-primary-light);
 }
 
@@ -470,20 +516,22 @@
 
 #view-rh-container .metric-info {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 6px;
 }
 
 #view-rh-container .metric-value {
-    font-size: 18px;
+    font-size: 13px;
     font-weight: 700;
 }
 
 #view-rh-container .metric-label {
-    font-size: 10px;
+    font-size: 9px;
     text-transform: uppercase;
     color: var(--text-secondary);
-    font-weight: 600;
-    margin-top: 1px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
 }
 
 /* Canvas da Planta Baixa (SVG) */

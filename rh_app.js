@@ -1461,10 +1461,20 @@ function renderActiveLayoutInfo() {
 }
 
 function atualizarControleDesignToolbar() {
+    const metricsRow = document.querySelector('.rh-metrics-row');
+    const btnSave = document.getElementById('btn-save-layout');
+    const btnCreate = document.getElementById('btn-create-layout');
+    
     if (state.isDesignerMode) {
         designerToolbar.style.display = 'flex';
+        if (metricsRow) metricsRow.style.display = 'none';
+        if (btnSave) btnSave.style.display = 'flex';
+        if (btnCreate) btnCreate.style.display = 'flex';
     } else {
         designerToolbar.style.display = 'none';
+        if (metricsRow) metricsRow.style.display = 'flex';
+        if (btnSave) btnSave.style.display = 'none';
+        if (btnCreate) btnCreate.style.display = 'none';
     }
 }
 

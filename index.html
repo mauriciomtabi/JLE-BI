@@ -756,6 +756,47 @@
                             <i class="fa-solid fa-magnifying-glass"></i>
                             <input type="text" id="roster-search" placeholder="Pesquisar funcionário...">
                         </div>
+
+                        <!-- Filtros do Roster (Painel Lateral) -->
+                        <div class="roster-filters-container">
+                            <div class="roster-filter-row">
+                                <div class="roster-filter-item">
+                                    <label>Setor</label>
+                                    <select id="filter-sector">
+                                        <option value="all">Todos</option>
+                                    </select>
+                                </div>
+                                <div class="roster-filter-item">
+                                    <label>Turno</label>
+                                    <select id="filter-shift">
+                                        <option value="all">Todos</option>
+                                        <option value="Manhã">Manhã</option>
+                                        <option value="Tarde">Tarde</option>
+                                        <option value="Noite">Noite</option>
+                                        <option value="Integral">Integral</option>
+                                        <option value="Flexível">Flexível</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="roster-filter-row">
+                                <div class="roster-filter-item">
+                                    <label>Equipamento</label>
+                                    <select id="filter-equipment">
+                                        <option value="all">Qualquer</option>
+                                        <option value="Computador">Computador</option>
+                                        <option value="Monitor">Monitor</option>
+                                        <option value="Headset">Headset</option>
+                                        <option value="Telefone IP">Telefone IP</option>
+                                        <option value="Teclado/Mouse">Teclado/Mouse</option>
+                                    </select>
+                                </div>
+                                <div class="roster-filter-item align-end">
+                                    <button class="btn-clear-roster-filters" id="btn-clear-filters" title="Limpar Filtros">
+                                        <i class="fa-solid fa-filter-circle-xmark"></i> Limpar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                         
                         <!-- Lista de Funcionários sem mesa -->
                         <div class="roster-list" id="roster-list">
@@ -859,11 +900,11 @@
                                 <option value="default">Layout Padrão (Local)</option>
                             </select>
                             
-                            <button class="btn-sidebar-action" id="btn-save-layout" style="width: auto; padding: 8px 16px;">
+                            <button class="btn-sidebar-action" id="btn-save-layout" style="width: auto; padding: 8px 16px; display: none;">
                                 <i class="fa-solid fa-cloud-arrow-up"></i> Salvar Layout
                             </button>
                             
-                            <button class="btn-sidebar-action" id="btn-create-layout" style="width: auto; padding: 8px 16px;">
+                            <button class="btn-sidebar-action" id="btn-create-layout" style="width: auto; padding: 8px 16px; display: none;">
                                 <i class="fa-solid fa-plus"></i> Novo Layout
                             </button>
 
@@ -878,46 +919,6 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- FILTROS LOCAL -->
-                    <section class="rh-filter-bar">
-                        <div class="filter-group">
-                            <label>Setor</label>
-                            <select id="filter-sector">
-                                <option value="all">Todos os Setores</option>
-                            </select>
-                        </div>
-                        
-                        <div class="filter-group">
-                            <label>Turno</label>
-                            <select id="filter-shift">
-                                <option value="all">Todos os Turnos</option>
-                                <option value="Manhã">Manhã</option>
-                                <option value="Tarde">Tarde</option>
-                                <option value="Noite">Noite</option>
-                                <option value="Integral">Integral</option>
-                                <option value="Flexível">Flexível</option>
-                            </select>
-                        </div>
-                        
-                        <div class="filter-group">
-                            <label>Equipamento</label>
-                            <select id="filter-equipment">
-                                <option value="all">Qualquer Equipamento</option>
-                                <option value="Computador">Computador (PC/Notebook)</option>
-                                <option value="Monitor">Monitor</option>
-                                <option value="Headset">Headset</option>
-                                <option value="Telefone IP">Telefone IP</option>
-                                <option value="Teclado/Mouse">Teclado/Mouse</option>
-                            </select>
-                        </div>
-
-                        <div class="filter-group" style="margin-left: auto;">
-                            <button class="btn-sidebar-action" id="btn-clear-filters" style="padding: 6px 12px; font-size: 11px;">
-                                <i class="fa-solid fa-filter-circle-xmark"></i> Limpar Filtros
-                            </button>
-                        </div>
-                    </section>
                     
                     <!-- METRICAS KPI -->
                     <section class="rh-metrics-row">
