@@ -559,8 +559,8 @@
 
 /* Elementos do SVG */
 #view-rh-container .svg-wall {
-    stroke: #3b5066;
-    stroke-width: 3;
+    stroke: #2c3e50;
+    stroke-width: 8px;
     stroke-linecap: round;
     stroke-linejoin: round;
     fill: none;
@@ -1326,7 +1326,11 @@
 }
 
 /* Selected Element Highlights */
-#view-rh-container .svg-wall.selected,
+#view-rh-container .svg-wall.selected {
+    stroke: #0077aa !important;
+    filter: drop-shadow(0 0 5px #0077aa);
+    stroke-width: 8px !important;
+}
 #view-rh-container .svg-partition.selected {
     stroke: var(--color-secondary) !important;
     filter: drop-shadow(0 0 5px var(--color-secondary));

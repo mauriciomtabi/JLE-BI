@@ -834,17 +834,17 @@
                                     <i class="fa-solid fa-pen-ruler"></i>
                                     <span>Desenhar Parede</span>
                                 </button>
-                                <button class="palette-btn" id="tool-draw-partition" onclick="setDesignerTool('draw-partition')">
+                                 <button class="palette-btn" id="tool-draw-partition" onclick="setDesignerTool('draw-partition')" style="display: none;">
                                     <i class="fa-solid fa-border-none"></i>
                                     <span>Desenhar Divisória</span>
                                 </button>
-                                <button class="palette-btn" id="tool-draw-zone" onclick="setDesignerTool('draw-zone')">
+                                <button class="palette-btn" id="tool-draw-zone" onclick="setDesignerTool('draw-zone')" style="display: none;">
                                     <i class="fa-solid fa-vector-square"></i>
                                     <span>Desenhar Área (Setor)</span>
                                 </button>
                             </div>
                             
-                            <div class="palette-group">
+                            <div class="palette-group" style="display: none;">
                                 <div class="palette-group-title">Aberturas & Móveis</div>
                                 <button class="palette-btn" id="tool-add-door" onclick="setDesignerTool('add-door')">
                                     <i class="fa-solid fa-door-open"></i>
@@ -860,7 +860,7 @@
                                 </button>
                             </div>
                             
-                            <div class="palette-group">
+                            <div class="palette-group" style="display: none;">
                                 <div class="palette-group-title">Equipamentos & Copa</div>
                                 <button class="palette-btn" id="tool-add-printer" onclick="setDesignerTool('add-printer')">
                                     <i class="fa-solid fa-print"></i>
@@ -872,7 +872,7 @@
                                 </button>
                             </div>
 
-                            <div class="palette-group">
+                            <div class="palette-group" style="display: none;">
                                 <div class="palette-group-title">Banheiro</div>
                                 <button class="palette-btn" id="tool-add-toilet" onclick="setDesignerTool('add-toilet')">
                                     <i class="fa-solid fa-toilet"></i>
@@ -899,7 +899,7 @@
                         <div class="rh-header-controls">
                             <span id="active-layout-desc" style="display:none;"></span>
                             <!-- Seletor de Versão de Layout -->
-                            <select class="layout-selector" id="layout-selector">
+                            <select class="layout-selector" id="layout-selector" style="display: none;">
                                 <!-- Carregado do Supabase -->
                                 <option value="default">Layout Padrão (Local)</option>
                             </select>
@@ -925,7 +925,7 @@
                     </div>
                     
                     <!-- METRICAS KPI -->
-                    <section class="rh-metrics-row">
+                    <section class="rh-metrics-row" style="display: none;">
                         <div class="metric-card">
                             <div class="metric-icon"><i class="fa-solid fa-chair"></i></div>
                             <div class="metric-info">
@@ -970,7 +970,7 @@
                     <!-- CANVAS DO MAPA SVG -->
                     <section class="canvas-container">
                         <!-- SVG Canvas Interativo -->
-                        <svg id="office-svg" class="svg-canvas" viewBox="0 0 950 900" xmlns="http://www.w3.org/2000/svg">
+                        <svg id="office-svg" class="svg-canvas" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
                             <!-- Grupo com transformações de Pan e Zoom -->
                             <g id="pan-zoom-group">
                                 <!-- Imagem da Planta Original como fundo opcional -->
@@ -4548,5 +4548,8 @@
         </div>
     </div>
 <!-- Deploy trigger: 202606082053 -->
+
+    
+
 </body>
 </html>
