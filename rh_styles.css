@@ -1131,3 +1131,180 @@
 #view-rh-container .color-sector-6 { background-color: #1abc9c; } /* Administrativo */
 #view-rh-container .color-sector-7 { background-color: #e67e22; } /* Operações */
 #view-rh-container .color-sector-8 { background-color: #e84393; } /* Recursos Humanos */
+
+/* ==========================================================================
+   ELEMENTS PALETTE & CAD STYLES (MODO DESIGNER)
+   ========================================================================== */
+
+/* Designer Palette Container */
+#view-rh-container .designer-palette {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 20px 16px;
+    background-color: var(--bg-sidebar);
+}
+
+#view-rh-container .palette-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+#view-rh-container .palette-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-primary);
+}
+
+#view-rh-container .palette-groups-container {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-right: 4px;
+}
+
+/* Custom Scrollbar for Groups Container */
+#view-rh-container .palette-groups-container::-webkit-scrollbar {
+    width: 4px;
+}
+#view-rh-container .palette-groups-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+#view-rh-container .palette-groups-container::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 2px;
+}
+
+#view-rh-container .palette-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#view-rh-container .palette-group-title {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+}
+
+#view-rh-container .palette-btn {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.2s ease;
+    text-align: left;
+    outline: none;
+}
+
+#view-rh-container .palette-btn:hover {
+    background-color: var(--bg-hover);
+    border-color: var(--text-secondary);
+}
+
+#view-rh-container .palette-btn.active {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+}
+
+#view-rh-container .palette-btn i {
+    font-size: 14px;
+    width: 20px;
+    text-align: center;
+}
+
+#view-rh-container .designer-palette-help {
+    padding: 12px 14px;
+    border-radius: 8px;
+    background-color: rgba(230, 126, 34, 0.08);
+    border: 1px solid rgba(230, 126, 34, 0.15);
+    margin-top: 16px;
+}
+
+#view-rh-container .designer-palette-help p {
+    font-size: 11px;
+    color: var(--color-secondary-light);
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* CAD drawing guiding styles */
+#view-rh-container .svg-drawing-preview {
+    stroke-linecap: round;
+    opacity: 0.85;
+    pointer-events: none;
+}
+
+#view-rh-container .svg-wall.designer-editable,
+#view-rh-container .svg-partition.designer-editable,
+#view-rh-container .door-group.designer-editable,
+#view-rh-container .fixture-group.designer-editable,
+#view-rh-container .desk-group.designer-editable {
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+#view-rh-container .svg-wall.designer-editable:hover,
+#view-rh-container .svg-partition.designer-editable:hover {
+    stroke: var(--color-secondary-light) !important;
+    filter: drop-shadow(0 0 2px rgba(254, 202, 87, 0.5));
+}
+
+#view-rh-container .door-group.designer-editable:hover .svg-door,
+#view-rh-container .fixture-group.designer-editable:hover rect,
+#view-rh-container .fixture-group.designer-editable:hover ellipse,
+#view-rh-container .fixture-group.designer-editable:hover circle {
+    stroke: var(--color-secondary-light) !important;
+}
+
+/* Selected Element Highlights */
+#view-rh-container .svg-wall.selected,
+#view-rh-container .svg-partition.selected {
+    stroke: var(--color-secondary) !important;
+    filter: drop-shadow(0 0 5px var(--color-secondary));
+    stroke-width: 6px !important;
+}
+
+#view-rh-container .door-group.selected .svg-door {
+    stroke: var(--color-secondary) !important;
+    stroke-width: 3.5px !important;
+}
+
+#view-rh-container .door-group.selected path {
+    stroke: var(--color-secondary) !important;
+    stroke-width: 2.5px !important;
+}
+
+#view-rh-container .fixture-group.selected rect,
+#view-rh-container .fixture-group.selected ellipse,
+#view-rh-container .fixture-group.selected circle {
+    stroke: var(--color-secondary) !important;
+    stroke-width: 2px !important;
+    filter: drop-shadow(0 0 3px rgba(254, 202, 87, 0.4));
+}
+
+#view-rh-container .fixture-group.selected text {
+    fill: var(--color-secondary-light) !important;
+    font-weight: 700 !important;
+}
+

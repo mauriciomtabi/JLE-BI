@@ -745,7 +745,8 @@
                 
                 <!-- SIDEBAR ESQUERDA: Roster e Funcionários -->
                 <aside class="rh-sub-sidebar">
-                    <div class="roster-section">
+                    <!-- Painel do Roster (Modo Visualização) -->
+                    <div class="roster-section" id="rh-roster-panel">
                         <div class="roster-header">
                             <span class="roster-title">Sem Posição (Roster)</span>
                             <span class="roster-count" id="roster-count">0</span>
@@ -762,13 +763,86 @@
                         </div>
                     </div>
                     
-                    <div class="rh-sub-sidebar-footer">
+                    <div class="rh-sub-sidebar-footer" id="rh-roster-footer">
                         <button class="btn-sidebar-action primary" id="btn-add-employee-modal">
                             <i class="fa-solid fa-user-plus"></i> Novo Funcionário
                         </button>
                         <button class="btn-sidebar-action" id="btn-manage-sectors-modal">
                             <i class="fa-solid fa-layer-group"></i> Gerenciar Setores
                         </button>
+                    </div>
+
+                    <!-- Paleta de Elementos (Modo Designer) -->
+                    <div class="designer-palette" id="designer-element-palette" style="display: none;">
+                        <div class="palette-header">
+                            <span class="palette-title">Paleta de Elementos</span>
+                        </div>
+                        
+                        <div class="palette-groups-container">
+                            <div class="palette-group">
+                                <div class="palette-group-title">Ferramentas</div>
+                                <button class="palette-btn active" id="tool-select" onclick="setDesignerTool('select')">
+                                    <i class="fa-solid fa-arrow-pointer"></i>
+                                    <span>Ponteiro de Seleção</span>
+                                </button>
+                            </div>
+                            
+                            <div class="palette-group">
+                                <div class="palette-group-title">Estrutura (Estilo CAD)</div>
+                                <button class="palette-btn" id="tool-draw-wall" onclick="setDesignerTool('draw-wall')">
+                                    <i class="fa-solid fa-pen-ruler"></i>
+                                    <span>Desenhar Parede</span>
+                                </button>
+                                <button class="palette-btn" id="tool-draw-partition" onclick="setDesignerTool('draw-partition')">
+                                    <i class="fa-solid fa-border-none"></i>
+                                    <span>Desenhar Divisória</span>
+                                </button>
+                            </div>
+                            
+                            <div class="palette-group">
+                                <div class="palette-group-title">Aberturas & Móveis</div>
+                                <button class="palette-btn" id="tool-add-door" onclick="setDesignerTool('add-door')">
+                                    <i class="fa-solid fa-door-open"></i>
+                                    <span>Porta Swing</span>
+                                </button>
+                                <button class="palette-btn" id="tool-add-desk" onclick="setDesignerTool('add-desk')">
+                                    <i class="fa-solid fa-table"></i>
+                                    <span>Mesa de Trabalho</span>
+                                </button>
+                                <button class="palette-btn" id="tool-add-meeting-table" onclick="setDesignerTool('add-meeting-table')">
+                                    <i class="fa-solid fa-users-rectangle"></i>
+                                    <span>Mesa Reuniões</span>
+                                </button>
+                            </div>
+                            
+                            <div class="palette-group">
+                                <div class="palette-group-title">Equipamentos & Copa</div>
+                                <button class="palette-btn" id="tool-add-printer" onclick="setDesignerTool('add-printer')">
+                                    <i class="fa-solid fa-print"></i>
+                                    <span>Impressora</span>
+                                </button>
+                                <button class="palette-btn" id="tool-add-cafe" onclick="setDesignerTool('add-cafe')">
+                                    <i class="fa-solid fa-mug-hot"></i>
+                                    <span>Área de Café</span>
+                                </button>
+                            </div>
+
+                            <div class="palette-group">
+                                <div class="palette-group-title">Banheiro</div>
+                                <button class="palette-btn" id="tool-add-toilet" onclick="setDesignerTool('add-toilet')">
+                                    <i class="fa-solid fa-toilet"></i>
+                                    <span>Vaso Sanitário</span>
+                                </button>
+                                <button class="palette-btn" id="tool-add-sink" onclick="setDesignerTool('add-sink')">
+                                    <i class="fa-solid fa-faucet-drip"></i>
+                                    <span>Pia Sanitária</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="designer-palette-help">
+                            <p><strong>Dica de Desenho:</strong> Clique no mapa para iniciar a parede, mova o mouse e clique novamente. Segure <strong>SHIFT</strong> para diagonal livre.</p>
+                        </div>
                     </div>
                 </aside>
 
@@ -918,19 +992,17 @@
                         
                         <!-- Barra de Ferramentas de Design (Somente Modo Designer) -->
                         <div class="designer-toolbar" id="designer-toolbar" style="display: none;">
-                            <button class="btn-toolbar accent" id="btn-add-desk">
-                                <i class="fa-solid fa-plus"></i> Adicionar Mesa
-                            </button>
+                            <span id="selected-element-indicator" style="font-size: 11px; font-weight: 700; color: var(--color-secondary); text-transform: uppercase; letter-spacing: 0.5px;">Selecione um item</span>
                             <div class="designer-toolbar-divider"></div>
                             <button class="btn-toolbar" id="btn-rotate-desk">
-                                <i class="fa-solid fa-rotate-right"></i> Rotacionar (90°)
+                                <i class="fa-solid fa-rotate-right"></i> Rotacionar
                             </button>
                             <button class="btn-toolbar" id="btn-delete-desk" style="color: var(--color-danger);">
-                                <i class="fa-solid fa-trash-can"></i> Remover Mesa
+                                <i class="fa-solid fa-trash-can"></i> Excluir
                             </button>
                             <div class="designer-toolbar-divider"></div>
-                            <span style="font-size: 10px; color: var(--text-secondary); max-width: 250px; line-height: 1.2;">
-                                Dica: Arraste para mover as mesas. Clique nelas para selecionar.
+                            <span id="designer-toolbar-hint" style="font-size: 10px; color: var(--text-secondary); max-width: 320px; line-height: 1.2;">
+                                Dica: Arraste para mover. Clique em "Desenhar Parede" para iniciar o desenho CAD.
                             </span>
                         </div>
                         

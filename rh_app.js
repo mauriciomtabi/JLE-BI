@@ -121,14 +121,73 @@ const DEFAULT_DESKS = [
 ];
 
 // --- ESTADO GLOBAL DA APLICAÇÃO ---
+// --- DADOS ESTRUTURAIS PADRÃO DE SEED (FALLBACKS) ---
+const DEFAULT_WALLS = [
+    { id: "wall-1", type: "wall", x1: 80, y1: 200, x2: 80, y2: 50 },
+    { id: "wall-2", type: "wall", x1: 80, y1: 50, x2: 430, y2: 50 },
+    { id: "wall-3", type: "wall", x1: 430, y1: 50, x2: 430, y2: 200 },
+    { id: "wall-4", type: "wall", x1: 430, y1: 200, x2: 900, y2: 200 },
+    { id: "wall-5", type: "wall", x1: 900, y1: 200, x2: 900, y2: 880 },
+    { id: "wall-6", type: "wall", x1: 900, y1: 880, x2: 430, y2: 880 },
+    { id: "wall-7", type: "wall", x1: 430, y1: 880, x2: 430, y2: 730 },
+    { id: "wall-8", type: "wall", x1: 430, y1: 730, x2: 75, y2: 730 },
+    { id: "wall-9", type: "wall", x1: 75, y1: 730, x2: 75, y2: 250 },
+    // Partition Walls
+    { id: "wall-10", type: "wall", x1: 135, y1: 50, x2: 135, y2: 200 },
+    { id: "wall-11", type: "wall", x1: 200, y1: 50, x2: 200, y2: 150 },
+    { id: "wall-12", type: "wall", x1: 260, y1: 50, x2: 260, y2: 150 },
+    { id: "wall-13", type: "wall", x1: 320, y1: 50, x2: 320, y2: 150 },
+    { id: "wall-14", type: "wall", x1: 200, y1: 150, x2: 430, y2: 150 },
+    { id: "wall-15", type: "wall", x1: 310, y1: 200, x2: 310, y2: 300 },
+    { id: "wall-16", type: "wall", x1: 310, y1: 300, x2: 430, y2: 300 },
+    { id: "wall-17", type: "wall", x1: 430, y1: 630, x2: 550, y2: 630 },
+    { id: "wall-18", type: "wall", x1: 430, y1: 680, x2: 550, y2: 680 },
+    { id: "wall-19", type: "wall", x1: 430, y1: 730, x2: 550, y2: 730 },
+    { id: "wall-20", type: "wall", x1: 550, y1: 630, x2: 550, y2: 730 },
+    { id: "wall-21", type: "wall", x1: 660, y1: 730, x2: 660, y2: 880 }
+];
+
+const DEFAULT_PARTITIONS = [
+    { id: "part-1", type: "partition", x1: 660, y1: 350, x2: 660, y2: 730 },
+    { id: "part-2", type: "partition", x1: 660, y1: 350, x2: 900, y2: 350 },
+    { id: "part-3", type: "partition", x1: 660, y1: 450, x2: 900, y2: 450 },
+    { id: "part-4", type: "partition", x1: 660, y1: 550, x2: 900, y2: 550 },
+    { id: "part-5", type: "partition", x1: 660, y1: 650, x2: 900, y2: 650 },
+    { id: "part-6", type: "partition", x1: 660, y1: 730, x2: 900, y2: 730 }
+];
+
+const DEFAULT_DOORS = [
+    { id: "door-1", type: "door", x: 135, y: 200, rotation: 90 },
+    { id: "door-2", type: "door", x: 430, y: 200, rotation: 0 },
+    { id: "door-3", type: "door", x: 500, y: 730, rotation: 180 },
+    { id: "door-4", type: "door", x: 500, y: 680, rotation: 180 }
+];
+
+const DEFAULT_FIXTURES = [
+    { id: "fix-toilet-1", type: "toilet", x: 490, y: 655, rotation: 0 },
+    { id: "fix-toilet-2", type: "toilet", x: 490, y: 705, rotation: 0 },
+    { id: "fix-sink-1", type: "sink", x: 535, y: 655, rotation: -90 },
+    { id: "fix-sink-2", type: "sink", x: 535, y: 705, rotation: -90 },
+    { id: "fix-cafe", type: "cafe", x: 530, y: 832, rotation: 0, width: 180, height: 65, name: "Área de Café / Copa" },
+    { id: "fix-table", type: "table", x: 800, y: 835, rotation: 0, width: 120, height: 50, name: "Mesa de Reuniões" },
+    { id: "fix-printer-1", type: "printer", x: 500, y: 280, rotation: 0 },
+    { id: "fix-printer-2", type: "printer", x: 690, y: 380, rotation: 90 }
+];
+
 let state = {
     layoutId: 'default',
     layoutName: 'Layout Padrão (Local)',
     sectors: [...DEFAULT_SECTORS],
     desks: [...DEFAULT_DESKS],
     employees: [...DEFAULT_EMPLOYEES],
+    walls: [...DEFAULT_WALLS],
+    partitions: [...DEFAULT_PARTITIONS],
+    doors: [...DEFAULT_DOORS],
+    fixtures: [...DEFAULT_FIXTURES],
     isDesignerMode: false,
-    selectedDeskId: null,
+    selectedDeskId: null, // ID do elemento selecionado (mesa, parede, etc.)
+    activeTool: 'select', // select, draw-wall, draw-partition, add-door, add-desk, add-meeting-table, add-printer, add-cafe, add-toilet, add-sink
+    drawingStart: null, // { x, y } para desenho CAD
     activeFilters: {
         sector: 'all',
         shift: 'all',
@@ -165,7 +224,6 @@ const modalLayout = document.getElementById('modal-layout');
 
 // --- INICIALIZAÇÃO SEGURA DA APLICAÇÃO ---
 async function iniciarAplicacao() {
-    inicializarParedesEstaticas();
     configurarEventosPanZoom();
     configurarDragAndDrop();
     configurarEventosInterface();
@@ -196,6 +254,7 @@ function renderApp() {
     renderKPIs();
     renderFiltrosDropdowns();
     renderRosterList();
+    renderStructuralElements(); // Renderiza dinamicamente as estruturas físicas (paredes, portas, divisórias)
     renderDesks();
     renderSectorsBackground();
     renderLegend();
@@ -203,163 +262,311 @@ function renderApp() {
     atualizarControleDesignToolbar();
 }
 
-// --- DESENHO DA PLANTA BAIXA ESTÁTICA (Walls & Layout) ---
-function inicializarParedesEstaticas() {
+let selectedElementType = null; // 'desk', 'wall', 'partition', 'door', 'fixture'
+window.selecionarElemento = function(id, label) {
+    state.selectedDeskId = id;
+    
+    if (!id) {
+        selectedElementType = null;
+        if (state.isDesignerMode) {
+            const indicator = document.getElementById('selected-element-indicator');
+            if (indicator) indicator.textContent = 'Selecione um item';
+        }
+        return;
+    }
+    
+    // Identifica o tipo do elemento
+    if (state.desks.some(d => d.id === id)) {
+        selectedElementType = 'desk';
+    } else if (state.walls.some(w => w.id === id)) {
+        selectedElementType = 'wall';
+    } else if (state.partitions.some(p => p.id === id)) {
+        selectedElementType = 'partition';
+    } else if (state.doors.some(d => d.id === id)) {
+        selectedElementType = 'door';
+    } else if (state.fixtures.some(f => f.id === id)) {
+        selectedElementType = 'fixture';
+    } else {
+        selectedElementType = null;
+    }
+
+    if (state.isDesignerMode) {
+        const indicator = document.getElementById('selected-element-indicator');
+        if (indicator) {
+            indicator.textContent = `${label} (${id})`;
+        }
+        renderStructuralElements();
+        renderDesks();
+    } else {
+        // Modo Visualização: abre slide-over para mesas
+        if (selectedElementType === 'desk') {
+            selecionarMesa(id);
+        } else {
+            state.selectedDeskId = null;
+            slideOver.classList.remove('open');
+            renderStructuralElements();
+            renderDesks();
+        }
+    }
+};
+
+// --- MOTOR DE RENDERIZAÇÃO VETORIAL DINÂMICA ---
+function renderStructuralElements() {
     const wallsGroup = document.getElementById('svg-walls-static');
-    wallsGroup.innerHTML = ''; // Limpa antes
+    if (!wallsGroup) return;
+    wallsGroup.innerHTML = ''; // Limpa tudo antes de re-desenhar
 
-    // DEFINIÇÕES DAS PAREDES DO ESCRITÓRIO (Baseado em input_file_0.png)
-    // Coordenadas aproximadas para recriar fielmente a estrutura física
-    
-    // 1. Paredes Externas (Contorno Principal)
-    const outerWalls = [
-        // Top-left wing
-        { x1: 80, y1: 200, x2: 80, y2: 50 },
-        { x1: 80, y1: 50, x2: 430, y2: 50 },
-        { x1: 430, y1: 50, x2: 430, y2: 200 },
-        // Main block top
-        { x1: 430, y1: 200, x2: 900, y2: 200 },
-        // Right vertical boundary
-        { x1: 900, y1: 200, x2: 900, y2: 880 },
-        // Bottom boundary (Diretoria / Copa)
-        { x1: 900, y1: 880, x2: 430, y2: 880 },
-        { x1: 430, y1: 880, x2: 430, y2: 730 },
-        { x1: 430, y1: 730, x2: 75, y2: 730 },
-        { x1: 75, y1: 730, x2: 75, y2: 250 } // Entry boundary (dashed on drawing)
-    ];
-
-    // 2. Paredes Internas (Divisórias)
-    const partitionWalls = [
-        // Top-left vertical separation (desk 1/2 from desk 3/4)
-        { x1: 135, y1: 50, x2: 135, y2: 200 },
-        { x1: 200, y1: 50, x2: 200, y2: 150 },
-        { x1: 260, y1: 50, x2: 260, y2: 150 },
-        { x1: 320, y1: 50, x2: 320, y2: 150 },
-        { x1: 200, y1: 150, x2: 430, y2: 150 },
-
-        // Hallway boundaries
-        { x1: 310, y1: 200, x2: 310, y2: 300 },
-        { x1: 310, y1: 300, x2: 430, y2: 300 },
-
-        // Restroom structures (bottom-middle)
-        { x1: 430, y1: 630, x2: 550, y2: 630 },
-        { x1: 430, y1: 680, x2: 550, y2: 680 },
-        { x1: 430, y1: 730, x2: 550, y2: 730 },
-        { x1: 550, y1: 630, x2: 550, y2: 730 }, // Restroom right wall
-
-        // Partition between middle columns and right open area
-        { x1: 660, y1: 350, x2: 660, y2: 730 },
-        { x1: 660, y1: 350, x2: 900, y2: 350 },
-        { x1: 660, y1: 450, x2: 900, y2: 450 },
-        { x1: 660, y1: 550, x2: 900, y2: 550 },
-        { x1: 660, y1: 650, x2: 900, y2: 650 },
-        { x1: 660, y1: 730, x2: 900, y2: 730 },
-
-        // Directors room bottom right (Diretoria)
-        { x1: 660, y1: 730, x2: 660, y2: 880 }
-    ];
-
-    // 3. Portas e Janelas (Desenho representativo)
-    const doors = [
-        { x1: 135, y1: 160, x2: 175, y2: 200 }, // Porta sala TI
-        { x1: 430, y1: 210, x2: 460, y2: 200 }, // Porta principal
-        { x1: 500, y1: 730, x2: 530, y2: 730 }, // Porta banheiro 1
-        { x1: 500, y1: 680, x2: 530, y2: 680 }  // Porta banheiro 2
-    ];
-
-    // Renderizar Paredes Externas (Grossas)
-    outerWalls.forEach(w => {
+    // 1. Renderizar Paredes de Tijolo (Walls)
+    state.walls.forEach(w => {
         const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
         line.setAttribute("x1", w.x1);
         line.setAttribute("y1", w.y1);
         line.setAttribute("x2", w.x2);
         line.setAttribute("y2", w.y2);
-        line.setAttribute("class", "svg-wall");
+        
+        let cls = "svg-wall";
+        if (state.isDesignerMode) cls += " designer-editable";
+        if (state.selectedDeskId === w.id) cls += " selected";
+        line.setAttribute("class", cls);
         line.style.strokeWidth = "5px";
+        
+        if (state.isDesignerMode) {
+            line.addEventListener('click', (e) => {
+                e.stopPropagation();
+                selecionarElemento(w.id, 'Parede');
+            });
+        }
         wallsGroup.appendChild(line);
     });
 
-    // Renderizar Divisórias (Mais finas)
-    partitionWalls.forEach(w => {
+    // 2. Renderizar Divisórias de Vidro (Partitions)
+    state.partitions.forEach(p => {
         const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-        line.setAttribute("x1", w.x1);
-        line.setAttribute("y1", w.y1);
-        line.setAttribute("x2", w.x2);
-        line.setAttribute("y2", w.y2);
-        line.setAttribute("class", "svg-wall");
-        line.style.stroke = "#2b3d52";
-        line.style.strokeWidth = "2.5px";
+        line.setAttribute("x1", p.x1);
+        line.setAttribute("y1", p.y1);
+        line.setAttribute("x2", p.x2);
+        line.setAttribute("y2", p.y2);
+        
+        let cls = "svg-partition";
+        if (state.isDesignerMode) cls += " designer-editable";
+        if (state.selectedDeskId === p.id) cls += " selected";
+        line.setAttribute("class", cls);
+        line.style.strokeWidth = "3px";
+        
+        if (state.isDesignerMode) {
+            line.addEventListener('click', (e) => {
+                e.stopPropagation();
+                selecionarElemento(p.id, 'Divisória');
+            });
+        }
         wallsGroup.appendChild(line);
     });
 
-    // Renderizar Portas (Laranja JLE)
-    doors.forEach(d => {
-        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-        line.setAttribute("x1", d.x1);
-        line.setAttribute("y1", d.y1);
-        line.setAttribute("x2", d.x2);
-        line.setAttribute("y2", d.y2);
-        line.setAttribute("class", "svg-door");
-        wallsGroup.appendChild(line);
+    // 3. Renderizar Portas (Swing Doors)
+    state.doors.forEach(d => {
+        const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        g.setAttribute("id", d.id);
+        g.setAttribute("transform", `translate(${d.x}, ${d.y}) rotate(${d.rotation})`);
+        
+        let cls = "door-group";
+        if (state.isDesignerMode) cls += " designer-editable";
+        if (state.selectedDeskId === d.id) cls += " selected";
+        g.setAttribute("class", cls);
+        g.style.cursor = state.isDesignerMode ? "move" : "default";
+
+        // Folha da porta (linha laranja)
+        const doorLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        doorLine.setAttribute("x1", 0);
+        doorLine.setAttribute("y1", 0);
+        doorLine.setAttribute("x2", 0);
+        doorLine.setAttribute("y2", -35); // 35px largura de passagem padrão
+        doorLine.setAttribute("class", "svg-door");
+        g.appendChild(doorLine);
+
+        // Arco de abertura
+        const arcPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        arcPath.setAttribute("d", "M 0,-35 A 35,35 0 0,1 35,0");
+        arcPath.setAttribute("fill", "none");
+        arcPath.setAttribute("stroke", "var(--color-secondary)");
+        arcPath.setAttribute("stroke-width", "1.5");
+        arcPath.setAttribute("stroke-dasharray", "3,3");
+        g.appendChild(arcPath);
+
+        g.addEventListener('click', (e) => {
+            e.stopPropagation();
+            selecionarElemento(d.id, 'Porta');
+        });
+
+        if (state.isDesignerMode) {
+            g.addEventListener('mousedown', (e) => {
+                if (e.button === 0) { // Botão esquerdo
+                    e.stopPropagation();
+                    iniciarArrastarElemento(e, d.id, 'door');
+                }
+            });
+        }
+
+        wallsGroup.appendChild(g);
     });
 
-    // Renderizar Decorações (Sanitários com base na imagem)
-    const restroomFixtures = [
-        { cx: 490, cy: 655 },
-        { cx: 490, cy: 705 }
-    ];
-    
-    restroomFixtures.forEach(fix => {
-        // Vaso sanitário simplificado
-        const toiletOval = document.createElementNS("http://www.w3.org/2000/svg", "ellipse");
-        toiletOval.setAttribute("cx", fix.cx);
-        toiletOval.setAttribute("cy", fix.cy);
-        toiletOval.setAttribute("rx", 10);
-        toiletOval.setAttribute("ry", 13);
-        toiletOval.setAttribute("class", "svg-toilet");
-        wallsGroup.appendChild(toiletOval);
+    // 4. Renderizar Equipamentos Comuns e Sanitários (Fixtures)
+    state.fixtures.forEach(fix => {
+        const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        g.setAttribute("id", fix.id);
+        g.setAttribute("transform", `translate(${fix.x}, ${fix.y}) rotate(${fix.rotation})`);
+        
+        let cls = "fixture-group " + fix.type;
+        if (state.isDesignerMode) cls += " designer-editable";
+        if (state.selectedDeskId === fix.id) cls += " selected";
+        g.setAttribute("class", cls);
+        g.style.cursor = state.isDesignerMode ? "move" : "default";
 
-        const tank = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-        tank.setAttribute("x", fix.cx - 14);
-        tank.setAttribute("y", fix.cy - 12);
-        tank.setAttribute("width", 6);
-        tank.setAttribute("height", 24);
-        tank.setAttribute("rx", 2);
-        tank.setAttribute("class", "svg-toilet");
-        wallsGroup.appendChild(tank);
+        const namesMap = { 
+            toilet: 'Vaso Sanitário', 
+            sink: 'Pia Sanitária', 
+            printer: 'Impressora', 
+            cafe: 'Copa / Área de Café', 
+            table: 'Mesa de Reuniões' 
+        };
+
+        if (fix.type === 'toilet') {
+            // Cisterna
+            const tank = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            tank.setAttribute("x", -10);
+            tank.setAttribute("y", -11);
+            tank.setAttribute("width", 20);
+            tank.setAttribute("height", 5);
+            tank.setAttribute("rx", 1.5);
+            tank.setAttribute("fill", "#112233");
+            tank.setAttribute("stroke", "#637a91");
+            tank.setAttribute("stroke-width", "1");
+            g.appendChild(tank);
+
+            // Bacia
+            const bowl = document.createElementNS("http://www.w3.org/2000/svg", "ellipse");
+            bowl.setAttribute("cx", 0);
+            bowl.setAttribute("cy", 1);
+            bowl.setAttribute("rx", 7.5);
+            bowl.setAttribute("ry", 10);
+            bowl.setAttribute("fill", "#112233");
+            bowl.setAttribute("stroke", "#637a91");
+            bowl.setAttribute("stroke-width", "1");
+            g.appendChild(bowl);
+        }
+        else if (fix.type === 'sink') {
+            // Base
+            const base = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            base.setAttribute("x", -9);
+            base.setAttribute("y", -9);
+            base.setAttribute("width", 18);
+            base.setAttribute("height", 14);
+            base.setAttribute("rx", 2);
+            base.setAttribute("fill", "#112233");
+            base.setAttribute("stroke", "#526880");
+            base.setAttribute("stroke-width", "1.2");
+            g.appendChild(base);
+
+            // Cuba
+            const bowl = document.createElementNS("http://www.w3.org/2000/svg", "ellipse");
+            bowl.setAttribute("cx", 0);
+            bowl.setAttribute("cy", -1);
+            bowl.setAttribute("rx", 5);
+            bowl.setAttribute("ry", 4);
+            bowl.setAttribute("fill", "#1b2936");
+            bowl.setAttribute("stroke", "#526880");
+            bowl.setAttribute("stroke-width", "0.8");
+            g.appendChild(bowl);
+
+            // Torneira
+            const tap = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            tap.setAttribute("x1", 0);
+            tap.setAttribute("y1", -8);
+            tap.setAttribute("x2", 0);
+            tap.setAttribute("y2", -4);
+            tap.setAttribute("stroke", "#bdc3c7");
+            tap.setAttribute("stroke-width", "1.5");
+            g.appendChild(tap);
+        }
+        else if (fix.type === 'printer') {
+            // Corpo da Impressora
+            const body = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            body.setAttribute("x", -15);
+            body.setAttribute("y", -15);
+            body.setAttribute("width", 30);
+            body.setAttribute("height", 30);
+            body.setAttribute("rx", 3);
+            body.setAttribute("fill", "#1a2c3d");
+            body.setAttribute("stroke", "#526880");
+            body.setAttribute("stroke-width", "1.5");
+            g.appendChild(body);
+
+            // Tampa do Scanner
+            const scanner = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            scanner.setAttribute("x", -10);
+            scanner.setAttribute("y", -10);
+            scanner.setAttribute("width", 20);
+            scanner.setAttribute("height", 17);
+            scanner.setAttribute("rx", 1.5);
+            scanner.setAttribute("fill", "#0e1a26");
+            scanner.setAttribute("stroke", "#637a91");
+            scanner.setAttribute("stroke-width", "0.8");
+            g.appendChild(scanner);
+
+            // Display
+            const display = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            display.setAttribute("x", -8);
+            display.setAttribute("y", 9);
+            display.setAttribute("width", 16);
+            display.setAttribute("height", 3);
+            display.setAttribute("fill", "#00d2d3");
+            g.appendChild(display);
+        }
+        else if (fix.type === 'cafe' || fix.type === 'table') {
+            // Blocos retangulares decorativos
+            const w = fix.width || 100;
+            const h = fix.height || 50;
+            
+            const r = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            r.setAttribute("x", -w / 2);
+            r.setAttribute("y", -h / 2);
+            r.setAttribute("width", w);
+            r.setAttribute("height", h);
+            r.setAttribute("fill", "#1b2936");
+            r.setAttribute("stroke", "#3b5066");
+            r.setAttribute("stroke-width", "1");
+            r.setAttribute("rx", "6");
+            g.appendChild(r);
+
+            // Rótulo
+            const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            text.setAttribute("x", 0);
+            text.setAttribute("y", 4);
+            text.setAttribute("fill", "#637a91");
+            text.setAttribute("font-size", "10px");
+            text.setAttribute("font-weight", "600");
+            text.setAttribute("text-anchor", "middle");
+            text.textContent = fix.name;
+            g.appendChild(text);
+        }
+
+        g.addEventListener('click', (e) => {
+            e.stopPropagation();
+            selecionarElemento(fix.id, namesMap[fix.type] || 'Móvel');
+        });
+
+        if (state.isDesignerMode) {
+            g.addEventListener('mousedown', (e) => {
+                if (e.button === 0) { // Botão esquerdo
+                    e.stopPropagation();
+                    iniciarArrastarElemento(e, fix.id, 'fixture');
+                }
+            });
+        }
+
+        wallsGroup.appendChild(g);
     });
 
-    // Renderizar Blocos Cinza (Copa e Mesas Grandes)
-    const grayBlocks = [
-        { x: 440, y: 800, w: 180, h: 65, label: "Área de Café / Copa" },
-        { x: 740, y: 810, w: 120, h: 50, label: "Mesa de Reuniões" }
-    ];
-
-    grayBlocks.forEach(block => {
-        const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-        rect.setAttribute("x", block.x);
-        rect.setAttribute("y", block.y);
-        rect.setAttribute("width", block.w);
-        rect.setAttribute("height", block.h);
-        rect.setAttribute("fill", "#1b2936");
-        rect.setAttribute("stroke", "#3b5066");
-        rect.setAttribute("stroke-width", "1");
-        rect.setAttribute("rx", "6");
-        wallsGroup.appendChild(rect);
-
-        // Texto explicativo
-        const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-        text.setAttribute("x", block.x + block.w / 2);
-        text.setAttribute("y", block.y + block.h / 2 + 4);
-        text.setAttribute("fill", "#637a91");
-        text.setAttribute("font-size", "10px");
-        text.setAttribute("font-weight", "600");
-        text.setAttribute("text-anchor", "middle");
-        text.textContent = block.label;
-        wallsGroup.appendChild(text);
-    });
-
-    // Rótulos de Áreas Administrativas
+    // 5. Rótulos de Áreas Administrativas (Estáticos)
     const areaLabels = [
         { x: 280, y: 190, text: "TI / SUPORTE" },
         { x: 260, y: 350, text: "OPERACIONAL" },
@@ -563,7 +770,7 @@ function renderDesks() {
             g.addEventListener('mousedown', (e) => {
                 if (e.button === 0) { // Botão esquerdo
                     e.stopPropagation();
-                    selecionarMesa(desk.id);
+                    selecionarElemento(desk.id, 'Mesa de Trabalho');
                     iniciarArrastarMesa(e, desk.id);
                 }
             });
@@ -830,13 +1037,17 @@ let dragDeskState = {
     startMouseY: 0
 };
 
-function iniciarArrastarMesa(e, deskId) {
-    const desk = state.desks.find(d => d.id === deskId);
-    if (!desk) return;
+function iniciarArrastarElemento(e, elementId, type) {
+    let element = null;
+    if (type === 'desk') element = state.desks.find(d => d.id === elementId);
+    else if (type === 'door') element = state.doors.find(d => d.id === elementId);
+    else if (type === 'fixture') element = state.fixtures.find(f => f.id === elementId);
+    
+    if (!element) return;
 
-    dragDeskState.deskId = deskId;
-    dragDeskState.initialX = desk.x;
-    dragDeskState.initialY = desk.y;
+    dragDeskState.deskId = elementId;
+    dragDeskState.initialX = element.x;
+    dragDeskState.initialY = element.y;
     
     // Obtém a coordenada do cursor no SVG
     const pt = obterCoordenadasSVG(e);
@@ -851,15 +1062,15 @@ function iniciarArrastarMesa(e, deskId) {
         const dx = currentPt.x - dragDeskState.startMouseX;
         const dy = currentPt.y - dragDeskState.startMouseY;
 
-        // Atualiza coordenadas no estado (com Snap-to-Grid opcional de 5px para alinhamento profissional)
-        const snap = 5;
-        desk.x = Math.round((dragDeskState.initialX + dx) / snap) * snap;
-        desk.y = Math.round((dragDeskState.initialY + dy) / snap) * snap;
+        // Snap-to-Grid de 10px para alinhamento CAD profissional
+        const snap = 10;
+        element.x = Math.round((dragDeskState.initialX + dx) / snap) * snap;
+        element.y = Math.round((dragDeskState.initialY + dy) / snap) * snap;
 
-        // Atualiza a posição da mesa renderizada em tempo real
-        const el = document.getElementById(deskId);
+        // Atualiza a posição renderizada em tempo real
+        const el = document.getElementById(elementId);
         if (el) {
-            el.setAttribute("transform", `translate(${desk.x}, ${desk.y}) rotate(${desk.rotation})`);
+            el.setAttribute("transform", `translate(${element.x}, ${element.y}) rotate(${element.rotation})`);
         }
     };
 
@@ -868,7 +1079,9 @@ function iniciarArrastarMesa(e, deskId) {
         window.removeEventListener('mouseup', windowUpHandler);
         
         if (dragDeskState.deskId) {
-            selecionarMesa(dragDeskState.deskId);
+            const namesMap = { door: 'Porta', toilet: 'Vaso Sanitário', sink: 'Pia', printer: 'Impressora', cafe: 'Copa', table: 'Mesa Reuniões' };
+            const label = namesMap[element.type] || 'Mesa';
+            selecionarElemento(dragDeskState.deskId, label);
             salvarLayoutNoLocalStorage();
             dragDeskState.deskId = null;
         }
@@ -876,6 +1089,10 @@ function iniciarArrastarMesa(e, deskId) {
 
     window.addEventListener('mousemove', windowMoveHandler);
     window.addEventListener('mouseup', windowUpHandler);
+}
+
+function iniciarArrastarMesa(e, deskId) {
+    iniciarArrastarElemento(e, deskId, 'desk');
 }
 
 // Converte evento de mouse para coordenadas SVG levando em conta pan e zoom
@@ -1251,6 +1468,40 @@ function atualizarControleDesignToolbar() {
     }
 }
 
+window.setDesignerTool = function(tool) {
+    state.activeTool = tool;
+    state.drawingStart = null;
+    removerLinhaGuia();
+    
+    // Atualiza classes ativas dos botões da paleta
+    const buttons = document.querySelectorAll('#designer-element-palette .palette-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    
+    const activeBtn = document.getElementById(`tool-${tool}`);
+    if (activeBtn) {
+        activeBtn.classList.add('active');
+    }
+    
+    // Atualiza o cursor do SVG
+    const svg = document.getElementById('office-svg');
+    if (svg) {
+        if (tool === 'draw-wall' || tool === 'draw-partition') {
+            svg.style.cursor = 'crosshair';
+        } else if (tool.startsWith('add-')) {
+            svg.style.cursor = 'cell';
+        } else {
+            svg.style.cursor = 'default';
+        }
+    }
+};
+
+function removerLinhaGuia() {
+    const tempLine = document.getElementById('svg-drawing-preview');
+    if (tempLine) {
+        tempLine.remove();
+    }
+}
+
 // --- CONFIGURAÇÃO DE EVENTOS DE INTERFACE ---
 function configurarEventosInterface() {
     // 1. Alternância de Modo (Visualizar vs Designer)
@@ -1263,11 +1514,16 @@ function configurarEventosInterface() {
         btnDesign.classList.remove('active');
         btnView.classList.add('active', 'view-mode');
         
-        // Remove seleção e fecha slide-over se Designer Mode foi fechado
+        // Restaura a visualização da barra lateral padrão
+        document.getElementById('rh-roster-panel').style.display = 'flex';
+        document.getElementById('rh-roster-footer').style.display = 'flex';
+        document.getElementById('designer-element-palette').style.display = 'none';
+        
+        // Remove seleção e reseta ferramenta
         state.selectedDeskId = null;
         slideOver.classList.remove('open');
+        setDesignerTool('select');
         
-        inicializarParedesEstaticas(); // Reseta o desenho estático
         renderApp();
         showToast("Modo Visualização Ativado.", "info");
     });
@@ -1278,24 +1534,151 @@ function configurarEventosInterface() {
         btnView.classList.remove('active', 'view-mode');
         btnDesign.classList.add('active');
         
+        // Exibe a paleta de elementos do Designer na barra lateral
+        document.getElementById('rh-roster-panel').style.display = 'none';
+        document.getElementById('rh-roster-footer').style.display = 'none';
+        document.getElementById('designer-element-palette').style.display = 'flex';
+        
+        // Limpa seleções anteriores e inicia no ponteiro
+        state.selectedDeskId = null;
+        slideOver.classList.remove('open');
+        setDesignerTool('select');
+        
         renderApp();
-        showToast("Modo Designer Ativado. Edite livremente as mesas!", "warning");
+        showToast("Modo Designer Ativado. Construa e edite a planta!", "warning");
     });
 
-    // 2. Eventos de Clique fora (Fechar slide-over e limpar seleção de mesa)
+    // 2. Ouvintes de Mouse no SVG (Seleção, Posicionamento e Desenho CAD)
+    svg.addEventListener('mousemove', (e) => {
+        if ((state.activeTool === 'draw-wall' || state.activeTool === 'draw-partition') && state.drawingStart) {
+            const pt = obterCoordenadasSVG(e);
+            const snap = 10;
+            let x2 = Math.round(pt.x / snap) * snap;
+            let y2 = Math.round(pt.y / snap) * snap;
+            
+            // Trava ortogonal (90 graus) por padrão (libera com SHIFT)
+            if (!e.shiftKey) {
+                const dx = Math.abs(x2 - state.drawingStart.x);
+                const dy = Math.abs(y2 - state.drawingStart.y);
+                if (dx > dy) {
+                    y2 = state.drawingStart.y;
+                } else {
+                    x2 = state.drawingStart.x;
+                }
+            }
+            
+            // Atualiza linha guia temporária
+            let tempLine = document.getElementById('svg-drawing-preview');
+            if (!tempLine) {
+                tempLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                tempLine.setAttribute("id", "svg-drawing-preview");
+                tempLine.setAttribute("class", "svg-drawing-preview");
+                tempLine.setAttribute("stroke", state.activeTool === 'draw-wall' ? "#e74c3c" : "#3498db");
+                tempLine.setAttribute("stroke-width", state.activeTool === 'draw-wall' ? "4" : "2.5");
+                tempLine.setAttribute("stroke-dasharray", "4,4");
+                tempLine.style.pointerEvents = 'none';
+                svg.appendChild(tempLine);
+            }
+            tempLine.setAttribute("x1", state.drawingStart.x);
+            tempLine.setAttribute("y1", state.drawingStart.y);
+            tempLine.setAttribute("x2", x2);
+            tempLine.setAttribute("y2", y2);
+        }
+    });
+
     svg.addEventListener('click', (e) => {
         // Se clicar no fundo do SVG, cancela a seleção
-        if (e.target.id === 'office-svg' || e.target.classList.contains('svg-wall') || e.target.classList.contains('sector-zone')) {
-            state.selectedDeskId = null;
+        const clickedBackground = (e.target.id === 'office-svg' || e.target.classList.contains('sector-zone') || e.target.tagName === 'image');
+        
+        if (state.isDesignerMode && state.activeTool !== 'select') {
+            // EXECUTA LÓGICA DE INSERÇÃO E EDICAO CAD
+            const pt = obterCoordenadasSVG(e);
+            const snap = 10;
+            const x = Math.round(pt.x / snap) * snap;
+            const y = Math.round(pt.y / snap) * snap;
+
+            if (state.activeTool === 'draw-wall' || state.activeTool === 'draw-partition') {
+                if (!state.drawingStart) {
+                    // Primeiro Clique: Inicia a linha
+                    state.drawingStart = { x, y };
+                } else {
+                    // Segundo Clique: Finaliza a linha
+                    let x2 = x;
+                    let y2 = y;
+                    if (!e.shiftKey) {
+                        const dx = Math.abs(x2 - state.drawingStart.x);
+                        const dy = Math.abs(y2 - state.drawingStart.y);
+                        if (dx > dy) {
+                            y2 = state.drawingStart.y;
+                        } else {
+                            x2 = state.drawingStart.x;
+                        }
+                    }
+                    
+                    const id = `${state.activeTool === 'draw-wall' ? 'wall' : 'part'}-${Date.now()}`;
+                    if (state.activeTool === 'draw-wall') {
+                        state.walls.push({ id, type: 'wall', x1: state.drawingStart.x, y1: state.drawingStart.y, x2, y2 });
+                        showToast("Parede adicionada!", "success");
+                    } else {
+                        state.partitions.push({ id, type: 'partition', x1: state.drawingStart.x, y1: state.drawingStart.y, x2, y2 });
+                        showToast("Divisória de vidro adicionada!", "success");
+                    }
+                    
+                    state.drawingStart = null;
+                    removerLinhaGuia();
+                    salvarLayoutNoLocalStorage();
+                    renderApp();
+                }
+            } else if (state.activeTool.startsWith('add-')) {
+                // Posiciona elementos pontuais
+                const type = state.activeTool.replace('add-', '');
+                const id = `${type}-${Date.now()}`;
+                
+                if (type === 'desk') {
+                    state.desks.push({ id, x, y, rotation: 0, sectorId: 6 }); // Setor administrativo por padrão
+                    showToast("Mesa posicionada com sucesso!", "success");
+                } else if (type === 'door') {
+                    state.doors.push({ id, type: 'door', x, y, rotation: 0 });
+                    showToast("Porta swing posicionada!", "success");
+                } else if (type === 'meeting-table') {
+                    state.fixtures.push({ id, type: 'table', x, y, rotation: 0, width: 120, height: 50, name: "Mesa de Reuniões" });
+                    showToast("Mesa de reuniões posicionada!", "success");
+                } else if (type === 'cafe') {
+                    state.fixtures.push({ id, type: 'cafe', x, y, rotation: 0, width: 180, height: 65, name: "Área de Café / Copa" });
+                    showToast("Área de café posicionada!", "success");
+                } else {
+                    state.fixtures.push({ id, type, x, y, rotation: 0 });
+                    const namesMap = { toilet: 'Vaso Sanitário', sink: 'Pia Sanitária', printer: 'Impressora' };
+                    showToast(`${namesMap[type] || 'Objeto'} posicionado!`, "success");
+                }
+                
+                salvarLayoutNoLocalStorage();
+                setDesignerTool('select'); // Volta para ferramenta seleção
+                renderApp();
+            }
+            return;
+        }
+
+        // Seleção de fundo / limpar seleção
+        if (clickedBackground) {
+            selecionarElemento(null);
             slideOver.classList.remove('open');
-            renderDesks();
         }
     });
 
     document.getElementById('btn-close-slide').addEventListener('click', () => {
-        state.selectedDeskId = null;
+        selecionarElemento(null);
         slideOver.classList.remove('open');
-        renderDesks();
+    });
+
+    // Tecla ESC cancela ferramenta de desenho CAD
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            if (state.isDesignerMode && state.activeTool !== 'select') {
+                setDesignerTool('select');
+                showToast("Ferramenta redefinida para seleção.", "info");
+            }
+        }
     });
 
     // 3. Lógica de Busca no Roster
@@ -1331,10 +1714,6 @@ function configurarEventosInterface() {
     });
 
     // 5. Botões do Toolbar do Designer
-    document.getElementById('btn-add-desk').addEventListener('click', () => {
-        adicionarNovaMesa();
-    });
-
     document.getElementById('btn-rotate-desk').addEventListener('click', () => {
         rotacionarMesaSelecionada();
     });
@@ -1436,45 +1815,92 @@ function adicionarNovaMesa() {
 
 function rotacionarMesaSelecionada() {
     if (!state.selectedDeskId) {
-        showToast("Nenhuma mesa selecionada para rotacionar.", "error");
+        showToast("Nenhum elemento selecionado para rotacionar.", "error");
         return;
     }
 
-    const desk = state.desks.find(d => d.id === state.selectedDeskId);
-    if (!desk) return;
-
-    // Incrementa 90 graus
-    desk.rotation = (desk.rotation + 90) % 360;
-    
-    renderApp();
-    selecionarMesa(state.selectedDeskId);
-    salvarLayoutNoLocalStorage();
+    if (selectedElementType === 'desk') {
+        const desk = state.desks.find(d => d.id === state.selectedDeskId);
+        if (desk) {
+            desk.rotation = (desk.rotation + 90) % 360;
+            renderApp();
+            selecionarElemento(state.selectedDeskId, 'Mesa de Trabalho');
+            salvarLayoutNoLocalStorage();
+        }
+    } else if (selectedElementType === 'door') {
+        const door = state.doors.find(d => d.id === state.selectedDeskId);
+        if (door) {
+            door.rotation = (door.rotation + 45) % 360; // Portas rotacionam em 45 graus
+            renderApp();
+            selecionarElemento(state.selectedDeskId, 'Porta');
+            salvarLayoutNoLocalStorage();
+        }
+    } else if (selectedElementType === 'fixture') {
+        const fix = state.fixtures.find(f => f.id === state.selectedDeskId);
+        if (fix) {
+            fix.rotation = (fix.rotation + 45) % 360; // Objetos comuns rotacionam em 45 graus
+            renderApp();
+            const namesMap = { toilet: 'Vaso Sanitário', sink: 'Pia Sanitária', printer: 'Impressora', cafe: 'Copa', table: 'Mesa Reuniões' };
+            selecionarElemento(state.selectedDeskId, namesMap[fix.type] || 'Objeto');
+            salvarLayoutNoLocalStorage();
+        }
+    } else {
+        showToast("Este tipo de elemento não pode ser rotacionado.", "warning");
+    }
 }
 
 function removerMesaSelecionada() {
     if (!state.selectedDeskId) {
-        showToast("Nenhuma mesa selecionada para remover.", "error");
+        showToast("Nenhum elemento selecionado para remover.", "error");
         return;
     }
 
-    const deskId = state.selectedDeskId;
-    const deskIndex = state.desks.findIndex(d => d.id === deskId);
-    if (deskIndex === -1) return;
+    const id = state.selectedDeskId;
 
-    // Se tiver funcionário alocado, manda de volta pro roster
-    const employee = state.employees.find(emp => emp.deskId === deskId);
-    if (employee) {
-        employee.deskId = null;
-        showToast(`${employee.name} retornou ao roster.`, "info");
+    if (selectedElementType === 'desk') {
+        const deskIndex = state.desks.findIndex(d => d.id === id);
+        if (deskIndex !== -1) {
+            const employee = state.employees.find(emp => emp.deskId === id);
+            if (employee) {
+                employee.deskId = null;
+                showToast(`${employee.name} retornou ao roster.`, "info");
+            }
+            state.desks.splice(deskIndex, 1);
+            showToast("Mesa de trabalho excluída.", "info");
+        }
+    } else if (selectedElementType === 'wall') {
+        const wallIndex = state.walls.findIndex(w => w.id === id);
+        if (wallIndex !== -1) {
+            state.walls.splice(wallIndex, 1);
+            showToast("Parede excluída.", "info");
+        }
+    } else if (selectedElementType === 'partition') {
+        const partIndex = state.partitions.findIndex(p => p.id === id);
+        if (partIndex !== -1) {
+            state.partitions.splice(partIndex, 1);
+            showToast("Divisória de vidro excluída.", "info");
+        }
+    } else if (selectedElementType === 'door') {
+        const doorIndex = state.doors.findIndex(d => d.id === id);
+        if (doorIndex !== -1) {
+            state.doors.splice(doorIndex, 1);
+            showToast("Porta swing excluída.", "info");
+        }
+    } else if (selectedElementType === 'fixture') {
+        const fixIndex = state.fixtures.findIndex(f => f.id === id);
+        if (fixIndex !== -1) {
+            state.fixtures.splice(fixIndex, 1);
+            showToast("Objeto excluído.", "info");
+        }
     }
 
-    state.desks.splice(deskIndex, 1);
     state.selectedDeskId = null;
-    slideOver.classList.remove('open');
+    selectedElementType = null;
+    const indicator = document.getElementById('selected-element-indicator');
+    if (indicator) indicator.textContent = 'Selecione um item';
     
     renderApp();
     salvarLayoutNoLocalStorage();
-    showToast("Mesa removida com sucesso.", "info");
 }
 
 // --- CRUD DE FUNCIONÁRIOS (MODAIS) ---
@@ -1687,6 +2113,10 @@ async function carregarLayoutsDoSupabase() {
             state.desks = activeLayout.data.desks || [...DEFAULT_DESKS];
             state.employees = activeLayout.data.employees || [...DEFAULT_EMPLOYEES];
             state.sectors = activeLayout.data.sectors || [...DEFAULT_SECTORS];
+            state.walls = activeLayout.data.walls || [...DEFAULT_WALLS];
+            state.partitions = activeLayout.data.partitions || [...DEFAULT_PARTITIONS];
+            state.doors = activeLayout.data.doors || [...DEFAULT_DOORS];
+            state.fixtures = activeLayout.data.fixtures || [...DEFAULT_FIXTURES];
         }
     } catch (err) {
         console.error("Exceção Supabase. Rodando localmente:", err);
@@ -1709,6 +2139,10 @@ async function carregarLayoutSelecionado(id) {
     state.desks = layout.data.desks || [];
     state.employees = layout.data.employees || [];
     state.sectors = layout.data.sectors || [];
+    state.walls = layout.data.walls || [...DEFAULT_WALLS];
+    state.partitions = layout.data.partitions || [...DEFAULT_PARTITIONS];
+    state.doors = layout.data.doors || [...DEFAULT_DOORS];
+    state.fixtures = layout.data.fixtures || [...DEFAULT_FIXTURES];
 
     // Limpa seleções
     state.selectedDeskId = null;
@@ -1728,7 +2162,11 @@ async function salvarLayoutNoSupabase() {
     const layoutData = {
         sectors: state.sectors,
         desks: state.desks,
-        employees: state.employees
+        employees: state.employees,
+        walls: state.walls,
+        partitions: state.partitions,
+        doors: state.doors,
+        fixtures: state.fixtures
     };
 
     try {
@@ -1772,16 +2210,27 @@ async function criarNovoLayoutRascunho() {
     let layoutData = {
         sectors: [...state.sectors],
         desks: [],
-        employees: []
+        employees: [],
+        walls: [],
+        partitions: [],
+        doors: [],
+        fixtures: []
     };
 
     if (base === 'current') {
         layoutData.desks = JSON.parse(JSON.stringify(state.desks));
-        // Copia também employees limpando alocação opcional ou mantendo
         layoutData.employees = JSON.parse(JSON.stringify(state.employees));
+        layoutData.walls = JSON.parse(JSON.stringify(state.walls));
+        layoutData.partitions = JSON.parse(JSON.stringify(state.partitions));
+        layoutData.doors = JSON.parse(JSON.stringify(state.doors));
+        layoutData.fixtures = JSON.parse(JSON.stringify(state.fixtures));
     } else {
-        // Mantém somente os setores padrão
+        // Mantém somente os setores padrão e as estruturas físicas do seed
         layoutData.sectors = [...DEFAULT_SECTORS];
+        layoutData.walls = [...DEFAULT_WALLS];
+        layoutData.partitions = [...DEFAULT_PARTITIONS];
+        layoutData.doors = [...DEFAULT_DOORS];
+        layoutData.fixtures = [...DEFAULT_FIXTURES];
     }
 
     modalLayout.classList.remove('open');
@@ -1793,6 +2242,10 @@ async function criarNovoLayoutRascunho() {
         state.desks = layoutData.desks;
         state.employees = layoutData.employees;
         state.sectors = layoutData.sectors;
+        state.walls = layoutData.walls;
+        state.partitions = layoutData.partitions;
+        state.doors = layoutData.doors;
+        state.fixtures = layoutData.fixtures;
         
         // Adiciona no seletor
         const select = document.getElementById('layout-selector');
@@ -1833,7 +2286,11 @@ function salvarLayoutNoLocalStorage() {
         layoutName: state.layoutName,
         sectors: state.sectors,
         desks: state.desks,
-        employees: state.employees
+        employees: state.employees,
+        walls: state.walls,
+        partitions: state.partitions,
+        doors: state.doors,
+        fixtures: state.fixtures
     };
     localStorage.setItem('jle_office_layout_local', JSON.stringify(dataToSave));
 }
@@ -1848,10 +2305,20 @@ function carregarLayoutDoLocalStorage() {
             state.sectors = parsed.sectors || [...DEFAULT_SECTORS];
             state.desks = parsed.desks || [...DEFAULT_DESKS];
             state.employees = parsed.employees || [...DEFAULT_EMPLOYEES];
+            state.walls = parsed.walls || [...DEFAULT_WALLS];
+            state.partitions = parsed.partitions || [...DEFAULT_PARTITIONS];
+            state.doors = parsed.doors || [...DEFAULT_DOORS];
+            state.fixtures = parsed.fixtures || [...DEFAULT_FIXTURES];
             console.log("Layout local restaurado do LocalStorage");
         } catch (e) {
             console.error("Erro ao ler LocalStorage:", e);
         }
+    } else {
+        // Primeira carga limpa
+        state.walls = [...DEFAULT_WALLS];
+        state.partitions = [...DEFAULT_PARTITIONS];
+        state.doors = [...DEFAULT_DOORS];
+        state.fixtures = [...DEFAULT_FIXTURES];
     }
 }
 
