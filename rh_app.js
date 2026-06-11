@@ -4,10 +4,10 @@
 const SUPABASE_URL = "https://fowlctvebdcodphntsjw.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZvd2xjdHZlYmRjb2RwaG50c2p3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwNzg2NjUsImV4cCI6MjA5NTY1NDY2NX0.PxzD_PlU4sBFPBukthuXpkBlzYbQqMLXLE4DQwctPOM";
 
-let supabase = null;
+let supabaseRH = null;
 try {
     if (typeof window.supabase !== 'undefined') {
-        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        supabaseRH = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     }
 } catch (e) {
     console.error("Falha ao inicializar Supabase:", e);
@@ -170,12 +170,19 @@ async function iniciarAplicacao() {
     configurarDragAndDrop();
     configurarEventosInterface();
     
-    // Tenta carregar os layouts do Supabase
-    await carregarLayoutsDoSupabase();
-    
-    // Inicializa a renderização
+    // Carrega o layout do cache local/padrão para exibir instantaneamente
+    carregarLayoutDoLocalStorage();
     renderApp();
-    showToast("Layout carregado com sucesso!", "success");
+    
+    // Sincroniza com o Supabase em background sem bloquear a UI
+    carregarLayoutsDoSupabase()
+        .then(() => {
+            renderApp();
+            showToast("Dados sincronizados com a nuvem!", "success");
+        })
+        .catch(err => {
+            console.error("Falha ao sincronizar com Supabase em background:", err);
+        });
 }
 
 if (document.readyState === 'loading') {
@@ -1636,14 +1643,14 @@ function criarNovoSetor() {
 let layoutsDBList = []; // Lista carregada do Supabase
 
 async function carregarLayoutsDoSupabase() {
-    if (!supabase) {
+    if (!supabaseRH) {
         console.warn("Supabase não disponível. Iniciando no modo de armazenamento LocalStorage.");
         carregarLayoutDoLocalStorage();
         return;
     }
 
     try {
-        const { data, error } = await supabase
+        const { data, error } = await supabaseRH
             .from('jle_office_layouts')
             .select('*')
             .order('name');
@@ -1712,7 +1719,7 @@ async function carregarLayoutSelecionado(id) {
 }
 
 async function salvarLayoutNoSupabase() {
-    if (!supabase) {
+    if (!supabaseRH) {
         showToast("Conexão Supabase indisponível. Salvo localmente.", "warning");
         salvarLayoutNoLocalStorage();
         return;
@@ -1730,7 +1737,7 @@ async function salvarLayoutNoSupabase() {
             const name = prompt("Digite um nome para salvar este layout no Supabase:", "Layout Principal JLE");
             if (!name) return;
 
-            const { data, error } = await supabase
+            const { data, error } = await supabaseRH
                 .from('jle_office_layouts')
                 .insert([{ name: name, data: layoutData, is_active: true }])
                 .select();
@@ -1741,7 +1748,7 @@ async function salvarLayoutNoSupabase() {
             await carregarLayoutsDoSupabase();
         } else {
             // Atualiza o layout aberto na nuvem
-            const { error } = await supabase
+            const { error } = await supabaseRH
                 .from('jle_office_layouts')
                 .update({ data: layoutData, updated_at: new Date().toISOString() })
                 .eq('id', state.layoutId);
@@ -1779,7 +1786,7 @@ async function criarNovoLayoutRascunho() {
 
     modalLayout.classList.remove('open');
 
-    if (!supabase) {
+    if (!supabaseRH) {
         // Modo local
         state.layoutId = `local-${Date.now()}`;
         state.layoutName = name;
@@ -1803,7 +1810,7 @@ async function criarNovoLayoutRascunho() {
 
     try {
         // Salva na nuvem
-        const { data, error } = await supabase
+        const { data, error } = await supabaseRH
             .from('jle_office_layouts')
             .insert([{ name: name, data: layoutData, is_active: true }])
             .select();
