@@ -44,7 +44,7 @@
     <!-- Local Stylesheet -->
     <link rel="stylesheet" href="styles.css?v=2.1.5">
     <link rel="stylesheet" href="veiculos_styles.css?v=3.39">
-    <link rel="stylesheet" href="rh_styles.css?v=1.01">
+    <link rel="stylesheet" href="rh_styles.css?v=1.02">
 </head>
 <body>
 
@@ -838,6 +838,10 @@
                                     <i class="fa-solid fa-border-none"></i>
                                     <span>Desenhar Divisória</span>
                                 </button>
+                                <button class="palette-btn" id="tool-draw-zone" onclick="setDesignerTool('draw-zone')">
+                                    <i class="fa-solid fa-vector-square"></i>
+                                    <span>Desenhar Área (Setor)</span>
+                                </button>
                             </div>
                             
                             <div class="palette-group">
@@ -1184,6 +1188,28 @@
         </div>
     </div>
 
+    <!-- Modal Seleção de Setor para Zonas -->
+    <div class="rh-modal-overlay" id="modal-zone">
+        <div class="rh-modal-content" style="max-width: 400px;">
+            <div class="rh-modal-header">
+                <h2>Vincular Setor à Área</h2>
+                <button class="rh-btn-close-modal" id="btn-close-zone-modal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="rh-modal-body">
+                <div class="rh-form-group">
+                    <label for="new-zone-sector">Selecione o Setor correspondente</label>
+                    <select id="new-zone-sector" class="rh-select-field" style="width: 100%; padding: 10px; border-radius: 6px; background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-color);">
+                        <!-- Será preenchido dinamicamente via JS -->
+                    </select>
+                </div>
+            </div>
+            <div class="rh-modal-footer">
+                <button class="rh-btn-modal cancel" id="btn-cancel-zone">Cancelar</button>
+                <button class="rh-btn-modal confirm" id="btn-submit-zone">Vincular e Criar</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Conteiner de Toast de Notificação -->
     <div class="toast-container" id="toast-container"></div>
 
@@ -1331,7 +1357,7 @@
 
     <script src="veiculos_data.js?v=3.35"></script>
     <script src="veiculos_app.js?v=3.39"></script>
-    <script src="rh_app.js?v=1.01"></script>
+    <script src="rh_app.js?v=1.02"></script>
 
     <!-- Logica de UI Autônoma (Sem Dependências de CDNs) -->
     <script>

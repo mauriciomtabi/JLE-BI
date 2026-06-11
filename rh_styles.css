@@ -1356,3 +1356,11 @@
     font-weight: 700 !important;
 }
 
+#view-rh-container .sector-zone-group.selected .sector-zone {
+    stroke: var(--color-secondary) !important;
+    stroke-width: 3px !important;
+    stroke-dasharray: 4 4;
+    fill-opacity: 0.15 !important;
+    filter: drop-shadow(0 0 5px var(--color-secondary));
+}
+

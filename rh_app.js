@@ -25,6 +25,13 @@ const DEFAULT_SECTORS = [
     { id: 8, name: "Recursos Humanos (RH)", color: "#e84393" }
 ];
 
+const DEFAULT_SECTOR_ZONES = [
+    { id: "zone-1", sectorId: 3, x: 80, y: 50, w: 350, h: 150 },   // TI
+    { id: "zone-2", sectorId: 8, x: 660, y: 350, w: 240, h: 100 },  // RH
+    { id: "zone-3", sectorId: 4, x: 660, y: 450, w: 240, h: 200 },  // Comercial
+    { id: "zone-4", sectorId: 1, x: 660, y: 730, w: 240, h: 150 }   // Diretoria
+];
+
 const DEFAULT_EMPLOYEES = [
     { id: "emp-1", name: "Guilherme Santos", sectorId: 3, shift: "Integral", hours: "44h", activities: "Administração de redes, servidores e segurança de TI.", deskId: "desk-3", equipments: [
         { tipo: "Computador", patrimonio: "PAT-2026-0045", detalhes: "Notebook Dell Vostro i7 16GB" },
@@ -184,6 +191,7 @@ let state = {
     partitions: [...DEFAULT_PARTITIONS],
     doors: [...DEFAULT_DOORS],
     fixtures: [...DEFAULT_FIXTURES],
+    sectorZones: [...DEFAULT_SECTOR_ZONES],
     isDesignerMode: false,
     selectedDeskId: null, // ID do elemento selecionado (mesa, parede, etc.)
     activeTool: 'select', // select, draw-wall, draw-partition, add-door, add-desk, add-meeting-table, add-printer, add-cafe, add-toilet, add-sink
@@ -221,6 +229,7 @@ const rosterSearchInput = document.getElementById('roster-search');
 const modalEmployee = document.getElementById('modal-employee');
 const modalSectors = document.getElementById('modal-sectors');
 const modalLayout = document.getElementById('modal-layout');
+const modalZone = document.getElementById('modal-zone');
 
 // --- INICIALIZAÇÃO SEGURA DA APLICAÇÃO ---
 async function iniciarAplicacao() {
@@ -286,6 +295,8 @@ window.selecionarElemento = function(id, label) {
         selectedElementType = 'door';
     } else if (state.fixtures.some(f => f.id === id)) {
         selectedElementType = 'fixture';
+    } else if (state.sectorZones && state.sectorZones.some(z => z.id === id)) {
+        selectedElementType = 'zone';
     } else {
         selectedElementType = null;
     }
@@ -297,6 +308,7 @@ window.selecionarElemento = function(id, label) {
         }
         renderStructuralElements();
         renderDesks();
+        renderSectorsBackground();
     } else {
         // Modo Visualização: abre slide-over para mesas
         if (selectedElementType === 'desk') {
@@ -589,19 +601,23 @@ function renderStructuralElements() {
 // --- RENDERIZAÇÃO DOS FUNDOS COLORIDOS DOS SETORES ---
 function renderSectorsBackground() {
     const sectorsBgGroup = document.getElementById('svg-sectors-background');
+    if (!sectorsBgGroup) return;
     sectorsBgGroup.innerHTML = '';
 
-    // Define zonas geográficas aproximadas para colorir sutilmente os setores no mapa
-    const zones = [
-        { sectorId: 3, x: 80, y: 50, w: 350, h: 150 },   // TI
-        { sectorId: 8, x: 660, y: 350, w: 240, h: 100 },  // RH
-        { sectorId: 4, x: 660, y: 450, w: 240, h: 200 },  // Comercial
-        { sectorId: 1, x: 660, y: 730, w: 240, h: 150 }   // Diretoria
-    ];
+    const zones = state.sectorZones || [];
 
     zones.forEach(zone => {
         const sector = state.sectors.find(s => s.id === zone.sectorId);
         if (!sector) return;
+
+        const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        g.setAttribute("id", zone.id);
+        
+        let gClass = "sector-zone-group";
+        if (state.isDesignerMode && state.selectedDeskId === zone.id) {
+            gClass += " selected";
+        }
+        g.setAttribute("class", gClass);
 
         const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
         rect.setAttribute("x", zone.x);
@@ -611,7 +627,17 @@ function renderSectorsBackground() {
         rect.setAttribute("fill", sector.color);
         rect.setAttribute("stroke", sector.color);
         rect.setAttribute("class", "sector-zone");
-        sectorsBgGroup.appendChild(rect);
+        
+        if (state.isDesignerMode) {
+            rect.style.cursor = 'pointer';
+            rect.addEventListener('click', (e) => {
+                e.stopPropagation();
+                selecionarElemento(zone.id, `Área: ${sector.name}`);
+            });
+        }
+        
+        g.appendChild(rect);
+        sectorsBgGroup.appendChild(g);
     });
 }
 
@@ -1097,16 +1123,10 @@ function iniciarArrastarMesa(e, deskId) {
 
 // Converte evento de mouse para coordenadas SVG levando em conta pan e zoom
 function obterCoordenadasSVG(e) {
-    const rect = svg.getBoundingClientRect();
-    
-    // Obtém coordenadas locais no container do SVG
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    
     // Inverte a transformação do pan e zoom aplicada ao panZoomGroup
     const svgPt = svg.createSVGPoint();
-    svgPt.x = x;
-    svgPt.y = y;
+    svgPt.x = e.clientX;
+    svgPt.y = e.clientY;
 
     // Aplica a matriz de transformação invertida do elemento panZoomGroup
     const globalToLocalMatrix = panZoomGroup.getScreenCTM().inverse();
@@ -1495,7 +1515,7 @@ window.setDesignerTool = function(tool) {
     // Atualiza o cursor do SVG
     const svg = document.getElementById('office-svg');
     if (svg) {
-        if (tool === 'draw-wall' || tool === 'draw-partition') {
+        if (tool === 'draw-wall' || tool === 'draw-partition' || tool === 'draw-zone') {
             svg.style.cursor = 'crosshair';
         } else if (tool.startsWith('add-')) {
             svg.style.cursor = 'cell';
@@ -1509,6 +1529,10 @@ function removerLinhaGuia() {
     const tempLine = document.getElementById('svg-drawing-preview');
     if (tempLine) {
         tempLine.remove();
+    }
+    const tempRect = document.getElementById('svg-drawing-preview-rect');
+    if (tempRect) {
+        tempRect.remove();
     }
 }
 
@@ -1593,6 +1617,32 @@ function configurarEventosInterface() {
             tempLine.setAttribute("y1", state.drawingStart.y);
             tempLine.setAttribute("x2", x2);
             tempLine.setAttribute("y2", y2);
+        } else if (state.activeTool === 'draw-zone' && state.drawingStart) {
+            const pt = obterCoordenadasSVG(e);
+            const snap = 10;
+            const x2 = Math.round(pt.x / snap) * snap;
+            const y2 = Math.round(pt.y / snap) * snap;
+            
+            const rx = Math.min(state.drawingStart.x, x2);
+            const ry = Math.min(state.drawingStart.y, y2);
+            const rw = Math.abs(x2 - state.drawingStart.x);
+            const rh = Math.abs(y2 - state.drawingStart.y);
+            
+            let tempRect = document.getElementById('svg-drawing-preview-rect');
+            if (!tempRect) {
+                tempRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+                tempRect.setAttribute("id", "svg-drawing-preview-rect");
+                tempRect.setAttribute("stroke", "var(--color-secondary)");
+                tempRect.setAttribute("stroke-width", "1.5");
+                tempRect.setAttribute("stroke-dasharray", "4,4");
+                tempRect.setAttribute("fill", "rgba(254, 202, 87, 0.05)");
+                tempRect.style.pointerEvents = 'none';
+                svg.appendChild(tempRect);
+            }
+            tempRect.setAttribute("x", rx);
+            tempRect.setAttribute("y", ry);
+            tempRect.setAttribute("width", rw);
+            tempRect.setAttribute("height", rh);
         }
     });
 
@@ -1638,6 +1688,27 @@ function configurarEventosInterface() {
                     removerLinhaGuia();
                     salvarLayoutNoLocalStorage();
                     renderApp();
+                }
+            } else if (state.activeTool === 'draw-zone') {
+                if (!state.drawingStart) {
+                    state.drawingStart = { x, y };
+                } else {
+                    const x2 = x;
+                    const y2 = y;
+                    const rx = Math.min(state.drawingStart.x, x2);
+                    const ry = Math.min(state.drawingStart.y, y2);
+                    const rw = Math.abs(x2 - state.drawingStart.x);
+                    const rh = Math.abs(y2 - state.drawingStart.y);
+                    
+                    if (rw < 20 || rh < 20) {
+                        showToast("A área desenhada é muito pequena. Desenhe uma área maior.", "warning");
+                        state.drawingStart = null;
+                        removerLinhaGuia();
+                        return;
+                    }
+                    
+                    window.pendingZoneRect = { x: rx, y: ry, w: rw, h: rh };
+                    abrirModalZone();
                 }
             } else if (state.activeTool.startsWith('add-')) {
                 // Posiciona elementos pontuais
@@ -1786,6 +1857,20 @@ function configurarEventosInterface() {
         criarNovoLayoutRascunho();
     });
 
+    // Modal de Zonas/Áreas
+    const btnCloseZoneModal = document.getElementById('btn-close-zone-modal');
+    if (btnCloseZoneModal) {
+        btnCloseZoneModal.addEventListener('click', fecharModalZone);
+    }
+    const btnCancelZone = document.getElementById('btn-cancel-zone');
+    if (btnCancelZone) {
+        btnCancelZone.addEventListener('click', fecharModalZone);
+    }
+    const btnSubmitZone = document.getElementById('btn-submit-zone');
+    if (btnSubmitZone) {
+        btnSubmitZone.addEventListener('click', salvarNovaZona);
+    }
+
     // Salvar Layout na Nuvem
     document.getElementById('btn-save-layout').addEventListener('click', async () => {
         await salvarLayoutNoSupabase();
@@ -1902,6 +1987,12 @@ function removerMesaSelecionada() {
             state.fixtures.splice(fixIndex, 1);
             showToast("Objeto excluído.", "info");
         }
+    } else if (selectedElementType === 'zone') {
+        const zoneIndex = state.sectorZones.findIndex(z => z.id === id);
+        if (zoneIndex !== -1) {
+            state.sectorZones.splice(zoneIndex, 1);
+            showToast("Área de setor excluída.", "info");
+        }
     }
 
     state.selectedDeskId = null;
@@ -1911,6 +2002,47 @@ function removerMesaSelecionada() {
     
     renderApp();
     salvarLayoutNoLocalStorage();
+}
+
+// --- CONTROLE DE ZONAS E ÁREAS DE SETOR (MODAIS) ---
+function abrirModalZone() {
+    const select = document.getElementById('new-zone-sector');
+    if (select) {
+        select.innerHTML = state.sectors.map(s => `<option value="${s.id}">${s.name}</option>`).join('');
+    }
+    if (modalZone) modalZone.classList.add('open');
+}
+
+function fecharModalZone() {
+    if (modalZone) modalZone.classList.remove('open');
+    state.drawingStart = null;
+    removerLinhaGuia();
+}
+
+function salvarNovaZona() {
+    const select = document.getElementById('new-zone-sector');
+    if (!select || !window.pendingZoneRect) return;
+
+    const sectorId = parseInt(select.value);
+    const newZone = {
+        id: `zone-${Date.now()}`,
+        sectorId: sectorId,
+        x: window.pendingZoneRect.x,
+        y: window.pendingZoneRect.y,
+        w: window.pendingZoneRect.w,
+        h: window.pendingZoneRect.h
+    };
+
+    if (!state.sectorZones) {
+        state.sectorZones = [];
+    }
+    state.sectorZones.push(newZone);
+
+    fecharModalZone();
+    salvarLayoutNoLocalStorage();
+    renderApp();
+    showToast("Área de setor adicionada com sucesso!", "success");
+    setDesignerTool('select');
 }
 
 // --- CRUD DE FUNCIONÁRIOS (MODAIS) ---
@@ -2127,6 +2259,7 @@ async function carregarLayoutsDoSupabase() {
             state.partitions = activeLayout.data.partitions || [...DEFAULT_PARTITIONS];
             state.doors = activeLayout.data.doors || [...DEFAULT_DOORS];
             state.fixtures = activeLayout.data.fixtures || [...DEFAULT_FIXTURES];
+            state.sectorZones = activeLayout.data.sectorZones || [...DEFAULT_SECTOR_ZONES];
         }
     } catch (err) {
         console.error("Exceção Supabase. Rodando localmente:", err);
@@ -2153,6 +2286,7 @@ async function carregarLayoutSelecionado(id) {
     state.partitions = layout.data.partitions || [...DEFAULT_PARTITIONS];
     state.doors = layout.data.doors || [...DEFAULT_DOORS];
     state.fixtures = layout.data.fixtures || [...DEFAULT_FIXTURES];
+    state.sectorZones = layout.data.sectorZones || [...DEFAULT_SECTOR_ZONES];
 
     // Limpa seleções
     state.selectedDeskId = null;
@@ -2176,7 +2310,8 @@ async function salvarLayoutNoSupabase() {
         walls: state.walls,
         partitions: state.partitions,
         doors: state.doors,
-        fixtures: state.fixtures
+        fixtures: state.fixtures,
+        sectorZones: state.sectorZones
     };
 
     try {
@@ -2224,7 +2359,8 @@ async function criarNovoLayoutRascunho() {
         walls: [],
         partitions: [],
         doors: [],
-        fixtures: []
+        fixtures: [],
+        sectorZones: []
     };
 
     if (base === 'current') {
@@ -2234,6 +2370,7 @@ async function criarNovoLayoutRascunho() {
         layoutData.partitions = JSON.parse(JSON.stringify(state.partitions));
         layoutData.doors = JSON.parse(JSON.stringify(state.doors));
         layoutData.fixtures = JSON.parse(JSON.stringify(state.fixtures));
+        layoutData.sectorZones = JSON.parse(JSON.stringify(state.sectorZones));
     } else {
         // Mantém somente os setores padrão e as estruturas físicas do seed
         layoutData.sectors = [...DEFAULT_SECTORS];
@@ -2241,6 +2378,7 @@ async function criarNovoLayoutRascunho() {
         layoutData.partitions = [...DEFAULT_PARTITIONS];
         layoutData.doors = [...DEFAULT_DOORS];
         layoutData.fixtures = [...DEFAULT_FIXTURES];
+        layoutData.sectorZones = [...DEFAULT_SECTOR_ZONES];
     }
 
     modalLayout.classList.remove('open');
@@ -2256,6 +2394,7 @@ async function criarNovoLayoutRascunho() {
         state.partitions = layoutData.partitions;
         state.doors = layoutData.doors;
         state.fixtures = layoutData.fixtures;
+        state.sectorZones = layoutData.sectorZones;
         
         // Adiciona no seletor
         const select = document.getElementById('layout-selector');
@@ -2300,7 +2439,8 @@ function salvarLayoutNoLocalStorage() {
         walls: state.walls,
         partitions: state.partitions,
         doors: state.doors,
-        fixtures: state.fixtures
+        fixtures: state.fixtures,
+        sectorZones: state.sectorZones
     };
     localStorage.setItem('jle_office_layout_local', JSON.stringify(dataToSave));
 }
@@ -2319,6 +2459,7 @@ function carregarLayoutDoLocalStorage() {
             state.partitions = parsed.partitions || [...DEFAULT_PARTITIONS];
             state.doors = parsed.doors || [...DEFAULT_DOORS];
             state.fixtures = parsed.fixtures || [...DEFAULT_FIXTURES];
+            state.sectorZones = parsed.sectorZones || [...DEFAULT_SECTOR_ZONES];
             console.log("Layout local restaurado do LocalStorage");
         } catch (e) {
             console.error("Erro ao ler LocalStorage:", e);
@@ -2329,6 +2470,7 @@ function carregarLayoutDoLocalStorage() {
         state.partitions = [...DEFAULT_PARTITIONS];
         state.doors = [...DEFAULT_DOORS];
         state.fixtures = [...DEFAULT_FIXTURES];
+        state.sectorZones = [...DEFAULT_SECTOR_ZONES];
     }
 }
 
