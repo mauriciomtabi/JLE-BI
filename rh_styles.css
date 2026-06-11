@@ -729,31 +729,31 @@
 /* Designer Toolbar (Flutuante no topo do canvas em modo de edição) */
 #view-rh-container .designer-toolbar {
     position: absolute;
-    top: 24px;
+    bottom: 24px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: rgba(17, 28, 36, 0.95);
+    background-color: rgba(15, 23, 30, 0.85);
     backdrop-filter: blur(10px);
-    border: 1px solid var(--color-secondary);
-    box-shadow: var(--shadow-main);
-    border-radius: 30px;
-    padding: 6px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    padding: 6px 14px;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     z-index: 5;
-    animation: slideDown 0.3s var(--transition-bounce);
+    animation: slideUp 0.3s var(--transition-bounce);
 }
 
-@keyframes slideDown {
-    from { transform: translate(-50%, -40px); opacity: 0; }
+@keyframes slideUp {
+    from { transform: translate(-50%, 40px); opacity: 0; }
     to { transform: translate(-50%, 0); opacity: 1; }
 }
 
 #view-rh-container .designer-toolbar-divider {
     width: 1px;
-    height: 20px;
-    background-color: var(--border-color);
+    height: 16px;
+    background-color: rgba(255, 255, 255, 0.15);
 }
 
 #view-rh-container .btn-toolbar {
