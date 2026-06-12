@@ -1,5 +1,5 @@
 ﻿window.CASH_FLOW_DATA = {
-    "generated_at":  "2026-06-12 10:05:53",
+    "generated_at":  "2026-06-12 11:03:20",
     "categories_origin":  {
                               "entradas":  [
 
@@ -107975,8 +107975,8 @@
                              "fluxo":  "Saída",
                              "categoria":  "Terceiros",
                              "descricao":  "GUSTAVO BATIS DOS SAN",
-                             "valor_nominal":  10000,
-                             "valor_liquido":  -10000,
+                             "valor_nominal":  10001.5,
+                             "valor_liquido":  -10001.5,
                              "meio_pagamento":  "Pix",
                              "is_transfer":  false
                          },
@@ -108457,6 +108457,54 @@
                              "descricao":  "Empréstimo Sílvio, descontar em 04 vezes",
                              "valor_nominal":  2000,
                              "valor_liquido":  -2000,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "JUN_2026 MAXCREDITO_276",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "JUN_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "JUNHO/2026",
+                             "data":  "2026-06-09",
+                             "uf":  "PR",
+                             "fluxo":  "Saída",
+                             "categoria":  "Retiradas Sócios",
+                             "descricao":  "JOSMAR",
+                             "valor_nominal":  10000,
+                             "valor_liquido":  -10000,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "JUN_2026 MAXCREDITO_277",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "JUN_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "JUNHO/2026",
+                             "data":  "2026-06-09",
+                             "uf":  "PR",
+                             "fluxo":  "Saída",
+                             "categoria":  "Terceiros",
+                             "descricao":  "Adiantamento Victor Vilson nogueira PR",
+                             "valor_nominal":  1000,
+                             "valor_liquido":  -1000,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "JUN_2026 MAXCREDITO_278",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "JUN_2026 MAXCREDITO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "JUNHO/2026",
+                             "data":  "2026-06-09",
+                             "uf":  "PR",
+                             "fluxo":  "Saída",
+                             "categoria":  "Terceiros",
+                             "descricao":  "G\u0026M SERVICOS TELECOM LTDA",
+                             "valor_nominal":  21012.93,
+                             "valor_liquido":  -21012.93,
                              "meio_pagamento":  "Pix",
                              "is_transfer":  false
                          }
