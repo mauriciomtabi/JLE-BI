@@ -557,11 +557,23 @@ body.light-theme #view-rh-container {
     width: 100%;
     height: 100%;
     display: block;
-    cursor: grab;
+    cursor: default;
 }
 
 #view-rh-container .svg-canvas.grabbing {
-    cursor: grabbing;
+    cursor: grabbing !important;
+}
+
+#view-rh-container .svg-wall-handle {
+    fill: #0077aa;
+    stroke: #ffffff;
+    stroke-width: 1.5;
+    cursor: move;
+    transition: r 0.1s ease;
+}
+
+#view-rh-container .svg-wall-handle:hover {
+    r: 8;
 }
 
 /* Elementos do SVG */

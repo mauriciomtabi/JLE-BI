@@ -42,6 +42,7 @@ const panZoomGroup = document.getElementById('pan-zoom-group');
 let lastMouseClientX = 0;
 let lastMouseClientY = 0;
 let shiftPressed = false;
+let handleDragState = null; // { wallId, propX: 'x1'|'x2', propY: 'y1'|'y2' }
 
 // Monitorar tecla Shift
 window.addEventListener('keydown', (e) => {
@@ -86,7 +87,7 @@ function obterCoordenadasSVG(clientX, clientY) {
 }
 
 // Obter coordenadas ajustadas ao Grid e Snapping Híbrido + Trava Ortogonal
-function obterCoordenadasAjustadas(clientX, clientY, ignoreOrtho = false) {
+function obterCoordenadasAjustadas(clientX, clientY, ignoreOrtho = false, ignoreWallId = null) {
     let raw = obterCoordenadasSVG(clientX, clientY);
     let x = raw.x;
     let y = raw.y;
@@ -100,6 +101,8 @@ function obterCoordenadasAjustadas(clientX, clientY, ignoreOrtho = false) {
     let minDistance = 15;
     
     state.walls.forEach(w => {
+        if (ignoreWallId && w.id === ignoreWallId) return;
+        
         let d1 = Math.hypot(raw.x - w.x1, raw.y - w.y1);
         if (d1 < minDistance) {
             minDistance = d1;
@@ -161,6 +164,69 @@ function garantizarSnapIndicator() {
     }
 }
 
+function garantirAlignmentGuidesGroup() {
+    let g = document.getElementById('svg-alignment-guides');
+    if (!g) {
+        g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        g.setAttribute('id', 'svg-alignment-guides');
+        const staticWalls = document.getElementById('svg-walls-static');
+        if (staticWalls) {
+            panZoomGroup.insertBefore(g, staticWalls);
+        } else {
+            panZoomGroup.appendChild(g);
+        }
+    }
+    return g;
+}
+
+function criarLinhaGuia(parent, x1, y1, x2, y2) {
+    if (x1 === x2 && y1 === y2) return;
+    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    line.setAttribute("x1", x1);
+    line.setAttribute("y1", y1);
+    line.setAttribute("x2", x2);
+    line.setAttribute("y2", y2);
+    line.setAttribute("stroke", "#2ecc71"); // green alignment guide
+    line.setAttribute("stroke-width", "1.5");
+    line.setAttribute("stroke-dasharray", "4,4");
+    line.setAttribute("style", "pointer-events: none;");
+    parent.appendChild(line);
+}
+
+function atualizarGuiasDeAlinhamento(pt, ignoreWallId = null) {
+    const g = garantirAlignmentGuidesGroup();
+    g.innerHTML = '';
+    
+    if (state.activeTool !== 'draw-wall' && !handleDragState) return;
+    
+    let matchedX = false;
+    let matchedY = false;
+    
+    state.walls.forEach(w => {
+        if (ignoreWallId && w.id === ignoreWallId) return;
+        
+        // Alignment with w.x1 / w.y1
+        if (pt.x === w.x1 && !matchedX) {
+            criarLinhaGuia(g, pt.x, pt.y, w.x1, w.y1);
+            matchedX = true;
+        }
+        if (pt.y === w.y1 && !matchedY) {
+            criarLinhaGuia(g, pt.x, pt.y, w.x1, w.y1);
+            matchedY = true;
+        }
+        
+        // Alignment with w.x2 / w.y2
+        if (pt.x === w.x2 && !matchedX) {
+            criarLinhaGuia(g, pt.x, pt.y, w.x2, w.y2);
+            matchedX = true;
+        }
+        if (pt.y === w.y2 && !matchedY) {
+            criarLinhaGuia(g, pt.x, pt.y, w.x2, w.y2);
+            matchedY = true;
+        }
+    });
+}
+
 function atualizarPreviewDesenho() {
     const preview = document.getElementById('svg-drawing-preview');
     if (!preview) return;
@@ -197,6 +263,8 @@ function cancelarDesenho() {
     if (preview) preview.setAttribute('display', 'none');
     const dot = document.getElementById('svg-snap-indicator');
     if (dot) dot.setAttribute('display', 'none');
+    const g = document.getElementById('svg-alignment-guides');
+    if (g) g.innerHTML = '';
 }
 
 // --- CONFIGURAÇÃO DE TRANSLATE & ZOOM DO CANVAS ---
@@ -247,6 +315,7 @@ function configurarEventosPanZoom() {
             isDragging = true;
             startX = e.clientX - zoomState.x;
             startY = e.clientY - zoomState.y;
+            svg.classList.add('grabbing');
             e.preventDefault();
         }
     });
@@ -255,18 +324,48 @@ function configurarEventosPanZoom() {
         lastMouseClientX = e.clientX;
         lastMouseClientY = e.clientY;
         
-        if (isDragging) {
+        if (handleDragState) {
+            let pt = obterCoordenadasAjustadas(e.clientX, e.clientY, true, handleDragState.wallId);
+            const wall = state.walls.find(w => w.id === handleDragState.wallId);
+            if (wall) {
+                wall[handleDragState.propX] = pt.x;
+                wall[handleDragState.propY] = pt.y;
+                atualizarGuiasDeAlinhamento(pt, handleDragState.wallId);
+                renderApp();
+            }
+        } else if (isDragging) {
             zoomState.x = e.clientX - startX;
             zoomState.y = e.clientY - startY;
             aplicarPanZoom();
         } else if (state.activeTool === 'draw-wall') {
+            let pt = obterCoordenadasAjustadas(e.clientX, e.clientY);
             atualizarPreviewDesenho();
             atualizarSnapIndicator();
+            atualizarGuiasDeAlinhamento(pt);
         }
     });
 
     window.addEventListener('mouseup', () => {
         isDragging = false;
+        svg.classList.remove('grabbing');
+        
+        if (handleDragState) {
+            const wall = state.walls.find(w => w.id === handleDragState.wallId);
+            if (wall && wall.x1 === wall.x2 && wall.y1 === wall.y2) {
+                state.walls = state.walls.filter(w => w.id !== handleDragState.wallId);
+                selecionarParede(null);
+                showToast("Parede encurtada até zero e excluída.", "info");
+            }
+            salvarLayoutNoLocalStorage();
+            salvarLayoutNoSupabase();
+            
+            // Clear alignment guides
+            const g = document.getElementById('svg-alignment-guides');
+            if (g) g.innerHTML = '';
+            
+            handleDragState = null;
+            renderApp();
+        }
     });
 
     svg.addEventListener('wheel', (e) => {
@@ -434,6 +533,80 @@ async function salvarLayoutNoSupabase() {
     }
 }
 
+function iniciarArrastoHandle(wallId, propX, propY) {
+    handleDragState = {
+        wallId: wallId,
+        propX: propX,
+        propY: propY
+    };
+    svg.classList.add('grabbing');
+}
+
+function splitWallAt(wallId, clientX, clientY) {
+    const wall = state.walls.find(w => w.id === wallId);
+    if (!wall) return;
+    
+    // Obter ponto cru em coordenadas SVG
+    const pt = obterCoordenadasSVG(clientX, clientY);
+    
+    // Projeção do ponto pt no segmento da parede (x1, y1) -> (x2, y2)
+    const dx = wall.x2 - wall.x1;
+    const dy = wall.y2 - wall.y1;
+    const lenSq = dx * dx + dy * dy;
+    
+    if (lenSq === 0) return;
+    
+    // Fator de projeção t
+    let t = ((pt.x - wall.x1) * dx + (pt.y - wall.y1) * dy) / lenSq;
+    t = Math.max(0, Math.min(1, t)); // limitar ao segmento
+    
+    // Coordenadas projetadas
+    let projX = wall.x1 + t * dx;
+    let projY = wall.y1 + t * dy;
+    
+    // Snap de 10px ao grid
+    projX = Math.round(projX / 10) * 10;
+    projY = Math.round(projY / 10) * 10;
+    
+    // Verificar se o ponto de corte coincide com uma das extremidades
+    const atStart = projX === wall.x1 && projY === wall.y1;
+    const atEnd = projX === wall.x2 && projY === wall.y2;
+    
+    if (atStart || atEnd) {
+        showToast("Não é possível dividir a parede nas extremidades.", "warning");
+        return;
+    }
+    
+    // Criar duas novas paredes
+    const wallA = {
+        id: `wall-${Date.now()}-a`,
+        x1: wall.x1,
+        y1: wall.y1,
+        x2: projX,
+        y2: projY
+    };
+    
+    const wallB = {
+        id: `wall-${Date.now()}-b`,
+        x1: projX,
+        y1: projY,
+        x2: wall.x2,
+        y2: wall.y2
+    };
+    
+    // Remover a parede antiga e empurrar os novos segmentos
+    state.walls = state.walls.filter(w => w.id !== wallId);
+    state.walls.push(wallA);
+    state.walls.push(wallB);
+    
+    selecionarParede(null);
+    salvarLayoutNoLocalStorage();
+    salvarLayoutNoSupabase();
+    renderApp();
+    
+    showToast("Parede dividida em dois segmentos.", "success");
+}
+
 // --- RENDERIZAÇÃO VETORIAL ---
 function renderStructuralElements() {
     const wallsGroup = document.getElementById('svg-walls-static');
@@ -460,6 +633,14 @@ function renderStructuralElements() {
                     selecionarParede(w.id);
                 }
             });
+            
+            // Duplo clique para dividir a parede
+            line.addEventListener('dblclick', (e) => {
+                if (state.activeTool === 'select') {
+                    e.stopPropagation();
+                    splitWallAt(w.id, e.clientX, e.clientY);
+                }
+            });
         }
         wallsGroup.appendChild(line);
         
@@ -470,14 +651,24 @@ function renderStructuralElements() {
             c1.setAttribute("cy", w.y1);
             c1.setAttribute("r", "6");
             c1.setAttribute("class", "svg-wall-handle");
-            c1.setAttribute("style", "fill: #0077aa; stroke: #ffffff; stroke-width: 1.5; cursor: move;");
+            
+            c1.addEventListener('mousedown', (e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                iniciarArrastoHandle(w.id, 'x1', 'y1');
+            });
             
             const c2 = document.createElementNS("http://www.w3.org/2000/svg", "circle");
             c2.setAttribute("cx", w.x2);
             c2.setAttribute("cy", w.y2);
             c2.setAttribute("r", "6");
             c2.setAttribute("class", "svg-wall-handle");
-            c2.setAttribute("style", "fill: #0077aa; stroke: #ffffff; stroke-width: 1.5; cursor: move;");
+            
+            c2.addEventListener('mousedown', (e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                iniciarArrastoHandle(w.id, 'x2', 'y2');
+            });
             
             wallsGroup.appendChild(c1);
             wallsGroup.appendChild(c2);
