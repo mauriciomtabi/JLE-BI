@@ -1,5 +1,5 @@
 ﻿window.CASH_FLOW_DATA = {
-    "generated_at":  "2026-06-12 13:03:21",
+    "generated_at":  "2026-06-12 14:05:12",
     "categories_origin":  {
                               "entradas":  [
 
@@ -109337,6 +109337,38 @@
                              "descricao":  "LUIS GUSTAVO SANTANNA CAMPANHONI",
                              "valor_nominal":  3152.38,
                              "valor_liquido":  -3152.38,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "JUN_2026 MAXCREDITO_331",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "JUN_2026 MAXCREDITO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "JUNHO/2026",
+                             "data":  "2026-06-10",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Terceiros",
+                             "descricao":  "ZENITE P\u0026A SERVICOS LTDA",
+                             "valor_nominal":  16596.45,
+                             "valor_liquido":  -16596.45,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "JUN_2026 MAXCREDITO_332",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "JUN_2026 MAXCREDITO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "JUNHO/2026",
+                             "data":  "2026-06-10",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Terceiros",
+                             "descricao":  "IGOR DE SOUZA RAMOS",
+                             "valor_nominal":  4825.6,
+                             "valor_liquido":  -4825.6,
                              "meio_pagamento":  "Pix",
                              "is_transfer":  false
                          }
