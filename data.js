@@ -1,5 +1,5 @@
 ﻿window.CASH_FLOW_DATA = {
-    "generated_at":  "2026-06-15 08:05:01",
+    "generated_at":  "2026-06-15 09:05:19",
     "categories_origin":  {
                               "entradas":  [
 
@@ -109369,6 +109369,54 @@
                              "descricao":  "IGOR DE SOUZA RAMOS",
                              "valor_nominal":  4825.6,
                              "valor_liquido":  -4825.6,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "JUN_2026 MAXCREDITO_333",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "JUN_2026 MAXCREDITO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "JUNHO/2026",
+                             "data":  "2026-06-10",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Terceiros",
+                             "descricao":  "PAULO VLADIMIR SIL.FE",
+                             "valor_nominal":  8350,
+                             "valor_liquido":  -8350,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "JUN_2026 MAXCREDITO_334",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "JUN_2026 MAXCREDITO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "JUNHO/2026",
+                             "data":  "2026-06-10",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Terceiros",
+                             "descricao":  "GABRIEL BRITO KREMER",
+                             "valor_nominal":  16000.16,
+                             "valor_liquido":  -16000.16,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "JUN_2026 MAXCREDITO_335",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "JUN_2026 MAXCREDITO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "JUNHO/2026",
+                             "data":  "2026-06-10",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Terceiros",
+                             "descricao":  "GUILHERME HENRIQUE AL",
+                             "valor_nominal":  20182.4,
+                             "valor_liquido":  -20182.4,
                              "meio_pagamento":  "Pix",
                              "is_transfer":  false
                          }
