@@ -45,6 +45,7 @@
     <link rel="stylesheet" href="styles.css?v=2.1.5">
     <link rel="stylesheet" href="veiculos_styles.css?v=3.39">
     <link rel="stylesheet" href="rh_styles.css?v=1.03">
+    <link rel="stylesheet" href="cobranca_styles.css?v=3.40">
 </head>
 <body>
 
@@ -71,6 +72,9 @@
             </a>
             <a class="nav-item" id="nav-rh" onclick="switchView('rh')" style="display:none;">
                 <i class="fa-solid fa-people-roof"></i> <span>RH</span>
+            </a>
+            <a class="nav-item" id="nav-cobranca" onclick="switchView('cobranca')" style="display:none;">
+                <i class="fa-solid fa-file-invoice-dollar"></i> <span>Cobrança</span>
             </a>
             <a class="nav-item" id="nav-admin" onclick="switchView('admin')" style="display:none;">
                 <i class="fa-solid fa-shield-halved"></i> <span>Admin</span>
@@ -1030,6 +1034,128 @@
             </div>
         </div>
 
+        <!-- VIEW 7: COBRANCA -->
+        <div id="view-cobranca-container" class="view-panel" style="display: none;">
+            <!-- Filters bar -->
+            <div id="cobranca-filters-container">
+                <div class="filter-group">
+                    <label>Fase Atual</label>
+                    <select id="cobranca-filter-fase"><option value="">Todas</option></select>
+                </div>
+                <div class="filter-group">
+                    <label>Mês de Medição</label>
+                    <select id="cobranca-filter-mes"><option value="">Todos</option></select>
+                </div>
+                <div class="filter-group">
+                    <label>UF</label>
+                    <select id="cobranca-filter-uf"><option value="">Todas</option></select>
+                </div>
+                <div class="filter-group">
+                    <label>Centro de Custo</label>
+                    <select id="cobranca-filter-cc"><option value="">Todos</option></select>
+                </div>
+                <div class="filter-group">
+                    <label>Contrato</label>
+                    <select id="cobranca-filter-contrato"><option value="">Todos</option></select>
+                </div>
+                <button class="btn-filter-clear" onclick="clearCobrancaFilters()" title="Limpar filtros">
+                    <i class="fa-solid fa-rotate-left"></i>
+                </button>
+            </div>
+            
+            <!-- KPI Grid -->
+            <div class="cobranca-kpi-grid">
+                <div class="cobranca-kpi-card faturado">
+                    <div class="cobranca-kpi-icon"><i class="fa-solid fa-sack-dollar"></i></div>
+                    <div class="cobranca-kpi-info">
+                        <span class="cobranca-kpi-label">Total Faturado</span>
+                        <span class="cobranca-kpi-value" id="cobranca-kpi-faturado">R$ 0</span>
+                    </div>
+                </div>
+                <div class="cobranca-kpi-card os">
+                    <div class="cobranca-kpi-icon"><i class="fa-solid fa-list-check"></i></div>
+                    <div class="cobranca-kpi-info">
+                        <span class="cobranca-kpi-label">Total OSs</span>
+                        <span class="cobranca-kpi-value" id="cobranca-kpi-os">0</span>
+                    </div>
+                </div>
+                <div class="cobranca-kpi-card pedidos">
+                    <div class="cobranca-kpi-icon"><i class="fa-solid fa-file-invoice"></i></div>
+                    <div class="cobranca-kpi-info">
+                        <span class="cobranca-kpi-label">Pedidos SAP</span>
+                        <span class="cobranca-kpi-value" id="cobranca-kpi-pedidos">0</span>
+                    </div>
+                </div>
+                <div class="cobranca-kpi-card periodo">
+                    <div class="cobranca-kpi-icon"><i class="fa-solid fa-calendar-range"></i></div>
+                    <div class="cobranca-kpi-info">
+                        <span class="cobranca-kpi-label">Período</span>
+                        <span class="cobranca-kpi-value" id="cobranca-kpi-periodo" style="font-size:14px;">-</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Chart -->
+            <div class="cobranca-chart-section">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <span class="chart-title"><i class="fa-solid fa-chart-bar"></i> Faturamento por Mês de Medição</span>
+                    </div>
+                    <div class="chart-body" style="height: 300px; position: relative;">
+                        <canvas id="cobranca-monthly-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Table -->
+            <div class="chart-card">
+                <div class="chart-header">
+                    <span class="chart-title"><i class="fa-solid fa-table"></i> Detalhamento por OS</span>
+                    <button class="btn-export" onclick="exportCobrancaCSV()" title="Exportar CSV">
+                        <i class="fa-solid fa-file-csv"></i> Exportar
+                    </button>
+                </div>
+                <div class="chart-body" style="padding: 0;">
+                    <div class="cobranca-table-controls" style="padding: 16px 16px 0 16px;">
+                        <div class="cobranca-search-wrapper">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" id="cobranca-search" placeholder="Buscar por PEP, OS, cidade, projeto..." oninput="applyCobrancaSearch()">
+                        </div>
+                        <span id="cobranca-results-count" style="font-size:12px; color: var(--text-secondary);"></span>
+                    </div>
+                    <div class="table-wrapper" style="overflow-x: auto;">
+                        <table class="data-table" id="cobranca-table">
+                            <thead>
+                                <tr>
+                                    <th onclick="sortCobrancaTable('pep')">PEP</th>
+                                    <th onclick="sortCobrancaTable('projeto_gerencial')">Projeto Gerencial</th>
+                                    <th onclick="sortCobrancaTable('contrato_numero')">Contrato</th>
+                                    <th onclick="sortCobrancaTable('cidade')">Cidade</th>
+                                    <th onclick="sortCobrancaTable('uf')">UF</th>
+                                    <th onclick="sortCobrancaTable('os')">OS</th>
+                                    <th onclick="sortCobrancaTable('fase_atual')">Fase Atual</th>
+                                    <th onclick="sortCobrancaTable('fase_atual_de_para')">De Para</th>
+                                    <th onclick="sortCobrancaTable('data_cadastro')">Dt. Cadastro</th>
+                                    <th onclick="sortCobrancaTable('data_aprovacao')">Dt. Aprovação</th>
+                                    <th onclick="sortCobrancaTable('numero_medicao')">Nº Medição</th>
+                                    <th onclick="sortCobrancaTable('numero_pedido')">Nº Pedido</th>
+                                    <th onclick="sortCobrancaTable('mes_medicao')">Mês Medição</th>
+                                    <th onclick="sortCobrancaTable('valor_total')" style="text-align:right;">Valor Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cobranca-table-body"></tbody>
+                        </table>
+                    </div>
+                    <div style="padding: 0 16px 16px;">
+                        <div class="cobranca-pagination">
+                            <span class="cobranca-pagination-info" id="cobranca-page-info"></span>
+                            <div class="cobranca-pagination-btns" id="cobranca-pagination-btns"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Modal: Adicionar/Editar Usuário -->
         <div class="modal-overlay" id="user-permission-modal" onclick="closeUserModal(event)">
             <div class="modal-card" style="max-width: 520px;">
@@ -1358,6 +1484,8 @@
     <script src="veiculos_data.js?v=3.35"></script>
     <script src="veiculos_app.js?v=3.39"></script>
     <script src="rh_app.js?v=1.02"></script>
+    <script src="cobranca_data.js?v=3.40"></script>
+    <script src="cobranca_app.js?v=3.40"></script>
 
     <!-- Logica de UI Autônoma (Sem Dependências de CDNs) -->
     <script>
@@ -1919,6 +2047,7 @@
             { id: 'dashboard',    label: 'Dashboard Financeiro',    icon: 'fa-sack-dollar',       navId: 'nav-dashboard' },
             { id: 'veiculos',     label: 'Veículos',                icon: 'fa-car',               navId: 'nav-veiculos' },
             { id: 'rh',           label: 'RH',                      icon: 'fa-people-roof',       navId: 'nav-rh' },
+            { id: 'cobranca',     label: 'Cobrança',                icon: 'fa-file-invoice-dollar', navId: 'nav-cobranca' },
             { id: 'admin',        label: 'Painel Admin',            icon: 'fa-shield-halved',    navId: 'nav-admin',        adminOnly: true },
         ];
 
@@ -2329,6 +2458,8 @@
             if (finFilters) finFilters.classList.remove('mobile-expanded');
             const veiFilters = document.getElementById('veiculos-filters-container');
             if (veiFilters) veiFilters.classList.remove('mobile-expanded');
+            const cobFilters = document.getElementById('cobranca-filters-container');
+            if (cobFilters) cobFilters.classList.remove('mobile-expanded');
             if (mobileToggleBtn) {
                 mobileToggleBtn.innerHTML = '<i class="fa-solid fa-filter"></i> <span>Mostrar Filtros</span>';
             }
@@ -2356,6 +2487,16 @@
                 if (window.renderRHApp) {
                     window.renderRHApp();
                 }
+            } else if (viewName === 'cobranca') {
+                document.getElementById('filters-container').style.display = 'none';
+                if (mobileToggleBtn) mobileToggleBtn.style.display = '';
+                document.getElementById('view-title').innerText = 'Acompanhamento de Cobrança';
+                document.getElementById('view-subtitle').innerHTML = 'Análise financeira de serviços executados – Claro';
+                if (!cobrancaDataLoaded) {
+                    initCobranca();
+                } else {
+                    applyCobrancaFilters();
+                }
             } else {
                 document.getElementById('filters-container').style.display = 'grid';
                 if (mobileToggleBtn) mobileToggleBtn.style.display = '';
@@ -2382,6 +2523,7 @@
             { id: 'dashboard',    label: 'Dashboard Financeiro',     icon: 'fa-sack-dollar' },
             { id: 'veiculos',     label: 'Veículos',                 icon: 'fa-car' },
             { id: 'rh',           label: 'RH',                       icon: 'fa-people-roof' },
+            { id: 'cobranca',     label: 'Cobrança',                 icon: 'fa-file-invoice-dollar' },
         ];
 
         function renderPageCheckboxes(containerId, selectedPages = []) {
@@ -4337,7 +4479,12 @@
 
         // Lógica de Filtros Mobile (Expandir/Recolher)
         function toggleMobileFilters() {
-            const containerId = (activeView === 'veiculos') ? 'veiculos-filters-container' : 'filters-container';
+            let containerId = 'filters-container';
+            if (activeView === 'veiculos') {
+                containerId = 'veiculos-filters-container';
+            } else if (activeView === 'cobranca') {
+                containerId = 'cobranca-filters-container';
+            }
             const filterBar = document.getElementById(containerId);
             const toggleBtn = document.getElementById('mobile-filter-toggle');
             if (!filterBar) return;
@@ -4547,7 +4694,7 @@
             </button>
         </div>
     </div>
-<!-- Deploy trigger: 202606082053 -->
+<!-- Deploy trigger: 202606181340 -->
 
     
 
