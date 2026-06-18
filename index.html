@@ -740,119 +740,249 @@
         <!-- VIEW 7: COBRANCA -->
         <div id="view-cobranca-container" class="view-panel" style="display: none;">
             <!-- Filters bar -->
-            <div id="cobranca-filters-container">
+            <section class="filter-bar" id="cobranca-filters-container">
                 <div class="filter-group">
-                    <label>Fase Atual</label>
-                    <select id="cobranca-filter-fase"><option value="">Todas</option></select>
-                </div>
-                <div class="filter-group">
-                    <label>Mês de Medição</label>
-                    <select id="cobranca-filter-mes"><option value="">Todos</option></select>
+                    <label for="cobranca-filter-categoria">Categoria</label>
+                    <select id="cobranca-filter-categoria" onchange="applyCobrancaFilters()">
+                        <option value="">Todas as Categorias</option>
+                    </select>
                 </div>
                 <div class="filter-group">
-                    <label>UF</label>
-                    <select id="cobranca-filter-uf"><option value="">Todas</option></select>
+                    <label for="cobranca-filter-uf">UF / Estado</label>
+                    <select id="cobranca-filter-uf" onchange="applyCobrancaFilters()">
+                        <option value="">Todas as UFs</option>
+                        <option value="RS">RS</option>
+                        <option value="SC">SC</option>
+                        <option value="PR">PR</option>
+                    </select>
                 </div>
                 <div class="filter-group">
-                    <label>Centro de Custo</label>
-                    <select id="cobranca-filter-cc"><option value="">Todos</option></select>
+                    <label for="cobranca-filter-projeto">Projeto</label>
+                    <select id="cobranca-filter-projeto" onchange="applyCobrancaFilters()">
+                        <option value="">Todos os Projetos</option>
+                    </select>
                 </div>
                 <div class="filter-group">
-                    <label>Contrato</label>
-                    <select id="cobranca-filter-contrato"><option value="">Todos</option></select>
+                    <label for="cobranca-filter-fase">Fase (De/Para)</label>
+                    <select id="cobranca-filter-fase" onchange="applyCobrancaFilters()">
+                        <option value="">Todas as Fases</option>
+                        <option value="EM EXECUÇÃO">Em Execução</option>
+                        <option value="EXECUTADO">Executado</option>
+                        <option value="APROVADO">Aprovado</option>
+                        <option value="PEDIDO EMITIDO">Pedido Emitido</option>
+                    </select>
                 </div>
-                <button class="btn-filter-clear" onclick="clearCobrancaFilters()" title="Limpar filtros">
-                    <i class="fa-solid fa-rotate-left"></i>
-                </button>
-            </div>
-            
-            <!-- KPI Grid -->
-            <div class="cobranca-kpi-grid">
-                <div class="cobranca-kpi-card faturado">
-                    <div class="cobranca-kpi-icon"><i class="fa-solid fa-sack-dollar"></i></div>
-                    <div class="cobranca-kpi-info">
-                        <span class="cobranca-kpi-label">Total Faturado</span>
-                        <span class="cobranca-kpi-value" id="cobranca-kpi-faturado">R$ 0</span>
+                <div class="filter-group">
+                    <label for="cobranca-filter-data-inicio">Data Início</label>
+                    <input type="date" id="cobranca-filter-data-inicio" onchange="applyCobrancaFilters()">
+                </div>
+                <div class="filter-group">
+                    <label for="cobranca-filter-data-fim">Data Fim</label>
+                    <div style="display: flex; gap: 6px; align-items: center; width: 100%;">
+                        <input type="date" id="cobranca-filter-data-fim" onchange="applyCobrancaFilters()" style="flex-grow: 1;">
+                        <button class="btn-reset" onclick="resetCobrancaDateFilter()" title="Limpar Período" style="padding: 10px; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); cursor: pointer; transition: all 0.2s ease;">
+                            <i class="fa-solid fa-calendar-xmark"></i>
+                        </button>
                     </div>
                 </div>
-                <div class="cobranca-kpi-card os">
-                    <div class="cobranca-kpi-icon"><i class="fa-solid fa-list-check"></i></div>
-                    <div class="cobranca-kpi-info">
-                        <span class="cobranca-kpi-label">Total OSs</span>
-                        <span class="cobranca-kpi-value" id="cobranca-kpi-os">0</span>
-                    </div>
-                </div>
-                <div class="cobranca-kpi-card pedidos">
-                    <div class="cobranca-kpi-icon"><i class="fa-solid fa-file-invoice"></i></div>
-                    <div class="cobranca-kpi-info">
-                        <span class="cobranca-kpi-label">Pedidos SAP</span>
-                        <span class="cobranca-kpi-value" id="cobranca-kpi-pedidos">0</span>
-                    </div>
-                </div>
-                <div class="cobranca-kpi-card periodo">
-                    <div class="cobranca-kpi-icon"><i class="fa-solid fa-calendar-range"></i></div>
-                    <div class="cobranca-kpi-info">
-                        <span class="cobranca-kpi-label">Período</span>
-                        <span class="cobranca-kpi-value" id="cobranca-kpi-periodo" style="font-size:14px;">-</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Chart -->
-            <div class="cobranca-chart-section">
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <span class="chart-title"><i class="fa-solid fa-chart-bar"></i> Faturamento por Mês de Medição</span>
-                    </div>
-                    <div class="chart-body" style="height: 300px; position: relative;">
-                        <canvas id="cobranca-monthly-chart"></canvas>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Table -->
-            <div class="chart-card">
-                <div class="chart-header">
-                    <span class="chart-title"><i class="fa-solid fa-table"></i> Detalhamento por OS</span>
-                    <button class="btn-export" onclick="exportCobrancaCSV()" title="Exportar CSV">
-                        <i class="fa-solid fa-file-csv"></i> Exportar
+                <div class="filter-actions-inline">
+                    <button class="btn-reset" onclick="clearCobrancaFilters()" title="Limpar Filtros">
+                        <i class="fa-solid fa-arrows-rotate"></i>
                     </button>
                 </div>
-                <div style="padding: 0;">
-                    <div class="cobranca-table-controls" style="padding: 16px 16px 0 16px;">
-                        <div class="cobranca-search-wrapper">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                            <input type="text" id="cobranca-search" placeholder="Buscar por PEP, OS, cidade, projeto..." oninput="applyCobrancaSearch()">
+            </section>
+
+            <!-- Sub Tab Selector (Indicadores / Relatório) -->
+            <div class="sub-tabs-container" id="cobranca-sub-tabs">
+                <button class="sub-tab tab-btn active" data-tab="indicators" id="cobranca-tab-btn-indicators" onclick="switchCobrancaTab('indicators')">
+                    <i class="fa-solid fa-chart-column"></i>
+                    <span>Indicadores</span>
+                </button>
+                <button class="sub-tab tab-btn" data-tab="report" id="cobranca-tab-btn-report" onclick="switchCobrancaTab('report')">
+                    <i class="fa-solid fa-table"></i>
+                    <span>Relatório</span>
+                </button>
+            </div>
+
+            <!-- Sub Tab Pane: Indicadores -->
+            <div id="subview-cobranca-indicators" class="subtab-pane active">
+                
+                <!-- Category Cards Row (Dynamic Cards for Categories Col B) -->
+                <div class="cobranca-category-grid" id="cobranca-category-cards-container">
+                    <!-- Dynamically populated categories -->
+                </div>
+
+                <!-- Phase Pipeline Flow (Stepper showing phases interlinking) -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <span class="chart-title"><i class="fa-solid fa-route"></i> Fluxo de Faturamento por Fase (Pipeline)</span>
+                    </div>
+                    <div class="chart-body" style="padding: 24px; overflow-x: auto;">
+                        <div class="cobranca-pipeline" id="cobranca-pipeline-container">
+                            <!-- Dynamically populated workflow steps -->
                         </div>
-                        <span id="cobranca-results-count" style="font-size:12px; color: var(--text-secondary);"></span>
                     </div>
-                    <div class="table-wrapper" style="overflow-x: auto;">
-                        <table class="data-table" id="cobranca-table">
-                            <thead>
-                                <tr>
-                                    <th onclick="sortCobrancaTable('pep')">PEP</th>
-                                    <th onclick="sortCobrancaTable('projeto_gerencial')">Projeto Gerencial</th>
-                                    <th onclick="sortCobrancaTable('contrato_numero')">Contrato</th>
-                                    <th onclick="sortCobrancaTable('cidade')">Cidade</th>
-                                    <th onclick="sortCobrancaTable('uf')">UF</th>
-                                    <th onclick="sortCobrancaTable('os')">OS</th>
-                                    <th onclick="sortCobrancaTable('fase_atual')">Fase Atual</th>
-                                    <th onclick="sortCobrancaTable('fase_atual_de_para')">De Para</th>
-                                    <th onclick="sortCobrancaTable('data_cadastro')">Dt. Cadastro</th>
-                                    <th onclick="sortCobrancaTable('data_aprovacao')">Dt. Aprovação</th>
-                                    <th onclick="sortCobrancaTable('numero_medicao')">Nº Medição</th>
-                                    <th onclick="sortCobrancaTable('numero_pedido')">Nº Pedido</th>
-                                    <th onclick="sortCobrancaTable('mes_medicao')">Mês Medição</th>
-                                    <th onclick="sortCobrancaTable('valor_total')" style="text-align:right;">Valor Total</th>
-                                </tr>
-                            </thead>
-                            <tbody id="cobranca-table-body"></tbody>
-                        </table>
+                </div>
+
+                <!-- UF Map + Donut Charts Row -->
+                <div class="cobranca-grid-3cols">
+                    <!-- Map Card -->
+                    <div class="chart-card map-card">
+                        <div class="chart-header">
+                            <span class="chart-title"><i class="fa-solid fa-map-location-dot"></i> Distribuição por UF</span>
+                        </div>
+                        <div class="chart-body" id="cobranca-uf-map-container" style="height: 380px; position: relative;">
+                            <!-- SVG Map and Compact Cards -->
+                        </div>
                     </div>
-                    <div style="padding: 0 16px 16px;">
-                        <div class="cobranca-pagination">
-                            <span class="cobranca-pagination-info" id="cobranca-page-info"></span>
-                            <div class="cobranca-pagination-btns" id="cobranca-pagination-btns"></div>
+
+                    <!-- Donut Chart: CAPEX / OPEX -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title"><i class="fa-solid fa-chart-pie"></i> CAPEX / OPEX</span>
+                        </div>
+                        <div class="chart-body" style="height: 380px; position: relative; display: flex; align-items: center; justify-content: center; padding: 16px;">
+                            <canvas id="cobranca-capex-opex-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Donut Chart: Pedido Emitido / Não Emitido -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title"><i class="fa-solid fa-file-signature"></i> Status do Pedido</span>
+                        </div>
+                        <div class="chart-body" style="height: 380px; position: relative; display: flex; align-items: center; justify-content: center; padding: 16px;">
+                            <canvas id="cobranca-pedido-status-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Monthly Split + Aging Cards Row -->
+                <div class="cobranca-grid-2cols">
+                    <!-- Monthly Billing Evolution -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title"><i class="fa-solid fa-chart-gantt"></i> Faturamento Mensal (Com Pedido vs Sem Pedido)</span>
+                        </div>
+                        <div class="chart-body" style="height: 320px; position: relative; padding: 16px;">
+                            <canvas id="cobranca-monthly-split-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Aging Cards Card -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title"><i class="fa-solid fa-clock-history"></i> OSs Sem Aprovação por Tempo em Aberto (Aging)</span>
+                        </div>
+                        <div class="chart-body" style="padding: 20px; height: 320px; display: flex; align-items: center; justify-content: center;">
+                            <div class="cobranca-aging-container" id="cobranca-aging-cards-container" style="width: 100%;">
+                                <!-- Dynamically populated aging cards -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project, Activity & Item Details Row -->
+                <div class="cobranca-grid-2cols">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title"><i class="fa-solid fa-folder-tree"></i> Faturamento por Projeto</span>
+                        </div>
+                        <div class="chart-body" style="height: 320px; position: relative; padding: 16px;">
+                            <canvas id="cobranca-project-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title"><i class="fa-solid fa-person-digging"></i> Faturamento por Tipo de Atividade</span>
+                        </div>
+                        <div class="chart-body" style="height: 320px; position: relative; padding: 16px;">
+                            <canvas id="cobranca-activity-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item details + Raw Phase breakdown -->
+                <div class="cobranca-grid-2cols">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title"><i class="fa-solid fa-list-check"></i> Faturamento por Item Descritivo (Top 10)</span>
+                        </div>
+                        <div class="chart-body" style="height: 320px; position: relative; padding: 16px;">
+                            <canvas id="cobranca-item-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title"><i class="fa-solid fa-network-wired"></i> Faturamento por Fase Atual (Original)</span>
+                        </div>
+                        <div class="chart-body" style="height: 320px; position: relative; padding: 16px;">
+                            <canvas id="cobranca-fase-atual-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Sub Tab Pane: Relatório -->
+            <div id="subview-cobranca-report" class="subtab-pane">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <span class="chart-title"><i class="fa-solid fa-table"></i> Relatório Analítico de Cobrança</span>
+                        <button class="btn-export" onclick="exportCobrancaCSV()" title="Exportar CSV">
+                            <i class="fa-solid fa-file-csv"></i> Exportar
+                        </button>
+                    </div>
+                    <div style="padding: 0;">
+                        <div class="cobranca-table-controls" style="padding: 16px 16px 0 16px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;">
+                            <div class="cobranca-search-wrapper" style="position: relative; flex-grow: 1; max-width: 400px;">
+                                <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-secondary);"></i>
+                                <input type="text" id="cobranca-search" placeholder="Buscar por OS, PEP, Cidade, Projeto, Pedido..." oninput="applyCobrancaSearch()" style="width: 100%; padding: 10px 12px 10px 36px; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--bg-input); color: var(--text-primary); font-family: inherit; font-size: 14px; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--color-primary)'" onblur="this.style.borderColor='var(--border-color)'">
+                            </div>
+                            <span id="cobranca-results-count" style="font-size: 13px; color: var(--text-secondary); font-weight: 500;"></span>
+                        </div>
+                        
+                        <div class="table-wrapper" style="overflow-x: auto; margin-top: 16px; border-top: 1px solid var(--border-color);">
+                            <table class="data-table" id="cobranca-table" style="width: 100%; border-collapse: collapse;">
+                                <thead>
+                                    <tr>
+                                        <th onclick="sortCobrancaTable('categoria')">Categoria</th>
+                                        <th onclick="sortCobrancaTable('os')">OS</th>
+                                        <th onclick="sortCobrancaTable('cidade')">Cidade</th>
+                                        <th onclick="sortCobrancaTable('uf')">UF</th>
+                                        <th onclick="sortCobrancaTable('projeto')">Projeto</th>
+                                        <th onclick="sortCobrancaTable('projeto_gerencial')">Proj. Gerencial</th>
+                                        <th onclick="sortCobrancaTable('tipo_atividade')">Tipo Atividade</th>
+                                        <th onclick="sortCobrancaTable('fase_atual')">Fase Atual</th>
+                                        <th onclick="sortCobrancaTable('contrato_numero')">Contrato</th>
+                                        <th onclick="sortCobrancaTable('item_descritivo')">Item Descritivo</th>
+                                        <th onclick="sortCobrancaTable('tipo_despesa')">Tipo Despesa</th>
+                                        <th onclick="sortCobrancaTable('objeto_do_contrato')">Objeto Contrato</th>
+                                        <th onclick="sortCobrancaTable('valor_total')" style="text-align:right;">Valor Total</th>
+                                        <th onclick="sortCobrancaTable('data_cadastro')">Dt. Cadastro</th>
+                                        <th onclick="sortCobrancaTable('data_aprovacao')">Dt. Aprovação</th>
+                                        <th onclick="sortCobrancaTable('tempo_aprovacao')">Tempo Aprov.</th>
+                                        <th onclick="sortCobrancaTable('user_inclusao_medicao')">User Incl. Medição</th>
+                                        <th onclick="sortCobrancaTable('pep')">PEP</th>
+                                        <th onclick="sortCobrancaTable('numero_medicao')">Nº Medição</th>
+                                        <th onclick="sortCobrancaTable('numero_pedido')">Nº Pedido</th>
+                                        <th onclick="sortCobrancaTable('user_pedido')">User Pedido</th>
+                                        <th onclick="sortCobrancaTable('fase_atual_de_para')">Fase (De/Para)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cobranca-table-body">
+                                    <!-- Table data rows -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div style="padding: 16px; border-top: 1px solid var(--border-color);">
+                            <div class="cobranca-pagination" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                                <span class="cobranca-pagination-info" id="cobranca-page-info" style="font-size: 13px; color: var(--text-secondary);"></span>
+                                <div class="cobranca-pagination-btns" id="cobranca-pagination-btns" style="display: flex; gap: 6px; align-items: center;">
+                                    <!-- Pagination buttons -->
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
