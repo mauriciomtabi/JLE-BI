@@ -44,7 +44,7 @@
     <!-- Local Stylesheet -->
     <link rel="stylesheet" href="styles.css?v=2.1.5">
     <link rel="stylesheet" href="veiculos_styles.css?v=3.39">
-    <link rel="stylesheet" href="rh_styles.css?v=1.03">
+    
     <link rel="stylesheet" href="cobranca_styles.css?v=3.40">
 </head>
 <body>
@@ -69,9 +69,6 @@
 
             <a class="nav-item" id="nav-veiculos" onclick="switchView('veiculos')" style="display:none;">
                 <i class="fa-solid fa-car"></i> <span>Veículos</span>
-            </a>
-            <a class="nav-item" id="nav-rh" onclick="switchView('rh')" style="display:none;">
-                <i class="fa-solid fa-people-roof"></i> <span>RH</span>
             </a>
             <a class="nav-item" id="nav-cobranca" onclick="switchView('cobranca')" style="display:none;">
                 <i class="fa-solid fa-file-invoice-dollar"></i> <span>Cobrança</span>
@@ -740,297 +737,6 @@
 
         </div>
 
-        <!-- VIEW 6: OFFICE LAYOUT (RH) -->
-        <div id="view-rh-container" class="view-panel" style="display: none;">
-            <div class="rh-layout-wrapper">
-                
-                <!-- SIDEBAR ESQUERDA: Roster e Funcionários -->
-                <aside class="rh-sub-sidebar">
-                    <!-- Painel do Roster (Modo Visualização) -->
-                    <div class="roster-section" id="rh-roster-panel">
-                        <div class="roster-header">
-                            <span class="roster-title">Sem Posição (Roster)</span>
-                            <span class="roster-count" id="roster-count">0</span>
-                        </div>
-                        
-                        <div class="search-box">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                            <input type="text" id="roster-search" placeholder="Pesquisar funcionário...">
-                        </div>
-
-                        <!-- Filtros do Roster (Painel Lateral) -->
-                        <div class="roster-filters-container">
-                            <div class="roster-filter-row">
-                                <div class="roster-filter-item">
-                                    <label>Setor</label>
-                                    <select id="filter-sector">
-                                        <option value="all">Todos</option>
-                                    </select>
-                                </div>
-                                <div class="roster-filter-item">
-                                    <label>Turno</label>
-                                    <select id="filter-shift">
-                                        <option value="all">Todos</option>
-                                        <option value="Manhã">Manhã</option>
-                                        <option value="Tarde">Tarde</option>
-                                        <option value="Noite">Noite</option>
-                                        <option value="Integral">Integral</option>
-                                        <option value="Flexível">Flexível</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="roster-filter-row">
-                                <div class="roster-filter-item">
-                                    <label>Equipamento</label>
-                                    <select id="filter-equipment">
-                                        <option value="all">Qualquer</option>
-                                        <option value="Computador">Computador</option>
-                                        <option value="Monitor">Monitor</option>
-                                        <option value="Headset">Headset</option>
-                                        <option value="Telefone IP">Telefone IP</option>
-                                        <option value="Teclado/Mouse">Teclado/Mouse</option>
-                                    </select>
-                                </div>
-                                <div class="roster-filter-item align-end">
-                                    <button class="btn-clear-roster-filters" id="btn-clear-filters" title="Limpar Filtros">
-                                        <i class="fa-solid fa-filter-circle-xmark"></i> Limpar
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Lista de Funcionários sem mesa -->
-                        <div class="roster-list" id="roster-list">
-                            <!-- Gerado dinamicamente via JS -->
-                        </div>
-                    </div>
-                    
-                    <div class="rh-sub-sidebar-footer" id="rh-roster-footer">
-                        <button class="btn-sidebar-action primary" id="btn-add-employee-modal">
-                            <i class="fa-solid fa-user-plus"></i> Novo Funcionário
-                        </button>
-                        <button class="btn-sidebar-action" id="btn-manage-sectors-modal">
-                            <i class="fa-solid fa-layer-group"></i> Gerenciar Setores
-                        </button>
-                    </div>
-
-                    <!-- Paleta de Elementos (Modo Designer) -->
-                    <div class="designer-palette" id="designer-element-palette" style="display: none;">
-                        <div class="palette-header">
-                            <span class="palette-title">Paleta de Elementos</span>
-                        </div>
-                        
-                        <div class="palette-groups-container">
-                            <div class="palette-group">
-                                <div class="palette-group-title">Ferramentas</div>
-                                <button class="palette-btn active" id="tool-select" onclick="setDesignerTool('select')">
-                                    <i class="fa-solid fa-arrow-pointer"></i>
-                                    <span>Ponteiro de Seleção</span>
-                                </button>
-                            </div>
-                            
-                            <div class="palette-group">
-                                <div class="palette-group-title">Estrutura (Estilo CAD)</div>
-                                <button class="palette-btn" id="tool-draw-wall" onclick="setDesignerTool('draw-wall')">
-                                    <i class="fa-solid fa-pen-ruler"></i>
-                                    <span>Desenhar Parede</span>
-                                </button>
-                                 <button class="palette-btn" id="tool-draw-partition" onclick="setDesignerTool('draw-partition')" style="display: none;">
-                                    <i class="fa-solid fa-border-none"></i>
-                                    <span>Desenhar Divisória</span>
-                                </button>
-                                <button class="palette-btn" id="tool-draw-zone" onclick="setDesignerTool('draw-zone')" style="display: none;">
-                                    <i class="fa-solid fa-vector-square"></i>
-                                    <span>Desenhar Área (Setor)</span>
-                                </button>
-                            </div>
-                            
-                            <div class="palette-group" style="display: none;">
-                                <div class="palette-group-title">Aberturas & Móveis</div>
-                                <button class="palette-btn" id="tool-add-door" onclick="setDesignerTool('add-door')">
-                                    <i class="fa-solid fa-door-open"></i>
-                                    <span>Porta Swing</span>
-                                </button>
-                                <button class="palette-btn" id="tool-add-desk" onclick="setDesignerTool('add-desk')">
-                                    <i class="fa-solid fa-table"></i>
-                                    <span>Mesa de Trabalho</span>
-                                </button>
-                                <button class="palette-btn" id="tool-add-meeting-table" onclick="setDesignerTool('add-meeting-table')">
-                                    <i class="fa-solid fa-users-rectangle"></i>
-                                    <span>Mesa Reuniões</span>
-                                </button>
-                            </div>
-                            
-                            <div class="palette-group" style="display: none;">
-                                <div class="palette-group-title">Equipamentos & Copa</div>
-                                <button class="palette-btn" id="tool-add-printer" onclick="setDesignerTool('add-printer')">
-                                    <i class="fa-solid fa-print"></i>
-                                    <span>Impressora</span>
-                                </button>
-                                <button class="palette-btn" id="tool-add-cafe" onclick="setDesignerTool('add-cafe')">
-                                    <i class="fa-solid fa-mug-hot"></i>
-                                    <span>Área de Café</span>
-                                </button>
-                            </div>
-
-                            <div class="palette-group" style="display: none;">
-                                <div class="palette-group-title">Banheiro</div>
-                                <button class="palette-btn" id="tool-add-toilet" onclick="setDesignerTool('add-toilet')">
-                                    <i class="fa-solid fa-toilet"></i>
-                                    <span>Vaso Sanitário</span>
-                                </button>
-                                <button class="palette-btn" id="tool-add-sink" onclick="setDesignerTool('add-sink')">
-                                    <i class="fa-solid fa-faucet-drip"></i>
-                                    <span>Pia Sanitária</span>
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <div class="designer-palette-help">
-                            <p><strong>Dica de Desenho:</strong> Clique no mapa para iniciar a parede, mova o mouse e clique novamente. Segure <strong>SHIFT</strong> para diagonal livre.</p>
-                        </div>
-                    </div>
-                </aside>
-
-                <!-- ÁREA CENTRAL/DIREITA: Conteúdo Principal -->
-                <div class="rh-main-content">
-                    
-                    <!-- TOP BAR DE CONTROLES LOCAL -->
-                    <div class="rh-controls-bar">
-                        <div class="rh-header-controls">
-                            <span id="active-layout-desc" style="display:none;"></span>
-                            <!-- Seletor de Versão de Layout -->
-                            <select class="layout-selector" id="layout-selector" style="display: none;">
-                                <!-- Carregado do Supabase -->
-                                <option value="default">Layout Padrão (Local)</option>
-                            </select>
-                            
-                            <button class="btn-sidebar-action" id="btn-save-layout" style="width: auto; padding: 8px 16px; display: none;">
-                                <i class="fa-solid fa-cloud-arrow-up"></i> Salvar Layout
-                            </button>
-                            
-                            <button class="btn-sidebar-action" id="btn-create-layout" style="width: auto; padding: 8px 16px; display: none;">
-                                <i class="fa-solid fa-plus"></i> Novo Layout
-                            </button>
-
-                            <!-- Toggle do Modo Designer -->
-                            <div class="mode-toggle" id="mode-toggle">
-                                <div class="mode-toggle-btn active view-mode" id="btn-mode-view">
-                                    <i class="fa-solid fa-eye"></i> Visualizar
-                                </div>
-                                <div class="mode-toggle-btn" id="btn-mode-design">
-                                    <i class="fa-solid fa-pen-ruler"></i> Designer
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- METRICAS KPI -->
-                    <section class="rh-metrics-row" style="display: none;">
-                        <div class="metric-card">
-                            <div class="metric-icon"><i class="fa-solid fa-chair"></i></div>
-                            <div class="metric-info">
-                                <span class="metric-value" id="metric-total-desks">0</span>
-                                <span class="metric-label">Posições Totais</span>
-                            </div>
-                        </div>
-                        
-                        <div class="metric-card">
-                            <div class="metric-icon" style="color: var(--color-success);"><i class="fa-solid fa-user-check"></i></div>
-                            <div class="metric-info">
-                                <span class="metric-value" id="metric-occupied-desks">0</span>
-                                <span class="metric-label">Mesas Ocupadas</span>
-                            </div>
-                        </div>
-                        
-                        <div class="metric-card">
-                            <div class="metric-icon warning"><i class="fa-solid fa-circle-minus"></i></div>
-                            <div class="metric-info">
-                                <span class="metric-value" id="metric-empty-desks">0</span>
-                                <span class="metric-label">Mesas Livres</span>
-                            </div>
-                        </div>
-                        
-                        <div class="metric-card">
-                            <div class="metric-icon" style="color: var(--color-info);"><i class="fa-solid fa-users"></i></div>
-                            <div class="metric-info">
-                                <span class="metric-value" id="metric-total-employees">0</span>
-                                <span class="metric-label">Total Pessoas</span>
-                            </div>
-                        </div>
-
-                        <div class="metric-card">
-                            <div class="metric-icon" style="color: var(--color-secondary-light);"><i class="fa-solid fa-desktop"></i></div>
-                            <div class="metric-info">
-                                <span class="metric-value" id="metric-total-assets">0</span>
-                                <span class="metric-label">Equipamentos</span>
-                            </div>
-                        </div>
-                    </section>
-                    
-                    <!-- CANVAS DO MAPA SVG -->
-                    <section class="canvas-container">
-                        <!-- SVG Canvas Interativo -->
-                        <svg id="office-svg" class="svg-canvas" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Grupo com transformações de Pan e Zoom -->
-                            <g id="pan-zoom-group">
-                                <!-- Imagem da Planta Original como fundo opcional -->
-                                <image id="svg-background-image" href="assets/layout_original.png" x="75" y="50" width="825" height="830" opacity="0.35" style="display: none; pointer-events: none;" />
-                                
-                                <!-- Zonas Coloridas dos Setores (Fundo) -->
-                                <g id="svg-sectors-background"></g>
-                                
-                                <!-- Desenho da Planta Baixa Estática (Paredes, Portas) -->
-                                <g id="svg-walls-static"></g>
-                                
-                                <!-- Mesas e Computadores (Dinâmico) -->
-                                <g id="svg-desks-dynamic"></g>
-                            </g>
-                        </svg>
-                        
-                        <!-- Controles Flutuantes de Zoom/Pan -->
-                        <div class="canvas-controls">
-                            <button class="btn-floating" id="btn-zoom-in" title="Aumentar Zoom"><i class="fa-solid fa-plus"></i></button>
-                            <button class="btn-floating" id="btn-zoom-out" title="Diminuir Zoom"><i class="fa-solid fa-minus"></i></button>
-                            <button class="btn-floating" id="btn-zoom-reset" title="Centralizar e Resetar"><i class="fa-solid fa-arrows-to-eye"></i></button>
-                            <button class="btn-floating" id="btn-toggle-original" title="Exibir Planta Original"><i class="fa-solid fa-map"></i></button>
-                        </div>
-                        
-                        <!-- Barra de Ferramentas de Design (Somente Modo Designer) -->
-                        <div class="designer-toolbar" id="designer-toolbar" style="display: none;">
-                            <span id="selected-element-indicator" style="font-size: 11px; font-weight: 700; color: var(--color-secondary); text-transform: uppercase; letter-spacing: 0.5px;">Selecione um item</span>
-                            <div class="designer-toolbar-divider"></div>
-                            <button class="btn-toolbar" id="btn-rotate-desk">
-                                <i class="fa-solid fa-rotate-right"></i> Rotacionar
-                            </button>
-                            <button class="btn-toolbar" id="btn-delete-desk" style="color: var(--color-danger);">
-                                <i class="fa-solid fa-trash-can"></i> Excluir
-                            </button>
-                        </div>
-                        
-                        <!-- Legendas do Layout -->
-                        <div class="canvas-legend" id="canvas-legend">
-                            <span class="legend-title">Setores do Escritório</span>
-                            <!-- Preenchido dinamicamente via JS -->
-                        </div>
-                    </section>
-                    
-                    <!-- PAINEL SLIDE-OVER (DETALHES DO FUNCIONÁRIO/MESA) -->
-                    <div class="slide-over" id="slide-over">
-                        <div class="slide-over-header">
-                            <span class="slide-over-title" id="slide-title">Detalhes da Posição</span>
-                            <button class="btn-close-slide" id="btn-close-slide"><i class="fa-solid fa-xmark"></i></button>
-                        </div>
-                        
-                        <div class="slide-over-body" id="slide-body">
-                            <!-- Conteúdo gerado dinamicamente via JS -->
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-
         <!-- VIEW 7: COBRANCA -->
         <div id="view-cobranca-container" class="view-panel" style="display: none;">
             <!-- Filters bar -->
@@ -1112,7 +818,7 @@
                         <i class="fa-solid fa-file-csv"></i> Exportar
                     </button>
                 </div>
-                <div class="chart-body" style="padding: 0;">
+                <div style="padding: 0;">
                     <div class="cobranca-table-controls" style="padding: 16px 16px 0 16px;">
                         <div class="cobranca-search-wrapper">
                             <i class="fa-solid fa-magnifying-glass"></i>
@@ -1197,141 +903,6 @@
         </div>
         
     </main>
-
-    <!-- ================= MODAIS DE RH ================= -->
-    
-    <!-- Modal: Adicionar/Editar Funcionário -->
-    <div class="rh-modal-overlay" id="modal-employee">
-        <div class="rh-modal-content">
-            <div class="rh-modal-header">
-                <h2 id="employee-modal-title">Novo Funcionário</h2>
-                <button class="rh-btn-close-modal" id="btn-close-employee-modal"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <form id="form-employee">
-                <div class="rh-modal-body">
-                    <input type="hidden" id="emp-id">
-                    
-                    <div class="rh-form-group">
-                        <label for="emp-name">Nome Completo</label>
-                        <input type="text" id="emp-name" required placeholder="Ex: João da Silva">
-                    </div>
-                    
-                    <div class="rh-form-group">
-                        <label for="emp-sector">Setor</label>
-                        <select id="emp-sector" required>
-                            <!-- Preenchido via JS -->
-                        </select>
-                    </div>
-                    
-                    <div class="rh-form-group">
-                        <label for="emp-shift">Turno</label>
-                        <select id="emp-shift" required>
-                            <option value="Manhã">Manhã</option>
-                            <option value="Tarde">Tarde</option>
-                            <option value="Noite">Noite</option>
-                            <option value="Integral" selected>Integral</option>
-                            <option value="Flexível">Flexível</option>
-                        </select>
-                    </div>
-                    
-                    <div class="rh-form-group">
-                        <label for="emp-hours">Carga Horária Semanal</label>
-                        <select id="emp-hours" required>
-                            <option value="44h" selected>44 horas semanais</option>
-                            <option value="40h">40 horas semanais</option>
-                            <option value="30h">30 horas semanais</option>
-                            <option value="20h">20 horas semanais</option>
-                            <option value="Estágio (30h)">Estágio (30h)</option>
-                        </select>
-                    </div>
-                    
-                    <div class="rh-form-group">
-                        <label for="emp-activities">Principais Atividades</label>
-                        <textarea id="emp-activities" rows="3" placeholder="Descreva sucintamente as principais atividades desenvolvidas..."></textarea>
-                    </div>
-                </div>
-                <div class="rh-modal-footer">
-                    <button type="button" class="rh-btn-modal cancel" id="btn-cancel-employee">Cancelar</button>
-                    <button type="submit" class="rh-btn-modal confirm">Salvar</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Modal: Gerenciar Setores -->
-    <div class="rh-modal-overlay" id="modal-sectors">
-        <div class="rh-modal-content">
-            <div class="rh-modal-header">
-                <h2>Gerenciar Setores e Cores</h2>
-                <button class="rh-btn-close-modal" id="btn-close-sectors-modal"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div class="rh-modal-body">
-                <div style="display: flex; gap: 8px; margin-bottom: 15px;">
-                    <input type="text" id="new-sector-name" placeholder="Nome do novo setor..." style="flex: 1;">
-                    <button class="btn-sidebar-action primary" id="btn-create-sector" style="width: auto;">
-                        Adicionar
-                    </button>
-                </div>
-                
-                <div style="max-height: 250px; overflow-y: auto;" id="sectors-list-container">
-                    <!-- Lista de setores com bolinha de cor e botão de deletar -->
-                </div>
-            </div>
-            <div class="rh-modal-footer">
-                <button class="rh-btn-modal confirm" id="btn-save-sectors-close">Concluir</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal: Criar Novo Layout (Versão) -->
-    <div class="rh-modal-overlay" id="modal-layout">
-        <div class="rh-modal-content">
-            <div class="rh-modal-header">
-                <h2>Novo Rascunho de Layout</h2>
-                <button class="rh-btn-close-modal" id="btn-close-layout-modal"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div class="rh-modal-body">
-                <div class="rh-form-group">
-                    <label for="new-layout-name">Nome do Layout</label>
-                    <input type="text" id="new-layout-name" required placeholder="Ex: Layout Planejado 2026 Q4">
-                </div>
-                
-                <div class="rh-form-group">
-                    <label for="new-layout-base">Basear em qual layout existente?</label>
-                    <select id="new-layout-base">
-                        <option value="current">Layout Atual em Exibição</option>
-                        <option value="empty">Layout Vazio (Somente paredes)</option>
-                    </select>
-                </div>
-            </div>
-            <div class="rh-modal-footer">
-                <button class="rh-btn-modal cancel" id="btn-cancel-layout">Cancelar</button>
-                <button class="rh-btn-modal confirm" id="btn-submit-layout">Criar Layout</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Seleção de Setor para Zonas -->
-    <div class="rh-modal-overlay" id="modal-zone">
-        <div class="rh-modal-content" style="max-width: 400px;">
-            <div class="rh-modal-header">
-                <h2>Vincular Setor à Área</h2>
-                <button class="rh-btn-close-modal" id="btn-close-zone-modal"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div class="rh-modal-body">
-                <div class="rh-form-group">
-                    <label for="new-zone-sector">Selecione o Setor correspondente</label>
-                    <select id="new-zone-sector" class="rh-select-field" style="width: 100%; padding: 10px; border-radius: 6px; background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-color);">
-                        <!-- Será preenchido dinamicamente via JS -->
-                    </select>
-                </div>
-            </div>
-            <div class="rh-modal-footer">
-                <button class="rh-btn-modal cancel" id="btn-cancel-zone">Cancelar</button>
-                <button class="rh-btn-modal confirm" id="btn-submit-zone">Vincular e Criar</button>
-            </div>
-        </div>
-    </div>
 
     <!-- Conteiner de Toast de Notificação -->
     <div class="toast-container" id="toast-container"></div>
@@ -1480,7 +1051,7 @@
 
     <script src="veiculos_data.js?v=3.35"></script>
     <script src="veiculos_app.js?v=3.39"></script>
-    <script src="rh_app.js?v=1.02"></script>
+    
     <script src="cobranca_data.js?v=3.40"></script>
     <script src="cobranca_app.js?v=3.40"></script>
 
@@ -2043,7 +1614,7 @@
         const ALL_PAGES = [
             { id: 'dashboard',    label: 'Dashboard Financeiro',    icon: 'fa-sack-dollar',       navId: 'nav-dashboard' },
             { id: 'veiculos',     label: 'Veículos',                icon: 'fa-car',               navId: 'nav-veiculos' },
-            { id: 'rh',           label: 'RH',                      icon: 'fa-people-roof',       navId: 'nav-rh' },
+            
             { id: 'cobranca',     label: 'Cobrança',                icon: 'fa-file-invoice-dollar', navId: 'nav-cobranca' },
             { id: 'admin',        label: 'Painel Admin',            icon: 'fa-shield-halved',    navId: 'nav-admin',        adminOnly: true },
         ];
@@ -2476,15 +2047,7 @@
                 } else {
                     applyVeiculosFilters();
                 }
-            } else if (viewName === 'rh') {
-                document.getElementById('filters-container').style.display = 'none';
-                if (mobileToggleBtn) mobileToggleBtn.style.display = 'none';
-                document.getElementById('view-title').innerText = 'Layout de Escritório';
-                document.getElementById('view-subtitle').innerHTML = 'Gerencie posições, setores e funcionários (RH)';
-                if (window.renderRHApp) {
-                    window.renderRHApp();
-                }
-            } else if (viewName === 'cobranca') {
+            }} else if (viewName === 'cobranca') {
                 document.getElementById('filters-container').style.display = 'none';
                 if (mobileToggleBtn) mobileToggleBtn.style.display = '';
                 document.getElementById('view-title').innerText = 'Acompanhamento de Cobrança';
@@ -2519,7 +2082,7 @@
         const PAGES_CATALOG = [
             { id: 'dashboard',    label: 'Dashboard Financeiro',     icon: 'fa-sack-dollar' },
             { id: 'veiculos',     label: 'Veículos',                 icon: 'fa-car' },
-            { id: 'rh',           label: 'RH',                       icon: 'fa-people-roof' },
+            
             { id: 'cobranca',     label: 'Cobrança',                 icon: 'fa-file-invoice-dollar' },
         ];
 
