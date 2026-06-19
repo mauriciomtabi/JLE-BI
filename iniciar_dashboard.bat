@@ -1,19 +1,18 @@
 @echo off
-title BI Fluxo de Caixa JLE Telecom - Atualizador
+title BI JLE Telecom - Atualizador de Dados
 echo ==========================================================
-echo       JLE TELECOM - BI FLUXO DE CAIXA ANALITICO
+echo       JLE TELECOM - ATUALIZADOR DO BI (COMPLETO)
 echo ==========================================================
 echo.
-echo Executando script de ETL (Extracao, Limpeza e Unificacao)...
-echo Lendo planilha original em rede:
-echo \\10.121.21.252\financeiro\Angelita\2026\FLUXO DIARIO
+echo Executando script de ETL (Processamento e Consolidação)...
+echo Lendo planilhas em rede...
 echo.
-powershell -ExecutionPolicy Bypass -File .\update_dashboard.ps1
+powershell -ExecutionPolicy Bypass -File .\update_all.ps1
 echo.
 echo ==========================================================
-echo Processamento concluido! A base local 'data.js' foi gerada.
+echo Processamento concluído! As bases de dados foram geradas.
 echo.
-echo Abrindo o Painel do BI no seu navegador padrao...
+echo Abrindo o Painel do BI no seu navegador padrão...
 echo ==========================================================
 start "" "index.html"
 timeout /t 3 >nul
