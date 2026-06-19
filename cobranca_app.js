@@ -1183,21 +1183,25 @@ function renderCapexOpexChart(th) {
 }
 
 
-// Gráfico Valor Mensal (Com Pedido vs Sem Pedido) - Barras Empilhadas
+// Gráfico Valor Mensal (Pedido Emitido vs Sem Aprovação vs Aprovado Aguardando Pedido) - Barras Empilhadas
 function renderMonthlySplitChart(th) {
     const canvas = document.getElementById('cobranca-monthly-split-chart');
     if (!canvas) return;
 
-    const monthlyMetrics = {}; // 'YYYY/MM' => { comPed: X, semPed: Y }
+    const monthlyMetrics = {}; // 'YYYY/MM' => { comPed: X, aprov: Y, semAprov: Z }
     cobrancaFilteredData.forEach(r => {
         const m = r.mes_medicao || 'N/D';
         if (!monthlyMetrics[m]) {
-            monthlyMetrics[m] = { comPed: 0, semPed: 0 };
+            monthlyMetrics[m] = { comPed: 0, aprov: 0, semAprov: 0 };
         }
-        if (r.fase_atual_de_para === 'PEDIDO EMITIDO') {
+        
+        const faseDePara = String(r.fase_atual_de_para || '').toUpperCase().trim();
+        if (faseDePara === 'PEDIDO EMITIDO') {
             monthlyMetrics[m].comPed += (r.valor_total || 0);
+        } else if (faseDePara === 'APROVADO') {
+            monthlyMetrics[m].aprov += (r.valor_total || 0);
         } else {
-            monthlyMetrics[m].semPed += (r.valor_total || 0);
+            monthlyMetrics[m].semAprov += (r.valor_total || 0);
         }
     });
 
@@ -1208,7 +1212,8 @@ function renderMonthlySplitChart(th) {
     });
 
     const comPedData = sortedMonths.map(m => monthlyMetrics[m].comPed);
-    const semPedData = sortedMonths.map(m => monthlyMetrics[m].semPed);
+    const aprovData = sortedMonths.map(m => monthlyMetrics[m].aprov);
+    const semAprovData = sortedMonths.map(m => monthlyMetrics[m].semAprov);
 
     cobrancaCharts.monthlySplit = new Chart(canvas, {
         type: 'bar',
@@ -1229,8 +1234,21 @@ function renderMonthlySplitChart(th) {
                     }
                 },
                 {
-                    label: 'Sem Pedido',
-                    data: semPedData,
+                    label: 'Aprovado Aguardando Pedido',
+                    data: aprovData,
+                    backgroundColor: '#00b4d8',
+                    borderColor: '#00b4d8',
+                    borderRadius: 2,
+                    hoverBackgroundColor: '#00d0fc',
+                    hoverBorderColor: '#ffffff',
+                    hoverBorderWidth: 2,
+                    datalabels: {
+                        display: false
+                    }
+                },
+                {
+                    label: 'Sem Aprovação',
+                    data: semAprovData,
                     backgroundColor: '#f39f18',
                     borderColor: '#f39f18',
                     borderRadius: 2,
@@ -1246,8 +1264,9 @@ function renderMonthlySplitChart(th) {
                         formatter: (value, context) => {
                             const index = context.dataIndex;
                             const comPedVal = context.chart.data.datasets[0].data[index] || 0;
-                            const semPedVal = context.chart.data.datasets[1].data[index] || 0;
-                            const total = comPedVal + semPedVal;
+                            const aprovVal = context.chart.data.datasets[1].data[index] || 0;
+                            const semAprovVal = context.chart.data.datasets[2].data[index] || 0;
+                            const total = comPedVal + aprovVal + semAprovVal;
                             return total > 0 ? formatCobrancaShortVal(total) : '';
                         }
                     }
