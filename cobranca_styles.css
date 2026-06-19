@@ -355,3 +355,15 @@
 .subtab-pane.active {
     display: flex;
 }
+
+/* -- Scrollable chart body for descriptive items -- */
+#view-cobranca-container .cobranca-item-chart-body {
+    height: 320px !important;
+    align-items: flex-start;
+    overflow-y: auto;
+    scrollbar-width: none !important; /* Firefox */
+    -ms-overflow-style: none !important; /* IE 10+ */
+}
+#view-cobranca-container .cobranca-item-chart-body::-webkit-scrollbar {
+    display: none !important; /* Chrome, Safari, Opera */
+}

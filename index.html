@@ -804,7 +804,7 @@
                 <!-- Phase Pipeline Flow (Stepper showing phases interlinking) -->
                 <div class="chart-card">
                     <div class="chart-header">
-                        <span class="chart-title"><i class="fa-solid fa-route"></i> Fluxo de Faturamento por Fase</span>
+                        <span class="chart-title">Fluxo de Faturamento por Fase</span>
                     </div>
                     <div style="padding: 24px; overflow-x: auto; width: 100%;">
                         <div class="cobranca-pipeline" id="cobranca-pipeline-container">
@@ -818,7 +818,7 @@
                     <!-- Map Card -->
                     <div class="chart-card map-card">
                         <div class="chart-header">
-                            <span class="chart-title"><i class="fa-solid fa-map-location-dot"></i> Distribuição por UF</span>
+                            <span class="chart-title">Distribuição por UF</span>
                         </div>
                         <div class="chart-body" id="cobranca-uf-map-container" style="height: 380px; position: relative;">
                             <!-- SVG Map and Compact Cards -->
@@ -828,7 +828,7 @@
                     <!-- Donut Chart: CAPEX / OPEX -->
                     <div class="chart-card">
                         <div class="chart-header">
-                            <span class="chart-title"><i class="fa-solid fa-chart-pie"></i> CAPEX / OPEX</span>
+                            <span class="chart-title">CAPEX / OPEX</span>
                         </div>
                         <div class="chart-body" style="height: 380px; position: relative; display: flex; align-items: center; justify-content: center; padding: 16px;">
                             <canvas id="cobranca-capex-opex-chart"></canvas>
@@ -838,7 +838,7 @@
                     <!-- Donut Chart: Pedido Emitido / Não Emitido -->
                     <div class="chart-card">
                         <div class="chart-header">
-                            <span class="chart-title"><i class="fa-solid fa-file-signature"></i> Status do Pedido</span>
+                            <span class="chart-title">Status do Pedido</span>
                         </div>
                         <div class="chart-body" style="height: 380px; position: relative; display: flex; align-items: center; justify-content: center; padding: 16px;">
                             <canvas id="cobranca-pedido-status-chart"></canvas>
@@ -851,7 +851,7 @@
                     <!-- Monthly Billing Evolution -->
                     <div class="chart-card">
                         <div class="chart-header">
-                            <span class="chart-title"><i class="fa-solid fa-chart-gantt"></i> Faturamento Mensal (Com Pedido vs Sem Pedido)</span>
+                            <span class="chart-title">Faturamento Mensal (Com Pedido vs Sem Pedido)</span>
                         </div>
                         <div class="chart-body" style="height: 320px; position: relative; padding: 16px;">
                             <canvas id="cobranca-monthly-split-chart"></canvas>
@@ -861,7 +861,7 @@
                     <!-- Aging Cards Card -->
                     <div class="chart-card">
                         <div class="chart-header">
-                            <span class="chart-title"><i class="fa-solid fa-clock-history"></i> OSs Sem Aprovação por Tempo em Aberto (Aging)</span>
+                            <span class="chart-title">OSs Sem Aprovação por Tempo em Aberto (Aging)</span>
                         </div>
                         <div class="chart-body" style="padding: 20px; height: 320px; display: flex; align-items: center; justify-content: center;">
                             <div class="cobranca-aging-container" id="cobranca-aging-cards-container" style="width: 100%;">
@@ -871,42 +871,36 @@
                     </div>
                 </div>
 
-                <!-- Project, Activity & Item Details Row -->
+                <!-- Activity & Phase Breakdown Row -->
                 <div class="cobranca-grid-2cols">
                     <div class="chart-card">
                         <div class="chart-header">
-                            <span class="chart-title"><i class="fa-solid fa-folder-tree"></i> Faturamento por Projeto</span>
-                        </div>
-                        <div class="chart-body" style="height: 320px; position: relative; padding: 16px;">
-                            <canvas id="cobranca-project-chart"></canvas>
-                        </div>
-                    </div>
-                    <div class="chart-card">
-                        <div class="chart-header">
-                            <span class="chart-title"><i class="fa-solid fa-person-digging"></i> Faturamento por Tipo de Atividade</span>
+                            <span class="chart-title">Faturamento por Tipo de Atividade</span>
                         </div>
                         <div class="chart-body" style="height: 320px; position: relative; padding: 16px;">
                             <canvas id="cobranca-activity-chart"></canvas>
                         </div>
                     </div>
-                </div>
-
-                <!-- Item details + Raw Phase breakdown -->
-                <div class="cobranca-grid-2cols">
                     <div class="chart-card">
                         <div class="chart-header">
-                            <span class="chart-title"><i class="fa-solid fa-list-check"></i> Faturamento por Item Descritivo (Top 10)</span>
-                        </div>
-                        <div class="chart-body" style="height: 320px; position: relative; padding: 16px;">
-                            <canvas id="cobranca-item-chart"></canvas>
-                        </div>
-                    </div>
-                    <div class="chart-card">
-                        <div class="chart-header">
-                            <span class="chart-title"><i class="fa-solid fa-network-wired"></i> Faturamento por Fase Atual (Original)</span>
+                            <span class="chart-title">Faturamento por Fase Atual (Original)</span>
                         </div>
                         <div class="chart-body" style="height: 320px; position: relative; padding: 16px;">
                             <canvas id="cobranca-fase-atual-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item Details Row (Full Width & Scrollable) -->
+                <div class="cobranca-full-width-row" style="margin-bottom: 24px;">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title">Faturamento por Item Descritivo</span>
+                        </div>
+                        <div class="chart-body cobranca-item-chart-body">
+                            <div style="width: 100%; height: 320px; position: relative;">
+                                <canvas id="cobranca-item-chart"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>

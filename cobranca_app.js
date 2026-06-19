@@ -19,7 +19,6 @@ let cobrancaCharts = {
     capexOpex: null,
     pedidoStatus: null,
     monthlySplit: null,
-    project: null,
     activity: null,
     item: null,
     faseAtual: null
@@ -498,6 +497,7 @@ function renderCobrancaUFMap() {
     });
 
     const maxVal = Math.max(ufSums['RS'], ufSums['SC'], ufSums['PR'], 1);
+    const totalFaturamento = ufSums['PR'] + ufSums['SC'] + ufSums['RS'];
 
     const getColorForUF = (uf) => {
         const vol = ufSums[uf];
@@ -508,6 +508,10 @@ function renderCobrancaUFMap() {
     const isSelectPR = filterSelectedUF === 'PR' ? 'active' : (filterSelectedUF ? 'dimmed' : '');
     const isSelectSC = filterSelectedUF === 'SC' ? 'active' : (filterSelectedUF ? 'dimmed' : '');
     const isSelectRS = filterSelectedUF === 'RS' ? 'active' : (filterSelectedUF ? 'dimmed' : '');
+
+    const prPct = totalFaturamento > 0 ? ((ufSums['PR'] / totalFaturamento) * 100).toFixed(1).replace('.', ',') : '0,0';
+    const scPct = totalFaturamento > 0 ? ((ufSums['SC'] / totalFaturamento) * 100).toFixed(1).replace('.', ',') : '0,0';
+    const rsPct = totalFaturamento > 0 ? ((ufSums['RS'] / totalFaturamento) * 100).toFixed(1).replace('.', ',') : '0,0';
 
     container.innerHTML = `
         <div class="uf-premium-container">
@@ -584,71 +588,88 @@ function renderCobrancaUFMap() {
                 </svg>
             </div>
 
-            <div class="uf-panels-side">
-                <!-- PARANÁ CAPSULE -->
-                <div class="uf-compact-card pr-card ${isSelectPR}" id="cobranca-card-UF-PR" onclick="toggleCobrancaUFFromMap('PR')" onmouseenter="handleCobrancaCardHover('PR')" onmouseleave="handleCobrancaCardLeave('PR')">
-                    <div class="uf-compact-header">
-                        <span class="uf-compact-name">
-                            <span class="uf-status-indicator pr-dot"></span>
-                            <strong>PR - Paraná</strong>
-                        </span>
-                    </div>
-                    <div class="uf-compact-content">
-                        <div class="uf-compact-main-stat">
-                            <span class="uf-stat-label"><i class="fa-solid fa-list-ol"></i> Lançamentos</span>
-                            <span class="uf-stat-value">${ufCounts['PR'].toLocaleString('pt-BR')}</span>
-                        </div>
-                        <div class="uf-compact-sub-stats" style="margin-top:4px;">
-                            <div class="uf-sub-stat">
-                                <span class="uf-sub-val" style="color: var(--color-primary-light); font-weight:700;">${formatCobrancaCurrency(ufSums['PR'])}</span>
-                            </div>
-                        </div>
-                    </div>
+            <!-- PARANÁ CAPSULE -->
+            <div class="uf-compact-card pr-card ${isSelectPR}" id="cobranca-card-UF-PR" onclick="toggleCobrancaUFFromMap('PR')" onmouseenter="handleCobrancaCardHover('PR')" onmouseleave="handleCobrancaCardLeave('PR')">
+                <div class="uf-compact-header">
+                    <span class="uf-compact-name">
+                        <span class="uf-status-indicator pr-dot"></span>
+                        <strong>Paraná</strong>
+                    </span>
                 </div>
-
-                <!-- SANTA CATARINA CAPSULE -->
-                <div class="uf-compact-card sc-card ${isSelectSC}" id="cobranca-card-UF-SC" onclick="toggleCobrancaUFFromMap('SC')" onmouseenter="handleCobrancaCardHover('SC')" onmouseleave="handleCobrancaCardLeave('SC')">
-                    <div class="uf-compact-header">
-                        <span class="uf-compact-name">
-                            <span class="uf-status-indicator sc-dot"></span>
-                            <strong>SC - Santa Catarina</strong>
-                        </span>
+                <div class="uf-compact-content">
+                    <div class="uf-compact-main-stat">
+                        <span class="uf-stat-label"><i class="fa-solid fa-list-ol"></i> Lançamentos</span>
+                        <span class="uf-stat-value">${ufCounts['PR'].toLocaleString('pt-BR')}</span>
                     </div>
-                    <div class="uf-compact-content">
-                        <div class="uf-compact-main-stat">
-                            <span class="uf-stat-label"><i class="fa-solid fa-list-ol"></i> Lançamentos</span>
-                            <span class="uf-stat-value">${ufCounts['SC'].toLocaleString('pt-BR')}</span>
+                    <div class="uf-compact-sub-stats" style="margin-top:4px;">
+                        <div class="uf-sub-stat success">
+                            <span class="uf-sub-val success" style="color: var(--color-primary-light); font-weight:700;">${formatCobrancaCurrency(ufSums['PR'])}</span>
                         </div>
-                        <div class="uf-compact-sub-stats" style="margin-top:4px;">
-                            <div class="uf-sub-stat">
-                                <span class="uf-sub-val" style="color: var(--color-primary-light); font-weight:700;">${formatCobrancaCurrency(ufSums['SC'])}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- RIO GRANDE DO SUL CAPSULE -->
-                <div class="uf-compact-card rs-card ${isSelectRS}" id="cobranca-card-UF-RS" onclick="toggleCobrancaUFFromMap('RS')" onmouseenter="handleCobrancaCardHover('RS')" onmouseleave="handleCobrancaCardLeave('RS')">
-                    <div class="uf-compact-header">
-                        <span class="uf-compact-name">
-                            <span class="uf-status-indicator rs-dot"></span>
-                            <strong>RS - Rio Grande do Sul</strong>
-                        </span>
-                    </div>
-                    <div class="uf-compact-content">
-                        <div class="uf-compact-main-stat">
-                            <span class="uf-stat-label"><i class="fa-solid fa-list-ol"></i> Lançamentos</span>
-                            <span class="uf-stat-value">${ufCounts['RS'].toLocaleString('pt-BR')}</span>
-                        </div>
-                        <div class="uf-compact-sub-stats" style="margin-top:4px;">
-                            <div class="uf-sub-stat">
-                                <span class="uf-sub-val" style="color: var(--color-primary-light); font-weight:700;">${formatCobrancaCurrency(ufSums['RS'])}</span>
-                            </div>
+                        <div class="uf-sub-stat">
+                            <span class="uf-sub-label" style="color:var(--text-secondary); font-size:10px;"><i class="fa-solid fa-percent"></i></span>
+                            <span class="uf-sub-val" style="color:var(--text-secondary); font-size:10px;">${prPct}%</span>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
+            <!-- SANTA CATARINA CAPSULE -->
+            <div class="uf-compact-card sc-card ${isSelectSC}" id="cobranca-card-UF-SC" onclick="toggleCobrancaUFFromMap('SC')" onmouseenter="handleCobrancaCardHover('SC')" onmouseleave="handleCobrancaCardLeave('SC')">
+                <div class="uf-compact-header">
+                    <span class="uf-compact-name">
+                        <span class="uf-status-indicator sc-dot"></span>
+                        <strong>Santa Catarina</strong>
+                    </span>
+                </div>
+                <div class="uf-compact-content">
+                    <div class="uf-compact-main-stat">
+                        <span class="uf-stat-label"><i class="fa-solid fa-list-ol"></i> Lançamentos</span>
+                        <span class="uf-stat-value">${ufCounts['SC'].toLocaleString('pt-BR')}</span>
+                    </div>
+                    <div class="uf-compact-sub-stats" style="margin-top:4px;">
+                        <div class="uf-sub-stat success">
+                            <span class="uf-sub-val success" style="color: var(--color-primary-light); font-weight:700;">${formatCobrancaCurrency(ufSums['SC'])}</span>
+                        </div>
+                        <div class="uf-sub-stat">
+                            <span class="uf-sub-label" style="color:var(--text-secondary); font-size:10px;"><i class="fa-solid fa-percent"></i></span>
+                            <span class="uf-sub-val" style="color:var(--text-secondary); font-size:10px;">${scPct}%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIO GRANDE DO SUL CAPSULE -->
+            <div class="uf-compact-card rs-card ${isSelectRS}" id="cobranca-card-UF-RS" onclick="toggleCobrancaUFFromMap('RS')" onmouseenter="handleCobrancaCardHover('RS')" onmouseleave="handleCobrancaCardLeave('RS')">
+                <div class="uf-compact-header">
+                    <span class="uf-compact-name">
+                        <span class="uf-status-indicator rs-dot"></span>
+                        <strong>Rio Grande do Sul</strong>
+                    </span>
+                </div>
+                <div class="uf-compact-content">
+                    <div class="uf-compact-main-stat">
+                        <span class="uf-stat-label"><i class="fa-solid fa-list-ol"></i> Lançamentos</span>
+                        <span class="uf-stat-value">${ufCounts['RS'].toLocaleString('pt-BR')}</span>
+                    </div>
+                    <div class="uf-compact-sub-stats" style="margin-top:4px;">
+                        <div class="uf-sub-stat success">
+                            <span class="uf-sub-val success" style="color: var(--color-primary-light); font-weight:700;">${formatCobrancaCurrency(ufSums['RS'])}</span>
+                        </div>
+                        <div class="uf-sub-stat">
+                            <span class="uf-sub-label" style="color:var(--text-secondary); font-size:10px;"><i class="fa-solid fa-percent"></i></span>
+                            <span class="uf-sub-val" style="color:var(--text-secondary); font-size:10px;">${rsPct}%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Legenda de volume -->
+            <div class="uf-discreet-legend">
+                <span style="font-size:9px;opacity:0.8;margin-right:4px;">Menor Cobrança</span>
+                <div class="legend-gradient-bar"></div>
+                <span style="font-size:9px;opacity:0.8;margin-left:4px;">Maior Cobrança</span>
+            </div>
+
             <!-- TOOLTIP DO MAPA -->
             <div class="map-tooltip" id="cobranca-map-tooltip" style="display: none;"></div>
         </div>
@@ -813,16 +834,13 @@ function renderCobrancaCharts() {
     // 3. Gráfico Faturamento Mensal com/sem pedido (Barras Empilhadas)
     renderMonthlySplitChart(th);
 
-    // 4. Gráfico Projetos (Barras Horizontais)
-    renderHorizontalChart('cobranca-project-chart', 'projeto', 'project', th);
-
-    // 5. Gráfico Atividade (Barras Horizontais)
+    // 4. Gráfico Atividade (Barras Horizontais)
     renderHorizontalChart('cobranca-activity-chart', 'tipo_atividade', 'activity', th);
 
-    // 6. Gráfico Itens (Barras Horizontais - Top 10)
-    renderHorizontalChart('cobranca-item-chart', 'item_descritivo', 'item', th, 10);
+    // 5. Gráfico Itens (Barras Horizontais - Todos os itens com scroll)
+    renderHorizontalChart('cobranca-item-chart', 'item_descritivo', 'item', th, null);
 
-    // 7. Gráfico Fase Atual Original (Barras Horizontais)
+    // 6. Gráfico Fase Atual Original (Barras Horizontais)
     renderHorizontalChart('cobranca-fase-atual-chart', 'fase_atual', 'faseAtual', th);
 }
 
@@ -869,13 +887,14 @@ function renderCapexOpexChart(th) {
                     }
                 },
                 datalabels: {
+                    display: 'auto',
                     formatter: (val, ctx) => {
                         const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
-                        const pct = total > 0 ? ((val / total) * 100).toFixed(1) + '%' : '0%';
-                        return val > 0 ? `${ctx.chart.data.labels[ctx.dataIndex]}\n${pct}` : '';
+                        const pct = total > 0 ? ((val / total) * 100).toFixed(1).replace('.', ',') + '%' : '0%';
+                        return val > 0 ? pct : '';
                     },
                     color: '#ffffff',
-                    font: { weight: 'bold', size: 10 }
+                    font: { weight: 'bold', size: 11 }
                 }
             },
             cutout: '60%'
@@ -926,13 +945,14 @@ function renderPedidoStatusChart(th) {
                     }
                 },
                 datalabels: {
+                    display: 'auto',
                     formatter: (val, ctx) => {
                         const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
-                        const pct = total > 0 ? ((val / total) * 100).toFixed(1) + '%' : '0%';
-                        return val > 0 ? `${ctx.chart.data.labels[ctx.dataIndex]}\n${pct}` : '';
+                        const pct = total > 0 ? ((val / total) * 100).toFixed(1).replace('.', ',') + '%' : '0%';
+                        return val > 0 ? pct : '';
                     },
                     color: '#ffffff',
-                    font: { weight: 'bold', size: 10 }
+                    font: { weight: 'bold', size: 11 }
                 }
             },
             cutout: '60%'
@@ -1012,7 +1032,10 @@ function renderMonthlySplitChart(th) {
                     }
                 },
                 datalabels: {
-                    display: false // Evita bagunça em gráfico empilhado
+                    display: 'auto',
+                    color: '#ffffff',
+                    font: { size: 9, weight: 'bold' },
+                    formatter: (val) => val > 0 ? formatCobrancaShortVal(val) : ''
                 }
             }
         }
@@ -1031,15 +1054,26 @@ function renderHorizontalChart(canvasId, fieldName, chartKey, th, limit = 5) {
     });
 
     // Ordenar e pegar top
-    const sorted = Object.keys(groupSum)
+    let sorted = Object.keys(groupSum)
         .map(key => ({ key, val: groupSum[key] }))
-        .sort((a, b) => b.val - a.val)
-        .slice(0, limit);
+        .sort((a, b) => b.val - a.val);
+
+    if (limit !== null && limit !== undefined) {
+        sorted = sorted.slice(0, limit);
+    }
 
     const labels = sorted.map(i => i.key);
     const data = sorted.map(i => i.val);
 
     if (labels.length === 0) return;
+
+    // Altura dinâmica para rolagem vertical se for o gráfico de item descritivo
+    if (canvasId === 'cobranca-item-chart' && canvas && canvas.parentElement) {
+        const chartHeight = Math.max(320, sorted.length * 32);
+        canvas.parentElement.style.height = chartHeight + 'px';
+    } else if (canvas && canvas.parentElement) {
+        canvas.parentElement.style.height = '320px';
+    }
 
     const ctx = canvas.getContext('2d');
     const gradient = ctx.createLinearGradient(0, 0, 300, 0);
@@ -1062,6 +1096,11 @@ function renderHorizontalChart(canvasId, fieldName, chartKey, th, limit = 5) {
             indexAxis: 'y',
             responsive: true,
             maintainAspectRatio: false,
+            layout: {
+                padding: {
+                    right: 40 // Add padding to avoid datalabels clipping
+                }
+            },
             scales: {
                 x: {
                     grid: { color: th.gridColor },
@@ -1094,6 +1133,7 @@ function renderHorizontalChart(canvasId, fieldName, chartKey, th, limit = 5) {
                     }
                 },
                 datalabels: {
+                    display: true,
                     align: 'end',
                     anchor: 'end',
                     color: th.textColor,
