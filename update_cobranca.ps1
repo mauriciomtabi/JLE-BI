@@ -1,7 +1,9 @@
 # Script ETL para extrair dados da planilha de Cobrança e gerar cobranca_data.js
 # Lê os dados da aba 'Analitico_Empreiteiras_WF1_WF2_' de 'Analítico Claro - Base Geral.xlsx'
 
-$networkDir = "\\10.121.21.252\mauricio.maciel@jletelecom.com.br\ANALÍTICO CLARO"
+$i_caps_acute = [char]205
+$folderName = "ANAL" + $i_caps_acute + "TICO CLARO"
+$networkDir = "\\10.121.21.252\mauricio.maciel@jletelecom.com.br\$folderName"
 $localTempPath = "$PSScriptRoot\temp_cobranca_read.xlsx"
 $fallbackPath = "$PSScriptRoot\local_cobranca_file.xlsx"
 $outputPath = "$PSScriptRoot\cobranca_data.js"
