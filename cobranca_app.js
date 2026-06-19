@@ -879,15 +879,27 @@ function renderCapexOpexChart(th) {
 
     if (labels.length === 0) return;
 
+    const isDark = !document.body.classList.contains('light-theme');
+    const colorPalette = [
+        '#004f71', '#ffb83d', '#7209b7', '#00b4d8', 
+        '#ff4d6d', '#2ecc71', '#f72585', '#4cc9f0',
+        '#f39f18', '#9b59b6', '#1abc9c', '#e74c3c'
+    ];
+
     cobrancaCharts.capexOpex = new Chart(canvas, {
         type: 'doughnut',
         data: {
             labels: labels,
             datasets: [{
                 data: data,
-                backgroundColor: ['#00b4d8', '#3498db', '#f39f18', '#e74c3c'],
-                borderWidth: 0,
-                hoverOffset: 4
+                backgroundColor: colorPalette.slice(0, labels.length),
+                borderColor: isDark ? '#0d1b26' : '#f5f6f8',
+                borderWidth: 1.5,
+                spacing: 2.5,
+                borderRadius: 4,
+                hoverOffset: 8,
+                hoverBorderColor: '#ffffff',
+                hoverBorderWidth: 2
             }]
         },
         options: {
@@ -916,7 +928,7 @@ function renderCapexOpexChart(th) {
                     font: { weight: 'bold', size: 11 }
                 }
             },
-            cutout: '60%'
+            cutout: '65%'
         }
     });
 }
@@ -937,15 +949,21 @@ function renderPedidoStatusChart(th) {
         }
     });
 
+    const isDark = !document.body.classList.contains('light-theme');
     cobrancaCharts.pedidoStatus = new Chart(canvas, {
         type: 'doughnut',
         data: {
             labels: ['Pedido Emitido', 'Sem Pedido'],
             datasets: [{
                 data: [comPedido, semPedido],
-                backgroundColor: ['#2ecc71', '#e74c3c'],
-                borderWidth: 0,
-                hoverOffset: 4
+                backgroundColor: ['#004f71', '#f39f18'],
+                borderColor: isDark ? '#0d1b26' : '#f5f6f8',
+                borderWidth: 1.5,
+                spacing: 2.5,
+                borderRadius: 4,
+                hoverOffset: 8,
+                hoverBorderColor: '#ffffff',
+                hoverBorderWidth: 2
             }]
         },
         options: {
@@ -974,7 +992,7 @@ function renderPedidoStatusChart(th) {
                     font: { weight: 'bold', size: 11 }
                 }
             },
-            cutout: '60%'
+            cutout: '65%'
         }
     });
 }
@@ -1014,14 +1032,22 @@ function renderMonthlySplitChart(th) {
                 {
                     label: 'Pedido Emitido',
                     data: comPedData,
-                    backgroundColor: '#2ecc71',
-                    borderRadius: 4
+                    backgroundColor: '#004f71',
+                    borderColor: '#004f71',
+                    borderRadius: 2,
+                    hoverBackgroundColor: '#0077aa',
+                    hoverBorderColor: '#ffffff',
+                    hoverBorderWidth: 2
                 },
                 {
                     label: 'Sem Pedido',
                     data: semPedData,
-                    backgroundColor: '#e74c3c',
-                    borderRadius: 4
+                    backgroundColor: '#f39f18',
+                    borderColor: '#f39f18',
+                    borderRadius: 2,
+                    hoverBackgroundColor: '#ffb83d',
+                    hoverBorderColor: '#ffffff',
+                    hoverBorderWidth: 2
                 }
             ]
         },
@@ -1096,8 +1122,8 @@ function renderHorizontalChart(canvasId, fieldName, chartKey, th, limit = 5) {
 
     const ctx = canvas.getContext('2d');
     const gradient = ctx.createLinearGradient(0, 0, 300, 0);
-    gradient.addColorStop(0, 'rgba(0, 180, 216, 0.15)');
-    gradient.addColorStop(1, 'rgba(0, 180, 216, 0.85)');
+    gradient.addColorStop(0, 'rgba(0, 79, 113, 0.15)');
+    gradient.addColorStop(1, 'rgba(0, 79, 113, 0.85)');
 
     cobrancaCharts[chartKey] = new Chart(canvas, {
         type: 'bar',
@@ -1106,9 +1132,12 @@ function renderHorizontalChart(canvasId, fieldName, chartKey, th, limit = 5) {
             datasets: [{
                 data: data,
                 backgroundColor: gradient,
-                borderColor: '#00b4d8',
+                borderColor: '#004f71',
                 borderWidth: 1.5,
-                borderRadius: 6
+                borderRadius: 4,
+                hoverBackgroundColor: '#0077aa',
+                hoverBorderColor: '#ffffff',
+                hoverBorderWidth: 2
             }]
         },
         options: {
