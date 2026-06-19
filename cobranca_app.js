@@ -13,6 +13,7 @@ let cobrancaSortCol = 'data_cadastro';
 let cobrancaSortDir = 'desc';
 let cobrancaSearchQuery = '';
 let cobrancaDataLoaded = false;
+let osListMode = 'sem-aprovacao'; // 'sem-aprovacao' | 'aprovadas'
 
 // Instâncias de Gráficos Chart.js
 let cobrancaCharts = {
@@ -709,52 +710,21 @@ function renderCobrancaUFMap() {
 }
 
 // 4. Lista de OSs sem aprovação
+// Alterna o modo de visualização da lista de OS
+function switchOSListMode(mode) {
+    osListMode = mode;
+    // Atualizar botões de toggle
+    document.querySelectorAll('.os-list-toggle-btn').forEach(btn => btn.classList.remove('active'));
+    const activeBtn = document.getElementById(mode === 'sem-aprovacao' ? 'btn-os-sem-aprovacao' : 'btn-os-aprovadas');
+    if (activeBtn) activeBtn.classList.add('active');
+    renderOpenOSsList();
+}
+
 function renderOpenOSsList() {
     const tbody = document.getElementById('cobranca-open-oss-list-tbody');
+    const thead = document.getElementById('cobranca-os-list-thead');
+    const titleEl = document.getElementById('cobranca-os-list-title');
     if (!tbody) return;
-
-    // Filtrar registros de OS sem aprovação (em aberto)
-    const openOSs = cobrancaFilteredData.filter(r => {
-        const isOpen = (r.tempo_aprovacao === null || r.tempo_aprovacao === undefined || !r.data_aprovacao || r.data_aprovacao === '-');
-        return isOpen && r.os && r.os !== '-';
-    });
-
-    // Agrupar por OS
-    const osMap = {};
-    openOSs.forEach(r => {
-        const osNum = r.os;
-        if (!osMap[osNum]) {
-            osMap[osNum] = {
-                os: osNum,
-                categoria: r.categoria || '-',
-                projeto: r.projeto || '-',
-                fase_atual: r.fase_atual || '-',
-                fase_atual_de_para: r.fase_atual_de_para || '-',
-                data_cadastro: r.data_cadastro,
-                valor: 0,
-                aging: calculateOSAge(r.data_cadastro)
-            };
-        }
-        osMap[osNum].valor += (r.valor_total || 0);
-        if (r.data_cadastro && (!osMap[osNum].data_cadastro || r.data_cadastro < osMap[osNum].data_cadastro)) {
-            osMap[osNum].data_cadastro = r.data_cadastro;
-            osMap[osNum].aging = calculateOSAge(r.data_cadastro);
-        }
-    });
-
-    // Ordenar da mais antiga para a mais recente (crescente por data de cadastro / decrescente por aging)
-    const sortedOpenOSs = Object.values(osMap).sort((a, b) => {
-        if (!a.data_cadastro) return 1;
-        if (!b.data_cadastro) return -1;
-        return a.data_cadastro.localeCompare(b.data_cadastro);
-    });
-
-    tbody.innerHTML = '';
-
-    if (sortedOpenOSs.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 20px; color: var(--text-secondary);">Nenhuma OS sem aprovação encontrada</td></tr>`;
-        return;
-    }
 
     const fmtDate = dStr => {
         if (!dStr || dStr === '-') return '-';
@@ -762,33 +732,166 @@ function renderOpenOSsList() {
         return p.length === 3 ? `${p[2]}/${p[1]}/${p[0]}` : dStr;
     };
 
-    sortedOpenOSs.forEach(o => {
-        const tr = document.createElement('tr');
-        
-        let agingClass = 'alert-none';
-        if (o.aging > 90) agingClass = 'alert-high';
-        else if (o.aging > 60) agingClass = 'alert-medium';
-        else if (o.aging > 30) agingClass = 'alert-low';
+    if (osListMode === 'aprovadas') {
+        // ── Modo: Aprovadas Aguardando Pedido ───────────────────────────────
+        if (titleEl) titleEl.textContent = 'OSs Aprovadas — Aguardando Pedido';
+        if (thead) thead.innerHTML = `
+            <tr style="position: sticky; top: 0; background: var(--bg-card); border-bottom: 2px solid var(--border-color); z-index: 10;">
+                <th style="padding: 10px 8px; text-align: left;">OS</th>
+                <th style="padding: 10px 8px; text-align: left;">Categoria</th>
+                <th style="padding: 10px 8px; text-align: left;">Aprovação</th>
+                <th style="padding: 10px 8px; text-align: center;">Dias Aguard.</th>
+                <th style="padding: 10px 8px; text-align: left;">Fase Atual (Original)</th>
+                <th style="padding: 10px 8px; text-align: left;">Fase (De/Para)</th>
+                <th style="padding: 10px 8px; text-align: right;">Valor</th>
+            </tr>`;
 
-        const badgeClass = getCobrancaBadgeClass(o.fase_atual_de_para);
+        // Filtrar aprovadas sem pedido emitido
+        const approvedOSs = cobrancaFilteredData.filter(r => {
+            const fase = String(r.fase_atual_de_para || '').toUpperCase().trim();
+            return fase === 'APROVADO' && r.os && r.os !== '-';
+        });
 
-        tr.innerHTML = `
-            <td style="padding: 8px; border-bottom: 1px solid var(--border-color);"><strong>${o.os}</strong></td>
-            <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${o.categoria}</td>
-            <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${fmtDate(o.data_cadastro)}</td>
-            <td style="padding: 8px; border-bottom: 1px solid var(--border-color); text-align: center;">
-                <span class="badge-aging ${agingClass}">${o.aging}d</span>
-            </td>
-            <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${o.fase_atual}</td>
-            <td style="padding: 8px; border-bottom: 1px solid var(--border-color);">
-                <span class="cobranca-badge ${badgeClass}" style="padding: 2px 6px; font-size: 9px;">${o.fase_atual_de_para}</span>
-            </td>
-            <td style="padding: 8px; border-bottom: 1px solid var(--border-color); text-align: right; font-weight: 700; color: var(--color-primary-light);">
-                ${formatCobrancaCurrency(o.valor)}
-            </td>
-        `;
-        tbody.appendChild(tr);
-    });
+        const osMap = {};
+        approvedOSs.forEach(r => {
+            const osNum = r.os;
+            if (!osMap[osNum]) {
+                osMap[osNum] = {
+                    os: osNum,
+                    categoria: r.categoria || '-',
+                    fase_atual: r.fase_atual || '-',
+                    fase_atual_de_para: r.fase_atual_de_para || '-',
+                    data_aprovacao: r.data_aprovacao || '-',
+                    valor: 0,
+                    diasAguard: calculateOSAge(r.data_aprovacao)
+                };
+            }
+            osMap[osNum].valor += (r.valor_total || 0);
+            // Manter a data de aprovação mais antiga
+            if (r.data_aprovacao && r.data_aprovacao !== '-' &&
+                (!osMap[osNum].data_aprovacao || osMap[osNum].data_aprovacao === '-' ||
+                 r.data_aprovacao < osMap[osNum].data_aprovacao)) {
+                osMap[osNum].data_aprovacao = r.data_aprovacao;
+                osMap[osNum].diasAguard = calculateOSAge(r.data_aprovacao);
+            }
+        });
+
+        // Ordenar da aprovação mais antiga para a mais recente
+        const sorted = Object.values(osMap).sort((a, b) => {
+            if (!a.data_aprovacao || a.data_aprovacao === '-') return 1;
+            if (!b.data_aprovacao || b.data_aprovacao === '-') return -1;
+            return a.data_aprovacao.localeCompare(b.data_aprovacao);
+        });
+
+        tbody.innerHTML = '';
+        if (sorted.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 20px; color: var(--text-secondary);">Nenhuma OS aprovada aguardando pedido</td></tr>`;
+            return;
+        }
+
+        sorted.forEach(o => {
+            const tr = document.createElement('tr');
+            let agingClass = 'alert-none';
+            if (o.diasAguard > 30) agingClass = 'alert-high';
+            else if (o.diasAguard > 15) agingClass = 'alert-medium';
+            else if (o.diasAguard > 7) agingClass = 'alert-low';
+            const badgeClass = getCobrancaBadgeClass(o.fase_atual_de_para);
+            tr.innerHTML = `
+                <td style="padding: 8px; border-bottom: 1px solid var(--border-color);"><strong>${o.os}</strong></td>
+                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${o.categoria}</td>
+                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${fmtDate(o.data_aprovacao)}</td>
+                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); text-align: center;">
+                    <span class="badge-aging ${agingClass}">${o.diasAguard >= 0 ? o.diasAguard + 'd' : '-'}</span>
+                </td>
+                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${o.fase_atual}</td>
+                <td style="padding: 8px; border-bottom: 1px solid var(--border-color);">
+                    <span class="cobranca-badge ${badgeClass}" style="padding: 2px 6px; font-size: 9px;">${o.fase_atual_de_para}</span>
+                </td>
+                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); text-align: right; font-weight: 700; color: #27ae60;">
+                    ${formatCobrancaCurrency(o.valor)}
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+    } else {
+        // ── Modo: Sem Aprovação (padrão) ────────────────────────────────────
+        if (titleEl) titleEl.textContent = 'OSs Sem Aprovação (Aging)';
+        if (thead) thead.innerHTML = `
+            <tr style="position: sticky; top: 0; background: var(--bg-card); border-bottom: 2px solid var(--border-color); z-index: 10;">
+                <th style="padding: 10px 8px; text-align: left;">OS</th>
+                <th style="padding: 10px 8px; text-align: left;">Categoria</th>
+                <th style="padding: 10px 8px; text-align: left;">Cadastro</th>
+                <th style="padding: 10px 8px; text-align: center;">Aging</th>
+                <th style="padding: 10px 8px; text-align: left;">Fase Atual (Original)</th>
+                <th style="padding: 10px 8px; text-align: left;">Fase (De/Para)</th>
+                <th style="padding: 10px 8px; text-align: right;">Valor</th>
+            </tr>`;
+
+        const openOSs = cobrancaFilteredData.filter(r => {
+            const isOpen = (r.tempo_aprovacao === null || r.tempo_aprovacao === undefined || !r.data_aprovacao || r.data_aprovacao === '-');
+            return isOpen && r.os && r.os !== '-';
+        });
+
+        const osMap = {};
+        openOSs.forEach(r => {
+            const osNum = r.os;
+            if (!osMap[osNum]) {
+                osMap[osNum] = {
+                    os: osNum,
+                    categoria: r.categoria || '-',
+                    projeto: r.projeto || '-',
+                    fase_atual: r.fase_atual || '-',
+                    fase_atual_de_para: r.fase_atual_de_para || '-',
+                    data_cadastro: r.data_cadastro,
+                    valor: 0,
+                    aging: calculateOSAge(r.data_cadastro)
+                };
+            }
+            osMap[osNum].valor += (r.valor_total || 0);
+            if (r.data_cadastro && (!osMap[osNum].data_cadastro || r.data_cadastro < osMap[osNum].data_cadastro)) {
+                osMap[osNum].data_cadastro = r.data_cadastro;
+                osMap[osNum].aging = calculateOSAge(r.data_cadastro);
+            }
+        });
+
+        const sortedOpenOSs = Object.values(osMap).sort((a, b) => {
+            if (!a.data_cadastro) return 1;
+            if (!b.data_cadastro) return -1;
+            return a.data_cadastro.localeCompare(b.data_cadastro);
+        });
+
+        tbody.innerHTML = '';
+        if (sortedOpenOSs.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 20px; color: var(--text-secondary);">Nenhuma OS sem aprovação encontrada</td></tr>`;
+            return;
+        }
+
+        sortedOpenOSs.forEach(o => {
+            const tr = document.createElement('tr');
+            let agingClass = 'alert-none';
+            if (o.aging > 90) agingClass = 'alert-high';
+            else if (o.aging > 60) agingClass = 'alert-medium';
+            else if (o.aging > 30) agingClass = 'alert-low';
+            const badgeClass = getCobrancaBadgeClass(o.fase_atual_de_para);
+            tr.innerHTML = `
+                <td style="padding: 8px; border-bottom: 1px solid var(--border-color);"><strong>${o.os}</strong></td>
+                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${o.categoria}</td>
+                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${fmtDate(o.data_cadastro)}</td>
+                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); text-align: center;">
+                    <span class="badge-aging ${agingClass}">${o.aging}d</span>
+                </td>
+                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${o.fase_atual}</td>
+                <td style="padding: 8px; border-bottom: 1px solid var(--border-color);">
+                    <span class="cobranca-badge ${badgeClass}" style="padding: 2px 6px; font-size: 9px;">${o.fase_atual_de_para}</span>
+                </td>
+                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); text-align: right; font-weight: 700; color: var(--color-primary-light);">
+                    ${formatCobrancaCurrency(o.valor)}
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
 }
 
 // ── Renderização dos Gráficos Chart.js ──────────────────────────────────────

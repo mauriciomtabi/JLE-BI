@@ -388,6 +388,59 @@
     margin-bottom: 24px !important;
 }
 
+/* -- Toggle de modo da lista de OS -- */
+.os-list-toggle {
+    display: flex;
+    gap: 4px;
+    background: var(--bg-input, rgba(255,255,255,0.05));
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 3px;
+}
+
+.os-list-toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 10px;
+    font-weight: 600;
+    font-family: 'Outfit', 'Inter', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    letter-spacing: 0.3px;
+}
+
+.os-list-toggle-btn:hover {
+    color: var(--text-primary);
+    background: rgba(255,255,255,0.06);
+}
+
+.os-list-toggle-btn.active {
+    background: var(--color-primary, #1a6fc4);
+    color: #fff;
+    box-shadow: 0 1px 6px rgba(26, 111, 196, 0.35);
+}
+
+/* Variante verde para o botão "Aprovadas" quando ativo */
+#btn-os-aprovadas.active {
+    background: #1e8449;
+    box-shadow: 0 1px 6px rgba(30, 132, 73, 0.35);
+}
+
+.light-theme .os-list-toggle {
+    background: rgba(0,0,0,0.04);
+}
+
+.light-theme .os-list-toggle-btn:hover {
+    background: rgba(0,0,0,0.06);
+}
+
 /* -- Tabela de OS sem Aprovação (Aging) -- */
 .cobranca-os-aging-table {
     width: 100%;
