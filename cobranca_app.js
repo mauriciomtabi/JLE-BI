@@ -324,14 +324,34 @@ function renderCategoryCards() {
     // Calcular faturamento total das categorias filtradas para o percentual
     const totalFaturamento = Object.values(categorySums).reduce((acc, val) => acc + val, 0);
 
+    // Calcular meses únicos no período selecionado para a média mensal
+    const uniqueMonths = new Set();
+    baseDataForCategoryKPI.forEach(r => {
+        if (r.mes_medicao && r.mes_medicao !== 'N/D') {
+            uniqueMonths.add(r.mes_medicao);
+        }
+    });
+    const monthsCount = Math.max(1, uniqueMonths.size);
+
     // Ordenar categorias por valor total decrescente
     const sortedCats = Object.keys(categorySums).sort((a, b) => categorySums[b] - categorySums[a]);
+
+    const categoryIcons = {
+        'RECUPERAÇÃO REDE': 'fa-solid fa-wrench',
+        'PLANTA EXTERNA': 'fa-solid fa-network-wired',
+        'FIXO MENSAL': 'fa-solid fa-calendar-check',
+        'DESATIVAÇÃO': 'fa-solid fa-ban',
+        'CONSTRUÇÃO': 'fa-solid fa-trowel-bricks',
+        'ATIVAÇÃO': 'fa-solid fa-toggle-on',
+        'OUTROS': 'fa-solid fa-folder-open'
+    };
 
     container.innerHTML = '';
     sortedCats.forEach(cat => {
         const sum = categorySums[cat];
         const count = categoryOSs[cat] ? categoryOSs[cat].size : 0; // Contagem distinta de OS
         const pct = totalFaturamento > 0 ? (sum / totalFaturamento) * 100 : 0;
+        const avgMonthly = sum / monthsCount;
         
         const card = document.createElement('div');
         card.className = `cobranca-category-card${filterSelectedCategory === cat ? ' active' : ''}`;
@@ -340,12 +360,24 @@ function renderCategoryCards() {
             applyCobrancaFilters();
         };
 
+        const iconClass = categoryIcons[cat.toUpperCase().trim()] || 'fa-solid fa-chart-simple';
+
         card.innerHTML = `
-            <span class="cobranca-category-title" title="${cat}">${cat}</span>
-            <span class="cobranca-category-value">${formatCobrancaCurrency(sum)}</span>
-            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; font-size: 11px; color: var(--text-secondary); margin-top: 4px;">
-                <span>${count.toLocaleString('pt-BR')} OSs</span>
-                <span style="font-weight: 700; color: var(--color-primary-light);">${pct.toFixed(1).replace('.', ',')}%</span>
+            <div class="kpi-info" style="flex-grow: 1;">
+                <span class="cobranca-category-title" title="${cat}">${cat}</span>
+                <span class="cobranca-category-value">${formatCobrancaCurrency(sum)}</span>
+                <div style="display: flex; flex-direction: column; gap: 2px; font-size: 11px; color: var(--text-secondary); margin-top: 6px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <span>${count.toLocaleString('pt-BR')} OSs</span>
+                        <span style="font-weight: 700; color: var(--color-primary-light);">${pct.toFixed(1).replace('.', ',')}%</span>
+                    </div>
+                    <div style="font-size: 10px; opacity: 0.85; border-top: 1px dashed var(--border-color); padding-top: 4px; margin-top: 4px;">
+                        Média Mensal: <strong style="color: var(--text-primary);">${formatCobrancaCurrency(avgMonthly)}</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="kpi-icon-container" style="font-size: 28px; opacity: 0.15; transition: all 0.2s ease;">
+                <i class="${iconClass}"></i>
             </div>
         `;
         container.appendChild(card);
@@ -410,27 +442,12 @@ function renderPipelineStepper() {
 
     container.innerHTML = '';
 
-    // Barra de progresso de conexão ao fundo
-    const line = document.createElement('div');
-    line.className = 'cobranca-pipeline-line';
-    
-    // Determinar porcentagem ativa da barra com base no progresso das fases
-    let activeStepsCount = 0;
-    pipelineSequence.forEach((phase, idx) => {
-        if (phaseMetrics[phase].oss.size > 0 || filterSelectedPhase === phase) {
-            activeStepsCount = idx + 1;
-        }
-    });
-    const pctActive = activeStepsCount > 1 ? ((activeStepsCount - 1) / (pipelineSequence.length - 1)) * 100 : 0;
-    line.innerHTML = `<div class="cobranca-pipeline-progress" style="width: ${pctActive}%;"></div>`;
-    container.appendChild(line);
-
-    // Adicionar passos
+    // Adicionar os cards de faturamento por fase (estilo KPI)
     pipelineSequence.forEach(phase => {
         const m = phaseMetrics[phase];
-        const step = document.createElement('div');
-        step.className = `cobranca-pipeline-step ${m.cssClass}${filterSelectedPhase === phase ? ' active' : ''}`;
-        step.onclick = () => {
+        const card = document.createElement('div');
+        card.className = `kpi-card ${m.cssClass}${filterSelectedPhase === phase ? ' active' : ''}`;
+        card.onclick = () => {
             filterSelectedPhase = (filterSelectedPhase === phase) ? null : phase;
             applyCobrancaFilters();
         };
@@ -439,12 +456,30 @@ function renderPipelineStepper() {
         const label = phase.charAt(0) + phase.slice(1).toLowerCase();
         const count = m.oss.size; // Contagem distinta de OS
 
-        step.innerHTML = `
-            <span class="cobranca-pipeline-label">${label}</span>
-            <span class="cobranca-pipeline-val">${formatCobrancaCurrency(m.sum)}</span>
-            <span class="cobranca-pipeline-sub">${count.toLocaleString('pt-BR')} OSs</span>
+        let iconHtml = '';
+        if (phase === 'EM EXECUÇÃO') {
+            iconHtml = '<i class="fa-solid fa-gears"></i>';
+        } else if (phase === 'EXECUTADO') {
+            iconHtml = '<i class="fa-solid fa-square-check"></i>';
+        } else if (phase === 'APROVADO') {
+            iconHtml = '<i class="fa-solid fa-circle-check"></i>';
+        } else if (phase === 'PEDIDO EMITIDO') {
+            iconHtml = '<i class="fa-solid fa-file-invoice-dollar"></i>';
+        }
+
+        card.innerHTML = `
+            <div class="kpi-info" style="flex-grow: 1;">
+                <span class="kpi-label">${label}</span>
+                <h3 class="kpi-value" style="font-size: 24px; font-weight: 800; font-family: 'Outfit', sans-serif;">${formatCobrancaCurrency(m.sum)}</h3>
+                <div class="kpi-analytics">
+                    <span class="kpi-subvalue" style="font-size: 11px; color: var(--text-secondary);">${count.toLocaleString('pt-BR')} OSs</span>
+                </div>
+            </div>
+            <div class="kpi-icon-container" style="font-size: 32px; opacity: 0.15; transition: all 0.2s ease;">
+                ${iconHtml}
+            </div>
         `;
-        container.appendChild(step);
+        container.appendChild(card);
     });
 }
 
