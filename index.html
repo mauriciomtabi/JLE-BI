@@ -817,7 +817,7 @@
                 </div>
 
                 <!-- UF Map + OS Aging Row -->
-                <div class="cobranca-grid-2cols">
+                <div class="cobranca-map-aging-grid">
                     <!-- Map Card -->
                     <div class="chart-card map-card">
                         <div class="chart-header">
@@ -834,15 +834,17 @@
                             <span class="chart-title">OSs Sem Aprovação (Aging)</span>
                             <span class="chart-subtitle" style="font-size: 11px; color: var(--text-secondary);">Mais antiga para mais nova</span>
                         </div>
-                        <div class="chart-body" style="height: 380px; overflow: auto; padding: 0;">
+                        <div class="chart-body" style="height: 380px; display: block !important; padding: 0;">
                             <div id="cobranca-open-oss-list-container" style="height: 100%; overflow: auto;">
                                 <table class="cobranca-os-aging-table">
                                     <thead>
                                         <tr style="position: sticky; top: 0; background: var(--bg-card); border-bottom: 2px solid var(--border-color); z-index: 10;">
                                             <th style="padding: 10px 8px; text-align: left;">OS</th>
+                                            <th style="padding: 10px 8px; text-align: left;">Categoria</th>
                                             <th style="padding: 10px 8px; text-align: left;">Cadastro</th>
                                             <th style="padding: 10px 8px; text-align: center;">Aging</th>
-                                            <th style="padding: 10px 8px; text-align: left;">Fase</th>
+                                            <th style="padding: 10px 8px; text-align: left;">Fase Atual (Original)</th>
+                                            <th style="padding: 10px 8px; text-align: left;">Fase (De/Para)</th>
                                             <th style="padding: 10px 8px; text-align: right;">Valor</th>
                                         </tr>
                                     </thead>

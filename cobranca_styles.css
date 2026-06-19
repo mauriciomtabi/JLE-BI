@@ -469,3 +469,27 @@
     width: 50px !important;
     height: 4px !important;
 }
+
+/* -- Grid Layout para Mapa + Aging (OS sem aprovação mais larga e mapa do tamanho anterior) -- */
+.cobranca-map-aging-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 2fr;
+    gap: 20px;
+    margin-bottom: 0 !important;
+}
+
+@media (max-width: 1024px) {
+    .cobranca-map-aging-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+}
+
+/* -- Ocultar barra de rolagem da lista de OS Aging -- */
+#cobranca-open-oss-list-container::-webkit-scrollbar {
+    display: none !important; /* Chrome, Safari, Opera */
+}
+#cobranca-open-oss-list-container {
+    scrollbar-width: none !important; /* Firefox */
+    -ms-overflow-style: none !important; /* IE 10+ */
+}

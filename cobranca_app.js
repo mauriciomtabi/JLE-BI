@@ -728,6 +728,7 @@ function renderOpenOSsList() {
                 os: osNum,
                 categoria: r.categoria || '-',
                 projeto: r.projeto || '-',
+                fase_atual: r.fase_atual || '-',
                 fase_atual_de_para: r.fase_atual_de_para || '-',
                 data_cadastro: r.data_cadastro,
                 valor: 0,
@@ -751,7 +752,7 @@ function renderOpenOSsList() {
     tbody.innerHTML = '';
 
     if (sortedOpenOSs.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; padding: 20px; color: var(--text-secondary);">Nenhuma OS sem aprovação encontrada</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 20px; color: var(--text-secondary);">Nenhuma OS sem aprovação encontrada</td></tr>`;
         return;
     }
 
@@ -773,10 +774,12 @@ function renderOpenOSsList() {
 
         tr.innerHTML = `
             <td style="padding: 8px; border-bottom: 1px solid var(--border-color);"><strong>${o.os}</strong></td>
+            <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${o.categoria}</td>
             <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${fmtDate(o.data_cadastro)}</td>
             <td style="padding: 8px; border-bottom: 1px solid var(--border-color); text-align: center;">
                 <span class="badge-aging ${agingClass}">${o.aging}d</span>
             </td>
+            <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${o.fase_atual}</td>
             <td style="padding: 8px; border-bottom: 1px solid var(--border-color);">
                 <span class="cobranca-badge ${badgeClass}" style="padding: 2px 6px; font-size: 9px;">${o.fase_atual_de_para}</span>
             </td>
