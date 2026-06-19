@@ -764,6 +764,8 @@ function renderOpenOSsList() {
                 <th style="padding: 10px 8px; text-align: left;">OS</th>
                 <th style="padding: 10px 8px; text-align: left;">Categoria</th>
                 <th style="padding: 10px 8px; text-align: left;">Proj. Gerencial</th>
+                <th style="padding: 10px 8px; text-align: left;">Cidade</th>
+                <th style="padding: 10px 8px; text-align: center;">UF</th>
                 <th style="padding: 10px 8px; text-align: left;">Aprovação</th>
                 <th style="padding: 10px 8px; text-align: center;">Dias Aguard.</th>
                 <th style="padding: 10px 8px; text-align: left;">Fase Atual (Original)</th>
@@ -785,6 +787,8 @@ function renderOpenOSsList() {
                     os: osNum,
                     categoria: r.categoria || '-',
                     projeto_gerencial: r.projeto_gerencial || '-',
+                    cidade: r.cidade || '-',
+                    uf: r.uf || '-',
                     fase_atual: r.fase_atual || '-',
                     fase_atual_de_para: r.fase_atual_de_para || '-',
                     data_aprovacao: r.data_aprovacao || '-',
@@ -811,7 +815,7 @@ function renderOpenOSsList() {
 
         tbody.innerHTML = '';
         if (sorted.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 20px; color: var(--text-secondary);">Nenhuma OS aprovada aguardando pedido</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 20px; color: var(--text-secondary);">Nenhuma OS aprovada aguardando pedido</td></tr>`;
             return;
         }
 
@@ -826,6 +830,8 @@ function renderOpenOSsList() {
                 <td style="padding: 8px; border-bottom: 1px solid var(--border-color);"><strong>${o.os}</strong></td>
                 <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${o.categoria}</td>
                 <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); font-size: 10px;">${o.projeto_gerencial}</td>
+                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${o.cidade}</td>
+                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); text-align: center; font-weight:600;">${o.uf}</td>
                 <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${fmtDate(o.data_aprovacao)}</td>
                 <td style="padding: 8px; border-bottom: 1px solid var(--border-color); text-align: center;">
                     <span class="badge-aging ${agingClass}">${o.diasAguard >= 0 ? o.diasAguard + 'd' : '-'}</span>
@@ -849,6 +855,8 @@ function renderOpenOSsList() {
                 <th style="padding: 10px 8px; text-align: left;">OS</th>
                 <th style="padding: 10px 8px; text-align: left;">Categoria</th>
                 <th style="padding: 10px 8px; text-align: left;">Proj. Gerencial</th>
+                <th style="padding: 10px 8px; text-align: left;">Cidade</th>
+                <th style="padding: 10px 8px; text-align: center;">UF</th>
                 <th style="padding: 10px 8px; text-align: left;">Cadastro</th>
                 <th style="padding: 10px 8px; text-align: center;">Aging</th>
                 <th style="padding: 10px 8px; text-align: left;">Fase Atual (Original)</th>
@@ -869,6 +877,8 @@ function renderOpenOSsList() {
                     os: osNum,
                     categoria: r.categoria || '-',
                     projeto_gerencial: r.projeto_gerencial || '-',
+                    cidade: r.cidade || '-',
+                    uf: r.uf || '-',
                     projeto: r.projeto || '-',
                     fase_atual: r.fase_atual || '-',
                     fase_atual_de_para: r.fase_atual_de_para || '-',
@@ -892,7 +902,7 @@ function renderOpenOSsList() {
 
         tbody.innerHTML = '';
         if (sortedOpenOSs.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 20px; color: var(--text-secondary);">Nenhuma OS sem aprovação encontrada</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 20px; color: var(--text-secondary);">Nenhuma OS sem aprovação encontrada</td></tr>`;
             return;
         }
 
@@ -907,6 +917,8 @@ function renderOpenOSsList() {
                 <td style="padding: 8px; border-bottom: 1px solid var(--border-color);"><strong>${o.os}</strong></td>
                 <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${o.categoria}</td>
                 <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); font-size: 10px;">${o.projeto_gerencial}</td>
+                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${o.cidade}</td>
+                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); text-align: center; font-weight:600;">${o.uf}</td>
                 <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${fmtDate(o.data_cadastro)}</td>
                 <td style="padding: 8px; border-bottom: 1px solid var(--border-color); text-align: center;">
                     <span class="badge-aging ${agingClass}">${o.aging}d</span>
@@ -937,26 +949,26 @@ function exportOSListCSV() {
 
     if (osListMode === 'aprovadas') {
         filename = 'OSs_Aprovadas_Aguardando_Pedido.csv';
-        headers = ['OS', 'Categoria', 'Proj. Gerencial', 'Data Aprovacao', 'Dias Aguardando', 'Fase Atual (Original)', 'Fase (De/Para)', 'Valor (R$)'];
+        headers = ['OS', 'Categoria', 'Proj. Gerencial', 'Cidade', 'UF', 'Data Aprovacao', 'Dias Aguardando', 'Fase Atual (Original)', 'Fase (De/Para)', 'Valor (R$)'];
         const src = cobrancaFilteredData.filter(r => String(r.fase_atual_de_para || '').toUpperCase().trim() === 'APROVADO' && r.os && r.os !== '-');
         const m = {};
         src.forEach(r => {
-            if (!m[r.os]) m[r.os] = { os: r.os, categoria: r.categoria || '-', pg: r.projeto_gerencial || '-', fa: r.fase_atual || '-', fp: r.fase_atual_de_para || '-', da: r.data_aprovacao || '-', v: 0, d: calculateOSAge(r.data_aprovacao) };
+            if (!m[r.os]) m[r.os] = { os: r.os, categoria: r.categoria || '-', pg: r.projeto_gerencial || '-', cidade: r.cidade || '-', uf: r.uf || '-', fa: r.fase_atual || '-', fp: r.fase_atual_de_para || '-', da: r.data_aprovacao || '-', v: 0, d: calculateOSAge(r.data_aprovacao) };
             m[r.os].v += (r.valor_total || 0);
             if (r.data_aprovacao && r.data_aprovacao !== '-' && (!m[r.os].da || r.data_aprovacao < m[r.os].da)) { m[r.os].da = r.data_aprovacao; m[r.os].d = calculateOSAge(r.data_aprovacao); }
         });
-        rows = Object.values(m).sort((a, b) => (a.da || '').localeCompare(b.da || '')).map(o => [o.os, o.categoria, o.pg, fmtD(o.da), o.d >= 0 ? o.d : '-', o.fa, o.fp, o.v.toFixed(2).replace('.', ',')]);
+        rows = Object.values(m).sort((a, b) => (a.da || '').localeCompare(b.da || '')).map(o => [o.os, o.categoria, o.pg, o.cidade, o.uf, fmtD(o.da), o.d >= 0 ? o.d : '-', o.fa, o.fp, o.v.toFixed(2).replace('.', ',')]);
     } else {
         filename = 'OSs_Sem_Aprovacao.csv';
-        headers = ['OS', 'Categoria', 'Proj. Gerencial', 'Data Cadastro', 'Aging (dias)', 'Fase Atual (Original)', 'Fase (De/Para)', 'Valor (R$)'];
+        headers = ['OS', 'Categoria', 'Proj. Gerencial', 'Cidade', 'UF', 'Data Cadastro', 'Aging (dias)', 'Fase Atual (Original)', 'Fase (De/Para)', 'Valor (R$)'];
         const src = cobrancaFilteredData.filter(r => (!r.data_aprovacao || r.data_aprovacao === '-') && r.os && r.os !== '-');
         const m = {};
         src.forEach(r => {
-            if (!m[r.os]) m[r.os] = { os: r.os, categoria: r.categoria || '-', pg: r.projeto_gerencial || '-', fa: r.fase_atual || '-', fp: r.fase_atual_de_para || '-', dc: r.data_cadastro, v: 0, ag: calculateOSAge(r.data_cadastro) };
+            if (!m[r.os]) m[r.os] = { os: r.os, categoria: r.categoria || '-', pg: r.projeto_gerencial || '-', cidade: r.cidade || '-', uf: r.uf || '-', fa: r.fase_atual || '-', fp: r.fase_atual_de_para || '-', dc: r.data_cadastro, v: 0, ag: calculateOSAge(r.data_cadastro) };
             m[r.os].v += (r.valor_total || 0);
             if (r.data_cadastro && (!m[r.os].dc || r.data_cadastro < m[r.os].dc)) { m[r.os].dc = r.data_cadastro; m[r.os].ag = calculateOSAge(r.data_cadastro); }
         });
-        rows = Object.values(m).sort((a, b) => (a.dc || '').localeCompare(b.dc || '')).map(o => [o.os, o.categoria, o.pg, fmtD(o.dc), o.ag, o.fa, o.fp, o.v.toFixed(2).replace('.', ',')]);
+        rows = Object.values(m).sort((a, b) => (a.dc || '').localeCompare(b.dc || '')).map(o => [o.os, o.categoria, o.pg, o.cidade, o.uf, fmtD(o.dc), o.ag, o.fa, o.fp, o.v.toFixed(2).replace('.', ',')]);
     }
 
     const csv = '\uFEFF' + [headers, ...rows].map(r => r.map(esc).join(';')).join('\r\n');

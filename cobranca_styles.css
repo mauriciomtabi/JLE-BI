@@ -441,6 +441,35 @@
     background: rgba(0,0,0,0.06);
 }
 
+/* -- Botão de exportar CSV da lista de OS -- */
+.os-list-export-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 7px;
+    border: 1px solid var(--border-color);
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 13px;
+    flex-shrink: 0;
+}
+
+.os-list-export-btn:hover {
+    background: rgba(0, 120, 170, 0.15);
+    border-color: #0077aa;
+    color: #0077aa;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 120, 170, 0.25);
+}
+
+.os-list-export-btn:active {
+    transform: translateY(0);
+}
+
 /* -- Tabela de OS sem Aprovação (Aging) -- */
 .cobranca-os-aging-table {
     width: 100%;

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -832,13 +832,15 @@
                     <div class="chart-card">
                         <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
                             <span class="chart-title" id="cobranca-os-list-title">OSs Sem Aprovação (Aging)</span>
-                            <div class="os-list-toggle" id="cobranca-os-list-toggle">
+                            <div style="display:flex;align-items:center;gap:8px;"><div class="os-list-toggle" id="cobranca-os-list-toggle">
                                 <button class="os-list-toggle-btn active" id="btn-os-sem-aprovacao" onclick="switchOSListMode('sem-aprovacao')">
                                     <i class="fa-solid fa-clock-rotate-left"></i> Sem Aprovação
                                 </button>
                                 <button class="os-list-toggle-btn" id="btn-os-aprovadas" onclick="switchOSListMode('aprovadas')">
                                     <i class="fa-solid fa-circle-check"></i> Aprovadas Aguardando Pedido
                                 </button>
+                            </div>
+                                <button class="os-list-export-btn" onclick="exportOSListCSV()" title="Baixar relat&oacute;rio CSV"><i class="fa-solid fa-file-arrow-down"></i></button>
                             </div>
                         </div>
                         <div class="chart-body" style="height: 380px; display: block !important; padding: 0;">
