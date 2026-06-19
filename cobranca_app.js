@@ -25,7 +25,13 @@ let cobrancaCharts = {
     faseAtual: null
 };
 
-// Filtros por Clique (Cards e Mapa)
+// Filtros por Clique em Gráficos
+let cobrancaClickFilters = {
+    tipo_atividade: null,
+    fase_atual: null,
+    item_descritivo: null,
+    tipo_despesa: null
+};
 
 // Data base para o cálculo de envelhecimento (Aging)
 // Utiliza a data de geração da base de dados se disponível, ou a data de hoje
@@ -155,7 +161,12 @@ function applyCobrancaFilters() {
             if (dtInicio && r.data_cadastro < dtInicio) return false;
             if (dtFim && r.data_cadastro > dtFim) return false;
 
-            // Filtros por Clique
+            // Filtros por Clique em Gráficos
+            if (cobrancaClickFilters.tipo_atividade && r.tipo_atividade !== cobrancaClickFilters.tipo_atividade) return false;
+            if (cobrancaClickFilters.fase_atual && r.fase_atual !== cobrancaClickFilters.fase_atual) return false;
+            if (cobrancaClickFilters.item_descritivo && r.item_descritivo !== cobrancaClickFilters.item_descritivo) return false;
+            if (cobrancaClickFilters.tipo_despesa && r.tipo_despesa !== cobrancaClickFilters.tipo_despesa) return false;
+
             return true;
         });
 
@@ -175,6 +186,16 @@ function applyCobrancaFilters() {
 }
 
 // Limpar Filtros
+// Toggle de filtro por clique em gráficos
+function toggleCobrancaChartFilter(field, value) {
+    if (cobrancaClickFilters[field] === value) {
+        cobrancaClickFilters[field] = null; // deselecionar (toggle off)
+    } else {
+        cobrancaClickFilters[field] = value;
+    }
+    applyCobrancaFilters();
+}
+
 function clearCobrancaFilters() {
     // Limpar inputs
     ['cobranca-filter-categoria', 'cobranca-filter-uf', 'cobranca-filter-projeto', 'cobranca-filter-fase', 'cobranca-filter-data-inicio', 'cobranca-filter-data-fim'].forEach(id => {
@@ -186,7 +207,8 @@ function clearCobrancaFilters() {
     if (searchEl) searchEl.value = '';
     cobrancaSearchQuery = '';
 
-    // Limpar filtros por clique
+    // Limpar filtros por clique em gráficos
+    cobrancaClickFilters = { tipo_atividade: null, fase_atual: null, item_descritivo: null, tipo_despesa: null };
     applyCobrancaFilters();
 }
 
@@ -732,13 +754,16 @@ function renderOpenOSsList() {
         return p.length === 3 ? `${p[2]}/${p[1]}/${p[0]}` : dStr;
     };
 
+    const TH = `position: sticky; top: 0; background: var(--bg-card); border-bottom: 2px solid var(--border-color); z-index: 10;`;
+
     if (osListMode === 'aprovadas') {
         // ── Modo: Aprovadas Aguardando Pedido ───────────────────────────────
         if (titleEl) titleEl.textContent = 'OSs Aprovadas — Aguardando Pedido';
         if (thead) thead.innerHTML = `
-            <tr style="position: sticky; top: 0; background: var(--bg-card); border-bottom: 2px solid var(--border-color); z-index: 10;">
+            <tr style="${TH}">
                 <th style="padding: 10px 8px; text-align: left;">OS</th>
                 <th style="padding: 10px 8px; text-align: left;">Categoria</th>
+                <th style="padding: 10px 8px; text-align: left;">Proj. Gerencial</th>
                 <th style="padding: 10px 8px; text-align: left;">Aprovação</th>
                 <th style="padding: 10px 8px; text-align: center;">Dias Aguard.</th>
                 <th style="padding: 10px 8px; text-align: left;">Fase Atual (Original)</th>
@@ -759,6 +784,7 @@ function renderOpenOSsList() {
                 osMap[osNum] = {
                     os: osNum,
                     categoria: r.categoria || '-',
+                    projeto_gerencial: r.projeto_gerencial || '-',
                     fase_atual: r.fase_atual || '-',
                     fase_atual_de_para: r.fase_atual_de_para || '-',
                     data_aprovacao: r.data_aprovacao || '-',
@@ -785,7 +811,7 @@ function renderOpenOSsList() {
 
         tbody.innerHTML = '';
         if (sorted.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 20px; color: var(--text-secondary);">Nenhuma OS aprovada aguardando pedido</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 20px; color: var(--text-secondary);">Nenhuma OS aprovada aguardando pedido</td></tr>`;
             return;
         }
 
@@ -799,6 +825,7 @@ function renderOpenOSsList() {
             tr.innerHTML = `
                 <td style="padding: 8px; border-bottom: 1px solid var(--border-color);"><strong>${o.os}</strong></td>
                 <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${o.categoria}</td>
+                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); font-size: 10px;">${o.projeto_gerencial}</td>
                 <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${fmtDate(o.data_aprovacao)}</td>
                 <td style="padding: 8px; border-bottom: 1px solid var(--border-color); text-align: center;">
                     <span class="badge-aging ${agingClass}">${o.diasAguard >= 0 ? o.diasAguard + 'd' : '-'}</span>
@@ -818,9 +845,10 @@ function renderOpenOSsList() {
         // ── Modo: Sem Aprovação (padrão) ────────────────────────────────────
         if (titleEl) titleEl.textContent = 'OSs Sem Aprovação (Aging)';
         if (thead) thead.innerHTML = `
-            <tr style="position: sticky; top: 0; background: var(--bg-card); border-bottom: 2px solid var(--border-color); z-index: 10;">
+            <tr style="${TH}">
                 <th style="padding: 10px 8px; text-align: left;">OS</th>
                 <th style="padding: 10px 8px; text-align: left;">Categoria</th>
+                <th style="padding: 10px 8px; text-align: left;">Proj. Gerencial</th>
                 <th style="padding: 10px 8px; text-align: left;">Cadastro</th>
                 <th style="padding: 10px 8px; text-align: center;">Aging</th>
                 <th style="padding: 10px 8px; text-align: left;">Fase Atual (Original)</th>
@@ -840,6 +868,7 @@ function renderOpenOSsList() {
                 osMap[osNum] = {
                     os: osNum,
                     categoria: r.categoria || '-',
+                    projeto_gerencial: r.projeto_gerencial || '-',
                     projeto: r.projeto || '-',
                     fase_atual: r.fase_atual || '-',
                     fase_atual_de_para: r.fase_atual_de_para || '-',
@@ -863,7 +892,7 @@ function renderOpenOSsList() {
 
         tbody.innerHTML = '';
         if (sortedOpenOSs.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 20px; color: var(--text-secondary);">Nenhuma OS sem aprovação encontrada</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 20px; color: var(--text-secondary);">Nenhuma OS sem aprovação encontrada</td></tr>`;
             return;
         }
 
@@ -877,6 +906,7 @@ function renderOpenOSsList() {
             tr.innerHTML = `
                 <td style="padding: 8px; border-bottom: 1px solid var(--border-color);"><strong>${o.os}</strong></td>
                 <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${o.categoria}</td>
+                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); font-size: 10px;">${o.projeto_gerencial}</td>
                 <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${fmtDate(o.data_cadastro)}</td>
                 <td style="padding: 8px; border-bottom: 1px solid var(--border-color); text-align: center;">
                     <span class="badge-aging ${agingClass}">${o.aging}d</span>
@@ -892,6 +922,48 @@ function renderOpenOSsList() {
             tbody.appendChild(tr);
         });
     }
+}
+
+// ── Exportar CSV da Lista de OSs ───────────────────────────────────────────
+function exportOSListCSV() {
+    const fmtD = dStr => {
+        if (!dStr || dStr === '-') return '-';
+        const p = dStr.split('-');
+        return p.length === 3 ? `${p[2]}/${p[1]}/${p[0]}` : dStr;
+    };
+    const esc = v => `"${String(v == null ? '-' : v).replace(/"/g, '""')}"`;
+
+    let rows, headers, filename;
+
+    if (osListMode === 'aprovadas') {
+        filename = 'OSs_Aprovadas_Aguardando_Pedido.csv';
+        headers = ['OS', 'Categoria', 'Proj. Gerencial', 'Data Aprovacao', 'Dias Aguardando', 'Fase Atual (Original)', 'Fase (De/Para)', 'Valor (R$)'];
+        const src = cobrancaFilteredData.filter(r => String(r.fase_atual_de_para || '').toUpperCase().trim() === 'APROVADO' && r.os && r.os !== '-');
+        const m = {};
+        src.forEach(r => {
+            if (!m[r.os]) m[r.os] = { os: r.os, categoria: r.categoria || '-', pg: r.projeto_gerencial || '-', fa: r.fase_atual || '-', fp: r.fase_atual_de_para || '-', da: r.data_aprovacao || '-', v: 0, d: calculateOSAge(r.data_aprovacao) };
+            m[r.os].v += (r.valor_total || 0);
+            if (r.data_aprovacao && r.data_aprovacao !== '-' && (!m[r.os].da || r.data_aprovacao < m[r.os].da)) { m[r.os].da = r.data_aprovacao; m[r.os].d = calculateOSAge(r.data_aprovacao); }
+        });
+        rows = Object.values(m).sort((a, b) => (a.da || '').localeCompare(b.da || '')).map(o => [o.os, o.categoria, o.pg, fmtD(o.da), o.d >= 0 ? o.d : '-', o.fa, o.fp, o.v.toFixed(2).replace('.', ',')]);
+    } else {
+        filename = 'OSs_Sem_Aprovacao.csv';
+        headers = ['OS', 'Categoria', 'Proj. Gerencial', 'Data Cadastro', 'Aging (dias)', 'Fase Atual (Original)', 'Fase (De/Para)', 'Valor (R$)'];
+        const src = cobrancaFilteredData.filter(r => (!r.data_aprovacao || r.data_aprovacao === '-') && r.os && r.os !== '-');
+        const m = {};
+        src.forEach(r => {
+            if (!m[r.os]) m[r.os] = { os: r.os, categoria: r.categoria || '-', pg: r.projeto_gerencial || '-', fa: r.fase_atual || '-', fp: r.fase_atual_de_para || '-', dc: r.data_cadastro, v: 0, ag: calculateOSAge(r.data_cadastro) };
+            m[r.os].v += (r.valor_total || 0);
+            if (r.data_cadastro && (!m[r.os].dc || r.data_cadastro < m[r.os].dc)) { m[r.os].dc = r.data_cadastro; m[r.os].ag = calculateOSAge(r.data_cadastro); }
+        });
+        rows = Object.values(m).sort((a, b) => (a.dc || '').localeCompare(b.dc || '')).map(o => [o.os, o.categoria, o.pg, fmtD(o.dc), o.ag, o.fa, o.fp, o.v.toFixed(2).replace('.', ',')]);
+    }
+
+    const csv = '\uFEFF' + [headers, ...rows].map(r => r.map(esc).join(';')).join('\r\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: filename });
+    a.click();
+    URL.revokeObjectURL(a.href);
 }
 
 // ── Renderização dos Gráficos Chart.js ──────────────────────────────────────
@@ -913,7 +985,7 @@ function renderCobrancaCharts() {
     // 1. Gráfico CAPEX / OPEX (Donut)
     renderCapexOpexChart(th);
 
-    // 2. Gráfico Faturamento Mensal com/sem pedido (Barras Empilhadas)
+    // 2. Gráfico Valor Mensal com/sem pedido (Barras Empilhadas)
     renderMonthlySplitChart(th);
 
     // 3. Gráfico Atividade (Barras Horizontais)
@@ -949,13 +1021,20 @@ function renderCapexOpexChart(th) {
         '#f39f18', '#9b59b6', '#1abc9c', '#e74c3c'
     ];
 
+    // Destaque se filtro ativo
+    const activeTipoDespesa = cobrancaClickFilters.tipo_despesa;
+    const bgColors = colorPalette.slice(0, labels.length).map((c, i) => {
+        if (!activeTipoDespesa) return c;
+        return labels[i] === activeTipoDespesa ? c : c + '55';
+    });
+
     cobrancaCharts.capexOpex = new Chart(canvas, {
         type: 'doughnut',
         data: {
             labels: labels,
             datasets: [{
                 data: data,
-                backgroundColor: colorPalette.slice(0, labels.length),
+                backgroundColor: bgColors,
                 borderColor: isDark ? '#0d1b26' : '#f5f6f8',
                 borderWidth: 1.5,
                 spacing: 2.5,
@@ -968,8 +1047,21 @@ function renderCapexOpexChart(th) {
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            onClick: (evt, elements) => {
+                if (!elements.length) return;
+                const idx = elements[0].index;
+                const label = labels[idx];
+                toggleCobrancaChartFilter('tipo_despesa', label);
+            },
             plugins: {
-                legend: { position: 'bottom', labels: { boxWidth: 12, padding: 16 } },
+                legend: {
+                    position: 'bottom',
+                    labels: { boxWidth: 12, padding: 16 },
+                    onClick: (evt, legendItem, legend) => {
+                        const label = legendItem.text;
+                        toggleCobrancaChartFilter('tipo_despesa', label);
+                    }
+                },
                 tooltip: {
                     backgroundColor: th.tooltipBg,
                     titleColor: th.tooltipText,
@@ -977,7 +1069,10 @@ function renderCapexOpexChart(th) {
                     borderColor: th.tooltipBorder,
                     borderWidth: 1,
                     callbacks: {
-                        label: (ctx) => ` ${ctx.label}: ${formatCobrancaCurrency(ctx.raw)}`
+                        label: (ctx) => {
+                            const active = cobrancaClickFilters.tipo_despesa === ctx.label ? ' ● Filtro ativo' : ' (clique para filtrar)';
+                            return ` ${ctx.label}: ${formatCobrancaCurrency(ctx.raw)}${active}`;
+                        }
                     }
                 },
                 datalabels: {
@@ -997,7 +1092,7 @@ function renderCapexOpexChart(th) {
 }
 
 
-// Gráfico Faturamento Mensal (Com Pedido vs Sem Pedido) - Barras Empilhadas
+// Gráfico Valor Mensal (Com Pedido vs Sem Pedido) - Barras Empilhadas
 function renderMonthlySplitChart(th) {
     const canvas = document.getElementById('cobranca-monthly-split-chart');
     if (!canvas) return;
@@ -1158,7 +1253,7 @@ function renderHorizontalChart(canvasId, fieldName, chartKey, th, limit = 5) {
     // Altura dinâmica para rolagem vertical se for um dos gráficos de barras horizontais roláveis
     if (canvas && canvas.parentElement) {
         if (canvasId === 'cobranca-item-chart' || canvasId === 'cobranca-activity-chart' || canvasId === 'cobranca-fase-atual-chart') {
-            const itemHeight = 45; // altura de 45px por barra para manter exatamente 7 itens visíveis em 320px de container
+            const itemHeight = 45;
             const minHeight = 320;
             const calculatedHeight = sorted.length * itemHeight;
             canvas.parentElement.style.height = Math.max(minHeight, calculatedHeight) + 'px';
@@ -1167,10 +1262,22 @@ function renderHorizontalChart(canvasId, fieldName, chartKey, th, limit = 5) {
         }
     }
 
+    // Cor destacada se filtro de clique ativo para este campo
+    const filterField = fieldName === 'tipo_atividade' ? 'tipo_atividade'
+                      : fieldName === 'fase_atual'     ? 'fase_atual'
+                      : fieldName === 'item_descritivo'? 'item_descritivo'
+                      : null;
+    const activeFilter = filterField ? cobrancaClickFilters[filterField] : null;
+
     const ctx = canvas.getContext('2d');
     const gradient = ctx.createLinearGradient(0, 0, 300, 0);
     gradient.addColorStop(0, 'rgba(0, 79, 113, 0.15)');
     gradient.addColorStop(1, 'rgba(0, 79, 113, 0.85)');
+
+    const bgColors = labels.map(lbl => {
+        if (!activeFilter) return gradient;
+        return lbl === activeFilter ? '#0077aa' : 'rgba(0, 79, 113, 0.25)';
+    });
 
     cobrancaCharts[chartKey] = new Chart(canvas, {
         type: 'bar',
@@ -1178,7 +1285,7 @@ function renderHorizontalChart(canvasId, fieldName, chartKey, th, limit = 5) {
             labels: labels,
             datasets: [{
                 data: data,
-                backgroundColor: gradient,
+                backgroundColor: bgColors,
                 borderColor: '#004f71',
                 borderWidth: 1.5,
                 borderRadius: 4,
@@ -1191,23 +1298,24 @@ function renderHorizontalChart(canvasId, fieldName, chartKey, th, limit = 5) {
             indexAxis: 'y',
             responsive: true,
             maintainAspectRatio: false,
+            onClick: (evt, elements) => {
+                if (!elements.length) return;
+                const idx = elements[0].index;
+                const label = labels[idx];
+                if (filterField) toggleCobrancaChartFilter(filterField, label);
+            },
             layout: {
-                padding: {
-                    right: 40 // Add padding to avoid datalabels clipping
-                }
+                padding: { right: 40 }
             },
             scales: {
                 x: {
                     grid: { color: th.gridColor },
-                    ticks: {
-                        callback: (val) => formatCobrancaShortVal(val)
-                    }
+                    ticks: { callback: (val) => formatCobrancaShortVal(val) }
                 },
                 y: {
                     grid: { display: false },
                     ticks: {
                         font: { size: 10 },
-                        // Encurtar textos de categorias longas
                         callback: function(valIndex) {
                             const label = this.getLabelForValue(valIndex);
                             return label.length > 25 ? label.substring(0, 22) + '...' : label;
@@ -1224,7 +1332,10 @@ function renderHorizontalChart(canvasId, fieldName, chartKey, th, limit = 5) {
                     borderColor: th.tooltipBorder,
                     borderWidth: 1,
                     callbacks: {
-                        label: (ctx) => ` Valor: ${formatCobrancaCurrency(ctx.raw)}`
+                        label: (ctx) => {
+                            const active = filterField && cobrancaClickFilters[filterField] === ctx.label ? ' ● Filtro ativo' : ' (clique para filtrar)';
+                            return ` Valor: ${formatCobrancaCurrency(ctx.raw)}${active}`;
+                        }
                     }
                 },
                 datalabels: {
