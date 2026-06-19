@@ -25,7 +25,6 @@ let cobrancaCharts = {
 };
 
 // Filtros por Clique (Cards e Mapa)
-let filterSelectedAging = null; // '0-30' | '31-60' | '61-90' | '91+'
 
 // Data base para o cálculo de envelhecimento (Aging)
 // Utiliza a data de geração da base de dados se disponível, ou a data de hoje
@@ -156,18 +155,6 @@ function applyCobrancaFilters() {
             if (dtFim && r.data_cadastro > dtFim) return false;
 
             // Filtros por Clique
-            if (filterSelectedAging) {
-                // OS sem aprovação (data_aprovacao vazia, nula ou '-')
-                const isNotApproved = !r.data_aprovacao || r.data_aprovacao === '' || r.data_aprovacao === '-';
-                if (!isNotApproved) return false;
-
-                const age = calculateOSAge(r.data_cadastro);
-                if (filterSelectedAging === '0-30' && (age < 0 || age > 30)) return false;
-                if (filterSelectedAging === '31-60' && (age < 31 || age > 60)) return false;
-                if (filterSelectedAging === '61-90' && (age < 61 || age > 90)) return false;
-                if (filterSelectedAging === '91+' && age < 91) return false;
-            }
-
             return true;
         });
 
@@ -199,8 +186,6 @@ function clearCobrancaFilters() {
     cobrancaSearchQuery = '';
 
     // Limpar filtros por clique
-    filterSelectedAging = null;
-
     applyCobrancaFilters();
 }
 
@@ -256,7 +241,6 @@ function getCobrancaThemeVars() {
 function renderCobrancaKPIs() {
     renderCategoryCards();
     renderPipelineStepper();
-    renderAgingCards();
     renderCobrancaUFMap();
 }
 
@@ -283,15 +267,6 @@ function renderCategoryCards() {
         if (dtInicio && r.data_cadastro < dtInicio) return false;
         if (dtFim && r.data_cadastro > dtFim) return false;
 
-        if (filterSelectedAging) {
-            const isNotApproved = !r.data_aprovacao || r.data_aprovacao === '' || r.data_aprovacao === '-';
-            if (!isNotApproved) return false;
-            const age = calculateOSAge(r.data_cadastro);
-            if (filterSelectedAging === '0-30' && (age < 0 || age > 30)) return false;
-            if (filterSelectedAging === '31-60' && (age < 31 || age > 60)) return false;
-            if (filterSelectedAging === '61-90' && (age < 61 || age > 90)) return false;
-            if (filterSelectedAging === '91+' && age < 91) return false;
-        }
         return true;
     });
 
@@ -395,15 +370,6 @@ function renderPipelineStepper() {
         if (dtInicio && r.data_cadastro < dtInicio) return false;
         if (dtFim && r.data_cadastro > dtFim) return false;
 
-        if (filterSelectedAging) {
-            const isNotApproved = !r.data_aprovacao || r.data_aprovacao === '' || r.data_aprovacao === '-';
-            if (!isNotApproved) return false;
-            const age = calculateOSAge(r.data_cadastro);
-            if (filterSelectedAging === '0-30' && (age < 0 || age > 30)) return false;
-            if (filterSelectedAging === '31-60' && (age < 31 || age > 60)) return false;
-            if (filterSelectedAging === '61-90' && (age < 61 || age > 90)) return false;
-            if (filterSelectedAging === '91+' && age < 91) return false;
-        }
         return true;
     });
 
@@ -494,15 +460,6 @@ function renderCobrancaUFMap() {
         if (dtInicio && r.data_cadastro < dtInicio) return false;
         if (dtFim && r.data_cadastro > dtFim) return false;
 
-        if (filterSelectedAging) {
-            const isNotApproved = !r.data_aprovacao || r.data_aprovacao === '' || r.data_aprovacao === '-';
-            if (!isNotApproved) return false;
-            const age = calculateOSAge(r.data_cadastro);
-            if (filterSelectedAging === '0-30' && (age < 0 || age > 30)) return false;
-            if (filterSelectedAging === '31-60' && (age < 31 || age > 60)) return false;
-            if (filterSelectedAging === '61-90' && (age < 61 || age > 90)) return false;
-            if (filterSelectedAging === '91+' && age < 91) return false;
-        }
         return true;
     });
 
@@ -749,84 +706,7 @@ function renderCobrancaUFMap() {
 }
 
 // 4. Faixas de Aging (OSs sem aprovação)
-function renderAgingCards() {
-    const container = document.getElementById('cobranca-aging-cards-container');
-    if (!container) return;
-
-    // Calcular valores por faixa
-    const agingMetrics = {
-        '0-30': { sum: 0, count: 0 },
-        '31-60': { sum: 0, count: 0 },
-        '61-90': { sum: 0, count: 0 },
-        '91+': { sum: 0, count: 0 }
-    };
-
-    // Obter dados sem o filtro de clique de aging
-    const baseDataForAging = COBRANCA_DATA.filter(r => {
-        const catDropdown = document.getElementById('cobranca-filter-categoria')?.value || '';
-        const ufDropdown = document.getElementById('cobranca-filter-uf')?.value || '';
-        const projDropdown = document.getElementById('cobranca-filter-projeto')?.value || '';
-        const faseDropdown = document.getElementById('cobranca-filter-fase')?.value || '';
-        const dtInicio = document.getElementById('cobranca-filter-data-inicio')?.value || '';
-        const dtFim = document.getElementById('cobranca-filter-data-fim')?.value || '';
-
-        if (catDropdown && r.categoria !== catDropdown) return false;
-        if (ufDropdown && r.uf !== ufDropdown) return false;
-        if (projDropdown && r.projeto !== projDropdown) return false;
-        if (faseDropdown && r.fase_atual_de_para !== faseDropdown) return false;
-        if (dtInicio && r.data_cadastro < dtInicio) return false;
-        if (dtFim && r.data_cadastro > dtFim) return false;
-
-        // Outros filtros
-        return true;
-    });
-
-    baseDataForAging.forEach(r => {
-        // Apenas sem aprovação
-        const isNotApproved = !r.data_aprovacao || r.data_aprovacao === '' || r.data_aprovacao === '-';
-        if (isNotApproved) {
-            const age = calculateOSAge(r.data_cadastro);
-            if (age >= 0 && age <= 30) {
-                agingMetrics['0-30'].sum += (r.valor_total || 0);
-                agingMetrics['0-30'].count++;
-            } else if (age >= 31 && age <= 60) {
-                agingMetrics['31-60'].sum += (r.valor_total || 0);
-                agingMetrics['31-60'].count++;
-            } else if (age >= 61 && age <= 90) {
-                agingMetrics['61-90'].sum += (r.valor_total || 0);
-                agingMetrics['61-90'].count++;
-            } else if (age >= 91) {
-                agingMetrics['91+'].sum += (r.valor_total || 0);
-                agingMetrics['91+'].count++;
-            }
-        }
-    });
-
-    container.innerHTML = '';
-    const faixas = [
-        { key: '0-30', label: 'Até 30 dias', cssClass: 'age-0-30' },
-        { key: '31-60', label: '31 a 60 dias', cssClass: 'age-31-60' },
-        { key: '61-90', label: '61 a 90 dias', cssClass: 'age-61-90' },
-        { key: '91+', label: 'Mais de 90 dias', cssClass: 'age-91-plus' }
-    ];
-
-    faixas.forEach(f => {
-        const m = agingMetrics[f.key];
-        const card = document.createElement('div');
-        card.className = `cobranca-aging-card ${f.cssClass}${filterSelectedAging === f.key ? ' active' : ''}`;
-        card.onclick = () => {
-            filterSelectedAging = (filterSelectedAging === f.key) ? null : f.key;
-            applyCobrancaFilters();
-        };
-
-        card.innerHTML = `
-            <span class="cobranca-aging-title">${f.label}</span>
-            <span class="cobranca-aging-value">${formatCobrancaCurrency(m.sum)}</span>
-            <span class="cobranca-aging-count">${m.count.toLocaleString('pt-BR')} OSs em aberto</span>
-        `;
-        container.appendChild(card);
-    });
-}
+// A função renderAgingCards foi removida pois o gráfico de Aging foi removido do layout.
 
 // ── Renderização dos Gráficos Chart.js ──────────────────────────────────────
 function renderCobrancaCharts() {
@@ -1037,7 +917,10 @@ function renderMonthlySplitChart(th) {
                     borderRadius: 2,
                     hoverBackgroundColor: '#0077aa',
                     hoverBorderColor: '#ffffff',
-                    hoverBorderWidth: 2
+                    hoverBorderWidth: 2,
+                    datalabels: {
+                        display: false
+                    }
                 },
                 {
                     label: 'Sem Pedido',
@@ -1047,13 +930,36 @@ function renderMonthlySplitChart(th) {
                     borderRadius: 2,
                     hoverBackgroundColor: '#ffb83d',
                     hoverBorderColor: '#ffffff',
-                    hoverBorderWidth: 2
+                    hoverBorderWidth: 2,
+                    datalabels: {
+                        display: true,
+                        align: 'end',
+                        anchor: 'end',
+                        color: th.textColor,
+                        font: { size: 9, weight: 'bold' },
+                        formatter: (value, context) => {
+                            const index = context.dataIndex;
+                            const comPedVal = context.chart.data.datasets[0].data[index] || 0;
+                            const semPedVal = context.chart.data.datasets[1].data[index] || 0;
+                            const total = comPedVal + semPedVal;
+                            return total > 0 ? formatCobrancaShortVal(total) : '';
+                        }
+                    }
                 }
             ]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
+            layout: {
+                padding: {
+                    top: 15
+                }
+            },
             scales: {
                 x: { stacked: true, grid: { display: false } },
                 y: {
@@ -1075,12 +981,6 @@ function renderMonthlySplitChart(th) {
                     callbacks: {
                         label: (ctx) => ` ${ctx.dataset.label}: ${formatCobrancaCurrency(ctx.raw)}`
                     }
-                },
-                datalabels: {
-                    display: 'auto',
-                    color: '#ffffff',
-                    font: { size: 9, weight: 'bold' },
-                    formatter: (val) => val > 0 ? formatCobrancaShortVal(val) : ''
                 }
             }
         }
