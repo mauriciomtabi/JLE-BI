@@ -65,15 +65,15 @@
         </div>
         
         <nav class="nav-menu">
+            <a class="nav-item" id="nav-cobranca" onclick="switchView('cobranca')" style="display:none;">
+                <i class="fa-solid fa-file-invoice-dollar"></i> <span>Analítico Claro</span>
+            </a>
             <a class="nav-item active" id="nav-dashboard" onclick="switchView('dashboard')">
                 <i class="fa-solid fa-sack-dollar"></i> <span>Financeiro</span>
             </a>
 
             <a class="nav-item" id="nav-veiculos" onclick="switchView('veiculos')" style="display:none;">
                 <i class="fa-solid fa-car"></i> <span>Veículos</span>
-            </a>
-            <a class="nav-item" id="nav-cobranca" onclick="switchView('cobranca')" style="display:none;">
-                <i class="fa-solid fa-file-invoice-dollar"></i> <span>Cobrança</span>
             </a>
             <a class="nav-item" id="nav-admin" onclick="switchView('admin')" style="display:none;">
                 <i class="fa-solid fa-shield-halved"></i> <span>Admin</span>
@@ -1740,7 +1740,7 @@
             { id: 'dashboard',    label: 'Dashboard Financeiro',    icon: 'fa-sack-dollar',       navId: 'nav-dashboard' },
             { id: 'veiculos',     label: 'Veículos',                icon: 'fa-car',               navId: 'nav-veiculos' },
             
-            { id: 'cobranca',     label: 'Cobrança',                icon: 'fa-file-invoice-dollar', navId: 'nav-cobranca' },
+            { id: 'cobranca',     label: 'Analítico Claro',         icon: 'fa-file-invoice-dollar', navId: 'nav-cobranca' },
             { id: 'admin',        label: 'Painel Admin',            icon: 'fa-shield-halved',    navId: 'nav-admin',        adminOnly: true },
         ];
 
@@ -1894,7 +1894,9 @@
                 });
 
                 // Resetar a tela ativa inicial para a página padrão permitida (previne vazamento de sessão anterior)
-                if (allowedPages.includes('dashboard')) {
+                if (allowedPages.includes('cobranca')) {
+                    switchView('cobranca');
+                } else if (allowedPages.includes('dashboard')) {
                     switchView('dashboard');
                 } else if (allowedPages.length > 0) {
                     switchView(allowedPages[0]);
@@ -2175,7 +2177,7 @@
             } else if (viewName === 'cobranca') {
                 document.getElementById('filters-container').style.display = 'none';
                 if (mobileToggleBtn) mobileToggleBtn.style.display = '';
-                document.getElementById('view-title').innerText = 'Acompanhamento de Cobrança';
+                document.getElementById('view-title').innerText = 'Analítico Claro';
                 document.getElementById('view-subtitle').innerHTML = 'Análise financeira de serviços executados – Claro';
                 if (!cobrancaDataLoaded) {
                     initCobranca();
@@ -2208,7 +2210,7 @@
             { id: 'dashboard',    label: 'Dashboard Financeiro',     icon: 'fa-sack-dollar' },
             { id: 'veiculos',     label: 'Veículos',                 icon: 'fa-car' },
             
-            { id: 'cobranca',     label: 'Cobrança',                 icon: 'fa-file-invoice-dollar' },
+            { id: 'cobranca',     label: 'Analítico Claro',          icon: 'fa-file-invoice-dollar' },
         ];
 
         function renderPageCheckboxes(containerId, selectedPages = []) {

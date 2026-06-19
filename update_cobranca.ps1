@@ -1,16 +1,58 @@
 # Script ETL para extrair dados da planilha de Cobrança e gerar cobranca_data.js
-# Lê os dados da aba 'Analitico_Empreiteiras_WF1_WF2_' de 'Analítico Claro - Base Geral.xlsx' em Downloads
+# Lê os dados da aba 'Analitico_Empreiteiras_WF1_WF2_' de 'Analítico Claro - Base Geral.xlsx'
 
-$downloadDir = "C:\Users\Operador\Downloads"
-$file = Get-ChildItem -Path $downloadDir -Filter "*Anal*tico*Claro*.xlsx" | Select-Object -First 1
+$networkDir = "\\10.121.21.252\mauricio.maciel@jletelecom.com.br\ANALÍTICO CLARO"
+$localTempPath = "$PSScriptRoot\temp_cobranca_read.xlsx"
+$fallbackPath = "$PSScriptRoot\local_cobranca_file.xlsx"
+$outputPath = "$PSScriptRoot\cobranca_data.js"
 
-if ($null -eq $file) {
-    Write-Error "Planilha 'Analítico Claro - Base Geral.xlsx' não encontrada em '$downloadDir'!"
-    Exit 1
+$useFile = $null
+
+if (Test-Path $networkDir) {
+    try {
+        $networkFile = Get-ChildItem -Path $networkDir -Filter "*Anal*tico*Claro*.xlsx" | Select-Object -First 1
+        if ($null -ne $networkFile) {
+            $networkPath = $networkFile.FullName
+            Write-Output "Arquivo de rede encontrado: $networkPath"
+            Write-Output "Copiando planilha da rede localmente..."
+            Copy-Item -Path $networkPath -Destination $localTempPath -Force
+            Copy-Item -Path $networkPath -Destination $fallbackPath -Force
+            $useFile = $localTempPath
+            Write-Output "Cópia realizada e cache local atualizado com sucesso."
+        } else {
+            Write-Warning "Nenhum arquivo correspondente a '*Anal*tico*Claro*.xlsx' foi encontrado na pasta de rede."
+        }
+    } catch {
+        Write-Warning "Falha ao copiar da rede: $($_.Exception.Message)"
+    }
+} else {
+    Write-Warning "Diretório de rede inacessível: $networkDir"
 }
 
-$filePath = $file.FullName
-$outputPath = "c:\Users\Operador\.gemini\antigravity\scratch\JLE-BI\cobranca_data.js"
+if ($null -eq $useFile) {
+    # Tenta obter do diretório Downloads do usuário atual como segunda opção
+    $userProfile = $env:USERPROFILE
+    $downloadDir = "$userProfile\Downloads"
+    if (Test-Path $downloadDir) {
+        $downloadFile = Get-ChildItem -Path $downloadDir -Filter "*Anal*tico*Claro*.xlsx" | Select-Object -First 1
+        if ($null -ne $downloadFile) {
+            Write-Output "Arquivo encontrado em Downloads: $($downloadFile.FullName)"
+            $useFile = $downloadFile.FullName
+        }
+    }
+}
+
+if ($null -eq $useFile) {
+    if (Test-Path $fallbackPath) {
+        Write-Output "Usando planilha em cache local como fallback: $fallbackPath"
+        $useFile = $fallbackPath
+    } else {
+        Write-Error "Arquivo de dados não encontrado! Certifique-se de estar conectado à rede ou de ter o arquivo em downloads/cache."
+        Exit 1
+    }
+}
+
+$filePath = $useFile
 
 Write-Output "Iniciando processamento da planilha de Cobrança: $filePath"
 
