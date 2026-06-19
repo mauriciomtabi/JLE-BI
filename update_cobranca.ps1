@@ -347,6 +347,40 @@ try {
 
     $jsContent | Out-File -FilePath $outputPath -Encoding utf8
     Write-Output "Concluído! Salvo em $outputPath com $($rowsList.Count) registros."
+
+    # 5. Publicar atualizações no GitHub se houver alterações em cobranca_data.js
+    Write-Output "Verificando se houve alteracoes nos dados para publicar no GitHub..."
+    $gitPath = "C:\Program Files\Git\cmd\git.exe"
+    if (Test-Path $gitPath) {
+        $gitStatus = & $gitPath status --porcelain "$PSScriptRoot\cobranca_data.js"
+        if ($null -ne $gitStatus -and $gitStatus.ToString().Trim() -ne "") {
+            Write-Output "Novas transacoes de cobranca detectadas! Atualizando a versao do Cache no Service Worker (sw.js)..."
+            $swPath = "$PSScriptRoot\sw.js"
+            if (Test-Path $swPath) {
+                try {
+                    $swContent = [System.IO.File]::ReadAllText($swPath)
+                    $timestamp = Get-Date -Format "yyyyMMddHHmmss"
+                    $newCacheNameLine = "const CACHE_NAME = 'jle-bi-v3.16.$timestamp';"
+                    $swContent = $swContent -replace "const CACHE_NAME = '([^']+)';", $newCacheNameLine
+                    $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+                    [System.IO.File]::WriteAllText($swPath, $swContent, $utf8NoBom)
+                    Write-Output "Cache do Service Worker atualizado com sucesso para: jle-bi-v3.16.$timestamp"
+                } catch {
+                    Write-Warning "Nao foi possivel atualizar o sw.js: $($_.Exception.Message)"
+                }
+            }
+
+            Write-Output "Fazendo commit e push para o GitHub..."
+            & $gitPath add "$PSScriptRoot\cobranca_data.js" "$PSScriptRoot\sw.js"
+            & $gitPath commit -m "data(auto): atualizacao automatica de dados de cobranca e cache PWA"
+            & $gitPath push origin main
+            Write-Output "Dados de cobranca e Service Worker publicados com sucesso no GitHub!"
+        } else {
+            Write-Output "Sem novas alteracoes nos dados de cobranca. Nenhuma publicacao necessaria."
+        }
+    } else {
+        Write-Warning "Executavel do Git nao encontrado em '$gitPath'. Nao foi possivel publicar no GitHub."
+    }
     
 } catch {
     Write-Error "Ocorreu um erro no script: $($_.Exception.Message)"

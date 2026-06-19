@@ -378,11 +378,11 @@ try {
     
     Write-Output "ETL Finalizado! Dados salvos em data.js com $($allTransactions.Count) lancamentos."
 
-    # 6. Publicar atualizações no GitHub se houver alterações em data.js ou cobranca_data.js
+    # 6. Publicar atualizações no GitHub se houver alterações em data.js
     Write-Output "Verificando se houve alteracoes nos dados para publicar no GitHub..."
     $gitPath = "C:\Program Files\Git\cmd\git.exe"
     if (Test-Path $gitPath) {
-        $gitStatus = & $gitPath status --porcelain data.js cobranca_data.js
+        $gitStatus = & $gitPath status --porcelain data.js
         if ($null -ne $gitStatus -and $gitStatus.ToString().Trim() -ne "") {
             Write-Output "Novas alteracoes nos dados detectadas! Atualizando a versao do Cache no Service Worker (sw.js)..."
             $swPath = "$PSScriptRoot\sw.js"
@@ -401,8 +401,8 @@ try {
             }
 
             Write-Output "Fazendo commit e push para o GitHub..."
-            & $gitPath add data.js cobranca_data.js sw.js
-            & $gitPath commit -m "data(auto): atualizacao automatica de dados (Financeiro/Cobranca) e cache PWA"
+            & $gitPath add data.js sw.js
+            & $gitPath commit -m "data(auto): atualizacao automatica de dados e cache do PWA"
             & $gitPath push origin main
             Write-Output "Dados e Service Worker publicados com sucesso no GitHub!"
         } else {
