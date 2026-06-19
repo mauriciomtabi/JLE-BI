@@ -12,8 +12,7 @@ echo.
 echo ==========================================================
 echo Processamento concluido! A base local 'data.js' foi gerada.
 echo.
-echo Abrindo o Painel do BI no seu navegador padrao...
+echo Pressione qualquer tecla para sair.
 echo ==========================================================
-start "" "index.html"
-timeout /t 3 >nul
+pause >nul
 exit
