@@ -806,39 +806,6 @@
                     <!-- Dynamically populated categories -->
                 </div>
 
-                <!-- UF Map + Donut Charts Row -->
-                <div class="cobranca-grid-3cols">
-                    <!-- Map Card -->
-                    <div class="chart-card map-card">
-                        <div class="chart-header">
-                            <span class="chart-title">Distribuição por UF</span>
-                        </div>
-                        <div class="chart-body" id="cobranca-uf-map-container" style="height: 380px; position: relative;">
-                            <!-- SVG Map and Compact Cards -->
-                        </div>
-                    </div>
-
-                    <!-- Donut Chart: CAPEX / OPEX -->
-                    <div class="chart-card">
-                        <div class="chart-header">
-                            <span class="chart-title">CAPEX / OPEX</span>
-                        </div>
-                        <div class="chart-body" style="height: 380px; position: relative; display: flex; align-items: center; justify-content: center; padding: 16px;">
-                            <canvas id="cobranca-capex-opex-chart"></canvas>
-                        </div>
-                    </div>
-
-                    <!-- Donut Chart: Pedido Emitido / Não Emitido -->
-                    <div class="chart-card">
-                        <div class="chart-header">
-                            <span class="chart-title">Status do Pedido</span>
-                        </div>
-                        <div class="chart-body" style="height: 380px; position: relative; display: flex; align-items: center; justify-content: center; padding: 16px;">
-                            <canvas id="cobranca-pedido-status-chart"></canvas>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Monthly Split Row (Full Width) -->
                 <div class="chart-card">
                     <div class="chart-header">
@@ -849,28 +816,82 @@
                     </div>
                 </div>
 
+                <!-- UF Map + OS Aging Row -->
+                <div class="cobranca-grid-2cols">
+                    <!-- Map Card -->
+                    <div class="chart-card map-card">
+                        <div class="chart-header">
+                            <span class="chart-title">Distribuição por UF</span>
+                        </div>
+                        <div class="chart-body" id="cobranca-uf-map-container" style="height: 380px; position: relative;">
+                            <!-- SVG Map and Compact Cards -->
+                        </div>
+                    </div>
+
+                    <!-- OSs sem aprovação card -->
+                    <div class="chart-card">
+                        <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center;">
+                            <span class="chart-title">OSs Sem Aprovação (Aging)</span>
+                            <span class="chart-subtitle" style="font-size: 11px; color: var(--text-secondary);">Mais antiga para mais nova</span>
+                        </div>
+                        <div class="chart-body" style="height: 380px; overflow: auto; padding: 0;">
+                            <div id="cobranca-open-oss-list-container" style="height: 100%; overflow: auto;">
+                                <table class="cobranca-os-aging-table">
+                                    <thead>
+                                        <tr style="position: sticky; top: 0; background: var(--bg-card); border-bottom: 2px solid var(--border-color); z-index: 10;">
+                                            <th style="padding: 10px 8px; text-align: left;">OS</th>
+                                            <th style="padding: 10px 8px; text-align: left;">Cadastro</th>
+                                            <th style="padding: 10px 8px; text-align: center;">Aging</th>
+                                            <th style="padding: 10px 8px; text-align: left;">Fase</th>
+                                            <th style="padding: 10px 8px; text-align: right;">Valor</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="cobranca-open-oss-list-tbody">
+                                        <!-- Dynamically populated rows -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Activity & Phase Breakdown Row -->
                 <div class="cobranca-grid-2cols">
                     <div class="chart-card">
                         <div class="chart-header">
                             <span class="chart-title">Faturamento por Tipo de Atividade</span>
                         </div>
-                        <div class="chart-body" style="height: 320px; position: relative; padding: 16px;">
-                            <canvas id="cobranca-activity-chart"></canvas>
+                        <div class="chart-body cobranca-item-chart-body">
+                            <div style="width: 100%; height: 320px; position: relative;">
+                                <canvas id="cobranca-activity-chart"></canvas>
+                            </div>
                         </div>
                     </div>
                     <div class="chart-card">
                         <div class="chart-header">
                             <span class="chart-title">Faturamento por Fase Atual (Original)</span>
                         </div>
-                        <div class="chart-body" style="height: 320px; position: relative; padding: 16px;">
-                            <canvas id="cobranca-fase-atual-chart"></canvas>
+                        <div class="chart-body cobranca-item-chart-body">
+                            <div style="width: 100%; height: 320px; position: relative;">
+                                <canvas id="cobranca-fase-atual-chart"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Item Details Row (Full Width & Scrollable) -->
-                <div class="cobranca-full-width-row" style="margin-bottom: 24px;">
+                <!-- Bottom Row: CAPEX/OPEX & Item Details -->
+                <div class="cobranca-grid-2cols" style="margin-bottom: 24px;">
+                    <!-- Donut Chart: CAPEX / OPEX -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title">CAPEX / OPEX</span>
+                        </div>
+                        <div class="chart-body" style="height: 320px; position: relative; display: flex; align-items: center; justify-content: center; padding: 16px;">
+                            <canvas id="cobranca-capex-opex-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Item Details Card -->
                     <div class="chart-card">
                         <div class="chart-header">
                             <span class="chart-title">Faturamento por Item Descritivo</span>

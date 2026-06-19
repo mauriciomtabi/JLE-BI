@@ -242,6 +242,7 @@ function renderCobrancaKPIs() {
     renderCategoryCards();
     renderPipelineStepper();
     renderCobrancaUFMap();
+    renderOpenOSsList();
 }
 
 // 1. Cards de Categoria (Coluna B) no topo
@@ -444,7 +445,7 @@ function renderCobrancaUFMap() {
 
     // Calcular valores por UF
     const ufSums = { 'RS': 0, 'SC': 0, 'PR': 0 };
-    const ufCounts = { 'RS': 0, 'SC': 0, 'PR': 0 };
+    const ufOSs = { 'RS': new Set(), 'SC': new Set(), 'PR': new Set() };
 
     // Obter dados sem o filtro de clique de UF
     const baseDataForUFMap = COBRANCA_DATA.filter(r => {
@@ -467,7 +468,9 @@ function renderCobrancaUFMap() {
         const uf = String(r.uf).toUpperCase().trim();
         if (ufSums.hasOwnProperty(uf)) {
             ufSums[uf] += (r.valor_total || 0);
-            ufCounts[uf]++;
+            if (r.os && r.os !== '-') {
+                ufOSs[uf].add(r.os);
+            }
         }
     });
 
@@ -574,8 +577,8 @@ function renderCobrancaUFMap() {
                 </div>
                 <div class="uf-compact-content">
                     <div class="uf-compact-main-stat">
-                        <span class="uf-stat-label"><i class="fa-solid fa-list-ol"></i> Lançamentos</span>
-                        <span class="uf-stat-value">${ufCounts['PR'].toLocaleString('pt-BR')}</span>
+                        <span class="uf-stat-label"><i class="fa-solid fa-file-invoice"></i> OSs</span>
+                        <span class="uf-stat-value">${ufOSs['PR'].size.toLocaleString('pt-BR')}</span>
                     </div>
                     <div class="uf-compact-sub-stats" style="margin-top:4px;">
                         <div class="uf-sub-stat success">
@@ -599,8 +602,8 @@ function renderCobrancaUFMap() {
                 </div>
                 <div class="uf-compact-content">
                     <div class="uf-compact-main-stat">
-                        <span class="uf-stat-label"><i class="fa-solid fa-list-ol"></i> Lançamentos</span>
-                        <span class="uf-stat-value">${ufCounts['SC'].toLocaleString('pt-BR')}</span>
+                        <span class="uf-stat-label"><i class="fa-solid fa-file-invoice"></i> OSs</span>
+                        <span class="uf-stat-value">${ufOSs['SC'].size.toLocaleString('pt-BR')}</span>
                     </div>
                     <div class="uf-compact-sub-stats" style="margin-top:4px;">
                         <div class="uf-sub-stat success">
@@ -624,8 +627,8 @@ function renderCobrancaUFMap() {
                 </div>
                 <div class="uf-compact-content">
                     <div class="uf-compact-main-stat">
-                        <span class="uf-stat-label"><i class="fa-solid fa-list-ol"></i> Lançamentos</span>
-                        <span class="uf-stat-value">${ufCounts['RS'].toLocaleString('pt-BR')}</span>
+                        <span class="uf-stat-label"><i class="fa-solid fa-file-invoice"></i> OSs</span>
+                        <span class="uf-stat-value">${ufOSs['RS'].size.toLocaleString('pt-BR')}</span>
                     </div>
                     <div class="uf-compact-sub-stats" style="margin-top:4px;">
                         <div class="uf-sub-stat success">
@@ -672,7 +675,7 @@ function renderCobrancaUFMap() {
             tooltip.innerHTML = `
                 <strong>${ufCode === 'RS' ? 'Rio Grande do Sul' : ufCode === 'SC' ? 'Santa Catarina' : 'Paraná'}</strong><br/>
                 Cobrança: ${formatCobrancaCurrency(ufSums[ufCode])}<br/>
-                OSs: ${ufCounts[ufCode].toLocaleString('pt-BR')}
+                OSs: ${ufOSs[ufCode].size.toLocaleString('pt-BR')}
             `;
         }
     };
@@ -705,8 +708,85 @@ function renderCobrancaUFMap() {
     };
 }
 
-// 4. Faixas de Aging (OSs sem aprovação)
-// A função renderAgingCards foi removida pois o gráfico de Aging foi removido do layout.
+// 4. Lista de OSs sem aprovação
+function renderOpenOSsList() {
+    const tbody = document.getElementById('cobranca-open-oss-list-tbody');
+    if (!tbody) return;
+
+    // Filtrar registros de OS sem aprovação (em aberto)
+    const openOSs = cobrancaFilteredData.filter(r => {
+        const isOpen = (r.tempo_aprovacao === null || r.tempo_aprovacao === undefined || !r.data_aprovacao || r.data_aprovacao === '-');
+        return isOpen && r.os && r.os !== '-';
+    });
+
+    // Agrupar por OS
+    const osMap = {};
+    openOSs.forEach(r => {
+        const osNum = r.os;
+        if (!osMap[osNum]) {
+            osMap[osNum] = {
+                os: osNum,
+                categoria: r.categoria || '-',
+                projeto: r.projeto || '-',
+                fase_atual_de_para: r.fase_atual_de_para || '-',
+                data_cadastro: r.data_cadastro,
+                valor: 0,
+                aging: calculateOSAge(r.data_cadastro)
+            };
+        }
+        osMap[osNum].valor += (r.valor_total || 0);
+        if (r.data_cadastro && (!osMap[osNum].data_cadastro || r.data_cadastro < osMap[osNum].data_cadastro)) {
+            osMap[osNum].data_cadastro = r.data_cadastro;
+            osMap[osNum].aging = calculateOSAge(r.data_cadastro);
+        }
+    });
+
+    // Ordenar da mais antiga para a mais recente (crescente por data de cadastro / decrescente por aging)
+    const sortedOpenOSs = Object.values(osMap).sort((a, b) => {
+        if (!a.data_cadastro) return 1;
+        if (!b.data_cadastro) return -1;
+        return a.data_cadastro.localeCompare(b.data_cadastro);
+    });
+
+    tbody.innerHTML = '';
+
+    if (sortedOpenOSs.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; padding: 20px; color: var(--text-secondary);">Nenhuma OS sem aprovação encontrada</td></tr>`;
+        return;
+    }
+
+    const fmtDate = dStr => {
+        if (!dStr || dStr === '-') return '-';
+        const p = dStr.split('-');
+        return p.length === 3 ? `${p[2]}/${p[1]}/${p[0]}` : dStr;
+    };
+
+    sortedOpenOSs.forEach(o => {
+        const tr = document.createElement('tr');
+        
+        let agingClass = 'alert-none';
+        if (o.aging > 90) agingClass = 'alert-high';
+        else if (o.aging > 60) agingClass = 'alert-medium';
+        else if (o.aging > 30) agingClass = 'alert-low';
+
+        const badgeClass = getCobrancaBadgeClass(o.fase_atual_de_para);
+
+        tr.innerHTML = `
+            <td style="padding: 8px; border-bottom: 1px solid var(--border-color);"><strong>${o.os}</strong></td>
+            <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${fmtDate(o.data_cadastro)}</td>
+            <td style="padding: 8px; border-bottom: 1px solid var(--border-color); text-align: center;">
+                <span class="badge-aging ${agingClass}">${o.aging}d</span>
+            </td>
+            <td style="padding: 8px; border-bottom: 1px solid var(--border-color);">
+                <span class="cobranca-badge ${badgeClass}" style="padding: 2px 6px; font-size: 9px;">${o.fase_atual_de_para}</span>
+            </td>
+            <td style="padding: 8px; border-bottom: 1px solid var(--border-color); text-align: right; font-weight: 700; color: var(--color-primary-light);">
+                ${formatCobrancaCurrency(o.valor)}
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
 
 // ── Renderização dos Gráficos Chart.js ──────────────────────────────────────
 function renderCobrancaCharts() {
@@ -727,20 +807,17 @@ function renderCobrancaCharts() {
     // 1. Gráfico CAPEX / OPEX (Donut)
     renderCapexOpexChart(th);
 
-    // 2. Gráfico Status Pedido (Donut: Emitido vs Não Emitido)
-    renderPedidoStatusChart(th);
-
-    // 3. Gráfico Faturamento Mensal com/sem pedido (Barras Empilhadas)
+    // 2. Gráfico Faturamento Mensal com/sem pedido (Barras Empilhadas)
     renderMonthlySplitChart(th);
 
-    // 4. Gráfico Atividade (Barras Horizontais)
-    renderHorizontalChart('cobranca-activity-chart', 'tipo_atividade', 'activity', th);
+    // 3. Gráfico Atividade (Barras Horizontais)
+    renderHorizontalChart('cobranca-activity-chart', 'tipo_atividade', 'activity', th, null);
 
-    // 5. Gráfico Itens (Barras Horizontais - Todos os itens com scroll)
+    // 4. Gráfico Itens (Barras Horizontais - Todos os itens com scroll)
     renderHorizontalChart('cobranca-item-chart', 'item_descritivo', 'item', th, null);
 
-    // 6. Gráfico Fase Atual Original (Barras Horizontais)
-    renderHorizontalChart('cobranca-fase-atual-chart', 'fase_atual', 'faseAtual', th);
+    // 5. Gráfico Fase Atual Original (Barras Horizontais)
+    renderHorizontalChart('cobranca-fase-atual-chart', 'fase_atual', 'faseAtual', th, null);
 }
 
 // Gráfico CAPEX/OPEX
@@ -813,69 +890,6 @@ function renderCapexOpexChart(th) {
     });
 }
 
-// Gráfico Status Pedido (Emitido vs Não Emitido)
-function renderPedidoStatusChart(th) {
-    const canvas = document.getElementById('cobranca-pedido-status-chart');
-    if (!canvas) return;
-
-    let comPedido = 0;
-    let semPedido = 0;
-
-    cobrancaFilteredData.forEach(r => {
-        if (r.fase_atual_de_para === 'PEDIDO EMITIDO') {
-            comPedido += (r.valor_total || 0);
-        } else {
-            semPedido += (r.valor_total || 0);
-        }
-    });
-
-    const isDark = !document.body.classList.contains('light-theme');
-    cobrancaCharts.pedidoStatus = new Chart(canvas, {
-        type: 'doughnut',
-        data: {
-            labels: ['Pedido Emitido', 'Sem Pedido'],
-            datasets: [{
-                data: [comPedido, semPedido],
-                backgroundColor: ['#004f71', '#f39f18'],
-                borderColor: isDark ? '#0d1b26' : '#f5f6f8',
-                borderWidth: 1.5,
-                spacing: 2.5,
-                borderRadius: 4,
-                hoverOffset: 8,
-                hoverBorderColor: '#ffffff',
-                hoverBorderWidth: 2
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { position: 'bottom', labels: { boxWidth: 12, padding: 16 } },
-                tooltip: {
-                    backgroundColor: th.tooltipBg,
-                    titleColor: th.tooltipText,
-                    bodyColor: th.tooltipText,
-                    borderColor: th.tooltipBorder,
-                    borderWidth: 1,
-                    callbacks: {
-                        label: (ctx) => ` ${ctx.label}: ${formatCobrancaCurrency(ctx.raw)}`
-                    }
-                },
-                datalabels: {
-                    display: 'auto',
-                    formatter: (val, ctx) => {
-                        const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
-                        const pct = total > 0 ? ((val / total) * 100).toFixed(1).replace('.', ',') + '%' : '0%';
-                        return val > 0 ? pct : '';
-                    },
-                    color: '#ffffff',
-                    font: { weight: 'bold', size: 11 }
-                }
-            },
-            cutout: '65%'
-        }
-    });
-}
 
 // Gráfico Faturamento Mensal (Com Pedido vs Sem Pedido) - Barras Empilhadas
 function renderMonthlySplitChart(th) {
@@ -951,6 +965,29 @@ function renderMonthlySplitChart(th) {
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            onClick: (event, elements) => {
+                if (elements && elements.length > 0) {
+                    const index = elements[0].index;
+                    const monthYear = sortedMonths[index];
+                    if (monthYear && monthYear !== 'N/D') {
+                        const [year, month] = monthYear.split('/');
+                        const start = `${year}-${month}-01`;
+                        const lastDay = new Date(parseInt(year), parseInt(month), 0).getDate();
+                        const end = `${year}-${month}-${String(lastDay).padStart(2, '0')}`;
+                        
+                        const startInput = document.getElementById('cobranca-filter-data-inicio');
+                        const endInput = document.getElementById('cobranca-filter-data-fim');
+                        if (startInput && endInput) {
+                            startInput.value = start;
+                            endInput.value = end;
+                            applyCobrancaFilters();
+                        }
+                    }
+                }
+            },
+            onHover: (event, chartElement) => {
+                event.native.target.style.cursor = chartElement.length ? 'pointer' : 'default';
+            },
             interaction: {
                 mode: 'index',
                 intersect: false
@@ -1012,12 +1049,16 @@ function renderHorizontalChart(canvasId, fieldName, chartKey, th, limit = 5) {
 
     if (labels.length === 0) return;
 
-    // Altura dinâmica para rolagem vertical se for o gráfico de item descritivo
-    if (canvasId === 'cobranca-item-chart' && canvas && canvas.parentElement) {
-        const chartHeight = Math.max(320, sorted.length * 32);
-        canvas.parentElement.style.height = chartHeight + 'px';
-    } else if (canvas && canvas.parentElement) {
-        canvas.parentElement.style.height = '320px';
+    // Altura dinâmica para rolagem vertical se for um dos gráficos de barras horizontais roláveis
+    if (canvas && canvas.parentElement) {
+        if (canvasId === 'cobranca-item-chart' || canvasId === 'cobranca-activity-chart' || canvasId === 'cobranca-fase-atual-chart') {
+            const itemHeight = 45; // altura de 45px por barra para manter exatamente 7 itens visíveis em 320px de container
+            const minHeight = 320;
+            const calculatedHeight = sorted.length * itemHeight;
+            canvas.parentElement.style.height = Math.max(minHeight, calculatedHeight) + 'px';
+        } else {
+            canvas.parentElement.style.height = '320px';
+        }
     }
 
     const ctx = canvas.getContext('2d');
