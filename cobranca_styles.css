@@ -58,9 +58,27 @@
 /* -- KPI Category Cards Grid -- */
 .cobranca-category-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(6, 1fr) !important;
+    gap: 12px;
     margin-bottom: 24px;
+}
+
+@media (max-width: 1200px) {
+    .cobranca-category-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .cobranca-category-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .cobranca-category-grid {
+        grid-template-columns: 1fr !important;
+    }
 }
 
 .cobranca-category-card {
@@ -124,6 +142,15 @@
     font-weight: 800;
     color: var(--text-primary);
     font-family: 'Outfit', sans-serif;
+}
+
+@media (max-width: 1400px) {
+    .cobranca-category-value {
+        font-size: 14px !important;
+    }
+    .cobranca-category-card {
+        padding: 12px 14px !important;
+    }
 }
 
 /* -- Pipeline KPI Grid -- */

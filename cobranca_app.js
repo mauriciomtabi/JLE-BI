@@ -25,9 +25,6 @@ let cobrancaCharts = {
 };
 
 // Filtros por Clique (Cards e Mapa)
-let filterSelectedCategory = null;
-let filterSelectedUF = null;
-let filterSelectedPhase = null;
 let filterSelectedAging = null; // '0-30' | '31-60' | '61-90' | '91+'
 
 // Data base para o cálculo de envelhecimento (Aging)
@@ -159,10 +156,6 @@ function applyCobrancaFilters() {
             if (dtFim && r.data_cadastro > dtFim) return false;
 
             // Filtros por Clique
-            if (filterSelectedCategory && r.categoria !== filterSelectedCategory) return false;
-            if (filterSelectedUF && r.uf !== filterSelectedUF) return false;
-            if (filterSelectedPhase && r.fase_atual_de_para !== filterSelectedPhase) return false;
-
             if (filterSelectedAging) {
                 // OS sem aprovação (data_aprovacao vazia, nula ou '-')
                 const isNotApproved = !r.data_aprovacao || r.data_aprovacao === '' || r.data_aprovacao === '-';
@@ -206,9 +199,6 @@ function clearCobrancaFilters() {
     cobrancaSearchQuery = '';
 
     // Limpar filtros por clique
-    filterSelectedCategory = null;
-    filterSelectedUF = null;
-    filterSelectedPhase = null;
     filterSelectedAging = null;
 
     applyCobrancaFilters();
@@ -281,23 +271,18 @@ function renderCategoryCards() {
     
     // Inicializar a partir dos dados atuais sem filtros por clique de categoria
     const baseDataForCategoryKPI = COBRANCA_DATA.filter(r => {
-        const catDropdown = document.getElementById('cobranca-filter-categoria')?.value || '';
         const ufDropdown = document.getElementById('cobranca-filter-uf')?.value || '';
         const projDropdown = document.getElementById('cobranca-filter-projeto')?.value || '';
         const faseDropdown = document.getElementById('cobranca-filter-fase')?.value || '';
         const dtInicio = document.getElementById('cobranca-filter-data-inicio')?.value || '';
         const dtFim = document.getElementById('cobranca-filter-data-fim')?.value || '';
 
-        if (catDropdown && r.categoria !== catDropdown) return false;
         if (ufDropdown && r.uf !== ufDropdown) return false;
         if (projDropdown && r.projeto !== projDropdown) return false;
         if (faseDropdown && r.fase_atual_de_para !== faseDropdown) return false;
         if (dtInicio && r.data_cadastro < dtInicio) return false;
         if (dtFim && r.data_cadastro > dtFim) return false;
 
-        // Filtros por clique adicionais
-        if (filterSelectedUF && r.uf !== filterSelectedUF) return false;
-        if (filterSelectedPhase && r.fase_atual_de_para !== filterSelectedPhase) return false;
         if (filterSelectedAging) {
             const isNotApproved = !r.data_aprovacao || r.data_aprovacao === '' || r.data_aprovacao === '-';
             if (!isNotApproved) return false;
@@ -341,7 +326,7 @@ function renderCategoryCards() {
         'PLANTA EXTERNA': 'fa-solid fa-network-wired',
         'FIXO MENSAL': 'fa-solid fa-calendar-check',
         'DESATIVAÇÃO': 'fa-solid fa-ban',
-        'CONSTRUÇÃO': 'fa-solid fa-trowel-bricks',
+        'CONSTRUÇÃO': 'fa-solid fa-helmet-safety',
         'ATIVAÇÃO': 'fa-solid fa-toggle-on',
         'OUTROS': 'fa-solid fa-folder-open'
     };
@@ -353,11 +338,15 @@ function renderCategoryCards() {
         const pct = totalFaturamento > 0 ? (sum / totalFaturamento) * 100 : 0;
         const avgMonthly = sum / monthsCount;
         
+        const activeCat = document.getElementById('cobranca-filter-categoria')?.value || '';
         const card = document.createElement('div');
-        card.className = `cobranca-category-card${filterSelectedCategory === cat ? ' active' : ''}`;
+        card.className = `cobranca-category-card${activeCat === cat ? ' active' : ''}`;
         card.onclick = () => {
-            filterSelectedCategory = (filterSelectedCategory === cat) ? null : cat;
-            applyCobrancaFilters();
+            const select = document.getElementById('cobranca-filter-categoria');
+            if (select) {
+                select.value = (select.value === cat) ? '' : cat;
+                applyCobrancaFilters();
+            }
         };
 
         const iconClass = categoryIcons[cat.toUpperCase().trim()] || 'fa-solid fa-chart-simple';
@@ -367,16 +356,16 @@ function renderCategoryCards() {
                 <span class="cobranca-category-title" title="${cat}">${cat}</span>
                 <span class="cobranca-category-value">${formatCobrancaCurrency(sum)}</span>
                 <div style="display: flex; flex-direction: column; gap: 2px; font-size: 11px; color: var(--text-secondary); margin-top: 6px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                    <div style="display: flex; align-items: center; gap: 6px;">
                         <span>${count.toLocaleString('pt-BR')} OSs</span>
-                        <span style="font-weight: 700; color: var(--color-primary-light);">${pct.toFixed(1).replace('.', ',')}%</span>
+                        <span style="font-weight: 700; color: var(--color-primary-light);">(${pct.toFixed(1).replace('.', ',')}%)</span>
                     </div>
                     <div style="font-size: 10px; opacity: 0.85; border-top: 1px dashed var(--border-color); padding-top: 4px; margin-top: 4px;">
                         Média Mensal: <strong style="color: var(--text-primary);">${formatCobrancaCurrency(avgMonthly)}</strong>
                     </div>
                 </div>
             </div>
-            <div class="kpi-icon-container" style="font-size: 28px; opacity: 0.15; transition: all 0.2s ease;">
+            <div class="kpi-icon-container" style="opacity: 0.15; transition: all 0.2s ease;">
                 <i class="${iconClass}"></i>
             </div>
         `;
@@ -397,20 +386,15 @@ function renderPipelineStepper() {
         const catDropdown = document.getElementById('cobranca-filter-categoria')?.value || '';
         const ufDropdown = document.getElementById('cobranca-filter-uf')?.value || '';
         const projDropdown = document.getElementById('cobranca-filter-projeto')?.value || '';
-        const faseDropdown = document.getElementById('cobranca-filter-fase')?.value || '';
         const dtInicio = document.getElementById('cobranca-filter-data-inicio')?.value || '';
         const dtFim = document.getElementById('cobranca-filter-data-fim')?.value || '';
 
         if (catDropdown && r.categoria !== catDropdown) return false;
         if (ufDropdown && r.uf !== ufDropdown) return false;
         if (projDropdown && r.projeto !== projDropdown) return false;
-        if (faseDropdown && r.fase_atual_de_para !== faseDropdown) return false;
         if (dtInicio && r.data_cadastro < dtInicio) return false;
         if (dtFim && r.data_cadastro > dtFim) return false;
 
-        // Outros filtros
-        if (filterSelectedCategory && r.categoria !== filterSelectedCategory) return false;
-        if (filterSelectedUF && r.uf !== filterSelectedUF) return false;
         if (filterSelectedAging) {
             const isNotApproved = !r.data_aprovacao || r.data_aprovacao === '' || r.data_aprovacao === '-';
             if (!isNotApproved) return false;
@@ -445,11 +429,15 @@ function renderPipelineStepper() {
     // Adicionar os cards de faturamento por fase (estilo KPI)
     pipelineSequence.forEach(phase => {
         const m = phaseMetrics[phase];
+        const activePhase = document.getElementById('cobranca-filter-fase')?.value || '';
         const card = document.createElement('div');
-        card.className = `kpi-card ${m.cssClass}${filterSelectedPhase === phase ? ' active' : ''}`;
+        card.className = `kpi-card ${m.cssClass}${activePhase === phase ? ' active' : ''}`;
         card.onclick = () => {
-            filterSelectedPhase = (filterSelectedPhase === phase) ? null : phase;
-            applyCobrancaFilters();
+            const select = document.getElementById('cobranca-filter-fase');
+            if (select) {
+                select.value = (select.value === phase) ? '' : phase;
+                applyCobrancaFilters();
+            }
         };
 
         // Formatar rótulo para exibição elegante
@@ -475,7 +463,7 @@ function renderPipelineStepper() {
                     <span class="kpi-subvalue" style="font-size: 11px; color: var(--text-secondary);">${count.toLocaleString('pt-BR')} OSs</span>
                 </div>
             </div>
-            <div class="kpi-icon-container" style="font-size: 32px; opacity: 0.15; transition: all 0.2s ease;">
+            <div class="kpi-icon-container" style="opacity: 0.15; transition: all 0.2s ease;">
                 ${iconHtml}
             </div>
         `;
@@ -495,22 +483,17 @@ function renderCobrancaUFMap() {
     // Obter dados sem o filtro de clique de UF
     const baseDataForUFMap = COBRANCA_DATA.filter(r => {
         const catDropdown = document.getElementById('cobranca-filter-categoria')?.value || '';
-        const ufDropdown = document.getElementById('cobranca-filter-uf')?.value || '';
         const projDropdown = document.getElementById('cobranca-filter-projeto')?.value || '';
         const faseDropdown = document.getElementById('cobranca-filter-fase')?.value || '';
         const dtInicio = document.getElementById('cobranca-filter-data-inicio')?.value || '';
         const dtFim = document.getElementById('cobranca-filter-data-fim')?.value || '';
 
         if (catDropdown && r.categoria !== catDropdown) return false;
-        if (ufDropdown && r.uf !== ufDropdown) return false;
         if (projDropdown && r.projeto !== projDropdown) return false;
         if (faseDropdown && r.fase_atual_de_para !== faseDropdown) return false;
         if (dtInicio && r.data_cadastro < dtInicio) return false;
         if (dtFim && r.data_cadastro > dtFim) return false;
 
-        // Outros filtros
-        if (filterSelectedCategory && r.categoria !== filterSelectedCategory) return false;
-        if (filterSelectedPhase && r.fase_atual_de_para !== filterSelectedPhase) return false;
         if (filterSelectedAging) {
             const isNotApproved = !r.data_aprovacao || r.data_aprovacao === '' || r.data_aprovacao === '-';
             if (!isNotApproved) return false;
@@ -540,9 +523,10 @@ function renderCobrancaUFMap() {
         return `rgba(0, 79, 113, ${opacity})`;
     };
 
-    const isSelectPR = filterSelectedUF === 'PR' ? 'active' : (filterSelectedUF ? 'dimmed' : '');
-    const isSelectSC = filterSelectedUF === 'SC' ? 'active' : (filterSelectedUF ? 'dimmed' : '');
-    const isSelectRS = filterSelectedUF === 'RS' ? 'active' : (filterSelectedUF ? 'dimmed' : '');
+    const activeUF = document.getElementById('cobranca-filter-uf')?.value || '';
+    const isSelectPR = activeUF === 'PR' ? 'active' : (activeUF ? 'dimmed' : '');
+    const isSelectSC = activeUF === 'SC' ? 'active' : (activeUF ? 'dimmed' : '');
+    const isSelectRS = activeUF === 'RS' ? 'active' : (activeUF ? 'dimmed' : '');
 
     const prPct = totalFaturamento > 0 ? ((ufSums['PR'] / totalFaturamento) * 100).toFixed(1).replace('.', ',') : '0,0';
     const scPct = totalFaturamento > 0 ? ((ufSums['SC'] / totalFaturamento) * 100).toFixed(1).replace('.', ',') : '0,0';
@@ -756,8 +740,11 @@ function renderCobrancaUFMap() {
     };
 
     window.toggleCobrancaUFFromMap = (ufCode) => {
-        filterSelectedUF = (filterSelectedUF === ufCode) ? null : ufCode;
-        applyCobrancaFilters();
+        const select = document.getElementById('cobranca-filter-uf');
+        if (select) {
+            select.value = (select.value === ufCode) ? '' : ufCode;
+            applyCobrancaFilters();
+        }
     };
 }
 
@@ -791,9 +778,6 @@ function renderAgingCards() {
         if (dtFim && r.data_cadastro > dtFim) return false;
 
         // Outros filtros
-        if (filterSelectedCategory && r.categoria !== filterSelectedCategory) return false;
-        if (filterSelectedUF && r.uf !== filterSelectedUF) return false;
-        if (filterSelectedPhase && r.fase_atual_de_para !== filterSelectedPhase) return false;
         return true;
     });
 
