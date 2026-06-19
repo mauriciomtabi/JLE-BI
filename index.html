@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -37,6 +37,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Chart.js Datalabels Plugin via CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <!-- SheetJS (xlsx) com suporte a estilos para relatorios Excel -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"></script>
     <!-- Supabase JS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <!-- Supabase Local Configuration -->
@@ -326,8 +328,8 @@
                             <input type="text" id="table-search" placeholder="Buscar por descrição ou categoria..." oninput="handleSearch()">
                         </div>
                         <div class="table-actions">
-                            <button class="btn-secondary" onclick="exportToCSV()">
-                                <i class="fa-solid fa-file-csv"></i> Exportar CSV
+                            <button class="btn-secondary" onclick="exportToXLSX()">
+                                <i class="fa-solid fa-file-excel"></i> Exportar Excel
                             </button>
                         </div>
                     </div>
@@ -840,7 +842,7 @@
                                     <i class="fa-solid fa-circle-check"></i> Aprovadas Aguardando Pedido
                                 </button>
                             </div>
-                                <button class="os-list-export-btn" onclick="exportOSListCSV()" title="Baixar relat&oacute;rio CSV"><i class="fa-solid fa-file-arrow-down"></i></button>
+                                <button class="os-list-export-btn" onclick="exportOSListXLSX()" title="Baixar relatório Excel"><i class="fa-solid fa-file-excel"></i></button>
                             </div>
                         </div>
                         <div class="chart-body" style="height: 380px; display: block !important; padding: 0;">
@@ -922,8 +924,8 @@
                 <div class="chart-card">
                     <div class="chart-header">
                         <span class="chart-title"><i class="fa-solid fa-table"></i> Relatório Analítico de Cobrança</span>
-                        <button class="btn-export" onclick="exportCobrancaCSV()" title="Exportar CSV">
-                            <i class="fa-solid fa-file-csv"></i> Exportar
+                        <button class="btn-export" onclick="exportCobrancaXLSX()" title="Exportar para Excel">
+                            <i class="fa-solid fa-file-excel"></i> Exportar
                         </button>
                     </div>
                     <div style="padding: 0;">
@@ -4114,51 +4116,46 @@
             renderTable();
         }
 
-        // Exportador CSV
-        function exportToCSV() {
+        // Exportador Excel
+        function exportToXLSX() {
             if (filteredTransactions.length === 0) {
                 alert("Nenhum dado para exportar!");
                 return;
             }
             
-            let csvContent = "\uFEFF";
-            csvContent += "ID;Banco;Aba;Origem;Competencia;Data;UF;Fluxo;Categoria;Descricao;Valor Nominal;Valor Liquido;Meio Pagamento;Transferencia Interna\n";
+            const headers = ["ID", "Banco", "Aba", "Origem", "Competência", "Data", "UF", "Fluxo", "Categoria", "Descrição", "Valor Nominal", "Valor Líquido", "Meio Pagamento", "Transferência Interna"];
             
-            filteredTransactions.forEach(t => {
-                const row = [
-                    t.id,
-                    t.banco,
-                    t.aba,
-                    t.remessa,
-                    t.competencia,
-                    t.data,
-                    t.uf,
-                    t.fluxo,
-                    t.categoria.replace(/;/g, ','),
-                    t.descricao.replace(/;/g, ','),
-                    t.valor_nominal.toString().replace(/\./g, ','),
-                    t.valor_liquido.toString().replace(/\./g, ','),
-                    t.meio_pagamento,
-                    t.is_transfer ? "SIM" : "NAO"
-                ];
-                csvContent += row.join(";") + "\n";
-            });
-            
-            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement("a");
+            const rows = filteredTransactions.map(t => [
+                t.id,
+                t.banco || '',
+                t.aba || '',
+                t.remessa || '',
+                t.competencia || '',
+                t.data || '',
+                t.uf || '',
+                t.fluxo || '',
+                t.categoria || '',
+                t.descricao || '',
+                t.valor_nominal || 0,
+                t.valor_liquido || 0,
+                t.meio_pagamento || '',
+                t.is_transfer ? "SIM" : "NÃO"
+            ]);
             
             const banco = document.getElementById('filter-banco').value;
             const mes = document.getElementById('filter-mes').value;
             const dateStr = new Date().toISOString().split('T')[0];
+            const filename = `Fluxo_Consolidado_${banco}_${mes}_${dateStr}.xlsx`;
             
-            link.setAttribute("href", url);
-            link.setAttribute("download", `Fluxo_Consolidado_${banco}_${mes}_${dateStr}.csv`);
-            link.style.visibility = 'hidden';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            if (typeof window.exportToStyledExcel === 'function') {
+                window.exportToStyledExcel(headers, rows, filename);
+            } else {
+                alert("Erro: Função de exportação Excel não disponível.");
+            }
         }
+        
+        // Fallback global
+        window.exportToCSV = exportToXLSX;
 
         // Lógica de Filtros Mobile (Expandir/Recolher)
         function toggleMobileFilters() {

@@ -936,20 +936,103 @@ function renderOpenOSsList() {
     }
 }
 
-// ── Exportar CSV da Lista de OSs ───────────────────────────────────────────
-function exportOSListCSV() {
+// ── Exportador Genérico para Excel Formatado ───────────────────────────────
+function exportToStyledExcel(headers, rows, filename) {
+    if (typeof XLSX === 'undefined') {
+        alert("Erro: Biblioteca Excel (xlsx-js-style) não foi carregada com sucesso.");
+        return;
+    }
+
+    // Criar planilha a partir de matriz de dados
+    const ws = XLSX.utils.aoa_to_sheet([headers, ...rows]);
+
+    // Aplicar estilos ao cabeçalho (linha 1)
+    const range = XLSX.utils.decode_range(ws['!ref']);
+    for (let col = range.s.c; col <= range.e.c; col++) {
+        const cellAddress = XLSX.utils.encode_cell({ r: range.s.r, c: col });
+        if (ws[cellAddress]) {
+            ws[cellAddress].s = {
+                fill: {
+                    fgColor: { rgb: "1F4E78" } // Cabeçalho Azul Escuro
+                },
+                font: {
+                    color: { rgb: "FFFFFF" }, // Texto Branco
+                    bold: true,
+                    name: 'Segoe UI',
+                    sz: 11
+                },
+                alignment: {
+                    horizontal: "center",
+                    vertical: "center",
+                    wrapText: true
+                }
+            };
+        }
+    }
+
+    // Calcular largura automática das colunas
+    const colsWidth = [];
+    for (let c = range.s.c; c <= range.e.c; c++) {
+        let maxLength = headers[c] ? headers[c].length : 10;
+        for (let r = range.s.r + 1; r <= range.e.r; r++) {
+            const cellAddress = XLSX.utils.encode_cell({ r: r, c: c });
+            if (ws[cellAddress] && ws[cellAddress].v !== undefined) {
+                let valStr = String(ws[cellAddress].v);
+                if (typeof ws[cellAddress].v === 'number') {
+                    valStr = ws[cellAddress].v % 1 === 0 ? ws[cellAddress].v.toString() : ws[cellAddress].v.toFixed(2);
+                }
+                if (valStr.length > maxLength) {
+                    maxLength = valStr.length;
+                }
+            }
+        }
+        colsWidth.push({ wch: maxLength + 4 }); // Padding extra para que todo texto fique visível
+    }
+    ws['!cols'] = colsWidth;
+
+    // Congelar a primeira linha (cabeçalho)
+    ws['!views'] = [
+        { state: 'frozen', ySplit: 1 }
+    ];
+
+    // Criar o workbook e salvar o arquivo
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Dados");
+
+    const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
+
+    function s2ab(s) {
+        const buf = new ArrayBuffer(s.length);
+        const view = new Uint8Array(buf);
+        for (let i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+        return buf;
+    }
+
+    const blob = new Blob([s2ab(wbout)], { type: "application/octet-stream" });
+    const url = URL.createObjectURL(blob);
+    const a = Object.assign(document.createElement('a'), { href: url, download: filename });
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+// Tornar o exportador genérico disponível na janela global para reuso
+window.exportToStyledExcel = exportToStyledExcel;
+
+// ── Exportar Excel da Lista de OSs ───────────────────────────────────────────
+function exportOSListXLSX() {
     const fmtD = dStr => {
         if (!dStr || dStr === '-') return '-';
         const p = dStr.split('-');
         return p.length === 3 ? `${p[2]}/${p[1]}/${p[0]}` : dStr;
     };
-    const esc = v => `"${String(v == null ? '-' : v).replace(/"/g, '""')}"`;
 
     let rows, headers, filename;
 
     if (osListMode === 'aprovadas') {
-        filename = 'OSs_Aprovadas_Aguardando_Pedido.csv';
-        headers = ['OS', 'Categoria', 'Proj. Gerencial', 'Cidade', 'UF', 'Data Aprovacao', 'Dias Aguardando', 'Fase Atual (Original)', 'Fase (De/Para)', 'Valor (R$)'];
+        filename = 'OSs_Aprovadas_Aguardando_Pedido.xlsx';
+        headers = ['OS', 'Categoria', 'Proj. Gerencial', 'Cidade', 'UF', 'Data Aprovação', 'Dias Aguardando', 'Fase Atual (Original)', 'Fase (De/Para)', 'Valor (R$)'];
         const src = cobrancaFilteredData.filter(r => String(r.fase_atual_de_para || '').toUpperCase().trim() === 'APROVADO' && r.os && r.os !== '-');
         const m = {};
         src.forEach(r => {
@@ -957,9 +1040,9 @@ function exportOSListCSV() {
             m[r.os].v += (r.valor_total || 0);
             if (r.data_aprovacao && r.data_aprovacao !== '-' && (!m[r.os].da || r.data_aprovacao < m[r.os].da)) { m[r.os].da = r.data_aprovacao; m[r.os].d = calculateOSAge(r.data_aprovacao); }
         });
-        rows = Object.values(m).sort((a, b) => (a.da || '').localeCompare(b.da || '')).map(o => [o.os, o.categoria, o.pg, o.cidade, o.uf, fmtD(o.da), o.d >= 0 ? o.d : '-', o.fa, o.fp, o.v.toFixed(2).replace('.', ',')]);
+        rows = Object.values(m).sort((a, b) => (a.da || '').localeCompare(b.da || '')).map(o => [o.os, o.categoria, o.pg, o.cidade, o.uf, fmtD(o.da), o.d >= 0 ? o.d : '-', o.fa, o.fp, o.v]);
     } else {
-        filename = 'OSs_Sem_Aprovacao.csv';
+        filename = 'OSs_Sem_Aprovação.xlsx';
         headers = ['OS', 'Categoria', 'Proj. Gerencial', 'Cidade', 'UF', 'Data Cadastro', 'Aging (dias)', 'Fase Atual (Original)', 'Fase (De/Para)', 'Valor (R$)'];
         const src = cobrancaFilteredData.filter(r => (!r.data_aprovacao || r.data_aprovacao === '-') && r.os && r.os !== '-');
         const m = {};
@@ -968,14 +1051,10 @@ function exportOSListCSV() {
             m[r.os].v += (r.valor_total || 0);
             if (r.data_cadastro && (!m[r.os].dc || r.data_cadastro < m[r.os].dc)) { m[r.os].dc = r.data_cadastro; m[r.os].ag = calculateOSAge(r.data_cadastro); }
         });
-        rows = Object.values(m).sort((a, b) => (a.dc || '').localeCompare(b.dc || '')).map(o => [o.os, o.categoria, o.pg, o.cidade, o.uf, fmtD(o.dc), o.ag, o.fa, o.fp, o.v.toFixed(2).replace('.', ',')]);
+        rows = Object.values(m).sort((a, b) => (a.dc || '').localeCompare(b.dc || '')).map(o => [o.os, o.categoria, o.pg, o.cidade, o.uf, fmtD(o.dc), o.ag, o.fa, o.fp, o.v]);
     }
 
-    const csv = '\uFEFF' + [headers, ...rows].map(r => r.map(esc).join(';')).join('\r\n');
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-    const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: filename });
-    a.click();
-    URL.revokeObjectURL(a.href);
+    exportToStyledExcel(headers, rows, filename);
 }
 
 // ── Renderização dos Gráficos Chart.js ──────────────────────────────────────
@@ -1551,8 +1630,8 @@ function renderCobrancaPagination(totalPages) {
     container.appendChild(btnNext);
 }
 
-// Exportar CSV
-function exportCobrancaCSV() {
+// Exportar Excel da Tabela Analítica de Cobrança
+function exportCobrancaXLSX() {
     try {
         const data = getCobrancaTableData();
         if (data.length === 0) {
@@ -1562,10 +1641,10 @@ function exportCobrancaCSV() {
 
         const headers = [
             'Categoria', 'OS', 'Cidade', 'UF', 'Projeto', 'Projeto Gerencial', 
-            'Tipo de Atividade', 'Fase Atual', 'Contrato Numero', 'Item Descritivo', 
+            'Tipo de Atividade', 'Fase Atual', 'Contrato Número', 'Item Descritivo', 
             'Tipo de Despesa', 'Objeto do Contrato', 'Valor Total', 'Data Cadastro', 
-            'Data Aprovacao', 'Tempo Aprovacao', 'Usuario Inclusao Medicao', 'PEP', 
-            'Numero Medicao', 'Numero Pedido', 'Usuario Inclusao Pedido', 'Fase Atual (De Para)'
+            'Data Aprovação', 'Tempo Aprovação', 'Usuário Inclusão Medição', 'PEP', 
+            'Número Medição', 'Número Pedido', 'Usuário Inclusão Pedido', 'Fase Atual (De Para)'
         ];
 
         const rows = data.map(r => [
@@ -1593,30 +1672,10 @@ function exportCobrancaCSV() {
             r.fase_atual_de_para || ''
         ]);
 
-        const csvContent = "\uFEFF" + [
-            headers.join(';'),
-            ...rows.map(e => e.map(val => {
-                if (typeof val === 'string') {
-                    let cleanVal = val.replace(/"/g, '""');
-                    if (cleanVal.includes(';') || cleanVal.includes('\n') || cleanVal.includes('\r')) {
-                        cleanVal = `"${cleanVal}"`;
-                    }
-                    return cleanVal;
-                }
-                return val;
-            }).join(';'))
-        ].join('\n');
-
-        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.setAttribute("href", url);
-        link.setAttribute("download", `RELATORIO_COBRANCA_ANALITICO_${new Date().toISOString().substring(0, 10)}.csv`);
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        const filename = `RELATORIO_COBRANCA_ANALITICO_${new Date().toISOString().substring(0, 10)}.xlsx`;
+        exportToStyledExcel(headers, rows, filename);
     } catch (err) {
-        console.error("Erro ao exportar CSV:", err);
+        console.error("Erro ao exportar Excel:", err);
     }
 }
 
@@ -1638,7 +1697,10 @@ window.clearCobrancaFilters = clearCobrancaFilters;
 window.resetCobrancaDateFilter = resetCobrancaDateFilter;
 window.switchCobrancaTab = switchCobrancaTab;
 window.sortCobrancaTable = sortCobrancaTable;
-window.exportCobrancaCSV = exportCobrancaCSV;
+window.exportOSListXLSX = exportOSListXLSX;
+window.exportCobrancaXLSX = exportCobrancaXLSX;
+window.exportOSListCSV = exportOSListXLSX; // Fallback
+window.exportCobrancaCSV = exportCobrancaXLSX; // Fallback
 window.applyCobrancaSearch = () => {
     const searchEl = document.getElementById('cobranca-search');
     if (searchEl) {
