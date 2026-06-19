@@ -4,16 +4,16 @@
 $i_caps_acute = [char]205
 $folderName = "ANAL" + $i_caps_acute + "TICO CLARO"
 $networkDir = "\\10.121.21.252\mauricio.maciel@jletelecom.com.br\$folderName"
-$localTempPath = "$PSScriptRoot\temp_cobranca_read.xlsx"
-$fallbackPath = "$PSScriptRoot\local_cobranca_file.xlsx"
 $outputPath = "$PSScriptRoot\cobranca_data.js"
-
 $useFile = $null
 
 if (Test-Path $networkDir) {
     try {
-        $networkFile = Get-ChildItem -Path $networkDir -Filter "*Anal*tico*Claro*.xlsx" | Select-Object -First 1
+        $networkFile = Get-ChildItem -Path $networkDir -Filter "*Anal*tico*" | Where-Object { $_.Name -notlike "~$*" } | Select-Object -First 1
         if ($null -ne $networkFile) {
+            $ext = $networkFile.Extension
+            $localTempPath = "$PSScriptRoot\temp_cobranca_read$ext"
+            $fallbackPath = "$PSScriptRoot\local_cobranca_file$ext"
             $networkPath = $networkFile.FullName
             Write-Output "Arquivo de rede encontrado: $networkPath"
             Write-Output "Copiando planilha da rede localmente..."
@@ -22,7 +22,7 @@ if (Test-Path $networkDir) {
             $useFile = $localTempPath
             Write-Output "Cópia realizada e cache local atualizado com sucesso."
         } else {
-            Write-Warning "Nenhum arquivo correspondente a '*Anal*tico*Claro*.xlsx' foi encontrado na pasta de rede."
+            Write-Warning "Nenhum arquivo correspondente a '*Anal*tico*' foi encontrado na pasta de rede."
         }
     } catch {
         Write-Warning "Falha ao copiar da rede: $($_.Exception.Message)"
@@ -36,7 +36,7 @@ if ($null -eq $useFile) {
     $userProfile = $env:USERPROFILE
     $downloadDir = "$userProfile\Downloads"
     if (Test-Path $downloadDir) {
-        $downloadFile = Get-ChildItem -Path $downloadDir -Filter "*Anal*tico*Claro*.xlsx" | Select-Object -First 1
+        $downloadFile = Get-ChildItem -Path $downloadDir -Filter "*Anal*tico*" | Where-Object { $_.Name -notlike "~$*" } | Select-Object -First 1
         if ($null -ne $downloadFile) {
             Write-Output "Arquivo encontrado em Downloads: $($downloadFile.FullName)"
             $useFile = $downloadFile.FullName
@@ -45,9 +45,11 @@ if ($null -eq $useFile) {
 }
 
 if ($null -eq $useFile) {
-    if (Test-Path $fallbackPath) {
-        Write-Output "Usando planilha em cache local como fallback: $fallbackPath"
-        $useFile = $fallbackPath
+    # Procura por qualquer arquivo de cache local
+    $fallbackFile = Get-ChildItem -Path $PSScriptRoot -Filter "local_cobranca_file.*" | Select-Object -First 1
+    if ($null -ne $fallbackFile) {
+        Write-Output "Usando planilha em cache local como fallback: $($fallbackFile.FullName)"
+        $useFile = $fallbackFile.FullName
     } else {
         Write-Error "Arquivo de dados não encontrado! Certifique-se de estar conectado à rede ou de ter o arquivo em downloads/cache."
         Exit 1
@@ -67,7 +69,7 @@ $workbook = $null
 
 try {
     $workbook = $excel.Workbooks.Open($filePath, 0, $true) # Somente-leitura
-    $ws = $workbook.Worksheets.Item("Analitico_Empreiteiras_WF1_WF2_")
+    $ws = $workbook.Worksheets.Item(1)
     
     Write-Output "Lendo intervalo de dados..."
     $range = $ws.UsedRange
@@ -390,6 +392,11 @@ try {
     if ($null -ne $workbook) { $workbook.Close($false) }
     $excel.Quit()
     [System.Runtime.Interopservices.Marshal]::ReleaseComObject($excel) | Out-Null
+    
+    if ($null -ne $localTempPath -and (Test-Path $localTempPath)) {
+        Remove-Item -Path $localTempPath -Force
+    }
+    
     [System.GC]::Collect()
     [System.GC]::WaitForPendingFinalizers()
 }
