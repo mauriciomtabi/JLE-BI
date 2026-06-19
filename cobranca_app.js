@@ -1188,6 +1188,19 @@ function renderMonthlySplitChart(th) {
     const canvas = document.getElementById('cobranca-monthly-split-chart');
     if (!canvas) return;
 
+    // Calcular o valor total sem aprovação
+    let totalSemAprov = 0;
+    cobrancaFilteredData.forEach(r => {
+        const faseDePara = String(r.fase_atual_de_para || '').toUpperCase().trim();
+        if (faseDePara !== 'PEDIDO EMITIDO' && faseDePara !== 'APROVADO') {
+            totalSemAprov += (r.valor_total || 0);
+        }
+    });
+    const totalSemAprovEl = document.getElementById('cobranca-monthly-total-sem-aprovacao');
+    if (totalSemAprovEl) {
+        totalSemAprovEl.innerHTML = `Sem Aprovação: <strong>${formatCobrancaCurrency(totalSemAprov)}</strong>`;
+    }
+
     const monthlyMetrics = {}; // 'YYYY/MM' => { comPed: X, aprov: Y, semAprov: Z }
     cobrancaFilteredData.forEach(r => {
         const m = r.mes_medicao || 'N/D';
@@ -1236,10 +1249,10 @@ function renderMonthlySplitChart(th) {
                 {
                     label: 'Aprovado Aguardando Pedido',
                     data: aprovData,
-                    backgroundColor: '#00b4d8',
-                    borderColor: '#00b4d8',
+                    backgroundColor: '#f39f18',
+                    borderColor: '#f39f18',
                     borderRadius: 2,
-                    hoverBackgroundColor: '#00d0fc',
+                    hoverBackgroundColor: '#ffb83d',
                     hoverBorderColor: '#ffffff',
                     hoverBorderWidth: 2,
                     datalabels: {
@@ -1249,10 +1262,10 @@ function renderMonthlySplitChart(th) {
                 {
                     label: 'Sem Aprovação',
                     data: semAprovData,
-                    backgroundColor: '#f39f18',
-                    borderColor: '#f39f18',
+                    backgroundColor: '#ff5722',
+                    borderColor: '#ff5722',
                     borderRadius: 2,
-                    hoverBackgroundColor: '#ffb83d',
+                    hoverBackgroundColor: '#ff784e',
                     hoverBorderColor: '#ffffff',
                     hoverBorderWidth: 2,
                     datalabels: {

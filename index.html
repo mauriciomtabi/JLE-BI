@@ -810,8 +810,11 @@
 
                 <!-- Monthly Split Row (Full Width) -->
                 <div class="chart-card">
-                    <div class="chart-header">
+                    <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
                         <span class="chart-title">Valor Mensal (Com Pedido vs Sem Pedido)</span>
+                        <div id="cobranca-monthly-total-sem-aprovacao" style="font-size: 13px; font-weight: 600; color: #ff5722; background: rgba(255,87,34,0.08); padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(255,87,34,0.18);">
+                            Sem Aprovação: R$ 0,00
+                        </div>
                     </div>
                     <div class="chart-body" style="height: 320px; position: relative; padding: 16px;">
                         <canvas id="cobranca-monthly-split-chart"></canvas>

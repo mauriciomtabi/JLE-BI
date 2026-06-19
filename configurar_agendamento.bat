@@ -12,9 +12,9 @@ if %errorlevel% neq 0 (
 
 cd /d "%~dp0"
 echo ==========================================================
-echo  CONFIGURANDO ATUALIZACAO AUTOMATICA DO DASHBOARD JLE
+echo  CONFIGURANDO ATUALIZACAO AUTOMATICA DO BI JLE TELECOM
 echo ==========================================================
-echo Frequencia: De segunda a sexta-feira, a cada 1 hora (8h as 18h)
+echo Frequencia: De segunda a sexta-feira, as 10:00 e as 15:00.
 echo.
 powershell -NoProfile -ExecutionPolicy Bypass -File .\configurar_agendamento.ps1
 echo.
