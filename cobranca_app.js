@@ -278,7 +278,7 @@ function renderCategoryCards() {
 
     // Calcular valores por categoria
     const categorySums = {};
-    const categoryCounts = {};
+    const categoryOSs = {}; // Armazenar Set de OSs únicas por categoria
     
     // Inicializar a partir dos dados atuais sem filtros por clique de categoria
     const baseDataForCategoryKPI = COBRANCA_DATA.filter(r => {
@@ -314,8 +314,16 @@ function renderCategoryCards() {
     baseDataForCategoryKPI.forEach(r => {
         const cat = r.categoria || 'OUTROS';
         categorySums[cat] = (categorySums[cat] || 0) + (r.valor_total || 0);
-        categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
+        if (!categoryOSs[cat]) {
+            categoryOSs[cat] = new Set();
+        }
+        if (r.os) {
+            categoryOSs[cat].add(r.os);
+        }
     });
+
+    // Calcular faturamento total das categorias filtradas para o percentual
+    const totalFaturamento = Object.values(categorySums).reduce((acc, val) => acc + val, 0);
 
     // Ordenar categorias por valor total decrescente
     const sortedCats = Object.keys(categorySums).sort((a, b) => categorySums[b] - categorySums[a]);
@@ -323,7 +331,8 @@ function renderCategoryCards() {
     container.innerHTML = '';
     sortedCats.forEach(cat => {
         const sum = categorySums[cat];
-        const count = categoryCounts[cat];
+        const count = categoryOSs[cat] ? categoryOSs[cat].size : 0; // Contagem distinta de OS
+        const pct = totalFaturamento > 0 ? (sum / totalFaturamento) * 100 : 0;
         
         const card = document.createElement('div');
         card.className = `cobranca-category-card${filterSelectedCategory === cat ? ' active' : ''}`;
@@ -335,7 +344,10 @@ function renderCategoryCards() {
         card.innerHTML = `
             <span class="cobranca-category-title" title="${cat}">${cat}</span>
             <span class="cobranca-category-value">${formatCobrancaCurrency(sum)}</span>
-            <span class="cobranca-category-count">${count.toLocaleString('pt-BR')} OSs</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; font-size: 11px; color: var(--text-secondary); margin-top: 4px;">
+                <span>${count.toLocaleString('pt-BR')} OSs</span>
+                <span style="font-weight: 700; color: var(--color-primary-light);">${pct.toFixed(1).replace('.', ',')}%</span>
+            </div>
         `;
         container.appendChild(card);
     });
@@ -381,17 +393,19 @@ function renderPipelineStepper() {
     });
 
     const phaseMetrics = {
-        'EM EXECUÇÃO': { sum: 0, count: 0, cssClass: 'em-execucao' },
-        'EXECUTADO': { sum: 0, count: 0, cssClass: 'executado' },
-        'APROVADO': { sum: 0, count: 0, cssClass: 'aprovado' },
-        'PEDIDO EMITIDO': { sum: 0, count: 0, cssClass: 'ped-emitido' }
+        'EM EXECUÇÃO': { sum: 0, oss: new Set(), cssClass: 'em-execucao' },
+        'EXECUTADO': { sum: 0, oss: new Set(), cssClass: 'executado' },
+        'APROVADO': { sum: 0, oss: new Set(), cssClass: 'aprovado' },
+        'PEDIDO EMITIDO': { sum: 0, oss: new Set(), cssClass: 'ped-emitido' }
     };
 
     baseDataForPipeline.forEach(r => {
         const p = String(r.fase_atual_de_para).toUpperCase().trim();
         if (phaseMetrics.hasOwnProperty(p)) {
             phaseMetrics[p].sum += (r.valor_total || 0);
-            phaseMetrics[p].count++;
+            if (r.os) {
+                phaseMetrics[p].oss.add(r.os);
+            }
         }
     });
 
@@ -404,7 +418,7 @@ function renderPipelineStepper() {
     // Determinar porcentagem ativa da barra com base no progresso das fases
     let activeStepsCount = 0;
     pipelineSequence.forEach((phase, idx) => {
-        if (phaseMetrics[phase].count > 0 || filterSelectedPhase === phase) {
+        if (phaseMetrics[phase].oss.size > 0 || filterSelectedPhase === phase) {
             activeStepsCount = idx + 1;
         }
     });
@@ -424,11 +438,12 @@ function renderPipelineStepper() {
 
         // Formatar rótulo para exibição elegante
         const label = phase.charAt(0) + phase.slice(1).toLowerCase();
+        const count = m.oss.size; // Contagem distinta de OS
 
         step.innerHTML = `
             <span class="cobranca-pipeline-label">${label}</span>
             <span class="cobranca-pipeline-val">${formatCobrancaCurrency(m.sum)}</span>
-            <span class="cobranca-pipeline-sub">${m.count.toLocaleString('pt-BR')} OSs</span>
+            <span class="cobranca-pipeline-sub">${count.toLocaleString('pt-BR')} OSs</span>
         `;
         container.appendChild(step);
     });

@@ -344,3 +344,14 @@
     .cobranca-search-wrapper { max-width: 100%; width: 100%; }
     .cobranca-pagination { flex-direction: column; gap: 8px; }
 }
+
+/* -- Subtab Panes Visibility -- */
+.subtab-pane {
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    animation: fadeInSubview 0.3s ease-out;
+}
+.subtab-pane.active {
+    display: flex;
+}

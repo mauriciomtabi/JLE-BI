@@ -468,10 +468,10 @@
 
                 <div class="filter-group">
                     <label for="filter-veiculos-data-fim">Data Fim</label>
-                    <div style="display: flex; gap: 6px; align-items: center; width: 100%;">
+                    <div style="display: flex; gap: 8px; align-items: center; width: 100%;">
                         <input type="date" id="filter-veiculos-data-fim" onchange="applyVeiculosFilters()" style="flex-grow: 1;">
-                        <button class="btn-reset" onclick="resetVeiculosDateFilter()" title="Limpar Período" style="padding: 10px; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); cursor: pointer; transition: all 0.2s ease;">
-                            <i class="fa-solid fa-calendar-xmark"></i>
+                        <button onclick="resetVeiculosFilters()" title="Limpar Filtros" style="background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 12px; color: var(--text-secondary); cursor: pointer; transition: all 0.2s ease;" onmouseover="this.style.borderColor='var(--color-primary)'; this.style.color='var(--text-primary)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-secondary)'">
+                            <i class="fa-solid fa-eraser"></i>
                         </button>
                     </div>
                 </div>
@@ -488,11 +488,7 @@
                     <datalist id="veiculos-plate-list"></datalist>
                 </div>
 
-                <div class="filter-actions-inline">
-                    <button class="btn-reset" id="btn-veiculos-reset" onclick="resetVeiculosFilters()" title="Limpar Filtros">
-                        <i class="fa-solid fa-arrows-rotate"></i>
-                    </button>
-                </div>
+
             </section>
 
             <!-- Sub Tab Selector (Indicadores / Lançamentos) -->
@@ -778,29 +774,22 @@
                 </div>
                 <div class="filter-group">
                     <label for="cobranca-filter-data-fim">Data Fim</label>
-                    <div style="display: flex; gap: 6px; align-items: center; width: 100%;">
+                    <div style="display: flex; gap: 8px; align-items: center; width: 100%;">
                         <input type="date" id="cobranca-filter-data-fim" onchange="applyCobrancaFilters()" style="flex-grow: 1;">
-                        <button class="btn-reset" onclick="resetCobrancaDateFilter()" title="Limpar Período" style="padding: 10px; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); cursor: pointer; transition: all 0.2s ease;">
-                            <i class="fa-solid fa-calendar-xmark"></i>
+                        <button onclick="clearCobrancaFilters()" title="Limpar Filtros" style="background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 12px; color: var(--text-secondary); cursor: pointer; transition: all 0.2s ease;" onmouseover="this.style.borderColor='var(--color-primary)'; this.style.color='var(--text-primary)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-secondary)'">
+                            <i class="fa-solid fa-eraser"></i>
                         </button>
                     </div>
-                </div>
-                <div class="filter-actions-inline">
-                    <button class="btn-reset" onclick="clearCobrancaFilters()" title="Limpar Filtros">
-                        <i class="fa-solid fa-arrows-rotate"></i>
-                    </button>
                 </div>
             </section>
 
             <!-- Sub Tab Selector (Indicadores / Relatório) -->
-            <div class="sub-tabs-container" id="cobranca-sub-tabs">
-                <button class="sub-tab tab-btn active" data-tab="indicators" id="cobranca-tab-btn-indicators" onclick="switchCobrancaTab('indicators')">
-                    <i class="fa-solid fa-chart-column"></i>
-                    <span>Indicadores</span>
+            <div class="dashboard-tabs" id="cobranca-sub-tabs">
+                <button class="tab-btn active" id="cobranca-tab-btn-indicators" onclick="switchCobrancaTab('indicators')">
+                    <i class="fa-solid fa-chart-column"></i> Indicadores
                 </button>
-                <button class="sub-tab tab-btn" data-tab="report" id="cobranca-tab-btn-report" onclick="switchCobrancaTab('report')">
-                    <i class="fa-solid fa-table"></i>
-                    <span>Relatório</span>
+                <button class="tab-btn" id="cobranca-tab-btn-report" onclick="switchCobrancaTab('report')">
+                    <i class="fa-solid fa-table"></i> Relatório
                 </button>
             </div>
 
@@ -815,9 +804,9 @@
                 <!-- Phase Pipeline Flow (Stepper showing phases interlinking) -->
                 <div class="chart-card">
                     <div class="chart-header">
-                        <span class="chart-title"><i class="fa-solid fa-route"></i> Fluxo de Faturamento por Fase (Pipeline)</span>
+                        <span class="chart-title"><i class="fa-solid fa-route"></i> Fluxo de Faturamento por Fase</span>
                     </div>
-                    <div class="chart-body" style="padding: 24px; overflow-x: auto;">
+                    <div style="padding: 24px; overflow-x: auto; width: 100%;">
                         <div class="cobranca-pipeline" id="cobranca-pipeline-container">
                             <!-- Dynamically populated workflow steps -->
                         </div>
