@@ -10,8 +10,8 @@ $e_circumflex = [char]234
 $c_cedilla_caps = [char]199
 
 $networkDir = "\\10.121.21.252\financeiro\Angelita\2026\FLUXO DIARIO"
-$localTempPath = "C:\Users\jlema\.gemini\antigravity\scratch\fluxo_caixa_mapping\temp_read.xlsx"
-$fallbackPath = "C:\Users\jlema\.gemini\antigravity\scratch\fluxo_caixa_mapping\local_file.xlsx"
+$localTempPath = "$PSScriptRoot\temp_read.xlsx"
+$fallbackPath = "$PSScriptRoot\local_file.xlsx"
 
 Write-Output "Iniciando processo de ETL..."
 
@@ -374,35 +374,35 @@ try {
     
     $jsonStr = $payload | ConvertTo-Json -Depth 6
     $jsContent = "window.CASH_FLOW_DATA = " + $jsonStr + ";"
-    $jsContent | Out-File -FilePath "C:\Users\jlema\.gemini\antigravity\scratch\fluxo_caixa_mapping\data.js" -Encoding utf8
+    $jsContent | Out-File -FilePath "$PSScriptRoot\data.js" -Encoding utf8
     
     Write-Output "ETL Finalizado! Dados salvos em data.js com $($allTransactions.Count) lancamentos."
 
-    # 6. Publicar atualizações no GitHub se houver alterações em data.js
+    # 6. Publicar atualizações no GitHub se houver alterações em data.js ou cobranca_data.js
     Write-Output "Verificando se houve alteracoes nos dados para publicar no GitHub..."
     $gitPath = "C:\Program Files\Git\cmd\git.exe"
     if (Test-Path $gitPath) {
-        $gitStatus = & $gitPath status --porcelain data.js
+        $gitStatus = & $gitPath status --porcelain data.js cobranca_data.js
         if ($null -ne $gitStatus -and $gitStatus.ToString().Trim() -ne "") {
-            Write-Output "Novas transacoes detectadas! Atualizando a versao do Cache no Service Worker (sw.js)..."
-            $swPath = "C:\Users\jlema\.gemini\antigravity\scratch\fluxo_caixa_mapping\sw.js"
+            Write-Output "Novas alteracoes nos dados detectadas! Atualizando a versao do Cache no Service Worker (sw.js)..."
+            $swPath = "$PSScriptRoot\sw.js"
             if (Test-Path $swPath) {
                 try {
                     $swContent = [System.IO.File]::ReadAllText($swPath)
                     $timestamp = Get-Date -Format "yyyyMMddHHmmss"
-                    $newCacheNameLine = "const CACHE_NAME = 'jle-bi-v3.12.$timestamp';"
+                    $newCacheNameLine = "const CACHE_NAME = 'jle-bi-v3.16.$timestamp';"
                     $swContent = $swContent -replace "const CACHE_NAME = '([^']+)';", $newCacheNameLine
                     $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
                     [System.IO.File]::WriteAllText($swPath, $swContent, $utf8NoBom)
-                    Write-Output "Cache do Service Worker atualizado com sucesso para: jle-bi-v3.12.$timestamp"
+                    Write-Output "Cache do Service Worker atualizado com sucesso para: jle-bi-v3.16.$timestamp"
                 } catch {
                     Write-Warning "Nao foi possivel atualizar o sw.js: $($_.Exception.Message)"
                 }
             }
 
             Write-Output "Fazendo commit e push para o GitHub..."
-            & $gitPath add data.js sw.js
-            & $gitPath commit -m "data(auto): atualizacao automatica de dados e cache do PWA"
+            & $gitPath add data.js cobranca_data.js sw.js
+            & $gitPath commit -m "data(auto): atualizacao automatica de dados (Financeiro/Cobranca) e cache PWA"
             & $gitPath push origin main
             Write-Output "Dados e Service Worker publicados com sucesso no GitHub!"
         } else {
