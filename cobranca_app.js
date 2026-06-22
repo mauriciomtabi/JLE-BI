@@ -669,12 +669,12 @@ function renderCobrancaUFMap() {
                             <span class="uf-sub-val" style="color:var(--text-secondary); font-size:10px;">${prPct}%</span>
                         </div>
                     </div>
-                    <!-- Barra de progresso empilhada colorira proporcional -->
-                    <div class="uf-stacked-bar" style="display: flex; height: 6px; border-radius: 3px; overflow: hidden; margin-top: 8px; background: rgba(0,0,0,0.08);" title="Pedido: ${prPedPct}%, Aprovado: ${prAprovPct}%, Sem Aprovação: ${prSemAprovPct}%">
-                        <div style="width: ${prPedPct}%; background: #004f71;"></div>
-                        <div style="width: ${prAprovPct}%; background: #f39f18;"></div>
-                        <div style="width: ${prSemAprovPct}%; background: #ff5722;"></div>
-                    </div>
+                </div>
+                <!-- Barra de progresso empilhada colorira proporcional -->
+                <div class="uf-stacked-bar" style="display: flex; height: 6px; border-radius: 3px; overflow: hidden; margin-top: 8px; background: rgba(0,0,0,0.08);" title="Pedido: ${prPedPct}%, Aprovado: ${prAprovPct}%, Sem Aprovação: ${prSemAprovPct}%">
+                    <div style="width: ${prPedPct}%; background: #004f71;"></div>
+                    <div style="width: ${prAprovPct}%; background: #f39f18;"></div>
+                    <div style="width: ${prSemAprovPct}%; background: #ff5722;"></div>
                 </div>
             </div>
 
@@ -700,12 +700,12 @@ function renderCobrancaUFMap() {
                             <span class="uf-sub-val" style="color:var(--text-secondary); font-size:10px;">${scPct}%</span>
                         </div>
                     </div>
-                    <!-- Barra de progresso empilhada colorira proporcional -->
-                    <div class="uf-stacked-bar" style="display: flex; height: 6px; border-radius: 3px; overflow: hidden; margin-top: 8px; background: rgba(0,0,0,0.08);" title="Pedido: ${scPedPct}%, Aprovado: ${scAprovPct}%, Sem Aprovação: ${scSemAprovPct}%">
-                        <div style="width: ${scPedPct}%; background: #004f71;"></div>
-                        <div style="width: ${scAprovPct}%; background: #f39f18;"></div>
-                        <div style="width: ${scSemAprovPct}%; background: #ff5722;"></div>
-                    </div>
+                </div>
+                <!-- Barra de progresso empilhada colorira proporcional -->
+                <div class="uf-stacked-bar" style="display: flex; height: 6px; border-radius: 3px; overflow: hidden; margin-top: 8px; background: rgba(0,0,0,0.08);" title="Pedido: ${scPedPct}%, Aprovado: ${scAprovPct}%, Sem Aprovação: ${scSemAprovPct}%">
+                    <div style="width: ${scPedPct}%; background: #004f71;"></div>
+                    <div style="width: ${scAprovPct}%; background: #f39f18;"></div>
+                    <div style="width: ${scSemAprovPct}%; background: #ff5722;"></div>
                 </div>
             </div>
 
@@ -731,12 +731,12 @@ function renderCobrancaUFMap() {
                             <span class="uf-sub-val" style="color:var(--text-secondary); font-size:10px;">${rsPct}%</span>
                         </div>
                     </div>
-                    <!-- Barra de progresso empilhada colorira proporcional -->
-                    <div class="uf-stacked-bar" style="display: flex; height: 6px; border-radius: 3px; overflow: hidden; margin-top: 8px; background: rgba(0,0,0,0.08);" title="Pedido: ${rsPedPct}%, Aprovado: ${rsAprovPct}%, Sem Aprovação: ${rsSemAprovPct}%">
-                        <div style="width: ${rsPedPct}%; background: #004f71;"></div>
-                        <div style="width: ${rsAprovPct}%; background: #f39f18;"></div>
-                        <div style="width: ${rsSemAprovPct}%; background: #ff5722;"></div>
-                    </div>
+                </div>
+                <!-- Barra de progresso empilhada colorira proporcional -->
+                <div class="uf-stacked-bar" style="display: flex; height: 6px; border-radius: 3px; overflow: hidden; margin-top: 8px; background: rgba(0,0,0,0.08);" title="Pedido: ${rsPedPct}%, Aprovado: ${rsAprovPct}%, Sem Aprovação: ${rsSemAprovPct}%">
+                    <div style="width: ${rsPedPct}%; background: #004f71;"></div>
+                    <div style="width: ${rsAprovPct}%; background: #f39f18;"></div>
+                    <div style="width: ${rsSemAprovPct}%; background: #ff5722;"></div>
                 </div>
             </div>
 
