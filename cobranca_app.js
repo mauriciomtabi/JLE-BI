@@ -655,16 +655,13 @@ function renderCobrancaUFMap() {
                         <strong>Paraná</strong>
                     </span>
                 </div>
+                <div class="uf-compact-default-val">
+                    ${formatCobrancaCurrency(ufSums['PR'])}
+                </div>
                 <div class="uf-compact-content">
                     <div class="uf-compact-main-stat">
-                        <div class="uf-main-stat-oss">
-                            <span class="uf-stat-label"><i class="fa-solid fa-file-invoice"></i> OSs</span>
-                            <span class="uf-stat-value">${ufOSs['PR'].size.toLocaleString('pt-BR')}</span>
-                        </div>
-                        <div class="uf-main-stat-val">
-                            <span class="uf-stat-label"><i class="fa-solid fa-sack-dollar"></i> Valor</span>
-                            <span class="uf-stat-value">R$ ${formatCobrancaShortVal(ufSums['PR'])}</span>
-                        </div>
+                        <span class="uf-stat-label"><i class="fa-solid fa-file-invoice"></i> OSs</span>
+                        <span class="uf-stat-value">${ufOSs['PR'].size.toLocaleString('pt-BR')}</span>
                     </div>
                     <div class="uf-compact-sub-stats" style="margin-top:4px;">
                         <div class="uf-sub-stat success">
@@ -707,16 +704,13 @@ function renderCobrancaUFMap() {
                         <strong>Santa Catarina</strong>
                     </span>
                 </div>
+                <div class="uf-compact-default-val">
+                    ${formatCobrancaCurrency(ufSums['SC'])}
+                </div>
                 <div class="uf-compact-content">
                     <div class="uf-compact-main-stat">
-                        <div class="uf-main-stat-oss">
-                            <span class="uf-stat-label"><i class="fa-solid fa-file-invoice"></i> OSs</span>
-                            <span class="uf-stat-value">${ufOSs['SC'].size.toLocaleString('pt-BR')}</span>
-                        </div>
-                        <div class="uf-main-stat-val">
-                            <span class="uf-stat-label"><i class="fa-solid fa-sack-dollar"></i> Valor</span>
-                            <span class="uf-stat-value">R$ ${formatCobrancaShortVal(ufSums['SC'])}</span>
-                        </div>
+                        <span class="uf-stat-label"><i class="fa-solid fa-file-invoice"></i> OSs</span>
+                        <span class="uf-stat-value">${ufOSs['SC'].size.toLocaleString('pt-BR')}</span>
                     </div>
                     <div class="uf-compact-sub-stats" style="margin-top:4px;">
                         <div class="uf-sub-stat success">
@@ -759,16 +753,13 @@ function renderCobrancaUFMap() {
                         <strong>Rio Grande do Sul</strong>
                     </span>
                 </div>
+                <div class="uf-compact-default-val">
+                    ${formatCobrancaCurrency(ufSums['RS'])}
+                </div>
                 <div class="uf-compact-content">
                     <div class="uf-compact-main-stat">
-                        <div class="uf-main-stat-oss">
-                            <span class="uf-stat-label"><i class="fa-solid fa-file-invoice"></i> OSs</span>
-                            <span class="uf-stat-value">${ufOSs['RS'].size.toLocaleString('pt-BR')}</span>
-                        </div>
-                        <div class="uf-main-stat-val">
-                            <span class="uf-stat-label"><i class="fa-solid fa-sack-dollar"></i> Valor</span>
-                            <span class="uf-stat-value">R$ ${formatCobrancaShortVal(ufSums['RS'])}</span>
-                        </div>
+                        <span class="uf-stat-label"><i class="fa-solid fa-file-invoice"></i> OSs</span>
+                        <span class="uf-stat-value">${ufOSs['RS'].size.toLocaleString('pt-BR')}</span>
                     </div>
                     <div class="uf-compact-sub-stats" style="margin-top:4px;">
                         <div class="uf-sub-stat success">
@@ -1560,7 +1551,8 @@ function renderMonthlySplitChart(th) {
             },
             layout: {
                 padding: {
-                    top: 15
+                    top: 15,
+                    bottom: 10
                 }
             },
             scales: {
@@ -1574,7 +1566,12 @@ function renderMonthlySplitChart(th) {
                 }
             },
             plugins: {
-                legend: { position: 'bottom' },
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        padding: 20
+                    }
+                },
                 tooltip: {
                     backgroundColor: th.tooltipBg,
                     titleColor: th.tooltipText,

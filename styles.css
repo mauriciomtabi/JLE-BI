@@ -1225,17 +1225,15 @@ td.cell-saida {
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-left: 4px solid transparent;
     border-radius: 12px;
-    padding: 6px 10px !important;
+    padding: 10px 14px;
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.05);
     display: flex;
     flex-direction: column;
     gap: 4px;
     position: absolute;
-    width: 145px; /* Minimized width by default */
-    max-height: 68px; /* Minimized height by default to prevent vertical text clipping */
-    overflow: hidden;
+    width: 220px;
     z-index: 10;
 }
 
@@ -1246,7 +1244,7 @@ td.cell-saida {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-/* Floating Card Coordinates (Restored original positions pointing to states) */
+/* Floating Card Coordinates */
 .uf-compact-card.pr-card {
     left: 8px;
     top: 15px;
@@ -1266,14 +1264,32 @@ td.cell-saida {
 }
 
 .uf-compact-card:hover, .uf-compact-card.hovered {
-    width: 220px !important; /* Expands to full width on hover */
-    max-height: 220px; /* Expands to fit detailed statistics on hover */
+    transform: translateY(-5px) scale(1.02);
+    border-color: var(--color-primary-light);
+    border-left-width: 4px;
+    box-shadow: 0 12px 30px rgba(0, 79, 113, 0.45);
+    z-index: 50;
+}
+
+/* Cobrança-only: Compact (minimized) state cards that expand on hover */
+#view-cobranca-container .uf-compact-card {
+    width: 145px;
+    max-height: 68px;
+    overflow: hidden;
+    padding: 6px 10px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+#view-cobranca-container .uf-compact-card:hover,
+#view-cobranca-container .uf-compact-card.hovered {
+    width: 220px !important;
+    max-height: 220px;
     padding: 10px 14px !important;
     transform: translateY(-5px) scale(1.02);
     border-color: var(--color-primary-light);
     border-left-width: 4px;
     box-shadow: 0 12px 30px rgba(0, 79, 113, 0.45);
-    z-index: 50; /* Bring to front on hover */
+    z-index: 50;
 }
 
 /* Hover highlights for active state */
@@ -1384,20 +1400,20 @@ td.cell-saida {
     border-left: 1px solid transparent;
 }
 
-/* Show sub-stats border and padding on hover */
-.uf-compact-card:hover .uf-compact-sub-stats,
-.uf-compact-card.hovered .uf-compact-sub-stats {
+/* Show sub-stats border and padding on hover (cobrança only) */
+#view-cobranca-container .uf-compact-card:hover .uf-compact-sub-stats,
+#view-cobranca-container .uf-compact-card.hovered .uf-compact-sub-stats {
     border-left: 1px solid rgba(255, 255, 255, 0.08);
     padding-left: 8px;
 }
 
-.light-theme .uf-compact-card:hover .uf-compact-sub-stats,
-.light-theme .uf-compact-card.hovered .uf-compact-sub-stats {
+.light-theme #view-cobranca-container .uf-compact-card:hover .uf-compact-sub-stats,
+.light-theme #view-cobranca-container .uf-compact-card.hovered .uf-compact-sub-stats {
     border-left: 1px solid rgba(0, 0, 0, 0.06);
 }
 
-/* Hide first sub-stat (financial value) by default and expand on hover */
-.uf-compact-sub-stats .uf-sub-stat:first-child {
+/* Hide first sub-stat (financial value) by default and expand on hover (cobrança only) */
+#view-cobranca-container .uf-compact-sub-stats .uf-sub-stat:first-child {
     max-height: 0;
     opacity: 0;
     overflow: hidden;
@@ -1406,14 +1422,14 @@ td.cell-saida {
     transition: all 0.35s ease;
 }
 
-.uf-compact-card:hover .uf-compact-sub-stats .uf-sub-stat:first-child,
-.uf-compact-card.hovered .uf-compact-sub-stats .uf-sub-stat:first-child {
+#view-cobranca-container .uf-compact-card:hover .uf-compact-sub-stats .uf-sub-stat:first-child,
+#view-cobranca-container .uf-compact-card.hovered .uf-compact-sub-stats .uf-sub-stat:first-child {
     max-height: 20px;
     opacity: 1;
 }
 
-/* Progress bar auto collapse/expand (only present in cobrança view) */
-.uf-compact-card .uf-stacked-bar {
+/* Progress bar auto collapse/expand (cobrança only, stacked bar not present in other views) */
+#view-cobranca-container .uf-compact-card .uf-stacked-bar {
     height: 0 !important;
     margin-top: 0 !important;
     opacity: 0 !important;
@@ -1421,8 +1437,8 @@ td.cell-saida {
     transition: all 0.35s ease;
 }
 
-.uf-compact-card:hover .uf-stacked-bar,
-.uf-compact-card.hovered .uf-stacked-bar {
+#view-cobranca-container .uf-compact-card:hover .uf-stacked-bar,
+#view-cobranca-container .uf-compact-card.hovered .uf-stacked-bar {
     height: 6px !important;
     margin-top: 8px !important;
     opacity: 1 !important;
@@ -1431,12 +1447,17 @@ td.cell-saida {
 .uf-stat-label {
     font-size: 8px;
     color: var(--text-secondary);
-    text-transform: none; /* Changed from uppercase to prevent OSs becoming OSS and save horizontal space */
+    text-transform: uppercase; /* Global default - uppercase for all map views */
     letter-spacing: 0.5px;
     display: flex;
     align-items: center;
     gap: 4px;
     white-space: nowrap;
+}
+
+/* Cobrança-only override: keep label casing natural so OSs displays correctly (not OSS) */
+#view-cobranca-container .uf-stat-label {
+    text-transform: none;
 }
 
 .uf-stat-value {
@@ -1445,8 +1466,8 @@ td.cell-saida {
     color: var(--text-primary);
 }
 
-/* Hide OSs main stat by default and expand on hover */
-.uf-compact-card .uf-main-stat-oss {
+/* Hide OSs main stat by default and expand on hover (cobrança only) */
+#view-cobranca-container .uf-compact-card .uf-main-stat-oss {
     max-height: 0;
     opacity: 0;
     overflow: hidden;
@@ -1455,33 +1476,53 @@ td.cell-saida {
     transition: all 0.35s ease;
 }
 
-.uf-compact-card:hover .uf-main-stat-oss,
-.uf-compact-card.hovered .uf-main-stat-oss {
+#view-cobranca-container .uf-compact-card:hover .uf-main-stat-oss,
+#view-cobranca-container .uf-compact-card.hovered .uf-main-stat-oss {
     max-height: 40px;
     opacity: 1;
 }
 
-/* Show Valor main stat by default and collapse on hover */
-.uf-compact-card .uf-main-stat-val {
-    max-height: 40px;
+/* Default val div: visible by default, hidden on hover (cobrança only) */
+#view-cobranca-container .uf-compact-default-val {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 24px;
     opacity: 1;
     transition: all 0.35s ease;
+    padding-bottom: 2px;
 }
 
-.uf-compact-card:hover .uf-main-stat-val,
-.uf-compact-card.hovered .uf-main-stat-val {
+#view-cobranca-container .uf-compact-card:hover .uf-compact-default-val,
+#view-cobranca-container .uf-compact-card.hovered .uf-compact-default-val {
     max-height: 0;
     opacity: 0;
     overflow: hidden;
-    margin: 0;
     padding: 0;
+    margin: 0;
 }
 
-/* Specific colors for UF values in minimized state */
-#view-cobranca-container .pr-card .uf-main-stat-val .uf-stat-value { color: #00b4d8; }
-#view-cobranca-container .sc-card .uf-main-stat-val .uf-stat-value { color: #f39f18; }
-#view-cobranca-container .rs-card .uf-main-stat-val .uf-stat-value { color: #2ecc71; }
-#veiculos-uf-map-container .uf-main-stat-val .uf-stat-value { color: #2ecc71; }
+/* Default val color per state */
+#view-cobranca-container .pr-card .uf-compact-default-val { color: #00b4d8; }
+#view-cobranca-container .sc-card .uf-compact-default-val { color: #f39f18; }
+#view-cobranca-container .rs-card .uf-compact-default-val { color: #2ecc71; }
+
+/* Hide the expanded content by default; reveal on hover (cobrança only) */
+#view-cobranca-container .uf-compact-card .uf-compact-content {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.35s ease;
+}
+
+#view-cobranca-container .uf-compact-card:hover .uf-compact-content,
+#view-cobranca-container .uf-compact-card.hovered .uf-compact-content {
+    max-height: 220px;
+    opacity: 1;
+}
 
 .uf-sub-stat {
     display: flex;
