@@ -1234,7 +1234,7 @@ td.cell-saida {
     gap: 4px;
     position: absolute;
     width: 145px; /* Minimized width by default */
-    max-height: 52px; /* Minimized height by default */
+    max-height: 68px; /* Minimized height by default to prevent vertical text clipping */
     overflow: hidden;
     z-index: 10;
 }
@@ -1431,7 +1431,7 @@ td.cell-saida {
 .uf-stat-label {
     font-size: 8px;
     color: var(--text-secondary);
-    text-transform: uppercase;
+    text-transform: none; /* Changed from uppercase to prevent OSs becoming OSS and save horizontal space */
     letter-spacing: 0.5px;
     display: flex;
     align-items: center;
@@ -1444,6 +1444,44 @@ td.cell-saida {
     font-weight: 750;
     color: var(--text-primary);
 }
+
+/* Hide OSs main stat by default and expand on hover */
+.uf-compact-card .uf-main-stat-oss {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    transition: all 0.35s ease;
+}
+
+.uf-compact-card:hover .uf-main-stat-oss,
+.uf-compact-card.hovered .uf-main-stat-oss {
+    max-height: 40px;
+    opacity: 1;
+}
+
+/* Show Valor main stat by default and collapse on hover */
+.uf-compact-card .uf-main-stat-val {
+    max-height: 40px;
+    opacity: 1;
+    transition: all 0.35s ease;
+}
+
+.uf-compact-card:hover .uf-main-stat-val,
+.uf-compact-card.hovered .uf-main-stat-val {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+/* Specific colors for UF values in minimized state */
+#view-cobranca-container .pr-card .uf-main-stat-val .uf-stat-value { color: #00b4d8; }
+#view-cobranca-container .sc-card .uf-main-stat-val .uf-stat-value { color: #f39f18; }
+#view-cobranca-container .rs-card .uf-main-stat-val .uf-stat-value { color: #2ecc71; }
+#veiculos-uf-map-container .uf-main-stat-val .uf-stat-value { color: #2ecc71; }
 
 .uf-sub-stat {
     display: flex;

@@ -657,8 +657,14 @@ function renderCobrancaUFMap() {
                 </div>
                 <div class="uf-compact-content">
                     <div class="uf-compact-main-stat">
-                        <span class="uf-stat-label"><i class="fa-solid fa-file-invoice"></i> OSs</span>
-                        <span class="uf-stat-value">${ufOSs['PR'].size.toLocaleString('pt-BR')}</span>
+                        <div class="uf-main-stat-oss">
+                            <span class="uf-stat-label"><i class="fa-solid fa-file-invoice"></i> OSs</span>
+                            <span class="uf-stat-value">${ufOSs['PR'].size.toLocaleString('pt-BR')}</span>
+                        </div>
+                        <div class="uf-main-stat-val">
+                            <span class="uf-stat-label"><i class="fa-solid fa-sack-dollar"></i> Valor</span>
+                            <span class="uf-stat-value">R$ ${formatCobrancaShortVal(ufSums['PR'])}</span>
+                        </div>
                     </div>
                     <div class="uf-compact-sub-stats" style="margin-top:4px;">
                         <div class="uf-sub-stat success">
@@ -703,8 +709,14 @@ function renderCobrancaUFMap() {
                 </div>
                 <div class="uf-compact-content">
                     <div class="uf-compact-main-stat">
-                        <span class="uf-stat-label"><i class="fa-solid fa-file-invoice"></i> OSs</span>
-                        <span class="uf-stat-value">${ufOSs['SC'].size.toLocaleString('pt-BR')}</span>
+                        <div class="uf-main-stat-oss">
+                            <span class="uf-stat-label"><i class="fa-solid fa-file-invoice"></i> OSs</span>
+                            <span class="uf-stat-value">${ufOSs['SC'].size.toLocaleString('pt-BR')}</span>
+                        </div>
+                        <div class="uf-main-stat-val">
+                            <span class="uf-stat-label"><i class="fa-solid fa-sack-dollar"></i> Valor</span>
+                            <span class="uf-stat-value">R$ ${formatCobrancaShortVal(ufSums['SC'])}</span>
+                        </div>
                     </div>
                     <div class="uf-compact-sub-stats" style="margin-top:4px;">
                         <div class="uf-sub-stat success">
@@ -749,8 +761,14 @@ function renderCobrancaUFMap() {
                 </div>
                 <div class="uf-compact-content">
                     <div class="uf-compact-main-stat">
-                        <span class="uf-stat-label"><i class="fa-solid fa-file-invoice"></i> OSs</span>
-                        <span class="uf-stat-value">${ufOSs['RS'].size.toLocaleString('pt-BR')}</span>
+                        <div class="uf-main-stat-oss">
+                            <span class="uf-stat-label"><i class="fa-solid fa-file-invoice"></i> OSs</span>
+                            <span class="uf-stat-value">${ufOSs['RS'].size.toLocaleString('pt-BR')}</span>
+                        </div>
+                        <div class="uf-main-stat-val">
+                            <span class="uf-stat-label"><i class="fa-solid fa-sack-dollar"></i> Valor</span>
+                            <span class="uf-stat-value">R$ ${formatCobrancaShortVal(ufSums['RS'])}</span>
+                        </div>
                     </div>
                     <div class="uf-compact-sub-stats" style="margin-top:4px;">
                         <div class="uf-sub-stat success">

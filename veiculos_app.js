@@ -674,8 +674,14 @@ function renderVeiculosMap(th) {
             </div>
             <div class="uf-compact-content">
                 <div class="uf-compact-main-stat">
-                    <span class="uf-stat-label"><i class="fa-solid fa-gas-pump"></i> Abastecimentos</span>
-                    <span class="uf-stat-value">${ufMetrics[uf].count.toLocaleString('pt-BR')}</span>
+                    <div class="uf-main-stat-oss">
+                        <span class="uf-stat-label"><i class="fa-solid fa-gas-pump"></i> Abastecimentos</span>
+                        <span class="uf-stat-value">${ufMetrics[uf].count.toLocaleString('pt-BR')}</span>
+                    </div>
+                    <div class="uf-main-stat-val">
+                        <span class="uf-stat-label"><i class="fa-solid fa-sack-dollar"></i> Gasto</span>
+                        <span class="uf-stat-value">${fmtBRLCompact(ufMetrics[uf].spent)}</span>
+                    </div>
                 </div>
                 <div class="uf-compact-sub-stats">
                     <div class="uf-sub-stat success">
