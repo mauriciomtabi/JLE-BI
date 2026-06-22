@@ -676,6 +676,21 @@ function renderCobrancaUFMap() {
                     <div style="width: ${prAprovPct}%; background: #f39f18;"></div>
                     <div style="width: ${prSemAprovPct}%; background: #ff5722;"></div>
                 </div>
+                <!-- Detalhes expandidos sob hover do mouse -->
+                <div class="uf-card-details-expanded">
+                    <div class="uf-detail-row">
+                        <span class="uf-detail-label"><span class="uf-detail-bullet" style="background:#004f71;"></span> Pedido:</span>
+                        <span class="uf-detail-value">${formatCobrancaCurrency(ufDetails['PR'].comPed)}</span>
+                    </div>
+                    <div class="uf-detail-row">
+                        <span class="uf-detail-label"><span class="uf-detail-bullet" style="background:#f39f18;"></span> Aprovado:</span>
+                        <span class="uf-detail-value">${formatCobrancaCurrency(ufDetails['PR'].aprov)}</span>
+                    </div>
+                    <div class="uf-detail-row">
+                        <span class="uf-detail-label"><span class="uf-detail-bullet" style="background:#ff5722;"></span> S/ Aprovação:</span>
+                        <span class="uf-detail-value">${formatCobrancaCurrency(ufDetails['PR'].semAprov)}</span>
+                    </div>
+                </div>
             </div>
 
             <!-- SANTA CATARINA CAPSULE -->
@@ -707,6 +722,21 @@ function renderCobrancaUFMap() {
                     <div style="width: ${scAprovPct}%; background: #f39f18;"></div>
                     <div style="width: ${scSemAprovPct}%; background: #ff5722;"></div>
                 </div>
+                <!-- Detalhes expandidos sob hover do mouse -->
+                <div class="uf-card-details-expanded">
+                    <div class="uf-detail-row">
+                        <span class="uf-detail-label"><span class="uf-detail-bullet" style="background:#004f71;"></span> Pedido:</span>
+                        <span class="uf-detail-value">${formatCobrancaCurrency(ufDetails['SC'].comPed)}</span>
+                    </div>
+                    <div class="uf-detail-row">
+                        <span class="uf-detail-label"><span class="uf-detail-bullet" style="background:#f39f18;"></span> Aprovado:</span>
+                        <span class="uf-detail-value">${formatCobrancaCurrency(ufDetails['SC'].aprov)}</span>
+                    </div>
+                    <div class="uf-detail-row">
+                        <span class="uf-detail-label"><span class="uf-detail-bullet" style="background:#ff5722;"></span> S/ Aprovação:</span>
+                        <span class="uf-detail-value">${formatCobrancaCurrency(ufDetails['SC'].semAprov)}</span>
+                    </div>
+                </div>
             </div>
 
             <!-- RIO GRANDE DO SUL CAPSULE -->
@@ -737,6 +767,21 @@ function renderCobrancaUFMap() {
                     <div style="width: ${rsPedPct}%; background: #004f71;"></div>
                     <div style="width: ${rsAprovPct}%; background: #f39f18;"></div>
                     <div style="width: ${rsSemAprovPct}%; background: #ff5722;"></div>
+                </div>
+                <!-- Detalhes expandidos sob hover do mouse -->
+                <div class="uf-card-details-expanded">
+                    <div class="uf-detail-row">
+                        <span class="uf-detail-label"><span class="uf-detail-bullet" style="background:#004f71;"></span> Pedido:</span>
+                        <span class="uf-detail-value">${formatCobrancaCurrency(ufDetails['RS'].comPed)}</span>
+                    </div>
+                    <div class="uf-detail-row">
+                        <span class="uf-detail-label"><span class="uf-detail-bullet" style="background:#f39f18;"></span> Aprovado:</span>
+                        <span class="uf-detail-value">${formatCobrancaCurrency(ufDetails['RS'].aprov)}</span>
+                    </div>
+                    <div class="uf-detail-row">
+                        <span class="uf-detail-label"><span class="uf-detail-bullet" style="background:#ff5722;"></span> S/ Aprovação:</span>
+                        <span class="uf-detail-value">${formatCobrancaCurrency(ufDetails['RS'].semAprov)}</span>
+                    </div>
                 </div>
             </div>
 
