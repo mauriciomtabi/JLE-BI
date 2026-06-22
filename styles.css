@@ -1122,10 +1122,10 @@ td.cell-saida {
 
 .uf-map-side {
     position: absolute;
-    left: 50%;
+    left: 64%; /* Pushed to the right to leave the left side for the card stack */
     top: 50.5%; /* Shifted slightly upward to avoid top/bottom clipping in Santa Catarina, Paraná, and Rio Grande do Sul */
     transform: translate(-50%, -50%);
-    width: 100%;
+    width: 70%; /* Reduced width to prevent overlapping on the left card stack */
     height: 100%;
     display: flex;
     align-items: center;
@@ -1225,7 +1225,7 @@ td.cell-saida {
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-left: 4px solid transparent;
     border-radius: 12px;
-    padding: 10px 14px;
+    padding: 8px 12px;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.05);
@@ -1233,7 +1233,7 @@ td.cell-saida {
     flex-direction: column;
     gap: 4px;
     position: absolute;
-    width: 220px; /* Reduced width to optimize card horizontal space usage */
+    width: 200px; /* Reduced width to optimize card horizontal space usage */
     z-index: 10;
 }
 
@@ -1247,19 +1247,19 @@ td.cell-saida {
 /* Floating Card Coordinates */
 .uf-compact-card.pr-card {
     left: 8px;
-    top: 15px;
+    top: 12px;
     border-left-color: #00b4d8;
 }
 
 .uf-compact-card.sc-card {
-    right: 8px;
-    top: 135px;
+    left: 8px;
+    top: 130px;
     border-left-color: #f39f18;
 }
 
 .uf-compact-card.rs-card {
     left: 8px;
-    bottom: 15px;
+    bottom: 12px;
     border-left-color: #2ecc71;
 }
 
