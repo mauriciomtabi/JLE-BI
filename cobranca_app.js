@@ -872,6 +872,7 @@ function renderOpenOSsList() {
                 <th style="padding: 10px 8px; text-align: left;">Cidade</th>
                 <th style="padding: 10px 8px; text-align: center;">UF</th>
                 <th style="padding: 10px 8px; text-align: left;">Cadastro</th>
+                <th style="padding: 10px 8px; text-align: left;">Data Medição</th>
                 <th style="padding: 10px 8px; text-align: center;">Aging</th>
                 <th style="padding: 10px 8px; text-align: left;">Fase Atual (Original)</th>
                 <th style="padding: 10px 8px; text-align: left;">Fase (De/Para)</th>
@@ -897,6 +898,7 @@ function renderOpenOSsList() {
                     fase_atual: r.fase_atual || '-',
                     fase_atual_de_para: r.fase_atual_de_para || '-',
                     data_cadastro: r.data_cadastro,
+                    data_inclusao_lpu: r.data_inclusao_lpu || '-',
                     valor: 0,
                     aging: calculateOSAge(r.data_cadastro)
                 };
@@ -905,6 +907,9 @@ function renderOpenOSsList() {
             if (r.data_cadastro && (!osMap[osNum].data_cadastro || r.data_cadastro < osMap[osNum].data_cadastro)) {
                 osMap[osNum].data_cadastro = r.data_cadastro;
                 osMap[osNum].aging = calculateOSAge(r.data_cadastro);
+            }
+            if (r.data_inclusao_lpu && r.data_inclusao_lpu !== '-' && (!osMap[osNum].data_inclusao_lpu || osMap[osNum].data_inclusao_lpu === '-' || r.data_inclusao_lpu < osMap[osNum].data_inclusao_lpu)) {
+                osMap[osNum].data_inclusao_lpu = r.data_inclusao_lpu;
             }
         });
 
@@ -916,7 +921,7 @@ function renderOpenOSsList() {
 
         tbody.innerHTML = '';
         if (sortedOpenOSs.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 20px; color: var(--text-secondary);">Nenhuma OS sem aprovação encontrada</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="11" style="text-align: center; padding: 20px; color: var(--text-secondary);">Nenhuma OS sem aprovação encontrada</td></tr>`;
             return;
         }
 
@@ -934,6 +939,7 @@ function renderOpenOSsList() {
                 <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${o.cidade}</td>
                 <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); text-align: center; font-weight:600;">${o.uf}</td>
                 <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${fmtDate(o.data_cadastro)}</td>
+                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${fmtDate(o.data_inclusao_lpu)}</td>
                 <td style="padding: 8px; border-bottom: 1px solid var(--border-color); text-align: center;">
                     <span class="badge-aging ${agingClass}">${o.aging}d</span>
                 </td>
@@ -1057,15 +1063,16 @@ function exportOSListXLSX() {
         rows = Object.values(m).sort((a, b) => (a.da || '').localeCompare(b.da || '')).map(o => [o.os, o.categoria, o.pg, o.cidade, o.uf, fmtD(o.da), o.d >= 0 ? o.d : '-', o.fa, o.fp, o.v]);
     } else {
         filename = 'OSs_Sem_Aprovação.xlsx';
-        headers = ['OS', 'Categoria', 'Proj. Gerencial', 'Cidade', 'UF', 'Data Cadastro', 'Aging (dias)', 'Fase Atual (Original)', 'Fase (De/Para)', 'Valor (R$)'];
+        headers = ['OS', 'Categoria', 'Proj. Gerencial', 'Cidade', 'UF', 'Data Cadastro', 'Data Medição', 'Aging (dias)', 'Fase Atual (Original)', 'Fase (De/Para)', 'Valor (R$)'];
         const src = cobrancaFilteredData.filter(r => (!r.data_aprovacao || r.data_aprovacao === '-') && r.os && r.os !== '-');
         const m = {};
         src.forEach(r => {
-            if (!m[r.os]) m[r.os] = { os: r.os, categoria: r.categoria || '-', pg: r.projeto_gerencial || '-', cidade: r.cidade || '-', uf: r.uf || '-', fa: r.fase_atual || '-', fp: r.fase_atual_de_para || '-', dc: r.data_cadastro, v: 0, ag: calculateOSAge(r.data_cadastro) };
+            if (!m[r.os]) m[r.os] = { os: r.os, categoria: r.categoria || '-', pg: r.projeto_gerencial || '-', cidade: r.cidade || '-', uf: r.uf || '-', fa: r.fase_atual || '-', fp: r.fase_atual_de_para || '-', dc: r.data_cadastro, dm: r.data_inclusao_lpu || '-', v: 0, ag: calculateOSAge(r.data_cadastro) };
             m[r.os].v += (r.valor_total || 0);
             if (r.data_cadastro && (!m[r.os].dc || r.data_cadastro < m[r.os].dc)) { m[r.os].dc = r.data_cadastro; m[r.os].ag = calculateOSAge(r.data_cadastro); }
+            if (r.data_inclusao_lpu && r.data_inclusao_lpu !== '-' && (!m[r.os].dm || m[r.os].dm === '-' || r.data_inclusao_lpu < m[r.os].dm)) { m[r.os].dm = r.data_inclusao_lpu; }
         });
-        rows = Object.values(m).sort((a, b) => (a.dc || '').localeCompare(b.dc || '')).map(o => [o.os, o.categoria, o.pg, o.cidade, o.uf, fmtD(o.dc), o.ag, o.fa, o.fp, o.v]);
+        rows = Object.values(m).sort((a, b) => (a.dc || '').localeCompare(b.dc || '')).map(o => [o.os, o.categoria, o.pg, o.cidade, o.uf, fmtD(o.dc), fmtD(o.dm), o.ag, o.fa, o.fp, o.v]);
     }
 
     exportToStyledExcel(headers, rows, filename);
@@ -1230,6 +1237,11 @@ function renderMonthlySplitChart(th) {
             filterYear = startParts[0];
             filterMonth = startParts[1];
         }
+    }
+
+    const backBtn = document.getElementById('cobranca-drilldown-back-btn');
+    if (backBtn) {
+        backBtn.style.display = isSingleMonthFiltered ? 'inline-flex' : 'none';
     }
 
     let labels = [];

@@ -811,7 +811,12 @@
                 <!-- Monthly Split Row (Full Width) -->
                 <div class="chart-card">
                     <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
-                        <span class="chart-title">Valor Mensal (Com Pedido vs Sem Pedido)</span>
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <span class="chart-title">Valor Mensal (Com Pedido vs Sem Pedido)</span>
+                            <button id="cobranca-drilldown-back-btn" style="display: none; align-items: center; gap: 6px; padding: 4px 12px; font-size: 11px; font-weight: 700; color: #fff; background: #004f71; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; cursor: pointer; transition: all 0.2s ease;" onclick="resetCobrancaDateFilter()">
+                                <i class="fa-solid fa-arrow-left"></i> Voltar
+                            </button>
+                        </div>
                         <div id="cobranca-monthly-total-sem-aprovacao" style="font-size: 13px; font-weight: 600; color: #ff5722; background: rgba(255,87,34,0.08); padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(255,87,34,0.18);">
                             Sem Aprovação: R$ 0,00
                         </div>
