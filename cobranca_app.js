@@ -320,14 +320,28 @@ function renderCategoryCards() {
     // Calcular faturamento total das categorias filtradas para o percentual
     const totalFaturamento = Object.values(categorySums).reduce((acc, val) => acc + val, 0);
 
-    // Calcular meses únicos no período selecionado para a média mensal
-    const uniqueMonths = new Set();
-    baseDataForCategoryKPI.forEach(r => {
-        if (r.mes_medicao && r.mes_medicao !== 'N/D') {
-            uniqueMonths.add(r.mes_medicao);
+    // Determinar os últimos 12 meses únicos no banco de dados completo (ordenados)
+    const allMonths = [...new Set(COBRANCA_DATA.map(r => r.mes_medicao).filter(m => m && m !== 'N/D'))].sort();
+    const last12Months = allMonths.slice(-12);
+    const last12MonthsSet = new Set(last12Months);
+    const monthsDivider = Math.max(1, last12Months.length);
+
+    // Calcular a média mensal dos últimos 12 meses para cada categoria
+    const categorySumsLast12 = {};
+    COBRANCA_DATA.forEach(r => {
+        const ufDropdown = document.getElementById('cobranca-filter-uf')?.value || '';
+        const projDropdown = document.getElementById('cobranca-filter-projeto')?.value || '';
+        const faseDropdown = document.getElementById('cobranca-filter-fase')?.value || '';
+
+        if (ufDropdown && r.uf !== ufDropdown) return;
+        if (projDropdown && r.projeto !== projDropdown) return;
+        if (faseDropdown && r.fase_atual_de_para !== faseDropdown) return;
+
+        if (r.mes_medicao && last12MonthsSet.has(r.mes_medicao)) {
+            const cat = r.categoria || 'OUTROS';
+            categorySumsLast12[cat] = (categorySumsLast12[cat] || 0) + (r.valor_total || 0);
         }
     });
-    const monthsCount = Math.max(1, uniqueMonths.size);
 
     // Ordenar categorias por valor total decrescente
     const sortedCats = Object.keys(categorySums).sort((a, b) => categorySums[b] - categorySums[a]);
@@ -347,7 +361,7 @@ function renderCategoryCards() {
         const sum = categorySums[cat];
         const count = categoryOSs[cat] ? categoryOSs[cat].size : 0; // Contagem distinta de OS
         const pct = totalFaturamento > 0 ? (sum / totalFaturamento) * 100 : 0;
-        const avgMonthly = sum / monthsCount;
+        const avgMonthly = (categorySumsLast12[cat] || 0) / monthsDivider;
         
         const activeCat = document.getElementById('cobranca-filter-categoria')?.value || '';
         const card = document.createElement('div');
