@@ -157,9 +157,10 @@ function applyCobrancaFilters() {
             if (projDropdown && r.projeto !== projDropdown) return false;
             if (faseDropdown && r.fase_atual_de_para !== faseDropdown) return false;
 
-            // Filtros de Data Aprovação Medição
-            if (dtInicio && (!r.data_aprovacao || r.data_aprovacao === '-' || r.data_aprovacao < dtInicio)) return false;
-            if (dtFim && (!r.data_aprovacao || r.data_aprovacao === '-' || r.data_aprovacao > dtFim)) return false;
+            // Filtros de Data de Referência Dinâmica
+            const refDate = getCobrancaRefDate(r);
+            if (dtInicio && (!refDate || refDate < dtInicio)) return false;
+            if (dtFim && (!refDate || refDate > dtFim)) return false;
 
             // Filtros por Clique em Gráficos
             if (cobrancaClickFilters.tipo_atividade && r.tipo_atividade !== cobrancaClickFilters.tipo_atividade) return false;
@@ -219,6 +220,16 @@ function resetCobrancaDateFilter() {
     if (d1) d1.value = '';
     if (d2) d2.value = '';
     applyCobrancaFilters();
+}
+
+// Obter a data de referência para uma OS de acordo com o status de aprovação
+function getCobrancaRefDate(r) {
+    if (!r) return '';
+    const fase = String(r.fase_atual_de_para || '').toUpperCase().trim();
+    if (fase === 'PEDIDO EMITIDO' || fase === 'APROVADO') {
+        return r.data_aprovacao && r.data_aprovacao !== '-' ? r.data_aprovacao : '';
+    }
+    return r.data_inclusao_lpu && r.data_inclusao_lpu !== '-' ? r.data_inclusao_lpu : '';
 }
 
 // Auxiliar para calcular a idade de uma OS sem aprovação
@@ -288,8 +299,9 @@ function renderCategoryCards() {
         if (ufDropdown && r.uf !== ufDropdown) return false;
         if (projDropdown && r.projeto !== projDropdown) return false;
         if (faseDropdown && r.fase_atual_de_para !== faseDropdown) return false;
-        if (dtInicio && (!r.data_aprovacao || r.data_aprovacao === '-' || r.data_aprovacao < dtInicio)) return false;
-        if (dtFim && (!r.data_aprovacao || r.data_aprovacao === '-' || r.data_aprovacao > dtFim)) return false;
+        const refDate = getCobrancaRefDate(r);
+        if (dtInicio && (!refDate || refDate < dtInicio)) return false;
+        if (dtFim && (!refDate || refDate > dtFim)) return false;
 
         return true;
     });
@@ -391,8 +403,9 @@ function renderPipelineStepper() {
         if (catDropdown && r.categoria !== catDropdown) return false;
         if (ufDropdown && r.uf !== ufDropdown) return false;
         if (projDropdown && r.projeto !== projDropdown) return false;
-        if (dtInicio && (!r.data_aprovacao || r.data_aprovacao === '-' || r.data_aprovacao < dtInicio)) return false;
-        if (dtFim && (!r.data_aprovacao || r.data_aprovacao === '-' || r.data_aprovacao > dtFim)) return false;
+        const refDate = getCobrancaRefDate(r);
+        if (dtInicio && (!refDate || refDate < dtInicio)) return false;
+        if (dtFim && (!refDate || refDate > dtFim)) return false;
 
         return true;
     });
@@ -481,8 +494,9 @@ function renderCobrancaUFMap() {
         if (catDropdown && r.categoria !== catDropdown) return false;
         if (projDropdown && r.projeto !== projDropdown) return false;
         if (faseDropdown && r.fase_atual_de_para !== faseDropdown) return false;
-        if (dtInicio && (!r.data_aprovacao || r.data_aprovacao === '-' || r.data_aprovacao < dtInicio)) return false;
-        if (dtFim && (!r.data_aprovacao || r.data_aprovacao === '-' || r.data_aprovacao > dtFim)) return false;
+        const refDate = getCobrancaRefDate(r);
+        if (dtInicio && (!refDate || refDate < dtInicio)) return false;
+        if (dtFim && (!refDate || refDate > dtFim)) return false;
 
         return true;
     });
@@ -1234,7 +1248,7 @@ function renderMonthlySplitChart(th) {
         }
         
         cobrancaFilteredData.forEach(r => {
-            const d = r.data_aprovacao;
+            const d = getCobrancaRefDate(r);
             if (d && dailyMetrics[d]) {
                 const faseDePara = String(r.fase_atual_de_para || '').toUpperCase().trim();
                 if (faseDePara === 'PEDIDO EMITIDO') {

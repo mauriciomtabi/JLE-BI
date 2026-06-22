@@ -86,7 +86,7 @@ try {
     }
     
     # Validar cabeçalhos necessários
-    $requiredHeaders = @("PEP", "PROJETO_GERENCIAL", "CATEGORIA", "CONTRATO_NUMERO", "CIDADE", "UF", "OS", "FASE_ATUAL", "FASE_ATUAL_DE_PARA", "DATA_CADASTRO", "DATA_APROVACAO_MEDICAO", "USER_INCLUSAO_LPU", "NUMERO_MEDICAO", "NUMERO_PEDIDO", "USER_PEDIDO", "TIPO_DE_ATIVIDADE", "ITEM_DESCRITIVO", "TIPO_DE_DESPESA", "OBJETO_DO_CONTRATO", "VALOR_TOTAL_FINAL", "PROJETO")
+    $requiredHeaders = @("PEP", "PROJETO_GERENCIAL", "CATEGORIA", "CONTRATO_NUMERO", "CIDADE", "UF", "OS", "FASE_ATUAL", "FASE_ATUAL_DE_PARA", "DATA_CADASTRO", "DATA_APROVACAO_MEDICAO", "USER_INCLUSAO_LPU", "NUMERO_MEDICAO", "NUMERO_PEDIDO", "USER_PEDIDO", "TIPO_DE_ATIVIDADE", "ITEM_DESCRITIVO", "TIPO_DE_DESPESA", "OBJETO_DO_CONTRATO", "VALOR_TOTAL_FINAL", "PROJETO", "DATA_INCLUSAO_LPU")
     foreach ($rh in $requiredHeaders) {
         if (-not $headers.ContainsKey($rh)) {
             Write-Error "Cabeçalho obrigatório '$rh' não encontrado na planilha!"
@@ -115,6 +115,7 @@ try {
     $idxObjContr = $headers["OBJETO_DO_CONTRATO"]
     $idxValTotal = $headers["VALOR_TOTAL_FINAL"]
     $idxProj = $headers["PROJETO"]
+    $idxDtInclLPU = $headers["DATA_INCLUSAO_LPU"]
     
     # Helpers para datas
     function Parse-ExcelDate ($excelDate) {
@@ -238,13 +239,30 @@ try {
         # Obter e tratar datas
         $dtCad = Parse-ExcelDate $data[$r, $idxDtCad]
         $dtAprov = Parse-ExcelDate $data[$r, $idxDtAprov]
+        $dtInclLPU = Parse-ExcelDate $data[$r, $idxDtInclLPU]
         
         # Calcular tempo de aprovação
         $tempoAprov = Get-DaysBetween $dtCad $dtAprov
         
-        # Obter mês de medição (que pode ser formatado ou string)
-        $mesMedVal = $data[$r, $headers["MES_MEDICAO"]]
-        $mesMed = if ($null -eq $mesMedVal) { "" } else { [string]$mesMedVal }
+        # Determinar data de referência dinâmica para o mês de medição:
+        # Se a OS estiver aprovada (fase_de_para = APROVADO ou PEDIDO EMITIDO), usar DATA_APROVACAO_MEDICAO
+        # Se não estiver aprovada (Em Execução ou Executado), usar DATA_INCLUSAO_LPU
+        $dtRef = ""
+        $faseDeParaVal = $data[$r, $idxFaseDePara]
+        if ($null -eq $faseDeParaVal) { $faseDeParaVal = "" }
+        $faseDeParaValStr = [string]$faseDeParaVal.ToString().ToUpper().Trim()
+        
+        if ($faseDeParaValStr -eq "APROVADO" -or $faseDeParaValStr -eq "PEDIDO EMITIDO") {
+            $dtRef = $dtAprov
+        } else {
+            $dtRef = $dtInclLPU
+        }
+        
+        # Obter mês de medição a partir da data de referência
+        $mesMed = "PREVISTO"
+        if ($dtRef -match "^\d{4}-\d{2}-\d{2}$") {
+            $mesMed = $dtRef.Substring(0, 4) + "/" + $dtRef.Substring(5, 2)
+        }
         
         # Estrutura ultra compacta de array:
         # 0: pep (str)
@@ -270,12 +288,13 @@ try {
         # 20: user_pedido (idx)
         # 21: fase_atual_de_para (idx)
         # 22: mes_medicao (str)
+        # 23: data_inclusao_lpu (str)
         
         $rowArray = @(
             $pep, $catIdx, $os, $cidadeIdx, $ufIdx, $projIdx, $projGerIdx, $tipoAtivIdx, 
             $faseIdx, $contratoIdx, $itemDescIdx, $tipoDespIdx, $objContrIdx, $valNum, 
             $dtCad, $dtAprov, $tempoAprov, $userMedIdx, $numMed, $numPed, $userPedIdx, 
-            $faseDeParaIdx, $mesMed
+            $faseDeParaIdx, $mesMed, $dtInclLPU
         )
         
         [void]$rowsList.Add($rowArray)
@@ -337,7 +356,8 @@ try {
         numero_pedido: r[19],
         user_pedido: l.users[r[20]],
         fase_atual_de_para: l.fase_de_para[r[21]],
-        mes_medicao: r[22]
+        mes_medicao: r[22],
+        data_inclusao_lpu: r[23]
     }));
     
     window.COBRANCA_METADATA = {
