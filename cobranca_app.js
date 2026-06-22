@@ -157,9 +157,9 @@ function applyCobrancaFilters() {
             if (projDropdown && r.projeto !== projDropdown) return false;
             if (faseDropdown && r.fase_atual_de_para !== faseDropdown) return false;
 
-            // Filtros de Data Cadastro Medição
-            if (dtInicio && r.data_cadastro < dtInicio) return false;
-            if (dtFim && r.data_cadastro > dtFim) return false;
+            // Filtros de Data Aprovação Medição
+            if (dtInicio && (!r.data_aprovacao || r.data_aprovacao === '-' || r.data_aprovacao < dtInicio)) return false;
+            if (dtFim && (!r.data_aprovacao || r.data_aprovacao === '-' || r.data_aprovacao > dtFim)) return false;
 
             // Filtros por Clique em Gráficos
             if (cobrancaClickFilters.tipo_atividade && r.tipo_atividade !== cobrancaClickFilters.tipo_atividade) return false;
@@ -288,8 +288,8 @@ function renderCategoryCards() {
         if (ufDropdown && r.uf !== ufDropdown) return false;
         if (projDropdown && r.projeto !== projDropdown) return false;
         if (faseDropdown && r.fase_atual_de_para !== faseDropdown) return false;
-        if (dtInicio && r.data_cadastro < dtInicio) return false;
-        if (dtFim && r.data_cadastro > dtFim) return false;
+        if (dtInicio && (!r.data_aprovacao || r.data_aprovacao === '-' || r.data_aprovacao < dtInicio)) return false;
+        if (dtFim && (!r.data_aprovacao || r.data_aprovacao === '-' || r.data_aprovacao > dtFim)) return false;
 
         return true;
     });
@@ -391,8 +391,8 @@ function renderPipelineStepper() {
         if (catDropdown && r.categoria !== catDropdown) return false;
         if (ufDropdown && r.uf !== ufDropdown) return false;
         if (projDropdown && r.projeto !== projDropdown) return false;
-        if (dtInicio && r.data_cadastro < dtInicio) return false;
-        if (dtFim && r.data_cadastro > dtFim) return false;
+        if (dtInicio && (!r.data_aprovacao || r.data_aprovacao === '-' || r.data_aprovacao < dtInicio)) return false;
+        if (dtFim && (!r.data_aprovacao || r.data_aprovacao === '-' || r.data_aprovacao > dtFim)) return false;
 
         return true;
     });
@@ -481,8 +481,8 @@ function renderCobrancaUFMap() {
         if (catDropdown && r.categoria !== catDropdown) return false;
         if (projDropdown && r.projeto !== projDropdown) return false;
         if (faseDropdown && r.fase_atual_de_para !== faseDropdown) return false;
-        if (dtInicio && r.data_cadastro < dtInicio) return false;
-        if (dtFim && r.data_cadastro > dtFim) return false;
+        if (dtInicio && (!r.data_aprovacao || r.data_aprovacao === '-' || r.data_aprovacao < dtInicio)) return false;
+        if (dtFim && (!r.data_aprovacao || r.data_aprovacao === '-' || r.data_aprovacao > dtFim)) return false;
 
         return true;
     });
@@ -1201,32 +1201,89 @@ function renderMonthlySplitChart(th) {
         totalSemAprovEl.innerHTML = `Sem Aprovação: <strong>${formatCobrancaCurrency(totalSemAprov)}</strong>`;
     }
 
-    const monthlyMetrics = {}; // 'YYYY/MM' => { comPed: X, aprov: Y, semAprov: Z }
-    cobrancaFilteredData.forEach(r => {
-        const m = r.mes_medicao || 'N/D';
-        if (!monthlyMetrics[m]) {
-            monthlyMetrics[m] = { comPed: 0, aprov: 0, semAprov: 0 };
+    const dtInicio = document.getElementById('cobranca-filter-data-inicio')?.value || '';
+    const dtFim = document.getElementById('cobranca-filter-data-fim')?.value || '';
+    
+    let isSingleMonthFiltered = false;
+    let filterYear = '';
+    let filterMonth = '';
+    
+    if (dtInicio && dtFim) {
+        const startParts = dtInicio.split('-');
+        const endParts = dtFim.split('-');
+        if (startParts[0] === endParts[0] && startParts[1] === endParts[1]) {
+            isSingleMonthFiltered = true;
+            filterYear = startParts[0];
+            filterMonth = startParts[1];
+        }
+    }
+
+    let labels = [];
+    let sortedKeys = [];
+    let comPedData = [];
+    let aprovData = [];
+    let semAprovData = [];
+    
+    if (isSingleMonthFiltered) {
+        const lastDay = new Date(parseInt(filterYear), parseInt(filterMonth), 0).getDate();
+        const dailyMetrics = {};
+        for (let day = 1; day <= lastDay; day++) {
+            const dayStr = String(day).padStart(2, '0');
+            const dateKey = `${filterYear}-${filterMonth}-${dayStr}`;
+            dailyMetrics[dateKey] = { comPed: 0, aprov: 0, semAprov: 0 };
         }
         
-        const faseDePara = String(r.fase_atual_de_para || '').toUpperCase().trim();
-        if (faseDePara === 'PEDIDO EMITIDO') {
-            monthlyMetrics[m].comPed += (r.valor_total || 0);
-        } else if (faseDePara === 'APROVADO') {
-            monthlyMetrics[m].aprov += (r.valor_total || 0);
-        } else {
-            monthlyMetrics[m].semAprov += (r.valor_total || 0);
-        }
-    });
-
-    const sortedMonths = Object.keys(monthlyMetrics).sort();
-    const labels = sortedMonths.map(m => {
-        const parts = m.split('/');
-        return parts.length === 2 ? `${parts[1]}/${parts[0]}` : m;
-    });
-
-    const comPedData = sortedMonths.map(m => monthlyMetrics[m].comPed);
-    const aprovData = sortedMonths.map(m => monthlyMetrics[m].aprov);
-    const semAprovData = sortedMonths.map(m => monthlyMetrics[m].semAprov);
+        cobrancaFilteredData.forEach(r => {
+            const d = r.data_aprovacao;
+            if (d && dailyMetrics[d]) {
+                const faseDePara = String(r.fase_atual_de_para || '').toUpperCase().trim();
+                if (faseDePara === 'PEDIDO EMITIDO') {
+                    dailyMetrics[d].comPed += (r.valor_total || 0);
+                } else if (faseDePara === 'APROVADO') {
+                    dailyMetrics[d].aprov += (r.valor_total || 0);
+                } else {
+                    dailyMetrics[d].semAprov += (r.valor_total || 0);
+                }
+            }
+        });
+        
+        sortedKeys = Object.keys(dailyMetrics).sort();
+        labels = sortedKeys.map(d => {
+            const parts = d.split('-');
+            return `${parts[2]}/${parts[1]}`; // DD/MM format
+        });
+        
+        comPedData = sortedKeys.map(d => dailyMetrics[d].comPed);
+        aprovData = sortedKeys.map(d => dailyMetrics[d].aprov);
+        semAprovData = sortedKeys.map(d => dailyMetrics[d].semAprov);
+    } else {
+        const monthlyMetrics = {}; // 'YYYY/MM' => { comPed: X, aprov: Y, semAprov: Z }
+        cobrancaFilteredData.forEach(r => {
+            const m = r.mes_medicao || 'N/D';
+            if (!monthlyMetrics[m]) {
+                monthlyMetrics[m] = { comPed: 0, aprov: 0, semAprov: 0 };
+            }
+            
+            const faseDePara = String(r.fase_atual_de_para || '').toUpperCase().trim();
+            if (faseDePara === 'PEDIDO EMITIDO') {
+                monthlyMetrics[m].comPed += (r.valor_total || 0);
+            } else if (faseDePara === 'APROVADO') {
+                monthlyMetrics[m].aprov += (r.valor_total || 0);
+            } else {
+                monthlyMetrics[m].semAprov += (r.valor_total || 0);
+            }
+        });
+        
+        sortedKeys = Object.keys(monthlyMetrics).sort();
+        labels = sortedKeys.map(m => {
+            const parts = m.split('/');
+            return parts.length === 2 ? `${parts[1]}/${parts[0]}` : m;
+        });
+        
+        comPedData = sortedKeys.map(m => monthlyMetrics[m].comPed);
+        aprovData = sortedKeys.map(m => monthlyMetrics[m].aprov);
+        semAprovData = sortedKeys.map(m => monthlyMetrics[m].semAprov);
+    }
 
     cobrancaCharts.monthlySplit = new Chart(canvas, {
         type: 'bar',
@@ -1292,19 +1349,32 @@ function renderMonthlySplitChart(th) {
             onClick: (event, elements) => {
                 if (elements && elements.length > 0) {
                     const index = elements[0].index;
-                    const monthYear = sortedMonths[index];
-                    if (monthYear && monthYear !== 'N/D') {
-                        const [year, month] = monthYear.split('/');
-                        const start = `${year}-${month}-01`;
-                        const lastDay = new Date(parseInt(year), parseInt(month), 0).getDate();
-                        const end = `${year}-${month}-${String(lastDay).padStart(2, '0')}`;
-                        
-                        const startInput = document.getElementById('cobranca-filter-data-inicio');
-                        const endInput = document.getElementById('cobranca-filter-data-fim');
-                        if (startInput && endInput) {
-                            startInput.value = start;
-                            endInput.value = end;
-                            applyCobrancaFilters();
+                    if (isSingleMonthFiltered) {
+                        const dayKey = sortedKeys[index];
+                        if (dayKey) {
+                            const startInput = document.getElementById('cobranca-filter-data-inicio');
+                            const endInput = document.getElementById('cobranca-filter-data-fim');
+                            if (startInput && endInput) {
+                                startInput.value = dayKey;
+                                endInput.value = dayKey;
+                                applyCobrancaFilters();
+                            }
+                        }
+                    } else {
+                        const monthYear = sortedKeys[index];
+                        if (monthYear && monthYear !== 'N/D') {
+                            const [year, month] = monthYear.split('/');
+                            const start = `${year}-${month}-01`;
+                            const lastDay = new Date(parseInt(year), parseInt(month), 0).getDate();
+                            const end = `${year}-${month}-${String(lastDay).padStart(2, '0')}`;
+                            
+                            const startInput = document.getElementById('cobranca-filter-data-inicio');
+                            const endInput = document.getElementById('cobranca-filter-data-fim');
+                            if (startInput && endInput) {
+                                startInput.value = start;
+                                endInput.value = end;
+                                applyCobrancaFilters();
+                            }
                         }
                     }
                 }
