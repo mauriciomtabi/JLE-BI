@@ -482,6 +482,11 @@ function renderCobrancaUFMap() {
     // Calcular valores por UF
     const ufSums = { 'RS': 0, 'SC': 0, 'PR': 0 };
     const ufOSs = { 'RS': new Set(), 'SC': new Set(), 'PR': new Set() };
+    const ufDetails = {
+        'PR': { comPed: 0, aprov: 0, semAprov: 0 },
+        'SC': { comPed: 0, aprov: 0, semAprov: 0 },
+        'RS': { comPed: 0, aprov: 0, semAprov: 0 }
+    };
 
     // Obter dados sem o filtro de clique de UF
     const baseDataForUFMap = COBRANCA_DATA.filter(r => {
@@ -508,6 +513,15 @@ function renderCobrancaUFMap() {
             if (r.os && r.os !== '-') {
                 ufOSs[uf].add(r.os);
             }
+            
+            const faseDePara = String(r.fase_atual_de_para || '').toUpperCase().trim();
+            if (faseDePara === 'PEDIDO EMITIDO') {
+                ufDetails[uf].comPed += (r.valor_total || 0);
+            } else if (faseDePara === 'APROVADO') {
+                ufDetails[uf].aprov += (r.valor_total || 0);
+            } else {
+                ufDetails[uf].semAprov += (r.valor_total || 0);
+            }
         }
     });
 
@@ -528,6 +542,21 @@ function renderCobrancaUFMap() {
     const prPct = totalFaturamento > 0 ? ((ufSums['PR'] / totalFaturamento) * 100).toFixed(1).replace('.', ',') : '0,0';
     const scPct = totalFaturamento > 0 ? ((ufSums['SC'] / totalFaturamento) * 100).toFixed(1).replace('.', ',') : '0,0';
     const rsPct = totalFaturamento > 0 ? ((ufSums['RS'] / totalFaturamento) * 100).toFixed(1).replace('.', ',') : '0,0';
+
+    const totalPR = ufSums['PR'] || 1;
+    const prPedPct = ((ufDetails['PR'].comPed / totalPR) * 100).toFixed(1);
+    const prAprovPct = ((ufDetails['PR'].aprov / totalPR) * 100).toFixed(1);
+    const prSemAprovPct = ((ufDetails['PR'].semAprov / totalPR) * 100).toFixed(1);
+
+    const totalSC = ufSums['SC'] || 1;
+    const scPedPct = ((ufDetails['SC'].comPed / totalSC) * 100).toFixed(1);
+    const scAprovPct = ((ufDetails['SC'].aprov / totalSC) * 100).toFixed(1);
+    const scSemAprovPct = ((ufDetails['SC'].semAprov / totalSC) * 100).toFixed(1);
+
+    const totalRS = ufSums['RS'] || 1;
+    const rsPedPct = ((ufDetails['RS'].comPed / totalRS) * 100).toFixed(1);
+    const rsAprovPct = ((ufDetails['RS'].aprov / totalRS) * 100).toFixed(1);
+    const rsSemAprovPct = ((ufDetails['RS'].semAprov / totalRS) * 100).toFixed(1);
 
     container.innerHTML = `
         <div class="uf-premium-container">
@@ -626,6 +655,12 @@ function renderCobrancaUFMap() {
                             <span class="uf-sub-val" style="color:var(--text-secondary); font-size:10px;">${prPct}%</span>
                         </div>
                     </div>
+                    <!-- Barra de progresso empilhada colorira proporcional -->
+                    <div class="uf-stacked-bar" style="display: flex; height: 6px; border-radius: 3px; overflow: hidden; margin-top: 8px; background: rgba(0,0,0,0.08);" title="Pedido: ${prPedPct}%, Aprovado: ${prAprovPct}%, Sem Aprovação: ${prSemAprovPct}%">
+                        <div style="width: ${prPedPct}%; background: #004f71;"></div>
+                        <div style="width: ${prAprovPct}%; background: #f39f18;"></div>
+                        <div style="width: ${prSemAprovPct}%; background: #ff5722;"></div>
+                    </div>
                 </div>
             </div>
 
@@ -651,6 +686,12 @@ function renderCobrancaUFMap() {
                             <span class="uf-sub-val" style="color:var(--text-secondary); font-size:10px;">${scPct}%</span>
                         </div>
                     </div>
+                    <!-- Barra de progresso empilhada colorira proporcional -->
+                    <div class="uf-stacked-bar" style="display: flex; height: 6px; border-radius: 3px; overflow: hidden; margin-top: 8px; background: rgba(0,0,0,0.08);" title="Pedido: ${scPedPct}%, Aprovado: ${scAprovPct}%, Sem Aprovação: ${scSemAprovPct}%">
+                        <div style="width: ${scPedPct}%; background: #004f71;"></div>
+                        <div style="width: ${scAprovPct}%; background: #f39f18;"></div>
+                        <div style="width: ${scSemAprovPct}%; background: #ff5722;"></div>
+                    </div>
                 </div>
             </div>
 
@@ -675,6 +716,12 @@ function renderCobrancaUFMap() {
                             <span class="uf-sub-label" style="color:var(--text-secondary); font-size:10px;"><i class="fa-solid fa-percent"></i></span>
                             <span class="uf-sub-val" style="color:var(--text-secondary); font-size:10px;">${rsPct}%</span>
                         </div>
+                    </div>
+                    <!-- Barra de progresso empilhada colorira proporcional -->
+                    <div class="uf-stacked-bar" style="display: flex; height: 6px; border-radius: 3px; overflow: hidden; margin-top: 8px; background: rgba(0,0,0,0.08);" title="Pedido: ${rsPedPct}%, Aprovado: ${rsAprovPct}%, Sem Aprovação: ${rsSemAprovPct}%">
+                        <div style="width: ${rsPedPct}%; background: #004f71;"></div>
+                        <div style="width: ${rsAprovPct}%; background: #f39f18;"></div>
+                        <div style="width: ${rsSemAprovPct}%; background: #ff5722;"></div>
                     </div>
                 </div>
             </div>
@@ -708,11 +755,29 @@ function renderCobrancaUFMap() {
 
         const tooltip = document.getElementById('cobranca-map-tooltip');
         if (tooltip) {
+            const isLight = document.body.classList.contains('light-theme');
+            const labelColor = isLight ? '#1f2c3d' : '#f5f6f8';
             tooltip.style.display = 'block';
             tooltip.innerHTML = `
-                <strong>${ufCode === 'RS' ? 'Rio Grande do Sul' : ufCode === 'SC' ? 'Santa Catarina' : 'Paraná'}</strong><br/>
-                Cobrança: ${formatCobrancaCurrency(ufSums[ufCode])}<br/>
-                OSs: ${ufOSs[ufCode].size.toLocaleString('pt-BR')}
+                <div style="font-family:'Outfit',sans-serif; min-width:160px; color: ${labelColor};">
+                    <strong style="font-size:12px;">${ufCode === 'RS' ? 'Rio Grande do Sul' : ufCode === 'SC' ? 'Santa Catarina' : 'Paraná'}</strong><br/>
+                    <span style="font-size:10px; opacity:0.85;">Total: ${formatCobrancaCurrency(ufSums[ufCode])} (${ufOSs[ufCode].size.toLocaleString('pt-BR')} OSs)</span>
+                    <hr style="border:0; border-top:1px dashed rgba(255,255,255,0.15); margin:6px 0;"/>
+                    <div style="display:flex; flex-direction:column; gap:3px; font-size:10px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="display:flex; align-items:center; gap:4px;"><span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:#004f71;"></span> Pedido:</span>
+                            <strong>${formatCobrancaCurrency(ufDetails[ufCode].comPed)}</strong>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="display:flex; align-items:center; gap:4px;"><span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:#f39f18;"></span> Aprovado:</span>
+                            <strong>${formatCobrancaCurrency(ufDetails[ufCode].aprov)}</strong>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="display:flex; align-items:center; gap:4px;"><span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:#ff5722;"></span> S/ Aprovação:</span>
+                            <strong>${formatCobrancaCurrency(ufDetails[ufCode].semAprov)}</strong>
+                        </div>
+                    </div>
+                </div>
             `;
         }
     };
