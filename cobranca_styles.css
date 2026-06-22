@@ -540,22 +540,22 @@
 
 /* -- Legenda do Mapa Overrides (Ajustar legenda diminuindo um pouco e levando para a direita) -- */
 #view-cobranca-container .uf-discreet-legend {
-    bottom: 8px !important;
-    right: 8px !important;
-    padding: 4px 8px !important;
-    font-size: 9px !important;
-    gap: 4px !important;
+    bottom: 4px !important;
+    right: 4px !important;
+    padding: 3px 6px !important;
+    font-size: 8px !important;
+    gap: 3px !important;
 }
 
 #view-cobranca-container .legend-gradient-bar {
-    width: 50px !important;
-    height: 4px !important;
+    width: 35px !important;
+    height: 3px !important;
 }
 
 /* -- Grid Layout para Mapa + Aging (OS sem aprovação mais larga e mapa do tamanho anterior) -- */
 .cobranca-map-aging-grid {
     display: grid;
-    grid-template-columns: 1.2fr 2fr;
+    grid-template-columns: 1fr 2.2fr;
     gap: 20px;
     margin-bottom: 0 !important;
 }

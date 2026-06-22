@@ -787,9 +787,9 @@ function renderCobrancaUFMap() {
 
             <!-- Legenda de volume -->
             <div class="uf-discreet-legend">
-                <span style="font-size:9px;opacity:0.8;margin-right:4px;">Menor Cobrança</span>
+                <span style="opacity:0.8;">Menor Valor</span>
                 <div class="legend-gradient-bar"></div>
-                <span style="font-size:9px;opacity:0.8;margin-left:4px;">Maior Cobrança</span>
+                <span style="opacity:0.8;">Maior Valor</span>
             </div>
 
             <!-- TOOLTIP DO MAPA -->
@@ -889,7 +889,11 @@ function renderOpenOSsList() {
     const fmtDate = dStr => {
         if (!dStr || dStr === '-') return '-';
         const p = dStr.split('-');
-        return p.length === 3 ? `${p[2]}/${p[1]}/${p[0]}` : dStr;
+        if (p.length === 3) {
+            const yearShort = p[0].substring(2); // '2024' -> '24'
+            return `${p[2]}/${p[1]}/${yearShort}`;
+        }
+        return dStr;
     };
 
     const TH = `position: sticky; top: 0; background: var(--bg-card); border-bottom: 2px solid var(--border-color); z-index: 10;`;
@@ -899,16 +903,16 @@ function renderOpenOSsList() {
         if (titleEl) titleEl.textContent = 'OSs Aprovadas — Aguardando Pedido';
         if (thead) thead.innerHTML = `
             <tr style="${TH}">
-                <th style="padding: 10px 8px; text-align: left;">OS</th>
-                <th style="padding: 10px 8px; text-align: left;">Categoria</th>
-                <th style="padding: 10px 8px; text-align: left;">Proj. Gerencial</th>
-                <th style="padding: 10px 8px; text-align: left;">Cidade</th>
-                <th style="padding: 10px 8px; text-align: center;">UF</th>
-                <th style="padding: 10px 8px; text-align: left;">Aprovação</th>
-                <th style="padding: 10px 8px; text-align: center;">Dias Aguard.</th>
-                <th style="padding: 10px 8px; text-align: left;">Fase Atual (Original)</th>
-                <th style="padding: 10px 8px; text-align: left;">Fase (De/Para)</th>
-                <th style="padding: 10px 8px; text-align: right;">Valor</th>
+                <th style="padding: 5px 3px; text-align: left; font-size: 8px; white-space: nowrap; max-width: 45px;">OS</th>
+                <th style="padding: 5px 3px; text-align: left; font-size: 8px; white-space: nowrap; max-width: 70px;">Categoria</th>
+                <th style="padding: 5px 3px; text-align: left; font-size: 8px; white-space: nowrap; max-width: 70px;">Proj. Ger.</th>
+                <th style="padding: 5px 3px; text-align: left; font-size: 8px; white-space: nowrap; max-width: 70px;">Cidade</th>
+                <th style="padding: 5px 3px; text-align: center; font-size: 8px; white-space: nowrap; max-width: 20px;">UF</th>
+                <th style="padding: 5px 3px; text-align: left; font-size: 8px; white-space: nowrap; max-width: 50px;">Aprovação</th>
+                <th style="padding: 5px 3px; text-align: center; font-size: 8px; white-space: nowrap; max-width: 45px;">Dias Aguard.</th>
+                <th style="padding: 5px 3px; text-align: left; font-size: 8px; white-space: nowrap; max-width: 75px;">Fase Original</th>
+                <th style="padding: 5px 3px; text-align: left; font-size: 8px; white-space: nowrap; max-width: 75px;">Fase (De/Para)</th>
+                <th style="padding: 5px 3px; text-align: right; font-size: 8px; white-space: nowrap; max-width: 90px;">Valor</th>
             </tr>`;
 
         // Filtrar aprovadas sem pedido emitido
@@ -965,20 +969,20 @@ function renderOpenOSsList() {
             else if (o.diasAguard > 7) agingClass = 'alert-low';
             const badgeClass = getCobrancaBadgeClass(o.fase_atual_de_para);
             tr.innerHTML = `
-                <td style="padding: 8px; border-bottom: 1px solid var(--border-color);"><strong>${o.os}</strong></td>
-                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${o.categoria}</td>
-                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); font-size: 10px;">${o.projeto_gerencial}</td>
-                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${o.cidade}</td>
-                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); text-align: center; font-weight:600;">${o.uf}</td>
-                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${fmtDate(o.data_aprovacao)}</td>
-                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); text-align: center;">
-                    <span class="badge-aging ${agingClass}">${o.diasAguard >= 0 ? o.diasAguard + 'd' : '-'}</span>
+                <td style="padding: 5px 3px; border-bottom: 1px solid var(--border-color); white-space: nowrap; font-size: 8.5px; max-width: 45px; overflow: hidden; text-overflow: ellipsis;"><strong>${o.os}</strong></td>
+                <td style="padding: 5px 3px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); white-space: nowrap; max-width: 70px; overflow: hidden; text-overflow: ellipsis; font-size: 8.5px;" title="${o.categoria}">${o.categoria}</td>
+                <td style="padding: 5px 3px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); font-size: 8px; white-space: nowrap; max-width: 70px; overflow: hidden; text-overflow: ellipsis;" title="${o.projeto_gerencial}">${o.projeto_gerencial}</td>
+                <td style="padding: 5px 3px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); white-space: nowrap; max-width: 70px; overflow: hidden; text-overflow: ellipsis; font-size: 8.5px;" title="${o.cidade}">${o.cidade}</td>
+                <td style="padding: 5px 3px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); text-align: center; font-weight:600; white-space: nowrap; font-size: 8.5px; max-width: 20px;">${o.uf}</td>
+                <td style="padding: 5px 3px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); white-space: nowrap; font-size: 8.5px; max-width: 50px;">${fmtDate(o.data_aprovacao)}</td>
+                <td style="padding: 5px 3px; border-bottom: 1px solid var(--border-color); text-align: center; white-space: nowrap; font-size: 8.5px; max-width: 45px;">
+                    <span class="badge-aging ${agingClass}" style="padding: 1.5px 3px; font-size: 8px; min-width: 20px; display: inline-block;">${o.diasAguard >= 0 ? o.diasAguard + 'd' : '-'}</span>
                 </td>
-                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${o.fase_atual}</td>
-                <td style="padding: 8px; border-bottom: 1px solid var(--border-color);">
-                    <span class="cobranca-badge ${badgeClass}" style="padding: 2px 6px; font-size: 9px;">${o.fase_atual_de_para}</span>
+                <td style="padding: 5px 3px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); white-space: nowrap; max-width: 75px; overflow: hidden; text-overflow: ellipsis; font-size: 8.5px;" title="${o.fase_atual}">${o.fase_atual}</td>
+                <td style="padding: 5px 3px; border-bottom: 1px solid var(--border-color); white-space: nowrap; font-size: 8.5px; max-width: 75px;">
+                    <span class="cobranca-badge ${badgeClass}" style="padding: 1.5px 3px; font-size: 8px; max-width: 70px; display: inline-block; overflow: hidden; text-overflow: ellipsis; vertical-align: middle;">${o.fase_atual_de_para}</span>
                 </td>
-                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); text-align: right; font-weight: 700; color: #27ae60;">
+                <td style="padding: 5px 3px; border-bottom: 1px solid var(--border-color); text-align: right; font-weight: 700; color: #27ae60; white-space: nowrap; font-size: 9px; max-width: 90px;">
                     ${formatCobrancaCurrency(o.valor)}
                 </td>
             `;
@@ -990,17 +994,17 @@ function renderOpenOSsList() {
         if (titleEl) titleEl.textContent = 'OSs Sem Aprovação (Aging)';
         if (thead) thead.innerHTML = `
             <tr style="${TH}">
-                <th style="padding: 10px 8px; text-align: left;">OS</th>
-                <th style="padding: 10px 8px; text-align: left;">Categoria</th>
-                <th style="padding: 10px 8px; text-align: left;">Proj. Gerencial</th>
-                <th style="padding: 10px 8px; text-align: left;">Cidade</th>
-                <th style="padding: 10px 8px; text-align: center;">UF</th>
-                <th style="padding: 10px 8px; text-align: left;">Cadastro</th>
-                <th style="padding: 10px 8px; text-align: left;">Data Medição</th>
-                <th style="padding: 10px 8px; text-align: center;">Aging</th>
-                <th style="padding: 10px 8px; text-align: left;">Fase Atual (Original)</th>
-                <th style="padding: 10px 8px; text-align: left;">Fase (De/Para)</th>
-                <th style="padding: 10px 8px; text-align: right;">Valor</th>
+                <th style="padding: 5px 3px; text-align: left; font-size: 8px; white-space: nowrap; max-width: 45px;">OS</th>
+                <th style="padding: 5px 3px; text-align: left; font-size: 8px; white-space: nowrap; max-width: 70px;">Categoria</th>
+                <th style="padding: 5px 3px; text-align: left; font-size: 8px; white-space: nowrap; max-width: 70px;">Proj. Ger.</th>
+                <th style="padding: 5px 3px; text-align: left; font-size: 8px; white-space: nowrap; max-width: 70px;">Cidade</th>
+                <th style="padding: 5px 3px; text-align: center; font-size: 8px; white-space: nowrap; max-width: 20px;">UF</th>
+                <th style="padding: 5px 3px; text-align: left; font-size: 8px; white-space: nowrap; max-width: 50px;">Cadastro</th>
+                <th style="padding: 5px 3px; text-align: left; font-size: 8px; white-space: nowrap; max-width: 50px;">Dt. Medição</th>
+                <th style="padding: 5px 3px; text-align: center; font-size: 8px; white-space: nowrap; max-width: 35px;">Aging</th>
+                <th style="padding: 5px 3px; text-align: left; font-size: 8px; white-space: nowrap; max-width: 75px;">Fase Original</th>
+                <th style="padding: 5px 3px; text-align: left; font-size: 8px; white-space: nowrap; max-width: 75px;">Fase (De/Para)</th>
+                <th style="padding: 5px 3px; text-align: right; font-size: 8px; white-space: nowrap; max-width: 90px;">Valor</th>
             </tr>`;
 
         const openOSs = cobrancaFilteredData.filter(r => {
@@ -1057,21 +1061,21 @@ function renderOpenOSsList() {
             else if (o.aging > 30) agingClass = 'alert-low';
             const badgeClass = getCobrancaBadgeClass(o.fase_atual_de_para);
             tr.innerHTML = `
-                <td style="padding: 8px; border-bottom: 1px solid var(--border-color);"><strong>${o.os}</strong></td>
-                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${o.categoria}</td>
-                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); font-size: 10px;">${o.projeto_gerencial}</td>
-                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${o.cidade}</td>
-                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); text-align: center; font-weight:600;">${o.uf}</td>
-                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${fmtDate(o.data_cadastro)}</td>
-                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${fmtDate(o.data_inclusao_lpu)}</td>
-                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); text-align: center;">
-                    <span class="badge-aging ${agingClass}">${o.aging}d</span>
+                <td style="padding: 5px 3px; border-bottom: 1px solid var(--border-color); white-space: nowrap; font-size: 8.5px; max-width: 45px; overflow: hidden; text-overflow: ellipsis;"><strong>${o.os}</strong></td>
+                <td style="padding: 5px 3px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); white-space: nowrap; max-width: 70px; overflow: hidden; text-overflow: ellipsis; font-size: 8.5px;" title="${o.categoria}">${o.categoria}</td>
+                <td style="padding: 5px 3px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); font-size: 8px; white-space: nowrap; max-width: 70px; overflow: hidden; text-overflow: ellipsis;" title="${o.projeto_gerencial}">${o.projeto_gerencial}</td>
+                <td style="padding: 5px 3px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); white-space: nowrap; max-width: 70px; overflow: hidden; text-overflow: ellipsis; font-size: 8.5px;" title="${o.cidade}">${o.cidade}</td>
+                <td style="padding: 5px 3px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); text-align: center; font-weight:600; white-space: nowrap; font-size: 8.5px; max-width: 20px;">${o.uf}</td>
+                <td style="padding: 5px 3px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); white-space: nowrap; font-size: 8.5px; max-width: 50px;">${fmtDate(o.data_cadastro)}</td>
+                <td style="padding: 5px 3px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); white-space: nowrap; font-size: 8.5px; max-width: 50px;">${fmtDate(o.data_inclusao_lpu)}</td>
+                <td style="padding: 5px 3px; border-bottom: 1px solid var(--border-color); text-align: center; white-space: nowrap; font-size: 8.5px; max-width: 35px;">
+                    <span class="badge-aging ${agingClass}" style="padding: 1.5px 3px; font-size: 8px; min-width: 20px; display: inline-block;">${o.aging}d</span>
                 </td>
-                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">${o.fase_atual}</td>
-                <td style="padding: 8px; border-bottom: 1px solid var(--border-color);">
-                    <span class="cobranca-badge ${badgeClass}" style="padding: 2px 6px; font-size: 9px;">${o.fase_atual_de_para}</span>
+                <td style="padding: 5px 3px; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); white-space: nowrap; max-width: 75px; overflow: hidden; text-overflow: ellipsis; font-size: 8.5px;" title="${o.fase_atual}">${o.fase_atual}</td>
+                <td style="padding: 5px 3px; border-bottom: 1px solid var(--border-color); white-space: nowrap; font-size: 8.5px; max-width: 75px;">
+                    <span class="cobranca-badge ${badgeClass}" style="padding: 1.5px 3px; font-size: 8px; max-width: 70px; display: inline-block; overflow: hidden; text-overflow: ellipsis; vertical-align: middle;">${o.fase_atual_de_para}</span>
                 </td>
-                <td style="padding: 8px; border-bottom: 1px solid var(--border-color); text-align: right; font-weight: 700; color: var(--color-primary-light);">
+                <td style="padding: 5px 3px; border-bottom: 1px solid var(--border-color); text-align: right; font-weight: 700; color: var(--color-primary-light); white-space: nowrap; font-size: 9px; max-width: 90px;">
                     ${formatCobrancaCurrency(o.valor)}
                 </td>
             `;
