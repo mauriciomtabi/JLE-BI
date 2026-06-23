@@ -9,7 +9,7 @@ $useFile = $null
 
 if (Test-Path $networkDir) {
     try {
-        $networkFile = Get-ChildItem -Path $networkDir -Filter "*Anal*tico*" | Where-Object { $_.Name -notlike "~$*" } | Select-Object -First 1
+        $networkFile = Get-ChildItem -Path $networkDir -Filter "*Anal*tico*" | Where-Object { $_.Name -notlike "~$*" } | Sort-Object LastWriteTime -Descending | Select-Object -First 1
         if ($null -ne $networkFile) {
             $ext = $networkFile.Extension
             $localTempPath = "$PSScriptRoot\temp_cobranca_read$ext"
@@ -57,6 +57,18 @@ if ($null -eq $useFile) {
 }
 
 $filePath = $useFile
+
+# Extrair data de atualizacao do relatorio
+$reportDate = $null
+$fileObject = Get-Item -Path $filePath
+if ($fileObject.Name -match "(\d{4})_(\d{2})_(\d{2})") {
+    # Encontrou a data no formato YYYY_MM_DD no nome do arquivo (ex: 2026_06_16)
+    $reportDate = "$($Matches[1])-$($Matches[2])-$($Matches[3]) 18:00:00"
+} else {
+    # Fallback para a data de modificacao do arquivo
+    $reportDate = $fileObject.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss")
+}
+Write-Output "Data de atualizacao identificada para o relatorio: $reportDate"
 
 Write-Output "Iniciando processamento da planilha de Cobrança: $filePath"
 
@@ -304,7 +316,7 @@ try {
     
     # Empacotar lookups e dados
     $payload = [PSCustomObject]@{
-        generated_at = (Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+        generated_at = $reportDate
         lookups = [PSCustomObject]@{
             categorias = $lookup_categorias
             cidades = $lookup_cidades
@@ -327,7 +339,7 @@ try {
     
     # Criar wrapper de descompressão automática em JavaScript
     $jsContent = @"
-// Dados de Cobrança Compactados - Gerado em: $((Get-Date -Format "yyyy-MM-dd HH:mm:ss"))
+// Dados de Cobrança Compactados - Gerado em: $reportDate
 (function() {
     const db = $jsonStr;
     const l = db.lookups;

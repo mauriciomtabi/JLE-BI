@@ -1973,7 +1973,7 @@
         window.addEventListener('DOMContentLoaded', () => {
             if (typeof window.CASH_FLOW_DATA !== 'undefined') {
                 transactions = window.CASH_FLOW_DATA.transactions || [];
-                document.getElementById('data-timestamp').innerText = formatTimestamp(window.CASH_FLOW_DATA.generated_at) || 'Desconhecido';
+                updateHeaderTimestamp(activeView);
             } else {
                 alert("Arquivo data.js não encontrado. Por favor, execute o script de ETL para gerar a base de dados.");
             }
@@ -2119,6 +2119,40 @@
             }
         }
 
+        // Atualizar o timestamp de atualização de acordo com a aba ativa
+        function updateHeaderTimestamp(viewName) {
+            const timestampEl = document.getElementById('data-timestamp');
+            if (!timestampEl) return;
+            
+            if (viewName === 'cobranca') {
+                if (typeof window.COBRANCA_METADATA !== 'undefined' && window.COBRANCA_METADATA.generated_at) {
+                    timestampEl.innerText = formatTimestamp(window.COBRANCA_METADATA.generated_at);
+                } else {
+                    timestampEl.innerText = 'Desconhecido';
+                }
+            } else if (viewName === 'veiculos') {
+                if (typeof VEICULOS_DATA !== 'undefined' && VEICULOS_DATA.length > 0) {
+                    let maxDateStr = '';
+                    VEICULOS_DATA.forEach(d => {
+                        if (d.date && d.date > maxDateStr) {
+                            maxDateStr = d.date;
+                        }
+                    });
+                    timestampEl.innerText = maxDateStr ? formatTimestamp(maxDateStr) : 'N/D';
+                } else {
+                    timestampEl.innerText = 'N/D';
+                }
+            } else if (viewName === 'dashboard') {
+                if (typeof window.CASH_FLOW_DATA !== 'undefined' && window.CASH_FLOW_DATA.generated_at) {
+                    timestampEl.innerText = formatTimestamp(window.CASH_FLOW_DATA.generated_at);
+                } else {
+                    timestampEl.innerText = 'Desconhecido';
+                }
+            } else {
+                timestampEl.innerText = 'N/D';
+            }
+        }
+
         // Navegação de Telas
         function switchView(viewName) {
             // Se tentar acessar a aba de transações como uma tela separada (legado/redirecionamento)
@@ -2210,6 +2244,7 @@
                     }
                 }
             }
+            updateHeaderTimestamp(viewName);
         }
 
         // ---- ADMIN PANEL FUNCTIONS ----
