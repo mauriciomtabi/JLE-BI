@@ -1768,6 +1768,21 @@
                     return;
                 }
 
+                // Registrar o último acesso em tempo real
+                if (supabaseClient && user && user.email) {
+                    const nowIso = new Date().toISOString();
+                    supabaseClient.from('bi_permissions')
+                        .update({ last_access: nowIso })
+                        .eq('email', user.email)
+                        .then(({ error }) => {
+                            if (error) {
+                                console.warn("Nota: Para habilitar o registro de ultimo acesso em tempo real, crie a coluna 'last_access' (tipo timestamp) na tabela 'bi_permissions' no console do Supabase.", error);
+                            } else {
+                                console.log("Acesso registrado com sucesso em bi_permissions:", nowIso);
+                            }
+                        });
+                }
+
                 document.getElementById('auth-panel').style.display = 'none';
                 document.getElementById('dashboard-sidebar').style.display = 'flex';
                 document.getElementById('dashboard-main-content').style.display = 'flex';
@@ -2308,6 +2323,25 @@
             const { data: usersData, error } = await supabaseClient
                 .rpc('get_users_admin');
             
+            // Buscar os acessos em tempo real diretamente da tabela bi_permissions
+            let accessTimes = {};
+            try {
+                if (supabaseClient) {
+                    const { data: permAccessData } = await supabaseClient
+                        .from('bi_permissions')
+                        .select('email, last_access');
+                    if (permAccessData) {
+                        permAccessData.forEach(p => {
+                            if (p.email && p.last_access) {
+                                accessTimes[p.email.toLowerCase()] = p.last_access;
+                            }
+                        });
+                    }
+                }
+            } catch (e) {
+                console.warn("Coluna 'last_access' nao encontrada ou erro ao ler de bi_permissions:", e);
+            }
+            
             const tbody = document.getElementById('admin-users-tbody');
             if (!tbody) return;
 
@@ -2320,7 +2354,8 @@
                 const email = u.out_email;
                 const isAdmin = u.out_is_admin;
                 const allowedPages = u.out_allowed_pages || [];
-                const lastSignInAt = u.out_last_sign_in_at;
+                // Se houver um registro de last_access em bi_permissions, usa-o, caso contrário cai de volta para a data de login no auth.users
+                const lastSignInAt = accessTimes[email.toLowerCase()] || u.out_last_sign_in_at;
 
                 const pages = allowedPages.map(p => {
                     const found = PAGES_CATALOG.find(c => c.id === p);
