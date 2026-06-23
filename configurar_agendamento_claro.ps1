@@ -1,5 +1,5 @@
 # Script PowerShell para criar o Agendamento de Tarefa do Windows
-# Executa o monitoramento de e-mail da Claro de segunda a sexta, a cada 1 hora.
+# Executa o monitoramento de e-mail da Claro de segunda a sexta, duas vezes ao dia.
 
 $scriptPath = Join-Path $PSScriptRoot "monitorar_email_claro.ps1"
 $workingDir = $PSScriptRoot
@@ -17,18 +17,16 @@ try {
 # Criar a ação da tarefa
 $action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-ExecutionPolicy Bypass -WindowStyle Hidden -File `"$scriptPath`"" -WorkingDirectory $workingDir
 
-# Criar um trigger diário que repete a cada 1 hora durante o dia inteiro
-$trigger = New-ScheduledTaskTrigger -Daily -At "07:00:00"
-# Adicionar repetição a cada 1 hora por 12 horas
-$trigger.RepetitionInterval = (New-TimeSpan -Hours 1)
-$trigger.RepetitionDuration = (New-TimeSpan -Hours 12)
+# Criar os dois triggers (10h30 e 15h30 de Seg-Sex)
+$trigger1 = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -At "10:30:00"
+$trigger2 = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -At "15:30:00"
 
 # Configurações de comportamento
 $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -ExecutionTimeLimit (New-TimeSpan -Minutes 15)
 
 # Registrar a tarefa agendada no Windows
 $taskName = "JLE_Telecom_Claro_Email_Monitor"
-Register-ScheduledTask -TaskName $taskName -Trigger $trigger -Action $action -Settings $settings -Description "Monitoramento automatico de email da Claro e atualizacao do BI de Cobranca" -Force
+Register-ScheduledTask -TaskName $taskName -Trigger @($trigger1, $trigger2) -Action $action -Settings $settings -Description "Monitoramento automatico de email da Claro e atualizacao do BI de Cobranca" -Force
 
 Write-Output "Tarefa agendada '$taskName' configurada com sucesso!"
-Write-Output "O monitor de email rodará diariamente a cada 1 hora das 07:00 as 19:00."
+Write-Output "O monitor de email rodará de segunda a sexta às 10:30 e às 15:30."

@@ -14,7 +14,7 @@ cd /d "%~dp0"
 echo ==========================================================
 echo  CONFIGURANDO MONITORAMENTO E ATUALIZAÇÃO AUTOMÁTICA CLARO
 echo ==========================================================
-echo Frequência: Diariamente, a cada 1 hora das 07h às 19h.
+echo Frequência: De segunda a sexta, às 10h30 e às 15h30.
 echo.
 powershell -NoProfile -ExecutionPolicy Bypass -File .\configurar_agendamento_claro.ps1
 echo.
