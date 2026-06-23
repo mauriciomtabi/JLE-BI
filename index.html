@@ -1644,6 +1644,7 @@
 
         // Logout
         async function handleLogout() {
+            localStorage.removeItem('jle_bi_active_view');
             if (isDemoMode || !supabaseClient) {
                 safeStorage.removeItem('demo_session');
                 checkAuth();
@@ -1916,8 +1917,11 @@
                     }
                 });
 
-                // Resetar a tela ativa inicial para a página padrão permitida (previne vazamento de sessão anterior)
-                if (allowedPages.includes('cobranca')) {
+                // Recuperar a última tela ativa do localStorage se o usuário tiver acesso a ela
+                const savedView = localStorage.getItem('jle_bi_active_view');
+                if (savedView && allowedPages.includes(savedView)) {
+                    switchView(savedView);
+                } else if (allowedPages.includes('cobranca')) {
                     switchView('cobranca');
                 } else if (allowedPages.includes('dashboard')) {
                     switchView('dashboard');
@@ -2188,6 +2192,7 @@
             }
 
             activeView = viewName;
+            localStorage.setItem('jle_bi_active_view', viewName);
             document.querySelectorAll('.view-panel').forEach(panel => panel.style.display = 'none');
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             
