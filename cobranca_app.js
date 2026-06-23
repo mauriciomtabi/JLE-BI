@@ -1552,7 +1552,7 @@ function renderMonthlySplitChart(th) {
             layout: {
                 padding: {
                     top: 15,
-                    bottom: 10
+                    bottom: 0
                 }
             },
             scales: {
@@ -1569,7 +1569,7 @@ function renderMonthlySplitChart(th) {
                 legend: {
                     position: 'bottom',
                     labels: {
-                        padding: 20
+                        padding: 12
                     }
                 },
                 tooltip: {
@@ -1592,23 +1592,34 @@ function renderHorizontalChart(canvasId, fieldName, chartKey, th, limit = 5) {
     const canvas = document.getElementById(canvasId);
     if (!canvas) return;
 
-    const groupSum = {};
+    // Agrupar valores por categoria e por fase (Pedido / Aprovado / Sem Aprovação)
+    const groupData = {};
     cobrancaFilteredData.forEach(r => {
-        const val = r[fieldName] || 'N/D';
-        groupSum[val] = (groupSum[val] || 0) + (r.valor_total || 0);
+        const cat = r[fieldName] || 'N/D';
+        if (!groupData[cat]) groupData[cat] = { comPed: 0, aprov: 0, semAprov: 0 };
+        const fase = String(r.fase_atual_de_para || '').toUpperCase().trim();
+        if (fase === 'PEDIDO EMITIDO') {
+            groupData[cat].comPed += (r.valor_total || 0);
+        } else if (fase === 'APROVADO') {
+            groupData[cat].aprov += (r.valor_total || 0);
+        } else {
+            groupData[cat].semAprov += (r.valor_total || 0);
+        }
     });
 
-    // Ordenar e pegar top
-    let sorted = Object.keys(groupSum)
-        .map(key => ({ key, val: groupSum[key] }))
-        .sort((a, b) => b.val - a.val);
+    // Ordenar pelo total e pegar top N
+    let sorted = Object.keys(groupData)
+        .map(key => ({ key, total: groupData[key].comPed + groupData[key].aprov + groupData[key].semAprov }))
+        .sort((a, b) => b.total - a.total);
 
     if (limit !== null && limit !== undefined) {
         sorted = sorted.slice(0, limit);
     }
 
     const labels = sorted.map(i => i.key);
-    const data = sorted.map(i => i.val);
+    const comPedData  = sorted.map(i => groupData[i.key].comPed);
+    const aprovData   = sorted.map(i => groupData[i.key].aprov);
+    const semAprovData = sorted.map(i => groupData[i.key].semAprov);
 
     if (labels.length === 0) return;
 
@@ -1624,37 +1635,60 @@ function renderHorizontalChart(canvasId, fieldName, chartKey, th, limit = 5) {
         }
     }
 
-    // Cor destacada se filtro de clique ativo para este campo
+    // Campo de filtro de clique
     const filterField = fieldName === 'tipo_atividade' ? 'tipo_atividade'
                       : fieldName === 'fase_atual'     ? 'fase_atual'
                       : fieldName === 'item_descritivo'? 'item_descritivo'
                       : null;
     const activeFilter = filterField ? cobrancaClickFilters[filterField] : null;
 
-    const ctx = canvas.getContext('2d');
-    const gradient = ctx.createLinearGradient(0, 0, 300, 0);
-    gradient.addColorStop(0, 'rgba(0, 79, 113, 0.15)');
-    gradient.addColorStop(1, 'rgba(0, 79, 113, 0.85)');
-
-    const bgColors = labels.map(lbl => {
-        if (!activeFilter) return gradient;
-        return lbl === activeFilter ? '#0077aa' : 'rgba(0, 79, 113, 0.25)';
-    });
-
     cobrancaCharts[chartKey] = new Chart(canvas, {
         type: 'bar',
         data: {
             labels: labels,
-            datasets: [{
-                data: data,
-                backgroundColor: bgColors,
-                borderColor: '#004f71',
-                borderWidth: 1.5,
-                borderRadius: 4,
-                hoverBackgroundColor: '#0077aa',
-                hoverBorderColor: '#ffffff',
-                hoverBorderWidth: 2
-            }]
+            datasets: [
+                {
+                    label: 'Pedido Emitido',
+                    data: comPedData,
+                    backgroundColor: labels.map(l => activeFilter && l !== activeFilter ? 'rgba(0,79,113,0.25)' : '#004f71'),
+                    borderColor: '#004f71',
+                    borderWidth: 1,
+                    borderRadius: 2,
+                    hoverBackgroundColor: '#0077aa',
+                    datalabels: { display: false }
+                },
+                {
+                    label: 'Aprovado Aguardando Pedido',
+                    data: aprovData,
+                    backgroundColor: labels.map(l => activeFilter && l !== activeFilter ? 'rgba(243,159,24,0.2)' : '#f39f18'),
+                    borderColor: '#f39f18',
+                    borderWidth: 1,
+                    borderRadius: 2,
+                    hoverBackgroundColor: '#ffb83d',
+                    datalabels: { display: false }
+                },
+                {
+                    label: 'Sem Aprovação',
+                    data: semAprovData,
+                    backgroundColor: labels.map(l => activeFilter && l !== activeFilter ? 'rgba(255,87,34,0.2)' : '#ff5722'),
+                    borderColor: '#ff5722',
+                    borderWidth: 1,
+                    borderRadius: 2,
+                    hoverBackgroundColor: '#ff784e',
+                    datalabels: {
+                        display: true,
+                        align: 'end',
+                        anchor: 'end',
+                        color: th.textColor,
+                        font: { size: 9, weight: 'bold' },
+                        formatter: (val, ctx) => {
+                            const idx = ctx.dataIndex;
+                            const total = comPedData[idx] + aprovData[idx] + semAprovData[idx];
+                            return total > 0 ? formatCobrancaShortVal(total) : '';
+                        }
+                    }
+                }
+            ]
         },
         options: {
             indexAxis: 'y',
@@ -1667,14 +1701,16 @@ function renderHorizontalChart(canvasId, fieldName, chartKey, th, limit = 5) {
                 if (filterField) toggleCobrancaChartFilter(filterField, label);
             },
             layout: {
-                padding: { right: 40 }
+                padding: { right: 45 }
             },
             scales: {
                 x: {
+                    stacked: true,
                     grid: { color: th.gridColor },
                     ticks: { callback: (val) => formatCobrancaShortVal(val) }
                 },
                 y: {
+                    stacked: true,
                     grid: { display: false },
                     ticks: {
                         font: { size: 10 },
@@ -1686,7 +1722,15 @@ function renderHorizontalChart(canvasId, fieldName, chartKey, th, limit = 5) {
                 }
             },
             plugins: {
-                legend: { display: false },
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                    labels: {
+                        padding: 12,
+                        font: { size: 10 },
+                        color: th.textColor
+                    }
+                },
                 tooltip: {
                     backgroundColor: th.tooltipBg,
                     titleColor: th.tooltipText,
@@ -1695,23 +1739,17 @@ function renderHorizontalChart(canvasId, fieldName, chartKey, th, limit = 5) {
                     borderWidth: 1,
                     callbacks: {
                         label: (ctx) => {
+                            if (ctx.raw === 0) return null;
                             const active = filterField && cobrancaClickFilters[filterField] === ctx.label ? ' ● Filtro ativo' : ' (clique para filtrar)';
-                            return ` Valor: ${formatCobrancaCurrency(ctx.raw)}${active}`;
+                            return ` ${ctx.dataset.label}: ${formatCobrancaCurrency(ctx.raw)}${active}`;
                         }
                     }
-                },
-                datalabels: {
-                    display: true,
-                    align: 'end',
-                    anchor: 'end',
-                    color: th.textColor,
-                    font: { size: 9, weight: 'bold' },
-                    formatter: (val) => formatCobrancaShortVal(val)
                 }
             }
         }
     });
 }
+
 
 // ── Tabela do Relatório Analítico ───────────────────────────────────────────
 function getCobrancaTableData() {
