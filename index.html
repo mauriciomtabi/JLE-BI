@@ -48,6 +48,7 @@
     <link rel="stylesheet" href="veiculos_styles.css?v=3.39">
     
     <link rel="stylesheet" href="cobranca_styles.css?v=3.47">
+    <link rel="stylesheet" href="gestao_os_styles.css">
 </head>
 <body>
 
@@ -67,6 +68,9 @@
         <nav class="nav-menu">
             <a class="nav-item" id="nav-cobranca" onclick="switchView('cobranca')" style="display:none;">
                 <i class="fa-solid fa-file-invoice-dollar"></i> <span>Analítico Claro</span>
+            </a>
+            <a class="nav-item" id="nav-gestao_os" onclick="switchView('gestao_os')" style="display:none;">
+                <i class="fa-solid fa-clipboard-list"></i> <span>Gestão de OS</span>
             </a>
             <a class="nav-item active" id="nav-dashboard" onclick="switchView('dashboard')">
                 <i class="fa-solid fa-sack-dollar"></i> <span>Financeiro</span>
@@ -992,6 +996,264 @@
             </div>
         </div>
 
+        
+        <!-- GESTAO DE OS CONTAINER -->
+        <div id="view-gestao_os-container" class="view-panel" style="display: none;">
+            <!-- Filters bar -->
+            <section class="filter-bar" id="gestao_os-filters-container">
+                <div class="filter-group">
+                    <label for="gestao_os-filter-categoria">Categoria</label>
+                    <select id="gestao_os-filter-categoria" onchange="applyGestaoOsFilters()">
+                        <option value="">Todas as Categorias</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="gestao_os-filter-uf">UF / Estado</label>
+                    <select id="gestao_os-filter-uf" onchange="applyGestaoOsFilters()">
+                        <option value="">Todas as UFs</option>
+                        <option value="RS">RS</option>
+                        <option value="SC">SC</option>
+                        <option value="PR">PR</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="gestao_os-filter-projeto">Projeto</label>
+                    <select id="gestao_os-filter-projeto" onchange="applyGestaoOsFilters()">
+                        <option value="">Todos os Projetos</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="gestao_os-filter-fase">Fase (De/Para)</label>
+                    <select id="gestao_os-filter-fase" onchange="applyGestaoOsFilters()">
+                        <option value="">Todas as Fases</option>
+                        <option value="EM EXECUÇÃO">Em Execução</option>
+                        <option value="EXECUTADO">Executado</option>
+                        <option value="APROVADO">Aprovado</option>
+                        <option value="PEDIDO EMITIDO">Pedido Emitido</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="gestao_os-filter-data-inicio">Data Início</label>
+                    <input type="date" id="gestao_os-filter-data-inicio" onchange="applyGestaoOsFilters()">
+                </div>
+                <div class="filter-group">
+                    <label for="gestao_os-filter-data-fim">Data Fim</label>
+                    <div style="display: flex; gap: 8px; align-items: center; width: 100%;">
+                        <input type="date" id="gestao_os-filter-data-fim" onchange="applyGestaoOsFilters()" style="flex-grow: 1;">
+                        <button onclick="clearCobrancaFilters()" title="Limpar Filtros" style="background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 12px; color: var(--text-secondary); cursor: pointer; transition: all 0.2s ease;" onmouseover="this.style.borderColor='var(--color-primary)'; this.style.color='var(--text-primary)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-secondary)'">
+                            <i class="fa-solid fa-eraser"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sub Tab Selector (Indicadores / Relatório) -->
+            <div class="dashboard-tabs" id="gestao_os-sub-tabs">
+                <button class="tab-btn active" id="gestao_os-tab-btn-indicators" onclick="switchGestaoOsTab('indicators')">
+                    <i class="fa-solid fa-chart-column"></i> Indicadores
+                </button>
+                <button class="tab-btn" id="gestao_os-tab-btn-report" onclick="switchGestaoOsTab('report')">
+                    <i class="fa-solid fa-table"></i> Relatório
+                </button>
+            </div>
+
+            <!-- Sub Tab Pane: Indicadores -->
+            <div id="subview-cobranca-indicators" class="subtab-pane active">
+                
+                <!-- Pipeline KPI Cards Row (Top) -->
+                <div class="kpi-container cobranca-pipeline-grid" id="gestao_os-pipeline-container">
+                    <!-- Dynamically populated phase cards -->
+                </div>
+
+                <!-- Category Cards Grid (Below) -->
+                <div class="gestao_os-category-grid" id="gestao_os-category-cards-container">
+                    <!-- Dynamically populated categories -->
+                </div>
+
+                <!-- Monthly Split Row (Full Width) -->
+                <div class="chart-card">
+                    <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <span class="chart-title">Valor Mensal (Com Pedido vs Sem Pedido)</span>
+                            <button id="gestao_os-drilldown-back-btn" style="display: none; align-items: center; gap: 6px; padding: 4px 12px; font-size: 11px; font-weight: 700; color: #fff; background: #004f71; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; cursor: pointer; transition: all 0.2s ease;" onclick="resetCobrancaDateFilter()">
+                                <i class="fa-solid fa-arrow-left"></i> Voltar
+                            </button>
+                        </div>
+                        <div id="gestao_os-monthly-total-sem-aprovacao" style="font-size: 13px; font-weight: 600; color: #ff5722; background: rgba(255,87,34,0.08); padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(255,87,34,0.18);">
+                            Sem Aprovação: R$ 0,00
+                        </div>
+                    </div>
+                    <div class="chart-body" style="height: 360px; position: relative; padding: 16px 16px 8px 16px;">
+                        <canvas id="gestao_os-monthly-split-chart"></canvas>
+                    </div>
+                </div>
+
+                <!-- UF Map + OS Aging Row -->
+                <div class="gestao_os-map-aging-grid">
+                    <!-- Map Card -->
+                    <div class="chart-card map-card">
+                        <div class="chart-header">
+                            <span class="chart-title">Distribuição por UF</span>
+                        </div>
+                        <div class="chart-body" id="gestao_os-uf-map-container" style="height: 380px; position: relative;">
+                            <!-- SVG Map and Compact Cards -->
+                        </div>
+                    </div>
+
+                    <!-- OSs sem aprovação / aprovadas aguardando pedido card -->
+                    <div class="chart-card">
+                        <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                            <span class="chart-title" id="gestao_os-os-list-title">OSs Sem Aprovação (Aging)</span>
+                            <div style="display:flex;align-items:center;gap:8px;"><div class="os-list-toggle" id="gestao_os-os-list-toggle">
+                                <button class="os-list-toggle-btn active" id="gestao_os-btn-os-sem-aprovacao" onclick="switchGestaoOsOSListMode('sem-aprovacao')">
+                                    <i class="fa-solid fa-clock-rotate-left"></i> Sem Aprovação
+                                </button>
+                                <button class="os-list-toggle-btn" id="gestao_os-btn-os-aprovadas" onclick="switchGestaoOsOSListMode('aprovadas')">
+                                    <i class="fa-solid fa-circle-check"></i> Aprovadas Aguardando Pedido
+                                </button>
+                            </div>
+                                <button class="os-list-export-btn" onclick="exportGestaoOsOSListXLSX()" title="Baixar relatório Excel"><i class="fa-solid fa-file-excel"></i></button>
+                            </div>
+                        </div>
+                        <div class="chart-body" style="height: 380px; display: block !important; padding: 0;">
+                            <div id="gestao_os-open-oss-list-container" style="height: 100%; overflow: auto;">
+                                <table class="gestao_os-os-aging-table">
+                                    <thead id="gestao_os-os-list-thead">
+                                        <tr style="position: sticky; top: 0; background: var(--bg-card); border-bottom: 2px solid var(--border-color); z-index: 10;">
+                                            <th style="padding: 10px 8px; text-align: left;">OS</th>
+                                            <th style="padding: 10px 8px; text-align: left;">Categoria</th>
+                                            <th style="padding: 10px 8px; text-align: left;">Cadastro</th>
+                                            <th style="padding: 10px 8px; text-align: center;">Aging</th>
+                                            <th style="padding: 10px 8px; text-align: left;">Fase Atual (Original)</th>
+                                            <th style="padding: 10px 8px; text-align: left;">Fase (De/Para)</th>
+                                            <th style="padding: 10px 8px; text-align: right;">Valor</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="gestao_os-open-oss-list-tbody">
+                                        <!-- Dynamically populated rows -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity & Phase Breakdown Row -->
+                <div class="gestao_os-grid-2cols">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title">Valor por Tipo de Atividade</span>
+                        </div>
+                        <div class="chart-body cobranca-item-chart-body">
+                            <div style="width: 100%; height: 320px; position: relative;">
+                                <canvas id="gestao_os-activity-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title">Valor por Fase Atual (Original)</span>
+                        </div>
+                        <div class="chart-body cobranca-item-chart-body">
+                            <div style="width: 100%; height: 320px; position: relative;">
+                                <canvas id="gestao_os-fase-atual-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Row: CAPEX/OPEX & Item Details -->
+                <div class="gestao_os-grid-2cols" style="margin-bottom: 24px;">
+                    <!-- Donut Chart: CAPEX / OPEX -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title">CAPEX / OPEX</span>
+                        </div>
+                        <div class="chart-body" style="height: 320px; position: relative; display: flex; align-items: center; justify-content: center; padding: 16px;">
+                            <canvas id="gestao_os-capex-opex-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Item Details Card -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title">Valor por Item Descritivo</span>
+                        </div>
+                        <div class="chart-body cobranca-item-chart-body">
+                            <div style="width: 100%; height: 320px; position: relative;">
+                                <canvas id="gestao_os-item-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Sub Tab Pane: Relatório -->
+            <div id="subview-cobranca-report" class="subtab-pane">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <span class="chart-title"><i class="fa-solid fa-table"></i> Relatório Analítico de Cobrança</span>
+                        <button class="btn-export" onclick="exportCobrancaXLSX()" title="Exportar para Excel">
+                            <i class="fa-solid fa-file-excel"></i> Exportar
+                        </button>
+                    </div>
+                    <div style="padding: 0;">
+                        <div class="gestao_os-table-controls" style="padding: 16px 16px 0 16px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;">
+                            <div class="gestao_os-search-wrapper" style="position: relative; flex-grow: 1; max-width: 400px;">
+                                <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-secondary);"></i>
+                                <input type="text" id="gestao_os-search" placeholder="Buscar por OS, PEP, Cidade, Projeto, Pedido..." oninput="applyCobrancaSearch()" style="width: 100%; padding: 10px 12px 10px 36px; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--bg-input); color: var(--text-primary); font-family: inherit; font-size: 14px; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--color-primary)'" onblur="this.style.borderColor='var(--border-color)'">
+                            </div>
+                            <span id="gestao_os-results-count" style="font-size: 13px; color: var(--text-secondary); font-weight: 500;"></span>
+                        </div>
+                        
+                        <div class="table-wrapper" style="overflow-x: auto; margin-top: 16px; border-top: 1px solid var(--border-color);">
+                            <table class="data-table" id="gestao_os-table" style="width: 100%; border-collapse: collapse;">
+                                <thead>
+                                    <tr>
+                                        <th onclick="sortCobrancaTable('categoria')">Categoria</th>
+                                        <th onclick="sortCobrancaTable('os')">OS</th>
+                                        <th onclick="sortCobrancaTable('cidade')">Cidade</th>
+                                        <th onclick="sortCobrancaTable('uf')">UF</th>
+                                        <th onclick="sortCobrancaTable('projeto')">Projeto</th>
+                                        <th onclick="sortCobrancaTable('projeto_gerencial')">Proj. Gerencial</th>
+                                        <th onclick="sortCobrancaTable('tipo_atividade')">Tipo Atividade</th>
+                                        <th onclick="sortCobrancaTable('fase_atual')">Fase Atual</th>
+                                        <th onclick="sortCobrancaTable('contrato_numero')">Contrato</th>
+                                        <th onclick="sortCobrancaTable('item_descritivo')">Item Descritivo</th>
+                                        <th onclick="sortCobrancaTable('tipo_despesa')">Tipo Despesa</th>
+                                        <th onclick="sortCobrancaTable('objeto_do_contrato')">Objeto Contrato</th>
+                                        <th onclick="sortCobrancaTable('valor_total')" style="text-align:right;">Valor Total</th>
+                                        <th onclick="sortCobrancaTable('data_cadastro')">Dt. Cadastro</th>
+                                        <th onclick="sortCobrancaTable('data_aprovacao')">Dt. Aprovação</th>
+                                        <th onclick="sortCobrancaTable('tempo_aprovacao')">Tempo Aprov.</th>
+                                        <th onclick="sortCobrancaTable('user_inclusao_medicao')">User Incl. Medição</th>
+                                        <th onclick="sortCobrancaTable('pep')">PEP</th>
+                                        <th onclick="sortCobrancaTable('numero_medicao')">Nº Medição</th>
+                                        <th onclick="sortCobrancaTable('numero_pedido')">Nº Pedido</th>
+                                        <th onclick="sortCobrancaTable('user_pedido')">User Pedido</th>
+                                        <th onclick="sortCobrancaTable('fase_atual_de_para')">Fase (De/Para)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="gestao_os-table-body">
+                                    <!-- Table data rows -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div style="padding: 16px; border-top: 1px solid var(--border-color);">
+                            <div class="gestao_os-pagination" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                                <span class="gestao_os-pagination-info" id="gestao_os-page-info" style="font-size: 13px; color: var(--text-secondary);"></span>
+                                <div class="gestao_os-pagination-btns" id="gestao_os-pagination-btns" style="display: flex; gap: 6px; align-items: center;">
+                                    <!-- Pagination buttons -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Modal: Adicionar/Editar Usuário -->
         <div class="modal-overlay" id="user-permission-modal" onclick="closeUserModal(event)">
             <div class="modal-card" style="max-width: 520px;">
@@ -1187,6 +1449,7 @@
     
     <script src="cobranca_data.js?v=3.46"></script>
     <script src="cobranca_app.js?v=3.49"></script>
+    <script src="gestao_os_app.js?v=4.1"></script>
 
     <!-- Logica de UI Autônoma (Sem Dependências de CDNs) -->
     <script>
@@ -1750,6 +2013,7 @@
             { id: 'veiculos',     label: 'Veículos',                icon: 'fa-car',               navId: 'nav-veiculos' },
             
             { id: 'cobranca',     label: 'Analítico Claro',         icon: 'fa-file-invoice-dollar', navId: 'nav-cobranca' },
+            { id: 'gestao_os',    label: 'Gestão de OS',            icon: 'fa-clipboard-list',    navId: 'nav-gestao_os' },
             { id: 'admin',        label: 'Painel Admin',            icon: 'fa-shield-halved',    navId: 'nav-admin',        adminOnly: true },
         ];
 
@@ -2143,7 +2407,7 @@
             const timestampEl = document.getElementById('data-timestamp');
             if (!timestampEl) return;
             
-            if (viewName === 'cobranca') {
+            if (viewName === 'cobranca' || viewName === 'gestao_os') {
                 if (typeof window.COBRANCA_METADATA !== 'undefined' && window.COBRANCA_METADATA.generated_at) {
                     timestampEl.innerText = formatTimestamp(window.COBRANCA_METADATA.generated_at);
                 } else {
@@ -2246,6 +2510,16 @@
                 } else {
                     applyCobrancaFilters();
                 }
+            } else if (viewName === 'gestao_os') {
+                document.getElementById('filters-container').style.display = 'none';
+                if (mobileToggleBtn) mobileToggleBtn.style.display = '';
+                document.getElementById('view-title').innerText = 'Gestão de OS';
+                document.getElementById('view-subtitle').innerHTML = 'Gestão de ordens de serviço (Quantidades)';
+                if (!gestao_osDataLoaded) {
+                    initGestaoOs();
+                } else {
+                    applyGestaoOsFilters();
+                }
             } else {
                 document.getElementById('filters-container').style.display = 'grid';
                 if (mobileToggleBtn) mobileToggleBtn.style.display = '';
@@ -2274,6 +2548,7 @@
             { id: 'veiculos',     label: 'Veículos',                 icon: 'fa-car' },
             
             { id: 'cobranca',     label: 'Analítico Claro',          icon: 'fa-file-invoice-dollar' },
+            { id: 'gestao_os',    label: 'Gestão de OS',             icon: 'fa-clipboard-list' },
         ];
 
         function renderPageCheckboxes(containerId, selectedPages = []) {

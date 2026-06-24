@@ -233,7 +233,7 @@ function getGestaoOsRefDate(r) {
 }
 
 // Auxiliar para calcular a idade de uma OS sem aprovação
-function calculateOSAge(dateStr) {
+function gestaoOs_calculateOSAge(dateStr) {
     if (!dateStr || dateStr === '-') return -1;
     try {
         const parts = dateStr.split('-');
@@ -273,14 +273,14 @@ function getGestaoOsThemeVars() {
 
 // ── Renderização dos KPIs e Layout de Indicadores ───────────────────────────
 function renderGestaoOsKPIs() {
-    renderCategoryCards();
-    renderPipelineStepper();
+    gestaoOs_renderCategoryCards();
+    gestaoOs_renderPipelineStepper();
     renderGestaoOsUFMap();
-    renderOpenOSsList();
+    gestaoOs_renderOpenOSsList();
 }
 
 // 1. Cards de Categoria (Coluna B) no topo
-function renderCategoryCards() {
+function gestaoOs_renderCategoryCards() {
     const container = document.getElementById('gestao_os-category-cards-container');
     if (!container) return;
 
@@ -412,7 +412,7 @@ function renderCategoryCards() {
 }
 
 // 2. Fluxo de Fases Stepper (Coluna CB)
-function renderPipelineStepper() {
+function gestaoOs_renderPipelineStepper() {
     const container = document.getElementById('gestao_os-pipeline-container');
     if (!container) return;
 
@@ -900,10 +900,10 @@ function switchGestaoOsOSListMode(mode) {
     document.querySelectorAll('.os-list-toggle-btn').forEach(btn => btn.classList.remove('active'));
     const activeBtn = document.getElementById(mode === 'sem-aprovacao' ? 'btn-os-sem-aprovacao' : 'btn-os-aprovadas');
     if (activeBtn) activeBtn.classList.add('active');
-    renderOpenOSsList();
+    gestaoOs_renderOpenOSsList();
 }
 
-function renderOpenOSsList() {
+function gestaoOs_renderOpenOSsList() {
     const tbody = document.getElementById('gestao_os-open-oss-list-tbody');
     const thead = document.getElementById('gestao_os-os-list-thead');
     const titleEl = document.getElementById('gestao_os-os-list-title');
@@ -957,7 +957,7 @@ function renderOpenOSsList() {
                     fase_atual_de_para: r.fase_atual_de_para || '-',
                     data_aprovacao: r.data_aprovacao || '-',
                     valor: 0,
-                    diasAguard: calculateOSAge(r.data_aprovacao)
+                    diasAguard: gestaoOs_calculateOSAge(r.data_aprovacao)
                 };
             }
             osMap[osNum].valor += (r.valor_total || 0);
@@ -966,7 +966,7 @@ function renderOpenOSsList() {
                 (!osMap[osNum].data_aprovacao || osMap[osNum].data_aprovacao === '-' ||
                  r.data_aprovacao < osMap[osNum].data_aprovacao)) {
                 osMap[osNum].data_aprovacao = r.data_aprovacao;
-                osMap[osNum].diasAguard = calculateOSAge(r.data_aprovacao);
+                osMap[osNum].diasAguard = gestaoOs_calculateOSAge(r.data_aprovacao);
             }
         });
 
@@ -1046,13 +1046,13 @@ function renderOpenOSsList() {
                     data_cadastro: r.data_cadastro,
                     data_inclusao_lpu: r.data_inclusao_lpu || '-',
                     valor: 0,
-                    aging: calculateOSAge(r.data_cadastro)
+                    aging: gestaoOs_calculateOSAge(r.data_cadastro)
                 };
             }
             osMap[osNum].valor += (r.valor_total || 0);
             if (r.data_cadastro && (!osMap[osNum].data_cadastro || r.data_cadastro < osMap[osNum].data_cadastro)) {
                 osMap[osNum].data_cadastro = r.data_cadastro;
-                osMap[osNum].aging = calculateOSAge(r.data_cadastro);
+                osMap[osNum].aging = gestaoOs_calculateOSAge(r.data_cadastro);
             }
             if (r.data_inclusao_lpu && r.data_inclusao_lpu !== '-' && (!osMap[osNum].data_inclusao_lpu || osMap[osNum].data_inclusao_lpu === '-' || r.data_inclusao_lpu < osMap[osNum].data_inclusao_lpu)) {
                 osMap[osNum].data_inclusao_lpu = r.data_inclusao_lpu;
@@ -1100,7 +1100,7 @@ function renderOpenOSsList() {
 }
 
 // ── Exportador Genérico para Excel Formatado ───────────────────────────────
-function exportToStyledExcel(headers, rows, filename) {
+function gestaoOs_exportToStyledExcel(headers, rows, filename) {
     if (typeof XLSX === 'undefined') {
         alert("Erro: Biblioteca Excel (xlsx-js-style) não foi carregada com sucesso.");
         return;
@@ -1181,7 +1181,7 @@ function exportToStyledExcel(headers, rows, filename) {
 }
 
 // Tornar o exportador genérico disponível na janela global para reuso
-window.exportToStyledExcel = exportToStyledExcel;
+window.gestaoOs_exportToStyledExcel = gestaoOs_exportToStyledExcel;
 
 // ── Exportar Excel da Lista de OSs ───────────────────────────────────────────
 function exportGestaoOsOSListXLSX() {
@@ -1199,9 +1199,9 @@ function exportGestaoOsOSListXLSX() {
         const src = gestao_osFilteredData.filter(r => String(r.fase_atual_de_para || '').toUpperCase().trim() === 'APROVADO' && r.os && r.os !== '-');
         const m = {};
         src.forEach(r => {
-            if (!m[r.os]) m[r.os] = { os: r.os, categoria: r.categoria || '-', pg: r.projeto_gerencial || '-', cidade: r.cidade || '-', uf: r.uf || '-', fa: r.fase_atual || '-', fp: r.fase_atual_de_para || '-', da: r.data_aprovacao || '-', v: 0, d: calculateOSAge(r.data_aprovacao) };
+            if (!m[r.os]) m[r.os] = { os: r.os, categoria: r.categoria || '-', pg: r.projeto_gerencial || '-', cidade: r.cidade || '-', uf: r.uf || '-', fa: r.fase_atual || '-', fp: r.fase_atual_de_para || '-', da: r.data_aprovacao || '-', v: 0, d: gestaoOs_calculateOSAge(r.data_aprovacao) };
             m[r.os].v += (r.valor_total || 0);
-            if (r.data_aprovacao && r.data_aprovacao !== '-' && (!m[r.os].da || r.data_aprovacao < m[r.os].da)) { m[r.os].da = r.data_aprovacao; m[r.os].d = calculateOSAge(r.data_aprovacao); }
+            if (r.data_aprovacao && r.data_aprovacao !== '-' && (!m[r.os].da || r.data_aprovacao < m[r.os].da)) { m[r.os].da = r.data_aprovacao; m[r.os].d = gestaoOs_calculateOSAge(r.data_aprovacao); }
         });
         rows = Object.values(m).sort((a, b) => (a.da || '').localeCompare(b.da || '')).map(o => [o.os, o.categoria, o.pg, o.cidade, o.uf, fmtD(o.da), o.d >= 0 ? o.d : '-', o.fa, o.fp]);
     } else {
@@ -1210,15 +1210,15 @@ function exportGestaoOsOSListXLSX() {
         const src = gestao_osFilteredData.filter(r => (!r.data_aprovacao || r.data_aprovacao === '-') && r.os && r.os !== '-');
         const m = {};
         src.forEach(r => {
-            if (!m[r.os]) m[r.os] = { os: r.os, categoria: r.categoria || '-', pg: r.projeto_gerencial || '-', cidade: r.cidade || '-', uf: r.uf || '-', fa: r.fase_atual || '-', fp: r.fase_atual_de_para || '-', dc: r.data_cadastro, dm: r.data_inclusao_lpu || '-', v: 0, ag: calculateOSAge(r.data_cadastro) };
+            if (!m[r.os]) m[r.os] = { os: r.os, categoria: r.categoria || '-', pg: r.projeto_gerencial || '-', cidade: r.cidade || '-', uf: r.uf || '-', fa: r.fase_atual || '-', fp: r.fase_atual_de_para || '-', dc: r.data_cadastro, dm: r.data_inclusao_lpu || '-', v: 0, ag: gestaoOs_calculateOSAge(r.data_cadastro) };
             m[r.os].v += (r.valor_total || 0);
-            if (r.data_cadastro && (!m[r.os].dc || r.data_cadastro < m[r.os].dc)) { m[r.os].dc = r.data_cadastro; m[r.os].ag = calculateOSAge(r.data_cadastro); }
+            if (r.data_cadastro && (!m[r.os].dc || r.data_cadastro < m[r.os].dc)) { m[r.os].dc = r.data_cadastro; m[r.os].ag = gestaoOs_calculateOSAge(r.data_cadastro); }
             if (r.data_inclusao_lpu && r.data_inclusao_lpu !== '-' && (!m[r.os].dm || m[r.os].dm === '-' || r.data_inclusao_lpu < m[r.os].dm)) { m[r.os].dm = r.data_inclusao_lpu; }
         });
         rows = Object.values(m).sort((a, b) => (a.dc || '').localeCompare(b.dc || '')).map(o => [o.os, o.categoria, o.pg, o.cidade, o.uf, fmtD(o.dc), fmtD(o.dm), o.ag, o.fa, o.fp]);
     }
 
-    exportToStyledExcel(headers, rows, filename);
+    gestaoOs_exportToStyledExcel(headers, rows, filename);
 }
 
 // ── Renderização dos Gráficos Chart.js ──────────────────────────────────────
@@ -1238,23 +1238,23 @@ function renderGestaoOsCharts() {
     Chart.defaults.font.family = "'Outfit', 'Inter', sans-serif";
 
     // 1. Gráfico CAPEX / OPEX (Donut)
-    renderCapexOpexChart(th);
+    gestaoOs_renderCapexOpexChart(th);
 
     // 2. Gráfico Valor Mensal com/sem pedido (Barras Empilhadas)
-    renderMonthlySplitChart(th);
+    gestaoOs_renderMonthlySplitChart(th);
 
     // 3. Gráfico Atividade (Barras Horizontais)
-    renderHorizontalChart('gestao_os-activity-chart', 'tipo_atividade', 'activity', th, null);
+    gestaoOs_renderHorizontalChart('gestao_os-activity-chart', 'tipo_atividade', 'activity', th, null);
 
     // 4. Gráfico Itens (Barras Horizontais - Todos os itens com scroll)
-    renderHorizontalChart('gestao_os-item-chart', 'item_descritivo', 'item', th, null);
+    gestaoOs_renderHorizontalChart('gestao_os-item-chart', 'item_descritivo', 'item', th, null);
 
     // 5. Gráfico Fase Atual Original (Barras Horizontais)
-    renderHorizontalChart('gestao_os-fase-atual-chart', 'fase_atual', 'faseAtual', th, null);
+    gestaoOs_renderHorizontalChart('gestao_os-fase-atual-chart', 'fase_atual', 'faseAtual', th, null);
 }
 
 // Gráfico CAPEX/OPEX
-function renderCapexOpexChart(th) {
+function gestaoOs_renderCapexOpexChart(th) {
     const canvas = document.getElementById('gestao_os-capex-opex-chart');
     if (!canvas) return;
 
@@ -1348,7 +1348,7 @@ function renderCapexOpexChart(th) {
 
 
 // Gráfico Valor Mensal (Pedido Emitido vs Sem Aprovação vs Aprovado Aguardando Pedido) - Barras Empilhadas
-function renderMonthlySplitChart(th) {
+function gestaoOs_renderMonthlySplitChart(th) {
     const canvas = document.getElementById('gestao_os-monthly-split-chart');
     if (!canvas) return;
 
@@ -1594,7 +1594,7 @@ function renderMonthlySplitChart(th) {
 }
 
 // Helper genérico para Gráficos Horizontais de Top valores
-function renderHorizontalChart(canvasId, fieldName, chartKey, th, limit = 5) {
+function gestaoOs_renderHorizontalChart(canvasId, fieldName, chartKey, th, limit = 5) {
     const canvas = document.getElementById(canvasId);
     if (!canvas) return;
 
@@ -1986,7 +1986,7 @@ function exportGestaoOsXLSX() {
         ]);
 
         const filename = `RELATORIO_GESTAO_OS_${new Date().toISOString().substring(0, 10)}.xlsx`;
-        exportToStyledExcel(headers, rows, filename);
+        gestaoOs_exportToStyledExcel(headers, rows, filename);
     } catch (err) {
         console.error("Erro ao exportar Excel:", err);
     }
