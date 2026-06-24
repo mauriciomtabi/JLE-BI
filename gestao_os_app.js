@@ -35,7 +35,7 @@ let gestao_osClickFilters = {
 
 // Data base para o cálculo de envelhecimento (Aging)
 // Utiliza a data de geração da base de dados se disponível, ou a data de hoje
-let baseAgingDate = new Date();
+let gestaoOs_baseAgingDate = new Date();
 
 // ── Inicialização ────────────────────────────────────────────────────────────
 function initGestaoOs() {
@@ -48,7 +48,7 @@ function initGestaoOs() {
         // Definir a data base do aging com base na data de geração do arquivo
         if (typeof window.COBRANCA_METADATA !== 'undefined' && window.COBRANCA_METADATA.generated_at) {
             const genDateParts = window.COBRANCA_METADATA.generated_at.split(' ')[0].split('-');
-            baseAgingDate = new Date(genDateParts[0], genDateParts[1] - 1, genDateParts[2]);
+            gestaoOs_baseAgingDate = new Date(genDateParts[0], genDateParts[1] - 1, genDateParts[2]);
         }
 
         gestao_osFilteredData = [...COBRANCA_DATA];
@@ -239,7 +239,7 @@ function calculateOSAge(dateStr) {
         const parts = dateStr.split('-');
         if (parts.length !== 3) return -1;
         const cadDate = new Date(parts[0], parts[1] - 1, parts[2]);
-        const diff = baseAgingDate - cadDate;
+        const diff = gestaoOs_baseAgingDate - cadDate;
         return Math.max(0, Math.floor(diff / (1000 * 60 * 60 * 24)));
     } catch {
         return -1;
