@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BI JLE Telecom</title>
-    <meta name="description" content="Dashboard de Gestão e Análise de Indicadores.">
+    <meta name="description" content="Dashboard de Gest├úo e An├ílise de Indicadores.">
     
     <!-- Open Graph / Facebook / WhatsApp / Telegram -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://jle-bi.vercel.app/">
     <meta property="og:title" content="BI JLE Telecom">
-    <meta property="og:description" content="Dashboard de Gestão e Análise de Indicadores.">
+    <meta property="og:description" content="Dashboard de Gest├úo e An├ílise de Indicadores.">
     <meta property="og:image" content="https://jle-bi.vercel.app/logo.png">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="512">
@@ -21,7 +21,7 @@
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://jle-bi.vercel.app/">
     <meta property="twitter:title" content="BI JLE Telecom">
-    <meta property="twitter:description" content="Dashboard de Gestão e Análise de Indicadores.">
+    <meta property="twitter:description" content="Dashboard de Gest├úo e An├ílise de Indicadores.">
     <meta property="twitter:image" content="https://jle-bi.vercel.app/logo.png">
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="favicon.png">
@@ -53,7 +53,7 @@
 
     <!-- SIDEBAR -->
     <aside class="sidebar" id="dashboard-sidebar" style="display: none;">
-        <!-- Botão de Colapso Flutuante -->
+        <!-- Bot├úo de Colapso Flutuante -->
         <button class="sidebar-toggle-btn" onclick="toggleSidebar()" id="sidebar-toggle-btn">
             <i class="fa-solid fa-chevron-left" id="sidebar-toggle-icon"></i>
         </button>
@@ -65,8 +65,8 @@
         </div>
         
         <nav class="nav-menu">
-                        <a class="nav-item" id="nav-cobranca" onclick="switchView('cobranca')" style="display:none;">
-                <i class="fa-solid fa-file-invoice-dollar"></i> <span>Analítico Claro</span>
+            <a class="nav-item" id="nav-cobranca" onclick="switchView('cobranca')" style="display:none;">
+                <i class="fa-solid fa-file-invoice-dollar"></i> <span>Anal├¡tico Claro</span>
             </a>
             <a class="nav-item" id="nav-gestao_os" onclick="switchView('gestao_os')" style="display:none;">
                 <i class="fa-solid fa-clipboard-list"></i> <span>Gestão de OS</span>
@@ -76,7 +76,7 @@
             </a>
 
             <a class="nav-item" id="nav-veiculos" onclick="switchView('veiculos')" style="display:none;">
-                <i class="fa-solid fa-car"></i> <span>Veículos</span>
+                <i class="fa-solid fa-car"></i> <span>Ve├¡culos</span>
             </a>
             <a class="nav-item" id="nav-admin" onclick="switchView('admin')" style="display:none;">
                 <i class="fa-solid fa-shield-halved"></i> <span>Admin</span>
@@ -84,7 +84,7 @@
         </nav>
         
         <div class="sidebar-footer">
-            <!-- Usuário Logado -->
+            <!-- Usu├írio Logado -->
             <div class="user-profile-badge" id="user-profile-info-box">
                 <i class="fa-solid fa-circle-user"></i>
                 <div class="user-profile-info">
@@ -115,7 +115,7 @@
         <header>
             <div class="header-title">
                 <h1 id="view-title">Dashboard Financeiro</h1>
-                <p id="view-subtitle">Dashboard de Gestão e Análise de Indicadores.</p>
+                <p id="view-subtitle">Dashboard de Gest├úo e An├ílise de Indicadores.</p>
             </div>
             <div class="last-update-badge">
                 <i class="fa-solid fa-clock"></i> Atualizado: <span id="data-timestamp">N/D</span>
@@ -134,19 +134,19 @@
                 <select id="filter-banco" onchange="applyFilters()">
                     <option value="ALL">Todos os Bancos</option>
                     <option value="Bradesco">Bradesco</option>
-                    <option value="Sicoob Confiança">Sicoob Confiança</option>
-                    <option value="Sicoob MaxiCrédito">Sicoob MaxiCrédito</option>
-                    <option value="Cartão de Crédito">Cartão de Crédito</option>
+                    <option value="Sicoob Confian├ºa">Sicoob Confian├ºa</option>
+                    <option value="Sicoob MaxiCr├⌐dito">Sicoob MaxiCr├⌐dito</option>
+                    <option value="Cart├úo de Cr├⌐dito">Cart├úo de Cr├⌐dito</option>
                 </select>
             </div>
             
             <div class="filter-group">
-                <label for="filter-mes">Competência / Mês</label>
+                <label for="filter-mes">Compet├¬ncia / M├¬s</label>
                 <select id="filter-mes" onchange="applyFilters()">
                     <option value="ALL">Todos os Meses</option>
                     <option value="JANEIRO">Janeiro</option>
                     <option value="FEVEREIRO">Fevereiro</option>
-                    <option value="MARÇO">Março</option>
+                    <option value="MAR├çO">Mar├ºo</option>
                     <option value="ABRIL">Abril</option>
                     <option value="MAIO">Maio</option>
                 </select>
@@ -171,7 +171,7 @@
             </div>
             
             <div class="filter-group">
-                <label for="filter-data-inicio">Data Início</label>
+                <label for="filter-data-inicio">Data In├¡cio</label>
                 <input type="date" id="filter-data-inicio" onchange="applyFilters()">
             </div>
 
@@ -179,7 +179,7 @@
                 <label for="filter-data-fim">Data Fim</label>
                 <div style="display: flex; gap: 8px; align-items: center; width: 100%;">
                     <input type="date" id="filter-data-fim" onchange="applyFilters()" style="flex-grow: 1;">
-                    <button onclick="clearDateRange()" title="Limpar período" style="background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 12px; color: var(--text-secondary); cursor: pointer; transition: all 0.2s ease;" onmouseover="this.style.borderColor='var(--color-primary)'; this.style.color='var(--text-primary)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-secondary)'">
+                    <button onclick="clearDateRange()" title="Limpar per├¡odo" style="background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 12px; color: var(--text-secondary); cursor: pointer; transition: all 0.2s ease;" onmouseover="this.style.borderColor='var(--color-primary)'; this.style.color='var(--text-primary)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-secondary)'">
                         <i class="fa-solid fa-eraser"></i>
                     </button>
                 </div>
@@ -188,26 +188,26 @@
 
         <!-- VIEW 1: DASHBOARD OVERVIEW -->
         <div id="view-dashboard-container" class="view-panel">
-            <!-- Banner de Instalação para iOS -->
+            <!-- Banner de Instala├º├úo para iOS -->
             <div class="ios-install-banner" id="ios-install-banner" style="display: none;">
                 <div class="ios-install-content">
                     <i class="fa-solid fa-circle-info" style="color: var(--color-secondary); font-size: 15px;"></i>
-                    <span>Para instalar no seu iPhone: toque em <i class="fa-solid fa-arrow-up-from-bracket"></i> (Compartilhar) e selecione <strong>"Adicionar à Tela de Início"</strong>.</span>
+                    <span>Para instalar no seu iPhone: toque em <i class="fa-solid fa-arrow-up-from-bracket"></i> (Compartilhar) e selecione <strong>"Adicionar ├á Tela de In├¡cio"</strong>.</span>
                 </div>
                 <button class="ios-install-close" onclick="closeIosBanner()">&times;</button>
             </div>
 
-            <!-- NAVEGAÇÃO INTERNA EM ABAS (TAB SYSTEM) -->
+            <!-- NAVEGA├ç├âO INTERNA EM ABAS (TAB SYSTEM) -->
             <div class="dashboard-tabs">
                 <button class="tab-btn active" id="tab-btn-indicators" onclick="switchDashboardTab('indicators')">
                     <i class="fa-solid fa-chart-column"></i> Indicadores
                 </button>
                 <button class="tab-btn" id="tab-btn-transactions" onclick="switchDashboardTab('transactions')">
-                    <i class="fa-solid fa-list-ol"></i> Lançamentos
+                    <i class="fa-solid fa-list-ol"></i> Lan├ºamentos
                 </button>
             </div>
 
-            <!-- SUB-VIEW 1: INDICADORES (KPIs, Bancos e Gráficos) -->
+            <!-- SUB-VIEW 1: INDICADORES (KPIs, Bancos e Gr├íficos) -->
             <div id="subview-indicators" class="dashboard-subview">
                 <!-- KPI Cards -->
             <div class="kpi-container">
@@ -216,8 +216,8 @@
                         <span class="kpi-label">Total de Entradas</span>
                         <h3 class="kpi-value" id="kpi-entradas">R$ 0,00</h3>
                         <div class="kpi-analytics">
-                            <span class="kpi-subvalue" id="sub-entradas-diaria">Média: R$ 0,00/dia</span>
-                            <span class="kpi-subvalue" id="sub-entradas-comp">vs. Mês Ant.: N/D</span>
+                            <span class="kpi-subvalue" id="sub-entradas-diaria">M├⌐dia: R$ 0,00/dia</span>
+                            <span class="kpi-subvalue" id="sub-entradas-comp">vs. M├¬s Ant.: N/D</span>
                         </div>
                     </div>
                     <div class="kpi-icon-container">
@@ -227,10 +227,10 @@
                 
                 <div class="kpi-card outflows">
                     <div class="kpi-info">
-                        <span class="kpi-label">Total de Saídas</span>
+                        <span class="kpi-label">Total de Sa├¡das</span>
                         <h3 class="kpi-value" id="kpi-saidas">R$ 0,00</h3>
                         <div class="kpi-analytics">
-                            <span class="kpi-subvalue" id="sub-saidas-diaria">Média: R$ 0,00/dia</span>
+                            <span class="kpi-subvalue" id="sub-saidas-diaria">M├⌐dia: R$ 0,00/dia</span>
                             <span class="kpi-subvalue" id="sub-saidas-comp">Comprometimento: 0,0%</span>
                         </div>
                     </div>
@@ -244,7 +244,7 @@
                         <span class="kpi-label">Saldo Final Consolidado</span>
                         <h3 class="kpi-value" id="kpi-saldo-final">R$ 0,00</h3>
                         <div class="kpi-analytics">
-                            <span class="kpi-subvalue" id="sub-saldo-sobra">Eficiência: 0,0%</span>
+                            <span class="kpi-subvalue" id="sub-saldo-sobra">Efici├¬ncia: 0,0%</span>
                         </div>
                     </div>
                     <div class="kpi-icon-container">
@@ -253,7 +253,7 @@
                 </div>
             </div>
             
-            <!-- Seção de Contas Bancárias (Lado a Lado) -->
+            <!-- Se├º├úo de Contas Banc├írias (Lado a Lado) -->
             <div class="banks-grid" id="banks-balance-list">
                 <!-- Loaded dynamically -->
             </div>
@@ -263,7 +263,7 @@
                 <div class="chart-card">
                     <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;">
                         <div class="chart-title">
-                            <h2 id="evolution-chart-title">Evolução de Fluxo Mensal</h2>
+                            <h2 id="evolution-chart-title">Evolu├º├úo de Fluxo Mensal</h2>
                         </div>
                         <div class="chart-controls" id="evolution-chart-controls" style="display: flex; gap: 4px; background: rgba(0, 0, 0, 0.2); padding: 2px; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.05);">
                             <!-- Dinamicamente preenchido por renderCharts() -->
@@ -277,7 +277,7 @@
                 <div class="chart-card">
                     <div class="chart-header">
                         <div class="chart-title">
-                            <h2 id="customers-chart-title">Receita por Cliente (Cobranças)</h2>
+                            <h2 id="customers-chart-title">Receita por Cliente (Cobran├ºas)</h2>
                         </div>
                         <div id="customers-back-container"></div>
                     </div>
@@ -295,7 +295,7 @@
                             <h2 id="categories-chart-title">Categorias</h2>
                         </div>
                         <div class="chart-toggle-buttons" style="display: flex; background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 20px; padding: 2px;">
-                            <button id="btn-toggle-saidas" class="toggle-chart-btn" onclick="setCategoryFlux('Saída')" style="background-color: var(--color-secondary); border: none; color: white; padding: 6px 14px; font-size: 11px; font-weight: 600; border-radius: 18px; cursor: pointer; transition: all 0.2s ease;">Saídas</button>
+                            <button id="btn-toggle-saidas" class="toggle-chart-btn" onclick="setCategoryFlux('Sa├¡da')" style="background-color: var(--color-secondary); border: none; color: white; padding: 6px 14px; font-size: 11px; font-weight: 600; border-radius: 18px; cursor: pointer; transition: all 0.2s ease;">Sa├¡das</button>
                             <button id="btn-toggle-entradas" class="toggle-chart-btn" onclick="setCategoryFlux('Entrada')" style="background-color: transparent; border: none; color: var(--text-secondary); padding: 6px 14px; font-size: 11px; font-weight: 600; border-radius: 18px; cursor: pointer; transition: all 0.2s ease;">Entradas</button>
                         </div>
                         <div id="categories-back-container"></div>
@@ -310,7 +310,7 @@
                 <div class="chart-card">
                     <div class="chart-header">
                         <div class="chart-title">
-                            <h2>Distribuição por UF</h2>
+                            <h2>Distribui├º├úo por UF</h2>
                         </div>
                     </div>
                     <div class="chart-body map-chart-body" style="overflow: hidden !important;">
@@ -322,13 +322,13 @@
             </div> <!-- Fim de charts-grid -->
         </div> <!-- Fim de subview-indicators -->
             
-            <!-- SUB-VIEW 2: LANÇAMENTOS (Tabela Analítica) -->
+            <!-- SUB-VIEW 2: LAN├çAMENTOS (Tabela Anal├¡tica) -->
             <div id="subview-transactions" class="dashboard-subview" style="display: none;">
                 <div class="data-table-card">
                     <div class="table-controls">
                         <div class="search-wrapper">
                             <i class="fa-solid fa-magnifying-glass"></i>
-                            <input type="text" id="table-search" placeholder="Buscar por descrição ou categoria..." oninput="handleSearch()">
+                            <input type="text" id="table-search" placeholder="Buscar por descri├º├úo ou categoria..." oninput="handleSearch()">
                         </div>
                         <div class="table-actions">
                             <button class="btn-secondary" onclick="exportToXLSX()">
@@ -343,12 +343,12 @@
                                 <tr>
                                     <th>Data</th>
                                     <th>Banco</th>
-                                    <th>Competência</th>
+                                    <th>Compet├¬ncia</th>
                                     <th>UF</th>
                                     <th>Origem</th>
                                     <th>Fluxo</th>
                                     <th>Categoria</th>
-                                    <th>Descrição</th>
+                                    <th>Descri├º├úo</th>
                                     <th style="text-align: right;">Valor</th>
                                     <th>Meio de Pagamento</th>
                                 </tr>
@@ -360,7 +360,7 @@
                     </div>
                     
                     <div class="pagination">
-                        <span class="pagination-info" id="pagination-info">Mostrando 0-0 de 0 transações</span>
+                        <span class="pagination-info" id="pagination-info">Mostrando 0-0 de 0 transa├º├╡es</span>
                         <div class="pagination-buttons">
                             <button class="pagination-btn" id="pagination-prev" onclick="changePage(-1)">
                                 <i class="fa-solid fa-chevron-left"></i>
@@ -378,37 +378,37 @@
         <div id="view-admin-container" class="view-panel" style="display: none;">
             <div class="admin-panel-grid">
 
-                <!-- Card: Páginas Padrão para Novos Usuários -->
+                <!-- Card: P├íginas Padr├úo para Novos Usu├írios -->
                 <div class="admin-card">
                     <div class="admin-card-header">
                         <div class="admin-card-icon" style="background: linear-gradient(135deg, rgba(0,79,113,0.2), rgba(0,119,170,0.3));">
                             <i class="fa-solid fa-sliders" style="color: var(--color-primary-light);"></i>
                         </div>
                         <div>
-                            <h3>Acesso Padrão</h3>
-                            <p class="admin-card-subtitle">Páginas habilitadas para novos usuários</p>
+                            <h3>Acesso Padr├úo</h3>
+                            <p class="admin-card-subtitle">P├íginas habilitadas para novos usu├írios</p>
                         </div>
                     </div>
                     <div class="admin-pages-checkboxes" id="default-pages-list">
                         <!-- Populated by JS -->
                     </div>
                     <button class="admin-save-btn" onclick="saveDefaultPages()">
-                        <i class="fa-solid fa-save"></i> Salvar Padrão
+                        <i class="fa-solid fa-save"></i> Salvar Padr├úo
                     </button>
                 </div>
 
-                <!-- Card: Gerenciar Usuários -->
+                <!-- Card: Gerenciar Usu├írios -->
                 <div class="admin-card admin-card-wide">
                     <div class="admin-card-header">
                         <div class="admin-card-icon" style="background: linear-gradient(135deg, rgba(243,159,24,0.15), rgba(255,184,61,0.25));">
                             <i class="fa-solid fa-users-gear" style="color: var(--color-secondary);"></i>
                         </div>
                         <div>
-                            <h3>Usuários e Permissões</h3>
+                            <h3>Usu├írios e Permiss├╡es</h3>
                             <p class="admin-card-subtitle">Gerencie o acesso de cada colaborador</p>
                         </div>
                         <button class="admin-add-btn" onclick="openAddUserModal()" style="margin-left:auto;">
-                            <i class="fa-solid fa-plus"></i> Adicionar Usuário
+                            <i class="fa-solid fa-plus"></i> Adicionar Usu├írio
                         </button>
                     </div>
                     <div class="admin-table-container">
@@ -417,9 +417,9 @@
                                 <tr>
                                     <th>E-mail</th>
                                     <th>Perfil</th>
-                                    <th>Páginas Permitidas</th>
-                                    <th>Último Acesso</th>
-                                    <th>Ações</th>
+                                    <th>P├íginas Permitidas</th>
+                                    <th>├Ültimo Acesso</th>
+                                    <th>A├º├╡es</th>
                                 </tr>
                             </thead>
                             <tbody id="admin-users-tbody">
@@ -437,12 +437,12 @@
             <!-- Horizontal Filter Panel -->
             <section class="filter-bar-veiculos" id="veiculos-filters-container">
                 <div class="filter-group">
-                    <label for="filter-veiculos-month">Competência / Mês</label>
+                    <label for="filter-veiculos-month">Compet├¬ncia / M├¬s</label>
                     <select id="filter-veiculos-month" onchange="applyVeiculosFilters()">
                         <option value="all">Todos os Meses</option>
                         <option value="JANEIRO">Janeiro/2026</option>
                         <option value="FEVEREIRO">Fevereiro/2026</option>
-                        <option value="MARCO">Março/2026</option>
+                        <option value="MARCO">Mar├ºo/2026</option>
                         <option value="ABRIL">Abril/2026</option>
                         <option value="MAIO">Maio/2026</option>
                     </select>
@@ -454,12 +454,12 @@
                         <option value="all">Todas as UFs</option>
                         <option value="SC">Santa Catarina (SC)</option>
                         <option value="RS">Rio Grande do Sul (RS)</option>
-                        <option value="PR">Paraná (PR)</option>
+                        <option value="PR">Paran├í (PR)</option>
                     </select>
                 </div>
 
                 <div class="filter-group">
-                    <label for="filter-veiculos-fuel">Categoria / Combustível</label>
+                    <label for="filter-veiculos-fuel">Categoria / Combust├¡vel</label>
                     <select id="filter-veiculos-fuel" onchange="applyVeiculosFilters()">
                         <option value="all">Todas as Categorias</option>
                         <!-- Generated dynamically -->
@@ -467,7 +467,7 @@
                 </div>
 
                 <div class="filter-group">
-                    <label for="filter-veiculos-data-inicio">Data Início</label>
+                    <label for="filter-veiculos-data-inicio">Data In├¡cio</label>
                     <input type="date" id="filter-veiculos-data-inicio" onchange="applyVeiculosFilters()">
                 </div>
 
@@ -488,7 +488,7 @@
                 </div>
 
                 <div class="filter-group">
-                    <label for="filter-veiculos-plate">Veículo / Placa</label>
+                    <label for="filter-veiculos-plate">Ve├¡culo / Placa</label>
                     <input type="text" id="filter-veiculos-plate" oninput="applyVeiculosFilters()" placeholder="Todas as Placas" list="veiculos-plate-list">
                     <datalist id="veiculos-plate-list"></datalist>
                 </div>
@@ -496,7 +496,7 @@
 
             </section>
 
-            <!-- Sub Tab Selector (Indicadores / Lançamentos) -->
+            <!-- Sub Tab Selector (Indicadores / Lan├ºamentos) -->
             <div class="sub-tabs-container">
                 <button class="sub-tab tab-btn active" data-tab="indicators">
                     <i class="fa-solid fa-chart-column"></i>
@@ -504,21 +504,21 @@
                 </button>
                 <button class="sub-tab tab-btn" data-tab="details">
                     <i class="fa-solid fa-list"></i>
-                    <span>Lançamentos</span>
+                    <span>Lan├ºamentos</span>
                 </button>
             </div>
 
             <!-- Sub Tab Pane: Indicadores -->
             <div id="subview-veiculos-indicators" class="subtab-pane active">
 
-                <!-- KPI Cards (mesmo padrão do Financeiro) -->
+                <!-- KPI Cards (mesmo padr├úo do Financeiro) -->
                 <div class="kpi-container">
                     <div class="kpi-card inflows">
                         <div class="kpi-info">
                             <span class="kpi-label">Total de Gastos de Frota</span>
                             <h3 class="kpi-value" id="kpi-veiculos-total">R$ 0,00</h3>
                             <div class="kpi-analytics">
-                                <span class="kpi-subvalue">Média p/ Abast.: <span id="kpi-veiculos-avg">R$ 0,00</span></span>
+                                <span class="kpi-subvalue">M├⌐dia p/ Abast.: <span id="kpi-veiculos-avg">R$ 0,00</span></span>
                             </div>
                         </div>
                         <div class="kpi-icon-container">
@@ -531,7 +531,7 @@
                             <span class="kpi-label">Total de Abastecimentos</span>
                             <h3 class="kpi-value" id="kpi-veiculos-count">0</h3>
                             <div class="kpi-analytics">
-                                <span class="kpi-subvalue">Veículos Ativos: <span id="kpi-veiculos-active-vehicles">0</span></span>
+                                <span class="kpi-subvalue">Ve├¡culos Ativos: <span id="kpi-veiculos-active-vehicles">0</span></span>
                             </div>
                         </div>
                         <div class="kpi-icon-container">
@@ -555,18 +555,18 @@
 
 
 
-                <!-- Charts Row 1: Evolução + Top 3 Consumo -->
+                <!-- Charts Row 1: Evolu├º├úo + Top 3 Consumo -->
                 <div class="charts-grid">
                     <!-- Evolution Chart -->
                     <div class="chart-card">
                         <div class="chart-header" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
                             <div class="chart-title">
-                                <h2 id="veiculos-evolution-title">Evolução de Gastos de Frota (Mensal)</h2>
+                                <h2 id="veiculos-evolution-title">Evolu├º├úo de Gastos de Frota (Mensal)</h2>
                             </div>
                             <div class="chart-controls" style="display:flex;gap:4px;background:rgba(0,0,0,0.2);padding:2px;border-radius:6px;border:1px solid rgba(255,255,255,0.05);">
                                 <button class="btn-chart-sub btn-granularidade-veiculos active" data-gran="mensal">Mensal</button>
                                 <button class="btn-chart-sub btn-granularidade-veiculos" data-gran="semanal">Semanal</button>
-                                <button class="btn-chart-sub btn-granularidade-veiculos" data-gran="diario">Diário</button>
+                                <button class="btn-chart-sub btn-granularidade-veiculos" data-gran="diario">Di├írio</button>
                             </div>
                         </div>
                         <div class="chart-body" style="height: 390px;">
@@ -574,7 +574,7 @@
                         </div>
                     </div>
 
-                    <!-- Top 3 Motoristas e Veículos com maior consumo -->
+                    <!-- Top 3 Motoristas e Ve├¡culos com maior consumo -->
                     <div class="chart-card top-consumos-card">
                         <div class="chart-header">
                             <div class="chart-title">
@@ -587,32 +587,32 @@
                                     <i class="fa-solid fa-user-tie" style="color: var(--color-primary-light); margin-right: 6px;"></i>Motoristas
                                 </h4>
                                 <div id="top-3-drivers-container" style="display: flex; flex-direction: column; gap: 8px;">
-                                    <!-- Dinâmico -->
+                                    <!-- Din├ómico -->
                                 </div>
                             </div>
                             <div style="width: 100%;">
                                 <h4 style="font-size: 11px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px; font-weight: 700; letter-spacing: 0.5px; border-bottom: 1px solid var(--border-color); padding-bottom: 4px;">
-                                    <i class="fa-solid fa-car" style="color: var(--color-secondary); margin-right: 6px;"></i>Veículos
+                                    <i class="fa-solid fa-car" style="color: var(--color-secondary); margin-right: 6px;"></i>Ve├¡culos
                                 </h4>
                                 <div id="top-3-vehicles-container" style="display: flex; flex-direction: column; gap: 8px;">
-                                    <!-- Dinâmico -->
+                                    <!-- Din├ómico -->
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Charts Combined: Left col [Veículos + Condutores] | Right col [Mapa UF + Preço Médio] -->
+                <!-- Charts Combined: Left col [Ve├¡culos + Condutores] | Right col [Mapa UF + Pre├ºo M├⌐dio] -->
                 <div class="vehicles-combined-layout">
 
-                    <!-- Left column: Gasto por Veículos + Gasto por Condutores -->
+                    <!-- Left column: Gasto por Ve├¡culos + Gasto por Condutores -->
                     <div class="vehicles-left-col">
 
-                        <!-- Gasto por Veículos -->
+                        <!-- Gasto por Ve├¡culos -->
                         <div class="chart-card">
                             <div class="chart-header" style="flex-wrap:wrap;gap:10px;">
                                 <div class="chart-title">
-                                    <h2 id="vehicle-chart-title">Gasto por Veículos</h2>
+                                    <h2 id="vehicle-chart-title">Gasto por Ve├¡culos</h2>
                                 </div>
                                 <div style="display:flex;align-items:center;gap:8px;">
                                     <span id="vehicle-drill-info" style="display:none;font-size:11px;font-weight:600;color:var(--color-secondary);background:rgba(243,159,24,0.12);border:1px solid rgba(243,159,24,0.3);border-radius:20px;padding:3px 12px;"></span>
@@ -650,7 +650,7 @@
 
                     </div><!-- end .vehicles-left-col -->
 
-                    <!-- Right column: Mapa UF + Preço Médio -->
+                    <!-- Right column: Mapa UF + Pre├ºo M├⌐dio -->
                     <div class="vehicles-right-col">
 
                         <!-- Mapa SVG Interativo PR/SC/RS -->
@@ -667,11 +667,11 @@
                             </div>
                         </div>
 
-                        <!-- Preço Médio por Litro (R$) -->
+                        <!-- Pre├ºo M├⌐dio por Litro (R$) -->
                         <div class="chart-card vehicles-price-card">
                             <div class="chart-header">
                                 <div class="chart-title">
-                                    <h2>Preço Médio por Litro (R$)</h2>
+                                    <h2>Pre├ºo M├⌐dio por Litro (R$)</h2>
                                 </div>
                             </div>
                             <div class="chart-body price-chart-body">
@@ -684,16 +684,16 @@
                 </div><!-- end .vehicles-combined-layout -->
             </div>
 
-            <!-- Sub Tab Pane: Lançamentos -->
+            <!-- Sub Tab Pane: Lan├ºamentos -->
             <div id="subview-veiculos-details" class="subtab-pane">
                 <section class="table-section chart-card">
                     <div class="table-header">
                         <div class="table-title">
-                            <h3>Lançamentos de Abastecimento</h3>
-                            <p>Visualização de todas as transações registradas</p>
+                            <h3>Lan├ºamentos de Abastecimento</h3>
+                            <p>Visualiza├º├úo de todas as transa├º├╡es registradas</p>
                         </div>
                         <div class="table-search">
-                            <input type="text" id="table-veiculos-search" placeholder="Pesquisar por motorista, placa, UF, combustível...">
+                            <input type="text" id="table-veiculos-search" placeholder="Pesquisar por motorista, placa, UF, combust├¡vel...">
                         </div>
                     </div>
                     
@@ -701,15 +701,15 @@
                         <table class="data-table">
                             <thead>
                                 <tr>
-                                    <th data-sort="date" class="sort-asc">Data Transação</th>
+                                    <th data-sort="date" class="sort-asc">Data Transa├º├úo</th>
                                     <th data-sort="plate">Placa</th>
                                     <th data-sort="model">Modelo</th>
                                     <th data-sort="driver">Motorista</th>
                                     <th data-sort="uf">UF</th>
                                     <th data-sort="value" class="text-right">Valor</th>
                                     <th data-sort="liters" class="text-right">Litros</th>
-                                    <th data-sort="vlLiter" class="text-right">Preço/L</th>
-                                    <th data-sort="fuel">Combustível</th>
+                                    <th data-sort="vlLiter" class="text-right">Pre├ºo/L</th>
+                                    <th data-sort="fuel">Combust├¡vel</th>
                                     <th data-sort="km" class="text-right">Km</th>
                                 </tr>
                             </thead>
@@ -721,13 +721,13 @@
                     
                     <div class="table-footer">
                         <div class="table-info">
-                            Mostrando <span id="table-veiculos-row-start">1</span> a <span id="table-veiculos-row-end">50</span> de <span id="table-veiculos-row-total">2020</span> lançamentos
+                            Mostrando <span id="table-veiculos-row-start">1</span> a <span id="table-veiculos-row-end">50</span> de <span id="table-veiculos-row-total">2020</span> lan├ºamentos
                         </div>
                         <div class="table-pagination">
                             <button class="btn-icon" id="btn-veiculos-page-prev" disabled>
                                 <i class="fa-solid fa-chevron-left"></i>
                             </button>
-                            <span class="page-indicator" id="veiculos-page-indicator">Pág. 1 / 41</span>
+                            <span class="page-indicator" id="veiculos-page-indicator">P├íg. 1 / 41</span>
                             <button class="btn-icon" id="btn-veiculos-page-next">
                                 <i class="fa-solid fa-chevron-right"></i>
                             </button>
@@ -767,14 +767,14 @@
                     <label for="cobranca-filter-fase">Fase (De/Para)</label>
                     <select id="cobranca-filter-fase" onchange="applyCobrancaFilters()">
                         <option value="">Todas as Fases</option>
-                        <option value="EM EXECUÇÃO">Em Execução</option>
+                        <option value="EM EXECU├ç├âO">Em Execu├º├úo</option>
                         <option value="EXECUTADO">Executado</option>
                         <option value="APROVADO">Aprovado</option>
                         <option value="PEDIDO EMITIDO">Pedido Emitido</option>
                     </select>
                 </div>
                 <div class="filter-group">
-                    <label for="cobranca-filter-data-inicio">Data Início</label>
+                    <label for="cobranca-filter-data-inicio">Data In├¡cio</label>
                     <input type="date" id="cobranca-filter-data-inicio" onchange="applyCobrancaFilters()">
                 </div>
                 <div class="filter-group">
@@ -788,13 +788,13 @@
                 </div>
             </section>
 
-            <!-- Sub Tab Selector (Indicadores / Relatório) -->
+            <!-- Sub Tab Selector (Indicadores / Relat├│rio) -->
             <div class="dashboard-tabs" id="cobranca-sub-tabs">
                 <button class="tab-btn active" id="cobranca-tab-btn-indicators" onclick="switchCobrancaTab('indicators')">
                     <i class="fa-solid fa-chart-column"></i> Indicadores
                 </button>
                 <button class="tab-btn" id="cobranca-tab-btn-report" onclick="switchCobrancaTab('report')">
-                    <i class="fa-solid fa-table"></i> Relatório
+                    <i class="fa-solid fa-table"></i> Relat├│rio
                 </button>
             </div>
 
@@ -821,7 +821,7 @@
                             </button>
                         </div>
                         <div id="cobranca-monthly-total-sem-aprovacao" style="font-size: 13px; font-weight: 600; color: #ff5722; background: rgba(255,87,34,0.08); padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(255,87,34,0.18);">
-                            Sem Aprovação: R$ 0,00
+                            Sem Aprova├º├úo: R$ 0,00
                         </div>
                     </div>
                     <div class="chart-body" style="height: 360px; position: relative; padding: 16px 16px 8px 16px;">
@@ -834,26 +834,26 @@
                     <!-- Map Card -->
                     <div class="chart-card map-card">
                         <div class="chart-header">
-                            <span class="chart-title">Distribuição por UF</span>
+                            <span class="chart-title">Distribui├º├úo por UF</span>
                         </div>
                         <div class="chart-body" id="cobranca-uf-map-container" style="height: 380px; position: relative;">
                             <!-- SVG Map and Compact Cards -->
                         </div>
                     </div>
 
-                    <!-- OSs sem aprovação / aprovadas aguardando pedido card -->
+                    <!-- OSs sem aprova├º├úo / aprovadas aguardando pedido card -->
                     <div class="chart-card">
                         <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
-                            <span class="chart-title" id="cobranca-os-list-title">OSs Sem Aprovação (Aging)</span>
+                            <span class="chart-title" id="cobranca-os-list-title">OSs Sem Aprova├º├úo (Aging)</span>
                             <div style="display:flex;align-items:center;gap:8px;"><div class="os-list-toggle" id="cobranca-os-list-toggle">
                                 <button class="os-list-toggle-btn active" id="btn-os-sem-aprovacao" onclick="switchOSListMode('sem-aprovacao')">
-                                    <i class="fa-solid fa-clock-rotate-left"></i> Sem Aprovação
+                                    <i class="fa-solid fa-clock-rotate-left"></i> Sem Aprova├º├úo
                                 </button>
                                 <button class="os-list-toggle-btn" id="btn-os-aprovadas" onclick="switchOSListMode('aprovadas')">
                                     <i class="fa-solid fa-circle-check"></i> Aprovadas Aguardando Pedido
                                 </button>
                             </div>
-                                <button class="os-list-export-btn" onclick="exportOSListXLSX()" title="Baixar relatório Excel"><i class="fa-solid fa-file-excel"></i></button>
+                                <button class="os-list-export-btn" onclick="exportOSListXLSX()" title="Baixar relat├│rio Excel"><i class="fa-solid fa-file-excel"></i></button>
                             </div>
                         </div>
                         <div class="chart-body" style="height: 380px; display: block !important; padding: 0;">
@@ -930,11 +930,11 @@
 
             </div>
 
-            <!-- Sub Tab Pane: Relatório -->
+            <!-- Sub Tab Pane: Relat├│rio -->
             <div id="subview-cobranca-report" class="subtab-pane">
                 <div class="chart-card">
                     <div class="chart-header">
-                        <span class="chart-title"><i class="fa-solid fa-table"></i> Relatório Analítico de Cobrança</span>
+                        <span class="chart-title"><i class="fa-solid fa-table"></i> Relat├│rio Anal├¡tico de Cobran├ºa</span>
                         <button class="btn-export" onclick="exportCobrancaXLSX()" title="Exportar para Excel">
                             <i class="fa-solid fa-file-excel"></i> Exportar
                         </button>
@@ -966,12 +966,12 @@
                                         <th onclick="sortCobrancaTable('objeto_do_contrato')">Objeto Contrato</th>
                                         <th onclick="sortCobrancaTable('valor_total')" style="text-align:right;">Valor Total</th>
                                         <th onclick="sortCobrancaTable('data_cadastro')">Dt. Cadastro</th>
-                                        <th onclick="sortCobrancaTable('data_aprovacao')">Dt. Aprovação</th>
+                                        <th onclick="sortCobrancaTable('data_aprovacao')">Dt. Aprova├º├úo</th>
                                         <th onclick="sortCobrancaTable('tempo_aprovacao')">Tempo Aprov.</th>
-                                        <th onclick="sortCobrancaTable('user_inclusao_medicao')">User Incl. Medição</th>
+                                        <th onclick="sortCobrancaTable('user_inclusao_medicao')">User Incl. Medi├º├úo</th>
                                         <th onclick="sortCobrancaTable('pep')">PEP</th>
-                                        <th onclick="sortCobrancaTable('numero_medicao')">Nº Medição</th>
-                                        <th onclick="sortCobrancaTable('numero_pedido')">Nº Pedido</th>
+                                        <th onclick="sortCobrancaTable('numero_medicao')">N┬║ Medi├º├úo</th>
+                                        <th onclick="sortCobrancaTable('numero_pedido')">N┬║ Pedido</th>
                                         <th onclick="sortCobrancaTable('user_pedido')">User Pedido</th>
                                         <th onclick="sortCobrancaTable('fase_atual_de_para')">Fase (De/Para)</th>
                                     </tr>
@@ -995,76 +995,8 @@
             </div>
         </div>
 
-        <!-- Modal: Adicionar/Editar Usuário -->
-        <div class="modal-overlay" id="user-permission-modal" onclick="closeUserModal(event)">
-            <div class="modal-card" style="max-width: 520px;">
-                <div class="modal-header">
-                    <h3 id="modal-user-title">Adicionar Usuário</h3>
-                    <button class="modal-close" onclick="document.getElementById('user-permission-modal').classList.remove('active')">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div style="display: flex; flex-direction: column; gap: 16px;">
-                        <div class="filter-group">
-                            <label>E-mail corporativo</label>
-                            <input type="email" id="modal-user-email" placeholder="usuario@jletelecom.com.br">
-                        </div>
-                        <div class="filter-group">
-                            <label id="modal-user-password-label">Senha de acesso</label>
-                            <input type="password" id="modal-user-password" placeholder="Digite a senha">
-                        </div>
-                        <div class="filter-group">
-                            <label>Perfil de acesso</label>
-                            <select id="modal-user-is-admin">
-                                <option value="false">Usuário Padrão</option>
-                                <option value="true">Administrador</option>
-                            </select>
-                        </div>
-                        <div class="filter-group">
-                            <label>Páginas Permitidas</label>
-                            <div class="admin-pages-checkboxes" id="modal-pages-list">
-                                <!-- Populated by JS -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div style="display: flex; gap: 12px; padding-top: 16px; border-top: 1px solid var(--border-color); margin-top: 4px;">
-                    <button class="admin-save-btn" onclick="saveUserPermission()" style="flex:1;">
-                        <i class="fa-solid fa-save"></i> Salvar
-                    </button>
-                    <button class="btn-secondary" onclick="document.getElementById('user-permission-modal').classList.remove('active')" style="flex:0 0 auto;">
-                        Cancelar
-                    </button>
-                </div>
-            </div>
-        </div>
         
-    </main>
-
-    <!-- Conteiner de Toast de Notificação -->
-    <div class="toast-container" id="toast-container"></div>
-
-    <!-- TOOLTIP DO MAPA -->
-    <div class="map-tooltip" id="map-tooltip"></div>
-
-    <!-- MODAL PARA ATUALIZAÇÃO -->
-    <div class="modal-overlay" id="update-modal" onclick="closeUpdateModal(event)">
-        <div class="modal-card" onclick="event.stopPropagation()">
-            <div class="modal-header">
-                <h3>Atualizar Base de Dados</h3>
-                <button class="modal-close" onclick="closeUpdateModal()">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p><strong>Atualização Manual Instantânea:</strong></p>
-                <p>Dê dois cliques no arquivo <strong>iniciar_dashboard.bat</strong> criado na pasta raiz deste projeto para atualizar e abrir o BI em tempo real.</p>
-                
-                <p style="border-top: 1px solid var(--border-color); padding-top: 12px; margin-top: 8px;"><strong>Atualização Automática Agendada (8h às 18h, Seg a Sex):</strong></p>
-                <p>Para configurar o Agendador de Tarefas do Windows para rodar a atualização automaticamente a cada 1 hora, dê dois cliques no arquivo <strong>configurar_agendamento.bat</strong> localizado na pasta raiz.</p>
-                <p><em>Este processo automatizado é executado em segundo plano e atualizará os dados do painel sem interferir nas suas atividades.</em></p>
-            </div>
-        </div>
-    </div>
-
-    <!-- GESTAO DE OS CONTAINER -->
+        <!-- GESTAO DE OS CONTAINER -->
         <div id="view-gestao_os-container" class="view-panel" style="display: none;">
             <!-- Filters bar -->
             <section class="filter-bar" id="gestao_os-filters-container">
@@ -1093,42 +1025,42 @@
                     <label for="gestao_os-filter-fase">Fase (De/Para)</label>
                     <select id="gestao_os-filter-fase" onchange="applyGestaoOsFilters()">
                         <option value="">Todas as Fases</option>
-                        <option value="EM EXECUÇÃO">Em Execução</option>
+                        <option value="EM EXECU├ç├âO">Em Execu├º├úo</option>
                         <option value="EXECUTADO">Executado</option>
                         <option value="APROVADO">Aprovado</option>
                         <option value="PEDIDO EMITIDO">Pedido Emitido</option>
                     </select>
                 </div>
                 <div class="filter-group">
-                    <label for="gestao_os-filter-data-inicio">Data Início</label>
+                    <label for="gestao_os-filter-data-inicio">Data In├¡cio</label>
                     <input type="date" id="gestao_os-filter-data-inicio" onchange="applyGestaoOsFilters()">
                 </div>
                 <div class="filter-group">
                     <label for="gestao_os-filter-data-fim">Data Fim</label>
                     <div style="display: flex; gap: 8px; align-items: center; width: 100%;">
                         <input type="date" id="gestao_os-filter-data-fim" onchange="applyGestaoOsFilters()" style="flex-grow: 1;">
-                        <button onclick="clearGestaoOsFilters()" title="Limpar Filtros" style="background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 12px; color: var(--text-secondary); cursor: pointer; transition: all 0.2s ease;" onmouseover="this.style.borderColor='var(--color-primary)'; this.style.color='var(--text-primary)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-secondary)'">
+                        <button onclick="clearCobrancaFilters()" title="Limpar Filtros" style="background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 12px; color: var(--text-secondary); cursor: pointer; transition: all 0.2s ease;" onmouseover="this.style.borderColor='var(--color-primary)'; this.style.color='var(--text-primary)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-secondary)'">
                             <i class="fa-solid fa-eraser"></i>
                         </button>
                     </div>
                 </div>
             </section>
 
-            <!-- Sub Tab Selector (Indicadores / Relatório) -->
+            <!-- Sub Tab Selector (Indicadores / Relat├│rio) -->
             <div class="dashboard-tabs" id="gestao_os-sub-tabs">
                 <button class="tab-btn active" id="gestao_os-tab-btn-indicators" onclick="switchGestaoOsTab('indicators')">
                     <i class="fa-solid fa-chart-column"></i> Indicadores
                 </button>
                 <button class="tab-btn" id="gestao_os-tab-btn-report" onclick="switchGestaoOsTab('report')">
-                    <i class="fa-solid fa-table"></i> Relatório
+                    <i class="fa-solid fa-table"></i> Relat├│rio
                 </button>
             </div>
 
             <!-- Sub Tab Pane: Indicadores -->
-            <div id="subview-gestao_os-indicators" class="subtab-pane active">
+            <div id="subview-cobranca-indicators" class="subtab-pane active">
                 
                 <!-- Pipeline KPI Cards Row (Top) -->
-                <div class="kpi-container gestao_os-pipeline-grid" id="gestao_os-pipeline-container">
+                <div class="kpi-container cobranca-pipeline-grid" id="gestao_os-pipeline-container">
                     <!-- Dynamically populated phase cards -->
                 </div>
 
@@ -1142,12 +1074,12 @@
                     <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
                         <div style="display: flex; align-items: center; gap: 12px;">
                             <span class="chart-title">Valor Mensal (Com Pedido vs Sem Pedido)</span>
-                            <button id="gestao_os-drilldown-back-btn" style="display: none; align-items: center; gap: 6px; padding: 4px 12px; font-size: 11px; font-weight: 700; color: #fff; background: #004f71; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; cursor: pointer; transition: all 0.2s ease;" onclick="resetGestaoOsDateFilter()">
+                            <button id="gestao_os-drilldown-back-btn" style="display: none; align-items: center; gap: 6px; padding: 4px 12px; font-size: 11px; font-weight: 700; color: #fff; background: #004f71; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; cursor: pointer; transition: all 0.2s ease;" onclick="resetCobrancaDateFilter()">
                                 <i class="fa-solid fa-arrow-left"></i> Voltar
                             </button>
                         </div>
                         <div id="gestao_os-monthly-total-sem-aprovacao" style="font-size: 13px; font-weight: 600; color: #ff5722; background: rgba(255,87,34,0.08); padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(255,87,34,0.18);">
-                            Sem Aprovação: R$ 0,00
+                            Sem Aprova├º├úo: R$ 0,00
                         </div>
                     </div>
                     <div class="chart-body" style="height: 360px; position: relative; padding: 16px 16px 8px 16px;">
@@ -1160,26 +1092,26 @@
                     <!-- Map Card -->
                     <div class="chart-card map-card">
                         <div class="chart-header">
-                            <span class="chart-title">Distribuição por UF</span>
+                            <span class="chart-title">Distribui├º├úo por UF</span>
                         </div>
                         <div class="chart-body" id="gestao_os-uf-map-container" style="height: 380px; position: relative;">
                             <!-- SVG Map and Compact Cards -->
                         </div>
                     </div>
 
-                    <!-- OSs sem aprovação / aprovadas aguardando pedido card -->
+                    <!-- OSs sem aprova├º├úo / aprovadas aguardando pedido card -->
                     <div class="chart-card">
                         <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
-                            <span class="chart-title" id="gestao_os-os-list-title">OSs Sem Aprovação (Aging)</span>
+                            <span class="chart-title" id="gestao_os-os-list-title">OSs Sem Aprova├º├úo (Aging)</span>
                             <div style="display:flex;align-items:center;gap:8px;"><div class="os-list-toggle" id="gestao_os-os-list-toggle">
                                 <button class="os-list-toggle-btn active" id="gestao_os-btn-os-sem-aprovacao" onclick="switchGestaoOsOSListMode('sem-aprovacao')">
-                                    <i class="fa-solid fa-clock-rotate-left"></i> Sem Aprovação
+                                    <i class="fa-solid fa-clock-rotate-left"></i> Sem Aprova├º├úo
                                 </button>
                                 <button class="os-list-toggle-btn" id="gestao_os-btn-os-aprovadas" onclick="switchGestaoOsOSListMode('aprovadas')">
                                     <i class="fa-solid fa-circle-check"></i> Aprovadas Aguardando Pedido
                                 </button>
                             </div>
-                                <button class="os-list-export-btn" onclick="exportGestaoOsOSListXLSX()" title="Baixar relatório Excel"><i class="fa-solid fa-file-excel"></i></button>
+                                <button class="os-list-export-btn" onclick="exportGestaoOsOSListXLSX()" title="Baixar relat├│rio Excel"><i class="fa-solid fa-file-excel"></i></button>
                             </div>
                         </div>
                         <div class="chart-body" style="height: 380px; display: block !important; padding: 0;">
@@ -1211,7 +1143,7 @@
                         <div class="chart-header">
                             <span class="chart-title">Valor por Tipo de Atividade</span>
                         </div>
-                        <div class="chart-body gestao_os-item-chart-body">
+                        <div class="chart-body cobranca-item-chart-body">
                             <div style="width: 100%; height: 320px; position: relative;">
                                 <canvas id="gestao_os-activity-chart"></canvas>
                             </div>
@@ -1221,7 +1153,7 @@
                         <div class="chart-header">
                             <span class="chart-title">Valor por Fase Atual (Original)</span>
                         </div>
-                        <div class="chart-body gestao_os-item-chart-body">
+                        <div class="chart-body cobranca-item-chart-body">
                             <div style="width: 100%; height: 320px; position: relative;">
                                 <canvas id="gestao_os-fase-atual-chart"></canvas>
                             </div>
@@ -1246,7 +1178,7 @@
                         <div class="chart-header">
                             <span class="chart-title">Valor por Item Descritivo</span>
                         </div>
-                        <div class="chart-body gestao_os-item-chart-body">
+                        <div class="chart-body cobranca-item-chart-body">
                             <div style="width: 100%; height: 320px; position: relative;">
                                 <canvas id="gestao_os-item-chart"></canvas>
                             </div>
@@ -1256,12 +1188,12 @@
 
             </div>
 
-            <!-- Sub Tab Pane: Relatório -->
-            <div id="subview-gestao_os-report" class="subtab-pane">
+            <!-- Sub Tab Pane: Relat├│rio -->
+            <div id="subview-cobranca-report" class="subtab-pane">
                 <div class="chart-card">
                     <div class="chart-header">
-                        <span class="chart-title"><i class="fa-solid fa-table"></i> Relatório Analítico de Cobrança</span>
-                        <button class="btn-export" onclick="exportGestaoOsXLSX()" title="Exportar para Excel">
+                        <span class="chart-title"><i class="fa-solid fa-table"></i> Relat├│rio Anal├¡tico de Cobran├ºa</span>
+                        <button class="btn-export" onclick="exportCobrancaXLSX()" title="Exportar para Excel">
                             <i class="fa-solid fa-file-excel"></i> Exportar
                         </button>
                     </div>
@@ -1269,7 +1201,7 @@
                         <div class="gestao_os-table-controls" style="padding: 16px 16px 0 16px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;">
                             <div class="gestao_os-search-wrapper" style="position: relative; flex-grow: 1; max-width: 400px;">
                                 <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-secondary);"></i>
-                                <input type="text" id="gestao_os-search" placeholder="Buscar por OS, PEP, Cidade, Projeto, Pedido..." oninput="applyGestaoOsSearch()" style="width: 100%; padding: 10px 12px 10px 36px; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--bg-input); color: var(--text-primary); font-family: inherit; font-size: 14px; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--color-primary)'" onblur="this.style.borderColor='var(--border-color)'">
+                                <input type="text" id="gestao_os-search" placeholder="Buscar por OS, PEP, Cidade, Projeto, Pedido..." oninput="applyCobrancaSearch()" style="width: 100%; padding: 10px 12px 10px 36px; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--bg-input); color: var(--text-primary); font-family: inherit; font-size: 14px; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--color-primary)'" onblur="this.style.borderColor='var(--border-color)'">
                             </div>
                             <span id="gestao_os-results-count" style="font-size: 13px; color: var(--text-secondary); font-weight: 500;"></span>
                         </div>
@@ -1278,28 +1210,28 @@
                             <table class="data-table" id="gestao_os-table" style="width: 100%; border-collapse: collapse;">
                                 <thead>
                                     <tr>
-                                        <th onclick="sortGestaoOsTable('categoria')">Categoria</th>
-                                        <th onclick="sortGestaoOsTable('os')">OS</th>
-                                        <th onclick="sortGestaoOsTable('cidade')">Cidade</th>
-                                        <th onclick="sortGestaoOsTable('uf')">UF</th>
-                                        <th onclick="sortGestaoOsTable('projeto')">Projeto</th>
-                                        <th onclick="sortGestaoOsTable('projeto_gerencial')">Proj. Gerencial</th>
-                                        <th onclick="sortGestaoOsTable('tipo_atividade')">Tipo Atividade</th>
-                                        <th onclick="sortGestaoOsTable('fase_atual')">Fase Atual</th>
-                                        <th onclick="sortGestaoOsTable('contrato_numero')">Contrato</th>
-                                        <th onclick="sortGestaoOsTable('item_descritivo')">Item Descritivo</th>
-                                        <th onclick="sortGestaoOsTable('tipo_despesa')">Tipo Despesa</th>
-                                        <th onclick="sortGestaoOsTable('objeto_do_contrato')">Objeto Contrato</th>
-                                        <th onclick="sortGestaoOsTable('valor_total')" style="text-align:right;">Valor Total</th>
-                                        <th onclick="sortGestaoOsTable('data_cadastro')">Dt. Cadastro</th>
-                                        <th onclick="sortGestaoOsTable('data_aprovacao')">Dt. Aprovação</th>
-                                        <th onclick="sortGestaoOsTable('tempo_aprovacao')">Tempo Aprov.</th>
-                                        <th onclick="sortGestaoOsTable('user_inclusao_medicao')">User Incl. Medição</th>
-                                        <th onclick="sortGestaoOsTable('pep')">PEP</th>
-                                        <th onclick="sortGestaoOsTable('numero_medicao')">Nº Medição</th>
-                                        <th onclick="sortGestaoOsTable('numero_pedido')">Nº Pedido</th>
-                                        <th onclick="sortGestaoOsTable('user_pedido')">User Pedido</th>
-                                        <th onclick="sortGestaoOsTable('fase_atual_de_para')">Fase (De/Para)</th>
+                                        <th onclick="sortCobrancaTable('categoria')">Categoria</th>
+                                        <th onclick="sortCobrancaTable('os')">OS</th>
+                                        <th onclick="sortCobrancaTable('cidade')">Cidade</th>
+                                        <th onclick="sortCobrancaTable('uf')">UF</th>
+                                        <th onclick="sortCobrancaTable('projeto')">Projeto</th>
+                                        <th onclick="sortCobrancaTable('projeto_gerencial')">Proj. Gerencial</th>
+                                        <th onclick="sortCobrancaTable('tipo_atividade')">Tipo Atividade</th>
+                                        <th onclick="sortCobrancaTable('fase_atual')">Fase Atual</th>
+                                        <th onclick="sortCobrancaTable('contrato_numero')">Contrato</th>
+                                        <th onclick="sortCobrancaTable('item_descritivo')">Item Descritivo</th>
+                                        <th onclick="sortCobrancaTable('tipo_despesa')">Tipo Despesa</th>
+                                        <th onclick="sortCobrancaTable('objeto_do_contrato')">Objeto Contrato</th>
+                                        <th onclick="sortCobrancaTable('valor_total')" style="text-align:right;">Valor Total</th>
+                                        <th onclick="sortCobrancaTable('data_cadastro')">Dt. Cadastro</th>
+                                        <th onclick="sortCobrancaTable('data_aprovacao')">Dt. Aprova├º├úo</th>
+                                        <th onclick="sortCobrancaTable('tempo_aprovacao')">Tempo Aprov.</th>
+                                        <th onclick="sortCobrancaTable('user_inclusao_medicao')">User Incl. Medi├º├úo</th>
+                                        <th onclick="sortCobrancaTable('pep')">PEP</th>
+                                        <th onclick="sortCobrancaTable('numero_medicao')">N┬║ Medi├º├úo</th>
+                                        <th onclick="sortCobrancaTable('numero_pedido')">N┬║ Pedido</th>
+                                        <th onclick="sortCobrancaTable('user_pedido')">User Pedido</th>
+                                        <th onclick="sortCobrancaTable('fase_atual_de_para')">Fase (De/Para)</th>
                                     </tr>
                                 </thead>
                                 <tbody id="gestao_os-table-body">
@@ -1321,11 +1253,11 @@
             </div>
         </div>
 
-        <!-- Modal: Adicionar/Editar Usuário -->
+        <!-- Modal: Adicionar/Editar Usu├írio -->
         <div class="modal-overlay" id="user-permission-modal" onclick="closeUserModal(event)">
             <div class="modal-card" style="max-width: 520px;">
                 <div class="modal-header">
-                    <h3 id="modal-user-title">Adicionar Usuário</h3>
+                    <h3 id="modal-user-title">Adicionar Usu├írio</h3>
                     <button class="modal-close" onclick="document.getElementById('user-permission-modal').classList.remove('active')">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -1341,12 +1273,12 @@
                         <div class="filter-group">
                             <label>Perfil de acesso</label>
                             <select id="modal-user-is-admin">
-                                <option value="false">Usuário Padrão</option>
+                                <option value="false">Usu├írio Padr├úo</option>
                                 <option value="true">Administrador</option>
                             </select>
                         </div>
                         <div class="filter-group">
-                            <label>Páginas Permitidas</label>
+                            <label>P├íginas Permitidas</label>
                             <div class="admin-pages-checkboxes" id="modal-pages-list">
                                 <!-- Populated by JS -->
                             </div>
@@ -1366,13 +1298,13 @@
         
     </main>
 
-    <!-- Conteiner de Toast de Notificação -->
+    <!-- Conteiner de Toast de Notifica├º├úo -->
     <div class="toast-container" id="toast-container"></div>
 
     <!-- TOOLTIP DO MAPA -->
     <div class="map-tooltip" id="map-tooltip"></div>
 
-    <!-- MODAL PARA ATUALIZAÇÃO -->
+    <!-- MODAL PARA ATUALIZA├ç├âO -->
     <div class="modal-overlay" id="update-modal" onclick="closeUpdateModal(event)">
         <div class="modal-card" onclick="event.stopPropagation()">
             <div class="modal-header">
@@ -1380,12 +1312,12 @@
                 <button class="modal-close" onclick="closeUpdateModal()">&times;</button>
             </div>
             <div class="modal-body">
-                <p><strong>Atualização Manual Instantânea:</strong></p>
-                <p>Dê dois cliques no arquivo <strong>iniciar_dashboard.bat</strong> criado na pasta raiz deste projeto para atualizar e abrir o BI em tempo real.</p>
+                <p><strong>Atualiza├º├úo Manual Instant├ónea:</strong></p>
+                <p>D├¬ dois cliques no arquivo <strong>iniciar_dashboard.bat</strong> criado na pasta raiz deste projeto para atualizar e abrir o BI em tempo real.</p>
                 
-                <p style="border-top: 1px solid var(--border-color); padding-top: 12px; margin-top: 8px;"><strong>Atualização Automática Agendada (8h às 18h, Seg a Sex):</strong></p>
-                <p>Para configurar o Agendador de Tarefas do Windows para rodar a atualização automaticamente a cada 1 hora, dê dois cliques no arquivo <strong>configurar_agendamento.bat</strong> localizado na pasta raiz.</p>
-                <p><em>Este processo automatizado é executado em segundo plano e atualizará os dados do painel sem interferir nas suas atividades.</em></p>
+                <p style="border-top: 1px solid var(--border-color); padding-top: 12px; margin-top: 8px;"><strong>Atualiza├º├úo Autom├ítica Agendada (8h ├ás 18h, Seg a Sex):</strong></p>
+                <p>Para configurar o Agendador de Tarefas do Windows para rodar a atualiza├º├úo automaticamente a cada 1 hora, d├¬ dois cliques no arquivo <strong>configurar_agendamento.bat</strong> localizado na pasta raiz.</p>
+                <p><em>Este processo automatizado ├⌐ executado em segundo plano e atualizar├í os dados do painel sem interferir nas suas atividades.</em></p>
             </div>
         </div>
     </div>
@@ -1399,7 +1331,7 @@
             <div class="auth-blob blob-3"></div>
         </div>
 
-        <!-- Botão de Alternância de Tema -->
+        <!-- Bot├úo de Altern├óncia de Tema -->
         <button class="auth-theme-toggle" onclick="toggleTheme()" type="button" title="Alternar tema">
             <i class="fa-solid fa-moon" id="auth-theme-icon"></i>
         </button>
@@ -1421,7 +1353,7 @@
             <!-- ALERTA DE MENSAGENS -->
             <div class="auth-alert" id="auth-alert"></div>
             
-            <!-- FORMULÁRIO DE LOGIN -->
+            <!-- FORMUL├üRIO DE LOGIN -->
             <form class="auth-form" id="form-login" onsubmit="handleLoginSubmit(event)">
                 <div class="auth-input-group">
                     <label for="login-email">E-mail Corporativo</label>
@@ -1442,18 +1374,18 @@
                 </button>
             </form>
             
-            <!-- FORMULÁRIO DE CADASTRO -->
+            <!-- FORMUL├üRIO DE CADASTRO -->
             <form class="auth-form" id="form-register" onsubmit="handleRegisterSubmit(event)" style="display: none;">
                 <div class="auth-input-group">
                     <label for="register-name">Nome</label>
-                    <input type="text" id="register-name" required placeholder="Maurício">
+                    <input type="text" id="register-name" required placeholder="Maur├¡cio">
                 </div>
                 <div class="auth-input-group">
                     <label for="register-email">E-mail Corporativo</label>
                     <input type="email" id="register-email" required placeholder="seu.nome@jletelecom.com.br">
                 </div>
                 <div class="auth-input-group">
-                    <label for="register-password">Senha (mín. 6 caracteres, com letras e números)</label>
+                    <label for="register-password">Senha (m├¡n. 6 caracteres, com letras e n├║meros)</label>
                     <div class="password-wrapper">
                         <input type="password" id="register-password" required placeholder="Sua senha" minlength="6">
                         <i class="fa-solid fa-eye password-toggle-icon" onclick="togglePasswordVisibility('register-password', this)"></i>
@@ -1471,24 +1403,24 @@
                 </button>
             </form>
             
-            <!-- FORMULÁRIO DE RECUPERAÇÃO DE SENHA -->
+            <!-- FORMUL├üRIO DE RECUPERA├ç├âO DE SENHA -->
             <form class="auth-form" id="form-forgot" onsubmit="handleForgotSubmit(event)" style="display: none;">
                 <div class="auth-input-group">
                     <label for="forgot-email">E-mail Corporativo</label>
                     <input type="email" id="forgot-email" required placeholder="seu.nome@jletelecom.com.br">
                 </div>
                 <button type="submit" class="auth-btn" id="btn-forgot-submit">
-                    <i class="fa-solid fa-paper-plane"></i> Enviar Link de Recuperação
+                    <i class="fa-solid fa-paper-plane"></i> Enviar Link de Recupera├º├úo
                 </button>
                 <div style="text-align: center; margin-top: 15px;">
                     <a href="#" onclick="showLoginForm(event)" style="font-size: 12px; color: var(--text-secondary); text-decoration: none; font-weight: 500;" onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-secondary)'">Voltar para o Login</a>
                 </div>
             </form>
             
-            <!-- FORMULÁRIO DE NOVA SENHA -->
+            <!-- FORMUL├üRIO DE NOVA SENHA -->
             <form class="auth-form" id="form-reset-password" onsubmit="handleResetPasswordSubmit(event)" style="display: none;">
                 <div class="auth-input-group">
-                    <label for="reset-new-password">Nova Senha (mín. 6 caracteres, com letras e números)</label>
+                    <label for="reset-new-password">Nova Senha (m├¡n. 6 caracteres, com letras e n├║meros)</label>
                     <div class="password-wrapper">
                         <input type="password" id="reset-new-password" required placeholder="Nova senha" minlength="6">
                         <i class="fa-solid fa-eye password-toggle-icon" onclick="togglePasswordVisibility('reset-new-password', this)"></i>
@@ -1508,19 +1440,19 @@
         </div>
     </div>
 
-    <!-- Carga de Dados Dinâmica -->
+    <!-- Carga de Dados Din├ómica -->
     <script src="data.js"></script>
 
     <script src="veiculos_data.js?v=3.35"></script>
     <script src="veiculos_app.js?v=3.41"></script>
     
     <script src="cobranca_data.js?v=3.46"></script>
-        <script src="cobranca_app.js?v=3.49"></script>
+    <script src="cobranca_app.js?v=3.49"></script>
     <script src="gestao_os_app.js?v=4.0"></script>
 
-    <!-- Logica de UI Autônoma (Sem Dependências de CDNs) -->
+    <!-- Logica de UI Aut├┤noma (Sem Depend├¬ncias de CDNs) -->
     <script>
-        // Utilitário de armazenamento seguro contra restrições de localStorage em browsers corporativos
+        // Utilit├írio de armazenamento seguro contra restri├º├╡es de localStorage em browsers corporativos
         const safeStorage = {
             getItem(key) {
                 try {
@@ -1546,7 +1478,7 @@
             _data: {}
         };
 
-        // Alternância de abas de autenticação
+        // Altern├óncia de abas de autentica├º├úo
         function switchAuthTab(tab) {
             const btnLogin = document.getElementById('tab-login');
             const btnRegister = document.getElementById('tab-register');
@@ -1633,7 +1565,7 @@
             if (alertBox) alertBox.style.display = 'none';
         }
 
-        // Função para mostrar/esconder senha
+        // Fun├º├úo para mostrar/esconder senha
         function togglePasswordVisibility(inputId, iconEl) {
             const input = document.getElementById(inputId);
             if (input) {
@@ -1652,7 +1584,7 @@
 
     <!-- Logica Frontend Geral -->
     <script>
-        // Registrar plugin de Datalabels e desativar exibição global com segurança
+        // Registrar plugin de Datalabels e desativar exibi├º├úo global com seguran├ºa
         try {
             if (typeof Chart !== 'undefined' && typeof ChartDataLabels !== 'undefined') {
                 Chart.register(ChartDataLabels);
@@ -1668,10 +1600,10 @@
                 };
             }
         } catch (e) {
-            console.error("Erro ao inicializar configurações do Chart.js:", e);
+            console.error("Erro ao inicializar configura├º├╡es do Chart.js:", e);
         }
 
-        // --- CONFIGURAÇÃO SUPABASE AUTH E MODO DEMO ---
+        // --- CONFIGURA├ç├âO SUPABASE AUTH E MODO DEMO ---
         let supabaseClient = null;
         const isDemoMode = (typeof window.SUPABASE_CONFIG === 'undefined' || 
                             window.SUPABASE_CONFIG.url === 'SUA_SUPABASE_URL_AQUI' || 
@@ -1684,7 +1616,7 @@
                 console.error("Falha ao inicializar o Supabase client:", err);
             }
         } else {
-            console.warn("Credenciais do Supabase não configuradas em supabase_config.js. O painel funcionará em modo demonstração local.");
+            console.warn("Credenciais do Supabase n├úo configuradas em supabase_config.js. O painel funcionar├í em modo demonstra├º├úo local.");
         }
 
         function showAuthAlert(message, type) {
@@ -1694,7 +1626,7 @@
             alertBox.style.display = 'block';
         }
 
-        // Formatar nome com a primeira letra maiúscula e as demais minúsculas, exceto preposições comuns em português
+        // Formatar nome com a primeira letra mai├║scula e as demais min├║sculas, exceto preposi├º├╡es comuns em portugu├¬s
         function formatFullName(name) {
             const lowercaseExceptions = ['e', 'de', 'da', 'do', 'das', 'dos', 'com', 'em'];
             return name
@@ -1710,7 +1642,7 @@
                 .join(' ');
         }
 
-        // Submissão do Cadastro
+        // Submiss├úo do Cadastro
         async function handleRegisterSubmit(event) {
             event.preventDefault();
             const nameInput = document.getElementById('register-name').value.trim();
@@ -1724,24 +1656,24 @@
             const formattedName = formatFullName(nameInput);
             
             if (!email.toLowerCase().endsWith('@jletelecom.com.br')) {
-                showAuthAlert('Acesso restrito: Apenas e-mails corporativos @jletelecom.com.br são permitidos.', 'error');
+                showAuthAlert('Acesso restrito: Apenas e-mails corporativos @jletelecom.com.br s├úo permitidos.', 'error');
                 return;
             }
             
             if (password !== confirmPassword) {
-                showAuthAlert('As senhas não coincidem.', 'error');
+                showAuthAlert('As senhas n├úo coincidem.', 'error');
                 return;
             }
             
             if (password.length < 6) {
-                showAuthAlert('A senha deve conter no mínimo 6 caracteres.', 'error');
+                showAuthAlert('A senha deve conter no m├¡nimo 6 caracteres.', 'error');
                 return;
             }
             
             const hasLetter = /[a-zA-Z]/.test(password);
             const hasNumber = /[0-9]/.test(password);
             if (!hasLetter || !hasNumber) {
-                showAuthAlert('A senha deve conter letras e números (pelo menos uma letra e um número).', 'error');
+                showAuthAlert('A senha deve conter letras e n├║meros (pelo menos uma letra e um n├║mero).', 'error');
                 return;
             }
 
@@ -1753,7 +1685,7 @@
                 setTimeout(() => {
                     btnSubmit.disabled = false;
                     btnSubmit.innerHTML = '<i class="fa-solid fa-user-plus"></i> Cadastrar';
-                    showAuthAlert('[MODO DEMO] Cadastro simulado! Em produção, você receberá um e-mail de confirmação para liberar o acesso. No modo demo, o acesso já está disponível para login na aba Entrar.', 'success');
+                    showAuthAlert('[MODO DEMO] Cadastro simulado! Em produ├º├úo, voc├¬ receber├í um e-mail de confirma├º├úo para liberar o acesso. No modo demo, o acesso j├í est├í dispon├¡vel para login na aba Entrar.', 'success');
                     safeStorage.setItem('demo_user_email', email);
                     safeStorage.setItem('demo_user_password', password);
                     safeStorage.setItem('demo_user_name', formattedName);
@@ -1776,7 +1708,7 @@
                     if (error) {
                         showAuthAlert(error.message, 'error');
                     } else {
-                        showAuthAlert('Cadastro realizado com sucesso! Você receberá um e-mail de confirmação em breve. Atenção: seu acesso só será liberado após você confirmar o cadastro pelo e-mail recebido.', 'success');
+                        showAuthAlert('Cadastro realizado com sucesso! Voc├¬ receber├í um e-mail de confirma├º├úo em breve. Aten├º├úo: seu acesso s├│ ser├í liberado ap├│s voc├¬ confirmar o cadastro pelo e-mail recebido.', 'success');
                         document.getElementById('register-name').value = '';
                         document.getElementById('register-email').value = '';
                         document.getElementById('register-password').value = '';
@@ -1790,7 +1722,7 @@
             }
         }
 
-        // Submissão do Login
+        // Submiss├úo do Login
         async function handleLoginSubmit(event) {
             event.preventDefault();
             const email = document.getElementById('login-email').value.trim();
@@ -1800,7 +1732,7 @@
             alertBox.style.display = 'none';
             
             if (!email.toLowerCase().endsWith('@jletelecom.com.br')) {
-                showAuthAlert('Acesso restrito: Apenas e-mails corporativos @jletelecom.com.br são permitidos.', 'error');
+                showAuthAlert('Acesso restrito: Apenas e-mails corporativos @jletelecom.com.br s├úo permitidos.', 'error');
                 return;
             }
 
@@ -1850,7 +1782,7 @@
             }
         }
 
-        // Solicitação de link de recuperação de senha
+        // Solicita├º├úo de link de recupera├º├úo de senha
         async function handleForgotSubmit(event) {
             event.preventDefault();
             const email = document.getElementById('forgot-email').value.trim();
@@ -1859,7 +1791,7 @@
             alertBox.style.display = 'none';
             
             if (!email.toLowerCase().endsWith('@jletelecom.com.br')) {
-                showAuthAlert('Acesso restrito: Apenas e-mails corporativos @jletelecom.com.br são permitidos.', 'error');
+                showAuthAlert('Acesso restrito: Apenas e-mails corporativos @jletelecom.com.br s├úo permitidos.', 'error');
                 return;
             }
             
@@ -1870,8 +1802,8 @@
             if (isDemoMode || !supabaseClient) {
                 setTimeout(() => {
                     btnSubmit.disabled = false;
-                    btnSubmit.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Enviar Link de Recuperação';
-                    showAuthAlert('[MODO DEMO] Link de recuperação enviado para ' + email + ' (simulado).', 'success');
+                    btnSubmit.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Enviar Link de Recupera├º├úo';
+                    showAuthAlert('[MODO DEMO] Link de recupera├º├úo enviado para ' + email + ' (simulado).', 'success');
                 }, 1000);
             } else {
                 try {
@@ -1881,23 +1813,23 @@
                     });
                     
                     btnSubmit.disabled = false;
-                    btnSubmit.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Enviar Link de Recuperação';
+                    btnSubmit.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Enviar Link de Recupera├º├úo';
                     
                     if (error) {
                         showAuthAlert(error.message, 'error');
                     } else {
-                        showAuthAlert('Link de recuperação enviado com sucesso! Verifique sua caixa de entrada e spam para redefinir sua senha.', 'success');
+                        showAuthAlert('Link de recupera├º├úo enviado com sucesso! Verifique sua caixa de entrada e spam para redefinir sua senha.', 'success');
                         document.getElementById('forgot-email').value = '';
                     }
                 } catch (err) {
                     btnSubmit.disabled = false;
-                    btnSubmit.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Enviar Link de Recuperação';
-                    showAuthAlert('Erro ao solicitar recuperação: ' + err.message, 'error');
+                    btnSubmit.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Enviar Link de Recupera├º├úo';
+                    showAuthAlert('Erro ao solicitar recupera├º├úo: ' + err.message, 'error');
                 }
             }
         }
 
-        // Submissão de alteração da senha
+        // Submiss├úo de altera├º├úo da senha
         async function handleResetPasswordSubmit(event) {
             event.preventDefault();
             const newPassword = document.getElementById('reset-new-password').value;
@@ -1907,19 +1839,19 @@
             alertBox.style.display = 'none';
             
             if (newPassword !== confirmNewPassword) {
-                showAuthAlert('As senhas não coincidem.', 'error');
+                showAuthAlert('As senhas n├úo coincidem.', 'error');
                 return;
             }
             
             if (newPassword.length < 6) {
-                showAuthAlert('A senha deve conter no mínimo 6 caracteres.', 'error');
+                showAuthAlert('A senha deve conter no m├¡nimo 6 caracteres.', 'error');
                 return;
             }
             
             const hasLetter = /[a-zA-Z]/.test(newPassword);
             const hasNumber = /[0-9]/.test(newPassword);
             if (!hasLetter || !hasNumber) {
-                showAuthAlert('A senha deve conter letras e números (pelo menos uma letra e um número).', 'error');
+                showAuthAlert('A senha deve conter letras e n├║meros (pelo menos uma letra e um n├║mero).', 'error');
                 return;
             }
 
@@ -1931,7 +1863,7 @@
                 setTimeout(() => {
                     btnSubmit.disabled = false;
                     btnSubmit.innerHTML = '<i class="fa-solid fa-key"></i> Salvar Nova Senha';
-                    showAuthAlert('Senha alterada com sucesso! Você já pode entrar com a nova senha.', 'success');
+                    showAuthAlert('Senha alterada com sucesso! Voc├¬ j├í pode entrar com a nova senha.', 'success');
                     safeStorage.setItem('demo_user_password', newPassword);
                     
                     setTimeout(() => {
@@ -1950,7 +1882,7 @@
                     if (error) {
                         showAuthAlert(error.message, 'error');
                     } else {
-                        showAuthAlert('Senha redefinida com sucesso! Você já pode acessar o BI com a sua nova senha.', 'success');
+                        showAuthAlert('Senha redefinida com sucesso! Voc├¬ j├í pode acessar o BI com a sua nova senha.', 'success');
                         document.getElementById('reset-new-password').value = '';
                         document.getElementById('reset-confirm-new-password').value = '';
                         
@@ -1987,9 +1919,9 @@
             }
         }
 
-        // Verificar sessão na carga
+        // Verificar sess├úo na carga
         function checkAuth() {
-            // Verificar se o usuário veio por link de recuperação de senha na URL hash
+            // Verificar se o usu├írio veio por link de recupera├º├úo de senha na URL hash
             if (window.location.hash && (window.location.hash.includes('type=recovery') || window.location.hash.includes('recovery_token='))) {
                 setTimeout(() => {
                     showResetPasswordForm();
@@ -2006,7 +1938,7 @@
                     showLoginScreen();
                 }
             } else {
-                // Registrar listener de alteração de autenticação nativo
+                // Registrar listener de altera├º├úo de autentica├º├úo nativo
                 try {
                     supabaseClient.auth.onAuthStateChange((event, session) => {
                         if (event === 'PASSWORD_RECOVERY') {
@@ -2021,11 +1953,11 @@
                     if (session) {
                         const email = session.user.email;
                         if (!email.toLowerCase().endsWith('@jletelecom.com.br')) {
-                            alert('Acesso restrito: Apenas e-mails corporativos @jletelecom.com.br são permitidos.');
+                            alert('Acesso restrito: Apenas e-mails corporativos @jletelecom.com.br s├úo permitidos.');
                             supabaseClient.auth.signOut();
                             return;
                         }
-                        // Obter os dados atualizados do usuário diretamente do servidor para evitar caches locais antigos
+                        // Obter os dados atualizados do usu├írio diretamente do servidor para evitar caches locais antigos
                         supabaseClient.auth.getUser().then(({ data: { user } }) => {
                             showDashboard(user || session.user);
                         }).catch(() => {
@@ -2035,7 +1967,7 @@
                         showLoginScreen();
                     }
                 }).catch(err => {
-                    console.error("Erro ao obter sessão do Supabase:", err);
+                    console.error("Erro ao obter sess├úo do Supabase:", err);
                     showLoginScreen();
                 });
             }
@@ -2077,9 +2009,9 @@
         // Known pages registry (for admin panel)
         const ALL_PAGES = [
             { id: 'dashboard',    label: 'Dashboard Financeiro',    icon: 'fa-sack-dollar',       navId: 'nav-dashboard' },
-            { id: 'veiculos',     label: 'Veículos',                icon: 'fa-car',               navId: 'nav-veiculos' },
+            { id: 'veiculos',     label: 'Ve├¡culos',                icon: 'fa-car',               navId: 'nav-veiculos' },
             
-            { id: 'cobranca',     label: 'Analítico Claro',         icon: 'fa-file-invoice-dollar', navId: 'nav-cobranca' },
+            { id: 'cobranca',     label: 'Anal├¡tico Claro',         icon: 'fa-file-invoice-dollar', navId: 'nav-cobranca' },
             { id: 'gestao_os',    label: 'Gestão de OS',            icon: 'fa-clipboard-list',    navId: 'nav-gestao_os' },
             { id: 'admin',        label: 'Painel Admin',            icon: 'fa-shield-halved',    navId: 'nav-admin',        adminOnly: true },
         ];
@@ -2094,13 +2026,13 @@
             isCheckingPermissions = true;
 
             try {
-                // Buscar permissões do usuário ANTES de ocultar o painel de login e exibir o dashboard
+                // Buscar permiss├╡es do usu├írio ANTES de ocultar o painel de login e exibir o dashboard
                 const hasAccess = await loadUserPermissions(user.email);
                 if (!hasAccess) {
                     return;
                 }
 
-                // Registrar o último acesso em tempo real
+                // Registrar o ├║ltimo acesso em tempo real
                 if (supabaseClient && user && user.email) {
                     const nowIso = new Date().toISOString();
                     supabaseClient.from('bi_permissions')
@@ -2130,15 +2062,15 @@
                 document.getElementById('user-display-email').innerText = user.email;
                 currentUserEmail = user.email;
 
-                // Auto-atualização de nome para o usuário de teste na base de dados do Supabase
-                if (user.email === 'teste_antigravity@jletelecom.com.br' && (!user.user_metadata || user.user_metadata.full_name !== 'Usuário Teste')) {
+                // Auto-atualiza├º├úo de nome para o usu├írio de teste na base de dados do Supabase
+                if (user.email === 'teste_antigravity@jletelecom.com.br' && (!user.user_metadata || user.user_metadata.full_name !== 'Usu├írio Teste')) {
                     if (supabaseClient) {
                         supabaseClient.auth.updateUser({
-                            data: { full_name: "Usuário Teste" }
+                            data: { full_name: "Usu├írio Teste" }
                         }).then(({ data, error }) => {
                             if (!error && data && data.user) {
-                                console.log("Nome do usuário de teste atualizado no Supabase com sucesso!");
-                                const updatedFullName = "Usuário Teste";
+                                console.log("Nome do usu├írio de teste atualizado no Supabase com sucesso!");
+                                const updatedFullName = "Usu├írio Teste";
                                 if (nameEl) {
                                     nameEl.setAttribute('data-fullname', updatedFullName);
                                     nameEl.setAttribute('data-initials', getInitials(updatedFullName));
@@ -2146,11 +2078,11 @@
                                     nameEl.innerText = isCollapsed ? nameEl.getAttribute('data-initials') : updatedFullName;
                                 }
                             }
-                        }).catch(e => console.warn("Erro ao atualizar nome do usuário de teste:", e));
+                        }).catch(e => console.warn("Erro ao atualizar nome do usu├írio de teste:", e));
                     }
                 }
 
-                // Força redimensionamento dos gráficos e aplicação de filtros iniciais
+                // For├ºa redimensionamento dos gr├íficos e aplica├º├úo de filtros iniciais
                 setTimeout(() => {
                     window.dispatchEvent(new Event('resize'));
                     applyFilters();
@@ -2188,7 +2120,7 @@
                 return true;
             }
             try {
-                // Buscar permissão do usuário
+                // Buscar permiss├úo do usu├írio
                 const { data: permData, error: permErr } = await supabaseClient
                     .from('bi_permissions')
                     .select('*')
@@ -2203,8 +2135,8 @@
                     allowedPages = permData.allowed_pages || [];
                     currentUserIsAdmin = permData.is_admin === true;
                 } else {
-                    // Usuário não cadastrado ou erro de RLS - buscar padrão
-                    console.warn('[Admin] Sem permissão no DB, usando padrão. Erro:', permErr);
+                    // Usu├írio n├úo cadastrado ou erro de RLS - buscar padr├úo
+                    console.warn('[Admin] Sem permiss├úo no DB, usando padr├úo. Erro:', permErr);
                     const { data: settData } = await supabaseClient
                         .from('bi_settings')
                         .select('value')
@@ -2216,14 +2148,14 @@
 
                 console.log('[Admin] isAdmin:', currentUserIsAdmin, '| pages:', allowedPages);
 
-                // Se não for admin e não tiver acesso a nenhuma página, bloqueia imediatamente
+                // Se n├úo for admin e n├úo tiver acesso a nenhuma p├ígina, bloqueia imediatamente
                 if (!currentUserIsAdmin && (!allowedPages || allowedPages.length === 0)) {
                     currentUserAllowedPages = [];
                     if (supabaseClient) {
                         await supabaseClient.auth.signOut();
                     }
                     showLoginScreen();
-                    showAuthAlert('Acesso negado: Você não possui permissão para acessar nenhuma página do BI. Entre em contato com o administrador.', 'error');
+                    showAuthAlert('Acesso negado: Voc├¬ n├úo possui permiss├úo para acessar nenhuma p├ígina do BI. Entre em contato com o administrador.', 'error');
                     return false;
                 }
 
@@ -2248,7 +2180,7 @@
                     }
                 });
 
-                // Recuperar a última tela ativa do localStorage se o usuário tiver acesso a ela
+                // Recuperar a ├║ltima tela ativa do localStorage se o usu├írio tiver acesso a ela
                 const savedView = localStorage.getItem('jle_bi_active_view');
                 if (savedView && allowedPages.includes(savedView)) {
                     switchView(savedView);
@@ -2262,7 +2194,7 @@
                 return true;
 
             } catch (err) {
-                console.warn('Erro ao carregar permissões:', err);
+                console.warn('Erro ao carregar permiss├╡es:', err);
                 return false;
             }
         }
@@ -2273,7 +2205,7 @@
             document.getElementById('dashboard-main-content').style.display = 'none';
         }
 
-        // Configuração de Dados e Estado Global
+        // Configura├º├úo de Dados e Estado Global
         let transactions = [];
         let filteredTransactions = [];
         
@@ -2281,9 +2213,9 @@
         const rowsPerPage = 15;
         let activeView = 'dashboard';
         
-        // Estado do Drill Down, Alternância de Fluxo (Receitas/Despesas) e Filtro de Cliente
+        // Estado do Drill Down, Altern├óncia de Fluxo (Receitas/Despesas) e Filtro de Cliente
         let categoryDrillDownState = { active: false, category: null };
-        let categoryFluxState = 'Saída';
+        let categoryFluxState = 'Sa├¡da';
         let activeCustomerFilter = null;
         
         function setCategoryFlux(flux) {
@@ -2294,7 +2226,7 @@
             const btnSaidas = document.getElementById('btn-toggle-saidas');
             const btnEntradas = document.getElementById('btn-toggle-entradas');
             
-            if (flux === 'Saída') {
+            if (flux === 'Sa├¡da') {
                 btnSaidas.style.backgroundColor = 'var(--color-secondary)';
                 btnSaidas.style.color = 'white';
                 btnEntradas.style.backgroundColor = 'transparent';
@@ -2309,32 +2241,32 @@
             renderCategoryChart();
         }
         
-        // Armazenamento de instâncias de gráficos
+        // Armazenamento de inst├óncias de gr├íficos
         let charts = {};
         
-        // Granularidade do gráfico de evolução (sobreposição do filtro global para o gráfico)
+        // Granularidade do gr├ífico de evolu├º├úo (sobreposi├º├úo do filtro global para o gr├ífico)
         window.evolutionChartGranularity = null;
         window.setEvolutionChartGranularity = function(granularity) {
             window.evolutionChartGranularity = granularity;
             renderCharts();
         };
 
-        // Carregar dados na inicialização
+        // Carregar dados na inicializa├º├úo
         window.addEventListener('DOMContentLoaded', () => {
             if (typeof window.CASH_FLOW_DATA !== 'undefined') {
                 transactions = window.CASH_FLOW_DATA.transactions || [];
                 updateHeaderTimestamp(activeView);
             } else {
-                alert("Arquivo data.js não encontrado. Por favor, execute o script de ETL para gerar a base de dados.");
+                alert("Arquivo data.js n├úo encontrado. Por favor, execute o script de ETL para gerar a base de dados.");
             }
             
             // Popular filtros de Categoria dinamicamente
             populateCategoryFilter();
             
-            // Popular filtros de Competência/Mês dinamicamente
-            // Competência agora está no formato "MÊSNOME/ANO" (ex: "JANEIRO/2026")
+            // Popular filtros de Compet├¬ncia/M├¬s dinamicamente
+            // Compet├¬ncia agora est├í no formato "M├èSNOME/ANO" (ex: "JANEIRO/2026")
             const monthOrder = {
-                'JANEIRO': 1, 'FEVEREIRO': 2, 'MARÇO': 3, 'ABRIL': 4,
+                'JANEIRO': 1, 'FEVEREIRO': 2, 'MAR├çO': 3, 'ABRIL': 4,
                 'MAIO': 5, 'JUNHO': 6, 'JULHO': 7, 'AGOSTO': 8,
                 'SETEMBRO': 9, 'OUTUBRO': 10, 'NOVEMBRO': 11, 'DEZEMBRO': 12
             };
@@ -2344,7 +2276,7 @@
             const uniqueMonths = [...new Set(transactions.map(t => t.competencia))]
                 .filter(m => m && m !== 'N/D' && m !== '')
                 .sort((a, b) => {
-                    // Ordenar por ano primeiro, depois por mês
+                    // Ordenar por ano primeiro, depois por m├¬s
                     const partsA = a.split('/');
                     const partsB = b.split('/');
                     const yearA = parseInt(partsA[1]) || 0;
@@ -2356,15 +2288,15 @@
             uniqueMonths.forEach(m => {
                 const opt = document.createElement('option');
                 opt.value = m;
-                // Exibir como "Janeiro/2026" (primeira letra maiúscula no nome do mês)
+                // Exibir como "Janeiro/2026" (primeira letra mai├║scula no nome do m├¬s)
                 const parts = m.split('/');
                 const displayMonth = parts[0].charAt(0) + parts[0].slice(1).toLowerCase();
                 opt.innerText = parts[1] ? `${displayMonth}/${parts[1]}` : displayMonth;
                 monthSelect.appendChild(opt);
             });
             
-            // Pré-seleção do mês/ano atual do sistema
-            const monthsPt = ["JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO", "JUNHO", "JULHO", "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"];
+            // Pr├⌐-sele├º├úo do m├¬s/ano atual do sistema
+            const monthsPt = ["JANEIRO", "FEVEREIRO", "MAR├çO", "ABRIL", "MAIO", "JUNHO", "JULHO", "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"];
             const currentMonthName = monthsPt[new Date().getMonth()];
             const currentYear = new Date().getFullYear().toString();
             const currentCompetencia = `${currentMonthName}/${currentYear}`;
@@ -2373,19 +2305,19 @@
             if (uniqueMonths.includes(currentCompetencia)) {
                 monthToSelect = currentCompetencia;
             } else if (uniqueMonths.length > 0) {
-                // Se o mês/ano atual não estiver nos dados, seleciona o último disponível
+                // Se o m├¬s/ano atual n├úo estiver nos dados, seleciona o ├║ltimo dispon├¡vel
                 monthToSelect = uniqueMonths[uniqueMonths.length - 1];
             }
             monthSelect.value = monthToSelect;
             
-            // Registrar listener de mudanças no estado de autenticação (Supabase Auth)
+            // Registrar listener de mudan├ºas no estado de autentica├º├úo (Supabase Auth)
             if (supabaseClient) {
                 try {
                     supabaseClient.auth.onAuthStateChange((event, session) => {
                         if (session) {
                             const email = session.user.email;
                             if (!email.toLowerCase().endsWith('@jletelecom.com.br')) {
-                                alert('Acesso restrito: Apenas e-mails corporativos @jletelecom.com.br são permitidos.');
+                                alert('Acesso restrito: Apenas e-mails corporativos @jletelecom.com.br s├úo permitidos.');
                                 supabaseClient.auth.signOut();
                                 return;
                             }
@@ -2405,7 +2337,7 @@
                 }
             }
             
-            // Verificar sessão inicial
+            // Verificar sess├úo inicial
             checkAuth();
         });
 
@@ -2416,7 +2348,7 @@
             return [...new Set(list)].sort();
         }
 
-        // Popular filtro de categorias dinamicamente (removendo "Saldo Inicial" das despesas de exibição)
+        // Popular filtro de categorias dinamicamente (removendo "Saldo Inicial" das despesas de exibi├º├úo)
         function populateCategoryFilter() {
             const catSelect = document.getElementById('filter-categoria');
             const uniqueCats = [...new Set(transactions.map(t => t.categoria))]
@@ -2441,7 +2373,7 @@
             if (indSubview) indSubview.style.display = tabName === 'indicators' ? 'block' : 'none';
             if (txSubview) txSubview.style.display = tabName === 'transactions' ? 'block' : 'none';
             
-            // Alterar estado ativo dos botões
+            // Alterar estado ativo dos bot├╡es
             const indBtn = document.getElementById('tab-btn-indicators');
             const txBtn = document.getElementById('tab-btn-transactions');
             if (indBtn) indBtn.classList.toggle('active', tabName === 'indicators');
@@ -2451,16 +2383,16 @@
             const mesText = mesSelect ? mesSelect.options[mesSelect.selectedIndex].text : '';
             const subtitleEl = document.getElementById('view-subtitle');
             
-            // Atualizar título/subtítulo conforme a aba ativa
+            // Atualizar t├¡tulo/subt├¡tulo conforme a aba ativa
             if (subtitleEl) {
                 if (tabName === 'indicators') {
-                    subtitleEl.innerHTML = `Dashboard de Gestão e Análise de Indicadores. <span class="badge-competencia">Competência: ${mesText}</span>`;
+                    subtitleEl.innerHTML = `Dashboard de Gest├úo e An├ílise de Indicadores. <span class="badge-competencia">Compet├¬ncia: ${mesText}</span>`;
                 } else {
-                    subtitleEl.innerHTML = `Relação completa de transações com ferramentas de busca e auditoria <span class="badge-competencia">Competência: ${mesText}</span>`;
+                    subtitleEl.innerHTML = `Rela├º├úo completa de transa├º├╡es com ferramentas de busca e auditoria <span class="badge-competencia">Compet├¬ncia: ${mesText}</span>`;
                 }
             }
             
-            // Redimensionar gráficos ou re-renderizar tabelas para ajustar largura
+            // Redimensionar gr├íficos ou re-renderizar tabelas para ajustar largura
             if (tabName === 'indicators') {
                 window.dispatchEvent(new Event('resize'));
                 renderCharts();
@@ -2469,7 +2401,7 @@
             }
         }
 
-        // Atualizar o timestamp de atualização de acordo com a aba ativa
+        // Atualizar o timestamp de atualiza├º├úo de acordo com a aba ativa
         function updateHeaderTimestamp(viewName) {
             const timestampEl = document.getElementById('data-timestamp');
             if (!timestampEl) return;
@@ -2503,22 +2435,22 @@
             }
         }
 
-        // Navegação de Telas
+        // Navega├º├úo de Telas
         function switchView(viewName) {
-            // Se tentar acessar a aba de transações como uma tela separada (legado/redirecionamento)
+            // Se tentar acessar a aba de transa├º├╡es como uma tela separada (legado/redirecionamento)
             if (viewName === 'transactions') {
                 switchView('dashboard');
                 switchDashboardTab('transactions');
                 return;
             }
 
-            // Segurança: Impedir transições para telas não autorizadas de forma fail-secure
+            // Seguran├ºa: Impedir transi├º├╡es para telas n├úo autorizadas de forma fail-secure
             if (viewName === 'admin' && !currentUserIsAdmin) {
-                console.warn("Acesso bloqueado: O usuário não possui perfil administrativo!");
+                console.warn("Acesso bloqueado: O usu├írio n├úo possui perfil administrativo!");
                 return;
             }
             if (viewName !== 'admin' && !currentUserIsAdmin && currentUserAllowedPages && currentUserAllowedPages.length > 0 && !currentUserAllowedPages.includes(viewName)) {
-                console.warn(`Acesso bloqueado: O usuário não possui permissão para ver a tela: ${viewName}`);
+                console.warn(`Acesso bloqueado: O usu├írio n├úo possui permiss├úo para ver a tela: ${viewName}`);
                 return;
             }
 
@@ -2532,7 +2464,7 @@
             const navEl = document.getElementById(`nav-${viewName}`);
             if (navEl) navEl.classList.add('active');
             
-            // Controle de visualização da página Admin para regras CSS mobile
+            // Controle de visualiza├º├úo da p├ígina Admin para regras CSS mobile
             if (viewName === 'admin') {
                 document.body.classList.add('viewing-admin');
             } else {
@@ -2556,7 +2488,7 @@
                 document.getElementById('filters-container').style.display = 'none';
                 if (mobileToggleBtn) mobileToggleBtn.style.display = 'none';
                 document.getElementById('view-title').innerText = 'Painel Administrativo';
-                document.getElementById('view-subtitle').innerHTML = 'Gerencie usuários, perfis de acesso e páginas do BI <span class="badge-competencia">Admin</span>';
+                document.getElementById('view-subtitle').innerHTML = 'Gerencie usu├írios, perfis de acesso e p├íginas do BI <span class="badge-competencia">Admin</span>';
                 loadAdminPanel();
             } else if (viewName === 'veiculos') {
                 document.getElementById('filters-container').style.display = 'none';
@@ -2570,8 +2502,8 @@
             } else if (viewName === 'cobranca') {
                 document.getElementById('filters-container').style.display = 'none';
                 if (mobileToggleBtn) mobileToggleBtn.style.display = '';
-                document.getElementById('view-title').innerText = 'Analítico Claro';
-                document.getElementById('view-subtitle').innerHTML = 'Análise financeira de serviços executados – Claro';
+                document.getElementById('view-title').innerText = 'Anal├¡tico Claro';
+                document.getElementById('view-subtitle').innerHTML = 'An├ílise financeira de servi├ºos executados ΓÇô Claro';
                 if (!cobrancaDataLoaded) {
                     initCobranca();
                 } else {
@@ -2597,10 +2529,10 @@
                 if (viewName === 'dashboard') {
                     document.getElementById('view-title').innerText = 'Dashboard Financeiro';
                     if (activeDashboardTab === 'indicators') {
-                        document.getElementById('view-subtitle').innerHTML = `Dashboard de Gestão e Análise de Indicadores.${mesText ? ' <span class="badge-competencia">Competência: ' + mesText + '</span>' : ''}`;
+                        document.getElementById('view-subtitle').innerHTML = `Dashboard de Gest├úo e An├ílise de Indicadores.${mesText ? ' <span class="badge-competencia">Compet├¬ncia: ' + mesText + '</span>' : ''}`;
                         renderCharts();
                     } else {
-                        document.getElementById('view-subtitle').innerHTML = `Relação completa de transações com ferramentas de busca e auditoria${mesText ? ' <span class="badge-competencia">Competência: ' + mesText + '</span>' : ''}`;
+                        document.getElementById('view-subtitle').innerHTML = `Rela├º├úo completa de transa├º├╡es com ferramentas de busca e auditoria${mesText ? ' <span class="badge-competencia">Compet├¬ncia: ' + mesText + '</span>' : ''}`;
                         renderTable();
                     }
                 }
@@ -2612,9 +2544,9 @@
 
         const PAGES_CATALOG = [
             { id: 'dashboard',    label: 'Dashboard Financeiro',     icon: 'fa-sack-dollar' },
-            { id: 'veiculos',     label: 'Veículos',                 icon: 'fa-car' },
+            { id: 'veiculos',     label: 'Ve├¡culos',                 icon: 'fa-car' },
             
-            { id: 'cobranca',     label: 'Analítico Claro',          icon: 'fa-file-invoice-dollar' },
+            { id: 'cobranca',     label: 'Anal├¡tico Claro',          icon: 'fa-file-invoice-dollar' },
             { id: 'gestao_os',    label: 'Gestão de OS',             icon: 'fa-clipboard-list' },
         ];
 
@@ -2693,7 +2625,7 @@
             if (!tbody) return;
 
             if (error || !usersData || usersData.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color: var(--text-secondary); padding: 24px;">Nenhum usuário cadastrado ainda.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color: var(--text-secondary); padding: 24px;">Nenhum usu├írio cadastrado ainda.</td></tr>`;
                 return;
             }
 
@@ -2701,7 +2633,7 @@
                 const email = u.out_email;
                 const isAdmin = u.out_is_admin;
                 const allowedPages = u.out_allowed_pages || [];
-                // Se houver um registro de last_access em bi_permissions, usa-o, caso contrário cai de volta para a data de login no auth.users
+                // Se houver um registro de last_access em bi_permissions, usa-o, caso contr├írio cai de volta para a data de login no auth.users
                 const lastSignInAt = accessTimes[email.toLowerCase()] || u.out_last_sign_in_at;
 
                 const pages = allowedPages.map(p => {
@@ -2711,7 +2643,7 @@
 
                 const adminBadge = isAdmin
                     ? `<span class="badge-competencia" style="background: rgba(231,76,60,0.1); color: #e74c3c; border-color: rgba(231,76,60,0.25);">Admin</span>`
-                    : `<span class="badge-competencia" style="background: rgba(46,204,113,0.08); color: var(--color-success); border-color: rgba(46,204,113,0.2);">Usuário</span>`;
+                    : `<span class="badge-competencia" style="background: rgba(46,204,113,0.08); color: var(--color-success); border-color: rgba(46,204,113,0.2);">Usu├írio</span>`;
                 
                 const isSelf = email === currentUserEmail;
 
@@ -2725,11 +2657,11 @@
                 const lastAccessHtml = formatLastAccess(lastSignInAt);
 
                 return `<tr>
-                    <td data-label="E-mail"><span class="admin-user-email-wrap" style="font-weight:600; word-break: break-all;">${email}${isSelf ? ' <span style="font-size:10px; color:var(--text-secondary); font-weight:normal;">(você)</span>' : ''}</span></td>
+                    <td data-label="E-mail"><span class="admin-user-email-wrap" style="font-weight:600; word-break: break-all;">${email}${isSelf ? ' <span style="font-size:10px; color:var(--text-secondary); font-weight:normal;">(voc├¬)</span>' : ''}</span></td>
                     <td data-label="Perfil"><span class="admin-user-badge-wrap">${adminBadge}</span></td>
-                    <td data-label="Páginas Permitidas" style="max-width: 320px; white-space: normal;"><div class="admin-user-pages-wrap">${pages || '<span style="color:var(--text-secondary);font-size:12px;">Nenhuma</span>'}</div></td>
-                    <td data-label="Último Acesso"><span class="admin-user-access-wrap">${lastAccessHtml}</span></td>
-                    <td data-label="Ações">
+                    <td data-label="P├íginas Permitidas" style="max-width: 320px; white-space: normal;"><div class="admin-user-pages-wrap">${pages || '<span style="color:var(--text-secondary);font-size:12px;">Nenhuma</span>'}</div></td>
+                    <td data-label="├Ültimo Acesso"><span class="admin-user-access-wrap">${lastAccessHtml}</span></td>
+                    <td data-label="A├º├╡es">
                         <div class="admin-user-actions-wrap" style="display: flex; gap: 8px; justify-content: flex-end; align-items: center; width: 100%;">
                             <button onclick="openEditUserModal(${JSON.stringify(userDataObj).replace(/"/g, '&quot;')})" title="Editar" style="background:none;border:1px solid var(--border-color);color:var(--text-secondary);padding:6px 10px;border-radius:6px;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;justify-content:center;height:32px;width:32px;" onmouseover="this.style.borderColor='var(--color-primary)'" onmouseout="this.style.borderColor='var(--border-color)'">
                                 <i class="fa-solid fa-pen"></i>
@@ -2752,7 +2684,7 @@
             if (error) {
                 alert('Erro ao salvar: ' + error.message);
             } else {
-                showAdminToast('Acesso padrão atualizado com sucesso!');
+                showAdminToast('Acesso padr├úo atualizado com sucesso!');
             }
         }
 
@@ -2760,11 +2692,11 @@
 
         function openAddUserModal() {
             editingEmail = null;
-            document.getElementById('modal-user-title').innerText = 'Adicionar Usuário';
+            document.getElementById('modal-user-title').innerText = 'Adicionar Usu├írio';
             document.getElementById('modal-user-email').value = '';
             document.getElementById('modal-user-email').disabled = false;
             document.getElementById('modal-user-password').value = '';
-            document.getElementById('modal-user-password').placeholder = 'Senha de no mínimo 6 caracteres';
+            document.getElementById('modal-user-password').placeholder = 'Senha de no m├¡nimo 6 caracteres';
             document.getElementById('modal-user-password-label').innerText = 'Senha de acesso';
             document.getElementById('modal-user-is-admin').value = 'false';
             renderPageCheckboxes('modal-pages-list', ['dashboard', 'transactions']);
@@ -2773,7 +2705,7 @@
 
         function openEditUserModal(userData) {
             editingEmail = userData.email;
-            document.getElementById('modal-user-title').innerText = 'Editar Permissões';
+            document.getElementById('modal-user-title').innerText = 'Editar Permiss├╡es';
             document.getElementById('modal-user-email').value = userData.email;
             document.getElementById('modal-user-email').disabled = true;
             document.getElementById('modal-user-password').value = '';
@@ -2799,25 +2731,25 @@
             const pages = isAdmin ? PAGES_CATALOG.filter(p => !p.disabled).map(p => p.id) : getCheckedPages('modal-pages-list');
 
             if (!email || !email.includes('@')) {
-                alert('Por favor, informe um e-mail válido.');
+                alert('Por favor, informe um e-mail v├ílido.');
                 return;
             }
 
-            // Se for novo usuário, senha é obrigatória (mínimo 6 caracteres)
+            // Se for novo usu├írio, senha ├⌐ obrigat├│ria (m├¡nimo 6 caracteres)
             if (!editingEmail) {
                 if (!password || password.length < 6) {
-                    alert('Para novos usuários, a senha é obrigatória e deve conter pelo menos 6 caracteres.');
+                    alert('Para novos usu├írios, a senha ├⌐ obrigat├│ria e deve conter pelo menos 6 caracteres.');
                     return;
                 }
             } else {
-                // Se for edição, e a senha for digitada, deve ter pelo menos 6 caracteres
+                // Se for edi├º├úo, e a senha for digitada, deve ter pelo menos 6 caracteres
                 if (password && password.length < 6) {
                     alert('A nova senha deve conter pelo menos 6 caracteres.');
                     return;
                 }
             }
 
-            // Exibir loading no botão
+            // Exibir loading no bot├úo
             const saveBtn = document.querySelector('#user-permission-modal .admin-save-btn');
             const originalHtml = saveBtn.innerHTML;
             saveBtn.disabled = true;
@@ -2828,17 +2760,17 @@
             try {
                 const { data, error } = await supabaseClient.rpc('create_or_update_user_admin', {
                     new_email: email,
-                    new_password: password || '', // opcional na edição se vazio
+                    new_password: password || '', // opcional na edi├º├úo se vazio
                     full_name: fullName,
                     is_admin_user: isAdmin,
                     allowed_pages: pages
                 });
 
                 if (error) {
-                    alert('Erro ao salvar usuário: ' + error.message);
+                    alert('Erro ao salvar usu├írio: ' + error.message);
                 } else {
                     document.getElementById('user-permission-modal').classList.remove('active');
-                    showAdminToast('Usuário e permissões salvos com sucesso!');
+                    showAdminToast('Usu├írio e permiss├╡es salvos com sucesso!');
                     loadAdminPanel();
                 }
             } catch (err) {
@@ -2851,14 +2783,14 @@
 
         async function deleteUserPermission(email) {
             if (!supabaseClient || !currentUserIsAdmin) return;
-            if (!confirm(`Remover acesso de ${email} e excluir conta de autenticação?`)) return;
+            if (!confirm(`Remover acesso de ${email} e excluir conta de autentica├º├úo?`)) return;
             
             try {
                 const { error } = await supabaseClient.rpc('delete_user_admin', { user_email: email });
                 if (error) {
                     alert('Erro ao remover: ' + error.message);
                 } else {
-                    showAdminToast('Usuário e acesso removidos com sucesso!');
+                    showAdminToast('Usu├írio e acesso removidos com sucesso!');
                     loadAdminPanel();
                 }
             } catch (err) {
@@ -2923,7 +2855,7 @@
                 icon.className = 'fa-solid fa-chevron-left';
             }
             
-            // Alternar exibição do nome do usuário (completo vs iniciais)
+            // Alternar exibi├º├úo do nome do usu├írio (completo vs iniciais)
             const nameEl = document.getElementById('user-display-name');
             if (nameEl) {
                 const fullName = nameEl.getAttribute('data-fullname') || '';
@@ -2931,7 +2863,7 @@
                 nameEl.innerText = isCollapsed ? initials : fullName;
             }
             
-            // Força o redimensionamento do canvas do Chart.js após a transição da barra lateral
+            // For├ºa o redimensionamento do canvas do Chart.js ap├│s a transi├º├úo da barra lateral
             setTimeout(() => {
                 window.dispatchEvent(new Event('resize'));
             }, 320);
@@ -2973,11 +2905,11 @@
             return (isNegative ? '-' : '') + formatted;
         }
 
-        // Lógica de Filtros Aplicados
+        // L├│gica de Filtros Aplicados
         function applyFilters() {
             const banco = document.getElementById('filter-banco').value;
             const mes = document.getElementById('filter-mes').value;
-            const transfers = 'SHOW'; // Forçado para Exibir (Reconciliação Física) sempre, a pedido do usuário
+            const transfers = 'SHOW'; // For├ºado para Exibir (Reconcilia├º├úo F├¡sica) sempre, a pedido do usu├írio
             const categoria = document.getElementById('filter-categoria').value;
             const uf = document.getElementById('filter-uf').value;
             const dataInicio = document.getElementById('filter-data-inicio').value;
@@ -2995,11 +2927,11 @@
                     if (clientName !== activeCustomerFilter) return false;
                 }
                 
-                // Filtro por Período de Data
+                // Filtro por Per├¡odo de Data
                 if (dataInicio && t.data < dataInicio) return false;
                 if (dataFim && t.data > dataFim) return false;
                 
-                // Filtro Transferências Internas
+                // Filtro Transfer├¬ncias Internas
                 if (transfers === 'HIDE' && t.is_transfer) return false;
                 if (transfers === 'ONLY' && !t.is_transfer) return false;
                 
@@ -3011,7 +2943,7 @@
             renderCharts();
             renderTable();
 
-            // Atualizar o mês de referência no subtítulo
+            // Atualizar o m├¬s de refer├¬ncia no subt├¡tulo
             const mesSelect = document.getElementById('filter-mes');
             if (mesSelect) {
                 const mesText = mesSelect.options[mesSelect.selectedIndex].text;
@@ -3019,12 +2951,12 @@
                 if (subtitleEl) {
                     if (activeView === 'dashboard') {
                         if (activeDashboardTab === 'indicators') {
-                            subtitleEl.innerHTML = `Dashboard de Gestão e Análise de Indicadores. <span class="badge-competencia">Competência: ${mesText}</span>`;
+                            subtitleEl.innerHTML = `Dashboard de Gest├úo e An├ílise de Indicadores. <span class="badge-competencia">Compet├¬ncia: ${mesText}</span>`;
                         } else {
-                            subtitleEl.innerHTML = `Relação completa de transações com ferramentas de busca e auditoria <span class="badge-competencia">Competência: ${mesText}</span>`;
+                            subtitleEl.innerHTML = `Rela├º├úo completa de transa├º├╡es com ferramentas de busca e auditoria <span class="badge-competencia">Compet├¬ncia: ${mesText}</span>`;
                         }
                     } else if (activeView === 'admin') {
-                        subtitleEl.innerHTML = `Gerencie usuários, perfis de acesso e páginas do BI <span class="badge-competencia">Admin</span>`;
+                        subtitleEl.innerHTML = `Gerencie usu├írios, perfis de acesso e p├íginas do BI <span class="badge-competencia">Admin</span>`;
                     }
                 }
             }
@@ -3044,7 +2976,7 @@
             applyFilters();
         }
 
-        // Função de alternância de filtro de banco ao clicar nos cards
+        // Fun├º├úo de altern├óncia de filtro de banco ao clicar nos cards
         function toggleBankFilter(bankName) {
             const selectEl = document.getElementById('filter-banco');
             if (!selectEl) return;
@@ -3065,7 +2997,7 @@
 
         function filterBySpecificDay(day, month) {
             const monthMapping = {
-                'JANEIRO': '01', 'FEVEREIRO': '02', 'MARÇO': '03', 'ABRIL': '04',
+                'JANEIRO': '01', 'FEVEREIRO': '02', 'MAR├çO': '03', 'ABRIL': '04',
                 'MAIO': '05', 'JUNHO': '06', 'JULHO': '07', 'AGOSTO': '08',
                 'SETEMBRO': '09', 'OUTUBRO': '10', 'NOVEMBRO': '11', 'DEZEMBRO': '12'
             };
@@ -3082,7 +3014,7 @@
 
         function filterBySpecificWeek(weekIdx, month) {
             const monthMapping = {
-                'JANEIRO': '01', 'FEVEREIRO': '02', 'MARÇO': '03', 'ABRIL': '04',
+                'JANEIRO': '01', 'FEVEREIRO': '02', 'MAR├çO': '03', 'ABRIL': '04',
                 'MAIO': '05', 'JUNHO': '06', 'JULHO': '07', 'AGOSTO': '08',
                 'SETEMBRO': '09', 'OUTUBRO': '10', 'NOVEMBRO': '11', 'DEZEMBRO': '12'
             };
@@ -3090,7 +3022,7 @@
             if (!monthNum) return;
             
             const daysInMonth = {
-                'JANEIRO': 31, 'FEVEREIRO': 28, 'MARÇO': 31, 'ABRIL': 30, 'MAIO': 31, 'JUNHO': 30,
+                'JANEIRO': 31, 'FEVEREIRO': 28, 'MAR├çO': 31, 'ABRIL': 30, 'MAIO': 31, 'JUNHO': 30,
                 'JULHO': 31, 'AGOSTO': 31, 'SETEMBRO': 30, 'OUTUBRO': 31, 'NOVEMBRO': 30, 'DEZEMBRO': 31
             };
             const maxDays = daysInMonth[month] || 31;
@@ -3123,22 +3055,22 @@
             renderTable();
         }
 
-        // KPIs (Geração/Fluxo Líquido removido a pedido do usuário)
+        // KPIs (Gera├º├úo/Fluxo L├¡quido removido a pedido do usu├írio)
         function calculateKPIs() {
             let totalEntradas = 0;
             let totalSaidas = 0;
             
             filteredTransactions.forEach(t => {
-                // Incluímos o Saldo Inicial no total de entradas para bater exatamente com a planilha base original
+                // Inclu├¡mos o Saldo Inicial no total de entradas para bater exatamente com a planilha base original
                 if (t.fluxo === 'Entrada') {
                     totalEntradas += t.valor_nominal;
-                } else if (t.fluxo === 'Saída') {
+                } else if (t.fluxo === 'Sa├¡da') {
                     totalSaidas += t.valor_nominal;
                 }
             });
             
             let saldoFinal = 0;
-            const bancosMapeados = ['Bradesco', 'Sicoob Confiança', 'Sicoob MaxiCrédito', 'Cartão de Crédito'];
+            const bancosMapeados = ['Bradesco', 'Sicoob Confian├ºa', 'Sicoob MaxiCr├⌐dito', 'Cart├úo de Cr├⌐dito'];
             const filterBanco = document.getElementById('filter-banco').value;
             const targetBancos = filterBanco === 'ALL' ? bancosMapeados : [filterBanco];
             
@@ -3158,25 +3090,25 @@
             document.getElementById('kpi-saidas').innerText = formatCurrency(totalSaidas);
             document.getElementById('kpi-saldo-final').innerText = formatCurrency(saldoFinal);
 
-            // --- Cálculos de Indicadores Analíticos Avançados ---
-            // Declarações hoistadas para evitar Temporal Dead Zone em closures
+            // --- C├ílculos de Indicadores Anal├¡ticos Avan├ºados ---
+            // Declara├º├╡es hoistadas para evitar Temporal Dead Zone em closures
             const selectedMonth = document.getElementById('filter-mes').value;
             const filterUf = document.getElementById('filter-uf').value;
             const filterCategoria = document.getElementById('filter-categoria').value;
-            // monthOrder como array para índice numérico (virada de ano: JANEIRO → DEZEMBRO do ano anterior)
+            // monthOrder como array para ├¡ndice num├⌐rico (virada de ano: JANEIRO ΓåÆ DEZEMBRO do ano anterior)
             const monthOrderArr = [
-                "JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO", "JUNHO",
+                "JANEIRO", "FEVEREIRO", "MAR├çO", "ABRIL", "MAIO", "JUNHO",
                 "JULHO", "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"
             ];
             const daysInMonth = {
-                'JANEIRO': 31, 'FEVEREIRO': 28, 'MARÇO': 31, 'ABRIL': 30, 'MAIO': 31, 'JUNHO': 30,
+                'JANEIRO': 31, 'FEVEREIRO': 28, 'MAR├çO': 31, 'ABRIL': 30, 'MAIO': 31, 'JUNHO': 30,
                 'JULHO': 31, 'AGOSTO': 31, 'SETEMBRO': 30, 'OUTUBRO': 31, 'NOVEMBRO': 30, 'DEZEMBRO': 31
             };
             
-            // Helper: extrai o nome do mês de uma competência no formato "JANEIRO/2026" ou "JANEIRO"
+            // Helper: extrai o nome do m├¬s de uma compet├¬ncia no formato "JANEIRO/2026" ou "JANEIRO"
             const getMonthName = (comp) => comp ? comp.split('/')[0] : comp;
             
-            // Helper: calcula a competência do mês anterior com suporte a virada de ano
+            // Helper: calcula a compet├¬ncia do m├¬s anterior com suporte a virada de ano
             const getPreviousCompetencia = (comp) => {
                 if (!comp || comp === 'ALL' || comp === 'N/D') return null;
                 const parts = comp.split('/');
@@ -3201,19 +3133,19 @@
                 periodDays = daysInMonth[getMonthName(selectedMonth)] || 30;
             }
 
-            // 1. Médias Diárias
+            // 1. M├⌐dias Di├írias
             const mediaDiariaEntradas = totalEntradas / periodDays;
             const mediaDiariaSaidas = totalSaidas / periodDays;
             
-            document.getElementById('sub-entradas-diaria').innerHTML = `Média: <strong>${formatCurrency(mediaDiariaEntradas)}</strong>/dia`;
-            document.getElementById('sub-saidas-diaria').innerHTML = `Média: <strong>${formatCurrency(mediaDiariaSaidas)}</strong>/dia`;
+            document.getElementById('sub-entradas-diaria').innerHTML = `M├⌐dia: <strong>${formatCurrency(mediaDiariaEntradas)}</strong>/dia`;
+            document.getElementById('sub-saidas-diaria').innerHTML = `M├⌐dia: <strong>${formatCurrency(mediaDiariaSaidas)}</strong>/dia`;
 
-            // 2. Comparativo vs. Mês Anterior (Saídas)
+            // 2. Comparativo vs. M├¬s Anterior (Sa├¡das)
             const getMonthSaidas = (m) => {
                 return transactions.filter(t => {
                     if (t.categoria === 'Saldo Inicial') return false;
                     if (t.competencia !== m) return false;
-                    if (t.fluxo !== 'Saída') return false;
+                    if (t.fluxo !== 'Sa├¡da') return false;
                     if (filterBanco !== 'ALL' && t.banco !== filterBanco) return false;
                     if (filterUf !== 'ALL' && t.uf !== filterUf) return false;
                     if (filterCategoria !== 'ALL' && t.categoria !== filterCategoria) return false;
@@ -3229,30 +3161,30 @@
                     if (prevSaidas > 0) {
                         const diffPctS = ((totalSaidas - prevSaidas) / prevSaidas) * 100;
                         const signS = diffPctS >= 0 ? "+" : "";
-                        // Para saídas: aumento é ruim (trend-down), redução é bom (trend-up)
+                        // Para sa├¡das: aumento ├⌐ ruim (trend-down), redu├º├úo ├⌐ bom (trend-up)
                         const trendClassS = diffPctS >= 0 ? 'trend-down' : 'trend-up';
-                        compSaidasText = `vs. Mês Ant.: <span class="${trendClassS}"><strong>${signS}${diffPctS.toFixed(1)}%</strong></span>`;
+                        compSaidasText = `vs. M├¬s Ant.: <span class="${trendClassS}"><strong>${signS}${diffPctS.toFixed(1)}%</strong></span>`;
                     } else {
-                        compSaidasText = "vs. Mês Ant.: <strong>N/D</strong>";
+                        compSaidasText = "vs. M├¬s Ant.: <strong>N/D</strong>";
                     }
                 } else {
-                    compSaidasText = "vs. Mês Ant.: <strong>N/D</strong>";
+                    compSaidasText = "vs. M├¬s Ant.: <strong>N/D</strong>";
                 }
             } else {
                 const activeMonthsCount = [...new Set(transactions.map(t => t.competencia))]
                     .filter(m => m && m !== 'N/D' && m !== '').length || 5;
                 const mediaMensalS = totalSaidas / activeMonthsCount;
-                compSaidasText = `Média Mensal: <strong>${formatShortCurrency(mediaMensalS)}</strong>`;
+                compSaidasText = `M├⌐dia Mensal: <strong>${formatShortCurrency(mediaMensalS)}</strong>`;
             }
             document.getElementById('sub-saidas-comp').innerHTML = compSaidasText;
 
-            // 3. Eficiência de Caixa (Margem Sobra Líquida)
+            // 3. Efici├¬ncia de Caixa (Margem Sobra L├¡quida)
             const sobraLiquida = totalEntradas > 0 ? ((totalEntradas - totalSaidas) / totalEntradas) * 100 : 0;
             const sobraClass = sobraLiquida >= 0 ? 'trend-up' : 'trend-down';
             const sobraSign = sobraLiquida >= 0 ? '+' : '';
-            document.getElementById('sub-saldo-sobra').innerHTML = `Conversão: <span class="${sobraClass}"><strong>${sobraSign}${sobraLiquida.toFixed(1)}%</strong></span>`;
+            document.getElementById('sub-saldo-sobra').innerHTML = `Convers├úo: <span class="${sobraClass}"><strong>${sobraSign}${sobraLiquida.toFixed(1)}%</strong></span>`;
 
-            // 4. Comparativo vs. Mês Anterior (Entradas)
+            // 4. Comparativo vs. M├¬s Anterior (Entradas)
             const getMonthEntradas = (m) => {
                 return transactions.filter(t => {
                     if (t.categoria === 'Saldo Inicial') return false;
@@ -3274,22 +3206,22 @@
                         const diffPct = ((totalEntradas - prevEntradas) / prevEntradas) * 100;
                         const sign = diffPct >= 0 ? "+" : "";
                         const trendClass = diffPct >= 0 ? 'trend-up' : 'trend-down';
-                        compEntradasText = `vs. Mês Ant.: <span class="${trendClass}"><strong>${sign}${diffPct.toFixed(1)}%</strong></span>`;
+                        compEntradasText = `vs. M├¬s Ant.: <span class="${trendClass}"><strong>${sign}${diffPct.toFixed(1)}%</strong></span>`;
                     } else {
-                        compEntradasText = "vs. Mês Ant.: <strong>N/D</strong>";
+                        compEntradasText = "vs. M├¬s Ant.: <strong>N/D</strong>";
                     }
                 } else {
-                    compEntradasText = "vs. Mês Ant.: <strong>N/D</strong>";
+                    compEntradasText = "vs. M├¬s Ant.: <strong>N/D</strong>";
                 }
             } else {
                 const activeMonthsCount = [...new Set(transactions.map(t => t.competencia))]
                     .filter(m => m && m !== 'N/D' && m !== '').length || 5;
                 const mediaMensal = totalEntradas / activeMonthsCount;
-                compEntradasText = `Média Mensal: <strong>${formatShortCurrency(mediaMensal)}</strong>`;
+                compEntradasText = `M├⌐dia Mensal: <strong>${formatShortCurrency(mediaMensal)}</strong>`;
             }
             document.getElementById('sub-entradas-comp').innerHTML = compEntradasText;
 
-            // 5. Geração / Consumo de Caixa removido a pedido do usuário
+            // 5. Gera├º├úo / Consumo de Caixa removido a pedido do usu├írio
         }
 
         function getSaldoInicialBanco(banco, mesFiltro) {
@@ -3297,7 +3229,7 @@
             if (mesFiltro !== 'ALL') {
                 targetTxs = targetTxs.filter(t => t.competencia === mesFiltro);
             }
-            // Retorna o primeiro saldo inicial do período selecionado
+            // Retorna o primeiro saldo inicial do per├¡odo selecionado
             const saldoInicialRow = targetTxs.find(t => t.categoria === 'Saldo Inicial');
             return saldoInicialRow ? saldoInicialRow.valor_nominal : 0;
         }
@@ -3307,7 +3239,7 @@
             if (!container) return;
             container.innerHTML = '';
             
-            const displayLabels = ['Bradesco', 'Sicoob Confiança', 'Sicoob MaxiCrédito', 'Cartão SICOOB'];
+            const displayLabels = ['Bradesco', 'Sicoob Confian├ºa', 'Sicoob MaxiCr├⌐dito', 'Cart├úo SICOOB'];
             const colors = ['#cc0000', '#0a7c59', '#ffb83d', '#00ae9d'];
             // Logos: imagem para Bradesco e Sicoob, fallback texto para os demais
             const badges = [
@@ -3333,7 +3265,7 @@
                 const pct = totalSaldo > 0 ? (item.saldoFinal / totalSaldo) * 100 : 0;
                 
                 const bankItem = document.createElement('div');
-                const bancosMapeados = ['Bradesco', 'Sicoob Confiança', 'Sicoob MaxiCrédito', 'Cartão de Crédito'];
+                const bancosMapeados = ['Bradesco', 'Sicoob Confian├ºa', 'Sicoob MaxiCr├⌐dito', 'Cart├úo de Cr├⌐dito'];
                 const isActive = filterBanco === bancosMapeados[idx];
                 bankItem.className = 'bank-card-item' + (isActive ? ' active' : '');
                 bankItem.setAttribute('onclick', `toggleBankFilter('${bancosMapeados[idx]}')`);
@@ -3369,7 +3301,7 @@
                             <strong class="trend-up">${formatCurrency(item.transfRec)}</strong>
                         </div>
                         <div class="bank-detail-item">
-                            <span>Saídas (-):</span>
+                            <span>Sa├¡das (-):</span>
                             <strong class="trend-down">${formatCurrency(item.saidas)}</strong>
                         </div>
                         <div class="bank-detail-item">
@@ -3382,7 +3314,7 @@
             });
         }
 
-        // Renderização de Gráficos (Chart.js)
+        // Renderiza├º├úo de Gr├íficos (Chart.js)
         function renderCharts() {
             if (!currentUserEmail || activeView !== 'dashboard' || activeDashboardTab !== 'indicators') return;
             
@@ -3390,14 +3322,14 @@
             const gridColor = isDark ? '#20313f' : '#e0e6ed';
             const textColor = isDark ? '#8a99a8' : '#637381';
             
-            // Destruir gráficos existentes
+            // Destruir gr├íficos existentes
             Object.keys(charts).forEach(key => {
                 if (charts[key]) charts[key].destroy();
             });
             
             const selectedMonth = document.getElementById('filter-mes').value;
             
-            // 1. GRAFICO 1: EVOLUÇÃO MENSAL OU DIÁRIA (DINÂMICO)
+            // 1. GRAFICO 1: EVOLU├ç├âO MENSAL OU DI├üRIA (DIN├éMICO)
             const ctxEvolution = document.getElementById('chart-evolution').getContext('2d');
             
             // Determinar a granularidade ativa
@@ -3412,7 +3344,7 @@
                 activeGranularity = isMobile ? 'weekly' : 'daily';
             }
             
-            // Renderizar botões de controle de granularidade
+            // Renderizar bot├╡es de controle de granularidade
             const controlsContainer = document.getElementById('evolution-chart-controls');
             if (controlsContainer) {
                 controlsContainer.innerHTML = `
@@ -3428,22 +3360,22 @@
                     <button class="chart-toggle-btn ${activeGranularity === 'daily' ? 'active' : ''}" 
                             ${isAllSelected ? 'disabled style="opacity: 0.35; pointer-events: none;"' : ''} 
                             onclick="setEvolutionChartGranularity('daily')">
-                        Diário
+                        Di├írio
                     </button>
                 `;
             }
             
             if (activeGranularity === 'monthly') {
-                // VISÃO MENSAL CONSOLIDADA (PODE IGNORAR O FILTRO DE MÊS INDIVIDUAL)
+                // VIS├âO MENSAL CONSOLIDADA (PODE IGNORAR O FILTRO DE M├èS INDIVIDUAL)
                 document.getElementById('evolution-chart-title').innerText = isAllSelected 
-                    ? 'Evolução de Fluxo Mensal' 
-                    : `Evolução de Fluxo Mensal (Visão Geral)`;
+                    ? 'Evolu├º├úo de Fluxo Mensal' 
+                    : `Evolu├º├úo de Fluxo Mensal (Vis├úo Geral)`;
                 
                 const monthOrderMap = {
-                    'JANEIRO': 1, 'FEVEREIRO': 2, 'MARÇO': 3, 'ABRIL': 4, 'MAIO': 5, 'JUNHO': 6,
+                    'JANEIRO': 1, 'FEVEREIRO': 2, 'MAR├çO': 3, 'ABRIL': 4, 'MAIO': 5, 'JUNHO': 6,
                     'JULHO': 7, 'AGOSTO': 8, 'SETEMBRO': 9, 'OUTUBRO': 10, 'NOVEMBRO': 11, 'DEZEMBRO': 12
                 };
-                // Ordenar competências por ano e depois por mês (suporte multi-ano)
+                // Ordenar compet├¬ncias por ano e depois por m├¬s (suporte multi-ano)
                 const months = [...new Set(transactions.map(t => t.competencia))]
                     .filter(m => m && m !== 'N/D' && m !== '')
                     .sort((a, b) => {
@@ -3456,7 +3388,7 @@
                 const monthlyEntradas = new Array(months.length).fill(0);
                 const monthlySaidas = new Array(months.length).fill(0);
                 
-                // Usamos as transações filtradas por banco/categoria/uf, mas não por mês
+                // Usamos as transa├º├╡es filtradas por banco/categoria/uf, mas n├úo por m├¬s
                 const evolutionTxs = transactions.filter(t => {
                     const banco = document.getElementById('filter-banco').value;
                     const categoria = document.getElementById('filter-categoria').value;
@@ -3473,14 +3405,14 @@
                     if (mIdx !== -1) {
                         if (t.fluxo === 'Entrada') {
                             monthlyEntradas[mIdx] += t.valor_nominal;
-                        } else if (t.fluxo === 'Saída') {
+                        } else if (t.fluxo === 'Sa├¡da') {
                             monthlySaidas[mIdx] += t.valor_nominal;
                         }
                     }
                 });
                 
                 const shortMonthsMap = {
-                    'JANEIRO': 'Jan', 'FEVEREIRO': 'Fev', 'MARÇO': 'Mar', 'ABRIL': 'Abr', 'MAIO': 'Mai', 'JUNHO': 'Jun',
+                    'JANEIRO': 'Jan', 'FEVEREIRO': 'Fev', 'MAR├çO': 'Mar', 'ABRIL': 'Abr', 'MAIO': 'Mai', 'JUNHO': 'Jun',
                     'JULHO': 'Jul', 'AGOSTO': 'Ago', 'SETEMBRO': 'Set', 'OUTUBRO': 'Out', 'NOVEMBRO': 'Nov', 'DEZEMBRO': 'Dez'
                 };
                 // Exibe "Jan/26" para competencias no formato "JANEIRO/2026"
@@ -3506,7 +3438,7 @@
                                 hoverBorderWidth: 2
                             },
                             {
-                                label: 'Saídas',
+                                label: 'Sa├¡das',
                                 data: monthlySaidas,
                                 backgroundColor: '#f39f18',
                                 borderColor: '#f39f18',
@@ -3569,7 +3501,7 @@
                         onClick: (event, elements) => {
                             if (elements.length > 0) {
                                 const monthMap = {
-                                    'Jan': 'JANEIRO', 'Fev': 'FEVEREIRO', 'Mar': 'MARÇO',
+                                    'Jan': 'JANEIRO', 'Fev': 'FEVEREIRO', 'Mar': 'MAR├çO',
                                     'Abr': 'ABRIL', 'Mai': 'MAIO', 'Jun': 'JUNHO',
                                     'Jul': 'JULHO', 'Ago': 'AGOSTO', 'Set': 'SETEMBRO',
                                     'Out': 'OUTUBRO', 'Nov': 'NOVEMBRO', 'Dez': 'DEZEMBRO'
@@ -3585,16 +3517,16 @@
                     }
                 });
             } else {
-                // VISÃO DIÁRIA OU SEMANAL PARA O MÊS SELECIONADO
+                // VIS├âO DI├üRIA OU SEMANAL PARA O M├èS SELECIONADO
                 const isWeekly = activeGranularity === 'weekly';
                 
                 document.getElementById('evolution-chart-title').innerText = isWeekly 
-                    ? `Evolução de Fluxo Semanal - ${selectedMonth}` 
-                    : `Evolução de Fluxo Diário - ${selectedMonth}`;
+                    ? `Evolu├º├úo de Fluxo Semanal - ${selectedMonth}` 
+                    : `Evolu├º├úo de Fluxo Di├írio - ${selectedMonth}`;
                 
-                // Mapeamento de dias por mês em 2026
+                // Mapeamento de dias por m├¬s em 2026
                 const daysInMonth = {
-                    'JANEIRO': 31, 'FEVEREIRO': 28, 'MARÇO': 31, 'ABRIL': 30, 'MAIO': 31, 'JUNHO': 30,
+                    'JANEIRO': 31, 'FEVEREIRO': 28, 'MAR├çO': 31, 'ABRIL': 30, 'MAIO': 31, 'JUNHO': 30,
                     'JULHO': 31, 'AGOSTO': 31, 'SETEMBRO': 30, 'OUTUBRO': 31, 'NOVEMBRO': 30, 'DEZEMBRO': 31
                 };
                 const maxDays = daysInMonth[selectedMonth] || 31;
@@ -3611,7 +3543,7 @@
                             if (day >= 1 && day <= maxDays) {
                                 if (t.fluxo === 'Entrada') {
                                     dailyEntradas[day - 1] += t.valor_nominal;
-                                } else if (t.fluxo === 'Saída') {
+                                } else if (t.fluxo === 'Sa├¡da') {
                                     dailySaidas[day - 1] += t.valor_nominal;
                                 }
                             }
@@ -3619,7 +3551,7 @@
                     }
                 });
                 
-                // Configuração condicional se for Semanal ou Diário
+                // Configura├º├úo condicional se for Semanal ou Di├írio
                 let chartLabels = [];
                 let chartEntradas = [];
                 let chartSaidas = [];
@@ -3643,7 +3575,7 @@
                 }
                 
                 charts.evolution = new Chart(ctxEvolution, {
-                    type: 'bar', // Ambos serão do tipo barra vertical duplo
+                    type: 'bar', // Ambos ser├úo do tipo barra vertical duplo
                     data: {
                         labels: chartLabels,
                         datasets: [
@@ -3658,7 +3590,7 @@
                                 hoverBorderWidth: 2
                             },
                             {
-                                label: 'Saídas',
+                                label: 'Sa├¡das',
                                 data: chartSaidas,
                                 backgroundColor: '#f39f18',
                                 borderColor: '#f39f18',
@@ -3691,7 +3623,7 @@
                                 display: (ctx) => ctx.dataset.data[ctx.dataIndex] > 0,
                                 align: 'end',
                                 anchor: 'end',
-                                rotation: isWeekly ? 0 : -90, // No semanal as fontes ficam horizontais para máxima legibilidade
+                                rotation: isWeekly ? 0 : -90, // No semanal as fontes ficam horizontais para m├íxima legibilidade
                                 color: textColor,
                                 font: { 
                                     family: 'Outfit', 
@@ -3738,7 +3670,7 @@
                                     // Drilldown por semana no celular/semanal
                                     filterBySpecificWeek(elementIndex, selectedMonth);
                                 } else {
-                                    // Drilldown por dia no desktop/diário
+                                    // Drilldown por dia no desktop/di├írio
                                     const clickedDay = days[elementIndex];
                                     filterBySpecificDay(clickedDay, selectedMonth);
                                 }
@@ -3748,8 +3680,8 @@
                 });
             }
             
-            // 2. GRAFICO 2: SALDOS POR INSTITUIÇÃO (CALCULADO COM DETALHAMENTO)
-            const bancosMapeados = ['Bradesco', 'Sicoob Confiança', 'Sicoob MaxiCrédito', 'Cartão de Crédito'];
+            // 2. GRAFICO 2: SALDOS POR INSTITUI├ç├âO (CALCULADO COM DETALHAMENTO)
+            const bancosMapeados = ['Bradesco', 'Sicoob Confian├ºa', 'Sicoob MaxiCr├⌐dito', 'Cart├úo de Cr├⌐dito'];
             const bankData = [];
             const filterBanco = document.getElementById('filter-banco').value;
             
@@ -3770,13 +3702,13 @@
                         if (t.is_transfer) {
                             if (t.fluxo === 'Entrada') {
                                 transfRec += t.valor_nominal;
-                            } else if (t.fluxo === 'Saída') {
+                            } else if (t.fluxo === 'Sa├¡da') {
                                 transfEnv += t.valor_nominal;
                             }
                         } else {
                             if (t.fluxo === 'Entrada') {
                                 entradas += t.valor_nominal;
-                            } else if (t.fluxo === 'Saída') {
+                            } else if (t.fluxo === 'Sa├¡da') {
                                 saidas += t.valor_nominal;
                             }
                         }
@@ -3799,17 +3731,17 @@
             
             renderBankBalancesList(bankData, filterBanco);
             
-            // 3. GRAFICO 3: TOP 10 CATEGORIAS / DRILL DOWN PARA DESCRIÇÕES
+            // 3. GRAFICO 3: TOP 10 CATEGORIAS / DRILL DOWN PARA DESCRI├ç├òES
             renderCategoryChart();
             
-            // 4. MAPA DE DISTRIBUIÇÃO POR UF (RS, SC, PR)
+            // 4. MAPA DE DISTRIBUI├ç├âO POR UF (RS, SC, PR)
             renderUFMap();
             
-            // 5. NOVO GRÁFICO: RECEITA POR CLIENTE (COBRANÇAS)
+            // 5. NOVO GR├üFICO: RECEITA POR CLIENTE (COBRAN├çAS)
             renderCustomerChart();
         }
 
-        // Renderiza Gráfico 3 (Categorias / Drill down)
+        // Renderiza Gr├ífico 3 (Categorias / Drill down)
         function renderCategoryChart() {
             const isDark = !document.body.classList.contains('light-theme');
             const gridColor = isDark ? '#20313f' : '#e0e6ed';
@@ -3818,13 +3750,13 @@
             let chartLabels = [];
             let chartData = [];
             
-            const isSaida = categoryFluxState === 'Saída';
-            const fluxLabel = isSaida ? 'Despesas (Saídas)' : 'Receitas (Entradas)';
+            const isSaida = categoryFluxState === 'Sa├¡da';
+            const fluxLabel = isSaida ? 'Despesas (Sa├¡das)' : 'Receitas (Entradas)';
             const barColor = isSaida ? 'rgba(243, 159, 24, 0.85)' : 'rgba(0, 79, 113, 0.85)';
             const barBorderColor = isSaida ? '#f39f18' : '#004f71';
             
             if (categoryDrillDownState.active) {
-                // VISÃO DRILL DOWN: DETALHE POR DESCRIÇÃO DENTRO DA CATEGORIA SELECIONADA
+                // VIS├âO DRILL DOWN: DETALHE POR DESCRI├ç├âO DENTRO DA CATEGORIA SELECIONADA
                 const targetCat = categoryDrillDownState.category;
                 document.getElementById('categories-chart-title').innerText = `${isSaida ? 'Despesas' : 'Receitas'}: ${targetCat}`;
                 document.getElementById('categories-back-container').innerHTML = `
@@ -3840,7 +3772,7 @@
                     }
                 });
                 
-                // Exibir TODAS as descrições (sem limite de 10)
+                // Exibir TODAS as descri├º├╡es (sem limite de 10)
                 const sortedDesc = Object.keys(descSum)
                     .map(d => ({ name: d, value: descSum[d] }))
                     .sort((a, b) => b.value - a.value);
@@ -3848,7 +3780,7 @@
                 chartLabels = sortedDesc.map(d => d.name);
                 chartData = sortedDesc.map(d => d.value);
             } else {
-                // VISÃO CATEGORIA GERAL
+                // VIS├âO CATEGORIA GERAL
                 document.getElementById('categories-chart-title').innerText = `${fluxLabel}`;
                 document.getElementById('categories-back-container').innerHTML = '';
                 
@@ -3868,7 +3800,7 @@
                 chartData = sortedCategories.map(c => c.value);
             }
             
-            // Ajustar altura do container do gráfico de acordo com o número de itens para rolagem vertical suave
+            // Ajustar altura do container do gr├ífico de acordo com o n├║mero de itens para rolagem vertical suave
             const N = chartLabels.length;
             const wrapperHeight = Math.max(380, N * 35);
             const scrollWrapper = document.getElementById('categories-scroll-wrapper');
@@ -3955,7 +3887,7 @@
                         }
                     },
                     onClick: (event, elements) => {
-                        // Ativa drill down ao clicar em uma barra (somente na visão geral)
+                        // Ativa drill down ao clicar em uma barra (somente na vis├úo geral)
                         if (elements.length > 0 && !categoryDrillDownState.active) {
                             const elementIndex = elements[0].index;
                             const clickedCat = charts.categories.data.labels[elementIndex];
@@ -3980,12 +3912,12 @@
             renderCategoryChart();
         }
 
-        // Renderização do Mapa Choropleth de UFs (RS, SC, PR) com Cards Compactos Premium
+        // Renderiza├º├úo do Mapa Choropleth de UFs (RS, SC, PR) com Cards Compactos Premium
         function renderUFMap() {
             const mapContainer = document.getElementById('map-container');
             const tooltip = document.getElementById('map-tooltip');
             
-            // Inicializar métricas por UF
+            // Inicializar m├⌐tricas por UF
             const ufMetrics = {
                 "PR": { entradas: 0, saidas: 0, txCount: 0 },
                 "SC": { entradas: 0, saidas: 0, txCount: 0 },
@@ -3999,7 +3931,7 @@
                     ufMetrics[uf].txCount++;
                     if (t.fluxo === 'Entrada') {
                         ufMetrics[uf].entradas += t.valor_nominal;
-                    } else if (t.fluxo === 'Saída') {
+                    } else if (t.fluxo === 'Sa├¡da') {
                         ufMetrics[uf].saidas += t.valor_nominal;
                     }
                 }
@@ -4009,9 +3941,9 @@
             const totalUFSaidas = Object.keys(ufMetrics).reduce((sum, k) => sum + ufMetrics[k].saidas, 0);
             const totalUFLancamentos = Object.keys(ufMetrics).reduce((sum, k) => sum + ufMetrics[k].txCount, 0);
             
-            // Encontra maior volume (saídas + entradas) para cálculo do gradiente de preenchimento
+            // Encontra maior volume (sa├¡das + entradas) para c├ílculo do gradiente de preenchimento
             const volumes = Object.keys(ufMetrics).map(k => ufMetrics[k].saidas + ufMetrics[k].entradas);
-            const maxVolume = Math.max(...volumes, 1); // evita divisão por zero
+            const maxVolume = Math.max(...volumes, 1); // evita divis├úo por zero
             
             const getColorForUF = (ufCode) => {
                 const vol = ufMetrics[ufCode].saidas + ufMetrics[ufCode].entradas;
@@ -4038,7 +3970,7 @@
                         <svg class="map-svg-centered" viewBox="125 242 136 136" style="overflow: visible;">
                             <!-- GLOWING CURVED DATA CONNECTION FLOW PATHS REMOVED AS REQUESTED -->
 
-                            <!-- PARANÁ POLYGON -->
+                            <!-- PARAN├ü POLYGON -->
                             <polygon class="map-state ${isSelectPR}" id="state-PR" points="
                                 234.456,277.734 235.218,274.689 232.173,276.213 229.318,273.357 228.368,269.744 224.942,269.172 221.898,269.363
                                 220.375,266.127 220.757,263.463 220.945,258.326 218.663,256.424 212.384,257.186 207.056,254.33 203.061,254.33 202.109,254.33
@@ -4108,17 +4040,17 @@
                         </svg>
                     </div>
 
-                    <!-- PARANÁ CAPSULE -->
+                    <!-- PARAN├ü CAPSULE -->
                     <div class="uf-compact-card pr-card ${isSelectPR}" id="card-UF-PR" onclick="toggleUFFromMap('PR')" onmouseenter="handleCardHover('PR')" onmouseleave="handleCardLeave('PR')">
                         <div class="uf-compact-header">
                             <span class="uf-compact-name">
                                 <span class="uf-status-indicator pr-dot"></span>
-                                <strong>Paraná</strong>
+                                <strong>Paran├í</strong>
                             </span>
                         </div>
                         <div class="uf-compact-content">
                             <div class="uf-compact-main-stat">
-                                <span class="uf-stat-label"><i class="fa-solid fa-list-ol"></i> Lançamentos</span>
+                                <span class="uf-stat-label"><i class="fa-solid fa-list-ol"></i> Lan├ºamentos</span>
                                 <span class="uf-stat-value">${ufMetrics['PR'].txCount}</span>
                             </div>
                             <div class="uf-compact-sub-stats">
@@ -4144,7 +4076,7 @@
                         </div>
                         <div class="uf-compact-content">
                             <div class="uf-compact-main-stat">
-                                <span class="uf-stat-label"><i class="fa-solid fa-list-ol"></i> Lançamentos</span>
+                                <span class="uf-stat-label"><i class="fa-solid fa-list-ol"></i> Lan├ºamentos</span>
                                 <span class="uf-stat-value">${ufMetrics['SC'].txCount}</span>
                             </div>
                             <div class="uf-compact-sub-stats">
@@ -4170,7 +4102,7 @@
                         </div>
                         <div class="uf-compact-content">
                             <div class="uf-compact-main-stat">
-                                <span class="uf-stat-label"><i class="fa-solid fa-list-ol"></i> Lançamentos</span>
+                                <span class="uf-stat-label"><i class="fa-solid fa-list-ol"></i> Lan├ºamentos</span>
                                 <span class="uf-stat-value">${ufMetrics['RS'].txCount}</span>
                             </div>
                             <div class="uf-compact-sub-stats">
@@ -4220,7 +4152,7 @@
                 if (polygon) polygon.classList.add('hovered');
                 
                 const data = ufMetrics[ufCode];
-                const stateName = ufCode === 'PR' ? 'Paraná' : ufCode === 'SC' ? 'Santa Catarina' : 'Rio Grande do Sul';
+                const stateName = ufCode === 'PR' ? 'Paran├í' : ufCode === 'SC' ? 'Santa Catarina' : 'Rio Grande do Sul';
                 
                 const pctEntradas = totalUFEntradas > 0 ? (data.entradas / totalUFEntradas) * 100 : 0;
                 const pctSaidas = totalUFSaidas > 0 ? (data.saidas / totalUFSaidas) * 100 : 0;
@@ -4231,9 +4163,9 @@
                 tooltip.style.opacity = 1;
                 tooltip.innerHTML = `
                     <div class="tooltip-title">${stateName} (${ufCode})</div>
-                    <div class="tooltip-row"><span>Lançamentos:</span><span class="tooltip-value">${data.txCount} (${pctLancamentos.toFixed(1).replace('.', ',')}%)</span></div>
+                    <div class="tooltip-row"><span>Lan├ºamentos:</span><span class="tooltip-value">${data.txCount} (${pctLancamentos.toFixed(1).replace('.', ',')}%)</span></div>
                     <div class="tooltip-row"><span>Entradas:</span><span class="tooltip-value" style="color: var(--color-success);">${formatCurrency(data.entradas)} (${pctEntradas.toFixed(1).replace('.', ',')}%)</span></div>
-                    <div class="tooltip-row"><span>Saídas:</span><span class="tooltip-value" style="color: var(--color-danger);">${formatCurrency(data.saidas)} (${pctSaidas.toFixed(1).replace('.', ',')}%)</span></div>
+                    <div class="tooltip-row"><span>Sa├¡das:</span><span class="tooltip-value" style="color: var(--color-danger);">${formatCurrency(data.saidas)} (${pctSaidas.toFixed(1).replace('.', ',')}%)</span></div>
                 `;
                 */
             };
@@ -4274,13 +4206,13 @@
             };
         }
 
-        // Novo Gráfico: Receita por Cliente (Cobranças)
+        // Novo Gr├ífico: Receita por Cliente (Cobran├ºas)
         function renderCustomerChart() {
             const isDark = !document.body.classList.contains('light-theme');
             const gridColor = isDark ? '#20313f' : '#e0e6ed';
             const textColor = isDark ? '#8a99a8' : '#637381';
             
-            // Atualiza cabeçalho do gráfico de clientes de acordo com o filtro ativo
+            // Atualiza cabe├ºalho do gr├ífico de clientes de acordo com o filtro ativo
             if (activeCustomerFilter) {
                 document.getElementById('customers-chart-title').innerText = `Cliente: ${activeCustomerFilter}`;
                 document.getElementById('customers-back-container').innerHTML = `
@@ -4289,15 +4221,15 @@
                     </button>
                 `;
             } else {
-                document.getElementById('customers-chart-title').innerText = 'Receita por Cliente (Cobranças)';
+                document.getElementById('customers-chart-title').innerText = 'Receita por Cliente (Cobran├ºas)';
                 document.getElementById('customers-back-container').innerHTML = '';
             }
             
             const customerSum = {};
             
-            // Filtrar transações de Entrada e Categoria 'Cobranças'
+            // Filtrar transa├º├╡es de Entrada e Categoria 'Cobran├ºas'
             filteredTransactions.forEach(t => {
-                if (t.fluxo === 'Entrada' && t.categoria === 'Cobranças') {
+                if (t.fluxo === 'Entrada' && t.categoria === 'Cobran├ºas') {
                     const clientName = t.descricao ? t.descricao.trim().toUpperCase() : 'OUTROS';
                     customerSum[clientName] = (customerSum[clientName] || 0) + t.valor_nominal;
                 }
@@ -4307,7 +4239,7 @@
                 .map(c => ({ name: c, value: customerSum[c] }))
                 .sort((a, b) => b.value - a.value);
                 
-            // Abreviação inteligente de nomes de clientes para manter legenda compacta
+            // Abrevia├º├úo inteligente de nomes de clientes para manter legenda compacta
             function abbrevClient(name) {
                 let s = name
                     .replace(/\s+LTDA\.?$/i, '')
@@ -4328,7 +4260,7 @@
             
             const totalSum = chartData.reduce((sum, val) => sum + val, 0);
 
-            // Fatia visual mínima de 2.5% — itens pequenos aparecem, proporção entre grandes é preservada
+            // Fatia visual m├¡nima de 2.5% ΓÇö itens pequenos aparecem, propor├º├úo entre grandes ├⌐ preservada
             const MIN_PCT = 0.025;
             const minSliceVal = totalSum * MIN_PCT;
             let totalBorrowed = 0;
@@ -4348,7 +4280,7 @@
             
             if (charts.customers) charts.customers.destroy();
             
-            // Paleta temática corporativa: tons de azul, laranjas, roxos, verdes
+            // Paleta tem├ítica corporativa: tons de azul, laranjas, roxos, verdes
             const colorPalette = [
                 '#004f71', '#ffb83d', '#7209b7', '#00b4d8', 
                 '#ff4d6d', '#2ecc71', '#f72585', '#4cc9f0',
@@ -4372,12 +4304,12 @@
                     
                     const innerRadius = chart.innerRadius || 60;
                     
-                    // Medição de fonte dinâmica para otimizar espaço e não quebrar/extrapolar o círculo interno
+                    // Medi├º├úo de fonte din├ómica para otimizar espa├ºo e n├úo quebrar/extrapolar o c├¡rculo interno
                     const textValue = formatCurrency(totalSum);
-                    let valueFontSize = innerRadius * 0.32; // Começa grande
+                    let valueFontSize = innerRadius * 0.32; // Come├ºa grande
                     ctx.font = `700 ${valueFontSize}px Outfit, sans-serif`;
                     
-                    // Reduz o tamanho da fonte caso o texto ultrapasse 85% do diâmetro interno
+                    // Reduz o tamanho da fonte caso o texto ultrapasse 85% do di├ómetro interno
                     const maxTextWidth = innerRadius * 2 * 0.85;
                     while (ctx.measureText(textValue).width > maxTextWidth && valueFontSize > 10) {
                         valueFontSize -= 1;
@@ -4468,7 +4400,7 @@
                             position: 'cursor',
                             callbacks: {
                                 label: (context) => {
-                                    // Mostra valor real (não o visual ajustado)
+                                    // Mostra valor real (n├úo o visual ajustado)
                                     const realVal = chartData[context.dataIndex];
                                     const pct = totalSum > 0 ? (realVal / totalSum) * 100 : 0;
                                     return ` ${context.label}: ${formatCurrency(realVal)} (${pct.toFixed(1).replace('.', ',')}%)`;
@@ -4480,7 +4412,7 @@
             });
         }
 
-        // Renderização da Tabela de Lançamentos
+        // Renderiza├º├úo da Tabela de Lan├ºamentos
         function renderTable() {
             if (activeView !== 'dashboard' || activeDashboardTab !== 'transactions') return;
             
@@ -4491,8 +4423,8 @@
             const totalPages = Math.ceil(totalRecords / rowsPerPage);
             
             if (totalRecords === 0) {
-                tbody.innerHTML = '<tr><td colspan="10" style="text-align: center; color: var(--text-secondary);">Nenhum lançamento encontrado para os filtros atuais.</td></tr>';
-                document.getElementById('pagination-info').innerText = 'Mostrando 0-0 de 0 transações';
+                tbody.innerHTML = '<tr><td colspan="10" style="text-align: center; color: var(--text-secondary);">Nenhum lan├ºamento encontrado para os filtros atuais.</td></tr>';
+                document.getElementById('pagination-info').innerText = 'Mostrando 0-0 de 0 transa├º├╡es';
                 document.getElementById('pagination-prev').disabled = true;
                 document.getElementById('pagination-next').disabled = true;
                 return;
@@ -4515,7 +4447,7 @@
                 
                 let catDisplay = t.categoria;
                 if (t.is_transfer) {
-                    catDisplay = `<span class="badge badge-transfer"><i class="fa-solid fa-right-left"></i> Transferência</span>`;
+                    catDisplay = `<span class="badge badge-transfer"><i class="fa-solid fa-right-left"></i> Transfer├¬ncia</span>`;
                 }
                 
                 tr.innerHTML = `
@@ -4533,7 +4465,7 @@
                 tbody.appendChild(tr);
             });
             
-            document.getElementById('pagination-info').innerText = `Mostrando ${startIdx + 1}-${endIdx} de ${totalRecords} transações`;
+            document.getElementById('pagination-info').innerText = `Mostrando ${startIdx + 1}-${endIdx} de ${totalRecords} transa├º├╡es`;
             document.getElementById('pagination-prev').disabled = currentPage === 1;
             document.getElementById('pagination-next').disabled = currentPage === totalPages || totalPages === 0;
         }
@@ -4550,7 +4482,7 @@
                 return;
             }
             
-            const headers = ["ID", "Banco", "Aba", "Origem", "Competência", "Data", "UF", "Fluxo", "Categoria", "Descrição", "Valor Nominal", "Valor Líquido", "Meio Pagamento", "Transferência Interna"];
+            const headers = ["ID", "Banco", "Aba", "Origem", "Compet├¬ncia", "Data", "UF", "Fluxo", "Categoria", "Descri├º├úo", "Valor Nominal", "Valor L├¡quido", "Meio Pagamento", "Transfer├¬ncia Interna"];
             
             const rows = filteredTransactions.map(t => [
                 t.id,
@@ -4566,7 +4498,7 @@
                 t.valor_nominal || 0,
                 t.valor_liquido || 0,
                 t.meio_pagamento || '',
-                t.is_transfer ? "SIM" : "NÃO"
+                t.is_transfer ? "SIM" : "N├âO"
             ]);
             
             const banco = document.getElementById('filter-banco').value;
@@ -4577,14 +4509,14 @@
             if (typeof window.exportToStyledExcel === 'function') {
                 window.exportToStyledExcel(headers, rows, filename);
             } else {
-                alert("Erro: Função de exportação Excel não disponível.");
+                alert("Erro: Fun├º├úo de exporta├º├úo Excel n├úo dispon├¡vel.");
             }
         }
         
         // Fallback global
         window.exportToCSV = exportToXLSX;
 
-        // Lógica de Filtros Mobile (Expandir/Recolher)
+        // L├│gica de Filtros Mobile (Expandir/Recolher)
         function toggleMobileFilters() {
             let containerId = 'filters-container';
             if (activeView === 'veiculos') {
@@ -4604,10 +4536,10 @@
             }
         }
 
-        // Lógica de Instalação PWA (Instalação no celular)
+        // L├│gica de Instala├º├úo PWA (Instala├º├úo no celular)
         let deferredPrompt;
         
-        // Esconder o botão se já estiver rodando como aplicativo instalado
+        // Esconder o bot├úo se j├í estiver rodando como aplicativo instalado
         const checkStandaloneMode = () => {
             const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
             if (isStandalone) {
@@ -4639,9 +4571,9 @@
             deferredPrompt.prompt();
             deferredPrompt.userChoice.then((choiceResult) => {
                 if (choiceResult.outcome === 'accepted') {
-                    console.log('Usuário aceitou a instalação do PWA');
+                    console.log('Usu├írio aceitou a instala├º├úo do PWA');
                 } else {
-                    console.log('Usuário rejeitou a instalação do PWA');
+                    console.log('Usu├írio rejeitou a instala├º├úo do PWA');
                 }
                 deferredPrompt = null;
                 const installBtn = document.getElementById('install-pwa-btn');
@@ -4652,10 +4584,10 @@
             });
         }
 
-        // Executar verificação standalone imediata na carga
+        // Executar verifica├º├úo standalone imediata na carga
         setTimeout(checkStandaloneMode, 100);
 
-        // Evento disparado quando a instalação é concluída
+        // Evento disparado quando a instala├º├úo ├⌐ conclu├¡da
         window.addEventListener('appinstalled', (evt) => {
             console.log('PWA instalado com sucesso!');
             const installBtn = document.getElementById('install-pwa-btn');
@@ -4675,9 +4607,9 @@
                         installToast.classList.remove('show');
                         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
                         if (isMobile) {
-                            alert('O aplicativo já está instalado e disponível na tela de início do seu celular! Feche esta página do navegador e clique no ícone "BI JLE Telecom" para usá-lo em tela cheia.');
+                            alert('O aplicativo j├í est├í instalado e dispon├¡vel na tela de in├¡cio do seu celular! Feche esta p├ígina do navegador e clique no ├¡cone "BI JLE Telecom" para us├í-lo em tela cheia.');
                         } else {
-                            alert('O aplicativo já está instalado e disponível na Área de Trabalho ou no Menu Iniciar do seu computador! Feche esta aba do navegador e abra o ícone "BI JLE Telecom" para usá-lo como um aplicativo nativo.');
+                            alert('O aplicativo j├í est├í instalado e dispon├¡vel na ├ürea de Trabalho ou no Menu Iniciar do seu computador! Feche esta aba do navegador e abra o ├¡cone "BI JLE Telecom" para us├í-lo como um aplicativo nativo.');
                         }
                     };
                     
@@ -4708,7 +4640,7 @@
             }
         }
 
-        // Registro do Service Worker com suporte a Atualização Silenciosa Automática
+        // Registro do Service Worker com suporte a Atualiza├º├úo Silenciosa Autom├ítica
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 checkIosInstallation();
@@ -4716,13 +4648,13 @@
                     .then(reg => {
                         console.log('Service Worker registrado com sucesso!', reg);
                         
-                        // Monitorar atualizações no sw.js
+                        // Monitorar atualiza├º├╡es no sw.js
                         reg.addEventListener('updatefound', () => {
                             const newWorker = reg.installing;
                             if (newWorker) {
                                 newWorker.addEventListener('statechange', () => {
                                     if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                                        // Novo worker está instalado e aguardando - ativa silenciosamente
+                                        // Novo worker est├í instalado e aguardando - ativa silenciosamente
                                         handleSilentUpdate(newWorker);
                                     }
                                 });
@@ -4731,7 +4663,7 @@
                     })
                     .catch(err => console.error('Erro ao registrar Service Worker:', err));
                 
-                // Verificar se já existe um worker esperando ativamente ao carregar a página
+                // Verificar se j├í existe um worker esperando ativamente ao carregar a p├ígina
                 navigator.serviceWorker.ready.then(reg => {
                     if (reg.waiting) {
                         handleSilentUpdate(reg.waiting);
@@ -4741,10 +4673,10 @@
                     let lastCheck = 0;
                     function checkUpdates() {
                         const now = Date.now();
-                        if (now - lastCheck > 600000) { // Debounce de 10 minutos para economizar rede móvel/bateria
+                        if (now - lastCheck > 600000) { // Debounce de 10 minutos para economizar rede m├│vel/bateria
                             lastCheck = now;
-                            console.log('Verificando atualizações no banco de dados e BI...');
-                            reg.update().catch(err => console.log('Erro ao buscar atualização:', err));
+                            console.log('Verificando atualiza├º├╡es no banco de dados e BI...');
+                            reg.update().catch(err => console.log('Erro ao buscar atualiza├º├úo:', err));
                         }
                     }
 
@@ -4761,8 +4693,8 @@
                 });
             });
 
-            // Recarregar a página automaticamente ao confirmar a ativação do novo worker
-            // Apenas se a página já estivesse sob controle de um worker ativo (evita loops infinitos no mobile/primeira carga)
+            // Recarregar a p├ígina automaticamente ao confirmar a ativa├º├úo do novo worker
+            // Apenas se a p├ígina j├í estivesse sob controle de um worker ativo (evita loops infinitos no mobile/primeira carga)
             if (navigator.serviceWorker.controller) {
                 let refreshing = false;
                 navigator.serviceWorker.addEventListener('controllerchange', () => {
@@ -4776,7 +4708,7 @@
 
         function handleSilentUpdate(worker) {
             if (worker) {
-                console.log('Nova atualização de dados/BI encontrada! Atualizando de forma silenciosa...');
+                console.log('Nova atualiza├º├úo de dados/BI encontrada! Atualizando de forma silenciosa...');
                 worker.postMessage({ type: 'SKIP_WAITING' });
             }
         }
@@ -4788,7 +4720,7 @@
         <div class="pwa-toast-content">
             <i class="fa-solid fa-circle-check pwa-toast-icon" style="color: var(--color-success) !important; animation: none;"></i>
             <div class="pwa-toast-text">
-                <strong>Instalação Concluída!</strong>
+                <strong>Instala├º├úo Conclu├¡da!</strong>
                 <span>Deseja abrir o aplicativo do BI agora?</span>
             </div>
         </div>
@@ -4797,7 +4729,7 @@
                 <i class="fa-solid fa-square-arrow-up-right"></i> Sim, Abrir
             </button>
             <button id="pwa-close-toast-btn" class="pwa-toast-btn" style="background-color: transparent !important; border: 1px solid var(--border-color) !important; color: var(--text-primary) !important;">
-                Não
+                N├úo
             </button>
         </div>
     </div>
