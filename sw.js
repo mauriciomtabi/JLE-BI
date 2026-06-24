@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jle-bi-v3.16.20260624150343';
+const CACHE_NAME = 'jle-bi-v3.17.20260624155221';
 const ASSETS = [
   './',
   './index.html',
@@ -12,6 +12,7 @@ const ASSETS = [
   './cobranca_app.js',
   './cobranca_styles.css',
   './cobranca_data.js',
+  './gestao_os_app.js',
   './assets/layout_original.png',
   './assets/logo_jle.png'
 ];
