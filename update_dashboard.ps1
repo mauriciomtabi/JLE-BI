@@ -15,16 +15,33 @@ $fallbackPath = "$PSScriptRoot\local_file.xlsx"
 
 Write-Output "Iniciando processo de ETL..."
 
-# 1. Copiar arquivo da rede localmente (utilizando busca com wildcard para tolerar variações de acentuação na rede)
+# 1. Copiar arquivo da rede localmente (utilizando busca regex flexível e ordenação baseada na data do nome)
 $useFile = $null
 $networkPath = $null
 
 if (Test-Path $networkDir) {
     try {
-        $networkFile = Get-ChildItem $networkDir | Where-Object { $_.Name -like "*Fluxo de Caixa*11.05.2026.xlsx" } | Select-Object -First 1
+        # Pega o arquivo "Fluxo de Caixa Analítico" mais recente com base na data do nome e LastWriteTime (exclui TECONDRILL)
+        $networkFile = Get-ChildItem $networkDir |
+            Where-Object { $_.Name -match "Fluxo de Caixa Anal.*tico.*Atualizado.*\.xlsx$" -and $_.Name -notlike "*TECONDRILL*" } |
+            Sort-Object @{Expression = {
+                if ($_.Name -match "(\d{2})[-.](\d{2})[-.](\d{4})") {
+                    [datetime]::ParseExact("$($Matches[3])-$($Matches[2])-$($Matches[1])", "yyyy-MM-dd", $null)
+                } else {
+                    [datetime]::MinValue
+                }
+            }; Descending = $true}, @{Expression = {$_.LastWriteTime}; Descending = $true} |
+            Select-Object -First 1
+
         if ($null -ne $networkFile) {
             $networkPath = $networkFile.FullName
             Write-Output "Arquivo de rede encontrado: $networkPath"
+            
+            # Extrair a data identificada no nome do arquivo para log
+            if ($networkFile.Name -match "(\d{2})[-.](\d{2})[-.](\d{4})") {
+                Write-Output "Data de referência identificada no nome do arquivo: $($Matches[1])/$($Matches[2])/$($Matches[3])"
+            }
+            
             Write-Output "Copiando planilha da rede localmente..."
             Copy-Item -Path $networkPath -Destination $localTempPath -Force
             # Atualiza também a cópia de fallback local para manter o cache sincronizado
@@ -32,7 +49,7 @@ if (Test-Path $networkDir) {
             $useFile = $localTempPath
             Write-Output "Cópia realizada e cache local atualizado com sucesso."
         } else {
-            Write-Warning "Nenhum arquivo correspondente a '*Fluxo de Caixa*11.05.2026.xlsx' foi encontrado na pasta de rede."
+            Write-Warning "Nenhum arquivo correspondente a 'Fluxo de Caixa Analítico_Atualizado*.xlsx' foi encontrado na pasta de rede."
         }
     } catch {
         Write-Warning "Falha ao copiar da rede: $($_.Exception.Message)"
