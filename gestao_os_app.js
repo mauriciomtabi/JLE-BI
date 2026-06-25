@@ -884,9 +884,15 @@ function renderGestaoOsUFMap() {
 // Alterna o modo de visualização da lista de OS
 function switchGestaoOsOSListMode(mode) {
     gestao_osOsListMode = mode;
-    // Atualizar botões de toggle
-    document.querySelectorAll('.os-list-toggle-btn').forEach(btn => btn.classList.remove('active'));
-    const activeBtn = document.getElementById(mode === 'sem-aprovacao' ? 'btn-os-sem-aprovacao' : 'btn-os-aprovadas');
+    // Atualizar botões de toggle - escopado ao container gestao_os para nao interferir com outras paginas
+    const gestaoOsContainer = document.getElementById('view-gestao_os-container');
+    if (gestaoOsContainer) {
+        gestaoOsContainer.querySelectorAll('.os-list-toggle-btn').forEach(btn => btn.classList.remove('active'));
+    }
+    // IDs corretos com prefixo gestao_os-
+    const activeBtn = document.getElementById(
+        mode === 'sem-aprovacao' ? 'gestao_os-btn-os-sem-aprovacao' : 'gestao_os-btn-os-aprovadas'
+    );
     if (activeBtn) activeBtn.classList.add('active');
     gestaoOs_renderOpenOSsList();
 }
