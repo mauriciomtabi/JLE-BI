@@ -395,11 +395,10 @@ function gestaoOs_renderCategoryCards() {
                 <span class="gestao_os-category-value">${formatGestaoOsCurrency(sum)}</span>
                 <div style="display: flex; flex-direction: column; gap: 2px; font-size: 11px; color: var(--text-secondary); margin-top: 6px;">
                     <div style="display: flex; align-items: center; gap: 6px;">
-                        <span>${count.toLocaleString('pt-BR')} OSs</span>
-                        <span style="font-weight: 700; color: var(--color-primary-light);">(${pct.toFixed(1).replace('.', ',')}%)</span>
+                        <span style="font-weight: 700; color: var(--color-primary-light);">${pct.toFixed(1).replace('.', ',')}%</span>
                     </div>
                     <div style="font-size: 10px; opacity: 0.85; border-top: 1px dashed var(--border-color); padding-top: 4px; margin-top: 4px;">
-                        Média Mensal: <strong style="color: var(--text-primary);">${avgMonthly.toFixed(1).replace('.', ',')} OSs/mês</strong>
+                        Média Mensal: <strong style="color: var(--text-primary);">${Math.round(avgMonthly).toLocaleString('pt-BR')} OSs</strong>
                     </div>
                 </div>
             </div>
