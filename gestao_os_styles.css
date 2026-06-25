@@ -10,7 +10,7 @@
    ============================================================ */
 
 /* -- Barra de Filtros -- */
-#cobranca-filters-container {
+#gestao_os-filters-container {
     background-color: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: 12px;
@@ -23,17 +23,17 @@
 }
 
 @media (max-width: 768px) {
-    #cobranca-filters-container {
+    #gestao_os-filters-container {
         display: none;
         grid-template-columns: repeat(2, 1fr);
     }
-    #cobranca-filters-container.mobile-expanded {
+    #gestao_os-filters-container.mobile-expanded {
         display: grid;
     }
 }
 
 @media (min-width: 769px) {
-    #cobranca-filters-container {
+    #gestao_os-filters-container {
         display: grid !important;
     }
 }
@@ -433,7 +433,7 @@
 }
 
 /* Variante verde para o botão "Aprovadas" quando ativo */
-#btn-os-aprovadas.active {
+#gestao_os-btn-os-aprovadas.active {
     background: #1e8449;
     box-shadow: 0 1px 6px rgba(30, 132, 73, 0.35);
 }
@@ -573,10 +573,10 @@
 }
 
 /* -- Ocultar barra de rolagem da lista de OS Aging -- */
-#cobranca-open-oss-list-container::-webkit-scrollbar {
+#gestao_os-open-oss-list-container::-webkit-scrollbar {
     display: none !important; /* Chrome, Safari, Opera */
 }
-#cobranca-open-oss-list-container {
+#gestao_os-open-oss-list-container {
     scrollbar-width: none !important; /* Firefox */
     -ms-overflow-style: none !important; /* IE 10+ */
 }

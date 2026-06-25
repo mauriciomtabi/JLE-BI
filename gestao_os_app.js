@@ -254,9 +254,9 @@ function formatGestaoOsCurrency(val) {
 // Helper para abreviar valores monetários (K e M)
 function formatGestaoOsShortVal(val) {
     const a = Math.abs(val);
-    if (a >= 1000000) return (val / 1000000).toFixed(1).replace('.', ',') + 'M OSs';
-    if (a >= 1000) return (val / 1000).toFixed(0) + 'k OSs';
-    return val.toFixed(0) + ' OSs';
+    if (a >= 1000000) return (val / 1000000).toFixed(1).replace('.', ',') + 'M';
+    if (a >= 1000) return (val / 1000).toFixed(0) + 'k';
+    return val.toFixed(0);
 }
 
 // Obter variáveis de cores do tema para eixos/gráficos
@@ -679,14 +679,10 @@ function renderGestaoOsUFMap() {
                     </span>
                 </div>
                 <div class="uf-compact-default-val">
-                    ${formatGestaoOsCurrency(ufSums['PR'])}
+                    ${ufOSs['PR'].size.toLocaleString('pt-BR')} OSs
                 </div>
                 <div class="uf-compact-content">
-                    <div class="uf-compact-main-stat">
-                        <span class="uf-stat-label"><i class="fa-solid fa-file-invoice"></i> OSs</span>
-                        <span class="uf-stat-value">${ufOSs['PR'].size.toLocaleString('pt-BR')}</span>
-                    </div>
-                    <div class="uf-compact-sub-stats" style="margin-top:4px;">
+                    <div class="uf-compact-sub-stats">
                         <div class="uf-sub-stat">
                             <span class="uf-sub-label" style="color:var(--text-secondary); font-size:10px;"><i class="fa-solid fa-percent"></i> Proporção:</span>
                             <span class="uf-sub-val" style="color:var(--text-secondary); font-size:10px; font-weight:700;">${prPct}%</span>
@@ -703,15 +699,15 @@ function renderGestaoOsUFMap() {
                 <div class="uf-card-details-expanded">
                     <div class="uf-detail-row">
                         <span class="uf-detail-label"><span class="uf-detail-bullet" style="background:#004f71;"></span> Pedido:</span>
-                        <span class="uf-detail-value">${formatGestaoOsCurrency(ufDetails['PR'].comPed)}</span>
+                        <span class="uf-detail-value">${ufDetails['PR'].comPed} OSs</span>
                     </div>
                     <div class="uf-detail-row">
                         <span class="uf-detail-label"><span class="uf-detail-bullet" style="background:#f39f18;"></span> Aprovado:</span>
-                        <span class="uf-detail-value">${formatGestaoOsCurrency(ufDetails['PR'].aprov)}</span>
+                        <span class="uf-detail-value">${ufDetails['PR'].aprov} OSs</span>
                     </div>
                     <div class="uf-detail-row">
                         <span class="uf-detail-label"><span class="uf-detail-bullet" style="background:#ff5722;"></span> S/ Aprovação:</span>
-                        <span class="uf-detail-value">${formatGestaoOsCurrency(ufDetails['PR'].semAprov)}</span>
+                        <span class="uf-detail-value">${ufDetails['PR'].semAprov} OSs</span>
                     </div>
                 </div>
             </div>
@@ -725,14 +721,10 @@ function renderGestaoOsUFMap() {
                     </span>
                 </div>
                 <div class="uf-compact-default-val">
-                    ${formatGestaoOsCurrency(ufSums['SC'])}
+                    ${ufOSs['SC'].size.toLocaleString('pt-BR')} OSs
                 </div>
                 <div class="uf-compact-content">
-                    <div class="uf-compact-main-stat">
-                        <span class="uf-stat-label"><i class="fa-solid fa-file-invoice"></i> OSs</span>
-                        <span class="uf-stat-value">${ufOSs['SC'].size.toLocaleString('pt-BR')}</span>
-                    </div>
-                    <div class="uf-compact-sub-stats" style="margin-top:4px;">
+                    <div class="uf-compact-sub-stats">
                         <div class="uf-sub-stat">
                             <span class="uf-sub-label" style="color:var(--text-secondary); font-size:10px;"><i class="fa-solid fa-percent"></i> Proporção:</span>
                             <span class="uf-sub-val" style="color:var(--text-secondary); font-size:10px; font-weight:700;">${scPct}%</span>
@@ -749,15 +741,15 @@ function renderGestaoOsUFMap() {
                 <div class="uf-card-details-expanded">
                     <div class="uf-detail-row">
                         <span class="uf-detail-label"><span class="uf-detail-bullet" style="background:#004f71;"></span> Pedido:</span>
-                        <span class="uf-detail-value">${formatGestaoOsCurrency(ufDetails['SC'].comPed)}</span>
+                        <span class="uf-detail-value">${ufDetails['SC'].comPed} OSs</span>
                     </div>
                     <div class="uf-detail-row">
                         <span class="uf-detail-label"><span class="uf-detail-bullet" style="background:#f39f18;"></span> Aprovado:</span>
-                        <span class="uf-detail-value">${formatGestaoOsCurrency(ufDetails['SC'].aprov)}</span>
+                        <span class="uf-detail-value">${ufDetails['SC'].aprov} OSs</span>
                     </div>
                     <div class="uf-detail-row">
                         <span class="uf-detail-label"><span class="uf-detail-bullet" style="background:#ff5722;"></span> S/ Aprovação:</span>
-                        <span class="uf-detail-value">${formatGestaoOsCurrency(ufDetails['SC'].semAprov)}</span>
+                        <span class="uf-detail-value">${ufDetails['SC'].semAprov} OSs</span>
                     </div>
                 </div>
             </div>
@@ -771,14 +763,10 @@ function renderGestaoOsUFMap() {
                     </span>
                 </div>
                 <div class="uf-compact-default-val">
-                    ${formatGestaoOsCurrency(ufSums['RS'])}
+                    ${ufOSs['RS'].size.toLocaleString('pt-BR')} OSs
                 </div>
                 <div class="uf-compact-content">
-                    <div class="uf-compact-main-stat">
-                        <span class="uf-stat-label"><i class="fa-solid fa-file-invoice"></i> OSs</span>
-                        <span class="uf-stat-value">${ufOSs['RS'].size.toLocaleString('pt-BR')}</span>
-                    </div>
-                    <div class="uf-compact-sub-stats" style="margin-top:4px;">
+                    <div class="uf-compact-sub-stats">
                         <div class="uf-sub-stat">
                             <span class="uf-sub-label" style="color:var(--text-secondary); font-size:10px;"><i class="fa-solid fa-percent"></i> Proporção:</span>
                             <span class="uf-sub-val" style="color:var(--text-secondary); font-size:10px; font-weight:700;">${rsPct}%</span>
@@ -795,15 +783,15 @@ function renderGestaoOsUFMap() {
                 <div class="uf-card-details-expanded">
                     <div class="uf-detail-row">
                         <span class="uf-detail-label"><span class="uf-detail-bullet" style="background:#004f71;"></span> Pedido:</span>
-                        <span class="uf-detail-value">${formatGestaoOsCurrency(ufDetails['RS'].comPed)}</span>
+                        <span class="uf-detail-value">${ufDetails['RS'].comPed} OSs</span>
                     </div>
                     <div class="uf-detail-row">
                         <span class="uf-detail-label"><span class="uf-detail-bullet" style="background:#f39f18;"></span> Aprovado:</span>
-                        <span class="uf-detail-value">${formatGestaoOsCurrency(ufDetails['RS'].aprov)}</span>
+                        <span class="uf-detail-value">${ufDetails['RS'].aprov} OSs</span>
                     </div>
                     <div class="uf-detail-row">
                         <span class="uf-detail-label"><span class="uf-detail-bullet" style="background:#ff5722;"></span> S/ Aprovação:</span>
-                        <span class="uf-detail-value">${formatGestaoOsCurrency(ufDetails['RS'].semAprov)}</span>
+                        <span class="uf-detail-value">${ufDetails['RS'].semAprov} OSs</span>
                     </div>
                 </div>
             </div>
@@ -1585,7 +1573,7 @@ function gestaoOs_renderMonthlySplitChart(th) {
                     borderColor: th.tooltipBorder,
                     borderWidth: 1,
                     callbacks: {
-                        label: (ctx) => ` ${ctx.dataset.label}: ${formatGestaoOsCurrency(ctx.raw)}`
+                        label: (ctx) => ` ${ctx.dataset.label}: ${formatGestaoOsShortVal(ctx.raw)} OSs`
                     }
                 }
             }
