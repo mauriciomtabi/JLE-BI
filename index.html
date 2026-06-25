@@ -1040,7 +1040,7 @@
                     <label for="gestao_os-filter-data-fim">Data Fim</label>
                     <div style="display: flex; gap: 8px; align-items: center; width: 100%;">
                         <input type="date" id="gestao_os-filter-data-fim" onchange="applyGestaoOsFilters()" style="flex-grow: 1;">
-                        <button onclick="clearCobrancaFilters()" title="Limpar Filtros" style="background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 12px; color: var(--text-secondary); cursor: pointer; transition: all 0.2s ease;" onmouseover="this.style.borderColor='var(--color-primary)'; this.style.color='var(--text-primary)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-secondary)'">
+                        <button onclick="clearGestaoOsFilters()" title="Limpar Filtros" style="background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 12px; color: var(--text-secondary); cursor: pointer; transition: all 0.2s ease;" onmouseover="this.style.borderColor='var(--color-primary)'; this.style.color='var(--text-primary)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-secondary)'">
                             <i class="fa-solid fa-eraser"></i>
                         </button>
                     </div>
@@ -1074,8 +1074,8 @@
                 <div class="chart-card">
                     <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
                         <div style="display: flex; align-items: center; gap: 12px;">
-                            <span class="chart-title">Valor Mensal (Com Pedido vs Sem Pedido)</span>
-                            <button id="gestao_os-drilldown-back-btn" style="display: none; align-items: center; gap: 6px; padding: 4px 12px; font-size: 11px; font-weight: 700; color: #fff; background: #004f71; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; cursor: pointer; transition: all 0.2s ease;" onclick="resetCobrancaDateFilter()">
+                            <span class="chart-title">Quantidade de OS Mensal (Com Pedido vs Sem Pedido)</span>
+                            <button id="gestao_os-drilldown-back-btn" style="display: none; align-items: center; gap: 6px; padding: 4px 12px; font-size: 11px; font-weight: 700; color: #fff; background: #004f71; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; cursor: pointer; transition: all 0.2s ease;" onclick="resetGestaoOsDateFilter()">
                                 <i class="fa-solid fa-arrow-left"></i> Voltar
                             </button>
                         </div>
@@ -1142,7 +1142,7 @@
                 <div class="gestao_os-grid-2cols">
                     <div class="chart-card">
                         <div class="chart-header">
-                            <span class="chart-title">Valor por Tipo de Atividade</span>
+                            <span class="chart-title">Quantidade de OS por Tipo de Atividade</span>
                         </div>
                         <div class="chart-body gestao_os-item-chart-body">
                             <div style="width: 100%; height: 320px; position: relative;">
@@ -1152,7 +1152,7 @@
                     </div>
                     <div class="chart-card">
                         <div class="chart-header">
-                            <span class="chart-title">Valor por Fase Atual (Original)</span>
+                            <span class="chart-title">Quantidade de OS por Fase Atual</span>
                         </div>
                         <div class="chart-body gestao_os-item-chart-body">
                             <div style="width: 100%; height: 320px; position: relative;">
@@ -1177,7 +1177,7 @@
                     <!-- Item Details Card -->
                     <div class="chart-card">
                         <div class="chart-header">
-                            <span class="chart-title">Valor por Item Descritivo</span>
+                            <span class="chart-title">Quantidade de OS por Item Descritivo</span>
                         </div>
                         <div class="chart-body gestao_os-item-chart-body">
                             <div style="width: 100%; height: 320px; position: relative;">
@@ -1193,8 +1193,8 @@
             <div id="subview-cobranca-report" class="subtab-pane">
                 <div class="chart-card">
                     <div class="chart-header">
-                        <span class="chart-title"><i class="fa-solid fa-table"></i> Relatório Analítico de Cobrança</span>
-                        <button class="btn-export" onclick="exportCobrancaXLSX()" title="Exportar para Excel">
+                        <span class="chart-title"><i class="fa-solid fa-table"></i> Relatório Analítico de OS</span>
+                        <button class="btn-export" onclick="exportGestaoOsXLSX()" title="Exportar para Excel">
                             <i class="fa-solid fa-file-excel"></i> Exportar
                         </button>
                     </div>
@@ -1211,28 +1211,28 @@
                             <table class="data-table" id="gestao_os-table" style="width: 100%; border-collapse: collapse;">
                                 <thead>
                                     <tr>
-                                        <th onclick="sortCobrancaTable('categoria')">Categoria</th>
-                                        <th onclick="sortCobrancaTable('os')">OS</th>
-                                        <th onclick="sortCobrancaTable('cidade')">Cidade</th>
-                                        <th onclick="sortCobrancaTable('uf')">UF</th>
-                                        <th onclick="sortCobrancaTable('projeto')">Projeto</th>
-                                        <th onclick="sortCobrancaTable('projeto_gerencial')">Proj. Gerencial</th>
-                                        <th onclick="sortCobrancaTable('tipo_atividade')">Tipo Atividade</th>
-                                        <th onclick="sortCobrancaTable('fase_atual')">Fase Atual</th>
-                                        <th onclick="sortCobrancaTable('contrato_numero')">Contrato</th>
-                                        <th onclick="sortCobrancaTable('item_descritivo')">Item Descritivo</th>
-                                        <th onclick="sortCobrancaTable('tipo_despesa')">Tipo Despesa</th>
-                                        <th onclick="sortCobrancaTable('objeto_do_contrato')">Objeto Contrato</th>
-                                        <th onclick="sortCobrancaTable('valor_total')" style="text-align:right;">Valor Total</th>
-                                        <th onclick="sortCobrancaTable('data_cadastro')">Dt. Cadastro</th>
-                                        <th onclick="sortCobrancaTable('data_aprovacao')">Dt. Aprovação</th>
-                                        <th onclick="sortCobrancaTable('tempo_aprovacao')">Tempo Aprov.</th>
-                                        <th onclick="sortCobrancaTable('user_inclusao_medicao')">User Incl. Medição</th>
-                                        <th onclick="sortCobrancaTable('pep')">PEP</th>
-                                        <th onclick="sortCobrancaTable('numero_medicao')">Nº Medição</th>
-                                        <th onclick="sortCobrancaTable('numero_pedido')">Nº Pedido</th>
-                                        <th onclick="sortCobrancaTable('user_pedido')">User Pedido</th>
-                                        <th onclick="sortCobrancaTable('fase_atual_de_para')">Fase (De/Para)</th>
+                                        <th onclick="sortGestaoOsTable('categoria')">Categoria</th>
+                                        <th onclick="sortGestaoOsTable('os')">OS</th>
+                                        <th onclick="sortGestaoOsTable('cidade')">Cidade</th>
+                                        <th onclick="sortGestaoOsTable('uf')">UF</th>
+                                        <th onclick="sortGestaoOsTable('projeto')">Projeto</th>
+                                        <th onclick="sortGestaoOsTable('projeto_gerencial')">Proj. Gerencial</th>
+                                        <th onclick="sortGestaoOsTable('tipo_atividade')">Tipo Atividade</th>
+                                        <th onclick="sortGestaoOsTable('fase_atual')">Fase Atual</th>
+                                        <th onclick="sortGestaoOsTable('contrato_numero')">Contrato</th>
+                                        <th onclick="sortGestaoOsTable('item_descritivo')">Item Descritivo</th>
+                                        <th onclick="sortGestaoOsTable('tipo_despesa')">Tipo Despesa</th>
+                                        <th onclick="sortGestaoOsTable('objeto_do_contrato')">Objeto Contrato</th>
+                                        <th onclick="sortGestaoOsTable('valor_total')" style="text-align:right;">Valor Total</th>
+                                        <th onclick="sortGestaoOsTable('data_cadastro')">Dt. Cadastro</th>
+                                        <th onclick="sortGestaoOsTable('data_aprovacao')">Dt. Aprovação</th>
+                                        <th onclick="sortGestaoOsTable('tempo_aprovacao')">Tempo Aprov.</th>
+                                        <th onclick="sortGestaoOsTable('user_inclusao_medicao')">User Incl. Medição</th>
+                                        <th onclick="sortGestaoOsTable('pep')">PEP</th>
+                                        <th onclick="sortGestaoOsTable('numero_medicao')">Nº Medição</th>
+                                        <th onclick="sortGestaoOsTable('numero_pedido')">Nº Pedido</th>
+                                        <th onclick="sortGestaoOsTable('user_pedido')">User Pedido</th>
+                                        <th onclick="sortGestaoOsTable('fase_atual_de_para')">Fase (De/Para)</th>
                                     </tr>
                                 </thead>
                                 <tbody id="gestao_os-table-body">

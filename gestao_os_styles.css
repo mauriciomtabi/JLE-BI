@@ -583,34 +583,30 @@
 
 /* -- Cards UF do Mapa (mais compactos que no Analitico Claro) -- */
 #view-gestao_os-container .uf-compact-card {
-    min-width: 130px !important;
-    max-width: 165px !important;
-    padding: 8px 10px !important;
+    min-width: 120px !important;
+    max-width: 150px !important;
+    padding: 7px 10px !important;
     border-radius: 8px !important;
 }
 #view-gestao_os-container .uf-compact-header {
     margin-bottom: 2px !important;
-    padding-bottom: 3px !important;
+    padding-bottom: 2px !important;
 }
 #view-gestao_os-container .uf-compact-name strong {
     font-size: 10px !important;
 }
 #view-gestao_os-container .uf-compact-default-val {
-    font-size: 16px !important;
+    font-size: 15px !important;
     font-weight: 700 !important;
     line-height: 1.2 !important;
-    margin-bottom: 2px !important;
+    margin-bottom: 0 !important;
 }
-#view-gestao_os-container .uf-sub-label,
-#view-gestao_os-container .uf-sub-val {
-    font-size: 9px !important;
+/* Ocultar proporcao e barra - igual ao Analitico Claro */
+#view-gestao_os-container .uf-compact-content {
+    display: none !important;
 }
 #view-gestao_os-container .uf-stacked-bar {
-    margin-top: 5px !important;
-    height: 4px !important;
-}
-#view-gestao_os-container .uf-compact-content {
-    margin-top: 2px !important;
+    display: none !important;
 }
 #view-gestao_os-container .uf-status-indicator {
     width: 7px !important;
