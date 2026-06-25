@@ -515,9 +515,9 @@ function renderGestaoOsUFMap() {
     const ufSums = { 'RS': 0, 'SC': 0, 'PR': 0 };
     const ufOSs = { 'RS': new Set(), 'SC': new Set(), 'PR': new Set() };
     const ufDetails = {
-        'PR': { comPed: 0, aprov: 0, semAprov: 0 },
-        'SC': { comPed: 0, aprov: 0, semAprov: 0 },
-        'RS': { comPed: 0, aprov: 0, semAprov: 0 }
+        'PR': { comPed: new Set(), aprov: new Set(), semAprov: new Set() },
+        'SC': { comPed: new Set(), aprov: new Set(), semAprov: new Set() },
+        'RS': { comPed: new Set(), aprov: new Set(), semAprov: new Set() }
     };
 
     // Obter dados sem o filtro de clique de UF
@@ -546,11 +546,11 @@ function renderGestaoOsUFMap() {
                 
                 const faseDePara = String(r.fase_atual_de_para || '').toUpperCase().trim();
                 if (faseDePara === 'PEDIDO EMITIDO') {
-                    ufDetails[uf].comPed += 1;
+                    ufDetails[uf].comPed.add(r.os);
                 } else if (faseDePara === 'APROVADO') {
-                    ufDetails[uf].aprov += 1;
+                    ufDetails[uf].aprov.add(r.os);
                 } else {
-                    ufDetails[uf].semAprov += 1;
+                    ufDetails[uf].semAprov.add(r.os);
                 }
             }
         }
@@ -580,19 +580,19 @@ function renderGestaoOsUFMap() {
     const rsPct = totalFaturamento > 0 ? ((ufSums['RS'] / totalFaturamento) * 100).toFixed(1).replace('.', ',') : '0,0';
 
     const totalPR = ufSums['PR'] || 1;
-    const prPedPct = ((ufDetails['PR'].comPed / totalPR) * 100).toFixed(1);
-    const prAprovPct = ((ufDetails['PR'].aprov / totalPR) * 100).toFixed(1);
-    const prSemAprovPct = ((ufDetails['PR'].semAprov / totalPR) * 100).toFixed(1);
+    const prPedPct = ((ufDetails['PR'].comPed.size / totalPR) * 100).toFixed(1);
+    const prAprovPct = ((ufDetails['PR'].aprov.size / totalPR) * 100).toFixed(1);
+    const prSemAprovPct = ((ufDetails['PR'].semAprov.size / totalPR) * 100).toFixed(1);
 
     const totalSC = ufSums['SC'] || 1;
-    const scPedPct = ((ufDetails['SC'].comPed / totalSC) * 100).toFixed(1);
-    const scAprovPct = ((ufDetails['SC'].aprov / totalSC) * 100).toFixed(1);
-    const scSemAprovPct = ((ufDetails['SC'].semAprov / totalSC) * 100).toFixed(1);
+    const scPedPct = ((ufDetails['SC'].comPed.size / totalSC) * 100).toFixed(1);
+    const scAprovPct = ((ufDetails['SC'].aprov.size / totalSC) * 100).toFixed(1);
+    const scSemAprovPct = ((ufDetails['SC'].semAprov.size / totalSC) * 100).toFixed(1);
 
     const totalRS = ufSums['RS'] || 1;
-    const rsPedPct = ((ufDetails['RS'].comPed / totalRS) * 100).toFixed(1);
-    const rsAprovPct = ((ufDetails['RS'].aprov / totalRS) * 100).toFixed(1);
-    const rsSemAprovPct = ((ufDetails['RS'].semAprov / totalRS) * 100).toFixed(1);
+    const rsPedPct = ((ufDetails['RS'].comPed.size / totalRS) * 100).toFixed(1);
+    const rsAprovPct = ((ufDetails['RS'].aprov.size / totalRS) * 100).toFixed(1);
+    const rsSemAprovPct = ((ufDetails['RS'].semAprov.size / totalRS) * 100).toFixed(1);
 
     container.innerHTML = `
         <div class="uf-premium-container">
@@ -698,15 +698,15 @@ function renderGestaoOsUFMap() {
                 <div class="uf-card-details-expanded">
                     <div class="uf-detail-row">
                         <span class="uf-detail-label"><span class="uf-detail-bullet" style="background:#004f71;"></span> Pedido:</span>
-                        <span class="uf-detail-value">${ufDetails['PR'].comPed} OSs</span>
+                        <span class="uf-detail-value">${ufDetails['PR'].comPed.size} OSs</span>
                     </div>
                     <div class="uf-detail-row">
                         <span class="uf-detail-label"><span class="uf-detail-bullet" style="background:#f39f18;"></span> Aprovado:</span>
-                        <span class="uf-detail-value">${ufDetails['PR'].aprov} OSs</span>
+                        <span class="uf-detail-value">${ufDetails['PR'].aprov.size} OSs</span>
                     </div>
                     <div class="uf-detail-row">
                         <span class="uf-detail-label"><span class="uf-detail-bullet" style="background:#ff5722;"></span> S/ Aprovação:</span>
-                        <span class="uf-detail-value">${ufDetails['PR'].semAprov} OSs</span>
+                        <span class="uf-detail-value">${ufDetails['PR'].semAprov.size} OSs</span>
                     </div>
                 </div>
             </div>
@@ -740,15 +740,15 @@ function renderGestaoOsUFMap() {
                 <div class="uf-card-details-expanded">
                     <div class="uf-detail-row">
                         <span class="uf-detail-label"><span class="uf-detail-bullet" style="background:#004f71;"></span> Pedido:</span>
-                        <span class="uf-detail-value">${ufDetails['SC'].comPed} OSs</span>
+                        <span class="uf-detail-value">${ufDetails['SC'].comPed.size} OSs</span>
                     </div>
                     <div class="uf-detail-row">
                         <span class="uf-detail-label"><span class="uf-detail-bullet" style="background:#f39f18;"></span> Aprovado:</span>
-                        <span class="uf-detail-value">${ufDetails['SC'].aprov} OSs</span>
+                        <span class="uf-detail-value">${ufDetails['SC'].aprov.size} OSs</span>
                     </div>
                     <div class="uf-detail-row">
                         <span class="uf-detail-label"><span class="uf-detail-bullet" style="background:#ff5722;"></span> S/ Aprovação:</span>
-                        <span class="uf-detail-value">${ufDetails['SC'].semAprov} OSs</span>
+                        <span class="uf-detail-value">${ufDetails['SC'].semAprov.size} OSs</span>
                     </div>
                 </div>
             </div>
@@ -782,15 +782,15 @@ function renderGestaoOsUFMap() {
                 <div class="uf-card-details-expanded">
                     <div class="uf-detail-row">
                         <span class="uf-detail-label"><span class="uf-detail-bullet" style="background:#004f71;"></span> Pedido:</span>
-                        <span class="uf-detail-value">${ufDetails['RS'].comPed} OSs</span>
+                        <span class="uf-detail-value">${ufDetails['RS'].comPed.size} OSs</span>
                     </div>
                     <div class="uf-detail-row">
                         <span class="uf-detail-label"><span class="uf-detail-bullet" style="background:#f39f18;"></span> Aprovado:</span>
-                        <span class="uf-detail-value">${ufDetails['RS'].aprov} OSs</span>
+                        <span class="uf-detail-value">${ufDetails['RS'].aprov.size} OSs</span>
                     </div>
                     <div class="uf-detail-row">
                         <span class="uf-detail-label"><span class="uf-detail-bullet" style="background:#ff5722;"></span> S/ Aprovação:</span>
-                        <span class="uf-detail-value">${ufDetails['RS'].semAprov} OSs</span>
+                        <span class="uf-detail-value">${ufDetails['RS'].semAprov.size} OSs</span>
                     </div>
                 </div>
             </div>
@@ -830,20 +830,20 @@ function renderGestaoOsUFMap() {
             tooltip.innerHTML = `
                 <div style="font-family:'Outfit',sans-serif; min-width:160px; color: ${labelColor};">
                     <strong style="font-size:12px;">${ufCode === 'RS' ? 'Rio Grande do Sul' : ufCode === 'SC' ? 'Santa Catarina' : 'Paraná'}</strong><br/>
-                    <span style="font-size:10px; opacity:0.85;">Total: ${formatGestaoOsCurrency(ufSums[ufCode])} (${ufOSs[ufCode].size.toLocaleString('pt-BR')} OSs)</span>
+                    <span style="font-size:10px; opacity:0.85;">Total: ${formatGestaoOsCurrency(ufSums[ufCode])}</span>
                     <hr style="border:0; border-top:1px dashed rgba(255,255,255,0.15); margin:6px 0;"/>
                     <div style="display:flex; flex-direction:column; gap:3px; font-size:10px;">
                         <div style="display:flex; justify-content:space-between; align-items:center;">
                             <span style="display:flex; align-items:center; gap:4px;"><span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:#004f71;"></span> Pedido:</span>
-                            <strong>${formatGestaoOsCurrency(ufDetails[ufCode].comPed)}</strong>
+                            <strong>${formatGestaoOsCurrency(ufDetails[ufCode].comPed.size)}</strong>
                         </div>
                         <div style="display:flex; justify-content:space-between; align-items:center;">
                             <span style="display:flex; align-items:center; gap:4px;"><span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:#f39f18;"></span> Aprovado:</span>
-                            <strong>${formatGestaoOsCurrency(ufDetails[ufCode].aprov)}</strong>
+                            <strong>${formatGestaoOsCurrency(ufDetails[ufCode].aprov.size)}</strong>
                         </div>
                         <div style="display:flex; justify-content:space-between; align-items:center;">
                             <span style="display:flex; align-items:center; gap:4px;"><span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:#ff5722;"></span> S/ Aprovação:</span>
-                            <strong>${formatGestaoOsCurrency(ufDetails[ufCode].semAprov)}</strong>
+                            <strong>${formatGestaoOsCurrency(ufDetails[ufCode].semAprov.size)}</strong>
                         </div>
                     </div>
                 </div>
@@ -1251,10 +1251,20 @@ function gestaoOs_renderCapexOpexChart(th) {
     const canvas = document.getElementById('gestao_os-capex-opex-chart');
     if (!canvas) return;
 
-    const capexOpexSum = {};
+    const capexOpexOSs = {};
     gestao_osFilteredData.forEach(r => {
         const type = r.tipo_despesa || 'OUTROS';
-        capexOpexSum[type] = (capexOpexSum[type] || 0) + 1;
+        if (!capexOpexOSs[type]) {
+            capexOpexOSs[type] = new Set();
+        }
+        if (r.os) {
+            capexOpexOSs[type].add(r.os);
+        }
+    });
+
+    const capexOpexSum = {};
+    Object.keys(capexOpexOSs).forEach(type => {
+        capexOpexSum[type] = capexOpexOSs[type].size;
     });
 
     const labels = Object.keys(capexOpexSum);
@@ -1345,14 +1355,17 @@ function gestaoOs_renderMonthlySplitChart(th) {
     const canvas = document.getElementById('gestao_os-monthly-split-chart');
     if (!canvas) return;
 
-    // Calcular o valor total sem aprovação
-    let totalSemAprov = 0;
+    // Calcular o valor total sem aprovação (OSs distintas)
+    const semAprovOSs = new Set();
     gestao_osFilteredData.forEach(r => {
         const faseDePara = String(r.fase_atual_de_para || '').toUpperCase().trim();
         if (faseDePara !== 'PEDIDO EMITIDO' && faseDePara !== 'APROVADO') {
-            totalSemAprov += 1;
+            if (r.os) {
+                semAprovOSs.add(r.os);
+            }
         }
     });
+    let totalSemAprov = semAprovOSs.size;
     const totalSemAprovEl = document.getElementById('gestao_os-monthly-total-sem-aprovacao');
     if (totalSemAprovEl) {
         totalSemAprovEl.innerHTML = `Sem Aprovação: <strong>${formatGestaoOsCurrency(totalSemAprov)}</strong>`;
@@ -1392,19 +1405,19 @@ function gestaoOs_renderMonthlySplitChart(th) {
         for (let day = 1; day <= lastDay; day++) {
             const dayStr = String(day).padStart(2, '0');
             const dateKey = `${filterYear}-${filterMonth}-${dayStr}`;
-            dailyMetrics[dateKey] = { comPed: 0, aprov: 0, semAprov: 0 };
+            dailyMetrics[dateKey] = { comPed: new Set(), aprov: new Set(), semAprov: new Set() };
         }
         
         gestao_osFilteredData.forEach(r => {
             const d = getGestaoOsRefDate(r);
-            if (d && dailyMetrics[d]) {
+            if (d && dailyMetrics[d] && r.os) {
                 const faseDePara = String(r.fase_atual_de_para || '').toUpperCase().trim();
                 if (faseDePara === 'PEDIDO EMITIDO') {
-                    dailyMetrics[d].comPed += 1;
+                    dailyMetrics[d].comPed.add(r.os);
                 } else if (faseDePara === 'APROVADO') {
-                    dailyMetrics[d].aprov += 1;
+                    dailyMetrics[d].aprov.add(r.os);
                 } else {
-                    dailyMetrics[d].semAprov += 1;
+                    dailyMetrics[d].semAprov.add(r.os);
                 }
             }
         });
@@ -1415,24 +1428,26 @@ function gestaoOs_renderMonthlySplitChart(th) {
             return `${parts[2]}/${parts[1]}`; // DD/MM format
         });
         
-        comPedData = sortedKeys.map(d => dailyMetrics[d].comPed);
-        aprovData = sortedKeys.map(d => dailyMetrics[d].aprov);
-        semAprovData = sortedKeys.map(d => dailyMetrics[d].semAprov);
+        comPedData = sortedKeys.map(d => dailyMetrics[d].comPed.size);
+        aprovData = sortedKeys.map(d => dailyMetrics[d].aprov.size);
+        semAprovData = sortedKeys.map(d => dailyMetrics[d].semAprov.size);
     } else {
-        const monthlyMetrics = {}; // 'YYYY/MM' => { comPed: X, aprov: Y, semAprov: Z }
+        const monthlyMetrics = {}; // 'YYYY/MM' => { comPed: Set, aprov: Set, semAprov: Set }
         gestao_osFilteredData.forEach(r => {
             const m = r.mes_medicao || 'N/D';
             if (!monthlyMetrics[m]) {
-                monthlyMetrics[m] = { comPed: 0, aprov: 0, semAprov: 0 };
+                monthlyMetrics[m] = { comPed: new Set(), aprov: new Set(), semAprov: new Set() };
             }
             
-            const faseDePara = String(r.fase_atual_de_para || '').toUpperCase().trim();
-            if (faseDePara === 'PEDIDO EMITIDO') {
-                monthlyMetrics[m].comPed += 1;
-            } else if (faseDePara === 'APROVADO') {
-                monthlyMetrics[m].aprov += 1;
-            } else {
-                monthlyMetrics[m].semAprov += 1;
+            if (r.os) {
+                const faseDePara = String(r.fase_atual_de_para || '').toUpperCase().trim();
+                if (faseDePara === 'PEDIDO EMITIDO') {
+                    monthlyMetrics[m].comPed.add(r.os);
+                } else if (faseDePara === 'APROVADO') {
+                    monthlyMetrics[m].aprov.add(r.os);
+                } else {
+                    monthlyMetrics[m].semAprov.add(r.os);
+                }
             }
         });
         
@@ -1442,9 +1457,9 @@ function gestaoOs_renderMonthlySplitChart(th) {
             return parts.length === 2 ? `${parts[1]}/${parts[0]}` : m;
         });
         
-        comPedData = sortedKeys.map(m => monthlyMetrics[m].comPed);
-        aprovData = sortedKeys.map(m => monthlyMetrics[m].aprov);
-        semAprovData = sortedKeys.map(m => monthlyMetrics[m].semAprov);
+        comPedData = sortedKeys.map(m => monthlyMetrics[m].comPed.size);
+        aprovData = sortedKeys.map(m => monthlyMetrics[m].aprov.size);
+        semAprovData = sortedKeys.map(m => monthlyMetrics[m].semAprov.size);
     }
 
     gestao_osCharts.monthlySplit = new Chart(canvas, {
@@ -1592,18 +1607,31 @@ function gestaoOs_renderHorizontalChart(canvasId, fieldName, chartKey, th, limit
     if (!canvas) return;
 
     // Agrupar valores por categoria e por fase (Pedido / Aprovado / Sem Aprovação)
-    const groupData = {};
+    const groupOSs = {};
     gestao_osFilteredData.forEach(r => {
         const cat = r[fieldName] || 'N/D';
-        if (!groupData[cat]) groupData[cat] = { comPed: 0, aprov: 0, semAprov: 0 };
-        const fase = String(r.fase_atual_de_para || '').toUpperCase().trim();
-        if (fase === 'PEDIDO EMITIDO') {
-            groupData[cat].comPed += 1;
-        } else if (fase === 'APROVADO') {
-            groupData[cat].aprov += 1;
-        } else {
-            groupData[cat].semAprov += 1;
+        if (!groupOSs[cat]) {
+            groupOSs[cat] = { comPed: new Set(), aprov: new Set(), semAprov: new Set() };
         }
+        if (r.os) {
+            const fase = String(r.fase_atual_de_para || '').toUpperCase().trim();
+            if (fase === 'PEDIDO EMITIDO') {
+                groupOSs[cat].comPed.add(r.os);
+            } else if (fase === 'APROVADO') {
+                groupOSs[cat].aprov.add(r.os);
+            } else {
+                groupOSs[cat].semAprov.add(r.os);
+            }
+        }
+    });
+
+    const groupData = {};
+    Object.keys(groupOSs).forEach(cat => {
+        groupData[cat] = {
+            comPed: groupOSs[cat].comPed.size,
+            aprov: groupOSs[cat].aprov.size,
+            semAprov: groupOSs[cat].semAprov.size
+        };
     });
 
     // Ordenar pelo total e pegar top N
