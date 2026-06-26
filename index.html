@@ -1263,6 +1263,10 @@
                 </div>
                 <div class="modal-body">
                     <div style="display: flex; flex-direction: column; gap: 16px;">
+                        <div class="filter-group" id="modal-user-name-container">
+                            <label>Nome do Colaborador</label>
+                            <input type="text" id="modal-user-name" placeholder="Ex: Douglas Ferreira">
+                        </div>
                         <div class="filter-group">
                             <label>E-mail corporativo</label>
                             <input type="email" id="modal-user-email" placeholder="usuario@jletelecom.com.br">
@@ -1481,7 +1485,7 @@
     
     <script src="cobranca_data.js?v=3.46"></script>
     <script src="cobranca_app.js?v=3.49"></script>
-    <script src="gestao_os_app.js?v=4.1"></script>
+    <script src="gestao_os_app.js?v=4.2"></script>
 
     <!-- Logica de UI Autônoma (Sem Dependências de CDNs) -->
     <script>
@@ -1954,19 +1958,26 @@
 
         // Verificar sessão na carga
         function checkAuth() {
-            // Verificar se o usuário veio por um link de convite/cadastro
+            // Verificar se o usuário veio por um link de convite/cadastro (suporta parâmetros longos e curtos)
             const urlParams = new URLSearchParams(window.location.search);
-            const isRegisterFlow = urlParams.get('register') === 'true';
-            const registerEmail = urlParams.get('email');
+            const isRegisterFlow = urlParams.get('r') === '1' || urlParams.get('register') === 'true';
+            const registerEmail = urlParams.get('e') || urlParams.get('email');
+            const registerName = urlParams.get('n');
 
             if (isRegisterFlow) {
-                // Alternar para a aba de cadastro e preencher o e-mail
+                // Alternar para a aba de cadastro e preencher o e-mail e nome
                 switchAuthTab('register');
                 if (registerEmail) {
                     const regEmailInput = document.getElementById('register-email');
                     if (regEmailInput) {
                         regEmailInput.value = decodeURIComponent(registerEmail);
                         regEmailInput.readOnly = true;
+                    }
+                }
+                if (registerName) {
+                    const regNameInput = document.getElementById('register-name');
+                    if (regNameInput) {
+                        regNameInput.value = decodeURIComponent(registerName);
                     }
                 }
                 
@@ -2801,6 +2812,8 @@
         function openAddUserModal() {
             editingEmail = null;
             document.getElementById('modal-user-title').innerText = 'Adicionar Usuário';
+            document.getElementById('modal-user-name-container').style.display = 'block';
+            document.getElementById('modal-user-name').value = '';
             document.getElementById('modal-user-email').value = '';
             document.getElementById('modal-user-email').disabled = false;
             document.getElementById('modal-user-password').value = '';
@@ -2815,6 +2828,7 @@
         function openEditUserModal(userData) {
             editingEmail = userData.email;
             document.getElementById('modal-user-title').innerText = 'Editar Permissões';
+            document.getElementById('modal-user-name-container').style.display = 'none';
             document.getElementById('modal-user-email').value = userData.email;
             document.getElementById('modal-user-email').disabled = true;
             document.getElementById('modal-user-password').value = '';
@@ -2833,12 +2847,21 @@
             }
         }
 
+
         async function saveUserPermission() {
             if (!supabaseClient || !currentUserIsAdmin) return;
             const email = editingEmail || document.getElementById('modal-user-email').value.trim();
             const password = document.getElementById('modal-user-password').value;
             const isAdmin = document.getElementById('modal-user-is-admin').value === 'true';
             const pages = isAdmin ? PAGES_CATALOG.filter(p => !p.disabled).map(p => p.id) : getCheckedPages('modal-pages-list');
+
+            const nameInput = document.getElementById('modal-user-name').value.trim();
+            const formattedNameInput = nameInput ? formatFullName(nameInput) : '';
+
+            if (!editingEmail && !formattedNameInput) {
+                alert('Por favor, informe o nome do colaborador.');
+                return;
+            }
 
             if (!email || !email.includes('@')) {
                 alert('Por favor, informe um e-mail válido.');
@@ -2857,7 +2880,7 @@
             saveBtn.disabled = true;
             saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Salvando...';
 
-            const fullName = email.split('@')[0].split('.').map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
+            const fullName = formattedNameInput || email.split('@')[0].split('.').map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
 
             try {
                 let error;
@@ -2901,9 +2924,16 @@
                     
                     if (!editingEmail) {
                         // Novo usuário criado com sucesso! Gerar texto de convite e abrir o modal de sucesso
-                        const currentOrigin = window.location.origin + window.location.pathname;
-                        const invitationLink = `${currentOrigin}?register=true&email=${encodeURIComponent(email)}`;
-                        const invitationText = `Dados de Acesso - BI JLE Telecom\nE-mail: ${email}\nLink de Acesso: ${invitationLink}`;
+                        let cleanOrigin = window.location.origin + window.location.pathname;
+                        if (cleanOrigin.endsWith('/index.html')) {
+                            cleanOrigin = cleanOrigin.slice(0, -11);
+                        }
+                        
+                        const nameParam = formattedNameInput ? `&n=${encodeURIComponent(formattedNameInput)}` : '';
+                        const invitationLink = `${cleanOrigin}?r=1&e=${encodeURIComponent(email)}${nameParam}`;
+                        
+                        const firstName = formattedNameInput ? formattedNameInput.split(' ')[0] : 'Colaborador';
+                        const invitationText = `Olá, ${firstName}!\n\nSeu acesso ao painel BI JLE Telecom foi liberado.\nClique no link abaixo para criar sua senha corporativa:\n\n👉 ${invitationLink}`;
                         
                         showUserSuccessModal(email, invitationText);
                     } else {
