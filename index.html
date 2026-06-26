@@ -49,6 +49,11 @@
     
     <link rel="stylesheet" href="cobranca_styles.css?v=3.47">
     <link rel="stylesheet" href="gestao_os_styles.css">
+    <link rel="stylesheet" href="mdu_styles.css">
+    
+    <!-- Leaflet Map CSS & JS CDNs -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </head>
 <body>
 
@@ -71,6 +76,9 @@
             </a>
             <a class="nav-item" id="nav-gestao_os" onclick="switchView('gestao_os')" style="display:none;">
                 <i class="fa-solid fa-clipboard-list"></i> <span>Gestão de OS</span>
+            </a>
+            <a class="nav-item" id="nav-mdu" onclick="switchView('mdu')" style="display:none;">
+                <i class="fa-solid fa-building"></i> <span>MDU</span>
             </a>
             <a class="nav-item active" id="nav-dashboard" onclick="switchView('dashboard')">
                 <i class="fa-solid fa-sack-dollar"></i> <span>Financeiro</span>
@@ -1254,6 +1262,157 @@
             </div>
         </div>
 
+        <!-- MDU CONTAINER -->
+        <div id="view-mdu-container" class="view-panel" style="display: none;">
+            <!-- Filters bar -->
+            <section class="filter-bar" id="mdu-filters-container">
+                <div class="filter-group">
+                    <label for="mdu-filter-status">Status</label>
+                    <select id="mdu-filter-status" class="mdu-select" onchange="applyMduFilters()">
+                        <option value="">Todos os Status</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="mdu-filter-cidade">Cidade</label>
+                    <select id="mdu-filter-cidade" class="mdu-select" onchange="applyMduFilters()">
+                        <option value="">Todas as Cidades</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="mdu-filter-cluster">Cluster</label>
+                    <select id="mdu-filter-cluster" class="mdu-select" onchange="applyMduFilters()">
+                        <option value="">Todos os Clusters</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="mdu-filter-equipe">Equipe</label>
+                    <select id="mdu-filter-equipe" class="mdu-select" onchange="applyMduFilters()">
+                        <option value="">Todas as Equipes</option>
+                    </select>
+                </div>
+                <div class="filter-group" style="display: flex; align-items: end; justify-content: end; margin-bottom: 2px;">
+                    <button class="mdu-btn-clear" onclick="clearMduFilters()" title="Limpar Filtros">
+                        <i class="fa-solid fa-filter-circle-xmark"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- KPI Cards -->
+            <div class="mdu-kpi-grid">
+                <div class="mdu-kpi-card kpi-total">
+                    <div class="mdu-kpi-header">
+                        <span class="mdu-kpi-title">Total de OSs MDU</span>
+                        <i class="fa-solid fa-building mdu-kpi-icon"></i>
+                    </div>
+                    <div class="mdu-kpi-value" id="mdu-kpi-total">0</div>
+                    <div class="mdu-kpi-footer">
+                        <span>Total de registros importados</span>
+                    </div>
+                </div>
+                <div class="mdu-kpi-card kpi-finalizado">
+                    <div class="mdu-kpi-header">
+                        <span class="mdu-kpi-title">Finalizadas</span>
+                        <i class="fa-solid fa-circle-check mdu-kpi-icon"></i>
+                    </div>
+                    <div class="mdu-kpi-value" id="mdu-kpi-finalizado">0</div>
+                    <div class="mdu-kpi-footer">
+                        <span id="mdu-kpi-finalizado-percent">0%</span> do total
+                    </div>
+                </div>
+                <div class="mdu-kpi-card kpi-andamento">
+                    <div class="mdu-kpi-header">
+                        <span class="mdu-kpi-title">Em Andamento</span>
+                        <i class="fa-solid fa-spinner fa-spin mdu-kpi-icon"></i>
+                    </div>
+                    <div class="mdu-kpi-value" id="mdu-kpi-andamento">0</div>
+                    <div class="mdu-kpi-footer">
+                        <span id="mdu-kpi-andamento-percent">0%</span> em execução
+                    </div>
+                </div>
+                <div class="mdu-kpi-card kpi-cancelado">
+                    <div class="mdu-kpi-header">
+                        <span class="mdu-kpi-title">Canceladas</span>
+                        <i class="fa-solid fa-ban mdu-kpi-icon"></i>
+                    </div>
+                    <div class="mdu-kpi-value" id="mdu-kpi-cancelado">0</div>
+                    <div class="mdu-kpi-footer">
+                        <span id="mdu-kpi-cancelado-percent">0%</span> sem faturamento
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Grid -->
+            <div class="mdu-grid-2cols">
+                <div class="mdu-card">
+                    <div class="mdu-card-title">Distribuição por Status</div>
+                    <div class="mdu-chart-container">
+                        <canvas id="mdu-chart-status"></canvas>
+                    </div>
+                </div>
+                <div class="mdu-card">
+                    <div class="mdu-card-title">MDUs por Cidade</div>
+                    <div class="mdu-chart-container">
+                        <canvas id="mdu-chart-cidade"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mdu-grid-2cols">
+                <div class="mdu-card">
+                    <div class="mdu-card-title">Top Equipes (Qtd. MDUs)</div>
+                    <div class="mdu-chart-container">
+                        <canvas id="mdu-chart-equipe"></canvas>
+                    </div>
+                </div>
+                <div class="mdu-card">
+                    <div class="mdu-card-title">Média de Evolução (% Progresso)</div>
+                    <div class="mdu-chart-container">
+                        <canvas id="mdu-chart-progresso"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Table -->
+            <div class="mdu-grid-1col-wide">
+                <div class="mdu-card">
+                    <div class="mdu-card-title">
+                        <span>Relação Detalhada de OSs MDU</span>
+                        <button class="btn-primary btn-sm" onclick="exportMduToExcel()" style="padding: 6px 12px; font-size: 0.8rem; display: flex; align-items: center; gap: 6px;">
+                            <i class="fa-solid fa-file-excel"></i> Exportar
+                        </button>
+                    </div>
+                    <div class="mdu-table-wrapper">
+                        <table class="mdu-table">
+                            <thead>
+                                <tr>
+                                    <th>OS JLE</th>
+                                    <th>Endereço</th>
+                                    <th>Cidade</th>
+                                    <th>Status</th>
+                                    <th>Progresso</th>
+                                    <th>Equipe</th>
+                                    <th>HPs</th>
+                                    <th>Aging</th>
+                                    <th>Data Baixa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="mdu-table-body">
+                                <tr><td colspan="9" style="text-align:center; color: var(--text-secondary);">Carregando dados de MDU...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style="padding: 16px 0 0 0; border-top: 1px solid var(--border-color); margin-top: 16px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                            <span id="mdu-pagination-info" style="font-size: 13px; color: var(--text-secondary);"></span>
+                            <div id="mdu-pagination-btns" style="display: flex; gap: 6px; align-items: center;">
+                                <!-- Populated dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Modal: Adicionar/Editar Usuário -->
         <div class="modal-overlay" id="user-permission-modal" onclick="closeUserModal(event)">
             <div class="modal-card" style="max-width: 520px;">
@@ -1486,6 +1645,8 @@
     <script src="cobranca_data.js?v=3.46"></script>
     <script src="cobranca_app.js?v=3.49"></script>
     <script src="gestao_os_app.js?v=4.2"></script>
+    <script src="mdu_data.js"></script>
+    <script src="mdu_app.js"></script>
 
     <!-- Logica de UI Autônoma (Sem Dependências de CDNs) -->
     <script>
@@ -2080,6 +2241,7 @@
             
             { id: 'cobranca',     label: 'Analítico Claro',         icon: 'fa-file-invoice-dollar', navId: 'nav-cobranca' },
             { id: 'gestao_os',    label: 'Gestão de OS',            icon: 'fa-clipboard-list',    navId: 'nav-gestao_os' },
+            { id: 'mdu',          label: 'MDU',                     icon: 'fa-building',          navId: 'nav-mdu' },
             { id: 'admin',        label: 'Painel Admin',            icon: 'fa-shield-halved',    navId: 'nav-admin',        adminOnly: true },
         ];
 
@@ -2547,6 +2709,8 @@
             if (veiFilters) veiFilters.classList.remove('mobile-expanded');
             const cobFilters = document.getElementById('cobranca-filters-container');
             if (cobFilters) cobFilters.classList.remove('mobile-expanded');
+            const mduFilters = document.getElementById('mdu-filters-container');
+            if (mduFilters) mduFilters.classList.remove('mobile-expanded');
             if (mobileToggleBtn) {
                 mobileToggleBtn.innerHTML = '<i class="fa-solid fa-filter"></i> <span>Mostrar Filtros</span>';
             }
@@ -2586,6 +2750,16 @@
                 } else {
                     applyGestaoOsFilters();
                 }
+            } else if (viewName === 'mdu') {
+                document.getElementById('filters-container').style.display = 'none';
+                if (mobileToggleBtn) mobileToggleBtn.style.display = '';
+                document.getElementById('view-title').innerText = 'MDU';
+                document.getElementById('view-subtitle').innerHTML = 'Acompanhamento e Análise de MDUs';
+                if (!mduDataLoaded) {
+                    initMdu();
+                } else {
+                    applyMduFilters();
+                }
             } else {
                 document.getElementById('filters-container').style.display = 'grid';
                 if (mobileToggleBtn) mobileToggleBtn.style.display = '';
@@ -2615,6 +2789,7 @@
             
             { id: 'cobranca',     label: 'Analítico Claro',          icon: 'fa-file-invoice-dollar' },
             { id: 'gestao_os',    label: 'Gestão de OS',             icon: 'fa-clipboard-list' },
+            { id: 'mdu',          label: 'MDU',                      icon: 'fa-building' },
         ];
 
         function renderPageCheckboxes(containerId, selectedPages = []) {
@@ -4692,6 +4867,8 @@
                 containerId = 'veiculos-filters-container';
             } else if (activeView === 'cobranca') {
                 containerId = 'cobranca-filters-container';
+            } else if (activeView === 'mdu') {
+                containerId = 'mdu-filters-container';
             }
             const filterBar = document.getElementById(containerId);
             const toggleBtn = document.getElementById('mobile-filter-toggle');
