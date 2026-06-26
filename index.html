@@ -1267,7 +1267,7 @@
                             <label>E-mail corporativo</label>
                             <input type="email" id="modal-user-email" placeholder="usuario@jletelecom.com.br">
                         </div>
-                        <div class="filter-group">
+                        <div class="filter-group" id="modal-user-password-container">
                             <label id="modal-user-password-label">Senha de acesso</label>
                             <input type="password" id="modal-user-password" placeholder="Digite a senha">
                         </div>
@@ -1319,6 +1319,38 @@
                 <p style="border-top: 1px solid var(--border-color); padding-top: 12px; margin-top: 8px;"><strong>Atualização Automática Agendada (8h às 18h, Seg a Sex):</strong></p>
                 <p>Para configurar o Agendador de Tarefas do Windows para rodar a atualização automaticamente a cada 1 hora, dê dois cliques no arquivo <strong>configurar_agendamento.bat</strong> localizado na pasta raiz.</p>
                 <p><em>Este processo automatizado é executado em segundo plano e atualizará os dados do painel sem interferir nas suas atividades.</em></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: USUÁRIO CRIADO COM SUCESSO -->
+    <div class="modal-overlay" id="user-success-modal" onclick="closeUserSuccessModal(event)">
+        <div class="modal-card" style="max-width: 500px;" onclick="event.stopPropagation()">
+            <div class="modal-header" style="border-bottom: none; padding-bottom: 0;">
+                <button class="modal-close" onclick="closeUserSuccessModal()">&times;</button>
+            </div>
+            <div class="modal-body" style="text-align: center; padding-top: 0;">
+                <div style="width: 64px; height: 64px; background: rgba(46, 204, 113, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px auto; border: 2px solid var(--color-success);">
+                    <i class="fa-solid fa-check" style="font-size: 32px; color: var(--color-success);"></i>
+                </div>
+                <h3 style="font-size: 20px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px;">Usuário Criado com Sucesso!</h3>
+                <p style="font-size: 13.5px; color: var(--text-secondary); margin-bottom: 20px;">Os dados de acesso foram copiados para compartilhar.</p>
+                
+                <p style="font-size: 13px; color: var(--text-secondary); text-align: left; margin-bottom: 8px; font-weight: 500;">
+                    Os dados abaixo foram copiados automaticamente para a sua área de transferência. Você pode colar e enviá-los para o novo usuário:
+                </p>
+                <div id="user-success-text-area" style="background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); border-radius: 8px; padding: 16px; text-align: left; font-family: 'Courier New', Courier, monospace; font-size: 13px; color: var(--text-primary); line-height: 1.5; white-space: pre-wrap; margin-bottom: 20px; word-break: break-all;">
+                    <!-- Populated dynamically -->
+                </div>
+                
+                <div style="display: flex; gap: 12px; justify-content: flex-end;">
+                    <button class="btn-secondary" onclick="copyInvitationTextAgain()" style="padding: 10px 20px;">
+                        <i class="fa-solid fa-copy"></i> Copiar Novamente
+                    </button>
+                    <button class="admin-save-btn" onclick="closeUserSuccessModal()" style="padding: 10px 24px; background-color: #f39f18; border-color: #f39f18;">
+                        Entendido
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -1922,6 +1954,29 @@
 
         // Verificar sessão na carga
         function checkAuth() {
+            // Verificar se o usuário veio por um link de convite/cadastro
+            const urlParams = new URLSearchParams(window.location.search);
+            const isRegisterFlow = urlParams.get('register') === 'true';
+            const registerEmail = urlParams.get('email');
+
+            if (isRegisterFlow) {
+                // Alternar para a aba de cadastro e preencher o e-mail
+                switchAuthTab('register');
+                if (registerEmail) {
+                    const regEmailInput = document.getElementById('register-email');
+                    if (regEmailInput) {
+                        regEmailInput.value = decodeURIComponent(registerEmail);
+                        regEmailInput.readOnly = true;
+                    }
+                }
+                
+                // Limpar os parâmetros da URL de forma amigável sem recarregar a página
+                if (window.history.replaceState) {
+                    const newUrl = window.location.pathname;
+                    window.history.replaceState({}, document.title, newUrl);
+                }
+            }
+
             // Verificar se o usuário veio por link de recuperação de senha na URL hash
             if (window.location.hash && (window.location.hash.includes('type=recovery') || window.location.hash.includes('recovery_token='))) {
                 setTimeout(() => {
@@ -2689,6 +2744,58 @@
             }
         }
 
+        function copyTextToClipboard(text) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                return navigator.clipboard.writeText(text);
+            }
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+            } catch (err) {
+                console.error('Fallback copy failed:', err);
+            }
+            document.body.removeChild(textarea);
+            return Promise.resolve();
+        }
+
+        let lastGeneratedInvitationText = '';
+
+        window.showUserSuccessModal = function(email, invitationText) {
+            lastGeneratedInvitationText = invitationText;
+            document.getElementById('user-success-text-area').innerText = invitationText;
+            copyTextToClipboard(invitationText)
+                .then(() => {
+                    console.log('Texto de convite copiado automaticamente.');
+                })
+                .catch(err => {
+                    console.error('Erro ao copiar convite automaticamente:', err);
+                });
+            document.getElementById('user-success-modal').classList.add('active');
+        };
+
+        window.closeUserSuccessModal = function(e) {
+            if (!e || e.target === document.getElementById('user-success-modal') || e.target.classList.contains('modal-close') || e.target.tagName === 'BUTTON' || e.target.classList.contains('admin-save-btn')) {
+                document.getElementById('user-success-modal').classList.remove('active');
+            }
+        };
+
+        window.copyInvitationTextAgain = function() {
+            if (lastGeneratedInvitationText) {
+                copyTextToClipboard(lastGeneratedInvitationText)
+                    .then(() => {
+                        showAdminToast('Copiado para a área de transferência!');
+                    })
+                    .catch(err => {
+                        alert('Erro ao copiar: ' + err.message);
+                    });
+            }
+        };
+
         let editingEmail = null;
 
         function openAddUserModal() {
@@ -2699,6 +2806,7 @@
             document.getElementById('modal-user-password').value = '';
             document.getElementById('modal-user-password').placeholder = 'Senha de no mínimo 6 caracteres';
             document.getElementById('modal-user-password-label').innerText = 'Senha de acesso';
+            document.getElementById('modal-user-password-container').style.display = 'none';
             document.getElementById('modal-user-is-admin').value = 'false';
             renderPageCheckboxes('modal-pages-list', ['dashboard', 'transactions']);
             document.getElementById('user-permission-modal').classList.add('active');
@@ -2712,6 +2820,7 @@
             document.getElementById('modal-user-password').value = '';
             document.getElementById('modal-user-password').placeholder = 'Deixe em branco para manter a atual';
             document.getElementById('modal-user-password-label').innerText = 'Nova senha (opcional)';
+            document.getElementById('modal-user-password-container').style.display = 'block';
             document.getElementById('modal-user-is-admin').value = userData.is_admin ? 'true' : 'false';
             const pages = userData.is_admin ? PAGES_CATALOG.filter(p => !p.disabled).map(p => p.id) : (userData.allowed_pages || []);
             renderPageCheckboxes('modal-pages-list', pages);
@@ -2736,18 +2845,10 @@
                 return;
             }
 
-            // Se for novo usuário, senha é obrigatória (mínimo 6 caracteres)
-            if (!editingEmail) {
-                if (!password || password.length < 6) {
-                    alert('Para novos usuários, a senha é obrigatória e deve conter pelo menos 6 caracteres.');
-                    return;
-                }
-            } else {
-                // Se for edição, e a senha for digitada, deve ter pelo menos 6 caracteres
-                if (password && password.length < 6) {
-                    alert('A nova senha deve conter pelo menos 6 caracteres.');
-                    return;
-                }
+            // Se for edição, e a senha for digitada, deve ter pelo menos 6 caracteres
+            if (editingEmail && password && password.length < 6) {
+                alert('A nova senha deve conter pelo menos 6 caracteres.');
+                return;
             }
 
             // Exibir loading no botão
@@ -2759,19 +2860,56 @@
             const fullName = email.split('@')[0].split('.').map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
 
             try {
-                const { data, error } = await supabaseClient.rpc('create_or_update_user_admin', {
-                    new_email: email,
-                    new_password: password || '', // opcional na edição se vazio
-                    full_name: fullName,
-                    is_admin_user: isAdmin,
-                    allowed_pages: pages
-                });
+                let error;
+                if (!editingEmail) {
+                    // Novo usuário: cadastrar apenas na tabela bi_permissions (autocadastro posterior pelo usuário)
+                    const { error: upsertError } = await supabaseClient
+                        .from('bi_permissions')
+                        .upsert({
+                            email: email,
+                            is_admin: isAdmin,
+                            allowed_pages: pages
+                        }, { onConflict: 'email' });
+                    error = upsertError;
+                } else {
+                    // Edição: se houver nova senha, usa o RPC para atualizar auth e permissões; senão, atualiza bi_permissions diretamente
+                    if (password) {
+                        const { error: rpcError } = await supabaseClient.rpc('create_or_update_user_admin', {
+                            new_email: email,
+                            new_password: password,
+                            full_name: fullName,
+                            is_admin_user: isAdmin,
+                            allowed_pages: pages
+                        });
+                        error = rpcError;
+                    } else {
+                        const { error: updateError } = await supabaseClient
+                            .from('bi_permissions')
+                            .update({
+                                is_admin: isAdmin,
+                                allowed_pages: pages
+                            })
+                            .eq('email', email);
+                        error = updateError;
+                    }
+                }
 
                 if (error) {
                     alert('Erro ao salvar usuário: ' + error.message);
                 } else {
                     document.getElementById('user-permission-modal').classList.remove('active');
-                    showAdminToast('Usuário e permissões salvos com sucesso!');
+                    
+                    if (!editingEmail) {
+                        // Novo usuário criado com sucesso! Gerar texto de convite e abrir o modal de sucesso
+                        const currentOrigin = window.location.origin + window.location.pathname;
+                        const invitationLink = `${currentOrigin}?register=true&email=${encodeURIComponent(email)}`;
+                        const invitationText = `Dados de Acesso - BI JLE Telecom\nE-mail: ${email}\nLink de Acesso: ${invitationLink}`;
+                        
+                        showUserSuccessModal(email, invitationText);
+                    } else {
+                        showAdminToast('Acesso do usuário atualizado com sucesso!');
+                    }
+                    
                     loadAdminPanel();
                 }
             } catch (err) {
