@@ -1019,7 +1019,8 @@ function gestaoOs_renderOpenOSsList() {
             </tr>`;
 
         const openOSs = gestao_osFilteredData.filter(r => {
-            const isOpen = (r.tempo_aprovacao === null || r.tempo_aprovacao === undefined || !r.data_aprovacao || r.data_aprovacao === '-');
+            const fase = String(r.fase_atual_de_para || '').toUpperCase().trim();
+            const isOpen = (fase !== 'PEDIDO EMITIDO' && fase !== 'APROVADO');
             return isOpen && r.os && r.os !== '-';
         });
 
@@ -1200,7 +1201,10 @@ function exportGestaoOsOSListXLSX() {
     } else {
         filename = 'OSs_Sem_Aprovação.xlsx';
         headers = ['OS', 'Categoria', 'Proj. Gerencial', 'Cidade', 'UF', 'Data Cadastro', 'Data Medição', 'Aging (dias)', 'Fase Atual (Original)', 'Fase (De/Para)'];
-        const src = gestao_osFilteredData.filter(r => (!r.data_aprovacao || r.data_aprovacao === '-') && r.os && r.os !== '-');
+        const src = gestao_osFilteredData.filter(r => {
+            const fase = String(r.fase_atual_de_para || '').toUpperCase().trim();
+            return fase !== 'PEDIDO EMITIDO' && fase !== 'APROVADO' && r.os && r.os !== '-';
+        });
         const m = {};
         src.forEach(r => {
             if (!m[r.os]) m[r.os] = { os: r.os, categoria: r.categoria || '-', pg: r.projeto_gerencial || '-', cidade: r.cidade || '-', uf: r.uf || '-', fa: r.fase_atual || '-', fp: r.fase_atual_de_para || '-', dc: r.data_cadastro, dm: r.data_inclusao_lpu || '-', v: 0, ag: gestaoOs_calculateOSAge(r.data_cadastro) };
