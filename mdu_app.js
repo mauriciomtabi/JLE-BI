@@ -10,6 +10,9 @@ let mduDataLoaded = false;
 let mduFilteredData = [];
 let mduPage = 1;
 const mduPageSize = 10;
+let mdu_map = null;
+let mdu_markersGroup = null;
+let mdu_tileLayer = null;
 
 const mduFilters = {
     status: '',
@@ -110,6 +113,9 @@ function applyMduFilters() {
     // Renderizar Tabela
     mduPage = 1;
     renderMduTable();
+
+    // Atualizar Mapa
+    updateMduMap();
 }
 
 function clearMduFilters() {
@@ -602,12 +608,156 @@ function escapeHtml(str) {
 // Expor funções essenciais ao escopo global
 window.setMduPage = setMduPage;
 window.exportMduToExcel = exportMduToExcel;
+window.switchMduTab = switchMduTab;
+window.mdu_renderMap = mdu_renderMap;
+window.updateMduMap = updateMduMap;
 
-// Escutar troca de tema (modo escuro) para redesenhar gráficos
+// Escutar troca de tema (modo escuro) para redesenhar gráficos e mapa
 const mduThemeObserver = new MutationObserver(() => {
     const mduContainer = document.getElementById('view-mdu-container');
     if (mduContainer && mduContainer.style.display !== 'none') {
         renderMduCharts();
+        if (mdu_map && document.getElementById('subview-mdu-map').style.display !== 'none') {
+            mdu_renderMap();
+        }
     }
 });
 mduThemeObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
+// Alternar Abas MDU
+function switchMduTab(tabId) {
+    document.querySelectorAll('#mdu-sub-tabs .tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    document.querySelectorAll('#view-mdu-container .subtab-pane').forEach(pane => {
+        pane.classList.remove('active');
+        pane.style.display = 'none';
+    });
+
+    if (tabId === 'indicators') {
+        const btn = document.getElementById('mdu-tab-btn-indicators');
+        if (btn) btn.classList.add('active');
+        const pane = document.getElementById('subview-mdu-indicators');
+        if (pane) {
+            pane.classList.add('active');
+            pane.style.display = 'block';
+        }
+    } else if (tabId === 'map') {
+        const btn = document.getElementById('mdu-tab-btn-map');
+        if (btn) btn.classList.add('active');
+        const pane = document.getElementById('subview-mdu-map');
+        if (pane) {
+            pane.classList.add('active');
+            pane.style.display = 'block';
+        }
+        
+        mdu_renderMap();
+    }
+}
+
+// Inicializar e Renderizar Mapa MDU
+function mdu_renderMap() {
+    if (!mdu_map) {
+        mdu_map = L.map('mdu-leaflet-map').setView([-27.2423, -50.2189], 8);
+        
+        mdu_tileLayer = L.tileLayer(mdu_getTileLayerUrl(), {
+            attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
+        }).addTo(mdu_map);
+
+        mdu_markersGroup = L.featureGroup().addTo(mdu_map);
+    } else {
+        mdu_tileLayer.setUrl(mdu_getTileLayerUrl());
+        setTimeout(() => {
+            mdu_map.invalidateSize();
+        }, 100);
+    }
+
+    updateMduMap();
+}
+
+function mdu_getTileLayerUrl() {
+    const isDark = document.body.classList.contains('dark-mode');
+    return isDark 
+        ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+        : 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
+}
+
+function updateMduMap() {
+    if (!mdu_map || !mdu_markersGroup) return;
+
+    mdu_markersGroup.clearLayers();
+
+    const colors = {
+        'FINALIZADO': '#2ed573',
+        'FINALIZADA': '#2ed573',
+        'CANCELADO': '#ff4757',
+        'CANCELADA': '#ff4757',
+        'FUSÃO': '#1e90ff',
+        '2ª VISTORIA': '#3742fa',
+        '1ª VISTORIA': '#70a1ff',
+        'MEDIÇÃO': '#ffa502',
+        'RELATÓRIO': '#a4b0be',
+        'BAIXA': '#2f3542',
+        'PROJETO': '#ff6b81'
+    };
+
+    const recordsWithGeo = mduFilteredData.filter(r => r.lat && r.lng);
+
+    recordsWithGeo.forEach(r => {
+        const statusUpper = String(r.status || '').toUpperCase().trim();
+        const markerColor = colors[statusUpper] || '#ced6e0';
+
+        const marker = L.circleMarker([r.lat, r.lng], {
+            radius: 8,
+            fillColor: markerColor,
+            color: '#ffffff',
+            weight: 1.5,
+            opacity: 1,
+            fillOpacity: 0.8
+        });
+
+        const popupContent = `
+            <div class="mdu-map-popup">
+                <div class="mdu-popup-header">
+                    <strong>OS: ${escapeHtml(r.os || '-')}</strong>
+                    <span class="mdu-popup-status" style="background-color: ${markerColor}1f; color: ${markerColor}; border: 1px solid ${markerColor}4d;">
+                        ${escapeHtml(r.status || 'Não Definido')}
+                    </span>
+                </div>
+                <div class="mdu-popup-body">
+                    <p><i class="fa-solid fa-location-dot"></i> ${escapeHtml(r.endereco || '-')}</p>
+                    <p><i class="fa-solid fa-city"></i> ${escapeHtml(r.cidade || '-')} - Cluster: ${escapeHtml(r.cluster || '-')}</p>
+                    <p><i class="fa-solid fa-users"></i> Equipe: ${escapeHtml(r.equipe || '-')}</p>
+                    <p><i class="fa-solid fa-house"></i> HPs: <strong>${r.hps !== null ? r.hps : '-'}</strong></p>
+                    <p><i class="fa-solid fa-calendar-day"></i> Baixa: ${escapeHtml(r.data_baixa || '-')}</p>
+                    <div class="mdu-popup-progress">
+                        <span>Progresso MDU</span>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" style="width: ${r.prog || 0}%; background-color: ${markerColor};"></div>
+                        </div>
+                        <span class="progress-val">${r.prog || 0}%</span>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        marker.bindTooltip(`OS: ${r.os || '-'} (${r.status || 'Não Definido'})`, {
+            direction: 'top',
+            offset: [0, -5],
+            opacity: 0.9,
+            className: 'mdu-map-tooltip'
+        });
+
+        marker.bindPopup(popupContent, {
+            maxWidth: 320,
+            className: 'mdu-leaflet-popup-custom'
+        });
+
+        mdu_markersGroup.addLayer(marker);
+    });
+
+    if (mdu_markersGroup.getLayers().length > 0) {
+        mdu_map.fitBounds(mdu_markersGroup.getBounds(), { padding: [40, 40] });
+    }
+}
