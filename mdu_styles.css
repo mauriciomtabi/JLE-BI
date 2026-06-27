@@ -276,21 +276,20 @@
 }
 
 /* -- Mapa MDU: Legenda, Expansão e Popups -- */
-.mdu-card.map-maximized {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh !important;
-    z-index: 9999;
+/* -- Mapa MDU: Legenda, Expansão e Popups -- */
+.mdu-card:fullscreen {
+    width: 100% !important;
+    height: 100% !important;
     margin: 0 !important;
-    border-radius: 0;
-    padding: 0;
-    background: var(--bg-body);
+    padding: 12px !important;
+    border-radius: 0 !important;
+    background-color: var(--bg-card) !important;
+    box-sizing: border-box;
 }
 
-.mdu-card.map-maximized #mdu-leaflet-map {
-    border-radius: 0;
+.mdu-card:fullscreen #mdu-leaflet-map {
+    height: 100% !important;
+    border-radius: 0 !important;
 }
 
 .map-expand-btn {
@@ -328,6 +327,7 @@
     font-family: 'Segoe UI', system-ui, sans-serif !important;
     font-size: 11px !important;
     line-height: 1.5 !important;
+    margin-top: 48px !important; /* Move a legenda para baixo para não sobrepor o botão de expandir */
 }
 
 .mdu-map-legend h4 {

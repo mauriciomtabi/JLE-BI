@@ -669,7 +669,7 @@ function mdu_renderMap() {
         mdu_markersGroup = L.featureGroup().addTo(mdu_map);
 
         // Adicionar legenda ao mapa
-        mdu_legend = L.control({position: 'bottomright'});
+        mdu_legend = L.control({position: 'topright'});
         mdu_legend.onAdd = function (map) {
             let div = L.DomUtil.create('div', 'info legend mdu-map-legend');
             const colors = {
@@ -793,18 +793,45 @@ function updateMduMap() {
 
 function toggleMduMapExpand() {
     const card = document.querySelector('#subview-mdu-map .mdu-card');
+    if (!card) return;
+
+    if (!document.fullscreenElement) {
+        if (card.requestFullscreen) {
+            card.requestFullscreen();
+        } else if (card.webkitRequestFullscreen) { /* Safari */
+            card.webkitRequestFullscreen();
+        } else if (card.msRequestFullscreen) { /* IE11 */
+            card.msRequestFullscreen();
+        }
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) { /* Safari */
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) { /* IE11 */
+            document.msExitFullscreen();
+        }
+    }
+}
+window.toggleMduMapExpand = toggleMduMapExpand;
+
+// Listener para gerenciar estado visual de tela cheia
+document.addEventListener('fullscreenchange', handleMduFullscreenChange);
+document.addEventListener('webkitfullscreenchange', handleMduFullscreenChange);
+document.addEventListener('msfullscreenchange', handleMduFullscreenChange);
+
+function handleMduFullscreenChange() {
+    const card = document.querySelector('#subview-mdu-map .mdu-card');
     const btn = document.getElementById('btn-toggle-mdu-map-expand');
     if (!card || !btn) return;
 
-    const isMaximized = card.classList.toggle('map-maximized');
-    if (isMaximized) {
+    const isFullscreen = !!document.fullscreenElement;
+    if (isFullscreen) {
         btn.innerHTML = '<i class="fa-solid fa-compress"></i>';
         btn.title = 'Restaurar Mapa';
-        document.body.style.overflow = 'hidden';
     } else {
         btn.innerHTML = '<i class="fa-solid fa-expand"></i>';
         btn.title = 'Maximizar Mapa';
-        document.body.style.overflow = '';
     }
 
     if (mdu_map) {
@@ -813,4 +840,3 @@ function toggleMduMapExpand() {
         }, 150);
     }
 }
-window.toggleMduMapExpand = toggleMduMapExpand;
