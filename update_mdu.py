@@ -101,6 +101,19 @@ def clean_int(val):
     except ValueError:
         return None
 
+def save_js_data(js_path, rows_data, generated_at, new_geocodes_count):
+    metadata = {
+        "generated_at": generated_at,
+        "total_rows": len(rows_data),
+        "geocoded_new": new_geocodes_count
+    }
+    with open(js_path, mode='w', encoding='utf-8') as f:
+        f.write(f"// Dados MDU Compactados - Gerado em: {generated_at}\n")
+        f.write(f"window.MDU_METADATA = {json.dumps(metadata, indent=4, ensure_ascii=False)};\n\n")
+        f.write("window.MDU_DATA = ")
+        f.write(json.dumps(rows_data, indent=4, ensure_ascii=False))
+        f.write(";\n")
+
 def process_mdu():
     if not os.path.exists(csv_path):
         print(f"Erro: Arquivo {csv_path} não encontrado!")
@@ -218,21 +231,11 @@ def process_mdu():
                 "lng": lng
             }
             rows_data.append(item)
+            if (idx + 1) % 50 == 0:
+                save_js_data(js_path, rows_data, generated_at, new_geocodes_count)
 
-    # Escrever no arquivo JS
-    metadata = {
-        "generated_at": generated_at,
-        "total_rows": len(rows_data),
-        "geocoded_new": new_geocodes_count
-    }
-
-    with open(js_path, mode='w', encoding='utf-8') as f:
-        f.write(f"// Dados MDU Compactados - Gerado em: {generated_at}\n")
-        f.write(f"window.MDU_METADATA = {json.dumps(metadata, indent=4, ensure_ascii=False)};\n\n")
-        f.write("window.MDU_DATA = ")
-        f.write(json.dumps(rows_data, indent=4, ensure_ascii=False))
-        f.write(";\n")
-
+    # Escrever no arquivo JS final
+    save_js_data(js_path, rows_data, generated_at, new_geocodes_count)
     print(f"Sucesso: {len(rows_data)} registros MDU processados e escritos em {js_path}")
 
 if __name__ == "__main__":

@@ -13,6 +13,7 @@ const mduPageSize = 10;
 let mdu_map = null;
 let mdu_markersGroup = null;
 let mdu_tileLayer = null;
+let mdu_legend = null;
 
 const mduFilters = {
     status: '',
@@ -666,6 +667,34 @@ function mdu_renderMap() {
         }).addTo(mdu_map);
 
         mdu_markersGroup = L.featureGroup().addTo(mdu_map);
+
+        // Adicionar legenda ao mapa
+        mdu_legend = L.control({position: 'bottomright'});
+        mdu_legend.onAdd = function (map) {
+            let div = L.DomUtil.create('div', 'info legend mdu-map-legend');
+            const colors = {
+                'Finalizado': '#2ed573',
+                'Fusão': '#1e90ff',
+                '2ª Vistoria': '#3742fa',
+                '1ª Vistoria': '#70a1ff',
+                'Medição': '#ffa502',
+                'Relatório': '#a4b0be',
+                'Baixa': '#2f3542',
+                'Projeto': '#ff6b81',
+                'Cancelado': '#ff4757'
+            };
+
+            let labels = [];
+            labels.push('<h4>Status MDU</h4>');
+            for (let status in colors) {
+                labels.push(
+                    '<div class="legend-item"><i style="background:' + colors[status] + '"></i> ' + status + '</div>'
+                );
+            }
+            div.innerHTML = labels.join('');
+            return div;
+        };
+        mdu_legend.addTo(mdu_map);
     } else {
         mdu_tileLayer.setUrl(mdu_getTileLayerUrl());
         setTimeout(() => {
@@ -761,3 +790,27 @@ function updateMduMap() {
         mdu_map.fitBounds(mdu_markersGroup.getBounds(), { padding: [40, 40] });
     }
 }
+
+function toggleMduMapExpand() {
+    const card = document.querySelector('#subview-mdu-map .mdu-card');
+    const btn = document.getElementById('btn-toggle-mdu-map-expand');
+    if (!card || !btn) return;
+
+    const isMaximized = card.classList.toggle('map-maximized');
+    if (isMaximized) {
+        btn.innerHTML = '<i class="fa-solid fa-compress"></i>';
+        btn.title = 'Restaurar Mapa';
+        document.body.style.overflow = 'hidden';
+    } else {
+        btn.innerHTML = '<i class="fa-solid fa-expand"></i>';
+        btn.title = 'Maximizar Mapa';
+        document.body.style.overflow = '';
+    }
+
+    if (mdu_map) {
+        setTimeout(() => {
+            mdu_map.invalidateSize();
+        }, 150);
+    }
+}
+window.toggleMduMapExpand = toggleMduMapExpand;

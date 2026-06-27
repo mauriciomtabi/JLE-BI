@@ -274,3 +274,82 @@
     color: white;
     border-color: var(--color-danger);
 }
+
+/* -- Mapa MDU: Legenda, Expansão e Popups -- */
+.mdu-card.map-maximized {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh !important;
+    z-index: 9999;
+    margin: 0 !important;
+    border-radius: 0;
+    padding: 0;
+    background: var(--bg-body);
+}
+
+.mdu-card.map-maximized #mdu-leaflet-map {
+    border-radius: 0;
+}
+
+.map-expand-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    width: 34px;
+    height: 34px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: all 0.2s ease;
+}
+
+.map-expand-btn:hover {
+    background: var(--bg-body);
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.mdu-map-legend {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    padding: 10px 14px !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15) !important;
+    color: var(--text-primary) !important;
+    font-family: 'Segoe UI', system-ui, sans-serif !important;
+    font-size: 11px !important;
+    line-height: 1.5 !important;
+}
+
+.mdu-map-legend h4 {
+    margin: 0 0 8px 0 !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    color: var(--text-primary) !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    padding-bottom: 4px !important;
+}
+
+.mdu-map-legend .legend-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin-bottom: 4px !important;
+}
+
+.mdu-map-legend .legend-item i {
+    width: 12px !important;
+    height: 12px !important;
+    border-radius: 50% !important;
+    display: inline-block !important;
+    border: 1px solid #ffffff !important;
+}
