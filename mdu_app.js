@@ -16,7 +16,7 @@ let mdu_tileLayer = null;
 let mdu_legend = null;
 
 const mduFilters = {
-    status: '',
+    status: [],
     cidade: '',
     cluster: '',
     equipe: ''
@@ -52,15 +52,28 @@ function populateMduFilterSelects() {
     const uniqueClusters = [...new Set(data.map(r => r.cluster).filter(Boolean))].sort();
     const uniqueEquipes = [...new Set(data.map(r => r.equipe).filter(Boolean))].sort();
 
-    const statusSelect = document.getElementById('mdu-filter-status');
+    const statusDropdown = document.getElementById('mdu-multiselect-status-dropdown');
     const cidadeSelect = document.getElementById('mdu-filter-cidade');
     const clusterSelect = document.getElementById('mdu-filter-cluster');
     const equipeSelect = document.getElementById('mdu-filter-equipe');
 
-    if (statusSelect) {
-        statusSelect.innerHTML = '<option value="">Todos os Status</option>';
-        uniqueStatus.forEach(v => {
-            statusSelect.innerHTML += `<option value="${v}">${v}</option>`;
+    if (statusDropdown) {
+        statusDropdown.innerHTML = '';
+        uniqueStatus.forEach(status => {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'mdu-multiselect-item';
+            itemDiv.innerHTML = `
+                <input type="checkbox" value="${status}" id="status-chk-${status}" onchange="handleMduStatusChange()">
+                <label for="status-chk-${status}" onclick="event.stopPropagation()">${status}</label>
+            `;
+            itemDiv.onclick = (e) => {
+                if (e.target.tagName !== 'INPUT') {
+                    const chk = itemDiv.querySelector('input');
+                    chk.checked = !chk.checked;
+                    handleMduStatusChange();
+                }
+            };
+            statusDropdown.appendChild(itemDiv);
         });
     }
 
@@ -87,18 +100,16 @@ function populateMduFilterSelects() {
 }
 
 function applyMduFilters() {
-    const statusSelect = document.getElementById('mdu-filter-status');
     const cidadeSelect = document.getElementById('mdu-filter-cidade');
     const clusterSelect = document.getElementById('mdu-filter-cluster');
     const equipeSelect = document.getElementById('mdu-filter-equipe');
 
-    mduFilters.status = statusSelect ? statusSelect.value : '';
     mduFilters.cidade = cidadeSelect ? cidadeSelect.value : '';
     mduFilters.cluster = clusterSelect ? clusterSelect.value : '';
     mduFilters.equipe = equipeSelect ? equipeSelect.value : '';
 
     mduFilteredData = window.MDU_DATA.filter(r => {
-        if (mduFilters.status && r.status !== mduFilters.status) return false;
+        if (mduFilters.status && mduFilters.status.length > 0 && !mduFilters.status.includes(r.status)) return false;
         if (mduFilters.cidade && r.cidade !== mduFilters.cidade) return false;
         if (mduFilters.cluster && r.cluster !== mduFilters.cluster) return false;
         if (mduFilters.equipe && r.equipe !== mduFilters.equipe) return false;
@@ -120,12 +131,18 @@ function applyMduFilters() {
 }
 
 function clearMduFilters() {
-    const statusSelect = document.getElementById('mdu-filter-status');
+    const checkboxes = document.querySelectorAll('#mdu-multiselect-status-dropdown input[type="checkbox"]');
+    checkboxes.forEach(chk => chk.checked = false);
+
+    const valueSpan = document.getElementById('mdu-multiselect-status-value');
+    if (valueSpan) valueSpan.innerText = 'Todos os Status';
+
+    mduFilters.status = [];
+
     const cidadeSelect = document.getElementById('mdu-filter-cidade');
     const clusterSelect = document.getElementById('mdu-filter-cluster');
     const equipeSelect = document.getElementById('mdu-filter-equipe');
 
-    if (statusSelect) statusSelect.value = '';
     if (cidadeSelect) cidadeSelect.value = '';
     if (clusterSelect) clusterSelect.value = '';
     if (equipeSelect) equipeSelect.value = '';
@@ -840,3 +857,52 @@ function handleMduFullscreenChange() {
         }, 150);
     }
 }
+
+// Funções do Multi-select de Status MDU
+function toggleMduStatusDropdown(event) {
+    event.stopPropagation();
+    const container = document.getElementById('mdu-multiselect-status-container');
+    const dropdown = document.getElementById('mdu-multiselect-status-dropdown');
+    if (!container || !dropdown) return;
+
+    const isActive = container.classList.toggle('active');
+    dropdown.style.display = isActive ? 'block' : 'none';
+}
+
+function handleMduStatusChange() {
+    const checkboxes = document.querySelectorAll('#mdu-multiselect-status-dropdown input[type="checkbox"]');
+    const selected = [];
+    checkboxes.forEach(chk => {
+        if (chk.checked) {
+            selected.push(chk.value);
+        }
+    });
+
+    mduFilters.status = selected;
+
+    const valueSpan = document.getElementById('mdu-multiselect-status-value');
+    if (valueSpan) {
+        if (selected.length === 0) {
+            valueSpan.innerText = 'Todos os Status';
+        } else if (selected.length === 1) {
+            valueSpan.innerText = selected[0];
+        } else {
+            valueSpan.innerText = `${selected.length} selecionados`;
+        }
+    }
+
+    applyMduFilters();
+}
+
+// Fechar dropdown ao clicar fora do componente
+document.addEventListener('click', (e) => {
+    const container = document.getElementById('mdu-multiselect-status-container');
+    const dropdown = document.getElementById('mdu-multiselect-status-dropdown');
+    if (container && dropdown && !container.contains(e.target)) {
+        container.classList.remove('active');
+        dropdown.style.display = 'none';
+    }
+});
+
+window.toggleMduStatusDropdown = toggleMduStatusDropdown;
+window.handleMduStatusChange = handleMduStatusChange;

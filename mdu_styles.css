@@ -353,3 +353,95 @@
     display: inline-block !important;
     border: 1px solid #ffffff !important;
 }
+
+/* -- Custom Multi-select Component for MDU Status -- */
+.mdu-multiselect-container {
+    position: relative;
+    width: 100%;
+}
+
+.mdu-multiselect-trigger {
+    width: 100%;
+    padding: 8px 12px;
+    background-color: var(--bg-body);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    user-select: none;
+    box-sizing: border-box;
+    height: 38px;
+}
+
+.mdu-multiselect-trigger:hover {
+    border-color: var(--color-primary);
+}
+
+.mdu-multiselect-value {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 8px;
+}
+
+.mdu-multiselect-trigger i {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    transition: transform 0.2s ease;
+}
+
+.mdu-multiselect-container.active .mdu-multiselect-trigger i {
+    transform: rotate(180deg);
+}
+
+.mdu-multiselect-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    width: 100%;
+    max-height: 250px;
+    overflow-y: auto;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    z-index: 2000;
+    padding: 6px 0;
+    box-sizing: border-box;
+}
+
+.mdu-multiselect-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+    user-select: none;
+    gap: 8px;
+}
+
+.mdu-multiselect-item:hover {
+    background-color: var(--bg-tr-hover);
+}
+
+.mdu-multiselect-item input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+}
+
+.mdu-multiselect-item label {
+    cursor: pointer;
+    flex-grow: 1;
+    margin: 0;
+    font-weight: 500;
+}
