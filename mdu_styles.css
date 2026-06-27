@@ -328,6 +328,7 @@
     font-size: 11px !important;
     line-height: 1.5 !important;
     margin-top: 48px !important; /* Move a legenda para baixo para não sobrepor o botão de expandir */
+    min-width: 190px !important;
 }
 
 .mdu-map-legend h4 {

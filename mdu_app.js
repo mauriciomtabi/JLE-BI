@@ -689,26 +689,7 @@ function mdu_renderMap() {
         mdu_legend = L.control({position: 'topright'});
         mdu_legend.onAdd = function (map) {
             let div = L.DomUtil.create('div', 'info legend mdu-map-legend');
-            const colors = {
-                'Finalizado': '#2ed573',
-                'Fusão': '#1e90ff',
-                '2ª Vistoria': '#3742fa',
-                '1ª Vistoria': '#70a1ff',
-                'Medição': '#ffa502',
-                'Relatório': '#a4b0be',
-                'Baixa': '#2f3542',
-                'Projeto': '#ff6b81',
-                'Cancelado': '#ff4757'
-            };
-
-            let labels = [];
-            labels.push('<h4>Status MDU</h4>');
-            for (let status in colors) {
-                labels.push(
-                    '<div class="legend-item"><i style="background:' + colors[status] + '"></i> ' + status + '</div>'
-                );
-            }
-            div.innerHTML = labels.join('');
+            div.id = 'mdu-map-legend-container';
             return div;
         };
         mdu_legend.addTo(mdu_map);
@@ -729,8 +710,81 @@ function mdu_getTileLayerUrl() {
         : 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
 }
 
+function getMduStatusCounts() {
+    const counts = {};
+    const statuses = ['Finalizado', 'Fusão', '2ª Vistoria', '1ª Vistoria', 'Medição', 'Relatório', 'Baixa', 'Projeto', 'Cancelado'];
+    statuses.forEach(s => counts[s] = 0);
+    
+    mduFilteredData.forEach(r => {
+        const val = String(r.status || '').toUpperCase().trim();
+        if (val === 'FINALIZADO' || val === 'FINALIZADA') {
+            counts['Finalizado']++;
+        } else if (val === 'CANCELADO' || val === 'CANCELADA') {
+            counts['Cancelado']++;
+        } else if (val === 'FUSÃO') {
+            counts['Fusão']++;
+        } else if (val === '2ª VISTORIA') {
+            counts['2ª Vistoria']++;
+        } else if (val === '1ª VISTORIA') {
+            counts['1ª Vistoria']++;
+        } else if (val === 'MEDIÇÃO') {
+            counts['Medição']++;
+        } else if (val === 'RELATÓRIO') {
+            counts['Relatório']++;
+        } else if (val === 'BAIXA') {
+            counts['Baixa']++;
+        } else if (val === 'PROJETO') {
+            counts['Projeto']++;
+        }
+    });
+    return counts;
+}
+
+function updateMduLegend() {
+    const legendContainer = document.getElementById('mdu-map-legend-container');
+    if (!legendContainer) return;
+
+    const counts = getMduStatusCounts();
+    const colors = {
+        'Finalizado': '#2ed573',
+        'Fusão': '#1e90ff',
+        '2ª Vistoria': '#3742fa',
+        '1ª Vistoria': '#70a1ff',
+        'Medição': '#ffa502',
+        'Relatório': '#a4b0be',
+        'Baixa': '#2f3542',
+        'Projeto': '#ff6b81',
+        'Cancelado': '#ff4757'
+    };
+
+    let labels = [];
+    labels.push('<h4>Status MDU</h4>');
+    labels.push(`
+        <div style="font-size: 0.8rem; font-weight: bold; margin-bottom: 8px; border-bottom: 1px solid var(--border-color); padding-bottom: 6px; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+            <span>Total de Endereços:</span>
+            <strong>${mduFilteredData.length}</strong>
+        </div>
+    `);
+    
+    for (let status in colors) {
+        const count = counts[status] || 0;
+        labels.push(
+            `<div class="legend-item" style="display: flex; justify-content: space-between; align-items: center; width: 100%; gap: 12px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <i style="background:${colors[status]}"></i> ${status}
+                </div>
+                <span class="legend-count" style="font-weight: 600; color: var(--text-secondary);">${count}</span>
+            </div>`
+        );
+    }
+    legendContainer.innerHTML = labels.join('');
+}
+
 function updateMduMap() {
     if (!mdu_map || !mdu_markersGroup) return;
+
+    // Atualizar legenda com quantidades
+    updateMduLegend();
 
     mdu_markersGroup.clearLayers();
 
