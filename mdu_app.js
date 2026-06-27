@@ -894,15 +894,25 @@ document.addEventListener('msfullscreenchange', handleMduFullscreenChange);
 function handleMduFullscreenChange() {
     const card = document.querySelector('#subview-mdu-map .mdu-card');
     const btn = document.getElementById('btn-toggle-mdu-map-expand');
+    const filters = document.getElementById('mdu-filters-container');
+    const mduContainer = document.getElementById('view-mdu-container');
     if (!card || !btn) return;
 
     const isFullscreen = !!document.fullscreenElement;
     if (isFullscreen) {
         btn.innerHTML = '<i class="fa-solid fa-compress"></i>';
         btn.title = 'Restaurar Mapa';
+        // Mover barra de filtros para dentro do card maximizado
+        if (filters) {
+            card.insertBefore(filters, card.firstChild);
+        }
     } else {
         btn.innerHTML = '<i class="fa-solid fa-expand"></i>';
         btn.title = 'Maximizar Mapa';
+        // Retornar barra de filtros para o topo do container principal de MDU
+        if (filters && mduContainer) {
+            mduContainer.insertBefore(filters, mduContainer.firstChild);
+        }
     }
 
     if (mdu_map) {
