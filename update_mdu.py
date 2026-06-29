@@ -45,6 +45,151 @@ def save_cache(cache):
     except Exception as e:
         print(f"Erro ao salvar cache geográfico: {e}")
 
+def clean_and_normalize(addr):
+    # Convert to uppercase
+    addr = addr.upper().strip()
+    
+    # Split numbers glued to words (e.g. FORTE364 -> FORTE 364)
+    addr = re.sub(r'([A-Z]+)(\d+)', r'\1 \2', addr)
+    
+    # Remove block/apt/etc info at the end (e.g. "BL 1", "APTO 203", "ÚNICO", "UNICO", "TORRE K", etc)
+    addr = re.sub(r'\s*-\s*(ÚNICO|UNICO|COMPLETO)$', '', addr)
+    addr = re.sub(r'\s+(BL|BLOCO|BLC|AP|APTO|APT|CASA|LOJA|SL|SALA|KM|QD|LT|T|TORRE|APARTAMENTO)\b.*', '', addr, flags=re.IGNORECASE)
+    
+    # Remove multiple spaces
+    addr = re.sub(r'\s+', ' ', addr).strip()
+    return addr
+
+def get_address_variations(raw_addr):
+    variations = []
+    
+    # Base clean
+    base_clean = clean_and_normalize(raw_addr)
+    if not base_clean:
+        return []
+    
+    # 1. Base clean as variation 1
+    variations.append(base_clean)
+    
+    # Apply prefix replacement safely without leaving dots
+    expanded = re.sub(r'^-?R\b\.?\s*', 'RUA ', base_clean, flags=re.IGNORECASE)
+    expanded = re.sub(r'^AV\b\.?\s*', 'AVENIDA ', expanded, flags=re.IGNORECASE)
+    expanded = re.sub(r'^TV\b\.?\s*', 'TRAVESSA ', expanded, flags=re.IGNORECASE)
+    expanded = re.sub(r'^EST\b\.?\s*', 'ESTRADA ', expanded, flags=re.IGNORECASE)
+    expanded = re.sub(r'^(PC|PRC)\b\.?\s*', 'PRAÇA ', expanded, flags=re.IGNORECASE)
+    expanded = re.sub(r'^AC\b\.?\s*', 'ACESSO ', expanded, flags=re.IGNORECASE)
+    expanded = re.sub(r'\s+', ' ', expanded).strip()
+    
+    # Dictionary of replacements for abbreviation expansion
+    replacements = {
+        r'\bBR\b': 'BARÃO',
+        r'\bPRF\b': 'PROFESSOR',
+        r'\bVSC\b': 'VISCONDE',
+        r'\bCD\b': 'CONDE',
+        r'\bDES\b': 'DESEMBARGADOR',
+        r'\bREV\b': 'REVERENDO',
+        r'\bDR\b': 'DOUTOR',
+        r'\bDRA\b': 'DOUTORA',
+        r'\bMNS\b': 'MONSENHOR',
+        r'\bGEN\b': 'GENERAL',
+        r'\bCEL\b': 'CORONEL',
+        r'\bTCEL\b': 'TENENTE CORONEL',
+        r'\bMAJ\b': 'MAJOR',
+        r'\bCAP\b': 'CAPITÃO',
+        r'\bTEN\b': 'TENENTE',
+        r'\bSGT\b': 'SARGENTO',
+        r'\bSTO\b': 'SANTO',
+        r'\bSTA\b': 'SANTA',
+        r'\bCNSO\b': 'CONSELHEIRO',
+        r'\bCDOR\b': 'COMENDADOR',
+        r'\bPRCA\b': 'PRINCESA',
+    }
+    
+    # Apply abbreviation expansion
+    for pattern, repl in replacements.items():
+        expanded = re.sub(pattern, repl, expanded, flags=re.IGNORECASE)
+    
+    expanded = re.sub(r'\s+', ' ', expanded).strip()
+    if expanded != base_clean:
+        variations.append(expanded)
+        
+    # Apply typo corrections
+    typos = {
+        'GETULUIO': 'GETULIO',
+        'PERREIRA': 'PEREIRA',
+        'MATRIZ BARROS': 'MARIZ E BARROS',
+        'ALVEZ': 'ALVES',
+        'PROTASIO': 'PROTÁZIO',
+        'TAUPICK': 'TAUFIK',
+        'PERTERSEN': 'PETERSEN',
+        'CRISTOFFEL': 'CRISTOFEL',
+        'SCHIMIDT': 'SCHMIDT',
+    }
+    
+    corrected = expanded
+    for typo, correction in typos.items():
+        corrected = corrected.replace(typo, correction)
+        
+    corrected = re.sub(r'\s+', ' ', corrected).strip()
+    if corrected not in variations:
+        variations.append(corrected)
+        
+    # Strip S/N or SN if present
+    sn_stripped = re.sub(r'\s+\b(S/N|SN)\b', '', corrected, flags=re.IGNORECASE).strip()
+    if sn_stripped not in variations:
+        variations.append(sn_stripped)
+        
+    # Add street-only variations
+    match = re.search(r'^(.*?)\s+\d+$', corrected)
+    if match:
+        street_only = match.group(1).strip()
+        if street_only not in variations:
+            variations.append(street_only)
+            
+    # Also for raw base_clean (street only)
+    match_raw = re.search(r'^(.*?)\s+\d+$', base_clean)
+    if match_raw:
+        street_raw = match_raw.group(1).strip()
+        if street_raw not in variations:
+            variations.append(street_raw)
+
+    # Prefixless and titleless variations
+    prefixless = re.sub(r'^(RUA|AVENIDA|TRAVESSA|ESTRADA|PRAÇA|ACESSO)\s+', '', corrected, flags=re.IGNORECASE)
+    if prefixless != corrected:
+        if prefixless not in variations:
+            variations.append(prefixless)
+        match_pl = re.search(r'^(.*?)\s+\d+$', prefixless)
+        if match_pl:
+            pl_street = match_pl.group(1).strip()
+            if pl_street not in variations:
+                variations.append(pl_street)
+                
+        # Title stripped prefixless
+        raw_name = re.sub(r'^(DESEMBARGADOR|DOUTOR|DOUTORA|PROFESSOR|BARÃO|VISCONDE|CONDE|CORONEL|GENERAL|REVERENDO|PADRE|PRESIDENTE|GOVERNADOR|MINISTRO|SENADOR|PREFEITO)\s+', '', prefixless, flags=re.IGNORECASE)
+        if raw_name != prefixless:
+            if raw_name not in variations:
+                variations.append(raw_name)
+            match_rn = re.search(r'^(.*?)\s+\d+$', raw_name)
+            if match_rn:
+                rn_street = match_rn.group(1).strip()
+                if rn_street not in variations:
+                    variations.append(rn_street)
+            
+    # Try truncated street names for long names
+    for name_variant in [prefixless, raw_name if 'raw_name' in locals() else prefixless]:
+        # Strip number if any (to work on street name only)
+        street_name = re.sub(r'\s+\d+$', '', name_variant).strip()
+        words = street_name.split()
+        if len(words) > 2:
+            trunc2 = " ".join(words[:2])
+            trunc3 = " ".join(words[:3])
+            if trunc2 not in variations:
+                variations.append(trunc2)
+            if trunc3 not in variations:
+                variations.append(trunc3)
+            
+    return variations
+
 def get_uf(cidade):
     # Todos do CSV atual estão na região metropolitana de Porto Alegre (RS)
     return "RS"
@@ -163,47 +308,41 @@ def process_mdu():
             if not cidade or cidade == '-':
                 cidade = "NÃO DEFINIDA"
 
-            # ── LÓGICA DE GEOCODIFICAÇÃO ──
-            # 1. Limpar endereço removendo detalhes do Bloco/Ap/etc.
-            # Ex: "RUA GARIBALDI 595 BL 1" -> "RUA GARIBALDI 595"
-            addr_clean = re.sub(r'\s+(BL|BLOCO|AP|APTO|CASA|LOJA|SL|SALA|KM|QD|LT).*', '', endereco, flags=re.IGNORECASE).strip()
-            
-            # 2. Chave do Cache (Endereço Completo)
+            # ── LÓGICA DE GEOCODIFICAÇÃO COM MÚLTIPLAS TENTATIVAS (VARREDURA DE ABREVIAÇÕES/TYPOS) ──
             uf = get_uf(cidade)
-            geo_key = f"{addr_clean}, {cidade}, {uf}, Brazil".upper()
-
             lat, lng = None, None
             geocodificado = False
+
+            # Gerar todas as variações de escrita do endereço (do mais completo ao mais simplificado)
+            variations = get_address_variations(endereco)
             
-            # Tenta buscar do cache primeiro
-            if geo_key in cache:
-                coords = cache[geo_key]
-                if coords:
-                    lat, lng = coords[0], coords[1]
-                    geocodificado = True
-            # Se não tiver no cache e não estourou o limite de novas consultas, faz a geocodificação
-            elif new_geocodes_count < max_new_geocodes:
-                print(f"[{idx+1}/{total_rows}] Buscando coordenadas para: {geo_key}")
-                coords = geocode_address(geo_key, cache)
-                if coords:
-                    lat, lng = coords[0], coords[1]
-                    geocodificado = True
-                new_geocodes_count += 1
-                save_cache(cache) # Salva o cache imediatamente
-                time.sleep(1) # Intervalo obrigatório do Nominatim
-            
-            # 3. Fallback: Se falhou a busca exata (ou não consultou por conta do limite),
-            # tenta buscar a coordenada da RUA (sem número) caso já esteja mapeada no cache por outra OS
-            if lat is None or lng is None:
-                street_only = re.sub(r'\s+\d+$', '', addr_clean).strip()
-                street_key = f"{street_only}, {cidade}, {uf}, Brazil".upper()
-                if street_key in cache:
-                    coords = cache[street_key]
+            for var in variations:
+                geo_key = f"{var}, {cidade}, {uf}, Brazil".upper()
+                
+                # A. Tenta buscar do cache primeiro
+                if geo_key in cache:
+                    coords = cache[geo_key]
                     if coords:
                         lat, lng = coords[0], coords[1]
                         geocodificado = True
-
-            # 4. Fallback 2: Se ainda assim falhar, posiciona no Centro da Cidade
+                        break
+                    # Se for None, significa que já foi consultado no Nominatim e falhou, então continuamos para a próxima variação
+                    continue
+                
+                # B. Se não está no cache e estamos dentro do limite de requisições, faz a geocodificação
+                if new_geocodes_count < max_new_geocodes:
+                    print(f"[{idx+1}/{total_rows}] Buscando no Nominatim: {geo_key}")
+                    coords = geocode_address(geo_key, cache)
+                    new_geocodes_count += 1
+                    save_cache(cache) # Salva o cache imediatamente
+                    time.sleep(1) # Intervalo obrigatório de 1s do Nominatim
+                    
+                    if coords:
+                        lat, lng = coords[0], coords[1]
+                        geocodificado = True
+                        break
+            
+            # C. Fallback: Se nenhuma variação resolveu, tenta o centro da cidade
             if lat is None or lng is None:
                 coords = CITY_COORDINATES.get(cidade, CITY_COORDINATES["NÃO DEFINIDA"])
                 lat, lng = coords[0], coords[1]
