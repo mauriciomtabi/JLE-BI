@@ -845,7 +845,12 @@ function updateMduMap() {
     const recordsWithGeo = mduFilteredData.filter(r => r.lat && r.lng && r.geocodificado);
 
     // 2. Atualizar banner de avisos para endereços não geolocalizados
-    const missingGeoCount = mduFilteredData.filter(r => !r.geocodificado).length;
+    const missingGeoCount = mduFilteredData.filter(r => 
+        !r.geocodificado && 
+        r.endereco && 
+        r.endereco.trim() !== '' && 
+        r.endereco.trim() !== '-'
+    ).length;
     const warningBanner = document.getElementById('mdu-map-warning-banner');
     const warningText = document.getElementById('mdu-map-warning-text');
     if (warningBanner && warningText) {
@@ -1057,7 +1062,12 @@ function getMduStatusBadgeClass(status) {
 }
 
 function showMissingGeoModal() {
-    const missing = mduFilteredData.filter(r => !r.geocodificado);
+    const missing = mduFilteredData.filter(r => 
+        !r.geocodificado && 
+        r.endereco && 
+        r.endereco.trim() !== '' && 
+        r.endereco.trim() !== '-'
+    );
     const tbody = document.getElementById('mdu-missing-geo-table-body');
     if (!tbody) return;
 
