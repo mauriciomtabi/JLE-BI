@@ -1294,9 +1294,22 @@
                         <option value="">Todas as Equipes</option>
                     </select>
                 </div>
+                <!-- Campo de busca rápida -->
+                <div class="filter-group" style="flex: 1 1 180px; min-width: 140px;">
+                    <label for="mdu-search-bar">Busca Rápida</label>
+                    <div style="position: relative; display: flex; align-items: center;">
+                        <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 10px; color: var(--text-secondary); font-size: 12px; pointer-events: none;"></i>
+                        <input type="text" id="mdu-search-bar"
+                            placeholder="OS, Endereço, Equipe, Cluster…"
+                            oninput="onMduSearchInput(this.value)"
+                            style="width: 100%; padding: 8px 10px 8px 30px; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 13px; outline: none; transition: border-color 0.2s;"
+                            onfocus="this.style.borderColor='var(--color-primary)'"
+                            onblur="this.style.borderColor='var(--border-color)'">
+                    </div>
+                </div>
                 <div class="filter-group" style="display: flex; align-items: end; justify-content: end; margin-bottom: 2px;">
-                    <button class="mdu-btn-clear" onclick="clearMduFilters()" title="Limpar Filtros">
-                        <i class="fa-solid fa-filter-circle-xmark"></i>
+                    <button onclick="clearMduFilters()" title="Limpar Filtros" style="background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 12px; color: var(--text-secondary); cursor: pointer; transition: all 0.2s ease;" onmouseover="this.style.borderColor='var(--color-primary)'; this.style.color='var(--text-primary)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-secondary)'">
+                        <i class="fa-solid fa-eraser"></i>
                     </button>
                 </div>
             </section>

@@ -6385,9 +6385,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0309405,
+        "lng": -51.184536,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -6413,9 +6413,9 @@ window.MDU_DATA = [
         "data_relatorio": "14/05",
         "valor_medicao": 1345.13,
         "valor_repasse": 680.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0309405,
+        "lng": -51.184536,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -6441,9 +6441,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 978.25,
         "valor_repasse": 680.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0309405,
+        "lng": -51.184536,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -6469,9 +6469,9 @@ window.MDU_DATA = [
         "data_relatorio": "14/05",
         "valor_medicao": 1268.94,
         "valor_repasse": 680.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0309405,
+        "lng": -51.184536,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -13273,9 +13273,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 535.05,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0408553,
+        "lng": -51.177427,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -26461,9 +26461,9 @@ window.MDU_DATA = [
         "data_relatorio": "12/05",
         "valor_medicao": 888.56,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.040477,
+        "lng": -51.1908723,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -38781,9 +38781,9 @@ window.MDU_DATA = [
         "data_relatorio": "09/02",
         "valor_medicao": 1032.58,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0492329,
+        "lng": -51.1913689,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -39593,9 +39593,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0505278,
+        "lng": -51.2255053,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -39621,9 +39621,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.049907,
+        "lng": -51.2254209,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -39649,9 +39649,9 @@ window.MDU_DATA = [
         "data_relatorio": "11/02",
         "valor_medicao": 1359.56,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.041777,
+        "lng": -51.2270807,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -39677,9 +39677,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.041777,
+        "lng": -51.2270807,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -39705,9 +39705,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.041777,
+        "lng": -51.2270807,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -39733,9 +39733,9 @@ window.MDU_DATA = [
         "data_relatorio": "22/02",
         "valor_medicao": 918.4,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.041777,
+        "lng": -51.2270807,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -44801,9 +44801,9 @@ window.MDU_DATA = [
         "data_relatorio": "09/02",
         "valor_medicao": 1401.74,
         "valor_repasse": 680.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0492329,
+        "lng": -51.1913689,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -46789,9 +46789,9 @@ window.MDU_DATA = [
         "data_relatorio": "16/02",
         "valor_medicao": 1050.03,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0246113,
+        "lng": -51.1385304,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -46817,9 +46817,9 @@ window.MDU_DATA = [
         "data_relatorio": "18/02",
         "valor_medicao": 1039.27,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0246113,
+        "lng": -51.1385304,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -47013,9 +47013,9 @@ window.MDU_DATA = [
         "data_relatorio": "19/02",
         "valor_medicao": 867.11,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.025346,
+        "lng": -51.1378009,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -47041,9 +47041,9 @@ window.MDU_DATA = [
         "data_relatorio": "19/02",
         "valor_medicao": 899.39,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.025346,
+        "lng": -51.1378009,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -52193,9 +52193,9 @@ window.MDU_DATA = [
         "data_relatorio": "10/02",
         "valor_medicao": 852.77,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0505278,
+        "lng": -51.2255053,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -52221,9 +52221,9 @@ window.MDU_DATA = [
         "data_relatorio": "10/02",
         "valor_medicao": 657.29,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.049907,
+        "lng": -51.2254209,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -52277,9 +52277,9 @@ window.MDU_DATA = [
         "data_relatorio": "06/02",
         "valor_medicao": 684.19,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.049907,
+        "lng": -51.2254209,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -53677,9 +53677,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.054939,
+        "lng": -51.1978368,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -54769,9 +54769,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0371,
+        "lng": -51.1984,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -54881,9 +54881,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0371,
+        "lng": -51.1984,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -54937,9 +54937,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0371,
+        "lng": -51.1984,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -59445,9 +59445,9 @@ window.MDU_DATA = [
         "data_relatorio": "28/08",
         "valor_medicao": 561.95,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0371649,
+        "lng": -51.1909732,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -61265,9 +61265,9 @@ window.MDU_DATA = [
         "data_relatorio": "09/02",
         "valor_medicao": 1165.88,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0403554,
+        "lng": -51.1903328,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -61293,9 +61293,9 @@ window.MDU_DATA = [
         "data_relatorio": "09/02",
         "valor_medicao": 969.33,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0403554,
+        "lng": -51.1903328,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -63953,9 +63953,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0556253,
+        "lng": -51.1810109,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -71513,9 +71513,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.031,
+        "lng": -51.2005,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -72717,9 +72717,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.03582,
+        "lng": -51.1743487,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -72829,9 +72829,9 @@ window.MDU_DATA = [
         "data_relatorio": "06/03",
         "valor_medicao": 1574.97,
         "valor_repasse": 680.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0346768,
+        "lng": -51.1773427,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -76861,9 +76861,9 @@ window.MDU_DATA = [
         "data_relatorio": "13/08",
         "valor_medicao": 1350.86,
         "valor_repasse": 680.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0331,
+        "lng": -51.23,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -80781,9 +80781,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0508604,
+        "lng": -51.209548,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -85065,9 +85065,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.059,
+        "lng": -51.168,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -85093,9 +85093,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.059,
+        "lng": -51.168,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -85121,9 +85121,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.059,
+        "lng": -51.168,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -85149,9 +85149,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.059,
+        "lng": -51.168,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -85793,9 +85793,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0790828,
+        "lng": -51.2436189,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -85821,9 +85821,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -29.9628339,
+        "lng": -51.2608217,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -87725,9 +87725,9 @@ window.MDU_DATA = [
         "data_relatorio": "09/02",
         "valor_medicao": 1964.83,
         "valor_repasse": 680.0,
-        "lat": -29.6842,
-        "lng": -51.1306,
-        "geocodificado": false,
+        "lat": -29.6942,
+        "lng": -51.0994,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -88033,9 +88033,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -29.6842,
-        "lng": -51.1306,
-        "geocodificado": false,
+        "lat": -29.690331,
+        "lng": -51.1344171,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -88061,9 +88061,9 @@ window.MDU_DATA = [
         "data_relatorio": "18/02",
         "valor_medicao": 1249.09,
         "valor_repasse": 520.0,
-        "lat": -29.6842,
-        "lng": -51.1306,
-        "geocodificado": false,
+        "lat": -29.6925184,
+        "lng": -51.1344846,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -92625,9 +92625,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -29.6842,
-        "lng": -51.1306,
-        "geocodificado": false,
+        "lat": -29.6953061,
+        "lng": -51.1443349,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -94277,9 +94277,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0229181,
+        "lng": -51.1710344,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -94445,9 +94445,9 @@ window.MDU_DATA = [
         "data_relatorio": "13/05",
         "valor_medicao": 1046.36,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.027499,
+        "lng": -51.1632274,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -94473,9 +94473,9 @@ window.MDU_DATA = [
         "data_relatorio": "13/05",
         "valor_medicao": 707.42,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.027499,
+        "lng": -51.1632274,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -94529,9 +94529,9 @@ window.MDU_DATA = [
         "data_relatorio": "13/05",
         "valor_medicao": 788.12,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.027499,
+        "lng": -51.1632274,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -94557,9 +94557,9 @@ window.MDU_DATA = [
         "data_relatorio": "13/05",
         "valor_medicao": 890.34,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.027499,
+        "lng": -51.1632274,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -94641,9 +94641,9 @@ window.MDU_DATA = [
         "data_relatorio": "13/05",
         "valor_medicao": 954.9,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.027499,
+        "lng": -51.1632274,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -94725,9 +94725,9 @@ window.MDU_DATA = [
         "data_relatorio": "13/05",
         "valor_medicao": 1073.26,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.027499,
+        "lng": -51.1632274,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -94781,9 +94781,9 @@ window.MDU_DATA = [
         "data_relatorio": "13/05",
         "valor_medicao": 1180.86,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.027499,
+        "lng": -51.1632274,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -99233,9 +99233,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0387698,
+        "lng": -51.1893263,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -105085,9 +105085,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -29.6842,
-        "lng": -51.1306,
-        "geocodificado": false,
+        "lat": -29.7130899,
+        "lng": -51.1454911,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -107409,9 +107409,9 @@ window.MDU_DATA = [
         "data_relatorio": "12/03",
         "valor_medicao": 926.29,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0024062,
+        "lng": -51.2008187,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -107493,9 +107493,9 @@ window.MDU_DATA = [
         "data_relatorio": "12/03",
         "valor_medicao": 950.73,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0024062,
+        "lng": -51.2008187,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -112113,9 +112113,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0155085,
+        "lng": -51.1963437,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -112141,9 +112141,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0155085,
+        "lng": -51.1963437,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -112169,9 +112169,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.017174,
+        "lng": -51.1977557,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -113289,9 +113289,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0075206,
+        "lng": -51.1915369,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -116005,9 +116005,9 @@ window.MDU_DATA = [
         "data_relatorio": "04/12",
         "valor_medicao": 0,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0493991,
+        "lng": -51.2051137,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -116173,9 +116173,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -29.9979,
+        "lng": -51.14,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -116201,9 +116201,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -29.9979,
+        "lng": -51.14,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -116229,9 +116229,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -29.9979,
+        "lng": -51.14,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -116257,9 +116257,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -29.9979,
+        "lng": -51.14,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -117657,9 +117657,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -29.9181,
-        "lng": -51.1781,
-        "geocodificado": false,
+        "lat": -29.9187,
+        "lng": -51.1867,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -118637,9 +118637,9 @@ window.MDU_DATA = [
         "data_relatorio": "19/05",
         "valor_medicao": 1061.72,
         "valor_repasse": 680.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0024062,
+        "lng": -51.2008187,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -118665,9 +118665,9 @@ window.MDU_DATA = [
         "data_relatorio": "26/05",
         "valor_medicao": 616.74,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0371649,
+        "lng": -51.1909732,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -118973,9 +118973,9 @@ window.MDU_DATA = [
         "data_relatorio": "27/05",
         "valor_medicao": 907.26,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0371649,
+        "lng": -51.1909732,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -119953,9 +119953,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 680.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0158817,
+        "lng": -51.1119018,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -122081,9 +122081,9 @@ window.MDU_DATA = [
         "data_relatorio": "22/05",
         "valor_medicao": 1383.54,
         "valor_repasse": 680.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0158817,
+        "lng": -51.1119018,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -122137,9 +122137,9 @@ window.MDU_DATA = [
         "data_relatorio": "22/05",
         "valor_medicao": 996.18,
         "valor_repasse": 680.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0158817,
+        "lng": -51.1119018,
+        "geocodificado": true,
         "obs_baixa": "ADEQUADO"
     },
     {
@@ -123033,9 +123033,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0092561,
+        "lng": -51.1554204,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -136221,9 +136221,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 520.0,
-        "lat": -29.6842,
-        "lng": -51.1306,
-        "geocodificado": false,
+        "lat": -29.702,
+        "lng": -51.09,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -136249,9 +136249,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 520.0,
-        "lat": -29.6842,
-        "lng": -51.1306,
-        "geocodificado": false,
+        "lat": -29.702,
+        "lng": -51.09,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -136277,9 +136277,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 520.0,
-        "lat": -29.6842,
-        "lng": -51.1306,
-        "geocodificado": false,
+        "lat": -29.702,
+        "lng": -51.09,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -136305,9 +136305,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 520.0,
-        "lat": -29.6842,
-        "lng": -51.1306,
-        "geocodificado": false,
+        "lat": -29.702,
+        "lng": -51.09,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -137061,9 +137061,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 520.0,
-        "lat": -29.6842,
-        "lng": -51.1306,
-        "geocodificado": false,
+        "lat": -29.702,
+        "lng": -51.09,
+        "geocodificado": true,
         "obs_baixa": "QUANDO SAIR O SAR, CORRIGIR TEXTO PADRÃO E CROQUI"
     },
     {
@@ -137089,9 +137089,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 520.0,
-        "lat": -29.6842,
-        "lng": -51.1306,
-        "geocodificado": false,
+        "lat": -29.702,
+        "lng": -51.09,
+        "geocodificado": true,
         "obs_baixa": "QUANDO SAIR O SAR, CORRIGIR TEXTO PADRÃO E CROQUI"
     },
     {
@@ -137117,9 +137117,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 520.0,
-        "lat": -29.6842,
-        "lng": -51.1306,
-        "geocodificado": false,
+        "lat": -29.702,
+        "lng": -51.09,
+        "geocodificado": true,
         "obs_baixa": "QUANDO SAIR O SAR, CORRIGIR TEXTO PADRÃO E CROQUI"
     },
     {
@@ -137145,9 +137145,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 520.0,
-        "lat": -29.6842,
-        "lng": -51.1306,
-        "geocodificado": false,
+        "lat": -29.702,
+        "lng": -51.09,
+        "geocodificado": true,
         "obs_baixa": "QUANDO SAIR O SAR, CORRIGIR TEXTO PADRÃO E CROQUI"
     },
     {
@@ -137257,9 +137257,9 @@ window.MDU_DATA = [
         "data_relatorio": "09/06",
         "valor_medicao": 514.52,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.1063118,
+        "lng": -51.2196606,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -137929,9 +137929,9 @@ window.MDU_DATA = [
         "data_relatorio": "12/06",
         "valor_medicao": 724.34,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0160121,
+        "lng": -51.1732385,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -137985,9 +137985,9 @@ window.MDU_DATA = [
         "data_relatorio": "12/06",
         "valor_medicao": 616.74,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.1063118,
+        "lng": -51.2196606,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -138069,9 +138069,9 @@ window.MDU_DATA = [
         "data_relatorio": "12/06",
         "valor_medicao": 455.34,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.1063118,
+        "lng": -51.2196606,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -138097,9 +138097,9 @@ window.MDU_DATA = [
         "data_relatorio": "12/06",
         "valor_medicao": 530.66,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.1063118,
+        "lng": -51.2196606,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -139189,9 +139189,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0038524,
+        "lng": -51.1440505,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -139441,9 +139441,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0297611,
+        "lng": -51.2058202,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {
@@ -140057,9 +140057,9 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0325963,
+        "lng": -51.2255163,
+        "geocodificado": true,
         "obs_baixa": ""
     },
     {

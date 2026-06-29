@@ -22,6 +22,8 @@ const mduFilters = {
     equipe: ''
 };
 
+let mduSearchQuery = ''; // Busca rápida global
+
 const mduCharts = {
     status: null,
     cidade: null,
@@ -113,6 +115,17 @@ function applyMduFilters() {
         if (mduFilters.cidade && r.cidade !== mduFilters.cidade) return false;
         if (mduFilters.cluster && r.cluster !== mduFilters.cluster) return false;
         if (mduFilters.equipe && r.equipe !== mduFilters.equipe) return false;
+
+        // Busca rápida multi-campo
+        if (mduSearchQuery) {
+            const q = mduSearchQuery.toLowerCase();
+            const haystack = [
+                r.os, r.endereco, r.cidade, r.equipe,
+                r.cluster, r.caixa_m, r.node, r.status
+            ].map(v => String(v || '').toLowerCase()).join(' ');
+            if (!haystack.includes(q)) return false;
+        }
+
         return true;
     });
 
@@ -147,8 +160,25 @@ function clearMduFilters() {
     if (clusterSelect) clusterSelect.value = '';
     if (equipeSelect) equipeSelect.value = '';
 
+    // Limpar busca rápida
+    mduSearchQuery = '';
+    const searchBar = document.getElementById('mdu-search-bar');
+    if (searchBar) searchBar.value = '';
+    const mapSearchInput = document.getElementById('mdu-map-search-input');
+    if (mapSearchInput) mapSearchInput.value = '';
+
     applyMduFilters();
 }
+
+// Handler do campo de busca rápida na barra de filtros
+function onMduSearchInput(value) {
+    mduSearchQuery = value.trim();
+    // Sincroniza com o campo de busca no mapa (se existir)
+    const mapInput = document.getElementById('mdu-map-search-input');
+    if (mapInput && mapInput.value !== value) mapInput.value = value;
+    applyMduFilters();
+}
+window.onMduSearchInput = onMduSearchInput;
 
 function renderMduKPIs() {
     const total = mduFilteredData.length;
@@ -629,6 +659,8 @@ window.exportMduToExcel = exportMduToExcel;
 window.switchMduTab = switchMduTab;
 window.mdu_renderMap = mdu_renderMap;
 window.updateMduMap = updateMduMap;
+window.clearMduFilters = clearMduFilters;
+window.applyMduFilters = applyMduFilters;
 
 // Escutar troca de tema (modo escuro) para redesenhar gráficos e mapa
 const mduThemeObserver = new MutationObserver(() => {
@@ -686,7 +718,7 @@ function mdu_renderMap() {
         mdu_markersGroup = L.featureGroup().addTo(mdu_map);
 
         // Adicionar legenda ao mapa
-        mdu_legend = L.control({position: 'topright'});
+        mdu_legend = L.control({position: 'bottomright'});
         mdu_legend.onAdd = function (map) {
             let div = L.DomUtil.create('div', 'info legend mdu-map-legend');
             div.id = 'mdu-map-legend-container';
@@ -694,23 +726,57 @@ function mdu_renderMap() {
         };
         mdu_legend.addTo(mdu_map);
 
-        // Adicionar botão de maximizar/restaurar como controle Leaflet no canto superior esquerdo
-        const expandControl = L.control({position: 'topleft'});
-        expandControl.onAdd = function (map) {
-            const btn = L.DomUtil.create('button', 'map-expand-btn leaflet-bar');
-            btn.id = 'btn-toggle-mdu-map-expand';
-            btn.innerHTML = '<i class="fa-solid fa-expand"></i>';
-            btn.title = 'Maximizar Mapa';
-            
-            L.DomEvent.on(btn, 'click', function (e) {
+        // ─── Controle no canto superior direito: [Buscar Lance…] [Buscar] [⤢] ─────
+        const searchExpandControl = L.control({ position: 'topright' });
+        searchExpandControl.onAdd = function () {
+            const wrapper = L.DomUtil.create('div', 'mdu-map-search-control leaflet-bar');
+            wrapper.style.cssText = 'display:flex; align-items:center; gap:6px; background:var(--bg-card,#1e2535); padding:6px 10px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.35); border:1px solid var(--border-color,rgba(255,255,255,0.1));';
+
+            // Campo de busca
+            const input = L.DomUtil.create('input', '', wrapper);
+            input.id = 'mdu-map-search-input';
+            input.type = 'text';
+            input.placeholder = 'OS, Endereço, Equipe…';
+            input.style.cssText = 'background:transparent; border:none; outline:none; color:var(--text-primary,#e2e8f0); font-size:13px; width:190px; padding:2px 4px;';
+            L.DomEvent.on(input, 'input', function () {
+                mduSearchQuery = input.value.trim();
+                // Sincroniza barra de filtros
+                const bar = document.getElementById('mdu-search-bar');
+                if (bar) bar.value = input.value;
+                applyMduFilters();
+            });
+            L.DomEvent.disableClickPropagation(wrapper);
+
+            // Botão Buscar
+            const btnSearch = L.DomUtil.create('button', '', wrapper);
+            btnSearch.innerHTML = 'Buscar';
+            btnSearch.style.cssText = 'background:var(--color-primary,#3b82f6); color:#fff; border:none; border-radius:6px; padding:4px 12px; font-size:13px; font-weight:600; cursor:pointer; white-space:nowrap; transition:opacity 0.2s;';
+            L.DomEvent.on(btnSearch, 'click', function () {
+                mduSearchQuery = input.value.trim();
+                const bar = document.getElementById('mdu-search-bar');
+                if (bar) bar.value = input.value;
+                applyMduFilters();
+            });
+            L.DomEvent.on(btnSearch, 'mouseover', () => btnSearch.style.opacity = '0.85');
+            L.DomEvent.on(btnSearch, 'mouseout',  () => btnSearch.style.opacity = '1');
+
+            // Botão Expand
+            const btnExp = L.DomUtil.create('button', '', wrapper);
+            btnExp.id = 'btn-toggle-mdu-map-expand';
+            btnExp.innerHTML = '<i class="fa-solid fa-expand"></i>';
+            btnExp.title = 'Maximizar Mapa';
+            btnExp.style.cssText = 'background:transparent; border:none; color:var(--text-secondary,#94a3b8); font-size:14px; cursor:pointer; padding:2px 4px; display:flex; align-items:center; transition:color 0.2s;';
+            L.DomEvent.on(btnExp, 'click', function (e) {
                 L.DomEvent.stopPropagation(e);
                 L.DomEvent.preventDefault(e);
                 window.toggleMduMapExpand();
             });
-            
-            return btn;
+            L.DomEvent.on(btnExp, 'mouseover', () => btnExp.style.color = 'var(--text-primary,#e2e8f0)');
+            L.DomEvent.on(btnExp, 'mouseout',  () => btnExp.style.color = 'var(--text-secondary,#94a3b8)');
+
+            return wrapper;
         };
-        expandControl.addTo(mdu_map);
+        searchExpandControl.addTo(mdu_map);
     } else {
         mdu_tileLayer.setUrl(mdu_getTileLayerUrl());
         setTimeout(() => {
