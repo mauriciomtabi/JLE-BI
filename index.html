@@ -1295,19 +1295,18 @@
                     </select>
                 </div>
                 <!-- Campo de busca rápida -->
-                <div class="filter-group" style="flex: 1 1 180px; min-width: 140px;">
+                <div class="filter-group mdu-search-group">
                     <label for="mdu-search-bar">Busca Rápida</label>
                     <div style="position: relative; display: flex; align-items: center;">
-                        <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 10px; color: var(--text-secondary); font-size: 12px; pointer-events: none;"></i>
                         <input type="text" id="mdu-search-bar"
-                            placeholder="OS, Endereço, Equipe, Cluster…"
+                            placeholder="OS, Endereço, Cidade, Equipe, Cluster, Caixa M, Node..."
                             oninput="onMduSearchInput(this.value)"
-                            style="width: 100%; padding: 8px 10px 8px 30px; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 13px; outline: none; transition: border-color 0.2s;"
+                            style="width: 100%; padding: 8px 10px; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 13px; outline: none; transition: border-color 0.2s;"
                             onfocus="this.style.borderColor='var(--color-primary)'"
                             onblur="this.style.borderColor='var(--border-color)'">
                     </div>
                 </div>
-                <div class="filter-group" style="display: flex; align-items: end; justify-content: end; margin-bottom: 2px;">
+                <div class="filter-group mdu-clear-group" style="display: flex; align-items: end; justify-content: end; margin-bottom: 2px;">
                     <button onclick="clearMduFilters()" title="Limpar Filtros" style="background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 12px; color: var(--text-secondary); cursor: pointer; transition: all 0.2s ease;" onmouseover="this.style.borderColor='var(--color-primary)'; this.style.color='var(--text-primary)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-secondary)'">
                         <i class="fa-solid fa-eraser"></i>
                     </button>
@@ -1453,8 +1452,29 @@
                     </div>
                     <button class="mdu-btn-view-missing" onclick="window.showMissingGeoModal()" style="background-color: #ff9800; color: white; border: none; border-radius: 4px; padding: 4px 10px; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: background-color 0.2s;">Ver Lista</button>
                 </div>
-                <div class="mdu-card" style="height: 600px; padding: 12px; margin-bottom: 24px; position: relative;">
-                    <div id="mdu-leaflet-map" style="width: 100%; height: 100%; border-radius: 8px; z-index: 1;"></div>
+                <div class="mdu-card" style="height: 600px; padding: 16px; margin-bottom: 24px; position: relative;">
+                    <div class="mdu-card-header" style="display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; padding-bottom: 10px; border-bottom: 1px solid var(--border-color); margin-bottom: 10px;">
+                        <span class="mdu-card-title-text" style="font-size: 1.05rem; font-weight: 600; color: var(--text-primary); display: flex; align-items: center; gap: 8px; margin: 0;">
+                            <i class="fa-solid fa-map-location-dot" style="color: var(--color-primary);"></i> Distribuição Geográfica de OSs
+                        </span>
+                        <div class="mdu-map-controls" style="display: flex; align-items: center; gap: 8px;">
+                            <!-- Campo de busca no mapa -->
+                            <div style="position: relative; display: flex; align-items: center;">
+                                <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 10px; color: var(--text-secondary); font-size: 12px;"></i>
+                                <input type="text" id="mdu-map-search-input"
+                                    placeholder="OS, Endereço, Cidade, Equipe, Cluster, Caixa M, Node..."
+                                    oninput="onMduSearchInput(this.value)"
+                                    style="padding: 6px 10px 6px 28px; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 13px; outline: none; width: 220px; transition: border-color 0.2s;"
+                                    onfocus="this.style.borderColor='var(--color-primary)'"
+                                    onblur="this.style.borderColor='var(--border-color)'">
+                            </div>
+                            <!-- Botão expandir mapa -->
+                            <button id="btn-toggle-mdu-map-expand" onclick="window.toggleMduMapExpand()" title="Maximizar Mapa" style="background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--color-primary)'; this.style.color='var(--text-primary)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-secondary)'">
+                                <i class="fa-solid fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="mdu-leaflet-map" style="width: 100%; flex-grow: 1; border-radius: 8px; z-index: 1;"></div>
                 </div>
             </div>
         </div>

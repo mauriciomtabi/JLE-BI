@@ -28,7 +28,27 @@
 
 @media (min-width: 769px) {
     #mdu-filters-container {
-        display: grid !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        align-items: flex-end !important;
+        justify-content: flex-start !important;
+        gap: 12px !important;
+    }
+    
+    #mdu-filters-container .filter-group {
+        flex: 1 1 150px;
+        max-width: 220px;
+    }
+    
+    #mdu-filters-container .mdu-search-group {
+        flex: 1 1 300px !important;
+        flex-grow: 1 !important;
+        max-width: none !important;
+    }
+    
+    #mdu-filters-container .mdu-clear-group {
+        flex: 0 0 auto !important;
+        max-width: none !important;
     }
 }
 
@@ -307,28 +327,23 @@
     z-index: 1 !important;
 }
 
-/* Custom styling for Leaflet control expand/compress button */
-.map-expand-btn {
-    background: var(--bg-card) !important;
-    border: 1px solid var(--border-color) !important;
-    color: var(--text-primary) !important;
-    width: 30px !important;
-    height: 30px !important;
-    border-radius: 4px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    cursor: pointer !important;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.2) !important;
-    transition: all 0.2s ease !important;
-    margin-top: 6px !important;
-    margin-left: 10px !important;
+/* -- Cabeçalho e Controles do Card do Mapa MDU -- */
+.mdu-card-header {
+    background-color: transparent;
+    transition: border-color 0.2s ease;
 }
 
-.map-expand-btn:hover {
-    background: var(--bg-body) !important;
-    color: var(--color-primary) !important;
-    border-color: var(--color-primary) !important;
+.mdu-map-controls button {
+    transition: all 0.2s ease;
+}
+
+.mdu-map-controls input {
+    font-family: inherit;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mdu-map-controls input:focus {
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
 }
 
 .mdu-map-legend {
