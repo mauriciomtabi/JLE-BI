@@ -1433,10 +1433,14 @@
 
             <!-- Sub Tab Pane: Mapa -->
             <div id="subview-mdu-map" class="subtab-pane" style="display: none; padding-bottom: 24px;">
+                <div id="mdu-map-warning-banner" class="mdu-map-warning" style="display: none; justify-content: space-between; align-items: center; background-color: rgba(255, 152, 0, 0.1); border: 1px solid rgba(255, 152, 0, 0.3); border-radius: 6px; padding: 10px 14px; margin-bottom: 12px; color: #ff9800; font-size: 0.85rem; font-weight: 500; gap: 8px;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        <span id="mdu-map-warning-text"></span>
+                    </div>
+                    <button class="mdu-btn-view-missing" onclick="window.showMissingGeoModal()" style="background-color: #ff9800; color: white; border: none; border-radius: 4px; padding: 4px 10px; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: background-color 0.2s;">Ver Lista</button>
+                </div>
                 <div class="mdu-card" style="height: 600px; padding: 12px; margin-bottom: 24px; position: relative;">
-                    <button id="btn-toggle-mdu-map-expand" class="map-expand-btn" onclick="window.toggleMduMapExpand()" title="Maximizar Mapa">
-                        <i class="fa-solid fa-expand"></i>
-                    </button>
                     <div id="mdu-leaflet-map" style="width: 100%; height: 100%; border-radius: 8px; z-index: 1;"></div>
                 </div>
             </div>
@@ -1485,6 +1489,37 @@
                     <button class="btn-secondary" onclick="document.getElementById('user-permission-modal').classList.remove('active')" style="flex:0 0 auto;">
                         Cancelar
                     </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal: Endereços sem Geolocalização -->
+        <div class="modal-overlay" id="mdu-missing-geo-modal" onclick="window.closeMduMissingGeoModal(event)" style="z-index: 3000;">
+            <div class="modal-card" style="max-width: 800px; width: 90%;" onclick="event.stopPropagation()">
+                <div class="modal-header">
+                    <h3>Endereços sem Geolocalização</h3>
+                    <button class="modal-close" onclick="window.closeMduMissingGeoModal()">&times;</button>
+                </div>
+                <div class="modal-body" style="padding-top: 8px;">
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.4;">
+                        Estes endereços não foram localizados pelo Nominatim OpenStreetMap (ex. por formatação inválida ou numeração inexistente) e não estão representados visualmente no mapa.
+                    </p>
+                    <div class="mdu-table-wrapper" style="max-height: 400px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 6px;">
+                        <table class="mdu-table">
+                            <thead>
+                                <tr>
+                                    <th>OS JLE</th>
+                                    <th>Endereço</th>
+                                    <th>Cidade</th>
+                                    <th>Cluster</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="mdu-missing-geo-table-body">
+                                <!-- Populado dinamicamente -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

@@ -307,35 +307,28 @@
     z-index: 1 !important;
 }
 
-/* Adjust map expand button when in fullscreen to not overlap filters */
-.mdu-card:fullscreen .map-expand-btn {
-    top: 86px !important; /* Move it down below the filters bar */
-    right: 28px !important;
-}
-
+/* Custom styling for Leaflet control expand/compress button */
 .map-expand-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 1000;
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    color: var(--text-primary);
-    width: 34px;
-    height: 34px;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    transition: all 0.2s ease;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-primary) !important;
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 4px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2) !important;
+    transition: all 0.2s ease !important;
+    margin-top: 6px !important;
+    margin-left: 10px !important;
 }
 
 .map-expand-btn:hover {
-    background: var(--bg-body);
-    color: var(--color-primary);
-    border-color: var(--color-primary);
+    background: var(--bg-body) !important;
+    color: var(--color-primary) !important;
+    border-color: var(--color-primary) !important;
 }
 
 .mdu-map-legend {

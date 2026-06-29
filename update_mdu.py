@@ -173,18 +173,21 @@ def process_mdu():
             geo_key = f"{addr_clean}, {cidade}, {uf}, Brazil".upper()
 
             lat, lng = None, None
+            geocodificado = False
             
             # Tenta buscar do cache primeiro
             if geo_key in cache:
                 coords = cache[geo_key]
                 if coords:
                     lat, lng = coords[0], coords[1]
+                    geocodificado = True
             # Se não tiver no cache e não estourou o limite de novas consultas, faz a geocodificação
             elif new_geocodes_count < max_new_geocodes:
                 print(f"[{idx+1}/{total_rows}] Buscando coordenadas para: {geo_key}")
                 coords = geocode_address(geo_key, cache)
                 if coords:
                     lat, lng = coords[0], coords[1]
+                    geocodificado = True
                 new_geocodes_count += 1
                 save_cache(cache) # Salva o cache imediatamente
                 time.sleep(1) # Intervalo obrigatório do Nominatim
@@ -198,11 +201,13 @@ def process_mdu():
                     coords = cache[street_key]
                     if coords:
                         lat, lng = coords[0], coords[1]
+                        geocodificado = True
 
             # 4. Fallback 2: Se ainda assim falhar, posiciona no Centro da Cidade
             if lat is None or lng is None:
                 coords = CITY_COORDINATES.get(cidade, CITY_COORDINATES["NÃO DEFINIDA"])
                 lat, lng = coords[0], coords[1]
+                geocodificado = False
 
             item = {
                 "os": os_val,
@@ -228,7 +233,9 @@ def process_mdu():
                 "valor_medicao": clean_currency(row[39]),
                 "valor_repasse": clean_currency(row[45]),
                 "lat": lat,
-                "lng": lng
+                "lng": lng,
+                "geocodificado": geocodificado,
+                "obs_baixa": row[33].strip()
             }
             rows_data.append(item)
             if (idx + 1) % 50 == 0:

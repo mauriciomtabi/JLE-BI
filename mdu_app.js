@@ -693,6 +693,24 @@ function mdu_renderMap() {
             return div;
         };
         mdu_legend.addTo(mdu_map);
+
+        // Adicionar botão de maximizar/restaurar como controle Leaflet no canto superior esquerdo
+        const expandControl = L.control({position: 'topleft'});
+        expandControl.onAdd = function (map) {
+            const btn = L.DomUtil.create('button', 'map-expand-btn leaflet-bar');
+            btn.id = 'btn-toggle-mdu-map-expand';
+            btn.innerHTML = '<i class="fa-solid fa-expand"></i>';
+            btn.title = 'Maximizar Mapa';
+            
+            L.DomEvent.on(btn, 'click', function (e) {
+                L.DomEvent.stopPropagation(e);
+                L.DomEvent.preventDefault(e);
+                window.toggleMduMapExpand();
+            });
+            
+            return btn;
+        };
+        expandControl.addTo(mdu_map);
     } else {
         mdu_tileLayer.setUrl(mdu_getTileLayerUrl());
         setTimeout(() => {
@@ -802,7 +820,21 @@ function updateMduMap() {
         'PROJETO': '#ff6b81'
     };
 
-    const recordsWithGeo = mduFilteredData.filter(r => r.lat && r.lng);
+    // 1. Filtrar apenas registros que possuem geolocalização válida (geocodificado: true)
+    const recordsWithGeo = mduFilteredData.filter(r => r.lat && r.lng && r.geocodificado);
+
+    // 2. Atualizar banner de avisos para endereços não geolocalizados
+    const missingGeoCount = mduFilteredData.filter(r => !r.geocodificado).length;
+    const warningBanner = document.getElementById('mdu-map-warning-banner');
+    const warningText = document.getElementById('mdu-map-warning-text');
+    if (warningBanner && warningText) {
+        if (missingGeoCount > 0) {
+            warningText.innerHTML = `⚠️ <strong>${missingGeoCount}</strong> endereços não estão exibidos no mapa por falta de coordenadas geográficas precisas.`;
+            warningBanner.style.display = 'flex';
+        } else {
+            warningBanner.style.display = 'none';
+        }
+    }
 
     recordsWithGeo.forEach(r => {
         const statusUpper = String(r.status || '').toUpperCase().trim();
@@ -842,10 +874,26 @@ function updateMduMap() {
             </div>
         `;
 
-        marker.bindTooltip(`OS: ${r.os || '-'} (${r.status || 'Não Definido'})`, {
+        const tooltipHtml = `
+            <div class="mdu-tooltip-content" style="font-family: 'Segoe UI', system-ui, sans-serif; font-size: 11px; padding: 4px; color: var(--text-primary);">
+                <div style="font-weight: 700; border-bottom: 1px solid var(--border-color); padding-bottom: 4px; margin-bottom: 4px; color: var(--color-primary); display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                    <span>OS: ${escapeHtml(r.os || '-')}</span>
+                    <span class="mdu-badge ${getMduStatusBadgeClass(r.status)}" style="font-size: 9px; padding: 2px 6px;">${escapeHtml(r.status || 'Não Definido')}</span>
+                </div>
+                <div style="margin-bottom: 2px;"><strong>Endereço:</strong> ${escapeHtml(r.endereco || '-')}</div>
+                <div style="margin-bottom: 2px;"><strong>Cidade:</strong> ${escapeHtml(r.cidade || '-')}</div>
+                <div style="margin-bottom: 2px;"><strong>Cluster:</strong> ${escapeHtml(r.cluster || '-')}</div>
+                <div style="margin-bottom: 2px;"><strong>Node:</strong> ${escapeHtml(r.node || '-')}</div>
+                <div style="margin-bottom: 2px;"><strong>Caixa M:</strong> ${escapeHtml(r.caixa_m || '-')}</div>
+                <div style="margin-bottom: 2px;"><strong>Equipe:</strong> ${escapeHtml(r.equipe || '-')}</div>
+                <div><strong>Obs. Baixa:</strong> <span style="color: var(--text-secondary); font-style: italic;">${escapeHtml(r.obs_baixa || '-')}</span></div>
+            </div>
+        `;
+
+        marker.bindTooltip(tooltipHtml, {
             direction: 'top',
             offset: [0, -5],
-            opacity: 0.9,
+            opacity: 0.95,
             className: 'mdu-map-tooltip'
         });
 
@@ -970,3 +1018,55 @@ document.addEventListener('click', (e) => {
 
 window.toggleMduStatusDropdown = toggleMduStatusDropdown;
 window.handleMduStatusChange = handleMduStatusChange;
+
+function getMduStatusBadgeClass(status) {
+    const statusUpper = String(status || '').toUpperCase().trim();
+    if (statusUpper === 'FINALIZADO' || statusUpper === 'FINALIZADA') {
+        return 'mdu-badge-finalizado';
+    } else if (statusUpper === '2ª VISTORIA' || statusUpper === '1ª VISTORIA' || statusUpper === 'VISTORIA') {
+        return 'mdu-badge-vistoria';
+    } else if (statusUpper === 'FUSÃO') {
+        return 'mdu-badge-fusao';
+    } else if (statusUpper === 'MEDIÇÃO') {
+        return 'mdu-badge-medicao';
+    } else if (statusUpper === 'CANCELADO' || statusUpper === 'CANCELADA') {
+        return 'mdu-badge-cancelado';
+    }
+    return 'mdu-badge-default';
+}
+
+function showMissingGeoModal() {
+    const missing = mduFilteredData.filter(r => !r.geocodificado);
+    const tbody = document.getElementById('mdu-missing-geo-table-body');
+    if (!tbody) return;
+
+    if (missing.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--text-secondary); padding: 20px;">Nenhum endereço sem geolocalização nos filtros atuais.</td></tr>';
+    } else {
+        tbody.innerHTML = missing.map(r => `
+            <tr>
+                <td><strong style="color: var(--color-primary);">${escapeHtml(r.os || '-')}</strong></td>
+                <td>${escapeHtml(r.endereco || '-')}</td>
+                <td>${escapeHtml(r.cidade || '-')}</td>
+                <td>${escapeHtml(r.cluster || '-')}</td>
+                <td>
+                    <span class="mdu-badge ${getMduStatusBadgeClass(r.status)}">
+                        ${escapeHtml(r.status || 'Não Definido')}
+                    </span>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    document.getElementById('mdu-missing-geo-modal').classList.add('active');
+}
+
+function closeMduMissingGeoModal(e) {
+    if (!e || e.target.id === 'mdu-missing-geo-modal') {
+        document.getElementById('mdu-missing-geo-modal').classList.remove('active');
+    }
+}
+
+window.getMduStatusBadgeClass = getMduStatusBadgeClass;
+window.showMissingGeoModal = showMissingGeoModal;
+window.closeMduMissingGeoModal = closeMduMissingGeoModal;
