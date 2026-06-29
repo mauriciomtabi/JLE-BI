@@ -23,6 +23,8 @@ const mduFilters = {
 };
 
 let mduSearchQuery = ''; // Busca rápida global
+let lastMduFiltersState = '';
+let mduMapInitializedBounds = false;
 
 const mduCharts = {
     status: null,
@@ -527,7 +529,16 @@ function renderMduTable() {
         html += `
             <tr>
                 <td style="font-weight: 600; color: var(--color-primary);">${escapeHtml(r.os)}</td>
-                <td title="${escapeHtml(r.endereco || '')}">${escapeHtml(r.endereco || '-')}</td>
+                <td title="${escapeHtml(r.endereco || '')}">
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+                        <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 180px;">${escapeHtml(r.endereco || '-')}</span>
+                        ${r.lat && r.lng && r.geocodificado ? `
+                            <a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${r.lat},${r.lng}" target="_blank" title="Ver no Google Street View" style="color: #ff9800; cursor: pointer; display: inline-flex; align-items: center; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">
+                                <i class="fa-solid fa-street-view" style="font-size: 14px;"></i>
+                            </a>
+                        ` : ''}
+                    </div>
+                </td>
                 <td>${escapeHtml(r.cidade || '-')}</td>
                 <td><span class="mdu-badge ${badgeClass}">${escapeHtml(r.status || 'Não definido')}</span></td>
                 <td style="font-weight:600;">
@@ -822,8 +833,40 @@ function updateMduLegend() {
 function updateMduMap() {
     if (!mdu_map || !mdu_markersGroup) return;
 
+    // Verificar se os filtros ou busca mudaram para decidir se recentraliza/redesenha
+    const currentFiltersState = JSON.stringify({
+        filters: mduFilters,
+        search: mduSearchQuery
+    });
+
+    const filtersChanged = currentFiltersState !== lastMduFiltersState;
+    lastMduFiltersState = currentFiltersState;
+
     // Atualizar legenda com quantidades
     updateMduLegend();
+
+    // 2. Atualizar banner de avisos para endereços não geolocalizados
+    const missingGeoCount = mduFilteredData.filter(r => 
+        !r.geocodificado && 
+        r.endereco && 
+        r.endereco.trim() !== '' && 
+        r.endereco.trim() !== '-'
+    ).length;
+    const warningBanner = document.getElementById('mdu-map-warning-banner');
+    const warningText = document.getElementById('mdu-map-warning-text');
+    if (warningBanner && warningText) {
+        if (missingGeoCount > 0) {
+            warningText.innerHTML = `⚠️ <strong>${missingGeoCount}</strong> endereços não estão exibidos no mapa por falta de coordenadas geográficas precisas.`;
+            warningBanner.style.display = 'flex';
+        } else {
+            warningBanner.style.display = 'none';
+        }
+    }
+
+    // Se os filtros não mudaram e o mapa já foi inicializado com bounds, mantém posição atual e sai
+    if (!filtersChanged && mduMapInitializedBounds) {
+        return;
+    }
 
     mdu_markersGroup.clearLayers();
 
@@ -843,24 +886,6 @@ function updateMduMap() {
 
     // 1. Filtrar apenas registros que possuem geolocalização válida (geocodificado: true)
     const recordsWithGeo = mduFilteredData.filter(r => r.lat && r.lng && r.geocodificado);
-
-    // 2. Atualizar banner de avisos para endereços não geolocalizados
-    const missingGeoCount = mduFilteredData.filter(r => 
-        !r.geocodificado && 
-        r.endereco && 
-        r.endereco.trim() !== '' && 
-        r.endereco.trim() !== '-'
-    ).length;
-    const warningBanner = document.getElementById('mdu-map-warning-banner');
-    const warningText = document.getElementById('mdu-map-warning-text');
-    if (warningBanner && warningText) {
-        if (missingGeoCount > 0) {
-            warningText.innerHTML = `⚠️ <strong>${missingGeoCount}</strong> endereços não estão exibidos no mapa por falta de coordenadas geográficas precisas.`;
-            warningBanner.style.display = 'flex';
-        } else {
-            warningBanner.style.display = 'none';
-        }
-    }
 
     recordsWithGeo.forEach(r => {
         const statusUpper = String(r.status || '').toUpperCase().trim();
@@ -889,13 +914,16 @@ function updateMduMap() {
                     <p><i class="fa-solid fa-users"></i> Equipe: ${escapeHtml(r.equipe || '-')}</p>
                     <p><i class="fa-solid fa-house"></i> HPs: <strong>${r.hps !== null ? r.hps : '-'}</strong></p>
                     <p><i class="fa-solid fa-calendar-day"></i> Baixa: ${escapeHtml(r.data_baixa || '-')}</p>
-                    <div class="mdu-popup-progress">
+                    <div class="mdu-popup-progress" style="margin-bottom: 12px;">
                         <span>Progresso MDU</span>
                         <div class="progress-bar-container">
                             <div class="progress-bar" style="width: ${r.prog || 0}%; background-color: ${markerColor};"></div>
                         </div>
                         <span class="progress-val">${r.prog || 0}%</span>
                     </div>
+                    <a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${r.lat},${r.lng}" target="_blank" class="mdu-popup-streetview-btn" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 8px 12px; background-color: #ff9800; color: white; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 11px; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#e68a00'" onmouseout="this.style.backgroundColor='#ff9800'">
+                        <i class="fa-solid fa-street-view"></i> Google Street View
+                    </a>
                 </div>
             </div>
         `;
@@ -933,6 +961,7 @@ function updateMduMap() {
 
     if (mdu_markersGroup.getLayers().length > 0) {
         mdu_map.fitBounds(mdu_markersGroup.getBounds(), { padding: [40, 40] });
+        mduMapInitializedBounds = true;
     }
 }
 
