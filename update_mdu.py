@@ -374,7 +374,9 @@ def process_mdu():
                 "lat": lat,
                 "lng": lng,
                 "geocodificado": geocodificado,
-                "obs_baixa": row[33].strip()
+                "obs_baixa": row[33].strip(),
+                "obs_vistoria": row[21].strip(),
+                "data_adicio": row[16].strip()
             }
             rows_data.append(item)
             if (idx + 1) % 50 == 0:

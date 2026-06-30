@@ -381,7 +381,8 @@ function renderClusterChart() {
 
     const counts = {};
     mduFilteredData.forEach(r => {
-        const c = r.cluster || 'Sem Cluster';
+        const c = (r.cluster || '').trim();
+        if (!c || c.toUpperCase() === 'SEM CLUSTER') return;
         counts[c] = (counts[c] || 0) + 1;
     });
 
@@ -392,11 +393,11 @@ function renderClusterChart() {
     const textThemeColor = isDark ? '#b2bec3' : '#636e72';
 
     const premiumColors = [
-        '#004f71', // Corporate blue
+        '#004f71', // Corporate blue (Deep Teal)
+        '#ffb83d', // JLE Orange (CAPEX/OPEX)
         '#1e90ff', // Dodger blue
         '#3742fa', // Indigo
         '#2ed573', // Green
-        '#ffa502', // Orange
         '#ff4757', // Red
         '#a4b0be', // Gray
         '#ff6b81'  // Pink
@@ -469,6 +470,34 @@ function renderClusterChart() {
     });
 }
 
+function toggleMduMacroStatusFilter(macro) {
+    let statusesToToggle = [];
+    if (macro === 'Finalizado') {
+        statusesToToggle = ['Finalizado', 'Finalizada'];
+    } else if (macro === 'Cancelado') {
+        statusesToToggle = ['Cancelado', 'Cancelada'];
+    } else {
+        statusesToToggle = ['1ª VISTORIA', '2ª VISTORIA', 'PROJETO', 'FUSÃO', 'MEDIÇÃO', 'RELATÓRIO', 'BAIXA', '1ª Vistoria', '2ª Vistoria', 'Vistoria'];
+    }
+
+    const checkboxes = document.querySelectorAll('#mdu-multiselect-status-dropdown input[type="checkbox"]');
+    let anyChecked = false;
+    checkboxes.forEach(chk => {
+        if (statusesToToggle.some(s => s.toUpperCase() === chk.value.toUpperCase()) && chk.checked) {
+            anyChecked = true;
+        }
+    });
+
+    checkboxes.forEach(chk => {
+        if (statusesToToggle.some(s => s.toUpperCase() === chk.value.toUpperCase())) {
+            chk.checked = !anyChecked;
+        }
+    });
+
+    handleMduStatusChange();
+}
+window.toggleMduMacroStatusFilter = toggleMduMacroStatusFilter;
+
 function renderCidadeStatusChart() {
     const canvas = document.getElementById('mdu-chart-cidade-status');
     if (!canvas) return;
@@ -479,44 +508,44 @@ function renderCidadeStatusChart() {
 
     const cityCounts = {};
     mduFilteredData.forEach(r => {
-        const c = r.cidade || 'Sem Cidade';
+        const c = (r.cidade || '').trim();
+        if (!c || c.toUpperCase() === 'NAO DEFINIDA' || c.toUpperCase() === 'SEM CIDADE') return;
         cityCounts[c] = (cityCounts[c] || 0) + 1;
     });
 
     const cities = Object.keys(cityCounts).sort((a, b) => cityCounts[b] - cityCounts[a]);
 
-    const statusColors = {
+    const macroColors = {
         'Finalizado': '#2ed573',
-        'Finalizada': '#2ed573',
-        'Cancelado': '#ff4757',
-        'Cancelada': '#ff4757',
-        'Fusão': '#1e90ff',
-        '2ª Vistoria': '#3742fa',
-        '1ª Vistoria': '#70a1ff',
-        'Medição': '#ffa502',
-        'Relatório': '#a4b0be',
-        'Baixa': '#2f3542',
-        'Projeto': '#ff6b81'
+        'Em Andamento': '#1e90ff',
+        'Cancelado': '#ff4757'
     };
 
-    const datasets = [];
-    const activeStatuses = [...new Set(mduFilteredData.map(r => r.status).filter(Boolean))];
-
-    activeStatuses.forEach(status => {
-        const color = statusColors[status] || '#ced6e0';
+    const macroStatuses = ['Finalizado', 'Em Andamento', 'Cancelado'];
+    const datasets = macroStatuses.map(macro => {
         const dataForStatus = cities.map(city => {
-            return mduFilteredData.filter(r => (r.cidade || 'Sem Cidade') === city && r.status === status).length;
+            return mduFilteredData.filter(r => {
+                const rCity = (r.cidade || '').trim();
+                if (rCity !== city) return false;
+
+                const status = String(r.status || '').toUpperCase().trim();
+                let rowMacro = 'Em Andamento';
+                if (status === 'FINALIZADO' || status === 'FINALIZADA') {
+                    rowMacro = 'Finalizado';
+                } else if (status === 'CANCELADO' || status === 'CANCELADA') {
+                    rowMacro = 'Cancelado';
+                }
+                return rowMacro === macro;
+            }).length;
         });
 
-        if (dataForStatus.some(v => v > 0)) {
-            datasets.push({
-                label: status,
-                data: dataForStatus,
-                backgroundColor: color,
-                borderRadius: 2
-            });
-        }
-    });
+        return {
+            label: macro,
+            data: dataForStatus,
+            backgroundColor: macroColors[macro],
+            borderRadius: 2
+        };
+    }).filter(ds => ds.data.some(v => v > 0));
 
     const isDark = !document.body.classList.contains('light-theme');
     const textThemeColor = isDark ? '#b2bec3' : '#636e72';
@@ -558,8 +587,8 @@ function renderCidadeStatusChart() {
                         font: { family: 'Outfit', size: 9 }
                     },
                     onClick: (e, legendItem, legend) => {
-                        const status = legendItem.text;
-                        toggleMduChartFilter('status', status);
+                        const macro = legendItem.text;
+                        toggleMduMacroStatusFilter(macro);
                     }
                 },
                 datalabels: {
@@ -1006,7 +1035,10 @@ function updateMduTableHeaders() {
         'status': 'Status',
         'prog': 'Progresso',
         'equipe': 'Equipe',
-        'hps': 'HPs',
+        'node': 'Node',
+        'obs_vistoria': 'Obs. Vistoria',
+        'obs_baixa': 'Obs. Baixa',
+        'data_adicio': 'Data Adicio.',
         'aging': 'Aging',
         'data_baixa': 'Data Baixa'
     };
@@ -1042,7 +1074,7 @@ function renderMduTable() {
     if (!tbody) return;
 
     if (mduFilteredData.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; color: var(--text-secondary);">Nenhuma OS MDU encontrada com os filtros selecionados.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="12" style="text-align:center; color: var(--text-secondary);">Nenhuma OS MDU encontrada com os filtros selecionados.</td></tr>';
         document.getElementById('mdu-pagination-info').innerText = '0 registros';
         document.getElementById('mdu-pagination-btns').innerHTML = '';
         return;
@@ -1070,9 +1102,6 @@ function renderMduTable() {
             } else if (mduTableSortColumn === 'prog') {
                 valA = parseFloat(a.prog) || 0;
                 valB = parseFloat(b.prog) || 0;
-            } else if (mduTableSortColumn === 'hps') {
-                valA = parseInt(a.hps) || 0;
-                valB = parseInt(b.hps) || 0;
             } else {
                 valA = String(valA || '').toLowerCase();
                 valB = String(valB || '').toLowerCase();
@@ -1105,8 +1134,7 @@ function renderMduTable() {
             badgeClass = 'mdu-badge-cancelado';
         }
 
-        const hpsStr = r.hps !== null && r.hps !== undefined ? r.hps.toLocaleString('pt-BR') : '-';
-        const progVal = r.prog || 0;
+        const progVal = Math.round(r.prog || 0);
 
         html += `
             <tr>
@@ -1132,7 +1160,10 @@ function renderMduTable() {
                     </div>
                 </td>
                 <td>${escapeHtml(r.equipe || '-')}</td>
-                <td>${hpsStr}</td>
+                <td>${escapeHtml(r.node || '-')}</td>
+                <td>${escapeHtml(r.obs_vistoria || '-')}</td>
+                <td>${escapeHtml(r.obs_baixa || '-')}</td>
+                <td>${escapeHtml(r.data_adicio || '-')}</td>
                 <td>${escapeHtml(r.aging || '-')}</td>
                 <td>${escapeHtml(r.data_baixa || '-')}</td>
             </tr>
@@ -1196,7 +1227,8 @@ function exportMduToExcel() {
         "Área", "Node", "Caixa M", "HPs", "Equipe", 
         "Primeira Visita", "Segunda Visita", "Data Interna", 
         "Data Fusão", "Data Baixa", "Data Relatório", 
-        "Valor Medição", "Valor Repasse"
+        "Valor Medição", "Valor Repasse", "Obs. Vistoria", "Obs. Baixa",
+        "Data Adicio."
     ];
 
     const rows = mduFilteredData.map(r => [
@@ -1221,7 +1253,10 @@ function exportMduToExcel() {
         r.data_baixa || '',
         r.data_relatorio || '',
         r.valor_medicao || 0,
-        r.valor_repasse || 0
+        r.valor_repasse || 0,
+        r.obs_vistoria || '',
+        r.obs_baixa || '',
+        r.data_adicio || ''
     ]);
 
     const filename = `mdu_export_${new Date().toISOString().slice(0,10)}.xlsx`;
@@ -1346,10 +1381,7 @@ function mdu_renderMap() {
 }
 
 function mdu_getTileLayerUrl() {
-    const isDark = !document.body.classList.contains('light-theme');
-    return isDark 
-        ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
-        : 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
+    return 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
 }
 
 function getMduStatusCounts() {
