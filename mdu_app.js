@@ -1018,6 +1018,32 @@ function renderMduPerformanceTable() {
     });
 
     tbody.innerHTML = html;
+
+    // Calcular e renderizar Total Geral no Footer
+    const colTotals = {};
+    statusColumns.forEach(col => {
+        colTotals[col] = 0;
+    });
+    let grandTotal = 0;
+
+    sortedEquipes.forEach(eq => {
+        statusColumns.forEach(col => {
+            colTotals[col] += eq.counts[col] || 0;
+        });
+        grandTotal += eq.total || 0;
+    });
+
+    const tfoot = document.getElementById('mdu-performance-table-footer');
+    if (tfoot) {
+        let footHtml = `<tr><td>Total Geral</td>`;
+        statusColumns.forEach(col => {
+            const sum = colTotals[col] || 0;
+            footHtml += `<td style="text-align: center; font-weight: 700;">${sum > 0 ? sum.toLocaleString('pt-BR') : '-'}</td>`;
+        });
+        footHtml += `<td style="text-align: center; font-weight: 800; color: var(--color-primary); background-color: rgba(0, 79, 113, 0.1);">${grandTotal.toLocaleString('pt-BR')}</td>`;
+        footHtml += `</tr>`;
+        tfoot.innerHTML = footHtml;
+    }
 }
 
 function getMduAgingNumericValue(val) {
@@ -1326,7 +1352,7 @@ function switchMduTab(tabId) {
         const pane = document.getElementById('subview-mdu-indicators');
         if (pane) {
             pane.classList.add('active');
-            pane.style.display = 'block';
+            pane.style.display = 'flex';
         }
         renderMduCharts();
     } else if (tabId === 'map') {
@@ -1335,7 +1361,7 @@ function switchMduTab(tabId) {
         const pane = document.getElementById('subview-mdu-map');
         if (pane) {
             pane.classList.add('active');
-            pane.style.display = 'block';
+            pane.style.display = 'flex';
         }
         mdu_renderMap();
     } else if (tabId === 'table') {
@@ -1344,7 +1370,7 @@ function switchMduTab(tabId) {
         const pane = document.getElementById('subview-mdu-table');
         if (pane) {
             pane.classList.add('active');
-            pane.style.display = 'block';
+            pane.style.display = 'flex';
         }
         renderMduTable();
     }
