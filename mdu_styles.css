@@ -86,7 +86,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
-    margin-bottom: 24px;
+    margin-bottom: 0;
 }
 
 @media (max-width: 1200px) {
@@ -572,3 +572,13 @@
 #mdu-google-sheets-btn:hover {
     box-shadow: 0 6px 14px rgba(15, 157, 88, 0.25) !important;
 }
+
+/* -- Ocultar Barra de Rolagem (Scrollbar) -- */
+.no-scrollbar::-webkit-scrollbar {
+    display: none; /* Safari e Chrome */
+}
+.no-scrollbar {
+    -ms-overflow-style: none;  /* IE e Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+

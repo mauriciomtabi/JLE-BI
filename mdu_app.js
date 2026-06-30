@@ -11,7 +11,11 @@ const GOOGLE_SHEETS_MDU_URL = "https://docs.google.com/spreadsheets/d/your-sprea
 let mduDataLoaded = false;
 let mduFilteredData = [];
 let mduPage = 1;
-const mduPageSize = 10;
+let mduPageSize = 50;
+let mduTableSortColumn = 'aging';
+let mduTableSortOrder = 'desc';
+let mduPerformanceSortColumn = 'total';
+let mduPerformanceSortOrder = 'desc';
 let mdu_map = null;
 let mdu_markersGroup = null;
 let mdu_tileLayer = null;
@@ -237,6 +241,8 @@ function renderMduCharts() {
     }
 
     renderStatusChart();
+    renderClusterChart();
+    renderCidadeStatusChart();
     renderMduPerformanceTable();
     renderFinalizadosPeriodoChart();
 }
@@ -248,6 +254,37 @@ function getThemeColors() {
         grid: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)'
     };
 }
+
+function toggleMduChartFilter(field, value) {
+    if (field === 'status') {
+        const chk = document.getElementById(`status-chk-${value}`);
+        if (chk) {
+            chk.checked = !chk.checked;
+            handleMduStatusChange();
+        }
+    } else if (field === 'cluster') {
+        const select = document.getElementById('mdu-filter-cluster');
+        if (select) {
+            if (select.value === value) {
+                select.value = '';
+            } else {
+                select.value = value;
+            }
+            applyMduFilters();
+        }
+    } else if (field === 'cidade') {
+        const select = document.getElementById('mdu-filter-cidade');
+        if (select) {
+            if (select.value === value) {
+                select.value = '';
+            } else {
+                select.value = value;
+            }
+            applyMduFilters();
+        }
+    }
+}
+window.toggleMduChartFilter = toggleMduChartFilter;
 
 function renderStatusChart() {
     const canvas = document.getElementById('mdu-chart-status');
@@ -267,22 +304,6 @@ function renderStatusChart() {
     const labels = Object.keys(statusCounts).sort((a,b) => statusCounts[b] - statusCounts[a]);
     const data = labels.map(l => statusCounts[l]);
 
-    // Paleta de cores premium
-    const colors = {
-        'Finalizado': '#2ed573',
-        'Finalizada': '#2ed573',
-        'Cancelado': '#ff4757',
-        'Cancelada': '#ff4757',
-        'Fusão': '#1e90ff',
-        '2ª Vistoria': '#3742fa',
-        '1ª Vistoria': '#70a1ff',
-        'Medição': '#ffa502',
-        'Relatório': '#a4b0be',
-        'Baixa': '#2f3542',
-        'Projeto': '#ff6b81'
-    };
-
-    const backgroundColors = labels.map(l => colors[l] || '#ced6e0');
     const isDark = !document.body.classList.contains('light-theme');
     const textThemeColor = isDark ? '#b2bec3' : '#636e72';
 
@@ -292,7 +313,8 @@ function renderStatusChart() {
             labels: labels,
             datasets: [{
                 data: data,
-                backgroundColor: backgroundColors,
+                backgroundColor: '#004f71',
+                hoverBackgroundColor: '#005d84',
                 borderRadius: 4,
                 borderWidth: 0
             }]
@@ -337,6 +359,232 @@ function renderStatusChart() {
                     },
                     grace: '15%'
                 }
+            },
+            onClick: (evt, elements) => {
+                if (!elements.length) return;
+                const idx = elements[0].index;
+                const clickedStatus = labels[idx];
+                toggleMduChartFilter('status', clickedStatus);
+            }
+        },
+        plugins: [ChartDataLabels]
+    });
+}
+
+function renderClusterChart() {
+    const canvas = document.getElementById('mdu-chart-cluster');
+    if (!canvas) return;
+
+    if (mduCharts.cluster) {
+        mduCharts.cluster.destroy();
+    }
+
+    const counts = {};
+    mduFilteredData.forEach(r => {
+        const c = r.cluster || 'Sem Cluster';
+        counts[c] = (counts[c] || 0) + 1;
+    });
+
+    const labels = Object.keys(counts).sort((a,b) => counts[b] - counts[a]);
+    const data = labels.map(l => counts[l]);
+
+    const isDark = !document.body.classList.contains('light-theme');
+    const textThemeColor = isDark ? '#b2bec3' : '#636e72';
+
+    const premiumColors = [
+        '#004f71', // Corporate blue
+        '#1e90ff', // Dodger blue
+        '#3742fa', // Indigo
+        '#2ed573', // Green
+        '#ffa502', // Orange
+        '#ff4757', // Red
+        '#a4b0be', // Gray
+        '#ff6b81'  // Pink
+    ];
+    const bgColors = labels.map((l, i) => premiumColors[i % premiumColors.length]);
+
+    mduCharts.cluster = new Chart(canvas, {
+        type: 'doughnut',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: data,
+                backgroundColor: bgColors,
+                borderWidth: 0,
+                spacing: 2.5
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '65%',
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        boxWidth: 10,
+                        padding: 10,
+                        color: textThemeColor,
+                        font: { family: 'Outfit', size: 10 }
+                    },
+                    onClick: (e, legendItem, legend) => {
+                        const idx = legendItem.index;
+                        const label = legend.chart.data.labels[idx];
+                        toggleMduChartFilter('cluster', label);
+                    }
+                },
+                datalabels: {
+                    display: (context) => {
+                        const val = context.dataset.data[context.dataIndex];
+                        const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                        return total > 0 ? (val / total > 0.04) : false;
+                    },
+                    color: '#ffffff',
+                    font: { weight: 'bold', size: 9 },
+                    formatter: (value, ctx) => {
+                        const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                        const pct = ((value / total) * 100).toFixed(0);
+                        return `${pct}%`;
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const val = context.raw || 0;
+                            const total = context.dataset.data.reduce((a,b) => a+b, 0);
+                            const pct = ((val / total) * 100).toFixed(1);
+                            return ` Quantidade: ${val.toLocaleString('pt-BR')} (${pct}%)`;
+                        }
+                    }
+                }
+            },
+            onClick: (evt, elements) => {
+                if (!elements.length) return;
+                const idx = elements[0].index;
+                const label = labels[idx];
+                toggleMduChartFilter('cluster', label);
+            }
+        },
+        plugins: [ChartDataLabels]
+    });
+}
+
+function renderCidadeStatusChart() {
+    const canvas = document.getElementById('mdu-chart-cidade-status');
+    if (!canvas) return;
+
+    if (mduCharts.cidadeStatus) {
+        mduCharts.cidadeStatus.destroy();
+    }
+
+    const cityCounts = {};
+    mduFilteredData.forEach(r => {
+        const c = r.cidade || 'Sem Cidade';
+        cityCounts[c] = (cityCounts[c] || 0) + 1;
+    });
+
+    const cities = Object.keys(cityCounts).sort((a, b) => cityCounts[b] - cityCounts[a]);
+
+    const statusColors = {
+        'Finalizado': '#2ed573',
+        'Finalizada': '#2ed573',
+        'Cancelado': '#ff4757',
+        'Cancelada': '#ff4757',
+        'Fusão': '#1e90ff',
+        '2ª Vistoria': '#3742fa',
+        '1ª Vistoria': '#70a1ff',
+        'Medição': '#ffa502',
+        'Relatório': '#a4b0be',
+        'Baixa': '#2f3542',
+        'Projeto': '#ff6b81'
+    };
+
+    const datasets = [];
+    const activeStatuses = [...new Set(mduFilteredData.map(r => r.status).filter(Boolean))];
+
+    activeStatuses.forEach(status => {
+        const color = statusColors[status] || '#ced6e0';
+        const dataForStatus = cities.map(city => {
+            return mduFilteredData.filter(r => (r.cidade || 'Sem Cidade') === city && r.status === status).length;
+        });
+
+        if (dataForStatus.some(v => v > 0)) {
+            datasets.push({
+                label: status,
+                data: dataForStatus,
+                backgroundColor: color,
+                borderRadius: 2
+            });
+        }
+    });
+
+    const isDark = !document.body.classList.contains('light-theme');
+    const textThemeColor = isDark ? '#b2bec3' : '#636e72';
+
+    mduCharts.cidadeStatus = new Chart(canvas, {
+        type: 'bar',
+        data: {
+            labels: cities,
+            datasets: datasets
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    stacked: true,
+                    grid: { display: false },
+                    ticks: {
+                        color: textThemeColor,
+                        font: { family: 'Outfit', size: 9 }
+                    }
+                },
+                y: {
+                    stacked: true,
+                    grid: { color: getThemeColors().grid },
+                    ticks: {
+                        color: textThemeColor,
+                        font: { family: 'Outfit', size: 9 }
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        boxWidth: 8,
+                        padding: 8,
+                        color: textThemeColor,
+                        font: { family: 'Outfit', size: 9 }
+                    },
+                    onClick: (e, legendItem, legend) => {
+                        const status = legendItem.text;
+                        toggleMduChartFilter('status', status);
+                    }
+                },
+                datalabels: {
+                    display: (context) => {
+                        const val = context.dataset.data[context.dataIndex];
+                        return val > 2;
+                    },
+                    color: '#ffffff',
+                    font: { weight: 'bold', size: 8 },
+                    formatter: (val) => val.toLocaleString('pt-BR')
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const val = context.raw || 0;
+                            return ` ${context.dataset.label}: ${val.toLocaleString('pt-BR')}`;
+                        }
+                    }
+                }
+            },
+            onClick: (evt, elements) => {
+                if (!elements.length) return;
+                const idx = elements[0].index;
+                const label = cities[idx];
+                toggleMduChartFilter('cidade', label);
             }
         },
         plugins: [ChartDataLabels]
@@ -603,6 +851,45 @@ function backFromMduDrilldown() {
 }
 window.backFromMduDrilldown = backFromMduDrilldown;
 
+function updateMduPerformanceHeaders() {
+    const cols = {
+        'equipe': { text: 'Executor', id: 'mdu-perf-th-equipe' },
+        '1ª VISTORIA': { text: '1º Vist.', id: 'mdu-perf-th-1ª-vistoria' },
+        '2ª VISTORIA': { text: '2º Vist.', id: 'mdu-perf-th-2ª-vistoria' },
+        'PROJETO': { text: 'Projeto', id: 'mdu-perf-th-projeto' },
+        'FUSÃO': { text: 'Fusão', id: 'mdu-perf-th-fusão' },
+        'MEDIÇÃO': { text: 'Medição', id: 'mdu-perf-th-medição' },
+        'RELATÓRIO': { text: 'Relatório', id: 'mdu-perf-th-relatório' },
+        'BAIXA': { text: 'Baixa', id: 'mdu-perf-th-baixa' },
+        'total': { text: 'Total', id: 'mdu-perf-th-total' }
+    };
+
+    Object.keys(cols).forEach(col => {
+        const th = document.getElementById(cols[col].id);
+        if (th) {
+            let icon = '<i class="fa-solid fa-sort" style="margin-left: 3px; opacity: 0.3;"></i>';
+            if (mduPerformanceSortColumn === col) {
+                icon = mduPerformanceSortOrder === 'asc'
+                    ? '<i class="fa-solid fa-sort-up" style="margin-left: 3px; color: var(--color-primary);"></i>'
+                    : '<i class="fa-solid fa-sort-down" style="margin-left: 3px; color: var(--color-primary);"></i>';
+            }
+            th.innerHTML = `${cols[col].text}${icon}`;
+        }
+    });
+}
+
+function sortMduPerformance(column) {
+    if (mduPerformanceSortColumn === column) {
+        mduPerformanceSortOrder = mduPerformanceSortOrder === 'asc' ? 'desc' : 'asc';
+    } else {
+        mduPerformanceSortColumn = column;
+        mduPerformanceSortOrder = 'desc';
+    }
+    updateMduPerformanceHeaders();
+    renderMduPerformanceTable();
+}
+window.sortMduPerformance = sortMduPerformance;
+
 function renderMduPerformanceTable() {
     const tbody = document.getElementById('mdu-performance-table-body');
     if (!tbody) return;
@@ -640,10 +927,40 @@ function renderMduPerformanceTable() {
         }
     });
 
-    const sortedEquipes = Object.keys(performanceData).sort().map(k => performanceData[k]);
+    // Calcular Total
+    Object.keys(performanceData).forEach(eq => {
+        let tot = 0;
+        statusColumns.forEach(col => {
+            tot += performanceData[eq].counts[col] || 0;
+        });
+        performanceData[eq].total = tot;
+    });
+
+    const sortedEquipes = Object.keys(performanceData).map(k => performanceData[k]);
+
+    // Ordenar de acordo com coluna e ordem
+    sortedEquipes.sort((a, b) => {
+        let valA, valB;
+        if (mduPerformanceSortColumn === 'equipe') {
+            valA = String(a.equipe || '').toLowerCase();
+            valB = String(b.equipe || '').toLowerCase();
+        } else if (mduPerformanceSortColumn === 'total') {
+            valA = a.total;
+            valB = b.total;
+        } else {
+            valA = a.counts[mduPerformanceSortColumn] || 0;
+            valB = b.counts[mduPerformanceSortColumn] || 0;
+        }
+
+        if (valA < valB) return mduPerformanceSortOrder === 'asc' ? -1 : 1;
+        if (valA > valB) return mduPerformanceSortOrder === 'asc' ? 1 : -1;
+        return 0;
+    });
+
+    updateMduPerformanceHeaders();
 
     if (sortedEquipes.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; color: var(--text-secondary); padding: 20px;">Nenhum dado de desempenho encontrado.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; color: var(--text-secondary); padding: 20px;">Nenhum dado de desempenho encontrado.</td></tr>';
         return;
     }
 
@@ -666,12 +983,59 @@ function renderMduPerformanceTable() {
                 rowHtml += `<td style="text-align: center;"><span class="badge-count count-zero">-</span></td>`;
             }
         });
+        rowHtml += `<td style="text-align: center; font-weight: 700; background-color: rgba(0, 79, 113, 0.05);">${eq.total}</td>`;
         rowHtml += `</tr>`;
         html += rowHtml;
     });
 
     tbody.innerHTML = html;
 }
+
+function getMduAgingNumericValue(val) {
+    if (!val || val === 'OK' || val === '-') return 0;
+    const cleaned = String(val).replace(/\./g, '').replace(/,/g, '.');
+    const num = parseFloat(cleaned);
+    return isNaN(num) ? 0 : num;
+}
+
+function updateMduTableHeaders() {
+    const cols = {
+        'os': 'OS JLE',
+        'endereco': 'Endereço',
+        'cidade': 'Cidade',
+        'status': 'Status',
+        'prog': 'Progresso',
+        'equipe': 'Equipe',
+        'hps': 'HPs',
+        'aging': 'Aging',
+        'data_baixa': 'Data Baixa'
+    };
+    
+    Object.keys(cols).forEach(col => {
+        const th = document.getElementById(`mdu-th-${col}`);
+        if (th) {
+            let icon = '<i class="fa-solid fa-sort" style="margin-left: 5px; opacity: 0.3;"></i>';
+            if (mduTableSortColumn === col) {
+                icon = mduTableSortOrder === 'asc' 
+                    ? '<i class="fa-solid fa-sort-up" style="margin-left: 5px; color: var(--color-primary);"></i>' 
+                    : '<i class="fa-solid fa-sort-down" style="margin-left: 5px; color: var(--color-primary);"></i>';
+            }
+            th.innerHTML = `${cols[col]} ${icon}`;
+        }
+    });
+}
+
+function sortMduTable(column) {
+    if (mduTableSortColumn === column) {
+        mduTableSortOrder = mduTableSortOrder === 'asc' ? 'desc' : 'asc';
+    } else {
+        mduTableSortColumn = column;
+        mduTableSortOrder = (column === 'aging' || column === 'prog') ? 'desc' : 'asc';
+    }
+    updateMduTableHeaders();
+    renderMduTable();
+}
+window.sortMduTable = sortMduTable;
 
 function renderMduTable() {
     const tbody = document.getElementById('mdu-table-body');
@@ -692,7 +1056,37 @@ function renderMduTable() {
 
     const startIndex = (mduPage - 1) * mduPageSize;
     const endIndex = Math.min(startIndex + mduPageSize, totalItems);
-    const pageData = mduFilteredData.slice(startIndex, endIndex);
+    
+    // Criar cópia e ordenar se houver coluna selecionada
+    let sortedData = [...mduFilteredData];
+    if (mduTableSortColumn) {
+        sortedData.sort((a, b) => {
+            let valA = a[mduTableSortColumn];
+            let valB = b[mduTableSortColumn];
+
+            if (mduTableSortColumn === 'aging') {
+                valA = getMduAgingNumericValue(valA);
+                valB = getMduAgingNumericValue(valB);
+            } else if (mduTableSortColumn === 'prog') {
+                valA = parseFloat(a.prog) || 0;
+                valB = parseFloat(b.prog) || 0;
+            } else if (mduTableSortColumn === 'hps') {
+                valA = parseInt(a.hps) || 0;
+                valB = parseInt(b.hps) || 0;
+            } else {
+                valA = String(valA || '').toLowerCase();
+                valB = String(valB || '').toLowerCase();
+            }
+
+            if (valA < valB) return mduTableSortOrder === 'asc' ? -1 : 1;
+            if (valA > valB) return mduTableSortOrder === 'asc' ? 1 : -1;
+            return 0;
+        });
+    }
+
+    updateMduTableHeaders();
+
+    const pageData = sortedData.slice(startIndex, endIndex);
 
     let html = '';
     pageData.forEach(r => {
@@ -908,10 +1302,19 @@ function switchMduTab(tabId) {
             pane.classList.add('active');
             pane.style.display = 'block';
         }
-        
         mdu_renderMap();
+    } else if (tabId === 'table') {
+        const btn = document.getElementById('mdu-tab-btn-table');
+        if (btn) btn.classList.add('active');
+        const pane = document.getElementById('subview-mdu-table');
+        if (pane) {
+            pane.classList.add('active');
+            pane.style.display = 'block';
+        }
+        renderMduTable();
     }
 }
+window.switchMduTab = switchMduTab;
 
 // Inicializar e Renderizar Mapa MDU
 function mdu_renderMap() {

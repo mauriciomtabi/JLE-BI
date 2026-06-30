@@ -1313,20 +1313,22 @@
                 </div>
             </section>
 
-            <!-- Sub Tab Selector (Indicadores / Mapa) -->
-            <div class="dashboard-tabs" id="mdu-sub-tabs">
+            <!-- Sub Tab Selector (Indicadores / Mapa / Relatório) -->
+            <div class="dashboard-tabs" id="mdu-sub-tabs" style="margin-bottom: 20px;">
                 <button class="tab-btn active" id="mdu-tab-btn-indicators" onclick="switchMduTab('indicators')">
-                    <i class="fa-solid fa-chart-column"></i> Indicadores & Tabela
+                    <i class="fa-solid fa-chart-column"></i> Indicadores
                 </button>
                 <button class="tab-btn" id="mdu-tab-btn-map" onclick="switchMduTab('map')">
                     <i class="fa-solid fa-map-location-dot"></i> Mapa de Endereços
+                </button>
+                <button class="tab-btn" id="mdu-tab-btn-table" onclick="switchMduTab('table')">
+                    <i class="fa-solid fa-list-check"></i> Relatório de OSs
                 </button>
             </div>
 
             <!-- Sub Tab Pane: Indicadores -->
             <div id="subview-mdu-indicators" class="subtab-pane active">
 
-                <!-- KPI Cards -->
                 <!-- KPI Cards -->
                 <div class="mdu-kpi-grid">
                     <div class="mdu-kpi-card kpi-total">
@@ -1379,40 +1381,8 @@
                     </div>
                 </div>
 
-                <!-- Charts Row 1: Status & Performance -->
-                <div class="mdu-grid-2cols" style="margin-bottom: 20px;">
-                    <div class="mdu-card">
-                        <div class="mdu-card-title">Distribuição por Status</div>
-                        <div class="mdu-chart-container">
-                            <canvas id="mdu-chart-status"></canvas>
-                        </div>
-                    </div>
-                    <div class="mdu-card" style="display: flex; flex-direction: column;">
-                        <div class="mdu-card-title">Desempenho por Equipe & Status</div>
-                        <div class="mdu-table-wrapper" style="border: none; overflow-x: auto; max-height: none; flex-grow: 1;">
-                            <table class="mdu-performance-table" style="width: 100%; border-collapse: collapse;">
-                                <thead>
-                                    <tr>
-                                        <th>Executor</th>
-                                        <th style="text-align: center; white-space: nowrap;">1º Vist.</th>
-                                        <th style="text-align: center; white-space: nowrap;">2º Vist.</th>
-                                        <th style="text-align: center; white-space: nowrap;">Projeto</th>
-                                        <th style="text-align: center; white-space: nowrap;">Fusão</th>
-                                        <th style="text-align: center; white-space: nowrap;">Medição</th>
-                                        <th style="text-align: center; white-space: nowrap;">Relatório</th>
-                                        <th style="text-align: center; white-space: nowrap;">Baixa</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="mdu-performance-table-body">
-                                    <tr><td colspan="8" style="text-align:center; color: var(--text-secondary); padding: 30px 0;">Carregando desempenho...</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Charts Row 2: Finalizados por Período (Full Width) -->
-                <div class="mdu-grid-1col-wide" style="margin-bottom: 20px;">
+                <!-- Charts Row 1: Finalizados por Período (Full Width at Top) -->
+                <div class="mdu-grid-1col-wide" style="margin-bottom: 0;">
                     <div class="mdu-card" style="position: relative;">
                         <div class="mdu-card-title" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
                             <span>Finalizados por Período Mês/Ano</span>
@@ -1426,7 +1396,63 @@
                     </div>
                 </div>
 
-                <!-- Detailed Table -->
+                <!-- Charts Row 2: 2-Column Grid -->
+                <div style="display: grid; grid-template-columns: 1fr 1.1fr; gap: 20px; margin-bottom: 0; align-items: start;">
+                    <!-- Coluna Esquerda: Gráficos -->
+                    <div style="display: flex; flex-direction: column; gap: 20px;">
+                        <!-- Card 1: Distribuição por Status -->
+                        <div class="mdu-card">
+                            <div class="mdu-card-title">Distribuição por Status</div>
+                            <div class="mdu-chart-container" style="height: 250px;">
+                                <canvas id="mdu-chart-status"></canvas>
+                            </div>
+                        </div>
+                        <!-- Card 2: Distribuição por Cluster (Rosca/Doughnut) -->
+                        <div class="mdu-card">
+                            <div class="mdu-card-title">Distribuição por Cluster</div>
+                            <div class="mdu-chart-container" style="height: 250px;">
+                                <canvas id="mdu-chart-cluster"></canvas>
+                            </div>
+                        </div>
+                        <!-- Card 3: Distribuição por Cidade & Status (Barras Empilhadas) -->
+                        <div class="mdu-card">
+                            <div class="mdu-card-title">Distribuição por Cidade & Status</div>
+                            <div class="mdu-chart-container" style="height: 250px;">
+                                <canvas id="mdu-chart-cidade-status"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Coluna Direita: Desempenho por Equipe & Status -->
+                    <div class="mdu-card" style="display: flex; flex-direction: column; min-height: 890px;">
+                        <div class="mdu-card-title">Desempenho por Equipe & Status</div>
+                        <div class="mdu-table-wrapper no-scrollbar" style="border: none; overflow-x: auto; max-height: 830px; overflow-y: scroll; flex-grow: 1;">
+                            <table class="mdu-performance-table" style="width: 100%; border-collapse: collapse;">
+                                <thead>
+                                    <tr>
+                                        <th onclick="sortMduPerformance('equipe')" style="cursor:pointer; user-select: none;" id="mdu-perf-th-equipe">Executor <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortMduPerformance('1ª VISTORIA')" style="cursor:pointer; text-align: center; white-space: nowrap; user-select: none;" id="mdu-perf-th-1ª-vistoria">1º Vist. <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortMduPerformance('2ª VISTORIA')" style="cursor:pointer; text-align: center; white-space: nowrap; user-select: none;" id="mdu-perf-th-2ª-vistoria">2º Vist. <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortMduPerformance('PROJETO')" style="cursor:pointer; text-align: center; white-space: nowrap; user-select: none;" id="mdu-perf-th-projeto">Projeto <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortMduPerformance('FUSÃO')" style="cursor:pointer; text-align: center; white-space: nowrap; user-select: none;" id="mdu-perf-th-fusão">Fusão <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortMduPerformance('MEDIÇÃO')" style="cursor:pointer; text-align: center; white-space: nowrap; user-select: none;" id="mdu-perf-th-medição">Medição <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortMduPerformance('RELATÓRIO')" style="cursor:pointer; text-align: center; white-space: nowrap; user-select: none;" id="mdu-perf-th-relatório">Relatório <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortMduPerformance('BAIXA')" style="cursor:pointer; text-align: center; white-space: nowrap; user-select: none;" id="mdu-perf-th-baixa">Baixa <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortMduPerformance('total')" style="cursor:pointer; text-align: center; white-space: nowrap; user-select: none; font-weight: 700;" id="mdu-perf-th-total">Total <i class="fa-solid fa-sort"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="mdu-performance-table-body">
+                                    <tr><td colspan="9" style="text-align:center; color: var(--text-secondary); padding: 30px 0;">Carregando desempenho...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- Fim de subview-mdu-indicators -->
+
+            <!-- Sub Tab Pane: Relatório de OSs (Tabela Detalhada) -->
+            <div id="subview-mdu-table" class="subtab-pane" style="display: none; padding-bottom: 24px;">
                 <div class="mdu-grid-1col-wide">
                     <div class="mdu-card">
                         <div class="mdu-card-title" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
@@ -1446,15 +1472,15 @@
                             <table class="mdu-table">
                                 <thead>
                                     <tr>
-                                        <th>OS JLE</th>
-                                        <th>Endereço</th>
-                                        <th>Cidade</th>
-                                        <th>Status</th>
-                                        <th>Progresso</th>
-                                        <th>Equipe</th>
-                                        <th>HPs</th>
-                                        <th>Aging</th>
-                                        <th>Data Baixa</th>
+                                        <th onclick="sortMduTable('os')" style="cursor:pointer; user-select: none;" id="mdu-th-os">OS JLE <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortMduTable('endereco')" style="cursor:pointer; user-select: none;" id="mdu-th-endereco">Endereço <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortMduTable('cidade')" style="cursor:pointer; user-select: none;" id="mdu-th-cidade">Cidade <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortMduTable('status')" style="cursor:pointer; user-select: none;" id="mdu-th-status">Status <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortMduTable('prog')" style="cursor:pointer; user-select: none;" id="mdu-th-prog">Progresso <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortMduTable('equipe')" style="cursor:pointer; user-select: none;" id="mdu-th-equipe">Equipe <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortMduTable('hps')" style="cursor:pointer; user-select: none;" id="mdu-th-hps">HPs <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortMduTable('aging')" style="cursor:pointer; user-select: none;" id="mdu-th-aging">Aging <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortMduTable('data_baixa')" style="cursor:pointer; user-select: none;" id="mdu-th-data_baixa">Data Baixa <i class="fa-solid fa-sort"></i></th>
                                     </tr>
                                 </thead>
                                 <tbody id="mdu-table-body">
@@ -1472,8 +1498,7 @@
                         </div>
                     </div>
                 </div>
-
-            </div> <!-- Fim de subview-mdu-indicators -->
+            </div> <!-- Fim de subview-mdu-table -->
 
             <!-- Sub Tab Pane: Mapa -->
             <div id="subview-mdu-map" class="subtab-pane" style="display: none; padding-bottom: 24px;">
