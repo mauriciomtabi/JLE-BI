@@ -222,7 +222,7 @@
 .mdu-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.85rem;
+    font-size: 0.76rem;
     text-align: left;
 }
 
@@ -230,7 +230,7 @@
     background-color: var(--bg-body);
     color: var(--text-secondary);
     font-weight: 600;
-    padding: 10px 12px;
+    padding: 6px 5px;
     position: sticky;
     top: 0;
     z-index: 10;
@@ -239,10 +239,18 @@
 }
 
 .mdu-table td {
-    padding: 10px 12px;
+    padding: 6px 5px;
     border-bottom: 1px solid var(--border-color);
     color: var(--text-primary);
     white-space: nowrap;
+}
+
+.mdu-table-text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .mdu-table tbody tr:hover {

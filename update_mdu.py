@@ -61,9 +61,56 @@ def clean_and_normalize(addr):
 
     # Correções de ortografia de ruas comuns para aumentar a taxa de geocodificação
     addr = addr.replace("AMELIA TELES", "AMELIA TELLES")
+    addr = addr.replace("PERPETUA TELES", "PERPETUA TELLES")
+    addr = addr.replace("TELES", "TELLES")
     addr = addr.replace("PROTASIO ALVEZ", "PROTASIO ALVES")
     addr = addr.replace("TAUPICK SAADI", "TAUPHICK SAADI")
     addr = addr.replace("FARIAS SANTOS", "FARIA SANTOS")
+    addr = addr.replace("JOAO WALIG", "JOAO WALLIG")
+    addr = addr.replace("COSNTANT", "CONSTANT")
+    addr = addr.replace("COSTANT", "CONSTANT")
+    addr = addr.replace("IDELFONSO", "ILDEFONSO")
+    addr = addr.replace("BRA DO GRAVATAI", "BARAO DO GRAVATAI")
+    addr = addr.replace("PC CON MARCELINO", "PRACA CONEGO MARCELINO")
+    addr = addr.replace("CASSEMIRO", "CASEMIRO")
+    addr = addr.replace("LEÃO XIII", "LEAO 13")
+    addr = addr.replace("LEAO XIII", "LEAO 13")
+    addr = addr.replace("MATRIS BARROS", "MARIZ E BARROS")
+    addr = addr.replace("POLHMAM", "POHLMANN")
+    addr = addr.replace("DOMIGOS", "DOMINGOS")
+    addr = addr.replace("MOTEIRO", "MONTEIRO")
+    addr = addr.replace("R LUIS MANOES GONZAGA", "AV LUIZ MANOEL GONZAGA")
+    addr = addr.replace("R LUIZ MANOEL GONZAGA", "AV LUIZ MANOEL GONZAGA")
+    addr = addr.replace("LUIS MANOES GONZAGA", "LUIZ MANOEL GONZAGA")
+    addr = addr.replace("LUIS MANOES", "LUIZ MANOEL")
+    addr = addr.replace("MAESTO", "MAESTRO")
+    addr = addr.replace("DEL JAHIR", "DELEGADO JAHIR")
+    addr = addr.replace("INICENCIA", "INOCENCIA")
+    addr = addr.replace("ROMANGUERA", "ROMAGUERA")
+    addr = addr.replace("CV JACUI", "AV JACUI")
+    addr = addr.replace("PERI MACHADO", "PERY MACHADO")
+    addr = addr.replace("MENACHEN", "MENACHEM")
+    addr = addr.replace("GERONIMO", "JERONIMO")
+    addr = addr.replace("ME BARBADA MAIX", "MADRE BARBARA MAIX")
+    addr = addr.replace("BARBADA MAIX", "BARBARA MAIX")
+    addr = addr.replace("PRE F ROOSEVELT", "PRESIDENTE FRANKLIN ROOSEVELT")
+    addr = addr.replace("PRESSIDENTE", "PRESIDENTE")
+    addr = addr.replace("ALEXANDRE ANEL", "ALEXANDRE SNEL")
+    addr = addr.replace("D AZEVEDO", "D'AZEVEDO")
+    addr = addr.replace("DE AZEVEDO", "D'AZEVEDO")
+    addr = addr.replace("MARCELLO", "MARCELO")
+    addr = addr.replace("LIBERA", "LIBERO")
+    addr = addr.replace("CONSTANTE", "CONSTANT")
+    addr = addr.replace("MIGUEL TOSTE", "MIGUEL TOSTES")
+    addr = addr.replace("MIGUEL TOTE", "MIGUEL TOSTES")
+    addr = addr.replace("TOSTESS", "TOSTES")
+
+    # Split prefixes missing space (e.g. AVLAVRAS -> AV LAVRAS)
+    addr = re.sub(r'^AVLAVRAS\b', 'AV LAVRAS', addr)
+    addr = re.sub(r'^AVIPIRANGA\b', 'AV IPIRANGA', addr)
+    
+    # Standardize common abbreviations
+    addr = re.sub(r'\bVER\b\.?\s*', 'VEREADOR ', addr)
     
     return addr
 
@@ -203,6 +250,13 @@ def get_uf(cidade):
 
 def geocode_address(address_str, cache):
     """Query OSM Nominatim to geocode an address string"""
+    # Override manual para Pedro Pohlmann
+    if "PEDRO POHLMANN" in address_str.upper():
+        coords = [-29.6953, -51.1014]
+        cache[address_str] = coords
+        print(f"  Geocodificado com override manual (Pedro Pohlmann): {address_str} -> {coords}")
+        return coords
+        
     url = "https://nominatim.openstreetmap.org/search?q=" + urllib.parse.quote(address_str) + "&format=json&limit=1"
     req = urllib.request.Request(
         url,
@@ -326,6 +380,20 @@ def process_mdu():
             for var in variations:
                 geo_key = f"{var}, {cidade}, {uf}, Brazil".upper()
                 
+                # Overrides manuais para ruas corretas mas não presentes no OpenStreetMap/Nominatim
+                if "PEDRO POHLMANN" in geo_key:
+                    lat, lng = -29.6953, -51.1014
+                    geocodificado = True
+                    break
+                elif "ORLANDO AITA" in geo_key or "ORLANDO AYTA" in geo_key:
+                    lat, lng = -30.01851, -51.11135
+                    geocodificado = True
+                    break
+                elif "ALEXANDRE SNEL" in geo_key or "ALEXANDRE ANEL" in geo_key:
+                    lat, lng = -30.07395, -51.20304
+                    geocodificado = True
+                    break
+                    
                 # A. Tenta buscar do cache primeiro
                 if geo_key in cache:
                     coords = cache[geo_key]

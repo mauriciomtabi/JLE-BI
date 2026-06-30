@@ -1167,7 +1167,7 @@ function renderMduTable() {
                 <td style="font-weight: 600; color: var(--color-primary);">${escapeHtml(r.os)}</td>
                 <td title="${escapeHtml(r.endereco || '')}">
                     <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
-                        <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 180px;">${escapeHtml(r.endereco || '-')}</span>
+                        <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 130px;">${escapeHtml(r.endereco || '-')}</span>
                         ${r.lat && r.lng && r.geocodificado ? `
                             <a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${r.lat},${r.lng}" target="_blank" title="Ver no Google Street View" style="color: #ff9800; cursor: pointer; display: inline-flex; align-items: center; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">
                                 <i class="fa-solid fa-street-view" style="font-size: 14px;"></i>
@@ -1179,16 +1179,16 @@ function renderMduTable() {
                 <td><span class="mdu-badge ${badgeClass}">${escapeHtml(r.status || 'Não definido')}</span></td>
                 <td style="font-weight:600;">
                     <div style="display:flex; align-items:center; gap:8px;">
-                        <div style="background-color: var(--bg-body); border-radius:3px; height:8px; width:60px; overflow:hidden;">
+                        <div style="background-color: var(--bg-body); border-radius:3px; height:8px; width:50px; overflow:hidden;">
                             <div style="background-color: ${progVal === 100 ? '#2ed573' : 'var(--color-primary)'}; width:${progVal}%; height:100%;"></div>
                         </div>
                         <span>${progVal}%</span>
                     </div>
                 </td>
-                <td>${escapeHtml(r.equipe || '-')}</td>
+                <td title="${escapeHtml(r.equipe || '')}"><span class="mdu-table-text-truncate" style="max-width: 90px;">${escapeHtml(r.equipe || '-')}</span></td>
                 <td>${escapeHtml(r.node || '-')}</td>
-                <td>${escapeHtml(r.obs_vistoria || '-')}</td>
-                <td>${escapeHtml(r.obs_baixa || '-')}</td>
+                <td title="${escapeHtml(r.obs_vistoria || '')}"><span class="mdu-table-text-truncate" style="max-width: 100px;">${escapeHtml(r.obs_vistoria || '-')}</span></td>
+                <td title="${escapeHtml(r.obs_baixa || '')}"><span class="mdu-table-text-truncate" style="max-width: 100px;">${escapeHtml(r.obs_baixa || '-')}</span></td>
                 <td>${escapeHtml(r.data_adicio || '-')}</td>
                 <td>${escapeHtml(r.aging || '-')}</td>
                 <td>${escapeHtml(r.data_baixa || '-')}</td>
