@@ -513,7 +513,7 @@
     width: 100%;
     height: 100%;
     border-collapse: collapse;
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     margin-top: 8px;
 }
 .mdu-performance-table tfoot {
@@ -529,7 +529,7 @@
 .mdu-performance-table tfoot td {
     background-color: var(--bg-card) !important;
     font-weight: 700;
-    padding: 12px 8px;
+    padding: 8px 4px;
     border-bottom: none;
     color: var(--text-primary);
     text-align: center;
@@ -541,10 +541,10 @@
     background-color: var(--bg-body);
     color: var(--text-secondary);
     font-weight: 600;
-    font-size: 0.78rem;
+    font-size: 0.74rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    padding: 10px 8px;
+    padding: 8px 4px;
     border-bottom: 2px solid var(--border-color);
     text-align: center;
 }
@@ -552,7 +552,7 @@
     text-align: left;
 }
 .mdu-performance-table td {
-    padding: 10px 8px;
+    padding: 8px 4px;
     border-bottom: 1px solid var(--border-color);
     color: var(--text-primary);
     text-align: center;

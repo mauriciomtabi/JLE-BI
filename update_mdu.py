@@ -58,6 +58,13 @@ def clean_and_normalize(addr):
     
     # Remove multiple spaces
     addr = re.sub(r'\s+', ' ', addr).strip()
+
+    # Correções de ortografia de ruas comuns para aumentar a taxa de geocodificação
+    addr = addr.replace("AMELIA TELES", "AMELIA TELLES")
+    addr = addr.replace("PROTASIO ALVEZ", "PROTASIO ALVES")
+    addr = addr.replace("TAUPICK SAADI", "TAUPHICK SAADI")
+    addr = addr.replace("FARIAS SANTOS", "FARIA SANTOS")
+    
     return addr
 
 def get_address_variations(raw_addr):
