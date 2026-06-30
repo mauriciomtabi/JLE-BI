@@ -6,6 +6,8 @@
  */
 
 // Estado Global da Página MDU
+const GOOGLE_SHEETS_MDU_URL = "https://docs.google.com/spreadsheets/d/your-spreadsheet-id/edit";
+
 let mduDataLoaded = false;
 let mduFilteredData = [];
 let mduPage = 1;
@@ -26,16 +28,24 @@ let mduSearchQuery = ''; // Busca rápida global
 let lastMduFiltersState = '';
 let mduMapInitializedBounds = false;
 
+// Estado de visualização do gráfico de Finalizados por Período
+let mduDrilldownActive = false;
+let mduDrilldownPeriod = null; // { month: 5, year: 2025, label: "Mai/25" }
+
 const mduCharts = {
     status: null,
-    cidade: null,
-    equipe: null,
-    progresso: null
+    finalizadosPeriodo: null
 };
 
 function initMdu() {
     if (mduDataLoaded) return;
     mduDataLoaded = true;
+
+    // Vincular URL da Planilha Google
+    const sheetsBtn = document.getElementById('mdu-google-sheets-btn');
+    if (sheetsBtn) {
+        sheetsBtn.href = GOOGLE_SHEETS_MDU_URL;
+    }
 
     if (!window.MDU_DATA || window.MDU_DATA.length === 0) {
         console.error("Dados de MDU não foram carregados.");
@@ -221,21 +231,18 @@ function renderMduKPIs() {
 }
 
 function renderMduCharts() {
-    // Status Chart (Doughnut)
+    const indicatorsTab = document.getElementById('subview-mdu-indicators');
+    if (!indicatorsTab || indicatorsTab.style.display === 'none') {
+        return; // Apenas renderiza se a aba de indicadores do MDU estiver ativa/visível
+    }
+
     renderStatusChart();
-
-    // Cidades Chart (Horizontal Bar)
-    renderCidadesChart();
-
-    // Equipe Chart (Bar)
-    renderEquipeChart();
-
-    // Progresso Chart (Bar of average progress by status)
-    renderProgressoChart();
+    renderMduPerformanceTable();
+    renderFinalizadosPeriodoChart();
 }
 
 function getThemeColors() {
-    const isDark = document.body.classList.contains('dark-mode');
+    const isDark = !document.body.classList.contains('light-theme');
     return {
         text: isDark ? '#b2bec3' : '#636e72',
         grid: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)'
@@ -276,14 +283,17 @@ function renderStatusChart() {
     };
 
     const backgroundColors = labels.map(l => colors[l] || '#ced6e0');
+    const isDark = !document.body.classList.contains('light-theme');
+    const textThemeColor = isDark ? '#b2bec3' : '#636e72';
 
     mduCharts.status = new Chart(canvas, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: labels,
             datasets: [{
                 data: data,
                 backgroundColor: backgroundColors,
+                borderRadius: 4,
                 borderWidth: 0
             }]
         },
@@ -291,12 +301,14 @@ function renderStatusChart() {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-                legend: {
-                    position: 'right',
-                    labels: {
-                        color: getThemeColors().text,
-                        font: { family: 'Segoe UI', size: 11 }
-                    }
+                legend: { display: false },
+                datalabels: {
+                    display: true,
+                    anchor: 'end',
+                    align: 'top',
+                    color: textThemeColor,
+                    font: { family: 'Outfit', weight: 'bold', size: 10 },
+                    formatter: (value) => value.toLocaleString('pt-BR')
                 },
                 tooltip: {
                     callbacks: {
@@ -304,185 +316,361 @@ function renderStatusChart() {
                             const val = context.raw || 0;
                             const total = context.dataset.data.reduce((a,b) => a+b, 0);
                             const pct = ((val / total) * 100).toFixed(1);
-                            return ` ${context.label}: ${val.toLocaleString('pt-BR')} (${pct}%)`;
+                            return ` Quantidade: ${val.toLocaleString('pt-BR')} (${pct}%)`;
                         }
                     }
                 }
+            },
+            scales: {
+                x: {
+                    grid: { display: false },
+                    ticks: {
+                        color: textThemeColor,
+                        font: { family: 'Outfit', size: 10 }
+                    }
+                },
+                y: {
+                    grid: { color: getThemeColors().grid },
+                    ticks: {
+                        color: textThemeColor,
+                        font: { family: 'Outfit', size: 10 }
+                    },
+                    grace: '15%'
+                }
             }
-        }
+        },
+        plugins: [ChartDataLabels]
     });
 }
 
-function renderCidadesChart() {
-    const canvas = document.getElementById('mdu-chart-cidade');
+// Auxiliares de data para o MDU
+function parseMduDateBaixa(r) {
+    if (!r.data_baixa || r.data_baixa === '-') return null;
+    
+    // Tenta obter o ano de primeira_visita (formato DD/MM/YYYY)
+    let year = 2025; // default fallback
+    if (r.primeira_visita && r.primeira_visita.includes('/')) {
+        const parts = r.primeira_visita.split('/');
+        if (parts.length === 3) {
+            const y = parseInt(parts[2]);
+            if (!isNaN(y)) year = y;
+        }
+    }
+    
+    const parts = r.data_baixa.split('/');
+    if (parts.length === 2) {
+        const day = parseInt(parts[0]);
+        const month = parseInt(parts[1]); // 1-indexed
+        if (!isNaN(day) && !isNaN(month)) {
+            return {
+                day: day,
+                month: month,
+                year: year,
+                dateObj: new Date(year, month - 1, day),
+                formattedPeriod: `${getMonthNameShort(month)}/${String(year).slice(-2)}` // ex: "Mai/25"
+            };
+        }
+    }
+    return null;
+}
+
+function getMonthNameShort(monthIndex) {
+    const months = [
+        'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
+        'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'
+    ];
+    return months[monthIndex - 1] || '';
+}
+
+function sortPeriods(a, b) {
+    const monthOrder = {
+        'Jan': 1, 'Fev': 2, 'Mar': 3, 'Abr': 4, 'Mai': 5, 'Jun': 6,
+        'Jul': 7, 'Ago': 8, 'Set': 9, 'Out': 10, 'Nov': 11, 'Dez': 12
+    };
+    const partsA = a.split('/');
+    const partsB = b.split('/');
+    const yA = parseInt(partsA[1]) || 0;
+    const yB = parseInt(partsB[1]) || 0;
+    if (yA !== yB) return yA - yB;
+    return (monthOrder[partsA[0]] || 0) - (monthOrder[partsB[0]] || 0);
+}
+
+function renderFinalizadosPeriodoChart() {
+    const canvas = document.getElementById('mdu-chart-finalizados-periodo');
     if (!canvas) return;
 
-    if (mduCharts.cidade) {
-        mduCharts.cidade.destroy();
+    if (mduCharts.finalizadosPeriodo) {
+        mduCharts.finalizadosPeriodo.destroy();
     }
 
-    const cidadeCounts = {};
-    mduFilteredData.forEach(r => {
-        const cidade = r.cidade || 'NÃO DEFINIDA';
-        cidadeCounts[cidade] = (cidadeCounts[cidade] || 0) + 1;
+    const backBtn = document.getElementById('mdu-drilldown-back-btn');
+    const titleElement = canvas.closest('.mdu-card').querySelector('.mdu-card-title span');
+
+    // Filtrar registros com status Finalizado e data de baixa válida
+    const finalizedRecords = mduFilteredData.filter(r => {
+        const statusUpper = String(r.status || '').toUpperCase().trim();
+        return (statusUpper === 'FINALIZADO' || statusUpper === 'FINALIZADA') && r.data_baixa && r.data_baixa !== '-';
     });
 
-    // Ordenar e pegar top 10
-    const sortedCidades = Object.keys(cidadeCounts).sort((a,b) => cidadeCounts[b] - cidadeCounts[a]).slice(0, 10);
-    const data = sortedCidades.map(c => cidadeCounts[c]);
+    // Parse de todas as datas
+    const parsedData = finalizedRecords.map(r => ({
+        record: r,
+        dateInfo: parseMduDateBaixa(r)
+    })).filter(item => item.dateInfo !== null);
 
-    mduCharts.cidade = new Chart(canvas, {
-        type: 'bar',
-        data: {
-            labels: sortedCidades,
-            datasets: [{
-                label: 'Quantidade de MDUs',
-                data: data,
-                backgroundColor: 'rgba(30, 144, 255, 0.75)',
-                hoverBackgroundColor: 'rgba(30, 144, 255, 0.95)',
-                borderRadius: 4
-            }]
+    const isDark = !document.body.classList.contains('light-theme');
+    const textThemeColor = isDark ? '#b2bec3' : '#636e72';
+
+    if (!mduDrilldownActive) {
+        // --- VISÃO MENSAL ---
+        if (backBtn) backBtn.style.display = 'none';
+        if (titleElement) titleElement.innerText = 'Finalizados por Período Mês/Ano';
+
+        const periodCounts = {};
+        parsedData.forEach(item => {
+            const period = item.dateInfo.formattedPeriod;
+            periodCounts[period] = (periodCounts[period] || 0) + 1;
+        });
+
+        const labels = Object.keys(periodCounts).sort(sortPeriods);
+        const data = labels.map(p => periodCounts[p]);
+
+        mduCharts.finalizadosPeriodo = new Chart(canvas, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Finalizados',
+                    data: data,
+                    backgroundColor: 'rgba(46, 213, 115, 0.75)',
+                    hoverBackgroundColor: 'rgba(46, 213, 115, 0.95)',
+                    borderRadius: 4,
+                    borderWidth: 0
+                }]
             },
             options: {
-                indexAxis: 'y',
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: { display: false }
+                    legend: { display: false },
+                    datalabels: {
+                        display: true,
+                        anchor: 'end',
+                        align: 'top',
+                        color: textThemeColor,
+                        font: { family: 'Outfit', weight: 'bold', size: 10 },
+                        formatter: (val) => val.toLocaleString('pt-BR')
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return ` Finalizados: ${context.raw.toLocaleString('pt-BR')}`;
+                            }
+                        }
+                    }
                 },
                 scales: {
                     x: {
-                        grid: { color: getThemeColors().grid },
-                        ticks: { color: getThemeColors().text, font: { family: 'Segoe UI' } }
+                        grid: { display: false },
+                        ticks: {
+                            color: textThemeColor,
+                            font: { family: 'Outfit', size: 10 }
+                        }
                     },
                     y: {
-                        grid: { display: false },
-                        ticks: { color: getThemeColors().text, font: { family: 'Segoe UI' } }
+                        grid: { color: getThemeColors().grid },
+                        ticks: {
+                            color: textThemeColor,
+                            font: { family: 'Outfit', size: 10 }
+                        },
+                        grace: '15%'
                     }
+                },
+                onClick: (event, elements) => {
+                    if (elements.length > 0) {
+                        const index = elements[0].index;
+                        const clickedPeriod = labels[index];
+                        
+                        const match = parsedData.find(item => item.dateInfo.formattedPeriod === clickedPeriod);
+                        if (match) {
+                            mduDrilldownActive = true;
+                            mduDrilldownPeriod = {
+                                month: match.dateInfo.month,
+                                year: match.dateInfo.year,
+                                label: clickedPeriod
+                            };
+                            renderFinalizadosPeriodoChart();
+                        }
+                    }
+                }
+            },
+            plugins: [ChartDataLabels]
+        });
+    } else {
+        // --- VISÃO DIÁRIA (DRILL DOWN) ---
+        if (backBtn) backBtn.style.display = 'flex';
+        
+        const fullMonthNames = [
+            'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+            'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+        ];
+        const monthLabel = fullMonthNames[mduDrilldownPeriod.month - 1];
+        if (titleElement) {
+            titleElement.innerText = `Finalizados em ${monthLabel}/${mduDrilldownPeriod.year} (Visão Diária)`;
+        }
+
+        const daysInMonth = new Date(mduDrilldownPeriod.year, mduDrilldownPeriod.month, 0).getDate();
+        const dailyCounts = {};
+        for (let d = 1; d <= daysInMonth; d++) {
+            dailyCounts[d] = 0;
+        }
+
+        parsedData.forEach(item => {
+            if (item.dateInfo.month === mduDrilldownPeriod.month && item.dateInfo.year === mduDrilldownPeriod.year) {
+                const day = item.dateInfo.day;
+                if (dailyCounts[day] !== undefined) {
+                    dailyCounts[day]++;
                 }
             }
         });
-    }
 
-function renderEquipeChart() {
-    const canvas = document.getElementById('mdu-chart-equipe');
-    if (!canvas) return;
+        const labels = Object.keys(dailyCounts).map(d => String(d));
+        const data = labels.map(d => dailyCounts[d]);
 
-    if (mduCharts.equipe) {
-        mduCharts.equipe.destroy();
-    }
-
-    const equipeCounts = {};
-    mduFilteredData.forEach(r => {
-        const equipe = r.equipe || 'Sem Equipe';
-        equipeCounts[equipe] = (equipeCounts[equipe] || 0) + 1;
-    });
-
-    const sortedEquipes = Object.keys(equipeCounts).sort((a,b) => equipeCounts[b] - equipeCounts[a]).slice(0, 10);
-    const data = sortedEquipes.map(e => equipeCounts[e]);
-
-    mduCharts.equipe = new Chart(canvas, {
-        type: 'bar',
-        data: {
-            labels: sortedEquipes,
-            datasets: [{
-                label: 'Quantidade de MDUs',
-                data: data,
-                backgroundColor: 'rgba(23, 162, 184, 0.75)',
-                hoverBackgroundColor: 'rgba(23, 162, 184, 0.95)',
-                borderRadius: 4
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { display: false }
+        mduCharts.finalizadosPeriodo = new Chart(canvas, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Finalizados',
+                    data: data,
+                    backgroundColor: 'rgba(30, 144, 255, 0.75)',
+                    hoverBackgroundColor: 'rgba(30, 144, 255, 0.95)',
+                    borderRadius: 4,
+                    borderWidth: 0
+                }]
             },
-            scales: {
-                x: {
-                    grid: { display: false },
-                    ticks: { 
-                        color: getThemeColors().text, 
-                        font: { family: 'Segoe UI', size: 10 },
-                        maxRotation: 45,
-                        minRotation: 45
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    datalabels: {
+                        display: (context) => context.dataset.data[context.dataIndex] > 0,
+                        anchor: 'end',
+                        align: 'top',
+                        color: textThemeColor,
+                        font: { family: 'Outfit', weight: 'bold', size: 9 }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: function(context) {
+                                return `${context[0].label} de ${monthLabel} de ${mduDrilldownPeriod.year}`;
+                            },
+                            label: function(context) {
+                                return ` Finalizados: ${context.raw}`;
+                            }
+                        }
                     }
                 },
-                y: {
-                    grid: { color: getThemeColors().grid },
-                    ticks: { color: getThemeColors().text, font: { family: 'Segoe UI' } }
+                scales: {
+                    x: {
+                        grid: { display: false },
+                        ticks: {
+                            color: textThemeColor,
+                            font: { family: 'Outfit', size: 9 }
+                        }
+                    },
+                    y: {
+                        grid: { color: getThemeColors().grid },
+                        ticks: {
+                            color: textThemeColor,
+                            font: { family: 'Outfit', size: 10 }
+                        },
+                        grace: '15%'
+                    }
                 }
-            }
-        }
-    });
+            },
+            plugins: [ChartDataLabels]
+        });
+    }
 }
 
-function renderProgressoChart() {
-    const canvas = document.getElementById('mdu-chart-progresso');
-    if (!canvas) return;
+function backFromMduDrilldown() {
+    mduDrilldownActive = false;
+    mduDrilldownPeriod = null;
+    renderFinalizadosPeriodoChart();
+}
+window.backFromMduDrilldown = backFromMduDrilldown;
 
-    if (mduCharts.progresso) {
-        mduCharts.progresso.destroy();
+function renderMduPerformanceTable() {
+    const tbody = document.getElementById('mdu-performance-table-body');
+    if (!tbody) return;
+
+    const performanceData = {};
+    const statusColumns = [
+        '1ª VISTORIA',
+        '2ª VISTORIA',
+        'PROJETO',
+        'FUSÃO',
+        'MEDIÇÃO',
+        'RELATÓRIO',
+        'BAIXA'
+    ];
+
+    mduFilteredData.forEach(r => {
+        const equipe = r.equipe ? r.equipe.trim() : 'Sem Equipe';
+        let status = r.status ? r.status.trim().toUpperCase() : '';
+        
+        if (status === '1ª VISTORIA') status = '1ª VISTORIA';
+        else if (status === '2ª VISTORIA') status = '2ª VISTORIA';
+        
+        if (!performanceData[equipe]) {
+            performanceData[equipe] = {
+                equipe: equipe,
+                counts: {}
+            };
+            statusColumns.forEach(col => {
+                performanceData[equipe].counts[col] = 0;
+            });
+        }
+
+        if (statusColumns.includes(status)) {
+            performanceData[equipe].counts[status]++;
+        }
+    });
+
+    const sortedEquipes = Object.keys(performanceData).sort().map(k => performanceData[k]);
+
+    if (sortedEquipes.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; color: var(--text-secondary); padding: 20px;">Nenhum dado de desempenho encontrado.</td></tr>';
+        return;
     }
 
-    // Calcular média de progresso por status
-    const statusGroups = {};
-    mduFilteredData.forEach(r => {
-        const status = r.status || 'Não Definido';
-        const prog = r.prog || 0;
-        if (!statusGroups[status]) {
-            statusGroups[status] = { sum: 0, count: 0 };
-        }
-        statusGroups[status].sum += prog;
-        statusGroups[status].count += 1;
-    });
-
-    const labels = Object.keys(statusGroups).sort((a,b) => (statusGroups[b].sum / statusGroups[b].count) - (statusGroups[a].sum / statusGroups[a].count));
-    const data = labels.map(l => (statusGroups[l].sum / statusGroups[l].count).toFixed(1));
-
-    mduCharts.progresso = new Chart(canvas, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Progresso Médio (%)',
-                data: data,
-                backgroundColor: 'rgba(255, 165, orange, 0.75)',
-                backgroundColor: 'rgba(255, 165, 0, 0.75)',
-                hoverBackgroundColor: 'rgba(255, 165, 0, 0.95)',
-                borderRadius: 4
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { display: false }
-            },
-            scales: {
-                x: {
-                    grid: { display: false },
-                    ticks: { 
-                        color: getThemeColors().text, 
-                        font: { family: 'Segoe UI', size: 10 },
-                        maxRotation: 45,
-                        minRotation: 45
-                    }
-                },
-                y: {
-                    grid: { color: getThemeColors().grid },
-                    ticks: { 
-                        color: getThemeColors().text, 
-                        font: { family: 'Segoe UI' },
-                        callback: function(val) { return val + '%'; }
-                    },
-                    min: 0,
-                    max: 100
-                }
+    let html = '';
+    sortedEquipes.forEach(eq => {
+        let rowHtml = `<tr><td>${escapeHtml(eq.equipe)}</td>`;
+        statusColumns.forEach(col => {
+            const count = eq.counts[col] || 0;
+            if (count > 0) {
+                let badgeStyle = '';
+                if (col === '1ª VISTORIA' || col === '2ª VISTORIA') badgeStyle = 'background-color: rgba(112, 161, 255, 0.15); color: #70a1ff;';
+                else if (col === 'PROJETO') badgeStyle = 'background-color: rgba(255, 107, 129, 0.15); color: #ff6b81;';
+                else if (col === 'FUSÃO') badgeStyle = 'background-color: rgba(30, 144, 255, 0.15); color: #1e90ff;';
+                else if (col === 'MEDIÇÃO') badgeStyle = 'background-color: rgba(255, 165, 2, 0.15); color: #ffa502;';
+                else if (col === 'RELATÓRIO') badgeStyle = 'background-color: rgba(164, 176, 190, 0.15); color: #a4b0be;';
+                else if (col === 'BAIXA') badgeStyle = 'background-color: rgba(47, 53, 66, 0.15); color: #2f3542;';
+                
+                rowHtml += `<td style="text-align: center;"><span class="badge-count" style="${badgeStyle}">${count}</span></td>`;
+            } else {
+                rowHtml += `<td style="text-align: center;"><span class="badge-count count-zero">-</span></td>`;
             }
-        }
+        });
+        rowHtml += `</tr>`;
+        html += rowHtml;
     });
+
+    tbody.innerHTML = html;
 }
 
 function renderMduTable() {
@@ -711,6 +899,7 @@ function switchMduTab(tabId) {
             pane.classList.add('active');
             pane.style.display = 'block';
         }
+        renderMduCharts();
     } else if (tabId === 'map') {
         const btn = document.getElementById('mdu-tab-btn-map');
         if (btn) btn.classList.add('active');
@@ -754,7 +943,7 @@ function mdu_renderMap() {
 }
 
 function mdu_getTileLayerUrl() {
-    const isDark = document.body.classList.contains('dark-mode');
+    const isDark = !document.body.classList.contains('light-theme');
     return isDark 
         ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
         : 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';

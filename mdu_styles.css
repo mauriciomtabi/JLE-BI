@@ -108,7 +108,8 @@
     padding: 18px 20px;
     box-shadow: var(--shadow-main);
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
     justify-content: space-between;
     position: relative;
     overflow: hidden;
@@ -135,25 +136,14 @@
 .mdu-kpi-card.kpi-andamento { --kpi-border-color: var(--color-warning); }
 .mdu-kpi-card.kpi-cancelado { --kpi-border-color: var(--color-danger); }
 
-.mdu-kpi-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-}
-
 .mdu-kpi-title {
     font-size: 0.85rem;
     font-weight: 600;
     color: var(--text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.5px;
-}
-
-.mdu-kpi-icon {
-    font-size: 1.2rem;
-    color: var(--kpi-border-color);
-    opacity: 0.8;
+    display: block;
+    margin-bottom: 6px;
 }
 
 .mdu-kpi-value {
@@ -161,15 +151,32 @@
     font-weight: 700;
     color: var(--text-primary);
     line-height: 1.2;
+    margin: 0 0 6px 0;
 }
 
 .mdu-kpi-footer {
-    margin-top: 10px;
     font-size: 0.75rem;
     color: var(--text-muted);
     display: flex;
     align-items: center;
     gap: 4px;
+}
+
+.kpi-icon-container {
+    position: absolute;
+    right: 12px;
+    bottom: -8px;
+    font-size: 4.5rem;
+    color: var(--kpi-border-color);
+    opacity: 0.12;
+    transform: rotate(12deg);
+    pointer-events: none;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.mdu-kpi-card:hover .kpi-icon-container {
+    transform: rotate(20deg) scale(1.1);
+    opacity: 0.18;
 }
 
 /* -- Standard Containers / Cards -- */
@@ -206,7 +213,8 @@
 /* -- Table Styles -- */
 .mdu-table-wrapper {
     overflow-x: auto;
-    max-height: 450px;
+    overflow-y: hidden;
+    max-height: none;
     border-radius: 8px;
     border: 1px solid var(--border-color);
 }
@@ -498,4 +506,69 @@
 }
 .leaflet-tooltip-right.mdu-map-tooltip::before {
     border-right-color: var(--bg-card) !important;
+}
+
+/* -- Tabela de Desempenho MDU -- */
+.mdu-performance-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+    margin-top: 8px;
+}
+.mdu-performance-table th {
+    background-color: var(--bg-body);
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 10px 8px;
+    border-bottom: 2px solid var(--border-color);
+    text-align: center;
+}
+.mdu-performance-table th:first-child {
+    text-align: left;
+}
+.mdu-performance-table td {
+    padding: 10px 8px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-primary);
+    text-align: center;
+}
+.mdu-performance-table td:first-child {
+    text-align: left;
+    font-weight: 700; /* Executor em negrito */
+}
+/* Linhas verticais leves para separar colunas de status */
+.mdu-performance-table td:not(:first-child), 
+.mdu-performance-table th:not(:first-child) {
+    border-left: 1px dotted var(--border-color);
+}
+.mdu-performance-table tbody tr:hover {
+    background-color: var(--bg-tr-hover);
+}
+.mdu-performance-table .badge-count {
+    display: inline-block;
+    min-width: 22px;
+    height: 22px;
+    line-height: 22px;
+    border-radius: 11px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-align: center;
+    background-color: rgba(var(--color-primary-rgb, 108, 117, 125), 0.1);
+    color: var(--text-primary);
+}
+.mdu-performance-table .badge-count.count-zero {
+    color: var(--text-muted);
+    font-weight: 400;
+    background-color: transparent;
+}
+
+/* -- Botão Planilha Google -- */
+#mdu-google-sheets-btn {
+    transition: all 0.2s ease;
+}
+#mdu-google-sheets-btn:hover {
+    box-shadow: 0 6px 14px rgba(15, 157, 88, 0.25) !important;
 }

@@ -1327,119 +1327,151 @@
             <div id="subview-mdu-indicators" class="subtab-pane active">
 
                 <!-- KPI Cards -->
+                <!-- KPI Cards -->
                 <div class="mdu-kpi-grid">
-                <div class="mdu-kpi-card kpi-total">
-                    <div class="mdu-kpi-header">
-                        <span class="mdu-kpi-title">Total de OSs MDU</span>
-                        <i class="fa-solid fa-building mdu-kpi-icon"></i>
+                    <div class="mdu-kpi-card kpi-total">
+                        <div class="kpi-info" style="flex-grow: 1;">
+                            <span class="mdu-kpi-title">Total de OSs MDU</span>
+                            <h3 class="mdu-kpi-value" id="mdu-kpi-total">0</h3>
+                            <div class="mdu-kpi-footer">
+                                <span>Total de registros importados</span>
+                            </div>
+                        </div>
+                        <div class="kpi-icon-container">
+                            <i class="fa-solid fa-building"></i>
+                        </div>
                     </div>
-                    <div class="mdu-kpi-value" id="mdu-kpi-total">0</div>
-                    <div class="mdu-kpi-footer">
-                        <span>Total de registros importados</span>
+                    <div class="mdu-kpi-card kpi-finalizado">
+                        <div class="kpi-info" style="flex-grow: 1;">
+                            <span class="mdu-kpi-title">Finalizadas</span>
+                            <h3 class="mdu-kpi-value" id="mdu-kpi-finalizado">0</h3>
+                            <div class="mdu-kpi-footer">
+                                <span id="mdu-kpi-finalizado-percent">0%</span> do total
+                            </div>
+                        </div>
+                        <div class="kpi-icon-container">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                    </div>
+                    <div class="mdu-kpi-card kpi-andamento">
+                        <div class="kpi-info" style="flex-grow: 1;">
+                            <span class="mdu-kpi-title">Em Andamento</span>
+                            <h3 class="mdu-kpi-value" id="mdu-kpi-andamento">0</h3>
+                            <div class="mdu-kpi-footer">
+                                <span id="mdu-kpi-andamento-percent">0%</span> em execução
+                            </div>
+                        </div>
+                        <div class="kpi-icon-container">
+                            <i class="fa-solid fa-spinner fa-spin"></i>
+                        </div>
+                    </div>
+                    <div class="mdu-kpi-card kpi-cancelado">
+                        <div class="kpi-info" style="flex-grow: 1;">
+                            <span class="mdu-kpi-title">Canceladas</span>
+                            <h3 class="mdu-kpi-value" id="mdu-kpi-cancelado">0</h3>
+                            <div class="mdu-kpi-footer">
+                                <span id="mdu-kpi-cancelado-percent">0%</span> sem faturamento
+                            </div>
+                        </div>
+                        <div class="kpi-icon-container">
+                            <i class="fa-solid fa-ban"></i>
+                        </div>
                     </div>
                 </div>
-                <div class="mdu-kpi-card kpi-finalizado">
-                    <div class="mdu-kpi-header">
-                        <span class="mdu-kpi-title">Finalizadas</span>
-                        <i class="fa-solid fa-circle-check mdu-kpi-icon"></i>
-                    </div>
-                    <div class="mdu-kpi-value" id="mdu-kpi-finalizado">0</div>
-                    <div class="mdu-kpi-footer">
-                        <span id="mdu-kpi-finalizado-percent">0%</span> do total
-                    </div>
-                </div>
-                <div class="mdu-kpi-card kpi-andamento">
-                    <div class="mdu-kpi-header">
-                        <span class="mdu-kpi-title">Em Andamento</span>
-                        <i class="fa-solid fa-spinner fa-spin mdu-kpi-icon"></i>
-                    </div>
-                    <div class="mdu-kpi-value" id="mdu-kpi-andamento">0</div>
-                    <div class="mdu-kpi-footer">
-                        <span id="mdu-kpi-andamento-percent">0%</span> em execução
-                    </div>
-                </div>
-                <div class="mdu-kpi-card kpi-cancelado">
-                    <div class="mdu-kpi-header">
-                        <span class="mdu-kpi-title">Canceladas</span>
-                        <i class="fa-solid fa-ban mdu-kpi-icon"></i>
-                    </div>
-                    <div class="mdu-kpi-value" id="mdu-kpi-cancelado">0</div>
-                    <div class="mdu-kpi-footer">
-                        <span id="mdu-kpi-cancelado-percent">0%</span> sem faturamento
-                    </div>
-                </div>
-            </div>
 
-            <!-- Charts Grid -->
-            <div class="mdu-grid-2cols">
-                <div class="mdu-card">
-                    <div class="mdu-card-title">Distribuição por Status</div>
-                    <div class="mdu-chart-container">
-                        <canvas id="mdu-chart-status"></canvas>
+                <!-- Charts Row 1: Status & Performance -->
+                <div class="mdu-grid-2cols" style="margin-bottom: 20px;">
+                    <div class="mdu-card">
+                        <div class="mdu-card-title">Distribuição por Status</div>
+                        <div class="mdu-chart-container">
+                            <canvas id="mdu-chart-status"></canvas>
+                        </div>
+                    </div>
+                    <div class="mdu-card" style="display: flex; flex-direction: column;">
+                        <div class="mdu-card-title">Desempenho por Equipe & Status</div>
+                        <div class="mdu-table-wrapper" style="border: none; overflow-x: auto; max-height: none; flex-grow: 1;">
+                            <table class="mdu-performance-table" style="width: 100%; border-collapse: collapse;">
+                                <thead>
+                                    <tr>
+                                        <th>Executor</th>
+                                        <th style="text-align: center; white-space: nowrap;">1º Vist.</th>
+                                        <th style="text-align: center; white-space: nowrap;">2º Vist.</th>
+                                        <th style="text-align: center; white-space: nowrap;">Projeto</th>
+                                        <th style="text-align: center; white-space: nowrap;">Fusão</th>
+                                        <th style="text-align: center; white-space: nowrap;">Medição</th>
+                                        <th style="text-align: center; white-space: nowrap;">Relatório</th>
+                                        <th style="text-align: center; white-space: nowrap;">Baixa</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="mdu-performance-table-body">
+                                    <tr><td colspan="8" style="text-align:center; color: var(--text-secondary); padding: 30px 0;">Carregando desempenho...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-                <div class="mdu-card">
-                    <div class="mdu-card-title">MDUs por Cidade</div>
-                    <div class="mdu-chart-container">
-                        <canvas id="mdu-chart-cidade"></canvas>
-                    </div>
-                </div>
-            </div>
 
-            <div class="mdu-grid-2cols">
-                <div class="mdu-card">
-                    <div class="mdu-card-title">Top Equipes (Qtd. MDUs)</div>
-                    <div class="mdu-chart-container">
-                        <canvas id="mdu-chart-equipe"></canvas>
+                <!-- Charts Row 2: Finalizados por Período (Full Width) -->
+                <div class="mdu-grid-1col-wide" style="margin-bottom: 20px;">
+                    <div class="mdu-card" style="position: relative;">
+                        <div class="mdu-card-title" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <span>Finalizados por Período Mês/Ano</span>
+                            <button id="mdu-drilldown-back-btn" style="display: none; align-items: center; gap: 6px; padding: 6px 12px; font-size: 11px; font-weight: 700; color: #fff; background: var(--color-primary); border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; cursor: pointer; transition: all 0.2s ease;" onclick="backFromMduDrilldown()">
+                                <i class="fa-solid fa-arrow-left"></i> Voltar ao Mensal
+                            </button>
+                        </div>
+                        <div class="mdu-chart-container" style="height: 320px;">
+                            <canvas id="mdu-chart-finalizados-periodo"></canvas>
+                        </div>
                     </div>
                 </div>
-                <div class="mdu-card">
-                    <div class="mdu-card-title">Média de Evolução (% Progresso)</div>
-                    <div class="mdu-chart-container">
-                        <canvas id="mdu-chart-progresso"></canvas>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Detailed Table -->
-            <div class="mdu-grid-1col-wide">
-                <div class="mdu-card">
-                    <div class="mdu-card-title">
-                        <span>Relação Detalhada de OSs MDU</span>
-                        <button class="btn-primary btn-sm" onclick="exportMduToExcel()" style="padding: 6px 12px; font-size: 0.8rem; display: flex; align-items: center; gap: 6px;">
-                            <i class="fa-solid fa-file-excel"></i> Exportar
-                        </button>
-                    </div>
-                    <div class="mdu-table-wrapper">
-                        <table class="mdu-table">
-                            <thead>
-                                <tr>
-                                    <th>OS JLE</th>
-                                    <th>Endereço</th>
-                                    <th>Cidade</th>
-                                    <th>Status</th>
-                                    <th>Progresso</th>
-                                    <th>Equipe</th>
-                                    <th>HPs</th>
-                                    <th>Aging</th>
-                                    <th>Data Baixa</th>
-                                </tr>
-                            </thead>
-                            <tbody id="mdu-table-body">
-                                <tr><td colspan="9" style="text-align:center; color: var(--text-secondary);">Carregando dados de MDU...</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div style="padding: 16px 0 0 0; border-top: 1px solid var(--border-color); margin-top: 16px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
-                            <span id="mdu-pagination-info" style="font-size: 13px; color: var(--text-secondary);"></span>
-                            <div id="mdu-pagination-btns" style="display: flex; gap: 6px; align-items: center;">
-                                <!-- Populated dynamically -->
+                <!-- Detailed Table -->
+                <div class="mdu-grid-1col-wide">
+                    <div class="mdu-card">
+                        <div class="mdu-card-title" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                            <span>Relação Detalhada de OSs MDU</span>
+                            <div style="display: flex; gap: 8px; align-items: center;">
+                                <!-- Botão Planilha Google -->
+                                <a id="mdu-google-sheets-btn" href="https://docs.google.com/spreadsheets/d/1eEJLaV7D0rthjC5H1MppXyk7dyroqn2h/edit?gid=260790893#gid=260790893" target="_blank" class="btn-export" title="Abrir Planilha Google Original" style="background-color: #0f9d58; border-color: #0f9d58; color: white; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; padding: 8px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 10px rgba(15, 157, 88, 0.15);" onmouseover="this.style.backgroundColor='#0b8043'; this.style.transform='translateY(-1px)';" onmouseout="this.style.backgroundColor='#0f9d58'; this.style.transform='translateY(0)';">
+                                    <i class="fa-solid fa-file-excel"></i> Planilha Original
+                                </a>
+                                <!-- Botão Exportar Excel -->
+                                <button class="btn-export" onclick="exportMduToExcel()" title="Exportar para Excel" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; font-size: 13px; font-weight: 600;">
+                                    <i class="fa-solid fa-file-arrow-down"></i> Exportar Excel
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mdu-table-wrapper" style="overflow-y: hidden;">
+                            <table class="mdu-table">
+                                <thead>
+                                    <tr>
+                                        <th>OS JLE</th>
+                                        <th>Endereço</th>
+                                        <th>Cidade</th>
+                                        <th>Status</th>
+                                        <th>Progresso</th>
+                                        <th>Equipe</th>
+                                        <th>HPs</th>
+                                        <th>Aging</th>
+                                        <th>Data Baixa</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="mdu-table-body">
+                                    <tr><td colspan="9" style="text-align:center; color: var(--text-secondary);">Carregando dados de MDU...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div style="padding: 16px 0 0 0; border-top: 1px solid var(--border-color); margin-top: 16px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                                <span id="mdu-pagination-info" style="font-size: 13px; color: var(--text-secondary);"></span>
+                                <div id="mdu-pagination-btns" style="display: flex; gap: 6px; align-items: center;">
+                                    <!-- Populated dynamically -->
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
             </div> <!-- Fim de subview-mdu-indicators -->
 
@@ -1453,23 +1485,21 @@
                     <button class="mdu-btn-view-missing" onclick="window.showMissingGeoModal()" style="background-color: #ff9800; color: white; border: none; border-radius: 4px; padding: 4px 10px; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: background-color 0.2s;">Ver Lista</button>
                 </div>
                 <div class="mdu-card" style="height: 600px; padding: 16px; margin-bottom: 24px; position: relative;">
-                    <div class="mdu-card-header" style="display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; padding-bottom: 10px; border-bottom: 1px solid var(--border-color); margin-bottom: 10px;">
+                    <div class="mdu-card-header" style="display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; padding-bottom: 10px; border-bottom: 1px solid var(--border-color); margin-bottom: 10px; width: 100%;">
                         <span class="mdu-card-title-text" style="font-size: 1.05rem; font-weight: 600; color: var(--text-primary); display: flex; align-items: center; gap: 8px; margin: 0;">
                             <i class="fa-solid fa-map-location-dot" style="color: var(--color-primary);"></i> Distribuição Geográfica de OSs
                         </span>
                         <div class="mdu-map-controls" style="display: flex; align-items: center; gap: 8px;">
-                            <!-- Campo de busca no mapa -->
-                            <div style="position: relative; display: flex; align-items: center;">
-                                <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 10px; color: var(--text-secondary); font-size: 12px;"></i>
-                                <input type="text" id="mdu-map-search-input"
-                                    placeholder="OS, Endereço, Cidade, Equipe, Cluster, Caixa M, Node..."
-                                    oninput="onMduSearchInput(this.value)"
-                                    style="padding: 6px 10px 6px 28px; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 13px; outline: none; width: 220px; transition: border-color 0.2s;"
+                            <div class="mdu-map-search-container" style="position: relative; display: flex; align-items: center;">
+                                <input type="text" id="mdu-map-search-input" 
+                                    placeholder="Buscar no mapa..." 
+                                    oninput="onMduSearchInput(this.value)" 
+                                    style="padding: 6px 10px; padding-left: 28px; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); font-size: 12px; outline: none; width: 220px; transition: all 0.2s;"
                                     onfocus="this.style.borderColor='var(--color-primary)'"
                                     onblur="this.style.borderColor='var(--border-color)'">
+                                <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 10px; color: var(--text-secondary); font-size: 12px; pointer-events: none;"></i>
                             </div>
-                            <!-- Botão expandir mapa -->
-                            <button id="btn-toggle-mdu-map-expand" onclick="window.toggleMduMapExpand()" title="Maximizar Mapa" style="background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--color-primary)'; this.style.color='var(--text-primary)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-secondary)'">
+                            <button id="btn-toggle-mdu-map-expand" onclick="toggleMduMapExpand()" title="Maximizar Mapa" style="background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 6px; padding: 6px 10px; color: var(--text-secondary); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; height: 30px; width: 34px; transition: all 0.2s ease;" onmouseover="this.style.borderColor='var(--color-primary)'; this.style.color='var(--text-primary)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-secondary)'">
                                 <i class="fa-solid fa-expand"></i>
                             </button>
                         </div>
