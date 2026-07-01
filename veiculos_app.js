@@ -951,11 +951,22 @@ function renderVehicleChart(th, tooltipBase) {
         if (drillHint)    drillHint.style.display = 'flex';
 
         const spends = {};
+        const vehicleModels = {};
         filteredVeiculosData.forEach(r => {
-            if (r.plate) spends[r.plate] = (spends[r.plate] || 0) + (r.value || 0);
+            if (r.plate) {
+                const plate = r.plate.trim();
+                spends[plate] = (spends[plate] || 0) + (r.value || 0);
+                if (r.model && !vehicleModels[plate]) {
+                    vehicleModels[plate] = r.model.trim();
+                }
+            }
         });
         const allVehicles = Object.keys(spends)
-            .map(plate => ({ plate, value: spends[plate] }))
+            .map(plate => ({ 
+                plate, 
+                value: spends[plate], 
+                model: vehicleModels[plate] || '' 
+            }))
             .sort((a, b) => b.value - a.value);
 
         // Altura dinâmica para rolagem vertical
@@ -990,7 +1001,7 @@ function renderVehicleChart(th, tooltipBase) {
         );
 
         renderVeiculosChart('chart-veiculos-top-vehicles', 'bar', {
-            labels: allVehicles.map(v => v.plate),
+            labels: allVehicles.map(v => v.model ? `${v.plate} (${v.model})` : v.plate),
             datasets: [{ label:'Gasto (R$)', data: allVehicles.map(v => v.value), backgroundColor: vehicleColors, hoverBackgroundColor: '#f39f18', borderRadius: 5, borderSkipped: false }]
         }, opts);
     }
@@ -1246,11 +1257,14 @@ function renderTop3Consumo() {
             if (!r.plate) return;
             const plate = r.plate.trim();
             if (!vehicleData[plate]) {
-                vehicleData[plate] = { spent: 0, count: 0, ufs: new Set() };
+                vehicleData[plate] = { spent: 0, count: 0, ufs: new Set(), model: r.model || '' };
             }
             vehicleData[plate].spent += (r.value || 0);
             vehicleData[plate].count += 1;
             if (r.uf) vehicleData[plate].ufs.add(r.uf);
+            if (r.model && !vehicleData[plate].model) {
+                vehicleData[plate].model = r.model.trim();
+            }
         });
 
         // Ordenar e pegar top 3
@@ -1259,7 +1273,8 @@ function renderTop3Consumo() {
                 plate,
                 spent: vehicleData[plate].spent,
                 count: vehicleData[plate].count,
-                ufs: Array.from(vehicleData[plate].ufs)
+                ufs: Array.from(vehicleData[plate].ufs),
+                model: vehicleData[plate].model || ''
             }))
             .sort((a, b) => b.spent - a.spent)
             .slice(0, 3);
@@ -1296,12 +1311,13 @@ function renderTop3Consumo() {
             vehiclesContainer.innerHTML = topVehicles.map((v, index) => {
                 const ufsBadges = v.ufs.map(uf => `<span class="badge ${uf.toLowerCase()}" style="margin-left: 4px; padding: 2px 6px; font-size: 9px; border-radius: 4px;">${uf}</span>`).join('');
                 const avgSpent = v.count > 0 ? (v.spent / v.count) : 0;
+                const modelDisplay = v.model ? ` <span style="font-weight: 500; font-size: 10.5px; color: var(--text-secondary);">(${v.model})</span>` : '';
                 return `
                     <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 12px; font-size: 12px;">
                         <div style="display: flex; align-items: center; gap: 8px;">
                             <strong style="color: var(--text-primary); font-size: 11px;">#${index + 1}</strong>
                             <div>
-                                <div style="font-weight: 700; color: var(--text-primary); letter-spacing: 0.5px;">${v.plate}</div>
+                                <div style="font-weight: 700; color: var(--text-primary); letter-spacing: 0.5px;">${v.plate}${modelDisplay}</div>
                                 <div style="font-size: 10px; color: var(--text-secondary); margin-top: 2px;">
                                     ${v.count} abast. • Méd. ${fmtBRL(avgSpent)} ${ufsBadges}
                                 </div>
