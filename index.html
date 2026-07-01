@@ -424,7 +424,7 @@
                         <table class="admin-users-table">
                             <thead>
                                 <tr>
-                                    <th>E-mail</th>
+                                    <th>Nome</th>
                                     <th>Perfil</th>
                                     <th>Páginas Permitidas</th>
                                     <th>Último Acesso</th>
@@ -3056,8 +3056,16 @@
 
                 const lastAccessHtml = formatLastAccess(lastSignInAt);
 
+                const rawName = u.out_full_name || u.out_name || (u.out_raw_user_meta_data && u.out_raw_user_meta_data.full_name) || (u.out_metadata && u.out_metadata.full_name);
+                const userName = rawName || email.split('@')[0].split('.').map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
+
                 return `<tr>
-                    <td data-label="E-mail"><span class="admin-user-email-wrap" style="font-weight:600; word-break: break-all;">${email}${isSelf ? ' <span style="font-size:10px; color:var(--text-secondary); font-weight:normal;">(você)</span>' : ''}</span></td>
+                    <td data-label="Nome">
+                        <div class="admin-user-info-wrap" style="display: flex; flex-direction: column; gap: 2px;">
+                            <span style="font-weight: 700; color: var(--text-primary); font-size: 13.5px;">${userName}${isSelf ? ' <span style="font-size:10px; color:var(--text-secondary); font-weight:normal;">(você)</span>' : ''}</span>
+                            <span style="font-size: 11px; color: var(--text-secondary); font-weight: normal; word-break: break-all;">${email}</span>
+                        </div>
+                    </td>
                     <td data-label="Perfil"><span class="admin-user-badge-wrap">${adminBadge}</span></td>
                     <td data-label="Páginas Permitidas" style="max-width: 320px; white-space: normal;"><div class="admin-user-pages-wrap">${pages || '<span style="color:var(--text-secondary);font-size:12px;">Nenhuma</span>'}</div></td>
                     <td data-label="Último Acesso"><span class="admin-user-access-wrap">${lastAccessHtml}</span></td>
