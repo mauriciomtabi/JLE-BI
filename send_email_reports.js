@@ -216,15 +216,15 @@ function buildEmailHtml(data, reportName) {
                     <table width="600" cellpadding="0" cellspacing="0" border="0" style="background:#ffffff; border-radius:16px; overflow:hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.05); border: 1px solid #e1e8ed;">
                         <!-- HEADER -->
                         <tr>
-                            <td style="background: #004f71; padding: 32px 40px; color:#ffffff; border-bottom: 4px solid #f39f18;">
+                            <td style="background: #ffffff; padding: 32px 40px; border-bottom: 4px solid #f39f18;">
                                 <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                     <tr>
                                         <td align="left" valign="middle">
-                                            <h1 style="margin:0; font-size:24px; font-weight:800; color:#ffffff; line-height:1.2;">${reportName}</h1>
-                                            <div style="font-size:12px; color:rgba(255,255,255,0.7); margin-top:6px;">Atualizado em: ${generatedAt}</div>
+                                            <h1 style="margin:0; font-size:24px; font-weight:800; color:#004f71; line-height:1.2;">${reportName}</h1>
+                                            <div style="font-size:12px; color:#747d8c; margin-top:6px; font-weight: 500;">Atualizado em: ${generatedAt}</div>
                                         </td>
                                         <td align="right" valign="middle" style="width: 120px;">
-                                            <img src="https://jle-bi.vercel.app/assets/logo_jle.png" alt="JLE Telecom" style="height: 48px; display: block;">
+                                            <img src="https://jle-bi.vercel.app/assets/logo_jle.png" alt="JLE Telecom" style="height: 44px; display: block;">
                                         </td>
                                     </tr>
                                 </table>
