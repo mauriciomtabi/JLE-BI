@@ -1,0 +1,24 @@
+name: Send Automated Email Reports
+
+on:
+  schedule:
+    # Roda a cada 10 minutos para verificar se e hora de disparar algum e-mail
+    - cron: '*/10 * * * *'
+  workflow_dispatch: # Permite disparar manualmente via GitHub Actions UI
+
+jobs:
+  send-reports:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Run email reports script
+        run: node send_email_reports.js
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}

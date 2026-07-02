@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS bi_email_reports (
     schedule_time TEXT NOT NULL DEFAULT '08:00',
     schedule_days TEXT[] NOT NULL DEFAULT ARRAY['MON','TUE','WED','THU','FRI'],
     is_active     BOOLEAN NOT NULL DEFAULT true,
+    send_now      BOOLEAN NOT NULL DEFAULT false,
     last_sent_at  TIMESTAMPTZ,
     created_at    TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at    TIMESTAMPTZ NOT NULL DEFAULT NOW()

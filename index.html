@@ -387,6 +387,18 @@
         <div id="view-admin-container" class="view-panel" style="display: none; width: 100%;">
             <div class="admin-panel-grid" style="width: 100%;">
 
+                <!-- Admin Tab Bar -->
+                <div style="display:flex; gap:0; border-bottom: 2px solid var(--border-color); margin-bottom: 28px; width: 100%;">
+                    <button id="admin-tab-users" onclick="switchAdminTab('users')" style="padding:12px 28px; background:none; border:none; border-bottom: 3px solid var(--color-primary); margin-bottom:-2px; color:var(--color-primary); font-size:14px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:8px; transition:all 0.2s;">
+                        <i class="fa-solid fa-users-gear"></i> Usuários e Permissões
+                    </button>
+                    <button id="admin-tab-emails" onclick="switchAdminTab('emails')" style="padding:12px 28px; background:none; border:none; border-bottom: 3px solid transparent; margin-bottom:-2px; color:var(--text-secondary); font-size:14px; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:8px; transition:all 0.2s;">
+                        <i class="fa-solid fa-envelope-circle-check"></i> E-mails Automáticos
+                    </button>
+                </div>
+
+                <!-- TAB PANE: Usuários -->
+                <div id="admin-pane-users" style="width: 100%;">
 
                 <!-- Card: Gerenciar Usuários -->
                 <div class="admin-card admin-card-wide" style="width: 100%; box-sizing: border-box;">
@@ -419,41 +431,45 @@
                         </table>
                     </div>
                 </div>
+                </div> <!-- End of TAB PANE: Usuários -->
 
-                <!-- Card: E-mails Automáticos -->
-                <div class="admin-card admin-card-wide" style="width: 100%; box-sizing: border-box; margin-top: 24px;">
-                    <div class="admin-card-header">
-                        <div class="admin-card-icon" style="background: linear-gradient(135deg, rgba(46,204,113,0.15), rgba(39,174,96,0.25));">
-                            <i class="fa-solid fa-envelope-circle-check" style="color: #2ecc71;"></i>
+                <!-- TAB PANE: E-mails -->
+                <div id="admin-pane-emails" style="display: none; width: 100%;">
+                    <!-- Card: E-mails Automáticos -->
+                    <div class="admin-card admin-card-wide" style="width: 100%; box-sizing: border-box; margin-top: 0;">
+                        <div class="admin-card-header">
+                            <div class="admin-card-icon" style="background: linear-gradient(135deg, rgba(46,204,113,0.15), rgba(39,174,96,0.25));">
+                                <i class="fa-solid fa-envelope-circle-check" style="color: #2ecc71;"></i>
+                            </div>
+                            <div>
+                                <h3>E-mails Automáticos</h3>
+                                <p class="admin-card-subtitle">Configure disparos automáticos de relatórios por e-mail</p>
+                            </div>
+                            <button class="admin-add-btn" onclick="openEmailReportModal()" style="margin-left:auto; background: linear-gradient(135deg, #1a7a4a, #27ae60);">
+                                <i class="fa-solid fa-plus"></i> Novo Relatório
+                            </button>
                         </div>
-                        <div>
-                            <h3>E-mails Automáticos</h3>
-                            <p class="admin-card-subtitle">Configure disparos automáticos de relatórios por e-mail</p>
+                        <div class="admin-table-container">
+                            <table class="admin-users-table">
+                                <thead>
+                                    <tr>
+                                        <th>Nome do Relatório</th>
+                                        <th>Tipo</th>
+                                        <th>Destinatários</th>
+                                        <th>Horário</th>
+                                        <th>Dias</th>
+                                        <th>Último Envio</th>
+                                        <th>Status</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-emails-tbody">
+                                    <tr><td colspan="8" style="text-align:center; color: var(--text-secondary); padding: 24px;">Carregando configurações de e-mail...</td></tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <button class="admin-add-btn" onclick="openEmailReportModal()" style="margin-left:auto; background: linear-gradient(135deg, #1a7a4a, #27ae60);">
-                            <i class="fa-solid fa-plus"></i> Novo Relatório
-                        </button>
                     </div>
-                    <div class="admin-table-container">
-                        <table class="admin-users-table">
-                            <thead>
-                                <tr>
-                                    <th>Nome do Relatório</th>
-                                    <th>Tipo</th>
-                                    <th>Destinatários</th>
-                                    <th>Horário</th>
-                                    <th>Dias</th>
-                                    <th>Último Envio</th>
-                                    <th>Status</th>
-                                    <th>Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody id="admin-emails-tbody">
-                                <tr><td colspan="8" style="text-align:center; color: var(--text-secondary); padding: 24px;">Carregando configurações de e-mail...</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                </div> <!-- End of TAB PANE: E-mails -->
 
             </div>
         </div>
@@ -3104,6 +3120,37 @@
                 return '<span style="color:var(--text-secondary);font-size:12px;">Nunca acessou</span>';
             }
         }
+        function switchAdminTab(tabName) {
+            const paneUsers = document.getElementById('admin-pane-users');
+            const paneEmails = document.getElementById('admin-pane-emails');
+            const tabUsers = document.getElementById('admin-tab-users');
+            const tabEmails = document.getElementById('admin-tab-emails');
+
+            if (!paneUsers || !paneEmails) return;
+
+            if (tabName === 'users') {
+                paneUsers.style.display = 'block';
+                paneEmails.style.display = 'none';
+                tabUsers.style.borderBottomColor = 'var(--color-primary)';
+                tabUsers.style.color = 'var(--color-primary)';
+                tabUsers.style.fontWeight = '700';
+                tabEmails.style.borderBottomColor = 'transparent';
+                tabEmails.style.color = 'var(--text-secondary)';
+                tabEmails.style.fontWeight = '600';
+            } else {
+                paneUsers.style.display = 'none';
+                paneEmails.style.display = 'block';
+                tabUsers.style.borderBottomColor = 'transparent';
+                tabUsers.style.color = 'var(--text-secondary)';
+                tabUsers.style.fontWeight = '600';
+                tabEmails.style.borderBottomColor = 'var(--color-primary)';
+                tabEmails.style.color = 'var(--color-primary)';
+                tabEmails.style.fontWeight = '700';
+                loadEmailReports();
+            }
+        }
+        window.switchAdminTab = switchAdminTab;
+
         // ============================================================
         // E-MAIL REPORTS ADMIN — Funções de gerenciamento
         // ============================================================
@@ -3310,8 +3357,18 @@
             }
         }
 
-        function sendEmailReportNow(id) {
-            showAdminToast('⏳ Solicite ao agente de e-mails que rode o script manualmente para envio imediato.');
+        async function sendEmailReportNow(id) {
+            if (!confirm('Deseja enviar este relatório agora? O envio ocorrerá na nuvem dentro de alguns minutos.')) return;
+            const { error } = await supabaseClient
+                .from('bi_email_reports')
+                .update({ send_now: true, updated_at: new Date().toISOString() })
+                .eq('id', id);
+
+            if (error) {
+                alert('Erro ao solicitar envio: ' + error.message);
+            } else {
+                showAdminToast('⏳ Solicitação de envio registrada! O relatório será disparado em instantes.');
+            }
         }
 
         // ============================================================
