@@ -128,23 +128,41 @@ function buildEmailHtml(data, reportName) {
     const generatedAt = data.generated_at;
     const total = data.total;
     
-    // Formatar a data/hora atual no fuso do Brasil
-    const nowStr = new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
+    // Fuso horário fixo de Brasília (UTC-3)
+    const utcDate = new Date();
+    const brOffset = -3 * 60 * 60 * 1000; // -3 horas em milissegundos
+    const localDate = new Date(utcDate.getTime() + brOffset);
+    const day = String(localDate.getUTCDate()).padStart(2, '0');
+    const month = String(localDate.getUTCMonth() + 1).padStart(2, '0');
+    const year = localDate.getUTCFullYear();
+    const hours = String(localDate.getUTCHours()).padStart(2, '0');
+    const minutes = String(localDate.getUTCMinutes()).padStart(2, '0');
+    const nowStr = `${day}/${month}/${year} às ${hours}:${minutes}`;
     
-    // Status e cores mapeadas
+    // Obter quantidades específicas para destaque
+    let medicaoCount = 0;
+    let relatorioCount = 0;
+    Object.keys(data.counts).forEach(k => {
+        if (k.toLowerCase().includes('medicao') || k.toLowerCase().includes('medição')) {
+            medicaoCount += data.counts[k];
+        }
+        if (k.toLowerCase().includes('relatorio') || k.toLowerCase().includes('relatório')) {
+            relatorioCount += data.counts[k];
+        }
+    });
+
     const statusOrder = [
-        { key: "1ª Vistoria", color: "#70a1ff", bg: "rgba(112,161,255,0.1)" },
-        { key: "2ª Vistoria", color: "#2ecc71", bg: "rgba(46,204,113,0.1)" },
-        { key: "Projeto",     color: "#ff6b81", bg: "rgba(255,107,129,0.1)" },
-        { key: "Fusão",       color: "#1e90ff", bg: "rgba(30,144,255,0.1)"  },
-        { key: "Medição",     color: "#ffa502", bg: "rgba(255,165,2,0.1)"   },
-        { key: "Relatório",   color: "#a4b0be", bg: "rgba(164,176,190,0.1)" },
-        { key: "Baixa",       color: "#2f3542", bg: "rgba(47,53,66,0.1)"    },
-        { key: "Não Definido", color: "#f39f18", bg: "rgba(243,159,24,0.1)"  }
+        { key: "1ª Vistoria", color: "#004f71" },
+        { key: "2ª Vistoria", color: "#004f71" },
+        { key: "Projeto",     color: "#004f71" },
+        { key: "Fusão",       color: "#004f71" },
+        { key: "Medição",     color: "#004f71" },
+        { key: "Relatório",   color: "#004f71" },
+        { key: "Baixa",       color: "#004f71" },
+        { key: "Não Definido", color: "#004f71" }
     ];
     
     let statusRows = "";
-    
     statusOrder.forEach(s => {
         let cnt = 0;
         Object.keys(data.counts).forEach(k => {
@@ -157,16 +175,16 @@ function buildEmailHtml(data, reportName) {
             statusRows += `
             <tr>
                 <td style="padding: 12px 20px; border-bottom: 1px solid #f0f0f0; font-size: 14px; color: #2c3e50; font-weight: 500;">
-                    <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:${s.color}; margin-right:8px;"></span>
+                    <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:${s.color}; margin-right:8px; vertical-align:middle;"></span>
                     ${s.key}
                 </td>
                 <td style="padding: 12px 20px; border-bottom: 1px solid #f0f0f0; text-align:center;">
-                    <span style="background:${s.bg}; color:${s.color}; padding:4px 14px; border-radius:20px; font-size:13px; font-weight:700;">${cnt}</span>
+                    <span style="background:rgba(0,79,113,0.06); color:#004f71; padding:4px 14px; border-radius:20px; font-size:13px; font-weight:700;">${cnt}</span>
                 </td>
             </tr>`;
         }
     });
-    
+
     // Adicionar outros status eventuais não mapeados
     Object.keys(data.counts).forEach(k => {
         const isMapped = statusOrder.some(s => matchStatus(s.key, k));
@@ -174,7 +192,7 @@ function buildEmailHtml(data, reportName) {
             statusRows += `
             <tr>
                 <td style="padding: 12px 20px; border-bottom: 1px solid #f0f0f0; font-size: 14px; color: #2c3e50; font-weight: 500;">
-                    <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#747d8c; margin-right:8px;"></span>
+                    <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#747d8c; margin-right:8px; vertical-align:middle;"></span>
                     ${k}
                 </td>
                 <td style="padding: 12px 20px; border-bottom: 1px solid #f0f0f0; text-align:center;">
@@ -198,12 +216,15 @@ function buildEmailHtml(data, reportName) {
                     <table width="600" cellpadding="0" cellspacing="0" border="0" style="background:#ffffff; border-radius:16px; overflow:hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.05); border: 1px solid #e1e8ed;">
                         <!-- HEADER -->
                         <tr>
-                            <td style="background: #004f71; padding: 36px 40px; color:#ffffff; border-bottom: 4px solid #f39f18;">
+                            <td style="background: #004f71; padding: 32px 40px; color:#ffffff; border-bottom: 4px solid #f39f18;">
                                 <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                     <tr>
-                                        <td>
-                                            <img src="https://jle-bi.vercel.app/assets/logo_jle.png" alt="JLE Telecom" style="height: 52px; display: block; margin-bottom: 16px;">
+                                        <td align="left" valign="middle">
                                             <h1 style="margin:0; font-size:24px; font-weight:800; color:#ffffff; line-height:1.2;">${reportName}</h1>
+                                            <div style="font-size:12px; color:rgba(255,255,255,0.7); margin-top:6px;">Atualizado em: ${generatedAt}</div>
+                                        </td>
+                                        <td align="right" valign="middle" style="width: 120px;">
+                                            <img src="https://jle-bi.vercel.app/assets/logo_jle.png" alt="JLE Telecom" style="height: 48px; display: block;">
                                         </td>
                                     </tr>
                                 </table>
@@ -213,11 +234,23 @@ function buildEmailHtml(data, reportName) {
                         <!-- CARD DE DESTAQUE -->
                         <tr>
                             <td style="padding: 30px 40px 0;">
-                                <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:rgba(0,79,113,0.04); border-radius:12px; border: 1px solid rgba(0,79,113,0.08); text-align:center; padding:24px;">
+                                <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                     <tr>
-                                        <td>
-                                            <div style="font-size:13px; color:#57606f; text-transform:uppercase; letter-spacing:1px; font-weight:600; margin-bottom:6px;">ORDENS DE SERVIÇO EM ANDAMENTO</div>
-                                            <div style="font-size:44px; font-weight:800; color:#004f71; line-height:1;">${total}</div>
+                                        <td colspan="3" style="background: rgba(0,79,113,0.04); border-radius: 12px; border: 1px solid rgba(0,79,113,0.08); text-align: center; padding: 24px;">
+                                            <div style="font-size: 11px; color: #747d8c; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; margin-bottom: 6px;">ORDENS DE SERVIÇO EM ANDAMENTO</div>
+                                            <div style="font-size: 42px; font-weight: 800; color: #004f71; line-height: 1;">${total}</div>
+                                        </td>
+                                    </tr>
+                                    <tr style="height: 16px;"><td colspan="3"></td></tr>
+                                    <tr>
+                                        <td width="48%" style="background: rgba(243,159,24,0.06); border-radius: 10px; border-left: 4px solid #f39f18; padding: 16px 20px; text-align: center; border-top: 1px solid rgba(243,159,24,0.1); border-right: 1px solid rgba(243,159,24,0.1); border-bottom: 1px solid rgba(243,159,24,0.1);">
+                                            <div style="font-size: 11px; color: #d37f00; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; margin-bottom: 4px;">Medição</div>
+                                            <div style="font-size: 28px; font-weight: 800; color: #b86d00;">${medicaoCount}</div>
+                                        </td>
+                                        <td width="4%"></td>
+                                        <td width="48%" style="background: rgba(0,119,170,0.06); border-radius: 10px; border-left: 4px solid #0077aa; padding: 16px 20px; text-align: center; border-top: 1px solid rgba(0,119,170,0.1); border-right: 1px solid rgba(0,119,170,0.1); border-bottom: 1px solid rgba(0,119,170,0.1);">
+                                            <div style="font-size: 11px; color: #0077aa; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; margin-bottom: 4px;">Relatórios</div>
+                                            <div style="font-size: 28px; font-weight: 800; color: #005f87;">${relatorioCount}</div>
                                         </td>
                                     </tr>
                                 </table>
@@ -226,8 +259,8 @@ function buildEmailHtml(data, reportName) {
 
                         <!-- TABELA DE STATUS -->
                         <tr>
-                            <td style="padding: 24px 40px 10px;">
-                                <div style="font-size:12px; text-transform:uppercase; letter-spacing:1.5px; color:#57606f; font-weight:700; margin-bottom:12px;">Desempenho por Status</div>
+                            <td style="padding: 28px 40px 10px;">
+                                <div style="font-size:12px; text-transform:uppercase; letter-spacing:1.5px; color:#57606f; font-weight:700; margin-bottom:12px;">Detalhamento das OSs</div>
                                 <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border: 1px solid #e1e8ed; border-radius:8px; overflow:hidden;">
                                     <tr style="background:#f8f9fa;">
                                         <th style="padding:12px 20px; text-align:left; font-size:12px; color:#57606f; font-weight:700;">Status</th>
@@ -279,15 +312,16 @@ async function start() {
         const configs = await fetchSupabase("bi_email_reports?select=*");
         console.log(`Encontradas ${configs.length} configurações.`);
         
-        // Obter fuso local
-        const localDateStr = new Date().toLocaleString("en-US", { timeZone: "America/Sao_Paulo" });
-        const localDate = new Date(localDateStr);
-        const currentHour = String(localDate.getHours()).padStart(2, '0');
-        const currentMinute = String(localDate.getMinutes()).padStart(2, '0');
+        // Fuso horário fixo de Brasília (UTC-3)
+        const utcDate = new Date();
+        const brOffset = -3 * 60 * 60 * 1000; // -3 horas em milissegundos
+        const localDate = new Date(utcDate.getTime() + brOffset);
+        const currentHour = String(localDate.getUTCHours()).padStart(2, '0');
+        const currentMinute = String(localDate.getUTCMinutes()).padStart(2, '0');
         const currentTime = `${currentHour}:${currentMinute}`;
         
         const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-        const currentDay = days[localDate.getDay()];
+        const currentDay = days[localDate.getUTCDay()];
         
         console.log(`Hora (BR): ${currentTime} | Dia: ${currentDay}`);
         
@@ -327,7 +361,10 @@ async function start() {
             console.log(`Destinatários: ${config.recipients.join(", ")}`);
             
             const emailHtml = buildEmailHtml(mduData, config.report_name);
-            const subject = `[BI JLE] ${config.report_name} - ${localDate.toLocaleDateString("pt-BR")}`;
+            const dayStr = String(localDate.getUTCDate()).padStart(2, '0');
+            const monthStr = String(localDate.getUTCMonth() + 1).padStart(2, '0');
+            const yearStr = localDate.getUTCFullYear();
+            const subject = `[BI JLE] ${config.report_name} - ${dayStr}/${monthStr}/${yearStr}`;
             
             await sendResendEmail(config.recipients, subject, emailHtml);
             console.log("E-mail disparado com sucesso via Resend!");

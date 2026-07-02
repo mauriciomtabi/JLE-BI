@@ -3417,7 +3417,7 @@
             showConfirmModal('Disparar Relatório', 'Deseja enviar este relatório agora? O e-mail será disparado instantaneamente pela nuvem.', async () => {
                 showAdminToast('⏳ Enviando e-mail... Por favor, aguarde.');
                 try {
-                    const response = await fetch('/api/send-email', {
+                    const response = await fetch('https://jle-bi.vercel.app/api/send-email', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
