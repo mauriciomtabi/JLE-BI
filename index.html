@@ -1476,7 +1476,7 @@
                 <div class="mdu-kpi-grid">
                     <div class="mdu-kpi-card kpi-total">
                         <div class="kpi-info" style="flex-grow: 1;">
-                            <span class="mdu-kpi-title">Total de OSs MDU</span>
+                            <span class="mdu-kpi-title" style="text-transform: none;">TOTAL DE OSs MDU</span>
                             <h3 class="mdu-kpi-value" id="mdu-kpi-total">0</h3>
                             <div class="mdu-kpi-footer">
                                 <span>Total de registros importados</span>
@@ -3160,21 +3160,16 @@
             titleEl.textContent = title;
             msgEl.textContent = message;
 
-            // Clone and replace buttons to clear previous event listeners
-            const newYesBtn = yesBtn.cloneNode(true);
-            const newNoBtn = noBtn.cloneNode(true);
-            yesBtn.parentNode.replaceChild(newYesBtn, yesBtn);
-            noBtn.parentNode.replaceChild(newNoBtn, noBtn);
-
-            newYesBtn.addEventListener('click', () => {
+            // Atribuir onclick diretamente (limpa o ouvinte anterior automaticamente)
+            yesBtn.onclick = () => {
                 modal.style.display = 'none';
                 if (onYes) onYes();
-            });
+            };
 
-            newNoBtn.addEventListener('click', () => {
+            noBtn.onclick = () => {
                 modal.style.display = 'none';
                 if (onNo) onNo();
-            });
+            };
 
             modal.style.display = 'flex';
         }

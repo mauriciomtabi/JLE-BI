@@ -311,7 +311,7 @@ function renderStatusChart() {
     mduFilteredData.forEach(r => {
         const status = r.status || 'Não Definido';
         const statusUpper = status.toUpperCase().trim();
-        if (statusUpper === 'FINALIZADO' || statusUpper === 'FINALIZADA') {
+        if (statusUpper === 'FINALIZADO' || statusUpper === 'FINALIZADA' || statusUpper === 'CANCELADO' || statusUpper === 'CANCELADA') {
             return;
         }
         statusCounts[status] = (statusCounts[status] || 0) + 1;

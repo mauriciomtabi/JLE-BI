@@ -88,12 +88,15 @@ function getMduStatusCounts() {
     }
     
     const mduData = JSON.parse(dataMatch[1]);
-    const excludeStatus = ["FINALIZADO", "FINALIZADA"];
+    const excludeStatus = ["FINALIZADO", "FINALIZADA", "CANCELADO", "CANCELADA"];
     const counts = {};
     let totalActive = 0;
     
     mduData.forEach(r => {
-        const status = (r.status || 'Não Definido').trim();
+        let status = (r.status || '').trim();
+        if (status === "") {
+            status = "Não Definido";
+        }
         const statusUpper = status.toUpperCase();
         if (excludeStatus.includes(statusUpper)) return;
         
@@ -102,6 +105,23 @@ function getMduStatusCounts() {
     });
     
     return { counts, total: totalActive, generated_at: generatedAt };
+}
+
+function matchStatus(key, dbKey) {
+    const k = key.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+    const db = dbKey.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+    
+    if (k === db) return true;
+    
+    // Substring checks for 1ª / 2ª Vistoria
+    if (db.includes('1') && db.includes('vistoria') && k.includes('1') && k.includes('vistoria')) return true;
+    if (db.includes('2') && db.includes('vistoria') && k.includes('2') && k.includes('vistoria')) return true;
+    
+    // Checks for Não Definido
+    if ((db === '' || db.includes('definido') || db.includes('indefinido')) && 
+        (k === '' || k.includes('definido') || k.includes('indefinido'))) return true;
+    
+    return false;
 }
 
 function buildEmailHtml(data, reportName) {
@@ -119,17 +139,16 @@ function buildEmailHtml(data, reportName) {
         { key: "Fusão",       color: "#1e90ff", bg: "rgba(30,144,255,0.1)"  },
         { key: "Medição",     color: "#ffa502", bg: "rgba(255,165,2,0.1)"   },
         { key: "Relatório",   color: "#a4b0be", bg: "rgba(164,176,190,0.1)" },
-        { key: "Baixa",       color: "#2f3542", bg: "rgba(47,53,66,0.1)"    }
+        { key: "Baixa",       color: "#2f3542", bg: "rgba(47,53,66,0.1)"    },
+        { key: "Não Definido", color: "#f39f18", bg: "rgba(243,159,24,0.1)"  }
     ];
     
     let statusRows = "";
     
     statusOrder.forEach(s => {
-        // Encontrar chave correspondente ignorando acentos/maiusculas
         let cnt = 0;
         Object.keys(data.counts).forEach(k => {
-            if (k.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") === 
-                s.key.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")) {
+            if (matchStatus(s.key, k)) {
                 cnt = data.counts[k];
             }
         });
@@ -150,10 +169,7 @@ function buildEmailHtml(data, reportName) {
     
     // Adicionar outros status eventuais não mapeados
     Object.keys(data.counts).forEach(k => {
-        const isMapped = statusOrder.some(s => 
-            s.key.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") === 
-            k.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-        );
+        const isMapped = statusOrder.some(s => matchStatus(s.key, k));
         if (!isMapped && data.counts[k] > 0) {
             statusRows += `
             <tr>
@@ -174,7 +190,6 @@ function buildEmailHtml(data, reportName) {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>${reportName}</title>
     </head>
     <body style="margin:0; padding:0; background:#f4f6f9; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
         <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f4f6f9; padding: 30px 10px;">
@@ -183,10 +198,17 @@ function buildEmailHtml(data, reportName) {
                     <table width="600" cellpadding="0" cellspacing="0" border="0" style="background:#ffffff; border-radius:16px; overflow:hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.05); border: 1px solid #e1e8ed;">
                         <!-- HEADER -->
                         <tr>
-                            <td style="background: linear-gradient(135deg, #004f71 0%, #007baf 100%); padding: 36px 40px; color:#ffffff;">
-                                <div style="font-size:11px; text-transform:uppercase; letter-spacing:2px; color:rgba(255,255,255,0.7); margin-bottom:6px; font-weight:700;">JLE Telecom — Relatório Automático</div>
-                                <h1 style="margin:0; font-size:24px; font-weight:800; color:#ffffff; line-height:1.2;">${reportName}</h1>
-                                <div style="font-size:13px; color:rgba(255,255,255,0.8); margin-top:8px;">Disparado em: ${nowStr} • Dados atualizados em: ${generatedAt}</div>
+                            <td style="background: #004f71; padding: 36px 40px; color:#ffffff; border-bottom: 4px solid #f39f18;">
+                                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                    <tr>
+                                        <td>
+                                            <img src="https://jle-bi.vercel.app/assets/logo_jle.png" alt="JLE Telecom" style="height: 52px; display: block; margin-bottom: 16px;">
+                                            <div style="font-size:11px; text-transform:uppercase; letter-spacing:2px; color:rgba(255,255,255,0.7); margin-bottom:6px; font-weight:700;">JLE Telecom — Relatório Automático</div>
+                                            <h1 style="margin:0; font-size:24px; font-weight:800; color:#ffffff; line-height:1.2;">${reportName}</h1>
+                                            <div style="font-size:13px; color:rgba(255,255,255,0.8); margin-top:8px;">Disparado em: ${nowStr} • Dados de: ${generatedAt}</div>
+                                        </td>
+                                    </tr>
+                                </table>
                             </td>
                         </tr>
                         
@@ -224,7 +246,7 @@ function buildEmailHtml(data, reportName) {
                                 <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                     <tr>
                                         <td width="48%">
-                                            <a href="${BI_URL}/#mdu" style="display:block; text-align:center; background:#004f71; color:#ffffff; text-decoration:none; padding:14px; border-radius:8px; font-size:14px; font-weight:700; box-shadow:0 4px 12px rgba(0,79,113,0.15);">
+                                            <a href="${BI_URL}/#mdu" style="display:block; text-align:center; background:#004f71; color:#ffffff; text-decoration:none; padding:14px; border-radius:8px; font-size:14px; font-weight:700; box-shadow:0 4px 12px rgba(0,79,113,0.15); border-bottom: 2px solid #002d42;">
                                                 📊 Ir para o BI
                                             </a>
                                         </td>
