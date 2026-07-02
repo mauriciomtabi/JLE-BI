@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-07-02 15:17:24
+// Dados MDU Compactados - Gerado em: 2026-07-02 16:00:16
 window.MDU_METADATA = {
-    "generated_at": "2026-07-02 15:17:24",
+    "generated_at": "2026-07-02 16:00:16",
     "total_rows": 5069,
-    "geocoded_new": 30
+    "geocoded_new": 2
 };
 
 window.MDU_DATA = [
@@ -151709,8 +151709,8 @@ window.MDU_DATA = [
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0393118,
-        "lng": -51.1516266,
+        "lat": -30.0146261,
+        "lng": -51.120832,
         "geocodificado": true,
         "obs_baixa": "",
         "obs_vistoria": "AGUARDANDO SAR",
@@ -151718,33 +151718,33 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2504874",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "R PRESIDENTE JUAREZ 80",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
+        "aging": "0",
         "relatorio_por": "",
-        "status": "",
-        "prog": 0,
+        "status": "Baixa",
+        "prog": 63.0,
         "cod_imovel": "",
-        "area": "",
+        "area": "SSOAA",
         "node": "",
-        "caixa_m": "",
-        "hps": null,
-        "equipe": "",
-        "primeira_visita": "",
+        "caixa_m": "SSOAA.112.M010",
+        "hps": 6,
+        "equipe": "Abraão Rodrigues",
+        "primeira_visita": "01/06/2026",
         "segunda_visita": "",
-        "data_interna": "",
-        "data_fusao": "",
+        "data_interna": "01/06",
+        "data_fusao": "01/06",
         "data_baixa": "",
         "data_relatorio": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0038524,
+        "lng": -51.1440505,
+        "geocodificado": true,
         "obs_baixa": "",
-        "obs_vistoria": "",
-        "data_adicio": ""
+        "obs_vistoria": "AGUARDANDO SAR",
+        "data_adicio": "02/07/2026"
     },
     {
         "os": "RS.CLR.PRD.2504875",
