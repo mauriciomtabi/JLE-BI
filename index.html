@@ -3046,7 +3046,10 @@
                 
                 const isSelf = email === currentUserEmail;
 
-                const rawName = u.out_full_name || u.out_name || (u.out_raw_user_meta_data && u.out_raw_user_meta_data.full_name) || (u.out_metadata && u.out_metadata.full_name);
+                const rawName = u.out_full_name || 
+                                u.out_name || 
+                                (u.out_raw_user_meta_data && (u.out_raw_user_meta_data.full_name || u.out_raw_user_meta_data.name || u.out_raw_user_meta_data.display_name)) || 
+                                (u.out_metadata && (u.out_metadata.full_name || u.out_metadata.name || u.out_metadata.display_name));
                 const userName = rawName || email.split('@')[0].split('.').map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
 
                 // Format userData object for the modal
