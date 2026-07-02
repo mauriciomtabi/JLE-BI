@@ -563,6 +563,26 @@
             </div>
         </div>
 
+        <!-- CONFIRM MODAL -->
+        <div class="modal-overlay" id="confirm-modal" style="display: none; z-index: 10000; position:fixed; inset:0; background:rgba(0,0,0,0.6); align-items:center; justify-content:center; backdrop-filter:blur(4px);">
+            <div style="background:var(--bg-card); border-radius:16px; padding:32px; width:420px; max-width:90vw; text-align:center; box-shadow:0 24px 60px rgba(0,0,0,0.4); border:1px solid var(--border-color);">
+                <div style="width:56px; height:56px; background:rgba(0, 79, 113, 0.1); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 20px; font-size:24px;">
+                    <i class="fa-solid fa-circle-question" style="color:var(--color-primary-light);"></i>
+                </div>
+                <h3 style="margin:0 0 10px 0; font-size:18px; color:var(--text-primary);" id="confirm-modal-title">Confirmar Ação</h3>
+                <p style="margin:0 0 24px 0; font-size:14px; color:var(--text-secondary); line-height:1.5;" id="confirm-modal-message">Deseja prosseguir com esta ação?</p>
+                <div style="display:flex; gap:12px;">
+                    <button id="confirm-modal-yes-btn" style="flex:1; padding:12px; background:linear-gradient(135deg, #004f71, #007baf); color:white; border:none; border-radius:8px; font-size:14px; font-weight:700; cursor:pointer; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+                        Confirmar
+                    </button>
+                    <button id="confirm-modal-no-btn" style="flex:1; padding:12px; background:rgba(255,255,255,0.06); color:var(--text-secondary); border:1px solid var(--border-color); border-radius:8px; font-size:14px; font-weight:600; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
 
         <!-- VIEW 5: VEHICLES FUELING DASHBOARD -->
         <div id="view-veiculos-container" class="view-panel" style="display: none;">
@@ -3120,6 +3140,38 @@
                 return '<span style="color:var(--text-secondary);font-size:12px;">Nunca acessou</span>';
             }
         }
+        function showConfirmModal(title, message, onYes, onNo = null) {
+            const modal = document.getElementById('confirm-modal');
+            const titleEl = document.getElementById('confirm-modal-title');
+            const msgEl = document.getElementById('confirm-modal-message');
+            const yesBtn = document.getElementById('confirm-modal-yes-btn');
+            const noBtn = document.getElementById('confirm-modal-no-btn');
+
+            if (!modal || !titleEl || !msgEl || !yesBtn || !noBtn) return;
+
+            titleEl.textContent = title;
+            msgEl.textContent = message;
+
+            // Clone and replace buttons to clear previous event listeners
+            const newYesBtn = yesBtn.cloneNode(true);
+            const newNoBtn = noBtn.cloneNode(true);
+            yesBtn.parentNode.replaceChild(newYesBtn, yesBtn);
+            noBtn.parentNode.replaceChild(newNoBtn, noBtn);
+
+            newYesBtn.addEventListener('click', () => {
+                modal.style.display = 'none';
+                if (onYes) onYes();
+            });
+
+            newNoBtn.addEventListener('click', () => {
+                modal.style.display = 'none';
+                if (onNo) onNo();
+            });
+
+            modal.style.display = 'flex';
+        }
+        window.showConfirmModal = showConfirmModal;
+
         function switchAdminTab(tabName) {
             const paneUsers = document.getElementById('admin-pane-users');
             const paneEmails = document.getElementById('admin-pane-emails');
@@ -3347,28 +3399,30 @@
         }
 
         async function deleteEmailReport(id, name) {
-            if (!confirm(`Excluir o relatório "${name}"?\nO envio automático será cancelado.`)) return;
-            const { error } = await supabaseClient.from('bi_email_reports').delete().eq('id', id);
-            if (error) {
-                alert('Erro ao excluir: ' + error.message);
-            } else {
-                showAdminToast('Relatório excluído com sucesso!');
-                loadEmailReports();
-            }
+            showConfirmModal('Excluir Relatório', `Deseja realmente excluir o relatório "${name}"? O envio automático será cancelado.`, async () => {
+                const { error } = await supabaseClient.from('bi_email_reports').delete().eq('id', id);
+                if (error) {
+                    alert('Erro ao excluir: ' + error.message);
+                } else {
+                    showAdminToast('Relatório excluído com sucesso!');
+                    loadEmailReports();
+                }
+            });
         }
 
         async function sendEmailReportNow(id) {
-            if (!confirm('Deseja enviar este relatório agora? O envio ocorrerá na nuvem dentro de alguns minutos.')) return;
-            const { error } = await supabaseClient
-                .from('bi_email_reports')
-                .update({ send_now: true, updated_at: new Date().toISOString() })
-                .eq('id', id);
+            showConfirmModal('Disparar Relatório', 'Deseja enviar este relatório agora? O envio ocorrerá na nuvem dentro de alguns minutos.', async () => {
+                const { error } = await supabaseClient
+                    .from('bi_email_reports')
+                    .update({ send_now: true, updated_at: new Date().toISOString() })
+                    .eq('id', id);
 
-            if (error) {
-                alert('Erro ao solicitar envio: ' + error.message);
-            } else {
-                showAdminToast('⏳ Solicitação de envio registrada! O relatório será disparado em instantes.');
-            }
+                if (error) {
+                    alert('Erro ao solicitar envio: ' + error.message);
+                } else {
+                    showAdminToast('⏳ Solicitação de envio registrada! O relatório será disparado em instantes.');
+                }
+            });
         }
 
         // ============================================================
@@ -3685,19 +3739,19 @@
 
         async function deleteUserPermission(email) {
             if (!supabaseClient || !currentUserIsAdmin) return;
-            if (!confirm(`Remover acesso de ${email} e excluir conta de autenticação?`)) return;
-            
-            try {
-                const { error } = await supabaseClient.rpc('delete_user_admin', { user_email: email });
-                if (error) {
-                    alert('Erro ao remover: ' + error.message);
-                } else {
-                    showAdminToast('Usuário e acesso removidos com sucesso!');
-                    loadAdminPanel();
+            showConfirmModal('Remover Acesso', `Deseja realmente remover o acesso de ${email} e excluir a conta de autenticação do colaborador?`, async () => {
+                try {
+                    const { error } = await supabaseClient.rpc('delete_user_admin', { user_email: email });
+                    if (error) {
+                        alert('Erro ao remover: ' + error.message);
+                    } else {
+                        showAdminToast('Usuário e acesso removidos com sucesso!');
+                        loadAdminPanel();
+                    }
+                } catch (err) {
+                    alert('Erro ao remover: ' + err.message);
                 }
-            } catch (err) {
-                alert('Erro ao remover: ' + err.message);
-            }
+            });
         }
 
         function showAdminToast(msg) {
