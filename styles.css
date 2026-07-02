@@ -3029,11 +3029,13 @@ body.light-theme .auth-alert.success {
     grid-template-columns: 1fr;
     gap: 24px;
     align-items: start;
+    width: 100%;
 }
 
 @media (max-width: 960px) {
     .admin-panel-grid {
         grid-template-columns: 1fr;
+        width: 100%;
     }
 }
 
@@ -3045,6 +3047,8 @@ body.light-theme .auth-alert.success {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .admin-card-wide {
