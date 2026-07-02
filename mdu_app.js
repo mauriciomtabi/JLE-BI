@@ -58,6 +58,18 @@ function initMdu() {
         return;
     }
 
+    // Normalizar status para "1ª Vistoria" e "2ª Vistoria" para evitar discrepâncias (como "1º Vistoria", "2º Vistoria")
+    window.MDU_DATA.forEach(r => {
+        if (r.status) {
+            let s = r.status.trim();
+            if (/^1[ºoOaA]?\s*Vistoria/i.test(s) || s.toUpperCase() === 'VISTORIA') {
+                r.status = '1ª Vistoria';
+            } else if (/^2[ºoOaA]?\s*Vistoria/i.test(s)) {
+                r.status = '2ª Vistoria';
+            }
+        }
+    });
+
     populateMduFilterSelects();
     applyMduFilters();
 }
