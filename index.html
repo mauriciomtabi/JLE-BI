@@ -3147,7 +3147,15 @@
             const yesBtn = document.getElementById('confirm-modal-yes-btn');
             const noBtn = document.getElementById('confirm-modal-no-btn');
 
-            if (!modal || !titleEl || !msgEl || !yesBtn || !noBtn) return;
+            if (!modal || !titleEl || !msgEl || !yesBtn || !noBtn) {
+                // Fallback defensivo se o HTML estiver cacheado
+                if (confirm(message)) {
+                    if (onYes) onYes();
+                } else {
+                    if (onNo) onNo();
+                }
+                return;
+            }
 
             titleEl.textContent = title;
             msgEl.textContent = message;
@@ -3411,16 +3419,25 @@
         }
 
         async function sendEmailReportNow(id) {
-            showConfirmModal('Disparar Relatório', 'Deseja enviar este relatório agora? O envio ocorrerá na nuvem dentro de alguns minutos.', async () => {
-                const { error } = await supabaseClient
-                    .from('bi_email_reports')
-                    .update({ send_now: true, updated_at: new Date().toISOString() })
-                    .eq('id', id);
-
-                if (error) {
-                    alert('Erro ao solicitar envio: ' + error.message);
-                } else {
-                    showAdminToast('⏳ Solicitação de envio registrada! O relatório será disparado em instantes.');
+            showConfirmModal('Disparar Relatório', 'Deseja enviar este relatório agora? O e-mail será disparado instantaneamente pela nuvem.', async () => {
+                showAdminToast('⏳ Enviando e-mail... Por favor, aguarde.');
+                try {
+                    const response = await fetch('/api/send-email', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ id })
+                    });
+                    const result = await response.json();
+                    if (result.success) {
+                        showAdminToast('🚀 E-mail disparado com sucesso! Verifique sua caixa de entrada.');
+                        loadEmailReports();
+                    } else {
+                        alert('Erro ao enviar e-mail: ' + (result.error || 'Erro desconhecido'));
+                    }
+                } catch (err) {
+                    alert('Erro de conexão ao enviar e-mail: ' + err.message);
                 }
             });
         }
