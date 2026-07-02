@@ -387,24 +387,6 @@
         <div id="view-admin-container" class="view-panel" style="display: none;">
             <div class="admin-panel-grid">
 
-                <!-- Card: Páginas Padrão para Novos Usuários -->
-                <div class="admin-card">
-                    <div class="admin-card-header">
-                        <div class="admin-card-icon" style="background: linear-gradient(135deg, rgba(0,79,113,0.2), rgba(0,119,170,0.3));">
-                            <i class="fa-solid fa-sliders" style="color: var(--color-primary-light);"></i>
-                        </div>
-                        <div>
-                            <h3>Acesso Padrão</h3>
-                            <p class="admin-card-subtitle">Páginas habilitadas para novos usuários</p>
-                        </div>
-                    </div>
-                    <div class="admin-pages-checkboxes" id="default-pages-list">
-                        <!-- Populated by JS -->
-                    </div>
-                    <button class="admin-save-btn" onclick="saveDefaultPages()">
-                        <i class="fa-solid fa-save"></i> Salvar Padrão
-                    </button>
-                </div>
 
                 <!-- Card: Gerenciar Usuários -->
                 <div class="admin-card admin-card-wide">
@@ -2831,6 +2813,12 @@
                 return;
             }
 
+            // Ocultar o badge de atualização "Atualizado: N/D" na tela de admin
+            const updateBadge = document.querySelector('.last-update-badge');
+            if (updateBadge) {
+                updateBadge.style.display = (viewName === 'admin') ? 'none' : '';
+            }
+
             // Segurança: Impedir transições para telas não autorizadas de forma fail-secure
             if (viewName === 'admin' && !currentUserIsAdmin) {
                 console.warn("Acesso bloqueado: O usuário não possui perfil administrativo!");
@@ -2992,12 +2980,6 @@
         async function loadAdminPanel() {
             if (!supabaseClient || !currentUserIsAdmin) return;
 
-            // Load default pages
-            const { data: settData } = await supabaseClient
-                .from('bi_settings').select('value').eq('key', 'default_pages').maybeSingle();
-            const defaultPages = (settData && settData.value) ? settData.value : ['dashboard', 'transactions'];
-            renderPageCheckboxes('default-pages-list', defaultPages);
-
             // Load users list with last login times from RPC
             const { data: usersData, error } = await supabaseClient
                 .rpc('get_users_admin');
@@ -3047,17 +3029,18 @@
                 
                 const isSelf = email === currentUserEmail;
 
+                const rawName = u.out_full_name || u.out_name || (u.out_raw_user_meta_data && u.out_raw_user_meta_data.full_name) || (u.out_metadata && u.out_metadata.full_name);
+                const userName = rawName || email.split('@')[0].split('.').map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
+
                 // Format userData object for the modal
                 const userDataObj = {
                     email: email,
                     is_admin: isAdmin,
-                    allowed_pages: allowedPages
+                    allowed_pages: allowedPages,
+                    full_name: rawName || ''
                 };
 
                 const lastAccessHtml = formatLastAccess(lastSignInAt);
-
-                const rawName = u.out_full_name || u.out_name || (u.out_raw_user_meta_data && u.out_raw_user_meta_data.full_name) || (u.out_metadata && u.out_metadata.full_name);
-                const userName = rawName || email.split('@')[0].split('.').map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
 
                 return `<tr>
                     <td data-label="Nome">
@@ -3083,18 +3066,6 @@
             }).join('');
         }
 
-        async function saveDefaultPages() {
-            if (!supabaseClient || !currentUserIsAdmin) return;
-            const pages = getCheckedPages('default-pages-list');
-            const { error } = await supabaseClient
-                .from('bi_settings')
-                .upsert({ key: 'default_pages', value: pages });
-            if (error) {
-                alert('Erro ao salvar: ' + error.message);
-            } else {
-                showAdminToast('Acesso padrão atualizado com sucesso!');
-            }
-        }
 
         function copyTextToClipboard(text) {
             if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -3169,7 +3140,8 @@
         function openEditUserModal(userData) {
             editingEmail = userData.email;
             document.getElementById('modal-user-title').innerText = 'Editar Permissões';
-            document.getElementById('modal-user-name-container').style.display = 'none';
+            document.getElementById('modal-user-name-container').style.display = 'block';
+            document.getElementById('modal-user-name').value = userData.full_name || '';
             document.getElementById('modal-user-email').value = userData.email;
             document.getElementById('modal-user-email').disabled = true;
             document.getElementById('modal-user-password').value = '';
@@ -3236,17 +3208,19 @@
                         }, { onConflict: 'email' });
                     error = upsertError;
                 } else {
-                    // Edição: se houver nova senha, usa o RPC para atualizar auth e permissões; senão, atualiza bi_permissions diretamente
-                    if (password) {
-                        const { error: rpcError } = await supabaseClient.rpc('create_or_update_user_admin', {
-                            new_email: email,
-                            new_password: password,
-                            full_name: fullName,
-                            is_admin_user: isAdmin,
-                            allowed_pages: pages
-                        });
-                        error = rpcError;
-                    } else {
+                    // Edição: sempre tenta usar o RPC para atualizar auth e permissões (incluindo o nome)
+                    const { error: rpcError } = await supabaseClient.rpc('create_or_update_user_admin', {
+                        new_email: email,
+                        new_password: password || '',
+                        full_name: fullName,
+                        is_admin_user: isAdmin,
+                        allowed_pages: pages
+                    });
+                    
+                    if (rpcError) {
+                        console.warn("RPC create_or_update_user_admin falhou (pode ser usuario nao registrado ainda), tentando update direto em bi_permissions:", rpcError);
+                        // Fallback: se o usuário ainda não tiver conta de autenticação criada (não registrado), o RPC pode falhar.
+                        // Nesse caso, atualizamos apenas as permissões e o perfil na tabela pública.
                         const { error: updateError } = await supabaseClient
                             .from('bi_permissions')
                             .update({
@@ -3255,6 +3229,8 @@
                             })
                             .eq('email', email);
                         error = updateError;
+                    } else {
+                        error = null;
                     }
                 }
 

@@ -3026,7 +3026,7 @@ body.light-theme .auth-alert.success {
 
 .admin-panel-grid {
     display: grid;
-    grid-template-columns: 320px 1fr;
+    grid-template-columns: 1fr;
     gap: 24px;
     align-items: start;
 }
