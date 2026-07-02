@@ -940,10 +940,7 @@ function renderMduPerformanceTable() {
         '1ª VISTORIA',
         '2ª VISTORIA',
         'PROJETO',
-        'FUSÃO',
-        'MEDIÇÃO',
-        'RELATÓRIO',
-        'BAIXA'
+        'FUSÃO'
     ];
 
     mduFilteredData.forEach(r => {
@@ -1001,7 +998,7 @@ function renderMduPerformanceTable() {
     updateMduPerformanceHeaders();
 
     if (sortedEquipes.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; color: var(--text-secondary); padding: 20px;">Nenhum dado de desempenho encontrado.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; color: var(--text-secondary); padding: 20px;">Nenhum dado de desempenho encontrado.</td></tr>';
         return;
     }
 
