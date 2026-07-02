@@ -203,9 +203,7 @@ function buildEmailHtml(data, reportName) {
                                     <tr>
                                         <td>
                                             <img src="https://jle-bi.vercel.app/assets/logo_jle.png" alt="JLE Telecom" style="height: 52px; display: block; margin-bottom: 16px;">
-                                            <div style="font-size:11px; text-transform:uppercase; letter-spacing:2px; color:rgba(255,255,255,0.7); margin-bottom:6px; font-weight:700;">JLE Telecom — Relatório Automático</div>
                                             <h1 style="margin:0; font-size:24px; font-weight:800; color:#ffffff; line-height:1.2;">${reportName}</h1>
-                                            <div style="font-size:13px; color:rgba(255,255,255,0.8); margin-top:8px;">Disparado em: ${nowStr} • Dados de: ${generatedAt}</div>
                                         </td>
                                     </tr>
                                 </table>
@@ -218,7 +216,7 @@ function buildEmailHtml(data, reportName) {
                                 <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:rgba(0,79,113,0.04); border-radius:12px; border: 1px solid rgba(0,79,113,0.08); text-align:center; padding:24px;">
                                     <tr>
                                         <td>
-                                            <div style="font-size:13px; color:#57606f; text-transform:uppercase; letter-spacing:1px; font-weight:600; margin-bottom:6px;">OSs Ativas em Andamento</div>
+                                            <div style="font-size:13px; color:#57606f; text-transform:uppercase; letter-spacing:1px; font-weight:600; margin-bottom:6px;">ORDENS DE SERVIÇO EM ANDAMENTO</div>
                                             <div style="font-size:44px; font-weight:800; color:#004f71; line-height:1;">${total}</div>
                                         </td>
                                     </tr>
@@ -252,7 +250,7 @@ function buildEmailHtml(data, reportName) {
                                         </td>
                                         <td width="4%"></td>
                                         <td width="48%">
-                                            <a href="${SHEETS_URL}" style="display:block; text-align:center; background:#217346; color:#ffffff; text-decoration:none; padding:14px; border-radius:8px; font-size:14px; font-weight:700; box-shadow:0 4px 12px rgba(33,115,70,0.15);">
+                                            <a href="${SHEETS_URL}" style="display:block; text-align:center; background:#217346; color:#ffffff; text-decoration:none; padding:14px; border-radius:8px; font-size:14px; font-weight:700; box-shadow:0 4px 12px rgba(33,115,70,0.15); border-bottom: 2px solid #14462a;">
                                                 📋 Ir para a Planilha
                                             </a>
                                         </td>
@@ -264,8 +262,7 @@ function buildEmailHtml(data, reportName) {
                         <!-- FOOTER -->
                         <tr>
                             <td style="background:#f8f9fa; padding:24px; border-top:1px solid #e1e8ed; text-align:center; font-size:12px; color:#747d8c;">
-                                Este é um informativo automático do <strong>BI JLE Telecom</strong>.<br>
-                                Para gerenciar os e-mails e frequências, acesse a aba Admin no painel do BI.
+                                Este é um informativo automático do <strong>BI JLE Telecom</strong>.
                             </td>
                         </tr>
                     </table>
