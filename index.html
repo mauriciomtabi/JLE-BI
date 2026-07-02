@@ -420,8 +420,133 @@
                     </div>
                 </div>
 
+                <!-- Card: E-mails Automáticos -->
+                <div class="admin-card admin-card-wide" style="width: 100%; box-sizing: border-box; margin-top: 24px;">
+                    <div class="admin-card-header">
+                        <div class="admin-card-icon" style="background: linear-gradient(135deg, rgba(46,204,113,0.15), rgba(39,174,96,0.25));">
+                            <i class="fa-solid fa-envelope-circle-check" style="color: #2ecc71;"></i>
+                        </div>
+                        <div>
+                            <h3>E-mails Automáticos</h3>
+                            <p class="admin-card-subtitle">Configure disparos automáticos de relatórios por e-mail</p>
+                        </div>
+                        <button class="admin-add-btn" onclick="openEmailReportModal()" style="margin-left:auto; background: linear-gradient(135deg, #1a7a4a, #27ae60);">
+                            <i class="fa-solid fa-plus"></i> Novo Relatório
+                        </button>
+                    </div>
+                    <div class="admin-table-container">
+                        <table class="admin-users-table">
+                            <thead>
+                                <tr>
+                                    <th>Nome do Relatório</th>
+                                    <th>Tipo</th>
+                                    <th>Destinatários</th>
+                                    <th>Horário</th>
+                                    <th>Dias</th>
+                                    <th>Último Envio</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-emails-tbody">
+                                <tr><td colspan="8" style="text-align:center; color: var(--text-secondary); padding: 24px;">Carregando configurações de e-mail...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
             </div>
         </div>
+
+        <!-- MODAL: E-mail Report Config -->
+        <div id="email-report-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter:blur(4px);">
+            <div style="background:var(--bg-card); border-radius:20px; padding:36px; width:560px; max-width:95vw; max-height:90vh; overflow-y:auto; box-shadow:0 24px 60px rgba(0,0,0,0.4); border:1px solid var(--border-color);">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:28px;">
+                    <div>
+                        <h2 style="margin:0; font-size:20px; color:var(--text-primary);"><i class="fa-solid fa-envelope" style="color:#2ecc71; margin-right:10px;"></i><span id="email-modal-title">Novo Relatório de E-mail</span></h2>
+                        <p style="margin:6px 0 0; font-size:13px; color:var(--text-secondary);">Configure destinatários, horário e dias de envio</p>
+                    </div>
+                    <button onclick="closeEmailReportModal()" style="background:none; border:none; color:var(--text-secondary); cursor:pointer; font-size:22px; padding:4px 8px; border-radius:8px; transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.background='none'">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <input type="hidden" id="email-modal-id" value="">
+
+                <!-- Nome -->
+                <div style="margin-bottom:20px;">
+                    <label style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-secondary); display:block; margin-bottom:8px;">Nome do Relatório</label>
+                    <input type="text" id="email-modal-name" placeholder="Ex: Relatório MDU Diário" style="width:100%; box-sizing:border-box; background:var(--bg-input,rgba(255,255,255,0.05)); border:1px solid var(--border-color); border-radius:10px; padding:12px 16px; color:var(--text-primary); font-size:14px; outline:none; transition:border 0.2s;" onfocus="this.style.borderColor='#2ecc71'" onblur="this.style.borderColor='var(--border-color)'">
+                </div>
+
+                <!-- Tipo de Relatório -->
+                <div style="margin-bottom:20px;">
+                    <label style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-secondary); display:block; margin-bottom:8px;">Tipo de Relatório</label>
+                    <select id="email-modal-type" style="width:100%; box-sizing:border-box; background:var(--bg-input,rgba(255,255,255,0.05)); border:1px solid var(--border-color); border-radius:10px; padding:12px 16px; color:var(--text-primary); font-size:14px; outline:none;">
+                        <option value="mdu">📡 MDU — Status em Andamento</option>
+                    </select>
+                </div>
+
+                <!-- Destinatários -->
+                <div style="margin-bottom:20px;">
+                    <label style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-secondary); display:block; margin-bottom:8px;">Destinatários <span style="color:var(--text-muted); font-weight:400;">(separe por vírgula)</span></label>
+                    <textarea id="email-modal-recipients" placeholder="email1@empresa.com, email2@empresa.com" rows="3" style="width:100%; box-sizing:border-box; background:var(--bg-input,rgba(255,255,255,0.05)); border:1px solid var(--border-color); border-radius:10px; padding:12px 16px; color:var(--text-primary); font-size:14px; outline:none; resize:vertical; font-family:inherit; transition:border 0.2s;" onfocus="this.style.borderColor='#2ecc71'" onblur="this.style.borderColor='var(--border-color)'"></textarea>
+                </div>
+
+                <!-- Horário -->
+                <div style="margin-bottom:20px;">
+                    <label style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-secondary); display:block; margin-bottom:8px;">Horário de Envio</label>
+                    <input type="time" id="email-modal-time" value="08:00" style="width:100%; box-sizing:border-box; background:var(--bg-input,rgba(255,255,255,0.05)); border:1px solid var(--border-color); border-radius:10px; padding:12px 16px; color:var(--text-primary); font-size:14px; outline:none; transition:border 0.2s;" onfocus="this.style.borderColor='#2ecc71'" onblur="this.style.borderColor='var(--border-color)'">
+                </div>
+
+                <!-- Dias da semana -->
+                <div style="margin-bottom:24px;">
+                    <label style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-secondary); display:block; margin-bottom:12px;">Dias de Envio</label>
+                    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                        <label id="day-label-MON" style="cursor:pointer; padding:8px 14px; border-radius:8px; border:1px solid var(--border-color); font-size:13px; font-weight:600; transition:all 0.2s; background:rgba(46,204,113,0.15); color:#2ecc71; border-color:#2ecc71;">
+                            <input type="checkbox" value="MON" class="email-day-check" checked style="display:none;"> Seg
+                        </label>
+                        <label id="day-label-TUE" style="cursor:pointer; padding:8px 14px; border-radius:8px; border:1px solid var(--border-color); font-size:13px; font-weight:600; transition:all 0.2s; background:rgba(46,204,113,0.15); color:#2ecc71; border-color:#2ecc71;">
+                            <input type="checkbox" value="TUE" class="email-day-check" checked style="display:none;"> Ter
+                        </label>
+                        <label id="day-label-WED" style="cursor:pointer; padding:8px 14px; border-radius:8px; border:1px solid var(--border-color); font-size:13px; font-weight:600; transition:all 0.2s; background:rgba(46,204,113,0.15); color:#2ecc71; border-color:#2ecc71;">
+                            <input type="checkbox" value="WED" class="email-day-check" checked style="display:none;"> Qua
+                        </label>
+                        <label id="day-label-THU" style="cursor:pointer; padding:8px 14px; border-radius:8px; border:1px solid var(--border-color); font-size:13px; font-weight:600; transition:all 0.2s; background:rgba(46,204,113,0.15); color:#2ecc71; border-color:#2ecc71;">
+                            <input type="checkbox" value="THU" class="email-day-check" checked style="display:none;"> Qui
+                        </label>
+                        <label id="day-label-FRI" style="cursor:pointer; padding:8px 14px; border-radius:8px; border:1px solid var(--border-color); font-size:13px; font-weight:600; transition:all 0.2s; background:rgba(46,204,113,0.15); color:#2ecc71; border-color:#2ecc71;">
+                            <input type="checkbox" value="FRI" class="email-day-check" checked style="display:none;"> Sex
+                        </label>
+                        <label id="day-label-SAT" style="cursor:pointer; padding:8px 14px; border-radius:8px; border:1px solid var(--border-color); font-size:13px; font-weight:600; transition:all 0.2s; color:var(--text-secondary);">
+                            <input type="checkbox" value="SAT" class="email-day-check" style="display:none;"> Sáb
+                        </label>
+                        <label id="day-label-SUN" style="cursor:pointer; padding:8px 14px; border-radius:8px; border:1px solid var(--border-color); font-size:13px; font-weight:600; transition:all 0.2s; color:var(--text-secondary);">
+                            <input type="checkbox" value="SUN" class="email-day-check" style="display:none;"> Dom
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Toggle Ativo -->
+                <div style="margin-bottom:28px; display:flex; align-items:center; gap:12px;">
+                    <div onclick="toggleEmailActive(this)" id="email-active-toggle" data-active="true" style="cursor:pointer; width:48px; height:26px; background:#2ecc71; border-radius:13px; position:relative; transition:background 0.3s;">
+                        <div style="position:absolute; width:20px; height:20px; background:white; border-radius:50%; top:3px; right:3px; transition:right 0.3s; box-shadow:0 2px 4px rgba(0,0,0,0.2);"></div>
+                    </div>
+                    <span style="font-size:14px; color:var(--text-primary);" id="email-active-label">Ativo — envio habilitado</span>
+                </div>
+
+                <!-- Botões -->
+                <div style="display:flex; gap:12px;">
+                    <button onclick="saveEmailReport()" style="flex:1; padding:14px; background:linear-gradient(135deg, #1a7a4a, #27ae60); color:white; border:none; border-radius:12px; font-size:14px; font-weight:700; cursor:pointer; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+                        <i class="fa-solid fa-floppy-disk" style="margin-right:8px;"></i>Salvar Configuração
+                    </button>
+                    <button onclick="closeEmailReportModal()" style="padding:14px 20px; background:rgba(255,255,255,0.06); color:var(--text-secondary); border:1px solid var(--border-color); border-radius:12px; font-size:14px; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+
 
         <!-- VIEW 5: VEHICLES FUELING DASHBOARD -->
         <div id="view-veiculos-container" class="view-panel" style="display: none;">
@@ -2979,9 +3104,223 @@
                 return '<span style="color:var(--text-secondary);font-size:12px;">Nunca acessou</span>';
             }
         }
+        // ============================================================
+        // E-MAIL REPORTS ADMIN — Funções de gerenciamento
+        // ============================================================
+
+        async function loadEmailReports() {
+            if (!supabaseClient || !currentUserIsAdmin) return;
+            const tbody = document.getElementById('admin-emails-tbody');
+            if (!tbody) return;
+
+            const { data, error } = await supabaseClient
+                .from('bi_email_reports')
+                .select('*')
+                .order('created_at', { ascending: false });
+
+            if (error) {
+                tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; color:var(--color-danger); padding:24px;">Erro ao carregar: ${error.message}</td></tr>`;
+                return;
+            }
+
+            if (!data || data.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; color:var(--text-secondary); padding:32px 20px;">
+                    <i class="fa-solid fa-envelope" style="font-size:28px; opacity:0.3; display:block; margin-bottom:10px;"></i>
+                    Nenhum relatório de e-mail configurado ainda.<br>
+                    <span style="font-size:12px;">Clique em "+ Novo Relatório" para começar.</span>
+                </td></tr>`;
+                return;
+            }
+
+            const dayLabels = { MON:'Seg', TUE:'Ter', WED:'Qua', THU:'Qui', FRI:'Sex', SAT:'Sáb', SUN:'Dom' };
+            const typeLabels = { mdu: '📡 MDU' };
+
+            tbody.innerHTML = data.map(r => {
+                const days = (r.schedule_days || []).map(d => dayLabels[d] || d).join(', ');
+                const recipients = (r.recipients || []).join(', ');
+                const lastSent = r.last_sent_at ? new Date(r.last_sent_at).toLocaleString('pt-BR') : '—';
+                const activeStyle = r.is_active
+                    ? 'background:rgba(46,204,113,0.12); color:#2ecc71; border:1px solid rgba(46,204,113,0.3);'
+                    : 'background:rgba(255,255,255,0.05); color:var(--text-secondary); border:1px solid var(--border-color);';
+                const activeLabel = r.is_active ? '● Ativo' : '○ Inativo';
+                const recipientsTrunc = recipients.length > 40 ? recipients.substring(0, 40) + '…' : recipients;
+                return `<tr>
+                    <td style="font-weight:600;">${r.report_name}</td>
+                    <td>${typeLabels[r.report_type] || r.report_type}</td>
+                    <td style="font-size:12px; color:var(--text-secondary);" title="${recipients}">${recipientsTrunc}</td>
+                    <td style="text-align:center; font-weight:600;">${r.schedule_time}</td>
+                    <td style="font-size:12px; color:var(--text-secondary);">${days}</td>
+                    <td style="font-size:12px; color:var(--text-secondary);">${lastSent}</td>
+                    <td><span style="padding:4px 10px; border-radius:20px; font-size:11px; font-weight:700; ${activeStyle}">${activeLabel}</span></td>
+                    <td>
+                        <div style="display:flex; gap:6px; justify-content:center;">
+                            <button onclick="editEmailReport('${r.id}')" style="padding:5px 10px; font-size:11px; background:rgba(0,79,113,0.15); color:var(--color-primary-light); border:1px solid rgba(0,79,113,0.3); border-radius:6px; cursor:pointer;" title="Editar">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </button>
+                            <button onclick="sendEmailReportNow('${r.id}')" style="padding:5px 10px; font-size:11px; background:rgba(46,204,113,0.12); color:#2ecc71; border:1px solid rgba(46,204,113,0.3); border-radius:6px; cursor:pointer;" title="Enviar agora">
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                            <button onclick="deleteEmailReport('${r.id}', '${r.report_name.replace(/'/g, "\\'")}')" style="padding:5px 10px; font-size:11px; background:rgba(231,76,60,0.1); color:#e74c3c; border:1px solid rgba(231,76,60,0.25); border-radius:6px; cursor:pointer;" title="Excluir">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>`;
+            }).join('');
+        }
+
+        function openEmailReportModal() {
+            document.getElementById('email-modal-id').value = '';
+            document.getElementById('email-modal-name').value = '';
+            document.getElementById('email-modal-type').value = 'mdu';
+            document.getElementById('email-modal-recipients').value = '';
+            document.getElementById('email-modal-time').value = '08:00';
+            document.getElementById('email-modal-title').textContent = 'Novo Relatório de E-mail';
+
+            ['MON','TUE','WED','THU','FRI','SAT','SUN'].forEach(d => {
+                const cb = document.querySelector(`.email-day-check[value="${d}"]`);
+                const lbl = document.getElementById(`day-label-${d}`);
+                const defaultChecked = ['MON','TUE','WED','THU','FRI'].includes(d);
+                if (cb) cb.checked = defaultChecked;
+                if (lbl) updateDayLabel(lbl, defaultChecked);
+            });
+
+            document.querySelectorAll('.email-day-check').forEach(cb => {
+                cb.onchange = function() {
+                    const lbl = document.getElementById(`day-label-${this.value}`);
+                    if (lbl) updateDayLabel(lbl, this.checked);
+                };
+            });
+
+            setEmailToggle(true);
+            document.getElementById('email-report-modal').style.display = 'flex';
+        }
+
+        function updateDayLabel(lbl, checked) {
+            if (checked) {
+                lbl.style.background = 'rgba(46,204,113,0.15)';
+                lbl.style.color = '#2ecc71';
+                lbl.style.borderColor = '#2ecc71';
+            } else {
+                lbl.style.background = '';
+                lbl.style.color = 'var(--text-secondary)';
+                lbl.style.borderColor = 'var(--border-color)';
+            }
+        }
+
+        function setEmailToggle(active) {
+            const toggle = document.getElementById('email-active-toggle');
+            const knob = toggle.querySelector('div');
+            toggle.dataset.active = active ? 'true' : 'false';
+            toggle.style.background = active ? '#2ecc71' : 'rgba(255,255,255,0.15)';
+            knob.style.right = active ? '3px' : 'calc(100% - 23px)';
+            document.getElementById('email-active-label').textContent = active ? 'Ativo — envio habilitado' : 'Inativo — envio suspenso';
+        }
+
+        function editEmailReport(id) {
+            supabaseClient.from('bi_email_reports').select('*').eq('id', id).single().then(({ data, error }) => {
+                if (error || !data) { alert('Erro ao carregar configuração.'); return; }
+                document.getElementById('email-modal-id').value = data.id;
+                document.getElementById('email-modal-name').value = data.report_name;
+                document.getElementById('email-modal-type').value = data.report_type;
+                document.getElementById('email-modal-recipients').value = (data.recipients || []).join(', ');
+                document.getElementById('email-modal-time').value = data.schedule_time;
+                document.getElementById('email-modal-title').textContent = 'Editar Relatório de E-mail';
+
+                const days = data.schedule_days || [];
+                ['MON','TUE','WED','THU','FRI','SAT','SUN'].forEach(d => {
+                    const cb = document.querySelector(`.email-day-check[value="${d}"]`);
+                    const lbl = document.getElementById(`day-label-${d}`);
+                    if (cb) cb.checked = days.includes(d);
+                    if (lbl) updateDayLabel(lbl, days.includes(d));
+                });
+
+                document.querySelectorAll('.email-day-check').forEach(cb => {
+                    cb.onchange = function() {
+                        const lbl = document.getElementById(`day-label-${this.value}`);
+                        if (lbl) updateDayLabel(lbl, this.checked);
+                    };
+                });
+
+                setEmailToggle(data.is_active);
+                document.getElementById('email-report-modal').style.display = 'flex';
+            });
+        }
+
+        function toggleEmailActive(el) {
+            const isActive = el.dataset.active === 'true';
+            setEmailToggle(!isActive);
+        }
+
+        function closeEmailReportModal() {
+            document.getElementById('email-report-modal').style.display = 'none';
+        }
+
+        async function saveEmailReport() {
+            const id = document.getElementById('email-modal-id').value;
+            const name = document.getElementById('email-modal-name').value.trim();
+            const type = document.getElementById('email-modal-type').value;
+            const recipientsRaw = document.getElementById('email-modal-recipients').value;
+            const time = document.getElementById('email-modal-time').value;
+            const isActive = document.getElementById('email-active-toggle').dataset.active === 'true';
+
+            if (!name) { alert('Informe um nome para o relatório.'); return; }
+            if (!recipientsRaw.trim()) { alert('Informe ao menos um e-mail destinatário.'); return; }
+
+            const recipients = recipientsRaw.split(',').map(e => e.trim()).filter(e => e.includes('@'));
+            if (recipients.length === 0) { alert('Nenhum e-mail válido informado.'); return; }
+
+            const days = Array.from(document.querySelectorAll('.email-day-check:checked')).map(cb => cb.value);
+            if (days.length === 0) { alert('Selecione ao menos um dia de envio.'); return; }
+
+            const payload = {
+                report_name: name,
+                report_type: type,
+                recipients: recipients,
+                schedule_time: time,
+                schedule_days: days,
+                is_active: isActive,
+                updated_at: new Date().toISOString()
+            };
+
+            let error;
+            if (id) {
+                ({ error } = await supabaseClient.from('bi_email_reports').update(payload).eq('id', id));
+            } else {
+                ({ error } = await supabaseClient.from('bi_email_reports').insert({ ...payload, created_at: new Date().toISOString() }));
+            }
+
+            if (error) {
+                alert('Erro ao salvar: ' + error.message);
+            } else {
+                closeEmailReportModal();
+                showAdminToast('Configuração de e-mail salva com sucesso!');
+                loadEmailReports();
+            }
+        }
+
+        async function deleteEmailReport(id, name) {
+            if (!confirm(`Excluir o relatório "${name}"?\nO envio automático será cancelado.`)) return;
+            const { error } = await supabaseClient.from('bi_email_reports').delete().eq('id', id);
+            if (error) {
+                alert('Erro ao excluir: ' + error.message);
+            } else {
+                showAdminToast('Relatório excluído com sucesso!');
+                loadEmailReports();
+            }
+        }
+
+        function sendEmailReportNow(id) {
+            showAdminToast('⏳ Solicite ao agente de e-mails que rode o script manualmente para envio imediato.');
+        }
+
+        // ============================================================
 
         async function loadAdminPanel() {
             if (!supabaseClient || !currentUserIsAdmin) return;
+            loadEmailReports();
+
+
 
             // Load users list with last login times from RPC
             const { data: usersData, error } = await supabaseClient
