@@ -3037,7 +3037,8 @@
                     email: email,
                     is_admin: isAdmin,
                     allowed_pages: allowedPages,
-                    full_name: rawName || ''
+                    full_name: rawName || '',
+                    last_sign_in: lastSignInAt
                 };
 
                 const lastAccessHtml = formatLastAccess(lastSignInAt);
@@ -3120,9 +3121,11 @@
         };
 
         let editingEmail = null;
+        let editingUserRegistered = false;
 
         function openAddUserModal() {
             editingEmail = null;
+            editingUserRegistered = false;
             document.getElementById('modal-user-title').innerText = 'Adicionar Usuário';
             document.getElementById('modal-user-name-container').style.display = 'block';
             document.getElementById('modal-user-name').value = '';
@@ -3139,6 +3142,7 @@
 
         function openEditUserModal(userData) {
             editingEmail = userData.email;
+            editingUserRegistered = !!userData.last_sign_in;
             document.getElementById('modal-user-title').innerText = 'Editar Permissões';
             document.getElementById('modal-user-name-container').style.display = 'block';
             document.getElementById('modal-user-name').value = userData.full_name || '';
@@ -3211,24 +3215,32 @@
                     // Edição: sempre tenta usar o RPC para atualizar auth e permissões (incluindo o nome)
                     const { error: rpcError } = await supabaseClient.rpc('create_or_update_user_admin', {
                         new_email: email,
-                        new_password: password || '',
+                        new_password: password || null,
                         full_name: fullName,
                         is_admin_user: isAdmin,
                         allowed_pages: pages
                     });
                     
                     if (rpcError) {
-                        console.warn("RPC create_or_update_user_admin falhou (pode ser usuario nao registrado ainda), tentando update direto em bi_permissions:", rpcError);
-                        // Fallback: se o usuário ainda não tiver conta de autenticação criada (não registrado), o RPC pode falhar.
-                        // Nesse caso, atualizamos apenas as permissões e o perfil na tabela pública.
-                        const { error: updateError } = await supabaseClient
-                            .from('bi_permissions')
-                            .update({
-                                is_admin: isAdmin,
-                                allowed_pages: pages
-                            })
-                            .eq('email', email);
-                        error = updateError;
+                        console.warn("RPC create_or_update_user_admin falhou:", rpcError);
+                        
+                        if (editingUserRegistered) {
+                            // Se for um usuário que já tem acesso (registrado), o RPC não deveria falhar.
+                            // Vamos mostrar o erro para diagnóstico em vez de falhar silenciosamente.
+                            alert('Erro ao atualizar cadastro no Supabase: ' + rpcError.message);
+                            error = rpcError;
+                        } else {
+                            // Fallback: se o usuário ainda não tiver conta de autenticação criada (não registrado), o RPC pode falhar.
+                            // Nesse caso, atualizamos apenas as permissões e o perfil na tabela pública.
+                            const { error: updateError } = await supabaseClient
+                                .from('bi_permissions')
+                                .update({
+                                    is_admin: isAdmin,
+                                    allowed_pages: pages
+                                })
+                                .eq('email', email);
+                            error = updateError;
+                        }
                     } else {
                         error = null;
                     }
