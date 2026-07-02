@@ -402,6 +402,7 @@
                             <i class="fa-solid fa-plus"></i> Adicionar Usuário
                         </button>
                     </div>
+                    <div id="admin-debug-info" style="display: none; background: rgba(231, 76, 60, 0.05); border: 1px dashed rgba(231, 76, 60, 0.3); padding: 12px; border-radius: 8px; margin: 16px; font-family: monospace; font-size: 11px; color: var(--text-secondary); word-break: break-all; white-space: pre-wrap; line-height: 1.4;"></div>
                     <div class="admin-table-container">
                         <table class="admin-users-table">
                             <thead>
@@ -2983,6 +2984,22 @@
             // Load users list with last login times from RPC
             const { data: usersData, error } = await supabaseClient
                 .rpc('get_users_admin');
+
+            // Exibir informações de diagnóstico no banner temporário
+            const debugInfoEl = document.getElementById('admin-debug-info');
+            if (debugInfoEl) {
+                if (usersData && usersData.length > 0) {
+                    debugInfoEl.style.display = 'block';
+                    debugInfoEl.innerHTML = `<strong>Diagnóstico RPC (get_users_admin):</strong><br>` + 
+                        usersData.slice(0, 4).map(u => {
+                            const keys = Object.keys(u).join(', ');
+                            return `- E-mail: ${u.out_email}<br>&nbsp;&nbsp;Campos: ${keys}<br>&nbsp;&nbsp;Objeto: ${JSON.stringify(u)}`;
+                        }).join('<br>');
+                } else if (error) {
+                    debugInfoEl.style.display = 'block';
+                    debugInfoEl.innerHTML = `<strong>Erro ao ler banco:</strong> ${error.message}`;
+                }
+            }
             
             // Buscar os acessos em tempo real diretamente da tabela bi_permissions
             let accessTimes = {};
