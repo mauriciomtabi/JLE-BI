@@ -306,10 +306,14 @@ function renderStatusChart() {
         mduCharts.status.destroy();
     }
 
-    // Agregar contagem de status
+    // Agregar contagem de status (desconsiderando "Finalizado" para focar em "Em Andamento")
     const statusCounts = {};
     mduFilteredData.forEach(r => {
         const status = r.status || 'Não Definido';
+        const statusUpper = status.toUpperCase().trim();
+        if (statusUpper === 'FINALIZADO' || statusUpper === 'FINALIZADA') {
+            return;
+        }
         statusCounts[status] = (statusCounts[status] || 0) + 1;
     });
 
