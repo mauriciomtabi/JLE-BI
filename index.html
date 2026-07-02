@@ -2793,6 +2793,12 @@
                 } else {
                     timestampEl.innerText = 'N/D';
                 }
+            } else if (viewName === 'mdu') {
+                if (typeof window.MDU_METADATA !== 'undefined' && window.MDU_METADATA.generated_at) {
+                    timestampEl.innerText = formatTimestamp(window.MDU_METADATA.generated_at);
+                } else {
+                    timestampEl.innerText = 'Desconhecido';
+                }
             } else if (viewName === 'dashboard') {
                 if (typeof window.CASH_FLOW_DATA !== 'undefined' && window.CASH_FLOW_DATA.generated_at) {
                     timestampEl.innerText = formatTimestamp(window.CASH_FLOW_DATA.generated_at);
