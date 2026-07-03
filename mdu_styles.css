@@ -102,7 +102,7 @@
 }
 
 .mdu-kpi-card {
-    background: var(--bg-card);
+    background: radial-gradient(circle at top right, rgba(var(--kpi-glow-color, 108, 117, 125), 0.06), var(--bg-card) 70%);
     border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 18px 20px;
@@ -131,10 +131,10 @@
     background-color: var(--kpi-border-color, var(--color-primary));
 }
 
-.mdu-kpi-card.kpi-total { --kpi-border-color: var(--color-primary); }
-.mdu-kpi-card.kpi-finalizado { --kpi-border-color: var(--color-success); }
-.mdu-kpi-card.kpi-andamento { --kpi-border-color: var(--color-warning); }
-.mdu-kpi-card.kpi-cancelado { --kpi-border-color: var(--color-danger); }
+.mdu-kpi-card.kpi-total { --kpi-border-color: var(--color-primary); --kpi-glow-color: 30, 144, 255; }
+.mdu-kpi-card.kpi-finalizado { --kpi-border-color: var(--color-success); --kpi-glow-color: 46, 213, 115; }
+.mdu-kpi-card.kpi-andamento { --kpi-border-color: var(--color-warning); --kpi-glow-color: 255, 165, 2; }
+.mdu-kpi-card.kpi-cancelado { --kpi-border-color: var(--color-danger); --kpi-glow-color: 255, 71, 87; }
 
 .mdu-kpi-title {
     font-size: 0.85rem;
