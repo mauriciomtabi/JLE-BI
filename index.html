@@ -3424,14 +3424,6 @@
                 closeEmailReportModal();
                 showAdminToast('Configuração de e-mail salva com sucesso!');
                 loadEmailReports();
-                
-                // Dispara sincronização com o Resend
-                supabaseClient.auth.getSession().then(({ data }) => {
-                    const token = data?.session?.access_token;
-                    const headers = {};
-                    if (token) headers['Authorization'] = 'Bearer ' + token;
-                    fetch('/api/sync-schedules', { method: 'POST', headers }).catch(err => console.error("Error syncing schedules:", err));
-                });
             }
         }
 
