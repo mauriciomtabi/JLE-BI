@@ -7,7 +7,7 @@ const path = require('path');
 
 const SUPABASE_URL = "https://fowlctvebdcodphntsjw.supabase.co";
 const ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZvd2xjdHZlYmRjb2RwaG50c2p3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwNzg2NjUsImV4cCI6MjA5NTY1NDY2NX0.PxzD_PlU4sBFPBukthuXpkBlzYbQqMLXLE4DQwctPOM";
-const RESEND_API_KEY = process.env.RESEND_API_KEY || "re_bBQyi9qa_C5py6HbtiYrNfPoJhZLUATRw";
+const RESEND_API_KEY = process.env.RESEND_API_KEY || "re_UrQ23kW7_HfeEnReBmEmKyFqo54AfMbgb";
 const FROM_EMAIL = "bi@jletelecom.com.br";
 
 async function fetchSupabase(endpoint, method = 'GET', body = null) {
