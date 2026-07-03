@@ -1,6 +1,6 @@
-// api/check-scheduled-emails.js
-// Serverless function running on Vercel triggered by Vercel Cron every 10 minutes
-// Verifies if there are any scheduled MDU reports to be sent at the current time and dispatches them.
+// api/sync-schedules.js
+// Serverless function on Vercel to synchronize BI report schedules with Resend's native scheduling system.
+// This maintains a rolling window of future emails scheduled in Resend, removing the need for external crons.
 
 const fs = require('fs');
 const path = require('path');
@@ -9,6 +9,8 @@ const SUPABASE_URL = "https://fowlctvebdcodphntsjw.supabase.co";
 const ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZvd2xjdHZlYmRjb2RwaG50c2p3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwNzg2NjUsImV4cCI6MjA5NTY1NDY2NX0.PxzD_PlU4sBFPBukthuXpkBlzYbQqMLXLE4DQwctPOM";
 const RESEND_API_KEY = process.env.RESEND_API_KEY || "re_bBQyi9qa_C5py6HbtiYrNfPoJhZLUATRw";
 const FROM_EMAIL = "bi@jletelecom.com.br";
+const BI_URL = "https://jle-bi.vercel.app";
+const SHEETS_URL = "https://docs.google.com/spreadsheets/d/1eEJLaV7D0rthjC5H1MppXyk7dyroqn2h/edit";
 
 async function fetchSupabase(endpoint, method = 'GET', body = null) {
     const url = `${SUPABASE_URL}/rest/v1/${endpoint}`;
@@ -30,7 +32,7 @@ async function fetchSupabase(endpoint, method = 'GET', body = null) {
     return res.json();
 }
 
-async function sendResendEmail(to, subject, html) {
+async function scheduleResendEmail(to, subject, html, scheduledAtISO) {
     const url = "https://api.resend.com/emails";
     const headers = {
         "Authorization": `Bearer ${RESEND_API_KEY}`,
@@ -40,7 +42,8 @@ async function sendResendEmail(to, subject, html) {
         from: `BI JLE Telecom <${FROM_EMAIL}>`,
         to: to,
         subject: subject,
-        html: html
+        html: html,
+        scheduled_at: scheduledAtISO
     };
     const res = await fetch(url, {
         method: 'POST',
@@ -49,9 +52,26 @@ async function sendResendEmail(to, subject, html) {
     });
     const resData = await res.json();
     if (!res.ok) {
-        throw new Error(`Resend Error: ${JSON.stringify(resData)}`);
+        throw new Error(`Resend Schedule Error: ${JSON.stringify(resData)}`);
     }
-    return resData;
+    return resData.id;
+}
+
+async function cancelResendEmail(emailId) {
+    const url = `https://api.resend.com/emails/${emailId}/cancel`;
+    const headers = {
+        "Authorization": `Bearer ${RESEND_API_KEY}`
+    };
+    const res = await fetch(url, {
+        method: 'DELETE',
+        headers: headers
+    });
+    if (!res.ok) {
+        const errText = await res.text();
+        console.error(`Failed to cancel Resend email ${emailId}: status ${res.status}, response: ${errText}`);
+    } else {
+        console.log(`Successfully cancelled scheduled email ${emailId}`);
+    }
 }
 
 function getMduStatusCounts() {
@@ -99,20 +119,9 @@ function matchStatus(key, dbKey) {
     return false;
 }
 
-function buildEmailHtml(data, reportName) {
+function buildEmailHtml(data, reportName, executionDateStr) {
     const total = data.total;
     const generatedAt = data.generated_at;
-
-    // Fuso horário fixo de Brasília (UTC-3)
-    const utcDate = new Date();
-    const brOffset = -3 * 60 * 60 * 1000;
-    const localDate = new Date(utcDate.getTime() + brOffset);
-    const day = String(localDate.getUTCDate()).padStart(2, '0');
-    const month = String(localDate.getUTCMonth() + 1).padStart(2, '0');
-    const year = localDate.getUTCFullYear();
-    const hours = String(localDate.getUTCHours()).padStart(2, '0');
-    const minutes = String(localDate.getUTCMinutes()).padStart(2, '0');
-    const nowStr = `${day}/${month}/${year} às ${hours}:${minutes}`;
     
     let medicaoCount = 0;
     let relatorioCount = 0;
@@ -223,7 +232,7 @@ function buildEmailHtml(data, reportName) {
                                 </table>
                             </td>
                         </tr>
-
+ 
                         <!-- TABELA DE STATUS -->
                         <tr>
                             <td style="padding: 28px 40px 10px;">
@@ -237,7 +246,7 @@ function buildEmailHtml(data, reportName) {
                                 </table>
                             </td>
                         </tr>
-
+ 
                         <!-- BOTOES DE ACAO -->
                         <tr>
                             <td style="padding: 24px 40px 36px;">
@@ -254,12 +263,12 @@ function buildEmailHtml(data, reportName) {
                                 </table>
                             </td>
                         </tr>
-
+ 
                         <!-- FOOTER -->
                         <tr>
                             <td style="background:#f8f9fa; border-top:1px solid #e1e8ed; padding:24px 40px; text-align:center; font-size:12px; color:#747d8c; line-height:1.5;">
                                 Este é um relatório automatizado gerado a partir do Banco de Dados do BI JLE Telecom.<br>
-                                Relatório emitido em: ${nowStr}.
+                                Relatório emitido em: ${executionDateStr}.
                             </td>
                         </tr>
                     </table>
@@ -270,8 +279,39 @@ function buildEmailHtml(data, reportName) {
     </html>`;
 }
 
+function getNextExecutionDates(scheduleTime, scheduleDays, count) {
+    const [hourStr, minStr] = scheduleTime.split(':');
+    const targetHour = parseInt(hourStr, 10);
+    const targetMin = parseInt(minStr, 10);
+
+    const weekdayMap = {
+        'SUN': 0, 'MON': 1, 'TUE': 2, 'WED': 3, 'THU': 4, 'FRI': 5, 'SAT': 6
+    };
+    const targetDays = scheduleDays.map(d => weekdayMap[d]);
+
+    const dates = [];
+    let current = new Date();
+    const brOffset = -3 * 60 * 60 * 1000;
+    
+    for (let i = 0; i < 30 && dates.length < count; i++) {
+        const testDate = new Date(current.getTime() + brOffset + i * 24 * 60 * 60 * 1000);
+        testDate.setUTCHours(targetHour, targetMin, 0, 0);
+
+        const absoluteUtcDate = new Date(testDate.getTime() - brOffset);
+
+        if (absoluteUtcDate.getTime() <= Date.now()) {
+            continue;
+        }
+
+        const dayOfWeek = testDate.getUTCDay();
+        if (targetDays.includes(dayOfWeek)) {
+            dates.push(absoluteUtcDate);
+        }
+    }
+    return dates;
+}
+
 module.exports = async (req, res) => {
-    // Configurar Headers de CORS
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
@@ -286,69 +326,115 @@ module.exports = async (req, res) => {
     }
 
     try {
-        console.log("Iniciando verificação de relatórios agendados...");
-        
-        // Fuso horário fixo de Brasília (UTC-3)
-        const utcDate = new Date();
-        const brOffset = -3 * 60 * 60 * 1000;
-        const localDate = new Date(utcDate.getTime() + brOffset);
-        const currentHour = String(localDate.getUTCHours()).padStart(2, '0');
-        const currentMinute = String(localDate.getUTCMinutes()).padStart(2, '0');
-        const currentTime = `${currentHour}:${currentMinute}`;
-        
-        const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-        const currentDay = days[localDate.getUTCDay()];
-        
-        console.log(`Hora atual (BR): ${currentTime} | Dia da semana: ${currentDay}`);
-
-        // 1. Obter relatórios ativos do Supabase
-        const configs = await fetchSupabase("bi_email_reports?is_active=eq.true");
-        if (!configs || configs.length === 0) {
-            console.log("Nenhum relatório agendado ativo no Supabase.");
-            return res.status(200).json({ success: true, message: "Nenhum relatório ativo encontrado." });
-        }
+        console.log("Iniciando sincronização de agendamentos com Resend...");
+        const reports = await fetchSupabase("bi_email_reports");
+        const actions = [];
 
         const mduData = getMduStatusCounts();
-        const sentReports = [];
 
-        for (const config of configs) {
-            const configTime = config.schedule_time.substring(0, 5); // formato "08:00"
-            const configDays = config.schedule_days || [];
+        for (const report of reports) {
+            const currentRecipients = report.recipients || [];
             
-            // Tolerância de 15 minutos para cobrir atrasos do disparador
-            const [cHour, cMin] = configTime.split(":").map(Number);
-            const [lHour, lMin] = currentTime.split(":").map(Number);
-            const timeDiff = (lHour * 60 + lMin) - (cHour * 60 + cMin);
-            const isTimeInWindow = timeDiff >= 0 && timeDiff < 15;
-            
-            const isRightDay = configDays.includes(currentDay);
-            const shouldSend = isTimeInWindow && isRightDay;
+            const cleanEmails = currentRecipients.filter(email => !email.startsWith('__sched:'));
+            const existingScheds = currentRecipients
+                .filter(email => email.startsWith('__sched:'))
+                .map(item => {
+                    const parts = item.split(':');
+                    return {
+                        raw: item,
+                        id: parts[1],
+                        dateStr: parts.slice(2).join(':')
+                    };
+                });
 
-            console.log(`Relatório: "${config.report_name}" | Agendamento: ${configTime} em [${configDays.join(",")}] | Diferença: ${timeDiff}min | Enviar? ${shouldSend}`);
+            let updatedRecipients = [...cleanEmails];
+            let shouldUpdateDb = false;
 
-            if (shouldSend) {
-                console.log(`=> Enviando "${config.report_name}" para:`, config.recipients);
-                const emailHtml = buildEmailHtml(mduData, config.report_name);
-                const dayStr = String(localDate.getUTCDate()).padStart(2, '0');
-                const monthStr = String(localDate.getUTCMonth() + 1).padStart(2, '0');
-                const yearStr = localDate.getUTCFullYear();
-                const subject = `[BI JLE] ${config.report_name} - ${dayStr}/${monthStr}/${yearStr}`;
-                
-                const cleanRecipients = (config.recipients || []).filter(e => !e.startsWith('__sched:'));
-                await sendResendEmail(cleanRecipients, subject, emailHtml);
-                sentReports.push(config.report_name);
+            if (report.is_active && cleanEmails.length > 0 && report.schedule_days && report.schedule_days.length > 0) {
+                const nextDates = getNextExecutionDates(report.schedule_time, report.schedule_days, 4);
+                const activeScheds = [];
+
+                for (const sched of existingScheds) {
+                    const schedTime = new Date(sched.dateStr).getTime();
+                    const isFuture = schedTime > Date.now();
+                    
+                    const schedDateObj = new Date(schedTime);
+                    const brOffset = -3 * 60 * 60 * 1000;
+                    const localSchedDate = new Date(schedDateObj.getTime() + brOffset);
+                    const localHour = String(localSchedDate.getUTCHours()).padStart(2, '0');
+                    const localMin = String(localSchedDate.getUTCMinutes()).padStart(2, '0');
+                    const localTimeStr = `${localHour}:${localMin}`;
+                    
+                    const daysMap = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+                    const localDayStr = daysMap[localSchedDate.getUTCDay()];
+
+                    const isStillValid = isFuture && 
+                                         localTimeStr === report.schedule_time && 
+                                         report.schedule_days.includes(localDayStr);
+
+                    if (isStillValid) {
+                        activeScheds.push(sched);
+                        updatedRecipients.push(sched.raw);
+                    } else {
+                        if (isFuture) {
+                            await cancelResendEmail(sched.id);
+                            actions.push({ report: report.report_name, action: "cancel", id: sched.id, date: sched.dateStr });
+                        }
+                        shouldUpdateDb = true;
+                    }
+                }
+
+                for (const targetDate of nextDates) {
+                    const targetIso = targetDate.toISOString();
+                    const alreadyScheduled = activeScheds.some(s => s.dateStr === targetIso);
+
+                    if (!alreadyScheduled) {
+                        const brOffset = -3 * 60 * 60 * 1000;
+                        const localTargetDate = new Date(targetDate.getTime() + brOffset);
+                        const day = String(localTargetDate.getUTCDate()).padStart(2, '0');
+                        const month = String(localTargetDate.getUTCMonth() + 1).padStart(2, '0');
+                        const year = localTargetDate.getUTCFullYear();
+                        const hours = String(localTargetDate.getUTCHours()).padStart(2, '0');
+                        const minutes = String(localTargetDate.getUTCMinutes()).padStart(2, '0');
+                        const dateFormatted = `${day}/${month}/${year} às ${hours}:${minutes}`;
+
+                        const emailHtml = buildEmailHtml(mduData, report.report_name, dateFormatted);
+                        const subject = `[BI JLE] ${report.report_name} - ${day}/${month}/${year}`;
+
+                        const resendId = await scheduleResendEmail(cleanEmails, subject, emailHtml, targetIso);
+                        const newSchedRaw = `__sched:${resendId}:${targetIso}`;
+                        
+                        updatedRecipients.push(newSchedRaw);
+                        shouldUpdateDb = true;
+                        actions.push({ report: report.report_name, action: "schedule", id: resendId, date: targetIso });
+                    }
+                }
+            } else {
+                for (const sched of existingScheds) {
+                    const schedTime = new Date(sched.dateStr).getTime();
+                    if (schedTime > Date.now()) {
+                        await cancelResendEmail(sched.id);
+                        actions.push({ report: report.report_name, action: "cancel_inactive", id: sched.id, date: sched.dateStr });
+                    }
+                    shouldUpdateDb = true;
+                }
+            }
+
+            if (shouldUpdateDb) {
+                await fetchSupabase(`bi_email_reports?id=eq.${report.id}`, 'PATCH', {
+                    recipients: updatedRecipients,
+                    updated_at: new Date().toISOString()
+                });
             }
         }
 
-        return res.status(200).json({ 
-            success: true, 
-            time: currentTime, 
-            day: currentDay, 
-            sent: sentReports 
+        return res.status(200).json({
+            success: true,
+            actions: actions
         });
 
     } catch (error) {
-        console.error("Erro na verificação de relatórios:", error);
+        console.error("Erro na sincronização de agendamentos:", error);
         return res.status(500).json({ success: false, error: error.message });
     }
 }

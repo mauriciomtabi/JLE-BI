@@ -336,7 +336,8 @@ module.exports = async (req, res) => {
         const yearStr = localDate.getUTCFullYear();
         const subject = `[BI JLE] ${config.report_name} - ${dayStr}/${monthStr}/${yearStr}`;
         
-        await sendResendEmail(config.recipients, subject, emailHtml);
+        const cleanRecipients = (config.recipients || []).filter(e => !e.startsWith('__sched:'));
+        await sendResendEmail(cleanRecipients, subject, emailHtml);
         
         // 4. Salvar last_sent_at
         await fetchSupabase(`bi_email_reports?id=eq.${id}`, 'PATCH', {

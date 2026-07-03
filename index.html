@@ -3244,7 +3244,7 @@
 
             tbody.innerHTML = data.map(r => {
                 const days = (r.schedule_days || []).map(d => dayLabels[d] || d).join(', ');
-                const recipients = (r.recipients || []).join(', ');
+                const recipients = (r.recipients || []).filter(e => !e.startsWith('__sched:')).join(', ');
                 const lastSent = r.last_sent_at ? new Date(r.last_sent_at).toLocaleString('pt-BR') : '—';
                 const activeStyle = r.is_active
                     ? 'background:rgba(46,204,113,0.12); color:#2ecc71; border:1px solid rgba(46,204,113,0.3);'
@@ -3274,6 +3274,9 @@
                     </td>
                 </tr>`;
             }).join('');
+
+            // Sincronização passiva de agendamentos no Resend
+            fetch('/api/sync-schedules', { method: 'POST' }).catch(err => console.error("Error syncing schedules:", err));
         }
 
         function openEmailReportModal() {
@@ -3330,7 +3333,7 @@
                 document.getElementById('email-modal-id').value = data.id;
                 document.getElementById('email-modal-name').value = data.report_name;
                 document.getElementById('email-modal-type').value = data.report_type;
-                document.getElementById('email-modal-recipients').value = (data.recipients || []).join(', ');
+                document.getElementById('email-modal-recipients').value = (data.recipients || []).filter(e => !e.startsWith('__sched:')).join(', ');
                 document.getElementById('email-modal-time').value = data.schedule_time;
                 document.getElementById('email-modal-title').textContent = 'Editar Relatório de E-mail';
 
@@ -3380,10 +3383,23 @@
             const days = Array.from(document.querySelectorAll('.email-day-check:checked')).map(cb => cb.value);
             if (days.length === 0) { alert('Selecione ao menos um dia de envio.'); return; }
 
+            let finalRecipients = recipients;
+            if (id) {
+                try {
+                    const { data: existingReport } = await supabaseClient.from('bi_email_reports').select('recipients').eq('id', id).single();
+                    if (existingReport && existingReport.recipients) {
+                        const existingScheds = existingReport.recipients.filter(e => e.startsWith('__sched:'));
+                        finalRecipients = [...recipients, ...existingScheds];
+                    }
+                } catch (e) {
+                    console.error("Error retrieving existing scheds:", e);
+                }
+            }
+
             const payload = {
                 report_name: name,
                 report_type: type,
-                recipients: recipients,
+                recipients: finalRecipients,
                 schedule_time: time,
                 schedule_days: days,
                 is_active: isActive,
@@ -3403,11 +3419,31 @@
                 closeEmailReportModal();
                 showAdminToast('Configuração de e-mail salva com sucesso!');
                 loadEmailReports();
+                
+                // Dispara sincronização com o Resend
+                fetch('/api/sync-schedules', { method: 'POST' }).catch(err => console.error("Error syncing schedules:", err));
             }
         }
 
         async function deleteEmailReport(id, name) {
             showConfirmModal('Excluir Relatório', `Deseja realmente excluir o relatório "${name}"? O envio automático será cancelado.`, async () => {
+                showAdminToast('⏳ Cancelando agendamentos...');
+                
+                // Desativa no banco primeiro
+                const { error: deactivateError } = await supabaseClient.from('bi_email_reports').update({ is_active: false }).eq('id', id);
+                if (deactivateError) {
+                    alert('Erro ao desativar relatório: ' + deactivateError.message);
+                    return;
+                }
+                
+                // Sincroniza para cancelar todos os agendamentos na API do Resend
+                try {
+                    await fetch('/api/sync-schedules', { method: 'POST' });
+                } catch (syncErr) {
+                    console.error("Erro ao sincronizar cancelamentos:", syncErr);
+                }
+                
+                // Agora sim, deleta do banco
                 const { error } = await supabaseClient.from('bi_email_reports').delete().eq('id', id);
                 if (error) {
                     alert('Erro ao excluir: ' + error.message);
