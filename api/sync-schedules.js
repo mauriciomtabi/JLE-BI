@@ -12,11 +12,11 @@ const FROM_EMAIL = "bi@jletelecom.com.br";
 const BI_URL = "https://jle-bi.vercel.app";
 const SHEETS_URL = "https://docs.google.com/spreadsheets/d/1eEJLaV7D0rthjC5H1MppXyk7dyroqn2h/edit";
 
-async function fetchSupabase(endpoint, method = 'GET', body = null) {
+async function fetchSupabase(endpoint, method = 'GET', body = null, token = null) {
     const url = `${SUPABASE_URL}/rest/v1/${endpoint}`;
     const headers = {
         "apikey": ANON_KEY,
-        "Authorization": `Bearer ${ANON_KEY}`,
+        "Authorization": token || `Bearer ${ANON_KEY}`,
         "Content-Type": "application/json",
         "Prefer": "return=representation"
     };
@@ -326,8 +326,12 @@ module.exports = async (req, res) => {
     }
 
     try {
+        const authHeader = req.headers['authorization'];
+        const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY;
+        const token = authHeader || (serviceRoleKey ? `Bearer ${serviceRoleKey}` : null);
+
         console.log("Iniciando sincronização de agendamentos com Resend...");
-        const reports = await fetchSupabase("bi_email_reports");
+        const reports = await fetchSupabase("bi_email_reports", 'GET', null, token);
         const actions = [];
 
         const mduData = getMduStatusCounts();
@@ -424,7 +428,7 @@ module.exports = async (req, res) => {
                 await fetchSupabase(`bi_email_reports?id=eq.${report.id}`, 'PATCH', {
                     recipients: updatedRecipients,
                     updated_at: new Date().toISOString()
-                });
+                }, token);
             }
         }
 

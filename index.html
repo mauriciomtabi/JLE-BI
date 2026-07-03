@@ -3276,7 +3276,12 @@
             }).join('');
 
             // Sincronização passiva de agendamentos no Resend
-            fetch('/api/sync-schedules', { method: 'POST' }).catch(err => console.error("Error syncing schedules:", err));
+            supabaseClient.auth.getSession().then(({ data }) => {
+                const token = data?.session?.access_token;
+                const headers = {};
+                if (token) headers['Authorization'] = 'Bearer ' + token;
+                fetch('/api/sync-schedules', { method: 'POST', headers }).catch(err => console.error("Error syncing schedules:", err));
+            });
         }
 
         function openEmailReportModal() {
@@ -3421,7 +3426,12 @@
                 loadEmailReports();
                 
                 // Dispara sincronização com o Resend
-                fetch('/api/sync-schedules', { method: 'POST' }).catch(err => console.error("Error syncing schedules:", err));
+                supabaseClient.auth.getSession().then(({ data }) => {
+                    const token = data?.session?.access_token;
+                    const headers = {};
+                    if (token) headers['Authorization'] = 'Bearer ' + token;
+                    fetch('/api/sync-schedules', { method: 'POST', headers }).catch(err => console.error("Error syncing schedules:", err));
+                });
             }
         }
 
@@ -3438,7 +3448,11 @@
                 
                 // Sincroniza para cancelar todos os agendamentos na API do Resend
                 try {
-                    await fetch('/api/sync-schedules', { method: 'POST' });
+                    const { data } = await supabaseClient.auth.getSession();
+                    const token = data?.session?.access_token;
+                    const headers = {};
+                    if (token) headers['Authorization'] = 'Bearer ' + token;
+                    await fetch('/api/sync-schedules', { method: 'POST', headers });
                 } catch (syncErr) {
                     console.error("Erro ao sincronizar cancelamentos:", syncErr);
                 }
