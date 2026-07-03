@@ -1142,9 +1142,14 @@ function updateMduTableHeaders() {
         'node': 'Node',
         'obs_vistoria': 'Obs. Vistoria',
         'obs_baixa': 'Obs. Baixa',
-        'data_adicio': 'Data Adicio.',
         'aging': 'Aging',
-        'data_baixa': 'Data Baixa'
+        'data_adicio': 'Início',
+        'primeira_visita': '1ª Vist.',
+        'segunda_visita': '2ª Vist.',
+        'data_fusao': 'Fusão',
+        'data_baixa': 'Baixa',
+        'data_relatorio': 'Relatório',
+        'data_medicao': 'Medição'
     };
     
     Object.keys(cols).forEach(col => {
@@ -1178,7 +1183,7 @@ function renderMduTable() {
     if (!tbody) return;
 
     if (mduFilteredData.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="12" style="text-align:center; color: var(--text-secondary);">Nenhuma OS MDU encontrada com os filtros selecionados.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="17" style="text-align:center; color: var(--text-secondary);">Nenhuma OS MDU encontrada com os filtros selecionados.</td></tr>';
         document.getElementById('mdu-pagination-info').innerText = '0 registros';
         document.getElementById('mdu-pagination-btns').innerHTML = '';
         return;
@@ -1267,9 +1272,14 @@ function renderMduTable() {
                 <td>${escapeHtml(r.node || '-')}</td>
                 <td title="${escapeHtml(r.obs_vistoria || '')}"><span class="mdu-table-text-truncate" style="max-width: 100px;">${escapeHtml(r.obs_vistoria || '-')}</span></td>
                 <td title="${escapeHtml(r.obs_baixa || '')}"><span class="mdu-table-text-truncate" style="max-width: 100px;">${escapeHtml(r.obs_baixa || '-')}</span></td>
-                <td>${escapeHtml(r.data_adicio || '-')}</td>
                 <td>${escapeHtml(r.aging || '-')}</td>
+                <td>${escapeHtml(r.data_adicio || '-')}</td>
+                <td>${escapeHtml(r.primeira_visita || '-')}</td>
+                <td>${escapeHtml(r.segunda_visita || '-')}</td>
+                <td>${escapeHtml(r.data_fusao || '-')}</td>
                 <td>${escapeHtml(r.data_baixa || '-')}</td>
+                <td>${escapeHtml(r.data_relatorio || '-')}</td>
+                <td>${escapeHtml(r.data_medicao || '-')}</td>
             </tr>
         `;
     });
@@ -1330,7 +1340,7 @@ function exportMduToExcel() {
         "Quem fez Relatório", "Status", "Prog. %", "Cód. Imóvel", 
         "Área", "Node", "Caixa M", "HPs", "Equipe", 
         "Primeira Visita", "Segunda Visita", "Data Interna", 
-        "Data Fusão", "Data Baixa", "Data Relatório", 
+        "Data Fusão", "Data Baixa", "Data Relatório", "Data Medição",
         "Valor Medição", "Valor Repasse", "Obs. Vistoria", "Obs. Baixa",
         "Data Adicio."
     ];
@@ -1356,6 +1366,7 @@ function exportMduToExcel() {
         r.data_fusao || '',
         r.data_baixa || '',
         r.data_relatorio || '',
+        r.data_medicao || '',
         r.valor_medicao || 0,
         r.valor_repasse || 0,
         r.obs_vistoria || '',

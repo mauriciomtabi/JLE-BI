@@ -444,6 +444,7 @@ def process_mdu():
                 "data_fusao": row[30].strip(),
                 "data_baixa": row[32].strip(),
                 "data_relatorio": row[34].strip(),
+                "data_medicao": row[38].strip(),
                 "valor_medicao": clean_currency(row[39]),
                 "valor_repasse": clean_currency(row[45]),
                 "lat": lat,
