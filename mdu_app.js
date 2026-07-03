@@ -1273,13 +1273,13 @@ function renderMduTable() {
                 <td title="${escapeHtml(r.obs_vistoria || '')}"><span class="mdu-table-text-truncate" style="max-width: 100px;">${escapeHtml(r.obs_vistoria || '-')}</span></td>
                 <td title="${escapeHtml(r.obs_baixa || '')}"><span class="mdu-table-text-truncate" style="max-width: 100px;">${escapeHtml(r.obs_baixa || '-')}</span></td>
                 <td>${escapeHtml(r.aging || '-')}</td>
-                <td>${escapeHtml(r.data_adicio || '-')}</td>
-                <td>${escapeHtml(r.primeira_visita || '-')}</td>
-                <td>${escapeHtml(r.segunda_visita || '-')}</td>
-                <td>${escapeHtml(r.data_fusao || '-')}</td>
-                <td>${escapeHtml(r.data_baixa || '-')}</td>
-                <td>${escapeHtml(r.data_relatorio || '-')}</td>
-                <td>${escapeHtml(r.data_medicao || '-')}</td>
+                <td>${escapeHtml(formatMduDateToFull(r.data_adicio, r))}</td>
+                <td>${escapeHtml(formatMduDateToFull(r.primeira_visita, r))}</td>
+                <td>${escapeHtml(formatMduDateToFull(r.segunda_visita, r))}</td>
+                <td>${escapeHtml(formatMduDateToFull(r.data_fusao, r))}</td>
+                <td>${escapeHtml(formatMduDateToFull(r.data_baixa, r))}</td>
+                <td>${escapeHtml(formatMduDateToFull(r.data_relatorio, r))}</td>
+                <td>${escapeHtml(formatMduDateToFull(r.data_medicao, r))}</td>
             </tr>
         `;
     });
@@ -1360,18 +1360,18 @@ function exportMduToExcel() {
         r.caixa_m || '',
         r.hps !== null ? r.hps : '',
         r.equipe || '',
-        r.primeira_visita || '',
-        r.segunda_visita || '',
+        formatMduDateToFull(r.primeira_visita, r),
+        formatMduDateToFull(r.segunda_visita, r),
         r.data_interna || '',
-        r.data_fusao || '',
-        r.data_baixa || '',
-        r.data_relatorio || '',
-        r.data_medicao || '',
+        formatMduDateToFull(r.data_fusao, r),
+        formatMduDateToFull(r.data_baixa, r),
+        formatMduDateToFull(r.data_relatorio, r),
+        formatMduDateToFull(r.data_medicao, r),
         r.valor_medicao || 0,
         r.valor_repasse || 0,
         r.obs_vistoria || '',
         r.obs_baixa || '',
-        r.data_adicio || ''
+        formatMduDateToFull(r.data_adicio, r)
     ]);
 
     const filename = `mdu_export_${new Date().toISOString().slice(0,10)}.xlsx`;
@@ -1401,6 +1401,48 @@ function escapeHtml(str) {
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
+}
+
+function formatMduDateToFull(dateStr, row) {
+    if (!dateStr || dateStr.trim() === '' || dateStr.trim() === '-') return '-';
+    
+    const cleanStr = dateStr.trim();
+    const parts = cleanStr.split('/');
+    
+    // Se já está no formato DD/MM/YYYY
+    if (parts.length === 3) {
+        const day = parts[0].padStart(2, '0');
+        const month = parts[1].padStart(2, '0');
+        const year = parts[2];
+        return `${day}/${month}/${year}`;
+    }
+    
+    // Se está no formato DD/MM ou D/M
+    if (parts.length === 2) {
+        const day = parts[0].padStart(2, '0');
+        const month = parts[1].padStart(2, '0');
+        
+        // Tenta obter o ano a partir de outros campos de data com ano completo
+        let year = 2025; // padrão de fallback
+        
+        const fieldsToTry = [row.primeira_visita, row.segunda_visita, row.data_adicio];
+        for (const f of fieldsToTry) {
+            if (f && f.includes('/')) {
+                const fParts = f.split('/');
+                if (fParts.length === 3) {
+                    const y = parseInt(fParts[2], 10);
+                    if (!isNaN(y) && y > 2000) {
+                        year = y;
+                        break;
+                    }
+                }
+            }
+        }
+        
+        return `${day}/${month}/${year}`;
+    }
+    
+    return cleanStr;
 }
 
 // Expor funções essenciais ao escopo global
