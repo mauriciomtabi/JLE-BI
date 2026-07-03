@@ -146,7 +146,7 @@ function buildEmailHtml(data, reportName) {
         { key: "Não Definido", color: "#004f71" }
     ];
     
-    let statusRows = "";
+    const statusItems = [];
     statusOrder.forEach(s => {
         let cnt = 0;
         Object.keys(data.counts).forEach(k => {
@@ -154,18 +154,8 @@ function buildEmailHtml(data, reportName) {
                 cnt = data.counts[k];
             }
         });
-        
         if (cnt > 0) {
-            statusRows += `
-            <tr>
-                <td style="padding: 12px 20px; border-bottom: 1px solid #f0f0f0; font-size: 14px; color: #2c3e50; font-weight: 500;">
-                    <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:${s.color}; margin-right:8px; vertical-align:middle;"></span>
-                    ${s.key}
-                </td>
-                <td style="padding: 12px 20px; border-bottom: 1px solid #f0f0f0; text-align:center;">
-                    <span style="background:rgba(0,79,113,0.06); color:#004f71; padding:4px 14px; border-radius:20px; font-size:13px; font-weight:700;">${cnt}</span>
-                </td>
-            </tr>`;
+            statusItems.push({ key: s.key, count: cnt, color: s.color });
         }
     });
 
@@ -173,17 +163,25 @@ function buildEmailHtml(data, reportName) {
     Object.keys(data.counts).forEach(k => {
         const isMapped = statusOrder.some(s => matchStatus(s.key, k));
         if (!isMapped && data.counts[k] > 0) {
-            statusRows += `
-            <tr>
-                <td style="padding: 12px 20px; border-bottom: 1px solid #f0f0f0; font-size: 14px; color: #2c3e50; font-weight: 500;">
-                    <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#747d8c; margin-right:8px; vertical-align:middle;"></span>
-                    ${k}
-                </td>
-                <td style="padding: 12px 20px; border-bottom: 1px solid #f0f0f0; text-align:center;">
-                    <span style="background:rgba(116,125,140,0.1); color:#747d8c; padding:4px 14px; border-radius:20px; font-size:13px; font-weight:700;">${data.counts[k]}</span>
-                </td>
-            </tr>`;
+            statusItems.push({ key: k, count: data.counts[k], color: "#747d8c" });
         }
+    });
+
+    // Ordenar do maior para o menor
+    statusItems.sort((a, b) => b.count - a.count);
+
+    let statusRows = "";
+    statusItems.forEach(item => {
+        statusRows += `
+        <tr>
+            <td style="padding: 12px 20px; border-bottom: 1px solid #f0f0f0; font-size: 14px; color: #2c3e50; font-weight: 500;">
+                <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:${item.color}; margin-right:8px; vertical-align:middle;"></span>
+                ${item.key}
+            </td>
+            <td style="padding: 12px 20px; border-bottom: 1px solid #f0f0f0; text-align:center;">
+                <span style="background:rgba(0,79,113,0.06); color:#004f71; padding:4px 14px; border-radius:20px; font-size:13px; font-weight:700;">${item.count}</span>
+            </td>
+        </tr>`;
     });
 
     return `
@@ -241,7 +239,7 @@ function buildEmailHtml(data, reportName) {
                         <!-- TABELA DE STATUS -->
                         <tr>
                             <td style="padding: 28px 40px 10px;">
-                                <div style="font-size:12px; text-transform:uppercase; letter-spacing:1.5px; color:#57606f; font-weight:700; margin-bottom:12px;">Detalhamento das OSs</div>
+                                <div style="font-size:12px; text-transform:uppercase; letter-spacing:1.5px; color:#57606f; font-weight:700; margin-bottom:12px;">Detalhamento por Status</div>
                                 <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border: 1px solid #e1e8ed; border-radius:8px; overflow:hidden;">
                                     <tr style="background:#f8f9fa;">
                                         <th style="padding:12px 20px; text-align:left; font-size:12px; color:#57606f; font-weight:700;">Status</th>

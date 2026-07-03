@@ -162,7 +162,7 @@ function buildEmailHtml(data, reportName) {
         { key: "Não Definido", color: "#004f71" }
     ];
     
-    let statusRows = "";
+    const statusItems = [];
     statusOrder.forEach(s => {
         let cnt = 0;
         Object.keys(data.counts).forEach(k => {
@@ -170,18 +170,8 @@ function buildEmailHtml(data, reportName) {
                 cnt = data.counts[k];
             }
         });
-        
         if (cnt > 0) {
-            statusRows += `
-            <tr>
-                <td style="padding: 12px 20px; border-bottom: 1px solid #f0f0f0; font-size: 14px; color: #2c3e50; font-weight: 500;">
-                    <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:${s.color}; margin-right:8px; vertical-align:middle;"></span>
-                    ${s.key}
-                </td>
-                <td style="padding: 12px 20px; border-bottom: 1px solid #f0f0f0; text-align:center;">
-                    <span style="background:rgba(0,79,113,0.06); color:#004f71; padding:4px 14px; border-radius:20px; font-size:13px; font-weight:700;">${cnt}</span>
-                </td>
-            </tr>`;
+            statusItems.push({ key: s.key, count: cnt, color: s.color });
         }
     });
 
@@ -189,17 +179,25 @@ function buildEmailHtml(data, reportName) {
     Object.keys(data.counts).forEach(k => {
         const isMapped = statusOrder.some(s => matchStatus(s.key, k));
         if (!isMapped && data.counts[k] > 0) {
-            statusRows += `
-            <tr>
-                <td style="padding: 12px 20px; border-bottom: 1px solid #f0f0f0; font-size: 14px; color: #2c3e50; font-weight: 500;">
-                    <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#747d8c; margin-right:8px; vertical-align:middle;"></span>
-                    ${k}
-                </td>
-                <td style="padding: 12px 20px; border-bottom: 1px solid #f0f0f0; text-align:center;">
-                    <span style="background:rgba(116,125,140,0.1); color:#747d8c; padding:4px 14px; border-radius:20px; font-size:13px; font-weight:700;">${data.counts[k]}</span>
-                </td>
-            </tr>`;
+            statusItems.push({ key: k, count: data.counts[k], color: "#747d8c" });
         }
+    });
+
+    // Ordenar do maior para o menor
+    statusItems.sort((a, b) => b.count - a.count);
+
+    let statusRows = "";
+    statusItems.forEach(item => {
+        statusRows += `
+        <tr>
+            <td style="padding: 12px 20px; border-bottom: 1px solid #f0f0f0; font-size: 14px; color: #2c3e50; font-weight: 500;">
+                <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:${item.color}; margin-right:8px; vertical-align:middle;"></span>
+                ${item.key}
+            </td>
+            <td style="padding: 12px 20px; border-bottom: 1px solid #f0f0f0; text-align:center;">
+                <span style="background:rgba(0,79,113,0.06); color:#004f71; padding:4px 14px; border-radius:20px; font-size:13px; font-weight:700;">${item.count}</span>
+            </td>
+        </tr>`;
     });
 
     return `
@@ -257,7 +255,7 @@ function buildEmailHtml(data, reportName) {
                         <!-- TABELA DE STATUS -->
                         <tr>
                             <td style="padding: 28px 40px 10px;">
-                                <div style="font-size:12px; text-transform:uppercase; letter-spacing:1.5px; color:#57606f; font-weight:700; margin-bottom:12px;">Detalhamento das OSs</div>
+                                <div style="font-size:12px; text-transform:uppercase; letter-spacing:1.5px; color:#57606f; font-weight:700; margin-bottom:12px;">Detalhamento por Status</div>
                                 <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border: 1px solid #e1e8ed; border-radius:8px; overflow:hidden;">
                                     <tr style="background:#f8f9fa;">
                                         <th style="padding:12px 20px; text-align:left; font-size:12px; color:#57606f; font-weight:700;">Status</th>
@@ -331,14 +329,10 @@ async function start() {
         for (const config of configs) {
             console.log(`\nVerificando relatório: "${config.report_name}"`);
             
-            // Verificar gatilho de "Enviar Agora"
-            const sendNowTriggered = config.send_now === true;
-            
             // Verificar agendamento de horário
             const configTime = config.schedule_time.substring(0, 5); // formato "08:00"
             const configDays = config.schedule_days || [];
             
-            const isRightTime = currentTime === configTime;
             // Se houver pequenos atrasos no cron, damos uma janela de 14 minutos de tolerância
             const [cHour, cMin] = configTime.split(":").map(Number);
             const [lHour, lMin] = currentTime.split(":").map(Number);
@@ -346,15 +340,14 @@ async function start() {
             const isTimeInWindow = timeDiff >= 0 && timeDiff < 15;
             
             const isRightDay = configDays.includes(currentDay);
-            
-            const shouldSend = sendNowTriggered || (isTimeInWindow && isRightDay);
+            const shouldSend = isTimeInWindow && isRightDay;
             
             if (!shouldSend) {
-                console.log(`- Fora do horário/dia ou sem gatilho ativo. (Config: ${configTime} em [${configDays.join(',')}])`);
+                console.log(`- Fora do horário/dia. (Config: ${configTime} em [${configDays.join(',')}])`);
                 continue;
             }
             
-            console.log(`=> DISPARANDO RELATÓRIO! Motivo: ${sendNowTriggered ? "Botão Enviar Agora" : "Horário agendado"}`);
+            console.log(`=> DISPARANDO RELATÓRIO! Motivo: Horário agendado`);
             console.log(`Destinatários: ${config.recipients.join(", ")}`);
             
             const emailHtml = buildEmailHtml(mduData, config.report_name);
@@ -365,18 +358,6 @@ async function start() {
             
             await sendResendEmail(config.recipients, subject, emailHtml);
             console.log("E-mail disparado com sucesso via Resend!");
-            
-            // Atualizar status no Supabase
-            const updatePayload = {
-                last_sent_at: new Date().toISOString(),
-                updated_at: new Date().toISOString()
-            };
-            if (sendNowTriggered) {
-                updatePayload.send_now = false;
-            }
-            
-            await fetchSupabase(`bi_email_reports?id=eq.${config.id}`, 'PATCH', updatePayload);
-            console.log("Status atualizado no Supabase.");
         }
     } catch (err) {
         console.error("Erro na execução geral:", err);

@@ -1,9 +1,6 @@
 name: Send Automated Email Reports
 
 on:
-  push:
-    branches:
-      - main
   schedule:
     # Roda a cada 10 minutos para verificar se e hora de disparar algum e-mail
     - cron: '*/10 * * * *'

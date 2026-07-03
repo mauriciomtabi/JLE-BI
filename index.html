@@ -3426,6 +3426,16 @@
                     });
                     const result = await response.json();
                     if (result.success) {
+                        // Atualizar last_sent_at e limpar send_now no banco de dados (o usuário logado tem permissão)
+                        await supabaseClient
+                            .from('bi_email_reports')
+                            .update({
+                                send_now: false,
+                                last_sent_at: new Date().toISOString(),
+                                updated_at: new Date().toISOString()
+                            })
+                            .eq('id', id);
+
                         showAdminToast('🚀 E-mail disparado com sucesso! Verifique sua caixa de entrada.');
                         loadEmailReports();
                     } else {
@@ -3442,6 +3452,25 @@
         async function loadAdminPanel() {
             if (!supabaseClient || !currentUserIsAdmin) return;
             loadEmailReports();
+
+            // Limpar eventuais flags send_now travadas em true no banco de dados
+            try {
+                const { data } = await supabaseClient
+                    .from('bi_email_reports')
+                    .select('id')
+                    .eq('send_now', true);
+                if (data && data.length > 0) {
+                    for (const r of data) {
+                        await supabaseClient
+                            .from('bi_email_reports')
+                            .update({ send_now: false })
+                            .eq('id', r.id);
+                    }
+                    setTimeout(loadEmailReports, 500);
+                }
+            } catch (e) {
+                console.error("Erro ao limpar flags do banco:", e);
+            }
 
 
 
