@@ -63,7 +63,7 @@ async function cancelResendEmail(emailId) {
         "Authorization": `Bearer ${RESEND_API_KEY}`
     };
     const res = await fetch(url, {
-        method: 'DELETE',
+        method: 'POST',
         headers: headers
     });
     if (!res.ok) {
