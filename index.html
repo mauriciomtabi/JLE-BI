@@ -3162,16 +3162,21 @@
 
             // Atribuir onclick diretamente (limpa o ouvinte anterior automaticamente)
             yesBtn.onclick = () => {
-                modal.style.display = 'none';
+                modal.classList.remove('active');
+                setTimeout(() => { modal.style.display = 'none'; }, 200);
                 if (onYes) onYes();
             };
 
             noBtn.onclick = () => {
-                modal.style.display = 'none';
+                modal.classList.remove('active');
+                setTimeout(() => { modal.style.display = 'none'; }, 200);
                 if (onNo) onNo();
             };
 
             modal.style.display = 'flex';
+            // Forçar reflow para iniciar transição CSS
+            modal.offsetHeight;
+            modal.classList.add('active');
         }
         window.showConfirmModal = showConfirmModal;
 
