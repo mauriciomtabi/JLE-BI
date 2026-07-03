@@ -1524,11 +1524,11 @@
                     </div>
                 </div>
 
-                <!-- Charts Row 1: 2-Column Grid -->
-                <div style="display: grid; grid-template-columns: 1fr 1.55fr; gap: 20px; margin-bottom: 0; align-items: start; min-width: 0;">
+                <!-- Charts Row 1: 2-Column Grid (Equal Width) -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; align-items: start; min-width: 0;">
                     <!-- Coluna Esquerda: Gráficos -->
                     <div style="display: flex; flex-direction: column; gap: 20px; min-width: 0;">
-                        <!-- Card 1: Distribuição por Status -->
+                        <!-- Card 1: Status em Andamento -->
                         <div class="mdu-card">
                             <div class="mdu-card-title">Status em Andamento</div>
                             <div class="mdu-chart-container" style="height: 250px;">
@@ -1542,19 +1542,12 @@
                                 <canvas id="mdu-chart-cluster"></canvas>
                             </div>
                         </div>
-                        <!-- Card 3: Distribuição por Cidade & Status (Barras Empilhadas) -->
-                        <div class="mdu-card">
-                            <div class="mdu-card-title">Distribuição por Cidade & Status</div>
-                            <div class="mdu-chart-container" style="height: 250px;">
-                                <canvas id="mdu-chart-cidade-status"></canvas>
-                            </div>
-                        </div>
                     </div>
 
                     <!-- Coluna Direita: Desempenho por Equipe & Status -->
-                    <div class="mdu-card" style="display: flex; flex-direction: column; min-width: 0;">
+                    <div class="mdu-card" style="display: flex; flex-direction: column; min-width: 0; height: 100%;">
                         <div class="mdu-card-title">Desempenho por Equipe & Status</div>
-                        <div class="mdu-table-wrapper no-scrollbar" style="border: none; overflow-x: auto; max-height: 1000px; overflow-y: scroll; flex-grow: 1; display: flex; flex-direction: column;">
+                        <div class="mdu-table-wrapper no-scrollbar" style="border: none; overflow-x: auto; max-height: 540px; overflow-y: scroll; flex-grow: 1; display: flex; flex-direction: column;">
                             <table class="mdu-performance-table" style="width: 100%; height: 100%; border-collapse: collapse;">
                                 <thead>
                                     <tr>
@@ -1573,6 +1566,24 @@
                                     <!-- Populated dynamically -->
                                 </tfoot>
                             </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row 1B: Histograms Grid -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; align-items: start; min-width: 0;">
+                    <!-- Card 3: Histograma Tempo de Relatórios em Aberto -->
+                    <div class="mdu-card">
+                        <div class="mdu-card-title">Tempo de Relatórios em Aberto (Aging da Baixa)</div>
+                        <div class="mdu-chart-container" style="height: 250px;">
+                            <canvas id="mdu-chart-aging-relatorios"></canvas>
+                        </div>
+                    </div>
+                    <!-- Card 4: Histograma Tempo de Medições em Aberto -->
+                    <div class="mdu-card">
+                        <div class="mdu-card-title">Tempo de Medições em Aberto (Aging da Baixa)</div>
+                        <div class="mdu-chart-container" style="height: 250px;">
+                            <canvas id="mdu-chart-aging-medicoes"></canvas>
                         </div>
                     </div>
                 </div>

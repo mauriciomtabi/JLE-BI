@@ -38,7 +38,9 @@ let mduDrilldownPeriod = null; // { month: 5, year: 2025, label: "Mai/25" }
 
 const mduCharts = {
     status: null,
-    finalizadosPeriodo: null
+    finalizadosPeriodo: null,
+    agingRelatorios: null,
+    agingMedicoes: null
 };
 
 function initMdu() {
@@ -254,7 +256,8 @@ function renderMduCharts() {
 
     renderStatusChart();
     renderClusterChart();
-    renderCidadeStatusChart();
+    renderAgingRelatoriosChart();
+    renderAgingMedicoesChart();
     renderMduPerformanceTable();
     renderFinalizadosPeriodoChart();
 }
@@ -514,70 +517,79 @@ function toggleMduMacroStatusFilter(macro) {
 }
 window.toggleMduMacroStatusFilter = toggleMduMacroStatusFilter;
 
-function renderCidadeStatusChart() {
-    const canvas = document.getElementById('mdu-chart-cidade-status');
+function renderAgingRelatoriosChart() {
+    const canvas = document.getElementById('mdu-chart-aging-relatorios');
     if (!canvas) return;
 
-    if (mduCharts.cidadeStatus) {
-        mduCharts.cidadeStatus.destroy();
+    if (mduCharts.agingRelatorios) {
+        mduCharts.agingRelatorios.destroy();
     }
 
-    const cityCounts = {};
-    mduFilteredData.forEach(r => {
-        const c = (r.cidade || '').trim();
-        if (!c || c.toUpperCase() === 'NAO DEFINIDA' || c.toUpperCase() === 'SEM CIDADE') return;
-        cityCounts[c] = (cityCounts[c] || 0) + 1;
-    });
-
-    const cities = Object.keys(cityCounts).sort((a, b) => cityCounts[b] - cityCounts[a]);
-
-    const macroColors = {
-        'Finalizado': '#2ed573',
-        'Em Andamento': '#1e90ff',
-        'Cancelado': '#ff4757'
+    const bins = {
+        '0-15 dias': 0,
+        '16-30 dias': 0,
+        '31-60 dias': 0,
+        '61-90 dias': 0,
+        '91-120 dias': 0,
+        '121-180 dias': 0,
+        '180+ dias': 0
     };
 
-    const macroStatuses = ['Finalizado', 'Em Andamento', 'Cancelado'];
-    const datasets = macroStatuses.map(macro => {
-        const dataForStatus = cities.map(city => {
-            return mduFilteredData.filter(r => {
-                const rCity = (r.cidade || '').trim();
-                if (rCity !== city) return false;
+    const today = new Date();
 
-                const status = String(r.status || '').toUpperCase().trim();
-                let rowMacro = 'Em Andamento';
-                if (status === 'FINALIZADO' || status === 'FINALIZADA') {
-                    rowMacro = 'Finalizado';
-                } else if (status === 'CANCELADO' || status === 'CANCELADA') {
-                    rowMacro = 'Cancelado';
-                }
-                return rowMacro === macro;
-            }).length;
-        });
+    mduFilteredData.forEach(r => {
+        const statusUpper = String(r.status || '').toUpperCase().trim();
+        if (statusUpper !== 'RELATÓRIO') return;
 
-        return {
-            label: macro,
-            data: dataForStatus,
-            backgroundColor: macroColors[macro],
-            borderRadius: 2
-        };
-    }).filter(ds => ds.data.some(v => v > 0));
+        const info = parseMduDateBaixa(r);
+        if (!info || !info.dateObj) return;
+
+        const diffTime = Math.max(0, today - info.dateObj);
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+        if (diffDays <= 15) bins['0-15 dias']++;
+        else if (diffDays <= 30) bins['16-30 dias']++;
+        else if (diffDays <= 60) bins['31-60 dias']++;
+        else if (diffDays <= 90) bins['61-90 dias']++;
+        else if (diffDays <= 120) bins['91-120 dias']++;
+        else if (diffDays <= 180) bins['121-180 dias']++;
+        else bins['180+ dias']++;
+    });
+
+    const labels = Object.keys(bins);
+    const data = labels.map(l => bins[l]);
 
     const isDark = !document.body.classList.contains('light-theme');
     const textThemeColor = isDark ? '#b2bec3' : '#636e72';
 
-    mduCharts.cidadeStatus = new Chart(canvas, {
+    mduCharts.agingRelatorios = new Chart(canvas, {
         type: 'bar',
         data: {
-            labels: cities,
-            datasets: datasets
+            labels: labels,
+            datasets: [{
+                data: data,
+                backgroundColor: '#a4b0be',
+                hoverBackgroundColor: '#8f9ca7',
+                borderRadius: 4,
+                borderWidth: 0
+            }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                datalabels: {
+                    display: true,
+                    anchor: 'end',
+                    align: 'top',
+                    color: textThemeColor,
+                    font: { family: 'Outfit', weight: 'bold', size: 9 },
+                    formatter: (value) => value > 0 ? value.toLocaleString('pt-BR') : ''
+                }
+            },
             scales: {
                 x: {
-                    stacked: true,
                     grid: { display: false },
                     ticks: {
                         color: textThemeColor,
@@ -585,54 +597,107 @@ function renderCidadeStatusChart() {
                     }
                 },
                 y: {
-                    stacked: true,
                     grid: { color: getThemeColors().grid },
                     ticks: {
                         color: textThemeColor,
                         font: { family: 'Outfit', size: 9 }
-                    }
+                    },
+                    grace: '15%'
+                }
+            }
+        }
+    });
+}
+
+function renderAgingMedicoesChart() {
+    const canvas = document.getElementById('mdu-chart-aging-medicoes');
+    if (!canvas) return;
+
+    if (mduCharts.agingMedicoes) {
+        mduCharts.agingMedicoes.destroy();
+    }
+
+    const bins = {
+        '0-15 dias': 0,
+        '16-30 dias': 0,
+        '31-60 dias': 0,
+        '61-90 dias': 0,
+        '91-120 dias': 0,
+        '121-180 dias': 0,
+        '180+ dias': 0
+    };
+
+    const today = new Date();
+
+    mduFilteredData.forEach(r => {
+        const statusUpper = String(r.status || '').toUpperCase().trim();
+        if (statusUpper !== 'MEDIÇÃO') return;
+
+        const info = parseMduDateBaixa(r);
+        if (!info || !info.dateObj) return;
+
+        const diffTime = Math.max(0, today - info.dateObj);
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+        if (diffDays <= 15) bins['0-15 dias']++;
+        else if (diffDays <= 30) bins['16-30 dias']++;
+        else if (diffDays <= 60) bins['31-60 dias']++;
+        else if (diffDays <= 90) bins['61-90 dias']++;
+        else if (diffDays <= 120) bins['91-120 dias']++;
+        else if (diffDays <= 180) bins['121-180 dias']++;
+        else bins['180+ dias']++;
+    });
+
+    const labels = Object.keys(bins);
+    const data = labels.map(l => bins[l]);
+
+    const isDark = !document.body.classList.contains('light-theme');
+    const textThemeColor = isDark ? '#b2bec3' : '#636e72';
+
+    mduCharts.agingMedicoes = new Chart(canvas, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: data,
+                backgroundColor: '#ffa502',
+                hoverBackgroundColor: '#e09000',
+                borderRadius: 4,
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                datalabels: {
+                    display: true,
+                    anchor: 'end',
+                    align: 'top',
+                    color: textThemeColor,
+                    font: { family: 'Outfit', weight: 'bold', size: 9 },
+                    formatter: (value) => value > 0 ? value.toLocaleString('pt-BR') : ''
                 }
             },
-            plugins: {
-                legend: {
-                    position: 'bottom',
-                    labels: {
-                        boxWidth: 8,
-                        padding: 8,
+            scales: {
+                x: {
+                    grid: { display: false },
+                    ticks: {
+                        color: textThemeColor,
+                        font: { family: 'Outfit', size: 9 }
+                    }
+                },
+                y: {
+                    grid: { color: getThemeColors().grid },
+                    ticks: {
                         color: textThemeColor,
                         font: { family: 'Outfit', size: 9 }
                     },
-                    onClick: (e, legendItem, legend) => {
-                        const macro = legendItem.text;
-                        toggleMduMacroStatusFilter(macro);
-                    }
-                },
-                datalabels: {
-                    display: (context) => {
-                        const val = context.dataset.data[context.dataIndex];
-                        return val > 2;
-                    },
-                    color: '#ffffff',
-                    font: { weight: 'bold', size: 8 },
-                    formatter: (val) => val.toLocaleString('pt-BR')
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            const val = context.raw || 0;
-                            return ` ${context.dataset.label}: ${val.toLocaleString('pt-BR')}`;
-                        }
-                    }
+                    grace: '15%'
                 }
-            },
-            onClick: (evt, elements) => {
-                if (!elements.length) return;
-                const idx = elements[0].index;
-                const label = cities[idx];
-                toggleMduChartFilter('cidade', label);
             }
-        },
-        plugins: [ChartDataLabels]
+        }
     });
 }
 
