@@ -38,7 +38,7 @@ async function sendResendEmail(to, subject, html) {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     };
     const body = {
-        from: `BI JLE Telecom <${FROM_EMAIL}>`,
+        from: `"BI JLE Telecom" <${FROM_EMAIL}>`,
         to: to,
         subject: subject,
         html: html
@@ -100,9 +100,31 @@ function matchStatus(key, dbKey) {
     return false;
 }
 
+function formatEmailGeneratedAt(str) {
+    if (!str || str === 'N/D') return str;
+    const parts = str.split(' ');
+    if (parts.length >= 1) {
+        const dateParts = parts[0].split('-');
+        if (dateParts.length === 3) {
+            const yyyy = dateParts[0];
+            const mm = dateParts[1];
+            const dd = dateParts[2];
+            let timeStr = "";
+            if (parts.length >= 2) {
+                const timeParts = parts[1].split(':');
+                if (timeParts.length >= 2) {
+                    timeStr = " " + timeParts[0] + ":" + timeParts[1];
+                }
+            }
+            return `${dd}/${mm}/${yyyy}${timeStr}`;
+        }
+    }
+    return str;
+}
+
 function buildEmailHtml(data, reportName) {
     const total = data.total;
-    const generatedAt = data.generated_at;
+    const generatedAt = formatEmailGeneratedAt(data.generated_at);
 
     // Fuso horário fixo de Brasília (UTC-3)
     const utcDate = new Date();
@@ -333,7 +355,7 @@ module.exports = async (req, res) => {
                 const dayStr = String(localDate.getUTCDate()).padStart(2, '0');
                 const monthStr = String(localDate.getUTCMonth() + 1).padStart(2, '0');
                 const yearStr = localDate.getUTCFullYear();
-                const subject = `[BI JLE] ${config.report_name} - ${dayStr}/${monthStr}/${yearStr}`;
+                const subject = `${config.report_name} - ${dayStr}/${monthStr}/${yearStr}`;
                 
                 const cleanRecipients = (config.recipients || []).filter(e => !e.startsWith('__sched:'));
                 await sendResendEmail(cleanRecipients, subject, emailHtml);

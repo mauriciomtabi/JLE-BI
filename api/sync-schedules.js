@@ -40,7 +40,7 @@ async function scheduleResendEmail(to, subject, html, scheduledAtISO) {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     };
     const body = {
-        from: `BI JLE Telecom <${FROM_EMAIL}>`,
+        from: `"BI JLE Telecom" <${FROM_EMAIL}>`,
         to: to,
         subject: subject,
         html: html,
@@ -121,9 +121,31 @@ function matchStatus(key, dbKey) {
     return false;
 }
 
+function formatEmailGeneratedAt(str) {
+    if (!str || str === 'N/D') return str;
+    const parts = str.split(' ');
+    if (parts.length >= 1) {
+        const dateParts = parts[0].split('-');
+        if (dateParts.length === 3) {
+            const yyyy = dateParts[0];
+            const mm = dateParts[1];
+            const dd = dateParts[2];
+            let timeStr = "";
+            if (parts.length >= 2) {
+                const timeParts = parts[1].split(':');
+                if (timeParts.length >= 2) {
+                    timeStr = " " + timeParts[0] + ":" + timeParts[1];
+                }
+            }
+            return `${dd}/${mm}/${yyyy}${timeStr}`;
+        }
+    }
+    return str;
+}
+
 function buildEmailHtml(data, reportName, executionDateStr) {
     const total = data.total;
-    const generatedAt = data.generated_at;
+    const generatedAt = formatEmailGeneratedAt(data.generated_at);
     
     let medicaoCount = 0;
     let relatorioCount = 0;
@@ -405,7 +427,7 @@ module.exports = async (req, res) => {
                         const dateFormatted = `${day}/${month}/${year} às ${hours}:${minutes}`;
 
                         const emailHtml = buildEmailHtml(mduData, report.report_name, dateFormatted);
-                        const subject = `[BI JLE] ${report.report_name} - ${day}/${month}/${year}`;
+                        const subject = `${report.report_name} - ${day}/${month}/${year}`;
 
                         const resendId = await scheduleResendEmail(cleanEmails, subject, emailHtml, targetIso);
                         const newSchedRaw = `__sched:${resendId}:${targetIso}`;

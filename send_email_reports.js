@@ -48,7 +48,7 @@ async function sendResendEmail(to, subject, html) {
     };
     
     const body = {
-        from: `BI JLE Telecom <${FROM_EMAIL}>`,
+        from: `"BI JLE Telecom" <${FROM_EMAIL}>`,
         to: to,
         subject: subject,
         html: html
@@ -124,8 +124,30 @@ function matchStatus(key, dbKey) {
     return false;
 }
 
+function formatEmailGeneratedAt(str) {
+    if (!str || str === 'N/D') return str;
+    const parts = str.split(' ');
+    if (parts.length >= 1) {
+        const dateParts = parts[0].split('-');
+        if (dateParts.length === 3) {
+            const yyyy = dateParts[0];
+            const mm = dateParts[1];
+            const dd = dateParts[2];
+            let timeStr = "";
+            if (parts.length >= 2) {
+                const timeParts = parts[1].split(':');
+                if (timeParts.length >= 2) {
+                    timeStr = " " + timeParts[0] + ":" + timeParts[1];
+                }
+            }
+            return `${dd}/${mm}/${yyyy}${timeStr}`;
+        }
+    }
+    return str;
+}
+
 function buildEmailHtml(data, reportName) {
-    const generatedAt = data.generated_at;
+    const generatedAt = formatEmailGeneratedAt(data.generated_at);
     const total = data.total;
     
     // Fuso horário fixo de Brasília (UTC-3)
@@ -354,7 +376,7 @@ async function start() {
             const dayStr = String(localDate.getUTCDate()).padStart(2, '0');
             const monthStr = String(localDate.getUTCMonth() + 1).padStart(2, '0');
             const yearStr = localDate.getUTCFullYear();
-            const subject = `[BI JLE] ${config.report_name} - ${dayStr}/${monthStr}/${yearStr}`;
+            const subject = `${config.report_name} - ${dayStr}/${monthStr}/${yearStr}`;
             
             await sendResendEmail(config.recipients, subject, emailHtml);
             console.log("E-mail disparado com sucesso via Resend!");
