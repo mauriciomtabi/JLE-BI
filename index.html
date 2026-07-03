@@ -5616,28 +5616,28 @@
                         installToast.classList.remove('show');
                     };
                 }, 800);
-                
-                // Remover Service Worker e limpar Cache Storage para evitar problemas de cache agressivo no BI
-                if ('serviceWorker' in navigator) {
-                    navigator.serviceWorker.getRegistrations().then(registrations => {
-                        for (let registration of registrations) {
-                            registration.unregister().then(() => {
-                                console.log('Service Worker antigo removido para evitar problemas de cache.');
-                            });
-                        }
-                    });
-                    if ('caches' in window) {
-                        caches.keys().then(names => {
-                            for (let name of names) {
-                                caches.delete(name);
-                            }
-                        }).then(() => {
-                            console.log('Cache Storage limpo com sucesso.');
-                        });
-                    }
-                }
             }
         });
+
+        // Remover Service Worker e limpar Cache Storage para evitar problemas de cache agressivo no BI
+        if ('serviceWorker' in navigator && typeof navigator.serviceWorker.getRegistrations === 'function') {
+            navigator.serviceWorker.getRegistrations().then(registrations => {
+                for (let registration of registrations) {
+                    registration.unregister().then(() => {
+                        console.log('Service Worker antigo removido para evitar problemas de cache.');
+                    });
+                }
+            });
+            if ('caches' in window) {
+                caches.keys().then(names => {
+                    for (let name of names) {
+                        caches.delete(name);
+                    }
+                }).then(() => {
+                    console.log('Cache Storage limpo com sucesso.');
+                });
+            }
+        }
 
         function checkIosInstallation() {
             const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
