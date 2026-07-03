@@ -459,7 +459,7 @@
                                         <th>Horário</th>
                                         <th>Dias</th>
                                         <th>Último Envio</th>
-                                        <th>Status</th>
+                                        <th>Envio</th>
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
@@ -548,7 +548,7 @@
                     <div onclick="toggleEmailActive(this)" id="email-active-toggle" data-active="true" style="cursor:pointer; width:48px; height:26px; background:#2ecc71; border-radius:13px; position:relative; transition:background 0.3s;">
                         <div style="position:absolute; width:20px; height:20px; background:white; border-radius:50%; top:3px; right:3px; transition:right 0.3s; box-shadow:0 2px 4px rgba(0,0,0,0.2);"></div>
                     </div>
-                    <span style="font-size:14px; color:var(--text-primary);" id="email-active-label">Ativo — envio habilitado</span>
+                    <span style="font-size:14px; color:var(--text-primary);" id="email-active-label">Agendado — envio automático ativo</span>
                 </div>
 
                 <!-- Botões -->
@@ -3248,8 +3248,8 @@
                 const lastSent = r.last_sent_at ? new Date(r.last_sent_at).toLocaleString('pt-BR') : '—';
                 const activeStyle = r.is_active
                     ? 'background:rgba(46,204,113,0.12); color:#2ecc71; border:1px solid rgba(46,204,113,0.3);'
-                    : 'background:rgba(255,255,255,0.05); color:var(--text-secondary); border:1px solid var(--border-color);';
-                const activeLabel = r.is_active ? '● Ativo' : '○ Inativo';
+                    : 'background:rgba(243,159,24,0.12); color:#f39f18; border:1px solid rgba(243,159,24,0.3);';
+                const activeLabel = r.is_active ? '● Agendado' : '○ Manual';
                 const recipientsTrunc = recipients.length > 40 ? recipients.substring(0, 40) + '…' : recipients;
                 return `<tr>
                     <td style="font-weight:600;">${r.report_name}</td>
@@ -3321,7 +3321,7 @@
             toggle.dataset.active = active ? 'true' : 'false';
             toggle.style.background = active ? '#2ecc71' : 'rgba(255,255,255,0.15)';
             knob.style.right = active ? '3px' : 'calc(100% - 23px)';
-            document.getElementById('email-active-label').textContent = active ? 'Ativo — envio habilitado' : 'Inativo — envio suspenso';
+            document.getElementById('email-active-label').textContent = active ? 'Agendado — envio automático ativo' : 'Manual — envio apenas sob demanda';
         }
 
         function editEmailReport(id) {
