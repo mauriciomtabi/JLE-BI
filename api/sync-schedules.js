@@ -36,7 +36,8 @@ async function scheduleResendEmail(to, subject, html, scheduledAtISO) {
     const url = "https://api.resend.com/emails";
     const headers = {
         "Authorization": `Bearer ${RESEND_API_KEY}`,
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     };
     const body = {
         from: `BI JLE Telecom <${FROM_EMAIL}>`,
@@ -60,7 +61,8 @@ async function scheduleResendEmail(to, subject, html, scheduledAtISO) {
 async function cancelResendEmail(emailId) {
     const url = `https://api.resend.com/emails/${emailId}/cancel`;
     const headers = {
-        "Authorization": `Bearer ${RESEND_API_KEY}`
+        "Authorization": `Bearer ${RESEND_API_KEY}`,
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     };
     const res = await fetch(url, {
         method: 'POST',

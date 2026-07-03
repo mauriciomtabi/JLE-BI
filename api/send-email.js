@@ -35,7 +35,8 @@ async function sendResendEmail(to, subject, html) {
     const url = "https://api.resend.com/emails";
     const headers = {
         "Authorization": `Bearer ${RESEND_API_KEY}`,
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     };
     const body = {
         from: `BI JLE Telecom <${FROM_EMAIL}>`,
