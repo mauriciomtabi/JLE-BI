@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-07-06 13:00:14
+// Dados MDU Compactados - Gerado em: 2026-07-06 14:00:13
 window.MDU_METADATA = {
-    "generated_at": "2026-07-06 13:00:14",
+    "generated_at": "2026-07-06 14:00:13",
     "total_rows": 5085,
-    "geocoded_new": 0
+    "geocoded_new": 6
 };
 
 window.MDU_DATA = [
@@ -153151,10 +153151,10 @@ window.MDU_DATA = [
         "endereco": "R AIMORE 58",
         "cidade": "NOVO HAMBURGO",
         "cluster": "NHO",
-        "aging": "21",
+        "aging": "OK",
         "relatorio_por": "",
-        "status": "Baixa",
-        "prog": 63.0,
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "610380159",
         "area": "IDLAA",
         "node": "IDLAG",
@@ -153165,7 +153165,7 @@ window.MDU_DATA = [
         "segunda_visita": "",
         "data_interna": "10/06",
         "data_fusao": "10/06",
-        "data_baixa": "",
+        "data_baixa": "06/07",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
@@ -153174,7 +153174,7 @@ window.MDU_DATA = [
         "lng": -51.1351247,
         "geocodificado": true,
         "obs_baixa": "",
-        "obs_vistoria": "ADEQUADO, AGUARDANDO SAR PARA UMA FIBRA",
+        "obs_vistoria": "ADEQUADO",
         "data_adicio": "15/06/2026"
     },
     {
@@ -157426,7 +157426,7 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2504895",
-        "endereco": "",
+        "endereco": "R MORRETES 88 BLOCO A",
         "cidade": "NÃO DEFINIDA",
         "cluster": "",
         "aging": "",
