@@ -379,6 +379,7 @@ module.exports = async (req, res) => {
 
             let updatedRecipients = [...cleanEmails];
             let shouldUpdateDb = false;
+            let latestSentDate = null;
 
             if (report.is_active && cleanEmails.length > 0 && report.schedule_days && report.schedule_days.length > 0) {
                 const nextDates = getNextExecutionDates(report.schedule_time, report.schedule_days, 4);
@@ -410,6 +411,14 @@ module.exports = async (req, res) => {
                         if (isFuture) {
                             await cancelResendEmail(sched.id);
                             actions.push({ report: report.report_name, action: "cancel", id: sched.id, date: sched.dateStr });
+                        } else {
+                            // Este agendamento foi no passado (já enviado pelo Resend), atualiza a data de último envio
+                            const currentLastSent = report.last_sent_at ? new Date(report.last_sent_at).getTime() : 0;
+                            if (schedTime > currentLastSent) {
+                                if (!latestSentDate || schedTime > new Date(latestSentDate).getTime()) {
+                                    latestSentDate = sched.dateStr;
+                                }
+                            }
                         }
                         shouldUpdateDb = true;
                     }
@@ -452,10 +461,14 @@ module.exports = async (req, res) => {
             }
 
             if (shouldUpdateDb) {
-                await fetchSupabase(`bi_email_reports?id=eq.${report.id}`, 'PATCH', {
+                const patchData = {
                     recipients: updatedRecipients,
                     updated_at: new Date().toISOString()
-                }, token);
+                };
+                if (latestSentDate) {
+                    patchData.last_sent_at = latestSentDate;
+                }
+                await fetchSupabase(`bi_email_reports?id=eq.${report.id}`, 'PATCH', patchData, token);
             }
         }
 
