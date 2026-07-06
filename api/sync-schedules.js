@@ -367,11 +367,13 @@ module.exports = async (req, res) => {
             const existingScheds = currentRecipients
                 .filter(email => email.startsWith('__sched:'))
                 .map(item => {
-                    const parts = item.split(':');
+                    const schedParts = item.split('::');
+                    const mainParts = schedParts[0].split(':');
                     return {
                         raw: item,
-                        id: parts[1],
-                        dateStr: parts.slice(2).join(':')
+                        id: mainParts[1],
+                        dateStr: mainParts.slice(2).join(':'),
+                        generatedAt: schedParts[1] || ''
                     };
                 });
 
@@ -398,7 +400,8 @@ module.exports = async (req, res) => {
 
                     const isStillValid = isFuture && 
                                          localTimeStr === report.schedule_time && 
-                                         report.schedule_days.includes(localDayStr);
+                                         report.schedule_days.includes(localDayStr) &&
+                                         sched.generatedAt === mduData.generated_at;
 
                     if (isStillValid) {
                         activeScheds.push(sched);
@@ -430,7 +433,7 @@ module.exports = async (req, res) => {
                         const subject = `${report.report_name} - ${day}/${month}/${year}`;
 
                         const resendId = await scheduleResendEmail(cleanEmails, subject, emailHtml, targetIso);
-                        const newSchedRaw = `__sched:${resendId}:${targetIso}`;
+                        const newSchedRaw = `__sched:${resendId}:${targetIso}::${mduData.generated_at}`;
                         
                         updatedRecipients.push(newSchedRaw);
                         shouldUpdateDb = true;
