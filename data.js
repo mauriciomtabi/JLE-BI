@@ -1,5 +1,5 @@
 ﻿window.CASH_FLOW_DATA = {
-    "generated_at":  "2026-07-06 15:03:20",
+    "generated_at":  "2026-07-07 10:03:58",
     "categories_origin":  {
                               "entradas":  [
 
@@ -120086,7 +120086,7 @@
                              "uf":  "RS",
                              "fluxo":  "Saída",
                              "categoria":  "Taxas e Tarifas",
-                             "descricao":  "Pagamento ATR SC JCS 45",
+                             "descricao":  "Pagamento ATR SCCNG01",
                              "valor_nominal":  108.39,
                              "valor_liquido":  -108.39,
                              "meio_pagamento":  "Pix",
