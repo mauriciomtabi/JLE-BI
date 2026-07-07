@@ -490,12 +490,22 @@ module.exports = async (req, res) => {
                             const emailHtml = buildEmailHtml(mduData, report.report_name, dateFormatted);
                             const subject = `${report.report_name} - ${day}/${month}/${year}`;
 
-                            const resendId = await scheduleResendEmail(cleanEmails, subject, emailHtml, targetIso);
-                            const newSchedRaw = `__sched:${resendId}:${targetIso}::${mduData.generated_at}`;
-                            
-                            updatedRecipients.push(newSchedRaw);
-                            shouldUpdateDb = true;
-                            actions.push({ report: report.report_name, action: "schedule", id: resendId, date: targetIso });
+                            try {
+                                const resendId = await scheduleResendEmail(cleanEmails, subject, emailHtml, targetIso);
+                                const newSchedRaw = `__sched:${resendId}:${targetIso}::${mduData.generated_at}`;
+                                updatedRecipients.push(newSchedRaw);
+                                shouldUpdateDb = true;
+                                actions.push({ report: report.report_name, action: "schedule", id: resendId, date: targetIso });
+                            } catch (schedErr) {
+                                console.error(`Failed to schedule email for ${targetIso}:`, schedErr);
+                                actions.push({ report: report.report_name, action: "schedule_failed", date: targetIso, error: schedErr.message });
+                                // Se for erro de limite de cota do Resend (429), não quebra o script todo, permitindo limpar os cancelados do banco
+                                if (schedErr.message.includes("quota") || schedErr.message.includes("429") || schedErr.message.includes("Limit")) {
+                                    console.warn(`[QUOTA] Limite de envio do Resend excedido para o agendamento de ${targetIso}. Pulando agendamento...`);
+                                } else {
+                                    throw schedErr;
+                                }
+                            }
                         }
                     }
                 } else {
