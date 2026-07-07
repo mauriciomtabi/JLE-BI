@@ -357,7 +357,7 @@ module.exports = async (req, res) => {
                 const yearStr = localDate.getUTCFullYear();
                 const subject = `${config.report_name} - ${dayStr}/${monthStr}/${yearStr}`;
                 
-                const cleanRecipients = (config.recipients || []).filter(e => !e.startsWith('__sched:'));
+                const cleanRecipients = (config.recipients || []).filter(e => !e.startsWith('__sched:') && !e.startsWith('__lock:'));
                 await sendResendEmail(cleanRecipients, subject, emailHtml);
                 sentReports.push(config.report_name);
             }

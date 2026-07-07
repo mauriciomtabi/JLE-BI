@@ -370,7 +370,7 @@ async function start() {
             }
             
             console.log(`=> DISPARANDO RELATÓRIO! Motivo: Horário agendado`);
-            console.log(`Destinatários: ${config.recipients.join(", ")}`);
+            console.log(`Destinatários: ${config.recipients.filter(e => !e.startsWith("__sched:") && !e.startsWith("__lock:")).join(", ")}`);
             
             const emailHtml = buildEmailHtml(mduData, config.report_name);
             const dayStr = String(localDate.getUTCDate()).padStart(2, '0');
@@ -378,7 +378,8 @@ async function start() {
             const yearStr = localDate.getUTCFullYear();
             const subject = `${config.report_name} - ${dayStr}/${monthStr}/${yearStr}`;
             
-            await sendResendEmail(config.recipients, subject, emailHtml);
+            const cleanRecipients = (config.recipients || []).filter(e => !e.startsWith("__sched:") && !e.startsWith("__lock:"));
+            await sendResendEmail(cleanRecipients, subject, emailHtml);
             console.log("E-mail disparado com sucesso via Resend!");
         }
     } catch (err) {
