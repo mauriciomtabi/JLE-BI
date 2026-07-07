@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-07-07 14:00:15
+// Dados MDU Compactados - Gerado em: 2026-07-07 15:00:19
 window.MDU_METADATA = {
-    "generated_at": "2026-07-07 14:00:15",
+    "generated_at": "2026-07-07 15:00:19",
     "total_rows": 5097,
     "geocoded_new": 0
 };
@@ -116206,7 +116206,7 @@ window.MDU_DATA = [
         "cod_imovel": "610692580",
         "area": "VJDAB",
         "node": "JITAG",
-        "caixa_m": "",
+        "caixa_m": "VJDAB.102.M080",
         "hps": 9,
         "equipe": "Murilo Didio",
         "primeira_visita": "03/03/2026",
@@ -157523,9 +157523,9 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "OK",
-        "relatorio_por": "",
-        "status": "Relatório",
-        "prog": 75.0,
+        "relatorio_por": "PATRÍCIA REIS",
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610477131",
         "area": "BFMAA",
         "node": "FLOAM",
@@ -157537,7 +157537,7 @@ window.MDU_DATA = [
         "data_interna": "24/06",
         "data_fusao": "24/06",
         "data_baixa": "06/07",
-        "data_relatorio": "",
+        "data_relatorio": "07/07",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
