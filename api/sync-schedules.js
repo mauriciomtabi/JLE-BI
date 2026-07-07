@@ -363,104 +363,153 @@ module.exports = async (req, res) => {
         for (const report of reports) {
             const currentRecipients = report.recipients || [];
             
-            const cleanEmails = currentRecipients.filter(email => !email.startsWith('__sched:'));
-            const existingScheds = currentRecipients
-                .filter(email => email.startsWith('__sched:'))
-                .map(item => {
-                    const schedParts = item.split('::');
-                    const mainParts = schedParts[0].split(':');
-                    return {
-                        raw: item,
-                        id: mainParts[1],
-                        dateStr: mainParts.slice(2).join(':'),
-                        generatedAt: schedParts[1] || ''
-                    };
-                });
+            // 1. Verificar se há lock ativo para este relatório (expira em 2 minutos)
+            const activeLock = currentRecipients.find(email => email.startsWith('__lock:sync:'));
+            if (activeLock) {
+                const lockTimeStr = activeLock.split('__lock:sync:')[1];
+                const lockTime = new Date(lockTimeStr).getTime();
+                if (Date.now() - lockTime < 2 * 60 * 1000) {
+                    console.log(`[LOCK] Relatório "${report.report_name}" está sendo sincronizado por outra requisição (lock ativo desde ${lockTimeStr}). Pulando...`);
+                    actions.push({ report: report.report_name, action: "skip_locked" });
+                    continue;
+                }
+            }
 
-            let updatedRecipients = [...cleanEmails];
-            let shouldUpdateDb = false;
-            let latestSentDate = null;
+            // 2. Tentar adquirir o lock via CAS no updated_at
+            const lockTimestamp = new Date().toISOString();
+            const lockRecipients = [...currentRecipients.filter(email => !email.startsWith('__lock:sync:')), `__lock:sync:${lockTimestamp}`];
+            
+            console.log(`[LOCK] Tentando adquirir lock para "${report.report_name}"...`);
+            let lockResult;
+            try {
+                lockResult = await fetchSupabase(
+                    `bi_email_reports?id=eq.${report.id}&updated_at=eq.${encodeURIComponent(report.updated_at)}`,
+                    'PATCH',
+                    {
+                        recipients: lockRecipients,
+                        updated_at: lockTimestamp
+                    },
+                    token
+                );
+            } catch (lockErr) {
+                console.error(`[LOCK] Erro ao tentar adquirir lock para "${report.report_name}":`, lockErr);
+                continue;
+            }
 
-            if (report.is_active && cleanEmails.length > 0 && report.schedule_days && report.schedule_days.length > 0) {
-                const nextDates = getNextExecutionDates(report.schedule_time, report.schedule_days, 4);
-                const activeScheds = [];
+            if (!lockResult || lockResult.length === 0) {
+                console.log(`[LOCK] Concorrência detectada: não foi possível adquirir o lock para "${report.report_name}". Pulando...`);
+                actions.push({ report: report.report_name, action: "skip_lock_failed" });
+                continue;
+            }
 
-                for (const sched of existingScheds) {
-                    const schedTime = new Date(sched.dateStr).getTime();
-                    const isFuture = schedTime > Date.now();
-                    
-                    const schedDateObj = new Date(schedTime);
-                    const brOffset = -3 * 60 * 60 * 1000;
-                    const localSchedDate = new Date(schedDateObj.getTime() + brOffset);
-                    const localHour = String(localSchedDate.getUTCHours()).padStart(2, '0');
-                    const localMin = String(localSchedDate.getUTCMinutes()).padStart(2, '0');
-                    const localTimeStr = `${localHour}:${localMin}`;
-                    
-                    const daysMap = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-                    const localDayStr = daysMap[localSchedDate.getUTCDay()];
+            console.log(`[LOCK] Lock adquirido com sucesso para "${report.report_name}".`);
 
-                    const isStillValid = isFuture && 
-                                         localTimeStr === report.schedule_time && 
-                                         report.schedule_days.includes(localDayStr) &&
-                                         sched.generatedAt === mduData.generated_at;
+            let successFlag = false;
+            try {
+                const cleanEmails = currentRecipients.filter(email => !email.startsWith('__sched:') && !email.startsWith('__lock:'));
+                const existingScheds = currentRecipients
+                    .filter(email => email.startsWith('__sched:'))
+                    .map(item => {
+                        const schedParts = item.split('::');
+                        const mainParts = schedParts[0].split(':');
+                        return {
+                            raw: item,
+                            id: mainParts[1],
+                            dateStr: mainParts.slice(2).join(':'),
+                            generatedAt: schedParts[1] || ''
+                        };
+                    });
 
-                    if (isStillValid) {
-                        activeScheds.push(sched);
-                        updatedRecipients.push(sched.raw);
-                    } else {
-                        if (isFuture) {
-                            await cancelResendEmail(sched.id);
-                            actions.push({ report: report.report_name, action: "cancel", id: sched.id, date: sched.dateStr });
+                let updatedRecipients = [...cleanEmails];
+                let shouldUpdateDb = false;
+                let latestSentDate = null;
+
+                if (report.is_active && cleanEmails.length > 0 && report.schedule_days && report.schedule_days.length > 0) {
+                    const nextDates = getNextExecutionDates(report.schedule_time, report.schedule_days, 1);
+                    const activeScheds = [];
+                    const seenDates = new Set();
+
+                    for (const sched of existingScheds) {
+                        const schedTime = new Date(sched.dateStr).getTime();
+                        const isFuture = schedTime > Date.now();
+                        
+                        const schedDateObj = new Date(schedTime);
+                        const brOffset = -3 * 60 * 60 * 1000;
+                        const localSchedDate = new Date(schedDateObj.getTime() + brOffset);
+                        const localHour = String(localSchedDate.getUTCHours()).padStart(2, '0');
+                        const localMin = String(localSchedDate.getUTCMinutes()).padStart(2, '0');
+                        const localTimeStr = `${localHour}:${localMin}`;
+                        
+                        const daysMap = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+                        const localDayStr = daysMap[localSchedDate.getUTCDay()];
+
+                        const isDuplicate = seenDates.has(sched.dateStr);
+                        const isWantedDate = nextDates.some(d => d.toISOString() === sched.dateStr);
+                        const isStillValid = isFuture && 
+                                             localTimeStr === report.schedule_time && 
+                                             report.schedule_days.includes(localDayStr) &&
+                                             sched.generatedAt === mduData.generated_at &&
+                                             isWantedDate &&
+                                             !isDuplicate;
+
+                        if (isStillValid) {
+                            activeScheds.push(sched);
+                            updatedRecipients.push(sched.raw);
+                            seenDates.add(sched.dateStr);
                         } else {
-                            // Este agendamento foi no passado (já enviado pelo Resend), atualiza a data de último envio
-                            const currentLastSent = report.last_sent_at ? new Date(report.last_sent_at).getTime() : 0;
-                            if (schedTime > currentLastSent) {
-                                if (!latestSentDate || schedTime > new Date(latestSentDate).getTime()) {
-                                    latestSentDate = sched.dateStr;
+                            if (isFuture) {
+                                await cancelResendEmail(sched.id);
+                                actions.push({ report: report.report_name, action: isDuplicate ? "cancel_duplicate" : "cancel", id: sched.id, date: sched.dateStr });
+                            } else {
+                                // Este agendamento foi no passado (já enviado pelo Resend), atualiza a data de último envio
+                                const currentLastSent = report.last_sent_at ? new Date(report.last_sent_at).getTime() : 0;
+                                if (schedTime > currentLastSent) {
+                                    if (!latestSentDate || schedTime > new Date(latestSentDate).getTime()) {
+                                        latestSentDate = sched.dateStr;
+                                    }
                                 }
                             }
+                            shouldUpdateDb = true;
+                        }
+                    }
+
+                    for (const targetDate of nextDates) {
+                        const targetIso = targetDate.toISOString();
+                        const alreadyScheduled = activeScheds.some(s => s.dateStr === targetIso);
+
+                        if (!alreadyScheduled) {
+                            const brOffset = -3 * 60 * 60 * 1000;
+                            const localTargetDate = new Date(targetDate.getTime() + brOffset);
+                            const day = String(localTargetDate.getUTCDate()).padStart(2, '0');
+                            const month = String(localTargetDate.getUTCMonth() + 1).padStart(2, '0');
+                            const year = localTargetDate.getUTCFullYear();
+                            const hours = String(localTargetDate.getUTCHours()).padStart(2, '0');
+                            const minutes = String(localTargetDate.getUTCMinutes()).padStart(2, '0');
+                            const dateFormatted = `${day}/${month}/${year} às ${hours}:${minutes}`;
+
+                            const emailHtml = buildEmailHtml(mduData, report.report_name, dateFormatted);
+                            const subject = `${report.report_name} - ${day}/${month}/${year}`;
+
+                            const resendId = await scheduleResendEmail(cleanEmails, subject, emailHtml, targetIso);
+                            const newSchedRaw = `__sched:${resendId}:${targetIso}::${mduData.generated_at}`;
+                            
+                            updatedRecipients.push(newSchedRaw);
+                            shouldUpdateDb = true;
+                            actions.push({ report: report.report_name, action: "schedule", id: resendId, date: targetIso });
+                        }
+                    }
+                } else {
+                    for (const sched of existingScheds) {
+                        const schedTime = new Date(sched.dateStr).getTime();
+                        if (schedTime > Date.now()) {
+                            await cancelResendEmail(sched.id);
+                            actions.push({ report: report.report_name, action: "cancel_inactive", id: sched.id, date: sched.dateStr });
                         }
                         shouldUpdateDb = true;
                     }
                 }
 
-                for (const targetDate of nextDates) {
-                    const targetIso = targetDate.toISOString();
-                    const alreadyScheduled = activeScheds.some(s => s.dateStr === targetIso);
-
-                    if (!alreadyScheduled) {
-                        const brOffset = -3 * 60 * 60 * 1000;
-                        const localTargetDate = new Date(targetDate.getTime() + brOffset);
-                        const day = String(localTargetDate.getUTCDate()).padStart(2, '0');
-                        const month = String(localTargetDate.getUTCMonth() + 1).padStart(2, '0');
-                        const year = localTargetDate.getUTCFullYear();
-                        const hours = String(localTargetDate.getUTCHours()).padStart(2, '0');
-                        const minutes = String(localTargetDate.getUTCMinutes()).padStart(2, '0');
-                        const dateFormatted = `${day}/${month}/${year} às ${hours}:${minutes}`;
-
-                        const emailHtml = buildEmailHtml(mduData, report.report_name, dateFormatted);
-                        const subject = `${report.report_name} - ${day}/${month}/${year}`;
-
-                        const resendId = await scheduleResendEmail(cleanEmails, subject, emailHtml, targetIso);
-                        const newSchedRaw = `__sched:${resendId}:${targetIso}::${mduData.generated_at}`;
-                        
-                        updatedRecipients.push(newSchedRaw);
-                        shouldUpdateDb = true;
-                        actions.push({ report: report.report_name, action: "schedule", id: resendId, date: targetIso });
-                    }
-                }
-            } else {
-                for (const sched of existingScheds) {
-                    const schedTime = new Date(sched.dateStr).getTime();
-                    if (schedTime > Date.now()) {
-                        await cancelResendEmail(sched.id);
-                        actions.push({ report: report.report_name, action: "cancel_inactive", id: sched.id, date: sched.dateStr });
-                    }
-                    shouldUpdateDb = true;
-                }
-            }
-
-            if (shouldUpdateDb) {
+                // Salvar as mudanças e liberar o lock (substituindo a lista por updatedRecipients que não tem o lock)
                 const patchData = {
                     recipients: updatedRecipients,
                     updated_at: new Date().toISOString()
@@ -468,7 +517,26 @@ module.exports = async (req, res) => {
                 if (latestSentDate) {
                     patchData.last_sent_at = latestSentDate;
                 }
-                await fetchSupabase(`bi_email_reports?id=eq.${report.id}`, 'PATCH', patchData, token);
+                
+                // Usamos o CAS novamente para garantir que ninguém editou a config em paralelo
+                await fetchSupabase(`bi_email_reports?id=eq.${report.id}&updated_at=eq.${encodeURIComponent(lockTimestamp)}`, 'PATCH', patchData, token);
+                successFlag = true;
+                console.log(`[LOCK] Agendamentos atualizados e lock liberado com sucesso para "${report.report_name}".`);
+
+            } finally {
+                if (!successFlag) {
+                    // Em caso de falha, libera o lock restaurando a lista original sem o marcador de lock
+                    try {
+                        const originalWithoutLock = lockRecipients.filter(email => !email.startsWith('__lock:sync:'));
+                        await fetchSupabase(`bi_email_reports?id=eq.${report.id}`, 'PATCH', {
+                            recipients: originalWithoutLock,
+                            updated_at: new Date().toISOString()
+                        }, token);
+                        console.log(`[LOCK] Processamento falhou ou foi abortado. Lock liberado emergencialmente para "${report.report_name}".`);
+                    } catch (releaseErr) {
+                        console.error(`[LOCK] Erro crítico ao liberar lock emergencial de "${report.report_name}":`, releaseErr);
+                    }
+                }
             }
         }
 
