@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-07-08 08:09:43
+// Dados MDU Compactados - Gerado em: 2026-07-08 09:00:20
 window.MDU_METADATA = {
-    "generated_at": "2026-07-08 08:09:43",
+    "generated_at": "2026-07-08 09:00:20",
     "total_rows": 5097,
     "geocoded_new": 0
 };
@@ -141651,13 +141651,13 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "OK",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER (OK)",
         "status": "Medição",
         "prog": 88.0,
         "cod_imovel": "610450964",
         "area": "JBOAA",
         "node": "PETAC",
-        "caixa_m": "",
+        "caixa_m": "JBOAA 042.M030",
         "hps": 18,
         "equipe": "Guilherme Albrecht",
         "primeira_visita": "03/03/2026",
@@ -141682,13 +141682,13 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "OK",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER (OK)",
         "status": "Medição",
         "prog": 88.0,
         "cod_imovel": "610450957",
         "area": "JBOAA",
         "node": "PETAC",
-        "caixa_m": "",
+        "caixa_m": "JBOAA 042.M030",
         "hps": 20,
         "equipe": "Guilherme Albrecht",
         "primeira_visita": "03/03/2026",
