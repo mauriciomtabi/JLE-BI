@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-07-08 13:00:10
+// Dados MDU Compactados - Gerado em: 2026-07-08 14:00:10
 window.MDU_METADATA = {
-    "generated_at": "2026-07-08 13:00:10",
+    "generated_at": "2026-07-08 14:00:10",
     "total_rows": 5121,
     "geocoded_new": 0
 };
@@ -141713,7 +141713,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "OK",
-        "relatorio_por": "JENIFFER",
+        "relatorio_por": "JENIFFER (OK)",
         "status": "Medição",
         "prog": 88.0,
         "cod_imovel": "611100528",
@@ -141727,7 +141727,7 @@ window.MDU_DATA = [
         "data_interna": "01/04",
         "data_fusao": "01/04",
         "data_baixa": "01/04",
-        "data_relatorio": "25/04",
+        "data_relatorio": "08/07",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 520.0,
@@ -141744,13 +141744,13 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "OK",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER (OK)",
         "status": "Medição",
         "prog": 88.0,
         "cod_imovel": "700077598",
         "area": "NAVAB",
         "node": "NAVAD F3",
-        "caixa_m": "",
+        "caixa_m": "NAVAB.125.M040",
         "hps": 16,
         "equipe": "Abraão Rodrigues",
         "primeira_visita": "01/04/2026",
@@ -141758,7 +141758,7 @@ window.MDU_DATA = [
         "data_interna": "01/04",
         "data_fusao": "01/04",
         "data_baixa": "01/04",
-        "data_relatorio": "25/04",
+        "data_relatorio": "08/07",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 520.0,
