@@ -1,7 +1,7 @@
 // api/force-resync-email.js
 // Endpoint serverless chamado pelo script ETL local (update_mdu.ps1) logo após o deploy de novos dados.
 // Força a re-sincronização dos e-mails agendados no Resend com os dados mais recentes do MDU.
-// Aceita chamadas GET ou POST e não exige autenticação (pois apenas cancela/recria e-mails futuros internos).
+// Aceita chamadas GET ou POST e não exige autenticação de usuário (usa service role key do Supabase).
 
 const fs = require('fs');
 const path = require('path');
@@ -13,14 +13,21 @@ const FROM_EMAIL = "bi@jletelecom.com.br";
 const BI_URL = "https://jle-bi.vercel.app";
 const SHEETS_URL = "https://docs.google.com/spreadsheets/d/1eEJLaV7D0rthjC5H1MppXyk7dyroqn2h/edit";
 
-async function fetchSupabase(endpoint, method = 'GET', body = null) {
-    const url = `${SUPABASE_URL}/rest/v1/${endpoint}`;
-    const headers = {
+function getSupabaseAuthHeaders() {
+    // Use service role key for full RLS bypass - necessary for server-to-server calls
+    const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY;
+    const authToken = serviceKey ? `Bearer ${serviceKey}` : `Bearer ${ANON_KEY}`;
+    return {
         "apikey": ANON_KEY,
-        "Authorization": `Bearer ${ANON_KEY}`,
+        "Authorization": authToken,
         "Content-Type": "application/json",
         "Prefer": "return=representation"
     };
+}
+
+async function fetchSupabase(endpoint, method = 'GET', body = null) {
+    const url = `${SUPABASE_URL}/rest/v1/${endpoint}`;
+    const headers = getSupabaseAuthHeaders();
     const options = { method, headers };
     if (body) options.body = JSON.stringify(body);
     const res = await fetch(url, options);
