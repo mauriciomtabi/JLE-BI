@@ -20,6 +20,7 @@ param(
 
 $PSScriptRoot_Resolved = Split-Path -Parent -Path $MyInvocation.MyCommand.Definition
 $MduJsPath = Join-Path $PSScriptRoot_Resolved "mdu_data.js"
+$StateFilePath = Join-Path $PSScriptRoot_Resolved "resend_schedule_state.json"
 
 # ============================================================
 # FUNÇÕES AUXILIARES
@@ -90,8 +91,11 @@ function Build-EmailHtml($data, $reportName, $executionDateStr) {
     $medicaoCount = 0
     $relatorioCount = 0
     foreach ($key in $data.counts.Keys) {
-        if ($key -match "medi[cç][aã]o") { $medicaoCount += $data.counts[$key] }
-        if ($key -match "relat[oó]rio") { $relatorioCount += $data.counts[$key] }
+        $keyLower = $key.ToLower()
+        # Match "medição", "medicao", "medic" variants
+        if ($keyLower -like "*medi*") { $medicaoCount += $data.counts[$key] }
+        # Match "relatório", "relatorio" variants
+        if ($keyLower -like "*relat*rio*") { $relatorioCount += $data.counts[$key] }
     }
     
     # Construir linhas de status
@@ -261,6 +265,27 @@ function Invoke-SupabaseGet($endpoint) {
     return Invoke-RestMethod "$SupabaseUrl/rest/v1/$endpoint" -Headers $headers -Method GET
 }
 
+function Read-LocalState {
+    if (Test-Path $StateFilePath) {
+        try {
+            return Get-Content $StateFilePath -Raw -Encoding UTF8 | ConvertFrom-Json
+        } catch { }
+    }
+    return $null
+}
+
+function Write-LocalState($state) {
+    $state | ConvertTo-Json -Depth 5 | Set-Content $StateFilePath -Encoding UTF8
+}
+
+function Get-ResendEmailStatus($emailId) {
+    $headers = @{ "Authorization" = "Bearer $ResendApiKey" }
+    try {
+        $r = Invoke-RestMethod "https://api.resend.com/emails/$emailId" -Headers $headers -Method GET -ErrorAction Stop
+        return $r.last_event
+    } catch { return $null }
+}
+
 function Invoke-SupabasePatch($endpoint, $body) {
     $headers = @{
         "apikey" = $AnonKey
@@ -369,25 +394,64 @@ try {
     exit 1
 }
 
+# Carregar estado local
+$localState = Read-LocalState
+if ($null -eq $localState) { $localState = @{} }
+
 foreach ($report in $reports) {
     Write-Output ""
     Write-Output "--- Processando: $($report.report_name) ---"
     
     $recipients = $report.recipients
     $cleanEmails = $recipients | Where-Object { -not $_.StartsWith('__sched:') -and -not $_.StartsWith('__lock:') }
-    $existingScheds = $recipients | Where-Object { $_.StartsWith('__sched:') } | ForEach-Object {
-        $schedParts = $_ -split '::'
-        $mainParts = $schedParts[0] -split ':'
-        @{
-            raw = $_
-            id = $mainParts[1]
-            dateStr = ($mainParts | Select-Object -Skip 2) -join ':'
-            generatedAt = if ($schedParts.Count -gt 1) { $schedParts[1] } else { '' }
+    
+    # Construir lista de agendamentos existentes a partir do Supabase
+    $existingScheds = [System.Collections.ArrayList]@()
+    if ($recipients) {
+        $recipients | Where-Object { $_.StartsWith('__sched:') } | ForEach-Object {
+            $schedParts = $_ -split '::'
+            $mainParts = $schedParts[0] -split ':'
+            [void]$existingScheds.Add(@{
+                raw = $_
+                id = $mainParts[1]
+                dateStr = ($mainParts | Select-Object -Skip 2) -join ':'
+                generatedAt = if ($schedParts.Count -gt 1) { $schedParts[1] } else { '' }
+                source = "supabase"
+            })
+        }
+    }
+    
+    # Mesclar com estado local (caso o Supabase não tenha sido atualizado devido a RLS)
+    $reportKeyName = $report.report_name
+    # Handle both string keys or PSObjects by converting key
+    $localReportState = $null
+    if ($localState.PSObject -and $localState.PSObject.Properties[$reportKeyName]) {
+        $localReportState = $localState."$reportKeyName"
+    }
+    
+    if ($null -ne $localReportState) {
+        $alreadyInScheds = $false
+        foreach ($s in $existingScheds) {
+            if ($s.id -eq $localReportState.id) {
+                $alreadyInScheds = $true
+                break
+            }
+        }
+        if (-not $alreadyInScheds) {
+            Write-Output "  [INFO] Encontrado agendamento no estado local: $($localReportState.id) para $($localReportState.dateStr)"
+            $localSchedRaw = "__sched:$($localReportState.id):$($localReportState.dateStr)::$($localReportState.generatedAt)"
+            [void]$existingScheds.Add(@{
+                raw = $localSchedRaw
+                id = $localReportState.id
+                dateStr = $localReportState.dateStr
+                generatedAt = $localReportState.generatedAt
+                source = "local_state"
+            })
         }
     }
     
     Write-Output "  Destinatários: $($cleanEmails -join ', ')"
-    Write-Output "  Agendamentos existentes: $($existingScheds.Count)"
+    Write-Output "  Agendamentos a analisar: $($existingScheds.Count)"
     
     # 3. Calcular próxima data de envio
     $nextDate = Get-NextSendDate $report.schedule_time $report.schedule_days
@@ -411,15 +475,36 @@ foreach ($report in $reports) {
             $isFresh = $sched.generatedAt -eq $mduData.generated_at
             
             if ($isFuture -and $isCorrectDate -and $isFresh) {
-                Write-Output "  [OK] Agendamento já está atualizado para $($sched.dateStr). Sem ação necessária."
-                [void]$freshScheds.Add($sched.raw)
+                # Confirmar se ainda está ativo no Resend
+                Write-Output "  Verificando status de $($sched.id) no Resend..."
+                $resendStatus = Get-ResendEmailStatus $sched.id
+                if ($resendStatus -eq "scheduled") {
+                    Write-Output "  [OK] Agendamento já está atualizado e ativo no Resend para $($sched.dateStr)."
+                    [void]$freshScheds.Add($sched.raw)
+                } else {
+                    Write-Output "  [STALE] Agendamento $($sched.id) não está mais ativo no Resend (Status: $resendStatus). Ignorando."
+                    if ($null -ne $localReportState -and $localReportState.id -eq $sched.id) {
+                        $localState.Remove($reportKeyName)
+                        Write-LocalState $localState
+                    }
+                }
             } elseif ($isFuture) {
                 $reason = if (-not $isFresh) { "dados desatualizados (stored=$($sched.generatedAt) vs current=$($mduData.generated_at))" } elseif (-not $isCorrectDate) { "data incorreta" } else { "desconhecido" }
                 Write-Output "  [CANCELAR] $($sched.dateStr) - Motivo: $reason"
                 Cancel-ResendEmail $sched.id
+                
+                # Remover do estado local se for o mesmo id
+                if ($null -ne $localReportState -and $localReportState.id -eq $sched.id) {
+                    $localState.Remove($reportKeyName)
+                    Write-LocalState $localState
+                }
             } else {
                 Write-Output "  [PASSADO] Agendamento $($sched.dateStr) já foi enviado. Ignorando token antigo."
-                # Token de passado - não adicionar à lista limpa (será removido)
+                # Limpar do estado local se já passou
+                if ($null -ne $localReportState -and $localReportState.id -eq $sched.id) {
+                    $localState.Remove($reportKeyName)
+                    Write-LocalState $localState
+                }
             }
         } catch {
             Write-Warning "  Erro ao processar agendamento '$($sched.raw)': $_"
@@ -446,6 +531,15 @@ foreach ($report in $reports) {
             $newSchedRaw = "__sched:${newId}:${nextDateIso}::$($mduData.generated_at)"
             [void]$freshScheds.Add($newSchedRaw)
             Write-Output "  [OK] Novo agendamento criado: $newId"
+            
+            # Salvar no estado local
+            $localState."$reportKeyName" = @{
+                id = $newId
+                dateStr = $nextDateIso
+                generatedAt = $mduData.generated_at
+            }
+            Write-LocalState $localState
+            
         } catch {
             if ($_.Exception.Message -match "429|quota|Limit") {
                 Write-Warning "  [QUOTA] Limite diário do Resend excedido. Será reagendado após 21h (BRT)."
