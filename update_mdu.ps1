@@ -66,44 +66,33 @@ if (Test-Path $gitPath) {
         & $gitPath push origin main
         Write-Output "Dados do MDU publicados com sucesso no repositorio remoto!"
 
-        # 4. Aguardar o deploy da Vercel e forcar re-sincronizacao dos e-mails agendados
+        # 4. Forçar re-sincronização IMEDIATA dos e-mails agendados no Resend com dados frescos
+        # Nota: O script local tem acesso direto ao mdu_data.js, então NÃO precisa esperar o deploy da Vercel
         Write-Output ""
-        Write-Output "Aguardando 90 segundos para o deploy automatico da Vercel completar..."
-        Start-Sleep -Seconds 90
-
-        Write-Output "Acionando re-sincronizacao de e-mails agendados com os dados mais recentes do MDU..."
+        Write-Output "Forçando re-sincronizacao dos e-mails agendados com os dados mais recentes..."
         try {
-            $resyncUrl = "https://jle-bi.vercel.app/api/force-resync-email"
-            $response = Invoke-RestMethod -Uri $resyncUrl -Method GET -TimeoutSec 60 -ErrorAction Stop
-            if ($response.success -eq $true) {
-                Write-Output "Re-sincronizacao de e-mails concluida com sucesso!"
-                Write-Output "  Dados referentes a: $($response.generatedAt)"
-                foreach ($r in $response.results) {
-                    Write-Output "  - [$($r.report)] Acao: $($r.action)"
-                }
+            $resyncScript = Join-Path $PSScriptRoot "resync_mdu_email.ps1"
+            if (Test-Path $resyncScript) {
+                & $resyncScript
             } else {
-                Write-Warning "Re-sincronizacao retornou falha: $($response | ConvertTo-Json -Compress)"
+                Write-Warning "Script de resync nao encontrado em: $resyncScript"
             }
         } catch {
-            Write-Warning "Falha ao acionar re-sincronizacao de e-mails: $($_.Exception.Message)"
-            Write-Warning "Os e-mails serao atualizados na proxima abertura do painel BI."
+            Write-Warning "Falha na re-sincronizacao de e-mails: $($_.Exception.Message)"
+            Write-Warning "Os e-mails serao sincronizados na proxima abertura do painel BI."
         }
     } else {
-        Write-Output "Sem novas alteracoes nos dados do MDU. Verificando se os e-mails agendados precisam ser atualizados..."
-        # Mesmo sem mudancas nos dados brutos, garantir que o e-mail de amanha esta sincronizado
+        Write-Output "Sem novas alteracoes nos dados do MDU. Verificando se os e-mails agendados precisam de re-sincronizacao..."
+        # Mesmo sem mudancas nos dados brutos, garantir que o e-mail de amanha está fresco
         try {
-            $resyncUrl = "https://jle-bi.vercel.app/api/force-resync-email"
-            $response = Invoke-RestMethod -Uri $resyncUrl -Method GET -TimeoutSec 60 -ErrorAction Stop
-            if ($response.success -eq $true) {
-                $hasAction = ($response.results | Where-Object { $_.action -ne "already_fresh" }).Count -gt 0
-                if ($hasAction) {
-                    Write-Output "E-mails reagendados com dados existentes."
-                } else {
-                    Write-Output "E-mails ja estao sincronizados. Nenhuma publicacao necessaria."
-                }
+            $resyncScript = Join-Path $PSScriptRoot "resync_mdu_email.ps1"
+            if (Test-Path $resyncScript) {
+                & $resyncScript
+            } else {
+                Write-Warning "Script de resync nao encontrado em: $resyncScript"
             }
         } catch {
-            Write-Warning "Falha ao verificar sincronizacao de e-mails: $($_.Exception.Message)"
+            Write-Warning "Falha na verificacao de sincronizacao de e-mails: $($_.Exception.Message)"
         }
     }
 } else {
