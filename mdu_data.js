@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-07-09 13:00:17
+// Dados MDU Compactados - Gerado em: 2026-07-09 14:00:15
 window.MDU_METADATA = {
-    "generated_at": "2026-07-09 13:00:17",
+    "generated_at": "2026-07-09 14:00:15",
     "total_rows": 5134,
-    "geocoded_new": 0
+    "geocoded_new": 1
 };
 
 window.MDU_DATA = [
@@ -28352,7 +28352,7 @@ window.MDU_DATA = [
         "cod_imovel": "610483144",
         "area": "BVSAA",
         "node": "PDRAD",
-        "caixa_m": "",
+        "caixa_m": "BVSAA.013.M030",
         "hps": 6,
         "equipe": "David Salomão",
         "primeira_visita": "29/04/2026",
@@ -28360,7 +28360,7 @@ window.MDU_DATA = [
         "data_interna": "29/04",
         "data_fusao": "29/04",
         "data_baixa": "04/05",
-        "data_relatorio": "13/05",
+        "data_relatorio": "09/07",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 520.0,
@@ -158945,34 +158945,34 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2504944",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "R HOFFMANN 543",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
+        "aging": "0",
         "relatorio_por": "",
-        "status": "",
-        "prog": 0,
+        "status": "Fusão",
+        "prog": 50.0,
         "cod_imovel": "",
         "area": "",
         "node": "",
         "caixa_m": "",
-        "hps": null,
-        "equipe": "",
-        "primeira_visita": "",
+        "hps": 8,
+        "equipe": "David Salomão",
+        "primeira_visita": "04/07/2026",
         "segunda_visita": "",
-        "data_interna": "",
+        "data_interna": "04/07",
         "data_fusao": "",
         "data_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0187408,
+        "lng": -51.2118637,
+        "geocodificado": true,
         "obs_baixa": "",
-        "obs_vistoria": "",
-        "data_adicio": ""
+        "obs_vistoria": "AGUARDANDO SAR",
+        "data_adicio": "09/07/2026"
     },
     {
         "os": "RS.CLR.PRD.2504945",
