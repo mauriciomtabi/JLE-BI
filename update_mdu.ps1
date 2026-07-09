@@ -65,35 +65,9 @@ if (Test-Path $gitPath) {
         & $gitPath commit -m "data(mdu): atualizacao automatica da base MDU via Google Sheets"
         & $gitPath push origin main
         Write-Output "Dados do MDU publicados com sucesso no repositorio remoto!"
-
-        # 4. Forçar re-sincronização IMEDIATA dos e-mails agendados no Resend com dados frescos
-        # Nota: O script local tem acesso direto ao mdu_data.js, então NÃO precisa esperar o deploy da Vercel
-        Write-Output ""
-        Write-Output "Forçando re-sincronizacao dos e-mails agendados com os dados mais recentes..."
-        try {
-            $resyncScript = Join-Path $PSScriptRoot "resync_mdu_email.ps1"
-            if (Test-Path $resyncScript) {
-                & $resyncScript
-            } else {
-                Write-Warning "Script de resync nao encontrado em: $resyncScript"
-            }
-        } catch {
-            Write-Warning "Falha na re-sincronizacao de e-mails: $($_.Exception.Message)"
-            Write-Warning "Os e-mails serao sincronizados na proxima abertura do painel BI."
-        }
+        Write-Output "Nota: o re-sincronizacao de e-mails roda 1x/dia via tarefa 'JLE_Telecom_MDU_EmailResync'."
     } else {
-        Write-Output "Sem novas alteracoes nos dados do MDU. Verificando se os e-mails agendados precisam de re-sincronizacao..."
-        # Mesmo sem mudancas nos dados brutos, garantir que o e-mail de amanha está fresco
-        try {
-            $resyncScript = Join-Path $PSScriptRoot "resync_mdu_email.ps1"
-            if (Test-Path $resyncScript) {
-                & $resyncScript
-            } else {
-                Write-Warning "Script de resync nao encontrado em: $resyncScript"
-            }
-        } catch {
-            Write-Warning "Falha na verificacao de sincronizacao de e-mails: $($_.Exception.Message)"
-        }
+        Write-Output "Sem novas alteracoes nos dados do MDU. Nenhuma acao necessaria."
     }
 } else {
     Write-Warning "Git executavel nao encontrado em '$gitPath'. Nao foi possivel enviar para o repositorio remoto."

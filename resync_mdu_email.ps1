@@ -443,7 +443,8 @@ foreach ($report in $reports) {
     }
     
     # Mesclar com estado local (caso o Supabase não tenha sido atualizado devido a RLS)
-    $reportKeyName = $report.report_name
+    # Normalize key to ASCII to avoid encoding issues with accented chars in JSON keys
+    $reportKeyName = $report.report_name.Normalize([System.Text.NormalizationForm]::FormD) -replace '\p{M}', '' -replace 'ª','a' -replace 'º','o'
     # Handle both string keys or PSObjects by converting key
     $localReportState = $null
     if ($localState.PSObject -and $localState.PSObject.Properties[$reportKeyName]) {
