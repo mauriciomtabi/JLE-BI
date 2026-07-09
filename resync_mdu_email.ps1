@@ -84,6 +84,16 @@ function Format-GeneratedAt($str) {
     return $str
 }
 
+function Match-StatusName($dbKey, $orderKey) {
+    # Strip accents
+    $db = $dbKey.ToLower().Normalize([System.Text.NormalizationForm]::FormD) -replace '\p{M}', ''
+    $ord = $orderKey.ToLower().Normalize([System.Text.NormalizationForm]::FormD) -replace '\p{M}', ''
+    # Normalize ordinal symbols
+    $db = $db -replace 'ª', 'a' -replace 'º', 'o' -replace '1ª', '1a' -replace '2ª', '2a'
+    $ord = $ord -replace 'ª', 'a' -replace 'º', 'o' -replace '1ª', '1a' -replace '2ª', '2a'
+    return $db -eq $ord
+}
+
 function Build-EmailHtml($data, $reportName, $executionDateStr) {
     $total = $data.total
     $generatedAt = Format-GeneratedAt($data.generated_at)
@@ -92,55 +102,66 @@ function Build-EmailHtml($data, $reportName, $executionDateStr) {
     $relatorioCount = 0
     foreach ($key in $data.counts.Keys) {
         $keyLower = $key.ToLower()
-        # Match "medição", "medicao", "medic" variants
         if ($keyLower -like "*medi*") { $medicaoCount += $data.counts[$key] }
-        # Match "relatório", "relatorio" variants
         if ($keyLower -like "*relat*rio*") { $relatorioCount += $data.counts[$key] }
     }
     
-    # Construir linhas de status
+    # statusOrder using 100% ASCII keys to avoid script encoding corruption
     $statusOrder = @(
-        "1ª Vistoria", "2ª Vistoria", "Projeto", "Fusão",
-        "Medição", "Relatório", "Baixa", "Não Definido"
+        "1a Vistoria", "2a Vistoria", "Projeto", "Fusao",
+        "Medicao", "Relatorio", "Baixa", "Nao Definido"
     )
+    
+    # Display names map using HTML entities to display accents perfectly
+    $statusDisplayNames = @{
+        "1a Vistoria"  = "1&ordf; Vistoria"
+        "2a Vistoria"  = "2&ordf; Vistoria"
+        "Projeto"      = "Projeto"
+        "Fusao"        = "Fus&atilde;o"
+        "Medicao"      = "Medi&ccedil;&atilde;o"
+        "Relatorio"    = "Relat&oacute;rio"
+        "Baixa"        = "Baixa"
+        "Nao Definido" = "N&atilde;o Definido"
+    }
     
     $statusItems = [System.Collections.ArrayList]@()
     
     foreach ($s in $statusOrder) {
         $cnt = 0
         foreach ($k in $data.counts.Keys) {
-            $kNorm = $k.ToLower().Normalize([System.Text.NormalizationForm]::FormD) -replace '\p{M}', ''
-            $sNorm = $s.ToLower().Normalize([System.Text.NormalizationForm]::FormD) -replace '\p{M}', ''
-            if ($kNorm -eq $sNorm) { $cnt = $data.counts[$k] }
+            if (Match-StatusName $k $s) { $cnt = $data.counts[$k] }
         }
         if ($cnt -gt 0) {
             [void]$statusItems.Add(@{ key = $s; count = $cnt })
         }
     }
     
-    # Adicionar status não mapeados
+    # Add unmapped statuses
     foreach ($k in $data.counts.Keys) {
-        $kNorm = $k.ToLower().Normalize([System.Text.NormalizationForm]::FormD) -replace '\p{M}', ''
         $isMapped = $false
         foreach ($s in $statusOrder) {
-            $sNorm = $s.ToLower().Normalize([System.Text.NormalizationForm]::FormD) -replace '\p{M}', ''
-            if ($kNorm -eq $sNorm) { $isMapped = $true; break }
+            if (Match-StatusName $k $s) { $isMapped = $true; break }
         }
         if (-not $isMapped -and $data.counts[$k] -gt 0) {
             [void]$statusItems.Add(@{ key = $k; count = $data.counts[$k] })
         }
     }
     
-    # Ordenar por contagem decrescente
+    # Sort descending
     $statusItems = $statusItems | Sort-Object { -$_.count }
     
     $statusRows = ""
     foreach ($item in $statusItems) {
+        $displayName = $statusDisplayNames[$item.key]
+        if ($null -eq $displayName) {
+            # Escape XML/HTML special characters in fallback keys
+            $displayName = $item.key -replace '&', '&amp;' -replace '<', '&lt;' -replace '>', '&gt;'
+        }
         $statusRows += @"
         <tr>
             <td style="padding: 12px 20px; border-bottom: 1px solid #f0f0f0; font-size: 14px; color: #2c3e50; font-weight: 500;">
                 <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#004f71; margin-right:8px; vertical-align:middle;"></span>
-                $($item.key)
+                $displayName
             </td>
             <td style="padding: 12px 20px; border-bottom: 1px solid #f0f0f0; text-align:center;">
                 <span style="background:rgba(0,79,113,0.06); color:#004f71; padding:4px 14px; border-radius:20px; font-size:13px; font-weight:700;">$($item.count)</span>
@@ -168,19 +189,19 @@ function Build-EmailHtml($data, $reportName, $executionDateStr) {
                         <table width="100%" cellpadding="0" cellspacing="0" border="0">
                             <tr>
                                 <td colspan="3" style="background: rgba(0,79,113,0.04); border-radius: 12px; border: 1px solid rgba(0,79,113,0.08); text-align: center; padding: 24px;">
-                                    <div style="font-size: 11px; color: #747d8c; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; margin-bottom: 6px;">ORDENS DE SERVIÇO EM ANDAMENTO</div>
+                                    <div style="font-size: 11px; color: #747d8c; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; margin-bottom: 6px;">ORDENS DE SERVI&Ccedil;O EM ANDAMENTO</div>
                                     <div style="font-size: 42px; font-weight: 800; color: #004f71; line-height: 1;">$total</div>
                                 </td>
                             </tr>
                             <tr style="height: 16px;"><td colspan="3"></td></tr>
                             <tr>
                                 <td width="48%" style="background: rgba(243,159,24,0.06); border-radius: 10px; border-left: 4px solid #f39f18; padding: 16px 20px; text-align: center; border-top: 1px solid rgba(243,159,24,0.1); border-right: 1px solid rgba(243,159,24,0.1); border-bottom: 1px solid rgba(243,159,24,0.1);">
-                                    <div style="font-size: 11px; color: #d37f00; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; margin-bottom: 4px;">Medição</div>
+                                    <div style="font-size: 11px; color: #d37f00; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; margin-bottom: 4px;">Medi&ccedil;&atilde;o</div>
                                     <div style="font-size: 28px; font-weight: 800; color: #b86d00;">$medicaoCount</div>
                                 </td>
                                 <td width="4%"></td>
                                 <td width="48%" style="background: rgba(0,119,170,0.06); border-radius: 10px; border-left: 4px solid #0077aa; padding: 16px 20px; text-align: center; border-top: 1px solid rgba(0,119,170,0.1); border-right: 1px solid rgba(0,119,170,0.1); border-bottom: 1px solid rgba(0,119,170,0.1);">
-                                    <div style="font-size: 11px; color: #0077aa; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; margin-bottom: 4px;">Relatórios</div>
+                                    <div style="font-size: 11px; color: #0077aa; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; margin-bottom: 4px;">Relat&oacute;rios</div>
                                     <div style="font-size: 28px; font-weight: 800; color: #005f87;">$relatorioCount</div>
                                 </td>
                             </tr>
