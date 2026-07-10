@@ -1981,7 +1981,7 @@ function renderRelatoriosResponsavel() {
     const responsibleTotals = {};
     let grandTotal = 0;
     const todayCutoff = new Date();
-    todayCutoff.setHours(23, 59, 59, 999); // Permitir registros de hoje completo
+    todayCutoff.setHours(23, 59, 59, 999);
 
     // 1. Filtrar registros que possuem data_relatorio preenchida e válida
     mduFilteredData.forEach(r => {
@@ -1989,9 +1989,10 @@ function renderRelatoriosResponsavel() {
         
         const dateStr = formatMduDateToFull(r.data_relatorio, r);
         const dateObj = parseMduDateString(dateStr);
-        if (!dateObj || dateObj > todayCutoff) return; // Ignorar datas futuras (erros de digitação/futuro no excel)
+        if (!dateObj || dateObj > todayCutoff) return; // Ignorar datas futuras
 
         const resp = normalizeMduReportResponsible(r.relatorio_por);
+        if (resp === 'Sem Responsável') return; // <-- REMOVER "Sem Responsável" dos indicadores
 
         reportData.push({
             dateStr: dateStr,
@@ -2003,24 +2004,15 @@ function renderRelatoriosResponsavel() {
         grandTotal++;
     });
 
-    // Calcular dias úteis no período
-    let minDate = null;
-    let maxDate = null;
+    // Calcular dias úteis com atividade no período (apenas dias úteis que tiveram algum relatório feito)
+    const uniqueActiveDays = new Set();
     reportData.forEach(item => {
-        if (!minDate || item.dateObj < minDate) minDate = item.dateObj;
-        if (!maxDate || item.dateObj > maxDate) maxDate = item.dateObj;
+        const dayOfWeek = item.dateObj.getDay();
+        if (dayOfWeek !== 0 && dayOfWeek !== 6) { // Ignorar FDS
+            uniqueActiveDays.add(item.dateStr);
+        }
     });
-
-    let totalWeekdays = 0;
-    if (minDate && maxDate) {
-        totalWeekdays = getMduWeekdayCount(minDate, maxDate);
-    }
-
-    // Atualizar subtítulo de média diária geral (sem contar FDS)
-    if (mediaSub) {
-        const overallAvg = totalWeekdays > 0 ? (grandTotal / totalWeekdays).toFixed(1) : '0.0';
-        mediaSub.innerText = `Média: ${overallAvg} relatórios/dia (Sem FDS)`;
-    }
+    const totalWeekdays = uniqueActiveDays.size;
 
     // 2. Renderizar Tabela de Ranking (Direita)
     const sortedResponsibles = Object.keys(responsibleTotals).sort((a, b) => responsibleTotals[b] - responsibleTotals[a]);
@@ -2065,17 +2057,29 @@ function renderRelatoriosResponsavel() {
 
     // Se não há dados, retornar
     if (lastActiveDates.length === 0) {
+        if (mediaSub) mediaSub.innerText = '';
         return;
     }
 
-    // Cores premium para cada responsável principal
+    // Atualizar subtítulo de média diária do gráfico com base nos 15 dias exibidos
+    if (mediaSub) {
+        let reportsInChart = 0;
+        reportData.forEach(item => {
+            if (lastActiveDates.includes(item.dateStr)) {
+                reportsInChart++;
+            }
+        });
+        const chartAvg = lastActiveDates.length > 0 ? (reportsInChart / lastActiveDates.length).toFixed(1) : '0.0';
+        mediaSub.innerText = `Média: ${chartAvg} relatórios/dia (Sem FDS)`;
+    }
+
+    // Cores premium para cada responsável principal (Removido Sem Responsável)
     const respColors = {
         'Duda': '#004f71',       // Deep blue
         'Gabriela': '#2ed573',   // Green
         'Jeniffer': '#ffa502',   // Orange
         'Matheus': '#1e90ff',    // Light blue
-        'Patrícia': '#ff6b81',   // Pink
-        'Sem Responsável': '#a4b0be' // Gray
+        'Patrícia': '#ff6b81'    // Pink
     };
     const defaultColor = '#747d8c';
 
