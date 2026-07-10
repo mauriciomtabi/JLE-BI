@@ -2009,42 +2009,10 @@ function renderRelatoriosResponsavel() {
         grandTotal++;
     });
 
-    // Calcular dias úteis com atividade no período (apenas dias úteis que tiveram algum relatório feito)
-    const uniqueActiveDays = new Set();
-    reportData.forEach(item => {
-        const dayOfWeek = item.dateObj.getDay();
-        if (dayOfWeek !== 0 && dayOfWeek !== 6) { // Ignorar FDS
-            uniqueActiveDays.add(item.dateStr);
-        }
-    });
-    const totalWeekdays = uniqueActiveDays.size;
-
-    // 2. Renderizar Tabela de Ranking (Direita)
-    const sortedResponsibles = Object.keys(responsibleTotals).sort((a, b) => responsibleTotals[b] - responsibleTotals[a]);
-    
-    if (sortedResponsibles.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color: var(--text-secondary); padding: 20px;">Nenhum relatório encontrado.</td></tr>';
-    } else {
-        let tableHtml = '';
-        sortedResponsibles.forEach(resp => {
-            const count = responsibleTotals[resp];
-            const pct = grandTotal > 0 ? ((count / grandTotal) * 100).toFixed(1) : '0.0';
-            const avg = totalWeekdays > 0 ? (count / totalWeekdays).toFixed(1) : '0.0';
-            tableHtml += `
-                <tr>
-                    <td style="text-align: left; font-weight: 700;">${escapeHtml(resp)}</td>
-                    <td style="text-align: center;"><span class="badge-count" style="background-color: rgba(0, 79, 113, 0.1); color: var(--color-primary);">${count.toLocaleString('pt-BR')}</span></td>
-                    <td style="text-align: center; font-weight: 600; color: var(--text-primary);">${avg}/dia</td>
-                    <td style="text-align: center; font-weight: 600; color: var(--text-secondary);">${pct}%</td>
-                </tr>
-            `;
-        });
-        tbody.innerHTML = tableHtml;
-    }
-
-    // 3. Preparar dados para o Gráfico de Linha (Esquerda)
+    // 2. Preparar agrupamento diário (necessário para o Melhor Dia e para o Gráfico)
     const dailyCounts = {}; // { dateStr: { respName: count } }
     const uniqueDatesMap = {}; // { dateStr: dateObj }
+    const uniqueActiveDays = new Set();
 
     reportData.forEach(item => {
         if (!dailyCounts[item.dateStr]) {
@@ -2052,9 +2020,54 @@ function renderRelatoriosResponsavel() {
         }
         dailyCounts[item.dateStr][item.responsible] = (dailyCounts[item.dateStr][item.responsible] || 0) + 1;
         uniqueDatesMap[item.dateStr] = item.dateObj;
+
+        // Calcular dias úteis com atividade no período (apenas dias úteis que tiveram algum relatório feito)
+        const dayOfWeek = item.dateObj.getDay();
+        if (dayOfWeek !== 0 && dayOfWeek !== 6) { // Ignorar FDS
+            uniqueActiveDays.add(item.dateStr);
+        }
     });
 
-    // Ordenar as datas cronologicamente
+    const totalWeekdays = uniqueActiveDays.size;
+
+    // Calcular o Melhor Dia (maior quantidade de relatórios feita em um único dia) para cada responsável
+    const responsibleBestDays = {};
+    Object.keys(dailyCounts).forEach(dStr => {
+        Object.keys(dailyCounts[dStr]).forEach(resp => {
+            const countOnDay = dailyCounts[dStr][resp] || 0;
+            if (!responsibleBestDays[resp] || countOnDay > responsibleBestDays[resp]) {
+                responsibleBestDays[resp] = countOnDay;
+            }
+        });
+    });
+
+    // 3. Renderizar Tabela de Ranking (Direita)
+    const sortedResponsibles = Object.keys(responsibleTotals).sort((a, b) => responsibleTotals[b] - responsibleTotals[a]);
+    
+    if (sortedResponsibles.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color: var(--text-secondary); padding: 20px;">Nenhum relatório encontrado.</td></tr>';
+    } else {
+        let tableHtml = '';
+        sortedResponsibles.forEach(resp => {
+            const count = responsibleTotals[resp];
+            const pct = grandTotal > 0 ? ((count / grandTotal) * 100).toFixed(1) : '0.0';
+            const avg = totalWeekdays > 0 ? (count / totalWeekdays).toFixed(1) : '0.0';
+            const bestDayVal = responsibleBestDays[resp] || 0;
+            
+            tableHtml += `
+                <tr>
+                    <td style="text-align: left; font-weight: 700;">${escapeHtml(resp)}</td>
+                    <td style="text-align: center;"><span class="badge-count" style="background-color: rgba(0, 79, 113, 0.1); color: var(--color-primary);">${count.toLocaleString('pt-BR')}</span></td>
+                    <td style="text-align: center; font-weight: 600; color: var(--text-primary);">${avg}/dia</td>
+                    <td style="text-align: center; font-weight: 600; color: var(--color-warning);">${bestDayVal}</td>
+                    <td style="text-align: center; font-weight: 600; color: var(--text-secondary);">${pct}%</td>
+                </tr>
+            `;
+        });
+        tbody.innerHTML = tableHtml;
+    }
+
+    // Ordenar as datas cronologicamente para o Gráfico de Linha
     const sortedDates = Object.keys(uniqueDatesMap).sort((a, b) => uniqueDatesMap[a] - uniqueDatesMap[b]);
 
     // Pegar apenas as últimas 15 datas que possuem atividade
