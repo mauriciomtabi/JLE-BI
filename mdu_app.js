@@ -1275,13 +1275,13 @@ function renderMduTable() {
                 <td title="${escapeHtml(r.obs_vistoria || '')}"><span class="mdu-table-text-truncate" style="max-width: 100px;">${escapeHtml(r.obs_vistoria || '-')}</span></td>
                 <td title="${escapeHtml(r.obs_baixa || '')}"><span class="mdu-table-text-truncate" style="max-width: 100px;">${escapeHtml(r.obs_baixa || '-')}</span></td>
                 <td>${escapeHtml(r.aging || '-')}</td>
-                <td>${escapeHtml(formatMduDateToFull(r.data_adicio, r))}</td>
-                <td>${escapeHtml(formatMduDateToFull(r.primeira_visita, r))}</td>
-                <td>${escapeHtml(formatMduDateToFull(r.segunda_visita, r))}</td>
-                <td>${escapeHtml(formatMduDateToFull(r.data_fusao, r))}</td>
-                <td>${escapeHtml(formatMduDateToFull(r.data_baixa, r))}</td>
-                <td>${escapeHtml(formatMduDateToFull(r.data_relatorio, r))}</td>
-                <td>${escapeHtml(formatMduDateToFull(r.data_medicao, r))}</td>
+                <td>${escapeHtml(formatMduDateToFull(r.data_adicio, r, 'data_adicio'))}</td>
+                <td>${escapeHtml(formatMduDateToFull(r.primeira_visita, r, 'primeira_visita'))}</td>
+                <td>${escapeHtml(formatMduDateToFull(r.segunda_visita, r, 'segunda_visita'))}</td>
+                <td>${escapeHtml(formatMduDateToFull(r.data_fusao, r, 'data_fusao'))}</td>
+                <td>${escapeHtml(formatMduDateToFull(r.data_baixa, r, 'data_baixa'))}</td>
+                <td>${escapeHtml(formatMduDateToFull(r.data_relatorio, r, 'data_relatorio'))}</td>
+                <td>${escapeHtml(formatMduDateToFull(r.data_medicao, r, 'data_medicao'))}</td>
             </tr>
         `;
     });
@@ -1362,18 +1362,18 @@ function exportMduToExcel() {
         r.caixa_m || '',
         r.hps !== null ? r.hps : '',
         r.equipe || '',
-        formatMduDateToFull(r.primeira_visita, r),
-        formatMduDateToFull(r.segunda_visita, r),
+        formatMduDateToFull(r.primeira_visita, r, 'primeira_visita'),
+        formatMduDateToFull(r.segunda_visita, r, 'segunda_visita'),
         r.data_interna || '',
-        formatMduDateToFull(r.data_fusao, r),
-        formatMduDateToFull(r.data_baixa, r),
-        formatMduDateToFull(r.data_relatorio, r),
-        formatMduDateToFull(r.data_medicao, r),
+        formatMduDateToFull(r.data_fusao, r, 'data_fusao'),
+        formatMduDateToFull(r.data_baixa, r, 'data_baixa'),
+        formatMduDateToFull(r.data_relatorio, r, 'data_relatorio'),
+        formatMduDateToFull(r.data_medicao, r, 'data_medicao'),
         r.valor_medicao || 0,
         r.valor_repasse || 0,
         r.obs_vistoria || '',
         r.obs_baixa || '',
-        formatMduDateToFull(r.data_adicio, r)
+        formatMduDateToFull(r.data_adicio, r, 'data_adicio')
     ]);
 
     const filename = `mdu_export_${new Date().toISOString().slice(0,10)}.xlsx`;
@@ -1405,45 +1405,94 @@ function escapeHtml(str) {
         .replace(/'/g, "&#039;");
 }
 
-function formatMduDateToFull(dateStr, row) {
+function formatMduDateToFull(dateStr, row, fieldName) {
     if (!dateStr || dateStr.trim() === '' || dateStr.trim() === '-') return '-';
     
     const cleanStr = dateStr.trim();
-    const parts = cleanStr.split('/');
     
-    // Se já está no formato DD/MM/YYYY
-    if (parts.length === 3) {
-        const day = parts[0].padStart(2, '0');
-        const month = parts[1].padStart(2, '0');
-        const year = parts[2];
-        return `${day}/${month}/${year}`;
+    // Se não temos o objeto row ou o nome do campo, faz o parse básico
+    if (!row || !fieldName) {
+        const parts = cleanStr.split('/');
+        if (parts.length === 3) {
+            return `${parts[0].padStart(2, '0')}/${parts[1].padStart(2, '0')}/${parts[2]}`;
+        }
+        if (parts.length === 2) {
+            return `${parts[0].padStart(2, '0')}/${parts[1].padStart(2, '0')}/2025`;
+        }
+        return cleanStr;
     }
+
+    // Lógica de parser cronológico para resolver anos de datas incompletas (ex: DD/MM)
+    let currentYear = 2025;
     
-    // Se está no formato DD/MM ou D/M
-    if (parts.length === 2) {
-        const day = parts[0].padStart(2, '0');
-        const month = parts[1].padStart(2, '0');
-        
-        // Tenta obter o ano a partir de outros campos de data com ano completo
-        let year = 2025; // padrão de fallback
-        
-        const fieldsToTry = [row.primeira_visita, row.segunda_visita, row.data_adicio];
-        for (const f of fieldsToTry) {
-            if (f && f.includes('/')) {
-                const fParts = f.split('/');
-                if (fParts.length === 3) {
-                    const y = parseInt(fParts[2], 10);
-                    if (!isNaN(y) && y > 2000) {
-                        year = y;
-                        break;
-                    }
+    const fullDateFields = [row.data_adicio, row.primeira_visita, row.segunda_visita];
+    for (const f of fullDateFields) {
+        if (f && f.includes('/')) {
+            const parts = f.split('/');
+            if (parts.length === 3) {
+                const y = parseInt(parts[2], 10);
+                if (!isNaN(y) && y > 2000) {
+                    currentYear = y;
+                    break;
                 }
             }
         }
-        
-        return `${day}/${month}/${year}`;
     }
+
+    function parseAndAdvance(val, prevDateObj) {
+        if (!val || val.trim() === '' || val.trim() === '-') return null;
+        const cleanVal = val.trim();
+        const parts = cleanVal.split('/');
+        if (parts.length === 3) {
+            const day = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10);
+            const year = parseInt(parts[2], 10);
+            return {
+                str: `${String(day).padStart(2, '0')}/${String(month).padStart(2, '0')}/${year}`,
+                obj: new Date(year, month - 1, day)
+            };
+        }
+        if (parts.length === 2) {
+            const day = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10);
+            let dateObj = new Date(currentYear, month - 1, day);
+            if (prevDateObj && dateObj < prevDateObj) {
+                currentYear++;
+                dateObj = new Date(currentYear, month - 1, day);
+            }
+            return {
+                str: `${String(day).padStart(2, '0')}/${String(month).padStart(2, '0')}/${currentYear}`,
+                obj: dateObj
+            };
+        }
+        return null;
+    }
+
+    const pAdicio = parseAndAdvance(row.data_adicio, null);
+    const p1a = parseAndAdvance(row.primeira_visita, pAdicio ? pAdicio.obj : null);
+    const p2a = parseAndAdvance(row.segunda_visita, p1a ? p1a.obj : null);
     
+    const refObj = p2a ? p2a.obj : (p1a ? p1a.obj : (pAdicio ? pAdicio.obj : null));
+    
+    const pFusao = parseAndAdvance(row.data_fusao, refObj);
+    const pBaixa = parseAndAdvance(row.data_baixa, pFusao ? pFusao.obj : refObj);
+    const pRelatorio = parseAndAdvance(row.data_relatorio, pBaixa ? pBaixa.obj : (pFusao ? pFusao.obj : refObj));
+    const pMedicao = parseAndAdvance(row.data_medicao, pRelatorio ? pRelatorio.obj : (pBaixa ? pBaixa.obj : refObj));
+
+    // Retorna a data cronológica correspondente ao campo solicitado
+    if (fieldName === 'data_relatorio' && pRelatorio) return pRelatorio.str;
+    if (fieldName === 'data_baixa' && pBaixa) return pBaixa.str;
+    if (fieldName === 'data_fusao' && pFusao) return pFusao.str;
+    if (fieldName === 'data_medicao' && pMedicao) return pMedicao.str;
+    if (fieldName === 'data_adicio' && pAdicio) return pAdicio.str;
+    if (fieldName === 'primeira_visita' && p1a) return p1a.str;
+    if (fieldName === 'segunda_visita' && p2a) return p2a.str;
+
+    // Fallback padrão se não bater
+    const parts = cleanStr.split('/');
+    if (parts.length === 2) {
+        return `${parts[0].padStart(2, '0')}/${parts[1].padStart(2, '0')}/${currentYear}`;
+    }
     return cleanStr;
 }
 
@@ -1992,7 +2041,7 @@ function renderRelatoriosResponsavel() {
     mduFilteredData.forEach(r => {
         if (!r.data_relatorio || r.data_relatorio === '-') return;
         
-        const dateStr = formatMduDateToFull(r.data_relatorio, r);
+        const dateStr = formatMduDateToFull(r.data_relatorio, r, 'data_relatorio');
         const dateObj = parseMduDateString(dateStr);
         if (!dateObj || dateObj > todayCutoff) return; // Ignorar datas futuras
 
