@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-07-10 12:00:32
+// Dados MDU Compactados - Gerado em: 2026-07-10 13:00:17
 window.MDU_METADATA = {
-    "generated_at": "2026-07-10 12:00:32",
+    "generated_at": "2026-07-10 13:00:17",
     "total_rows": 5144,
-    "geocoded_new": 9
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -159320,20 +159320,20 @@ window.MDU_DATA = [
         "endereco": "R COMENDADOR AZEVEDO 497",
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
-        "aging": "",
+        "aging": "0",
         "relatorio_por": "",
-        "status": "",
-        "prog": 0,
+        "status": "Baixa",
+        "prog": 63.0,
         "cod_imovel": "",
         "area": "BFMAA",
         "node": "",
-        "caixa_m": "",
-        "hps": null,
-        "equipe": "",
-        "primeira_visita": "",
+        "caixa_m": "BFMAA.033.M030",
+        "hps": 16,
+        "equipe": "David Salomão",
+        "primeira_visita": "03/07/2026",
         "segunda_visita": "",
-        "data_interna": "",
-        "data_fusao": "",
+        "data_interna": "03/07",
+        "data_fusao": "03/07",
         "data_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
@@ -159343,8 +159343,8 @@ window.MDU_DATA = [
         "lng": -51.2123115,
         "geocodificado": true,
         "obs_baixa": "",
-        "obs_vistoria": "",
-        "data_adicio": ""
+        "obs_vistoria": "ADEQUADO, AGUARDANDO SAR PARA UMA FIBRA",
+        "data_adicio": "10/07/2026"
     },
     {
         "os": "RS.CLR.PRD.2504957",
