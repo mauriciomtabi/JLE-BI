@@ -1934,6 +1934,11 @@ function normalizeMduReportResponsible(name) {
         return 'Patrícia';
     }
     
+    // Excluir Gabriela dos indicadores
+    if (firstWord === 'GABRIELA') {
+        return 'Sem Responsável';
+    }
+    
     const blacklist = [
         'ARQUIVO', 'NODE', 'NÃO', 'NO', 'PROJETO', 'PASTA', 'SEM', 'OK', 'LOCALIZADO', 
         'FOTOS', 'PENDENCIA', 'RELAÇÃO', 'RELATÓRIO', 'FALTA', 'DWG'
@@ -2070,13 +2075,12 @@ function renderRelatoriosResponsavel() {
             }
         });
         const chartAvg = lastActiveDates.length > 0 ? (reportsInChart / lastActiveDates.length).toFixed(1) : '0.0';
-        mediaSub.innerText = `Média: ${chartAvg} relatórios/dia (Sem FDS)`;
+        mediaSub.innerText = `Média: ${chartAvg}/dia`;
     }
 
-    // Cores premium para cada responsável principal (Removido Sem Responsável)
+    // Cores premium para cada responsável principal (Removido Sem Responsável e Gabriela)
     const respColors = {
         'Duda': '#004f71',       // Deep blue
-        'Gabriela': '#2ed573',   // Green
         'Jeniffer': '#ffa502',   // Orange
         'Matheus': '#1e90ff',    // Light blue
         'Patrícia': '#ff6b81'    // Pink
