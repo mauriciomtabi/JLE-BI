@@ -154,8 +154,21 @@ function Build-EmailHtml($data, $reportName, $executionDateStr) {
     foreach ($item in $statusItems) {
         $displayName = $statusDisplayNames[$item.key]
         if ($null -eq $displayName) {
-            # Escape XML/HTML special characters in fallback keys
-            $displayName = $item.key -replace '&', '&amp;' -replace '<', '&lt;' -replace '>', '&gt;'
+            # Encode accented chars and XML/HTML special chars for any unmapped status
+            $displayName = $item.key `
+                -replace '&',  '&amp;'  -replace '<',  '&lt;'   -replace '>',  '&gt;' `
+                -replace '\u00e0','&agrave;'  -replace '\u00e1','&aacute;'  -replace '\u00e2','&acirc;'  -replace '\u00e3','&atilde;'  -replace '\u00e4','&auml;' `
+                -replace '\u00e8','&egrave;'  -replace '\u00e9','&eacute;'  -replace '\u00ea','&ecirc;'  -replace '\u00eb','&euml;' `
+                -replace '\u00ec','&igrave;'  -replace '\u00ed','&iacute;'  -replace '\u00ee','&icirc;'  -replace '\u00ef','&iuml;' `
+                -replace '\u00f2','&ograve;'  -replace '\u00f3','&oacute;'  -replace '\u00f4','&ocirc;'  -replace '\u00f5','&otilde;'  -replace '\u00f6','&ouml;' `
+                -replace '\u00f9','&ugrave;'  -replace '\u00fa','&uacute;'  -replace '\u00fb','&ucirc;'  -replace '\u00fc','&uuml;' `
+                -replace '\u00c0','&Agrave;'  -replace '\u00c1','&Aacute;'  -replace '\u00c2','&Acirc;'  -replace '\u00c3','&Atilde;'  -replace '\u00c4','&Auml;' `
+                -replace '\u00c8','&Egrave;'  -replace '\u00c9','&Eacute;'  -replace '\u00ca','&Ecirc;'  -replace '\u00cb','&Euml;' `
+                -replace '\u00cc','&Igrave;'  -replace '\u00cd','&Iacute;'  -replace '\u00ce','&Icirc;'  -replace '\u00cf','&Iuml;' `
+                -replace '\u00d2','&Ograve;'  -replace '\u00d3','&Oacute;'  -replace '\u00d4','&Ocirc;'  -replace '\u00d5','&Otilde;'  -replace '\u00d6','&Ouml;' `
+                -replace '\u00d9','&Ugrave;'  -replace '\u00da','&Uacute;'  -replace '\u00db','&Ucirc;'  -replace '\u00dc','&Uuml;' `
+                -replace '\u00e7','&ccedil;'  -replace '\u00c7','&Ccedil;'  -replace '\u00f1','&ntilde;'  -replace '\u00d1','&Ntilde;' `
+                -replace '\u00aa','&ordf;'    -replace '\u00ba','&ordm;'
         }
         $statusRows += @"
         <tr>
@@ -225,11 +238,11 @@ function Build-EmailHtml($data, $reportName, $executionDateStr) {
                         <table width="100%" cellpadding="0" cellspacing="0" border="0">
                             <tr>
                                 <td width="48%">
-                                    <a href="$BiUrl" style="display:block; text-align:center; background:#004f71; color:#ffffff; padding:12px 20px; border-radius:8px; text-decoration:none; font-weight:700; font-size:14px;" target="_blank">📊 Ir para o BI</a>
+                                    <a href="$BiUrl" style="display:block; text-align:center; background:#004f71; color:#ffffff; padding:12px 20px; border-radius:8px; text-decoration:none; font-weight:700; font-size:14px;" target="_blank">&#128202; Ir para o BI</a>
                                 </td>
                                 <td width="4%"></td>
                                 <td width="48%">
-                                    <a href="$SheetsUrl" style="display:block; text-align:center; background:#1e7e34; color:#ffffff; padding:12px 20px; border-radius:8px; text-decoration:none; font-weight:700; font-size:14px;" target="_blank">📑 Ir para a Planilha</a>
+                                    <a href="$SheetsUrl" style="display:block; text-align:center; background:#1e7e34; color:#ffffff; padding:12px 20px; border-radius:8px; text-decoration:none; font-weight:700; font-size:14px;" target="_blank">&#128209; Ir para a Planilha</a>
                                 </td>
                             </tr>
                         </table>
@@ -237,8 +250,8 @@ function Build-EmailHtml($data, $reportName, $executionDateStr) {
                 </tr>
                 <tr>
                     <td style="background:#f8f9fa; border-top:1px solid #e1e8ed; padding:24px 40px; text-align:center; font-size:12px; color:#747d8c; line-height:1.5;">
-                        Este é um relatório automatizado gerado a partir do Banco de Dados do BI JLE Telecom.<br>
-                        Relatório emitido em: $executionDateStr.
+                        Este &eacute; um relat&oacute;rio automatizado gerado a partir do Banco de Dados do BI JLE Telecom.<br>
+                        Relat&oacute;rio emitido em: $executionDateStr.
                     </td>
                 </tr>
             </table>
