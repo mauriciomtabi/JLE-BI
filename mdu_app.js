@@ -40,7 +40,8 @@ const mduCharts = {
     status: null,
     finalizadosPeriodo: null,
     agingRelatorios: null,
-    agingMedicoes: null
+    agingMedicoes: null,
+    relatoriosDiarios: null
 };
 
 function initMdu() {
@@ -260,6 +261,7 @@ function renderMduCharts() {
     renderAgingMedicoesChart();
     renderMduPerformanceTable();
     renderFinalizadosPeriodoChart();
+    renderRelatoriosResponsavel();
 }
 
 function getThemeColors() {
@@ -1911,3 +1913,217 @@ function closeMduMissingGeoModal(e) {
 window.getMduStatusBadgeClass = getMduStatusBadgeClass;
 window.showMissingGeoModal = showMissingGeoModal;
 window.closeMduMissingGeoModal = closeMduMissingGeoModal;
+
+// --- Lógica do Novo Indicador: Relatórios por Responsável e Dia ---
+
+function normalizeMduReportResponsible(name) {
+    if (!name || name.trim() === '' || name.trim() === '-') return 'Sem Responsável';
+    
+    let n = name.trim().toUpperCase();
+    
+    // Normalizar pontuações e separadores comuns
+    n = n.replace(/[^A-ZÁÉÍÓÚÂÊÔÃÕÇ\s]/g, ' ');
+    
+    const words = n.split(/\s+/).filter(Boolean);
+    if (words.length === 0) return 'Sem Responsável';
+    
+    let firstWord = words[0];
+    
+    // Mapeamento e consolidação para padronizar
+    if (firstWord === 'PATY' || firstWord === 'PATRICIA' || firstWord === 'PATRÍCIA') {
+        return 'Patrícia';
+    }
+    
+    const blacklist = [
+        'ARQUIVO', 'NODE', 'NÃO', 'NO', 'PROJETO', 'PASTA', 'SEM', 'OK', 'LOCALIZADO', 
+        'FOTOS', 'PENDENCIA', 'RELAÇÃO', 'RELATÓRIO', 'FALTA', 'DWG'
+    ];
+    if (blacklist.includes(firstWord)) {
+        return 'Sem Responsável';
+    }
+    
+    return firstWord.charAt(0) + firstWord.slice(1).toLowerCase();
+}
+
+function parseMduDateString(dStr) {
+    if (!dStr) return null;
+    const parts = dStr.split('/');
+    if (parts.length === 3) {
+        return new Date(parts[2], parts[1] - 1, parts[0]);
+    }
+    return null;
+}
+
+function renderRelatoriosResponsavel() {
+    const canvas = document.getElementById('mdu-chart-relatorios-diarios');
+    const tbody = document.getElementById('mdu-relatorios-responsavel-table-body');
+    if (!canvas || !tbody) return;
+
+    if (mduCharts.relatoriosDiarios) {
+        mduCharts.relatoriosDiarios.destroy();
+    }
+
+    const reportData = [];
+    const responsibleTotals = {};
+    let grandTotal = 0;
+
+    // 1. Filtrar registros que possuem data_relatorio preenchida e válida
+    mduFilteredData.forEach(r => {
+        if (!r.data_relatorio || r.data_relatorio === '-') return;
+        
+        const dateStr = formatMduDateToFull(r.data_relatorio, r);
+        const dateObj = parseMduDateString(dateStr);
+        if (!dateObj) return;
+
+        const resp = normalizeMduReportResponsible(r.relatorio_por);
+
+        reportData.push({
+            dateStr: dateStr,
+            dateObj: dateObj,
+            responsible: resp
+        });
+
+        responsibleTotals[resp] = (responsibleTotals[resp] || 0) + 1;
+        grandTotal++;
+    });
+
+    // 2. Renderizar Tabela de Ranking (Direita)
+    const sortedResponsibles = Object.keys(responsibleTotals).sort((a, b) => responsibleTotals[b] - responsibleTotals[a]);
+    
+    if (sortedResponsibles.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color: var(--text-secondary); padding: 20px;">Nenhum relatório encontrado.</td></tr>';
+    } else {
+        let tableHtml = '';
+        sortedResponsibles.forEach(resp => {
+            const count = responsibleTotals[resp];
+            const pct = grandTotal > 0 ? ((count / grandTotal) * 100).toFixed(1) : '0.0';
+            tableHtml += `
+                <tr>
+                    <td style="text-align: left; font-weight: 700;">${escapeHtml(resp)}</td>
+                    <td style="text-align: center;"><span class="badge-count" style="background-color: rgba(0, 79, 113, 0.1); color: var(--color-primary);">${count.toLocaleString('pt-BR')}</span></td>
+                    <td style="text-align: center; font-weight: 600; color: var(--text-secondary);">${pct}%</td>
+                </tr>
+            `;
+        });
+        tbody.innerHTML = tableHtml;
+    }
+
+    // 3. Preparar dados para o Gráfico de Linha (Esquerda)
+    const dailyCounts = {}; // { dateStr: { respName: count } }
+    const uniqueDatesMap = {}; // { dateStr: dateObj }
+
+    reportData.forEach(item => {
+        if (!dailyCounts[item.dateStr]) {
+            dailyCounts[item.dateStr] = {};
+        }
+        dailyCounts[item.dateStr][item.responsible] = (dailyCounts[item.dateStr][item.responsible] || 0) + 1;
+        uniqueDatesMap[item.dateStr] = item.dateObj;
+    });
+
+    // Ordenar as datas cronologicamente
+    const sortedDates = Object.keys(uniqueDatesMap).sort((a, b) => uniqueDatesMap[a] - uniqueDatesMap[b]);
+
+    // Pegar apenas as últimas 15 datas que possuem atividade
+    const lastActiveDates = sortedDates.slice(-15);
+
+    // Se não há dados, retornar
+    if (lastActiveDates.length === 0) {
+        return;
+    }
+
+    // Cores premium para cada responsável principal
+    const respColors = {
+        'Duda': '#004f71',       // Deep blue
+        'Gabriela': '#2ed573',   // Green
+        'Jeniffer': '#ffa502',   // Orange
+        'Matheus': '#1e90ff',    // Light blue
+        'Patrícia': '#ff6b81',   // Pink
+        'Sem Responsável': '#a4b0be' // Gray
+    };
+    const defaultColor = '#747d8c';
+
+    // Construir datasets para cada responsável
+    const datasets = sortedResponsibles.map(resp => {
+        const dataPoints = lastActiveDates.map(dStr => {
+            return dailyCounts[dStr][resp] || 0;
+        });
+
+        const color = respColors[resp] || defaultColor;
+
+        return {
+            label: resp,
+            data: dataPoints,
+            borderColor: color,
+            backgroundColor: color + '1a', // 10% opacity fill for hover/point
+            borderWidth: 2.5,
+            tension: 0.35, // suavizar linhas
+            pointRadius: 3,
+            pointHoverRadius: 6,
+            pointBackgroundColor: color,
+            pointBorderColor: '#ffffff',
+            pointBorderWidth: 1.5,
+            fill: false
+        };
+    });
+
+    const isDark = !document.body.classList.contains('light-theme');
+    const textThemeColor = isDark ? '#b2bec3' : '#636e72';
+
+    mduCharts.relatoriosDiarios = new Chart(canvas, {
+        type: 'line',
+        data: {
+            labels: lastActiveDates.map(dStr => dStr.slice(0, 5)), // Exibir apenas DD/MM
+            datasets: datasets
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        boxWidth: 10,
+                        padding: 8,
+                        color: textThemeColor,
+                        font: { family: 'Outfit', size: 9, weight: '600' }
+                    }
+                },
+                datalabels: {
+                    display: false // não poluir visualmente com números sobre os pontos
+                },
+                tooltip: {
+                    callbacks: {
+                        title: function(context) {
+                            const shortDate = context[0].label;
+                            const fullDateMatch = lastActiveDates.find(d => d.startsWith(shortDate));
+                            return `Data: ${fullDateMatch || shortDate}`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    grid: { display: false },
+                    ticks: {
+                        color: textThemeColor,
+                        font: { family: 'Outfit', size: 9 }
+                    }
+                },
+                y: {
+                    grid: { color: getThemeColors().grid },
+                    ticks: {
+                        color: textThemeColor,
+                        font: { family: 'Outfit', size: 9 },
+                        stepSize: 1,
+                        beginAtZero: true
+                    }
+                }
+            }
+        }
+    });
+}
+
