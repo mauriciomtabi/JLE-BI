@@ -1929,7 +1929,7 @@ function normalizeMduReportResponsible(name) {
     
     let firstWord = words[0];
     
-    // Mapeamento e consolidação para padronizar
+    // Mapeamento e consolidação para padronizar (Corrigido Patrília -> Patrícia)
     if (firstWord === 'PATY' || firstWord === 'PATRICIA' || firstWord === 'PATRÍCIA') {
         return 'Patrícia';
     }
@@ -1954,9 +1954,23 @@ function parseMduDateString(dStr) {
     return null;
 }
 
+function getMduWeekdayCount(startDate, endDate) {
+    let count = 0;
+    let curDate = new Date(startDate.getTime());
+    while (curDate <= endDate) {
+        const dayOfWeek = curDate.getDay();
+        if (dayOfWeek !== 0 && dayOfWeek !== 6) { // 0 = Domingo, 6 = Sábado
+            count++;
+        }
+        curDate.setDate(curDate.getDate() + 1);
+    }
+    return count || 1;
+}
+
 function renderRelatoriosResponsavel() {
     const canvas = document.getElementById('mdu-chart-relatorios-diarios');
     const tbody = document.getElementById('mdu-relatorios-responsavel-table-body');
+    const mediaSub = document.getElementById('mdu-relatorios-media-diaria');
     if (!canvas || !tbody) return;
 
     if (mduCharts.relatoriosDiarios) {
@@ -1966,6 +1980,8 @@ function renderRelatoriosResponsavel() {
     const reportData = [];
     const responsibleTotals = {};
     let grandTotal = 0;
+    const todayCutoff = new Date();
+    todayCutoff.setHours(23, 59, 59, 999); // Permitir registros de hoje completo
 
     // 1. Filtrar registros que possuem data_relatorio preenchida e válida
     mduFilteredData.forEach(r => {
@@ -1973,7 +1989,7 @@ function renderRelatoriosResponsavel() {
         
         const dateStr = formatMduDateToFull(r.data_relatorio, r);
         const dateObj = parseMduDateString(dateStr);
-        if (!dateObj) return;
+        if (!dateObj || dateObj > todayCutoff) return; // Ignorar datas futuras (erros de digitação/futuro no excel)
 
         const resp = normalizeMduReportResponsible(r.relatorio_por);
 
@@ -1987,20 +2003,41 @@ function renderRelatoriosResponsavel() {
         grandTotal++;
     });
 
+    // Calcular dias úteis no período
+    let minDate = null;
+    let maxDate = null;
+    reportData.forEach(item => {
+        if (!minDate || item.dateObj < minDate) minDate = item.dateObj;
+        if (!maxDate || item.dateObj > maxDate) maxDate = item.dateObj;
+    });
+
+    let totalWeekdays = 0;
+    if (minDate && maxDate) {
+        totalWeekdays = getMduWeekdayCount(minDate, maxDate);
+    }
+
+    // Atualizar subtítulo de média diária geral (sem contar FDS)
+    if (mediaSub) {
+        const overallAvg = totalWeekdays > 0 ? (grandTotal / totalWeekdays).toFixed(1) : '0.0';
+        mediaSub.innerText = `Média: ${overallAvg} relatórios/dia (Sem FDS)`;
+    }
+
     // 2. Renderizar Tabela de Ranking (Direita)
     const sortedResponsibles = Object.keys(responsibleTotals).sort((a, b) => responsibleTotals[b] - responsibleTotals[a]);
     
     if (sortedResponsibles.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color: var(--text-secondary); padding: 20px;">Nenhum relatório encontrado.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color: var(--text-secondary); padding: 20px;">Nenhum relatório encontrado.</td></tr>';
     } else {
         let tableHtml = '';
         sortedResponsibles.forEach(resp => {
             const count = responsibleTotals[resp];
             const pct = grandTotal > 0 ? ((count / grandTotal) * 100).toFixed(1) : '0.0';
+            const avg = totalWeekdays > 0 ? (count / totalWeekdays).toFixed(1) : '0.0';
             tableHtml += `
                 <tr>
                     <td style="text-align: left; font-weight: 700;">${escapeHtml(resp)}</td>
                     <td style="text-align: center;"><span class="badge-count" style="background-color: rgba(0, 79, 113, 0.1); color: var(--color-primary);">${count.toLocaleString('pt-BR')}</span></td>
+                    <td style="text-align: center; font-weight: 600; color: var(--text-primary);">${avg}/dia</td>
                     <td style="text-align: center; font-weight: 600; color: var(--text-secondary);">${pct}%</td>
                 </tr>
             `;

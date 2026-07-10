@@ -1592,7 +1592,10 @@
                 <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; align-items: stretch; min-width: 0;">
                     <!-- Card Esquerdo: Produção Diária (Line Chart) -->
                     <div class="mdu-card">
-                        <div class="mdu-card-title">Produção Diária de Relatórios (Últimos 15 dias com atividade)</div>
+                        <div class="mdu-card-title">
+                            <span>Produção Diária de Relatórios (Últimos 15 dias com atividade)</span>
+                            <span id="mdu-relatorios-media-diaria" style="font-size: 0.85rem; font-weight: 600; color: var(--color-primary);"></span>
+                        </div>
                         <div class="mdu-chart-container" style="height: 250px;">
                             <canvas id="mdu-chart-relatorios-diarios"></canvas>
                         </div>
@@ -1600,17 +1603,18 @@
                     <!-- Card Direito: Ranking de Elaboração de Relatórios -->
                     <div class="mdu-card" style="display: flex; flex-direction: column;">
                         <div class="mdu-card-title">Total de Relatórios por Responsável</div>
-                        <div class="mdu-table-wrapper no-scrollbar" style="border: none; overflow-x: auto; max-height: 250px; overflow-y: scroll; flex-grow: 1;">
+                        <div class="mdu-table-wrapper no-scrollbar" style="border: none; overflow-x: auto; flex-grow: 1;">
                             <table class="mdu-performance-table" style="width: 100%; border-collapse: collapse;">
                                 <thead>
                                     <tr>
                                         <th style="text-align: left;">Responsável</th>
                                         <th style="text-align: center; width: 100px;">Qtd. Relatórios</th>
+                                        <th style="text-align: center; width: 100px;">Média Diária</th>
                                         <th style="text-align: center; width: 100px;">% do Total</th>
                                     </tr>
                                 </thead>
                                 <tbody id="mdu-relatorios-responsavel-table-body">
-                                    <tr><td colspan="3" style="text-align:center; color: var(--text-secondary); padding: 30px 0;">Carregando dados...</td></tr>
+                                    <tr><td colspan="4" style="text-align:center; color: var(--text-secondary); padding: 30px 0;">Carregando dados...</td></tr>
                                 </tbody>
                             </table>
                         </div>
