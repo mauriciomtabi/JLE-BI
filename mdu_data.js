@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-07-10 10:18:12
+// Dados MDU Compactados - Gerado em: 2026-07-10 10:26:44
 window.MDU_METADATA = {
-    "generated_at": "2026-07-10 10:18:12",
+    "generated_at": "2026-07-10 10:26:44",
     "total_rows": 5144,
     "geocoded_new": 0
 };
@@ -101016,7 +101016,7 @@ window.MDU_DATA = [
         "cod_imovel": "610482663",
         "area": "BVSAB",
         "node": "VJDANB",
-        "caixa_m": "",
+        "caixa_m": "BVSAB.215.M030",
         "hps": 10,
         "equipe": "Alessandro Fagundes",
         "primeira_visita": "01/09/2025",
