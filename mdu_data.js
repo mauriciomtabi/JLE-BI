@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-07-10 10:34:12
+// Dados MDU Compactados - Gerado em: 2026-07-10 10:40:45
 window.MDU_METADATA = {
-    "generated_at": "2026-07-10 10:34:12",
+    "generated_at": "2026-07-10 10:40:45",
     "total_rows": 5144,
     "geocoded_new": 0
 };
@@ -101010,7 +101010,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "OK",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER (OK)",
         "status": "Medição",
         "prog": 88.0,
         "cod_imovel": "610482663",
@@ -101024,7 +101024,7 @@ window.MDU_DATA = [
         "data_interna": "01/09",
         "data_fusao": "",
         "data_baixa": "30/09",
-        "data_relatorio": "12/11",
+        "data_relatorio": "10/07",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 520.0,
