@@ -67,44 +67,94 @@ async function sendResendEmail(to, subject, html) {
     return resData;
 }
 
-function getMduStatusCounts() {
-    const jsPath = path.join(__dirname, 'mdu_data.js');
-    if (!fs.existsSync(jsPath)) {
-        console.warn(`Arquivo mdu_data.js não encontrado em: ${jsPath}`);
-        return null;
-    }
+function parseCsv(csvText) {
+    const lines = [];
+    let row = [];
+    let inQuotes = false;
+    let currentCell = '';
     
-    const content = fs.readFileSync(jsPath, 'utf8');
-    
-    // Extrair data de geração
-    const generatedAtMatch = content.match(/"generated_at"\s*:\s*"([^"]+)"/);
-    const generatedAt = generatedAtMatch ? generatedAtMatch[1] : "N/D";
-    
-    // Extrair array de dados
-    const dataMatch = content.match(/window\.MDU_DATA\s*=\s*([\s\S]+?);\s*$/);
-    if (!dataMatch) {
-        console.warn("Não foi possível localizar window.MDU_DATA no arquivo.");
-        return null;
-    }
-    
-    const mduData = JSON.parse(dataMatch[1]);
-    const excludeStatus = ["FINALIZADO", "FINALIZADA", "CANCELADO", "CANCELADA"];
-    const counts = {};
-    let totalActive = 0;
-    
-    mduData.forEach(r => {
-        let status = (r.status || '').trim();
-        if (status === "") {
-            status = "Não Definido";
-        }
-        const statusUpper = status.toUpperCase();
-        if (excludeStatus.includes(statusUpper)) return;
+    for (let i = 0; i < csvText.length; i++) {
+        const char = csvText[i];
+        const nextChar = csvText[i + 1];
         
-        counts[status] = (counts[status] || 0) + 1;
-        totalActive++;
-    });
-    
-    return { counts, total: totalActive, generated_at: generatedAt };
+        if (char === '"') {
+            if (inQuotes && nextChar === '"') {
+                currentCell += '"';
+                i++;
+            } else {
+                inQuotes = !inQuotes;
+            }
+        } else if (char === ',' && !inQuotes) {
+            row.push(currentCell);
+            currentCell = '';
+        } else if ((char === '\r' || char === '\n') && !inQuotes) {
+            row.push(currentCell);
+            if (row.length > 0 && row.some(cell => cell !== '')) {
+                lines.push(row);
+            }
+            row = [];
+            currentCell = '';
+            if (char === '\r' && nextChar === '\n') {
+                i++;
+            }
+        } else {
+            currentCell += char;
+        }
+    }
+    if (currentCell || row.length > 0) {
+        row.push(currentCell);
+        lines.push(row);
+    }
+    return lines;
+}
+
+async function getMduStatusCounts() {
+    try {
+        console.log("Baixando planilha do Google Sheets para o e-mail...");
+        const res = await fetch(SHEETS_URL);
+        if (!res.ok) throw new Error(`Erro ao baixar a planilha: HTTP ${res.status}`);
+        const csvText = await res.text();
+        console.log(`Planilha baixada! Tamanho: ${csvText.length} bytes.`);
+        
+        const rows = parseCsv(csvText);
+        if (rows.length === 0) throw new Error("Planilha vazia ou inválida.");
+        
+        const excludeStatus = ["FINALIZADO", "FINALIZADA", "CANCELADO", "CANCELADA"];
+        const counts = {};
+        let totalActive = 0;
+        
+        // Pular a primeira linha (cabeçalho)
+        for (let i = 1; i < rows.length; i++) {
+            const r = rows[i];
+            if (r.length <= 8) continue;
+            let status = (r[8] || '').trim();
+            if (status === "") {
+                status = "Não Definido";
+            }
+            const statusUpper = status.toUpperCase();
+            if (excludeStatus.includes(statusUpper)) continue;
+            
+            counts[status] = (counts[status] || 0) + 1;
+            totalActive++;
+        }
+        
+        // Fuso horário fixo de Brasília (UTC-3) para o timestamp
+        const utcDate = new Date();
+        const brOffset = -3 * 60 * 60 * 1000; // -3 horas em milissegundos
+        const localDate = new Date(utcDate.getTime() + brOffset);
+        const day = String(localDate.getUTCDate()).padStart(2, '0');
+        const month = String(localDate.getUTCMonth() + 1).padStart(2, '0');
+        const year = localDate.getUTCFullYear();
+        const hours = String(localDate.getUTCHours()).padStart(2, '0');
+        const minutes = String(localDate.getUTCMinutes()).padStart(2, '0');
+        const seconds = String(localDate.getUTCSeconds()).padStart(2, '0');
+        const generatedAt = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        
+        return { counts, total: totalActive, generated_at: generatedAt };
+    } catch (err) {
+        console.error("Erro ao obter dados do Google Sheets:", err);
+        return null;
+    }
 }
 
 function matchStatus(key, dbKey) {
@@ -342,7 +392,7 @@ async function start() {
         
         console.log(`Hora (BR): ${currentTime} | Dia: ${currentDay}`);
         
-        const mduData = getMduStatusCounts();
+        const mduData = await getMduStatusCounts();
         if (!mduData) {
             console.error("Não foi possível computar os dados do MDU.");
             return;
