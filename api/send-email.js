@@ -10,6 +10,7 @@ const RESEND_API_KEY = process.env.RESEND_API_KEY || "re_UrQ23kW7_HfeEnReBmEmKyF
 const FROM_EMAIL = "bi@jletelecom.com.br";
 const BI_URL = "https://jle-bi.vercel.app";
 const SHEETS_URL = "https://docs.google.com/spreadsheets/d/1eEJLaV7D0rthjC5H1MppXyk7dyroqn2h/edit";
+const SHEETS_CSV_URL = "https://docs.google.com/spreadsheets/d/1eEJLaV7D0rthjC5H1MppXyk7dyroqn2h/export?format=csv&gid=260790893";
 
 async function fetchSupabase(endpoint, method = 'GET', body = null) {
     const url = `${SUPABASE_URL}/rest/v1/${endpoint}`;
@@ -100,7 +101,7 @@ function parseCsv(csvText) {
 async function getMduStatusCounts() {
     try {
         console.log("Baixando planilha do Google Sheets para o e-mail (API)...");
-        const res = await fetch(SHEETS_URL);
+        const res = await fetch(SHEETS_CSV_URL);
         if (!res.ok) throw new Error(`Erro ao baixar a planilha: HTTP ${res.status}`);
         const csvText = await res.text();
         console.log(`Planilha baixada! Tamanho: ${csvText.length} bytes.`);

@@ -3325,13 +3325,7 @@
                 </tr>`;
             }).join('');
 
-            // Sincronização passiva de agendamentos no Resend
-            supabaseClient.auth.getSession().then(({ data }) => {
-                const token = data?.session?.access_token;
-                const headers = {};
-                if (token) headers['Authorization'] = 'Bearer ' + token;
-                fetch('/api/sync-schedules', { method: 'POST', headers }).catch(err => console.error("Error syncing schedules:", err));
-            });
+            // Sincronização passiva desativada (e-mails gerenciados na nuvem via GitHub Actions)
         }
 
         function openEmailReportModal() {
@@ -3488,16 +3482,7 @@
                     return;
                 }
                 
-                // Sincroniza para cancelar todos os agendamentos na API do Resend
-                try {
-                    const { data } = await supabaseClient.auth.getSession();
-                    const token = data?.session?.access_token;
-                    const headers = {};
-                    if (token) headers['Authorization'] = 'Bearer ' + token;
-                    await fetch('/api/sync-schedules', { method: 'POST', headers });
-                } catch (syncErr) {
-                    console.error("Erro ao sincronizar cancelamentos:", syncErr);
-                }
+                // Sincronização de cancelamentos desativada (e-mails gerenciados na nuvem via GitHub Actions)
                 
                 // Agora sim, deleta do banco
                 const { error } = await supabaseClient.from('bi_email_reports').delete().eq('id', id);

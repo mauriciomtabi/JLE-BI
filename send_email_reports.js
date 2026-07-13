@@ -11,6 +11,7 @@ const RESEND_API_KEY = process.env.RESEND_API_KEY || "re_bBQyi9qa_C5py6HbtiYrNfP
 const FROM_EMAIL = "bi@jletelecom.com.br";
 const BI_URL = "https://jle-bi.vercel.app";
 const SHEETS_URL = "https://docs.google.com/spreadsheets/d/1eEJLaV7D0rthjC5H1MppXyk7dyroqn2h/edit";
+const SHEETS_CSV_URL = "https://docs.google.com/spreadsheets/d/1eEJLaV7D0rthjC5H1MppXyk7dyroqn2h/export?format=csv&gid=260790893";
 
 console.log("==========================================================");
 console.log("JLE TELECOM - DISPARADOR DE E-MAILS EM NUVEM (RESEND)");
@@ -111,7 +112,7 @@ function parseCsv(csvText) {
 async function getMduStatusCounts() {
     try {
         console.log("Baixando planilha do Google Sheets para o e-mail...");
-        const res = await fetch(SHEETS_URL);
+        const res = await fetch(SHEETS_CSV_URL);
         if (!res.ok) throw new Error(`Erro ao baixar a planilha: HTTP ${res.status}`);
         const csvText = await res.text();
         console.log(`Planilha baixada! Tamanho: ${csvText.length} bytes.`);
@@ -401,11 +402,29 @@ async function start() {
         for (const config of configs) {
             console.log(`\nVerificando relatório: "${config.report_name}"`);
             
-            // Verificar agendamento de horário
+            // 1. Verificar se o relatório está ativo
+            if (config.is_active === false) {
+                console.log("- Relatório inativo.");
+                continue;
+            }
+
+            // 2. Verificar se já foi enviado hoje (comparando a data local de Brasília)
+            if (config.last_sent_at) {
+                const lastSentDate = new Date(config.last_sent_at);
+                const lastSentBrt = new Date(lastSentDate.getTime() + brOffset);
+                if (lastSentBrt.getUTCDate() === localDate.getUTCDate() &&
+                    lastSentBrt.getUTCMonth() === localDate.getUTCMonth() &&
+                    lastSentBrt.getUTCFullYear() === localDate.getUTCFullYear()) {
+                    console.log(`- Já enviado hoje. (Último envio em: ${config.last_sent_at})`);
+                    continue;
+                }
+            }
+
+            // 3. Verificar agendamento de horário e dia da semana
             const configTime = config.schedule_time.substring(0, 5); // formato "08:00"
             const configDays = config.schedule_days || [];
             
-            // Se houver pequenos atrasos no cron, damos uma janela de 14 minutos de tolerância
+            // Dar tolerância de 15 minutos (compatível com cron de 10 min)
             const [cHour, cMin] = configTime.split(":").map(Number);
             const [lHour, lMin] = currentTime.split(":").map(Number);
             const timeDiff = (lHour * 60 + lMin) - (cHour * 60 + cMin);
@@ -431,6 +450,18 @@ async function start() {
             const cleanRecipients = (config.recipients || []).filter(e => !e.startsWith("__sched:") && !e.startsWith("__lock:"));
             await sendResendEmail(cleanRecipients, subject, emailHtml);
             console.log("E-mail disparado com sucesso via Resend!");
+
+            // 4. Salvar last_sent_at no Supabase para travar reenvios hoje
+            console.log("Atualizando data de envio no Supabase...");
+            try {
+                await fetchSupabase(`bi_email_reports?id=eq.${config.id}`, 'PATCH', {
+                    last_sent_at: new Date().toISOString(),
+                    updated_at: new Date().toISOString()
+                });
+                console.log("Supabase atualizado!");
+            } catch (supErr) {
+                console.error("Erro ao atualizar last_sent_at no Supabase:", supErr);
+            }
         }
     } catch (err) {
         console.error("Erro na execução geral:", err);
