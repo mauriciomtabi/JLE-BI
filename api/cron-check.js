@@ -10,14 +10,20 @@ const BI_URL = "https://jle-bi.vercel.app";
 const SHEETS_URL = "https://docs.google.com/spreadsheets/d/1eEJLaV7D0rthjC5H1MppXyk7dyroqn2h/edit";
 const SHEETS_CSV_URL = "https://docs.google.com/spreadsheets/d/1eEJLaV7D0rthjC5H1MppXyk7dyroqn2h/export?format=csv&gid=260790893";
 
-async function fetchSupabase(endpoint, method = 'GET', body = null) {
-    const url = `${SUPABASE_URL}/rest/v1/${endpoint}`;
-    const headers = {
+function getSupabaseAuthHeaders() {
+    const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY;
+    const authToken = serviceKey ? `Bearer ${serviceKey}` : `Bearer ${ANON_KEY}`;
+    return {
         "apikey": ANON_KEY,
-        "Authorization": `Bearer ${ANON_KEY}`,
+        "Authorization": authToken,
         "Content-Type": "application/json",
         "Prefer": "return=representation"
     };
+}
+
+async function fetchSupabase(endpoint, method = 'GET', body = null) {
+    const url = `${SUPABASE_URL}/rest/v1/${endpoint}`;
+    const headers = getSupabaseAuthHeaders();
     const options = { method, headers };
     if (body) {
         options.body = JSON.stringify(body);
