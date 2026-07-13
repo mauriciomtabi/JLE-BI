@@ -411,8 +411,7 @@ module.exports = async (req, res) => {
                 continue;
             }
 
-            // 2. Trava de envio diário (Temporariamente comentada para permitir o teste de agendamento de hoje)
-            /*
+            // 2. Trava de envio diário
             if (config.last_sent_at) {
                 const lastSentDate = new Date(config.last_sent_at);
                 const lastSentBrt = new Date(lastSentDate.getTime() + brOffset);
@@ -423,7 +422,6 @@ module.exports = async (req, res) => {
                     continue;
                 }
             }
-            */
 
             // 3. Janela de horário
             const configTime = config.schedule_time.substring(0, 5);
