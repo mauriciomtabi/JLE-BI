@@ -16,10 +16,10 @@ const SHEETS_URL = "https://docs.google.com/spreadsheets/d/1eEJLaV7D0rthjC5H1Mpp
 function getSupabaseAuthHeaders() {
     // Use service role key for full RLS bypass - necessary for server-to-server calls
     const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY;
-    const authToken = serviceKey ? `Bearer ${serviceKey}` : `Bearer ${ANON_KEY}`;
+    const key = serviceKey || ANON_KEY;
     return {
-        "apikey": ANON_KEY,
-        "Authorization": authToken,
+        "apikey": key,
+        "Authorization": `Bearer ${key}`,
         "Content-Type": "application/json",
         "Prefer": "return=representation"
     };

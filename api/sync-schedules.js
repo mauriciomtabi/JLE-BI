@@ -14,8 +14,15 @@ const SHEETS_URL = "https://docs.google.com/spreadsheets/d/1eEJLaV7D0rthjC5H1Mpp
 
 async function fetchSupabase(endpoint, method = 'GET', body = null, token = null) {
     const url = `${SUPABASE_URL}/rest/v1/${endpoint}`;
+    
+    // Garantir que a apikey corresponda ao token de Authorization (requerido pelo Supabase Kong Gateway)
+    let apiKeyToUse = ANON_KEY;
+    if (token) {
+        apiKeyToUse = token.replace(/^Bearer\s+/i, '').trim();
+    }
+
     const headers = {
-        "apikey": ANON_KEY,
+        "apikey": apiKeyToUse,
         "Authorization": token || `Bearer ${ANON_KEY}`,
         "Content-Type": "application/json",
         "Prefer": "return=representation"
