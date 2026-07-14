@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-07-14 09:00:12
+// Dados MDU Compactados - Gerado em: 2026-07-14 10:00:17
 window.MDU_METADATA = {
-    "generated_at": "2026-07-14 09:00:12",
+    "generated_at": "2026-07-14 10:00:17",
     "total_rows": 5171,
     "geocoded_new": 0
 };
@@ -158456,7 +158456,7 @@ window.MDU_DATA = [
         "relatorio_por": "",
         "status": "Relatório",
         "prog": 75.0,
-        "cod_imovel": "",
+        "cod_imovel": "610448179",
         "area": "BFMAA",
         "node": "",
         "caixa_m": "BFMAA.211.M050",
@@ -159941,10 +159941,10 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "OK",
-        "relatorio_por": "",
-        "status": "Relatório",
-        "prog": 75.0,
-        "cod_imovel": "",
+        "relatorio_por": "MATHEUS",
+        "status": "Medição",
+        "prog": 88.0,
+        "cod_imovel": "610448640",
         "area": "BFMAA",
         "node": "",
         "caixa_m": "BFMAA.211.M010",
@@ -159955,7 +159955,7 @@ window.MDU_DATA = [
         "data_interna": "07/07",
         "data_fusao": "07/07",
         "data_baixa": "13/07",
-        "data_relatorio": "",
+        "data_relatorio": "14/07/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
