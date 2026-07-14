@@ -10,7 +10,7 @@
 # 5. Atualiza o Supabase com o novo token de agendamento (via service role key ou anon key)
 
 param(
-    [string]$ResendApiKey = "re_UrQ23kW7_HfeEnReBmEmKyFqo54AfMbgb",
+    [string]$ResendApiKey = "",
     [string]$SupabaseUrl = "https://fowlctvebdcodphntsjw.supabase.co",
     [string]$AnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZvd2xjdHZlYmRjb2RwaG50c2p3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwNzg2NjUsImV4cCI6MjA5NTY1NDY2NX0.PxzD_PlU4sBFPBukthuXpkBlzYbQqMLXLE4DQwctPOM",
     [string]$FromEmail = "bi@jletelecom.com.br",
