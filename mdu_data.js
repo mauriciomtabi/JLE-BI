@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-07-14 08:05:21
+// Dados MDU Compactados - Gerado em: 2026-07-14 09:00:12
 window.MDU_METADATA = {
-    "generated_at": "2026-07-14 08:05:21",
+    "generated_at": "2026-07-14 09:00:12",
     "total_rows": 5171,
     "geocoded_new": 0
 };
@@ -158422,7 +158422,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "OK",
-        "relatorio_por": "MATHEUS",
+        "relatorio_por": "",
         "status": "Relatório",
         "prog": 75.0,
         "cod_imovel": "610474207",
@@ -158484,7 +158484,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "OK",
-        "relatorio_por": "MATHEUS",
+        "relatorio_por": "",
         "status": "Relatório",
         "prog": 75.0,
         "cod_imovel": "610448184",
@@ -158546,7 +158546,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "OK",
-        "relatorio_por": "MATHEUS",
+        "relatorio_por": "",
         "status": "Relatório",
         "prog": 75.0,
         "cod_imovel": "611214586",
@@ -159507,7 +159507,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "OK",
-        "relatorio_por": "MATHEUS",
+        "relatorio_por": "",
         "status": "Relatório",
         "prog": 75.0,
         "cod_imovel": "702336115",
@@ -159569,7 +159569,7 @@ window.MDU_DATA = [
         "cidade": "NOVO HAMBURGO",
         "cluster": "NHO",
         "aging": "OK",
-        "relatorio_por": "MATHEUS",
+        "relatorio_por": "",
         "status": "Relatório",
         "prog": 75.0,
         "cod_imovel": "610381431",
