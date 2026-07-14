@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-07-14 13:00:13
+// Dados MDU Compactados - Gerado em: 2026-07-14 14:00:11
 window.MDU_METADATA = {
-    "generated_at": "2026-07-14 13:00:13",
+    "generated_at": "2026-07-14 14:00:11",
     "total_rows": 5171,
     "geocoded_new": 0
 };
@@ -159014,7 +159014,7 @@ window.MDU_DATA = [
         "relatorio_por": "",
         "status": "Fusão",
         "prog": 50.0,
-        "cod_imovel": "",
+        "cod_imovel": "703802750",
         "area": "RNDAA",
         "node": "",
         "caixa_m": "RNDAA.061.M020",
@@ -159076,7 +159076,7 @@ window.MDU_DATA = [
         "relatorio_por": "",
         "status": "Fusão",
         "prog": 50.0,
-        "cod_imovel": "",
+        "cod_imovel": "701783834",
         "area": "",
         "node": "",
         "caixa_m": "",
@@ -159138,7 +159138,7 @@ window.MDU_DATA = [
         "relatorio_por": "",
         "status": "Fusão",
         "prog": 50.0,
-        "cod_imovel": "",
+        "cod_imovel": "701741347",
         "area": "",
         "node": "",
         "caixa_m": "",
@@ -159975,7 +159975,7 @@ window.MDU_DATA = [
         "relatorio_por": "",
         "status": "Relatório",
         "prog": 75.0,
-        "cod_imovel": "",
+        "cod_imovel": "610142324",
         "area": "CNTAA",
         "node": "",
         "caixa_m": "CNTAA.115.M020",
