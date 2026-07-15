@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-07-15 13:00:14
+// Dados MDU Compactados - Gerado em: 2026-07-15 14:00:13
 window.MDU_METADATA = {
-    "generated_at": "2026-07-15 13:00:14",
+    "generated_at": "2026-07-15 14:00:13",
     "total_rows": 5189,
     "geocoded_new": 0
 };
@@ -108822,13 +108822,13 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "OK",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER (OK)",
         "status": "Medição",
         "prog": 88.0,
         "cod_imovel": "610448971",
         "area": "NAVAA",
         "node": "SJOAF",
-        "caixa_m": "",
+        "caixa_m": "NAVAA.033.M010",
         "hps": 17,
         "equipe": "Abraão Rodrigues",
         "primeira_visita": "22/10/2025",
@@ -157048,7 +157048,7 @@ window.MDU_DATA = [
         "lat": -30.0399288,
         "lng": -51.1660186,
         "geocodificado": true,
-        "obs_baixa": "ATUALIZAR TEXTO PADRAO COM FIBRAS DO SAR",
+        "obs_baixa": "",
         "obs_vistoria": "ADEQUADO",
         "data_adicio": "03/07/2026"
     },
@@ -160529,10 +160529,10 @@ window.MDU_DATA = [
         "endereco": "R FERREIRA VIANA 55",
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
-        "aging": "0",
+        "aging": "OK",
         "relatorio_por": "",
-        "status": "Baixa",
-        "prog": 63.0,
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "",
         "area": "JBOAA",
         "node": "",
@@ -160543,7 +160543,7 @@ window.MDU_DATA = [
         "segunda_visita": "",
         "data_interna": "10/07",
         "data_fusao": "10/07",
-        "data_baixa": "",
+        "data_baixa": "15/07",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
