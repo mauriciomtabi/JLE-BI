@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-07-16 09:00:11
+// Dados MDU Compactados - Gerado em: 2026-07-16 10:00:19
 window.MDU_METADATA = {
-    "generated_at": "2026-07-16 09:00:11",
+    "generated_at": "2026-07-16 10:00:19",
     "total_rows": 5189,
     "geocoded_new": 0
 };
@@ -157182,9 +157182,9 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "OK",
-        "relatorio_por": "",
-        "status": "Relatório",
-        "prog": 75.0,
+        "relatorio_por": "DUDA",
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610483056",
         "area": "CNTAA",
         "node": "CNTAL",
@@ -157196,7 +157196,7 @@ window.MDU_DATA = [
         "data_interna": "27/06",
         "data_fusao": "27/06",
         "data_baixa": "03/07",
-        "data_relatorio": "",
+        "data_relatorio": "16/07/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
@@ -158081,7 +158081,7 @@ window.MDU_DATA = [
         "cidade": "NOVO HAMBURGO",
         "cluster": "NHO",
         "aging": "OK",
-        "relatorio_por": "",
+        "relatorio_por": "PATRÍCIA REIS",
         "status": "Relatório",
         "prog": 75.0,
         "cod_imovel": "713025446",
@@ -158112,7 +158112,7 @@ window.MDU_DATA = [
         "cidade": "NOVO HAMBURGO",
         "cluster": "NHO",
         "aging": "OK",
-        "relatorio_por": "",
+        "relatorio_por": "PATRÍCIA REIS",
         "status": "Relatório",
         "prog": 75.0,
         "cod_imovel": "713025444",
