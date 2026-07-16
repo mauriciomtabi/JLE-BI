@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-07-16 13:00:10
+// Dados MDU Compactados - Gerado em: 2026-07-16 14:00:11
 window.MDU_METADATA = {
-    "generated_at": "2026-07-16 13:00:10",
+    "generated_at": "2026-07-16 14:00:11",
     "total_rows": 5189,
     "geocoded_new": 0
 };
@@ -158174,9 +158174,9 @@ window.MDU_DATA = [
         "cidade": "NOVO HAMBURGO",
         "cluster": "NHO",
         "aging": "OK",
-        "relatorio_por": "",
-        "status": "Relatório",
-        "prog": 75.0,
+        "relatorio_por": "PATRÍCIA REIS",
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "713025440",
         "area": "RNDAA",
         "node": "RNDAH",
@@ -158188,7 +158188,7 @@ window.MDU_DATA = [
         "data_interna": "17/06",
         "data_fusao": "17/06",
         "data_baixa": "13/07",
-        "data_relatorio": "",
+        "data_relatorio": "14/07/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
@@ -158236,9 +158236,9 @@ window.MDU_DATA = [
         "cidade": "NOVO HAMBURGO",
         "cluster": "NHO",
         "aging": "OK",
-        "relatorio_por": "",
-        "status": "Relatório",
-        "prog": 75.0,
+        "relatorio_por": "PATRÍCIA REIS",
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "713025438",
         "area": "RNDAA",
         "node": "RNDAH",
@@ -158250,7 +158250,7 @@ window.MDU_DATA = [
         "data_interna": "17/06",
         "data_fusao": "17/06",
         "data_baixa": "08/07",
-        "data_relatorio": "",
+        "data_relatorio": "14/07/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
