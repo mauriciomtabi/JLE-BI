@@ -1,5 +1,5 @@
 ﻿window.CASH_FLOW_DATA = {
-    "generated_at":  "2026-07-15 15:03:49",
+    "generated_at":  "2026-07-16 10:08:08",
     "categories_origin":  {
                               "entradas":  [
 
@@ -124822,7 +124822,7 @@
                              "uf":  "PR",
                              "fluxo":  "Saída",
                              "categoria":  "Frete",
-                             "descricao":  "CURITIBA - EXPRESSO SAO MIGUEL S",
+                             "descricao":  "Frete são Paulo Florianópolis emendas dutos pad",
                              "valor_nominal":  880,
                              "valor_liquido":  -880,
                              "meio_pagamento":  "Pix",
