@@ -1,5 +1,5 @@
 ﻿window.CASH_FLOW_DATA = {
-    "generated_at":  "2026-07-16 10:08:08",
+    "generated_at":  "2026-07-16 15:04:59",
     "categories_origin":  {
                               "entradas":  [
 
@@ -125337,6 +125337,70 @@
                              "descricao":  "Pagamento SC JGS36 L01",
                              "valor_nominal":  68.17,
                              "valor_liquido":  -68.17,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "JUL_2026 MAXCREDITO_369",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "JUL_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "JULHO/2026",
+                             "data":  "2026-07-15",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Combustíveis",
+                             "descricao":  "TICKET SOLUCOES HDFGT S/A",
+                             "valor_nominal":  62755.28,
+                             "valor_liquido":  -62755.28,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "JUL_2026 MAXCREDITO_370",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "JUL_2026 MAXCREDITO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "JULHO/2026",
+                             "data":  "2026-07-15",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Prestadores de Serviços",
+                             "descricao":  "SMARTEC INF GERENCIAIS LTDA",
+                             "valor_nominal":  397,
+                             "valor_liquido":  -397,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "JUL_2026 MAXCREDITO_371",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "JUL_2026 MAXCREDITO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "JULHO/2026",
+                             "data":  "2026-07-15",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Impostos",
+                             "descricao":  "MUNICIPIO DE SAO LEOPOLDO - IMPOSTO ISSQN",
+                             "valor_nominal":  1935,
+                             "valor_liquido":  -1935,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "JUL_2026 MAXCREDITO_372",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "JUL_2026 MAXCREDITO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "JULHO/2026",
+                             "data":  "2026-07-15",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Impostos",
+                             "descricao":  "MUNICIPIO DE SAO LEOPOLDO - IMPOSTO ISSQN",
+                             "valor_nominal":  119.3,
+                             "valor_liquido":  -119.3,
                              "meio_pagamento":  "Pix",
                              "is_transfer":  false
                          },
