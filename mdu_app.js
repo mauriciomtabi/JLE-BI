@@ -66,11 +66,18 @@ function initMdu() {
     window.MDU_DATA.forEach(r => {
         if (r.status) {
             let s = r.status.trim();
-            if (/^1[ºoOaA]?\s*Vistoria/i.test(s) || s.toUpperCase() === 'VISTORIA') {
-                r.status = '1ª Vistoria';
-            } else if (/^2[ºoOaA]?\s*Vistoria/i.test(s)) {
-                r.status = '2ª Vistoria';
+            const sUpper = s.toUpperCase();
+            if (/^1[ºoOaA]?\s*Vistoria/i.test(s) || sUpper === 'VISTORIA' || 
+                /^2[ºoOaA]?\s*Vistoria/i.test(s) || 
+                sUpper === 'BAIXA' || 
+                sUpper === 'PROJETO' || 
+                sUpper === 'NÃO DEFINIDO' || sUpper === 'NÃO DEFINIDA' || s === '' || s === '-') {
+                r.status = 'Não Adequado';
+            } else if (sUpper === 'FUSÃO' || sUpper === 'FUSAO') {
+                r.status = 'Pendências Claro';
             }
+        } else {
+            r.status = 'Não Adequado';
         }
     });
 
@@ -978,13 +985,8 @@ window.backFromMduDrilldown = backFromMduDrilldown;
 function updateMduPerformanceHeaders() {
     const cols = {
         'equipe': { text: 'Executor', id: 'mdu-perf-th-equipe' },
-        '1ª VISTORIA': { text: '1º Vist.', id: 'mdu-perf-th-1ª-vistoria' },
-        '2ª VISTORIA': { text: '2º Vist.', id: 'mdu-perf-th-2ª-vistoria' },
-        'PROJETO': { text: 'Projeto', id: 'mdu-perf-th-projeto' },
-        'FUSÃO': { text: 'Fusão', id: 'mdu-perf-th-fusão' },
-        'MEDIÇÃO': { text: 'Medição', id: 'mdu-perf-th-medição' },
-        'RELATÓRIO': { text: 'Relatório', id: 'mdu-perf-th-relatório' },
-        'BAIXA': { text: 'Baixa', id: 'mdu-perf-th-baixa' },
+        'NÃO ADEQUADO': { text: 'Não Adequado', id: 'mdu-perf-th-nao-adequado' },
+        'PENDÊNCIAS CLARO': { text: 'Pendências Claro', id: 'mdu-perf-th-pendencias-claro' },
         'total': { text: 'Total', id: 'mdu-perf-th-total' }
     };
 
@@ -1020,18 +1022,16 @@ function renderMduPerformanceTable() {
 
     const performanceData = {};
     const statusColumns = [
-        '1ª VISTORIA',
-        '2ª VISTORIA',
-        'PROJETO',
-        'FUSÃO'
+        'NÃO ADEQUADO',
+        'PENDÊNCIAS CLARO'
     ];
 
     mduFilteredData.forEach(r => {
         const equipe = r.equipe ? r.equipe.trim() : 'Sem Equipe';
         let status = r.status ? r.status.trim().toUpperCase() : '';
         
-        if (status === '1ª VISTORIA') status = '1ª VISTORIA';
-        else if (status === '2ª VISTORIA') status = '2ª VISTORIA';
+        if (status === 'NÃO ADEQUADO') status = 'NÃO ADEQUADO';
+        else if (status === 'PENDÊNCIAS CLARO') status = 'PENDÊNCIAS CLARO';
         
         if (!performanceData[equipe]) {
             performanceData[equipe] = {
@@ -1081,7 +1081,7 @@ function renderMduPerformanceTable() {
     updateMduPerformanceHeaders();
 
     if (sortedEquipes.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; color: var(--text-secondary); padding: 20px;">Nenhum dado de desempenho encontrado.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color: var(--text-secondary); padding: 20px;">Nenhum dado de desempenho encontrado.</td></tr>';
         return;
     }
 
@@ -1092,12 +1092,8 @@ function renderMduPerformanceTable() {
             const count = eq.counts[col] || 0;
             if (count > 0) {
                 let badgeStyle = '';
-                if (col === '1ª VISTORIA' || col === '2ª VISTORIA') badgeStyle = 'background-color: rgba(112, 161, 255, 0.15); color: #70a1ff;';
-                else if (col === 'PROJETO') badgeStyle = 'background-color: rgba(255, 107, 129, 0.15); color: #ff6b81;';
-                else if (col === 'FUSÃO') badgeStyle = 'background-color: rgba(30, 144, 255, 0.15); color: #1e90ff;';
-                else if (col === 'MEDIÇÃO') badgeStyle = 'background-color: rgba(255, 165, 2, 0.15); color: #ffa502;';
-                else if (col === 'RELATÓRIO') badgeStyle = 'background-color: rgba(164, 176, 190, 0.15); color: #a4b0be;';
-                else if (col === 'BAIXA') badgeStyle = 'background-color: rgba(47, 53, 66, 0.15); color: #2f3542;';
+                if (col === 'NÃO ADEQUADO') badgeStyle = 'background-color: rgba(112, 161, 255, 0.15); color: #70a1ff;';
+                else if (col === 'PENDÊNCIAS CLARO') badgeStyle = 'background-color: rgba(30, 144, 255, 0.15); color: #1e90ff;';
                 
                 rowHtml += `<td style="text-align: center;"><span class="badge-count" style="${badgeStyle}">${count}</span></td>`;
             } else {
@@ -1248,10 +1244,6 @@ function renderMduTable() {
 
         if (statusUpper === 'FINALIZADO' || statusUpper === 'FINALIZADA') {
             badgeClass = 'mdu-badge-finalizado';
-        } else if (statusUpper === '2ª VISTORIA' || statusUpper === '1ª VISTORIA' || statusUpper === 'VISTORIA') {
-            badgeClass = 'mdu-badge-vistoria';
-        } else if (statusUpper === 'FUSÃO') {
-            badgeClass = 'mdu-badge-fusao';
         } else if (statusUpper === 'MEDIÇÃO') {
             badgeClass = 'mdu-badge-medicao';
         } else if (statusUpper === 'CANCELADO' || statusUpper === 'CANCELADA') {
@@ -1260,6 +1252,10 @@ function renderMduTable() {
             badgeClass = 'mdu-badge-pendencia';
         } else if (statusUpper === 'RELATÓRIO HBOX') {
             badgeClass = 'mdu-badge-hbox';
+        } else if (statusUpper === 'NÃO ADEQUADO') {
+            badgeClass = 'mdu-badge-vistoria';
+        } else if (statusUpper === 'PENDÊNCIAS CLARO') {
+            badgeClass = 'mdu-badge-fusao';
         }
 
         const pend = String(r.pendencia || '').toUpperCase().trim();
@@ -1620,7 +1616,7 @@ function mdu_getTileLayerUrl() {
 
 function getMduStatusCounts() {
     const counts = {};
-    const statuses = ['Finalizado', 'Fusão', '2ª Vistoria', '1ª Vistoria', 'Medição', 'Relatório', 'Relatório HBOX', 'Baixa', 'Projeto', 'Cancelado', 'Pendência'];
+    const statuses = ['Finalizado', 'Medição', 'Relatório', 'Relatório HBOX', 'Cancelado', 'Pendência', 'Não Adequado', 'Pendências Claro'];
     statuses.forEach(s => counts[s] = 0);
     
     mduFilteredData.forEach(r => {
@@ -1629,24 +1625,18 @@ function getMduStatusCounts() {
             counts['Finalizado']++;
         } else if (val === 'CANCELADO' || val === 'CANCELADA') {
             counts['Cancelado']++;
-        } else if (val === 'FUSÃO') {
-            counts['Fusão']++;
-        } else if (val === '2ª VISTORIA') {
-            counts['2ª Vistoria']++;
-        } else if (val === '1ª VISTORIA') {
-            counts['1ª Vistoria']++;
         } else if (val === 'MEDIÇÃO') {
             counts['Medição']++;
         } else if (val === 'RELATÓRIO') {
             counts['Relatório']++;
         } else if (val === 'RELATÓRIO HBOX') {
             counts['Relatório HBOX']++;
-        } else if (val === 'BAIXA') {
-            counts['Baixa']++;
-        } else if (val === 'PROJETO') {
-            counts['Projeto']++;
         } else if (val === 'PENDÊNCIA') {
             counts['Pendência']++;
+        } else if (val === 'NÃO ADEQUADO') {
+            counts['Não Adequado']++;
+        } else if (val === 'PENDÊNCIAS CLARO') {
+            counts['Pendências Claro']++;
         }
     });
     return counts;
@@ -1659,16 +1649,13 @@ function updateMduLegend() {
     const counts = getMduStatusCounts();
     const colors = {
         'Finalizado': '#2ed573',
-        'Fusão': '#1e90ff',
-        '2ª Vistoria': '#3742fa',
-        '1ª Vistoria': '#70a1ff',
         'Medição': '#ffa502',
         'Relatório': '#a4b0be',
         'Relatório HBOX': '#747d8c',
-        'Baixa': '#2f3542',
-        'Projeto': '#ff6b81',
         'Cancelado': '#ff4757',
-        'Pendência': '#ff9f43'
+        'Pendência': '#ff9f43',
+        'Não Adequado': '#70a1ff',
+        'Pendências Claro': '#1e90ff'
     };
 
     let labels = [];
@@ -1739,15 +1726,12 @@ function updateMduMap() {
         'FINALIZADA': '#2ed573',
         'CANCELADO': '#ff4757',
         'CANCELADA': '#ff4757',
-        'FUSÃO': '#1e90ff',
-        '2ª VISTORIA': '#3742fa',
-        '1ª VISTORIA': '#70a1ff',
         'MEDIÇÃO': '#ffa502',
         'RELATÓRIO': '#a4b0be',
         'RELATÓRIO HBOX': '#747d8c',
-        'BAIXA': '#2f3542',
-        'PROJETO': '#ff6b81',
-        'PENDÊNCIA': '#ff9f43'
+        'PENDÊNCIA': '#ff9f43',
+        'NÃO ADEQUADO': '#70a1ff',
+        'PENDÊNCIAS CLARO': '#1e90ff'
     };
 
     // 1. Filtrar apenas registros que possuem geolocalização válida (geocodificado: true)
@@ -1944,10 +1928,6 @@ function getMduStatusBadgeClass(status) {
     const statusUpper = String(status || '').toUpperCase().trim();
     if (statusUpper === 'FINALIZADO' || statusUpper === 'FINALIZADA') {
         return 'mdu-badge-finalizado';
-    } else if (statusUpper === '2ª VISTORIA' || statusUpper === '1ª VISTORIA' || statusUpper === 'VISTORIA') {
-        return 'mdu-badge-vistoria';
-    } else if (statusUpper === 'FUSÃO') {
-        return 'mdu-badge-fusao';
     } else if (statusUpper === 'MEDIÇÃO') {
         return 'mdu-badge-medicao';
     } else if (statusUpper === 'CANCELADO' || statusUpper === 'CANCELADA') {
@@ -1956,6 +1936,10 @@ function getMduStatusBadgeClass(status) {
         return 'mdu-badge-pendencia';
     } else if (statusUpper === 'RELATÓRIO HBOX') {
         return 'mdu-badge-hbox';
+    } else if (statusUpper === 'NÃO ADEQUADO') {
+        return 'mdu-badge-vistoria';
+    } else if (statusUpper === 'PENDÊNCIAS CLARO') {
+        return 'mdu-badge-fusao';
     }
     return 'mdu-badge-default';
 }

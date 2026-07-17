@@ -125,9 +125,22 @@ async function getMduStatusCounts() {
             if (r.length <= finalStatusIdx) continue;
             let status = (r[finalStatusIdx] || '').trim();
             if (status === "") {
-                status = "Não Definido";
+                status = "Não Adequado";
             }
             let statusUpper = status.toUpperCase();
+            
+            if (/^1[ºoOaA]?\s*Vistoria/i.test(status) || statusUpper === 'VISTORIA' || 
+                /^2[ºoOaA]?\s*Vistoria/i.test(status) || 
+                statusUpper === 'BAIXA' || 
+                statusUpper === 'PROJETO' || 
+                statusUpper === 'NÃO DEFINIDO' || statusUpper === 'NÃO DEFINIDA' || status === 'Não Definido') {
+                status = "Não Adequado";
+                statusUpper = "NÃO ADEQUADO";
+            } else if (statusUpper === 'FUSÃO' || statusUpper === 'FUSAO') {
+                status = "Pendências Claro";
+                statusUpper = "PENDÊNCIAS CLARO";
+            }
+            
             if (excludeStatus.includes(statusUpper)) continue;
             
             counts[status] = (counts[status] || 0) + 1;
@@ -212,16 +225,12 @@ function buildEmailHtml(data, reportName) {
     });
 
     const statusOrder = [
-        { key: "1ª Vistoria", color: "#004f71" },
-        { key: "2ª Vistoria", color: "#004f71" },
-        { key: "Projeto",     color: "#004f71" },
-        { key: "Fusão",       color: "#004f71" },
+        { key: "Não Adequado", color: "#004f71" },
+        { key: "Pendências Claro", color: "#004f71" },
         { key: "Medição",     color: "#004f71" },
         { key: "Relatório",   color: "#004f71" },
         { key: "Relatório HBOX", color: "#747d8c" },
-        { key: "Pendência",   color: "#ff9f43" },
-        { key: "Baixa",       color: "#004f71" },
-        { key: "Não Definido", color: "#004f71" }
+        { key: "Pendência",   color: "#ff9f43" }
     ];
     
     const statusItems = [];
