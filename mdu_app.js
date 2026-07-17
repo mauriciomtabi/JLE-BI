@@ -139,6 +139,7 @@ function applyMduFilters() {
     const cidadeSelect = document.getElementById('mdu-filter-cidade');
     const clusterSelect = document.getElementById('mdu-filter-cluster');
     const equipeSelect = document.getElementById('mdu-filter-equipe');
+    const pendenciaSelect = document.getElementById('mdu-filter-pendencia');
 
     mduFilters.cidade = cidadeSelect ? cidadeSelect.value : '';
     mduFilters.cluster = clusterSelect ? clusterSelect.value : '';
