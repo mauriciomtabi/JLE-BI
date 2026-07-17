@@ -202,10 +202,11 @@ function buildEmailHtml(data, reportName) {
     let medicaoCount = 0;
     let relatorioCount = 0;
     Object.keys(data.counts).forEach(k => {
-        if (k.toLowerCase().includes('medicao') || k.toLowerCase().includes('medição')) {
+        const normKey = k.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        if (normKey === 'medicao') {
             medicaoCount += data.counts[k];
         }
-        if (k.toLowerCase().includes('relatorio') || k.toLowerCase().includes('relatório')) {
+        if (normKey === 'relatorio') {
             relatorioCount += data.counts[k];
         }
     });
