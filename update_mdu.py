@@ -320,6 +320,21 @@ def save_js_data(js_path, rows_data, generated_at, new_geocodes_count):
         f.write(json.dumps(rows_data, indent=4, ensure_ascii=False))
         f.write(";\n")
 
+def normalize_header(h):
+    h = h.lower().strip()
+    h = h.replace('\n', ' ').replace('\r', ' ')
+    replacements = {
+        'á': 'a', 'é': 'e', 'í': 'i', 'ó': 'o', 'ú': 'u',
+        'â': 'a', 'ê': 'e', 'ô': 'o',
+        'ã': 'a', 'õ': 'o',
+        'ç': 'c',
+        'º': '', 'ª': '',
+        ' ': ''
+    }
+    for k, v in replacements.items():
+        h = h.replace(k, v)
+    return h
+
 def process_mdu():
     if not os.path.exists(csv_path):
         print(f"Erro: Arquivo {csv_path} não encontrado!")
@@ -346,10 +361,28 @@ def process_mdu():
             print("Erro: CSV está vazio!")
             return
 
+        header_map = {}
+        for i_h, h in enumerate(headers):
+            norm = normalize_header(h)
+            header_map[norm] = i_h
+
+        def get_col(row, header_name, default_idx):
+            norm = normalize_header(header_name)
+            idx = header_map.get(norm)
+            if idx is not None and idx < len(row):
+                return row[idx].strip()
+            actual_idx = default_idx
+            if "pendencia?" in header_map and default_idx >= 8:
+                actual_idx = default_idx + 1
+            if actual_idx < len(row):
+                return row[actual_idx].strip()
+            return ""
+
         # Filtrar linhas válidas antes para podermos fazer uma barra de progresso simples
+        os_idx = header_map.get(normalize_header("OS JLE"), 2)
         valid_rows = []
         for row in reader:
-            if row and len(row) >= 20 and row[2].strip():
+            if row and len(row) > os_idx and row[os_idx].strip():
                 valid_rows.append(row)
 
         total_rows = len(valid_rows)
@@ -357,13 +390,13 @@ def process_mdu():
 
         for idx, row in enumerate(valid_rows):
             # Garantir que a linha tenha colunas suficientes para não quebrar
-            while len(row) < 53:
+            while len(row) < 55:
                 row.append('')
 
-            os_val = row[2].strip()
-            endereco = row[3].strip()
-            cidade = row[4].strip().upper()
-            cluster = row[5].strip().upper()
+            os_val = get_col(row, "OS JLE", 2)
+            endereco = get_col(row, "Endereço", 3)
+            cidade = get_col(row, "Cidade", 4).upper()
+            cluster = get_col(row, "Cluster", 5).upper()
 
             # Normalização de Cidade
             if not cidade or cidade == '-':
@@ -428,31 +461,32 @@ def process_mdu():
                 "endereco": endereco,
                 "cidade": cidade,
                 "cluster": cluster,
-                "aging": row[6].strip(),
-                "relatorio_por": row[7].strip(),
-                "status": row[8].strip(),
-                "prog": clean_percentage(row[9]),
-                "cod_imovel": row[10].strip(),
-                "area": row[11].strip(),
-                "node": row[12].strip(),
-                "caixa_m": row[13].strip(),
-                "hps": clean_int(row[14]),
-                "equipe": row[17].strip(),
-                "primeira_visita": row[18].strip(),
-                "segunda_visita": row[19].strip(),
-                "data_interna": row[29].strip(),
-                "data_fusao": row[30].strip(),
-                "data_baixa": row[32].strip(),
-                "data_relatorio": row[34].strip(),
-                "data_medicao": row[38].strip(),
-                "valor_medicao": clean_currency(row[39]),
-                "valor_repasse": clean_currency(row[45]),
+                "aging": get_col(row, "Aging", 6),
+                "relatorio_por": get_col(row, "Quem fez Relatório", 7),
+                "pendencia": get_col(row, "Pendência?", 8),
+                "status": get_col(row, "Status", 8),
+                "prog": clean_percentage(get_col(row, "Prog. %", 9)),
+                "cod_imovel": get_col(row, "Cód. Imóvel", 10),
+                "area": get_col(row, "Área", 11),
+                "node": get_col(row, "Node", 12),
+                "caixa_m": get_col(row, "Caixa M", 13),
+                "hps": clean_int(get_col(row, "HPs", 14)),
+                "equipe": get_col(row, "Equipe", 17),
+                "primeira_visita": get_col(row, "Primeira Visita", 18),
+                "segunda_visita": get_col(row, "Segunda Visita", 19),
+                "data_interna": get_col(row, "Data Interna", 29),
+                "data_fusao": get_col(row, "Data Fusão", 30),
+                "data_baixa": get_col(row, "Data Baixa", 32),
+                "data_relatorio": get_col(row, "Data Relatório", 34),
+                "data_medicao": get_col(row, "Data Medição", 38),
+                "valor_medicao": clean_currency(get_col(row, "Valor Medição", 39)),
+                "valor_repasse": clean_currency(get_col(row, "Valor Repasse", 45)),
                 "lat": lat,
                 "lng": lng,
                 "geocodificado": geocodificado,
-                "obs_baixa": row[33].strip(),
-                "obs_vistoria": row[21].strip(),
-                "data_adicio": row[16].strip()
+                "obs_baixa": get_col(row, "Observações Baixa", 33),
+                "obs_vistoria": get_col(row, "Observações Vistoria", 21),
+                "data_adicio": get_col(row, "Data Adicio.", 16)
             }
             rows_data.append(item)
             if (idx + 1) % 50 == 0:

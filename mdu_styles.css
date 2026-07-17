@@ -271,6 +271,7 @@
 .mdu-badge-fusao { background-color: rgba(23, 162, 184, 0.15); color: #17a2b8; }
 .mdu-badge-medicao { background-color: rgba(253, 126, 20, 0.15); color: #fd7e14; }
 .mdu-badge-cancelado { background-color: rgba(220, 53, 69, 0.15); color: #dc3545; }
+.mdu-badge-pendencia { background-color: rgba(255, 159, 67, 0.15); color: #ff9f43; }
 .mdu-badge-default { background-color: rgba(108, 117, 125, 0.15); color: #6c757d; }
 
 /* Filter select resets */

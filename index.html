@@ -1420,6 +1420,14 @@
                     </div>
                 </div>
                 <div class="filter-group">
+                    <label for="mdu-filter-pendencia">Pendência?</label>
+                    <select id="mdu-filter-pendencia" class="mdu-select" onchange="applyMduFilters()">
+                        <option value="">Todas</option>
+                        <option value="SIM">Sim</option>
+                        <option value="NÃO">Não</option>
+                    </select>
+                </div>
+                <div class="filter-group">
                     <label for="mdu-filter-cidade">Cidade</label>
                     <select id="mdu-filter-cidade" class="mdu-select" onchange="applyMduFilters()">
                         <option value="">Todas as Cidades</option>
@@ -1663,6 +1671,7 @@
                                         <th onclick="sortMduTable('os')" style="cursor:pointer; user-select: none;" id="mdu-th-os">OS JLE <i class="fa-solid fa-sort"></i></th>
                                         <th onclick="sortMduTable('endereco')" style="cursor:pointer; user-select: none;" id="mdu-th-endereco">Endereço <i class="fa-solid fa-sort"></i></th>
                                         <th onclick="sortMduTable('cidade')" style="cursor:pointer; user-select: none;" id="mdu-th-cidade">Cidade <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortMduTable('pendencia')" style="cursor:pointer; user-select: none;" id="mdu-th-pendencia">Pendência? <i class="fa-solid fa-sort"></i></th>
                                         <th onclick="sortMduTable('status')" style="cursor:pointer; user-select: none;" id="mdu-th-status">Status <i class="fa-solid fa-sort"></i></th>
                                         <th onclick="sortMduTable('prog')" style="cursor:pointer; user-select: none;" id="mdu-th-prog">Progresso <i class="fa-solid fa-sort"></i></th>
                                         <th onclick="sortMduTable('equipe')" style="cursor:pointer; user-select: none;" id="mdu-th-equipe">Equipe <i class="fa-solid fa-sort"></i></th>

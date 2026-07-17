@@ -109,19 +109,26 @@ async function getMduStatusCounts() {
         const rows = parseCsv(csvText);
         if (rows.length === 0) throw new Error("Planilha vazia ou inválida.");
         
+        const headers = rows[0];
+        const statusIdx = headers.findIndex(h => h.trim().toUpperCase() === "STATUS");
+        const finalStatusIdx = statusIdx !== -1 ? statusIdx : 9;
+
         const excludeStatus = ["FINALIZADO", "FINALIZADA", "CANCELADO", "CANCELADA"];
         const counts = {};
         let totalActive = 0;
         
-        // Pular a primeira linha (cabeçalho)
         for (let i = 1; i < rows.length; i++) {
             const r = rows[i];
-            if (r.length <= 8) continue;
-            let status = (r[8] || '').trim();
+            if (r.length <= finalStatusIdx) continue;
+            let status = (r[finalStatusIdx] || '').trim();
             if (status === "") {
                 status = "Não Definido";
             }
-            const statusUpper = status.toUpperCase();
+            let statusUpper = status.toUpperCase();
+            if (statusUpper === "RELATÓRIO HBOX") {
+                status = "Relatório";
+                statusUpper = "RELATÓRIO";
+            }
             if (excludeStatus.includes(statusUpper)) continue;
             
             counts[status] = (counts[status] || 0) + 1;
@@ -220,6 +227,7 @@ function buildEmailHtml(data, reportName) {
         { key: "Fusão",       color: "#004f71" },
         { key: "Medição",     color: "#004f71" },
         { key: "Relatório",   color: "#004f71" },
+        { key: "Pendência",   color: "#ff9f43" },
         { key: "Baixa",       color: "#004f71" },
         { key: "Não Definido", color: "#004f71" }
     ];

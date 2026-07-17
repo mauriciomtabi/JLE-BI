@@ -25,7 +25,8 @@ const mduFilters = {
     status: [],
     cidade: '',
     cluster: '',
-    equipe: ''
+    equipe: '',
+    pendencia: ''
 };
 
 let mduSearchQuery = ''; // Busca rápida global
@@ -69,6 +70,8 @@ function initMdu() {
                 r.status = '1ª Vistoria';
             } else if (/^2[ºoOaA]?\s*Vistoria/i.test(s)) {
                 r.status = '2ª Vistoria';
+            } else if (s.toUpperCase() === 'RELATÓRIO HBOX') {
+                r.status = 'Relatório';
             }
         }
     });
@@ -140,12 +143,20 @@ function applyMduFilters() {
     mduFilters.cidade = cidadeSelect ? cidadeSelect.value : '';
     mduFilters.cluster = clusterSelect ? clusterSelect.value : '';
     mduFilters.equipe = equipeSelect ? equipeSelect.value : '';
+    mduFilters.pendencia = pendenciaSelect ? pendenciaSelect.value : '';
 
     mduFilteredData = window.MDU_DATA.filter(r => {
         if (mduFilters.status && mduFilters.status.length > 0 && !mduFilters.status.includes(r.status)) return false;
         if (mduFilters.cidade && r.cidade !== mduFilters.cidade) return false;
         if (mduFilters.cluster && r.cluster !== mduFilters.cluster) return false;
         if (mduFilters.equipe && r.equipe !== mduFilters.equipe) return false;
+        if (mduFilters.pendencia) {
+            const pVal = String(r.pendencia || '').toUpperCase().trim();
+            const fVal = String(mduFilters.pendencia).toUpperCase().trim();
+            const isPend = (pVal === 'SIM');
+            const filterPend = (fVal === 'SIM');
+            if (isPend !== filterPend) return false;
+        }
 
         // Busca rápida multi-campo
         if (mduSearchQuery) {
@@ -186,10 +197,12 @@ function clearMduFilters() {
     const cidadeSelect = document.getElementById('mdu-filter-cidade');
     const clusterSelect = document.getElementById('mdu-filter-cluster');
     const equipeSelect = document.getElementById('mdu-filter-equipe');
+    const pendenciaSelect = document.getElementById('mdu-filter-pendencia');
 
     if (cidadeSelect) cidadeSelect.value = '';
     if (clusterSelect) clusterSelect.value = '';
     if (equipeSelect) equipeSelect.value = '';
+    if (pendenciaSelect) pendenciaSelect.value = '';
 
     // Limpar busca rápida
     mduSearchQuery = '';
@@ -1138,6 +1151,7 @@ function updateMduTableHeaders() {
         'os': 'OS JLE',
         'endereco': 'Endereço',
         'cidade': 'Cidade',
+        'pendencia': 'Pendência?',
         'status': 'Status',
         'prog': 'Progresso',
         'equipe': 'Equipe',
@@ -1185,7 +1199,7 @@ function renderMduTable() {
     if (!tbody) return;
 
     if (mduFilteredData.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="17" style="text-align:center; color: var(--text-secondary);">Nenhuma OS MDU encontrada com os filtros selecionados.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="18" style="text-align:center; color: var(--text-secondary);">Nenhuma OS MDU encontrada com os filtros selecionados.</td></tr>';
         document.getElementById('mdu-pagination-info').innerText = '0 registros';
         document.getElementById('mdu-pagination-btns').innerHTML = '';
         return;
@@ -1243,6 +1257,16 @@ function renderMduTable() {
             badgeClass = 'mdu-badge-medicao';
         } else if (statusUpper === 'CANCELADO' || statusUpper === 'CANCELADA') {
             badgeClass = 'mdu-badge-cancelado';
+        } else if (statusUpper === 'PENDÊNCIA') {
+            badgeClass = 'mdu-badge-pendencia';
+        }
+
+        const pend = String(r.pendencia || '').toUpperCase().trim();
+        let pendBadgeClass = 'mdu-badge-default';
+        if (pend === 'SIM') {
+            pendBadgeClass = 'mdu-badge-cancelado'; // Red badge for "SIM"
+        } else if (pend === 'NÃO' || pend === 'NAO') {
+            pendBadgeClass = 'mdu-badge-finalizado'; // Green badge for "NÃO"
         }
 
         const progVal = Math.round(r.prog || 0);
@@ -1261,6 +1285,7 @@ function renderMduTable() {
                     </div>
                 </td>
                 <td>${escapeHtml(r.cidade || '-')}</td>
+                <td><span class="mdu-badge ${pendBadgeClass}">${escapeHtml(r.pendencia || 'Não')}</span></td>
                 <td><span class="mdu-badge ${badgeClass}">${escapeHtml(r.status || 'Não definido')}</span></td>
                 <td style="font-weight:600;">
                     <div style="display:flex; align-items:center; gap:8px;">
@@ -1594,7 +1619,7 @@ function mdu_getTileLayerUrl() {
 
 function getMduStatusCounts() {
     const counts = {};
-    const statuses = ['Finalizado', 'Fusão', '2ª Vistoria', '1ª Vistoria', 'Medição', 'Relatório', 'Baixa', 'Projeto', 'Cancelado'];
+    const statuses = ['Finalizado', 'Fusão', '2ª Vistoria', '1ª Vistoria', 'Medição', 'Relatório', 'Baixa', 'Projeto', 'Cancelado', 'Pendência'];
     statuses.forEach(s => counts[s] = 0);
     
     mduFilteredData.forEach(r => {
@@ -1617,6 +1642,8 @@ function getMduStatusCounts() {
             counts['Baixa']++;
         } else if (val === 'PROJETO') {
             counts['Projeto']++;
+        } else if (val === 'PENDÊNCIA') {
+            counts['Pendência']++;
         }
     });
     return counts;
@@ -1636,7 +1663,8 @@ function updateMduLegend() {
         'Relatório': '#a4b0be',
         'Baixa': '#2f3542',
         'Projeto': '#ff6b81',
-        'Cancelado': '#ff4757'
+        'Cancelado': '#ff4757',
+        'Pendência': '#ff9f43'
     };
 
     let labels = [];
@@ -1713,7 +1741,8 @@ function updateMduMap() {
         'MEDIÇÃO': '#ffa502',
         'RELATÓRIO': '#a4b0be',
         'BAIXA': '#2f3542',
-        'PROJETO': '#ff6b81'
+        'PROJETO': '#ff6b81',
+        'PENDÊNCIA': '#ff9f43'
     };
 
     // 1. Filtrar apenas registros que possuem geolocalização válida (geocodificado: true)
@@ -1918,6 +1947,8 @@ function getMduStatusBadgeClass(status) {
         return 'mdu-badge-medicao';
     } else if (statusUpper === 'CANCELADO' || statusUpper === 'CANCELADA') {
         return 'mdu-badge-cancelado';
+    } else if (statusUpper === 'PENDÊNCIA') {
+        return 'mdu-badge-pendencia';
     }
     return 'mdu-badge-default';
 }
