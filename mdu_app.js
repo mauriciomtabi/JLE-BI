@@ -70,8 +70,6 @@ function initMdu() {
                 r.status = '1ª Vistoria';
             } else if (/^2[ºoOaA]?\s*Vistoria/i.test(s)) {
                 r.status = '2ª Vistoria';
-            } else if (s.toUpperCase() === 'RELATÓRIO HBOX') {
-                r.status = 'Relatório';
             }
         }
     });
@@ -1260,6 +1258,8 @@ function renderMduTable() {
             badgeClass = 'mdu-badge-cancelado';
         } else if (statusUpper === 'PENDÊNCIA') {
             badgeClass = 'mdu-badge-pendencia';
+        } else if (statusUpper === 'RELATÓRIO HBOX') {
+            badgeClass = 'mdu-badge-hbox';
         }
 
         const pend = String(r.pendencia || '').toUpperCase().trim();
@@ -1620,7 +1620,7 @@ function mdu_getTileLayerUrl() {
 
 function getMduStatusCounts() {
     const counts = {};
-    const statuses = ['Finalizado', 'Fusão', '2ª Vistoria', '1ª Vistoria', 'Medição', 'Relatório', 'Baixa', 'Projeto', 'Cancelado', 'Pendência'];
+    const statuses = ['Finalizado', 'Fusão', '2ª Vistoria', '1ª Vistoria', 'Medição', 'Relatório', 'Relatório HBOX', 'Baixa', 'Projeto', 'Cancelado', 'Pendência'];
     statuses.forEach(s => counts[s] = 0);
     
     mduFilteredData.forEach(r => {
@@ -1639,6 +1639,8 @@ function getMduStatusCounts() {
             counts['Medição']++;
         } else if (val === 'RELATÓRIO') {
             counts['Relatório']++;
+        } else if (val === 'RELATÓRIO HBOX') {
+            counts['Relatório HBOX']++;
         } else if (val === 'BAIXA') {
             counts['Baixa']++;
         } else if (val === 'PROJETO') {
@@ -1662,6 +1664,7 @@ function updateMduLegend() {
         '1ª Vistoria': '#70a1ff',
         'Medição': '#ffa502',
         'Relatório': '#a4b0be',
+        'Relatório HBOX': '#747d8c',
         'Baixa': '#2f3542',
         'Projeto': '#ff6b81',
         'Cancelado': '#ff4757',
@@ -1741,6 +1744,7 @@ function updateMduMap() {
         '1ª VISTORIA': '#70a1ff',
         'MEDIÇÃO': '#ffa502',
         'RELATÓRIO': '#a4b0be',
+        'RELATÓRIO HBOX': '#747d8c',
         'BAIXA': '#2f3542',
         'PROJETO': '#ff6b81',
         'PENDÊNCIA': '#ff9f43'
@@ -1950,6 +1954,8 @@ function getMduStatusBadgeClass(status) {
         return 'mdu-badge-cancelado';
     } else if (statusUpper === 'PENDÊNCIA') {
         return 'mdu-badge-pendencia';
+    } else if (statusUpper === 'RELATÓRIO HBOX') {
+        return 'mdu-badge-hbox';
     }
     return 'mdu-badge-default';
 }

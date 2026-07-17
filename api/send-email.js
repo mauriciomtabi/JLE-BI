@@ -125,10 +125,6 @@ async function getMduStatusCounts() {
                 status = "Não Definido";
             }
             let statusUpper = status.toUpperCase();
-            if (statusUpper === "RELATÓRIO HBOX") {
-                status = "Relatório";
-                statusUpper = "RELATÓRIO";
-            }
             if (excludeStatus.includes(statusUpper)) continue;
             
             counts[status] = (counts[status] || 0) + 1;
@@ -227,6 +223,7 @@ function buildEmailHtml(data, reportName) {
         { key: "Fusão",       color: "#004f71" },
         { key: "Medição",     color: "#004f71" },
         { key: "Relatório",   color: "#004f71" },
+        { key: "Relatório HBOX", color: "#747d8c" },
         { key: "Pendência",   color: "#ff9f43" },
         { key: "Baixa",       color: "#004f71" },
         { key: "Não Definido", color: "#004f71" }
