@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-07-17 11:14:38
+// Dados MDU Compactados - Gerado em: 2026-07-17 12:00:26
 window.MDU_METADATA = {
-    "generated_at": "2026-07-17 11:14:38",
+    "generated_at": "2026-07-17 12:00:26",
     "total_rows": 5221,
-    "geocoded_new": 2
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -103739,8 +103739,8 @@ window.MDU_DATA = [
         "cluster": "NHO",
         "aging": "OK",
         "relatorio_por": "DUDA",
-        "status": "Medição",
-        "prog": 88.0,
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "61614262",
         "area": "GRIAA",
         "node": "GRIAAA",
@@ -103752,7 +103752,7 @@ window.MDU_DATA = [
         "data_interna": "20/06",
         "data_fusao": "30/06",
         "data_baixa": "06/07",
-        "data_relatorio": "17/07/2026",
+        "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 620.0,
@@ -123640,13 +123640,13 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "OK",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER (OK)",
         "status": "Medição",
         "prog": 88.0,
         "cod_imovel": "610472906",
         "area": "SANAB",
         "node": "SANAJ",
-        "caixa_m": "",
+        "caixa_m": "SANAB.032.M030",
         "hps": 6,
         "equipe": "Abraão Rodrigues",
         "primeira_visita": "16/12/2025",
@@ -123654,7 +123654,7 @@ window.MDU_DATA = [
         "data_interna": "16/12",
         "data_fusao": "16/12",
         "data_baixa": "18/12",
-        "data_relatorio": "22/12/2025",
+        "data_relatorio": "17/07/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 520.0,
@@ -156313,10 +156313,10 @@ window.MDU_DATA = [
         "endereco": "AV FARRAPOS 3685",
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
-        "aging": "16",
+        "aging": "OK",
         "relatorio_por": "",
-        "status": "Baixa",
-        "prog": 63.0,
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "611113671",
         "area": "NAVAB",
         "node": "NAVACA",
@@ -156327,7 +156327,7 @@ window.MDU_DATA = [
         "segunda_visita": "",
         "data_interna": "23/06",
         "data_fusao": "23/06",
-        "data_baixa": "",
+        "data_baixa": "17/06",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
@@ -156335,7 +156335,7 @@ window.MDU_DATA = [
         "lat": -29.9959646,
         "lng": -51.189319,
         "geocodificado": true,
-        "obs_baixa": "ADEQUADO APOS SAR",
+        "obs_baixa": "",
         "obs_vistoria": "ADEQUADO",
         "data_adicio": "01/07/2026"
     },
