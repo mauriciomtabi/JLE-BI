@@ -2245,6 +2245,28 @@
                 }, 1000);
             } else {
                 try {
+                    // Verificar se o e-mail está pré-cadastrado na tabela bi_permissions (convidado pelo admin)
+                    const { data: permissionData, error: permError } = await supabaseClient
+                        .from('bi_permissions')
+                        .select('email')
+                        .eq('email', email)
+                        .maybeSingle();
+
+                    if (permError) {
+                        console.error("Erro ao verificar permissão:", permError);
+                        showAuthAlert('Erro ao validar e-mail corporativo. Tente novamente mais tarde.', 'error');
+                        btnSubmit.disabled = false;
+                        btnSubmit.innerHTML = '<i class="fa-solid fa-user-plus"></i> Cadastrar';
+                        return;
+                    }
+
+                    if (!permissionData) {
+                        showAuthAlert('Acesso negado: Este e-mail não foi convidado pelo administrador do BI JLE Telecom.', 'error');
+                        btnSubmit.disabled = false;
+                        btnSubmit.innerHTML = '<i class="fa-solid fa-user-plus"></i> Cadastrar';
+                        return;
+                    }
+
                     const { data, error } = await supabaseClient.auth.signUp({
                         email: email,
                         password: password,
@@ -2480,7 +2502,13 @@
             const registerEmail = urlParams.get('e') || urlParams.get('email');
             const registerName = urlParams.get('n');
 
+            const tabContainer = document.querySelector('.auth-tabs');
+            const btnRegister = document.getElementById('tab-register');
+
             if (isRegisterFlow) {
+                if (tabContainer) tabContainer.style.display = 'flex';
+                if (btnRegister) btnRegister.style.display = 'block';
+
                 // Alternar para a aba de cadastro e preencher o e-mail e nome
                 switchAuthTab('register');
                 if (registerEmail) {
@@ -2502,6 +2530,9 @@
                     const newUrl = window.location.pathname;
                     window.history.replaceState({}, document.title, newUrl);
                 }
+            } else {
+                if (tabContainer) tabContainer.style.display = 'none';
+                if (btnRegister) btnRegister.style.display = 'none';
             }
 
             // Verificar se o usuário veio por link de recuperação de senha na URL hash
