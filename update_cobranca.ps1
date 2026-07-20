@@ -384,6 +384,43 @@ try {
     $jsContent | Out-File -FilePath $outputPath -Encoding utf8
     Write-Output "Concluído! Salvo em $outputPath com $($rowsList.Count) registros."
 
+    # 4.5. Gerar cobranca_simple.json mapeando OS -> { status, pedido }
+    Write-Output "Gerando cobranca_simple.json..."
+    $simpleMap = [System.Collections.Generic.Dictionary[string, object]]::new()
+    foreach ($row in $rowsList) {
+        $osVal = $row[2]
+        if (-not $osVal) { continue }
+        $osKey = $osVal.ToString().Trim().ToUpper()
+        if ($osKey -eq "") { continue }
+
+        $statusVal = $lookup_fase_de_para[$row[21]]
+        $pedidoVal = $row[19]
+        $pedidoStr = if ($null -eq $pedidoVal) { "" } else { $pedidoVal.ToString().Trim() }
+
+        if ($simpleMap.ContainsKey($osKey)) {
+            $existing = $simpleMap[$osKey]
+            if ($pedidoStr -ne "" -and $existing.pedido -eq "") {
+                $existing.pedido = $pedidoStr
+            }
+            if ($statusVal -ne "" -and $existing.status -eq "") {
+                $existing.status = $statusVal
+            }
+        } else {
+            $simpleMap[$osKey] = [PSCustomObject]@{
+                status = $statusVal
+                pedido = $pedidoStr
+            }
+        }
+    }
+
+    $simplePayload = [PSCustomObject]@{
+        generated_at = $reportDate
+        os = $simpleMap
+    }
+    $simpleJsonStr = $simplePayload | ConvertTo-Json -Depth 10
+    $simpleJsonStr | Out-File -FilePath "$PSScriptRoot\cobranca_simple.json" -Encoding utf8
+    Write-Output "cobranca_simple.json salvo com sucesso."
+
     # 5. Publicar atualizações no GitHub se houver alterações em cobranca_data.js
     Write-Output "Verificando se houve alteracoes nos dados para publicar no GitHub..."
     $gitPath = "C:\Program Files\Git\cmd\git.exe"
@@ -407,7 +444,7 @@ try {
             }
 
             Write-Output "Fazendo commit e push para o GitHub..."
-            & $gitPath add "$PSScriptRoot\cobranca_data.js" "$PSScriptRoot\sw.js"
+            & $gitPath add "$PSScriptRoot\cobranca_data.js" "$PSScriptRoot\cobranca_simple.json" "$PSScriptRoot\sw.js"
             & $gitPath commit -m "data(auto): atualizacao automatica de dados de cobranca e cache PWA"
             & $gitPath push origin main
             Write-Output "Dados de cobranca e Service Worker publicados com sucesso no GitHub!"
