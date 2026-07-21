@@ -448,6 +448,20 @@ try {
             & $gitPath commit -m "data(auto): atualizacao automatica de dados de cobranca e cache PWA"
             & $gitPath push origin main
             Write-Output "Dados de cobranca e Service Worker publicados com sucesso no GitHub!"
+            
+            # 6. Trigger automatic sync in Services JLE system
+            try {
+                Write-Output "Disparando sincronizacao em tempo real no Servicos JLE..."
+                $webhookUrlProd = "https://jle-monitoramento-tecnico.vercel.app/api/sync-bi"
+                $headers = @{
+                    "Authorization" = "Bearer jle-bi-sync-token-2026"
+                    "Content-Type"  = "application/json"
+                }
+                $response = Invoke-RestMethod -Uri $webhookUrlProd -Method Post -Headers $headers -TimeoutSec 15
+                Write-Output "Sincronizacao em producao disparada com sucesso: $($response.mensagem)"
+            } catch {
+                Write-Warning "Falha ao disparar sincronizacao automatica: $_"
+            }
         } else {
             Write-Output "Sem novas alteracoes nos dados de cobranca. Nenhuma publicacao necessaria."
         }
