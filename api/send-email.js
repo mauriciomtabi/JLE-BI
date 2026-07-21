@@ -32,18 +32,28 @@ async function fetchSupabase(endpoint, method = 'GET', body = null) {
     return res.json();
 }
 
-async function sendResendEmail(to, subject, html, attachments = null) {
+async function sendResendEmail(to, subject, html, attachments = null, textAlt = null) {
     const url = "https://api.resend.com/emails";
     const headers = {
         "Authorization": `Bearer ${RESEND_API_KEY}`,
         "Content-Type": "application/json",
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     };
+    
+    const formattedSubject = subject.startsWith('[BI JLE]') ? subject : `[BI JLE] ${subject}`;
+    const defaultText = `[BI JLE TELECOM] ${formattedSubject}\n\nEste é um relatório gerado automaticamente pelo BI JLE Telecom.\nPor favor, visualize o e-mail em um leitor compatível com HTML para ver a tabela e os indicadores.\n\nAcesse o painel do BI: ${BI_URL}`;
+
     const body = {
         from: `"BI JLE Telecom" <${FROM_EMAIL}>`,
         to: to,
-        subject: subject,
-        html: html
+        subject: formattedSubject,
+        html: html,
+        text: textAlt || defaultText,
+        headers: {
+            "X-Entity-Ref-ID": `bi-report-${Date.now()}`,
+            "X-Auto-Response-Suppress": "OOF, AutoReply",
+            "Precedence": "bulk"
+        }
     };
     if (attachments && Array.isArray(attachments) && attachments.length > 0) {
         body.attachments = attachments;
