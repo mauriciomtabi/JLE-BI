@@ -93,25 +93,20 @@ try {
                 if (Test-Path $networkDir) {
                     $destinationPath = Join-Path $networkDir $extractedFile.Name
                     
-                    if (Test-Path $destinationPath) {
-                        Write-Output "O arquivo '$($extractedFile.Name)' ja existe na rede local."
-                        Write-Output "Este e-mail ja foi processado anteriormente. Pulando copia e ETL para evitar redundancia."
+                    Write-Output "Copiando/Atualizando arquivo na pasta de rede: $destinationPath ..."
+                    Copy-Item -Path $extractedFile.FullName -Destination $destinationPath -Force
+                    Write-Output "Cópia concluída com sucesso na rede local!"
+                    
+                    # 5. Executar o ETL de atualização
+                    if (Test-Path $etlScript) {
+                        Write-Output "Disparando script ETL ($etlScript)..."
+                        powershell.exe -ExecutionPolicy Bypass -File $etlScript
+                        Write-Output "BI atualizado com sucesso!"
                     } else {
-                        Write-Output "Copiando para a pasta de rede: $destinationPath ..."
-                        Copy-Item -Path $extractedFile.FullName -Destination $destinationPath -Force
-                        Write-Output "Copia concluida com sucesso na rede local!"
-                        
-                        # 5. Executar o ETL de atualizacao
-                        if (Test-Path $etlScript) {
-                            Write-Output "Disparando script ETL ($etlScript)..."
-                            powershell.exe -ExecutionPolicy Bypass -File $etlScript
-                            Write-Output "BI atualizado com sucesso!"
-                        } else {
-                            Write-Warning "Aviso: O script ETL '$etlScript' nao foi encontrado."
-                        }
+                        Write-Warning "Aviso: O script ETL '$etlScript' não foi encontrado."
                     }
                 } else {
-                    Write-Error "Erro: O diretorio de rede '$networkDir' nao esta acessivel. Certifique-se de estar conectado a rede JLE Telecom."
+                    Write-Error "Erro: O diretório de rede '$networkDir' não está acessível. Certifique-se de estar conectado à rede JLE Telecom."
                 }
             } else {
                 Write-Warning "Nenhum arquivo CSV ou Excel extraido de dentro do ZIP."
