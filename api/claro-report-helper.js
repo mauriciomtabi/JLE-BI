@@ -61,6 +61,20 @@ function formatCurrency(val) {
     return (val || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 }
 
+function calculateAgeInDays(dateStr, refDateStr) {
+    if (!dateStr || dateStr === '-') return -1;
+    try {
+        const parts = dateStr.split('-');
+        if (parts.length !== 3) return -1;
+        const cadDate = new Date(parts[0], parts[1] - 1, parts[2]);
+        const refDate = refDateStr ? new Date(refDateStr.split(' ')[0]) : new Date();
+        const diff = refDate - cadDate;
+        return Math.max(0, Math.floor(diff / (1000 * 60 * 60 * 24)));
+    } catch {
+        return -1;
+    }
+}
+
 function generateExcelAttachments(claroData) {
     const todayStr = new Date().toISOString().substring(0, 10);
     
@@ -70,7 +84,7 @@ function generateExcelAttachments(claroData) {
         return f === 'EM EXECUÇÃO' || f === 'EXECUTADO';
     });
     
-    // 2. Aprovado Aguardando Pedido (Fase: APROVADO)
+    // 2. Aguardando Pedido (Fase: APROVADO)
     const aprovadoRows = claroData.rows.filter(r => {
         const f = String(r.fase_atual_de_para || '').toUpperCase().trim();
         return f === 'APROVADO';
@@ -97,10 +111,10 @@ function generateExcelAttachments(claroData) {
     XLSX.utils.book_append_sheet(wb1, ws1, "Sem Aprovação");
     const buf1 = XLSX.write(wb1, { type: 'buffer', bookType: 'xlsx' });
     
-    // Gerar Workbook 2: Aprovado Aguardando Pedido
+    // Gerar Workbook 2: Aguardando Pedido
     const wb2 = XLSX.utils.book_new();
     const ws2 = XLSX.utils.json_to_sheet(mapToExcelJson(aprovadoRows));
-    XLSX.utils.book_append_sheet(wb2, ws2, "Aprovado Aguardando Pedido");
+    XLSX.utils.book_append_sheet(wb2, ws2, "Aguardando Pedido");
     const buf2 = XLSX.write(wb2, { type: 'buffer', bookType: 'xlsx' });
 
     // Distinct OS counts (excluding '-' placeholder)
@@ -113,7 +127,7 @@ function generateExcelAttachments(claroData) {
                 content: buf1.toString('base64')
             },
             {
-                filename: `Aprovado_Aguardando_Pedido_${todayStr}.xlsx`,
+                filename: `Aguardando_Pedido_${todayStr}.xlsx`,
                 content: buf2.toString('base64')
             }
         ],
@@ -126,10 +140,41 @@ function generateExcelAttachments(claroData) {
     };
 }
 
+function calculateAgingMetrics(rows, refDateStr) {
+    const osAgeMap = {};
+    rows.forEach(r => {
+        const os = r.os;
+        if (!os || os === '-') return;
+        const age = calculateAgeInDays(r.data_cadastro, refDateStr);
+        if (!osAgeMap[os]) {
+            osAgeMap[os] = { os, age, val: 0 };
+        }
+        osAgeMap[os].val += r.valor_total;
+    });
+
+    const osList = Object.values(osAgeMap);
+
+    const b3m = osList.filter(o => o.age > 90 && o.age <= 180);
+    const b6m = osList.filter(o => o.age > 180 && o.age <= 365);
+    const b1y = osList.filter(o => o.age > 365);
+
+    const sum = items => items.reduce((acc, c) => acc + c.val, 0);
+
+    return {
+        m3: { count: b3m.length, sum: sum(b3m) },
+        m6: { count: b6m.length, sum: sum(b6m) },
+        y1: { count: b1y.length, sum: sum(b1y) }
+    };
+}
+
 function buildClaroEmailHtml(reportName, metrics, dataDate) {
     const dateFormatted = dataDate ? dataDate.split(' ')[0].split('-').reverse().join('/') : new Date().toLocaleDateString('pt-BR');
     const timeStr = dataDate && dataDate.includes(' ') ? dataDate.split(' ')[1].substring(0, 5) : '';
     
+    // Métricas de Aging por Período (>3M, >6M, >1Ano)
+    const semAprovAging = calculateAgingMetrics(metrics.semAprovRows, dataDate);
+    const aprovAging = calculateAgingMetrics(metrics.aprovadoRows, dataDate);
+
     // Resumo por Categoria de Serviço
     const catSummary = {};
     const processRows = (rows, key) => {
@@ -192,9 +237,9 @@ function buildClaroEmailHtml(reportName, metrics, dataDate) {
                                         <div style="font-size: 12px; color: #7f8c8d; margin-top: 6px; font-weight: 600;">${metrics.semAprovCount} Ordens de Serviço</div>
                                     </td>
                                     <td width="4%"></td>
-                                    <!-- CARD APROVADO AGUARDANDO PEDIDO -->
+                                    <!-- CARD AGUARDANDO PEDIDO -->
                                     <td width="48%" style="background: rgba(39,174,96,0.06); border-radius: 12px; border-left: 5px solid #27ae60; padding: 20px; text-align: center; border-top: 1px solid rgba(39,174,96,0.15); border-right: 1px solid rgba(39,174,96,0.15); border-bottom: 1px solid rgba(39,174,96,0.15);">
-                                        <div style="font-size: 11px; color: #27ae60; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 6px;">✅ APROVADO AGUARD. PEDIDO</div>
+                                        <div style="font-size: 11px; color: #27ae60; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 6px;">✅ AGUARDANDO PEDIDO</div>
                                         <div style="font-size: 24px; font-weight: 800; color: #27ae60; line-height: 1.2;">${formatCurrency(metrics.aprovSum)}</div>
                                         <div style="font-size: 12px; color: #7f8c8d; margin-top: 6px; font-weight: 600;">${metrics.aprovCount} Ordens de Serviço</div>
                                     </td>
@@ -208,8 +253,55 @@ function buildClaroEmailHtml(reportName, metrics, dataDate) {
                         <td style="padding: 10px 40px;">
                             <div style="background: #eef9f1; border: 1px dashed #27ae60; border-radius: 10px; padding: 14px 20px; text-align: center; color: #1e824c; font-size: 13px; font-weight: 600;">
                                 📎 <strong>2 Planilhas Excel (.xlsx) anexadas a este e-mail:</strong><br>
-                                <span style="font-size: 12px; font-weight: 400; color: #27ae60;">Listagens detalhadas de todas as OSs em Sem Aprovação e Aprovado Aguardando Pedido.</span>
+                                <span style="font-size: 12px; font-weight: 400; color: #27ae60;">Listagens detalhadas de todas as OSs em Sem Aprovação e Aguardando Pedido.</span>
                             </div>
+                        </td>
+                    </tr>
+
+                    <!-- TABELA RESUMO POR AGING (OSs EM ABERTO HÁ MAIS DE 3M, 6M E 1 ANO) -->
+                    <tr>
+                        <td style="padding: 20px 40px 10px;">
+                            <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: #57606f; font-weight: 700; margin-bottom: 12px;">⏳ Aging de OSs em Aberto (Tempo de Espera)</div>
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border: 1px solid #e1e8ed; border-radius: 8px; overflow: hidden;">
+                                <tr style="background: #f8f9fa;">
+                                    <th style="padding: 12px 16px; text-align: left; font-size: 12px; color: #57606f; font-weight: 700;">Período em Aberto</th>
+                                    <th style="padding: 12px 16px; text-align: right; font-size: 12px; color: #e67e22; font-weight: 700;">Sem Aprovação</th>
+                                    <th style="padding: 12px 16px; text-align: right; font-size: 12px; color: #27ae60; font-weight: 700;">Aguardando Pedido</th>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #edf2f7;">
+                                    <td style="padding: 10px 16px; font-size: 13px; color: #2d3748; font-weight: 600;">⏱️ <strong>Mais de 3 Meses</strong> <span style="font-size:11px; color:#7f8c8d;">(91 a 180 dias)</span></td>
+                                    <td style="padding: 10px 16px; font-size: 13px; color: #e67e22; font-weight: 700; text-align: right;">
+                                        ${formatCurrency(semAprovAging.m3.sum)}<br>
+                                        <span style="font-size:11px; font-weight:600; color:#7f8c8d;">${semAprovAging.m3.count} OSs</span>
+                                    </td>
+                                    <td style="padding: 10px 16px; font-size: 13px; color: #27ae60; font-weight: 700; text-align: right;">
+                                        ${aprovAging.m3.sum > 0 ? formatCurrency(aprovAging.m3.sum) : '-'}<br>
+                                        <span style="font-size:11px; font-weight:600; color:#7f8c8d;">${aprovAging.m3.count > 0 ? aprovAging.m3.count + ' OSs' : ''}</span>
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #edf2f7;">
+                                    <td style="padding: 10px 16px; font-size: 13px; color: #2d3748; font-weight: 600;">⏳ <strong>Mais de 6 Meses</strong> <span style="font-size:11px; color:#7f8c8d;">(181 a 365 dias)</span></td>
+                                    <td style="padding: 10px 16px; font-size: 13px; color: #d35400; font-weight: 700; text-align: right;">
+                                        ${formatCurrency(semAprovAging.m6.sum)}<br>
+                                        <span style="font-size:11px; font-weight:600; color:#7f8c8d;">${semAprovAging.m6.count} OSs</span>
+                                    </td>
+                                    <td style="padding: 10px 16px; font-size: 13px; color: #27ae60; font-weight: 700; text-align: right;">
+                                        ${aprovAging.m6.sum > 0 ? formatCurrency(aprovAging.m6.sum) : '-'}<br>
+                                        <span style="font-size:11px; font-weight:600; color:#7f8c8d;">${aprovAging.m6.count > 0 ? aprovAging.m6.count + ' OSs' : ''}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px 16px; font-size: 13px; color: #c0392b; font-weight: 700;">🚨 <strong>Mais de 1 Ano</strong> <span style="font-size:11px; color:#7f8c8d; font-weight:normal;">(> 365 dias)</span></td>
+                                    <td style="padding: 10px 16px; font-size: 13px; color: #c0392b; font-weight: 800; text-align: right;">
+                                        ${formatCurrency(semAprovAging.y1.sum)}<br>
+                                        <span style="font-size:11px; font-weight:600; color:#c0392b;">${semAprovAging.y1.count} OSs</span>
+                                    </td>
+                                    <td style="padding: 10px 16px; font-size: 13px; color: #27ae60; font-weight: 700; text-align: right;">
+                                        ${aprovAging.y1.sum > 0 ? formatCurrency(aprovAging.y1.sum) : '-'}<br>
+                                        <span style="font-size:11px; font-weight:600; color:#7f8c8d;">${aprovAging.y1.count > 0 ? aprovAging.y1.count + ' OSs' : ''}</span>
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
 
@@ -221,7 +313,7 @@ function buildClaroEmailHtml(reportName, metrics, dataDate) {
                                 <tr style="background: #f8f9fa;">
                                     <th style="padding: 12px 16px; text-align: left; font-size: 12px; color: #57606f; font-weight: 700;">Categoria</th>
                                     <th style="padding: 12px 16px; text-align: right; font-size: 12px; color: #e67e22; font-weight: 700;">Sem Aprovação</th>
-                                    <th style="padding: 12px 16px; text-align: right; font-size: 12px; color: #27ae60; font-weight: 700;">Aprovado Aguard.</th>
+                                    <th style="padding: 12px 16px; text-align: right; font-size: 12px; color: #27ae60; font-weight: 700;">Aguardando Pedido</th>
                                 </tr>
                                 ${catRowsHtml}
                             </table>
