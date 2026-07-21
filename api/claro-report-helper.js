@@ -78,7 +78,6 @@ function generateExcelAttachments(claroData) {
     
     const mapToExcelJson = (arr) => arr.map(r => ({
         "OS": r.os,
-        "Categoria": r.categoria,
         "Projeto Gerencial": r.projeto_gerencial,
         "Cidade": r.cidade,
         "UF": r.uf,
@@ -128,24 +127,31 @@ function generateExcelAttachments(claroData) {
 
 function buildClaroEmailHtml(reportName, metrics, dataDate) {
     const dateFormatted = dataDate ? dataDate.split(' ')[0].split('-').reverse().join('/') : new Date().toLocaleDateString('pt-BR');
+    const timeStr = dataDate && dataDate.includes(' ') ? dataDate.split(' ')[1].substring(0, 5) : '';
     
-    // Resumo por Categoria
-    const catSummary = {};
+    // Resumo por Projeto Gerencial
+    const projSummary = {};
     const processRows = (rows, key) => {
         rows.forEach(r => {
-            const cat = r.categoria || 'Outros';
-            if (!catSummary[cat]) catSummary[cat] = { semAprov: 0, aprov: 0 };
-            catSummary[cat][key] += r.valor_total;
+            const proj = r.projeto_gerencial && r.projeto_gerencial !== '-' ? r.projeto_gerencial : 'Sem Projeto';
+            if (!projSummary[proj]) projSummary[proj] = { semAprov: 0, aprov: 0 };
+            projSummary[proj][key] += r.valor_total;
         });
     };
     processRows(metrics.semAprovRows, 'semAprov');
     processRows(metrics.aprovadoRows, 'aprov');
 
-    const catRowsHtml = Object.keys(catSummary).map(cat => `
+    const sortedProjects = Object.keys(projSummary).sort((a, b) => {
+        const totalA = projSummary[a].semAprov + projSummary[a].aprov;
+        const totalB = projSummary[b].semAprov + projSummary[b].aprov;
+        return totalB - totalA;
+    });
+
+    const projRowsHtml = sortedProjects.map(proj => `
         <tr style="border-bottom: 1px solid #edf2f7;">
-            <td style="padding: 10px 16px; font-size: 13px; color: #2d3748; font-weight: 600;">${cat}</td>
-            <td style="padding: 10px 16px; font-size: 13px; color: #e67e22; font-weight: 700; text-align: right;">${formatCurrency(catSummary[cat].semAprov)}</td>
-            <td style="padding: 10px 16px; font-size: 13px; color: #27ae60; font-weight: 700; text-align: right;">${formatCurrency(catSummary[cat].aprov)}</td>
+            <td style="padding: 10px 16px; font-size: 12px; color: #2d3748; font-weight: 600;">${proj}</td>
+            <td style="padding: 10px 16px; font-size: 12px; color: #e67e22; font-weight: 700; text-align: right;">${projSummary[proj].semAprov > 0 ? formatCurrency(projSummary[proj].semAprov) : '-'}</td>
+            <td style="padding: 10px 16px; font-size: 12px; color: #27ae60; font-weight: 700; text-align: right;">${projSummary[proj].aprov > 0 ? formatCurrency(projSummary[proj].aprov) : '-'}</td>
         </tr>
     `).join('');
 
@@ -160,13 +166,17 @@ function buildClaroEmailHtml(reportName, metrics, dataDate) {
         <tr>
             <td align="center">
                 <table width="640" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid #e1e8ed;">
-                    <!-- HEADER -->
+                    <!-- HEADER IGUAL AO MDU (ALINHADO A ESQUERDA + BARRA LARANJA) -->
                     <tr>
-                        <td style="background: linear-gradient(135deg, #004f71, #002d42); padding: 32px 40px; text-align: center;">
-                            <div style="font-size: 12px; font-weight: 700; color: #38ef7d; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px;">JLE TELECOM — ANALÍTICO CLARO</div>
-                            <h1 style="margin: 0; font-size: 24px; color: #ffffff; font-weight: 800; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">${reportName}</h1>
-                            <div style="font-size: 13px; color: #e0e0e0; margin-top: 8px;">Base atualizada em: <strong>${dateFormatted}</strong></div>
+                        <td style="background: #004f71; padding: 32px 40px; text-align: left;">
+                            <h1 style="margin: 0; font-size: 26px; color: #ffffff; font-weight: 800;">${reportName}</h1>
+                            <div style="font-size: 13px; color: #e0e0e0; margin-top: 8px;">
+                                Atualizado em: <span style="text-decoration: underline; color: #38ef7d; font-weight: 700;">${dateFormatted}</span> ${timeStr}
+                            </div>
                         </td>
+                    </tr>
+                    <tr>
+                        <td style="height: 4px; background: #f39f18;"></td>
                     </tr>
 
                     <!-- CARDS DE METRICAS (KPIs) -->
@@ -202,17 +212,17 @@ function buildClaroEmailHtml(reportName, metrics, dataDate) {
                         </td>
                     </tr>
 
-                    <!-- TABELA RESUMO POR CATEGORIA -->
+                    <!-- TABELA RESUMO POR PROJETO -->
                     <tr>
                         <td style="padding: 20px 40px 30px;">
-                            <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: #57606f; font-weight: 700; margin-bottom: 12px;">Resumo Financeiro por Categoria</div>
+                            <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: #57606f; font-weight: 700; margin-bottom: 12px;">Resumo Financeiro por Projeto</div>
                             <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border: 1px solid #e1e8ed; border-radius: 8px; overflow: hidden;">
                                 <tr style="background: #f8f9fa;">
-                                    <th style="padding: 12px 16px; text-align: left; font-size: 12px; color: #57606f; font-weight: 700;">Categoria</th>
+                                    <th style="padding: 12px 16px; text-align: left; font-size: 12px; color: #57606f; font-weight: 700;">Projeto</th>
                                     <th style="padding: 12px 16px; text-align: right; font-size: 12px; color: #e67e22; font-weight: 700;">Sem Aprovação</th>
                                     <th style="padding: 12px 16px; text-align: right; font-size: 12px; color: #27ae60; font-weight: 700;">Aprovado Aguard.</th>
                                 </tr>
-                                ${catRowsHtml}
+                                ${projRowsHtml}
                             </table>
                         </td>
                     </tr>
