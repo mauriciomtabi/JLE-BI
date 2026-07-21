@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-07-21 09:31:54
+// Dados MDU Compactados - Gerado em: 2026-07-21 10:00:17
 window.MDU_METADATA = {
-    "generated_at": "2026-07-21 09:31:54",
+    "generated_at": "2026-07-21 10:00:17",
     "total_rows": 5221,
     "geocoded_new": 0
 };
@@ -67595,15 +67595,15 @@ window.MDU_DATA = [
         "endereco": "R D PEDRO II 1610",
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
-        "aging": "3.024",
-        "relatorio_por": "",
+        "aging": "OK",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
-        "status": "Relatório HBOX",
-        "prog": 0.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610730334",
         "area": "MTSAA",
         "node": "MTSAA",
-        "caixa_m": "",
+        "caixa_m": "MTSAA.001.M050",
         "hps": 12,
         "equipe": "Alessandro Fagundes",
         "primeira_visita": "22/08/2025",
@@ -67611,7 +67611,7 @@ window.MDU_DATA = [
         "data_interna": "22/08",
         "data_fusao": "22/08",
         "data_baixa": "22/08",
-        "data_relatorio": "04/09/2025",
+        "data_relatorio": "21/07/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 520.0,
