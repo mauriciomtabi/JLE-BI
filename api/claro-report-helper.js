@@ -25,9 +25,9 @@ function loadClaroData() {
     const l = db.lookups;
     
     const rows = db.rows.map(r => ({
-        os: r[0] || '-',
-        pep: r[1] || '-',
-        categoria: l.categorias[r[2]] || '-',
+        pep: r[0] || '-',
+        categoria: l.categorias[r[1]] || '-',
+        os: r[2] || '-',
         cidade: l.cidades[r[3]] || '-',
         uf: l.ufs[r[4]] || '-',
         projeto: l.projetos[r[5]] || '-',
@@ -78,6 +78,7 @@ function generateExcelAttachments(claroData) {
     
     const mapToExcelJson = (arr) => arr.map(r => ({
         "OS": r.os,
+        "Categoria": r.categoria,
         "Projeto Gerencial": r.projeto_gerencial,
         "Cidade": r.cidade,
         "UF": r.uf,
@@ -129,29 +130,29 @@ function buildClaroEmailHtml(reportName, metrics, dataDate) {
     const dateFormatted = dataDate ? dataDate.split(' ')[0].split('-').reverse().join('/') : new Date().toLocaleDateString('pt-BR');
     const timeStr = dataDate && dataDate.includes(' ') ? dataDate.split(' ')[1].substring(0, 5) : '';
     
-    // Resumo por Projeto Gerencial
-    const projSummary = {};
+    // Resumo por Categoria de Serviço
+    const catSummary = {};
     const processRows = (rows, key) => {
         rows.forEach(r => {
-            const proj = r.projeto_gerencial && r.projeto_gerencial !== '-' ? r.projeto_gerencial : 'Sem Projeto';
-            if (!projSummary[proj]) projSummary[proj] = { semAprov: 0, aprov: 0 };
-            projSummary[proj][key] += r.valor_total;
+            const cat = r.categoria && r.categoria !== '-' ? r.categoria : 'OUTROS';
+            if (!catSummary[cat]) catSummary[cat] = { semAprov: 0, aprov: 0 };
+            catSummary[cat][key] += r.valor_total;
         });
     };
     processRows(metrics.semAprovRows, 'semAprov');
     processRows(metrics.aprovadoRows, 'aprov');
 
-    const sortedProjects = Object.keys(projSummary).sort((a, b) => {
-        const totalA = projSummary[a].semAprov + projSummary[a].aprov;
-        const totalB = projSummary[b].semAprov + projSummary[b].aprov;
+    const sortedCats = Object.keys(catSummary).sort((a, b) => {
+        const totalA = catSummary[a].semAprov + catSummary[a].aprov;
+        const totalB = catSummary[b].semAprov + catSummary[b].aprov;
         return totalB - totalA;
     });
 
-    const projRowsHtml = sortedProjects.map(proj => `
+    const catRowsHtml = sortedCats.map(cat => `
         <tr style="border-bottom: 1px solid #edf2f7;">
-            <td style="padding: 10px 16px; font-size: 12px; color: #2d3748; font-weight: 600;">${proj}</td>
-            <td style="padding: 10px 16px; font-size: 12px; color: #e67e22; font-weight: 700; text-align: right;">${projSummary[proj].semAprov > 0 ? formatCurrency(projSummary[proj].semAprov) : '-'}</td>
-            <td style="padding: 10px 16px; font-size: 12px; color: #27ae60; font-weight: 700; text-align: right;">${projSummary[proj].aprov > 0 ? formatCurrency(projSummary[proj].aprov) : '-'}</td>
+            <td style="padding: 10px 16px; font-size: 13px; color: #2d3748; font-weight: 600;">${cat}</td>
+            <td style="padding: 10px 16px; font-size: 13px; color: #e67e22; font-weight: 700; text-align: right;">${catSummary[cat].semAprov > 0 ? formatCurrency(catSummary[cat].semAprov) : '-'}</td>
+            <td style="padding: 10px 16px; font-size: 13px; color: #27ae60; font-weight: 700; text-align: right;">${catSummary[cat].aprov > 0 ? formatCurrency(catSummary[cat].aprov) : '-'}</td>
         </tr>
     `).join('');
 
@@ -212,17 +213,17 @@ function buildClaroEmailHtml(reportName, metrics, dataDate) {
                         </td>
                     </tr>
 
-                    <!-- TABELA RESUMO POR PROJETO -->
+                    <!-- TABELA RESUMO POR CATEGORIA -->
                     <tr>
                         <td style="padding: 20px 40px 30px;">
-                            <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: #57606f; font-weight: 700; margin-bottom: 12px;">Resumo Financeiro por Projeto</div>
+                            <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: #57606f; font-weight: 700; margin-bottom: 12px;">Resumo Financeiro por Categoria</div>
                             <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border: 1px solid #e1e8ed; border-radius: 8px; overflow: hidden;">
                                 <tr style="background: #f8f9fa;">
-                                    <th style="padding: 12px 16px; text-align: left; font-size: 12px; color: #57606f; font-weight: 700;">Projeto</th>
+                                    <th style="padding: 12px 16px; text-align: left; font-size: 12px; color: #57606f; font-weight: 700;">Categoria</th>
                                     <th style="padding: 12px 16px; text-align: right; font-size: 12px; color: #e67e22; font-weight: 700;">Sem Aprovação</th>
                                     <th style="padding: 12px 16px; text-align: right; font-size: 12px; color: #27ae60; font-weight: 700;">Aprovado Aguard.</th>
                                 </tr>
-                                ${projRowsHtml}
+                                ${catRowsHtml}
                             </table>
                         </td>
                     </tr>
