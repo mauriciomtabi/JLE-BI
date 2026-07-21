@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-07-21 15:00:17
+// Dados MDU Compactados - Gerado em: 2026-07-21 16:00:12
 window.MDU_METADATA = {
-    "generated_at": "2026-07-21 15:00:17",
+    "generated_at": "2026-07-21 16:00:12",
     "total_rows": 5221,
-    "geocoded_new": 3
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -163340,10 +163340,10 @@ window.MDU_DATA = [
         "cidade": "NOVO HAMBURGO",
         "cluster": "NHO",
         "aging": "OK",
-        "relatorio_por": "",
+        "relatorio_por": "MATHEUS",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "61396802",
         "area": "GRIAA",
         "node": "",
@@ -163355,7 +163355,7 @@ window.MDU_DATA = [
         "data_interna": "30/06",
         "data_fusao": "30/06",
         "data_baixa": "08/07",
-        "data_relatorio": "",
+        "data_relatorio": "21/07/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
@@ -166763,11 +166763,11 @@ window.MDU_DATA = [
         "endereco": "AV CRISTOVÃO COLOMBO 4308",
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
-        "aging": "0",
+        "aging": "OK",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Baixa",
-        "prog": 63.0,
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "",
         "area": "BVSAA",
         "node": "",
@@ -166778,7 +166778,7 @@ window.MDU_DATA = [
         "segunda_visita": "",
         "data_interna": "17/07/2026",
         "data_fusao": "17/07/2026",
-        "data_baixa": "",
+        "data_baixa": "21/07/2026",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
