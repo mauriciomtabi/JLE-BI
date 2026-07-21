@@ -32,7 +32,7 @@ async function fetchSupabase(endpoint, method = 'GET', body = null) {
     return res.json();
 }
 
-async function sendResendEmail(to, subject, html) {
+async function sendResendEmail(to, subject, html, attachments = null) {
     const url = "https://api.resend.com/emails";
     const headers = {
         "Authorization": `Bearer ${RESEND_API_KEY}`,
@@ -45,6 +45,9 @@ async function sendResendEmail(to, subject, html) {
         subject: subject,
         html: html
     };
+    if (attachments && Array.isArray(attachments) && attachments.length > 0) {
+        body.attachments = attachments;
+    }
     const res = await fetch(url, {
         method: 'POST',
         headers: headers,
@@ -416,11 +419,21 @@ module.exports = async (req, res) => {
         
         const config = configs[0];
         
-        // 2. Extrair contagens do MDU
-        const mduData = await getMduStatusCounts();
-        
-        // 3. Montar e enviar e-mail
-        const emailHtml = buildEmailHtml(mduData, config.report_name);
+        // 2. Extrair dados e montar e-mail com base no tipo
+        let emailHtml;
+        let attachments = null;
+
+        if (config.report_type === 'claro') {
+            const claroHelper = require('./claro-report-helper');
+            const claroData = claroHelper.loadClaroData();
+            const excelRes = claroHelper.generateExcelAttachments(claroData);
+            attachments = excelRes.attachments;
+            emailHtml = claroHelper.buildClaroEmailHtml(config.report_name, excelRes, claroData.generated_at);
+        } else {
+            const mduData = await getMduStatusCounts();
+            emailHtml = buildEmailHtml(mduData, config.report_name);
+        }
+
         const utcDate = new Date();
         const brOffset = -3 * 60 * 60 * 1000;
         const localDate = new Date(utcDate.getTime() + brOffset);
@@ -430,7 +443,7 @@ module.exports = async (req, res) => {
         const subject = `${config.report_name} - ${dayStr}/${monthStr}/${yearStr}`;
         
         const cleanRecipients = (config.recipients || []).filter(e => !e.startsWith('__sched:') && !e.startsWith('__lock:'));
-        await sendResendEmail(cleanRecipients, subject, emailHtml);
+        await sendResendEmail(cleanRecipients, subject, emailHtml, attachments);
         
         // 4. Salvar last_sent_at
         await fetchSupabase(`bi_email_reports?id=eq.${id}`, 'PATCH', {

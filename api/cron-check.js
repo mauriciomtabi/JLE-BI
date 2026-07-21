@@ -36,7 +36,7 @@ async function fetchSupabase(endpoint, method = 'GET', body = null) {
     return res.json();
 }
 
-async function sendResendEmail(to, subject, html) {
+async function sendResendEmail(to, subject, html, attachments = null) {
     const url = "https://api.resend.com/emails";
     const headers = {
         "Authorization": `Bearer ${RESEND_API_KEY}`,
@@ -49,6 +49,9 @@ async function sendResendEmail(to, subject, html) {
         subject: subject,
         html: html
     };
+    if (attachments && Array.isArray(attachments) && attachments.length > 0) {
+        body.attachments = attachments;
+    }
     const res = await fetch(url, {
         method: 'POST',
         headers: headers,
@@ -456,22 +459,33 @@ module.exports = async (req, res) => {
                 continue;
             }
 
-            // Se chegamos aqui, precisamos disparar o e-mail. Baixamos a planilha uma única vez.
-            if (!mduData) {
-                mduData = await getMduStatusCounts();
-            }
+            // Se chegamos aqui, precisamos disparar o e-mail.
+            let emailHtml;
+            let attachments = null;
 
-            if (!mduData) {
-                actions.push({ name: config.report_name, status: "failed_to_get_sheets_data" });
-                continue;
+            if (config.report_type === 'claro') {
+                const claroHelper = require('./claro-report-helper');
+                const claroData = claroHelper.loadClaroData();
+                const excelRes = claroHelper.generateExcelAttachments(claroData);
+                attachments = excelRes.attachments;
+                emailHtml = claroHelper.buildClaroEmailHtml(config.report_name, excelRes, claroData.generated_at);
+            } else {
+                if (!mduData) {
+                    mduData = await getMduStatusCounts();
+                }
+
+                if (!mduData) {
+                    actions.push({ name: config.report_name, status: "failed_to_get_sheets_data" });
+                    continue;
+                }
+                emailHtml = buildEmailHtml(mduData, config.report_name);
             }
 
             // Disparar
-            const emailHtml = buildEmailHtml(mduData, config.report_name);
             const subject = `${config.report_name} - ${day}/${month}/${year}`;
             const cleanRecipients = (config.recipients || []).filter(e => !e.startsWith("__sched:") && !e.startsWith("__lock:"));
             
-            await sendResendEmail(cleanRecipients, subject, emailHtml);
+            await sendResendEmail(cleanRecipients, subject, emailHtml, attachments);
             
             // Atualizar last_sent_at
             await fetchSupabase(`bi_email_reports?id=eq.${config.id}`, 'PATCH', {
