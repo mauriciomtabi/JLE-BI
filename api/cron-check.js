@@ -430,9 +430,9 @@ module.exports = async (req, res) => {
                 continue;
             }
 
-            // 2. Trava de envio diário (Apenas para disparos automáticos via cron)
-            if (config.last_cron_sent_at) {
-                const lastSentDate = new Date(config.last_cron_sent_at);
+            // 2. Trava de envio diário (Impede múltiplos disparos no mesmo dia)
+            if (config.last_sent_at) {
+                const lastSentDate = new Date(config.last_sent_at);
                 const lastSentBrt = new Date(lastSentDate.getTime() + brOffset);
                 if (lastSentBrt.getUTCDate() === localDate.getUTCDate() &&
                     lastSentBrt.getUTCMonth() === localDate.getUTCMonth() &&
@@ -487,10 +487,9 @@ module.exports = async (req, res) => {
             
             await sendResendEmail(cleanRecipients, subject, emailHtml, attachments);
             
-            // Atualizar last_sent_at e last_cron_sent_at
+            // Atualizar last_sent_at no Supabase
             await fetchSupabase(`bi_email_reports?id=eq.${config.id}`, 'PATCH', {
                 last_sent_at: new Date().toISOString(),
-                last_cron_sent_at: new Date().toISOString(),
                 updated_at: new Date().toISOString()
             });
 
