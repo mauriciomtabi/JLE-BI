@@ -209,7 +209,7 @@ function buildClaroEmailHtml(reportName, metrics, dataDate) {
         const iconSvg = CATEGORY_ICONS[cat] || DEFAULT_CAT_ICON;
         const bgRow = idx % 2 === 0 ? '#ffffff' : '#f8fafc';
         return `
-        <tr style="border-bottom: 1px solid #e2e8f0; background-color: ${bgRow}; transition: background 0.2s;">
+        <tr style="border-bottom: 1px solid #e2e8f0; background-color: ${bgRow};">
             <td style="padding: 12px 18px;">
                 <table cellpadding="0" cellspacing="0" border="0">
                     <tr>
@@ -260,7 +260,7 @@ function buildClaroEmailHtml(reportName, metrics, dataDate) {
 
                     <!-- CARDS DE MÉTRICAS KPIs PRINCIPAIS -->
                     <tr>
-                        <td style="padding: 32px 40px 16px;">
+                        <td style="padding: 32px 40px 24px;">
                             <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                 <tr>
                                     <!-- CARD SEM APROVAÇÃO -->
@@ -301,101 +301,86 @@ function buildClaroEmailHtml(reportName, metrics, dataDate) {
                         </td>
                     </tr>
 
-                    <!-- BANNER REMODELADO: ARQUIVOS EXCEL ANEXADOS (EXECUTIVO) -->
+                    <!-- SEÇÃO REMODELADA: AGING DE OSs EM ABERTO (3 CARTÕES EXECUTIVOS LADO A LADO) -->
                     <tr>
-                        <td style="padding: 10px 40px 24px;">
-                            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: #f8fafc; border: 1px solid #cbd5e1; border-left: 4px solid #0284c7; border-radius: 12px; padding: 16px 20px;">
-                                <tr>
-                                    <td width="42" style="vertical-align: middle;">
-                                        <div style="width: 36px; height: 36px; border-radius: 8px; background: #e0f2fe; display: flex; align-items: center; justify-content: center; text-align: center; line-height: 36px;">
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M8 13h8"/><path d="M8 17h8"/><path d="M10 9h2"/></svg>
-                                        </div>
-                                    </td>
-                                    <td style="vertical-align: middle; padding-left: 12px;">
-                                        <div style="font-size: 13px; font-weight: 800; color: #0f172a; letter-spacing: -0.2px;">2 Planilhas Excel (.xlsx) Anexadas a este E-mail</div>
-                                        <div style="font-size: 12px; color: #475569; margin-top: 3px; font-weight: 500;">
-                                            Listagens analíticas completas: 
-                                            <strong style="color: #ea580c;">Sem_Aprovacao.xlsx</strong> e 
-                                            <strong style="color: #16a34a;">Aguardando_Pedido.xlsx</strong>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-
-                    <!-- SEÇÃO REMODELADA: AGING DE OSs EM ABERTO (EXECUTIVE GRID) -->
-                    <tr>
-                        <td style="padding: 8px 40px 24px;">
-                            <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #64748b; font-weight: 800; margin-bottom: 14px;">📊 AGING DE OSs EM ABERTO (TEMPO DE ESPERA)</div>
+                        <td style="padding: 0 40px 28px;">
+                            <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #64748b; font-weight: 800; margin-bottom: 14px;">⏳ AGING DE OSs EM ABERTO</div>
                             
-                            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; background: #ffffff;">
-                                <tr style="background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
-                                    <th style="padding: 12px 18px; text-align: left; font-size: 11px; color: #475569; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px;">Período em Aberto</th>
-                                    <th style="padding: 12px 18px; text-align: right; font-size: 11px; color: #ea580c; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px;">Sem Aprovação</th>
-                                    <th style="padding: 12px 18px; text-align: right; font-size: 11px; color: #16a34a; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px;">Aguardando Pedido</th>
-                                </tr>
-                                
-                                <!-- > 3 MESES -->
-                                <tr style="border-bottom: 1px solid #f1f5f9;">
-                                    <td style="padding: 14px 18px; vertical-align: middle;">
-                                        <span style="background: #fef3c7; color: #b45309; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 800; display: inline-block; margin-bottom: 3px;">3 a 6 MESES</span>
-                                        <div style="font-size: 12px; color: #475569; font-weight: 600;">91 a 180 dias de espera</div>
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <!-- BLOCO 1: 3 A 6 MESES -->
+                                    <td width="31%" style="background: #fefce8; border: 1px solid #fef08a; border-radius: 12px; padding: 16px 14px; vertical-align: top;">
+                                        <div style="display: inline-block; background: #fef3c7; color: #b45309; padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">
+                                            3 a 6 MESES
+                                        </div>
+                                        
+                                        <!-- Sem Aprovação -->
+                                        <div style="margin-top: 12px;">
+                                            <div style="font-size: 10px; color: #c2410c; text-transform: uppercase; font-weight: 800;">SEM APROVAÇÃO</div>
+                                            <div style="font-size: 14px; font-weight: 800; color: #9a3412; margin-top: 2px;">${formatCurrency(semAprovAging.m3.sum)}</div>
+                                            <div style="font-size: 11px; font-weight: 700; color: #ea580c; margin-top: 1px;">${semAprovAging.m3.count} OSs</div>
+                                        </div>
+                                        
+                                        <!-- Aguardando Pedido -->
+                                        <div style="margin-top: 10px; padding-top: 8px; border-top: 1px dashed #fde047;">
+                                            <div style="font-size: 10px; color: #15803d; text-transform: uppercase; font-weight: 800;">AGUARD. PEDIDO</div>
+                                            <div style="font-size: 13px; font-weight: 800; color: #166534; margin-top: 2px;">${aprovAging.m3.sum > 0 ? formatCurrency(aprovAging.m3.sum) : '-'}</div>
+                                            <div style="font-size: 11px; font-weight: 700; color: #16a34a; margin-top: 1px;">${aprovAging.m3.count > 0 ? aprovAging.m3.count + ' OSs' : ''}</div>
+                                        </div>
                                     </td>
-                                    <td style="padding: 14px 18px; text-align: right; vertical-align: middle;">
-                                        <div style="font-size: 14px; font-weight: 800; color: #b45309;">${formatCurrency(semAprovAging.m3.sum)}</div>
-                                        <div style="font-size: 11px; color: #78350f; font-weight: 700; margin-top: 2px;">${semAprovAging.m3.count} OSs</div>
-                                    </td>
-                                    <td style="padding: 14px 18px; text-align: right; vertical-align: middle;">
-                                        ${aprovAging.m3.sum > 0 ? `
-                                            <div style="font-size: 14px; font-weight: 800; color: #15803d;">${formatCurrency(aprovAging.m3.sum)}</div>
-                                            <div style="font-size: 11px; color: #166534; font-weight: 700; margin-top: 2px;">${aprovAging.m3.count} OSs</div>
-                                        ` : '<span style="color:#cbd5e1; font-weight:600;">-</span>'}
-                                    </td>
-                                </tr>
 
-                                <!-- > 6 MESES -->
-                                <tr style="border-bottom: 1px solid #f1f5f9; background: #fffcf5;">
-                                    <td style="padding: 14px 18px; vertical-align: middle;">
-                                        <span style="background: #ffedd5; color: #c2410c; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 800; display: inline-block; margin-bottom: 3px;">6 a 12 MESES</span>
-                                        <div style="font-size: 12px; color: #475569; font-weight: 600;">181 a 365 dias de espera</div>
-                                    </td>
-                                    <td style="padding: 14px 18px; text-align: right; vertical-align: middle;">
-                                        <div style="font-size: 14px; font-weight: 800; color: #c2410c;">${formatCurrency(semAprovAging.m6.sum)}</div>
-                                        <div style="font-size: 11px; color: #9a3412; font-weight: 700; margin-top: 2px;">${semAprovAging.m6.count} OSs</div>
-                                    </td>
-                                    <td style="padding: 14px 18px; text-align: right; vertical-align: middle;">
-                                        ${aprovAging.m6.sum > 0 ? `
-                                            <div style="font-size: 14px; font-weight: 800; color: #15803d;">${formatCurrency(aprovAging.m6.sum)}</div>
-                                            <div style="font-size: 11px; color: #166534; font-weight: 700; margin-top: 2px;">${aprovAging.m6.count} OSs</div>
-                                        ` : '<span style="color:#cbd5e1; font-weight:600;">-</span>'}
-                                    </td>
-                                </tr>
+                                    <td width="3.5%"></td>
 
-                                <!-- > 1 ANO -->
-                                <tr style="background: #fef2f2;">
-                                    <td style="padding: 14px 18px; vertical-align: middle;">
-                                        <span style="background: #fee2e2; color: #991b1b; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 800; display: inline-block; margin-bottom: 3px;">MAIS DE 1 ANO</span>
-                                        <div style="font-size: 12px; color: #991b1b; font-weight: 700;">Acima de 365 dias em aberto</div>
+                                    <!-- BLOCO 2: 6 A 12 MESES -->
+                                    <td width="31%" style="background: #fff7ed; border: 1px solid #ffedd5; border-radius: 12px; padding: 16px 14px; vertical-align: top;">
+                                        <div style="display: inline-block; background: #ffedd5; color: #c2410c; padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">
+                                            6 a 12 MESES
+                                        </div>
+                                        
+                                        <!-- Sem Aprovação -->
+                                        <div style="margin-top: 12px;">
+                                            <div style="font-size: 10px; color: #c2410c; text-transform: uppercase; font-weight: 800;">SEM APROVAÇÃO</div>
+                                            <div style="font-size: 14px; font-weight: 800; color: #9a3412; margin-top: 2px;">${formatCurrency(semAprovAging.m6.sum)}</div>
+                                            <div style="font-size: 11px; font-weight: 700; color: #ea580c; margin-top: 1px;">${semAprovAging.m6.count} OSs</div>
+                                        </div>
+                                        
+                                        <!-- Aguardando Pedido -->
+                                        <div style="margin-top: 10px; padding-top: 8px; border-top: 1px dashed #fed7aa;">
+                                            <div style="font-size: 10px; color: #15803d; text-transform: uppercase; font-weight: 800;">AGUARD. PEDIDO</div>
+                                            <div style="font-size: 13px; font-weight: 800; color: #94a3b8; margin-top: 2px;">-</div>
+                                        </div>
                                     </td>
-                                    <td style="padding: 14px 18px; text-align: right; vertical-align: middle;">
-                                        <div style="font-size: 15px; font-weight: 800; color: #991b1b;">${formatCurrency(semAprovAging.y1.sum)}</div>
-                                        <div style="font-size: 11px; color: #991b1b; font-weight: 800; margin-top: 2px;">${semAprovAging.y1.count} OSs Criticas</div>
-                                    </td>
-                                    <td style="padding: 14px 18px; text-align: right; vertical-align: middle;">
-                                        ${aprovAging.y1.sum > 0 ? `
-                                            <div style="font-size: 14px; font-weight: 800; color: #15803d;">${formatCurrency(aprovAging.y1.sum)}</div>
-                                            <div style="font-size: 11px; color: #166534; font-weight: 700; margin-top: 2px;">${aprovAging.y1.count} OSs</div>
-                                        ` : '<span style="color:#cbd5e1; font-weight:600;">-</span>'}
+
+                                    <td width="3.5%"></td>
+
+                                    <!-- BLOCO 3: MAIS DE 1 ANO -->
+                                    <td width="31%" style="background: #fef2f2; border: 1px solid #fee2e2; border-radius: 12px; padding: 16px 14px; vertical-align: top;">
+                                        <div style="display: inline-block; background: #fee2e2; color: #991b1b; padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">
+                                            MAIS DE 1 ANO
+                                        </div>
+                                        
+                                        <!-- Sem Aprovação -->
+                                        <div style="margin-top: 12px;">
+                                            <div style="font-size: 10px; color: #991b1b; text-transform: uppercase; font-weight: 800;">SEM APROVAÇÃO</div>
+                                            <div style="font-size: 14px; font-weight: 800; color: #7f1d1d; margin-top: 2px;">${formatCurrency(semAprovAging.y1.sum)}</div>
+                                            <div style="font-size: 11px; font-weight: 800; color: #991b1b; margin-top: 1px;">${semAprovAging.y1.count} OSs</div>
+                                        </div>
+                                        
+                                        <!-- Aguardando Pedido -->
+                                        <div style="margin-top: 10px; padding-top: 8px; border-top: 1px dashed #fca5a5;">
+                                            <div style="font-size: 10px; color: #15803d; text-transform: uppercase; font-weight: 800;">AGUARD. PEDIDO</div>
+                                            <div style="font-size: 13px; font-weight: 800; color: #166534; margin-top: 2px;">${aprovAging.y1.sum > 0 ? formatCurrency(aprovAging.y1.sum) : '-'}</div>
+                                            <div style="font-size: 11px; font-weight: 700; color: #16a34a; margin-top: 1px;">${aprovAging.y1.count > 0 ? aprovAging.y1.count + ' OSs' : ''}</div>
+                                        </div>
                                     </td>
                                 </tr>
                             </table>
                         </td>
                     </tr>
 
-                    <!-- SEÇÃO REMODELADA: RESUMO FINANCEIRO POR CATEGORIA (COM ÍCONES SVG EXECUTIVOS) -->
+                    <!-- SEÇÃO: RESUMO FINANCEIRO POR CATEGORIA (COM ÍCONES SVG) -->
                     <tr>
-                        <td style="padding: 8px 40px 32px;">
+                        <td style="padding: 0 40px 28px;">
                             <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #64748b; font-weight: 800; margin-bottom: 14px;">🏷️ RESUMO FINANCEIRO POR CATEGORIA</div>
                             <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border: 1px solid #e2e8ed; border-radius: 12px; overflow: hidden; background: #ffffff;">
                                 <tr style="background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
@@ -408,10 +393,33 @@ function buildClaroEmailHtml(reportName, metrics, dataDate) {
                         </td>
                     </tr>
 
+                    <!-- NOVO POSICIONAMENTO: ARQUIVOS EXCEL ANEXADOS NO FIM DO E-MAIL -->
+                    <tr>
+                        <td style="padding: 0 40px 28px;">
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: #f8fafc; border: 1px solid #cbd5e1; border-left: 4px solid #0284c7; border-radius: 12px; padding: 16px 20px;">
+                                <tr>
+                                    <td width="36" style="vertical-align: middle;">
+                                        <div style="width: 34px; height: 34px; border-radius: 8px; background: #e0f2fe; display: flex; align-items: center; justify-content: center; text-align: center; line-height: 34px;">
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M8 13h8"/><path d="M8 17h8"/><path d="M10 9h2"/></svg>
+                                        </div>
+                                    </td>
+                                    <td style="vertical-align: middle; padding-left: 12px;">
+                                        <div style="font-size: 13px; font-weight: 800; color: #0f172a; letter-spacing: -0.2px;">2 Planilhas Excel (.xlsx) Anexadas a este E-mail</div>
+                                        <div style="font-size: 12px; color: #475569; margin-top: 2px; font-weight: 500;">
+                                            Listagens analíticas em anexo: 
+                                            <strong style="color: #ea580c;">Sem_Aprovacao.xlsx</strong> e 
+                                            <strong style="color: #16a34a;">Aguardando_Pedido.xlsx</strong>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
                     <!-- BOTÃO CALL TO ACTION (ESTILO PREMIUM BI JLE) -->
                     <tr>
-                        <td style="padding: 0 40px 40px; text-align: center;">
-                            <a href="https://jle-bi.vercel.app/#cobranca" style="display: inline-block; background: linear-gradient(135deg, #004f71, #002d42); color: #ffffff; text-decoration: none; padding: 16px 36px; border-radius: 10px; font-size: 14px; font-weight: 800; letter-spacing: 0.3px; box-shadow: 0 6px 20px rgba(0,79,113,0.3); transition: all 0.2s;">
+                        <td style="padding: 0 40px 36px; text-align: center;">
+                            <a href="https://jle-bi.vercel.app/#cobranca" style="display: inline-block; background: linear-gradient(135deg, #004f71, #002d42); color: #ffffff; text-decoration: none; padding: 16px 36px; border-radius: 10px; font-size: 14px; font-weight: 800; letter-spacing: 0.3px; box-shadow: 0 6px 20px rgba(0,79,113,0.3);">
                                 📊 Abrir Dashboard Analítico Claro
                             </a>
                         </td>
