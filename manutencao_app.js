@@ -1,5 +1,5 @@
 // manutencao_app.js
-// Logic for Manutenção (Claro RS) page in BI JLE Telecom - 100% System Standardized with Analítico Claro
+// Logic for Manutenção (Claro RS) page in BI JLE Telecom - 100% System Standardized with Analítico Claro & Scrollable 10-Bar View
 
 (function() {
     let rawData = [];
@@ -294,7 +294,6 @@
         // 1. Chart Mensal de Manutenção (Data de Acionamento)
         // Regra: Remover Sem Data e meses futuros em relação ao mês atual (JUL/2026)
         const monthNames = { '01':'JAN', '02':'FEV', '03':'MAR', '04':'ABR', '05':'MAI', '06':'JUN', '07':'JUL', '08':'AGO', '09':'SET', '10':'OUT', '11':'NOV', '12':'DEZ' };
-        // Valid months up to JUL (current month)
         const monthOrder = ['FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL'];
         const monthlyCounts = { FEV:0, MAR:0, ABR:0, MAI:0, JUN:0, JUL:0 };
 
@@ -371,7 +370,7 @@
             });
         }
 
-        // 2. Chart Tipo de Defeito (Coluna O) - Sem agrupamento "Outros", com rolagem vertical
+        // 2. Chart Tipo de Defeito - 10 barras visíveis por padrão, rolagem para ver as demais
         const tipoDefCounts = {};
         filteredData.forEach(r => {
             if (r.tipo_defeito && r.tipo_defeito !== '-') {
@@ -384,7 +383,8 @@
 
         const canvasTipoDef = document.getElementById('manut-chart-tipo-defeito');
         if (canvasTipoDef) {
-            const containerHeight = Math.max(300, sortedTipoDef.length * 32);
+            // Calculated height so ~10 bars are visible in 360px container
+            const containerHeight = Math.max(340, sortedTipoDef.length * 34);
             canvasTipoDef.parentElement.style.height = containerHeight + 'px';
 
             const ctxTipoDef = canvasTipoDef.getContext('2d');
@@ -424,7 +424,7 @@
             });
         }
 
-        // 3. Chart Causa do Defeito (Coluna P) - Sem agrupamento "Outros", com rolagem vertical
+        // 3. Chart Causa do Defeito - 10 barras visíveis por padrão, rolagem para ver as demais
         const causaDefCounts = {};
         filteredData.forEach(r => {
             if (r.causa_defeito && r.causa_defeito !== '-') {
@@ -437,7 +437,8 @@
 
         const canvasCausaDef = document.getElementById('manut-chart-causa-defeito');
         if (canvasCausaDef) {
-            const containerHeight = Math.max(300, sortedCausaDef.length * 30);
+            // Calculated height so ~10 bars are visible in 360px container
+            const containerHeight = Math.max(340, sortedCausaDef.length * 34);
             canvasCausaDef.parentElement.style.height = containerHeight + 'px';
 
             const ctxCausaDef = canvasCausaDef.getContext('2d');
@@ -477,7 +478,7 @@
             });
         }
 
-        // 4. Chart Localidades (Coluna G) - Sem agrupamento "Outros", com rolagem vertical
+        // 4. Chart Localidades - 10 barras visíveis por padrão, rolagem para ver as demais
         const locCounts = {};
         filteredData.forEach(r => {
             if (r.localidade && r.localidade !== '-') {
@@ -490,7 +491,8 @@
 
         const canvasLoc = document.getElementById('manut-chart-localidades');
         if (canvasLoc) {
-            const containerHeight = Math.max(300, sortedLoc.length * 28);
+            // Calculated height so ~10 bars are visible in 360px container
+            const containerHeight = Math.max(340, sortedLoc.length * 34);
             canvasLoc.parentElement.style.height = containerHeight + 'px';
 
             const ctxLoc = canvasLoc.getContext('2d');
