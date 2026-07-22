@@ -1,5 +1,5 @@
 // manutencao_app.js
-// Logic for Manutenção (Claro RS) page in BI JLE Telecom - 100% System Standardized with Analítico Claro & Scrollable 10-Bar View
+// Logic for Manutenção (Claro RS) page in BI JLE Telecom - Clean Top 10 Charts (No Scroll, Vertical Columns for Cities)
 
 (function() {
     let rawData = [];
@@ -291,8 +291,7 @@
         const gridColor = 'rgba(255, 255, 255, 0.05)';
         const pluginsList = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
 
-        // 1. Chart Mensal de Manutenção (Data de Acionamento)
-        // Regra: Remover Sem Data e meses futuros em relação ao mês atual (JUL/2026)
+        // 1. Chart Mensal de Manutenção (Data de Acionamento - Até mês atual JUL/2026)
         const monthNames = { '01':'JAN', '02':'FEV', '03':'MAR', '04':'ABR', '05':'MAI', '06':'JUN', '07':'JUL', '08':'AGO', '09':'SET', '10':'OUT', '11':'NOV', '12':'DEZ' };
         const monthOrder = ['FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL'];
         const monthlyCounts = { FEV:0, MAR:0, ABR:0, MAI:0, JUN:0, JUL:0 };
@@ -370,7 +369,7 @@
             });
         }
 
-        // 2. Chart Tipo de Defeito - 10 barras visíveis por padrão, rolagem para ver as demais
+        // 2. Chart Tipo de Defeito - Estritamente TOP 10 (Sem rolagem, visual ultra limpo)
         const tipoDefCounts = {};
         filteredData.forEach(r => {
             if (r.tipo_defeito && r.tipo_defeito !== '-') {
@@ -378,16 +377,11 @@
                 tipoDefCounts[td] = (tipoDefCounts[td] || 0) + 1;
             }
         });
-        const sortedTipoDef = Object.keys(tipoDefCounts).sort((a,b) => tipoDefCounts[b] - tipoDefCounts[a]);
+        const sortedTipoDef = Object.keys(tipoDefCounts).sort((a,b) => tipoDefCounts[b] - tipoDefCounts[a]).slice(0, 10);
         const dataTipoDef = sortedTipoDef.map(k => tipoDefCounts[k]);
 
-        const canvasTipoDef = document.getElementById('manut-chart-tipo-defeito');
-        if (canvasTipoDef) {
-            // Calculated height so ~10 bars are visible in 360px container
-            const containerHeight = Math.max(340, sortedTipoDef.length * 34);
-            canvasTipoDef.parentElement.style.height = containerHeight + 'px';
-
-            const ctxTipoDef = canvasTipoDef.getContext('2d');
+        const ctxTipoDef = document.getElementById('manut-chart-tipo-defeito')?.getContext('2d');
+        if (ctxTipoDef) {
             if (chartTipoDefeito) chartTipoDefeito.destroy();
             chartTipoDefeito = new Chart(ctxTipoDef, {
                 type: 'bar',
@@ -424,7 +418,7 @@
             });
         }
 
-        // 3. Chart Causa do Defeito - 10 barras visíveis por padrão, rolagem para ver as demais
+        // 3. Chart Causa do Defeito - Estritamente TOP 10 (Sem rolagem, visual ultra limpo)
         const causaDefCounts = {};
         filteredData.forEach(r => {
             if (r.causa_defeito && r.causa_defeito !== '-') {
@@ -432,16 +426,11 @@
                 causaDefCounts[cd] = (causaDefCounts[cd] || 0) + 1;
             }
         });
-        const sortedCausaDef = Object.keys(causaDefCounts).sort((a,b) => causaDefCounts[b] - causaDefCounts[a]);
+        const sortedCausaDef = Object.keys(causaDefCounts).sort((a,b) => causaDefCounts[b] - causaDefCounts[a]).slice(0, 10);
         const dataCausaDef = sortedCausaDef.map(k => causaDefCounts[k]);
 
-        const canvasCausaDef = document.getElementById('manut-chart-causa-defeito');
-        if (canvasCausaDef) {
-            // Calculated height so ~10 bars are visible in 360px container
-            const containerHeight = Math.max(340, sortedCausaDef.length * 34);
-            canvasCausaDef.parentElement.style.height = containerHeight + 'px';
-
-            const ctxCausaDef = canvasCausaDef.getContext('2d');
+        const ctxCausaDef = document.getElementById('manut-chart-causa-defeito')?.getContext('2d');
+        if (ctxCausaDef) {
             if (chartCausaDefeito) chartCausaDefeito.destroy();
             chartCausaDefeito = new Chart(ctxCausaDef, {
                 type: 'bar',
@@ -478,7 +467,7 @@
             });
         }
 
-        // 4. Chart Localidades - 10 barras visíveis por padrão, rolagem para ver as demais
+        // 4. Chart Localidades / Cidades - COLUNAS VERTICAIS (indexAxis: 'x') Estritamente TOP 10
         const locCounts = {};
         filteredData.forEach(r => {
             if (r.localidade && r.localidade !== '-') {
@@ -486,16 +475,11 @@
                 locCounts[loc] = (locCounts[loc] || 0) + 1;
             }
         });
-        const sortedLoc = Object.keys(locCounts).sort((a,b) => locCounts[b] - locCounts[a]);
+        const sortedLoc = Object.keys(locCounts).sort((a,b) => locCounts[b] - locCounts[a]).slice(0, 10);
         const dataLoc = sortedLoc.map(k => locCounts[k]);
 
-        const canvasLoc = document.getElementById('manut-chart-localidades');
-        if (canvasLoc) {
-            // Calculated height so ~10 bars are visible in 360px container
-            const containerHeight = Math.max(340, sortedLoc.length * 34);
-            canvasLoc.parentElement.style.height = containerHeight + 'px';
-
-            const ctxLoc = canvasLoc.getContext('2d');
+        const ctxLoc = document.getElementById('manut-chart-localidades')?.getContext('2d');
+        if (ctxLoc) {
             if (chartLocalidades) chartLocalidades.destroy();
             chartLocalidades = new Chart(ctxLoc, {
                 type: 'bar',
@@ -509,7 +493,7 @@
                     }]
                 },
                 options: {
-                    indexAxis: 'y',
+                    indexAxis: 'x', // COLUNAS VERTICAIS EM PÉ
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
@@ -518,14 +502,14 @@
                             display: true,
                             color: '#ffffff',
                             anchor: 'end',
-                            align: 'end',
+                            align: 'top',
                             font: { weight: 'bold', size: 11 },
                             formatter: (val) => val.toLocaleString('pt-BR')
                         }
                     },
                     scales: {
-                        x: { ticks: { color: '#94a3b8' }, grid: { color: gridColor }, grace: '20%' },
-                        y: { ticks: { color: textColor, font: { weight: 'bold' } }, grid: { display: false } }
+                        x: { ticks: { color: textColor, font: { weight: 'bold', size: 11 } }, grid: { display: false } },
+                        y: { ticks: { color: '#94a3b8' }, grid: { color: gridColor }, grace: '18%' }
                     }
                 },
                 plugins: pluginsList
