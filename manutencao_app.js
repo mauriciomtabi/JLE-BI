@@ -1,5 +1,5 @@
 // manutencao_app.js
-// Logic for Manutenção (Claro RS) page in BI JLE Telecom - 100% System Standardized with Analítico Claro
+// Logic for Manutenção (Claro RS) page in BI JLE Telecom - 100% Column I/O/P Mapped with Scrollable Charts (No "Outros" grouping)
 
 (function() {
     let rawData = [];
@@ -12,7 +12,8 @@
 
     // Chart instances
     let chartMensal = null;
-    let chartAtividades = null;
+    let chartTipoDefeito = null;
+    let chartCausaDefeito = null;
     let chartLocalidades = null;
 
     const CATEGORY_ICONS = {
@@ -24,7 +25,9 @@
         'MELHORIA DE REDE': 'fa-solid fa-network-wired',
         'OBRAS': 'fa-solid fa-helmet-safety',
         'FORNECIMENTO / MATERIAIS': 'fa-solid fa-boxes-stacked',
-        'OUTROS': 'fa-solid fa-folder-open'
+        'LINK': 'fa-solid fa-signal',
+        'EVENTO': 'fa-solid fa-calendar-star',
+        'ACIONANDO': 'fa-solid fa-bolt'
     };
 
     function initManutencao() {
@@ -49,22 +52,22 @@
 
         if (!selStatus) return;
 
-        // Unique Statuses
+        // Unique Statuses (Coluna I)
         const statuses = [...new Set(rawData.map(r => r.status).filter(s => s && s !== '-'))].sort();
         selStatus.innerHTML = '<option value="">Todos os Status</option>' + 
             statuses.map(s => `<option value="${s}">${s}</option>`).join('');
 
-        // Unique Tipos de Atividade
+        // Unique Tipos de Atividade (Coluna F)
         const atividades = [...new Set(rawData.map(r => r.tipo_atividade).filter(a => a && a !== '-'))].sort();
         selAtividade.innerHTML = '<option value="">Todas as Atividades</option>' + 
             atividades.map(a => `<option value="${a}">${a}</option>`).join('');
 
-        // Unique Localidades
+        // Unique Localidades (Coluna G)
         const localidades = [...new Set(rawData.map(r => r.localidade).filter(l => l && l !== '-'))].sort();
         selLocalidade.innerHTML = '<option value="">Todas as Localidades</option>' + 
             localidades.map(l => `<option value="${l}">${l}</option>`).join('');
 
-        // Unique Equipes
+        // Unique Equipes (Coluna N)
         const equipes = [...new Set(rawData.map(r => r.equipe).filter(e => e && e !== '-'))].sort();
         selEquipe.innerHTML = '<option value="">Todas as Equipes</option>' + 
             equipes.map(e => `<option value="${e}">${e}</option>`).join('');
@@ -189,7 +192,9 @@
                     (r.localidade || '').toLowerCase().includes(searchQuery) ||
                     (r.equipe || '').toLowerCase().includes(searchQuery) ||
                     (r.status || '').toLowerCase().includes(searchQuery) ||
-                    (r.tipo_atividade || '').toLowerCase().includes(searchQuery);
+                    (r.tipo_atividade || '').toLowerCase().includes(searchQuery) ||
+                    (r.tipo_defeito || '').toLowerCase().includes(searchQuery) ||
+                    (r.causa_defeito || '').toLowerCase().includes(searchQuery);
                 if (!matchSearch) return false;
             }
 
@@ -210,32 +215,40 @@
         }
     }
 
+    // 1. CARDS DE STATUS (Estritamente baseados na Coluna I - Status)
     function renderKpiCards() {
         const totalOfs = filteredData.length;
-        const emObra = filteredData.filter(r => r.status === 'OBRA').length;
-        const concluidas = filteredData.filter(r => r.status === 'CONCLUIDO').length;
         const emMedicao = filteredData.filter(r => r.status === 'MEDIÇÃO').length;
-        const precificados = filteredData.filter(r => r.precificado === 'SIM').length;
+        const concluidas = filteredData.filter(r => r.status === 'CONCLUIDO').length;
+        const emObra = filteredData.filter(r => r.status === 'OBRA').length;
+        const adequacao = filteredData.filter(r => r.status === 'ADEQUAÇÃO').length;
+        const documentacao = filteredData.filter(r => r.status === 'DOCUMENTAÇÃO').length;
+        const fotos = filteredData.filter(r => r.status === 'FOTOS').length;
 
         document.getElementById('manut-kpi-total').textContent = totalOfs.toLocaleString('pt-BR');
-        document.getElementById('manut-kpi-obra').textContent = emObra.toLocaleString('pt-BR');
-        document.getElementById('manut-kpi-concluido').textContent = concluidas.toLocaleString('pt-BR');
         document.getElementById('manut-kpi-medicao').textContent = emMedicao.toLocaleString('pt-BR');
-        document.getElementById('manut-kpi-precificado').textContent = precificados.toLocaleString('pt-BR');
+        document.getElementById('manut-kpi-concluido').textContent = concluidas.toLocaleString('pt-BR');
+        document.getElementById('manut-kpi-obra').textContent = emObra.toLocaleString('pt-BR');
+        document.getElementById('manut-kpi-adequacao').textContent = adequacao.toLocaleString('pt-BR');
+        document.getElementById('manut-kpi-documentacao').textContent = documentacao.toLocaleString('pt-BR');
+        document.getElementById('manut-kpi-fotos').textContent = fotos.toLocaleString('pt-BR');
     }
 
+    // 2. CARDS DE CATEGORIA (Tipo de Atividade - Coluna F, exibindo TODAS as categorias sem "Outros")
     function renderCategoryCards() {
         const container = document.getElementById('manut-category-cards-container');
         if (!container) return;
 
         const ativCounts = {};
         filteredData.forEach(r => {
-            const at = r.tipo_atividade && r.tipo_atividade !== '-' ? r.tipo_atividade : 'OUTROS';
-            ativCounts[at] = (ativCounts[at] || 0) + 1;
+            if (r.tipo_atividade && r.tipo_atividade !== '-') {
+                const at = r.tipo_atividade;
+                ativCounts[at] = (ativCounts[at] || 0) + 1;
+            }
         });
 
         const totalCount = filteredData.length || 1;
-        const sortedAtiv = Object.keys(ativCounts).sort((a,b) => ativCounts[b] - ativCounts[a]).slice(0, 6);
+        const sortedAtiv = Object.keys(ativCounts).sort((a,b) => ativCounts[b] - ativCounts[a]);
 
         container.innerHTML = sortedAtiv.map(cat => {
             const count = ativCounts[cat];
@@ -344,25 +357,32 @@
             });
         }
 
-        // 2. Chart Atividades (Bar Horizontal)
-        const ativCounts = {};
+        // 2. Chart Tipo de Defeito (Coluna O) - Sem agrupamento "Outros", com rolagem vertical
+        const tipoDefCounts = {};
         filteredData.forEach(r => {
-            const at = r.tipo_atividade && r.tipo_atividade !== '-' ? r.tipo_atividade : 'Outros';
-            ativCounts[at] = (ativCounts[at] || 0) + 1;
+            if (r.tipo_defeito && r.tipo_defeito !== '-') {
+                const td = r.tipo_defeito;
+                tipoDefCounts[td] = (tipoDefCounts[td] || 0) + 1;
+            }
         });
-        const sortedAtiv = Object.keys(ativCounts).sort((a,b) => ativCounts[b] - ativCounts[a]).slice(0, 8);
-        const dataAtiv = sortedAtiv.map(k => ativCounts[k]);
+        const sortedTipoDef = Object.keys(tipoDefCounts).sort((a,b) => tipoDefCounts[b] - tipoDefCounts[a]);
+        const dataTipoDef = sortedTipoDef.map(k => tipoDefCounts[k]);
 
-        const ctxAtiv = document.getElementById('manut-chart-atividades')?.getContext('2d');
-        if (ctxAtiv) {
-            if (chartAtividades) chartAtividades.destroy();
-            chartAtividades = new Chart(ctxAtiv, {
+        const canvasTipoDef = document.getElementById('manut-chart-tipo-defeito');
+        if (canvasTipoDef) {
+            // Adjust canvas height for scrolling
+            const containerHeight = Math.max(300, sortedTipoDef.length * 32);
+            canvasTipoDef.parentElement.style.height = containerHeight + 'px';
+
+            const ctxTipoDef = canvasTipoDef.getContext('2d');
+            if (chartTipoDefeito) chartTipoDefeito.destroy();
+            chartTipoDefeito = new Chart(ctxTipoDef, {
                 type: 'bar',
                 data: {
-                    labels: sortedAtiv,
+                    labels: sortedTipoDef,
                     datasets: [{
-                        label: 'Quantidade de OFs',
-                        data: dataAtiv,
+                        label: 'OFs por Tipo de Defeito',
+                        data: dataTipoDef,
                         backgroundColor: '#0284c7',
                         borderRadius: 6
                     }]
@@ -391,30 +411,38 @@
             });
         }
 
-        // 3. Chart Localidades (Top 8 Cidades)
-        const locCounts = {};
+        // 3. Chart Causa do Defeito (Coluna P) - Sem agrupamento "Outros", com rolagem vertical
+        const causaDefCounts = {};
         filteredData.forEach(r => {
-            const loc = r.localidade && r.localidade !== '-' ? r.localidade : 'Outros';
-            locCounts[loc] = (locCounts[loc] || 0) + 1;
+            if (r.causa_defeito && r.causa_defeito !== '-') {
+                const cd = r.causa_defeito;
+                causaDefCounts[cd] = (causaDefCounts[cd] || 0) + 1;
+            }
         });
-        const sortedLoc = Object.keys(locCounts).sort((a,b) => locCounts[b] - locCounts[a]).slice(0, 8);
-        const dataLoc = sortedLoc.map(k => locCounts[k]);
+        const sortedCausaDef = Object.keys(causaDefCounts).sort((a,b) => causaDefCounts[b] - causaDefCounts[a]);
+        const dataCausaDef = sortedCausaDef.map(k => causaDefCounts[k]);
 
-        const ctxLoc = document.getElementById('manut-chart-localidades')?.getContext('2d');
-        if (ctxLoc) {
-            if (chartLocalidades) chartLocalidades.destroy();
-            chartLocalidades = new Chart(ctxLoc, {
+        const canvasCausaDef = document.getElementById('manut-chart-causa-defeito');
+        if (canvasCausaDef) {
+            // Adjust canvas height for scrolling
+            const containerHeight = Math.max(300, sortedCausaDef.length * 30);
+            canvasCausaDef.parentElement.style.height = containerHeight + 'px';
+
+            const ctxCausaDef = canvasCausaDef.getContext('2d');
+            if (chartCausaDefeito) chartCausaDefeito.destroy();
+            chartCausaDefeito = new Chart(ctxCausaDef, {
                 type: 'bar',
                 data: {
-                    labels: sortedLoc,
+                    labels: sortedCausaDef,
                     datasets: [{
-                        label: 'OFs por Localidade',
-                        data: dataLoc,
-                        backgroundColor: '#10b981',
+                        label: 'OFs por Causa do Defeito',
+                        data: dataCausaDef,
+                        backgroundColor: '#e67e22',
                         borderRadius: 6
                     }]
                 },
                 options: {
+                    indexAxis: 'y',
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
@@ -429,8 +457,62 @@
                         }
                     },
                     scales: {
-                        x: { ticks: { color: textColor, font: { weight: 'bold' } }, grid: { display: false } },
-                        y: { ticks: { color: '#94a3b8' }, grid: { color: gridColor }, grace: '18%' }
+                        x: { ticks: { color: '#94a3b8' }, grid: { color: gridColor }, grace: '20%' },
+                        y: { ticks: { color: textColor, font: { weight: 'bold' } }, grid: { display: false } }
+                    }
+                },
+                plugins: pluginsList
+            });
+        }
+
+        // 4. Chart Localidades (Coluna G) - Sem agrupamento "Outros", com rolagem vertical
+        const locCounts = {};
+        filteredData.forEach(r => {
+            if (r.localidade && r.localidade !== '-') {
+                const loc = r.localidade;
+                locCounts[loc] = (locCounts[loc] || 0) + 1;
+            }
+        });
+        const sortedLoc = Object.keys(locCounts).sort((a,b) => locCounts[b] - locCounts[a]);
+        const dataLoc = sortedLoc.map(k => locCounts[k]);
+
+        const canvasLoc = document.getElementById('manut-chart-localidades');
+        if (canvasLoc) {
+            // Adjust canvas height for scrolling
+            const containerHeight = Math.max(300, sortedLoc.length * 28);
+            canvasLoc.parentElement.style.height = containerHeight + 'px';
+
+            const ctxLoc = canvasLoc.getContext('2d');
+            if (chartLocalidades) chartLocalidades.destroy();
+            chartLocalidades = new Chart(ctxLoc, {
+                type: 'bar',
+                data: {
+                    labels: sortedLoc,
+                    datasets: [{
+                        label: 'OFs por Localidade',
+                        data: dataLoc,
+                        backgroundColor: '#10b981',
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        datalabels: {
+                            display: true,
+                            color: '#ffffff',
+                            anchor: 'end',
+                            align: 'end',
+                            font: { weight: 'bold', size: 11 },
+                            formatter: (val) => val.toLocaleString('pt-BR')
+                        }
+                    },
+                    scales: {
+                        x: { ticks: { color: '#94a3b8' }, grid: { color: gridColor }, grace: '20%' },
+                        y: { ticks: { color: textColor, font: { weight: 'bold' } }, grid: { display: false } }
                     }
                 },
                 plugins: pluginsList
@@ -479,6 +561,9 @@
             case 'MEDIÇÃO': return `<span class="badge" style="background: rgba(2,132,199,0.2); color: #38bdf8; border: 1px solid rgba(2,132,199,0.4); padding: 4px 10px; border-radius: 12px; font-weight: 700; font-size: 11px;">MEDIÇÃO</span>`;
             case 'CONCLUIDO': return `<span class="badge" style="background: rgba(22,163,74,0.2); color: #4ade80; border: 1px solid rgba(22,163,74,0.4); padding: 4px 10px; border-radius: 12px; font-weight: 700; font-size: 11px;">CONCLUÍDO</span>`;
             case 'OBRA': return `<span class="badge" style="background: rgba(230,126,34,0.2); color: #fb923c; border: 1px solid rgba(230,126,34,0.4); padding: 4px 10px; border-radius: 12px; font-weight: 700; font-size: 11px;">OBRA</span>`;
+            case 'ADEQUAÇÃO': return `<span class="badge" style="background: rgba(168,85,247,0.2); color: #c084fc; border: 1px solid rgba(168,85,247,0.4); padding: 4px 10px; border-radius: 12px; font-weight: 700; font-size: 11px;">ADEQUAÇÃO</span>`;
+            case 'DOCUMENTAÇÃO': return `<span class="badge" style="background: rgba(234,179,8,0.2); color: #facc15; border: 1px solid rgba(234,179,8,0.4); padding: 4px 10px; border-radius: 12px; font-weight: 700; font-size: 11px;">DOCUMENTAÇÃO</span>`;
+            case 'FOTOS': return `<span class="badge" style="background: rgba(236,72,153,0.2); color: #f472b6; border: 1px solid rgba(236,72,153,0.4); padding: 4px 10px; border-radius: 12px; font-weight: 700; font-size: 11px;">FOTOS</span>`;
             default: return `<span class="badge" style="background: rgba(148,163,184,0.2); color: #cbd5e1; border: 1px solid rgba(148,163,184,0.4); padding: 4px 10px; border-radius: 12px; font-weight: 700; font-size: 11px;">${st || '-'}</span>`;
         }
     }
@@ -543,9 +628,11 @@
                     <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 8px 0; color: #94a3b8; width: 40%;">Tipo de OF:</td><td style="font-weight: 700;">${item.tipo_of}</td></tr>
                     <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 8px 0; color: #94a3b8;">Tipo Atividade:</td><td style="font-weight: 700; color: #38bdf8;">${item.tipo_atividade}</td></tr>
                     <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 8px 0; color: #94a3b8;">Atividade:</td><td>${item.atividade}</td></tr>
+                    <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 8px 0; color: #94a3b8;">Tipo Defeito:</td><td style="font-weight: 700; color: #fb923c;">${item.tipo_defeito}</td></tr>
+                    <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 8px 0; color: #94a3b8;">Causa Defeito:</td><td style="font-weight: 700; color: #e67e22;">${item.causa_defeito}</td></tr>
                     <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 8px 0; color: #94a3b8;">Localidade:</td><td>${item.localidade}</td></tr>
                     <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 8px 0; color: #94a3b8;">Endereço:</td><td>${item.endereco}</td></tr>
-                    <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 8px 0; color: #94a3b8;">Status:</td><td>${getStatusBadge(item.status)}</td></tr>
+                    <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 8px 0; color: #94a3b8;">Status (Coluna I):</td><td>${getStatusBadge(item.status)}</td></tr>
                     <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 8px 0; color: #94a3b8;">Equipe:</td><td>${item.equipe}</td></tr>
                     <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 8px 0; color: #94a3b8;">Data Acionamento:</td><td>${item.data_acionamento}</td></tr>
                     <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 8px 0; color: #94a3b8;">Data Conclusão:</td><td>${item.data_conclusao}</td></tr>

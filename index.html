@@ -1875,52 +1875,8 @@
             <!-- SUB TAB PANE 1: INDICADORES -->
             <div id="subview-manut-indicators" class="subtab-pane active">
                 
-                <!-- PIPELINE KPI CARDS ROW (PADRÃO ANALÍTICO CLARO) -->
-                <div class="kpi-container cobranca-pipeline-grid" style="grid-template-columns: repeat(5, 1fr) !important; margin-bottom: 24px !important;">
-                    <div class="kpi-card em-execucao">
-                        <div class="kpi-info">
-                            <div class="kpi-title" style="color: #f39f18;">EM EXECUÇÃO / OBRA</div>
-                            <div class="kpi-value" id="manut-kpi-obra" style="color: #f39f18;">0</div>
-                            <div class="kpi-sub">Execução de Campo</div>
-                        </div>
-                        <div class="kpi-icon-container">
-                            <i class="fa-solid fa-helmet-safety"></i>
-                        </div>
-                    </div>
-
-                    <div class="kpi-card executado">
-                        <div class="kpi-info">
-                            <div class="kpi-title" style="color: #9b59b6;">CONCLUÍDO</div>
-                            <div class="kpi-value" id="manut-kpi-concluido" style="color: #9b59b6;">0</div>
-                            <div class="kpi-sub">Chamados Finalizados</div>
-                        </div>
-                        <div class="kpi-icon-container">
-                            <i class="fa-solid fa-circle-check"></i>
-                        </div>
-                    </div>
-
-                    <div class="kpi-card aprovado">
-                        <div class="kpi-info">
-                            <div class="kpi-title" style="color: #3498db;">EM MEDIÇÃO</div>
-                            <div class="kpi-value" id="manut-kpi-medicao" style="color: #3498db;">0</div>
-                            <div class="kpi-sub">Aguardando Faturamento</div>
-                        </div>
-                        <div class="kpi-icon-container">
-                            <i class="fa-solid fa-file-invoice-dollar"></i>
-                        </div>
-                    </div>
-
-                    <div class="kpi-card ped-emitido">
-                        <div class="kpi-info">
-                            <div class="kpi-title" style="color: #2ecc71;">PRECIFICADO CLARO</div>
-                            <div class="kpi-value" id="manut-kpi-precificado" style="color: #2ecc71;">0</div>
-                            <div class="kpi-sub">Status Precificado (SIM)</div>
-                        </div>
-                        <div class="kpi-icon-container">
-                            <i class="fa-solid fa-square-check"></i>
-                        </div>
-                    </div>
-
+                <!-- PIPELINE KPI CARDS ROW (COLUNA I - STATUS ESTRITO) -->
+                <div class="kpi-container cobranca-pipeline-grid" style="grid-template-columns: repeat(7, 1fr) !important; margin-bottom: 24px !important;">
                     <div class="kpi-card aprovado">
                         <div class="kpi-info">
                             <div class="kpi-title">TOTAL DE OFs</div>
@@ -1931,9 +1887,75 @@
                             <i class="fa-solid fa-clipboard-list"></i>
                         </div>
                     </div>
+
+                    <div class="kpi-card aprovado">
+                        <div class="kpi-info">
+                            <div class="kpi-title" style="color: #3498db;">MEDIÇÃO</div>
+                            <div class="kpi-value" id="manut-kpi-medicao" style="color: #3498db;">0</div>
+                            <div class="kpi-sub">Aguardando Faturamento</div>
+                        </div>
+                        <div class="kpi-icon-container">
+                            <i class="fa-solid fa-file-invoice-dollar" style="color: #3498db;"></i>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card executado">
+                        <div class="kpi-info">
+                            <div class="kpi-title" style="color: #9b59b6;">CONCLUÍDO</div>
+                            <div class="kpi-value" id="manut-kpi-concluido" style="color: #9b59b6;">0</div>
+                            <div class="kpi-sub">Chamados Finalizados</div>
+                        </div>
+                        <div class="kpi-icon-container">
+                            <i class="fa-solid fa-circle-check" style="color: #9b59b6;"></i>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card em-execucao">
+                        <div class="kpi-info">
+                            <div class="kpi-title" style="color: #f39f18;">OBRA</div>
+                            <div class="kpi-value" id="manut-kpi-obra" style="color: #f39f18;">0</div>
+                            <div class="kpi-sub">Execução de Campo</div>
+                        </div>
+                        <div class="kpi-icon-container">
+                            <i class="fa-solid fa-helmet-safety" style="color: #f39f18;"></i>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card" style="border-left: 5px solid #a855f7;">
+                        <div class="kpi-info">
+                            <div class="kpi-title" style="color: #c084fc;">ADEQUAÇÃO</div>
+                            <div class="kpi-value" id="manut-kpi-adequacao" style="color: #c084fc;">0</div>
+                            <div class="kpi-sub">Ajuste Solicitado</div>
+                        </div>
+                        <div class="kpi-icon-container">
+                            <i class="fa-solid fa-sliders" style="color: #a855f7;"></i>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card" style="border-left: 5px solid #eab308;">
+                        <div class="kpi-info">
+                            <div class="kpi-title" style="color: #facc15;">DOCUMENTAÇÃO</div>
+                            <div class="kpi-value" id="manut-kpi-documentacao" style="color: #facc15;">0</div>
+                            <div class="kpi-sub">Validando Relatório</div>
+                        </div>
+                        <div class="kpi-icon-container">
+                            <i class="fa-solid fa-file-contract" style="color: #eab308;"></i>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card" style="border-left: 5px solid #ec4899;">
+                        <div class="kpi-info">
+                            <div class="kpi-title" style="color: #f472b6;">FOTOS</div>
+                            <div class="kpi-value" id="manut-kpi-fotos" style="color: #f472b6;">0</div>
+                            <div class="kpi-sub">Aguardando Imagens</div>
+                        </div>
+                        <div class="kpi-icon-container">
+                            <i class="fa-solid fa-camera" style="color: #ec4899;"></i>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- CARDS DE CATEGORIA (EXATAMENTE COMO EM ANALÍTICO CLARO) -->
+                <!-- CARDS DE CATEGORIA DE ATIVIDADE (COLUNA F) -->
                 <div class="cobranca-category-grid" id="manut-category-cards-container" style="margin-bottom: 24px;">
                     <!-- Preenchido via JS -->
                 </div>
@@ -1948,24 +1970,34 @@
                     </div>
                 </div>
 
-                <!-- GRÁFICOS 2 & 3: LADO A LADO (TIPO DE ATIVIDADE & TOP LOCALIDADES) -->
+                <!-- GRÁFICOS 2 & 3: LADO A LADO COM ROLAGEM VERTICAL (COLUNA O: TIPO DEFEITO & COLUNA P: CAUSA DEFEITO) -->
                 <div class="cobranca-grid-2cols" style="margin-bottom: 24px;">
                     <div class="chart-card">
                         <div class="chart-header">
-                            <span class="chart-title"><i class="fa-solid fa-wrench" style="color: #0284c7;"></i> Volume de OFs por Tipo de Atividade</span>
+                            <span class="chart-title"><i class="fa-solid fa-triangle-exclamation" style="color: #0284c7;"></i> Volume de OFs por Tipo de Defeito (Coluna O)</span>
                         </div>
-                        <div style="height: 300px; position: relative;">
-                            <canvas id="manut-chart-atividades"></canvas>
+                        <div style="max-height: 380px; overflow-y: auto; position: relative; padding-right: 8px;">
+                            <canvas id="manut-chart-tipo-defeito"></canvas>
                         </div>
                     </div>
 
                     <div class="chart-card">
                         <div class="chart-header">
-                            <span class="chart-title"><i class="fa-solid fa-location-dot" style="color: #10b981;"></i> Top Localidades (Cidades com Maior Demanda)</span>
+                            <span class="chart-title"><i class="fa-solid fa-burst" style="color: #e67e22;"></i> Volume de OFs por Causa do Defeito (Coluna P)</span>
                         </div>
-                        <div style="height: 300px; position: relative;">
-                            <canvas id="manut-chart-localidades"></canvas>
+                        <div style="max-height: 380px; overflow-y: auto; position: relative; padding-right: 8px;">
+                            <canvas id="manut-chart-causa-defeito"></canvas>
                         </div>
+                    </div>
+                </div>
+
+                <!-- GRÁFICO 4: TOP LOCALIDADES COM ROLAGEM VERTICAL (COLUNA G) -->
+                <div class="chart-card" style="margin-bottom: 24px;">
+                    <div class="chart-header">
+                        <span class="chart-title"><i class="fa-solid fa-location-dot" style="color: #10b981;"></i> Manutenções por Localidade / Cidade (Coluna G)</span>
+                    </div>
+                    <div style="max-height: 380px; overflow-y: auto; position: relative; padding-right: 8px;">
+                        <canvas id="manut-chart-localidades"></canvas>
                     </div>
                 </div>
             </div>
