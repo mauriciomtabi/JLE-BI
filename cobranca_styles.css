@@ -581,37 +581,8 @@
     margin-bottom: 20px !important;
 }
 
-#view-manutencao-container .cobranca-pipeline-grid {
-    gap: 10px !important;
-}
-
-#view-manutencao-container .kpi-card {
-    padding: 12px 10px !important;
-    min-width: 0 !important;
-    overflow: hidden !important;
-}
-
-#view-manutencao-container .kpi-info {
-    min-width: 0 !important;
-    overflow: hidden !important;
-}
-
-#view-manutencao-container .kpi-title {
-    font-size: 10.5px !important;
-    letter-spacing: -0.3px !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-}
-
-#view-manutencao-container .kpi-value {
-    font-size: 20px !important;
-    line-height: 1.2 !important;
-    margin-top: 2px !important;
-}
-
-#view-manutencao-container .kpi-icon-container {
-    font-size: 18px !important;
-    opacity: 0.25 !important;
+/* Adjust ONLY the title font size in top status cards (cobranca-pipeline-grid) */
+#view-manutencao-container .cobranca-pipeline-grid .kpi-title {
+    font-size: 11px !important;
 }
 
