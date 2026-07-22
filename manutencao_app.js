@@ -1,5 +1,5 @@
 // manutencao_app.js
-// Logic for Manutenção (Claro RS) page in BI JLE Telecom - 100% System Standardized with Analítico Claro & Reconciled Totals (1.716 OFs)
+// Logic for Manutenção (Claro RS) page in BI JLE Telecom - 100% System Standardized with Analítico Claro
 
 (function() {
     let rawData = [];
@@ -216,7 +216,7 @@
         }
     }
 
-    // 1. CARDS DE STATUS (Estritamente baseados na Coluna I - Status)
+    // 1. CARDS DE STATUS (Estritamente baseados na Coluna I - Status, sem subtexto)
     function renderKpiCards() {
         const totalOfs = filteredData.length;
         const emMedicao = filteredData.filter(r => r.status === 'MEDIÇÃO').length;
@@ -235,7 +235,7 @@
         document.getElementById('manut-kpi-fotos').textContent = fotos.toLocaleString('pt-BR');
     }
 
-    // 2. CARDS DE CATEGORIA (Tipo de Atividade - Coluna F, exibindo TODAS as categorias sem "Outros")
+    // 2. CARDS DE CATEGORIA (Filtrados VISUALMENTE para exibir somente quantidade >= 10, mantendo os dados nos demais gráficos)
     function renderCategoryCards() {
         const container = document.getElementById('manut-category-cards-container');
         if (!container) return;
@@ -249,7 +249,10 @@
         });
 
         const totalCount = filteredData.length || 1;
-        const sortedAtiv = Object.keys(ativCounts).sort((a,b) => ativCounts[b] - ativCounts[a]);
+        // Visual filter: Only display categories with count >= 10 in this row
+        const sortedAtiv = Object.keys(ativCounts)
+            .filter(cat => ativCounts[cat] >= 10)
+            .sort((a,b) => ativCounts[b] - ativCounts[a]);
 
         container.innerHTML = sortedAtiv.map(cat => {
             const count = ativCounts[cat];
@@ -288,35 +291,34 @@
         const gridColor = 'rgba(255, 255, 255, 0.05)';
         const pluginsList = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
 
-        // 1. Chart Mensal de Manutenção (Data de Acionamento / Envio, Reconciliado a 100% das OFs)
+        // 1. Chart Mensal de Manutenção (Data de Acionamento)
+        // Regra: Remover Sem Data e meses futuros em relação ao mês atual (JUL/2026)
         const monthNames = { '01':'JAN', '02':'FEV', '03':'MAR', '04':'ABR', '05':'MAI', '06':'JUN', '07':'JUL', '08':'AGO', '09':'SET', '10':'OUT', '11':'NOV', '12':'DEZ' };
-        const monthOrder = ['FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'Sem Data'];
-        const monthlyCounts = { FEV:0, MAR:0, ABR:0, MAI:0, JUN:0, JUL:0, AGO:0, 'Sem Data':0 };
+        // Valid months up to JUL (current month)
+        const monthOrder = ['FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL'];
+        const monthlyCounts = { FEV:0, MAR:0, ABR:0, MAI:0, JUN:0, JUL:0 };
 
         filteredData.forEach(r => {
-            let foundMonth = null;
             if (r.data_acionamento && r.data_acionamento !== '-') {
                 const parts = r.data_acionamento.split(' ')[0].split('/');
                 if (parts.length >= 2) {
-                    foundMonth = monthNames[parts[1].padStart(2, '0')];
+                    const mKey = monthNames[parts[1].padStart(2, '0')];
+                    if (mKey && monthlyCounts[mKey] !== undefined) {
+                        monthlyCounts[mKey]++;
+                    }
                 }
             } else if (r.data_envio_relatorio && r.data_envio_relatorio !== '-') {
                 const parts = r.data_envio_relatorio.split(' ')[0].split('/');
                 if (parts.length >= 2) {
-                    foundMonth = monthNames[parts[1].padStart(2, '0')];
+                    const mKey = monthNames[parts[1].padStart(2, '0')];
+                    if (mKey && monthlyCounts[mKey] !== undefined) {
+                        monthlyCounts[mKey]++;
+                    }
                 }
-            }
-
-            if (foundMonth && monthlyCounts[foundMonth] !== undefined) {
-                monthlyCounts[foundMonth]++;
-            } else {
-                monthlyCounts['Sem Data']++;
             }
         });
 
-        // Filter out zero months dynamically for clean chart
-        const activeMonthOrder = monthOrder.filter(m => monthlyCounts[m] > 0);
-        const dataMensal = activeMonthOrder.map(m => monthlyCounts[m]);
+        const dataMensal = monthOrder.map(m => monthlyCounts[m]);
 
         const ctxMensal = document.getElementById('manut-chart-mensal')?.getContext('2d');
         if (ctxMensal) {
@@ -329,7 +331,7 @@
             chartMensal = new Chart(ctxMensal, {
                 type: 'line',
                 data: {
-                    labels: activeMonthOrder,
+                    labels: monthOrder,
                     datasets: [{
                         label: 'Acionamentos de Manutenção',
                         data: dataMensal,
