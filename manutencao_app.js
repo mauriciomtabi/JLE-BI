@@ -1,5 +1,5 @@
 // manutencao_app.js
-// Logic for Manutenção (Claro RS) page in BI JLE Telecom - 100% Column I/O/P Mapped with Scrollable Charts (No "Outros" grouping)
+// Logic for Manutenção (Claro RS) page in BI JLE Telecom - 100% System Standardized with Analítico Claro & Reconciled Totals (1.716 OFs)
 
 (function() {
     let rawData = [];
@@ -36,7 +36,8 @@
             return;
         }
 
-        rawData = window.MANUTENCAO_DATA;
+        // Filter out empty spreadsheet rows without status or activity (reconciling to 1.716 OFs matching CONTROLE DASH)
+        rawData = window.MANUTENCAO_DATA.filter(r => r.status !== '-' || r.ral_rec !== '-' || r.tipo_atividade !== '-');
         filteredData = [...rawData];
 
         populateFilterDropdowns();
@@ -180,7 +181,7 @@
             if (selEquipe && r.equipe !== selEquipe) return false;
 
             if (dtInicio || dtFim) {
-                const dateObj = parseAcionamentoDate(r.data_acionamento);
+                const dateObj = parseAcionamentoDate(r.data_acionamento) || parseAcionamentoDate(r.data_envio_relatorio);
                 if (dtInicio && (!dateObj || dateObj < dtInicio)) return false;
                 if (dtFim && (!dateObj || dateObj > dtFim)) return false;
             }
@@ -287,24 +288,35 @@
         const gridColor = 'rgba(255, 255, 255, 0.05)';
         const pluginsList = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
 
-        // 1. Chart Mensal de Manutenção (Data de Acionamento)
+        // 1. Chart Mensal de Manutenção (Data de Acionamento / Envio, Reconciliado a 100% das OFs)
         const monthNames = { '01':'JAN', '02':'FEV', '03':'MAR', '04':'ABR', '05':'MAI', '06':'JUN', '07':'JUL', '08':'AGO', '09':'SET', '10':'OUT', '11':'NOV', '12':'DEZ' };
-        const monthOrder = ['FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL'];
-        const monthlyCounts = { FEV:0, MAR:0, ABR:0, MAI:0, JUN:0, JUL:0 };
+        const monthOrder = ['FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'Sem Data'];
+        const monthlyCounts = { FEV:0, MAR:0, ABR:0, MAI:0, JUN:0, JUL:0, AGO:0, 'Sem Data':0 };
 
         filteredData.forEach(r => {
+            let foundMonth = null;
             if (r.data_acionamento && r.data_acionamento !== '-') {
                 const parts = r.data_acionamento.split(' ')[0].split('/');
                 if (parts.length >= 2) {
-                    const mKey = monthNames[parts[1].substring(0, 2)];
-                    if (mKey && monthlyCounts[mKey] !== undefined) {
-                        monthlyCounts[mKey]++;
-                    }
+                    foundMonth = monthNames[parts[1].padStart(2, '0')];
                 }
+            } else if (r.data_envio_relatorio && r.data_envio_relatorio !== '-') {
+                const parts = r.data_envio_relatorio.split(' ')[0].split('/');
+                if (parts.length >= 2) {
+                    foundMonth = monthNames[parts[1].padStart(2, '0')];
+                }
+            }
+
+            if (foundMonth && monthlyCounts[foundMonth] !== undefined) {
+                monthlyCounts[foundMonth]++;
+            } else {
+                monthlyCounts['Sem Data']++;
             }
         });
 
-        const dataMensal = monthOrder.map(m => monthlyCounts[m]);
+        // Filter out zero months dynamically for clean chart
+        const activeMonthOrder = monthOrder.filter(m => monthlyCounts[m] > 0);
+        const dataMensal = activeMonthOrder.map(m => monthlyCounts[m]);
 
         const ctxMensal = document.getElementById('manut-chart-mensal')?.getContext('2d');
         if (ctxMensal) {
@@ -317,7 +329,7 @@
             chartMensal = new Chart(ctxMensal, {
                 type: 'line',
                 data: {
-                    labels: monthOrder,
+                    labels: activeMonthOrder,
                     datasets: [{
                         label: 'Acionamentos de Manutenção',
                         data: dataMensal,
@@ -370,7 +382,6 @@
 
         const canvasTipoDef = document.getElementById('manut-chart-tipo-defeito');
         if (canvasTipoDef) {
-            // Adjust canvas height for scrolling
             const containerHeight = Math.max(300, sortedTipoDef.length * 32);
             canvasTipoDef.parentElement.style.height = containerHeight + 'px';
 
@@ -424,7 +435,6 @@
 
         const canvasCausaDef = document.getElementById('manut-chart-causa-defeito');
         if (canvasCausaDef) {
-            // Adjust canvas height for scrolling
             const containerHeight = Math.max(300, sortedCausaDef.length * 30);
             canvasCausaDef.parentElement.style.height = containerHeight + 'px';
 
@@ -478,7 +488,6 @@
 
         const canvasLoc = document.getElementById('manut-chart-localidades');
         if (canvasLoc) {
-            // Adjust canvas height for scrolling
             const containerHeight = Math.max(300, sortedLoc.length * 28);
             canvasLoc.parentElement.style.height = containerHeight + 'px';
 
