@@ -80,6 +80,9 @@
             <a class="nav-item" id="nav-mdu" onclick="switchView('mdu')" style="display:none;">
                 <i class="fa-solid fa-building"></i> <span>MDU</span>
             </a>
+            <a class="nav-item" id="nav-manutencao" onclick="switchView('manutencao')" style="display:none;">
+                <i class="fa-solid fa-wrench"></i> <span>Manutenção</span>
+            </a>
             <a class="nav-item active" id="nav-dashboard" onclick="switchView('dashboard')">
                 <i class="fa-solid fa-sack-dollar"></i> <span>Financeiro</span>
             </a>
@@ -1816,6 +1819,152 @@
             </div>
         </div>
         
+        <!-- MANUTENÇÃO CONTAINER -->
+        <div id="view-manutencao-container" class="view-panel" style="display: none;">
+            <div class="cobranca-header" style="margin-bottom: 20px;">
+                <div class="cobranca-header-title">
+                    <h2><i class="fa-solid fa-wrench" style="color: #38ef7d;"></i> Manutenção</h2>
+                    <p>Análise de ordens de manutenção e atendimento de campo — Claro RS</p>
+                </div>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <button class="btn-refresh" id="manut-btn-refresh-data" title="Recarregar Dados" style="padding: 10px 16px; background: #1e293b; color: #f8fafc; border: 1px solid #334155; border-radius: 8px; cursor: pointer;">
+                        <i class="fa-solid fa-rotate-right"></i> Atualizar Base
+                    </button>
+                </div>
+            </div>
+
+            <!-- FILTROS -->
+            <div class="cobranca-filters-card" style="background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 20px; margin-bottom: 24px;">
+                <div class="cobranca-filters-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                    <div class="filter-item">
+                        <label style="display: block; font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700; margin-bottom: 6px;">STATUS</label>
+                        <select id="manut-filter-status" class="filter-select" style="width: 100%; padding: 10px; background: #1e293b; border: 1px solid #334155; border-radius: 8px; color: #f8fafc; font-size: 13px;">
+                            <option value="">Todos os Status</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <label style="display: block; font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700; margin-bottom: 6px;">TIPO DE ATIVIDADE</label>
+                        <select id="manut-filter-atividade" class="filter-select" style="width: 100%; padding: 10px; background: #1e293b; border: 1px solid #334155; border-radius: 8px; color: #f8fafc; font-size: 13px;">
+                            <option value="">Todas as Atividades</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <label style="display: block; font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700; margin-bottom: 6px;">LOCALIDADE / CIDADE</label>
+                        <select id="manut-filter-localidade" class="filter-select" style="width: 100%; padding: 10px; background: #1e293b; border: 1px solid #334155; border-radius: 8px; color: #f8fafc; font-size: 13px;">
+                            <option value="">Todas as Localidades</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <label style="display: block; font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700; margin-bottom: 6px;">EQUIPE</label>
+                        <select id="manut-filter-equipe" class="filter-select" style="width: 100%; padding: 10px; background: #1e293b; border: 1px solid #334155; border-radius: 8px; color: #f8fafc; font-size: 13px;">
+                            <option value="">Todas as Equipes</option>
+                        </select>
+                    </div>
+                    <div class="filter-item" style="display: flex; align-items: flex-end;">
+                        <button id="manut-btn-reset-filters" class="btn-reset-filters" style="width: 100%; padding: 10px; background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3); border-radius: 8px; font-weight: 700; cursor: pointer;">
+                            <i class="fa-solid fa-filter-circle-xmark"></i> Limpar Filtros
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NAVEGAÇÃO ENTRE ABAS (INDICADORES vs RELATÓRIO) -->
+            <div class="cobranca-tabs-container" style="display: flex; gap: 12px; margin-bottom: 20px;">
+                <button class="cobranca-tab-btn manut-tab-btn active" data-tab="indicadores" style="padding: 10px 20px; background: #0284c7; color: #ffffff; border: none; border-radius: 8px; font-weight: 700; cursor: pointer;">
+                    <i class="fa-solid fa-chart-pie"></i> Indicadores
+                </button>
+                <button class="cobranca-tab-btn manut-tab-btn" data-tab="relatorio" style="padding: 10px 20px; background: #1e293b; color: #94a3b8; border: 1px solid #334155; border-radius: 8px; font-weight: 700; cursor: pointer;">
+                    <i class="fa-solid fa-table"></i> Relatório
+                </button>
+            </div>
+
+            <!-- CARDS DE METRICAS (KPIs) -->
+            <div class="cobranca-kpi-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px;">
+                <div class="cobranca-kpi-card" style="background: #0f172a; border: 1px solid #1e293b; border-left: 4px solid #0284c7; border-radius: 12px; padding: 18px 20px;">
+                    <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">TOTAL DE OFs</div>
+                    <div style="font-size: 26px; font-weight: 800; color: #f8fafc;" id="manut-kpi-total">0</div>
+                    <div style="font-size: 12px; color: #64748b; margin-top: 4px;">Ordens de Atendimento</div>
+                </div>
+                <div class="cobranca-kpi-card" style="background: #0f172a; border: 1px solid #1e293b; border-left: 4px solid #38bdf8; border-radius: 12px; padding: 18px 20px;">
+                    <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">EM MEDIÇÃO</div>
+                    <div style="font-size: 26px; font-weight: 800; color: #38bdf8;" id="manut-kpi-medicao">0</div>
+                    <div style="font-size: 12px; color: #64748b; margin-top: 4px;">Aguardando Faturamento</div>
+                </div>
+                <div class="cobranca-kpi-card" style="background: #0f172a; border: 1px solid #1e293b; border-left: 4px solid #4ade80; border-radius: 12px; padding: 18px 20px;">
+                    <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">CONCLUÍDO</div>
+                    <div style="font-size: 26px; font-weight: 800; color: #4ade80;" id="manut-kpi-concluido">0</div>
+                    <div style="font-size: 12px; color: #64748b; margin-top: 4px;">Chamados Finalizados</div>
+                </div>
+                <div class="cobranca-kpi-card" style="background: #0f172a; border: 1px solid #1e293b; border-left: 4px solid #fb923c; border-radius: 12px; padding: 18px 20px;">
+                    <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">EM OBRA</div>
+                    <div style="font-size: 26px; font-weight: 800; color: #fb923c;" id="manut-kpi-obra">0</div>
+                    <div style="font-size: 12px; color: #64748b; margin-top: 4px;">Execução de Campo</div>
+                </div>
+                <div class="cobranca-kpi-card" style="background: #0f172a; border: 1px solid #1e293b; border-left: 4px solid #c084fc; border-radius: 12px; padding: 18px 20px;">
+                    <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">PRECIFICADO CLARO</div>
+                    <div style="font-size: 26px; font-weight: 800; color: #c084fc;" id="manut-kpi-precificado">0</div>
+                    <div style="font-size: 12px; color: #64748b; margin-top: 4px;">Status Precificado (SIM)</div>
+                </div>
+            </div>
+
+            <!-- VISÃO 1: INDICADORES (GRÁFICOS) -->
+            <div id="manut-view-indicadores">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">
+                    <div style="background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 20px;">
+                        <h3 style="margin: 0 0 16px; font-size: 15px; color: #f8fafc;"><i class="fa-solid fa-wrench" style="color: #0284c7;"></i> OFs por Tipo de Atividade</h3>
+                        <div style="height: 280px; position: relative;">
+                            <canvas id="manut-chart-atividades"></canvas>
+                        </div>
+                    </div>
+                    <div style="background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 20px;">
+                        <h3 style="margin: 0 0 16px; font-size: 15px; color: #f8fafc;"><i class="fa-solid fa-chart-pie" style="color: #38ef7d;"></i> Distribuição por Status</h3>
+                        <div style="height: 280px; position: relative;">
+                            <canvas id="manut-chart-status"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 20px; margin-bottom: 24px;">
+                    <h3 style="margin: 0 0 16px; font-size: 15px; color: #f8fafc;"><i class="fa-solid fa-location-dot" style="color: #38ef7d;"></i> Top Localidades (Cidades)</h3>
+                    <div style="height: 260px; position: relative;">
+                        <canvas id="manut-chart-localidades"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VISÃO 2: RELATÓRIO (TABELA INTERATIVA) -->
+            <div id="manut-view-relatorio" style="display: none;">
+                <div style="background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; overflow: hidden;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid #1e293b;">
+                        <div style="position: relative; width: 320px;">
+                            <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 12px; top: 12px; color: #64748b;"></i>
+                            <input type="text" id="manut-search-input" placeholder="Buscar por OF, Atividade, Localidade..." style="width: 100%; padding: 8px 12px 8px 36px; background: #1e293b; border: 1px solid #334155; border-radius: 8px; color: #f8fafc; font-size: 13px;">
+                        </div>
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table class="cobranca-table" style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                            <thead>
+                                <tr style="background: #1e293b; text-align: left; color: #94a3b8; font-size: 11px; text-transform: uppercase;">
+                                    <th style="padding: 12px 16px;">Nº RAL / REC</th>
+                                    <th style="padding: 12px 16px;">TIPO ATIVIDADE</th>
+                                    <th style="padding: 12px 16px;">ATIVIDADE</th>
+                                    <th style="padding: 12px 16px;">LOCALIDADE</th>
+                                    <th style="padding: 12px 16px;">EQUIPE</th>
+                                    <th style="padding: 12px 16px;">STATUS</th>
+                                    <th style="padding: 12px 16px; text-align: center;">AÇÕES</th>
+                                </tr>
+                            </thead>
+                            <tbody id="manut-table-tbody">
+                                <!-- Preenchido via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="manut-pagination" style="display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-top: 1px solid #1e293b;">
+                        <!-- Paginação JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <!-- Conteiner de Toast de Notificação -->
@@ -2003,6 +2152,8 @@
     <script src="gestao_os_app.js?v=4.2"></script>
     <script src="mdu_data.js"></script>
     <script src="mdu_app.js?v=1.3"></script>
+    <script src="manutencao_data.js"></script>
+    <script src="manutencao_app.js"></script>
 
     <!-- Logica de UI Autônoma (Sem Dependências de CDNs) -->
     <script>
@@ -2629,6 +2780,7 @@
             { id: 'cobranca',     label: 'Analítico Claro',         icon: 'fa-file-invoice-dollar', navId: 'nav-cobranca' },
             { id: 'gestao_os',    label: 'Gestão de OS',            icon: 'fa-clipboard-list',    navId: 'nav-gestao_os' },
             { id: 'mdu',          label: 'MDU',                     icon: 'fa-building',          navId: 'nav-mdu' },
+            { id: 'manutencao',   label: 'Manutenção',              icon: 'fa-wrench',            navId: 'nav-manutencao' },
             { id: 'admin',        label: 'Painel Admin',            icon: 'fa-shield-halved',    navId: 'nav-admin',        adminOnly: true },
         ];
 
@@ -3158,6 +3310,14 @@
                     initMdu();
                 } else {
                     applyMduFilters();
+                }
+            } else if (viewName === 'manutencao') {
+                document.getElementById('filters-container').style.display = 'none';
+                if (mobileToggleBtn) mobileToggleBtn.style.display = '';
+                document.getElementById('view-title').innerText = 'Manutenção';
+                document.getElementById('view-subtitle').innerHTML = 'Análise de ordens de manutenção e atendimento de campo — Claro RS';
+                if (typeof window.initManutencaoModule === 'function') {
+                    window.initManutencaoModule();
                 }
             } else {
                 document.getElementById('filters-container').style.display = 'grid';
