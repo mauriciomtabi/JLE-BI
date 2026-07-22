@@ -1,5 +1,5 @@
 // manutencao_app.js
-// Logic for Manutenção (Claro RS) page in BI JLE Telecom - Styled 1-to-1 with Analítico Claro
+// Logic for Manutenção (Claro RS) page in BI JLE Telecom - 100% System Standardized with Analítico Claro
 
 (function() {
     let rawData = [];
@@ -11,6 +11,7 @@
     let activeTab = 'indicadores'; // 'indicadores' or 'relatorio'
 
     // Chart instances
+    let chartMensal = null;
     let chartAtividades = null;
     let chartLocalidades = null;
 
@@ -74,27 +75,17 @@
         const selAtividade = document.getElementById('manut-filter-atividade');
         const selLocalidade = document.getElementById('manut-filter-localidade');
         const selEquipe = document.getElementById('manut-filter-equipe');
-        const btnReset = document.getElementById('manut-btn-reset-filters');
+        const inputDtInicio = document.getElementById('manut-filter-data-inicio');
+        const inputDtFim = document.getElementById('manut-filter-data-fim');
         const inputSearch = document.getElementById('manut-search-input');
         const btnRefresh = document.getElementById('manut-btn-refresh-data');
 
-        [selStatus, selAtividade, selLocalidade, selEquipe].forEach(el => {
+        [selStatus, selAtividade, selLocalidade, selEquipe, inputDtInicio, inputDtFim].forEach(el => {
             if (el) el.addEventListener('change', applyFilters);
         });
 
         if (inputSearch) {
             inputSearch.addEventListener('input', applyFilters);
-        }
-
-        if (btnReset) {
-            btnReset.addEventListener('click', () => {
-                if (selStatus) selStatus.value = '';
-                if (selAtividade) selAtividade.value = '';
-                if (selLocalidade) selLocalidade.value = '';
-                if (selEquipe) selEquipe.value = '';
-                if (inputSearch) inputSearch.value = '';
-                applyFilters();
-            });
         }
 
         if (btnRefresh) {
@@ -103,7 +94,7 @@
             });
         }
 
-        // Tabs toggle
+        // Sub Tab Selector
         const tabBtns = document.querySelectorAll('.manut-tab-btn');
         tabBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -112,6 +103,25 @@
             });
         });
     }
+
+    window.clearManutFilters = function() {
+        const selStatus = document.getElementById('manut-filter-status');
+        const selAtividade = document.getElementById('manut-filter-atividade');
+        const selLocalidade = document.getElementById('manut-filter-localidade');
+        const selEquipe = document.getElementById('manut-filter-equipe');
+        const inputDtInicio = document.getElementById('manut-filter-data-inicio');
+        const inputDtFim = document.getElementById('manut-filter-data-fim');
+        const inputSearch = document.getElementById('manut-search-input');
+
+        if (selStatus) selStatus.value = '';
+        if (selAtividade) selAtividade.value = '';
+        if (selLocalidade) selLocalidade.value = '';
+        if (selEquipe) selEquipe.value = '';
+        if (inputDtInicio) inputDtInicio.value = '';
+        if (inputDtFim) inputDtFim.value = '';
+        if (inputSearch) inputSearch.value = '';
+        applyFilters();
+    };
 
     function switchTab(tabName) {
         activeTab = tabName;
@@ -123,8 +133,8 @@
             }
         });
 
-        const viewIndicadores = document.getElementById('manut-view-indicadores');
-        const viewRelatorio = document.getElementById('manut-view-relatorio');
+        const viewIndicadores = document.getElementById('subview-manut-indicators');
+        const viewRelatorio = document.getElementById('subview-manut-report');
 
         if (tabName === 'indicadores') {
             if (viewIndicadores) viewIndicadores.style.display = 'block';
@@ -137,18 +147,40 @@
         }
     }
 
+    function parseAcionamentoDate(dateStr) {
+        if (!dateStr || dateStr === '-') return null;
+        const parts = dateStr.split(' ')[0].split('/');
+        if (parts.length === 3) {
+            return new Date(parts[2], parts[1] - 1, parts[0]);
+        } else if (parts.length === 2) {
+            return new Date(2026, parts[1] - 1, parts[0]);
+        }
+        return null;
+    }
+
     function applyFilters() {
         const selStatus = document.getElementById('manut-filter-status')?.value || '';
         const selAtividade = document.getElementById('manut-filter-atividade')?.value || '';
         const selLocalidade = document.getElementById('manut-filter-localidade')?.value || '';
         const selEquipe = document.getElementById('manut-filter-equipe')?.value || '';
+        const dtInicioStr = document.getElementById('manut-filter-data-inicio')?.value || '';
+        const dtFimStr = document.getElementById('manut-filter-data-fim')?.value || '';
         const searchQuery = (document.getElementById('manut-search-input')?.value || '').toLowerCase().trim();
+
+        const dtInicio = dtInicioStr ? new Date(dtInicioStr + 'T00:00:00') : null;
+        const dtFim = dtFimStr ? new Date(dtFimStr + 'T23:59:59') : null;
 
         filteredData = rawData.filter(r => {
             if (selStatus && r.status !== selStatus) return false;
             if (selAtividade && r.tipo_atividade !== selAtividade) return false;
             if (selLocalidade && r.localidade !== selLocalidade) return false;
             if (selEquipe && r.equipe !== selEquipe) return false;
+
+            if (dtInicio || dtFim) {
+                const dateObj = parseAcionamentoDate(r.data_acionamento);
+                if (dtInicio && (!dateObj || dateObj < dtInicio)) return false;
+                if (dtFim && (!dateObj || dateObj > dtFim)) return false;
+            }
 
             if (searchQuery) {
                 const matchSearch = 
@@ -215,7 +247,7 @@
             <div class="cobranca-category-card${activeAtiv === cat ? ' active' : ''}" onclick="window.filterByManutCategory('${cat}')">
                 <div class="kpi-info" style="flex-grow: 1;">
                     <div class="cobranca-category-title">${cat}</div>
-                    <div class="kpi-value" style="font-size: 20px; font-weight: 800; color: var(--text-primary); margin: 4px 0;">${count.toLocaleString('pt-BR')} <span style="font-size: 11px; color: var(--text-secondary); font-weight: 600;">OFs</span></div>
+                    <div class="cobranca-category-value">${count.toLocaleString('pt-BR')} <span style="font-size: 11px; color: var(--text-secondary); font-weight: 600;">OFs</span></div>
                     <div class="kpi-sub" style="font-size: 11px; color: var(--color-primary); font-weight: 700;">
                         <span style="background: rgba(0,180,216,0.12); padding: 2px 7px; border-radius: 10px;">${pct}% do Total</span>
                     </div>
@@ -238,7 +270,81 @@
     function renderCharts() {
         if (typeof Chart === 'undefined') return;
 
-        // 1. Chart Atividades (Bar Horizontal)
+        const textColor = '#f8fafc';
+        const gridColor = 'rgba(255, 255, 255, 0.05)';
+        const pluginsList = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
+
+        // 1. Chart Mensal de Manutenção (Data de Acionamento)
+        const monthNames = { '01':'JAN', '02':'FEV', '03':'MAR', '04':'ABR', '05':'MAI', '06':'JUN', '07':'JUL', '08':'AGO', '09':'SET', '10':'OUT', '11':'NOV', '12':'DEZ' };
+        const monthOrder = ['FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL'];
+        const monthlyCounts = { FEV:0, MAR:0, ABR:0, MAI:0, JUN:0, JUL:0 };
+
+        filteredData.forEach(r => {
+            if (r.data_acionamento && r.data_acionamento !== '-') {
+                const parts = r.data_acionamento.split(' ')[0].split('/');
+                if (parts.length >= 2) {
+                    const mKey = monthNames[parts[1].substring(0, 2)];
+                    if (mKey && monthlyCounts[mKey] !== undefined) {
+                        monthlyCounts[mKey]++;
+                    }
+                }
+            }
+        });
+
+        const dataMensal = monthOrder.map(m => monthlyCounts[m]);
+
+        const ctxMensal = document.getElementById('manut-chart-mensal')?.getContext('2d');
+        if (ctxMensal) {
+            if (chartMensal) chartMensal.destroy();
+
+            const gradLine = ctxMensal.createLinearGradient(0, 0, 0, 300);
+            gradLine.addColorStop(0, 'rgba(0, 180, 216, 0.35)');
+            gradLine.addColorStop(1, 'rgba(0, 180, 216, 0.0)');
+
+            chartMensal = new Chart(ctxMensal, {
+                type: 'line',
+                data: {
+                    labels: monthOrder,
+                    datasets: [{
+                        label: 'Acionamentos de Manutenção',
+                        data: dataMensal,
+                        borderColor: '#00b4d8',
+                        borderWidth: 3,
+                        backgroundColor: gradLine,
+                        fill: true,
+                        tension: 0.35,
+                        pointBackgroundColor: '#00b4d8',
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 2,
+                        pointRadius: 5,
+                        pointHoverRadius: 7
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        datalabels: {
+                            display: true,
+                            color: '#ffffff',
+                            align: 'top',
+                            anchor: 'end',
+                            offset: 4,
+                            font: { weight: 'bold', size: 12 },
+                            formatter: (val) => val > 0 ? val.toLocaleString('pt-BR') : ''
+                        }
+                    },
+                    scales: {
+                        x: { ticks: { color: textColor, font: { weight: 'bold' } }, grid: { display: false } },
+                        y: { ticks: { color: '#94a3b8' }, grid: { color: gridColor }, grace: '18%' }
+                    }
+                },
+                plugins: pluginsList
+            });
+        }
+
+        // 2. Chart Atividades (Bar Horizontal)
         const ativCounts = {};
         filteredData.forEach(r => {
             const at = r.tipo_atividade && r.tipo_atividade !== '-' ? r.tipo_atividade : 'Outros';
@@ -265,16 +371,27 @@
                     indexAxis: 'y',
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
+                    plugins: {
+                        legend: { display: false },
+                        datalabels: {
+                            display: true,
+                            color: '#ffffff',
+                            anchor: 'end',
+                            align: 'end',
+                            font: { weight: 'bold', size: 11 },
+                            formatter: (val) => val.toLocaleString('pt-BR')
+                        }
+                    },
                     scales: {
-                        x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } },
-                        y: { ticks: { color: '#f8fafc', font: { weight: 'bold' } }, grid: { display: false } }
+                        x: { ticks: { color: '#94a3b8' }, grid: { color: gridColor }, grace: '20%' },
+                        y: { ticks: { color: textColor, font: { weight: 'bold' } }, grid: { display: false } }
                     }
-                }
+                },
+                plugins: pluginsList
             });
         }
 
-        // 2. Chart Localidades (Top 8 Cidades)
+        // 3. Chart Localidades (Top 8 Cidades)
         const locCounts = {};
         filteredData.forEach(r => {
             const loc = r.localidade && r.localidade !== '-' ? r.localidade : 'Outros';
@@ -293,19 +410,30 @@
                     datasets: [{
                         label: 'OFs por Localidade',
                         data: dataLoc,
-                        backgroundColor: '#38ef7d',
+                        backgroundColor: '#10b981',
                         borderRadius: 6
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
+                    plugins: {
+                        legend: { display: false },
+                        datalabels: {
+                            display: true,
+                            color: '#ffffff',
+                            anchor: 'end',
+                            align: 'end',
+                            font: { weight: 'bold', size: 11 },
+                            formatter: (val) => val.toLocaleString('pt-BR')
+                        }
+                    },
                     scales: {
-                        x: { ticks: { color: '#f8fafc' }, grid: { display: false } },
-                        y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+                        x: { ticks: { color: textColor, font: { weight: 'bold' } }, grid: { display: false } },
+                        y: { ticks: { color: '#94a3b8' }, grid: { color: gridColor }, grace: '18%' }
                     }
-                }
+                },
+                plugins: pluginsList
             });
         }
     }
