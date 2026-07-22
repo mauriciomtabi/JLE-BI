@@ -3261,6 +3261,12 @@
                 } else {
                     timestampEl.innerText = 'Desconhecido';
                 }
+            } else if (viewName === 'manutencao') {
+                if (typeof window.MANUTENCAO_METADATA !== 'undefined' && window.MANUTENCAO_METADATA.generated_at) {
+                    timestampEl.innerText = formatTimestamp(window.MANUTENCAO_METADATA.generated_at);
+                } else {
+                    timestampEl.innerText = 'Desconhecido';
+                }
             } else if (viewName === 'dashboard') {
                 if (typeof window.CASH_FLOW_DATA !== 'undefined' && window.CASH_FLOW_DATA.generated_at) {
                     timestampEl.innerText = formatTimestamp(window.CASH_FLOW_DATA.generated_at);
