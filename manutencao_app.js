@@ -1,5 +1,5 @@
 // manutencao_app.js
-// Logic for Manutenção (Claro RS) page in BI JLE Telecom
+// Logic for Manutenção (Claro RS) page in BI JLE Telecom - Styled 1-to-1 with Analítico Claro
 
 (function() {
     let rawData = [];
@@ -12,9 +12,19 @@
 
     // Chart instances
     let chartAtividades = null;
-    let chartStatus = null;
     let chartLocalidades = null;
-    let chartEquipes = null;
+
+    const CATEGORY_ICONS = {
+        'ROMPIMENTO': 'fa-solid fa-link-slash',
+        'ATENUAÇÃO': 'fa-solid fa-triangle-exclamation',
+        'ADEQUAÇÃO DE REDE': 'fa-solid fa-wrench',
+        'MOBILIZAÇÃO': 'fa-solid fa-truck-fast',
+        'RAL DE QUALIDADE': 'fa-solid fa-award',
+        'MELHORIA DE REDE': 'fa-solid fa-network-wired',
+        'OBRAS': 'fa-solid fa-helmet-safety',
+        'FORNECIMENTO / MATERIAIS': 'fa-solid fa-boxes-stacked',
+        'OUTROS': 'fa-solid fa-folder-open'
+    };
 
     function initManutencao() {
         if (!window.MANUTENCAO_DATA) {
@@ -160,6 +170,7 @@
 
     function renderPage() {
         renderKpiCards();
+        renderCategoryCards();
         if (activeTab === 'indicadores') {
             renderCharts();
         } else {
@@ -169,17 +180,60 @@
 
     function renderKpiCards() {
         const totalOfs = filteredData.length;
-        const emMedicao = filteredData.filter(r => r.status === 'MEDIÇÃO').length;
-        const concluidas = filteredData.filter(r => r.status === 'CONCLUIDO').length;
         const emObra = filteredData.filter(r => r.status === 'OBRA').length;
+        const concluidas = filteredData.filter(r => r.status === 'CONCLUIDO').length;
+        const emMedicao = filteredData.filter(r => r.status === 'MEDIÇÃO').length;
         const precificados = filteredData.filter(r => r.precificado === 'SIM').length;
 
         document.getElementById('manut-kpi-total').textContent = totalOfs.toLocaleString('pt-BR');
-        document.getElementById('manut-kpi-medicao').textContent = emMedicao.toLocaleString('pt-BR');
-        document.getElementById('manut-kpi-concluido').textContent = concluidas.toLocaleString('pt-BR');
         document.getElementById('manut-kpi-obra').textContent = emObra.toLocaleString('pt-BR');
+        document.getElementById('manut-kpi-concluido').textContent = concluidas.toLocaleString('pt-BR');
+        document.getElementById('manut-kpi-medicao').textContent = emMedicao.toLocaleString('pt-BR');
         document.getElementById('manut-kpi-precificado').textContent = precificados.toLocaleString('pt-BR');
     }
+
+    function renderCategoryCards() {
+        const container = document.getElementById('manut-category-cards-container');
+        if (!container) return;
+
+        const ativCounts = {};
+        filteredData.forEach(r => {
+            const at = r.tipo_atividade && r.tipo_atividade !== '-' ? r.tipo_atividade : 'OUTROS';
+            ativCounts[at] = (ativCounts[at] || 0) + 1;
+        });
+
+        const totalCount = filteredData.length || 1;
+        const sortedAtiv = Object.keys(ativCounts).sort((a,b) => ativCounts[b] - ativCounts[a]).slice(0, 6);
+
+        container.innerHTML = sortedAtiv.map(cat => {
+            const count = ativCounts[cat];
+            const pct = ((count / totalCount) * 100).toFixed(1).replace('.', ',');
+            const iconClass = CATEGORY_ICONS[cat] || 'fa-solid fa-wrench';
+            const activeAtiv = document.getElementById('manut-filter-atividade')?.value || '';
+
+            return `
+            <div class="cobranca-category-card${activeAtiv === cat ? ' active' : ''}" onclick="window.filterByManutCategory('${cat}')">
+                <div class="kpi-info" style="flex-grow: 1;">
+                    <div class="cobranca-category-title">${cat}</div>
+                    <div class="kpi-value" style="font-size: 20px; font-weight: 800; color: var(--text-primary); margin: 4px 0;">${count.toLocaleString('pt-BR')} <span style="font-size: 11px; color: var(--text-secondary); font-weight: 600;">OFs</span></div>
+                    <div class="kpi-sub" style="font-size: 11px; color: var(--color-primary); font-weight: 700;">
+                        <span style="background: rgba(0,180,216,0.12); padding: 2px 7px; border-radius: 10px;">${pct}% do Total</span>
+                    </div>
+                </div>
+                <div class="kpi-icon-container">
+                    <i class="${iconClass}"></i>
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    window.filterByManutCategory = function(cat) {
+        const sel = document.getElementById('manut-filter-atividade');
+        if (sel) {
+            sel.value = sel.value === cat ? '' : cat;
+            applyFilters();
+        }
+    };
 
     function renderCharts() {
         if (typeof Chart === 'undefined') return;
@@ -220,40 +274,7 @@
             });
         }
 
-        // 2. Chart Status (Donut)
-        const statusCounts = {};
-        filteredData.forEach(r => {
-            const st = r.status && r.status !== '-' ? r.status : 'Outros';
-            statusCounts[st] = (statusCounts[st] || 0) + 1;
-        });
-        const labelsStatus = Object.keys(statusCounts);
-        const dataStatus = Object.values(statusCounts);
-
-        const ctxStatus = document.getElementById('manut-chart-status')?.getContext('2d');
-        if (ctxStatus) {
-            if (chartStatus) chartStatus.destroy();
-            chartStatus = new Chart(ctxStatus, {
-                type: 'doughnut',
-                data: {
-                    labels: labelsStatus,
-                    datasets: [{
-                        data: dataStatus,
-                        backgroundColor: ['#0284c7', '#16a34a', '#e67e22', '#d97706', '#8b5cf6', '#64748b'],
-                        borderWidth: 2,
-                        borderColor: '#0f172a'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { position: 'right', labels: { color: '#f8fafc', font: { size: 12 } } }
-                    }
-                }
-            });
-        }
-
-        // 3. Chart Localidades (Top 8 Cidades)
+        // 2. Chart Localidades (Top 8 Cidades)
         const locCounts = {};
         filteredData.forEach(r => {
             const loc = r.localidade && r.localidade !== '-' ? r.localidade : 'Outros';
