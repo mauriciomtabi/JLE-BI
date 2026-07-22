@@ -31,16 +31,15 @@ def process_csv():
         for r in reader:
             if not r or len(r) < 9:
                 continue
-            ral = r[0].strip() if len(r) > 0 else ""
             status = r[8].strip() if len(r) > 8 else ""
-            tipo_ativ = r[5].strip() if len(r) > 5 else ""
             
-            if not ral and not status and not tipo_ativ:
+            # Considerar APENAS linhas com Status válido na Coluna I (desconsidera linhas sem status / vazias)
+            if not status or status.upper() in ('', '-', 'STATUS'):
                 continue
             
             rows.append(r)
 
-    print(f"Total de registros válidos de Manutenção: {len(rows)}")
+    print(f"Total de registros válidos de Manutenção (com Status na Coluna I): {len(rows)}")
 
     lookups = {
         "tipos_of": [],

@@ -36,8 +36,8 @@
             return;
         }
 
-        // Filter out empty spreadsheet rows without status or activity (reconciling to 1.716 OFs matching CONTROLE DASH)
-        rawData = window.MANUTENCAO_DATA.filter(r => r.status !== '-' || r.ral_rec !== '-' || r.tipo_atividade !== '-');
+        // Filter out empty spreadsheet rows without status (Column I) to strictly reflect valid OFs matching CONTROLE DASH
+        rawData = window.MANUTENCAO_DATA.filter(r => r.status && r.status !== '-' && r.status !== 'STATUS');
         filteredData = [...rawData];
 
         populateFilterDropdowns();
