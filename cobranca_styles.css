@@ -576,11 +576,6 @@
     -ms-overflow-style: none !important; /* IE 10+ */
 }
 
-/* -- Manutenção Specific Spacing & Status Card Overrides -- */
-#manut-filters-container {
-    margin-bottom: 20px !important;
-}
-
 /* Adjust ONLY the title font size in top status cards (cobranca-pipeline-grid) */
 #view-manutencao-container .cobranca-pipeline-grid .kpi-title {
     font-size: 11px !important;
