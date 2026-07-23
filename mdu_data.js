@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-07-23 12:00:19
+// Dados MDU Compactados - Gerado em: 2026-07-23 13:29:01
 window.MDU_METADATA = {
-    "generated_at": "2026-07-23 12:00:19",
+    "generated_at": "2026-07-23 13:29:01",
     "total_rows": 5246,
     "geocoded_new": 0
 };
@@ -111051,11 +111051,11 @@ window.MDU_DATA = [
         "endereco": "R ANGELO CRIVELLARO 680",
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
-        "aging": "2.064",
-        "relatorio_por": "",
+        "aging": "OK",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
-        "status": "Relatório HBOX",
-        "prog": 0.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610482286",
         "area": "BMJAA",
         "node": "JSOAAA",
@@ -111067,7 +111067,7 @@ window.MDU_DATA = [
         "data_interna": "06/11",
         "data_fusao": "06/11",
         "data_baixa": "06/11",
-        "data_relatorio": "25/11/2025",
+        "data_relatorio": "23/07/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 520.0,
