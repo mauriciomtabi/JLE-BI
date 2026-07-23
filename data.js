@@ -1,5 +1,5 @@
 ﻿window.CASH_FLOW_DATA = {
-    "generated_at":  "2026-07-22 15:04:05",
+    "generated_at":  "2026-07-23 09:32:40",
     "categories_origin":  {
                               "entradas":  [
 
@@ -70453,12 +70453,12 @@
                              "data":  "30/03/2026",
                              "uf":  "N/D",
                              "fluxo":  "Entrada",
-                             "categoria":  "Transferência entre contas",
+                             "categoria":  "Cobranças",
                              "descricao":  "TRANSFERENCIA PIX REM: CLARO S/A             30/03",
                              "valor_nominal":  0,
                              "valor_liquido":  0,
                              "meio_pagamento":  "Pix",
-                             "is_transfer":  true
+                             "is_transfer":  false
                          },
                          {
                              "id":  "MAR_2026 BRADESCO_103",
