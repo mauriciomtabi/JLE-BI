@@ -153,11 +153,19 @@
 
     function parseAcionamentoDate(dateStr) {
         if (!dateStr || dateStr === '-') return null;
-        const parts = dateStr.split(' ')[0].split('/');
-        if (parts.length === 3) {
-            return new Date(parts[2], parts[1] - 1, parts[0]);
-        } else if (parts.length === 2) {
-            return new Date(2026, parts[1] - 1, parts[0]);
+        const cleanStr = dateStr.split(' ')[0].trim();
+        if (cleanStr.includes('/')) {
+            const parts = cleanStr.split('/');
+            if (parts.length === 3) {
+                return new Date(parseInt(parts[2]), parseInt(parts[1]) - 1, parseInt(parts[0]));
+            } else if (parts.length === 2) {
+                return new Date(2026, parseInt(parts[1]) - 1, parseInt(parts[0]));
+            }
+        } else if (cleanStr.includes('-')) {
+            const parts = cleanStr.split('-');
+            if (parts.length === 3) {
+                return new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+            }
         }
         return null;
     }
@@ -295,28 +303,57 @@
         const monthNames = { '01':'JAN', '02':'FEV', '03':'MAR', '04':'ABR', '05':'MAI', '06':'JUN', '07':'JUL', '08':'AGO', '09':'SET', '10':'OUT', '11':'NOV', '12':'DEZ' };
         const monthOrder = ['FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL'];
         const monthlyCounts = { FEV:0, MAR:0, ABR:0, MAI:0, JUN:0, JUL:0 };
+        
+        // Mapeamento de dias por mês (Ano 2026)
+        const daysInMonths = { FEV: 28, MAR: 31, ABR: 30, MAI: 31, JUN: 30, JUL: 31 };
+        
+        // Ajuste dinâmico de dias decorridos se for o mês corrente (ex: Julho)
+        const today = new Date();
+        if (today.getFullYear() === 2026 && today.getMonth() === 6) { // Julho
+            daysInMonths['JUL'] = Math.max(1, today.getDate());
+        }
+
+        // Janela móvel dos últimos 30 dias a partir da data de referência (hoje ou última data do conjunto)
+        let refDate = new Date();
+        refDate.setHours(23, 59, 59, 999);
+        const ref30DaysAgo = new Date(refDate.getTime() - (29 * 24 * 60 * 60 * 1000));
+        ref30DaysAgo.setHours(0, 0, 0, 0);
+
+        let count30Days = 0;
 
         filteredData.forEach(r => {
-            if (r.data_acionamento && r.data_acionamento !== '-') {
-                const parts = r.data_acionamento.split(' ')[0].split('/');
-                if (parts.length >= 2) {
-                    const mKey = monthNames[parts[1].padStart(2, '0')];
-                    if (mKey && monthlyCounts[mKey] !== undefined) {
+            const dtObj = parseAcionamentoDate(r.data_acionamento) || parseAcionamentoDate(r.data_envio_relatorio);
+            
+            if (dtObj) {
+                // Filtro para contagem mensal
+                const mStr = (dtObj.getMonth() + 1).toString().padStart(2, '0');
+                const mKey = monthNames[mStr];
+                if (mKey && monthlyCounts[mKey] !== undefined) {
+                    if (dtObj.getFullYear() === 2026 && dtObj.getMonth() <= 6) {
                         monthlyCounts[mKey]++;
                     }
                 }
-            } else if (r.data_envio_relatorio && r.data_envio_relatorio !== '-') {
-                const parts = r.data_envio_relatorio.split(' ')[0].split('/');
-                if (parts.length >= 2) {
-                    const mKey = monthNames[parts[1].padStart(2, '0')];
-                    if (mKey && monthlyCounts[mKey] !== undefined) {
-                        monthlyCounts[mKey]++;
-                    }
+
+                // Filtro para janela de 30 dias
+                if (dtObj >= ref30DaysAgo && dtObj <= refDate) {
+                    count30Days++;
                 }
             }
         });
 
         const dataMensal = monthOrder.map(m => monthlyCounts[m]);
+        const dataMediasDiarias = monthOrder.map(m => {
+            const cnt = monthlyCounts[m] || 0;
+            const dCount = daysInMonths[m] || 30;
+            return cnt / dCount;
+        });
+
+        // Atualizar o indicador de média dos últimos 30 dias no canto superior direito
+        const avg30Days = count30Days / 30.0;
+        const avg30DaysEl = document.getElementById('manut-avg-30days-val');
+        if (avg30DaysEl) {
+            avg30DaysEl.innerText = avg30Days.toFixed(1).replace('.', ',');
+        }
 
         const ctxMensal = document.getElementById('manut-chart-mensal')?.getContext('2d');
         if (ctxMensal) {
@@ -350,6 +387,26 @@
                     maintainAspectRatio: false,
                     plugins: {
                         legend: { display: false },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                            titleColor: '#38bdf8',
+                            bodyColor: '#f8fafc',
+                            borderColor: 'rgba(56, 189, 248, 0.3)',
+                            borderWidth: 1,
+                            padding: 10,
+                            boxPadding: 4,
+                            callbacks: {
+                                label: function(context) {
+                                    const idx = context.dataIndex;
+                                    const val = context.raw || 0;
+                                    const avg = dataMediasDiarias[idx] || 0;
+                                    return [
+                                        ` Acionamentos: ${val.toLocaleString('pt-BR')}`,
+                                        ` Média Diária: ${avg.toFixed(1).replace('.', ',')} acionamentos/dia`
+                                    ];
+                                }
+                            }
+                        },
                         datalabels: {
                             display: true,
                             color: '#ffffff',
