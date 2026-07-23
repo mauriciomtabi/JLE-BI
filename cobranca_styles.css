@@ -585,3 +585,15 @@
     margin-bottom: 24px;
 }
 
+/* Guarantee strict 24px uniform spacing across all sections in Manutenção Indicators */
+#subview-manut-indicators {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+}
+
+#subview-manut-indicators > * {
+    margin-bottom: 0 !important;
+}
+
+

@@ -141,7 +141,7 @@
         const viewRelatorio = document.getElementById('subview-manut-report');
 
         if (tabName === 'indicadores') {
-            if (viewIndicadores) viewIndicadores.style.display = 'block';
+            if (viewIndicadores) viewIndicadores.style.display = 'flex';
             if (viewRelatorio) viewRelatorio.style.display = 'none';
             renderCharts();
         } else {
