@@ -3070,6 +3070,7 @@
             }
             
             renderCategoryChart();
+            renderUFMap();
         }
         
         // Armazenamento de instâncias de gráficos
@@ -4253,6 +4254,17 @@
             return (isNegative ? '-' : '') + formatted;
         }
 
+        function getTransactionUF(t) {
+            if (!t) return '';
+            let uf = t.uf ? t.uf.trim().toUpperCase() : '';
+            if (uf === 'PR' || uf === 'SC' || uf === 'RS') return uf;
+            if (t.descricao) {
+                const match = t.descricao.toUpperCase().match(/\b(PR|SC|RS)\b/);
+                if (match) return match[1];
+            }
+            return uf || 'N/D';
+        }
+
         // Lógica de Filtros Aplicados
         function applyFilters() {
             const banco = document.getElementById('filter-banco').value;
@@ -4267,8 +4279,13 @@
                 if (banco !== 'ALL' && t.banco !== banco) return false;
                 if (mes !== 'ALL' && t.competencia !== mes) return false;
                 if (categoria !== 'ALL' && t.categoria !== categoria) return false;
-                if (uf !== 'ALL' && t.uf !== uf) return false;
+                if (uf !== 'ALL' && getTransactionUF(t) !== uf) return false;
                 
+                // Filtro de Categoria em Drilldown (se houver)
+                if (categoryDrillDownState && categoryDrillDownState.active && categoryDrillDownState.category) {
+                    if (t.categoria !== categoryDrillDownState.category) return false;
+                }
+
                 // Filtro de Cliente Selecionado (Doughnut)
                 if (activeCustomerFilter) {
                     const clientName = t.descricao ? t.descricao.trim().toUpperCase() : 'OUTROS';
@@ -4439,11 +4456,11 @@
             document.getElementById('kpi-saldo-final').innerText = formatCurrency(saldoFinal);
 
             // --- Cálculos de Indicadores Analíticos Avançados ---
-            // Declarações hoistadas para evitar Temporal Dead Zone em closures
             const selectedMonth = document.getElementById('filter-mes').value;
             const filterUf = document.getElementById('filter-uf').value;
             const filterCategoria = document.getElementById('filter-categoria').value;
-            // monthOrder como array para índice numérico (virada de ano: JANEIRO → DEZEMBRO do ano anterior)
+            const filterBanco = document.getElementById('filter-banco').value;
+            
             const monthOrderArr = [
                 "JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO", "JUNHO",
                 "JULHO", "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"
@@ -4453,10 +4470,8 @@
                 'JULHO': 31, 'AGOSTO': 31, 'SETEMBRO': 30, 'OUTUBRO': 31, 'NOVEMBRO': 30, 'DEZEMBRO': 31
             };
             
-            // Helper: extrai o nome do mês de uma competência no formato "JANEIRO/2026" ou "JANEIRO"
             const getMonthName = (comp) => comp ? comp.split('/')[0] : comp;
             
-            // Helper: calcula a competência do mês anterior com suporte a virada de ano
             const getPreviousCompetencia = (comp) => {
                 if (!comp || comp === 'ALL' || comp === 'N/D') return null;
                 const parts = comp.split('/');
@@ -4465,7 +4480,6 @@
                 const mIdx = monthOrderArr.indexOf(month);
                 if (mIdx === -1) return null;
                 if (mIdx === 0) {
-                    // JANEIRO -> DEZEMBRO do ano anterior
                     return `DEZEMBRO/${year - 1}`;
                 } else {
                     return `${monthOrderArr[mIdx - 1]}/${year}`;
@@ -4495,7 +4509,7 @@
                     if (t.competencia !== m) return false;
                     if (t.fluxo !== 'Saída') return false;
                     if (filterBanco !== 'ALL' && t.banco !== filterBanco) return false;
-                    if (filterUf !== 'ALL' && t.uf !== filterUf) return false;
+                    if (filterUf !== 'ALL' && getTransactionUF(t) !== filterUf) return false;
                     if (filterCategoria !== 'ALL' && t.categoria !== filterCategoria) return false;
                     return true;
                 }).reduce((sum, t) => sum + t.valor_nominal, 0);
@@ -4509,7 +4523,6 @@
                     if (prevSaidas > 0) {
                         const diffPctS = ((totalSaidas - prevSaidas) / prevSaidas) * 100;
                         const signS = diffPctS >= 0 ? "+" : "";
-                        // Para saídas: aumento é ruim (trend-down), redução é bom (trend-up)
                         const trendClassS = diffPctS >= 0 ? 'trend-down' : 'trend-up';
                         compSaidasText = `vs. Mês Ant.: <span class="${trendClassS}"><strong>${signS}${diffPctS.toFixed(1)}%</strong></span>`;
                     } else {
@@ -4539,7 +4552,7 @@
                     if (t.competencia !== m) return false;
                     if (t.fluxo !== 'Entrada') return false;
                     if (filterBanco !== 'ALL' && t.banco !== filterBanco) return false;
-                    if (filterUf !== 'ALL' && t.uf !== filterUf) return false;
+                    if (filterUf !== 'ALL' && getTransactionUF(t) !== filterUf) return false;
                     if (filterCategoria !== 'ALL' && t.categoria !== filterCategoria) return false;
                     return true;
                 }).reduce((sum, t) => sum + t.valor_nominal, 0);
@@ -5250,21 +5263,52 @@
         function drillDownCategory(categoryName) {
             categoryDrillDownState.active = true;
             categoryDrillDownState.category = categoryName;
-            renderCategoryChart();
+            applyFilters();
         }
 
         // Reseta o Drill Down
         function resetCategoryChart() {
             categoryDrillDownState.active = false;
             categoryDrillDownState.category = null;
-            renderCategoryChart();
+            applyFilters();
         }
 
         // Renderização do Mapa Choropleth de UFs (RS, SC, PR) com Cards Compactos Premium
         function renderUFMap() {
             const mapContainer = document.getElementById('map-container');
+            if (!mapContainer) return;
             const tooltip = document.getElementById('map-tooltip');
             
+            const filterBanco = document.getElementById('filter-banco').value;
+            const filterMes = document.getElementById('filter-mes').value;
+            const filterCategoria = document.getElementById('filter-categoria').value;
+            const dataInicio = document.getElementById('filter-data-inicio').value;
+            const dataFim = document.getElementById('filter-data-fim').value;
+            
+            // Filtrar transações para o mapa aplicando TODOS os filtros ativos (mês, banco, categoria, cliente, datas, drilldown, etc.) EXCETO o filtro de UF em si
+            const mapTransactions = transactions.filter(t => {
+                if (filterBanco !== 'ALL' && t.banco !== filterBanco) return false;
+                if (filterMes !== 'ALL' && t.competencia !== filterMes) return false;
+                if (filterCategoria !== 'ALL' && t.categoria !== filterCategoria) return false;
+                
+                // Filtro de Categoria em Drilldown (se houver)
+                if (categoryDrillDownState && categoryDrillDownState.active && categoryDrillDownState.category) {
+                    if (t.categoria !== categoryDrillDownState.category) return false;
+                }
+
+                // Filtro de Cliente Selecionado (Doughnut)
+                if (activeCustomerFilter) {
+                    const clientName = t.descricao ? t.descricao.trim().toUpperCase() : 'OUTROS';
+                    if (clientName !== activeCustomerFilter) return false;
+                }
+                
+                // Filtro por Período de Data
+                if (dataInicio && t.data < dataInicio) return false;
+                if (dataFim && t.data > dataFim) return false;
+                
+                return true;
+            });
+
             // Inicializar métricas por UF
             const ufMetrics = {
                 "PR": { entradas: 0, saidas: 0, txCount: 0 },
@@ -5272,9 +5316,9 @@
                 "RS": { entradas: 0, saidas: 0, txCount: 0 }
             };
             
-            filteredTransactions.forEach(t => {
+            mapTransactions.forEach(t => {
                 if (t.categoria === 'Saldo Inicial') return;
-                const uf = t.uf ? t.uf.trim().toUpperCase() : '';
+                const uf = getTransactionUF(t);
                 if (ufMetrics.hasOwnProperty(uf)) {
                     ufMetrics[uf].txCount++;
                     if (t.fluxo === 'Entrada') {
