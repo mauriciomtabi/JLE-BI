@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-07-23 08:10:44
+// Dados MDU Compactados - Gerado em: 2026-07-23 09:02:42
 window.MDU_METADATA = {
-    "generated_at": "2026-07-23 08:10:44",
+    "generated_at": "2026-07-23 09:02:42",
     "total_rows": 5248,
     "geocoded_new": 0
 };
@@ -67723,15 +67723,15 @@ window.MDU_DATA = [
         "endereco": "R CASEMIRO DE ABREU 1805",
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
-        "aging": "3.025",
-        "relatorio_por": "",
+        "aging": "OK",
+        "relatorio_por": "JENIFEER",
         "pendencia": "Não",
-        "status": "Relatório HBOX",
-        "prog": 0.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610586599",
         "area": "MTSAA",
         "node": "MTSAK",
-        "caixa_m": "",
+        "caixa_m": "MTSAA.302.M060",
         "hps": 25,
         "equipe": "Alessandro Fagundes",
         "primeira_visita": "22/08/2025",
@@ -67739,7 +67739,7 @@ window.MDU_DATA = [
         "data_interna": "22/08",
         "data_fusao": "22/08",
         "data_baixa": "26/08",
-        "data_relatorio": "04/09/2025",
+        "data_relatorio": "23/07/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 520.0,
@@ -68627,7 +68627,7 @@ window.MDU_DATA = [
         "cod_imovel": "610440333",
         "area": "RBRAA",
         "node": "RBRAO",
-        "caixa_m": "",
+        "caixa_m": "RBRAA.122.M020",
         "hps": 22,
         "equipe": "Kleiton de Paula",
         "primeira_visita": "09/04/2025",
