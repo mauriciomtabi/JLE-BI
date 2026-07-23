@@ -348,11 +348,11 @@
             return cnt / dCount;
         });
 
-        // Atualizar o indicador de média dos últimos 30 dias no canto superior direito
+        // Atualizar o indicador de média dos últimos 30 dias no canto superior direito (arredondado para número inteiro)
         const avg30Days = count30Days / 30.0;
         const avg30DaysEl = document.getElementById('manut-avg-30days-val');
         if (avg30DaysEl) {
-            avg30DaysEl.innerText = avg30Days.toFixed(1).replace('.', ',');
+            avg30DaysEl.innerText = Math.round(avg30Days).toLocaleString('pt-BR');
         }
 
         const ctxMensal = document.getElementById('manut-chart-mensal')?.getContext('2d');
@@ -402,7 +402,7 @@
                                     const avg = dataMediasDiarias[idx] || 0;
                                     return [
                                         ` Acionamentos: ${val.toLocaleString('pt-BR')}`,
-                                        ` Média Diária: ${avg.toFixed(1).replace('.', ',')} acionamentos/dia`
+                                        ` Média Diária: ${Math.round(avg).toLocaleString('pt-BR')} acionamentos/dia`
                                     ];
                                 }
                             }
