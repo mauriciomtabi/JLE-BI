@@ -1,7 +1,7 @@
 // Data generated automatically from Google Sheet OFS
 (function() {
     const db = {
-  "generated_at": "2026-07-23 11:00:12",
+  "generated_at": "2026-07-23 12:00:18",
   "lookups": {
     "tipos_of": [
       "OBRA",
