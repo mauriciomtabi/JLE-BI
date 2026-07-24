@@ -19,105 +19,173 @@ ns = {
     'r': 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 }
 
-def excel_serial_to_month(serial):
+def excel_serial_to_date(serial):
     try:
         val = float(serial)
         dt = datetime(1899, 12, 30) + timedelta(days=val)
+        return dt
+    except Exception:
+        return None
+
+def excel_serial_to_month(serial):
+    dt = excel_serial_to_date(serial)
+    if dt:
         months = ["JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO", "JUNHO", "JULHO", "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"]
         return f"{months[dt.month-1]}/{dt.year}"
-    except Exception:
-        return str(serial).strip()
-
-def load_excel_financial_data():
-    financial_map = {}
-    if not os.path.exists(excel_path):
-        print(f"Aviso: Planilha de Medições em {excel_path} não encontrada.")
-        return financial_map
-
-    print(f"Lendo dados financeiros de {excel_path}...")
-    try:
-        with zipfile.ZipFile(excel_path) as z:
-            shared_strings = []
-            if 'xl/sharedStrings.xml' in z.namelist():
-                tree = ET.fromstring(z.read('xl/sharedStrings.xml'))
-                for si in tree.findall('main:si', ns):
-                    t = si.find('main:t', ns)
-                    if t is not None and t.text:
-                        shared_strings.append(t.text)
-                    else:
-                        texts = [t_node.text for t_node in si.findall('.//main:t', ns) if t_node.text]
-                        shared_strings.append(''.join(texts))
-
-            sheet_tree = ET.fromstring(z.read('xl/worksheets/sheet3.xml')) # Mnt. Demanda
-            rows = sheet_tree.findall('.//main:row', ns)
-            
-            for row in rows[4:]:
-                cells = {}
-                for c in row.findall('main:c', ns):
-                    r_ref = c.attrib.get('r')
-                    col_let = ''.join([char for char in r_ref if char.isalpha()])
-                    t_type = c.attrib.get('t')
-                    v_elem = c.find('main:v', ns)
-                    val = v_elem.text if v_elem is not None else None
-                    if t_type == 's' and val is not None:
-                        try:
-                            val = shared_strings[int(val)]
-                        except IndexError:
-                            pass
-                    cells[col_let] = val
-
-                os_num = str(cells.get('B', '') or '').strip()
-                mes_base_raw = cells.get('N', '')
-                valor_raw = cells.get('P', '')
-
-                if os_num and os_num.upper() != 'NONE':
-                    mes_fmt = excel_serial_to_month(mes_base_raw) if mes_base_raw else ''
-                    try:
-                        v_num = float(valor_raw) if valor_raw else 0.0
-                    except ValueError:
-                        v_num = 0.0
-                    
-                    financial_map[os_num] = {
-                        'mes_pagamento': mes_fmt,
-                        'valor_medicao': round(v_num, 2)
-                    }
-        print(f"Dados financeiros carregados: {len(financial_map)} OSs mapeadas.")
-    except Exception as e:
-        print(f"Erro ao ler planilha Excel da rede: {e}")
-
-    return financial_map
+    s = str(serial).strip().upper()
+    if 'JUN' in s: return 'JUNHO/2026'
+    if 'MAI' in s: return 'MAIO/2026'
+    if 'ABR' in s: return 'ABRIL/2026'
+    if 'MAR' in s: return 'MARÇO/2026'
+    if 'FEV' in s: return 'FEVEREIRO/2026'
+    if 'JUL' in s: return 'JULHO/2026'
+    if 'AGO' in s: return 'AGOSTO/2026'
+    if 'SET' in s: return 'SETEMBRO/2026'
+    if 'OUT' in s: return 'OUTUBRO/2026'
+    if 'NOV' in s: return 'NOVEMBRO/2026'
+    if 'DEZ' in s: return 'DEZEMBRO/2026'
+    return s
 
 def download_csv():
-    print(f"Baixando CSV de Manutenção de {csv_url}...")
-    headers = {'User-Agent': 'Mozilla/5.0'}
-    req = urllib.request.Request(csv_url, headers=headers)
-    with urllib.request.urlopen(req) as response, open(csv_path, 'wb') as out_file:
-        out_file.write(response.read())
-    print(f"CSV salvo com sucesso em {csv_path}")
+    try:
+        print(f"Baixando CSV de Manutenção de {csv_url}...")
+        headers = {'User-Agent': 'Mozilla/5.0'}
+        req = urllib.request.Request(csv_url, headers=headers)
+        with urllib.request.urlopen(req) as response, open(csv_path, 'wb') as out_file:
+            out_file.write(response.read())
+        print(f"CSV salvo com sucesso em {csv_path}")
+    except Exception as e:
+        print(f"Aviso ao baixar CSV do Google: {e}")
 
-def process_csv():
-    if not os.path.exists(csv_path):
-        print(f"Erro: Arquivo CSV {csv_path} não encontrado.")
+def process_excel_master():
+    if not os.path.exists(excel_path):
+        print(f"Erro: Planilha Excel {excel_path} não encontrada.")
         sys.exit(1)
 
-    financial_map = load_excel_financial_data()
+    print(f"Lendo dados diretos da Planilha Master de Medições: {excel_path}...")
 
-    print("Processando dados de Manutenção...")
-    rows = []
-    with open(csv_path, mode='r', encoding='utf-8-sig') as f:
-        reader = csv.reader(f)
-        header = next(reader, None)
-        for r in reader:
-            if not r or len(r) < 9:
-                continue
-            status = r[8].strip() if len(r) > 8 else ""
-            
-            if not status or status.upper() in ('', '-', 'STATUS'):
-                continue
-            
-            rows.append(r)
+    # Leitura do Google Sheets para enriquecimento de campos operacionais (equipe, datas detalhadas, etc.)
+    gs_lookup = {}
+    if os.path.exists(csv_path):
+        with open(csv_path, mode='r', encoding='utf-8-sig') as f:
+            reader = csv.reader(f)
+            next(reader, None)
+            for r in reader:
+                if len(r) > 0:
+                    ral_id = r[0].strip()
+                    if ral_id:
+                        gs_lookup[ral_id] = {
+                            'equipe': r[13].strip() if len(r) > 13 else "",
+                            'tipo_defeito': r[14].strip() if len(r) > 14 else "",
+                            'causa_defeito': r[15].strip() if len(r) > 15 else "",
+                            'data_envio_rel': r[28].strip() if len(r) > 28 else "",
+                            'status_gs': r[8].strip() if len(r) > 8 else ""
+                        }
 
-    print(f"Total de registros válidos de Manutenção (com Status na Coluna I): {len(rows)}")
+    excel_rows = []
+    with zipfile.ZipFile(excel_path) as z:
+        shared_strings = []
+        if 'xl/sharedStrings.xml' in z.namelist():
+            tree = ET.fromstring(z.read('xl/sharedStrings.xml'))
+            for si in tree.findall('main:si', ns):
+                t = si.find('main:t', ns)
+                if t is not None and t.text:
+                    shared_strings.append(t.text)
+                else:
+                    texts = [t_node.text for t_node in si.findall('.//main:t', ns) if t_node.text]
+                    shared_strings.append(''.join(texts))
+
+        sheet_tree = ET.fromstring(z.read('xl/worksheets/sheet3.xml')) # Mnt. Demanda
+        rows = sheet_tree.findall('.//main:row', ns)
+        
+        for r_idx, row in enumerate(rows[4:]):
+            cells = {}
+            for c in row.findall('main:c', ns):
+                r_ref = c.attrib.get('r')
+                col_let = ''.join([char for char in r_ref if char.isalpha()])
+                t_type = c.attrib.get('t')
+                v_elem = c.find('main:v', ns)
+                val = v_elem.text if v_elem is not None else None
+                if t_type == 's' and val is not None:
+                    try:
+                        val = shared_strings[int(val)]
+                    except IndexError:
+                        pass
+                cells[col_let] = val
+
+            os_num = str(cells.get('B', '') or '').strip()
+            tipo_of = str(cells.get('C', '') or '').strip()
+            num_os_cli = str(cells.get('D', '') or '').strip()
+            ativ_desc = str(cells.get('E', '') or '').strip()
+            num_cabo = str(cells.get('F', '') or '').strip()
+            tipo_ativ_raw = str(cells.get('G', '') or '').strip()
+            localidade = str(cells.get('H', '') or '').strip()
+            cluster = str(cells.get('I', '') or '').strip()
+            uf = str(cells.get('J', '') or '').strip()
+            tipo_rede = str(cells.get('K', '') or '').strip()
+            data_acion_raw = cells.get('L', '')
+            mes_base_raw = cells.get('N', '')
+            demanda_integ = str(cells.get('O', '') or '').strip()
+            valor_raw = cells.get('P', '')
+            wf2_num = str(cells.get('T', '') or '').strip()
+
+            if os_num and os_num.upper() != 'NONE':
+                mes_fmt = excel_serial_to_month(mes_base_raw) if mes_base_raw else ''
+                dt_acion = excel_serial_to_date(data_acion_raw)
+                dt_acion_str = dt_acion.strftime("%d/%m/%Y") if dt_acion else ""
+                
+                try:
+                    v_num = float(valor_raw) if valor_raw else 0.0
+                except ValueError:
+                    v_num = 0.0
+
+                # Inferência/Higienização de Tipo de Atividade
+                t_clean = tipo_ativ_raw.upper()
+                a_desc_upper = ativ_desc.upper()
+                if t_clean in ('ROMPIMENTO', 'ATENUAÇÃO', 'ADEQUAÇÃO DE REDE', 'MOBILIZAÇÃO', 'RAL DE QUALIDADE', 'MELHORIA DE REDE', 'OBRAS'):
+                    tipo_ativ_final = t_clean
+                elif 'ROMPIMENTO' in a_desc_upper:
+                    tipo_ativ_final = 'ROMPIMENTO'
+                elif 'ATENUAÇÃO' in a_desc_upper or 'ATENUACAO' in a_desc_upper:
+                    tipo_ativ_final = 'ATENUAÇÃO'
+                elif 'ADEQUA' in a_desc_upper:
+                    tipo_ativ_final = 'ADEQUAÇÃO DE REDE'
+                elif 'MOBILIZ' in a_desc_upper:
+                    tipo_ativ_final = 'MOBILIZAÇÃO'
+                elif 'QUALIDADE' in a_desc_upper or 'RAL' in a_desc_upper:
+                    tipo_ativ_final = 'RAL DE QUALIDADE'
+                elif t_clean and t_clean != 'NONE':
+                    tipo_ativ_final = t_clean
+                else:
+                    tipo_ativ_final = 'OUTROS'
+
+                gs_info = gs_lookup.get(os_num, {})
+                equipe_final = gs_info.get('equipe') or (cluster if cluster and cluster != 'None' else '-')
+                tipo_def_final = gs_info.get('tipo_defeito') or tipo_ativ_final
+                causa_def_final = gs_info.get('causa_defeito') or (tipo_rede if tipo_rede and tipo_rede != 'None' else '-')
+                status_final = 'MEDIÇÃO' if v_num > 0 else (gs_info.get('status_gs') or 'CONCLUIDO')
+
+                excel_rows.append({
+                    'ral': os_num,
+                    'tipo_of': tipo_of if tipo_of and tipo_of != 'None' else 'RAL',
+                    'atividade': ativ_desc if ativ_desc and ativ_desc != 'None' else '-',
+                    'tipo_atividade': tipo_ativ_final,
+                    'localidade': localidade if localidade and localidade != 'None' else '-',
+                    'status': status_final,
+                    'data_acionamento': dt_acion_str,
+                    'equipe': equipe_final,
+                    'tipo_defeito': tipo_def_final,
+                    'causa_defeito': causa_def_final,
+                    'valor_medicao': round(v_num, 2),
+                    'mes_pagamento': mes_fmt,
+                    'demanda_integ': demanda_integ if demanda_integ and demanda_integ != 'None' else '-',
+                    'wf2': wf2_num if wf2_num and wf2_num != 'None' else '-'
+                })
+
+    print(f"Total de registros da Planilha Master de Medições: {len(excel_rows)}")
+    matched_count = len([r for r in excel_rows if r['valor_medicao'] > 0])
+    total_val_sum = sum(r['valor_medicao'] for r in excel_rows)
+    print(f"Registros com valor medido > 0: {matched_count} OSs | Soma Total Medida: R$ {total_val_sum:,.2f}")
 
     lookups = {
         "tipos_of": [],
@@ -127,7 +195,6 @@ def process_csv():
         "statuses": [],
         "tipos_defeito": [],
         "causas_defeito": [],
-        "precificados": [],
         "meses_pagamento": []
     }
 
@@ -140,64 +207,23 @@ def process_csv():
         return lookups[key].index(val_clean)
 
     compressed_rows = []
-    matched_fin_count = 0
-    total_fin_value = 0.0
-
-    for r in rows:
-        ral = r[0].strip() if len(r) > 0 else "-"
-        tipo_of_idx = get_lookup_idx("tipos_of", r[1] if len(r) > 1 else "-")
-        atividade = r[3].strip() if len(r) > 3 else "-"
-        tipo_ativ_idx = get_lookup_idx("tipos_atividade", r[5] if len(r) > 5 else "-")
-        localidade_idx = get_lookup_idx("localidades", r[6] if len(r) > 6 else "-")
-        logradouro = r[7].strip() if len(r) > 7 else "-"
-        status_idx = get_lookup_idx("statuses", r[8] if len(r) > 8 else "-")
-        data_venc = r[9].strip() if len(r) > 9 else "-"
-        hora_venc = r[10].strip() if len(r) > 10 else "-"
-        data_acion = r[11].strip() if len(r) > 11 else "-"
-        hora_acion = r[12].strip() if len(r) > 12 else "-"
-        equipe_idx = get_lookup_idx("equipes", r[13] if len(r) > 13 else "-")
-        tipo_def_idx = get_lookup_idx("tipos_defeito", r[14] if len(r) > 14 else "-")
-        causa_def_idx = get_lookup_idx("causas_defeito", r[15] if len(r) > 15 else "-")
-        tipo_rede = r[16].strip() if len(r) > 16 else "-"
-        servico_exec = r[17].strip() if len(r) > 17 else "-"
-        observacao = r[18].strip() if len(r) > 18 else "-"
-        cx_exist = r[19].strip() if len(r) > 19 else "-"
-        cx_nova = r[20].strip() if len(r) > 20 else "-"
-        fusao = r[21].strip() if len(r) > 21 else "-"
-        tipo_cabo = r[22].strip() if len(r) > 22 else "-"
-        lanc_m = r[23].strip() if len(r) > 23 else "-"
-        espin_m = r[24].strip() if len(r) > 24 else "-"
-        adeq_qtd = r[25].strip() if len(r) > 25 else "-"
-        cord_m = r[26].strip() if len(r) > 26 else "-"
-        task_toa = r[27].strip() if len(r) > 27 else "-"
-        data_envio_rel = r[28].strip() if len(r) > 28 else "-"
-        hora_envio_rel = r[29].strip() if len(r) > 29 else "-"
-        precificado_idx = get_lookup_idx("precificados", r[31] if len(r) > 31 else "-")
-        data_envio_claro = r[32].strip() if len(r) > 32 else "-"
-        claro_pago = r[33].strip() if len(r) > 33 else "-"
-        data_devol_claro = r[34].strip() if len(r) > 34 else "-"
-
-        fin_info = financial_map.get(ral, {'mes_pagamento': '-', 'valor_medicao': 0.0})
-        valor_med = fin_info['valor_medicao']
-        mes_pag_idx = get_lookup_idx("meses_pagamento", fin_info['mes_pagamento'])
-
-        if valor_med > 0:
-            matched_fin_count += 1
-            total_fin_value += valor_med
+    for r in excel_rows:
+        tipo_of_idx = get_lookup_idx("tipos_of", r['tipo_of'])
+        tipo_ativ_idx = get_lookup_idx("tipos_atividade", r['tipo_atividade'])
+        localidade_idx = get_lookup_idx("localidades", r['localidade'])
+        status_idx = get_lookup_idx("statuses", r['status'])
+        equipe_idx = get_lookup_idx("equipes", r['equipe'])
+        tipo_def_idx = get_lookup_idx("tipos_defeito", r['tipo_defeito'])
+        causa_def_idx = get_lookup_idx("causas_defeito", r['causa_defeito'])
+        mes_pag_idx = get_lookup_idx("meses_pagamento", r['mes_pagamento'])
 
         compressed_rows.append([
-            ral, tipo_of_idx, atividade, tipo_ativ_idx, localidade_idx,
-            logradouro, status_idx, data_venc, hora_venc, data_acion,
-            hora_acion, equipe_idx, tipo_def_idx, causa_def_idx, tipo_rede,
-            servico_exec, observacao, cx_exist, cx_nova, fusao,
-            tipo_cabo, lanc_m, espin_m, adeq_qtd, cord_m,
-            task_toa, data_envio_rel, hora_envio_rel, precificado_idx, data_envio_claro,
-            claro_pago, data_devol_claro, valor_med, mes_pag_idx
+            r['ral'], tipo_of_idx, r['atividade'], tipo_ativ_idx, localidade_idx,
+            status_idx, r['data_acionamento'], equipe_idx, tipo_def_idx, causa_def_idx,
+            r['valor_medicao'], mes_pag_idx, r['demanda_integ'], r['wf2']
         ])
 
     now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
-    print(f"Cruzamento concluído: {matched_fin_count} OFs com valor medido > 0. Valor Total: R$ {total_fin_value:,.2f}")
 
     db = {
         "generated_at": now_str,
@@ -207,7 +233,7 @@ def process_csv():
 
     print(f"Gerando {js_path}...")
     with open(js_path, 'w', encoding='utf-8') as f:
-        f.write("// Data generated automatically from Google Sheet OFS & Excel Medições\n")
+        f.write("// Data generated automatically from Master Excel Controle de Medições\n")
         f.write("(function() {\n")
         f.write(f"    const db = {json.dumps(db, ensure_ascii=False, indent=2)};\n\n")
         f.write("    const l = db.lookups;\n")
@@ -217,47 +243,27 @@ def process_csv():
         f.write("        atividade: r[2] || '-',\n")
         f.write("        tipo_atividade: l.tipos_atividade[r[3]] || '-',\n")
         f.write("        localidade: l.localidades[r[4]] || '-',\n")
-        f.write("        logradouro: r[5] || '-',\n")
-        f.write("        status: l.statuses[r[6]] || '-',\n")
-        f.write("        data_vencimento: r[7] || '-',\n")
-        f.write("        hora_vencimento: r[8] || '-',\n")
-        f.write("        data_acionamento: r[9] || '-',\n")
-        f.write("        hora_acionamento: r[10] || '-',\n")
-        f.write("        equipe: l.equipes[r[11]] || '-',\n")
-        f.write("        tipo_defeito: l.tipos_defeito[r[12]] || '-',\n")
-        f.write("        causa_defeito: l.causas_defeito[r[13]] || '-',\n")
-        f.write("        tipo_rede: r[14] || '-',\n")
-        f.write("        servico_executado: r[15] || '-',\n")
-        f.write("        observacao: r[16] || '-',\n")
-        f.write("        cx_exist: r[17] || '-',\n")
-        f.write("        cx_nova: r[18] || '-',\n")
-        f.write("        fusao: r[19] || '-',\n")
-        f.write("        tipo_cabo: r[20] || '-',\n")
-        f.write("        lanc_m: r[21] || '-',\n")
-        f.write("        espin_m: r[22] || '-',\n")
-        f.write("        adeq_qtd: r[23] || '-',\n")
-        f.write("        cord_m: r[24] || '-',\n")
-        f.write("        task_toa: r[25] || '-',\n")
-        f.write("        data_envio_relatorio: r[26] || '-',\n")
-        f.write("        hora_envio_relatorio: r[27] || '-',\n")
-        f.write("        precificado: l.precificados[r[28]] || '-',\n")
-        f.write("        data_envio_claro: r[29] || '-',\n")
-        f.write("        claro_pago: r[30] || '-',\n")
-        f.write("        data_devolucao_claro: r[31] || '-',\n")
-        f.write("        valor_medicao: r[32] || 0.0,\n")
-        f.write("        mes_pagamento: l.meses_pagamento[r[33]] || '-'\n")
+        f.write("        status: l.statuses[r[5]] || '-',\n")
+        f.write("        data_acionamento: r[6] || '-',\n")
+        f.write("        equipe: l.equipes[r[7]] || '-',\n")
+        f.write("        tipo_defeito: l.tipos_defeito[r[8]] || '-',\n")
+        f.write("        causa_defeito: l.causas_defeito[r[9]] || '-',\n")
+        f.write("        valor_medicao: r[10] || 0.0,\n")
+        f.write("        mes_pagamento: l.meses_pagamento[r[11]] || '-',\n")
+        f.write("        demanda_integ: r[12] || '-',\n")
+        f.write("        wf2: r[13] || '-'\n")
         f.write("    }));\n")
         f.write("    window.MANUTENCAO_METADATA = {\n")
         f.write("        generated_at: db.generated_at,\n")
-        f.write("        count: db.rows.length\n")
+        f.write("        count: db.rows.length,\n")
+        f.write("        total_medido: " + str(total_val_sum) + "\n")
         f.write("    };\n")
-        f.write("    console.log('Base de Manutenção carregada:', window.MANUTENCAO_DATA.length, 'registros.');\n")
+        f.write("    console.log('Base Master de Manutenção carregada:', window.MANUTENCAO_DATA.length, 'registros.');\n")
         f.write("})();\n")
-        f.write("\n")
-        f.write(f"// Processamento de Manutenção concluído com sucesso às {now_str}!\n")
 
-    print(f"Processamento de Manutenção concluído com sucesso às {now_str}!")
+    print(f"Processamento da Planilha Master concluído com sucesso às {now_str}!")
 
 if __name__ == "__main__":
     download_csv()
-    process_csv()
+    process_excel_master()
+
