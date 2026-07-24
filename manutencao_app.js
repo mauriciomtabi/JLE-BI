@@ -269,8 +269,8 @@
         if (!container) return;
 
         const macroStats = {
-            'ROMPIMENTO': { count: 0, totalVal: 0, aprovVal: 0, pedVal: 0, icon: 'fa-solid fa-triangle-exclamation', color: '#ef4444', sub: 'Rompimento, Adequação, Atenuação, Qualidade, Mobilização' },
-            'Melhoria':   { count: 0, totalVal: 0, aprovVal: 0, pedVal: 0, icon: 'fa-solid fa-wrench',                color: '#0284c7', sub: 'Obras, Migração, Anti-Furto, Melhoria de Rede' }
+            'ROMPIMENTO': { count: 0, totalVal: 0, aprovVal: 0, icon: 'fa-solid fa-triangle-exclamation', color: '#ef4444', sub: 'Rompimento, Adequação, Atenuação, Qualidade, Mobilização' },
+            'Melhoria':   { count: 0, totalVal: 0, aprovVal: 0, icon: 'fa-solid fa-wrench',                color: '#0284c7', sub: 'Obras, Migração, Anti-Furto, Melhoria de Rede' }
         };
 
         filteredData.forEach(r => {
@@ -279,9 +279,7 @@
                 macroStats[macro].count   += 1;
                 macroStats[macro].totalVal += (r.valor_medicao || 0);
                 const hasColT = Boolean(r.wf2 && r.wf2 !== '-' && r.wf2.toUpperCase() !== 'NONE');
-                const hasColU = Boolean(r.obs_medicao && r.obs_medicao !== '-' && r.obs_medicao.toUpperCase() !== 'NONE');
-                if (hasColT && !hasColU) macroStats[macro].aprovVal += (r.valor_medicao || 0);
-                if (hasColT && hasColU)  macroStats[macro].pedVal   += (r.valor_medicao || 0);
+                if (hasColT) macroStats[macro].aprovVal += (r.valor_medicao || 0);
             }
         });
 
@@ -290,7 +288,7 @@
 
         container.innerHTML = sortedMacro.map(cat => {
             const stats = macroStats[cat];
-            const pendVal = stats.totalVal - stats.aprovVal - stats.pedVal;
+            const pendVal = stats.totalVal - stats.aprovVal;
 
             return `
             <div class="cobranca-category-card${activeAtiv === cat ? ' active' : ''}" style="cursor:pointer; position:relative; overflow:hidden; padding: 18px 22px; display:flex; align-items:center; justify-content:space-between; gap:20px; border-left: 4px solid ${stats.color};" onclick="window.filterByManutCategory('${cat}')">
@@ -312,28 +310,21 @@
                     </div>
                 </div>
 
-                <!-- Direita: Os 3 Status KPI Boxes (Aprovado, Pedido Gerado, Pendente) -->
-                <div style="flex: 1.4; display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; align-items:center;">
+                <!-- Direita: 2 Status KPI Boxes (Aprovado e Pendente) -->
+                <div style="flex: 1; display:grid; grid-template-columns: repeat(2, 1fr); gap:12px; align-items:center;">
                     
-                    <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 8px; padding: 10px 12px; display:flex; flex-direction:column; gap:4px;">
-                        <div style="font-size:9px; font-weight:800; color:#10b981; text-transform:uppercase; letter-spacing:0.5px; display:flex; align-items:center; gap:5px;">
-                            <i class="fa-solid fa-circle-check" style="font-size:10px;"></i> Aprovado
+                    <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 10px; padding: 12px 14px; display:flex; flex-direction:column; gap:4px;">
+                        <div style="font-size:10px; font-weight:800; color:#10b981; text-transform:uppercase; letter-spacing:0.5px; display:flex; align-items:center; gap:6px;">
+                            <i class="fa-solid fa-circle-check" style="font-size:11px;"></i> Aprovado
                         </div>
-                        <div style="font-size:13px; font-weight:800; color:#10b981; line-height:1.2;">${formatCurrency(stats.aprovVal)}</div>
+                        <div style="font-size:14px; font-weight:800; color:#10b981; line-height:1.2;">${formatCurrency(stats.aprovVal)}</div>
                     </div>
 
-                    <div style="background: rgba(2, 132, 199, 0.08); border: 1px solid rgba(2, 132, 199, 0.25); border-radius: 8px; padding: 10px 12px; display:flex; flex-direction:column; gap:4px;">
-                        <div style="font-size:9px; font-weight:800; color:#0284c7; text-transform:uppercase; letter-spacing:0.5px; display:flex; align-items:center; gap:5px;">
-                            <i class="fa-solid fa-file-invoice-dollar" style="font-size:10px;"></i> Ped. Gerado
+                    <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: 10px; padding: 12px 14px; display:flex; flex-direction:column; gap:4px;">
+                        <div style="font-size:10px; font-weight:800; color:#f59e0b; text-transform:uppercase; letter-spacing:0.5px; display:flex; align-items:center; gap:6px;">
+                            <i class="fa-solid fa-clock" style="font-size:11px;"></i> Pendente
                         </div>
-                        <div style="font-size:13px; font-weight:800; color:#0284c7; line-height:1.2;">${formatCurrency(stats.pedVal)}</div>
-                    </div>
-
-                    <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: 8px; padding: 10px 12px; display:flex; flex-direction:column; gap:4px;">
-                        <div style="font-size:9px; font-weight:800; color:#f59e0b; text-transform:uppercase; letter-spacing:0.5px; display:flex; align-items:center; gap:5px;">
-                            <i class="fa-solid fa-clock" style="font-size:10px;"></i> Pendente
-                        </div>
-                        <div style="font-size:13px; font-weight:800; color:#f59e0b; line-height:1.2;">${formatCurrency(pendVal)}</div>
+                        <div style="font-size:14px; font-weight:800; color:#f59e0b; line-height:1.2;">${formatCurrency(pendVal)}</div>
                     </div>
 
                 </div>
@@ -341,6 +332,7 @@
             </div>`;
         }).join('');
     }
+
 
 
 
