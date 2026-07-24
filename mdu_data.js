@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-07-24 12:00:18
+// Dados MDU Compactados - Gerado em: 2026-07-24 13:00:13
 window.MDU_METADATA = {
-    "generated_at": "2026-07-24 12:00:18",
+    "generated_at": "2026-07-24 13:00:13",
     "total_rows": 5270,
     "geocoded_new": 0
 };
@@ -165324,7 +165324,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "OK",
-        "relatorio_por": "",
+        "relatorio_por": "NÃO ENCONTRADO",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
@@ -165356,7 +165356,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "OK",
-        "relatorio_por": "",
+        "relatorio_por": "RESIDENCIAL",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
@@ -165388,7 +165388,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "OK",
-        "relatorio_por": "",
+        "relatorio_por": "NÃO ENCONTRADO",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
@@ -165420,7 +165420,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "OK",
-        "relatorio_por": "",
+        "relatorio_por": "NÃO ENCONTRADO",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
