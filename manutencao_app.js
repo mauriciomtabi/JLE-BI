@@ -280,61 +280,68 @@
                 macroStats[macro].totalVal += (r.valor_medicao || 0);
                 const hasColT = Boolean(r.wf2 && r.wf2 !== '-' && r.wf2.toUpperCase() !== 'NONE');
                 const hasColU = Boolean(r.obs_medicao && r.obs_medicao !== '-' && r.obs_medicao.toUpperCase() !== 'NONE');
-                // Aprovado = tem WF2 mas NÃO tem obs_medicao (conforme chart mensal)
                 if (hasColT && !hasColU) macroStats[macro].aprovVal += (r.valor_medicao || 0);
-                // Pedido Gerado = tem WF2 E tem obs_medicao
                 if (hasColT && hasColU)  macroStats[macro].pedVal   += (r.valor_medicao || 0);
             }
         });
 
-
-        const overallVal = filteredData.reduce((sum, r) => sum + (r.valor_medicao || 0), 0) || 1;
         const sortedMacro = ['ROMPIMENTO', 'Melhoria'];
         const activeAtiv = document.getElementById('manut-filter-atividade')?.value || '';
 
         container.innerHTML = sortedMacro.map(cat => {
             const stats = macroStats[cat];
-            const pct = ((stats.totalVal / overallVal) * 100).toFixed(1).replace('.', ',');
             const pendVal = stats.totalVal - stats.aprovVal - stats.pedVal;
 
             return `
-            <div class="cobranca-category-card${activeAtiv === cat ? ' active' : ''}" style="cursor:pointer; position:relative; overflow:hidden; padding: 16px 18px; display:flex; flex-direction:column; gap:8px; border-left: 4px solid ${stats.color};" onclick="window.filterByManutCategory('${cat}')">
+            <div class="cobranca-category-card${activeAtiv === cat ? ' active' : ''}" style="cursor:pointer; position:relative; overflow:hidden; padding: 18px 22px; display:flex; align-items:center; justify-content:space-between; gap:20px; border-left: 4px solid ${stats.color};" onclick="window.filterByManutCategory('${cat}')">
 
-                <!-- ícone de fundo decorativo -->
-                <i class="${stats.icon}" style="position:absolute; right:14px; bottom:10px; font-size:5rem; color:${stats.color}; opacity:0.06; pointer-events:none;"></i>
-
-                <!-- cabeçalho: título grande + badge % -->
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2px;">
-                    <span style="font-size:13px; font-weight:900; letter-spacing:2px; text-transform:uppercase; color:${stats.color};">${cat}</span>
-                    <span style="background:${stats.color}22; color:${stats.color}; padding:3px 12px; border-radius:20px; font-size:11px; font-weight:800; border:1px solid ${stats.color}55;">${pct}% do total</span>
-                </div>
-
-                <!-- valor total em destaque -->
-                <div style="font-size:1.6rem; font-weight:900; color:var(--text-primary); line-height:1; letter-spacing:-0.5px;">${formatCurrency(stats.totalVal)}</div>
-
-                <!-- linha divisória -->
-                <div style="height:1px; background:rgba(255,255,255,0.07); margin:2px 0;"></div>
-
-                <!-- aprovado | pedido gerado | pendente -->
-                <div style="display:flex; gap:0;">
-                    <div style="flex:1; display:flex; flex-direction:column; gap:3px; padding-right:10px;">
-                        <span style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.8px; color:#10b981;">&#x2714; Aprovado</span>
-                        <span style="font-size:12px; font-weight:800; color:#10b981;">${formatCurrency(stats.aprovVal)}</span>
+                <!-- Esquerda: Título, Atividades e Valor Total -->
+                <div style="flex: 1.1; min-width: 210px; display:flex; flex-direction:column; gap:10px; border-right: 1px solid rgba(255,255,255,0.08); padding-right:20px;">
+                    <div style="display:flex; align-items:center; gap:12px;">
+                        <div style="width:40px; height:40px; border-radius:10px; background:${stats.color}18; border:1px solid ${stats.color}40; color:${stats.color}; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;">
+                            <i class="${stats.icon}"></i>
+                        </div>
+                        <div>
+                            <div style="font-size:13px; font-weight:900; letter-spacing:1.5px; text-transform:uppercase; color:${stats.color};">${cat}</div>
+                            <div style="font-size:10px; color:#64748b; font-weight:500; margin-top:2px; line-height:1.2;">${stats.sub}</div>
+                        </div>
                     </div>
-                    <div style="width:1px; background:rgba(255,255,255,0.07);"></div>
-                    <div style="flex:1; display:flex; flex-direction:column; gap:3px; padding:0 10px;">
-                        <span style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.8px; color:#0284c7;">&#x1F4CB; Ped. Gerado</span>
-                        <span style="font-size:12px; font-weight:800; color:#0284c7;">${formatCurrency(stats.pedVal)}</span>
-                    </div>
-                    <div style="width:1px; background:rgba(255,255,255,0.07);"></div>
-                    <div style="flex:1; display:flex; flex-direction:column; gap:3px; padding-left:10px;">
-                        <span style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.8px; color:#f59e0b;">&#x23F3; Pendente</span>
-                        <span style="font-size:12px; font-weight:800; color:#f59e0b;">${formatCurrency(pendVal)}</span>
+                    <div>
+                        <div style="font-size:9px; font-weight:700; color:#94a3b8; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:2px;">Valor Total Medido</div>
+                        <div style="font-size:1.6rem; font-weight:900; color:var(--text-primary); line-height:1; letter-spacing:-0.5px;">${formatCurrency(stats.totalVal)}</div>
                     </div>
                 </div>
+
+                <!-- Direita: Os 3 Status KPI Boxes (Aprovado, Pedido Gerado, Pendente) -->
+                <div style="flex: 1.4; display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; align-items:center;">
+                    
+                    <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 8px; padding: 10px 12px; display:flex; flex-direction:column; gap:4px;">
+                        <div style="font-size:9px; font-weight:800; color:#10b981; text-transform:uppercase; letter-spacing:0.5px; display:flex; align-items:center; gap:5px;">
+                            <i class="fa-solid fa-circle-check" style="font-size:10px;"></i> Aprovado
+                        </div>
+                        <div style="font-size:13px; font-weight:800; color:#10b981; line-height:1.2;">${formatCurrency(stats.aprovVal)}</div>
+                    </div>
+
+                    <div style="background: rgba(2, 132, 199, 0.08); border: 1px solid rgba(2, 132, 199, 0.25); border-radius: 8px; padding: 10px 12px; display:flex; flex-direction:column; gap:4px;">
+                        <div style="font-size:9px; font-weight:800; color:#0284c7; text-transform:uppercase; letter-spacing:0.5px; display:flex; align-items:center; gap:5px;">
+                            <i class="fa-solid fa-file-invoice-dollar" style="font-size:10px;"></i> Ped. Gerado
+                        </div>
+                        <div style="font-size:13px; font-weight:800; color:#0284c7; line-height:1.2;">${formatCurrency(stats.pedVal)}</div>
+                    </div>
+
+                    <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: 8px; padding: 10px 12px; display:flex; flex-direction:column; gap:4px;">
+                        <div style="font-size:9px; font-weight:800; color:#f59e0b; text-transform:uppercase; letter-spacing:0.5px; display:flex; align-items:center; gap:5px;">
+                            <i class="fa-solid fa-clock" style="font-size:10px;"></i> Pendente
+                        </div>
+                        <div style="font-size:13px; font-weight:800; color:#f59e0b; line-height:1.2;">${formatCurrency(pendVal)}</div>
+                    </div>
+
+                </div>
+
             </div>`;
         }).join('');
     }
+
 
 
     window.filterByManutCategory = function(cat) {
