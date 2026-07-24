@@ -293,29 +293,34 @@
             const pendVal = stats.totalVal - stats.aprovVal;
 
             return `
-            <div class="cobranca-category-card${activeAtiv === cat ? ' active' : ''}" style="cursor: pointer; position: relative; overflow: hidden;" onclick="window.filterByManutCategory('${cat}')">
-                <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: ${stats.color}; border-radius: 4px 0 0 4px;"></div>
-                <div style="padding-left: 8px; flex-grow: 1; display: flex; flex-direction: column; gap: 2px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-size: 11px; font-weight: 800; letter-spacing: 1px; color: ${stats.color};">${cat.toUpperCase()}</span>
-                        <span style="background: rgba(0,180,216,0.12); color: var(--color-primary); padding: 2px 8px; border-radius: 8px; font-size: 10px; font-weight: 700;">${pct}%</span>
-                    </div>
-                    <div style="font-size: 1.5rem; font-weight: 900; color: var(--text-primary); line-height: 1.1;">${formatShortCurrency(stats.totalVal)}</div>
-                    <div style="font-size: 10px; color: var(--text-secondary); font-weight: 600;">${stats.count.toLocaleString('pt-BR')} OFs</div>
-                    <div style="display: flex; gap: 8px; margin-top: 4px;">
-                        <div style="flex: 1; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.25); border-radius: 6px; padding: 4px 8px;">
-                            <div style="font-size: 9px; color: #10b981; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Aprovado</div>
-                            <div style="font-size: 12px; font-weight: 800; color: #10b981;">${formatShortCurrency(stats.aprovVal)}</div>
-                        </div>
-                        <div style="flex: 1; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.25); border-radius: 6px; padding: 4px 8px;">
-                            <div style="font-size: 9px; color: #f59e0b; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Pendente</div>
-                            <div style="font-size: 12px; font-weight: 800; color: #f59e0b;">${formatShortCurrency(pendVal)}</div>
-                        </div>
-                    </div>
-                    <div style="font-size: 9px; color: #475569; margin-top: 4px; line-height: 1.3;">${stats.sub}</div>
+            <div class="cobranca-category-card${activeAtiv === cat ? ' active' : ''}" style="cursor:pointer; position:relative; overflow:hidden; padding: 14px 16px; display:flex; flex-direction:column; gap:10px; border-left: 4px solid ${stats.color};" onclick="window.filterByManutCategory('${cat}')">
+
+                <!-- ícone de fundo decorativo -->
+                <i class="${stats.icon}" style="position:absolute; right:12px; top:50%; transform:translateY(-50%); font-size:4.5rem; color:${stats.color}; opacity:0.07; pointer-events:none;"></i>
+
+                <!-- cabeçalho: título + badge % -->
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span style="font-size:10px; font-weight:900; letter-spacing:1.5px; text-transform:uppercase; color:${stats.color};">${cat}</span>
+                    <span style="background:${stats.color}22; color:${stats.color}; padding:2px 10px; border-radius:20px; font-size:10px; font-weight:800; border:1px solid ${stats.color}55;">${pct}% do total</span>
                 </div>
-                <div style="display: flex; align-items: center; justify-content: center; width: 44px; min-width: 44px; font-size: 2rem; color: ${stats.color}; opacity: 0.25;">
-                    <i class="${stats.icon}"></i>
+
+                <!-- valor total -->
+                <div style="font-size:1.45rem; font-weight:900; color:var(--text-primary); line-height:1; letter-spacing:-0.5px;">${formatCurrency(stats.totalVal)}</div>
+
+                <!-- linha divisória -->
+                <div style="height:1px; background: rgba(255,255,255,0.06);"></div>
+
+                <!-- aprovado + pendente -->
+                <div style="display:flex; gap:10px;">
+                    <div style="flex:1; display:flex; flex-direction:column; gap:2px;">
+                        <span style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.8px; color:#10b981;">&#x2714; Aprovado</span>
+                        <span style="font-size:13px; font-weight:800; color:#10b981;">${formatCurrency(stats.aprovVal)}</span>
+                    </div>
+                    <div style="width:1px; background:rgba(255,255,255,0.06);"></div>
+                    <div style="flex:1; display:flex; flex-direction:column; gap:2px;">
+                        <span style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.8px; color:#f59e0b;">&#x23F3; Pendente</span>
+                        <span style="font-size:13px; font-weight:800; color:#f59e0b;">${formatCurrency(pendVal)}</span>
+                    </div>
                 </div>
             </div>`;
         }).join('');
@@ -496,11 +501,14 @@
         const dataPedGerado = monthMapKeys.map(m => monthlyStats[m].pedGerado);
         const dataAguard = monthMapKeys.map(m => monthlyStats[m].aguard);
 
-        // Total Medido do filtro atual para o badge superior
-        const overallTotalMedido = filteredData.reduce((sum, r) => sum + (r.valor_medicao || 0), 0);
+        // Total Aprovado do filtro atual para o badge superior
+        const overallTotalAprovado = filteredData.reduce((sum, r) => {
+            const isAprov = Boolean(r.wf2 && r.wf2 !== '-' && r.wf2.toUpperCase() !== 'NONE');
+            return sum + (isAprov ? (r.valor_medicao || 0) : 0);
+        }, 0);
         const avg30DaysEl = document.getElementById('manut-avg-30days-val');
         if (avg30DaysEl) {
-            avg30DaysEl.innerText = formatCurrency(overallTotalMedido);
+            avg30DaysEl.innerText = formatCurrency(overallTotalAprovado);
         }
 
         const ctxMensal = document.getElementById('manut-chart-mensal')?.getContext('2d');
