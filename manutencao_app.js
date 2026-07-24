@@ -269,15 +269,17 @@
         if (!container) return;
 
         const macroStats = {
-            'ROMPIMENTO': { count: 0, totalVal: 0, icon: 'fa-solid fa-triangle-exclamation', sub: 'Rompimento, Adequação, Atenuação, Qualidade, Mobilização' },
-            'Melhoria': { count: 0, totalVal: 0, icon: 'fa-solid fa-wrench', sub: 'Obras, Migração, Anti-Furto, Melhoria de Rede' }
+            'ROMPIMENTO': { count: 0, totalVal: 0, aprovVal: 0, icon: 'fa-solid fa-triangle-exclamation', color: '#ef4444', sub: 'Rompimento, Adequação, Atenuação, Qualidade, Mobilização' },
+            'Melhoria':   { count: 0, totalVal: 0, aprovVal: 0, icon: 'fa-solid fa-wrench',                color: '#0284c7', sub: 'Obras, Migração, Anti-Furto, Melhoria de Rede' }
         };
 
         filteredData.forEach(r => {
             const macro = getMacroCategory(r.tipo_atividade);
             if (macroStats[macro]) {
-                macroStats[macro].count += 1;
+                macroStats[macro].count   += 1;
                 macroStats[macro].totalVal += (r.valor_medicao || 0);
+                const isAprov = Boolean(r.wf2 && r.wf2 !== '-' && r.wf2.toUpperCase() !== 'NONE');
+                if (isAprov) macroStats[macro].aprovVal += (r.valor_medicao || 0);
             }
         });
 
@@ -288,24 +290,37 @@
         container.innerHTML = sortedMacro.map(cat => {
             const stats = macroStats[cat];
             const pct = ((stats.totalVal / overallVal) * 100).toFixed(1).replace('.', ',');
+            const pendVal = stats.totalVal - stats.aprovVal;
 
             return `
-            <div class="cobranca-category-card${activeAtiv === cat ? ' active' : ''}" style="cursor: pointer;" onclick="window.filterByManutCategory('${cat}')">
-                <div class="kpi-info" style="flex-grow: 1;">
-                    <div class="cobranca-category-title" style="font-size: 14px; font-weight: 800; color: var(--color-primary);">${cat.toUpperCase()}</div>
-                    <div class="cobranca-category-value" style="font-size: 1.25rem; font-weight: 800; color: var(--text-primary); margin: 4px 0;">${formatShortCurrency(stats.totalVal)}</div>
-                    <div class="kpi-sub" style="font-size: 11px; color: var(--text-secondary); font-weight: 600; display: flex; justify-content: space-between; align-items: center;">
-                        <span>${stats.count.toLocaleString('pt-BR')} OFs</span>
-                        <span style="background: rgba(0,180,216,0.12); color: var(--color-primary); padding: 2px 8px; border-radius: 8px; font-weight: 700;">${pct}%</span>
+            <div class="cobranca-category-card${activeAtiv === cat ? ' active' : ''}" style="cursor: pointer; position: relative; overflow: hidden;" onclick="window.filterByManutCategory('${cat}')">
+                <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: ${stats.color}; border-radius: 4px 0 0 4px;"></div>
+                <div style="padding-left: 8px; flex-grow: 1; display: flex; flex-direction: column; gap: 2px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 11px; font-weight: 800; letter-spacing: 1px; color: ${stats.color};">${cat.toUpperCase()}</span>
+                        <span style="background: rgba(0,180,216,0.12); color: var(--color-primary); padding: 2px 8px; border-radius: 8px; font-size: 10px; font-weight: 700;">${pct}%</span>
                     </div>
-                    <div style="font-size: 10px; color: #64748b; margin-top: 4px; line-height: 1.2;">${stats.sub}</div>
+                    <div style="font-size: 1.5rem; font-weight: 900; color: var(--text-primary); line-height: 1.1;">${formatShortCurrency(stats.totalVal)}</div>
+                    <div style="font-size: 10px; color: var(--text-secondary); font-weight: 600;">${stats.count.toLocaleString('pt-BR')} OFs</div>
+                    <div style="display: flex; gap: 8px; margin-top: 4px;">
+                        <div style="flex: 1; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.25); border-radius: 6px; padding: 4px 8px;">
+                            <div style="font-size: 9px; color: #10b981; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Aprovado</div>
+                            <div style="font-size: 12px; font-weight: 800; color: #10b981;">${formatShortCurrency(stats.aprovVal)}</div>
+                        </div>
+                        <div style="flex: 1; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.25); border-radius: 6px; padding: 4px 8px;">
+                            <div style="font-size: 9px; color: #f59e0b; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Pendente</div>
+                            <div style="font-size: 12px; font-weight: 800; color: #f59e0b;">${formatShortCurrency(pendVal)}</div>
+                        </div>
+                    </div>
+                    <div style="font-size: 9px; color: #475569; margin-top: 4px; line-height: 1.3;">${stats.sub}</div>
                 </div>
-                <div class="kpi-icon-container">
+                <div style="display: flex; align-items: center; justify-content: center; width: 44px; min-width: 44px; font-size: 2rem; color: ${stats.color}; opacity: 0.25;">
                     <i class="${stats.icon}"></i>
                 </div>
             </div>`;
         }).join('');
     }
+
 
     window.filterByManutCategory = function(cat) {
         const sel = document.getElementById('manut-filter-atividade');
