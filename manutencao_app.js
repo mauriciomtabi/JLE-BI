@@ -695,14 +695,18 @@
 
                     if (circle) {
                         if (typeof circle.addTo === 'function') circle.addTo(manutMap);
-                        if (typeof circle.bindPopup === 'function') {
-                            circle.bindPopup(`
+                        if (typeof circle.bindTooltip === 'function') {
+                            circle.bindTooltip(`
                                 <div style="font-family: 'Outfit', sans-serif; padding: 4px;">
-                                    <div style="font-weight: 800; font-size: 14px; color: #0284c7; margin-bottom: 4px;">${stats.rawName}</div>
-                                    <div style="font-size: 13px; font-weight: 700; color: #0f172a;">Valor Medido: <span style="color: #16a34a;">${formatCurrency(stats.val)}</span></div>
-                                    <div style="font-size: 12px; color: #475569; margin-top: 2px;">Acionamentos: <strong>${stats.count.toLocaleString('pt-BR')} OFs</strong></div>
+                                    <div style="font-weight: 800; font-size: 13px; color: #0284c7; margin-bottom: 2px;">${stats.rawName}</div>
+                                    <div style="font-size: 12px; font-weight: 700; color: #0f172a;">Valor Medido: <span style="color: #16a34a;">${formatCurrency(stats.val)}</span></div>
+                                    <div style="font-size: 11px; color: #475569; margin-top: 2px;">Acionamentos: <strong>${stats.count.toLocaleString('pt-BR')} OFs</strong></div>
                                 </div>
-                            `);
+                            `, {
+                                direction: 'top',
+                                sticky: true,
+                                opacity: 0.95
+                            });
                         }
                         manutMapMarkers.push(circle);
                     }
@@ -744,20 +748,21 @@
         tbody.innerHTML = pageItems.map(r => {
             const statusBadge = getStatusBadge(r.status);
             const valStr = r.valor_medicao > 0 ? formatCurrency(r.valor_medicao) : 'R$ 0,00';
+            const dataAciona = r.data_acionamento && r.data_acionamento !== '-' ? r.data_acionamento : '-';
             const mesPag = r.mes_pagamento && r.mes_pagamento !== '-' ? r.mes_pagamento : '-';
 
             return `
-            <tr>
-                <td style="font-weight: 700; color: #38ef7d;">${r.ral}</td>
-                <td><span style="font-weight: 600; color: #f8fafc;">${r.tipo_atividade}</span></td>
-                <td>${r.atividade}</td>
-                <td>${r.localidade}</td>
-                <td>${r.equipe}</td>
-                <td>${statusBadge}</td>
-                <td style="text-align: right; font-weight: 700; color: #38bdf8;">${valStr}</td>
-                <td style="text-align: center; font-weight: 600; color: #cbd5e1;">${mesPag}</td>
-                <td style="text-align: center;">
-                    <button class="action-btn view-of-btn" data-ral="${r.ral}" title="Ver detalhes" style="background: rgba(2,132,199,0.15); color: #38bdf8; border: 1px solid rgba(2,132,199,0.3); padding: 5px 10px; border-radius: 6px; cursor: pointer;">
+            <tr style="white-space: nowrap; font-size: 11px;">
+                <td style="font-weight: 700; color: #38ef7d; padding: 8px 12px;">${r.ral}</td>
+                <td style="padding: 8px 12px;"><span style="font-weight: 600; color: #f8fafc;">${r.tipo_atividade}</span></td>
+                <td style="padding: 8px 12px; max-width: 320px; overflow: hidden; text-overflow: ellipsis;">${r.atividade}</td>
+                <td style="padding: 8px 12px;">${r.localidade}</td>
+                <td style="padding: 8px 12px;">${statusBadge}</td>
+                <td style="text-align: right; font-weight: 700; color: #38bdf8; padding: 8px 12px;">${valStr}</td>
+                <td style="text-align: center; font-weight: 600; color: #cbd5e1; padding: 8px 12px;">${dataAciona}</td>
+                <td style="text-align: center; font-weight: 600; color: #cbd5e1; padding: 8px 12px;">${mesPag}</td>
+                <td style="text-align: center; padding: 8px 12px;">
+                    <button class="action-btn view-of-btn" data-ral="${r.ral}" title="Ver detalhes" style="background: rgba(2,132,199,0.15); color: #38bdf8; border: 1px solid rgba(2,132,199,0.3); padding: 3px 8px; border-radius: 6px; cursor: pointer;">
                         <i class="fa-solid fa-eye"></i>
                     </button>
                 </td>
