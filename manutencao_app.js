@@ -706,18 +706,6 @@
             if (manutMap) manutMap.invalidateSize();
         }, 200);
     }
-                        <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">Acionamentos: <strong>${stats.count.toLocaleString('pt-BR')} OFs</strong></div>
-                    </div>
-                `);
-
-                manutMapMarkers.push(circle);
-            }
-        });
-
-        setTimeout(() => {
-            if (manutMap) manutMap.invalidateSize();
-        }, 200);
-    }
 
     function getFallbackCoords(cityName) {
         let hash = 0;
