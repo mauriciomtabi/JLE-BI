@@ -12,10 +12,7 @@
 
     // Chart instances
     let chartMensal = null;
-    let chartDemandaInteg = null;
-    let chartTipoDefeito = null;
-    let chartCausaDefeito = null;
-    let chartLocalidades = null;
+    let chartAprovadosAtividade = null;
 
     const CATEGORY_ICONS = {
         'ROMPIMENTO': 'fa-solid fa-link-slash',
@@ -499,7 +496,7 @@
                         {
                             label: 'Pedido Gerado',
                             data: dataPedGerado,
-                            backgroundColor: '#a855f7',
+                            backgroundColor: '#0284c7', // Azul para Pedido Gerado
                             borderRadius: 4
                         },
                         {
@@ -544,7 +541,7 @@
                             stacked: true,
                             ticks: { 
                                 color: '#94a3b8',
-                                callback: (v) => formatSimpleNumber(v) // Formato limpo sem R$ no eixo Y (1 mi, 900 mil, 800 mil...)
+                                callback: (v) => formatSimpleNumber(v)
                             }, 
                             grid: { color: gridColor }, 
                             grace: '18%' 
@@ -555,95 +552,34 @@
             });
         }
 
-        // 2. GRÁFICO DEMANDA vs INTEGRIDADE (GRÁFICO DE ROSCA / DOUGHNUT)
-        const demStats = { 'DEMANDA': 0, 'INTEGRIDADE': 0 };
-        const demCount = { 'DEMANDA': 0, 'INTEGRIDADE': 0 };
-
+        // 2. GRÁFICO APROVADOS POR TIPO DE ATIVIDADE (SOMENTE ATIVIDADES APROVADAS)
+        const aprovAtivStats = {};
         filteredData.forEach(r => {
-            const d = r.demanda_integ === 'INTEGRIDADE' ? 'INTEGRIDADE' : 'DEMANDA';
-            demStats[d] += (r.valor_medicao || 0);
-            demCount[d] += 1;
-        });
-
-        const demLabels = ['Demanda', 'Integridade'];
-        const demValues = [demStats['DEMANDA'], demStats['INTEGRIDADE']];
-
-        const ctxDem = document.getElementById('manut-chart-demanda-integ')?.getContext('2d');
-        if (ctxDem) {
-            if (chartDemandaInteg) chartDemandaInteg.destroy();
-            chartDemandaInteg = new Chart(ctxDem, {
-                type: 'doughnut',
-                data: {
-                    labels: demLabels,
-                    datasets: [{
-                        data: demValues,
-                        backgroundColor: ['#a855f7', '#3b82f6'],
-                        borderColor: '#0f172a',
-                        borderWidth: 3,
-                        hoverOffset: 6
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    cutout: '68%',
-                    plugins: {
-                        legend: { 
-                            display: true,
-                            position: 'bottom',
-                            labels: { color: textColor, font: { weight: 'bold', size: 11 }, usePointStyle: true, boxWidth: 8 }
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: (ctx) => {
-                                    const key = ctx.label.toUpperCase();
-                                    const val = demStats[key] || 0;
-                                    const count = demCount[key] || 0;
-                                    return [
-                                        ` ${ctx.label}: ${formatCurrency(val)}`,
-                                        ` Acionamentos: ${count.toLocaleString('pt-BR')} OFs`
-                                    ];
-                                }
-                            }
-                        },
-                        datalabels: {
-                            display: true,
-                            color: '#ffffff',
-                            font: { weight: 'bold', size: 11 },
-                            formatter: (val) => formatSimpleNumber(val) // Formato sem R$: 900 mil, 585 mil, 1 mi
-                        }
-                    }
-                },
-                plugins: pluginsList
-            });
-        }
-
-        // 3. GRÁFICO TIPO DE DEFEITO - TOP 10
-        const tipoDefStats = {};
-        filteredData.forEach(r => {
-            if (r.tipo_defeito && r.tipo_defeito !== '-') {
-                const td = r.tipo_defeito;
-                if (!tipoDefStats[td]) tipoDefStats[td] = { val: 0, count: 0 };
-                tipoDefStats[td].val += (r.valor_medicao || 0);
-                tipoDefStats[td].count += 1;
+            const isAprovado = r.legend_status === 'APROVADO' || (Boolean(r.wf2 && r.wf2 !== '-' && r.wf2.toUpperCase() !== 'NONE') && !Boolean(r.obs_medicao && r.obs_medicao !== '-' && r.obs_medicao.toUpperCase() !== 'NONE'));
+            
+            if (isAprovado && r.tipo_atividade && r.tipo_atividade !== '-') {
+                const ta = r.tipo_atividade;
+                if (!aprovAtivStats[ta]) aprovAtivStats[ta] = { val: 0, count: 0 };
+                aprovAtivStats[ta].val += (r.valor_medicao || 0);
+                aprovAtivStats[ta].count += 1;
             }
         });
-        const sortedTipoDef = Object.keys(tipoDefStats)
-            .sort((a,b) => tipoDefStats[b].val - tipoDefStats[a].val)
-            .slice(0, 10);
-        const dataTipoDefVal = sortedTipoDef.map(k => tipoDefStats[k].val);
 
-        const ctxTipoDef = document.getElementById('manut-chart-tipo-defeito')?.getContext('2d');
-        if (ctxTipoDef) {
-            if (chartTipoDefeito) chartTipoDefeito.destroy();
-            chartTipoDefeito = new Chart(ctxTipoDef, {
+        const sortedAprovAtiv = Object.keys(aprovAtivStats)
+            .sort((a,b) => aprovAtivStats[b].val - aprovAtivStats[a].val);
+        const dataAprovAtivVal = sortedAprovAtiv.map(k => aprovAtivStats[k].val);
+
+        const ctxAprovAtiv = document.getElementById('manut-chart-aprovados-atividade')?.getContext('2d');
+        if (ctxAprovAtiv) {
+            if (chartAprovadosAtividade) chartAprovadosAtividade.destroy();
+            chartAprovadosAtividade = new Chart(ctxAprovAtiv, {
                 type: 'bar',
                 data: {
-                    labels: sortedTipoDef,
+                    labels: sortedAprovAtiv,
                     datasets: [{
-                        label: 'Valor Medido (R$)',
-                        data: dataTipoDefVal,
-                        backgroundColor: '#0284c7',
+                        label: 'Valor Aprovado (R$)',
+                        data: dataAprovAtivVal,
+                        backgroundColor: '#10b981',
                         borderRadius: 6
                     }]
                 },
@@ -656,11 +592,11 @@
                         tooltip: {
                             callbacks: {
                                 label: (ctx) => {
-                                    const labelKey = sortedTipoDef[ctx.dataIndex];
-                                    const st = tipoDefStats[labelKey];
+                                    const labelKey = sortedAprovAtiv[ctx.dataIndex];
+                                    const st = aprovAtivStats[labelKey];
                                     return [
-                                        ` Valor: ${formatCurrency(st.val)}`,
-                                        ` Qtd: ${st.count.toLocaleString('pt-BR')} OFs`
+                                        ` Valor Aprovado: ${formatCurrency(st.val)}`,
+                                        ` Qtd: ${st.count.toLocaleString('pt-BR')} OFs Aprovadas`
                                     ];
                                 }
                             }
@@ -671,7 +607,7 @@
                             anchor: 'end',
                             align: 'end',
                             font: { weight: 'bold', size: 10 },
-                            formatter: (val) => formatSimpleNumber(val) // Sem R$: 900 mil, 585 mil, 1 mi
+                            formatter: (val) => formatSimpleNumber(val)
                         }
                     },
                     scales: {
@@ -690,7 +626,7 @@
             });
         }
 
-        // 4. MAPA OPENSTREETMAP LEAFLET POR CIDADE / LOCALIDADE
+        // 3. MAPA OPENSTREETMAP LEAFLET POR CIDADE / LOCALIDADE (MODO CLARO)
         renderManutMap();
     }
 
@@ -710,8 +646,8 @@
                 zoomControl: true
             });
 
-            // Camada OpenStreetMap Dark / CARTO
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            // Camada OpenStreetMap MODO CLARO (CARTO Voyager / Light)
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
                 attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
                 subdomains: 'abcd',
                 maxZoom: 19
@@ -747,17 +683,29 @@
 
                 const circle = L.circleMarker(coords, {
                     radius: radius,
-                    fillColor: '#10b981',
-                    color: '#34d399',
+                    fillColor: '#0284c7',
+                    color: '#0369a1',
                     weight: 2,
                     opacity: 0.9,
-                    fillOpacity: 0.6
+                    fillOpacity: 0.65
                 }).addTo(manutMap);
 
                 circle.bindPopup(`
                     <div style="font-family: 'Outfit', sans-serif; padding: 4px;">
-                        <div style="font-weight: 800; font-size: 14px; color: #38bdf8; margin-bottom: 4px;">${stats.rawName}</div>
-                        <div style="font-size: 13px; font-weight: 700; color: #f8fafc;">Valor Medido: <span style="color: #38ef7d;">${formatCurrency(stats.val)}</span></div>
+                        <div style="font-weight: 800; font-size: 14px; color: #0284c7; margin-bottom: 4px;">${stats.rawName}</div>
+                        <div style="font-size: 13px; font-weight: 700; color: #0f172a;">Valor Medido: <span style="color: #16a34a;">${formatCurrency(stats.val)}</span></div>
+                        <div style="font-size: 12px; color: #475569; margin-top: 2px;">Acionamentos: <strong>${stats.count.toLocaleString('pt-BR')} OFs</strong></div>
+                    </div>
+                `);
+
+                manutMapMarkers.push(circle);
+            }
+        });
+
+        setTimeout(() => {
+            if (manutMap) manutMap.invalidateSize();
+        }, 200);
+    }
                         <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">Acionamentos: <strong>${stats.count.toLocaleString('pt-BR')} OFs</strong></div>
                     </div>
                 `);

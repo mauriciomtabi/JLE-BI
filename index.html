@@ -1893,28 +1893,17 @@
                     </div>
                 </div>
 
-                <!-- GRÁFICOS 2 & 3: LADO A LADO (DEMANDA vs INTEGRIDADE & TIPO DE DEFEITO) -->
-                <div class="cobranca-grid-2cols" style="margin-bottom: 24px;">
-                    <div class="chart-card">
-                        <div class="chart-header">
-                            <span class="chart-title"><i class="fa-solid fa-chart-pie" style="color: #a855f7;"></i> Demanda / Integridade</span>
-                        </div>
-                        <div style="height: 300px; position: relative;">
-                            <canvas id="manut-chart-demanda-integ"></canvas>
-                        </div>
+                <!-- GRÁFICO 2: APROVADOS POR TIPO DE ATIVIDADE -->
+                <div class="chart-card" style="margin-bottom: 24px;">
+                    <div class="chart-header">
+                        <span class="chart-title"><i class="fa-solid fa-circle-check" style="color: #10b981;"></i> Aprovados por Tipo de Atividade</span>
                     </div>
-
-                    <div class="chart-card">
-                        <div class="chart-header">
-                            <span class="chart-title"><i class="fa-solid fa-triangle-exclamation" style="color: #0284c7;"></i> Top 10 - Volume de OFs por Tipo de Defeito</span>
-                        </div>
-                        <div style="height: 300px; position: relative;">
-                            <canvas id="manut-chart-tipo-defeito"></canvas>
-                        </div>
+                    <div style="height: 320px; position: relative;">
+                        <canvas id="manut-chart-aprovados-atividade"></canvas>
                     </div>
                 </div>
 
-                <!-- GRÁFICO 4: MAPA DE FATURAMENTO POR CIDADE / LOCALIDADE (OPENSTREETMAP LEAFLET) -->
+                <!-- GRÁFICO 3: MAPA DE FATURAMENTO POR CIDADE / LOCALIDADE (OPENSTREETMAP LEAFLET) -->
                 <div class="chart-card" style="margin-bottom: 24px;">
                     <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center;">
                         <span class="chart-title"><i class="fa-solid fa-map-location-dot" style="color: #10b981;"></i> Faturamento por Cidade / Localidade (OpenStreetMap)</span>
