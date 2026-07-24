@@ -1893,11 +1893,11 @@
                     </div>
                 </div>
 
-                <!-- GRÁFICOS 2 & 3: LADO A LADO (DEMANDA vs INTEGRIDADE & LOCALIDADES) -->
+                <!-- GRÁFICOS 2 & 3: LADO A LADO (DEMANDA vs INTEGRIDADE & TIPO DE DEFEITO) -->
                 <div class="cobranca-grid-2cols" style="margin-bottom: 24px;">
                     <div class="chart-card">
                         <div class="chart-header">
-                            <span class="chart-title"><i class="fa-solid fa-layer-group" style="color: #a855f7;"></i> Demanda / Integridade (Coluna O)</span>
+                            <span class="chart-title"><i class="fa-solid fa-chart-pie" style="color: #a855f7;"></i> Demanda / Integridade</span>
                         </div>
                         <div style="height: 300px; position: relative;">
                             <canvas id="manut-chart-demanda-integ"></canvas>
@@ -1906,32 +1906,22 @@
 
                     <div class="chart-card">
                         <div class="chart-header">
-                            <span class="chart-title"><i class="fa-solid fa-location-dot" style="color: #10b981;"></i> Top 10 - Manutenções por Localidade / Cidade</span>
-                        </div>
-                        <div style="height: 300px; position: relative;">
-                            <canvas id="manut-chart-localidades"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- GRÁFICOS 4 & 5: LADO A LADO (TOP 10 TIPO E CAUSA DEFEITO) -->
-                <div class="cobranca-grid-2cols" style="margin-bottom: 24px;">
-                    <div class="chart-card">
-                        <div class="chart-header">
                             <span class="chart-title"><i class="fa-solid fa-triangle-exclamation" style="color: #0284c7;"></i> Top 10 - Volume de OFs por Tipo de Defeito</span>
                         </div>
                         <div style="height: 300px; position: relative;">
                             <canvas id="manut-chart-tipo-defeito"></canvas>
                         </div>
                     </div>
+                </div>
 
-                    <div class="chart-card">
-                        <div class="chart-header">
-                            <span class="chart-title"><i class="fa-solid fa-burst" style="color: #e67e22;"></i> Top 10 - Volume de OFs por Causa do Defeito</span>
-                        </div>
-                        <div style="height: 300px; position: relative;">
-                            <canvas id="manut-chart-causa-defeito"></canvas>
-                        </div>
+                <!-- GRÁFICO 4: MAPA DE FATURAMENTO POR CIDADE / LOCALIDADE (OPENSTREETMAP LEAFLET) -->
+                <div class="chart-card" style="margin-bottom: 24px;">
+                    <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center;">
+                        <span class="chart-title"><i class="fa-solid fa-map-location-dot" style="color: #10b981;"></i> Faturamento por Cidade / Localidade (OpenStreetMap)</span>
+                        <span style="font-size: 11px; color: var(--text-secondary); font-weight: 500;">Tamanho da bolha proporcional ao faturamento</span>
+                    </div>
+                    <div style="height: 420px; position: relative; width: 100%;">
+                        <div id="manut-map-container" style="width: 100%; height: 100%; border-radius: 12px; overflow: hidden; z-index: 1;"></div>
                     </div>
                 </div>
             </div>

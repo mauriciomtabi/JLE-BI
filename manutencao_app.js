@@ -305,8 +305,109 @@
         if (sel) {
             sel.value = sel.value === cat ? '' : cat;
             applyFilters();
-        }
+        const RS_CITY_COORDS = {
+        'PORTO ALEGRE': [-30.0346, -51.2177],
+        'CANOAS': [-29.9184, -51.1824],
+        'GRAVATAÍ': [-29.9439, -50.9937],
+        'GRAVATAI': [-29.9439, -50.9937],
+        'GUAÍBA': [-30.1139, -51.3253],
+        'GUAIBA': [-30.1139, -51.3253],
+        'NOVO HAMBURGO': [-29.6783, -51.1306],
+        'SÃO JERÔNIMO': [-29.9589, -51.7225],
+        'SAO JERONIMO': [-29.9589, -51.7225],
+        'ESTEIO': [-29.8525, -51.1836],
+        'VIAMÃO': [-30.0811, -51.0233],
+        'VIAMAO': [-30.0811, -51.0233],
+        'SAPUCAIA DO SUL': [-29.8272, -51.1444],
+        'PASSO FUNDO': [-28.2612, -52.4083],
+        'SANTA CRUZ DO SUL': [-29.7183, -52.4311],
+        'ELDORADO DO SUL': [-30.0847, -51.3008],
+        'ESTRELA': [-29.5019, -51.9619],
+        'ESTRELA VELHA': [-29.2567, -53.1558],
+        'ESTÂNCIA VELHA': [-29.6483, -51.1739],
+        'ESTANCIA VELHA': [-29.6483, -51.1739],
+        'CACHOEIRINHA': [-29.9506, -51.0939],
+        'ALVORADA': [-29.9925, -51.0803],
+        'MONTENEGRO': [-29.6886, -51.4608],
+        'LAJEADO': [-29.4669, -51.9614],
+        'SÃO LEOPOLDO': [-29.7606, -51.1472],
+        'SAO LEOPOLDO': [-29.7606, -51.1472],
+        'SAPIRANGA': [-29.6381, -51.0069],
+        'TAQUARA': [-29.6517, -50.7761],
+        'PAROBÉ': [-29.6272, -50.8344],
+        'PAROBE': [-29.6272, -50.8344],
+        'CAMPO BOM': [-29.6783, -51.0544],
+        'NOVA SANTA RITA': [-29.8569, -51.2725],
+        'CHARQUEADAS': [-29.9547, -51.6247],
+        'TRIUNFO': [-29.9406, -51.7161],
+        'PORTÃO': [-29.7019, -51.2408],
+        'PORTAO': [-29.7019, -51.2408],
+        'IVOTI': [-29.5936, -51.1578],
+        'DOIS IRMÃOS': [-29.5800, -51.0861],
+        'DOIS IRMAOS': [-29.5800, -51.0861],
+        'IGREJINHA': [-29.5744, -50.7936],
+        'TRÊS COROAS': [-29.5167, -50.7783],
+        'TRES COROAS': [-29.5167, -50.7783],
+        'TORRES': [-29.3361, -49.7269],
+        'CAPÃO DA CANOA': [-29.7456, -50.0094],
+        'CAPAO DA CANOA': [-29.7456, -50.0094],
+        'TRAMANDAÍ': [-29.9847, -50.1336],
+        'TRAMANDAI': [-29.9847, -50.1336],
+        'IMBÉ': [-29.9750, -50.1278],
+        'IMBE': [-29.9750, -50.1278],
+        'OSÓRIO': [-29.8872, -50.2694],
+        'OSORIO': [-29.8872, -50.2694],
+        'XANGRI-LÁ': [-29.8039, -50.0436],
+        'XANGRI-LA': [-29.8039, -50.0436],
+        'SANTO ANTÔNIO DA PATRULHA': [-29.8306, -50.5186],
+        'SANTO ANTONIO DA PATRULHA': [-29.8306, -50.5186],
+        'CACHOEIRA DO SUL': [-30.0389, -52.8939],
+        'VENÂNCIO AIRES': [-29.6053, -52.1939],
+        'VENANCIO AIRES': [-29.6053, -52.1939],
+        'CANDELÁRIA': [-29.6689, -52.7889],
+        'CANDELARIA': [-29.6689, -52.7889],
+        'RIO PARDO': [-29.9889, -52.3789],
+        'VERA CRUZ': [-29.7139, -52.5089],
+        'VERA CRUZ (RS)': [-29.7139, -52.5089],
+        'ENCANTADO': [-29.2361, -51.8700],
+        'TEUTÔNIA': [-29.4489, -51.8061],
+        'TEUTONIA': [-29.4489, -51.8061],
+        'TAQUARI': [-29.7961, -51.8039],
+        'ARROIO DO MEIO': [-29.4019, -51.9444],
+        'BOM RETIRO DO SUL': [-29.6061, -51.9439],
+        'ROCA SALES': [-29.2844, -51.8683],
+        'CRUZEIRO DO SUL': [-29.5139, -51.9861],
+        'CRUZEIRO DO SUL (RS)': [-29.5139, -51.9861],
+        'BENTO GONÇALVES': [-29.1706, -51.5186],
+        'BENTO GONCALVES': [-29.1706, -51.5186],
+        'CAXIAS DO SUL': [-29.1678, -51.1794],
+        'PELOTAS': [-31.7654, -52.3376],
+        'RIO GRANDE': [-32.0350, -52.0986],
+        'SANTA MARIA': [-29.6842, -53.8069],
+        'ERECHIM': [-27.6342, -52.2739],
+        'BAGÉ': [-31.3314, -54.1069],
+        'BAGE': [-31.3314, -54.1069],
+        'BUTIÁ': [-29.7139, -51.9619],
+        'BUTIA': [-29.7139, -51.9619],
+        'CAMAQUÃ': [-30.8517, -51.8117],
+        'CAMAQUA': [-30.8517, -51.8117],
+        'TAPES': [-30.6739, -51.3958],
+        'MOSTARDAS': [-31.1083, -50.9200],
+        'BARRA DO RIBEIRO': [-30.2917, -51.3017],
+        'GENERAL CÂMARA': [-29.9039, -51.7589],
+        'GENERAL CAMARA': [-29.9039, -51.7589],
+        'GLORINHA': [-29.8789, -50.7939],
+        'ARATIBA': [-27.4761, -52.3411],
+        'ARROIO DO TIGRE': [-29.3339, -53.0939],
+        'SOBRADINHO': [-29.4219, -53.0289],
+        'SOBRADINHO (RS)': [-29.4219, -53.0289],
+        'ARVOREZINHA': [-28.8719, -52.3461],
+        'SALTO DO JACUÍ': [-29.0889, -53.2139],
+        'SALTO DO JACUI': [-29.0889, -53.2139]
     };
+
+    let manutMap = null;
+    let manutMapMarkers = [];
 
     function renderCharts() {
         if (typeof Chart === 'undefined') return;
@@ -315,11 +416,31 @@
         const gridColor = 'rgba(255, 255, 255, 0.05)';
         const pluginsList = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
 
-        // 1. GRÁFICO DE EVOLUÇÃO MENSAL (COLUNAS EMPILHADAS)
-        // Regra de Legendas:
-        // - Aprovado: Coluna T não vazia (wf2) E Coluna U vazia
-        // - Pedido Gerado: Coluna T não vazia (wf2) E Coluna U não vazia (obs_medicao)
-        // - Aguard. aprovação: Coluna T vazia (wf2)
+        // 1. GRÁFICO DE EVOLUÇÃO MENSAL (NÃO AFETADO PELO FILTRO DE MÊS BASE)
+        // O gráfico de evolução mensal DEVE mostrar sempre todos os meses do ano, ignorando #manut-filter-mes-base
+        const selStatus = document.getElementById('manut-filter-status')?.value || '';
+        const selAtividade = document.getElementById('manut-filter-atividade')?.value || '';
+        const selLocalidade = document.getElementById('manut-filter-localidade')?.value || '';
+        const selEquipe = document.getElementById('manut-filter-equipe')?.value || '';
+        const searchQuery = (document.getElementById('manut-search-input')?.value || '').toLowerCase().trim();
+
+        // Dados filtrados sem o filtro de mês base para o gráfico mensal
+        const annualData = rawData.filter(r => {
+            if (selStatus && r.status !== selStatus) return false;
+            if (selAtividade && r.tipo_atividade !== selAtividade) return false;
+            if (selLocalidade && r.localidade !== selLocalidade) return false;
+            if (selEquipe && r.equipe !== selEquipe) return false;
+            if (searchQuery) {
+                const matchRal = (r.ral || '').toLowerCase().includes(searchQuery);
+                const matchAtiv = (r.atividade || '').toLowerCase().includes(searchQuery);
+                const matchTipoAtiv = (r.tipo_atividade || '').toLowerCase().includes(searchQuery);
+                const matchLoc = (r.localidade || '').toLowerCase().includes(searchQuery);
+                const matchWf2 = (r.wf2 || '').toLowerCase().includes(searchQuery);
+                if (!matchRal && !matchAtiv && !matchTipoAtiv && !matchLoc && !matchWf2) return false;
+            }
+            return true;
+        });
+
         const monthMapKeys = ['FEVEREIRO/2026', 'MARÇO/2026', 'ABRIL/2026', 'MAIO/2026', 'JUNHO/2026', 'JULHO/2026', 'AGOSTO/2026', 'SETEMBRO/2026', 'OUTUBRO/2026'];
         const monthShortLabels = ['FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT'];
 
@@ -328,7 +449,7 @@
             monthlyStats[m] = { aprovado: 0, pedGerado: 0, aguard: 0, totalVal: 0 };
         });
 
-        filteredData.forEach(r => {
+        annualData.forEach(r => {
             const mKey = r.mes_pagamento;
             if (mKey && monthlyStats[mKey]) {
                 const v = r.valor_medicao || 0;
@@ -350,7 +471,7 @@
         const dataPedGerado = monthMapKeys.map(m => monthlyStats[m].pedGerado);
         const dataAguard = monthMapKeys.map(m => monthlyStats[m].aguard);
 
-        // Update Total Medido Badge
+        // Total Medido do filtro atual para o badge superior
         const overallTotalMedido = filteredData.reduce((sum, r) => sum + (r.valor_medicao || 0), 0);
         const avg30DaysEl = document.getElementById('manut-avg-30days-val');
         if (avg30DaysEl) {
@@ -420,7 +541,7 @@
                             stacked: true,
                             ticks: { 
                                 color: '#94a3b8',
-                                callback: (v) => formatShortCurrency(v)
+                                callback: (v) => formatSimpleNumber(v) // Formato limpo sem R$ no eixo Y (1 mi, 900 mil, 800 mil...)
                             }, 
                             grid: { color: gridColor }, 
                             grace: '18%' 
@@ -431,50 +552,53 @@
             });
         }
 
-        // 2. GRÁFICO DEMANDA vs INTEGRIDADE (COLUNA O)
-        const demStats = { 'DEMANDA': 0, 'INTEGRIDADE': 0, 'OUTROS': 0 };
-        const demCount = { 'DEMANDA': 0, 'INTEGRIDADE': 0, 'OUTROS': 0 };
+        // 2. GRÁFICO DEMANDA vs INTEGRIDADE (GRÁFICO DE ROSCA / DOUGHNUT)
+        const demStats = { 'DEMANDA': 0, 'INTEGRIDADE': 0 };
+        const demCount = { 'DEMANDA': 0, 'INTEGRIDADE': 0 };
 
         filteredData.forEach(r => {
-            const d = r.demanda_integ || 'OUTROS';
-            if (demStats[d] !== undefined) {
-                demStats[d] += (r.valor_medicao || 0);
-                demCount[d] += 1;
-            } else {
-                demStats['OUTROS'] += (r.valor_medicao || 0);
-                demCount['OUTROS'] += 1;
-            }
+            const d = r.demanda_integ === 'INTEGRIDADE' ? 'INTEGRIDADE' : 'DEMANDA';
+            demStats[d] += (r.valor_medicao || 0);
+            demCount[d] += 1;
         });
 
-        const demLabels = Object.keys(demStats).filter(k => demCount[k] > 0);
-        const demValues = demLabels.map(k => demStats[k]);
+        const demLabels = ['Demanda', 'Integridade'];
+        const demValues = [demStats['DEMANDA'], demStats['INTEGRIDADE']];
 
         const ctxDem = document.getElementById('manut-chart-demanda-integ')?.getContext('2d');
         if (ctxDem) {
             if (chartDemandaInteg) chartDemandaInteg.destroy();
             chartDemandaInteg = new Chart(ctxDem, {
-                type: 'bar',
+                type: 'doughnut',
                 data: {
                     labels: demLabels,
                     datasets: [{
-                        label: 'Valor Medido (R$)',
                         data: demValues,
-                        backgroundColor: ['#a855f7', '#3b82f6', '#64748b'],
-                        borderRadius: 6
+                        backgroundColor: ['#a855f7', '#3b82f6'],
+                        borderColor: '#0f172a',
+                        borderWidth: 3,
+                        hoverOffset: 6
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    cutout: '68%',
                     plugins: {
-                        legend: { display: false },
+                        legend: { 
+                            display: true,
+                            position: 'bottom',
+                            labels: { color: textColor, font: { weight: 'bold', size: 11 }, usePointStyle: true, boxWidth: 8 }
+                        },
                         tooltip: {
                             callbacks: {
                                 label: (ctx) => {
-                                    const k = demLabels[ctx.dataIndex];
+                                    const key = ctx.label.toUpperCase();
+                                    const val = demStats[key] || 0;
+                                    const count = demCount[key] || 0;
                                     return [
-                                        ` Valor: ${formatCurrency(demStats[k])}`,
-                                        ` Qtd: ${demCount[k].toLocaleString('pt-BR')} OFs`
+                                        ` ${ctx.label}: ${formatCurrency(val)}`,
+                                        ` Acionamentos: ${count.toLocaleString('pt-BR')} OFs`
                                     ];
                                 }
                             }
@@ -482,101 +606,16 @@
                         datalabels: {
                             display: true,
                             color: '#ffffff',
-                            anchor: 'end',
-                            align: 'top',
                             font: { weight: 'bold', size: 11 },
                             formatter: (val) => formatSimpleNumber(val) // Formato sem R$: 900 mil, 585 mil, 1 mi
                         }
-                    },
-                    scales: {
-                        x: { ticks: { color: textColor, font: { weight: 'bold', size: 11 } }, grid: { display: false } },
-                        y: { 
-                            ticks: { 
-                                color: '#94a3b8',
-                                callback: (v) => formatShortCurrency(v)
-                            }, 
-                            grid: { color: gridColor }, 
-                            grace: '20%' 
-                        }
                     }
                 },
                 plugins: pluginsList
             });
         }
 
-        // 3. GRÁFICO LOCALIDADES / CIDADES - TOP 10 (SEM R$ NO DATALABEL)
-        const locStats = {};
-        filteredData.forEach(r => {
-            if (r.localidade && r.localidade !== '-') {
-                const loc = r.localidade;
-                if (!locStats[loc]) locStats[loc] = { val: 0, count: 0 };
-                locStats[loc].val += (r.valor_medicao || 0);
-                locStats[loc].count += 1;
-            }
-        });
-        const sortedLoc = Object.keys(locStats)
-            .sort((a,b) => locStats[b].val - locStats[a].val)
-            .slice(0, 10);
-        const dataLocVal = sortedLoc.map(k => locStats[k].val);
-
-        const ctxLoc = document.getElementById('manut-chart-localidades')?.getContext('2d');
-        if (ctxLoc) {
-            if (chartLocalidades) chartLocalidades.destroy();
-            chartLocalidades = new Chart(ctxLoc, {
-                type: 'bar',
-                data: {
-                    labels: sortedLoc,
-                    datasets: [{
-                        label: 'Valor Medido (R$)',
-                        data: dataLocVal,
-                        backgroundColor: '#10b981',
-                        borderRadius: 6
-                    }]
-                },
-                options: {
-                    indexAxis: 'x',
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: {
-                            callbacks: {
-                                label: (ctx) => {
-                                    const labelKey = sortedLoc[ctx.dataIndex];
-                                    const st = locStats[labelKey];
-                                    return [
-                                        ` Valor: ${formatCurrency(st.val)}`,
-                                        ` Qtd: ${st.count.toLocaleString('pt-BR')} OFs`
-                                    ];
-                                }
-                            }
-                        },
-                        datalabels: {
-                            display: true,
-                            color: '#ffffff',
-                            anchor: 'end',
-                            align: 'top',
-                            font: { weight: 'bold', size: 10 },
-                            formatter: (val) => formatSimpleNumber(val) // Sem R$: 900 mil, 585 mil, 1 mi
-                        }
-                    },
-                    scales: {
-                        x: { ticks: { color: textColor, font: { weight: 'bold', size: 11 } }, grid: { display: false } },
-                        y: { 
-                            ticks: { 
-                                color: '#94a3b8',
-                                callback: (v) => formatShortCurrency(v)
-                            }, 
-                            grid: { color: gridColor }, 
-                            grace: '18%' 
-                        }
-                    }
-                },
-                plugins: pluginsList
-            });
-        }
-
-        // 4. GRÁFICO TIPO DE DEFEITO - TOP 10 (SEM R$ NO DATALABEL)
+        // 3. GRÁFICO TIPO DE DEFEITO - TOP 10
         const tipoDefStats = {};
         filteredData.forEach(r => {
             if (r.tipo_defeito && r.tipo_defeito !== '-') {
@@ -636,7 +675,7 @@
                         x: { 
                             ticks: { 
                                 color: '#94a3b8',
-                                callback: (v) => formatShortCurrency(v)
+                                callback: (v) => formatSimpleNumber(v)
                             }, 
                             grid: { color: gridColor }, 
                             grace: '20%' 
@@ -648,77 +687,95 @@
             });
         }
 
-        // 5. GRÁFICO CAUSA DO DEFEITO - TOP 10 (SEM R$ NO DATALABEL)
-        const causaDefStats = {};
+        // 4. MAPA OPENSTREETMAP LEAFLET POR CIDADE / LOCALIDADE
+        renderManutMap();
+    }
+
+    function renderManutMap() {
+        const container = document.getElementById('manut-map-container');
+        if (!container) return;
+
+        if (typeof L === 'undefined') {
+            console.warn("Leaflet Library não carregada.");
+            return;
+        }
+
+        if (!manutMap) {
+            manutMap = L.map('manut-map-container', {
+                center: [-29.8, -51.3],
+                zoom: 8,
+                zoomControl: true
+            });
+
+            // Camada OpenStreetMap Dark / CARTO
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+                subdomains: 'abcd',
+                maxZoom: 19
+            }).addTo(manutMap);
+        } else {
+            manutMapMarkers.forEach(m => m.remove());
+            manutMapMarkers = [];
+        }
+
+        // Agrupar dados por localidade
+        const locMapStats = {};
         filteredData.forEach(r => {
-            if (r.causa_defeito && r.causa_defeito !== '-') {
-                const cd = r.causa_defeito;
-                if (!causaDefStats[cd]) causaDefStats[cd] = { val: 0, count: 0 };
-                causaDefStats[cd].val += (r.valor_medicao || 0);
-                causaDefStats[cd].count += 1;
+            if (r.localidade && r.localidade !== '-') {
+                const locUpper = r.localidade.trim().toUpperCase();
+                if (!locMapStats[locUpper]) {
+                    locMapStats[locUpper] = { val: 0, count: 0, rawName: r.localidade };
+                }
+                locMapStats[locUpper].val += (r.valor_medicao || 0);
+                locMapStats[locUpper].count += 1;
             }
         });
-        const sortedCausaDef = Object.keys(causaDefStats)
-            .sort((a,b) => causaDefStats[b].val - causaDefStats[a].val)
-            .slice(0, 10);
-        const dataCausaDefVal = sortedCausaDef.map(k => causaDefStats[k].val);
 
-        const ctxCausaDef = document.getElementById('manut-chart-causa-defeito')?.getContext('2d');
-        if (ctxCausaDef) {
-            if (chartCausaDefeito) chartCausaDefeito.destroy();
-            chartCausaDefeito = new Chart(ctxCausaDef, {
-                type: 'bar',
-                data: {
-                    labels: sortedCausaDef,
-                    datasets: [{
-                        label: 'Valor Medido (R$)',
-                        data: dataCausaDefVal,
-                        backgroundColor: '#e67e22',
-                        borderRadius: 6
-                    }]
-                },
-                options: {
-                    indexAxis: 'y',
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: {
-                            callbacks: {
-                                label: (ctx) => {
-                                    const labelKey = sortedCausaDef[ctx.dataIndex];
-                                    const st = causaDefStats[labelKey];
-                                    return [
-                                        ` Valor: ${formatCurrency(st.val)}`,
-                                        ` Qtd: ${st.count.toLocaleString('pt-BR')} OFs`
-                                    ];
-                                }
-                            }
-                        },
-                        datalabels: {
-                            display: true,
-                            color: '#ffffff',
-                            anchor: 'end',
-                            align: 'end',
-                            font: { weight: 'bold', size: 10 },
-                            formatter: (val) => formatSimpleNumber(val) // Sem R$: 900 mil, 585 mil, 1 mi
-                        }
-                    },
-                    scales: {
-                        x: { 
-                            ticks: { 
-                                color: '#94a3b8',
-                                callback: (v) => formatShortCurrency(v)
-                            }, 
-                            grid: { color: gridColor }, 
-                            grace: '20%' 
-                        },
-                        y: { ticks: { color: textColor, font: { weight: 'bold' } }, grid: { display: false } }
-                    }
-                },
-                plugins: pluginsList
-            });
+        const allVals = Object.values(locMapStats).map(s => s.val);
+        const maxVal = allVals.length > 0 ? Math.max(...allVals, 1) : 1;
+
+        Object.keys(locMapStats).forEach(loc => {
+            const stats = locMapStats[loc];
+            const coords = RS_CITY_COORDS[loc] || getFallbackCoords(loc);
+            if (coords) {
+                // Tamanho da bolha proporcional ao faturamento (min 7px, max 36px)
+                const norm = Math.sqrt(stats.val) / Math.sqrt(maxVal);
+                const radius = Math.max(7, Math.min(36, 7 + norm * 29));
+
+                const circle = L.circleMarker(coords, {
+                    radius: radius,
+                    fillColor: '#10b981',
+                    color: '#34d399',
+                    weight: 2,
+                    opacity: 0.9,
+                    fillOpacity: 0.6
+                }).addTo(manutMap);
+
+                circle.bindPopup(`
+                    <div style="font-family: 'Outfit', sans-serif; padding: 4px;">
+                        <div style="font-weight: 800; font-size: 14px; color: #38bdf8; margin-bottom: 4px;">${stats.rawName}</div>
+                        <div style="font-size: 13px; font-weight: 700; color: #f8fafc;">Valor Medido: <span style="color: #38ef7d;">${formatCurrency(stats.val)}</span></div>
+                        <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">Acionamentos: <strong>${stats.count.toLocaleString('pt-BR')} OFs</strong></div>
+                    </div>
+                `);
+
+                manutMapMarkers.push(circle);
+            }
+        });
+
+        setTimeout(() => {
+            if (manutMap) manutMap.invalidateSize();
+        }, 200);
+    }
+
+    function getFallbackCoords(cityName) {
+        let hash = 0;
+        for (let i = 0; i < cityName.length; i++) {
+            hash = cityName.charCodeAt(i) + ((hash << 5) - hash);
         }
+        const offsetLat = ((hash % 100) / 100) * 0.8 - 0.4;
+        const offsetLon = (((hash >> 3) % 100) / 100) * 0.8 - 0.4;
+        return [-29.8 + offsetLat, -51.3 + offsetLon];
     }
 
     function renderTable() {
