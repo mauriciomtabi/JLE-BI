@@ -1848,13 +1848,11 @@
                     </select>
                 </div>
                 <div class="filter-group">
-                    <label for="manut-filter-data-inicio">Acionamento Início</label>
-                    <input type="date" id="manut-filter-data-inicio">
-                </div>
-                <div class="filter-group">
-                    <label for="manut-filter-data-fim">Acionamento Fim</label>
+                    <label for="manut-filter-mes-base">Mês Base Pagamento</label>
                     <div style="display: flex; gap: 8px; align-items: center; width: 100%;">
-                        <input type="date" id="manut-filter-data-fim" style="flex-grow: 1;">
+                        <select id="manut-filter-mes-base" style="flex-grow: 1;">
+                            <option value="">Todos os Meses</option>
+                        </select>
                         <button onclick="clearManutFilters()" title="Limpar Filtros" style="background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 12px; color: var(--text-secondary); cursor: pointer; transition: all 0.2s ease;" onmouseover="this.style.borderColor='var(--color-primary)'; this.style.color='var(--text-primary)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-secondary)'">
                             <i class="fa-solid fa-eraser"></i>
                         </button>
@@ -1880,13 +1878,14 @@
                     <!-- Preenchido via JS -->
                 </div>
 
-                <!-- GRÁFICO 1: EVOLUÇÃO MENSAL (LARGURA TOTAL) -->
-                <div class="chart-card">
-                    <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
-                        <span class="chart-title"><i class="fa-solid fa-chart-line" style="color: #00b4d8;"></i> Evolução Mensal de Manutenção (Data de Acionamento)</span>
-                        <div id="manut-avg-30days-badge" style="background: rgba(0, 180, 216, 0.12); border: 1px solid rgba(0, 180, 216, 0.3); border-radius: 8px; padding: 4px 12px; font-size: 12px; color: #38bdf8; display: flex; align-items: center; gap: 6px; font-weight: 600;">
-                            <i class="fa-solid fa-sack-dollar"></i>
-                            <span>Total Medido: <strong id="manut-avg-30days-val" style="color: #ffffff;">R$ 0</strong></span>
+                <!-- GRÁFICO 1: EVOLUÇÃO MENSAL (COLUNAS EMPILHADAS) -->
+                <div class="chart-card" style="margin-bottom: 24px;">
+                    <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center;">
+                        <span class="chart-title"><i class="fa-solid fa-chart-line" style="color: var(--color-primary);"></i> Evolução Mensal de Manutenção (Mês Base Pagamento)</span>
+                        <div class="manut-badge-container" style="background: rgba(0, 180, 216, 0.12); border: 1px solid rgba(0, 180, 216, 0.3); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
+                            <i class="fa-solid fa-sack-dollar" style="color: #00b4d8; font-size: 12px;"></i>
+                            <span style="font-size: 11px; color: var(--text-secondary); font-weight: 600;">Total Medido:</span>
+                            <span id="manut-avg-30days-val" style="font-size: 12px; color: #38bdf8; font-weight: 800;">R$ 0,00</span>
                         </div>
                     </div>
                     <div style="height: 280px; position: relative;">
@@ -1894,7 +1893,28 @@
                     </div>
                 </div>
 
-                <!-- GRÁFICOS 2 & 3: LADO A LADO (TOP 10 TIPO E CAUSA DEFEITO) -->
+                <!-- GRÁFICOS 2 & 3: LADO A LADO (DEMANDA vs INTEGRIDADE & LOCALIDADES) -->
+                <div class="cobranca-grid-2cols" style="margin-bottom: 24px;">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title"><i class="fa-solid fa-layer-group" style="color: #a855f7;"></i> Demanda / Integridade (Coluna O)</span>
+                        </div>
+                        <div style="height: 300px; position: relative;">
+                            <canvas id="manut-chart-demanda-integ"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title"><i class="fa-solid fa-location-dot" style="color: #10b981;"></i> Top 10 - Manutenções por Localidade / Cidade</span>
+                        </div>
+                        <div style="height: 300px; position: relative;">
+                            <canvas id="manut-chart-localidades"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GRÁFICOS 4 & 5: LADO A LADO (TOP 10 TIPO E CAUSA DEFEITO) -->
                 <div class="cobranca-grid-2cols" style="margin-bottom: 24px;">
                     <div class="chart-card">
                         <div class="chart-header">
@@ -1912,16 +1932,6 @@
                         <div style="height: 300px; position: relative;">
                             <canvas id="manut-chart-causa-defeito"></canvas>
                         </div>
-                    </div>
-                </div>
-
-                <!-- GRÁFICO 4: TOP 10 LOCALIDADES / CIDADES (COLUNAS VERTICAIS) -->
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <span class="chart-title"><i class="fa-solid fa-location-dot" style="color: #10b981;"></i> Top 10 - Manutenções por Localidade / Cidade</span>
-                    </div>
-                    <div style="height: 300px; position: relative;">
-                        <canvas id="manut-chart-localidades"></canvas>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 // manutencao_app.js
-// Logic for Manutenção (Claro RS) page in BI JLE Telecom - Clean Top 10 Charts (No Scroll, Vertical Columns for Cities)
+// Logic for Manutenção (Claro RS) page in BI JLE Telecom - 100% Excel Master Base
 
 (function() {
     let rawData = [];
@@ -12,6 +12,7 @@
 
     // Chart instances
     let chartMensal = null;
+    let chartDemandaInteg = null;
     let chartTipoDefeito = null;
     let chartCausaDefeito = null;
     let chartLocalidades = null;
@@ -30,19 +31,57 @@
         'ACIONANDO': 'fa-solid fa-bolt'
     };
 
+    function formatCurrency(val) {
+        if (!val || isNaN(val)) return "R$ 0,00";
+        return val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
+    function formatShortCurrency(val) {
+        if (!val || isNaN(val) || val === 0) return "R$ 0";
+        if (val >= 1000000) {
+            return `R$ ${(val / 1000000).toFixed(2).replace('.', ',')}M`;
+        }
+        if (val >= 1000) {
+            return `R$ ${(val / 1000).toFixed(1).replace('.', ',')}k`;
+        }
+        return `R$ ${val.toFixed(0)}`;
+    }
+
+    // Rotulo simples sem o "R$" na frente: 900 mil, 585 mil, 86 mil, 1 mi
+    function formatSimpleNumber(val) {
+        if (!val || isNaN(val) || val === 0) return '';
+        if (val >= 1000000) {
+            const mi = val / 1000000;
+            return Number.isInteger(mi) ? `${mi} mi` : `${mi.toFixed(2).replace('.', ',')} mi`;
+        }
+        if (val >= 1000) {
+            const mil = Math.round(val / 1000);
+            return `${mil} mil`;
+        }
+        return Math.round(val).toString();
+    }
+
     function initManutencao() {
         if (!window.MANUTENCAO_DATA) {
             console.warn("MANUTENCAO_DATA não carregado ainda.");
             return;
         }
 
-        // Filter out empty spreadsheet rows without status (Column I) to strictly reflect valid OFs matching CONTROLE DASH
-        rawData = window.MANUTENCAO_DATA.filter(r => r.status && r.status !== '-' && r.status !== 'STATUS');
-        filteredData = [...rawData];
-
+        rawData = [...window.MANUTENCAO_DATA];
+        
         populateFilterDropdowns();
         setupEventListeners();
-        renderPage();
+
+        // A pagina deve sempre estar filtrada pelo mês atual por padrão (ex: JULHO/2026)
+        const selMesBase = document.getElementById('manut-filter-mes-base');
+        if (selMesBase) {
+            const hasJulho = Array.from(selMesBase.options).some(opt => opt.value === 'JULHO/2026');
+            if (hasJulho) {
+                selMesBase.value = 'JULHO/2026';
+            }
+        }
+
+        applyFilters();
     }
 
     function populateFilterDropdowns() {
@@ -50,28 +89,39 @@
         const selAtividade = document.getElementById('manut-filter-atividade');
         const selLocalidade = document.getElementById('manut-filter-localidade');
         const selEquipe = document.getElementById('manut-filter-equipe');
+        const selMesBase = document.getElementById('manut-filter-mes-base');
 
         if (!selStatus) return;
 
-        // Unique Statuses (Coluna I)
+        // Unique Statuses
         const statuses = [...new Set(rawData.map(r => r.status).filter(s => s && s !== '-'))].sort();
         selStatus.innerHTML = '<option value="">Todos os Status</option>' + 
             statuses.map(s => `<option value="${s}">${s}</option>`).join('');
 
-        // Unique Tipos de Atividade (Coluna F)
+        // Unique Tipos de Atividade
         const atividades = [...new Set(rawData.map(r => r.tipo_atividade).filter(a => a && a !== '-'))].sort();
         selAtividade.innerHTML = '<option value="">Todas as Atividades</option>' + 
             atividades.map(a => `<option value="${a}">${a}</option>`).join('');
 
-        // Unique Localidades (Coluna G)
+        // Unique Localidades
         const localidades = [...new Set(rawData.map(r => r.localidade).filter(l => l && l !== '-'))].sort();
         selLocalidade.innerHTML = '<option value="">Todas as Localidades</option>' + 
             localidades.map(l => `<option value="${l}">${l}</option>`).join('');
 
-        // Unique Equipes (Coluna N)
+        // Unique Equipes
         const equipes = [...new Set(rawData.map(r => r.equipe).filter(e => e && e !== '-'))].sort();
         selEquipe.innerHTML = '<option value="">Todas as Equipes</option>' + 
             equipes.map(e => `<option value="${e}">${e}</option>`).join('');
+
+        // Unique Mês Base Pagamento (Coluna N)
+        const monthOrder = ["FEVEREIRO/2026", "MARÇO/2026", "ABRIL/2026", "MAIO/2026", "JUNHO/2026", "JULHO/2026", "AGOSTO/2026", "SETEMBRO/2026", "OUTUBRO/2026"];
+        const rawMonths = [...new Set(rawData.map(r => r.mes_pagamento).filter(m => m && m !== '-' && m !== 'SEM MÊS'))];
+        const months = monthOrder.filter(m => rawMonths.includes(m)).concat(rawMonths.filter(m => !monthOrder.includes(m)));
+
+        if (selMesBase) {
+            selMesBase.innerHTML = '<option value="">Todos os Meses</option>' + 
+                months.map(m => `<option value="${m}">${m}</option>`).join('');
+        }
     }
 
     function setupEventListeners() {
@@ -79,12 +129,11 @@
         const selAtividade = document.getElementById('manut-filter-atividade');
         const selLocalidade = document.getElementById('manut-filter-localidade');
         const selEquipe = document.getElementById('manut-filter-equipe');
-        const inputDtInicio = document.getElementById('manut-filter-data-inicio');
-        const inputDtFim = document.getElementById('manut-filter-data-fim');
+        const selMesBase = document.getElementById('manut-filter-mes-base');
         const inputSearch = document.getElementById('manut-search-input');
         const btnRefresh = document.getElementById('manut-btn-refresh-data');
 
-        [selStatus, selAtividade, selLocalidade, selEquipe, inputDtInicio, inputDtFim].forEach(el => {
+        [selStatus, selAtividade, selLocalidade, selEquipe, selMesBase].forEach(el => {
             if (el) el.addEventListener('change', applyFilters);
         });
 
@@ -113,16 +162,14 @@
         const selAtividade = document.getElementById('manut-filter-atividade');
         const selLocalidade = document.getElementById('manut-filter-localidade');
         const selEquipe = document.getElementById('manut-filter-equipe');
-        const inputDtInicio = document.getElementById('manut-filter-data-inicio');
-        const inputDtFim = document.getElementById('manut-filter-data-fim');
+        const selMesBase = document.getElementById('manut-filter-mes-base');
         const inputSearch = document.getElementById('manut-search-input');
 
         if (selStatus) selStatus.value = '';
         if (selAtividade) selAtividade.value = '';
         if (selLocalidade) selLocalidade.value = '';
         if (selEquipe) selEquipe.value = '';
-        if (inputDtInicio) inputDtInicio.value = '';
-        if (inputDtFim) inputDtFim.value = '';
+        if (selMesBase) selMesBase.value = '';
         if (inputSearch) inputSearch.value = '';
         applyFilters();
     };
@@ -163,71 +210,34 @@
         }
     }
 
-    function parseAcionamentoDate(dateStr) {
-        if (!dateStr || dateStr === '-') return null;
-        const cleanStr = dateStr.split(' ')[0].trim();
-        if (cleanStr.includes('/')) {
-            const parts = cleanStr.split('/');
-            if (parts.length === 3) {
-                return new Date(parseInt(parts[2]), parseInt(parts[1]) - 1, parseInt(parts[0]));
-            } else if (parts.length === 2) {
-                return new Date(2026, parseInt(parts[1]) - 1, parseInt(parts[0]));
-            }
-        } else if (cleanStr.includes('-')) {
-            const parts = cleanStr.split('-');
-            if (parts.length === 3) {
-                return new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
-            }
-        }
-        return null;
-    }
-
     function applyFilters() {
         const selStatus = document.getElementById('manut-filter-status')?.value || '';
         const selAtividade = document.getElementById('manut-filter-atividade')?.value || '';
         const selLocalidade = document.getElementById('manut-filter-localidade')?.value || '';
         const selEquipe = document.getElementById('manut-filter-equipe')?.value || '';
-        const dtInicioStr = document.getElementById('manut-filter-data-inicio')?.value || '';
-        const dtFimStr = document.getElementById('manut-filter-data-fim')?.value || '';
+        const selMesBase = document.getElementById('manut-filter-mes-base')?.value || '';
         const searchQuery = (document.getElementById('manut-search-input')?.value || '').toLowerCase().trim();
-
-        const dtInicio = dtInicioStr ? new Date(dtInicioStr + 'T00:00:00') : null;
-        const dtFim = dtFimStr ? new Date(dtFimStr + 'T23:59:59') : null;
 
         filteredData = rawData.filter(r => {
             if (selStatus && r.status !== selStatus) return false;
             if (selAtividade && r.tipo_atividade !== selAtividade) return false;
             if (selLocalidade && r.localidade !== selLocalidade) return false;
             if (selEquipe && r.equipe !== selEquipe) return false;
-
-            if (dtInicio || dtFim) {
-                const dateObj = parseAcionamentoDate(r.data_acionamento) || parseAcionamentoDate(r.data_envio_relatorio);
-                if (dtInicio && (!dateObj || dateObj < dtInicio)) return false;
-                if (dtFim && (!dateObj || dateObj > dtFim)) return false;
-            }
+            if (selMesBase && r.mes_pagamento !== selMesBase) return false;
 
             if (searchQuery) {
-                const matchSearch = 
-                    (r.ral_rec || '').toLowerCase().includes(searchQuery) ||
-                    (r.atividade || '').toLowerCase().includes(searchQuery) ||
-                    (r.localidade || '').toLowerCase().includes(searchQuery) ||
-                    (r.equipe || '').toLowerCase().includes(searchQuery) ||
-                    (r.status || '').toLowerCase().includes(searchQuery) ||
-                    (r.tipo_atividade || '').toLowerCase().includes(searchQuery) ||
-                    (r.tipo_defeito || '').toLowerCase().includes(searchQuery) ||
-                    (r.causa_defeito || '').toLowerCase().includes(searchQuery);
-                if (!matchSearch) return false;
+                const matchRal = (r.ral || '').toLowerCase().includes(searchQuery);
+                const matchAtiv = (r.atividade || '').toLowerCase().includes(searchQuery);
+                const matchTipoAtiv = (r.tipo_atividade || '').toLowerCase().includes(searchQuery);
+                const matchLoc = (r.localidade || '').toLowerCase().includes(searchQuery);
+                const matchWf2 = (r.wf2 || '').toLowerCase().includes(searchQuery);
+                if (!matchRal && !matchAtiv && !matchTipoAtiv && !matchLoc && !matchWf2) return false;
             }
 
             return true;
         });
 
         currentPage = 1;
-        renderPage();
-    }
-
-    function renderPage() {
-        renderKpiCards();
         renderCategoryCards();
         if (activeTab === 'indicadores') {
             renderCharts();
@@ -236,65 +246,16 @@
         }
     }
 
-    function formatCurrency(val) {
-        return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(val || 0);
-    }
-
-    function formatShortCurrency(val) {
-        if (!val || val === 0) return 'R$ 0';
-        if (Math.abs(val) >= 1000000) {
-            return `R$ ${(val / 1000000).toFixed(2).replace('.', ',')}M`;
+    function renderPage() {
+        renderCategoryCards();
+        if (activeTab === 'indicadores') {
+            renderCharts();
+        } else {
+            renderTable();
         }
-        if (Math.abs(val) >= 1000) {
-            return `R$ ${(val / 1000).toFixed(1).replace('.', ',')}k`;
-        }
-        return formatCurrency(val);
     }
 
-    // 1. CARDS DE STATUS (Dados operacionais do Google Sheets - Quantidade de OFs como valor principal)
-    function renderKpiCards() {
-        const getStatusStats = (statusName) => {
-            const list = statusName === 'ALL' ? filteredData : filteredData.filter(r => r.status === statusName);
-            const count = list.length;
-            const totalVal = list.reduce((sum, r) => sum + (r.valor_medicao || 0), 0);
-            return { count, totalVal };
-        };
-
-        const totalStats = getStatusStats('ALL');
-        const medicaoStats = getStatusStats('MEDIÇÃO');
-        const concluidoStats = getStatusStats('CONCLUIDO');
-        const obraStats = getStatusStats('OBRA');
-        const adequacaoStats = getStatusStats('ADEQUAÇÃO');
-        const documentacaoStats = getStatusStats('DOCUMENTAÇÃO');
-        const fotosStats = getStatusStats('FOTOS');
-
-        const setCard = (valId, subId, stats, showMoney = false) => {
-            const valEl = document.getElementById(valId);
-            const subEl = document.getElementById(subId);
-            if (valEl) valEl.textContent = stats.count.toLocaleString('pt-BR');
-            if (subEl) {
-                if (showMoney && stats.totalVal > 0) {
-                    subEl.textContent = `${formatShortCurrency(stats.totalVal)} Medido`;
-                    subEl.style.color = '#38bdf8';
-                } else if (showMoney) {
-                    subEl.textContent = `R$ 0,00 Medido`;
-                } else {
-                    subEl.textContent = `Passo Operacional`;
-                    subEl.style.color = 'var(--text-secondary)';
-                }
-            }
-        };
-
-        setCard('manut-kpi-total', 'manut-kpi-total-sub', totalStats, true);
-        setCard('manut-kpi-medicao', 'manut-kpi-medicao-sub', medicaoStats, true);
-        setCard('manut-kpi-concluido', 'manut-kpi-concluido-sub', concluidoStats, false);
-        setCard('manut-kpi-obra', 'manut-kpi-obra-sub', obraStats, false);
-        setCard('manut-kpi-adequacao', 'manut-kpi-adequacao-sub', adequacaoStats, false);
-        setCard('manut-kpi-documentacao', 'manut-kpi-documentacao-sub', documentacaoStats, false);
-        setCard('manut-kpi-fotos', 'manut-kpi-fotos-sub', fotosStats, false);
-    }
-
-    // 2. CARDS DE CATEGORIA (Foco Principal em R$ Valor Medido, secundário em Qtd OFs)
+    // CARDS DE CATEGORIA
     function renderCategoryCards() {
         const container = document.getElementById('manut-category-cards-container');
         if (!container) return;
@@ -313,7 +274,7 @@
 
         const overallVal = filteredData.reduce((sum, r) => sum + (r.valor_medicao || 0), 0) || 1;
         const sortedAtiv = Object.keys(ativStats)
-            .filter(cat => ativStats[cat].count >= 5 || ativStats[cat].totalVal > 0)
+            .filter(cat => ativStats[cat].count >= 1 || ativStats[cat].totalVal > 0)
             .sort((a,b) => ativStats[b].totalVal - ativStats[a].totalVal);
 
         container.innerHTML = sortedAtiv.map(cat => {
@@ -354,62 +315,46 @@
         const gridColor = 'rgba(255, 255, 255, 0.05)';
         const pluginsList = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
 
-        // 1. Chart Mensal de Evolução - COLUNAS EMPILHADAS (Pago, Aprovado Pendente Pagamento, Aguard. Aprovação)
-        const monthNames = { '01':'JAN', '02':'FEV', '03':'MAR', '04':'ABR', '05':'MAI', '06':'JUN', '07':'JUL', '08':'AGO', '09':'SET', '10':'OUT', '11':'NOV', '12':'DEZ' };
-        const monthOrder = ['FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL'];
+        // 1. GRÁFICO DE EVOLUÇÃO MENSAL (COLUNAS EMPILHADAS)
+        // Regra de Legendas:
+        // - Aprovado: Coluna T não vazia (wf2) E Coluna U vazia
+        // - Pedido Gerado: Coluna T não vazia (wf2) E Coluna U não vazia (obs_medicao)
+        // - Aguard. aprovação: Coluna T vazia (wf2)
+        const monthMapKeys = ['FEVEREIRO/2026', 'MARÇO/2026', 'ABRIL/2026', 'MAIO/2026', 'JUNHO/2026', 'JULHO/2026', 'AGOSTO/2026', 'SETEMBRO/2026', 'OUTUBRO/2026'];
+        const monthShortLabels = ['FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT'];
 
-        const monthlyStats = {
-            FEV: { pago: 0, aprovPend: 0, aguard: 0, count: 0 },
-            MAR: { pago: 0, aprovPend: 0, aguard: 0, count: 0 },
-            ABR: { pago: 0, aprovPend: 0, aguard: 0, count: 0 },
-            MAI: { pago: 0, aprovPend: 0, aguard: 0, count: 0 },
-            JUN: { pago: 0, aprovPend: 0, aguard: 0, count: 0 },
-            JUL: { pago: 0, aprovPend: 0, aguard: 0, count: 0 }
-        };
+        const monthlyStats = {};
+        monthMapKeys.forEach(m => {
+            monthlyStats[m] = { aprovado: 0, pedGerado: 0, aguard: 0, totalVal: 0 };
+        });
 
         filteredData.forEach(r => {
-            const v = r.valor_medicao || 0;
-            let mKey = null;
+            const mKey = r.mes_pagamento;
+            if (mKey && monthlyStats[mKey]) {
+                const v = r.valor_medicao || 0;
+                const hasColT = Boolean(r.wf2 && r.wf2 !== '-' && r.wf2.toUpperCase() !== 'NONE');
+                const hasColU = Boolean(r.obs_medicao && r.obs_medicao !== '-' && r.obs_medicao.toUpperCase() !== 'NONE');
 
-            if (r.mes_pagamento && r.mes_pagamento !== '-') {
-                const parts = r.mes_pagamento.split('/')[0].toUpperCase();
-                const mShort = parts.slice(0, 3);
-                if (monthlyStats[mShort] !== undefined) {
-                    mKey = mShort;
-                }
-            }
-            if (!mKey) {
-                const dtObj = parseAcionamentoDate(r.data_acionamento) || parseAcionamentoDate(r.data_envio_relatorio);
-                if (dtObj) {
-                    const mStr = (dtObj.getMonth() + 1).toString().padStart(2, '0');
-                    mKey = monthNames[mStr];
-                }
-            }
-
-            if (mKey && monthlyStats[mKey] !== undefined) {
-                const hasColN = Boolean(r.mes_pagamento && r.mes_pagamento !== '-');
-                const hasColU = Boolean(r.col_u && r.col_u !== '-' && r.col_u.toUpperCase() !== 'NONE');
-
-                if (hasColN) {
-                    monthlyStats[mKey].pago += v;
-                } else if (hasColU || r.status === 'MEDIÇÃO') {
-                    monthlyStats[mKey].aprovPend += v;
+                if (hasColT && hasColU) {
+                    monthlyStats[mKey].pedGerado += v;
+                } else if (hasColT) {
+                    monthlyStats[mKey].aprovado += v;
                 } else {
                     monthlyStats[mKey].aguard += v;
                 }
-                monthlyStats[mKey].count += 1;
+                monthlyStats[mKey].totalVal += v;
             }
         });
 
-        const dataPago = monthOrder.map(m => monthlyStats[m].pago);
-        const dataAprovPend = monthOrder.map(m => monthlyStats[m].aprovPend);
-        const dataAguard = monthOrder.map(m => monthlyStats[m].aguard);
+        const dataAprovado = monthMapKeys.map(m => monthlyStats[m].aprovado);
+        const dataPedGerado = monthMapKeys.map(m => monthlyStats[m].pedGerado);
+        const dataAguard = monthMapKeys.map(m => monthlyStats[m].aguard);
 
-        // Total geral medido para o badge do topo
-        const totalMedidoSum = dataPago.reduce((a,b) => a+b, 0) + dataAprovPend.reduce((a,b) => a+b, 0) + dataAguard.reduce((a,b) => a+b, 0);
+        // Update Total Medido Badge
+        const overallTotalMedido = filteredData.reduce((sum, r) => sum + (r.valor_medicao || 0), 0);
         const avg30DaysEl = document.getElementById('manut-avg-30days-val');
         if (avg30DaysEl) {
-            avg30DaysEl.innerText = formatShortCurrency(totalMedidoSum);
+            avg30DaysEl.innerText = formatCurrency(overallTotalMedido);
         }
 
         const ctxMensal = document.getElementById('manut-chart-mensal')?.getContext('2d');
@@ -419,24 +364,24 @@
             chartMensal = new Chart(ctxMensal, {
                 type: 'bar',
                 data: {
-                    labels: monthOrder,
+                    labels: monthShortLabels,
                     datasets: [
                         {
-                            label: 'Pago',
-                            data: dataPago,
+                            label: 'Aprovado',
+                            data: dataAprovado,
                             backgroundColor: '#10b981',
                             borderRadius: 4
                         },
                         {
-                            label: 'Aprovado Pendente Pagamento',
-                            data: dataAprovPend,
-                            backgroundColor: '#f59e0b',
+                            label: 'Pedido Gerado',
+                            data: dataPedGerado,
+                            backgroundColor: '#a855f7',
                             borderRadius: 4
                         },
                         {
-                            label: 'Aguard. Aprovação',
+                            label: 'Aguard. aprovação',
                             data: dataAguard,
-                            backgroundColor: '#38bdf8',
+                            backgroundColor: '#f59e0b',
                             borderRadius: 4
                         }
                     ]
@@ -486,37 +431,39 @@
             });
         }
 
-        // 2. Chart Tipo de Defeito - TOP 10 por Valor Medido (R$)
-        const tipoDefStats = {};
+        // 2. GRÁFICO DEMANDA vs INTEGRIDADE (COLUNA O)
+        const demStats = { 'DEMANDA': 0, 'INTEGRIDADE': 0, 'OUTROS': 0 };
+        const demCount = { 'DEMANDA': 0, 'INTEGRIDADE': 0, 'OUTROS': 0 };
+
         filteredData.forEach(r => {
-            if (r.tipo_defeito && r.tipo_defeito !== '-') {
-                const td = r.tipo_defeito;
-                if (!tipoDefStats[td]) tipoDefStats[td] = { val: 0, count: 0 };
-                tipoDefStats[td].val += (r.valor_medicao || 0);
-                tipoDefStats[td].count += 1;
+            const d = r.demanda_integ || 'OUTROS';
+            if (demStats[d] !== undefined) {
+                demStats[d] += (r.valor_medicao || 0);
+                demCount[d] += 1;
+            } else {
+                demStats['OUTROS'] += (r.valor_medicao || 0);
+                demCount['OUTROS'] += 1;
             }
         });
-        const sortedTipoDef = Object.keys(tipoDefStats)
-            .sort((a,b) => tipoDefStats[b].val - tipoDefStats[a].val)
-            .slice(0, 10);
-        const dataTipoDefVal = sortedTipoDef.map(k => tipoDefStats[k].val);
 
-        const ctxTipoDef = document.getElementById('manut-chart-tipo-defeito')?.getContext('2d');
-        if (ctxTipoDef) {
-            if (chartTipoDefeito) chartTipoDefeito.destroy();
-            chartTipoDefeito = new Chart(ctxTipoDef, {
+        const demLabels = Object.keys(demStats).filter(k => demCount[k] > 0);
+        const demValues = demLabels.map(k => demStats[k]);
+
+        const ctxDem = document.getElementById('manut-chart-demanda-integ')?.getContext('2d');
+        if (ctxDem) {
+            if (chartDemandaInteg) chartDemandaInteg.destroy();
+            chartDemandaInteg = new Chart(ctxDem, {
                 type: 'bar',
                 data: {
-                    labels: sortedTipoDef,
+                    labels: demLabels,
                     datasets: [{
                         label: 'Valor Medido (R$)',
-                        data: dataTipoDefVal,
-                        backgroundColor: '#0284c7',
+                        data: demValues,
+                        backgroundColor: ['#a855f7', '#3b82f6', '#64748b'],
                         borderRadius: 6
                     }]
                 },
                 options: {
-                    indexAxis: 'y',
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
@@ -524,11 +471,10 @@
                         tooltip: {
                             callbacks: {
                                 label: (ctx) => {
-                                    const labelKey = sortedTipoDef[ctx.dataIndex];
-                                    const st = tipoDefStats[labelKey];
+                                    const k = demLabels[ctx.dataIndex];
                                     return [
-                                        ` Valor: ${formatCurrency(st.val)}`,
-                                        ` Qtd: ${st.count.toLocaleString('pt-BR')} OFs`
+                                        ` Valor: ${formatCurrency(demStats[k])}`,
+                                        ` Qtd: ${demCount[k].toLocaleString('pt-BR')} OFs`
                                     ];
                                 }
                             }
@@ -537,100 +483,28 @@
                             display: true,
                             color: '#ffffff',
                             anchor: 'end',
-                            align: 'end',
-                            font: { weight: 'bold', size: 10 },
-                            formatter: (val) => formatShortCurrency(val)
+                            align: 'top',
+                            font: { weight: 'bold', size: 11 },
+                            formatter: (val) => formatSimpleNumber(val) // Formato sem R$: 900 mil, 585 mil, 1 mi
                         }
                     },
                     scales: {
-                        x: { 
+                        x: { ticks: { color: textColor, font: { weight: 'bold', size: 11 } }, grid: { display: false } },
+                        y: { 
                             ticks: { 
                                 color: '#94a3b8',
                                 callback: (v) => formatShortCurrency(v)
                             }, 
                             grid: { color: gridColor }, 
                             grace: '20%' 
-                        },
-                        y: { ticks: { color: textColor, font: { weight: 'bold' } }, grid: { display: false } }
-                    }
-                },
-                plugins: pluginsList
-            });
-        }
-
-        // 3. Chart Causa do Defeito - TOP 10 por Valor Medido (R$)
-        const causaDefStats = {};
-        filteredData.forEach(r => {
-            if (r.causa_defeito && r.causa_defeito !== '-') {
-                const cd = r.causa_defeito;
-                if (!causaDefStats[cd]) causaDefStats[cd] = { val: 0, count: 0 };
-                causaDefStats[cd].val += (r.valor_medicao || 0);
-                causaDefStats[cd].count += 1;
-            }
-        });
-        const sortedCausaDef = Object.keys(causaDefStats)
-            .sort((a,b) => causaDefStats[b].val - causaDefStats[a].val)
-            .slice(0, 10);
-        const dataCausaDefVal = sortedCausaDef.map(k => causaDefStats[k].val);
-
-        const ctxCausaDef = document.getElementById('manut-chart-causa-defeito')?.getContext('2d');
-        if (ctxCausaDef) {
-            if (chartCausaDefeito) chartCausaDefeito.destroy();
-            chartCausaDefeito = new Chart(ctxCausaDef, {
-                type: 'bar',
-                data: {
-                    labels: sortedCausaDef,
-                    datasets: [{
-                        label: 'Valor Medido (R$)',
-                        data: dataCausaDefVal,
-                        backgroundColor: '#e67e22',
-                        borderRadius: 6
-                    }]
-                },
-                options: {
-                    indexAxis: 'y',
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: {
-                            callbacks: {
-                                label: (ctx) => {
-                                    const labelKey = sortedCausaDef[ctx.dataIndex];
-                                    const st = causaDefStats[labelKey];
-                                    return [
-                                        ` Valor: ${formatCurrency(st.val)}`,
-                                        ` Qtd: ${st.count.toLocaleString('pt-BR')} OFs`
-                                    ];
-                                }
-                            }
-                        },
-                        datalabels: {
-                            display: true,
-                            color: '#ffffff',
-                            anchor: 'end',
-                            align: 'end',
-                            font: { weight: 'bold', size: 10 },
-                            formatter: (val) => formatShortCurrency(val)
                         }
-                    },
-                    scales: {
-                        x: { 
-                            ticks: { 
-                                color: '#94a3b8',
-                                callback: (v) => formatShortCurrency(v)
-                            }, 
-                            grid: { color: gridColor }, 
-                            grace: '20%' 
-                        },
-                        y: { ticks: { color: textColor, font: { weight: 'bold' } }, grid: { display: false } }
                     }
                 },
                 plugins: pluginsList
             });
         }
 
-        // 4. Chart Localidades / Cidades - TOP 10 por Valor Medido (R$)
+        // 3. GRÁFICO LOCALIDADES / CIDADES - TOP 10 (SEM R$ NO DATALABEL)
         const locStats = {};
         filteredData.forEach(r => {
             if (r.localidade && r.localidade !== '-') {
@@ -683,7 +557,7 @@
                             anchor: 'end',
                             align: 'top',
                             font: { weight: 'bold', size: 10 },
-                            formatter: (val) => formatShortCurrency(val)
+                            formatter: (val) => formatSimpleNumber(val) // Sem R$: 900 mil, 585 mil, 1 mi
                         }
                     },
                     scales: {
@@ -696,6 +570,150 @@
                             grid: { color: gridColor }, 
                             grace: '18%' 
                         }
+                    }
+                },
+                plugins: pluginsList
+            });
+        }
+
+        // 4. GRÁFICO TIPO DE DEFEITO - TOP 10 (SEM R$ NO DATALABEL)
+        const tipoDefStats = {};
+        filteredData.forEach(r => {
+            if (r.tipo_defeito && r.tipo_defeito !== '-') {
+                const td = r.tipo_defeito;
+                if (!tipoDefStats[td]) tipoDefStats[td] = { val: 0, count: 0 };
+                tipoDefStats[td].val += (r.valor_medicao || 0);
+                tipoDefStats[td].count += 1;
+            }
+        });
+        const sortedTipoDef = Object.keys(tipoDefStats)
+            .sort((a,b) => tipoDefStats[b].val - tipoDefStats[a].val)
+            .slice(0, 10);
+        const dataTipoDefVal = sortedTipoDef.map(k => tipoDefStats[k].val);
+
+        const ctxTipoDef = document.getElementById('manut-chart-tipo-defeito')?.getContext('2d');
+        if (ctxTipoDef) {
+            if (chartTipoDefeito) chartTipoDefeito.destroy();
+            chartTipoDefeito = new Chart(ctxTipoDef, {
+                type: 'bar',
+                data: {
+                    labels: sortedTipoDef,
+                    datasets: [{
+                        label: 'Valor Medido (R$)',
+                        data: dataTipoDefVal,
+                        backgroundColor: '#0284c7',
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: (ctx) => {
+                                    const labelKey = sortedTipoDef[ctx.dataIndex];
+                                    const st = tipoDefStats[labelKey];
+                                    return [
+                                        ` Valor: ${formatCurrency(st.val)}`,
+                                        ` Qtd: ${st.count.toLocaleString('pt-BR')} OFs`
+                                    ];
+                                }
+                            }
+                        },
+                        datalabels: {
+                            display: true,
+                            color: '#ffffff',
+                            anchor: 'end',
+                            align: 'end',
+                            font: { weight: 'bold', size: 10 },
+                            formatter: (val) => formatSimpleNumber(val) // Sem R$: 900 mil, 585 mil, 1 mi
+                        }
+                    },
+                    scales: {
+                        x: { 
+                            ticks: { 
+                                color: '#94a3b8',
+                                callback: (v) => formatShortCurrency(v)
+                            }, 
+                            grid: { color: gridColor }, 
+                            grace: '20%' 
+                        },
+                        y: { ticks: { color: textColor, font: { weight: 'bold' } }, grid: { display: false } }
+                    }
+                },
+                plugins: pluginsList
+            });
+        }
+
+        // 5. GRÁFICO CAUSA DO DEFEITO - TOP 10 (SEM R$ NO DATALABEL)
+        const causaDefStats = {};
+        filteredData.forEach(r => {
+            if (r.causa_defeito && r.causa_defeito !== '-') {
+                const cd = r.causa_defeito;
+                if (!causaDefStats[cd]) causaDefStats[cd] = { val: 0, count: 0 };
+                causaDefStats[cd].val += (r.valor_medicao || 0);
+                causaDefStats[cd].count += 1;
+            }
+        });
+        const sortedCausaDef = Object.keys(causaDefStats)
+            .sort((a,b) => causaDefStats[b].val - causaDefStats[a].val)
+            .slice(0, 10);
+        const dataCausaDefVal = sortedCausaDef.map(k => causaDefStats[k].val);
+
+        const ctxCausaDef = document.getElementById('manut-chart-causa-defeito')?.getContext('2d');
+        if (ctxCausaDef) {
+            if (chartCausaDefeito) chartCausaDefeito.destroy();
+            chartCausaDefeito = new Chart(ctxCausaDef, {
+                type: 'bar',
+                data: {
+                    labels: sortedCausaDef,
+                    datasets: [{
+                        label: 'Valor Medido (R$)',
+                        data: dataCausaDefVal,
+                        backgroundColor: '#e67e22',
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: (ctx) => {
+                                    const labelKey = sortedCausaDef[ctx.dataIndex];
+                                    const st = causaDefStats[labelKey];
+                                    return [
+                                        ` Valor: ${formatCurrency(st.val)}`,
+                                        ` Qtd: ${st.count.toLocaleString('pt-BR')} OFs`
+                                    ];
+                                }
+                            }
+                        },
+                        datalabels: {
+                            display: true,
+                            color: '#ffffff',
+                            anchor: 'end',
+                            align: 'end',
+                            font: { weight: 'bold', size: 10 },
+                            formatter: (val) => formatSimpleNumber(val) // Sem R$: 900 mil, 585 mil, 1 mi
+                        }
+                    },
+                    scales: {
+                        x: { 
+                            ticks: { 
+                                color: '#94a3b8',
+                                callback: (v) => formatShortCurrency(v)
+                            }, 
+                            grid: { color: gridColor }, 
+                            grace: '20%' 
+                        },
+                        y: { ticks: { color: textColor, font: { weight: 'bold' } }, grid: { display: false } }
                     }
                 },
                 plugins: pluginsList
@@ -724,7 +742,7 @@
 
             return `
             <tr>
-                <td style="font-weight: 700; color: #38ef7d;">${r.ral_rec}</td>
+                <td style="font-weight: 700; color: #38ef7d;">${r.ral}</td>
                 <td><span style="font-weight: 600; color: #f8fafc;">${r.tipo_atividade}</span></td>
                 <td>${r.atividade}</td>
                 <td>${r.localidade}</td>
@@ -733,7 +751,7 @@
                 <td style="text-align: right; font-weight: 700; color: #38bdf8;">${valStr}</td>
                 <td style="text-align: center; font-weight: 600; color: #cbd5e1;">${mesPag}</td>
                 <td style="text-align: center;">
-                    <button class="action-btn view-of-btn" data-ral="${r.ral_rec}" title="Ver detalhes" style="background: rgba(2,132,199,0.15); color: #38bdf8; border: 1px solid rgba(2,132,199,0.3); padding: 5px 10px; border-radius: 6px; cursor: pointer;">
+                    <button class="action-btn view-of-btn" data-ral="${r.ral}" title="Ver detalhes" style="background: rgba(2,132,199,0.15); color: #38bdf8; border: 1px solid rgba(2,132,199,0.3); padding: 5px 10px; border-radius: 6px; cursor: pointer;">
                         <i class="fa-solid fa-eye"></i>
                     </button>
                 </td>
@@ -746,12 +764,9 @@
 
     function getStatusBadge(st) {
         switch (st) {
-            case 'MEDIÇÃO': return `<span class="badge" style="background: rgba(2,132,199,0.2); color: #38bdf8; border: 1px solid rgba(2,132,199,0.4); padding: 4px 10px; border-radius: 12px; font-weight: 700; font-size: 11px;">MEDIÇÃO</span>`;
-            case 'CONCLUIDO': return `<span class="badge" style="background: rgba(22,163,74,0.2); color: #4ade80; border: 1px solid rgba(22,163,74,0.4); padding: 4px 10px; border-radius: 12px; font-weight: 700; font-size: 11px;">CONCLUÍDO</span>`;
-            case 'OBRA': return `<span class="badge" style="background: rgba(230,126,34,0.2); color: #fb923c; border: 1px solid rgba(230,126,34,0.4); padding: 4px 10px; border-radius: 12px; font-weight: 700; font-size: 11px;">OBRA</span>`;
-            case 'ADEQUAÇÃO': return `<span class="badge" style="background: rgba(168,85,247,0.2); color: #c084fc; border: 1px solid rgba(168,85,247,0.4); padding: 4px 10px; border-radius: 12px; font-weight: 700; font-size: 11px;">ADEQUAÇÃO</span>`;
-            case 'DOCUMENTAÇÃO': return `<span class="badge" style="background: rgba(234,179,8,0.2); color: #facc15; border: 1px solid rgba(234,179,8,0.4); padding: 4px 10px; border-radius: 12px; font-weight: 700; font-size: 11px;">DOCUMENTAÇÃO</span>`;
-            case 'FOTOS': return `<span class="badge" style="background: rgba(236,72,153,0.2); color: #f472b6; border: 1px solid rgba(236,72,153,0.4); padding: 4px 10px; border-radius: 12px; font-weight: 700; font-size: 11px;">FOTOS</span>`;
+            case 'PEDIDO_GERADO': return `<span class="badge" style="background: rgba(168,85,247,0.2); color: #c084fc; border: 1px solid rgba(168,85,247,0.4); padding: 4px 10px; border-radius: 12px; font-weight: 700; font-size: 11px;">PEDIDO GERADO</span>`;
+            case 'APROVADO': return `<span class="badge" style="background: rgba(22,163,74,0.2); color: #4ade80; border: 1px solid rgba(22,163,74,0.4); padding: 4px 10px; border-radius: 12px; font-weight: 700; font-size: 11px;">APROVADO</span>`;
+            case 'AGUARD_APROVACAO': return `<span class="badge" style="background: rgba(245,158,11,0.2); color: #fbbf24; border: 1px solid rgba(245,158,11,0.4); padding: 4px 10px; border-radius: 12px; font-weight: 700; font-size: 11px;">AGUARD. APROVAÇÃO</span>`;
             default: return `<span class="badge" style="background: rgba(148,163,184,0.2); color: #cbd5e1; border: 1px solid rgba(148,163,184,0.4); padding: 4px 10px; border-radius: 12px; font-weight: 700; font-size: 11px;">${st || '-'}</span>`;
         }
     }
@@ -763,7 +778,7 @@
         const totalPages = Math.ceil(totalCount / itemsPerPage) || 1;
         container.innerHTML = `
             <div style="font-size: 13px; color: #94a3b8;">
-                Exibindo página <strong>${currentPage}</strong> de <strong>${totalPages}</strong> (${totalCount} OFs no total)
+                Exibindo página <strong>${currentPage}</strong> de <strong>${totalPages}</strong> (${totalCount} OSs no total)
             </div>
             <div style="display: flex; gap: 8px;">
                 <button id="manut-prev-page" ${currentPage === 1 ? 'disabled' : ''} style="padding: 6px 14px; background: #1e293b; color: #f8fafc; border: 1px solid #334155; border-radius: 6px; cursor: pointer;">Anterior</button>
@@ -790,7 +805,7 @@
         document.querySelectorAll('.view-of-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const ral = e.currentTarget.getAttribute('data-ral');
-                const item = rawData.find(r => r.ral_rec === ral);
+                const item = rawData.find(r => r.ral === ral);
                 if (item) openOfModal(item);
             });
         });
@@ -808,7 +823,7 @@
         modal.innerHTML = `
             <div style="background: #0f172a; border: 1px solid #334155; border-radius: 16px; padding: 24px 30px; width: 620px; max-width: 90%; max-height: 85vh; overflow-y: auto; color: #f8fafc; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
                 <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1e293b; padding-bottom: 14px; margin-bottom: 18px;">
-                    <h3 style="margin: 0; font-size: 18px; color: #38ef7d;">OF ${item.ral_rec}</h3>
+                    <h3 style="margin: 0; font-size: 18px; color: #38ef7d;">OS ${item.ral}</h3>
                     <button id="manut-close-modal" style="background: none; border: none; color: #94a3b8; font-size: 20px; cursor: pointer;">&times;</button>
                 </div>
                 
@@ -816,16 +831,15 @@
                     <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 8px 0; color: #94a3b8; width: 40%;">Tipo de OF:</td><td style="font-weight: 700;">${item.tipo_of}</td></tr>
                     <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 8px 0; color: #94a3b8;">Tipo Atividade:</td><td style="font-weight: 700; color: #38bdf8;">${item.tipo_atividade}</td></tr>
                     <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 8px 0; color: #94a3b8;">Atividade:</td><td>${item.atividade}</td></tr>
-                    <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 8px 0; color: #94a3b8;">Tipo Defeito:</td><td style="font-weight: 700; color: #fb923c;">${item.tipo_defeito}</td></tr>
-                    <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 8px 0; color: #94a3b8;">Causa Defeito:</td><td style="font-weight: 700; color: #e67e22;">${item.causa_defeito}</td></tr>
+                    <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 8px 0; color: #94a3b8;">Demanda / Integridade:</td><td style="font-weight: 700; color: #c084fc;">${item.demanda_integ}</td></tr>
+                    <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 8px 0; color: #94a3b8;">Nº WF2 (Coluna T):</td><td style="font-weight: 700;">${item.wf2}</td></tr>
+                    <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 8px 0; color: #94a3b8;">Observação Medição (Coluna U):</td><td>${item.obs_medicao}</td></tr>
                     <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 8px 0; color: #94a3b8;">Localidade:</td><td>${item.localidade}</td></tr>
-                    <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 8px 0; color: #94a3b8;">Endereço:</td><td>${item.endereco}</td></tr>
-                    <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 8px 0; color: #94a3b8;">Status (Coluna I):</td><td>${getStatusBadge(item.status)}</td></tr>
-                    <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 8px 0; color: #94a3b8;">Equipe:</td><td>${item.equipe}</td></tr>
+                    <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 8px 0; color: #94a3b8;">Status Financeiro:</td><td>${getStatusBadge(item.legend_status)}</td></tr>
+                    <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 8px 0; color: #94a3b8;">Equipe / Cluster:</td><td>${item.equipe}</td></tr>
                     <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 8px 0; color: #94a3b8;">Data Acionamento:</td><td>${item.data_acionamento}</td></tr>
-                    <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 8px 0; color: #94a3b8;">Data Conclusão:</td><td>${item.data_conclusao}</td></tr>
-                    <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 8px 0; color: #94a3b8;">Precificado Claro:</td><td><strong style="color: ${item.precificado === 'SIM' ? '#4ade80' : '#cbd5e1'}">${item.precificado}</strong></td></tr>
-                    <tr><td style="padding: 8px 0; color: #94a3b8;">Observação:</td><td>${item.observacao}</td></tr>
+                    <tr style="border-bottom: 1px solid #1e293b;"><td style="padding: 8px 0; color: #94a3b8;">Mês Base Pagamento:</td><td style="font-weight: 700; color: #38bdf8;">${item.mes_pagamento}</td></tr>
+                    <tr><td style="padding: 8px 0; color: #94a3b8;">Valor Medido:</td><td style="font-weight: 700; color: #38ef7d;">${formatCurrency(item.valor_medicao)}</td></tr>
                 </table>
 
                 <div style="text-align: right; margin-top: 20px;">
