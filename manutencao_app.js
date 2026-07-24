@@ -236,47 +236,79 @@
         }
     }
 
-    // 1. CARDS DE STATUS (Estritamente baseados na Coluna I - Status, sem subtexto)
-    function renderKpiCards() {
-        const totalOfs = filteredData.length;
-        const emMedicao = filteredData.filter(r => r.status === 'MEDIÇÃO').length;
-        const concluidas = filteredData.filter(r => r.status === 'CONCLUIDO').length;
-        const emObra = filteredData.filter(r => r.status === 'OBRA').length;
-        const adequacao = filteredData.filter(r => r.status === 'ADEQUAÇÃO').length;
-        const documentacao = filteredData.filter(r => r.status === 'DOCUMENTAÇÃO').length;
-        const fotos = filteredData.filter(r => r.status === 'FOTOS').length;
-
-        document.getElementById('manut-kpi-total').textContent = totalOfs.toLocaleString('pt-BR');
-        document.getElementById('manut-kpi-medicao').textContent = emMedicao.toLocaleString('pt-BR');
-        document.getElementById('manut-kpi-concluido').textContent = concluidas.toLocaleString('pt-BR');
-        document.getElementById('manut-kpi-obra').textContent = emObra.toLocaleString('pt-BR');
-        document.getElementById('manut-kpi-adequacao').textContent = adequacao.toLocaleString('pt-BR');
-        document.getElementById('manut-kpi-documentacao').textContent = documentacao.toLocaleString('pt-BR');
-        document.getElementById('manut-kpi-fotos').textContent = fotos.toLocaleString('pt-BR');
+    function formatCurrency(val) {
+        return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(val || 0);
     }
 
-    // 2. CARDS DE CATEGORIA (Filtrados VISUALMENTE para exibir somente quantidade >= 10, mantendo os dados nos demais gráficos)
+    function formatShortCurrency(val) {
+        if (!val || val === 0) return 'R$ 0';
+        if (Math.abs(val) >= 1000000) {
+            return `R$ ${(val / 1000000).toFixed(2).replace('.', ',')}M`;
+        }
+        if (Math.abs(val) >= 1000) {
+            return `R$ ${(val / 1000).toFixed(1).replace('.', ',')}k`;
+        }
+        return formatCurrency(val);
+    }
+
+    // 1. CARDS DE STATUS (Foco Principal em R$ Valor Medido, secundário em Qtd OFs)
+    function renderKpiCards() {
+        const getStatusStats = (statusName) => {
+            const list = statusName === 'ALL' ? filteredData : filteredData.filter(r => r.status === statusName);
+            const count = list.length;
+            const totalVal = list.reduce((sum, r) => sum + (r.valor_medicao || 0), 0);
+            return { count, totalVal };
+        };
+
+        const totalStats = getStatusStats('ALL');
+        const medicaoStats = getStatusStats('MEDIÇÃO');
+        const concluidoStats = getStatusStats('CONCLUIDO');
+        const obraStats = getStatusStats('OBRA');
+        const adequacaoStats = getStatusStats('ADEQUAÇÃO');
+        const documentacaoStats = getStatusStats('DOCUMENTAÇÃO');
+        const fotosStats = getStatusStats('FOTOS');
+
+        const setCardValues = (valId, subId, stats) => {
+            const valEl = document.getElementById(valId);
+            const subEl = document.getElementById(subId);
+            if (valEl) valEl.textContent = formatShortCurrency(stats.totalVal);
+            if (subEl) subEl.textContent = `${stats.count.toLocaleString('pt-BR')} OFs`;
+        };
+
+        setCardValues('manut-kpi-total', 'manut-kpi-total-sub', totalStats);
+        setCardValues('manut-kpi-medicao', 'manut-kpi-medicao-sub', medicaoStats);
+        setCardValues('manut-kpi-concluido', 'manut-kpi-concluido-sub', concluidoStats);
+        setCardValues('manut-kpi-obra', 'manut-kpi-obra-sub', obraStats);
+        setCardValues('manut-kpi-adequacao', 'manut-kpi-adequacao-sub', adequacaoStats);
+        setCardValues('manut-kpi-documentacao', 'manut-kpi-documentacao-sub', documentacaoStats);
+        setCardValues('manut-kpi-fotos', 'manut-kpi-fotos-sub', fotosStats);
+    }
+
+    // 2. CARDS DE CATEGORIA (Foco Principal em R$ Valor Medido, secundário em Qtd OFs)
     function renderCategoryCards() {
         const container = document.getElementById('manut-category-cards-container');
         if (!container) return;
 
-        const ativCounts = {};
+        const ativStats = {};
         filteredData.forEach(r => {
             if (r.tipo_atividade && r.tipo_atividade !== '-') {
                 const at = r.tipo_atividade;
-                ativCounts[at] = (ativCounts[at] || 0) + 1;
+                if (!ativStats[at]) {
+                    ativStats[at] = { count: 0, totalVal: 0 };
+                }
+                ativStats[at].count += 1;
+                ativStats[at].totalVal += (r.valor_medicao || 0);
             }
         });
 
-        const totalCount = filteredData.length || 1;
-        // Visual filter: Only display categories with count >= 10 in this row
-        const sortedAtiv = Object.keys(ativCounts)
-            .filter(cat => ativCounts[cat] >= 10)
-            .sort((a,b) => ativCounts[b] - ativCounts[a]);
+        const overallVal = filteredData.reduce((sum, r) => sum + (r.valor_medicao || 0), 0) || 1;
+        const sortedAtiv = Object.keys(ativStats)
+            .filter(cat => ativStats[cat].count >= 5 || ativStats[cat].totalVal > 0)
+            .sort((a,b) => ativStats[b].totalVal - ativStats[a].totalVal);
 
         container.innerHTML = sortedAtiv.map(cat => {
-            const count = ativCounts[cat];
-            const pct = ((count / totalCount) * 100).toFixed(1).replace('.', ',');
+            const stats = ativStats[cat];
+            const pct = ((stats.totalVal / overallVal) * 100).toFixed(1).replace('.', ',');
             const iconClass = CATEGORY_ICONS[cat] || 'fa-solid fa-wrench';
             const activeAtiv = document.getElementById('manut-filter-atividade')?.value || '';
 
@@ -284,9 +316,10 @@
             <div class="cobranca-category-card${activeAtiv === cat ? ' active' : ''}" onclick="window.filterByManutCategory('${cat}')">
                 <div class="kpi-info" style="flex-grow: 1;">
                     <div class="cobranca-category-title">${cat}</div>
-                    <div class="cobranca-category-value">${count.toLocaleString('pt-BR')} <span style="font-size: 11px; color: var(--text-secondary); font-weight: 600;">OFs</span></div>
-                    <div class="kpi-sub" style="font-size: 11px; color: var(--color-primary); font-weight: 700;">
-                        <span style="background: rgba(0,180,216,0.12); padding: 2px 7px; border-radius: 10px;">${pct}% do Total</span>
+                    <div class="cobranca-category-value" style="font-size: 1.05rem; font-weight: 800; color: var(--text-primary);">${formatShortCurrency(stats.totalVal)}</div>
+                    <div class="kpi-sub" style="font-size: 11px; color: var(--text-secondary); font-weight: 600; display: flex; justify-content: space-between; align-items: center; margin-top: 2px;">
+                        <span>${stats.count.toLocaleString('pt-BR')} OFs</span>
+                        <span style="background: rgba(0,180,216,0.12); color: var(--color-primary); padding: 1px 6px; border-radius: 8px; font-weight: 700;">${pct}%</span>
                     </div>
                 </div>
                 <div class="kpi-icon-container">
@@ -311,60 +344,45 @@
         const gridColor = 'rgba(255, 255, 255, 0.05)';
         const pluginsList = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
 
-        // 1. Chart Mensal de Manutenção (Data de Acionamento - Até mês atual JUL/2026)
+        // 1. Chart Mensal de Faturamento / Medição por Mês de Pagamento e Data de Acionamento
         const monthNames = { '01':'JAN', '02':'FEV', '03':'MAR', '04':'ABR', '05':'MAI', '06':'JUN', '07':'JUL', '08':'AGO', '09':'SET', '10':'OUT', '11':'NOV', '12':'DEZ' };
         const monthOrder = ['FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL'];
+        const monthlyValues = { FEV:0, MAR:0, ABR:0, MAI:0, JUN:0, JUL:0 };
         const monthlyCounts = { FEV:0, MAR:0, ABR:0, MAI:0, JUN:0, JUL:0 };
-        
-        // Mapeamento de dias por mês (Ano 2026)
-        const daysInMonths = { FEV: 28, MAR: 31, ABR: 30, MAI: 31, JUN: 30, JUL: 31 };
-        
-        // Ajuste dinâmico de dias decorridos se for o mês corrente (ex: Julho)
-        const today = new Date();
-        if (today.getFullYear() === 2026 && today.getMonth() === 6) { // Julho
-            daysInMonths['JUL'] = Math.max(1, today.getDate());
-        }
-
-        // Janela móvel dos últimos 30 dias a partir da data de referência (hoje ou última data do conjunto)
-        let refDate = new Date();
-        refDate.setHours(23, 59, 59, 999);
-        const ref30DaysAgo = new Date(refDate.getTime() - (29 * 24 * 60 * 60 * 1000));
-        ref30DaysAgo.setHours(0, 0, 0, 0);
-
-        let count30Days = 0;
 
         filteredData.forEach(r => {
-            const dtObj = parseAcionamentoDate(r.data_acionamento) || parseAcionamentoDate(r.data_envio_relatorio);
-            
-            if (dtObj) {
-                // Filtro para contagem mensal
-                const mStr = (dtObj.getMonth() + 1).toString().padStart(2, '0');
-                const mKey = monthNames[mStr];
-                if (mKey && monthlyCounts[mKey] !== undefined) {
-                    if (dtObj.getFullYear() === 2026 && dtObj.getMonth() <= 6) {
-                        monthlyCounts[mKey]++;
-                    }
-                }
+            const v = r.valor_medicao || 0;
+            let mKey = null;
 
-                // Filtro para janela de 30 dias
-                if (dtObj >= ref30DaysAgo && dtObj <= refDate) {
-                    count30Days++;
+            if (r.mes_pagamento && r.mes_pagamento !== '-') {
+                const parts = r.mes_pagamento.split('/')[0].toUpperCase();
+                const mShort = parts.slice(0, 3);
+                if (monthlyValues[mShort] !== undefined) {
+                    mKey = mShort;
                 }
+            }
+            if (!mKey) {
+                const dtObj = parseAcionamentoDate(r.data_acionamento) || parseAcionamentoDate(r.data_envio_relatorio);
+                if (dtObj) {
+                    const mStr = (dtObj.getMonth() + 1).toString().padStart(2, '0');
+                    mKey = monthNames[mStr];
+                }
+            }
+
+            if (mKey && monthlyValues[mKey] !== undefined) {
+                monthlyValues[mKey] += v;
+                monthlyCounts[mKey] += 1;
             }
         });
 
-        const dataMensal = monthOrder.map(m => monthlyCounts[m]);
-        const dataMediasDiarias = monthOrder.map(m => {
-            const cnt = monthlyCounts[m] || 0;
-            const dCount = daysInMonths[m] || 30;
-            return cnt / dCount;
-        });
+        const dataMensalVal = monthOrder.map(m => monthlyValues[m]);
+        const dataMensalCount = monthOrder.map(m => monthlyCounts[m]);
 
-        // Atualizar o indicador de média dos últimos 30 dias no canto superior direito (arredondado para número inteiro)
-        const avg30Days = count30Days / 30.0;
+        // Atualizar indicador de total medido no selo superior direito
+        const totalMedidoSum = dataMensalVal.reduce((a,b) => a+b, 0);
         const avg30DaysEl = document.getElementById('manut-avg-30days-val');
         if (avg30DaysEl) {
-            avg30DaysEl.innerText = Math.round(avg30Days).toLocaleString('pt-BR');
+            avg30DaysEl.innerText = formatShortCurrency(totalMedidoSum);
         }
 
         const ctxMensal = document.getElementById('manut-chart-mensal')?.getContext('2d');
@@ -380,8 +398,8 @@
                 data: {
                     labels: monthOrder,
                     datasets: [{
-                        label: 'Acionamentos de Manutenção',
-                        data: dataMensal,
+                        label: 'Valor Medido (R$)',
+                        data: dataMensalVal,
                         borderColor: '#00b4d8',
                         borderWidth: 3,
                         backgroundColor: gradLine,
@@ -411,10 +429,10 @@
                                 label: function(context) {
                                     const idx = context.dataIndex;
                                     const val = context.raw || 0;
-                                    const avg = dataMediasDiarias[idx] || 0;
+                                    const cnt = dataMensalCount[idx] || 0;
                                     return [
-                                        ` Acionamentos: ${val.toLocaleString('pt-BR')}`,
-                                        ` Média Diária: ${Math.round(avg).toLocaleString('pt-BR')} acionamentos/dia`
+                                        ` Valor Medido: ${formatCurrency(val)}`,
+                                        ` Acionamentos: ${cnt.toLocaleString('pt-BR')} OFs`
                                     ];
                                 }
                             }
@@ -425,29 +443,40 @@
                             align: 'top',
                             anchor: 'end',
                             offset: 4,
-                            font: { weight: 'bold', size: 12 },
-                            formatter: (val) => val > 0 ? val.toLocaleString('pt-BR') : ''
+                            font: { weight: 'bold', size: 11 },
+                            formatter: (val) => val > 0 ? formatShortCurrency(val) : ''
                         }
                     },
                     scales: {
                         x: { ticks: { color: textColor, font: { weight: 'bold' } }, grid: { display: false } },
-                        y: { ticks: { color: '#94a3b8' }, grid: { color: gridColor }, grace: '18%' }
+                        y: { 
+                            ticks: { 
+                                color: '#94a3b8',
+                                callback: (v) => formatShortCurrency(v)
+                            }, 
+                            grid: { color: gridColor }, 
+                            grace: '18%' 
+                        }
                     }
                 },
                 plugins: pluginsList
             });
         }
 
-        // 2. Chart Tipo de Defeito - Estritamente TOP 10 (Sem rolagem, visual ultra limpo)
-        const tipoDefCounts = {};
+        // 2. Chart Tipo de Defeito - TOP 10 por Valor Medido (R$)
+        const tipoDefStats = {};
         filteredData.forEach(r => {
             if (r.tipo_defeito && r.tipo_defeito !== '-') {
                 const td = r.tipo_defeito;
-                tipoDefCounts[td] = (tipoDefCounts[td] || 0) + 1;
+                if (!tipoDefStats[td]) tipoDefStats[td] = { val: 0, count: 0 };
+                tipoDefStats[td].val += (r.valor_medicao || 0);
+                tipoDefStats[td].count += 1;
             }
         });
-        const sortedTipoDef = Object.keys(tipoDefCounts).sort((a,b) => tipoDefCounts[b] - tipoDefCounts[a]).slice(0, 10);
-        const dataTipoDef = sortedTipoDef.map(k => tipoDefCounts[k]);
+        const sortedTipoDef = Object.keys(tipoDefStats)
+            .sort((a,b) => tipoDefStats[b].val - tipoDefStats[a].val)
+            .slice(0, 10);
+        const dataTipoDefVal = sortedTipoDef.map(k => tipoDefStats[k].val);
 
         const ctxTipoDef = document.getElementById('manut-chart-tipo-defeito')?.getContext('2d');
         if (ctxTipoDef) {
@@ -457,8 +486,8 @@
                 data: {
                     labels: sortedTipoDef,
                     datasets: [{
-                        label: 'OFs por Tipo de Defeito',
-                        data: dataTipoDef,
+                        label: 'Valor Medido (R$)',
+                        data: dataTipoDefVal,
                         backgroundColor: '#0284c7',
                         borderRadius: 6
                     }]
@@ -469,17 +498,36 @@
                     maintainAspectRatio: false,
                     plugins: {
                         legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: (ctx) => {
+                                    const labelKey = sortedTipoDef[ctx.dataIndex];
+                                    const st = tipoDefStats[labelKey];
+                                    return [
+                                        ` Valor: ${formatCurrency(st.val)}`,
+                                        ` Qtd: ${st.count.toLocaleString('pt-BR')} OFs`
+                                    ];
+                                }
+                            }
+                        },
                         datalabels: {
                             display: true,
                             color: '#ffffff',
                             anchor: 'end',
                             align: 'end',
-                            font: { weight: 'bold', size: 11 },
-                            formatter: (val) => val.toLocaleString('pt-BR')
+                            font: { weight: 'bold', size: 10 },
+                            formatter: (val) => formatShortCurrency(val)
                         }
                     },
                     scales: {
-                        x: { ticks: { color: '#94a3b8' }, grid: { color: gridColor }, grace: '20%' },
+                        x: { 
+                            ticks: { 
+                                color: '#94a3b8',
+                                callback: (v) => formatShortCurrency(v)
+                            }, 
+                            grid: { color: gridColor }, 
+                            grace: '20%' 
+                        },
                         y: { ticks: { color: textColor, font: { weight: 'bold' } }, grid: { display: false } }
                     }
                 },
@@ -487,16 +535,20 @@
             });
         }
 
-        // 3. Chart Causa do Defeito - Estritamente TOP 10 (Sem rolagem, visual ultra limpo)
-        const causaDefCounts = {};
+        // 3. Chart Causa do Defeito - TOP 10 por Valor Medido (R$)
+        const causaDefStats = {};
         filteredData.forEach(r => {
             if (r.causa_defeito && r.causa_defeito !== '-') {
                 const cd = r.causa_defeito;
-                causaDefCounts[cd] = (causaDefCounts[cd] || 0) + 1;
+                if (!causaDefStats[cd]) causaDefStats[cd] = { val: 0, count: 0 };
+                causaDefStats[cd].val += (r.valor_medicao || 0);
+                causaDefStats[cd].count += 1;
             }
         });
-        const sortedCausaDef = Object.keys(causaDefCounts).sort((a,b) => causaDefCounts[b] - causaDefCounts[a]).slice(0, 10);
-        const dataCausaDef = sortedCausaDef.map(k => causaDefCounts[k]);
+        const sortedCausaDef = Object.keys(causaDefStats)
+            .sort((a,b) => causaDefStats[b].val - causaDefStats[a].val)
+            .slice(0, 10);
+        const dataCausaDefVal = sortedCausaDef.map(k => causaDefStats[k].val);
 
         const ctxCausaDef = document.getElementById('manut-chart-causa-defeito')?.getContext('2d');
         if (ctxCausaDef) {
@@ -506,8 +558,8 @@
                 data: {
                     labels: sortedCausaDef,
                     datasets: [{
-                        label: 'OFs por Causa do Defeito',
-                        data: dataCausaDef,
+                        label: 'Valor Medido (R$)',
+                        data: dataCausaDefVal,
                         backgroundColor: '#e67e22',
                         borderRadius: 6
                     }]
@@ -518,17 +570,36 @@
                     maintainAspectRatio: false,
                     plugins: {
                         legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: (ctx) => {
+                                    const labelKey = sortedCausaDef[ctx.dataIndex];
+                                    const st = causaDefStats[labelKey];
+                                    return [
+                                        ` Valor: ${formatCurrency(st.val)}`,
+                                        ` Qtd: ${st.count.toLocaleString('pt-BR')} OFs`
+                                    ];
+                                }
+                            }
+                        },
                         datalabels: {
                             display: true,
                             color: '#ffffff',
                             anchor: 'end',
                             align: 'end',
-                            font: { weight: 'bold', size: 11 },
-                            formatter: (val) => val.toLocaleString('pt-BR')
+                            font: { weight: 'bold', size: 10 },
+                            formatter: (val) => formatShortCurrency(val)
                         }
                     },
                     scales: {
-                        x: { ticks: { color: '#94a3b8' }, grid: { color: gridColor }, grace: '20%' },
+                        x: { 
+                            ticks: { 
+                                color: '#94a3b8',
+                                callback: (v) => formatShortCurrency(v)
+                            }, 
+                            grid: { color: gridColor }, 
+                            grace: '20%' 
+                        },
                         y: { ticks: { color: textColor, font: { weight: 'bold' } }, grid: { display: false } }
                     }
                 },
@@ -536,16 +607,20 @@
             });
         }
 
-        // 4. Chart Localidades / Cidades - COLUNAS VERTICAIS (indexAxis: 'x') Estritamente TOP 10
-        const locCounts = {};
+        // 4. Chart Localidades / Cidades - TOP 10 por Valor Medido (R$)
+        const locStats = {};
         filteredData.forEach(r => {
             if (r.localidade && r.localidade !== '-') {
                 const loc = r.localidade;
-                locCounts[loc] = (locCounts[loc] || 0) + 1;
+                if (!locStats[loc]) locStats[loc] = { val: 0, count: 0 };
+                locStats[loc].val += (r.valor_medicao || 0);
+                locStats[loc].count += 1;
             }
         });
-        const sortedLoc = Object.keys(locCounts).sort((a,b) => locCounts[b] - locCounts[a]).slice(0, 10);
-        const dataLoc = sortedLoc.map(k => locCounts[k]);
+        const sortedLoc = Object.keys(locStats)
+            .sort((a,b) => locStats[b].val - locStats[a].val)
+            .slice(0, 10);
+        const dataLocVal = sortedLoc.map(k => locStats[k].val);
 
         const ctxLoc = document.getElementById('manut-chart-localidades')?.getContext('2d');
         if (ctxLoc) {
@@ -555,30 +630,49 @@
                 data: {
                     labels: sortedLoc,
                     datasets: [{
-                        label: 'OFs por Localidade',
-                        data: dataLoc,
+                        label: 'Valor Medido (R$)',
+                        data: dataLocVal,
                         backgroundColor: '#10b981',
                         borderRadius: 6
                     }]
                 },
                 options: {
-                    indexAxis: 'x', // COLUNAS VERTICAIS EM PÉ
+                    indexAxis: 'x',
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
                         legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: (ctx) => {
+                                    const labelKey = sortedLoc[ctx.dataIndex];
+                                    const st = locStats[labelKey];
+                                    return [
+                                        ` Valor: ${formatCurrency(st.val)}`,
+                                        ` Qtd: ${st.count.toLocaleString('pt-BR')} OFs`
+                                    ];
+                                }
+                            }
+                        },
                         datalabels: {
                             display: true,
                             color: '#ffffff',
                             anchor: 'end',
                             align: 'top',
-                            font: { weight: 'bold', size: 11 },
-                            formatter: (val) => val.toLocaleString('pt-BR')
+                            font: { weight: 'bold', size: 10 },
+                            formatter: (val) => formatShortCurrency(val)
                         }
                     },
                     scales: {
                         x: { ticks: { color: textColor, font: { weight: 'bold', size: 11 } }, grid: { display: false } },
-                        y: { ticks: { color: '#94a3b8' }, grid: { color: gridColor }, grace: '18%' }
+                        y: { 
+                            ticks: { 
+                                color: '#94a3b8',
+                                callback: (v) => formatShortCurrency(v)
+                            }, 
+                            grid: { color: gridColor }, 
+                            grace: '18%' 
+                        }
                     }
                 },
                 plugins: pluginsList
@@ -595,13 +689,16 @@
         const pageItems = filteredData.slice(start, end);
 
         if (pageItems.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 30px; color: #94a3b8;">Nenhum registro localizado.</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; padding: 30px; color: #94a3b8;">Nenhum registro localizado.</td></tr>`;
             renderPagination(0);
             return;
         }
 
         tbody.innerHTML = pageItems.map(r => {
             const statusBadge = getStatusBadge(r.status);
+            const valStr = r.valor_medicao > 0 ? formatCurrency(r.valor_medicao) : 'R$ 0,00';
+            const mesPag = r.mes_pagamento && r.mes_pagamento !== '-' ? r.mes_pagamento : '-';
+
             return `
             <tr>
                 <td style="font-weight: 700; color: #38ef7d;">${r.ral_rec}</td>
@@ -610,6 +707,8 @@
                 <td>${r.localidade}</td>
                 <td>${r.equipe}</td>
                 <td>${statusBadge}</td>
+                <td style="text-align: right; font-weight: 700; color: #38bdf8;">${valStr}</td>
+                <td style="text-align: center; font-weight: 600; color: #cbd5e1;">${mesPag}</td>
                 <td style="text-align: center;">
                     <button class="action-btn view-of-btn" data-ral="${r.ral_rec}" title="Ver detalhes" style="background: rgba(2,132,199,0.15); color: #38bdf8; border: 1px solid rgba(2,132,199,0.3); padding: 5px 10px; border-radius: 6px; cursor: pointer;">
                         <i class="fa-solid fa-eye"></i>
