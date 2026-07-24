@@ -269,8 +269,8 @@
         if (!container) return;
 
         const macroStats = {
-            'ROMPIMENTO': { count: 0, totalVal: 0, aprovVal: 0, icon: 'fa-solid fa-triangle-exclamation', color: '#ef4444', sub: 'Rompimento, Adequação, Atenuação, Qualidade, Mobilização' },
-            'Melhoria':   { count: 0, totalVal: 0, aprovVal: 0, icon: 'fa-solid fa-wrench',                color: '#0284c7', sub: 'Obras, Migração, Anti-Furto, Melhoria de Rede' }
+            'ROMPIMENTO': { count: 0, totalVal: 0, aprovVal: 0, pedVal: 0, icon: 'fa-solid fa-triangle-exclamation', color: '#ef4444', sub: 'Rompimento, Adequação, Atenuação, Qualidade, Mobilização' },
+            'Melhoria':   { count: 0, totalVal: 0, aprovVal: 0, pedVal: 0, icon: 'fa-solid fa-wrench',                color: '#0284c7', sub: 'Obras, Migração, Anti-Furto, Melhoria de Rede' }
         };
 
         filteredData.forEach(r => {
@@ -278,10 +278,15 @@
             if (macroStats[macro]) {
                 macroStats[macro].count   += 1;
                 macroStats[macro].totalVal += (r.valor_medicao || 0);
-                const isAprov = Boolean(r.wf2 && r.wf2 !== '-' && r.wf2.toUpperCase() !== 'NONE');
-                if (isAprov) macroStats[macro].aprovVal += (r.valor_medicao || 0);
+                const hasColT = Boolean(r.wf2 && r.wf2 !== '-' && r.wf2.toUpperCase() !== 'NONE');
+                const hasColU = Boolean(r.obs_medicao && r.obs_medicao !== '-' && r.obs_medicao.toUpperCase() !== 'NONE');
+                // Aprovado = tem WF2 mas NÃO tem obs_medicao (conforme chart mensal)
+                if (hasColT && !hasColU) macroStats[macro].aprovVal += (r.valor_medicao || 0);
+                // Pedido Gerado = tem WF2 E tem obs_medicao
+                if (hasColT && hasColU)  macroStats[macro].pedVal   += (r.valor_medicao || 0);
             }
         });
+
 
         const overallVal = filteredData.reduce((sum, r) => sum + (r.valor_medicao || 0), 0) || 1;
         const sortedMacro = ['ROMPIMENTO', 'Melhoria'];
@@ -290,36 +295,41 @@
         container.innerHTML = sortedMacro.map(cat => {
             const stats = macroStats[cat];
             const pct = ((stats.totalVal / overallVal) * 100).toFixed(1).replace('.', ',');
-            const pendVal = stats.totalVal - stats.aprovVal;
+            const pendVal = stats.totalVal - stats.aprovVal - stats.pedVal;
 
             return `
-            <div class="cobranca-category-card${activeAtiv === cat ? ' active' : ''}" style="cursor:pointer; position:relative; overflow:hidden; padding: 14px 16px; display:flex; flex-direction:column; gap:10px; border-left: 4px solid ${stats.color};" onclick="window.filterByManutCategory('${cat}')">
+            <div class="cobranca-category-card${activeAtiv === cat ? ' active' : ''}" style="cursor:pointer; position:relative; overflow:hidden; padding: 16px 18px; display:flex; flex-direction:column; gap:8px; border-left: 4px solid ${stats.color};" onclick="window.filterByManutCategory('${cat}')">
 
                 <!-- ícone de fundo decorativo -->
-                <i class="${stats.icon}" style="position:absolute; right:12px; top:50%; transform:translateY(-50%); font-size:4.5rem; color:${stats.color}; opacity:0.07; pointer-events:none;"></i>
+                <i class="${stats.icon}" style="position:absolute; right:14px; bottom:10px; font-size:5rem; color:${stats.color}; opacity:0.06; pointer-events:none;"></i>
 
-                <!-- cabeçalho: título + badge % -->
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <span style="font-size:10px; font-weight:900; letter-spacing:1.5px; text-transform:uppercase; color:${stats.color};">${cat}</span>
-                    <span style="background:${stats.color}22; color:${stats.color}; padding:2px 10px; border-radius:20px; font-size:10px; font-weight:800; border:1px solid ${stats.color}55;">${pct}% do total</span>
+                <!-- cabeçalho: título grande + badge % -->
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2px;">
+                    <span style="font-size:13px; font-weight:900; letter-spacing:2px; text-transform:uppercase; color:${stats.color};">${cat}</span>
+                    <span style="background:${stats.color}22; color:${stats.color}; padding:3px 12px; border-radius:20px; font-size:11px; font-weight:800; border:1px solid ${stats.color}55;">${pct}% do total</span>
                 </div>
 
-                <!-- valor total -->
-                <div style="font-size:1.45rem; font-weight:900; color:var(--text-primary); line-height:1; letter-spacing:-0.5px;">${formatCurrency(stats.totalVal)}</div>
+                <!-- valor total em destaque -->
+                <div style="font-size:1.6rem; font-weight:900; color:var(--text-primary); line-height:1; letter-spacing:-0.5px;">${formatCurrency(stats.totalVal)}</div>
 
                 <!-- linha divisória -->
-                <div style="height:1px; background: rgba(255,255,255,0.06);"></div>
+                <div style="height:1px; background:rgba(255,255,255,0.07); margin:2px 0;"></div>
 
-                <!-- aprovado + pendente -->
-                <div style="display:flex; gap:10px;">
-                    <div style="flex:1; display:flex; flex-direction:column; gap:2px;">
+                <!-- aprovado | pedido gerado | pendente -->
+                <div style="display:flex; gap:0;">
+                    <div style="flex:1; display:flex; flex-direction:column; gap:3px; padding-right:10px;">
                         <span style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.8px; color:#10b981;">&#x2714; Aprovado</span>
-                        <span style="font-size:13px; font-weight:800; color:#10b981;">${formatCurrency(stats.aprovVal)}</span>
+                        <span style="font-size:12px; font-weight:800; color:#10b981;">${formatCurrency(stats.aprovVal)}</span>
                     </div>
-                    <div style="width:1px; background:rgba(255,255,255,0.06);"></div>
-                    <div style="flex:1; display:flex; flex-direction:column; gap:2px;">
+                    <div style="width:1px; background:rgba(255,255,255,0.07);"></div>
+                    <div style="flex:1; display:flex; flex-direction:column; gap:3px; padding:0 10px;">
+                        <span style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.8px; color:#0284c7;">&#x1F4CB; Ped. Gerado</span>
+                        <span style="font-size:12px; font-weight:800; color:#0284c7;">${formatCurrency(stats.pedVal)}</span>
+                    </div>
+                    <div style="width:1px; background:rgba(255,255,255,0.07);"></div>
+                    <div style="flex:1; display:flex; flex-direction:column; gap:3px; padding-left:10px;">
                         <span style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.8px; color:#f59e0b;">&#x23F3; Pendente</span>
-                        <span style="font-size:13px; font-weight:800; color:#f59e0b;">${formatCurrency(pendVal)}</span>
+                        <span style="font-size:12px; font-weight:800; color:#f59e0b;">${formatCurrency(pendVal)}</span>
                     </div>
                 </div>
             </div>`;
@@ -501,10 +511,11 @@
         const dataPedGerado = monthMapKeys.map(m => monthlyStats[m].pedGerado);
         const dataAguard = monthMapKeys.map(m => monthlyStats[m].aguard);
 
-        // Total Aprovado do filtro atual para o badge superior
+        // Total Aprovado do filtro atual para o badge superior (apenas Aprovado, excluindo Pedido Gerado)
         const overallTotalAprovado = filteredData.reduce((sum, r) => {
-            const isAprov = Boolean(r.wf2 && r.wf2 !== '-' && r.wf2.toUpperCase() !== 'NONE');
-            return sum + (isAprov ? (r.valor_medicao || 0) : 0);
+            const hasColT = Boolean(r.wf2 && r.wf2 !== '-' && r.wf2.toUpperCase() !== 'NONE');
+            const hasColU = Boolean(r.obs_medicao && r.obs_medicao !== '-' && r.obs_medicao.toUpperCase() !== 'NONE');
+            return sum + (hasColT && !hasColU ? (r.valor_medicao || 0) : 0);
         }, 0);
         const avg30DaysEl = document.getElementById('manut-avg-30days-val');
         if (avg30DaysEl) {
