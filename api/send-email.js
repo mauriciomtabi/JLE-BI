@@ -40,8 +40,8 @@ async function sendResendEmail(to, subject, html, attachments = null, textAlt = 
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     };
     
-    const formattedSubject = subject.startsWith('[BI JLE]') ? subject : `[BI JLE] ${subject}`;
-    const defaultText = `[BI JLE TELECOM] ${formattedSubject}\n\nEste é um relatório gerado automaticamente pelo BI JLE Telecom.\nPor favor, visualize o e-mail em um leitor compatível com HTML para ver a tabela e os indicadores.\n\nAcesse o painel do BI: ${BI_URL}`;
+    const formattedSubject = subject;
+    const defaultText = `BI JLE TELECOM\n\nEste é um relatório gerado automaticamente pelo BI JLE Telecom.\nPor favor, visualize o e-mail em um leitor compatível com HTML para ver a tabela e os indicadores.\n\nAcesse o painel do BI: ${BI_URL}`;
 
     const body = {
         from: `"BI JLE Telecom" <${FROM_EMAIL}>`,

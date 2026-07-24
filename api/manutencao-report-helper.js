@@ -62,11 +62,34 @@ function formatCurrency(val) {
     return (val || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 }
 
+function getCurrentMonth(rows) {
+    // Retorna o mês de pagamento mais recente presente nos dados
+    const months = rows.map(r => r.mes_pagamento).filter(m => m && m !== '-');
+    if (!months.length) return null;
+    // Ordena por ano e mês (formato esperado: "JULHO/2026")
+    const monthOrder = ['JANEIRO','FEVEREIRO','MARÇO','ABRIL','MAIO','JUNHO','JULHO','AGOSTO','SETEMBRO','OUTUBRO','NOVEMBRO','DEZEMBRO'];
+    const parsed = months.map(m => {
+        const parts = m.split('/');
+        const monthName = parts[0] ? parts[0].toUpperCase() : '';
+        const year = parts[1] ? parseInt(parts[1]) : 0;
+        const monthIdx = monthOrder.indexOf(monthName);
+        return { raw: m, year, monthIdx };
+    });
+    parsed.sort((a, b) => b.year - a.year || b.monthIdx - a.monthIdx);
+    return parsed[0].raw;
+}
+
 function generateExcelAttachments(manutData) {
     const todayStr = new Date().toISOString().substring(0, 10);
     
-    // Filtra apenas as OSs Pendentes (sem WF2 / Coluna T vazia)
-    const pendentesRows = manutData.rows.filter(r => {
+    // Filtra apenas o mês atual de pagamento
+    const currentMonth = getCurrentMonth(manutData.rows);
+    const rowsCurrentMonth = currentMonth
+        ? manutData.rows.filter(r => r.mes_pagamento === currentMonth)
+        : manutData.rows;
+    
+    // Filtra apenas as OFs Pendentes (sem WF2 / Coluna T vazia) do mês atual
+    const pendentesRows = rowsCurrentMonth.filter(r => {
         const hasColT = Boolean(r.wf2 && r.wf2 !== '-' && String(r.wf2).toUpperCase() !== 'NONE');
         return !hasColT;
     });
@@ -84,12 +107,12 @@ function generateExcelAttachments(manutData) {
     
     const wb = XLSX.utils.book_new();
     const wsPendentes = XLSX.utils.json_to_sheet(mapToExcelJson(pendentesRows));
-    XLSX.utils.book_append_sheet(wb, wsPendentes, "OSs Pendentes de Aprovação");
+    XLSX.utils.book_append_sheet(wb, wsPendentes, "OFs Pendentes de Aprovação");
     
     const buffer = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx' });
     
     return [{
-        filename: `Manutencao_OSs_Pendentes_${todayStr}.xlsx`,
+        filename: `Manutencao_OFs_Pendentes_${todayStr}.xlsx`,
         content: buffer.toString('base64')
     }];
 }
@@ -99,7 +122,13 @@ function buildManutencaoEmailHtml(reportName, manutData) {
     const dateFormatted = dataDate ? dataDate.split(' ')[0].split('-').reverse().join('/') : new Date().toLocaleDateString('pt-BR');
     const timeStr = dataDate && dataDate.includes(' ') ? dataDate.split(' ')[1].substring(0, 5) : '';
     
-    const rows = manutData.rows;
+    // Filtra apenas o mês atual de pagamento
+    const currentMonth = getCurrentMonth(manutData.rows);
+    const rows = currentMonth
+        ? manutData.rows.filter(r => r.mes_pagamento === currentMonth)
+        : manutData.rows;
+    const currentMonthLabel = currentMonth || 'Mês Atual';
+    
     let totalMedido = 0;
     let totalAprovado = 0;
     let totalPendente = 0;
@@ -168,7 +197,7 @@ function buildManutencaoEmailHtml(reportName, manutData) {
                 ${formatCurrency(st.val)}
             </td>
             <td style="padding: 10px 16px; font-size: 12px; color: #64748b; font-weight: 600; text-align: center;">
-                ${st.count.toLocaleString('pt-BR')} OSs
+                ${st.count.toLocaleString('pt-BR')} OFs
             </td>
             <td style="padding: 10px 16px; font-size: 12px; color: #0284c7; font-weight: 700; text-align: right;">
                 ${pct}%
@@ -192,8 +221,11 @@ function buildManutencaoEmailHtml(reportName, manutData) {
                     <tr>
                         <td style="background: #004f71; padding: 32px 40px; text-align: left;">
                             <h1 style="margin: 0; font-size: 24px; color: #ffffff; font-weight: 800;">${reportName}</h1>
-                            <div style="font-size: 13px; color: #e0e0e0; margin-top: 8px;">
-                                Acompanhamento Geral — Atualizado em: <span style="text-decoration: underline; color: #38ef7d; font-weight: 700;">${dateFormatted}</span> ${timeStr}
+                            <div style="font-size: 13px; color: #e0e0e0; margin-top: 4px;">
+                                Mês Base: <span style="color: #38ef7d; font-weight: 800;">${currentMonthLabel}</span>
+                            </div>
+                            <div style="font-size: 12px; color: #b0c4d4; margin-top: 4px;">
+                                Atualizado em: <span style="text-decoration: underline; color: #e0e0e0; font-weight: 600;">${dateFormatted}</span> ${timeStr}
                             </div>
                         </td>
                     </tr>
@@ -210,7 +242,7 @@ function buildManutencaoEmailHtml(reportName, manutData) {
                                     <td width="31%" style="background: #f8fafc; border-radius: 10px; border-top: 4px solid #004f71; padding: 16px; text-align: center; border-left: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; vertical-align: top;">
                                         <div style="font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 800; margin-bottom: 4px;">TOTAL MEDIDO</div>
                                         <div style="font-size: 17px; font-weight: 900; color: #0f172a; line-height: 1.2;">${formatCurrency(totalMedido)}</div>
-                                        <div style="font-size: 11px; color: #64748b; margin-top: 4px; font-weight: 600;">${countTotal.toLocaleString('pt-BR')} OSs</div>
+                                        <div style="font-size: 11px; color: #64748b; margin-top: 4px; font-weight: 600;">${countTotal.toLocaleString('pt-BR')} OFs</div>
                                     </td>
 
                                     <td width="3.5%"></td>
@@ -219,7 +251,7 @@ function buildManutencaoEmailHtml(reportName, manutData) {
                                     <td width="31%" style="background: rgba(16,185,129,0.06); border-radius: 10px; border-top: 4px solid #10b981; padding: 16px; text-align: center; border-left: 1px solid rgba(16,185,129,0.2); border-right: 1px solid rgba(16,185,129,0.2); border-bottom: 1px solid rgba(16,185,129,0.2); vertical-align: top;">
                                         <div style="font-size: 10px; color: #047857; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 800; margin-bottom: 4px;">TOTAL APROVADO</div>
                                         <div style="font-size: 17px; font-weight: 900; color: #10b981; line-height: 1.2;">${formatCurrency(totalAprovado)}</div>
-                                        <div style="font-size: 11px; color: #047857; margin-top: 4px; font-weight: 600;">${countAprovado.toLocaleString('pt-BR')} OSs</div>
+                                        <div style="font-size: 11px; color: #047857; margin-top: 4px; font-weight: 600;">${countAprovado.toLocaleString('pt-BR')} OFs</div>
                                     </td>
 
                                     <td width="3.5%"></td>
@@ -228,7 +260,7 @@ function buildManutencaoEmailHtml(reportName, manutData) {
                                     <td width="31%" style="background: rgba(245,158,11,0.06); border-radius: 10px; border-top: 4px solid #f59e0b; padding: 16px; text-align: center; border-left: 1px solid rgba(245,158,11,0.2); border-right: 1px solid rgba(245,158,11,0.2); border-bottom: 1px solid rgba(245,158,11,0.2); vertical-align: top;">
                                         <div style="font-size: 10px; color: #b45309; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 800; margin-bottom: 4px;">TOTAL PENDENTE</div>
                                         <div style="font-size: 17px; font-weight: 900; color: #d97706; line-height: 1.2;">${formatCurrency(totalPendente)}</div>
-                                        <div style="font-size: 11px; color: #b45309; margin-top: 4px; font-weight: 600;">${countPendente.toLocaleString('pt-BR')} OSs</div>
+                                        <div style="font-size: 11px; color: #b45309; margin-top: 4px; font-weight: 600;">${countPendente.toLocaleString('pt-BR')} OFs</div>
                                     </td>
                                 </tr>
                             </table>
@@ -288,7 +320,7 @@ function buildManutencaoEmailHtml(reportName, manutData) {
                         <td style="padding: 15px 40px 10px;">
                             <div style="background: #f0fdf4; border: 1px dashed #10b981; border-radius: 10px; padding: 14px 20px; text-align: center; color: #047857; font-size: 13px; font-weight: 600;">
                                 <strong>Planilha Excel (.xlsx) anexada a este e-mail:</strong><br>
-                                <span style="font-size: 12px; font-weight: 400; color: #059669;">Contém a listagem detalhada de todas as OSs Pendentes de Aprovação.</span>
+                                <span style="font-size: 12px; font-weight: 400; color: #059669;">Contém a listagem detalhada de todas as OFs Pendentes de Aprovação do mês ${currentMonthLabel}.</span>
                             </div>
                         </td>
                     </tr>
