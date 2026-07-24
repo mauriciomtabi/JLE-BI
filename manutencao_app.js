@@ -305,7 +305,10 @@
         if (sel) {
             sel.value = sel.value === cat ? '' : cat;
             applyFilters();
-        const RS_CITY_COORDS = {
+        }
+    };
+
+    const RS_CITY_COORDS = {
         'PORTO ALEGRE': [-30.0346, -51.2177],
         'CANOAS': [-29.9184, -51.1824],
         'GRAVATAÍ': [-29.9439, -50.9937],
