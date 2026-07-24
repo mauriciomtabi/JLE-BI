@@ -88,34 +88,35 @@
         const selEquipe = document.getElementById('manut-filter-equipe');
         const selMesBase = document.getElementById('manut-filter-mes-base');
 
-        if (!selStatus) return;
+        if (selStatus) {
+            const statuses = [...new Set(rawData.map(r => r.status).filter(s => s && s !== '-'))].sort();
+            selStatus.innerHTML = '<option value="">Todos os Status</option>' + 
+                statuses.map(s => `<option value="${s}">${s}</option>`).join('');
+        }
 
-        // Unique Statuses
-        const statuses = [...new Set(rawData.map(r => r.status).filter(s => s && s !== '-'))].sort();
-        selStatus.innerHTML = '<option value="">Todos os Status</option>' + 
-            statuses.map(s => `<option value="${s}">${s}</option>`).join('');
+        if (selAtividade) {
+            const atividades = [...new Set(rawData.map(r => r.tipo_atividade).filter(a => a && a !== '-'))].sort();
+            selAtividade.innerHTML = '<option value="">Todas as Atividades</option>' + 
+                atividades.map(a => `<option value="${a}">${a}</option>`).join('');
+        }
 
-        // Unique Tipos de Atividade
-        const atividades = [...new Set(rawData.map(r => r.tipo_atividade).filter(a => a && a !== '-'))].sort();
-        selAtividade.innerHTML = '<option value="">Todas as Atividades</option>' + 
-            atividades.map(a => `<option value="${a}">${a}</option>`).join('');
+        if (selLocalidade) {
+            const localidades = [...new Set(rawData.map(r => r.localidade).filter(l => l && l !== '-'))].sort();
+            selLocalidade.innerHTML = '<option value="">Todas as Localidades</option>' + 
+                localidades.map(l => `<option value="${l}">${l}</option>`).join('');
+        }
 
-        // Unique Localidades
-        const localidades = [...new Set(rawData.map(r => r.localidade).filter(l => l && l !== '-'))].sort();
-        selLocalidade.innerHTML = '<option value="">Todas as Localidades</option>' + 
-            localidades.map(l => `<option value="${l}">${l}</option>`).join('');
-
-        // Unique Equipes
-        const equipes = [...new Set(rawData.map(r => r.equipe).filter(e => e && e !== '-'))].sort();
-        selEquipe.innerHTML = '<option value="">Todas as Equipes</option>' + 
-            equipes.map(e => `<option value="${e}">${e}</option>`).join('');
-
-        // Unique Mês Base Pagamento (Coluna N)
-        const monthOrder = ["FEVEREIRO/2026", "MARÇO/2026", "ABRIL/2026", "MAIO/2026", "JUNHO/2026", "JULHO/2026", "AGOSTO/2026", "SETEMBRO/2026", "OUTUBRO/2026"];
-        const rawMonths = [...new Set(rawData.map(r => r.mes_pagamento).filter(m => m && m !== '-' && m !== 'SEM MÊS'))];
-        const months = monthOrder.filter(m => rawMonths.includes(m)).concat(rawMonths.filter(m => !monthOrder.includes(m)));
+        if (selEquipe) {
+            const equipes = [...new Set(rawData.map(r => r.equipe).filter(e => e && e !== '-'))].sort();
+            selEquipe.innerHTML = '<option value="">Todas as Equipes</option>' + 
+                equipes.map(e => `<option value="${e}">${e}</option>`).join('');
+        }
 
         if (selMesBase) {
+            const monthOrder = ["FEVEREIRO/2026", "MARÇO/2026", "ABRIL/2026", "MAIO/2026", "JUNHO/2026", "JULHO/2026", "AGOSTO/2026", "SETEMBRO/2026", "OUTUBRO/2026"];
+            const rawMonths = [...new Set(rawData.map(r => r.mes_pagamento).filter(m => m && m !== '-' && m !== 'SEM MÊS'))];
+            const months = monthOrder.filter(m => rawMonths.includes(m)).concat(rawMonths.filter(m => !monthOrder.includes(m)));
+
             selMesBase.innerHTML = '<option value="">Todos os Meses</option>' + 
                 months.map(m => `<option value="${m}">${m}</option>`).join('');
         }
