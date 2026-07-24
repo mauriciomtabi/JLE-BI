@@ -1847,15 +1847,12 @@
                         <option value="">Todos os Meses</option>
                     </select>
                 </div>
-                <div class="filter-group" style="flex: 1 1 250px;">
+                <div class="filter-group" style="flex: 1 1 auto;">
                     <label for="manut-search-input">Buscar Registro</label>
-                    <div style="position: relative; width: 100%;">
-                        <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 12px; top: 11px; color: var(--text-secondary); font-size: 12px;"></i>
-                        <input type="text" id="manut-search-input" placeholder="Buscar por OS, Atividade, Cidade..." style="width: 100%; padding: 8px 12px 8px 34px; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 13px;">
-                    </div>
+                    <input type="text" id="manut-search-input" placeholder="Buscar por OS, Atividade, Cidade..." style="width: 100%; padding: 8px 12px; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 13px;">
                 </div>
                 <div class="filter-group" style="display: flex; align-items: flex-end; justify-content: flex-end;">
-                    <button onclick="clearManutFilters()" title="Limpar Filtros" style="background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 12px; color: var(--text-secondary); cursor: pointer; transition: all 0.2s ease;" onmouseover="this.style.borderColor='var(--color-primary)'; this.style.color='var(--text-primary)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-secondary)'">
+                    <button onclick="clearManutFilters()" title="Limpar Filtros" style="background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 9px 12px; color: var(--text-secondary); cursor: pointer; transition: all 0.2s ease;" onmouseover="this.style.borderColor='var(--color-primary)'; this.style.color='var(--text-primary)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-secondary)'">
                         <i class="fa-solid fa-eraser"></i>
                     </button>
                 </div>

@@ -255,45 +255,53 @@
     }
 
     // CARDS DE CATEGORIA
+    function getMacroCategory(tipoAtiv) {
+        if (!tipoAtiv || tipoAtiv === '-') return 'ROMPIMENTO';
+        const tUpper = tipoAtiv.toUpperCase();
+        if (tUpper.includes('OBRAS') || tUpper.includes('MIGRAÇÃO') || tUpper.includes('MIGRACAO') || tUpper.includes('ANTI-FURTO') || tUpper.includes('MELHORIA')) {
+            return 'Melhoria';
+        }
+        return 'ROMPIMENTO';
+    }
+
     function renderCategoryCards() {
         const container = document.getElementById('manut-category-cards-container');
         if (!container) return;
 
-        const ativStats = {};
+        const macroStats = {
+            'ROMPIMENTO': { count: 0, totalVal: 0, icon: 'fa-solid fa-triangle-exclamation', sub: 'Rompimento, Adequação, Atenuação, Qualidade, Mobilização' },
+            'Melhoria': { count: 0, totalVal: 0, icon: 'fa-solid fa-wrench', sub: 'Obras, Migração, Anti-Furto, Melhoria de Rede' }
+        };
+
         filteredData.forEach(r => {
-            if (r.tipo_atividade && r.tipo_atividade !== '-') {
-                const at = r.tipo_atividade;
-                if (!ativStats[at]) {
-                    ativStats[at] = { count: 0, totalVal: 0 };
-                }
-                ativStats[at].count += 1;
-                ativStats[at].totalVal += (r.valor_medicao || 0);
+            const macro = getMacroCategory(r.tipo_atividade);
+            if (macroStats[macro]) {
+                macroStats[macro].count += 1;
+                macroStats[macro].totalVal += (r.valor_medicao || 0);
             }
         });
 
         const overallVal = filteredData.reduce((sum, r) => sum + (r.valor_medicao || 0), 0) || 1;
-        const sortedAtiv = Object.keys(ativStats)
-            .filter(cat => ativStats[cat].count >= 1 || ativStats[cat].totalVal > 0)
-            .sort((a,b) => ativStats[b].totalVal - ativStats[a].totalVal);
+        const sortedMacro = ['ROMPIMENTO', 'Melhoria'];
+        const activeAtiv = document.getElementById('manut-filter-atividade')?.value || '';
 
-        container.innerHTML = sortedAtiv.map(cat => {
-            const stats = ativStats[cat];
+        container.innerHTML = sortedMacro.map(cat => {
+            const stats = macroStats[cat];
             const pct = ((stats.totalVal / overallVal) * 100).toFixed(1).replace('.', ',');
-            const iconClass = CATEGORY_ICONS[cat] || 'fa-solid fa-wrench';
-            const activeAtiv = document.getElementById('manut-filter-atividade')?.value || '';
 
             return `
-            <div class="cobranca-category-card${activeAtiv === cat ? ' active' : ''}" onclick="window.filterByManutCategory('${cat}')">
+            <div class="cobranca-category-card${activeAtiv === cat ? ' active' : ''}" style="cursor: pointer;" onclick="window.filterByManutCategory('${cat}')">
                 <div class="kpi-info" style="flex-grow: 1;">
-                    <div class="cobranca-category-title">${cat}</div>
-                    <div class="cobranca-category-value" style="font-size: 1.05rem; font-weight: 800; color: var(--text-primary);">${formatShortCurrency(stats.totalVal)}</div>
-                    <div class="kpi-sub" style="font-size: 11px; color: var(--text-secondary); font-weight: 600; display: flex; justify-content: space-between; align-items: center; margin-top: 2px;">
+                    <div class="cobranca-category-title" style="font-size: 14px; font-weight: 800; color: var(--color-primary);">${cat.toUpperCase()}</div>
+                    <div class="cobranca-category-value" style="font-size: 1.25rem; font-weight: 800; color: var(--text-primary); margin: 4px 0;">${formatShortCurrency(stats.totalVal)}</div>
+                    <div class="kpi-sub" style="font-size: 11px; color: var(--text-secondary); font-weight: 600; display: flex; justify-content: space-between; align-items: center;">
                         <span>${stats.count.toLocaleString('pt-BR')} OFs</span>
-                        <span style="background: rgba(0,180,216,0.12); color: var(--color-primary); padding: 1px 6px; border-radius: 8px; font-weight: 700;">${pct}%</span>
+                        <span style="background: rgba(0,180,216,0.12); color: var(--color-primary); padding: 2px 8px; border-radius: 8px; font-weight: 700;">${pct}%</span>
                     </div>
+                    <div style="font-size: 10px; color: #64748b; margin-top: 4px; line-height: 1.2;">${stats.sub}</div>
                 </div>
                 <div class="kpi-icon-container">
-                    <i class="${iconClass}"></i>
+                    <i class="${stats.icon}"></i>
                 </div>
             </div>`;
         }).join('');
@@ -554,7 +562,7 @@
             });
         }
 
-        // 2. GRÁFICO TEMPO MÉDIO DE APROVÇÃO (DIAS POR MÊS)
+        // 2. GRÁFICO TEMPO MÉDIO DE APROVAÇÃO (DIAS POR MÊS - BASE DATA DE ACIONAMENTO)
         const monthDateMap = {
             'FEVEREIRO/2026': new Date(2026, 1, 1),
             'MARÇO/2026': new Date(2026, 2, 1),
@@ -567,21 +575,27 @@
             'OUTUBRO/2026': new Date(2026, 9, 1)
         };
 
+        const monthIndexMap = { 2: 'FEV', 3: 'MAR', 4: 'ABR', 5: 'MAI', 6: 'JUN', 7: 'JUL', 8: 'AGO', 9: 'SET', 10: 'OUT' };
         const leadTimeStats = {};
-        monthMapKeys.forEach(m => { leadTimeStats[m] = []; });
+        monthShortLabels.forEach(m => { leadTimeStats[m] = []; });
 
         annualData.forEach(r => {
-            if (r.data_acionamento && r.data_acionamento !== '-' && r.mes_pagamento && leadTimeStats[r.mes_pagamento]) {
+            const hasColT = Boolean(r.wf2 && r.wf2 !== '-' && r.wf2.toUpperCase() !== 'NONE');
+            const isApprovedOrPO = hasColT; // O que já foi aprovado / gerado pedido (não aguard. aprovação)
+
+            if (isApprovedOrPO && r.data_acionamento && r.data_acionamento !== '-' && r.mes_pagamento && monthDateMap[r.mes_pagamento]) {
                 try {
                     const parts = r.data_acionamento.split(' ')[0].split('/');
                     if (parts.length === 3) {
-                        const dtAciona = new Date(parseInt(parts[2]), parseInt(parts[1]) - 1, parseInt(parts[0]));
+                        const mNum = parseInt(parts[1]);
+                        const mCode = monthIndexMap[mNum];
+                        const dtAciona = new Date(parseInt(parts[2]), mNum - 1, parseInt(parts[0]));
                         const dtPag = monthDateMap[r.mes_pagamento];
-                        if (dtPag && !isNaN(dtAciona)) {
+                        if (mCode && dtPag && !isNaN(dtAciona)) {
                             const diffMs = dtPag - dtAciona;
                             const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-                            if (diffDays >= 0) {
-                                leadTimeStats[r.mes_pagamento].push(diffDays);
+                            if (diffDays >= 0 && leadTimeStats[mCode]) {
+                                leadTimeStats[mCode].push(diffDays);
                             }
                         }
                     }
@@ -589,7 +603,7 @@
             }
         });
 
-        const dataLeadTime = monthMapKeys.map(m => {
+        const dataLeadTime = monthShortLabels.map(m => {
             const list = leadTimeStats[m];
             if (!list || list.length === 0) return 0;
             return Math.round(list.reduce((a, b) => a + b, 0) / list.length);
