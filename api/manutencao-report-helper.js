@@ -62,28 +62,18 @@ function formatCurrency(val) {
     return (val || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 }
 
-function getCurrentMonth(rows) {
-    // Retorna o mês de pagamento mais recente presente nos dados
-    const months = rows.map(r => r.mes_pagamento).filter(m => m && m !== '-');
-    if (!months.length) return null;
-    // Ordena por ano e mês (formato esperado: "JULHO/2026")
-    const monthOrder = ['JANEIRO','FEVEREIRO','MARÇO','ABRIL','MAIO','JUNHO','JULHO','AGOSTO','SETEMBRO','OUTUBRO','NOVEMBRO','DEZEMBRO'];
-    const parsed = months.map(m => {
-        const parts = m.split('/');
-        const monthName = parts[0] ? parts[0].toUpperCase() : '';
-        const year = parts[1] ? parseInt(parts[1]) : 0;
-        const monthIdx = monthOrder.indexOf(monthName);
-        return { raw: m, year, monthIdx };
-    });
-    parsed.sort((a, b) => b.year - a.year || b.monthIdx - a.monthIdx);
-    return parsed[0].raw;
+function getCurrentMonth() {
+    // Retorna o mês de pagamento baseado na data REAL do calendário
+    const monthNames = ['JANEIRO','FEVEREIRO','MARÇO','ABRIL','MAIO','JUNHO','JULHO','AGOSTO','SETEMBRO','OUTUBRO','NOVEMBRO','DEZEMBRO'];
+    const now = new Date();
+    return `${monthNames[now.getMonth()]}/${now.getFullYear()}`;
 }
 
 function generateExcelAttachments(manutData) {
     const todayStr = new Date().toISOString().substring(0, 10);
     
-    // Filtra apenas o mês atual de pagamento
-    const currentMonth = getCurrentMonth(manutData.rows);
+    // Filtra apenas o mês atual de pagamento (baseado na data real)
+    const currentMonth = getCurrentMonth();
     const rowsCurrentMonth = currentMonth
         ? manutData.rows.filter(r => r.mes_pagamento === currentMonth)
         : manutData.rows;
@@ -122,8 +112,8 @@ function buildManutencaoEmailHtml(reportName, manutData) {
     const dateFormatted = dataDate ? dataDate.split(' ')[0].split('-').reverse().join('/') : new Date().toLocaleDateString('pt-BR');
     const timeStr = dataDate && dataDate.includes(' ') ? dataDate.split(' ')[1].substring(0, 5) : '';
     
-    // Filtra apenas o mês atual de pagamento
-    const currentMonth = getCurrentMonth(manutData.rows);
+    // Filtra apenas o mês atual de pagamento (baseado na data real do calendário)
+    const currentMonth = getCurrentMonth();
     const rows = currentMonth
         ? manutData.rows.filter(r => r.mes_pagamento === currentMonth)
         : manutData.rows;
@@ -143,8 +133,6 @@ function buildManutencaoEmailHtml(reportName, manutData) {
 
     const monthIndexMap = { 2: 'FEV', 3: 'MAR', 4: 'ABR', 5: 'MAI', 6: 'JUN', 7: 'JUL', 8: 'AGO', 9: 'SET', 10: 'OUT' };
     const monthOrder = ['FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT'];
-    const pendingByMonth = {};
-    monthOrder.forEach(m => pendingByMonth[m] = { val: 0, count: 0 });
 
     rows.forEach(r => {
         const v = r.valor_medicao || 0;
@@ -165,17 +153,28 @@ function buildManutencaoEmailHtml(reportName, manutData) {
             totalPendente += v;
             countPendente += 1;
             if (macroStats[macro]) macroStats[macro].pendVal += v;
+        }
+    });
 
-            // Agrupa pendência por Mês de Acionamento
+    // Tabela de Pendências por Mês de Acionamento — usa TODA a base (todos os meses)
+    const allRows = manutData.rows;
+    const pendingByMonthAll = {};
+    monthOrder.forEach(m => pendingByMonthAll[m] = { val: 0, count: 0 });
+    let totalPendenteAll = 0;
+    allRows.forEach(r => {
+        const v = r.valor_medicao || 0;
+        const hasColT = Boolean(r.wf2 && r.wf2 !== '-' && String(r.wf2).toUpperCase() !== 'NONE');
+        if (!hasColT) {
+            totalPendenteAll += v;
             if (r.data_acionamento && r.data_acionamento !== '-') {
                 try {
                     const parts = r.data_acionamento.split(' ')[0].split('/');
                     if (parts.length === 3) {
                         const mNum = parseInt(parts[1]);
                         const mCode = monthIndexMap[mNum];
-                        if (mCode && pendingByMonth[mCode]) {
-                            pendingByMonth[mCode].val += v;
-                            pendingByMonth[mCode].count += 1;
+                        if (mCode && pendingByMonthAll[mCode]) {
+                            pendingByMonthAll[mCode].val += v;
+                            pendingByMonthAll[mCode].count += 1;
                         }
                     }
                 } catch(e) {}
@@ -183,11 +182,11 @@ function buildManutencaoEmailHtml(reportName, manutData) {
         }
     });
 
-    // Tabela de Pendências por Mês de Acionamento
+    // Tabela de Pendências por Mês de Acionamento (todos os meses da base)
     const monthRowsHtml = monthOrder.map(m => {
-        const st = pendingByMonth[m];
+        const st = pendingByMonthAll[m];
         if (st.val === 0 && st.count === 0) return '';
-        const pct = totalPendente > 0 ? ((st.val / totalPendente) * 100).toFixed(1).replace('.', ',') : '0,0';
+        const pct = totalPendenteAll > 0 ? ((st.val / totalPendenteAll) * 100).toFixed(1).replace('.', ',') : '0,0';
         return `
         <tr style="border-bottom: 1px solid #e1e8ed;">
             <td style="padding: 10px 16px; font-size: 13px; color: #2d3748; font-weight: 700;">
