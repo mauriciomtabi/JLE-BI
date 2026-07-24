@@ -439,6 +439,11 @@ module.exports = async (req, res) => {
             const excelRes = claroHelper.generateExcelAttachments(claroData);
             attachments = excelRes.attachments;
             emailHtml = claroHelper.buildClaroEmailHtml(config.report_name, excelRes, claroData.generated_at);
+        } else if (config.report_type === 'manutencao') {
+            const manutHelper = require('./manutencao-report-helper');
+            const manutData = manutHelper.loadManutencaoData();
+            attachments = manutHelper.generateExcelAttachments(manutData);
+            emailHtml = manutHelper.buildManutencaoEmailHtml(config.report_name, manutData);
         } else {
             const mduData = await getMduStatusCounts();
             emailHtml = buildEmailHtml(mduData, config.report_name);
