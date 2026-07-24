@@ -81,6 +81,7 @@ def load_excel_financial_data():
                 os_num = str(cells.get('B', '') or '').strip()
                 mes_base_raw = cells.get('N', '')
                 valor_raw = cells.get('P', '')
+                col_u_raw = str(cells.get('U', '') or '').strip()
 
                 if os_num and os_num.upper() != 'NONE':
                     mes_fmt = excel_serial_to_month(mes_base_raw) if mes_base_raw else ''
@@ -91,7 +92,8 @@ def load_excel_financial_data():
                     
                     financial_map[os_num] = {
                         'mes_pagamento': mes_fmt,
-                        'valor_medicao': round(v_num, 2)
+                        'valor_medicao': round(v_num, 2),
+                        'col_u': col_u_raw if col_u_raw and col_u_raw.upper() != 'NONE' else ''
                     }
         print(f"Dados financeiros do Excel carregados: {len(financial_map)} OSs mapeadas.")
     except Exception as e:
@@ -191,9 +193,10 @@ def process_csv():
         data_devol_claro = r[34].strip() if len(r) > 34 else "-"
 
         # Cruzamento Financeiro via número da OS (Coluna A / ral_rec)
-        fin_info = financial_map.get(ral, {'mes_pagamento': '-', 'valor_medicao': 0.0})
+        fin_info = financial_map.get(ral, {'mes_pagamento': '-', 'valor_medicao': 0.0, 'col_u': ''})
         valor_med = fin_info['valor_medicao']
         mes_pag_idx = get_lookup_idx("meses_pagamento", fin_info['mes_pagamento'])
+        col_u_val = fin_info.get('col_u', '')
 
         if valor_med > 0:
             matched_fin_count += 1
@@ -206,7 +209,7 @@ def process_csv():
             servico_exec, observacao, cx_exist, cx_nova, fusao,
             tipo_cabo, lanc_m, espin_m, adeq_qtd, cord_m,
             task_toa, data_envio_rel, hora_envio_rel, precificado_idx, data_envio_claro,
-            claro_pago, data_devol_claro, valor_med, mes_pag_idx
+            claro_pago, data_devol_claro, valor_med, mes_pag_idx, col_u_val
         ])
 
     now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -259,7 +262,8 @@ def process_csv():
         f.write("        claro_pago: r[30] || '-',\n")
         f.write("        data_devolucao_claro: r[31] || '-',\n")
         f.write("        valor_medicao: r[32] || 0.0,\n")
-        f.write("        mes_pagamento: l.meses_pagamento[r[33]] || '-'\n")
+        f.write("        mes_pagamento: l.meses_pagamento[r[33]] || '-',\n")
+        f.write("        col_u: r[34] || ''\n")
         f.write("    }));\n")
         f.write("    window.MANUTENCAO_METADATA = {\n")
         f.write("        generated_at: db.generated_at,\n")

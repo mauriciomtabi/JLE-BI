@@ -354,11 +354,18 @@
         const gridColor = 'rgba(255, 255, 255, 0.05)';
         const pluginsList = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
 
-        // 1. Chart Mensal de Faturamento / Medição por Mês de Pagamento e Data de Acionamento
+        // 1. Chart Mensal de Evolução - COLUNAS EMPILHADAS (Pago, Aprovado Pendente Pagamento, Aguard. Aprovação)
         const monthNames = { '01':'JAN', '02':'FEV', '03':'MAR', '04':'ABR', '05':'MAI', '06':'JUN', '07':'JUL', '08':'AGO', '09':'SET', '10':'OUT', '11':'NOV', '12':'DEZ' };
         const monthOrder = ['FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL'];
-        const monthlyValues = { FEV:0, MAR:0, ABR:0, MAI:0, JUN:0, JUL:0 };
-        const monthlyCounts = { FEV:0, MAR:0, ABR:0, MAI:0, JUN:0, JUL:0 };
+
+        const monthlyStats = {
+            FEV: { pago: 0, aprovPend: 0, aguard: 0, count: 0 },
+            MAR: { pago: 0, aprovPend: 0, aguard: 0, count: 0 },
+            ABR: { pago: 0, aprovPend: 0, aguard: 0, count: 0 },
+            MAI: { pago: 0, aprovPend: 0, aguard: 0, count: 0 },
+            JUN: { pago: 0, aprovPend: 0, aguard: 0, count: 0 },
+            JUL: { pago: 0, aprovPend: 0, aguard: 0, count: 0 }
+        };
 
         filteredData.forEach(r => {
             const v = r.valor_medicao || 0;
@@ -367,7 +374,7 @@
             if (r.mes_pagamento && r.mes_pagamento !== '-') {
                 const parts = r.mes_pagamento.split('/')[0].toUpperCase();
                 const mShort = parts.slice(0, 3);
-                if (monthlyValues[mShort] !== undefined) {
+                if (monthlyStats[mShort] !== undefined) {
                     mKey = mShort;
                 }
             }
@@ -379,17 +386,27 @@
                 }
             }
 
-            if (mKey && monthlyValues[mKey] !== undefined) {
-                monthlyValues[mKey] += v;
-                monthlyCounts[mKey] += 1;
+            if (mKey && monthlyStats[mKey] !== undefined) {
+                const hasColN = Boolean(r.mes_pagamento && r.mes_pagamento !== '-');
+                const hasColU = Boolean(r.col_u && r.col_u !== '-' && r.col_u.toUpperCase() !== 'NONE');
+
+                if (hasColN) {
+                    monthlyStats[mKey].pago += v;
+                } else if (hasColU || r.status === 'MEDIÇÃO') {
+                    monthlyStats[mKey].aprovPend += v;
+                } else {
+                    monthlyStats[mKey].aguard += v;
+                }
+                monthlyStats[mKey].count += 1;
             }
         });
 
-        const dataMensalVal = monthOrder.map(m => monthlyValues[m]);
-        const dataMensalCount = monthOrder.map(m => monthlyCounts[m]);
+        const dataPago = monthOrder.map(m => monthlyStats[m].pago);
+        const dataAprovPend = monthOrder.map(m => monthlyStats[m].aprovPend);
+        const dataAguard = monthOrder.map(m => monthlyStats[m].aguard);
 
-        // Atualizar indicador de total medido no selo superior direito
-        const totalMedidoSum = dataMensalVal.reduce((a,b) => a+b, 0);
+        // Total geral medido para o badge do topo
+        const totalMedidoSum = dataPago.reduce((a,b) => a+b, 0) + dataAprovPend.reduce((a,b) => a+b, 0) + dataAguard.reduce((a,b) => a+b, 0);
         const avg30DaysEl = document.getElementById('manut-avg-30days-val');
         if (avg30DaysEl) {
             avg30DaysEl.innerText = formatShortCurrency(totalMedidoSum);
@@ -399,34 +416,40 @@
         if (ctxMensal) {
             if (chartMensal) chartMensal.destroy();
 
-            const gradLine = ctxMensal.createLinearGradient(0, 0, 0, 300);
-            gradLine.addColorStop(0, 'rgba(0, 180, 216, 0.35)');
-            gradLine.addColorStop(1, 'rgba(0, 180, 216, 0.0)');
-
             chartMensal = new Chart(ctxMensal, {
-                type: 'line',
+                type: 'bar',
                 data: {
                     labels: monthOrder,
-                    datasets: [{
-                        label: 'Valor Medido (R$)',
-                        data: dataMensalVal,
-                        borderColor: '#00b4d8',
-                        borderWidth: 3,
-                        backgroundColor: gradLine,
-                        fill: true,
-                        tension: 0.35,
-                        pointBackgroundColor: '#00b4d8',
-                        pointBorderColor: '#ffffff',
-                        pointBorderWidth: 2,
-                        pointRadius: 5,
-                        pointHoverRadius: 7
-                    }]
+                    datasets: [
+                        {
+                            label: 'Pago',
+                            data: dataPago,
+                            backgroundColor: '#10b981',
+                            borderRadius: 4
+                        },
+                        {
+                            label: 'Aprovado Pendente Pagamento',
+                            data: dataAprovPend,
+                            backgroundColor: '#f59e0b',
+                            borderRadius: 4
+                        },
+                        {
+                            label: 'Aguard. Aprovação',
+                            data: dataAguard,
+                            backgroundColor: '#38bdf8',
+                            borderRadius: 4
+                        }
+                    ]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { display: false },
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: { color: textColor, font: { weight: 'bold', size: 11 }, usePointStyle: true, boxWidth: 8 }
+                        },
                         tooltip: {
                             backgroundColor: 'rgba(15, 23, 42, 0.95)',
                             titleColor: '#38bdf8',
@@ -437,29 +460,19 @@
                             boxPadding: 4,
                             callbacks: {
                                 label: function(context) {
-                                    const idx = context.dataIndex;
                                     const val = context.raw || 0;
-                                    const cnt = dataMensalCount[idx] || 0;
-                                    return [
-                                        ` Valor Medido: ${formatCurrency(val)}`,
-                                        ` Acionamentos: ${cnt.toLocaleString('pt-BR')} OFs`
-                                    ];
+                                    return ` ${context.dataset.label}: ${formatCurrency(val)}`;
                                 }
                             }
                         },
                         datalabels: {
-                            display: true,
-                            color: '#ffffff',
-                            align: 'top',
-                            anchor: 'end',
-                            offset: 4,
-                            font: { weight: 'bold', size: 11 },
-                            formatter: (val) => val > 0 ? formatShortCurrency(val) : ''
+                            display: false
                         }
                     },
                     scales: {
-                        x: { ticks: { color: textColor, font: { weight: 'bold' } }, grid: { display: false } },
+                        x: { stacked: true, ticks: { color: textColor, font: { weight: 'bold' } }, grid: { display: false } },
                         y: { 
+                            stacked: true,
                             ticks: { 
                                 color: '#94a3b8',
                                 callback: (v) => formatShortCurrency(v)
