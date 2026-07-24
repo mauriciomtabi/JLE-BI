@@ -586,10 +586,14 @@
 }
 
 /* Guarantee strict 24px uniform spacing across all sections in Manutenção Indicators */
-#subview-manut-indicators {
+#subview-manut-indicators.active {
     display: flex !important;
     flex-direction: column !important;
     gap: 24px !important;
+}
+
+#subview-manut-indicators:not(.active) {
+    display: none !important;
 }
 
 #subview-manut-indicators > * {

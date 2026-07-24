@@ -141,12 +141,24 @@
         const viewRelatorio = document.getElementById('subview-manut-report');
 
         if (tabName === 'indicadores') {
-            if (viewIndicadores) viewIndicadores.style.display = 'flex';
-            if (viewRelatorio) viewRelatorio.style.display = 'none';
+            if (viewIndicadores) {
+                viewIndicadores.classList.add('active');
+                viewIndicadores.style.display = 'flex';
+            }
+            if (viewRelatorio) {
+                viewRelatorio.classList.remove('active');
+                viewRelatorio.style.display = 'none';
+            }
             renderCharts();
         } else {
-            if (viewIndicadores) viewIndicadores.style.display = 'none';
-            if (viewRelatorio) viewRelatorio.style.display = 'block';
+            if (viewIndicadores) {
+                viewIndicadores.classList.remove('active');
+                viewIndicadores.style.display = 'none';
+            }
+            if (viewRelatorio) {
+                viewRelatorio.classList.add('active');
+                viewRelatorio.style.display = 'block';
+            }
             renderTable();
         }
     }
