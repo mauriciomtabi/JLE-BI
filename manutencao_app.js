@@ -12,6 +12,7 @@
 
     // Chart instances
     let chartMensal = null;
+    let chartLeadTime = null;
     let chartAprovadosAtividade = null;
 
     const CATEGORY_ICONS = {
@@ -553,7 +554,103 @@
             });
         }
 
-        // 2. GRÁFICO APROVADOS POR TIPO DE ATIVIDADE (SOMENTE ATIVIDADES APROVADAS)
+        // 2. GRÁFICO TEMPO MÉDIO DE APROVÇÃO (DIAS POR MÊS)
+        const monthDateMap = {
+            'FEVEREIRO/2026': new Date(2026, 1, 1),
+            'MARÇO/2026': new Date(2026, 2, 1),
+            'ABRIL/2026': new Date(2026, 3, 1),
+            'MAIO/2026': new Date(2026, 4, 1),
+            'JUNHO/2026': new Date(2026, 5, 1),
+            'JULHO/2026': new Date(2026, 6, 1),
+            'AGOSTO/2026': new Date(2026, 7, 1),
+            'SETEMBRO/2026': new Date(2026, 8, 1),
+            'OUTUBRO/2026': new Date(2026, 9, 1)
+        };
+
+        const leadTimeStats = {};
+        monthMapKeys.forEach(m => { leadTimeStats[m] = []; });
+
+        annualData.forEach(r => {
+            if (r.data_acionamento && r.data_acionamento !== '-' && r.mes_pagamento && leadTimeStats[r.mes_pagamento]) {
+                try {
+                    const parts = r.data_acionamento.split(' ')[0].split('/');
+                    if (parts.length === 3) {
+                        const dtAciona = new Date(parseInt(parts[2]), parseInt(parts[1]) - 1, parseInt(parts[0]));
+                        const dtPag = monthDateMap[r.mes_pagamento];
+                        if (dtPag && !isNaN(dtAciona)) {
+                            const diffMs = dtPag - dtAciona;
+                            const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+                            if (diffDays >= 0) {
+                                leadTimeStats[r.mes_pagamento].push(diffDays);
+                            }
+                        }
+                    }
+                } catch(e) {}
+            }
+        });
+
+        const dataLeadTime = monthMapKeys.map(m => {
+            const list = leadTimeStats[m];
+            if (!list || list.length === 0) return 0;
+            return Math.round(list.reduce((a, b) => a + b, 0) / list.length);
+        });
+
+        const ctxLeadTime = document.getElementById('manut-chart-leadtime')?.getContext('2d');
+        if (ctxLeadTime) {
+            if (chartLeadTime) chartLeadTime.destroy();
+            chartLeadTime = new Chart(ctxLeadTime, {
+                type: 'line',
+                data: {
+                    labels: monthShortLabels,
+                    datasets: [{
+                        label: 'Tempo Médio (Dias)',
+                        data: dataLeadTime,
+                        borderColor: '#38bdf8',
+                        backgroundColor: 'rgba(56, 189, 248, 0.15)',
+                        fill: true,
+                        tension: 0.3,
+                        pointRadius: 5,
+                        pointBackgroundColor: '#38bdf8',
+                        pointBorderColor: '#0f172a',
+                        pointBorderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: (ctx) => ` Tempo Médio: ${ctx.raw} dias`
+                            }
+                        },
+                        datalabels: {
+                            display: true,
+                            color: '#ffffff',
+                            anchor: 'top',
+                            align: 'top',
+                            font: { weight: 'bold', size: 11 },
+                            formatter: (val) => val > 0 ? `${val} dias` : ''
+                        }
+                    },
+                    scales: {
+                        x: { ticks: { color: textColor, font: { weight: 'bold' } }, grid: { display: false } },
+                        y: { 
+                            ticks: { 
+                                color: '#94a3b8',
+                                callback: (v) => `${v} dias`
+                            }, 
+                            grid: { color: gridColor }, 
+                            grace: '20%' 
+                        }
+                    }
+                },
+                plugins: pluginsList
+            });
+        }
+
+        // 3. GRÁFICO APROVADOS POR TIPO DE ATIVIDADE (SOMENTE ATIVIDADES APROVADAS)
         const aprovAtivStats = {};
         filteredData.forEach(r => {
             const isAprovado = r.legend_status === 'APROVADO' || (Boolean(r.wf2 && r.wf2 !== '-' && r.wf2.toUpperCase() !== 'NONE') && !Boolean(r.obs_medicao && r.obs_medicao !== '-' && r.obs_medicao.toUpperCase() !== 'NONE'));

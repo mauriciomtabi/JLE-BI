@@ -1894,13 +1894,24 @@
                     </div>
                 </div>
 
-                <!-- GRÁFICO 2: APROVADOS POR TIPO DE ATIVIDADE -->
-                <div class="chart-card" style="margin-bottom: 24px;">
-                    <div class="chart-header">
-                        <span class="chart-title"><i class="fa-solid fa-circle-check" style="color: #10b981;"></i> Aprovados por Tipo de Atividade</span>
+                <!-- GRÁFICOS 2 & 3: LADO A LADO (TEMPO MÉDIO DE APROVAÇÃO & APROVADOS POR TIPO DE ATIVIDADE) -->
+                <div class="cobranca-grid-2cols" style="margin-bottom: 24px;">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title"><i class="fa-solid fa-clock-rotate-left" style="color: #38bdf8;"></i> Tempo Médio de Aprovação (Dias por Mês)</span>
+                        </div>
+                        <div style="height: 320px; position: relative;">
+                            <canvas id="manut-chart-leadtime"></canvas>
+                        </div>
                     </div>
-                    <div style="height: 320px; position: relative;">
-                        <canvas id="manut-chart-aprovados-atividade"></canvas>
+
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title"><i class="fa-solid fa-circle-check" style="color: #10b981;"></i> Aprovados por Tipo de Atividade</span>
+                        </div>
+                        <div style="height: 320px; position: relative;">
+                            <canvas id="manut-chart-aprovados-atividade"></canvas>
+                        </div>
                     </div>
                 </div>
 
