@@ -95,8 +95,27 @@ function generateExcelAttachments(manutData) {
         "Status Financeiro": "AGUARD_APROVACAO"
     }));
     
+    // Calcula largura de cada coluna pelo maior valor encontrado nos dados
+    const calcColWidth = (data, key) => {
+        const headerLen = key.length;
+        const maxDataLen = data.reduce((max, row) => {
+            const v = row[key] !== undefined && row[key] !== null ? String(row[key]).length : 0;
+            return Math.max(max, v);
+        }, 0);
+        return { wch: Math.max(headerLen, maxDataLen) + 2 };
+    };
+
     const wb = XLSX.utils.book_new();
-    const wsPendentes = XLSX.utils.json_to_sheet(mapToExcelJson(pendentesRows));
+    const excelData = mapToExcelJson(pendentesRows);
+    const wsPendentes = XLSX.utils.json_to_sheet(excelData);
+    
+    // Aplica larguras responsivas nas colunas
+    const cols = [
+        "RAL / OF", "Atividade", "Tipo de Atividade", "Localidade",
+        "Data Acionamento", "Mês Pagamento", "Valor Medido (R$)", "Status Financeiro"
+    ];
+    wsPendentes['!cols'] = cols.map(key => calcColWidth(excelData, key));
+    
     XLSX.utils.book_append_sheet(wb, wsPendentes, "OFs Pendentes de Aprovação");
     
     const buffer = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx' });
@@ -218,18 +237,18 @@ function buildManutencaoEmailHtml(reportName, manutData) {
                     
                     <!-- HEADER -->
                     <tr>
-                        <td style="background: #004f71; padding: 32px 40px; text-align: left;">
-                            <h1 style="margin: 0; font-size: 24px; color: #ffffff; font-weight: 800;">${reportName}</h1>
-                            <div style="font-size: 13px; color: #e0e0e0; margin-top: 4px;">
-                                Mês Base: <span style="color: #38ef7d; font-weight: 800;">${currentMonthLabel}</span>
+                        <td style="background: linear-gradient(135deg, #0057b8 0%, #1976d2 100%); padding: 32px 40px; text-align: left;">
+                            <h1 style="margin: 0; font-size: 24px; color: #ffffff; font-weight: 800; letter-spacing: -0.5px;">${reportName}</h1>
+                            <div style="font-size: 13px; color: #bbdefb; margin-top: 6px;">
+                                Mês Base: <span style="color: #ffffff; font-weight: 800; background: rgba(255,255,255,0.15); padding: 2px 10px; border-radius: 12px;">${currentMonthLabel}</span>
                             </div>
-                            <div style="font-size: 12px; color: #b0c4d4; margin-top: 4px;">
-                                Atualizado em: <span style="text-decoration: underline; color: #e0e0e0; font-weight: 600;">${dateFormatted}</span> ${timeStr}
+                            <div style="font-size: 12px; color: #90caf9; margin-top: 6px;">
+                                Atualizado em: <span style="color: #e3f2fd; font-weight: 600;">${dateFormatted}</span> ${timeStr}
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td style="height: 4px; background: #0284c7;"></td>
+                        <td style="height: 4px; background: linear-gradient(90deg, #42a5f5, #1565c0);"></td>
                     </tr>
 
                     <!-- CARDS DE MÉTRICAS KPIs PRINCIPAIS -->
@@ -238,7 +257,7 @@ function buildManutencaoEmailHtml(reportName, manutData) {
                             <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                 <tr>
                                     <!-- TOTAL MEDIDO -->
-                                    <td width="31%" style="background: #f8fafc; border-radius: 10px; border-top: 4px solid #004f71; padding: 16px; text-align: center; border-left: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; vertical-align: top;">
+                                    <td width="31%" style="background: #f8fafc; border-radius: 10px; border-top: 4px solid #0057b8; padding: 16px; text-align: center; border-left: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; vertical-align: top;">
                                         <div style="font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 800; margin-bottom: 4px;">TOTAL MEDIDO</div>
                                         <div style="font-size: 17px; font-weight: 900; color: #0f172a; line-height: 1.2;">${formatCurrency(totalMedido)}</div>
                                         <div style="font-size: 11px; color: #64748b; margin-top: 4px; font-weight: 600;">${countTotal.toLocaleString('pt-BR')} OFs</div>
