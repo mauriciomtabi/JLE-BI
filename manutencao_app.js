@@ -521,38 +521,24 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top',
-                            labels: { color: textColor, font: { weight: 'bold', size: 11 }, usePointStyle: true, boxWidth: 8 }
-                        },
+                        legend: { position: 'top', labels: { color: textColor, font: { family: 'Outfit', weight: '600' } } },
                         tooltip: {
-                            backgroundColor: 'rgba(15, 23, 42, 0.95)',
-                            titleColor: '#38bdf8',
-                            bodyColor: '#f8fafc',
-                            borderColor: 'rgba(56, 189, 248, 0.3)',
-                            borderWidth: 1,
-                            padding: 10,
-                            boxPadding: 4,
                             callbacks: {
-                                label: function(context) {
-                                    const val = context.raw || 0;
-                                    return ` ${context.dataset.label}: ${formatCurrency(val)}`;
-                                }
+                                label: (ctx) => ` ${ctx.dataset.label}: ${formatCurrency(ctx.raw)}`
                             }
                         },
                         datalabels: {
-                            display: false
+                            display: true,
+                            color: '#ffffff',
+                            font: { weight: 'bold', size: 10 },
+                            formatter: (val) => val > 0 ? formatSimpleNumber(val) : ''
                         }
                     },
                     scales: {
                         x: { stacked: true, ticks: { color: textColor, font: { weight: 'bold' } }, grid: { display: false } },
                         y: { 
                             stacked: true,
-                            ticks: { 
-                                color: '#94a3b8',
-                                callback: (v) => formatSimpleNumber(v)
-                            }, 
+                            ticks: { color: '#94a3b8', callback: (v) => formatSimpleNumber(v) }, 
                             grid: { color: gridColor }, 
                             grace: '18%' 
                         }
@@ -562,71 +548,45 @@
             });
         }
 
-        // 2. GRÁFICO TEMPO MÉDIO DE APROVAÇÃO (DIAS POR MÊS - BASE DATA DE ACIONAMENTO)
-        const monthDateMap = {
-            'FEVEREIRO/2026': new Date(2026, 1, 1),
-            'MARÇO/2026': new Date(2026, 2, 1),
-            'ABRIL/2026': new Date(2026, 3, 1),
-            'MAIO/2026': new Date(2026, 4, 1),
-            'JUNHO/2026': new Date(2026, 5, 1),
-            'JULHO/2026': new Date(2026, 6, 1),
-            'AGOSTO/2026': new Date(2026, 7, 1),
-            'SETEMBRO/2026': new Date(2026, 8, 1),
-            'OUTUBRO/2026': new Date(2026, 9, 1)
-        };
-
+        // 2. GRÁFICO VALOR PENDENTE POR MÊS DE ACIONAMENTO (R$)
         const monthIndexMap = { 2: 'FEV', 3: 'MAR', 4: 'ABR', 5: 'MAI', 6: 'JUN', 7: 'JUL', 8: 'AGO', 9: 'SET', 10: 'OUT' };
-        const leadTimeStats = {};
-        monthShortLabels.forEach(m => { leadTimeStats[m] = []; });
+        const pendingValStats = {};
+        const pendingCountStats = {};
+        monthShortLabels.forEach(m => { pendingValStats[m] = 0; pendingCountStats[m] = 0; });
 
         annualData.forEach(r => {
             const hasColT = Boolean(r.wf2 && r.wf2 !== '-' && r.wf2.toUpperCase() !== 'NONE');
-            const isApprovedOrPO = hasColT; // O que já foi aprovado / gerado pedido (não aguard. aprovação)
+            const isPending = !hasColT; // O que AINDA NÃO está aprovado / gerado pedido (aguard. aprovação)
 
-            if (isApprovedOrPO && r.data_acionamento && r.data_acionamento !== '-' && r.mes_pagamento && monthDateMap[r.mes_pagamento]) {
+            if (isPending && r.data_acionamento && r.data_acionamento !== '-') {
                 try {
                     const parts = r.data_acionamento.split(' ')[0].split('/');
                     if (parts.length === 3) {
                         const mNum = parseInt(parts[1]);
                         const mCode = monthIndexMap[mNum];
-                        const dtAciona = new Date(parseInt(parts[2]), mNum - 1, parseInt(parts[0]));
-                        const dtPag = monthDateMap[r.mes_pagamento];
-                        if (mCode && dtPag && !isNaN(dtAciona)) {
-                            const diffMs = dtPag - dtAciona;
-                            const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-                            if (diffDays >= 0 && leadTimeStats[mCode]) {
-                                leadTimeStats[mCode].push(diffDays);
-                            }
+                        if (mCode && pendingValStats[mCode] !== undefined) {
+                            pendingValStats[mCode] += (r.valor_medicao || 0);
+                            pendingCountStats[mCode] += 1;
                         }
                     }
                 } catch(e) {}
             }
         });
 
-        const dataLeadTime = monthShortLabels.map(m => {
-            const list = leadTimeStats[m];
-            if (!list || list.length === 0) return 0;
-            return Math.round(list.reduce((a, b) => a + b, 0) / list.length);
-        });
+        const dataPendingVal = monthShortLabels.map(m => pendingValStats[m]);
 
         const ctxLeadTime = document.getElementById('manut-chart-leadtime')?.getContext('2d');
         if (ctxLeadTime) {
             if (chartLeadTime) chartLeadTime.destroy();
             chartLeadTime = new Chart(ctxLeadTime, {
-                type: 'line',
+                type: 'bar',
                 data: {
                     labels: monthShortLabels,
                     datasets: [{
-                        label: 'Tempo Médio (Dias)',
-                        data: dataLeadTime,
-                        borderColor: '#38bdf8',
-                        backgroundColor: 'rgba(56, 189, 248, 0.15)',
-                        fill: true,
-                        tension: 0.3,
-                        pointRadius: 5,
-                        pointBackgroundColor: '#38bdf8',
-                        pointBorderColor: '#0f172a',
-                        pointBorderWidth: 2
+                        label: 'Valor Pendente (R$)',
+                        data: dataPendingVal,
+                        backgroundColor: '#f59e0b',
+                        borderRadius: 6
                     }]
                 },
                 options: {
@@ -636,16 +596,24 @@
                         legend: { display: false },
                         tooltip: {
                             callbacks: {
-                                label: (ctx) => ` Tempo Médio: ${ctx.raw} dias`
+                                label: (ctx) => {
+                                    const mCode = monthShortLabels[ctx.dataIndex];
+                                    const val = pendingValStats[mCode];
+                                    const cnt = pendingCountStats[mCode];
+                                    return [
+                                        ` Valor Pendente: ${formatCurrency(val)}`,
+                                        ` Qtd: ${cnt.toLocaleString('pt-BR')} OSs Pendentes`
+                                    ];
+                                }
                             }
                         },
                         datalabels: {
                             display: true,
                             color: '#ffffff',
-                            anchor: 'top',
+                            anchor: 'end',
                             align: 'top',
-                            font: { weight: 'bold', size: 11 },
-                            formatter: (val) => val > 0 ? `${val} dias` : ''
+                            font: { weight: 'bold', size: 10 },
+                            formatter: (val) => val > 0 ? formatSimpleNumber(val) : ''
                         }
                     },
                     scales: {
@@ -653,10 +621,10 @@
                         y: { 
                             ticks: { 
                                 color: '#94a3b8',
-                                callback: (v) => `${v} dias`
+                                callback: (v) => formatSimpleNumber(v)
                             }, 
                             grid: { color: gridColor }, 
-                            grace: '20%' 
+                            grace: '18%' 
                         }
                     }
                 },
