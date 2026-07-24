@@ -548,21 +548,15 @@
             });
         }
 
-        // 2. GRÁFICO VALOR POR MÊS DE ACIONAMENTO — PENDENTE + APROVADO (R$)
+        // 2. GRÁFICO VALOR PENDENTE POR MÊS DE ACIONAMENTO (R$)
         const monthIndexMap = { 2: 'FEV', 3: 'MAR', 4: 'ABR', 5: 'MAI', 6: 'JUN', 7: 'JUL', 8: 'AGO', 9: 'SET', 10: 'OUT' };
         const pendingValStats = {};
         const pendingCountStats = {};
-        const aprovValStats = {};
-        const aprovCountStats = {};
-        monthShortLabels.forEach(m => {
-            pendingValStats[m] = 0; pendingCountStats[m] = 0;
-            aprovValStats[m] = 0;  aprovCountStats[m] = 0;
-        });
+        monthShortLabels.forEach(m => { pendingValStats[m] = 0; pendingCountStats[m] = 0; });
 
         annualData.forEach(r => {
             const hasColT = Boolean(r.wf2 && r.wf2 !== '-' && r.wf2.toUpperCase() !== 'NONE');
             const isPending = !hasColT;
-            const isAprov = hasColT;
 
             const dateStr = r.data_acionamento;
             if (!dateStr || dateStr === '-') return;
@@ -576,15 +570,10 @@
                     pendingValStats[mCode] += (r.valor_medicao || 0);
                     pendingCountStats[mCode] += 1;
                 }
-                if (isAprov && aprovValStats[mCode] !== undefined) {
-                    aprovValStats[mCode] += (r.valor_medicao || 0);
-                    aprovCountStats[mCode] += 1;
-                }
             } catch(e) {}
         });
 
         const dataPendingVal = monthShortLabels.map(m => pendingValStats[m]);
-        const dataAprovVal   = monthShortLabels.map(m => aprovValStats[m]);
 
         const ctxLeadTime = document.getElementById('manut-chart-leadtime')?.getContext('2d');
         if (ctxLeadTime) {
@@ -593,69 +582,46 @@
                 type: 'bar',
                 data: {
                     labels: monthShortLabels,
-                    datasets: [
-                        {
-                            label: 'Aprovado',
-                            data: dataAprovVal,
-                            backgroundColor: '#10b981',
-                            borderRadius: 4,
-                            stack: 'stack'
-                        },
-                        {
-                            label: 'Aguard. Aprovacao',
-                            data: dataPendingVal,
-                            backgroundColor: '#f59e0b',
-                            borderRadius: 4,
-                            stack: 'stack'
-                        }
-                    ]
+                    datasets: [{
+                        label: 'Valor Pendente (R$)',
+                        data: dataPendingVal,
+                        backgroundColor: '#f59e0b',
+                        borderRadius: 6
+                    }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top',
-                            labels: { color: textColor, font: { family: 'Outfit', weight: '600' }, usePointStyle: true, boxWidth: 8 }
-                        },
+                        legend: { display: false },
                         tooltip: {
                             callbacks: {
                                 label: (ctx) => {
                                     const mCode = monthShortLabels[ctx.dataIndex];
-                                    if (ctx.datasetIndex === 0) {
-                                        return [
-                                            ` Aprovado: ${formatCurrency(aprovValStats[mCode])}`,
-                                            ` Qtd: ${aprovCountStats[mCode].toLocaleString('pt-BR')} OSs`
-                                        ];
-                                    } else {
-                                        return [
-                                            ` Aguard. Aprovacao: ${formatCurrency(pendingValStats[mCode])}`,
-                                            ` Qtd: ${pendingCountStats[mCode].toLocaleString('pt-BR')} OSs`
-                                        ];
-                                    }
+                                    const val = pendingValStats[mCode];
+                                    const cnt = pendingCountStats[mCode];
+                                    return [
+                                        ` Valor Pendente: ${formatCurrency(val)}`,
+                                        ` Qtd: ${cnt.toLocaleString('pt-BR')} OSs Pendentes`
+                                    ];
                                 }
                             }
                         },
                         datalabels: {
-                            display: (ctx) => ctx.dataset.data[ctx.dataIndex] > 0,
+                            display: true,
                             color: '#ffffff',
-                            anchor: 'center',
-                            align: 'center',
+                            anchor: 'end',
+                            align: 'top',
                             font: { weight: 'bold', size: 10 },
                             formatter: (val) => val > 0 ? formatSimpleNumber(val) : ''
                         }
                     },
                     scales: {
-                        x: { stacked: true, ticks: { color: textColor, font: { weight: 'bold' } }, grid: { display: false } },
+                        x: { ticks: { color: textColor, font: { weight: 'bold' } }, grid: { display: false } },
                         y: {
-                            stacked: true,
-                            ticks: {
-                                color: '#94a3b8',
-                                callback: (v) => formatSimpleNumber(v)
-                            },
+                            ticks: { color: '#94a3b8', callback: (v) => formatSimpleNumber(v) },
                             grid: { color: gridColor },
-                            grace: '12%'
+                            grace: '18%'
                         }
                     }
                 },
@@ -665,7 +631,9 @@
 
 
 
+
         // 3. GRÁFICO APROVADOS POR TIPO DE ATIVIDADE (SOMENTE ATIVIDADES APROVADAS)
+
         const aprovAtivStats = {};
         filteredData.forEach(r => {
             const isAprovado = r.legend_status === 'APROVADO' || (Boolean(r.wf2 && r.wf2 !== '-' && r.wf2.toUpperCase() !== 'NONE') && !Boolean(r.obs_medicao && r.obs_medicao !== '-' && r.obs_medicao.toUpperCase() !== 'NONE'));
