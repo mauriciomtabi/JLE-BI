@@ -631,80 +631,90 @@
     }
 
     function renderManutMap() {
-        const container = document.getElementById('manut-map-container');
-        if (!container) return;
+        try {
+            const container = document.getElementById('manut-map-container');
+            if (!container) return;
 
-        if (typeof L === 'undefined') {
-            console.warn("Leaflet Library não carregada.");
-            return;
-        }
+            if (typeof L === 'undefined') {
+                console.warn("Leaflet Library não carregada.");
+                return;
+            }
 
-        if (!manutMap) {
-            manutMap = L.map('manut-map-container', {
-                center: [-29.8, -51.3],
-                zoom: 8,
-                zoomControl: true
+            if (!manutMap) {
+                manutMap = L.map('manut-map-container', {
+                    center: [-29.8, -51.3],
+                    zoom: 8,
+                    zoomControl: true
+                });
+
+                // Camada OpenStreetMap MODO CLARO (CARTO Voyager / Light)
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+                    attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+                    subdomains: 'abcd',
+                    maxZoom: 19
+                }).addTo(manutMap);
+            } else {
+                manutMapMarkers.forEach(m => {
+                    try { m.remove(); } catch(e) {}
+                });
+                manutMapMarkers = [];
+            }
+
+            // Agrupar dados por localidade
+            const locMapStats = {};
+            filteredData.forEach(r => {
+                if (r.localidade && r.localidade !== '-') {
+                    const locUpper = r.localidade.trim().toUpperCase();
+                    if (!locMapStats[locUpper]) {
+                        locMapStats[locUpper] = { val: 0, count: 0, rawName: r.localidade };
+                    }
+                    locMapStats[locUpper].val += (r.valor_medicao || 0);
+                    locMapStats[locUpper].count += 1;
+                }
             });
 
-            // Camada OpenStreetMap MODO CLARO (CARTO Voyager / Light)
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-                attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
-                subdomains: 'abcd',
-                maxZoom: 19
-            }).addTo(manutMap);
-        } else {
-            manutMapMarkers.forEach(m => m.remove());
-            manutMapMarkers = [];
-        }
+            const allVals = Object.values(locMapStats).map(s => s.val);
+            const maxVal = allVals.length > 0 ? Math.max(...allVals, 1) : 1;
 
-        // Agrupar dados por localidade
-        const locMapStats = {};
-        filteredData.forEach(r => {
-            if (r.localidade && r.localidade !== '-') {
-                const locUpper = r.localidade.trim().toUpperCase();
-                if (!locMapStats[locUpper]) {
-                    locMapStats[locUpper] = { val: 0, count: 0, rawName: r.localidade };
+            Object.keys(locMapStats).forEach(loc => {
+                const stats = locMapStats[loc];
+                const coords = RS_CITY_COORDS[loc] || getFallbackCoords(loc);
+                if (coords && Array.isArray(coords) && coords.length === 2) {
+                    // Tamanho da bolha proporcional ao faturamento (min 7px, max 36px)
+                    const norm = Math.sqrt(stats.val) / Math.sqrt(maxVal);
+                    const radius = Math.max(7, Math.min(36, 7 + norm * 29));
+
+                    const circle = L.circleMarker(coords, {
+                        radius: radius,
+                        fillColor: '#0284c7',
+                        color: '#0369a1',
+                        weight: 2,
+                        opacity: 0.9,
+                        fillOpacity: 0.65
+                    });
+
+                    if (circle) {
+                        if (typeof circle.addTo === 'function') circle.addTo(manutMap);
+                        if (typeof circle.bindPopup === 'function') {
+                            circle.bindPopup(`
+                                <div style="font-family: 'Outfit', sans-serif; padding: 4px;">
+                                    <div style="font-weight: 800; font-size: 14px; color: #0284c7; margin-bottom: 4px;">${stats.rawName}</div>
+                                    <div style="font-size: 13px; font-weight: 700; color: #0f172a;">Valor Medido: <span style="color: #16a34a;">${formatCurrency(stats.val)}</span></div>
+                                    <div style="font-size: 12px; color: #475569; margin-top: 2px;">Acionamentos: <strong>${stats.count.toLocaleString('pt-BR')} OFs</strong></div>
+                                </div>
+                            `);
+                        }
+                        manutMapMarkers.push(circle);
+                    }
                 }
-                locMapStats[locUpper].val += (r.valor_medicao || 0);
-                locMapStats[locUpper].count += 1;
-            }
-        });
+            });
 
-        const allVals = Object.values(locMapStats).map(s => s.val);
-        const maxVal = allVals.length > 0 ? Math.max(...allVals, 1) : 1;
-
-        Object.keys(locMapStats).forEach(loc => {
-            const stats = locMapStats[loc];
-            const coords = RS_CITY_COORDS[loc] || getFallbackCoords(loc);
-            if (coords) {
-                // Tamanho da bolha proporcional ao faturamento (min 7px, max 36px)
-                const norm = Math.sqrt(stats.val) / Math.sqrt(maxVal);
-                const radius = Math.max(7, Math.min(36, 7 + norm * 29));
-
-                const circle = L.circleMarker(coords, {
-                    radius: radius,
-                    fillColor: '#0284c7',
-                    color: '#0369a1',
-                    weight: 2,
-                    opacity: 0.9,
-                    fillOpacity: 0.65
-                }).addTo(manutMap);
-
-                circle.bindPopup(`
-                    <div style="font-family: 'Outfit', sans-serif; padding: 4px;">
-                        <div style="font-weight: 800; font-size: 14px; color: #0284c7; margin-bottom: 4px;">${stats.rawName}</div>
-                        <div style="font-size: 13px; font-weight: 700; color: #0f172a;">Valor Medido: <span style="color: #16a34a;">${formatCurrency(stats.val)}</span></div>
-                        <div style="font-size: 12px; color: #475569; margin-top: 2px;">Acionamentos: <strong>${stats.count.toLocaleString('pt-BR')} OFs</strong></div>
-                    </div>
-                `);
-
-                manutMapMarkers.push(circle);
-            }
-        });
-
-        setTimeout(() => {
-            if (manutMap) manutMap.invalidateSize();
-        }, 200);
+            setTimeout(() => {
+                try { if (manutMap) manutMap.invalidateSize(); } catch(e) {}
+            }, 200);
+        } catch (err) {
+            console.error("Erro renderizando mapa de manutenção:", err);
+        }
     }
 
     function getFallbackCoords(cityName) {
