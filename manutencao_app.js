@@ -251,7 +251,7 @@
         return formatCurrency(val);
     }
 
-    // 1. CARDS DE STATUS (Foco Principal em R$ Valor Medido, secundário em Qtd OFs)
+    // 1. CARDS DE STATUS (Dados operacionais do Google Sheets - Quantidade de OFs como valor principal)
     function renderKpiCards() {
         const getStatusStats = (statusName) => {
             const list = statusName === 'ALL' ? filteredData : filteredData.filter(r => r.status === statusName);
@@ -268,20 +268,30 @@
         const documentacaoStats = getStatusStats('DOCUMENTAÇÃO');
         const fotosStats = getStatusStats('FOTOS');
 
-        const setCardValues = (valId, subId, stats) => {
+        const setCard = (valId, subId, stats, showMoney = false) => {
             const valEl = document.getElementById(valId);
             const subEl = document.getElementById(subId);
-            if (valEl) valEl.textContent = formatShortCurrency(stats.totalVal);
-            if (subEl) subEl.textContent = `${stats.count.toLocaleString('pt-BR')} OFs`;
+            if (valEl) valEl.textContent = stats.count.toLocaleString('pt-BR');
+            if (subEl) {
+                if (showMoney && stats.totalVal > 0) {
+                    subEl.textContent = `${formatShortCurrency(stats.totalVal)} Medido`;
+                    subEl.style.color = '#38bdf8';
+                } else if (showMoney) {
+                    subEl.textContent = `R$ 0,00 Medido`;
+                } else {
+                    subEl.textContent = `Passo Operacional`;
+                    subEl.style.color = 'var(--text-secondary)';
+                }
+            }
         };
 
-        setCardValues('manut-kpi-total', 'manut-kpi-total-sub', totalStats);
-        setCardValues('manut-kpi-medicao', 'manut-kpi-medicao-sub', medicaoStats);
-        setCardValues('manut-kpi-concluido', 'manut-kpi-concluido-sub', concluidoStats);
-        setCardValues('manut-kpi-obra', 'manut-kpi-obra-sub', obraStats);
-        setCardValues('manut-kpi-adequacao', 'manut-kpi-adequacao-sub', adequacaoStats);
-        setCardValues('manut-kpi-documentacao', 'manut-kpi-documentacao-sub', documentacaoStats);
-        setCardValues('manut-kpi-fotos', 'manut-kpi-fotos-sub', fotosStats);
+        setCard('manut-kpi-total', 'manut-kpi-total-sub', totalStats, true);
+        setCard('manut-kpi-medicao', 'manut-kpi-medicao-sub', medicaoStats, true);
+        setCard('manut-kpi-concluido', 'manut-kpi-concluido-sub', concluidoStats, false);
+        setCard('manut-kpi-obra', 'manut-kpi-obra-sub', obraStats, false);
+        setCard('manut-kpi-adequacao', 'manut-kpi-adequacao-sub', adequacaoStats, false);
+        setCard('manut-kpi-documentacao', 'manut-kpi-documentacao-sub', documentacaoStats, false);
+        setCard('manut-kpi-fotos', 'manut-kpi-fotos-sub', fotosStats, false);
     }
 
     // 2. CARDS DE CATEGORIA (Foco Principal em R$ Valor Medido, secundário em Qtd OFs)
