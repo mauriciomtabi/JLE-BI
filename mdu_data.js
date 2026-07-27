@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-07-27 08:00:11
+// Dados MDU Compactados - Gerado em: 2026-07-27 09:00:11
 window.MDU_METADATA = {
-    "generated_at": "2026-07-27 08:00:11",
+    "generated_at": "2026-07-27 09:00:11",
     "total_rows": 5268,
     "geocoded_new": 0
 };
@@ -7276,7 +7276,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "OK",
-        "relatorio_por": "",
+        "relatorio_por": "DUDA",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
@@ -161996,7 +161996,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "OK",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
@@ -164044,7 +164044,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "OK",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
@@ -164588,7 +164588,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "OK",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
@@ -164620,7 +164620,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "OK",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
