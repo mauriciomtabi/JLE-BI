@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-07-28 08:09:39
+// Dados MDU Compactados - Gerado em: 2026-07-28 09:00:13
 window.MDU_METADATA = {
-    "generated_at": "2026-07-28 08:09:39",
+    "generated_at": "2026-07-28 09:00:13",
     "total_rows": 5285,
     "geocoded_new": 0
 };
@@ -167147,11 +167147,11 @@ window.MDU_DATA = [
         "endereco": "R BARÃO DE UBÁ 621",
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
-        "aging": "OK",
+        "aging": "4",
         "relatorio_por": "PASTA COM ENDEREÇO NÃO ENCONTRADO",
-        "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "pendencia": "SIM",
+        "status": "Pendência",
+        "prog": 0.0,
         "cod_imovel": "711776109",
         "area": "MTSAA",
         "node": "MTSAK",
@@ -168204,7 +168204,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "",
-        "relatorio_por": "",
+        "relatorio_por": "duda",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
@@ -168236,7 +168236,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "",
-        "relatorio_por": "",
+        "relatorio_por": "duda",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
@@ -168268,7 +168268,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "",
-        "relatorio_por": "",
+        "relatorio_por": "duda",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
