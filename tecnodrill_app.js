@@ -448,53 +448,168 @@
         const textColor = isDark ? '#8a99a8' : '#637381';
 
         const titleEl = document.getElementById('td-customers-chart-title');
-        if (titleEl) titleEl.innerText = 'Receita por Cliente';
+        if (titleEl) titleEl.innerText = 'Receita por Cliente (Cobranças)';
 
-        // Filtrar transações de Entrada (Cobranças / Outros Recebimentos / Vendas ou com descrição de cliente)
-        const txs = nonTransfer(tdFilteredTransactions).filter(t => 
+        // Considerar APENAS 'Cobranças' e 'Outros Recebimentos' sob o fluxo 'Entrada'
+        const txs = tdFilteredTransactions.filter(t => 
             t.fluxo === 'Entrada' && 
-            (t.categoria === 'Cobranças' || t.categoria === 'Outros Recebimentos' || t.categoria === 'Vendas' || t.descricao)
+            (t.categoria === 'Cobranças' || t.categoria === 'Outros Recebimentos')
         );
 
-        const clientSum = {};
+        const customerSum = {};
         txs.forEach(t => {
-            const clientName = (t.descricao && t.descricao.trim()) ? t.descricao.trim() : (t.categoria || 'Outros');
-            clientSum[clientName] = (clientSum[clientName] || 0) + t.valor_nominal;
+            const clientName = (t.descricao && t.descricao.trim()) ? t.descricao.trim().toUpperCase() : 'OUTROS';
+            customerSum[clientName] = (customerSum[clientName] || 0) + t.valor_nominal;
         });
 
-        const sorted = Object.entries(clientSum).sort((a, b) => b[1] - a[1]).slice(0, 8);
-        if (!sorted.length) return;
+        const sortedCustomers = Object.keys(customerSum)
+            .map(c => ({ name: c, value: customerSum[c] }))
+            .sort((a, b) => b.value - a.value);
 
-        const totalEntradas = sorted.reduce((s, [, v]) => s + v, 0);
+        if (!sortedCustomers.length) return;
 
-        const COLORS = ['#004f71', '#f39f18', '#0077aa', '#ffb83d', '#2ecc71', '#3498db', '#9b59b6', '#e74c3c'];
+        function abbrevClient(name) {
+            let s = name
+                .replace(/\s+LTDA\.?$/i, '')
+                .replace(/\s+ME\.?$/i, '')
+                .replace(/\s+EPP\.?$/i, '')
+                .replace(/\s+S\/A\.?$/i, '')
+                .replace(/\s+S\.A\.?$/i, '')
+                .replace(/\s+BRASIL$/i, '')
+                .replace(/\s+BR$/i, '')
+                .trim();
+            s = s.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+            return s.length > 15 ? s.substring(0, 14) + '…' : s;
+        }
+
+        const chartLabels = sortedCustomers.map(c => abbrevClient(c.name));
+        const chartData = sortedCustomers.map(c => c.value);
+        const totalSum = chartData.reduce((sum, val) => sum + val, 0);
+
+        // Fatia visual mínima de 2.5%
+        const MIN_PCT = 0.025;
+        const minSliceVal = totalSum * MIN_PCT;
+        let totalBorrowed = 0;
+        const chartDataDisplay = chartData.map(v => {
+            if (v > 0 && v < minSliceVal) { totalBorrowed += minSliceVal - v; return minSliceVal; }
+            return v;
+        });
+        if (totalBorrowed > 0) {
+            const bigSum = chartData.reduce((s, v) => v >= minSliceVal ? s + v : s, 0);
+            for (let i = 0; i < chartDataDisplay.length; i++) {
+                if (chartData[i] >= minSliceVal && bigSum > 0)
+                    chartDataDisplay[i] -= (chartData[i] / bigSum) * totalBorrowed;
+            }
+        }
+
+        const colorPalette = [
+            '#004f71', '#ffb83d', '#7209b7', '#00b4d8', 
+            '#ff4d6d', '#2ecc71', '#f72585', '#4cc9f0',
+            '#f39f18', '#9b59b6', '#1abc9c', '#e74c3c'
+        ];
+
+        const centerTextPlugin = {
+            id: 'tdCenterText',
+            afterDraw: function(chart) {
+                const chartArea = chart.chartArea;
+                if (!chartArea) return;
+                const centerX = (chartArea.left + chartArea.right) / 2;
+                const centerY = (chartArea.top + chartArea.bottom) / 2;
+                const cCtx = chart.ctx;
+                
+                cCtx.save();
+                
+                const isDarkTheme = !document.body.classList.contains('light-theme');
+                const textSec = isDarkTheme ? '#8a99a8' : '#637381';
+                const textPri = isDarkTheme ? '#f5f6f8' : '#1f2c3d';
+                
+                const innerRadius = chart.innerRadius || 60;
+                
+                const textValue = formatCurrency(totalSum);
+                let valueFontSize = innerRadius * 0.32;
+                cCtx.font = `700 ${valueFontSize}px Outfit, sans-serif`;
+                
+                const maxTextWidth = innerRadius * 2 * 0.85;
+                while (cCtx.measureText(textValue).width > maxTextWidth && valueFontSize > 10) {
+                    valueFontSize -= 1;
+                    cCtx.font = `700 ${valueFontSize}px Outfit, sans-serif`;
+                }
+                
+                const labelFontSize = Math.max(9, valueFontSize * 0.50);
+                
+                cCtx.textAlign = 'center';
+                cCtx.textBaseline = 'middle';
+                
+                cCtx.font = `700 ${valueFontSize}px Outfit, sans-serif`;
+                cCtx.fillStyle = textPri;
+                cCtx.fillText(textValue, centerX, centerY - (labelFontSize * 0.15));
+                
+                cCtx.font = `600 ${labelFontSize}px Outfit, sans-serif`;
+                cCtx.fillStyle = textSec;
+                cCtx.fillText("FATURAMENTO", centerX, centerY + (valueFontSize * 0.70));
+                
+                cCtx.restore();
+            }
+        };
 
         tdCharts.customers = new Chart(ctx, {
             type: 'doughnut',
             data: {
-                labels: sorted.map(([k]) => k.length > 25 ? k.substring(0, 22) + '...' : k),
+                labels: chartLabels,
                 datasets: [{
-                    data: sorted.map(([, v]) => v),
-                    backgroundColor: COLORS.slice(0, sorted.length),
-                    borderWidth: 2,
-                    borderColor: isDark ? '#111c24' : '#ffffff'
+                    data: chartDataDisplay,
+                    backgroundColor: colorPalette.slice(0, chartLabels.length),
+                    borderColor: isDark ? '#0d1b26' : '#f5f6f8',
+                    borderWidth: 1.5,
+                    spacing: 2.5,
+                    borderRadius: 4,
+                    hoverOffset: 8,
+                    hoverBorderColor: '#ffffff',
+                    hoverBorderWidth: 2
                 }]
             },
+            plugins: [centerTextPlugin],
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                cutout: '65%',
                 plugins: {
                     legend: {
                         position: 'bottom',
-                        labels: { color: textColor, font: { family: 'Outfit', size: 10 }, boxWidth: 10 }
+                        align: 'center',
+                        labels: {
+                            color: textColor,
+                            usePointStyle: true,
+                            pointStyle: 'rectRounded',
+                            boxWidth: 16,
+                            boxHeight: 8,
+                            padding: 16,
+                            font: { family: 'Outfit', size: 11 }
+                        }
                     },
-                    datalabels: { display: false },
+                    datalabels: {
+                        display: (context) => {
+                            const realVal = chartData[context.dataIndex] || 0;
+                            const pct = totalSum > 0 ? (realVal / totalSum) * 100 : 0;
+                            return pct >= 5;
+                        },
+                        color: '#ffffff',
+                        font: { family: 'Outfit', size: 10, weight: 'bold' },
+                        textStrokeColor: 'rgba(0, 0, 0, 0.4)',
+                        textStrokeWidth: 2,
+                        formatter: (value, context) => {
+                            const realVal = chartData[context.dataIndex] || 0;
+                            const pct = totalSum > 0 ? (realVal / totalSum) * 100 : 0;
+                            return pct.toFixed(1).replace('.', ',') + '%';
+                        }
+                    },
                     tooltip: {
+                        position: 'cursor',
                         callbacks: {
-                            label: ctx => {
-                                const val = ctx.raw;
-                                const pct = totalEntradas > 0 ? ((val / totalEntradas) * 100).toFixed(1).replace('.', ',') : '0';
-                                return ` ${formatCurrency(val)} (${pct}%)`;
+                            label: (context) => {
+                                const realVal = chartData[context.dataIndex];
+                                const pct = totalSum > 0 ? (realVal / totalSum) * 100 : 0;
+                                return ` ${context.label}: ${formatCurrency(realVal)} (${pct.toFixed(1).replace('.', ',')}%)`;
                             }
                         }
                     }
