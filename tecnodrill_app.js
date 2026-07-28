@@ -414,14 +414,15 @@
                     x: { grid: { color: 'transparent' }, ticks: { color: textColor } },
                     y: {
                         grid: { color: gridColor },
-                        ticks: { color: textColor, callback: v => formatShortCurrencyNoR$(v) }
+                        ticks: { color: textColor, callback: v => formatShortCurrencyNoR$(v) },
+                        grace: '25%'
                     }
                 }
             }
         });
     }
 
-    // --- GRÁFICO 2: RECEITA POR CATEGORIA / CLIENTE (Rosca) ---
+    // --- GRÁFICO 2: RECEITA POR CLIENTE (Rosca) ---
     function renderTdCustomerChart() {
         destroyChart('customers');
         const canvas = document.getElementById('td-chart-customers');
@@ -431,24 +432,35 @@
         const isDark = !document.body.classList.contains('light-theme');
         const textColor = isDark ? '#8a99a8' : '#637381';
 
-        const txs = nonTransfer(tdFilteredTransactions).filter(t => t.fluxo === 'Entrada' && t.categoria);
-        const catSum = {};
-        txs.forEach(t => { catSum[t.categoria] = (catSum[t.categoria] || 0) + t.valor_nominal; });
+        const titleEl = document.getElementById('td-customers-chart-title');
+        if (titleEl) titleEl.innerText = 'Receita por Cliente';
 
-        const sorted = Object.entries(catSum).sort((a, b) => b[1] - a[1]).slice(0, 7);
+        // Filtrar transações de Entrada (Cobranças / Outros Recebimentos / Vendas ou com descrição de cliente)
+        const txs = nonTransfer(tdFilteredTransactions).filter(t => 
+            t.fluxo === 'Entrada' && 
+            (t.categoria === 'Cobranças' || t.categoria === 'Outros Recebimentos' || t.categoria === 'Vendas' || t.descricao)
+        );
+
+        const clientSum = {};
+        txs.forEach(t => {
+            const clientName = (t.descricao && t.descricao.trim()) ? t.descricao.trim() : (t.categoria || 'Outros');
+            clientSum[clientName] = (clientSum[clientName] || 0) + t.valor_nominal;
+        });
+
+        const sorted = Object.entries(clientSum).sort((a, b) => b[1] - a[1]).slice(0, 8);
         if (!sorted.length) return;
 
         const totalEntradas = sorted.reduce((s, [, v]) => s + v, 0);
 
-        const COLORS = ['#004f71', '#f39f18', '#0077aa', '#ffb83d', '#2ecc71', '#3498db', '#9b59b6'];
+        const COLORS = ['#004f71', '#f39f18', '#0077aa', '#ffb83d', '#2ecc71', '#3498db', '#9b59b6', '#e74c3c'];
 
         tdCharts.customers = new Chart(ctx, {
             type: 'doughnut',
             data: {
-                labels: sorted.map(([k]) => k),
+                labels: sorted.map(([k]) => k.length > 25 ? k.substring(0, 22) + '...' : k),
                 datasets: [{
                     data: sorted.map(([, v]) => v),
-                    backgroundColor: COLORS,
+                    backgroundColor: COLORS.slice(0, sorted.length),
                     borderWidth: 2,
                     borderColor: isDark ? '#111c24' : '#ffffff'
                 }]
