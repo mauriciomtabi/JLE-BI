@@ -118,7 +118,8 @@
     }
 
     function updateTecnodrillHeaderSubtitle() {
-        if (window.activeView !== 'tecnodrill') return;
+        const tdContainer = document.getElementById('view-tecnodrill-container');
+        if (tdContainer && tdContainer.style.display === 'none') return;
         const subtitleEl = document.getElementById('view-subtitle');
         if (!subtitleEl) return;
         const sel = document.getElementById('td-filter-mes');

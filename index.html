@@ -3460,6 +3460,7 @@
             }
 
             activeView = viewName;
+            window.activeView = viewName;
             localStorage.setItem('jle_bi_active_view', viewName);
             document.querySelectorAll('.view-panel').forEach(panel => panel.style.display = 'none');
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
