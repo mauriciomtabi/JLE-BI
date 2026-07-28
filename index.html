@@ -83,9 +83,22 @@
             <a class="nav-item" id="nav-manutencao" onclick="switchView('manutencao')" style="display:none;">
                 <i class="fa-solid fa-wrench"></i> <span>Manutenção</span>
             </a>
-            <a class="nav-item active" id="nav-dashboard" onclick="switchView('dashboard')">
-                <i class="fa-solid fa-sack-dollar"></i> <span>Financeiro</span>
-            </a>
+            <!-- Accordion Financeiro -->
+            <div class="nav-group" id="nav-group-financeiro">
+                <div class="nav-group-toggle" id="nav-financeiro-toggle" onclick="toggleNavGroup('financeiro')">
+                    <i class="fa-solid fa-sack-dollar"></i>
+                    <span>Financeiro</span>
+                    <i class="fa-solid fa-chevron-right nav-group-arrow"></i>
+                </div>
+                <div class="nav-submenu" id="submenu-financeiro">
+                    <a class="nav-item nav-subitem" id="nav-dashboard" onclick="switchView('dashboard')">
+                        <i class="fa-solid fa-building-columns"></i> <span>JLE</span>
+                    </a>
+                    <a class="nav-item nav-subitem" id="nav-tecnodrill" onclick="switchView('tecnodrill')" style="display:none;">
+                        <i class="fa-solid fa-industry"></i> <span>Tecnodrill</span>
+                    </a>
+                </div>
+            </div>
 
             <a class="nav-item" id="nav-veiculos" onclick="switchView('veiculos')" style="display:none;">
                 <i class="fa-solid fa-car"></i> <span>Veículos</span>
@@ -386,6 +399,200 @@
             </div>
         </div>
 
+        <!-- VIEW TECNODRILL: DASHBOARD FINANCEIRO TECNODRILL -->
+        <div id="view-tecnodrill-container" class="view-panel" style="display:none;">
+
+            <!-- NAVEGAÇÃO INTERNA EM ABAS -->
+            <div class="dashboard-tabs">
+                <button class="tab-btn active" id="td-tab-btn-indicators" onclick="switchTecnodrillTab('indicators')">
+                    <i class="fa-solid fa-chart-column"></i> Indicadores
+                </button>
+                <button class="tab-btn" id="td-tab-btn-transactions" onclick="switchTecnodrillTab('transactions')">
+                    <i class="fa-solid fa-list-ol"></i> Lançamentos
+                </button>
+            </div>
+
+            <!-- SUB-VIEW: INDICADORES -->
+            <div id="td-subview-indicators" class="dashboard-subview">
+                <!-- KPI Cards -->
+                <div class="kpi-container">
+                    <div class="kpi-card inflows">
+                        <div class="kpi-info">
+                            <span class="kpi-label">Total de Entradas</span>
+                            <h3 class="kpi-value" id="td-kpi-entradas">R$ 0,00</h3>
+                            <div class="kpi-analytics">
+                                <span class="kpi-subvalue" id="td-sub-entradas-diaria">Média: R$ 0,00/dia</span>
+                                <span class="kpi-subvalue" id="td-sub-entradas-comp">vs. Mês Ant.: N/D</span>
+                            </div>
+                        </div>
+                        <div class="kpi-icon-container">
+                            <i class="fa-solid fa-money-bill-trend-up"></i>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card outflows">
+                        <div class="kpi-info">
+                            <span class="kpi-label">Total de Saídas</span>
+                            <h3 class="kpi-value" id="td-kpi-saidas">R$ 0,00</h3>
+                            <div class="kpi-analytics">
+                                <span class="kpi-subvalue" id="td-sub-saidas-diaria">Média: R$ 0,00/dia</span>
+                                <span class="kpi-subvalue" id="td-sub-saidas-comp">Comprometimento: 0,0%</span>
+                            </div>
+                        </div>
+                        <div class="kpi-icon-container">
+                            <i class="fa-solid fa-money-bill-transfer"></i>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card balance">
+                        <div class="kpi-info">
+                            <span class="kpi-label">Saldo Final Consolidado</span>
+                            <h3 class="kpi-value" id="td-kpi-saldo-final">R$ 0,00</h3>
+                            <div class="kpi-analytics">
+                                <span class="kpi-subvalue" id="td-sub-saldo-sobra">Eficiência: 0,0%</span>
+                            </div>
+                        </div>
+                        <div class="kpi-icon-container">
+                            <i class="fa-solid fa-vault"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filtros Tecnodrill -->
+                <section class="filter-bar" id="td-filters-container" style="margin: 0 0 20px 0;">
+                    <div class="filter-group">
+                        <label for="td-filter-mes">Competência / Mês</label>
+                        <select id="td-filter-mes" onchange="applyTecnodrillFilters()">
+                            <option value="ALL">Todos os Meses</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="td-filter-categoria">Categoria</label>
+                        <select id="td-filter-categoria" onchange="applyTecnodrillFilters()">
+                            <option value="ALL">Todas as Categorias</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="td-filter-data-inicio">Data Início</label>
+                        <input type="date" id="td-filter-data-inicio" onchange="applyTecnodrillFilters()">
+                    </div>
+                    <div class="filter-group">
+                        <label for="td-filter-data-fim">Data Fim</label>
+                        <div style="display: flex; gap: 8px; align-items: center; width: 100%;">
+                            <input type="date" id="td-filter-data-fim" onchange="applyTecnodrillFilters()" style="flex-grow: 1;">
+                            <button onclick="clearTecnodrillDateRange()" title="Limpar período" style="background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 12px; color: var(--text-secondary); cursor: pointer; transition: all 0.2s ease;">
+                                <i class="fa-solid fa-eraser"></i>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Card SICOOB -->
+                <div class="banks-grid" id="td-banks-balance-list"></div>
+
+                <!-- Charts Row 1 -->
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;">
+                            <div class="chart-title">
+                                <h2 id="td-evolution-chart-title">Evolução de Fluxo</h2>
+                            </div>
+                            <div class="chart-controls" id="td-evolution-chart-controls" style="display: flex; gap: 4px; background: rgba(0,0,0,0.2); padding: 2px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);"></div>
+                        </div>
+                        <div class="chart-body">
+                            <canvas id="td-chart-evolution"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <div class="chart-title">
+                                <h2 id="td-customers-chart-title">Receita por Categoria</h2>
+                            </div>
+                        </div>
+                        <div class="chart-body" style="position: relative; height: 320px; width: 100%; display: flex; align-items: center; justify-content: center;">
+                            <canvas id="td-chart-customers"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row 2 -->
+                <div class="charts-grid categories-uf-row">
+                    <div class="chart-card">
+                        <div class="chart-header" style="flex-wrap: wrap; gap: 10px;">
+                            <div class="chart-title">
+                                <h2 id="td-categories-chart-title">Categorias</h2>
+                            </div>
+                            <div class="chart-toggle-buttons" style="display: flex; background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 20px; padding: 2px;">
+                                <button id="td-btn-toggle-saidas" onclick="setTecnodrillCategoryFlux('Saída')" style="background-color: var(--color-secondary); border: none; color: white; padding: 6px 14px; font-size: 11px; font-weight: 600; border-radius: 18px; cursor: pointer; transition: all 0.2s ease;">Saídas</button>
+                                <button id="td-btn-toggle-entradas" onclick="setTecnodrillCategoryFlux('Entrada')" style="background-color: transparent; border: none; color: var(--text-secondary); padding: 6px 14px; font-size: 11px; font-weight: 600; border-radius: 18px; cursor: pointer; transition: all 0.2s ease;">Entradas</button>
+                            </div>
+                        </div>
+                        <div class="chart-body map-chart-body" style="align-items: flex-start; justify-content: flex-start; overflow-y: auto;">
+                            <div style="width: 100%; height: 440px; position: relative;">
+                                <canvas id="td-chart-categories"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <div class="chart-title"><h2>Evolução Mensal — SICOOB</h2></div>
+                        </div>
+                        <div class="chart-body" style="position: relative; height: 100%; min-height: 300px;">
+                            <canvas id="td-chart-monthly"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- fim td-subview-indicators -->
+
+            <!-- SUB-VIEW: LANÇAMENTOS -->
+            <div id="td-subview-transactions" class="dashboard-subview" style="display: none;">
+                <div class="data-table-card">
+                    <div class="table-controls">
+                        <div class="search-wrapper">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" id="td-table-search" placeholder="Buscar por descrição ou categoria..." oninput="handleTecnodrillSearch()">
+                        </div>
+                        <div class="table-actions">
+                            <button class="btn-secondary" onclick="exportTecnodrillToXLSX()">
+                                <i class="fa-solid fa-file-excel"></i> Exportar Excel
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Banco</th>
+                                    <th>Competência</th>
+                                    <th>Fluxo</th>
+                                    <th>Categoria</th>
+                                    <th>Descrição</th>
+                                    <th style="text-align: right;">Valor</th>
+                                    <th>Meio de Pagamento</th>
+                                </tr>
+                            </thead>
+                            <tbody id="td-table-body"></tbody>
+                        </table>
+                    </div>
+                    <div class="pagination">
+                        <span class="pagination-info" id="td-pagination-info">Mostrando 0-0 de 0 transações</span>
+                        <div class="pagination-buttons">
+                            <button class="pagination-btn" id="td-pagination-prev" onclick="changeTecnodrillPage(-1)">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </button>
+                            <button class="pagination-btn" id="td-pagination-next" onclick="changeTecnodrillPage(1)">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- FIM VIEW TECNODRILL -->
+
         <!-- VIEW 4: ADMIN PANEL -->
         <div id="view-admin-container" class="view-panel" style="display: none; width: 100%;">
             <div class="admin-panel-grid" style="width: 100%;">
@@ -505,6 +712,7 @@
                         <option value="mdu">📡 MDU — Status em Andamento</option>
                         <option value="claro">📊 Analítico Claro — Sem Aprovação e Aguardando Pedido</option>
                         <option value="manutencao">🛠️ Manutenção — Resumo de Pendências e Aprovados</option>
+                        <option value="tecnodrill">🏭 Tecnodrill — Resumo Financeiro</option>
                     </select>
                 </div>
 
@@ -2132,6 +2340,8 @@
 
     <!-- Carga de Dados Dinâmica -->
     <script src="data.js"></script>
+    <script src="tecnodrill_data.js"></script>
+    <script src="tecnodrill_app.js"></script>
 
     <script src="veiculos_data.js?v=3.35"></script>
     <script src="veiculos_app.js?v=3.41"></script>
@@ -2764,8 +2974,8 @@
         // Known pages registry (for admin panel)
         const ALL_PAGES = [
             { id: 'dashboard',    label: 'Dashboard Financeiro',    icon: 'fa-sack-dollar',       navId: 'nav-dashboard' },
+            { id: 'tecnodrill',   label: 'Financeiro Tecnodrill',   icon: 'fa-industry',          navId: 'nav-tecnodrill' },
             { id: 'veiculos',     label: 'Veículos',                icon: 'fa-car',               navId: 'nav-veiculos' },
-            
             { id: 'cobranca',     label: 'Analítico Claro',         icon: 'fa-file-invoice-dollar', navId: 'nav-cobranca' },
             { id: 'gestao_os',    label: 'Gestão de OS',            icon: 'fa-clipboard-list',    navId: 'nav-gestao_os' },
             { id: 'mdu',          label: 'MDU',                     icon: 'fa-building',          navId: 'nav-mdu' },
@@ -3315,6 +3525,16 @@
                 if (typeof window.initManutencaoModule === 'function') {
                     window.initManutencaoModule();
                 }
+            } else if (viewName === 'tecnodrill') {
+                document.getElementById('filters-container').style.display = 'none';
+                if (mobileToggleBtn) mobileToggleBtn.style.display = '';
+                document.getElementById('view-title').innerText = 'Dashboard Financeiro — Tecnodrill';
+                document.getElementById('view-subtitle').innerHTML = 'Análise de Fluxo de Caixa — Tecnodrill (SICOOB)';
+                if (!tecnodrillDataLoaded) {
+                    initTecnodrill();
+                } else {
+                    applyTecnodrillFilters();
+                }
             } else {
                 document.getElementById('filters-container').style.display = 'grid';
                 if (mobileToggleBtn) mobileToggleBtn.style.display = '';
@@ -3340,6 +3560,7 @@
 
         const PAGES_CATALOG = [
             { id: 'dashboard',    label: 'Dashboard Financeiro',     icon: 'fa-sack-dollar' },
+            { id: 'tecnodrill',   label: 'Financeiro Tecnodrill',    icon: 'fa-industry' },
             { id: 'veiculos',     label: 'Veículos',                 icon: 'fa-car' },
             { id: 'cobranca',     label: 'Analítico Claro',          icon: 'fa-file-invoice-dollar' },
             { id: 'gestao_os',    label: 'Gestão de OS',             icon: 'fa-clipboard-list' },

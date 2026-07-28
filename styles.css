@@ -188,6 +188,76 @@ body.light-theme .logo-light-mode {
     color: var(--color-secondary);
 }
 
+/* ── Accordion Financeiro (JLE / Tecnodrill) ── */
+.nav-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-group-toggle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.nav-group-toggle:hover,
+.nav-group-toggle.open {
+    background-color: rgba(0, 79, 113, 0.15);
+    color: var(--text-primary);
+    border-left: 4px solid var(--color-primary);
+    padding-left: 12px;
+}
+
+.nav-group-toggle.open i.fa-sack-dollar {
+    color: var(--color-secondary);
+}
+
+.nav-group-arrow {
+    margin-left: auto;
+    font-size: 11px;
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+}
+
+.nav-group-toggle.open .nav-group-arrow {
+    transform: rotate(90deg);
+}
+
+.nav-submenu {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease, opacity 0.25s ease;
+    opacity: 0;
+}
+
+.nav-submenu.open {
+    max-height: 120px;
+    opacity: 1;
+}
+
+.nav-subitem {
+    padding-left: 40px !important;
+    font-size: 13px;
+    border-radius: 6px;
+    margin-top: 2px;
+}
+
+.nav-subitem:hover,
+.nav-subitem.active {
+    background-color: rgba(0, 79, 113, 0.12);
+    color: var(--text-primary);
+    border-left: 3px solid var(--color-primary-light);
+    padding-left: 37px !important;
+}
+
 .sidebar-footer {
     display: flex;
     flex-direction: column;

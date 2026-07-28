@@ -444,6 +444,11 @@ module.exports = async (req, res) => {
             const manutData = manutHelper.loadManutencaoData();
             attachments = manutHelper.generateExcelAttachments(manutData);
             emailHtml = manutHelper.buildManutencaoEmailHtml(config.report_name, manutData);
+        } else if (config.report_type === 'tecnodrill') {
+            const tecnoHelper = require('./tecnodrill-report-helper');
+            const tecnoData = tecnoHelper.loadTecnodrillData();
+            attachments = tecnoHelper.generateExcelAttachments(tecnoData);
+            emailHtml = tecnoHelper.buildTecnodrillEmailHtml(config.report_name, tecnoData);
         } else {
             const mduData = await getMduStatusCounts();
             emailHtml = buildEmailHtml(mduData, config.report_name);
