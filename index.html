@@ -402,6 +402,45 @@
         <!-- VIEW TECNODRILL: DASHBOARD FINANCEIRO TECNODRILL -->
         <div id="view-tecnodrill-container" class="view-panel" style="display:none;">
 
+            <!-- FILTROS TECNODRILL (No topo, igual ao JLE) -->
+            <section class="filter-bar" id="td-filters-container" style="margin-bottom: 20px;">
+                <div class="filter-group">
+                    <label for="td-filter-mes">Competência / Mês</label>
+                    <select id="td-filter-mes" onchange="applyTecnodrillFilters()">
+                        <option value="ALL">Todos os Meses</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="td-filter-categoria">Categoria</label>
+                    <select id="td-filter-categoria" onchange="applyTecnodrillFilters()">
+                        <option value="ALL">Todas as Categorias</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="td-filter-uf">UF / Estado</label>
+                    <select id="td-filter-uf" onchange="applyTecnodrillFilters()">
+                        <option value="ALL">Todas as UFs</option>
+                        <option value="RS">RS</option>
+                        <option value="SC">SC</option>
+                        <option value="PR">PR</option>
+                        <option value="N/D">N/D</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="td-filter-data-inicio">Data Início</label>
+                    <input type="date" id="td-filter-data-inicio" onchange="applyTecnodrillFilters()">
+                </div>
+                <div class="filter-group">
+                    <label for="td-filter-data-fim">Data Fim</label>
+                    <div style="display: flex; gap: 8px; align-items: center; width: 100%;">
+                        <input type="date" id="td-filter-data-fim" onchange="applyTecnodrillFilters()" style="flex-grow: 1;">
+                        <button onclick="clearTecnodrillDateRange()" title="Limpar período" style="background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 12px; color: var(--text-secondary); cursor: pointer; transition: all 0.2s ease;" onmouseover="this.style.borderColor='var(--color-primary)'; this.style.color='var(--text-primary)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-secondary)'">
+                            <i class="fa-solid fa-eraser"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
             <!-- NAVEGAÇÃO INTERNA EM ABAS -->
             <div class="dashboard-tabs">
                 <button class="tab-btn active" id="td-tab-btn-indicators" onclick="switchTecnodrillTab('indicators')">
@@ -458,44 +497,12 @@
                     </div>
                 </div>
 
-                <!-- Filtros Tecnodrill -->
-                <section class="filter-bar" id="td-filters-container" style="margin: 0 0 20px 0;">
-                    <div class="filter-group">
-                        <label for="td-filter-mes">Competência / Mês</label>
-                        <select id="td-filter-mes" onchange="applyTecnodrillFilters()">
-                            <option value="ALL">Todos os Meses</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label for="td-filter-categoria">Categoria</label>
-                        <select id="td-filter-categoria" onchange="applyTecnodrillFilters()">
-                            <option value="ALL">Todas as Categorias</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label for="td-filter-data-inicio">Data Início</label>
-                        <input type="date" id="td-filter-data-inicio" onchange="applyTecnodrillFilters()">
-                    </div>
-                    <div class="filter-group">
-                        <label for="td-filter-data-fim">Data Fim</label>
-                        <div style="display: flex; gap: 8px; align-items: center; width: 100%;">
-                            <input type="date" id="td-filter-data-fim" onchange="applyTecnodrillFilters()" style="flex-grow: 1;">
-                            <button onclick="clearTecnodrillDateRange()" title="Limpar período" style="background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 12px; color: var(--text-secondary); cursor: pointer; transition: all 0.2s ease;">
-                                <i class="fa-solid fa-eraser"></i>
-                            </button>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Card SICOOB -->
-                <div class="banks-grid" id="td-banks-balance-list"></div>
-
                 <!-- Charts Row 1 -->
                 <div class="charts-grid">
                     <div class="chart-card">
                         <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;">
                             <div class="chart-title">
-                                <h2 id="td-evolution-chart-title">Evolução de Fluxo</h2>
+                                <h2 id="td-evolution-chart-title">Evolução de Fluxo Mensal</h2>
                             </div>
                             <div class="chart-controls" id="td-evolution-chart-controls" style="display: flex; gap: 4px; background: rgba(0,0,0,0.2); padding: 2px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);"></div>
                         </div>
@@ -509,6 +516,7 @@
                             <div class="chart-title">
                                 <h2 id="td-customers-chart-title">Receita por Categoria</h2>
                             </div>
+                            <div id="td-customers-back-container"></div>
                         </div>
                         <div class="chart-body" style="position: relative; height: 320px; width: 100%; display: flex; align-items: center; justify-content: center;">
                             <canvas id="td-chart-customers"></canvas>
@@ -521,15 +529,16 @@
                     <div class="chart-card">
                         <div class="chart-header" style="flex-wrap: wrap; gap: 10px;">
                             <div class="chart-title">
-                                <h2 id="td-categories-chart-title">Categorias</h2>
+                                <h2 id="td-categories-chart-title">Despesas (Saídas)</h2>
                             </div>
                             <div class="chart-toggle-buttons" style="display: flex; background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 20px; padding: 2px;">
-                                <button id="td-btn-toggle-saidas" onclick="setTecnodrillCategoryFlux('Saída')" style="background-color: var(--color-secondary); border: none; color: white; padding: 6px 14px; font-size: 11px; font-weight: 600; border-radius: 18px; cursor: pointer; transition: all 0.2s ease;">Saídas</button>
-                                <button id="td-btn-toggle-entradas" onclick="setTecnodrillCategoryFlux('Entrada')" style="background-color: transparent; border: none; color: var(--text-secondary); padding: 6px 14px; font-size: 11px; font-weight: 600; border-radius: 18px; cursor: pointer; transition: all 0.2s ease;">Entradas</button>
+                                <button id="td-btn-toggle-saidas" class="toggle-chart-btn" onclick="setTecnodrillCategoryFlux('Saída')" style="background-color: var(--color-secondary); border: none; color: white; padding: 6px 14px; font-size: 11px; font-weight: 600; border-radius: 18px; cursor: pointer; transition: all 0.2s ease;">Saídas</button>
+                                <button id="td-btn-toggle-entradas" class="toggle-chart-btn" onclick="setTecnodrillCategoryFlux('Entrada')" style="background-color: transparent; border: none; color: var(--text-secondary); padding: 6px 14px; font-size: 11px; font-weight: 600; border-radius: 18px; cursor: pointer; transition: all 0.2s ease;">Entradas</button>
                             </div>
+                            <div id="td-categories-back-container"></div>
                         </div>
-                        <div class="chart-body map-chart-body" style="align-items: flex-start; justify-content: flex-start; overflow-y: auto;">
-                            <div style="width: 100%; height: 440px; position: relative;">
+                        <div id="td-categories-chart-body-container" class="chart-body map-chart-body" style="align-items: flex-start; justify-content: flex-start; overflow-y: auto;">
+                            <div id="td-categories-scroll-wrapper" style="width: 100%; height: 440px; position: relative;">
                                 <canvas id="td-chart-categories"></canvas>
                             </div>
                         </div>
@@ -537,10 +546,14 @@
 
                     <div class="chart-card">
                         <div class="chart-header">
-                            <div class="chart-title"><h2>Evolução Mensal — SICOOB</h2></div>
+                            <div class="chart-title">
+                                <h2>Distribuição por UF</h2>
+                            </div>
                         </div>
-                        <div class="chart-body" style="position: relative; height: 100%; min-height: 300px;">
-                            <canvas id="td-chart-monthly"></canvas>
+                        <div class="chart-body map-chart-body" style="overflow: hidden !important;">
+                            <div class="map-wrapper" id="td-map-container" style="width: 100%; height: 100%; position: relative;">
+                                <!-- SVG Map injected dynamically -->
+                            </div>
                         </div>
                     </div>
                 </div>
