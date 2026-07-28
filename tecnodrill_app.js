@@ -117,6 +117,19 @@
         });
     }
 
+    function updateTecnodrillHeaderSubtitle() {
+        if (window.activeView !== 'tecnodrill') return;
+        const subtitleEl = document.getElementById('view-subtitle');
+        if (!subtitleEl) return;
+        const sel = document.getElementById('td-filter-mes');
+        const mesText = (sel && sel.selectedIndex >= 0) ? sel.options[sel.selectedIndex].text : '';
+        if (tdActiveTab === 'indicators') {
+            subtitleEl.innerHTML = `Dashboard de Gestão e Análise de Indicadores.${mesText && mesText !== 'Todos os Meses' ? ' <span class="badge-competencia">COMPETÊNCIA: ' + mesText.toUpperCase() + '</span>' : ''}`;
+        } else {
+            subtitleEl.innerHTML = `Relação completa de transações com ferramentas de busca e auditoria${mesText && mesText !== 'Todos os Meses' ? ' <span class="badge-competencia">COMPETÊNCIA: ' + mesText.toUpperCase() + '</span>' : ''}`;
+        }
+    }
+
     window.applyTecnodrillFilters = function () {
         if (!window.tecnodrillDataLoaded) return;
         const mes = document.getElementById('td-filter-mes')?.value || 'ALL';
@@ -136,6 +149,7 @@
         });
 
         tdCurrentPage = 1;
+        updateTecnodrillHeaderSubtitle();
         renderTecnodrillKPIs();
         renderTecnodrillCharts();
         if (tdActiveTab === 'transactions') renderTecnodrillTable();
@@ -822,7 +836,13 @@
         document.getElementById('td-subview-transactions').style.display = tab === 'transactions' ? 'block' : 'none';
         document.getElementById('td-tab-btn-indicators').classList.toggle('active', tab === 'indicators');
         document.getElementById('td-tab-btn-transactions').classList.toggle('active', tab === 'transactions');
-        if (tab === 'transactions') renderTecnodrillTable();
+        updateTecnodrillHeaderSubtitle();
+        if (tab === 'indicators') {
+            window.dispatchEvent(new Event('resize'));
+            renderTecnodrillCharts();
+        } else {
+            renderTecnodrillTable();
+        }
     };
 
     function renderTecnodrillTable() {

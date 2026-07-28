@@ -3423,6 +3423,12 @@
                 } else {
                     timestampEl.innerText = 'Desconhecido';
                 }
+            } else if (viewName === 'tecnodrill') {
+                if (typeof window.TECNODRILL_DATA !== 'undefined' && window.TECNODRILL_DATA.generated_at) {
+                    timestampEl.innerText = formatTimestamp(window.TECNODRILL_DATA.generated_at);
+                } else {
+                    timestampEl.innerText = 'Desconhecido';
+                }
             } else {
                 timestampEl.innerText = 'N/D';
             }
@@ -3541,8 +3547,10 @@
             } else if (viewName === 'tecnodrill') {
                 document.getElementById('filters-container').style.display = 'none';
                 if (mobileToggleBtn) mobileToggleBtn.style.display = '';
-                document.getElementById('view-title').innerText = 'Dashboard Financeiro — Tecnodrill';
-                document.getElementById('view-subtitle').innerHTML = 'Análise de Fluxo de Caixa — Tecnodrill (SICOOB)';
+                document.getElementById('view-title').innerText = 'Dashboard Financeiro';
+                const mesSelect = document.getElementById('td-filter-mes');
+                const mesText = (mesSelect && mesSelect.selectedIndex >= 0) ? mesSelect.options[mesSelect.selectedIndex].text : '';
+                document.getElementById('view-subtitle').innerHTML = `Dashboard de Gestão e Análise de Indicadores.${mesText && mesText !== 'Todos os Meses' ? ' <span class="badge-competencia">COMPETÊNCIA: ' + mesText.toUpperCase() + '</span>' : ''}`;
                 if (!tecnodrillDataLoaded) {
                     initTecnodrill();
                 } else {
