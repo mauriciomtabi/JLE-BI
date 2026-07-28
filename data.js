@@ -1,5 +1,5 @@
 ﻿window.CASH_FLOW_DATA = {
-    "generated_at":  "2026-07-27 15:05:10",
+    "generated_at":  "2026-07-28 10:03:51",
     "categories_origin":  {
                               "entradas":  [
 
@@ -129973,8 +129973,8 @@
                              "data":  "2026-07-24",
                              "uf":  "RS",
                              "fluxo":  "Saída",
-                             "categoria":  "Manut. De Veículos",
-                             "descricao":  "Material Cruzeta",
+                             "categoria":  "Material utilizado em serviços",
+                             "descricao":  "ENVIEI - Material Cruzeta",
                              "valor_nominal":  973.14,
                              "valor_liquido":  -973.14,
                              "meio_pagamento":  "Pix",
