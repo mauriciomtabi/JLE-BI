@@ -179,7 +179,7 @@
     }
 
     function nonTransfer(txs) {
-        return txs.filter(t => !t.is_transfer && t.categoria !== 'Saldo Inicial');
+        return txs;
     }
 
     // ──────────────────────────────────────────────
@@ -329,7 +329,7 @@
             const filteredForEvolution = tdAllTransactions.filter(t => {
                 if (catVal !== 'ALL' && t.categoria !== catVal) return false;
                 if (ufVal !== 'ALL' && t.uf !== ufVal) return false;
-                return !t.is_transfer && t.categoria !== 'Saldo Inicial';
+                return true;
             });
 
             chartEntradas = new Array(months.length).fill(0);

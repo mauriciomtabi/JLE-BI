@@ -187,47 +187,23 @@ try {
             }
         }
 
+        $mesNumMap = @{
+            "JANEIRO"="01"; "FEVEREIRO"="02"; "MARÇO"="03"; "ABRIL"="04";
+            "MAIO"="05"; "JUNHO"="06"; "JULHO"="07"; "AGOSTO"="08";
+            "SETEMBRO"="09"; "OUTUBRO"="10"; "NOVEMBRO"="11"; "DEZEMBRO"="12"
+        }
+        $monthNum = if ($mesNumMap.ContainsKey($mesAba)) { $mesNumMap[$mesAba] } else { "01" }
+        $defaultDate = if ($anoAba -ne "") { "$anoAba-$monthNum-01" } else { "2026-01-01" }
+        $lastValidDate = $defaultDate
+
         $txCount = 0
         for ($r = $headerRowIdx + 1; $r -le $totalRows; $r++) {
-            $dataIdx = $colMap["data"]
-            if ($null -eq $dataIdx) { continue }
-
-            $dataVal = $sheet.Cells.Item($r, $dataIdx).Value2
-            if ($null -eq $dataVal -or $dataVal.ToString().Trim() -eq "") { continue }
-
-            $dataStr = Parse-ExcelDate-TD $dataVal
-
-            # UF
-            $uf = "RS"
-            if ($colMap.ContainsKey("uf")) {
-                $temp = $sheet.Cells.Item($r, $colMap["uf"]).Value2
-                if ($null -ne $temp -and $temp.ToString().Trim() -ne "") { $uf = $temp.ToString().Trim().ToUpper() }
-            }
-
             # Entrada / Saida
             $fluxo = "N/D"
             foreach ($hk in @("entradasaida", "entrada/saida", "entradasada")) {
                 if ($colMap.ContainsKey($hk)) {
                     $temp = $sheet.Cells.Item($r, $colMap[$hk]).Value2
                     if ($null -ne $temp) { $fluxo = $temp.ToString().Trim(); break }
-                }
-            }
-
-            # Categoria (coluna "d" na Tecnodrill)
-            $categoria = "Outros"
-            foreach ($hk in @("d", "movimento", "receitasdespesas", "categoria")) {
-                if ($colMap.ContainsKey($hk)) {
-                    $temp = $sheet.Cells.Item($r, $colMap[$hk]).Value2
-                    if ($null -ne $temp -and $temp.ToString().Trim() -ne "") { $categoria = $temp.ToString().Trim(); break }
-                }
-            }
-
-            # Descricao (coluna "Coluna1" na Tecnodrill)
-            $descricao = ""
-            foreach ($hk in @("coluna1", "descricao", "detalhamento")) {
-                if ($colMap.ContainsKey($hk)) {
-                    $temp = $sheet.Cells.Item($r, $colMap[$hk]).Value2
-                    if ($null -ne $temp -and $temp.ToString().Trim() -ne "") { $descricao = $temp.ToString().Trim(); break }
                 }
             }
 
@@ -250,6 +226,48 @@ try {
                         }
                         break
                     }
+                }
+            }
+
+            # Se não tiver valor nominal e o fluxo for N/D, pular linha
+            if ($valorNominal -eq 0.0 -and ($fluxo -eq "N/D" -or $null -eq $fluxo -or $fluxo -eq "")) { continue }
+
+            # Data
+            $dataStr = ""
+            if ($colMap.ContainsKey("data")) {
+                $dataVal = $sheet.Cells.Item($r, $colMap["data"]).Value2
+                if ($null -ne $dataVal -and $dataVal.ToString().Trim() -ne "") {
+                    $dataStr = Parse-ExcelDate-TD $dataVal
+                }
+            }
+            if ($dataStr -and $dataStr -match "^\d{4}-\d{2}-\d{2}$") {
+                $lastValidDate = $dataStr
+            } else {
+                $dataStr = $lastValidDate
+            }
+
+            # UF
+            $uf = "RS"
+            if ($colMap.ContainsKey("uf")) {
+                $temp = $sheet.Cells.Item($r, $colMap["uf"]).Value2
+                if ($null -ne $temp -and $temp.ToString().Trim() -ne "") { $uf = $temp.ToString().Trim().ToUpper() }
+            }
+
+            # Categoria (coluna "d" na Tecnodrill)
+            $categoria = "Outros"
+            foreach ($hk in @("d", "movimento", "receitasdespesas", "categoria")) {
+                if ($colMap.ContainsKey($hk)) {
+                    $temp = $sheet.Cells.Item($r, $colMap[$hk]).Value2
+                    if ($null -ne $temp -and $temp.ToString().Trim() -ne "") { $categoria = $temp.ToString().Trim(); break }
+                }
+            }
+
+            # Descricao (coluna "Coluna1" na Tecnodrill)
+            $descricao = ""
+            foreach ($hk in @("coluna1", "descricao", "detalhamento")) {
+                if ($colMap.ContainsKey($hk)) {
+                    $temp = $sheet.Cells.Item($r, $colMap[$hk]).Value2
+                    if ($null -ne $temp -and $temp.ToString().Trim() -ne "") { $descricao = $temp.ToString().Trim(); break }
                 }
             }
 
