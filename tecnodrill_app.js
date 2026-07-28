@@ -89,7 +89,7 @@
         competencias.forEach(c => {
             const opt = document.createElement('option');
             opt.value = c;
-            opt.text = c.charAt(0) + c.slice(1).toLowerCase().replace('/', ' / ');
+            opt.text = c.charAt(0) + c.slice(1).toLowerCase();
             sel.appendChild(opt);
         });
 
@@ -122,7 +122,8 @@
         const subtitleEl = document.getElementById('view-subtitle');
         if (!subtitleEl) return;
         const sel = document.getElementById('td-filter-mes');
-        const mesText = (sel && sel.selectedIndex >= 0) ? sel.options[sel.selectedIndex].text : '';
+        const rawMesText = (sel && sel.selectedIndex >= 0) ? sel.options[sel.selectedIndex].text : '';
+        const mesText = rawMesText.replace(/\s*\/\s*/g, '/');
         if (tdActiveTab === 'indicators') {
             subtitleEl.innerHTML = `Dashboard de Gestão e Análise de Indicadores.${mesText && mesText !== 'Todos os Meses' ? ' <span class="badge-competencia">COMPETÊNCIA: ' + mesText.toUpperCase() + '</span>' : ''}`;
         } else {

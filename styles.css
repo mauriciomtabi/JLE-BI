@@ -501,6 +501,9 @@ body.light-theme .badge-competencia {
         gap: 10px !important;
         padding: 14px 16px !important;
     }
+    #td-filters-container {
+        grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    }
     
     .filter-group label {
         font-size: 11px !important;
