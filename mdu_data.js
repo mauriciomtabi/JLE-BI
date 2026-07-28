@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-07-28 11:00:13
+// Dados MDU Compactados - Gerado em: 2026-07-28 12:00:22
 window.MDU_METADATA = {
-    "generated_at": "2026-07-28 11:00:13",
+    "generated_at": "2026-07-28 12:00:22",
     "total_rows": 5285,
     "geocoded_new": 0
 };
@@ -161131,11 +161131,11 @@ window.MDU_DATA = [
         "endereco": "R ALMIRANTE GONÇALVES 127 / 141 BLOCO A",
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
-        "aging": "OK",
-        "relatorio_por": "",
-        "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "aging": "29",
+        "relatorio_por": "trocar identificação das NAPs",
+        "pendencia": "SIM",
+        "status": "Pendência",
+        "prog": 0.0,
         "cod_imovel": "62012388",
         "area": "TRLAA",
         "node": "MNDAR",
