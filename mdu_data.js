@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-07-29 14:04:49
+// Dados MDU Compactados - Gerado em: 2026-07-29 15:00:34
 window.MDU_METADATA = {
-    "generated_at": "2026-07-29 14:04:49",
+    "generated_at": "2026-07-29 15:00:34",
     "total_rows": 5285,
     "geocoded_new": 0
 };
@@ -162220,7 +162220,7 @@ window.MDU_DATA = [
         "cidade": "NOVO HAMBURGO",
         "cluster": "NHO",
         "aging": "OK",
-        "relatorio_por": "",
+        "relatorio_por": "MATHEUS",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
@@ -162286,8 +162286,8 @@ window.MDU_DATA = [
         "aging": "OK",
         "relatorio_por": "MATHEUS",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610482721",
         "area": "CNTAA",
         "node": "CNTAL",
@@ -162299,7 +162299,7 @@ window.MDU_DATA = [
         "data_interna": "30/06",
         "data_fusao": "30/06",
         "data_baixa": "29/07",
-        "data_relatorio": "",
+        "data_relatorio": "29/07/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
@@ -167822,8 +167822,8 @@ window.MDU_DATA = [
         "aging": "",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Baixa",
-        "prog": 63.0,
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "610513702",
         "area": "PETAA",
         "node": "PETAX",
@@ -167834,7 +167834,7 @@ window.MDU_DATA = [
         "segunda_visita": "",
         "data_interna": "14/07/2026",
         "data_fusao": "27/07/2026",
-        "data_baixa": "",
+        "data_baixa": "29/07",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
@@ -167842,7 +167842,7 @@ window.MDU_DATA = [
         "lat": -30.0390259,
         "lng": -51.1776549,
         "geocodificado": true,
-        "obs_baixa": "FALTA TEXTO PADRÃO E CROQUI CORRIGIDO COM SAR",
+        "obs_baixa": "",
         "obs_vistoria": "ADEQUADO",
         "data_adicio": "24/07/2026"
     },
