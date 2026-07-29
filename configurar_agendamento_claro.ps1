@@ -17,16 +17,24 @@ try {
 # Criar a ação da tarefa
 $action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-ExecutionPolicy Bypass -WindowStyle Hidden -File `"$scriptPath`"" -WorkingDirectory $workingDir
 
-# Criar os dois triggers (10h30 e 15h30 de Seg-Sex)
-$trigger1 = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -At "10:30:00"
-$trigger2 = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -At "15:30:00"
+# Criar triggers de 2 em 2 horas das 07:30 às 21:30 (Seg-Dom)
+$triggers = @(
+    (New-ScheduledTaskTrigger -Daily -At "07:30:00"),
+    (New-ScheduledTaskTrigger -Daily -At "09:30:00"),
+    (New-ScheduledTaskTrigger -Daily -At "11:30:00"),
+    (New-ScheduledTaskTrigger -Daily -At "13:30:00"),
+    (New-ScheduledTaskTrigger -Daily -At "15:30:00"),
+    (New-ScheduledTaskTrigger -Daily -At "17:30:00"),
+    (New-ScheduledTaskTrigger -Daily -At "19:30:00"),
+    (New-ScheduledTaskTrigger -Daily -At "21:30:00")
+)
 
 # Configurações de comportamento
-$settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -ExecutionTimeLimit (New-TimeSpan -Minutes 15)
+$settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -ExecutionTimeLimit (New-TimeSpan -Minutes 20)
 
 # Registrar a tarefa agendada no Windows
 $taskName = "JLE_Telecom_Claro_Email_Monitor"
-Register-ScheduledTask -TaskName $taskName -Trigger @($trigger1, $trigger2) -Action $action -Settings $settings -Description "Monitoramento automatico de email da Claro e atualizacao do BI de Cobranca" -Force
+Register-ScheduledTask -TaskName $taskName -Trigger $triggers -Action $action -Settings $settings -Description "Monitoramento automatico de email da Claro e atualizacao do BI de Cobranca" -Force
 
 Write-Output "Tarefa agendada '$taskName' configurada com sucesso!"
 Write-Output "O monitor de email rodará de segunda a sexta às 10:30 e às 15:30."
