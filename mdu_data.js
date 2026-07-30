@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-07-30 06:00:29
+// Dados MDU Compactados - Gerado em: 2026-07-30 08:26:51
 window.MDU_METADATA = {
-    "generated_at": "2026-07-30 06:00:29",
+    "generated_at": "2026-07-30 08:26:51",
     "total_rows": 5307,
     "geocoded_new": 0
 };
@@ -168620,7 +168620,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "",
-        "relatorio_por": "",
+        "relatorio_por": "MATHEUS",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
