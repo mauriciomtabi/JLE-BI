@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-07-31 13:00:12
+// Dados MDU Compactados - Gerado em: 2026-07-31 14:00:10
 window.MDU_METADATA = {
-    "generated_at": "2026-07-31 13:00:12",
+    "generated_at": "2026-07-31 14:00:10",
     "total_rows": 5330,
     "geocoded_new": 0
 };
@@ -165164,12 +165164,12 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "OK",
-        "relatorio_por": "",
+        "relatorio_por": "MATHEUS",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610448738",
-        "area": "",
+        "area": "PETAA",
         "node": "",
         "caixa_m": "",
         "hps": 10,
@@ -165179,7 +165179,7 @@ window.MDU_DATA = [
         "data_interna": "09/07",
         "data_fusao": "27/07",
         "data_baixa": "30/07",
-        "data_relatorio": "",
+        "data_relatorio": "31/07/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
