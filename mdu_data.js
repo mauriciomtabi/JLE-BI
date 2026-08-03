@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-08-03 08:01:39
+// Dados MDU Compactados - Gerado em: 2026-08-03 09:00:16
 window.MDU_METADATA = {
-    "generated_at": "2026-08-03 08:01:39",
+    "generated_at": "2026-08-03 09:00:16",
     "total_rows": 5330,
     "geocoded_new": 0
 };
@@ -169900,11 +169900,11 @@ window.MDU_DATA = [
         "cidade": "NOVO HAMBURGO",
         "cluster": "NHO",
         "aging": "",
-        "relatorio_por": "",
+        "relatorio_por": "MATHEUS",
         "pendencia": "",
         "status": "Relatório",
         "prog": 75.0,
-        "cod_imovel": "",
+        "cod_imovel": "700070739",
         "area": "GRIAA",
         "node": "",
         "caixa_m": "GRIAA.031.M010",
