@@ -1,5 +1,5 @@
 ﻿window.CASH_FLOW_DATA = {
-    "generated_at":  "2026-07-31 15:14:05",
+    "generated_at":  "2026-08-03 10:04:25",
     "categories_origin":  {
                               "entradas":  [
 
@@ -127734,7 +127734,7 @@
                              "uf":  "RS",
                              "fluxo":  "Saída",
                              "categoria":  "Terceiros",
-                             "descricao":  "Adiantamento João Felipe terceiro",
+                             "descricao":  "Adiantamento João Felipe terceiro - FRANCIELE",
                              "valor_nominal":  1500,
                              "valor_liquido":  -1500,
                              "meio_pagamento":  "Pix",
