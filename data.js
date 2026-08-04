@@ -1,5 +1,5 @@
 ﻿window.CASH_FLOW_DATA = {
-    "generated_at":  "2026-08-04 10:04:23",
+    "generated_at":  "2026-08-04 15:04:29",
     "categories_origin":  {
                               "entradas":  [
 
@@ -129040,6 +129040,22 @@
                              "id":  "JUL_2026 MAXCREDITO_600",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "JULHO/2026",
+                             "data":  "2026-07-31",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Despesas Operacionais",
+                             "descricao":  "REEMBOLSO EDSON",
+                             "valor_nominal":  82.6,
+                             "valor_liquido":  -82.6,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "JUL_2026 MAXCREDITO_601",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "REMESSA",
                              "competencia":  "JULHO/2026",
                              "data":  "2026-07-31",
@@ -129053,7 +129069,7 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_601",
+                             "id":  "JUL_2026 MAXCREDITO_602",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "REMESSA",
@@ -129069,7 +129085,7 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_602",
+                             "id":  "JUL_2026 MAXCREDITO_603",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "MANUAL",
@@ -129085,7 +129101,7 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_603",
+                             "id":  "JUL_2026 MAXCREDITO_604",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "MANUAL",
@@ -129101,7 +129117,7 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_604",
+                             "id":  "JUL_2026 MAXCREDITO_605",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "MANUAL",
@@ -129117,7 +129133,7 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_605",
+                             "id":  "JUL_2026 MAXCREDITO_606",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "REMESSA",
@@ -129133,7 +129149,7 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_606",
+                             "id":  "JUL_2026 MAXCREDITO_607",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "REMESSA",
@@ -129149,7 +129165,7 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_607",
+                             "id":  "JUL_2026 MAXCREDITO_608",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "REMESSA",
@@ -129165,7 +129181,7 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_608",
+                             "id":  "JUL_2026 MAXCREDITO_609",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "REMESSA",
@@ -129181,7 +129197,7 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_609",
+                             "id":  "JUL_2026 MAXCREDITO_610",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "REMESSA",
@@ -129197,7 +129213,7 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_610",
+                             "id":  "JUL_2026 MAXCREDITO_611",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "MANUAL",
@@ -129213,7 +129229,7 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_611",
+                             "id":  "JUL_2026 MAXCREDITO_612",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "MANUAL",
@@ -129229,7 +129245,7 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_612",
+                             "id":  "JUL_2026 MAXCREDITO_613",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "MANUAL",
@@ -129245,7 +129261,7 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_613",
+                             "id":  "JUL_2026 MAXCREDITO_614",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "MANUAL",
@@ -129261,7 +129277,7 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_614",
+                             "id":  "JUL_2026 MAXCREDITO_615",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "MANUAL",
@@ -129277,7 +129293,7 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_615",
+                             "id":  "JUL_2026 MAXCREDITO_616",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "MANUAL",
@@ -129293,7 +129309,7 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_616",
+                             "id":  "JUL_2026 MAXCREDITO_617",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "MANUAL",
@@ -129309,7 +129325,7 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_617",
+                             "id":  "JUL_2026 MAXCREDITO_618",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "REMESSA",
@@ -129325,7 +129341,7 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_618",
+                             "id":  "JUL_2026 MAXCREDITO_619",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "REMESSA",
@@ -129341,7 +129357,7 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_619",
+                             "id":  "JUL_2026 MAXCREDITO_620",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "REMESSA",
@@ -129357,7 +129373,7 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_620",
+                             "id":  "JUL_2026 MAXCREDITO_621",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "REMESSA",
@@ -129373,7 +129389,7 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_621",
+                             "id":  "JUL_2026 MAXCREDITO_622",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "REMESSA",
@@ -129389,7 +129405,7 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_622",
+                             "id":  "JUL_2026 MAXCREDITO_623",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "REMESSA",
@@ -129405,7 +129421,7 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_623",
+                             "id":  "JUL_2026 MAXCREDITO_624",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "MANUAL",
@@ -129421,7 +129437,7 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_624",
+                             "id":  "JUL_2026 MAXCREDITO_625",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "MANUAL",
@@ -129437,7 +129453,7 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_625",
+                             "id":  "JUL_2026 MAXCREDITO_626",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "MANUAL",
@@ -129453,7 +129469,7 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_626",
+                             "id":  "JUL_2026 MAXCREDITO_627",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "MANUAL",
@@ -129469,7 +129485,7 @@
                              "is_transfer":  true
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_627",
+                             "id":  "JUL_2026 MAXCREDITO_628",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "MANUAL",
@@ -129485,7 +129501,7 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_628",
+                             "id":  "JUL_2026 MAXCREDITO_629",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "MANUAL",
@@ -129501,7 +129517,7 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_629",
+                             "id":  "JUL_2026 MAXCREDITO_630",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "MANUAL",
@@ -129517,7 +129533,7 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_630",
+                             "id":  "JUL_2026 MAXCREDITO_631",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "MANUAL",
@@ -129533,7 +129549,7 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "JUL_2026 MAXCREDITO_631",
+                             "id":  "JUL_2026 MAXCREDITO_632",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "JUL_2026 MAXCREDITO",
                              "remessa":  "MANUAL",
@@ -133994,6 +134010,534 @@
                              "valor_nominal":  3940015.46,
                              "valor_liquido":  3940015.46,
                              "meio_pagamento":  "Transferência Bancária",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 CONFIANÇA_11",
+                             "banco":  "Sicoob Confiança",
+                             "aba":  "AGOS_2026 CONFIANÇA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-01",
+                             "uf":  "RS",
+                             "fluxo":  "Entrada",
+                             "categoria":  "Saldo Inicial",
+                             "descricao":  "Transferência entre contas",
+                             "valor_nominal":  4977.24,
+                             "valor_liquido":  4977.24,
+                             "meio_pagamento":  "Transferência Bancária",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_11",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-01",
+                             "uf":  "RS",
+                             "fluxo":  "Entrada",
+                             "categoria":  "Saldo Inicial",
+                             "descricao":  "Transferência entre contas",
+                             "valor_nominal":  -2663.72,
+                             "valor_liquido":  -2663.72,
+                             "meio_pagamento":  "Transferência Bancária",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_12",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Encargos Bancários",
+                             "descricao":  "DEBITO PACOTE SERVIÇOS",
+                             "valor_nominal":  48.9,
+                             "valor_liquido":  -48.9,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_13",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Despesas Operacionais",
+                             "descricao":  "FLASH - RAISSA AUX ALIM 150/AUX. COMB. 250/REEMBOLSO ALDAIR 228,97",
+                             "valor_nominal":  628.97,
+                             "valor_liquido":  -628.97,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_14",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Refeição",
+                             "descricao":  "CAJU - VA RAISSA - RELATORIO MDU",
+                             "valor_nominal":  617.4,
+                             "valor_liquido":  -617.4,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_15",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Terceiros",
+                             "descricao":  "GIOVANE ALVES DA SILVA",
+                             "valor_nominal":  650,
+                             "valor_liquido":  -650,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_16",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Terceiros",
+                             "descricao":  "RENATO DORNELES FERREIRA LTDA",
+                             "valor_nominal":  500,
+                             "valor_liquido":  -500,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_17",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Terceiros",
+                             "descricao":  "FRANCIELE BORBA MEDEI",
+                             "valor_nominal":  1500,
+                             "valor_liquido":  -1500,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_18",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Terceiros",
+                             "descricao":  "YURI GONÇALVES SOCA",
+                             "valor_nominal":  650,
+                             "valor_liquido":  -650,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_19",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Terceiros",
+                             "descricao":  "BAIRON GONCALVES SILV",
+                             "valor_nominal":  2500,
+                             "valor_liquido":  -2500,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_20",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Terceiros",
+                             "descricao":  "TIAGO DOS SANTOS FERREIRA",
+                             "valor_nominal":  650,
+                             "valor_liquido":  -650,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_21",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Terceiros",
+                             "descricao":  "MARCIO ALVES XAVIER",
+                             "valor_nominal":  1300,
+                             "valor_liquido":  -1300,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_22",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Terceiros",
+                             "descricao":  "LUCAS HOBERT OLIVEIRA",
+                             "valor_nominal":  650,
+                             "valor_liquido":  -650,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_23",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Estadias",
+                             "descricao":  "MICHELLI MARZOLA GUER - ESTADIA IGOR RAMOS E AUX. 4 DIARIAS ENTRADA 03/08 A 07/08 ZANI AUTORIZOU",
+                             "valor_nominal":  560,
+                             "valor_liquido":  -560,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_24",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "RS",
+                             "fluxo":  "Entrada",
+                             "categoria":  "Transferência entre contas",
+                             "descricao":  "Transferência entre contas",
+                             "valor_nominal":  70000,
+                             "valor_liquido":  70000,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  true
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_25",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Material utilizado em serviços",
+                             "descricao":  "Compras equipamento fly",
+                             "valor_nominal":  2385,
+                             "valor_liquido":  -2385,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_26",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "SC",
+                             "fluxo":  "Saída",
+                             "categoria":  "Terceiros",
+                             "descricao":  "EDIVALDO",
+                             "valor_nominal":  1000,
+                             "valor_liquido":  -1000,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_27",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "SC",
+                             "fluxo":  "Saída",
+                             "categoria":  "Terceiros",
+                             "descricao":  "FLASH TERCEIROS",
+                             "valor_nominal":  6714,
+                             "valor_liquido":  -6714,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_28",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "SC",
+                             "fluxo":  "Saída",
+                             "categoria":  "Medicina do Trabalho",
+                             "descricao":  "ATIVA MEDICINA NH LTDA",
+                             "valor_nominal":  550.56,
+                             "valor_liquido":  -550.56,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_29",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "SC",
+                             "fluxo":  "Saída",
+                             "categoria":  "Manut. De Veículos",
+                             "descricao":  "OFICINA MECANICA TIBURCIO LTDA",
+                             "valor_nominal":  1042.5,
+                             "valor_liquido":  -1042.5,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_30",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "SC",
+                             "fluxo":  "Saída",
+                             "categoria":  "Material utilizado em serviços",
+                             "descricao":  "TGL TELECOM LTDA",
+                             "valor_nominal":  10453,
+                             "valor_liquido":  -10453,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_31",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "PR",
+                             "fluxo":  "Saída",
+                             "categoria":  "Estadias",
+                             "descricao":  "JOAO PAULO RODRIGUES JUNIOR LTDA - ESTADIA RODRIGO MOLINA 22 A 23-07",
+                             "valor_nominal":  180,
+                             "valor_liquido":  -180,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_32",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "PR",
+                             "fluxo":  "Saída",
+                             "categoria":  "Terceiros",
+                             "descricao":  "J B PEREIRA",
+                             "valor_nominal":  2000,
+                             "valor_liquido":  -2000,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_33",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "PR",
+                             "fluxo":  "Saída",
+                             "categoria":  "Terceiros",
+                             "descricao":  "SILVEIRA TELECOMUNICACOES LTDA",
+                             "valor_nominal":  2000,
+                             "valor_liquido":  -2000,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_34",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "PR",
+                             "fluxo":  "Saída",
+                             "categoria":  "Terceiros",
+                             "descricao":  "GUSTAVO BATIS DOS SAN",
+                             "valor_nominal":  1000,
+                             "valor_liquido":  -1000,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_35",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "PR",
+                             "fluxo":  "Saída",
+                             "categoria":  "Terceiros",
+                             "descricao":  "WILLIAM DUTRA CORONAD",
+                             "valor_nominal":  800,
+                             "valor_liquido":  -800,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_36",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "PR",
+                             "fluxo":  "Saída",
+                             "categoria":  "Terceiros",
+                             "descricao":  "DOMINIQUE VISSOTO",
+                             "valor_nominal":  4000,
+                             "valor_liquido":  -4000,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_37",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "PR",
+                             "fluxo":  "Saída",
+                             "categoria":  "Terceiros",
+                             "descricao":  "BENEDITO ANTONIO DOS SANTOS",
+                             "valor_nominal":  260,
+                             "valor_liquido":  -260,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_38",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "SC",
+                             "fluxo":  "Saída",
+                             "categoria":  "Aluguel",
+                             "descricao":  "IBAGY IMOVEIS LTDA",
+                             "valor_nominal":  6174.64,
+                             "valor_liquido":  -6174.64,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_39",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "RS",
+                             "fluxo":  "Entrada",
+                             "categoria":  "Transferência entre contas",
+                             "descricao":  "Transferência entre contas",
+                             "valor_nominal":  50000,
+                             "valor_liquido":  50000,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  true
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_40",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Manutenção Predial",
+                             "descricao":  "COMPRA Tintas e massa base NHO",
+                             "valor_nominal":  1320,
+                             "valor_liquido":  -1320,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_41",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Despesas Bancárias",
+                             "descricao":  "IOF EMRESTIMO",
+                             "valor_nominal":  127.18,
+                             "valor_liquido":  -127.18,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 MAXCREDITO_42",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "AGOS_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Despesas Operacionais",
+                             "descricao":  "Caixa Pastor VINICIUS",
+                             "valor_nominal":  100,
+                             "valor_liquido":  -100,
+                             "meio_pagamento":  "Pix",
                              "is_transfer":  false
                          }
                      ]
