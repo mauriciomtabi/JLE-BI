@@ -3012,17 +3012,18 @@
                     return;
                 }
 
-                // Registrar o último acesso em tempo real
+                // Registrar o último acesso em tempo real (insensível a maiúsculas/minúsculas)
                 if (supabaseClient && user && user.email) {
                     const nowIso = new Date().toISOString();
+                    const cleanEmail = user.email.toLowerCase().trim();
                     supabaseClient.from('bi_permissions')
                         .update({ last_access: nowIso })
-                        .eq('email', user.email)
-                        .then(({ error }) => {
+                        .ilike('email', cleanEmail)
+                        .then(({ error, count }) => {
                             if (error) {
-                                console.warn("Nota: Para habilitar o registro de ultimo acesso em tempo real, crie a coluna 'last_access' (tipo timestamp) na tabela 'bi_permissions' no console do Supabase.", error);
+                                console.warn("Nota ao registrar último acesso:", error);
                             } else {
-                                console.log("Acesso registrado com sucesso em bi_permissions:", nowIso);
+                                console.log("Último acesso registrado para", cleanEmail, "às", nowIso);
                             }
                         });
                 }
