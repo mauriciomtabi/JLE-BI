@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-08-04 18:00:11
+// Dados MDU Compactados - Gerado em: 2026-08-04 19:00:14
 window.MDU_METADATA = {
-    "generated_at": "2026-08-04 18:00:11",
+    "generated_at": "2026-08-04 19:00:14",
     "total_rows": 5371,
-    "geocoded_new": 2
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -170606,8 +170606,8 @@ window.MDU_DATA = [
         "aging": "",
         "relatorio_por": "MATHEUS",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610450502",
         "area": "JBOAAA",
         "node": "PETAH",
@@ -170619,7 +170619,7 @@ window.MDU_DATA = [
         "data_interna": "30/07/2026",
         "data_fusao": "30/07/2026",
         "data_baixa": "04/08",
-        "data_relatorio": "",
+        "data_relatorio": "04/08/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
@@ -171022,8 +171022,8 @@ window.MDU_DATA = [
         "aging": "",
         "relatorio_por": "",
         "pendencia": "",
-        "status": "Baixa",
-        "prog": 63.0,
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "610651058",
         "area": "",
         "node": "",
@@ -171034,7 +171034,7 @@ window.MDU_DATA = [
         "segunda_visita": "",
         "data_interna": "31/07/2026",
         "data_fusao": "31/07/2026",
-        "data_baixa": "",
+        "data_baixa": "04/08",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
