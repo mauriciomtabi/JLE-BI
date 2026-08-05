@@ -3398,7 +3398,7 @@
                 if (typeof VEICULOS_DATA !== 'undefined' && VEICULOS_DATA.length > 0) {
                     let maxDateStr = '';
                     VEICULOS_DATA.forEach(d => {
-                        if (d.date && d.date > maxDateStr) {
+                        if (d.date && typeof d.date === 'string' && !d.date.includes('NaT') && d.date > maxDateStr) {
                             maxDateStr = d.date;
                         }
                     });

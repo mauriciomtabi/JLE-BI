@@ -43302,6 +43302,6 @@ const VEICULOS_DATA = [
     "fuel": null,
     "uf": null,
     "fleet": null,
-    "date": "NaT"
+    "date": ""
   }
 ];
