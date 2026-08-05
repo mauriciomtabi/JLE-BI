@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-08-05 14:00:14
+// Dados MDU Compactados - Gerado em: 2026-08-05 15:00:17
 window.MDU_METADATA = {
-    "generated_at": "2026-08-05 14:00:14",
+    "generated_at": "2026-08-05 15:00:17",
     "total_rows": 5371,
-    "geocoded_new": 2
+    "geocoded_new": 1
 };
 
 window.MDU_DATA = [
@@ -171208,35 +171208,35 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505175",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
+        "endereco": "RUA JARAGUÁ 238",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
         "aging": "",
         "relatorio_por": "",
         "pendencia": "",
-        "status": "",
-        "prog": 0,
+        "status": "Fusão",
+        "prog": 50.0,
         "cod_imovel": "",
-        "area": "",
-        "node": "",
-        "caixa_m": "",
-        "hps": null,
-        "equipe": "",
-        "primeira_visita": "",
+        "area": "MTSAA",
+        "node": "PETALB",
+        "caixa_m": "MTSAA.334.M040",
+        "hps": 8,
+        "equipe": "Guilherme Albrecht",
+        "primeira_visita": "27/07/2026",
         "segunda_visita": "",
-        "data_interna": "",
+        "data_interna": "27/07/2026",
         "data_fusao": "",
         "data_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0355932,
+        "lng": -51.1872999,
+        "geocodificado": true,
         "obs_baixa": "",
-        "obs_vistoria": "",
-        "data_adicio": ""
+        "obs_vistoria": "ADEQUADO",
+        "data_adicio": "05/08/2026"
     },
     {
         "os": "RS.CLR.PRD.2505176",
