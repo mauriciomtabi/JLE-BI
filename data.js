@@ -1,5 +1,5 @@
 ﻿window.CASH_FLOW_DATA = {
-    "generated_at":  "2026-08-04 15:04:29",
+    "generated_at":  "2026-08-05 10:06:27",
     "categories_origin":  {
                               "entradas":  [
 
@@ -134026,6 +134026,70 @@
                              "valor_nominal":  4977.24,
                              "valor_liquido":  4977.24,
                              "meio_pagamento":  "Transferência Bancária",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 CONFIANÇA_12",
+                             "banco":  "Sicoob Confiança",
+                             "aba":  "AGOS_2026 CONFIANÇA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Pedágio",
+                             "descricao":  "PEDAGIO",
+                             "valor_nominal":  6.6,
+                             "valor_liquido":  -6.6,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 CONFIANÇA_13",
+                             "banco":  "Sicoob Confiança",
+                             "aba":  "AGOS_2026 CONFIANÇA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "SC",
+                             "fluxo":  "Saída",
+                             "categoria":  "Manut. De Veículos",
+                             "descricao":  "Conserto pneu ranger",
+                             "valor_nominal":  60,
+                             "valor_liquido":  -60,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 CONFIANÇA_14",
+                             "banco":  "Sicoob Confiança",
+                             "aba":  "AGOS_2026 CONFIANÇA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "SC",
+                             "fluxo":  "Saída",
+                             "categoria":  "Manut. De Veículos",
+                             "descricao":  "Pagamento transferência ranger e Siena",
+                             "valor_nominal":  1100,
+                             "valor_liquido":  -1100,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 CONFIANÇA_15",
+                             "banco":  "Sicoob Confiança",
+                             "aba":  "AGOS_2026 CONFIANÇA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-03",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Material de Escritório",
+                             "descricao":  "Compra notebook RS Paraguai",
+                             "valor_nominal":  2300,
+                             "valor_liquido":  -2300,
+                             "meio_pagamento":  "Pix",
                              "is_transfer":  false
                          },
                          {
