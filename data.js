@@ -1,5 +1,5 @@
 ﻿window.CASH_FLOW_DATA = {
-    "generated_at":  "2026-08-05 10:06:27",
+    "generated_at":  "2026-08-05 15:03:56",
     "categories_origin":  {
                               "entradas":  [
 
@@ -134089,6 +134089,22 @@
                              "descricao":  "Compra notebook RS Paraguai",
                              "valor_nominal":  2300,
                              "valor_liquido":  -2300,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "AGOS_2026 CONFIANÇA_16",
+                             "banco":  "Sicoob Confiança",
+                             "aba":  "AGOS_2026 CONFIANÇA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "AGOSTO/2026",
+                             "data":  "2026-08-04",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Retiradas Sócios",
+                             "descricao":  "Adiantamento josmar",
+                             "valor_nominal":  234.78,
+                             "valor_liquido":  -234.78,
                              "meio_pagamento":  "Pix",
                              "is_transfer":  false
                          },
