@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-08-05 10:00:20
+// Dados MDU Compactados - Gerado em: 2026-08-05 11:00:12
 window.MDU_METADATA = {
-    "generated_at": "2026-08-05 10:00:20",
+    "generated_at": "2026-08-05 11:00:12",
     "total_rows": 5371,
-    "geocoded_new": 0
+    "geocoded_new": 1
 };
 
 window.MDU_DATA = [
@@ -152131,7 +152131,7 @@ window.MDU_DATA = [
         "lng": -51.2270318,
         "geocodificado": true,
         "obs_baixa": "ENTREGUES NA W31",
-        "obs_vistoria": "ADEQUADO, SEM SINAL",
+        "obs_vistoria": "ADEQUADO",
         "data_adicio": "21/05/2026"
     },
     {
@@ -170734,8 +170734,8 @@ window.MDU_DATA = [
         "aging": "",
         "relatorio_por": "JENIFFER",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "711464497",
         "area": "MTSAA",
         "node": "PETALB",
@@ -170747,7 +170747,7 @@ window.MDU_DATA = [
         "data_interna": "30/07/2026",
         "data_fusao": "30/07/2026",
         "data_baixa": "04/08",
-        "data_relatorio": "",
+        "data_relatorio": "05/08/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
@@ -170830,8 +170830,8 @@ window.MDU_DATA = [
         "aging": "",
         "relatorio_por": "JENIFFER",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610433509",
         "area": "MTSAA",
         "node": "PETALB",
@@ -170843,7 +170843,7 @@ window.MDU_DATA = [
         "data_interna": "29/07/2026",
         "data_fusao": "29/07/2026",
         "data_baixa": "04/08",
-        "data_relatorio": "",
+        "data_relatorio": "05/08/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
@@ -171048,9 +171048,9 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505170",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
+        "endereco": "R GUIA LOPES 900 BL 1",
+        "cidade": "NOVO HAMBURGO",
+        "cluster": "NHO",
         "aging": "",
         "relatorio_por": "",
         "pendencia": "",
@@ -171060,23 +171060,23 @@ window.MDU_DATA = [
         "area": "",
         "node": "",
         "caixa_m": "",
-        "hps": null,
-        "equipe": "",
-        "primeira_visita": "",
+        "hps": 20,
+        "equipe": "David Salomão",
+        "primeira_visita": "17/06/2026",
         "segunda_visita": "",
-        "data_interna": "",
+        "data_interna": "17/06/2026",
         "data_fusao": "",
         "data_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -29.6944802,
+        "lng": -51.11723,
+        "geocodificado": true,
         "obs_baixa": "",
-        "obs_vistoria": "",
-        "data_adicio": ""
+        "obs_vistoria": "AGUARDANDO SAR",
+        "data_adicio": "05/08/2026"
     },
     {
         "os": "RS.CLR.PRD.2505171",
