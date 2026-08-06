@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-08-06 12:00:30
+// Dados MDU Compactados - Gerado em: 2026-08-06 13:00:15
 window.MDU_METADATA = {
-    "generated_at": "2026-08-06 12:00:30",
+    "generated_at": "2026-08-06 13:00:15",
     "total_rows": 5371,
-    "geocoded_new": 0
+    "geocoded_new": 4
 };
 
 window.MDU_DATA = [
@@ -171720,35 +171720,35 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505191",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
+        "endereco": "R PALMEIRA 27",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
         "aging": "",
         "relatorio_por": "",
         "pendencia": "",
-        "status": "",
-        "prog": 0,
+        "status": "Baixa",
+        "prog": 63.0,
         "cod_imovel": "",
-        "area": "",
+        "area": "PETAA",
         "node": "",
-        "caixa_m": "",
-        "hps": null,
-        "equipe": "",
-        "primeira_visita": "",
+        "caixa_m": "PETAA.062.M010",
+        "hps": 48,
+        "equipe": "Abraão Rodrigues",
+        "primeira_visita": "04/08/2026",
         "segunda_visita": "",
-        "data_interna": "",
-        "data_fusao": "",
+        "data_interna": "04/08/2026",
+        "data_fusao": "04/08/2026",
         "data_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false,
+        "lat": -30.0360011,
+        "lng": -51.1835253,
+        "geocodificado": true,
         "obs_baixa": "",
-        "obs_vistoria": "",
-        "data_adicio": ""
+        "obs_vistoria": "ADEQUADO",
+        "data_adicio": "06/08/2026"
     },
     {
         "os": "RS.CLR.PRD.2505192",
