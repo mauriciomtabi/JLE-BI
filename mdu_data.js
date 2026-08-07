@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-08-07 12:00:21
+// Dados MDU Compactados - Gerado em: 2026-08-07 13:00:13
 window.MDU_METADATA = {
-    "generated_at": "2026-08-07 12:00:21",
+    "generated_at": "2026-08-07 13:00:13",
     "total_rows": 5386,
-    "geocoded_new": 1
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -152398,8 +152398,8 @@ window.MDU_DATA = [
         "aging": "OK",
         "relatorio_por": "MATHEUS",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610593791",
         "area": "TRLAA",
         "node": "STZAE",
@@ -152411,7 +152411,7 @@ window.MDU_DATA = [
         "data_interna": "20/05",
         "data_fusao": "06/08",
         "data_baixa": "07/08",
-        "data_relatorio": "",
+        "data_relatorio": "07/08/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 620.0,
