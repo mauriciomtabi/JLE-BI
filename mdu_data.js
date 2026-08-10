@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-08-10 08:31:52
+// Dados MDU Compactados - Gerado em: 2026-08-10 09:00:18
 window.MDU_METADATA = {
-    "generated_at": "2026-08-10 08:31:52",
+    "generated_at": "2026-08-10 09:00:18",
     "total_rows": 5386,
     "geocoded_new": 0
 };
@@ -12876,14 +12876,14 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "OK",
-        "relatorio_por": "duda",
+        "relatorio_por": "DUDA",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610441272",
         "area": "MTSAA",
         "node": "MTSACA",
-        "caixa_m": "",
+        "caixa_m": "MTSAA.263.M050",
         "hps": 11,
         "equipe": "Alessandro Fagundes",
         "primeira_visita": "10/09/2025",
@@ -12891,7 +12891,7 @@ window.MDU_DATA = [
         "data_interna": "10/09",
         "data_fusao": "10/09",
         "data_baixa": "30/09",
-        "data_relatorio": "",
+        "data_relatorio": "10/08/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 520.0,
@@ -132115,7 +132115,7 @@ window.MDU_DATA = [
         "cod_imovel": "",
         "area": "RBTAB",
         "node": "RBTAAA",
-        "caixa_m": "",
+        "caixa_m": "RBTAB.051.M010",
         "hps": 24,
         "equipe": "Alessandro Fagundes",
         "primeira_visita": "01/09/2025",
