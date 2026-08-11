@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-08-11 11:00:19
+// Dados MDU Compactados - Gerado em: 2026-08-11 12:00:25
 window.MDU_METADATA = {
-    "generated_at": "2026-08-11 11:00:19",
+    "generated_at": "2026-08-11 12:00:25",
     "total_rows": 5403,
     "geocoded_new": 0
 };
@@ -159918,8 +159918,8 @@ window.MDU_DATA = [
         "aging": "OK",
         "relatorio_por": "JENIFFER",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "711557697",
         "area": "CNTAA",
         "node": "CNTAL",
@@ -159931,7 +159931,7 @@ window.MDU_DATA = [
         "data_interna": "18/06",
         "data_fusao": "08/08",
         "data_baixa": "10/08",
-        "data_relatorio": "",
+        "data_relatorio": "11/08/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
