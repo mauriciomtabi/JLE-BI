@@ -70,6 +70,17 @@ if (Test-Path $gitPath) {
     Write-Warning "Git executavel nao encontrado em '$gitPath'. Nao foi possivel enviar para o repositorio remoto."
 }
 
+# 4. Disparar e-mail de manutenção logo após o sync matinal das 08:00
+$currentHour = (Get-Date).Hour
+if ($currentHour -eq 8 -or $currentHour -eq 9) {
+    Write-Output "Executando disparo matinal de e-mail com a base recem-atualizada..."
+    try {
+        node "$PSScriptRoot\send_email_reports.js"
+    } catch {
+        Write-Warning "Falha ao executar send_email_reports.js: $_"
+    }
+}
+
 Write-Output "=========================================================="
 Write-Output "PROCESSO DE ATUALIZACAO DE MANUTENÇÃO CONCLUIDO!"
 Write-Output "=========================================================="
