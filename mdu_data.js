@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-08-11 13:31:08
+// Dados MDU Compactados - Gerado em: 2026-08-11 14:00:11
 window.MDU_METADATA = {
-    "generated_at": "2026-08-11 13:31:08",
+    "generated_at": "2026-08-11 14:00:11",
     "total_rows": 5403,
-    "geocoded_new": 9
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -114892,7 +114892,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "OK",
-        "relatorio_por": "",
+        "relatorio_por": "MATHEUS",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
@@ -144363,11 +144363,11 @@ window.MDU_DATA = [
         "endereco": "R GUANANAS 83",
         "cidade": "NOVO HAMBURGO",
         "cluster": "NHO",
-        "aging": "117",
-        "relatorio_por": "JENIFFER (SEM FOTO DA FACHADA)",
-        "pendencia": "SIM",
-        "status": "Pendência",
-        "prog": 0.0,
+        "aging": "OK",
+        "relatorio_por": "DUDA",
+        "pendencia": "Não",
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610726251",
         "area": "RNDAA",
         "node": "RNDAC",
@@ -144379,7 +144379,7 @@ window.MDU_DATA = [
         "data_interna": "16/04",
         "data_fusao": "03/06",
         "data_baixa": "05/06",
-        "data_relatorio": "",
+        "data_relatorio": "11/08/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 620.0,
@@ -150347,11 +150347,11 @@ window.MDU_DATA = [
         "endereco": "R PRIMEIRO DE MAIO 278",
         "cidade": "NOVO HAMBURGO",
         "cluster": "NHO",
-        "aging": "87",
+        "aging": "OK",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Baixa",
-        "prog": 63.0,
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "62050171",
         "area": "GRIAA",
         "node": "GRIAC",
@@ -150362,7 +150362,7 @@ window.MDU_DATA = [
         "segunda_visita": "",
         "data_interna": "16/05",
         "data_fusao": "16/05",
-        "data_baixa": "",
+        "data_baixa": "11/08",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
