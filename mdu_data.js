@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-08-13 12:00:17
+// Dados MDU Compactados - Gerado em: 2026-08-13 13:00:10
 window.MDU_METADATA = {
-    "generated_at": "2026-08-13 12:00:17",
+    "generated_at": "2026-08-13 13:00:10",
     "total_rows": 5481,
-    "geocoded_new": 4
+    "geocoded_new": 1
 };
 
 window.MDU_DATA = [
@@ -68622,8 +68622,8 @@ window.MDU_DATA = [
         "aging": "1.236",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "2º Vistoria",
-        "prog": 13.0,
+        "status": "#REF!",
+        "prog": 0.0,
         "cod_imovel": "610450288",
         "area": "BFMAA",
         "node": "BFMAG",
@@ -156556,10 +156556,10 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "OK",
-        "relatorio_por": "",
+        "relatorio_por": "MATHEUS",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610450242",
         "area": "BVSAB",
         "node": "",
@@ -156571,7 +156571,7 @@ window.MDU_DATA = [
         "data_interna": "02/06",
         "data_fusao": "02/06",
         "data_baixa": "25/06",
-        "data_relatorio": "",
+        "data_relatorio": "13/08/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 520.0,
@@ -159756,7 +159756,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "OK",
-        "relatorio_por": "MATHEUS",
+        "relatorio_por": "",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
@@ -168364,7 +168364,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "",
-        "relatorio_por": "",
+        "relatorio_por": "MATHEUS",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
@@ -169228,7 +169228,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "",
-        "relatorio_por": "",
+        "relatorio_por": "MATHEUS",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
