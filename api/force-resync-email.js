@@ -69,7 +69,7 @@ async function scheduleResendEmail(to, subject, html, scheduledAtISO) {
     return resData.id;
 }
 
-function getMduStatusCounts() {
+async function getMduStatusCounts() {
     try {
         const excludeStatus = ["FINALIZADO", "FINALIZADA", "CANCELADO", "CANCELADA"];
         const counts = {};
@@ -353,7 +353,7 @@ module.exports = async (req, res) => {
         console.log("[FORCE-RESYNC] Iniciando re-sincronização forçada pós-deploy de dados MDU...");
 
         // 1. Ler dados MDU atuais do deploy recém-realizado
-        const mduData = getMduStatusCounts();
+        const mduData = await getMduStatusCounts();
         console.log(`[FORCE-RESYNC] generated_at atual dos dados MDU: ${mduData.generated_at}`);
 
         // 2. Buscar todos os relatórios ativos no Supabase

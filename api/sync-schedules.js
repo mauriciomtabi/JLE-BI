@@ -83,7 +83,7 @@ async function cancelResendEmail(emailId) {
     }
 }
 
-function getMduStatusCounts() {
+async function getMduStatusCounts() {
     try {
         const excludeStatus = ["FINALIZADO", "FINALIZADA", "CANCELADO", "CANCELADA"];
         const counts = {};
@@ -427,7 +427,7 @@ module.exports = async (req, res) => {
         const reports = await fetchSupabase("bi_email_reports", 'GET', null, token);
         const actions = [];
 
-        const mduData = getMduStatusCounts();
+        const mduData = await getMduStatusCounts();
 
         for (const report of reports) {
             const currentRecipients = report.recipients || [];

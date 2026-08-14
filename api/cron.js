@@ -67,7 +67,7 @@ async function sendResendEmail(to, subject, html, attachments = null, textAlt = 
     return resData;
 }
 
-function getMduStatusCounts() {
+async function getMduStatusCounts() {
     try {
         const excludeStatus = ["FINALIZADO", "FINALIZADA", "CANCELADO", "CANCELADA"];
         const counts = {};
@@ -405,7 +405,7 @@ module.exports = async (req, res) => {
             return res.status(200).json({ success: true, message: "Nenhum relatório ativo encontrado." });
         }
 
-        const mduData = getMduStatusCounts();
+        const mduData = await getMduStatusCounts();
         const sentReports = [];
 
         for (const config of configs) {

@@ -111,7 +111,7 @@ function parseCsv(csvText) {
     return lines;
 }
 
-async function getMduStatusCounts() {
+async async function getMduStatusCounts() {
     try {
         const excludeStatus = ["FINALIZADO", "FINALIZADA", "CANCELADO", "CANCELADA"];
         const counts = {};
