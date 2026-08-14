@@ -115,44 +115,69 @@ async function getMduStatusCounts() {
         const counts = {};
         let totalActive = 0;
         let generatedAt = "N/D";
+        let content = null;
 
-        // 1. Tentar ler de mdu_data.js (Fonte de verdade idêntica ao BI Dashboard)
-        const jsPath = path.join(process.cwd(), 'mdu_data.js');
-        if (fs.existsSync(jsPath)) {
-            const content = fs.readFileSync(jsPath, 'utf8');
-            const generatedAtMatch = content.match(/"generated_at"s*:s*"([^"]+)"/);
-            if (generatedAtMatch) generatedAt = generatedAtMatch[1];
+        // 1. Tentar ler mdu_data.js local
+        try {
+            const jsPath = path.join(process.cwd(), 'mdu_data.js');
+            if (fs.existsSync(jsPath)) {
+                content = fs.readFileSync(jsPath, 'utf8');
+            }
+        } catch (e) {}
 
-            const dataMatch = content.match(/window.MDU_DATAs*=s*([sS]+?);s*$/);
-            if (dataMatch) {
-                const mduData = JSON.parse(dataMatch[1]);
-                mduData.forEach(r => {
-                    let status = r.status ? r.status.trim() : '';
-                    const statusUpper = status.toUpperCase();
-
-                    if (excludeStatus.includes(statusUpper)) return;
-
-                    if (/^1[ºoOaA]?s*Vistoria/i.test(status) || statusUpper === 'VISTORIA' ||
-                        /^2[ºoOaA]?s*Vistoria/i.test(status) ||
-                        statusUpper === 'BAIXA' ||
-                        statusUpper === 'PROJETO' ||
-                        statusUpper === 'NÃO DEFINIDO' || statusUpper === 'NÃO DEFINIDA' || status === '' || status === '-') {
-                        status = 'Não Adequado';
-                    } else if (statusUpper === 'FUSÃO' || statusUpper === 'FUSAO') {
-                        status = 'Pendências Claro';
-                    }
-
-                    counts[status] = (counts[status] || 0) + 1;
-                    totalActive++;
-                });
-
-                return { counts, total: totalActive, generated_at: generatedAt };
+        // 2. Se não existir localmente (ex: Vercel Serverless), baixar mdu_data.js da Vercel
+        if (!content) {
+            try {
+                const res = await fetch('https://jle-bi.vercel.app/mdu_data.js');
+                if (res.ok) {
+                    content = await res.text();
+                }
+            } catch (e) {
+                console.warn("Falha ao baixar mdu_data.js da Vercel:", e.message);
             }
         }
 
-        // 2. Fallback via Google Sheets CSV caso mdu_data.js não exista
+        // 3. Processar o conteúdo de mdu_data.js se disponível
+        if (content) {
+            try {
+                const generatedAtMatch = content.match(/"generated_at"s*:s*"([^"]+)"/);
+                if (generatedAtMatch) generatedAt = generatedAtMatch[1];
+
+                const dataMatch = content.match(/window.MDU_DATAs*=s*([sS]+?);s*$/);
+                if (dataMatch) {
+                    const mduData = JSON.parse(dataMatch[1]);
+                    mduData.forEach(r => {
+                        let status = r.status ? r.status.trim() : '';
+                        const statusUpper = status.toUpperCase();
+
+                        if (excludeStatus.includes(statusUpper)) return;
+
+                        if (/^1[ºoOaA]?s*Vistoria/i.test(status) || statusUpper === 'VISTORIA' ||
+                            /^2[ºoOaA]?s*Vistoria/i.test(status) ||
+                            statusUpper === 'BAIXA' ||
+                            statusUpper === 'PROJETO' ||
+                            statusUpper === 'NÃO DEFINIDO' || statusUpper === 'NÃO DEFINIDA' || status === '' || status === '-') {
+                            status = 'Não Adequado';
+                        } else if (statusUpper === 'FUSÃO' || statusUpper === 'FUSAO') {
+                            status = 'Pendências Claro';
+                        }
+
+                        counts[status] = (counts[status] || 0) + 1;
+                        totalActive++;
+                    });
+
+                    return { counts, total: totalActive, generated_at: generatedAt };
+                }
+            } catch (e) {
+                console.warn("Erro ao processar mdu_data.js:", e.message);
+            }
+        }
+
+        // 4. Fallback via Google Sheets CSV caso mdu_data.js falhe totalmente
         console.log("Baixando planilha do Google Sheets para o e-mail (fallback)...");
-        const res = await fetch(SHEETS_CSV_URL);
+        const res = await fetch('https://docs.google.com/spreadsheets/d/1eEJLaV7D0rthjC5H1MppXyk7dyroqn2h/export?format=csv&gid=260790893', {
+            headers: { 'User-Agent': 'Mozilla/5.0' }
+        });
         if (!res.ok) throw new Error(`Erro ao baixar a planilha: HTTP ${res.status}`);
         const csvText = await res.text();
         
