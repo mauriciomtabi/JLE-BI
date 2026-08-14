@@ -10,9 +10,14 @@ Write-Output "--- [1/3] Atualizando Fluxo de Caixa (Financeiro) ---"
 & "$workingDir\update_dashboard.ps1"
 Write-Output ""
 
-# 2. Atualizar Analítico Claro
+# 2. Atualizar Analítico Claro (Monitora e-mail e executa ETL)
 Write-Output "--- [2/3] Atualizando Analítico Claro ---"
-& "$workingDir\update_cobranca.ps1"
+$claroMonitor = "$workingDir\monitorar_email_claro.ps1"
+if (Test-Path $claroMonitor) {
+    & "$claroMonitor"
+} else {
+    & "$workingDir\update_cobranca.ps1"
+}
 Write-Output ""
 
 # 3. Atualizar Veículos

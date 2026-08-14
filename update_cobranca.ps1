@@ -1,5 +1,10 @@
 # Script ETL para extrair dados da planilha de Cobrança e gerar cobranca_data.js
 # Lê os dados da aba 'Analitico_Empreiteiras_WF1_WF2_' de 'Analítico Claro - Base Geral.xlsx'
+# Aceita parametro -ExplicitFile para usar um arquivo especifico (passado pelo monitor)
+
+param(
+    [string]$ExplicitFile = ""
+)
 
 $i_caps_acute = [char]205
 $folderName = "ANAL" + $i_caps_acute + "TICO CLARO"
@@ -7,10 +12,44 @@ $networkDir = "\\10.121.21.252\mauricio.maciel@jletelecom.com.br\$folderName"
 $outputPath = "$PSScriptRoot\cobranca_data.js"
 $useFile = $null
 
-if (Test-Path $networkDir) {
+# Se um arquivo foi passado explicitamente pelo monitor, usa-lo diretamente (prioridade maxima)
+if ($ExplicitFile -and (Test-Path $ExplicitFile)) {
+    Write-Output "Usando arquivo fornecido pelo monitor: $ExplicitFile"
+    $ext = [System.IO.Path]::GetExtension($ExplicitFile)
+    $localTempPath = "$PSScriptRoot\temp_cobranca_read$ext"
+    Copy-Item -Path $ExplicitFile -Destination $localTempPath -Force
+    Copy-Item -Path $ExplicitFile -Destination "$PSScriptRoot\local_cobranca_file$ext" -Force
+    $useFile = $localTempPath
+    Write-Output "Arquivo do monitor copiado com sucesso."
+}
+
+# Buscar na rede APENAS se nao recebemos um arquivo explicito do monitor
+if ($null -eq $useFile -and (Test-Path $networkDir)) {
     try {
         $networkFile = Get-ChildItem -Path $networkDir -Filter "*Anal*tico*" | Where-Object { $_.Name -notlike "~$*" } | Sort-Object LastWriteTime -Descending | Select-Object -First 1
-        if ($null -ne $networkFile) {
+        $fallbackFile = Get-ChildItem -Path $PSScriptRoot -Filter "local_cobranca_file.*" | Select-Object -First 1
+        
+        $useNetwork = $true
+        if ($null -ne $networkFile -and $null -ne $fallbackFile) {
+            # Comparar datas dos arquivos no nome ou ultima modificacao
+            $netDate = if ($networkFile.Name -match "(\d{4}_\d{2}_\d{2})") { $Matches[1] -replace "_","" } else { $networkFile.LastWriteTime.ToString("yyyyMMdd") }
+            $localDate = if ($fallbackFile.Name -match "(\d{4}_\d{2}_\d{2})") { $Matches[1] -replace "_","" } else { $fallbackFile.LastWriteTime.ToString("yyyyMMdd") }
+            
+            # Tambem checar .last_claro_mail_date se existir
+            $mailDateFile = "$PSScriptRoot\.last_claro_mail_date"
+            if (Test-Path $mailDateFile) {
+                $savedMailDate = (Get-Content $mailDateFile -Raw).Trim()
+                if ($savedMailDate -gt $localDate) { $localDate = $savedMailDate }
+            }
+
+            if ($localDate -gt $netDate) {
+                Write-Output "Arquivo de rede ($netDate) e MAIS ANTIGO que o cache local/email ($localDate). Mantendo arquivo local mais recente!"
+                $useNetwork = $false
+                $useFile = $fallbackFile.FullName
+            }
+        }
+
+        if ($useNetwork -and $null -ne $networkFile) {
             $ext = $networkFile.Extension
             $localTempPath = "$PSScriptRoot\temp_cobranca_read$ext"
             $fallbackPath = "$PSScriptRoot\local_cobranca_file$ext"
@@ -21,15 +60,16 @@ if (Test-Path $networkDir) {
             Copy-Item -Path $networkPath -Destination $fallbackPath -Force
             $useFile = $localTempPath
             Write-Output "Cópia realizada e cache local atualizado com sucesso."
-        } else {
-            Write-Warning "Nenhum arquivo correspondente a '*Anal*tico*' foi encontrado na pasta de rede."
         }
     } catch {
         Write-Warning "Falha ao copiar da rede: $($_.Exception.Message)"
     }
-} else {
+} elseif ($null -eq $useFile) {
     Write-Warning "Diretório de rede inacessível: $networkDir"
+} else {
+    Write-Output "Arquivo explicito definido - ignorando verificacao de rede."
 }
+
 
 if ($null -eq $useFile) {
     # Tenta obter do diretório Downloads do usuário atual como segunda opção

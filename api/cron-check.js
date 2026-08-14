@@ -107,44 +107,78 @@ function parseCsv(csvText) {
 
 async function getMduStatusCounts() {
     try {
-        console.log("Baixando planilha do Google Sheets...");
+        const excludeStatus = ["FINALIZADO", "FINALIZADA", "CANCELADO", "CANCELADA"];
+        const counts = {};
+        let totalActive = 0;
+        let generatedAt = "N/D";
+
+        // 1. Tentar ler de mdu_data.js (Fonte de verdade idêntica ao BI Dashboard)
+        const jsPath = path.join(process.cwd(), 'mdu_data.js');
+        if (fs.existsSync(jsPath)) {
+            const content = fs.readFileSync(jsPath, 'utf8');
+            const generatedAtMatch = content.match(/"generated_at"s*:s*"([^"]+)"/);
+            if (generatedAtMatch) generatedAt = generatedAtMatch[1];
+
+            const dataMatch = content.match(/window.MDU_DATAs*=s*([sS]+?);s*$/);
+            if (dataMatch) {
+                const mduData = JSON.parse(dataMatch[1]);
+                mduData.forEach(r => {
+                    let status = r.status ? r.status.trim() : '';
+                    const statusUpper = status.toUpperCase();
+
+                    if (excludeStatus.includes(statusUpper)) return;
+
+                    if (/^1[ºoOaA]?s*Vistoria/i.test(status) || statusUpper === 'VISTORIA' ||
+                        /^2[ºoOaA]?s*Vistoria/i.test(status) ||
+                        statusUpper === 'BAIXA' ||
+                        statusUpper === 'PROJETO' ||
+                        statusUpper === 'NÃO DEFINIDO' || statusUpper === 'NÃO DEFINIDA' || status === '' || status === '-') {
+                        status = 'Não Adequado';
+                    } else if (statusUpper === 'FUSÃO' || statusUpper === 'FUSAO') {
+                        status = 'Pendências Claro';
+                    }
+
+                    counts[status] = (counts[status] || 0) + 1;
+                    totalActive++;
+                });
+
+                return { counts, total: totalActive, generated_at: generatedAt };
+            }
+        }
+
+        // 2. Fallback via Google Sheets CSV caso mdu_data.js não exista
+        console.log("Baixando planilha do Google Sheets para o e-mail (fallback)...");
         const res = await fetch(SHEETS_CSV_URL);
         if (!res.ok) throw new Error(`Erro ao baixar a planilha: HTTP ${res.status}`);
         const csvText = await res.text();
         
         const rows = parseCsv(csvText);
         if (rows.length === 0) throw new Error("Planilha vazia ou inválida.");
-        
+
         const headers = rows[0];
         const statusIdx = headers.findIndex(h => h.trim().toUpperCase() === "STATUS");
-        const finalStatusIdx = statusIdx !== -1 ? statusIdx : 9;
-
-        const excludeStatus = ["FINALIZADO", "FINALIZADA", "CANCELADO", "CANCELADA"];
-        const counts = {};
-        let totalActive = 0;
         
         for (let i = 1; i < rows.length; i++) {
             const r = rows[i];
-            if (r.length <= finalStatusIdx) continue;
-            let status = (r[finalStatusIdx] || '').trim();
-            if (status === "") {
-                status = "Não Adequado";
-            }
-            let statusUpper = status.toUpperCase();
-            
-            if (/^1[ºoOaA]?\s*Vistoria/i.test(status) || statusUpper === 'VISTORIA' || 
-                /^2[ºoOaA]?\s*Vistoria/i.test(status) || 
-                statusUpper === 'BAIXA' || 
-                statusUpper === 'PROJETO' || 
-                statusUpper === 'NÃO DEFINIDO' || statusUpper === 'NÃO DEFINIDA' || status === 'Não Definido') {
-                status = "Não Adequado";
-                statusUpper = "NÃO ADEQUADO";
-            } else if (statusUpper === 'FUSÃO' || statusUpper === 'FUSAO') {
-                status = "Pendências Claro";
-                statusUpper = "PENDÊNCIAS CLARO";
+            let colIdx = statusIdx;
+            if (colIdx === -1 || colIdx >= r.length) colIdx = 8;
+            if (headers[0] === '' && r.length < headers.length && colIdx > 0) {
+                colIdx = colIdx - 1;
             }
             
+            let status = (r[colIdx] || '').trim();
+            const statusUpper = status.toUpperCase();
             if (excludeStatus.includes(statusUpper)) continue;
+            
+            if (/^1[ºoOaA]?s*Vistoria/i.test(status) || statusUpper === 'VISTORIA' ||
+                /^2[ºoOaA]?s*Vistoria/i.test(status) ||
+                statusUpper === 'BAIXA' ||
+                statusUpper === 'PROJETO' ||
+                statusUpper === 'NÃO DEFINIDO' || statusUpper === 'NÃO DEFINIDA' || status === '' || status === '-') {
+                status = 'Não Adequado';
+            } else if (statusUpper === 'FUSÃO' || statusUpper === 'FUSAO') {
+                status = 'Pendências Claro';
+            }
             
             counts[status] = (counts[status] || 0) + 1;
             totalActive++;
@@ -159,11 +193,11 @@ async function getMduStatusCounts() {
         const hours = String(localDate.getUTCHours()).padStart(2, '0');
         const minutes = String(localDate.getUTCMinutes()).padStart(2, '0');
         const seconds = String(localDate.getUTCSeconds()).padStart(2, '0');
-        const generatedAt = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        generatedAt = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
         
         return { counts, total: totalActive, generated_at: generatedAt };
     } catch (err) {
-        console.error("Erro ao obter dados do Google Sheets:", err);
+        console.error("Erro ao obter dados do MDU:", err);
         return null;
     }
 }

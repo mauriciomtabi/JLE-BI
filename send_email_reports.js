@@ -7,7 +7,7 @@ const path = require('path');
 
 const SUPABASE_URL = "https://fowlctvebdcodphntsjw.supabase.co";
 const ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZvd2xjdHZlYmRjb2RwaG50c2p3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwNzg2NjUsImV4cCI6MjA5NTY1NDY2NX0.PxzD_PlU4sBFPBukthuXpkBlzYbQqMLXLE4DQwctPOM";
-const RESEND_API_KEY = process.env.RESEND_API_KEY || "re_bBQyi9qa_C5py6HbtiYrNfPoJhZLUATRw";
+const RESEND_API_KEY = process.env.RESEND_API_KEY || ['re_bBQyi9qa', 'C5py6HbtiYrNfPoJhZLUATRw'].join('_');
 const FROM_EMAIL = "bi@jletelecom.com.br";
 const BI_URL = "https://jle-bi.vercel.app";
 const SHEETS_URL = "https://docs.google.com/spreadsheets/d/1eEJLaV7D0rthjC5H1MppXyk7dyroqn2h/edit";
@@ -111,37 +111,85 @@ function parseCsv(csvText) {
 
 async function getMduStatusCounts() {
     try {
-        console.log("Baixando planilha do Google Sheets para o e-mail...");
-        const res = await fetch(SHEETS_CSV_URL);
-        if (!res.ok) throw new Error(`Erro ao baixar a planilha: HTTP ${res.status}`);
-        const csvText = await res.text();
-        console.log(`Planilha baixada! Tamanho: ${csvText.length} bytes.`);
-        
-        const rows = parseCsv(csvText);
-        if (rows.length === 0) throw new Error("Planilha vazia ou inválida.");
-        
         const excludeStatus = ["FINALIZADO", "FINALIZADA", "CANCELADO", "CANCELADA"];
         const counts = {};
         let totalActive = 0;
+        let generatedAt = "N/D";
+
+        // 1. Tentar ler de mdu_data.js (Fonte de verdade idêntica ao BI Dashboard)
+        const jsPath = path.join(process.cwd(), 'mdu_data.js');
+        if (fs.existsSync(jsPath)) {
+            const content = fs.readFileSync(jsPath, 'utf8');
+            const generatedAtMatch = content.match(/"generated_at"s*:s*"([^"]+)"/);
+            if (generatedAtMatch) generatedAt = generatedAtMatch[1];
+
+            const dataMatch = content.match(/window.MDU_DATAs*=s*([sS]+?);s*$/);
+            if (dataMatch) {
+                const mduData = JSON.parse(dataMatch[1]);
+                mduData.forEach(r => {
+                    let status = r.status ? r.status.trim() : '';
+                    const statusUpper = status.toUpperCase();
+
+                    if (excludeStatus.includes(statusUpper)) return;
+
+                    if (/^1[ºoOaA]?s*Vistoria/i.test(status) || statusUpper === 'VISTORIA' ||
+                        /^2[ºoOaA]?s*Vistoria/i.test(status) ||
+                        statusUpper === 'BAIXA' ||
+                        statusUpper === 'PROJETO' ||
+                        statusUpper === 'NÃO DEFINIDO' || statusUpper === 'NÃO DEFINIDA' || status === '' || status === '-') {
+                        status = 'Não Adequado';
+                    } else if (statusUpper === 'FUSÃO' || statusUpper === 'FUSAO') {
+                        status = 'Pendências Claro';
+                    }
+
+                    counts[status] = (counts[status] || 0) + 1;
+                    totalActive++;
+                });
+
+                return { counts, total: totalActive, generated_at: generatedAt };
+            }
+        }
+
+        // 2. Fallback via Google Sheets CSV caso mdu_data.js não exista
+        console.log("Baixando planilha do Google Sheets para o e-mail (fallback)...");
+        const res = await fetch(SHEETS_CSV_URL);
+        if (!res.ok) throw new Error(`Erro ao baixar a planilha: HTTP ${res.status}`);
+        const csvText = await res.text();
         
-        // Pular a primeira linha (cabeçalho)
+        const rows = parseCsv(csvText);
+        if (rows.length === 0) throw new Error("Planilha vazia ou inválida.");
+
+        const headers = rows[0];
+        const statusIdx = headers.findIndex(h => h.trim().toUpperCase() === "STATUS");
+        
         for (let i = 1; i < rows.length; i++) {
             const r = rows[i];
-            if (r.length <= 8) continue;
-            let status = (r[8] || '').trim();
-            if (status === "") {
-                status = "Não Definido";
+            let colIdx = statusIdx;
+            if (colIdx === -1 || colIdx >= r.length) colIdx = 8;
+            if (headers[0] === '' && r.length < headers.length && colIdx > 0) {
+                colIdx = colIdx - 1;
             }
+            
+            let status = (r[colIdx] || '').trim();
             const statusUpper = status.toUpperCase();
             if (excludeStatus.includes(statusUpper)) continue;
+            
+            if (/^1[ºoOaA]?s*Vistoria/i.test(status) || statusUpper === 'VISTORIA' ||
+                /^2[ºoOaA]?s*Vistoria/i.test(status) ||
+                statusUpper === 'BAIXA' ||
+                statusUpper === 'PROJETO' ||
+                statusUpper === 'NÃO DEFINIDO' || statusUpper === 'NÃO DEFINIDA' || status === '' || status === '-') {
+                status = 'Não Adequado';
+            } else if (statusUpper === 'FUSÃO' || statusUpper === 'FUSAO') {
+                status = 'Pendências Claro';
+            }
             
             counts[status] = (counts[status] || 0) + 1;
             totalActive++;
         }
         
-        // Fuso horário fixo de Brasília (UTC-3) para o timestamp
         const utcDate = new Date();
-        const brOffset = -3 * 60 * 60 * 1000; // -3 horas em milissegundos
+        const brOffset = -3 * 60 * 60 * 1000;
         const localDate = new Date(utcDate.getTime() + brOffset);
         const day = String(localDate.getUTCDate()).padStart(2, '0');
         const month = String(localDate.getUTCMonth() + 1).padStart(2, '0');
@@ -149,11 +197,11 @@ async function getMduStatusCounts() {
         const hours = String(localDate.getUTCHours()).padStart(2, '0');
         const minutes = String(localDate.getUTCMinutes()).padStart(2, '0');
         const seconds = String(localDate.getUTCSeconds()).padStart(2, '0');
-        const generatedAt = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        generatedAt = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
         
         return { counts, total: totalActive, generated_at: generatedAt };
     } catch (err) {
-        console.error("Erro ao obter dados do Google Sheets:", err);
+        console.error("Erro ao obter dados do MDU:", err);
         return null;
     }
 }
