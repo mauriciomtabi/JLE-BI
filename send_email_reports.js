@@ -525,14 +525,43 @@ async function start() {
             console.log(`=> DISPARANDO RELATÓRIO! Motivo: Horário agendado`);
             console.log(`Destinatários: ${config.recipients.filter(e => !e.startsWith("__sched:") && !e.startsWith("__lock:")).join(", ")}`);
             
-            const emailHtml = buildEmailHtml(mduData, config.report_name);
+            const reportNameLower = (config.report_name || '').toLowerCase();
+            const reportType = config.report_type || 
+                (reportNameLower.includes('manut') ? 'manutencao' : 
+                 reportNameLower.includes('claro') ? 'claro' : 
+                 reportNameLower.includes('tecnodrill') ? 'tecnodrill' : 'mdu');
+
+            let emailHtml;
+            let attachments = null;
+
+            if (reportType === 'claro') {
+                const claroHelper = require('./api/claro-report-helper');
+                const claroData = await claroHelper.loadClaroDataAsync();
+                const excelRes = claroHelper.generateExcelAttachments(claroData);
+                attachments = excelRes.attachments;
+                emailHtml = claroHelper.buildClaroEmailHtml(config.report_name, excelRes, claroData.generated_at);
+            } else if (reportType === 'manutencao') {
+                const manutHelper = require('./api/manutencao-report-helper');
+                const manutData = await manutHelper.loadManutencaoDataAsync();
+                attachments = manutHelper.generateExcelAttachments(manutData);
+                emailHtml = manutHelper.buildManutencaoEmailHtml(config.report_name, manutData);
+            } else if (reportType === 'tecnodrill') {
+                const tecnoHelper = require('./api/tecnodrill-report-helper');
+                const tecnoData = await tecnoHelper.loadTecnodrillDataAsync();
+                attachments = tecnoHelper.generateExcelAttachments(tecnoData);
+                emailHtml = tecnoHelper.buildTecnodrillEmailHtml(config.report_name, tecnoData);
+            } else {
+                const mduData = await getMduStatusCounts();
+                emailHtml = buildEmailHtml(mduData, config.report_name);
+            }
+
             const dayStr = String(localDate.getUTCDate()).padStart(2, '0');
             const monthStr = String(localDate.getUTCMonth() + 1).padStart(2, '0');
             const yearStr = localDate.getUTCFullYear();
             const subject = `${config.report_name} - ${dayStr}/${monthStr}/${yearStr}`;
             
             const cleanRecipients = (config.recipients || []).filter(e => !e.startsWith("__sched:") && !e.startsWith("__lock:"));
-            await sendResendEmail(cleanRecipients, subject, emailHtml);
+            await sendResendEmail(cleanRecipients, subject, emailHtml, attachments);
             console.log("E-mail disparado com sucesso via Resend!");
 
             // 4. Salvar last_sent_at no Supabase para travar reenvios hoje

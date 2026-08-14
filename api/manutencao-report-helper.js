@@ -371,3 +371,72 @@ module.exports = {
     generateExcelAttachments,
     buildManutencaoEmailHtml
 };
+
+function parseManutencaoContent(content) {
+    const match = content.match(/const db = ({[\s\S]*?});\r?\n\r?\s*const l =/);
+    if (!match) {
+        throw new Error("Não foi possível decodificar os dados de manutencao_data.js.");
+    }
+    
+    const db = JSON.parse(match[1]);
+    const l = db.lookups;
+    
+    const rows = db.rows.map(r => ({
+        ral: r[0] || '-',
+        tipo_of: l.tipos_of[r[1]] || '-',
+        atividade: r[2] || '-',
+        tipo_atividade: l.tipos_atividade[r[3]] || '-',
+        localidade: l.localidades[r[4]] || '-',
+        status: l.statuses[r[5]] || '-',
+        data_acionamento: r[6] || '-',
+        equipe: l.equipes[r[7]] || '-',
+        tipo_defeito: l.tipos_defeito[r[8]] || '-',
+        causa_defeito: l.causas_defeito[r[9]] || '-',
+        valor_medicao: r[10] || 0.0,
+        mes_pagamento: l.meses_pagamento[r[11]] || '-',
+        demanda_integ: l.demanda_integ[r[12]] || '-',
+        wf2: r[13] || '-',
+        obs_medicao: r[14] || '-',
+        legend_status: r[15] || '-'
+    }));
+    
+    return {
+        generated_at: db.generated_at,
+        rows: rows
+    };
+}
+
+async function loadManutencaoDataAsync() {
+    let content = null;
+    let filePath = path.join(__dirname, '../manutencao_data.js');
+    if (!fs.existsSync(filePath)) {
+        filePath = path.join(process.cwd(), 'manutencao_data.js');
+    }
+    if (!fs.existsSync(filePath)) {
+        filePath = path.join(__dirname, 'manutencao_data.js');
+    }
+    
+    if (fs.existsSync(filePath)) {
+        content = fs.readFileSync(filePath, 'utf8');
+    } else {
+        try {
+            const res = await fetch('https://raw.githubusercontent.com/mauriciomtabi/JLE-BI/main/manutencao_data.js', {
+                headers: { 'User-Agent': 'Mozilla/5.0' }
+            });
+            if (res.ok) {
+                content = await res.text();
+            }
+        } catch (e) {
+            console.warn("Falha ao buscar manutencao_data.js do GitHub:", e.message);
+        }
+    }
+    
+    if (!content) {
+        throw new Error("Arquivo manutencao_data.js não localizado no servidor.");
+    }
+    
+    return parseManutencaoContent(content);
+}
+
+module.exports.loadManutencaoDataAsync = loadManutencaoDataAsync;
+module.exports.parseManutencaoContent = parseManutencaoContent;

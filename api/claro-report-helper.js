@@ -352,3 +352,76 @@ module.exports = {
     generateExcelAttachments,
     buildClaroEmailHtml
 };
+
+function parseClaroContent(content) {
+    const match = content.match(/const db = ({[\s\S]*?});\r?\n/);
+    if (!match) {
+        throw new Error("Não foi possível decodificar os dados de cobranca_data.js.");
+    }
+    
+    const db = JSON.parse(match[1]);
+    const l = db.lookups;
+    
+    const rows = db.rows.map(r => ({
+        pep: r[0] || '-',
+        categoria: l.categorias[r[1]] || '-',
+        os: r[2] || '-',
+        cidade: l.cidades[r[3]] || '-',
+        uf: l.ufs[r[4]] || '-',
+        projeto: l.projetos[r[5]] || '-',
+        projeto_gerencial: l.projetos_gerenciais[r[6]] || '-',
+        tipo_atividade: l.tipos_atividade[r[7]] || '-',
+        fase_atual: l.fase_atual[r[8]] || '-',
+        contrato_numero: l.contratos[r[9]] || '-',
+        item_descritivo: l.itens_descritivos[r[10]] || '-',
+        tipo_despesa: l.tipos_despesa[r[11]] || '-',
+        objeto_do_contrato: l.objetos_contrato[r[12]] || '-',
+        fornecedor: l.fornecedores[r[13]] || '-',
+        mes_pagamento: l.meses_pagamento[r[14]] || '-',
+        demanda_integ: l.demandas_integ[r[15]] || '-',
+        status_pedido: l.status_pedido[r[16]] || '-',
+        valor_medido: r[17] || 0.0,
+        wf2: r[18] || '-',
+        ano_aprovacao: r[19] || '-'
+    }));
+    
+    return {
+        generated_at: db.generated_at,
+        rows: rows
+    };
+}
+
+async function loadClaroDataAsync() {
+    let content = null;
+    let filePath = path.join(__dirname, '../cobranca_data.js');
+    if (!fs.existsSync(filePath)) {
+        filePath = path.join(process.cwd(), 'cobranca_data.js');
+    }
+    if (!fs.existsSync(filePath)) {
+        filePath = path.join(__dirname, 'cobranca_data.js');
+    }
+    
+    if (fs.existsSync(filePath)) {
+        content = fs.readFileSync(filePath, 'utf8');
+    } else {
+        try {
+            const res = await fetch('https://raw.githubusercontent.com/mauriciomtabi/JLE-BI/main/cobranca_data.js', {
+                headers: { 'User-Agent': 'Mozilla/5.0' }
+            });
+            if (res.ok) {
+                content = await res.text();
+            }
+        } catch (e) {
+            console.warn("Falha ao buscar cobranca_data.js do GitHub:", e.message);
+        }
+    }
+    
+    if (!content) {
+        throw new Error("Arquivo cobranca_data.js não localizado no servidor.");
+    }
+    
+    return parseClaroContent(content);
+}
+
+module.exports.loadClaroDataAsync = loadClaroDataAsync;
+module.exports.parseClaroContent = parseClaroContent;
