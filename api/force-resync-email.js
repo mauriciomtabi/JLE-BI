@@ -85,15 +85,22 @@ async function getMduStatusCounts() {
             }
         } catch (e) {}
 
-        // 2. Se não existir localmente (ex: Vercel Serverless), baixar mdu_data.js da Vercel
+        // 2. Se não existir localmente (ex: Vercel Serverless), buscar do GitHub Raw ou Vercel
         if (!content) {
-            try {
-                const res = await fetch('https://jle-bi.vercel.app/mdu_data.js');
-                if (res.ok) {
-                    content = await res.text();
+            const urls = [
+                'https://raw.githubusercontent.com/mauriciomtabi/JLE-BI/main/mdu_data.js',
+                'https://jle-bi.vercel.app/mdu_data.js'
+            ];
+            for (const url of urls) {
+                try {
+                    const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
+                    if (res.ok) {
+                        content = await res.text();
+                        if (content && content.includes('window.MDU_DATA')) break;
+                    }
+                } catch (e) {
+                    console.warn(`Falha ao buscar mdu_data.js de ${url}:`, e.message);
                 }
-            } catch (e) {
-                console.warn("Falha ao baixar mdu_data.js da Vercel:", e.message);
             }
         }
 
