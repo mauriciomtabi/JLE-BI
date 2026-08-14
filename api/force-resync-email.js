@@ -110,30 +110,34 @@ async function getMduStatusCounts() {
                 const generatedAtMatch = content.match(/"generated_at"s*:s*"([^"]+)"/);
                 if (generatedAtMatch) generatedAt = generatedAtMatch[1];
 
-                const dataMatch = content.match(/window.MDU_DATAs*=s*([sS]+?);s*$/);
-                if (dataMatch) {
-                    const mduData = JSON.parse(dataMatch[1]);
-                    mduData.forEach(r => {
-                        let status = r.status ? r.status.trim() : '';
-                        const statusUpper = status.toUpperCase();
+                const idx = content.indexOf('window.MDU_DATA');
+                if (idx !== -1) {
+                    const jsonStart = content.indexOf('[', idx);
+                    const jsonEnd = content.lastIndexOf(']');
+                    if (jsonStart !== -1 && jsonEnd !== -1) {
+                        const mduData = JSON.parse(content.substring(jsonStart, jsonEnd + 1));
+                        mduData.forEach(r => {
+                            let status = r.status ? r.status.trim() : '';
+                            const statusUpper = status.toUpperCase();
 
-                        if (excludeStatus.includes(statusUpper)) return;
+                            if (excludeStatus.includes(statusUpper)) return;
 
-                        if (/^1[ºoOaA]?s*Vistoria/i.test(status) || statusUpper === 'VISTORIA' ||
-                            /^2[ºoOaA]?s*Vistoria/i.test(status) ||
-                            statusUpper === 'BAIXA' ||
-                            statusUpper === 'PROJETO' ||
-                            statusUpper === 'NÃO DEFINIDO' || statusUpper === 'NÃO DEFINIDA' || status === '' || status === '-') {
-                            status = 'Não Adequado';
-                        } else if (statusUpper === 'FUSÃO' || statusUpper === 'FUSAO') {
-                            status = 'Pendências Claro';
-                        }
+                            if (/^1[ºoOaA]?s*Vistoria/i.test(status) || statusUpper === 'VISTORIA' ||
+                                /^2[ºoOaA]?s*Vistoria/i.test(status) ||
+                                statusUpper === 'BAIXA' ||
+                                statusUpper === 'PROJETO' ||
+                                statusUpper === 'NÃO DEFINIDO' || statusUpper === 'NÃO DEFINIDA' || status === '' || status === '-') {
+                                status = 'Não Adequado';
+                            } else if (statusUpper === 'FUSÃO' || statusUpper === 'FUSAO') {
+                                status = 'Pendências Claro';
+                            }
 
-                        counts[status] = (counts[status] || 0) + 1;
-                        totalActive++;
-                    });
+                            counts[status] = (counts[status] || 0) + 1;
+                            totalActive++;
+                        });
 
-                    return { counts, total: totalActive, generated_at: generatedAt };
+                        return { counts, total: totalActive, generated_at: generatedAt };
+                    }
                 }
             } catch (e) {
                 console.warn("Erro ao processar mdu_data.js:", e.message);
