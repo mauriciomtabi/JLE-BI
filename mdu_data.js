@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-08-15 15:34:30
+// Dados MDU Compactados - Gerado em: 2026-08-15 16:00:11
 window.MDU_METADATA = {
-    "generated_at": "2026-08-15 15:34:30",
+    "generated_at": "2026-08-15 16:00:11",
     "total_rows": 5481,
     "geocoded_new": 0
 };
@@ -160142,8 +160142,8 @@ window.MDU_DATA = [
         "aging": "51",
         "relatorio_por": "JENIFFER",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "713042346",
         "area": "SPEAA",
         "node": "PDRACB FASE 2",
@@ -160155,7 +160155,7 @@ window.MDU_DATA = [
         "data_interna": "19/06",
         "data_fusao": "19/06",
         "data_baixa": "25/06",
-        "data_relatorio": "",
+        "data_relatorio": "15/08/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
