@@ -3728,6 +3728,19 @@
                 return;
             }
 
+            // Auto-sanitizar tokens legados __sched: / __lock: se existirem
+            data.forEach(r => {
+                if (r.recipients && r.recipients.some(e => e.startsWith('__sched:') || e.startsWith('__lock:'))) {
+                    const cleanRecipients = r.recipients.filter(e => !e.startsWith('__sched:') && !e.startsWith('__lock:'));
+                    supabaseClient.from('bi_email_reports').update({
+                        recipients: cleanRecipients,
+                        updated_at: new Date().toISOString()
+                    }).eq('id', r.id).then(() => {
+                        console.log(`[Email Reports] Auto-sanitizado destinatários de "${r.report_name}".`);
+                    });
+                }
+            });
+
             const dayLabels = { MON:'Seg', TUE:'Ter', WED:'Qua', THU:'Qui', FRI:'Sex', SAT:'Sáb', SUN:'Dom' };
             const typeLabels = { mdu: '📡 MDU', claro: '📊 Analítico Claro', manutencao: '🛠️ Manutenção' };
 
@@ -3871,18 +3884,7 @@
             const days = Array.from(document.querySelectorAll('.email-day-check:checked')).map(cb => cb.value);
             if (days.length === 0) { alert('Selecione ao menos um dia de envio.'); return; }
 
-            let finalRecipients = recipients;
-            if (id) {
-                try {
-                    const { data: existingReport } = await supabaseClient.from('bi_email_reports').select('recipients').eq('id', id).single();
-                    if (existingReport && existingReport.recipients) {
-                        const existingScheds = existingReport.recipients.filter(e => e.startsWith('__sched:') || e.startsWith('__lock:'));
-                        finalRecipients = [...recipients, ...existingScheds];
-                    }
-                } catch (e) {
-                    console.error("Error retrieving existing scheds:", e);
-                }
-            }
+            const finalRecipients = recipients;
 
             const payload = {
                 report_name: name,
