@@ -28,6 +28,18 @@ function initVeiculos() {
             console.error('VEICULOS_DATA não carregado.');
             return;
         }
+
+        // Sanitização preventiva: remove linhas de resumo/total e registros inválidos
+        VEICULOS_DATA = (VEICULOS_DATA || []).filter(r => {
+            if (!r) return false;
+            const plate  = String(r.plate || '').trim().toUpperCase();
+            const driver = String(r.driver || '').trim().toUpperCase();
+            const date   = String(r.date || '').trim();
+            if (!plate && !driver && !date) return false;
+            if (plate === 'TOTAL' || driver === 'TOTAL') return false;
+            return true;
+        });
+
         filteredVeiculosData = [...VEICULOS_DATA];
 
         populateVeiculosFilters();
