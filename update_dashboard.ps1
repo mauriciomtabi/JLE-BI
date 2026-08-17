@@ -208,15 +208,40 @@ try {
             }
         }
         
+        # Determinar limites exatos de linhas (usando Tabela/ListObject se disponível)
+        $firstDataRow = $headerRowIdx + 1
+        $lastDataRow = $totalRows
+        $hasListObject = $false
+        
+        if ($sheet.ListObjects.Count -gt 0) {
+            try {
+                $lo = $sheet.ListObjects.Item(1)
+                $loHeader = $lo.HeaderRowRange.Row
+                if ($loHeader -eq $headerRowIdx) {
+                    $firstDataRow = $loHeader + 1
+                    $lastDataRow = $loHeader + $lo.ListRows.Count
+                    $hasListObject = $true
+                }
+            } catch {
+                # Fallback para range padrão caso haja erro no ListObject
+            }
+        }
+        
         $txCount = 0
-        for ($r = $headerRowIdx + 1; $r -le $totalRows; $r++) {
+        $consecutiveEmptyRows = 0
+        for ($r = $firstDataRow; $r -le $lastDataRow; $r++) {
             $dataIdx = $colMap["data"]
             if ($null -eq $dataIdx) { continue }
             
             $dataVal = $sheet.Cells.Item($r, $dataIdx).Value2
             if ($null -eq $dataVal -or $dataVal.ToString().Trim() -eq "") {
+                $consecutiveEmptyRows++
+                if (-not $hasListObject -and $consecutiveEmptyRows -ge 3) {
+                    break
+                }
                 continue
             }
+            $consecutiveEmptyRows = 0
             
             $dataStr = Parse-ExcelDate $dataVal
             
