@@ -1905,6 +1905,7 @@ td.cell-saida {
 body.sidebar-collapsed .sidebar {
     width: 70px;
     padding: 0 10px 24px 10px;
+    overflow-x: hidden;
 }
 
 body.sidebar-collapsed .main-content {
@@ -1930,13 +1931,33 @@ body.sidebar-collapsed .sidebar .logo-full {
     max-width: 90px;
 }
 
-body.sidebar-collapsed .sidebar .nav-item span {
-    display: none;
+body.sidebar-collapsed .sidebar .nav-item span,
+body.sidebar-collapsed .sidebar .nav-group-toggle span,
+body.sidebar-collapsed .sidebar .nav-group-arrow {
+    display: none !important;
 }
 
-body.sidebar-collapsed .sidebar .nav-item {
+body.sidebar-collapsed .sidebar .nav-item,
+body.sidebar-collapsed .sidebar .nav-group-toggle {
     justify-content: center;
     padding: 12px 0;
+}
+
+body.sidebar-collapsed .sidebar .nav-item:hover,
+body.sidebar-collapsed .sidebar .nav-item.active,
+body.sidebar-collapsed .sidebar .nav-group-toggle:hover,
+body.sidebar-collapsed .sidebar .nav-group-toggle.open {
+    padding-left: 0 !important;
+}
+
+body.sidebar-collapsed .sidebar .nav-subitem {
+    padding-left: 0 !important;
+    justify-content: center !important;
+}
+
+body.sidebar-collapsed .sidebar .nav-subitem:hover,
+body.sidebar-collapsed .sidebar .nav-subitem.active {
+    padding-left: 0 !important;
 }
 
 body.sidebar-collapsed .sidebar .sidebar-footer button span {
