@@ -1,4 +1,4 @@
-const VEICULOS_DATA = [
+var VEICULOS_DATA = [
   {
     "km": null,
     "model": null,

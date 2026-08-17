@@ -21,6 +21,20 @@ let tableVeiculosSortColumn     = 'date';
 let tableVeiculosSortDirection  = 'asc';
 let tableVeiculosSearchQuery    = '';
 
+// ── Fonte de dados base (segura contra linhas espúrias) ────────────────────
+function getBaseVeiculosData() {
+    if (typeof VEICULOS_DATA === 'undefined' || !Array.isArray(VEICULOS_DATA)) return [];
+    return VEICULOS_DATA.filter(r => {
+        if (!r) return false;
+        const plate  = String(r.plate || '').trim().toUpperCase();
+        const driver = String(r.driver || '').trim().toUpperCase();
+        const date   = String(r.date || '').trim();
+        if (!plate && !driver && !date) return false;
+        if (plate === 'TOTAL' || driver === 'TOTAL') return false;
+        return true;
+    });
+}
+
 // ── Inicialização ─────────────────────────────────────────────────────────
 function initVeiculos() {
     try {
@@ -29,18 +43,7 @@ function initVeiculos() {
             return;
         }
 
-        // Sanitização preventiva: remove linhas de resumo/total e registros inválidos
-        VEICULOS_DATA = (VEICULOS_DATA || []).filter(r => {
-            if (!r) return false;
-            const plate  = String(r.plate || '').trim().toUpperCase();
-            const driver = String(r.driver || '').trim().toUpperCase();
-            const date   = String(r.date || '').trim();
-            if (!plate && !driver && !date) return false;
-            if (plate === 'TOTAL' || driver === 'TOTAL') return false;
-            return true;
-        });
-
-        filteredVeiculosData = [...VEICULOS_DATA];
+        filteredVeiculosData = getBaseVeiculosData();
 
         populateVeiculosFilters();
         initVeiculosEventListeners();
@@ -110,6 +113,7 @@ function setVeiculosEvolutionGranularity(g) {
 
 // ── Popula filtros dinamicamente ──────────────────────────────────────────
 function populateVeiculosFilters() {
+    const baseData = getBaseVeiculosData();
     // Competência/Mês
     try {
         const monthSelect = document.getElementById('filter-veiculos-month');
@@ -119,7 +123,7 @@ function populateVeiculosFilters() {
                 'MAIO':5,'JUNHO':6,'JULHO':7,'AGOSTO':8,
                 'SETEMBRO':9,'OUTUBRO':10,'NOVEMBRO':11,'DEZEMBRO':12
             };
-            const uniqueMonths = [...new Set(VEICULOS_DATA.map(r => String(r.month || '').trim()))]
+            const uniqueMonths = [...new Set(baseData.map(r => String(r.month || '').trim()))]
                 .filter(m => m && m !== '')
                 .sort((a, b) => (monthOrder[a.toUpperCase()] || 99) - (monthOrder[b.toUpperCase()] || 99));
 
@@ -154,7 +158,7 @@ function populateVeiculosFilters() {
     try {
         const fuelSelect = document.getElementById('filter-veiculos-fuel');
         if (fuelSelect) {
-            const fuels = [...new Set(VEICULOS_DATA.map(r => String(r.fuel || '').trim()).filter(Boolean))].sort();
+            const fuels = [...new Set(baseData.map(r => String(r.fuel || '').trim()).filter(Boolean))].sort();
             if (fuels.length > 0) {
                 fuelSelect.innerHTML = '<option value="all">Todas as Categorias</option>';
                 fuels.forEach(f => {
@@ -171,8 +175,8 @@ function populateVeiculosFilters() {
 
     // Datalists
     try {
-        const drivers = [...new Set(VEICULOS_DATA.map(r => String(r.driver || '').trim()).filter(Boolean))].sort();
-        const plates  = [...new Set(VEICULOS_DATA.map(r => String(r.plate || '').trim()).filter(Boolean))].sort();
+        const drivers = [...new Set(baseData.map(r => String(r.driver || '').trim()).filter(Boolean))].sort();
+        const plates  = [...new Set(baseData.map(r => String(r.plate || '').trim()).filter(Boolean))].sort();
 
         const driverList = document.getElementById('veiculos-driver-list');
         if (driverList) {
@@ -231,7 +235,7 @@ function applyVeiculosFilters() {
         const dataInicio = document.getElementById('filter-veiculos-data-inicio')?.value || '';
         const dataFim    = document.getElementById('filter-veiculos-data-fim')?.value    || '';
 
-        filteredVeiculosData = VEICULOS_DATA.filter(r => {
+        filteredVeiculosData = getBaseVeiculosData().filter(r => {
             if (month !== 'all' && String(r.month || '').toUpperCase() !== month.toUpperCase()) return false;
             if (uf    !== 'all' && String(r.uf || '') !== uf)    return false;
             if (fuel  !== 'all' && String(r.fuel || '') !== fuel)  return false;
@@ -372,7 +376,7 @@ function buildEvolutionData() {
         const dataInicio = document.getElementById('filter-veiculos-data-inicio')?.value || '';
         const dataFim    = document.getElementById('filter-veiculos-data-fim')?.value    || '';
 
-        const dataForMensal = VEICULOS_DATA.filter(r => {
+        const dataForMensal = getBaseVeiculosData().filter(r => {
             if (uf    !== 'all' && String(r.uf || '') !== uf)    return false;
             if (fuel  !== 'all' && String(r.fuel || '') !== fuel)  return false;
             if (driver && !String(r.driver || '').toUpperCase().includes(driver)) return false;
