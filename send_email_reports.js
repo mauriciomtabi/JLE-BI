@@ -41,7 +41,7 @@ async function fetchSupabase(endpoint, method = 'GET', body = null) {
     return res.json();
 }
 
-async function sendResendEmail(to, subject, html) {
+async function sendResendEmail(to, subject, html, attachments = null) {
     const url = "https://api.resend.com/emails";
     const headers = {
         "Authorization": `Bearer ${RESEND_API_KEY}`,
@@ -54,6 +54,9 @@ async function sendResendEmail(to, subject, html) {
         subject: subject,
         html: html
     };
+    if (attachments && Array.isArray(attachments) && attachments.length > 0) {
+        body.attachments = attachments;
+    }
     
     const res = await fetch(url, {
         method: 'POST',

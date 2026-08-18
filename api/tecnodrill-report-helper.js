@@ -187,8 +187,50 @@ function buildTecnodrillEmailHtml(reportName, tecnodrillData) {
     </html>`;
 }
 
+function parseTecnodrillContent(content) {
+    const match = content.match(/window\.TECNODRILL_DATA\s*=\s*({[\s\S]*?});/);
+    if (!match) {
+        throw new Error("Não foi possível decodificar os dados de tecnodrill_data.js.");
+    }
+    return JSON.parse(match[1]);
+}
+
+async function loadTecnodrillDataAsync() {
+    let content = null;
+    let filePath = path.join(__dirname, '../tecnodrill_data.js');
+    if (!fs.existsSync(filePath)) {
+        filePath = path.join(process.cwd(), 'tecnodrill_data.js');
+    }
+    if (!fs.existsSync(filePath)) {
+        filePath = path.join(__dirname, 'tecnodrill_data.js');
+    }
+
+    if (fs.existsSync(filePath)) {
+        content = fs.readFileSync(filePath, 'utf8');
+    } else {
+        try {
+            const res = await fetch('https://raw.githubusercontent.com/mauriciomtabi/JLE-BI/main/tecnodrill_data.js', {
+                headers: { 'User-Agent': 'Mozilla/5.0' }
+            });
+            if (res.ok) {
+                content = await res.text();
+            }
+        } catch (e) {
+            console.warn("Falha ao buscar tecnodrill_data.js do GitHub:", e.message);
+        }
+    }
+
+    if (!content) {
+        throw new Error("Arquivo tecnodrill_data.js não localizado no servidor.");
+    }
+
+    return parseTecnodrillContent(content);
+}
+
 module.exports = {
     loadTecnodrillData,
+    loadTecnodrillDataAsync,
+    parseTecnodrillContent,
     generateExcelAttachments,
     buildTecnodrillEmailHtml
 };

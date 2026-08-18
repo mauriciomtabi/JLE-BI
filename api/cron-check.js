@@ -530,20 +530,31 @@ module.exports = async (req, res) => {
             }
 
             // Se chegamos aqui, precisamos disparar o e-mail.
+            const reportNameLower = (config.report_name || config.report || '').toLowerCase();
+            const reportType = config.report_type || 
+                (reportNameLower.includes('manut') ? 'manutencao' : 
+                 reportNameLower.includes('claro') ? 'claro' : 
+                 reportNameLower.includes('tecnodrill') ? 'tecnodrill' : 'mdu');
+
             let emailHtml;
             let attachments = null;
 
-            if (config.report_type === 'claro') {
+            if (reportType === 'claro') {
                 const claroHelper = require('./claro-report-helper');
-                const claroData = claroHelper.loadClaroData();
+                const claroData = await claroHelper.loadClaroDataAsync();
                 const excelRes = claroHelper.generateExcelAttachments(claroData);
                 attachments = excelRes.attachments;
-                emailHtml = claroHelper.buildClaroEmailHtml(config.report_name, excelRes, claroData.generated_at);
-            } else if (config.report_type === 'manutencao') {
+                emailHtml = claroHelper.buildClaroEmailHtml(config.report_name || config.report, excelRes, claroData.generated_at);
+            } else if (reportType === 'manutencao') {
                 const manutHelper = require('./manutencao-report-helper');
-                const manutData = manutHelper.loadManutencaoData();
+                const manutData = await manutHelper.loadManutencaoDataAsync();
                 attachments = manutHelper.generateExcelAttachments(manutData);
-                emailHtml = manutHelper.buildManutencaoEmailHtml(config.report_name, manutData);
+                emailHtml = manutHelper.buildManutencaoEmailHtml(config.report_name || config.report, manutData);
+            } else if (reportType === 'tecnodrill') {
+                const tecnoHelper = require('./tecnodrill-report-helper');
+                const tecnoData = await tecnoHelper.loadTecnodrillDataAsync();
+                attachments = tecnoHelper.generateExcelAttachments(tecnoData);
+                emailHtml = tecnoHelper.buildTecnodrillEmailHtml(config.report_name || config.report, tecnoData);
             } else {
                 if (!mduData) {
                     mduData = await getMduStatusCounts();
@@ -553,7 +564,7 @@ module.exports = async (req, res) => {
                     actions.push({ name: config.report_name, status: "failed_to_get_sheets_data" });
                     continue;
                 }
-                emailHtml = buildEmailHtml(mduData, config.report_name);
+                emailHtml = buildEmailHtml(mduData, config.report_name || config.report);
             }
 
             // Disparar
