@@ -1,4 +1,5 @@
 {
+  "name": "jle-bi",
   "dependencies": {
     "pg": "^8.21.0",
     "xlsx": "^0.18.5"

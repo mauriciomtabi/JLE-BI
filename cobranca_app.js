@@ -155,7 +155,11 @@ function applyCobrancaFilters() {
             if (catDropdown && r.categoria !== catDropdown) return false;
             if (ufDropdown && r.uf !== ufDropdown) return false;
             if (projDropdown && r.projeto !== projDropdown) return false;
-            if (faseDropdown && r.fase_atual_de_para !== faseDropdown) return false;
+            if (faseDropdown) {
+                const rf = normalizeCobrancaPhase(r.fase_atual_de_para);
+                const ff = normalizeCobrancaPhase(faseDropdown);
+                if (rf !== ff) return false;
+            }
 
             // Filtros de Data de Referência Dinâmica
             const refDate = getCobrancaRefDate(r);
@@ -398,6 +402,16 @@ function renderCategoryCards() {
     });
 }
 
+function normalizeCobrancaPhase(fase) {
+    if (!fase) return '';
+    const s = String(fase).toUpperCase().trim();
+    if (s.includes('EM EXECU') || (s.includes('EXECU') && !s.includes('EXECUTADO'))) return 'EM EXECUÇÃO';
+    if (s === 'EXECUTADO') return 'EXECUTADO';
+    if (s === 'APROVADO') return 'APROVADO';
+    if (s.includes('PEDIDO')) return 'PEDIDO EMITIDO';
+    return s;
+}
+
 // 2. Fluxo de Fases Stepper (Coluna CB)
 function renderPipelineStepper() {
     const container = document.getElementById('cobranca-pipeline-container');
@@ -432,7 +446,7 @@ function renderPipelineStepper() {
     };
 
     baseDataForPipeline.forEach(r => {
-        const p = String(r.fase_atual_de_para).toUpperCase().trim();
+        const p = normalizeCobrancaPhase(r.fase_atual_de_para);
         if (phaseMetrics.hasOwnProperty(p)) {
             phaseMetrics[p].sum += (r.valor_total || 0);
             if (r.os) {

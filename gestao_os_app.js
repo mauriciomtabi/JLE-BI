@@ -155,7 +155,11 @@ function applyGestaoOsFilters() {
             if (catDropdown && r.categoria !== catDropdown) return false;
             if (ufDropdown && r.uf !== ufDropdown) return false;
             if (projDropdown && r.projeto !== projDropdown) return false;
-            if (faseDropdown && r.fase_atual_de_para !== faseDropdown) return false;
+            if (faseDropdown) {
+                const rf = normalizeGestaoOsPhase(r.fase_atual_de_para);
+                const ff = normalizeGestaoOsPhase(faseDropdown);
+                if (rf !== ff) return false;
+            }
 
             // Filtros de Data de Referência Dinâmica
             const refDate = getGestaoOsRefDate(r);
@@ -410,6 +414,16 @@ function gestaoOs_renderCategoryCards() {
     });
 }
 
+function normalizeGestaoOsPhase(fase) {
+    if (!fase) return '';
+    const s = String(fase).toUpperCase().trim();
+    if (s.includes('EM EXECU') || (s.includes('EXECU') && !s.includes('EXECUTADO'))) return 'EM EXECUÇÃO';
+    if (s === 'EXECUTADO') return 'EXECUTADO';
+    if (s === 'APROVADO') return 'APROVADO';
+    if (s.includes('PEDIDO')) return 'PEDIDO EMITIDO';
+    return s;
+}
+
 // 2. Fluxo de Fases Stepper (Coluna CB)
 function gestaoOs_renderPipelineStepper() {
     const container = document.getElementById('gestao_os-pipeline-container');
@@ -444,7 +458,7 @@ function gestaoOs_renderPipelineStepper() {
     };
 
     baseDataForPipeline.forEach(r => {
-        const p = String(r.fase_atual_de_para).toUpperCase().trim();
+        const p = normalizeGestaoOsPhase(r.fase_atual_de_para);
         if (phaseMetrics.hasOwnProperty(p)) {
             if (r.os) {
                 phaseMetrics[p].oss.add(r.os);

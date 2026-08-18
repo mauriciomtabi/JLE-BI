@@ -75,18 +75,28 @@ function calculateAgeInDays(dateStr, refDateStr) {
     }
 }
 
+function normalizeClaroPhase(fase) {
+    if (!fase) return '';
+    const s = String(fase).toUpperCase().trim();
+    if (s.includes('EM EXECU') || (s.includes('EXECU') && !s.includes('EXECUTADO'))) return 'EM EXECUÇÃO';
+    if (s === 'EXECUTADO') return 'EXECUTADO';
+    if (s === 'APROVADO') return 'APROVADO';
+    if (s.includes('PEDIDO')) return 'PEDIDO EMITIDO';
+    return s;
+}
+
 function generateExcelAttachments(claroData) {
     const todayStr = new Date().toISOString().substring(0, 10);
     
     // 1. Sem Aprovação (Fases: EM EXECUÇÃO, EXECUTADO)
     const semAprovRows = claroData.rows.filter(r => {
-        const f = String(r.fase_atual_de_para || '').toUpperCase().trim();
+        const f = normalizeClaroPhase(r.fase_atual_de_para);
         return f === 'EM EXECUÇÃO' || f === 'EXECUTADO';
     });
     
     // 2. Aguardando Pedido (Fase: APROVADO)
     const aprovadoRows = claroData.rows.filter(r => {
-        const f = String(r.fase_atual_de_para || '').toUpperCase().trim();
+        const f = normalizeClaroPhase(r.fase_atual_de_para);
         return f === 'APROVADO';
     });
     
