@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-08-18 16:51:02
+// Dados MDU Compactados - Gerado em: 2026-08-18 17:00:20
 window.MDU_METADATA = {
-    "generated_at": "2026-08-18 16:51:02",
+    "generated_at": "2026-08-18 17:00:20",
     "total_rows": 5480,
-    "geocoded_new": 12
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -175214,8 +175214,8 @@ window.MDU_DATA = [
         "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Fusão",
-        "prog": 50.0,
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "",
         "area": "NNIAA",
         "node": "",
@@ -175225,8 +175225,8 @@ window.MDU_DATA = [
         "primeira_visita": "17/08/2026",
         "segunda_visita": "",
         "data_interna": "17/08/2026",
-        "data_fusao": "",
-        "data_baixa": "",
+        "data_fusao": "17/08/2026",
+        "data_baixa": "18/08",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
