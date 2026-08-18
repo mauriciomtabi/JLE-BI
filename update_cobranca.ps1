@@ -112,23 +112,39 @@ Write-Output "Data de atualizacao identificada para o relatorio: $reportDate"
 
 Write-Output "Iniciando processamento da planilha de Cobrança: $filePath"
 
-# 1. Inicializar Excel COM
-Write-Output "Abrindo Excel..."
-$excel = New-Object -ComObject Excel.Application
-$excel.Visible = $false
-$excel.DisplayAlerts = $false
-$workbook = $null
+# 1. Tentar processamento rápido e seguro via Python
+$pyScript = "$PSScriptRoot\update_cobranca.py"
+$pythonSuccess = $false
 
-try {
-    $workbook = $excel.Workbooks.Open($filePath, 0, $true) # Somente-leitura
-    $ws = $workbook.Worksheets.Item(1)
-    
-    Write-Output "Lendo intervalo de dados..."
-    $range = $ws.UsedRange
-    $data = $range.Value2
-    $rowCount = $data.GetLength(0)
-    $colCount = $data.GetLength(1)
-    Write-Output "Carregados $rowCount linhas e $colCount colunas."
+if (Test-Path $pyScript) {
+    Write-Output "Executando ETL ultra-rapido via Python..."
+    & python.exe "$pyScript" "$filePath"
+    if ($LASTEXITCODE -eq 0) {
+        $pythonSuccess = $true
+        Write-Output "Processamento Python concluido com sucesso!"
+    } else {
+        Write-Warning "Python ETL falhou. Tentando fallback via Excel COM..."
+    }
+}
+
+if (-not $pythonSuccess) {
+    # 1. Inicializar Excel COM (Fallback legado)
+    Write-Output "Abrindo Excel..."
+    $excel = New-Object -ComObject Excel.Application
+    $excel.Visible = $false
+    $excel.DisplayAlerts = $false
+    $workbook = $null
+
+    try {
+        $workbook = $excel.Workbooks.Open($filePath, 0, $true) # Somente-leitura
+        $ws = $workbook.Worksheets.Item(1)
+        
+        Write-Output "Lendo intervalo de dados..."
+        $range = $ws.UsedRange
+        $data = $range.Value2
+        $rowCount = $data.GetLength(0)
+        $colCount = $data.GetLength(1)
+        Write-Output "Carregados $rowCount linhas e $colCount colunas."
     
     # 2. Mapear cabeçalhos
     $headers = @{}
@@ -453,73 +469,75 @@ try {
         }
     }
 
-    $simplePayload = [PSCustomObject]@{
-        generated_at = $reportDate
-        os = $simpleMap
+        $simplePayload = [PSCustomObject]@{
+            generated_at = $reportDate
+            os = $simpleMap
+        }
+        $simpleJsonStr = $simplePayload | ConvertTo-Json -Depth 10
+        $simpleJsonStr | Out-File -FilePath "$PSScriptRoot\cobranca_simple.json" -Encoding utf8
+        Write-Output "cobranca_simple.json salvo com sucesso."
+
+    } catch {
+        Write-Error "Ocorreu um erro no processamento Excel: $($_.Exception.Message)"
+    } finally {
+        if ($null -ne $workbook) { $workbook.Close($false) }
+        if ($null -ne $excel) {
+            $excel.Quit()
+            [System.Runtime.Interopservices.Marshal]::ReleaseComObject($excel) | Out-Null
+        }
+        if ($null -ne $localTempPath -and (Test-Path $localTempPath)) {
+            Remove-Item -Path $localTempPath -Force
+        }
+        [System.GC]::Collect()
+        [System.GC]::WaitForPendingFinalizers()
     }
-    $simpleJsonStr = $simplePayload | ConvertTo-Json -Depth 10
-    $simpleJsonStr | Out-File -FilePath "$PSScriptRoot\cobranca_simple.json" -Encoding utf8
-    Write-Output "cobranca_simple.json salvo com sucesso."
+}
 
-    # 5. Publicar atualizações no GitHub se houver alterações em cobranca_data.js
-    Write-Output "Verificando se houve alteracoes nos dados para publicar no GitHub..."
-    $gitPath = "C:\Program Files\Git\cmd\git.exe"
-    if (Test-Path $gitPath) {
-        $gitStatus = & $gitPath status --porcelain "$PSScriptRoot\cobranca_data.js"
-        if ($null -ne $gitStatus -and $gitStatus.ToString().Trim() -ne "") {
-            Write-Output "Novas transacoes de cobranca detectadas! Atualizando a versao do Cache no Service Worker (sw.js)..."
-            $swPath = "$PSScriptRoot\sw.js"
-            if (Test-Path $swPath) {
-                try {
-                    $swContent = [System.IO.File]::ReadAllText($swPath)
-                    $timestamp = Get-Date -Format "yyyyMMddHHmmss"
-                    $newCacheNameLine = "const CACHE_NAME = 'jle-bi-v3.16.$timestamp';"
-                    $swContent = $swContent -replace "const CACHE_NAME = '([^']+)';", $newCacheNameLine
-                    $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
-                    [System.IO.File]::WriteAllText($swPath, $swContent, $utf8NoBom)
-                    Write-Output "Cache do Service Worker atualizado com sucesso para: jle-bi-v3.16.$timestamp"
-                } catch {
-                    Write-Warning "Nao foi possivel atualizar o sw.js: $($_.Exception.Message)"
-                }
-            }
-
-            Write-Output "Fazendo commit e push para o GitHub..."
-            & $gitPath add "$PSScriptRoot\cobranca_data.js" "$PSScriptRoot\cobranca_simple.json" "$PSScriptRoot\sw.js"
-            & $gitPath commit -m "data(auto): atualizacao automatica de dados de cobranca e cache PWA"
-            & $gitPath push origin main
-            Write-Output "Dados de cobranca e Service Worker publicados com sucesso no GitHub!"
-            
-            # 6. Trigger automatic sync in Services JLE system
+# 5. Publicar atualizações no GitHub se houver alterações em cobranca_data.js
+Write-Output "Verificando se houve alteracoes nos dados para publicar no GitHub..."
+$gitPath = "C:\Program Files\Git\cmd\git.exe"
+if (Test-Path $gitPath) {
+    $gitStatus = & $gitPath status --porcelain "$PSScriptRoot\cobranca_data.js"
+    if ($null -ne $gitStatus -and $gitStatus.ToString().Trim() -ne "") {
+        Write-Output "Novas transacoes de cobranca detectadas! Atualizando a versao do Cache no Service Worker (sw.js)..."
+        $swPath = "$PSScriptRoot\sw.js"
+        if (Test-Path $swPath) {
             try {
-                Write-Output "Disparando sincronizacao em tempo real no Servicos JLE..."
-                $webhookUrlProd = "https://jle-monitoramento-tecnico.vercel.app/api/sync-bi"
-                $headers = @{
-                    "Authorization" = "Bearer jle-bi-sync-token-2026"
-                    "Content-Type"  = "application/json"
-                }
-                $response = Invoke-RestMethod -Uri $webhookUrlProd -Method Post -Headers $headers -TimeoutSec 15
-                Write-Output "Sincronizacao em producao disparada com sucesso: $($response.mensagem)"
+                $swContent = [System.IO.File]::ReadAllText($swPath)
+                $timestamp = Get-Date -Format "yyyyMMddHHmmss"
+                $newCacheNameLine = "const CACHE_NAME = 'jle-bi-v3.16.$timestamp';"
+                $swContent = $swContent -replace "const CACHE_NAME = '([^']+)';", $newCacheNameLine
+                $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+                [System.IO.File]::WriteAllText($swPath, $swContent, $utf8NoBom)
+                Write-Output "Cache do Service Worker atualizado com sucesso para: jle-bi-v3.16.$timestamp"
             } catch {
-                Write-Warning "Falha ao disparar sincronizacao automatica: $_"
+                Write-Warning "Nao foi possivel atualizar o sw.js: $($_.Exception.Message)"
             }
-        } else {
-            Write-Output "Sem novas alteracoes nos dados de cobranca. Nenhuma publicacao necessaria."
+        }
+
+        Write-Output "Fazendo commit e push para o GitHub..."
+        & $gitPath add "$PSScriptRoot\cobranca_data.js" "$PSScriptRoot\cobranca_simple.json" "$PSScriptRoot\sw.js"
+        & $gitPath commit -m "data(auto): atualizacao automatica de dados de cobranca e cache PWA"
+        & $gitPath push origin main
+        Write-Output "Dados de cobranca e Service Worker publicados com sucesso no GitHub!"
+        
+        # 6. Trigger automatic sync in Services JLE system
+        try {
+            Write-Output "Disparando sincronizacao em tempo real no Servicos JLE..."
+            $webhookUrlProd = "https://jle-monitoramento-tecnico.vercel.app/api/sync-bi"
+            $headers = @{
+                "Authorization" = "Bearer jle-bi-sync-token-2026"
+                "Content-Type"  = "application/json"
+            }
+            $response = Invoke-RestMethod -Uri $webhookUrlProd -Method Post -Headers $headers -TimeoutSec 15
+            Write-Output "Sincronizacao em producao disparada com sucesso: $($response.mensagem)"
+        } catch {
+            Write-Warning "Falha ao disparar sincronizacao automatica: $_"
         }
     } else {
-        Write-Warning "Executavel do Git nao encontrado em '$gitPath'. Nao foi possivel publicar no GitHub."
+        Write-Output "Sem novas alteracoes nos dados de cobranca. Nenhuma publicacao necessaria."
     }
-    
-} catch {
-    Write-Error "Ocorreu um erro no script: $($_.Exception.Message)"
-} finally {
-    if ($null -ne $workbook) { $workbook.Close($false) }
-    $excel.Quit()
-    [System.Runtime.Interopservices.Marshal]::ReleaseComObject($excel) | Out-Null
-    
-    if ($null -ne $localTempPath -and (Test-Path $localTempPath)) {
-        Remove-Item -Path $localTempPath -Force
-    }
-    
-    [System.GC]::Collect()
-    [System.GC]::WaitForPendingFinalizers()
+} else {
+    Write-Warning "Executavel do Git nao encontrado em '$gitPath'. Nao foi possivel publicar no GitHub."
 }
+

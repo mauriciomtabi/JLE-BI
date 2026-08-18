@@ -15,3 +15,6 @@ node_modules/
 package-lock.json
 temp_deployed.html
 resend_schedule_state.json
+
+.vercel
+.env*

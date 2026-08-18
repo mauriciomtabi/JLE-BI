@@ -148,6 +148,30 @@ try {
     Write-Log "Continuando via Outlook COM..."
 }
 
+# ===== GARANTIR QUE O OUTLOOK ESTEJA RODANDO E CONECTADO =====
+$proc = Get-Process -Name "OUTLOOK" -ErrorAction SilentlyContinue
+$startedOutlookByScript = $false
+
+if (-not $proc) {
+    Write-Log "Outlook fechado. Iniciando Outlook minimizado em segundo plano..."
+    $outlookExe = "C:\Program Files\Microsoft Office\Root\Office16\OUTLOOK.EXE"
+    if (-not (Test-Path $outlookExe)) {
+        $outlookExe = "C:\Program Files (x86)\Microsoft Office\Root\Office16\OUTLOOK.EXE"
+    }
+
+    if (Test-Path $outlookExe) {
+        $wshell = New-Object -ComObject WScript.Shell
+        $wshell.Run("`"$outlookExe`" /recycle", 7, $false)
+        $startedOutlookByScript = $true
+        Write-Log "Aguardando 12 segundos para inicializacao e conexao de rede..."
+        Start-Sleep -Seconds 12
+    } else {
+        Write-Log "AVISO: Executavel do Outlook nao localizado no caminho padrao."
+    }
+} else {
+    Write-Log "Outlook ja esta em execucao (PID: $($proc.Id))."
+}
+
 # ===== OUTLOOK COM - SYNC + BUSCA =====
 Write-Log "Iniciando busca via Outlook COM em TODAS as pastas..."
 
