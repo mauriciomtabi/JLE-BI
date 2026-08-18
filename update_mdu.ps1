@@ -63,6 +63,7 @@ if (Test-Path $gitPath) {
         Write-Output "Enviando commits ao GitHub..."
         & $gitPath add "$jsPath" "$swPath"
         & $gitPath commit -m "data(mdu): atualizacao automatica da base MDU via Google Sheets"
+        & $gitPath pull --rebase origin main
         & $gitPath push origin main
         Write-Output "Dados do MDU publicados com sucesso no repositorio remoto!"
         Write-Output "Nota: o re-sincronizacao de e-mails roda 1x/dia via tarefa 'JLE_Telecom_MDU_EmailResync'."

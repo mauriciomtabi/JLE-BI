@@ -8,9 +8,10 @@ import urllib.request
 import urllib.parse
 from datetime import datetime
 
-csv_path = r"C:\Users\jlema\.gemini\antigravity\scratch\fluxo_caixa_mapping\mdu_data.csv"
-js_path = r"C:\Users\jlema\.gemini\antigravity\scratch\fluxo_caixa_mapping\mdu_data.js"
-cache_path = r"C:\Users\jlema\.gemini\antigravity\scratch\fluxo_caixa_mapping\mdu_geo_cache.json"
+script_dir = os.path.dirname(os.path.abspath(__file__))
+csv_path = os.path.join(script_dir, "mdu_data.csv")
+js_path = os.path.join(script_dir, "mdu_data.js")
+cache_path = os.path.join(script_dir, "mdu_geo_cache.json")
 
 # Cidades e coordenadas padrão (Centro) como fallback imediato
 CITY_COORDINATES = {
