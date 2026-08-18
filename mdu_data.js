@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-08-17 18:00:19
+// Dados MDU Compactados - Gerado em: 2026-08-17 22:40:20
 window.MDU_METADATA = {
-    "generated_at": "2026-08-17 18:00:19",
+    "generated_at": "2026-08-17 22:40:20",
     "total_rows": 5480,
-    "geocoded_new": 4
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -172206,8 +172206,8 @@ window.MDU_DATA = [
         "aging": "7",
         "relatorio_por": "MATHEUS",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610473971",
         "area": "PDRAA",
         "node": "",
@@ -172219,7 +172219,7 @@ window.MDU_DATA = [
         "data_interna": "30/07/2026",
         "data_fusao": "12/08/2026",
         "data_baixa": "17/08",
-        "data_relatorio": "",
+        "data_relatorio": "17/08/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
@@ -172780,7 +172780,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "4",
-        "relatorio_por": "",
+        "relatorio_por": "MATHEUS",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
