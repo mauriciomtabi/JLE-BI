@@ -1,7 +1,7 @@
 // Data generated 100% from Master Excel Controle de Medições (Mnt. Demanda)
 (function() {
     const db = {
-  "generated_at": "2026-08-18 11:00:15",
+  "generated_at": "2026-08-18 12:00:24",
   "lookups": {
     "tipos_of": [
       "TIPO\nOS CLIENTE",
@@ -25250,7 +25250,7 @@
       "OBRA DE MND PARCELA 2/5",
       11,
       4,
-      1,
+      0,
       "16/04/2026",
       1,
       11,
@@ -25258,9 +25258,9 @@
       13797.94,
       7,
       0,
-      "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "5397125",
+      "46164",
+      "PEDIDO_GERADO"
     ],
     [
       "RS.1392",
@@ -28189,9 +28189,9 @@
       1,
       4,
       1,
-      293.94,
+      0.0,
       7,
-      0,
+      1,
       "-",
       "-",
       "AGUARD_APROVACAO"
@@ -30007,9 +30007,9 @@
       1,
       1,
       1,
-      1936.7,
+      0.0,
       7,
-      0,
+      1,
       "-",
       "-",
       "AGUARD_APROVACAO"
@@ -32869,9 +32869,9 @@
       1,
       1,
       1,
-      14206.01,
+      0.0,
       7,
-      0,
+      1,
       "-",
       "-",
       "AGUARD_APROVACAO"
@@ -32888,7 +32888,7 @@
       1,
       1,
       0.0,
-      0,
+      7,
       1,
       "-",
       "-",
@@ -41869,9 +41869,9 @@
       1,
       1,
       1,
-      3047.06,
+      0.0,
       7,
-      0,
+      1,
       "-",
       "-",
       "AGUARD_APROVACAO"
@@ -42967,9 +42967,9 @@
       1,
       2,
       1,
-      1101.63,
+      0.0,
       7,
-      0,
+      1,
       "-",
       "-",
       "AGUARD_APROVACAO"
@@ -43993,9 +43993,9 @@
       1,
       1,
       1,
-      669.12,
+      0.0,
       7,
-      0,
+      1,
       "-",
       "-",
       "AGUARD_APROVACAO"
@@ -44425,9 +44425,9 @@
       1,
       1,
       1,
-      3750.13,
+      0.0,
       7,
-      0,
+      1,
       "-",
       "-",
       "AGUARD_APROVACAO"
@@ -93507,7 +93507,7 @@
     window.MANUTENCAO_METADATA = {
         generated_at: db.generated_at,
         count: db.rows.length,
-        total_medido: 3893516.93
+        total_medido: 3868512.34
     };
     console.log('Base 100% Excel de Manutenção carregada:', window.MANUTENCAO_DATA.length, 'registros.');
 })();
