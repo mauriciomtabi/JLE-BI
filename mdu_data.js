@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-08-18 23:00:17
+// Dados MDU Compactados - Gerado em: 2026-08-19 00:00:12
 window.MDU_METADATA = {
-    "generated_at": "2026-08-18 23:00:17",
+    "generated_at": "2026-08-19 00:00:12",
     "total_rows": 5480,
     "geocoded_new": 0
 };
@@ -174027,7 +174027,7 @@ window.MDU_DATA = [
         "endereco": "R AFONSO CELSO 30",
         "cidade": "NOVO HAMBURGO",
         "cluster": "NHO",
-        "aging": "",
+        "aging": "1",
         "relatorio_por": "",
         "pendencia": "Não",
         "status": "Relatório",
