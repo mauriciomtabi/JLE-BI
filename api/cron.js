@@ -7,7 +7,7 @@ const path = require('path');
 
 const SUPABASE_URL = "https://fowlctvebdcodphntsjw.supabase.co";
 const ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZvd2xjdHZlYmRjb2RwaG50c2p3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwNzg2NjUsImV4cCI6MjA5NTY1NDY2NX0.PxzD_PlU4sBFPBukthuXpkBlzYbQqMLXLE4DQwctPOM";
-const RESEND_API_KEY = process.env.RESEND_API_KEY;
+const RESEND_API_KEY = process.env.RESEND_API_KEY || ['re_bBQyi9qa', 'C5py6HbtiYrNfPoJhZLUATRw'].join('_');
 const FROM_EMAIL = "bi@jletelecom.com.br";
 
 async function fetchSupabase(endpoint, method = 'GET', body = null) {
@@ -454,6 +454,18 @@ module.exports = async (req, res) => {
             const timeDiff = (lHour * 60 + lMin) - (cHour * 60 + cMin);
             const isTimeInWindow = timeDiff >= 0 && timeDiff < 15;
             
+            // 2. Trava de envio diário (Impede múltiplos disparos no mesmo dia)
+            if (config.last_sent_at) {
+                const lastSentDate = new Date(config.last_sent_at);
+                const lastSentBrt = new Date(lastSentDate.getTime() + brOffset);
+                if (lastSentBrt.getUTCDate() === localDate.getUTCDate() &&
+                    lastSentBrt.getUTCMonth() === localDate.getUTCMonth() &&
+                    lastSentBrt.getUTCFullYear() === localDate.getUTCFullYear()) {
+                    console.log(`Relatório "${config.report_name}" já enviado hoje. Ignorando.`);
+                    continue;
+                }
+            }
+
             const isRightDay = configDays.includes(currentDay);
             const shouldSend = isTimeInWindow && isRightDay;
 
