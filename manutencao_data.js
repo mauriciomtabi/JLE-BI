@@ -1,7 +1,7 @@
 // Data generated 100% from Master Excel Controle de Medições (Mnt. Demanda)
 (function() {
     const db = {
-  "generated_at": "2026-08-21 16:00:17",
+  "generated_at": "2026-08-21 17:00:16",
   "lookups": {
     "tipos_of": [
       "TIPO\nOS CLIENTE",
@@ -23478,7 +23478,7 @@
       4,
       17,
       1,
-      19200.0,
+      6400.0,
       7,
       0,
       "5626579",
@@ -49051,7 +49051,7 @@
       "ATENUAÇÃO - : PAE BVANELPAE MADANE10G 001",
       2,
       1,
-      1,
+      2,
       "16/07/2026",
       1,
       2,
@@ -49059,9 +49059,9 @@
       657.8,
       7,
       0,
+      "5609563",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2714",
@@ -49339,7 +49339,7 @@
       "ATENUAÇÃO - GERDAU IND - PAE/IP/21452",
       2,
       1,
-      1,
+      2,
       "17/07/2026",
       1,
       2,
@@ -49347,9 +49347,9 @@
       328.9,
       7,
       0,
+      "5609570",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2730",
@@ -49357,7 +49357,7 @@
       "ROMPIMENTO - RUP CABO OPTICO: CANNET-NHOLO",
       1,
       16,
-      1,
+      2,
       "17/07/2026",
       1,
       1,
@@ -49365,9 +49365,9 @@
       2536.58,
       7,
       0,
+      "5609575",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2731",
@@ -49393,7 +49393,7 @@
       "ROMPIMENTO - ESTAÇÃO RSPSUB5 ISOLADA",
       1,
       1,
-      1,
+      2,
       "17/07/2026",
       1,
       1,
@@ -49401,9 +49401,9 @@
       1161.5,
       7,
       0,
+      "5609579",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2733",
@@ -49429,7 +49429,7 @@
       "ROMPIMENTO - CHN/IP/00789 (RAIA DROGASIL S A)",
       1,
       3,
-      1,
+      2,
       "17/07/2026",
       1,
       1,
@@ -49437,9 +49437,9 @@
       1214.81,
       7,
       0,
+      "5609584",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2735",
@@ -49681,7 +49681,7 @@
       "ROMPIMENTO - CALDAS JR. - PAE/IP/1795",
       1,
       1,
-      1,
+      2,
       "20/07/2026",
       1,
       1,
@@ -49689,9 +49689,9 @@
       705.32,
       7,
       0,
+      "5609601",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2749",
@@ -49735,7 +49735,7 @@
       "ROMPIMENTO - IERGS INSTITUTO EDUCACI",
       1,
       1,
-      1,
+      2,
       "20/07/2026",
       1,
       1,
@@ -49743,9 +49743,9 @@
       649.46,
       7,
       0,
+      "5609605",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2752",
@@ -49753,7 +49753,7 @@
       "ROMPIMENTO - PAE/IP/21224 ORANGE BUSINESS SERVICES",
       1,
       1,
-      1,
+      2,
       "18/07/2026",
       1,
       1,
@@ -49761,9 +49761,9 @@
       1295.9,
       7,
       0,
+      "5609610",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2753",
@@ -49771,7 +49771,7 @@
       "ROMPIMENTO - PAE MF9LINPAE 312LINVC4S 002",
       1,
       1,
-      1,
+      2,
       "20/07/2026",
       1,
       1,
@@ -49779,9 +49779,9 @@
       1323.65,
       7,
       0,
+      "5609628",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2754",
@@ -49789,7 +49789,7 @@
       "ROMPIMENTO - ARTHUR LUNDGREN TECIDOS S",
       1,
       3,
-      1,
+      2,
       "21/07/2026",
       1,
       1,
@@ -49797,9 +49797,9 @@
       376.42,
       7,
       0,
+      "5609641",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2755",
@@ -49807,7 +49807,7 @@
       "ROMPIMENTO - PAE ARYLINPAE TW6LINVC4S 001",
       1,
       1,
-      1,
+      2,
       "21/07/2026",
       1,
       1,
@@ -49815,9 +49815,9 @@
       2422.32,
       7,
       0,
+      "5609658",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2756",
@@ -49825,7 +49825,7 @@
       "ROMPIMENTO - CAN DMANELPAE BV3ANE10G 00",
       1,
       16,
-      1,
+      2,
       "21/07/2026",
       1,
       1,
@@ -49833,9 +49833,9 @@
       2659.16,
       7,
       0,
+      "5609668",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2757",
@@ -50383,7 +50383,7 @@
       "ATENUAÇÃO - EMPRESA BRASILEIRA DE COR",
       2,
       16,
-      1,
+      2,
       "17/07/2026",
       1,
       2,
@@ -50391,9 +50391,9 @@
       376.42,
       7,
       0,
+      "5609686",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2788",
@@ -50815,7 +50815,7 @@
       "ROMPIMENTO - GTI/IP/01230",
       1,
       5,
-      1,
+      2,
       "23/07/2026",
       1,
       1,
@@ -50823,9 +50823,9 @@
       376.42,
       7,
       0,
+      "5609708",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2812",
@@ -50833,7 +50833,7 @@
       "ROMPIMENTO - NODE B RSPSU40 X RSPSU27",
       1,
       1,
-      1,
+      2,
       "23/07/2026",
       1,
       1,
@@ -50841,9 +50841,9 @@
       1811.64,
       7,
       0,
+      "5623817",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2813",
@@ -50869,7 +50869,7 @@
       "ROMPIMENTO - NODE B RSCANIA X RSCAN59",
       1,
       16,
-      1,
+      2,
       "23/07/2026",
       1,
       1,
@@ -50877,9 +50877,9 @@
       730.2,
       7,
       0,
+      "5609720",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2815",
@@ -50959,7 +50959,7 @@
       "ROMPIMENTO - COMERCIO DE MEDICAMENTOS",
       1,
       5,
-      1,
+      2,
       "23/07/2026",
       1,
       1,
@@ -50967,9 +50967,9 @@
       1681.46,
       7,
       0,
+      "5609738",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2820",
@@ -51031,7 +51031,7 @@
       "ROMPIMENTO",
       1,
       1,
-      1,
+      2,
       "24/07/2026",
       1,
       1,
@@ -51039,9 +51039,9 @@
       3870.98,
       7,
       0,
+      "5609742",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2824",
@@ -51553,7 +51553,7 @@
       "ROMPIMENTO - LAB VIDORA - PAE/IP/17190",
       1,
       1,
-      1,
+      2,
       "27/07/2026",
       1,
       1,
@@ -51561,9 +51561,9 @@
       1681.46,
       7,
       0,
+      "5609750",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2853",
@@ -51571,7 +51571,7 @@
       "ROMPIMENTO - PAE/IP/21884 / N N CAIXAS INDUSTRIA E CO",
       1,
       1,
-      1,
+      2,
       "27/07/2026",
       1,
       1,
@@ -51579,9 +51579,9 @@
       810.35,
       7,
       0,
+      "5609758",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2854",
@@ -51607,7 +51607,7 @@
       "ROMPIMENTO - PAE/IP/22761 / TBLM - SISTEMAS FORENSES",
       1,
       1,
-      1,
+      2,
       "27/07/2026",
       1,
       1,
@@ -51615,9 +51615,9 @@
       1457.85,
       7,
       0,
+      "5609767",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2856",
@@ -51625,7 +51625,7 @@
       "ROMPIMENTO - NODE B RSPLE66 X RSPLE58",
       1,
       1,
-      1,
+      2,
       "27/07/2026",
       1,
       1,
@@ -51633,9 +51633,9 @@
       1490.24,
       7,
       0,
+      "5609776",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2857",
@@ -52399,7 +52399,7 @@
       "ROMPIMENTO - C320-PAEFAR-001 - 2/3",
       1,
       1,
-      1,
+      2,
       "29/07/2026",
       1,
       1,
@@ -52407,9 +52407,9 @@
       2599.89,
       7,
       0,
+      "5622128",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2900",
@@ -52597,7 +52597,7 @@
       "ATENUAÇÃO - CAN MBOLINCAN 0GDLINB1S 001",
       6,
       16,
-      1,
+      2,
       "30/07/2026",
       1,
       6,
@@ -52605,9 +52605,9 @@
       1630.94,
       7,
       0,
+      "5622148",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2911",
@@ -52615,7 +52615,7 @@
       "ROMPIMENTO - RAIA DROGASIL S A",
       1,
       27,
-      1,
+      2,
       "29/07/2026",
       1,
       1,
@@ -52623,9 +52623,9 @@
       650.49,
       7,
       0,
+      "5622164",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2912",
@@ -52705,7 +52705,7 @@
       "MOBILIZAÇÃO - :CAN/IP/01377 - localiza rente a car",
       4,
       16,
-      1,
+      2,
       "30/07/2026",
       1,
       4,
@@ -52713,9 +52713,9 @@
       376.42,
       7,
       0,
+      "5622199",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2917",
@@ -52813,7 +52813,7 @@
       "ROMPIMENTO - LINS FERRAO ARTIGOS DO VE",
       1,
       3,
-      1,
+      2,
       "31/07/2026",
       1,
       1,
@@ -52821,9 +52821,9 @@
       3366.55,
       7,
       0,
+      "5622216",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2923",
@@ -52921,7 +52921,7 @@
       "ROMPIMENTO - NODE B RSEIO17 X RSEIO01",
       1,
       40,
-      1,
+      2,
       "02/08/2026",
       1,
       1,
@@ -52929,9 +52929,9 @@
       1089.72,
       7,
       0,
+      "5622264",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2929",
@@ -56509,7 +56509,7 @@
       17,
       1,
       6400.0,
-      8,
+      7,
       0,
       "-",
       "-",
@@ -56527,7 +56527,7 @@
       17,
       1,
       6400.0,
-      9,
+      7,
       0,
       "-",
       "-",
@@ -93512,7 +93512,7 @@
     window.MANUTENCAO_METADATA = {
         generated_at: db.generated_at,
         count: db.rows.length,
-        total_medido: 3887827.70
+        total_medido: 3875027.70
     };
     console.log('Base 100% Excel de Manutenção carregada:', window.MANUTENCAO_DATA.length, 'registros.');
 })();
