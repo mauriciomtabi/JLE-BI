@@ -12,12 +12,9 @@ if (Test-Path "$workingDir\update_dashboard.ps1") {
 }
 Write-Output ""
 
-# 2. Atualizar Analítico Claro (Monitora e-mail e executa ETL)
-Write-Output "--- [2/5] Atualizando Analítico Claro ---"
-$claroMonitor = "$workingDir\monitorar_email_claro.ps1"
-if (Test-Path $claroMonitor) {
-    & "$claroMonitor"
-} elseif (Test-Path "$workingDir\update_cobranca.ps1") {
+# 2. Atualizar Analítico Claro (Apenas executa ETL local se disponível)
+Write-Output "--- [2/5] Atualizando Analítico Claro (ETL) ---"
+if (Test-Path "$workingDir\update_cobranca.ps1") {
     & "$workingDir\update_cobranca.ps1"
 }
 Write-Output ""
