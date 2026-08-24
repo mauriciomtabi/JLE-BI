@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-08-24 15:00:21
+// Dados MDU Compactados - Gerado em: 2026-08-24 16:00:13
 window.MDU_METADATA = {
-    "generated_at": "2026-08-24 15:00:21",
+    "generated_at": "2026-08-24 16:00:13",
     "total_rows": 5516,
     "geocoded_new": 0
 };
@@ -174765,13 +174765,13 @@ window.MDU_DATA = [
         "cluster": "PAE",
         "aging": "6",
         "relatorio_por": "Não",
-        "pendencia": "Relatório",
-        "status": "Relatório",
-        "prog": 75.0,
+        "pendencia": "Medição",
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610199630",
         "area": "TRLAA",
-        "node": "",
-        "caixa_m": "",
+        "node": "STZAC",
+        "caixa_m": "TRLAA.094.M010",
         "hps": null,
         "equipe": "Abraão Rodrigues",
         "primeira_visita": "17/08/2026",
@@ -174802,8 +174802,8 @@ window.MDU_DATA = [
         "prog": 75.0,
         "cod_imovel": "610199630",
         "area": "TRLAA",
-        "node": "",
-        "caixa_m": "",
+        "node": "STZAC",
+        "caixa_m": "TRLAA.094.M010",
         "hps": null,
         "equipe": "Abraão Rodrigues",
         "primeira_visita": "17/08/2026",
