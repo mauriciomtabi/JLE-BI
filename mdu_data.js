@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-08-24 13:00:13
+// Dados MDU Compactados - Gerado em: 2026-08-24 14:00:16
 window.MDU_METADATA = {
-    "generated_at": "2026-08-24 13:00:13",
+    "generated_at": "2026-08-24 14:00:16",
     "total_rows": 5516,
     "geocoded_new": 0
 };
@@ -5299,7 +5299,7 @@ window.MDU_DATA = [
         "cod_imovel": "700156905",
         "area": "MNDAC",
         "node": "STZAF",
-        "caixa_m": "",
+        "caixa_m": "MNDAC.132.M020",
         "hps": 36,
         "equipe": "Paulo Ribaczki",
         "primeira_visita": "02/01/2026",
@@ -67187,7 +67187,7 @@ window.MDU_DATA = [
         "cod_imovel": "610510436",
         "area": "BFMAA",
         "node": "BFMAG",
-        "caixa_m": "",
+        "caixa_m": "BFMAA.265.M040",
         "hps": 3,
         "equipe": "Paulo Ribaczki",
         "primeira_visita": "02/01/2026",
@@ -87540,7 +87540,7 @@ window.MDU_DATA = [
         "area": "MTSAA",
         "node": "MTSAA",
         "caixa_m": "",
-        "hps": null,
+        "hps": 18,
         "equipe": "Vinicius de Brito",
         "primeira_visita": "05/01/2026",
         "segunda_visita": "",
@@ -89908,7 +89908,7 @@ window.MDU_DATA = [
         "area": "MNDAA",
         "node": "MNDAH",
         "caixa_m": "",
-        "hps": null,
+        "hps": 14,
         "equipe": "Paulo Ribaczki",
         "primeira_visita": "05/01/2026",
         "segunda_visita": "",
@@ -175917,9 +175917,9 @@ window.MDU_DATA = [
         "cluster": "PAE",
         "aging": "3",
         "relatorio_por": "Não",
-        "pendencia": "Relatório",
-        "status": "Relatório",
-        "prog": 75.0,
+        "pendencia": "Medição",
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "700068377",
         "area": "BFMAA",
         "node": "FLOAA",
