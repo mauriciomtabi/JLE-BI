@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-08-24 14:00:16
+// Dados MDU Compactados - Gerado em: 2026-08-24 14:22:01
 window.MDU_METADATA = {
-    "generated_at": "2026-08-24 14:00:16",
+    "generated_at": "2026-08-24 14:22:01",
     "total_rows": 5516,
     "geocoded_new": 0
 };
@@ -175949,9 +175949,9 @@ window.MDU_DATA = [
         "cluster": "PAE",
         "aging": "3",
         "relatorio_por": "Não",
-        "pendencia": "Relatório",
-        "status": "Relatório",
-        "prog": 75.0,
+        "pendencia": "Medição",
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610477276",
         "area": "BFMAA",
         "node": "FLOAPB",
