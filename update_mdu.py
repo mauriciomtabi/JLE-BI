@@ -1,4 +1,4 @@
-﻿import csv
+import csv
 import json
 import os
 import re
@@ -8,26 +8,34 @@ import urllib.request
 import urllib.parse
 from datetime import datetime
 
+import sys
+if sys.platform == 'win32':
+    try:
+        sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+        sys.stderr.reconfigure(encoding='utf-8', errors='replace')
+    except Exception:
+        pass
+
 script_dir = os.path.dirname(os.path.abspath(__file__))
 csv_path = os.path.join(script_dir, "mdu_data.csv")
 js_path = os.path.join(script_dir, "mdu_data.js")
 cache_path = os.path.join(script_dir, "mdu_geo_cache.json")
 
-# Cidades e coordenadas padrÃ£o (Centro) como fallback imediato
+# Cidades e coordenadas padrão (Centro) como fallback imediato
 CITY_COORDINATES = {
     "PORTO ALEGRE": [-30.0346, -51.2177],
     "NOVO HAMBURGO": [-29.6842, -51.1306],
     "CANOAS": [-29.9181, -51.1781],
     "MONTENEGRO": [-29.6883, -51.4633],
     "GRAVATAI": [-29.9377, -50.9922],
-    "GRAVATAÃ": [-29.9377, -50.9922],
+    "GRAVATAÍ": [-29.9377, -50.9922],
     "GUAIBA": [-30.1139, -51.3250],
-    "GUAÃBA": [-30.1139, -51.3250],
+    "GUAÍBA": [-30.1139, -51.3250],
     "SAPUCAIA DO SUL": [-29.8378, -51.1444],
     "CACHOEIRINHA": [-29.9508, -51.0967],
     "ESTEIO": [-29.8522, -51.1800],
     "CHARQUEADAS": [-29.9556, -51.6253],
-    "NÃƒO DEFINIDA": [-30.0346, -51.2177]
+    "NÃO DEFINIDA": [-30.0346, -51.2177]
 }
 
 def load_cache():
@@ -321,28 +329,23 @@ def save_js_data(js_path, rows_data, generated_at, new_geocodes_count):
         f.write(json.dumps(rows_data, indent=4, ensure_ascii=False))
         f.write(";\n")
 
+import unicodedata
+
 def normalize_header(h):
-    h = h.lower().strip()
-    h = h.replace('\n', ' ').replace('\r', ' ')
-    replacements = {
-        'Ã¡': 'a', 'Ã©': 'e', 'Ã­': 'i', 'Ã³': 'o', 'Ãº': 'u',
-        'Ã¢': 'a', 'Ãª': 'e', 'Ã´': 'o',
-        'Ã£': 'a', 'Ãµ': 'o',
-        'Ã§': 'c',
-        'Âº': '', 'Âª': '',
-        ' ': ''
-    }
-    for k, v in replacements.items():
-        h = h.replace(k, v)
+    if not h:
+        return ""
+    h = unicodedata.normalize('NFKD', h.lower().strip())
+    h = "".join(c for c in h if not unicodedata.combining(c))
+    h = re.sub(r'[^a-z0-9]', '', h)
     return h
 
 def process_mdu():
     if not os.path.exists(csv_path):
-        print(f"Erro: Arquivo {csv_path} nÃ£o encontrado!")
+        print(f"Erro: Arquivo {csv_path} não encontrado!")
         return
 
-    # ParÃ¢metro de limite mÃ¡ximo de novas consultas geogrÃ¡ficas
-    # Se '--all' for passado, geocodifica sem limite. Caso contrÃ¡rio, limite default de 30 consultas novas.
+    # Parâmetro de limite máximo de novas consultas geográficas
+    # Se '--all' for passado, geocodifica sem limite. Caso contrário, limite default de 30 consultas novas.
     max_new_geocodes = 9999 if '--all' in sys.argv else 30
     new_geocodes_count = 0
 
@@ -352,14 +355,14 @@ def process_mdu():
 
     rows_data = []
 
-    print(f"Iniciando compilaÃ§Ã£o MDU. Limite de novas geocodificaÃ§Ãµes: {max_new_geocodes}")
+    print(f"Iniciando compilação MDU. Limite de novas geocodificações: {max_new_geocodes}")
 
     with open(csv_path, mode='r', encoding='utf-8-sig', errors='replace') as f:
         reader = csv.reader(f)
         try:
             headers = next(reader)
         except StopIteration:
-            print("Erro: CSV estÃ¡ vazio!")
+            print("Erro: CSV está vazio!")
             return
 
         header_map = {}
@@ -372,15 +375,12 @@ def process_mdu():
             idx = header_map.get(norm)
             if idx is not None and idx < len(row):
                 return row[idx].strip()
-            actual_idx = default_idx
-            if "pendencia?" in header_map and default_idx >= 8:
-                actual_idx = default_idx + 1
-            if actual_idx < len(row):
-                return row[actual_idx].strip()
+            if default_idx is not None and default_idx < len(row):
+                return row[default_idx].strip()
             return ""
 
-        # Filtrar linhas vÃ¡lidas antes para podermos fazer uma barra de progresso simples
-        os_idx = header_map.get(normalize_header("OS JLE"), 2)
+        # Filtrar linhas válidas
+        os_idx = header_map.get(normalize_header("OS JLE"), 1)
         valid_rows = []
         for row in reader:
             if row and len(row) > os_idx and row[os_idx].strip():
@@ -390,31 +390,31 @@ def process_mdu():
         print(f"Processando {total_rows} registros...")
 
         for idx, row in enumerate(valid_rows):
-            # Garantir que a linha tenha colunas suficientes para nÃ£o quebrar
+            # Garantir que a linha tenha colunas suficientes para não quebrar
             while len(row) < 55:
                 row.append('')
 
-            os_val = get_col(row, "OS JLE", 2)
-            endereco = get_col(row, "EndereÃ§o", 3)
-            cidade = get_col(row, "Cidade", 4).upper()
-            cluster = get_col(row, "Cluster", 5).upper()
+            os_val = get_col(row, "OS JLE", 1)
+            endereco = get_col(row, "ENDEREÇO", 2)
+            cidade = get_col(row, "Cidade", 3).upper()
+            cluster = get_col(row, "Cluster", 4).upper()
 
-            # NormalizaÃ§Ã£o de Cidade
+            # Normalização de Cidade
             if not cidade or cidade == '-':
-                cidade = "NÃƒO DEFINIDA"
+                cidade = "NÃO DEFINIDA"
 
-            # â”€â”€ LÃ“GICA DE GEOCODIFICAÃ‡ÃƒO COM MÃšLTIPLAS TENTATIVAS (VARREDURA DE ABREVIAÃ‡Ã•ES/TYPOS) â”€â”€
+            # ── LÓGICA DE GEOCODIFICAÇÃO COM MÚLTIPLAS TENTATIVAS ──
             uf = get_uf(cidade)
             lat, lng = None, None
             geocodificado = False
 
-            # Gerar todas as variaÃ§Ãµes de escrita do endereÃ§o (do mais completo ao mais simplificado)
+            # Gerar todas as variações de escrita do endereço
             variations = get_address_variations(endereco)
             
             for var in variations:
                 geo_key = f"{var}, {cidade}, {uf}, Brazil".upper()
                 
-                # Overrides manuais para ruas corretas mas nÃ£o presentes no OpenStreetMap/Nominatim
+                # Overrides manuais
                 if "PEDRO POHLMANN" in geo_key:
                     lat, lng = -29.6953, -51.1014
                     geocodificado = True
@@ -435,25 +435,24 @@ def process_mdu():
                         lat, lng = coords[0], coords[1]
                         geocodificado = True
                         break
-                    # Se for None, significa que jÃ¡ foi consultado no Nominatim e falhou, entÃ£o continuamos para a prÃ³xima variaÃ§Ã£o
                     continue
                 
-                # B. Se nÃ£o estÃ¡ no cache e estamos dentro do limite de requisiÃ§Ãµes, faz a geocodificaÃ§Ã£o
+                # B. Se não está no cache e estamos dentro do limite
                 if new_geocodes_count < max_new_geocodes:
                     print(f"[{idx+1}/{total_rows}] Buscando no Nominatim: {geo_key}")
                     coords = geocode_address(geo_key, cache)
                     new_geocodes_count += 1
-                    save_cache(cache) # Salva o cache imediatamente
-                    time.sleep(1) # Intervalo obrigatÃ³rio de 1s do Nominatim
+                    save_cache(cache)
+                    time.sleep(1)
                     
                     if coords:
                         lat, lng = coords[0], coords[1]
                         geocodificado = True
                         break
             
-            # C. Fallback: Se nenhuma variaÃ§Ã£o resolveu, tenta o centro da cidade
+            # C. Fallback: centro da cidade
             if lat is None or lng is None:
-                coords = CITY_COORDINATES.get(cidade, CITY_COORDINATES["NÃƒO DEFINIDA"])
+                coords = CITY_COORDINATES.get(cidade, CITY_COORDINATES.get("NÃO DEFINIDA", [-30.0346, -51.2177]))
                 lat, lng = coords[0], coords[1]
                 geocodificado = False
 
@@ -462,32 +461,32 @@ def process_mdu():
                 "endereco": endereco,
                 "cidade": cidade,
                 "cluster": cluster,
-                "aging": get_col(row, "Aging", 6),
-                "relatorio_por": get_col(row, "Quem fez RelatÃ³rio", 7),
-                "pendencia": get_col(row, "PendÃªncia?", 8),
-                "status": get_col(row, "Status", 8),
+                "aging": get_col(row, "Aging", 5),
+                "relatorio_por": get_col(row, "Quem fez Relatório", 6),
+                "pendencia": get_col(row, "Pendência?", 7),
+                "status": get_col(row, "STATUS", 8),
                 "prog": clean_percentage(get_col(row, "Prog. %", 9)),
-                "cod_imovel": get_col(row, "CÃ³d. ImÃ³vel", 10),
-                "area": get_col(row, "Ãrea", 11),
+                "cod_imovel": get_col(row, "COD IMOVEL", 10),
+                "area": get_col(row, "Área", 11),
                 "node": get_col(row, "Node", 12),
                 "caixa_m": get_col(row, "Caixa M", 13),
                 "hps": clean_int(get_col(row, "HPs", 14)),
+                "data_adicio": get_col(row, "Data Adicio.", 16),
                 "equipe": get_col(row, "Equipe", 17),
                 "primeira_visita": get_col(row, "Primeira Visita", 18),
                 "segunda_visita": get_col(row, "Segunda Visita", 19),
+                "obs_vistoria": get_col(row, "Observações Vistoria", 21),
                 "data_interna": get_col(row, "Data Interna", 29),
-                "data_fusao": get_col(row, "Data FusÃ£o", 30),
-                "data_baixa": get_col(row, "Data Baixa", 32),
-                "data_relatorio": get_col(row, "Data RelatÃ³rio", 34),
-                "data_medicao": get_col(row, "Data MediÃ§Ã£o", 38),
-                "valor_medicao": clean_currency(get_col(row, "Valor MediÃ§Ã£o", 39)),
-                "valor_repasse": clean_currency(get_col(row, "Valor Repasse", 45)),
+                "data_fusao": get_col(row, "Data Fusão", 30),
+                "data_baixa": get_col(row, "Data Baixa", 33),
+                "obs_baixa": get_col(row, "Observações Baixa", 34),
+                "data_relatorio": get_col(row, "Data Relatório", 35),
+                "data_medicao": get_col(row, "Data Medição", 39),
+                "valor_medicao": clean_currency(get_col(row, "Valor Medição", 40)),
+                "valor_repasse": clean_currency(get_col(row, "Valor Repasse", 46)),
                 "lat": lat,
                 "lng": lng,
-                "geocodificado": geocodificado,
-                "obs_baixa": get_col(row, "ObservaÃ§Ãµes Baixa", 33),
-                "obs_vistoria": get_col(row, "ObservaÃ§Ãµes Vistoria", 21),
-                "data_adicio": get_col(row, "Data Adicio.", 16)
+                "geocodificado": geocodificado
             }
             rows_data.append(item)
             if (idx + 1) % 50 == 0:

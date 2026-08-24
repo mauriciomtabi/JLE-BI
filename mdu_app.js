@@ -1990,29 +1990,34 @@ window.closeMduMissingGeoModal = closeMduMissingGeoModal;
 function normalizeMduReportResponsible(name) {
     if (!name || name.trim() === '' || name.trim() === '-') return 'Sem Responsável';
     
-    let n = name.trim().toUpperCase();
-    
-    // Normalizar pontuações e separadores comuns
-    n = n.replace(/[^A-ZÁÉÍÓÚÂÊÔÃÕÇ\s]/g, ' ');
+    let n = name.trim().toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    n = n.replace(/[^A-Z\s]/g, ' ');
     
     const words = n.split(/\s+/).filter(Boolean);
     if (words.length === 0) return 'Sem Responsável';
     
     let firstWord = words[0];
     
-    // Mapeamento e consolidação para padronizar (Corrigido Patrília -> Patrícia)
-    if (firstWord === 'PATY' || firstWord === 'PATRICIA' || firstWord === 'PATRÍCIA') {
+    // Mapeamento e consolidação para padronizar
+    if (['PATY', 'PATRICIA'].includes(firstWord)) {
         return 'Patrícia';
     }
-    
-    // Excluir Gabriela dos indicadores
-    if (firstWord === 'GABRIELA') {
-        return 'Sem Responsável';
+    if (['JENIFFER', 'JENIFER', 'JENNIFER'].includes(firstWord)) {
+        return 'Jeniffer';
+    }
+    if (['DUDA', 'EDUARDA'].includes(firstWord)) {
+        return 'Duda';
+    }
+    if (['MATHEUS', 'MATEUS'].includes(firstWord)) {
+        return 'Matheus';
+    }
+    if (['GABRIELA', 'GABI'].includes(firstWord)) {
+        return 'Gabriela';
     }
     
     const blacklist = [
-        'ARQUIVO', 'NODE', 'NÃO', 'NO', 'PROJETO', 'PASTA', 'SEM', 'OK', 'LOCALIZADO', 
-        'FOTOS', 'PENDENCIA', 'RELAÇÃO', 'RELATÓRIO', 'FALTA', 'DWG'
+        'ARQUIVO', 'NODE', 'NAO', 'NO', 'PROJETO', 'PASTA', 'SEM', 'OK', 'LOCALIZADO', 
+        'FOTOS', 'PENDENCIA', 'RELACAO', 'RELATORIO', 'FALTA', 'FALTANDO', 'DWG', 'AGUARDANDO', 'TROCAR', 'N', 'SIM'
     ];
     if (blacklist.includes(firstWord)) {
         return 'Sem Responsável';
@@ -2057,6 +2062,7 @@ function renderRelatoriosResponsavel() {
     const responsibleTotals = {};
     let grandTotal = 0;
     const todayCutoff = new Date();
+    todayCutoff.setDate(todayCutoff.getDate() + 1);
     todayCutoff.setHours(23, 59, 59, 999);
 
     // 1. Filtrar registros que possuem data_relatorio preenchida e válida
@@ -2162,12 +2168,13 @@ function renderRelatoriosResponsavel() {
         mediaSub.innerText = `Média: ${chartAvg}/dia`;
     }
 
-    // Cores premium para cada responsável principal (Removido Sem Responsável e Gabriela)
+    // Cores premium para cada responsável principal
     const respColors = {
         'Duda': '#004f71',       // Deep blue
         'Jeniffer': '#ffa502',   // Orange
         'Matheus': '#1e90ff',    // Light blue
-        'Patrícia': '#ff6b81'    // Pink
+        'Patrícia': '#ff6b81',   // Pink
+        'Gabriela': '#2ed573'    // Emerald green
     };
     const defaultColor = '#747d8c';
 
