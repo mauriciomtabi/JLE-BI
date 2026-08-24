@@ -8,7 +8,12 @@ $i_acute = [char]237
 $e_circumflex = [char]234
 $c_cedilla_caps = [char]199
 
-$networkDir = "\\10.121.21.252\financeiro\Angelita\2026\FLUXO DIARIO"
+$candidateDirs = @(
+    "\\10.121.21.252\financeiro\Angelita\2026\TECNODRILL\FLUXO CAIXA",
+    "\\10.121.21.252\financeiro\Angelita\2026\FLUXO DIARIO",
+    "\\10.121.21.252\financeiro\Angelita\2026\TECNODRILL",
+    "\\10.121.21.252\financeiro\Angelita\2026\FLUXO DIARIO\PLANILHAS ANTIGAS"
+)
 $localTempPath = "$PSScriptRoot\temp_tecnodrill.xlsx"
 $fallbackPath = "$PSScriptRoot\tecnodrill_local.xlsx"
 
@@ -18,30 +23,37 @@ Write-Output "======================================================="
 
 $useFile = $null
 $networkPath = $null
+$foundFiles = @()
 
-if (Test-Path $networkDir) {
-    try {
-        $networkFile = Get-ChildItem $networkDir |
-            Where-Object { $_.Name -match "Fluxo de Caixa Anal.*tico TECONDRILL.*\.xlsx$" } |
-            Sort-Object @{Expression = {$_.LastWriteTime}; Descending = $true} |
-            Select-Object -First 1
-
-        if ($null -ne $networkFile) {
-            $networkPath = $networkFile.FullName
-            Write-Output "Arquivo Tecnodrill encontrado: $networkPath"
-            Write-Output "Copiando planilha da rede localmente..."
-            Copy-Item -Path $networkPath -Destination $localTempPath -Force
-            Copy-Item -Path $networkPath -Destination $fallbackPath -Force
-            $useFile = $localTempPath
-            Write-Output "Copia realizada com sucesso."
-        } else {
-            Write-Warning "Arquivo TECONDRILL nao encontrado na pasta de rede."
+foreach ($dir in $candidateDirs) {
+    if (Test-Path $dir) {
+        try {
+            $files = Get-ChildItem -Path $dir -Filter "*.xlsx" -ErrorAction SilentlyContinue |
+                Where-Object { ($_.Name -match "Fluxo de Caixa Anal.*tico TEC.*NDRILL.*\.xlsx$" -or $_.Name -like "*TECONDRILL*.xlsx" -or $_.Name -like "*TECNODRILL*.xlsx") -and $_.Name -notlike "~$*" }
+            if ($null -ne $files) {
+                $foundFiles += $files
+            }
+        } catch {
+            Write-Warning "Falha ao inspecionar diretorio $dir : $($_.Exception.Message)"
         }
+    }
+}
+
+if ($foundFiles.Count -gt 0) {
+    $networkFile = $foundFiles | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+    $networkPath = $networkFile.FullName
+    Write-Output "Arquivo Tecnodrill mais recente encontrado: $networkPath (Modificado em: $($networkFile.LastWriteTime))"
+    try {
+        Write-Output "Copiando planilha da rede localmente..."
+        Copy-Item -Path $networkPath -Destination $localTempPath -Force
+        Copy-Item -Path $networkPath -Destination $fallbackPath -Force
+        $useFile = $localTempPath
+        Write-Output "Copia realizada com sucesso e cache local sincronizado."
     } catch {
         Write-Warning "Falha ao copiar da rede: $($_.Exception.Message)"
     }
 } else {
-    Write-Warning "Diretorio de rede inacessivel: $networkDir"
+    Write-Warning "Nenhum arquivo Tecnodrill encontrado nos diretorios de rede consultados."
 }
 
 if ($null -eq $useFile) {
@@ -136,7 +148,7 @@ try {
         # Extrair mes/ano do nome da aba
         $mesAba = "N/D"
         $anoAba = ""
-        if ($name -match "(JAN|FEV|MAR|ABR|MAI|JUN|JUL|AGO|SET|OUT|NOV|DEZ)") {
+        if ($name -match "(JAN|FEV|MAR|ABR|MAI|JUN|JUL|AGOS|AGO|SET|OUT|NOV|DEZ)") {
             $mesCode = $Matches[1]
             switch ($mesCode) {
                 "JAN" { $mesAba = "JANEIRO" }
@@ -146,6 +158,7 @@ try {
                 "MAI" { $mesAba = "MAIO" }
                 "JUN" { $mesAba = "JUNHO" }
                 "JUL" { $mesAba = "JULHO" }
+                "AGOS" { $mesAba = "AGOSTO" }
                 "AGO" { $mesAba = "AGOSTO" }
                 "SET" { $mesAba = "SETEMBRO" }
                 "OUT" { $mesAba = "OUTUBRO" }
@@ -337,17 +350,38 @@ try {
 
     Write-Output "Tecnodrill ETL finalizado! tecnodrill_data.js gerado com sucesso."
 
-    # Staging para git (o commit/push e feito pelo update_dashboard.ps1 em seguida)
+    # 6. Publicar atualizações no GitHub se houver alterações em tecnodrill_data.js
+    Write-Output "Verificando se houve alteracoes em tecnodrill_data.js para publicar no GitHub..."
     $gitPath = "C:\Program Files\Git\cmd\git.exe"
     if (Test-Path $gitPath) {
         $gitStatus = & $gitPath status --porcelain tecnodrill_data.js
         if ($null -ne $gitStatus -and $gitStatus.ToString().Trim() -ne "") {
-            Write-Output "Adicionando tecnodrill_data.js ao staging area..."
-            & $gitPath add tecnodrill_data.js
-            Write-Output "tecnodrill_data.js adicionado. Commit sera feito pelo update_dashboard.ps1."
+            Write-Output "Novas alteracoes detectadas em tecnodrill_data.js! Atualizando a versao do Cache no Service Worker (sw.js)..."
+            $swPath = "$PSScriptRoot\sw.js"
+            if (Test-Path $swPath) {
+                try {
+                    $swContent = [System.IO.File]::ReadAllText($swPath)
+                    $timestamp = Get-Date -Format "yyyyMMddHHmmss"
+                    $newCacheNameLine = "const CACHE_NAME = 'jle-bi-v3.16.$timestamp';"
+                    $swContent = $swContent -replace "const CACHE_NAME = '([^']+)';", $newCacheNameLine
+                    $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+                    [System.IO.File]::WriteAllText($swPath, $swContent, $utf8NoBom)
+                    Write-Output "Cache do Service Worker atualizado com sucesso para: jle-bi-v3.16.$timestamp"
+                } catch {
+                    Write-Warning "Nao foi possivel atualizar o sw.js: $($_.Exception.Message)"
+                }
+            }
+
+            Write-Output "Fazendo commit e push para o GitHub..."
+            & $gitPath add tecnodrill_data.js sw.js
+            & $gitPath commit -m "data(auto): atualizacao automatica de dados Tecnodrill e cache do PWA"
+            & $gitPath push origin main
+            Write-Output "Dados Tecnodrill e Service Worker publicados com sucesso no GitHub!"
         } else {
-            Write-Output "Sem novas alteracoes em tecnodrill_data.js."
+            Write-Output "Sem novas alteracoes em tecnodrill_data.js. Nenhuma publicacao necessaria."
         }
+    } else {
+        Write-Warning "Executavel do Git nao encontrado em '$gitPath'."
     }
 
 } catch {

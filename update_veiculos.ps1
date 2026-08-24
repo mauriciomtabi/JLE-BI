@@ -284,7 +284,7 @@ if os.path.exists(out_js):
 new_data = []
 if os.path.exists(temp_json):
     try:
-        with open(temp_json, 'r', encoding='utf-8') as f:
+        with open(temp_json, 'r', encoding='utf-8-sig') as f:
             new_data = json.load(f)
         if isinstance(new_data, dict):
             new_data = [new_data]
