@@ -227,23 +227,13 @@ function resetVeiculosDateFilter() {
 // ── Aplicar Filtros ───────────────────────────────────────────────────────
 function applyVeiculosFilters() {
     try {
-        const monthSelect = document.getElementById('filter-veiculos-month');
-        const month      = monthSelect?.value || 'all';
+        const month      = document.getElementById('filter-veiculos-month')?.value || 'all';
         const uf         = document.getElementById('filter-veiculos-uf')?.value    || 'all';
         const fuel       = document.getElementById('filter-veiculos-fuel')?.value  || 'all';
         const driver     = (document.getElementById('filter-veiculos-driver')?.value || '').trim().toUpperCase();
         const plate      = (document.getElementById('filter-veiculos-plate')?.value  || '').trim().toUpperCase();
         const dataInicio = document.getElementById('filter-veiculos-data-inicio')?.value || '';
         const dataFim    = document.getElementById('filter-veiculos-data-fim')?.value    || '';
-
-        // Se o usuário selecionou um mês específico e ainda estava em 'mensal' (ou se a base tem apenas 1 mês), muda para diário
-        const uniqueMonthsCount = new Set(getBaseVeiculosData().map(r => r.month)).size;
-        if ((month !== 'all' || uniqueMonthsCount <= 1) && veiculosEvolutionGranularity === 'mensal') {
-            veiculosEvolutionGranularity = 'diario';
-            document.querySelectorAll('#view-veiculos-container .btn-granularidade-veiculos').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('data-gran') === 'diario');
-            });
-        }
 
         filteredVeiculosData = getBaseVeiculosData().filter(r => {
             if (month !== 'all' && String(r.month || '').toUpperCase() !== month.toUpperCase()) return false;
@@ -525,84 +515,52 @@ function updateVeiculosCharts() {
         };
     }
 
-    const chartType = (isMensal && evoData.labels.length <= 1) ? 'bar' : 'line';
-
-    const datasets = chartType === 'bar' ? [
-        {
-            label: 'Santa Catarina (SC)',
-            data: evoData.SC,
-            backgroundColor: 'rgba(46,204,113,0.85)',
-            borderColor: '#2ecc71',
-            borderWidth: 1.5,
-            borderRadius: 6,
-            borderSkipped: false,
-        },
-        {
-            label: 'Rio Grande do Sul (RS)',
-            data: evoData.RS,
-            backgroundColor: 'rgba(52,152,219,0.85)',
-            borderColor: '#3498db',
-            borderWidth: 1.5,
-            borderRadius: 6,
-            borderSkipped: false,
-        },
-        {
-            label: 'Paraná (PR)',
-            data: evoData.PR,
-            backgroundColor: 'rgba(243,159,24,0.85)',
-            borderColor: '#f39f18',
-            borderWidth: 1.5,
-            borderRadius: 6,
-            borderSkipped: false,
-        }
-    ] : [
-        {
-            label: 'Santa Catarina (SC)',
-            data: evoData.SC,
-            borderColor: '#2ecc71',
-            backgroundColor: 'rgba(46,204,113,0.08)',
-            tension: 0.35,
-            borderWidth: 2.5,
-            fill: true,
-            pointRadius: 4,
-            pointHoverRadius: 7,
-            pointBackgroundColor: '#2ecc71',
-            pointBorderColor: '#fff',
-            pointBorderWidth: 2,
-        },
-        {
-            label: 'Rio Grande do Sul (RS)',
-            data: evoData.RS,
-            borderColor: '#3498db',
-            backgroundColor: 'rgba(52,152,219,0.08)',
-            tension: 0.35,
-            borderWidth: 2.5,
-            fill: true,
-            pointRadius: 4,
-            pointHoverRadius: 7,
-            pointBackgroundColor: '#3498db',
-            pointBorderColor: '#fff',
-            pointBorderWidth: 2,
-        },
-        {
-            label: 'Paraná (PR)',
-            data: evoData.PR,
-            borderColor: '#f39f18',
-            backgroundColor: 'rgba(243,159,24,0.08)',
-            tension: 0.35,
-            borderWidth: 2.5,
-            fill: true,
-            pointRadius: 4,
-            pointHoverRadius: 7,
-            pointBackgroundColor: '#f39f18',
-            pointBorderColor: '#fff',
-            pointBorderWidth: 2,
-        },
-    ];
-
-    renderVeiculosChart('chart-veiculos-evolution', chartType, {
+    renderVeiculosChart('chart-veiculos-evolution', 'line', {
         labels: evoData.labels,
-        datasets: datasets
+        datasets: [
+            {
+                label: 'Santa Catarina (SC)',
+                data: evoData.SC,
+                borderColor: '#2ecc71',
+                backgroundColor: 'rgba(46,204,113,0.08)',
+                tension: 0.35,
+                borderWidth: 2.5,
+                fill: true,
+                pointRadius: 4,
+                pointHoverRadius: 7,
+                pointBackgroundColor: '#2ecc71',
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2,
+            },
+            {
+                label: 'Rio Grande do Sul (RS)',
+                data: evoData.RS,
+                borderColor: '#3498db',
+                backgroundColor: 'rgba(52,152,219,0.08)',
+                tension: 0.35,
+                borderWidth: 2.5,
+                fill: true,
+                pointRadius: 4,
+                pointHoverRadius: 7,
+                pointBackgroundColor: '#3498db',
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2,
+            },
+            {
+                label: 'Paraná (PR)',
+                data: evoData.PR,
+                borderColor: '#f39f18',
+                backgroundColor: 'rgba(243,159,24,0.08)',
+                tension: 0.35,
+                borderWidth: 2.5,
+                fill: true,
+                pointRadius: 4,
+                pointHoverRadius: 7,
+                pointBackgroundColor: '#f39f18',
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2,
+            },
+        ]
     }, {
         responsive: true,
         maintainAspectRatio: false,

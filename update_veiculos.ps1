@@ -257,52 +257,78 @@ try {
 # 3. Mesclagem e Preservacao de Historico
 $historicalRecords = @()
 
-if (Test-Path $outDataJs) {
-    Write-Output "Lendo dados historicos locais em veiculos_data.js..."
-    $jsContent = [System.IO.File]::ReadAllText($outDataJs, [System.Text.Encoding]::UTF8)
-    if ($jsContent -match "const\s+VEICULOS_DATA\s*=\s*([\s\S]+?);?\s*$") {
-        $jsonStr = $Matches[1]
-        try {
-            $historicalRecords = ConvertFrom-Json -InputObject $jsonStr
-            Write-Output "Historico carregado com sucesso: $($historicalRecords.Count) registros."
-        } catch {
-            Write-Warning "Nao foi possivel interpretar o JSON historico. Iniciando sem historico."
+# Exportar novos registros temporariamente para mesclagem segura
+$tempNewJson = "$PSScriptRoot\temp_new_veiculos.json"
+$newRecords | ConvertTo-Json -Depth 5 | Out-File -FilePath $tempNewJson -Encoding UTF8
+
+$pythonPath = "python"
+if (Get-Command "python" -ErrorAction SilentlyContinue) {
+    Write-Output "Executando mesclagem e protecao de historico via Python..."
+    & python -c @"
+import json, os
+
+out_js = r'$outDataJs'
+temp_json = r'$tempNewJson'
+
+existing_data = []
+if os.path.exists(out_js):
+    try:
+        with open(out_js, 'r', encoding='utf-8', errors='replace') as f:
+            c = f.read()
+        if 'VEICULOS_DATA = ' in c:
+            existing_data = json.loads(c.split('VEICULOS_DATA = ')[1].rstrip(';\n '))
+        print(f'Historico lido: {len(existing_data)} registros.')
+    except Exception as e:
+        print(f'Aviso ao ler historico: {e}')
+
+new_data = []
+if os.path.exists(temp_json):
+    try:
+        with open(temp_json, 'r', encoding='utf-8') as f:
+            new_data = json.load(f)
+        if isinstance(new_data, dict):
+            new_data = [new_data]
+        print(f'Novos registros extraidos: {len(new_data)}')
+    except Exception as e:
+        print(f'Erro ao ler novos registros: {e}')
+
+new_months = set(r.get('month', '').upper() for r in new_data if r.get('month') and r.get('month') != 'N/D')
+print('Meses novos detectados:', sorted(list(new_months)))
+
+# Preservar meses que nao estao no lote novo
+merged = [r for r in existing_data if r.get('month', '').upper() not in new_months]
+print(f'Historico preservado de outros meses: {len(merged)}')
+merged.extend(new_data)
+print(f'Total final consolidado: {len(merged)}')
+
+# Escrever veiculos_data.js
+with open(out_js, 'w', encoding='utf-8') as f:
+    f.write(f'const VEICULOS_DATA = {json.dumps(merged, ensure_ascii=False, indent=2)};\n')
+
+print('veiculos_data.js atualizado com sucesso!')
+"@
+    if (Test-Path $tempNewJson) { Remove-Item $tempNewJson -Force }
+} else {
+    Write-Warning "Python nao encontrado. Usando fallback do PowerShell."
+    # Fallback caso python nao esteja disponivel
+    if (Test-Path $outDataJs) {
+        $jsContent = [System.IO.File]::ReadAllText($outDataJs, [System.Text.Encoding]::UTF8)
+        if ($jsContent -match "const\s+VEICULOS_DATA\s*=\s*([\s\S]+?);?\s*$") {
+            try {
+                $historicalRecords = ConvertFrom-Json -InputObject $Matches[1]
+            } catch {}
         }
     }
-}
-
-# Identificar os meses novos extraidos da planilha de rede
-$newMonths = @{}
-foreach ($rec in $newRecords) {
-    if ($rec.month -ne "N/D") {
-        $newMonths[$rec.month.ToUpper()] = $true
+    $newMonths = @{}
+    foreach ($rec in $newRecords) { if ($rec.month -ne "N/D") { $newMonths[$rec.month.ToUpper()] = $true } }
+    $mergedRecords = @()
+    foreach ($hRec in $historicalRecords) {
+        if (-not $newMonths.ContainsKey($hRec.month.ToString().ToUpper())) { $mergedRecords += $hRec }
     }
+    $mergedRecords += $newRecords
+    $jsonOut = ConvertTo-Json -InputObject $mergedRecords -Depth 5
+    [System.IO.File]::WriteAllText($outDataJs, "const VEICULOS_DATA = " + $jsonOut + ";", [System.Text.Encoding]::UTF8)
 }
-
-Write-Output "Meses detectados no novo relatorio: $(($newMonths.Keys | Sort-Object) -join ', ')"
-
-# Manter registros historicos dos meses que NAO estao no novo arquivo
-$mergedRecords = @()
-$preservedCount = 0
-foreach ($hRec in $historicalRecords) {
-    $hMonth = $hRec.month.ToString().ToUpper()
-    if (-not $newMonths.ContainsKey($hMonth)) {
-        $mergedRecords += $hRec
-        $preservedCount++
-    }
-}
-
-Write-Output "Mantendo $preservedCount registros historicos de meses anteriores."
-
-# Adicionar os novos registros extraidos
-$mergedRecords += $newRecords
-Write-Output "Total de registros consolidados apos a mesclagem: $($mergedRecords.Count)"
-
-# 4. Escrever arquivo final veiculos_data.js
-$jsonOut = ConvertTo-Json -InputObject $mergedRecords -Depth 5
-$jsOutContent = "const VEICULOS_DATA = " + $jsonOut + ";"
-[System.IO.File]::WriteAllText($outDataJs, $jsOutContent, [System.Text.Encoding]::UTF8)
-Write-Output "Arquivo veiculos_data.js escrito com sucesso!"
 
 # 5. Commit e Push no GitHub (atualizacao na Vercel)
 $gitPath = "C:\Program Files\Git\cmd\git.exe"
