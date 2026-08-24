@@ -851,12 +851,7 @@
 
                 <div class="filter-group">
                     <label for="filter-veiculos-data-fim">Data Fim</label>
-                    <div style="display: flex; gap: 8px; align-items: center; width: 100%;">
-                        <input type="date" id="filter-veiculos-data-fim" onchange="applyVeiculosFilters()" style="flex-grow: 1;">
-                        <button onclick="resetVeiculosFilters()" title="Limpar Filtros" style="background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 12px; color: var(--text-secondary); cursor: pointer; transition: all 0.2s ease;" onmouseover="this.style.borderColor='var(--color-primary)'; this.style.color='var(--text-primary)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-secondary)'">
-                            <i class="fa-solid fa-eraser"></i>
-                        </button>
-                    </div>
+                    <input type="date" id="filter-veiculos-data-fim" onchange="applyVeiculosFilters()">
                 </div>
 
                 <div class="filter-group">
@@ -871,7 +866,11 @@
                     <datalist id="veiculos-plate-list"></datalist>
                 </div>
 
-
+                <div class="filter-group filter-group-clear" style="flex: 0 0 auto; display: flex; align-items: flex-end;">
+                    <button onclick="resetVeiculosFilters()" title="Limpar Filtros" style="background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; height: 38px; width: 42px; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); cursor: pointer; transition: all 0.2s ease;" onmouseover="this.style.borderColor='var(--color-primary)'; this.style.color='var(--text-primary)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-secondary)'">
+                        <i class="fa-solid fa-eraser"></i>
+                    </button>
+                </div>
             </section>
 
             <!-- Sub Tab Selector (Indicadores / Lançamentos) -->
@@ -959,7 +958,7 @@
                                 <h2>Maiores Consumos (Top 3)</h2>
                             </div>
                         </div>
-                        <div class="chart-body" style="flex-direction: column; justify-content: flex-start; gap: 16px; overflow-y: hidden; height: 390px; padding-top: 4px;">
+                        <div class="chart-body" style="flex-direction: column; justify-content: flex-start; gap: 10px; overflow-y: auto; height: 390px; padding: 12px 14px;">
                             <div style="width: 100%;">
                                 <h4 style="font-size: 11px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px; font-weight: 700; letter-spacing: 0.5px; border-bottom: 1px solid var(--border-color); padding-bottom: 4px;">
                                     <i class="fa-solid fa-user-tie" style="color: var(--color-primary-light); margin-right: 6px;"></i>Motoristas

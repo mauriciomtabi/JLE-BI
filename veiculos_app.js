@@ -227,13 +227,23 @@ function resetVeiculosDateFilter() {
 // ── Aplicar Filtros ───────────────────────────────────────────────────────
 function applyVeiculosFilters() {
     try {
-        const month      = document.getElementById('filter-veiculos-month')?.value || 'all';
+        const monthSelect = document.getElementById('filter-veiculos-month');
+        const month      = monthSelect?.value || 'all';
         const uf         = document.getElementById('filter-veiculos-uf')?.value    || 'all';
         const fuel       = document.getElementById('filter-veiculos-fuel')?.value  || 'all';
         const driver     = (document.getElementById('filter-veiculos-driver')?.value || '').trim().toUpperCase();
         const plate      = (document.getElementById('filter-veiculos-plate')?.value  || '').trim().toUpperCase();
         const dataInicio = document.getElementById('filter-veiculos-data-inicio')?.value || '';
         const dataFim    = document.getElementById('filter-veiculos-data-fim')?.value    || '';
+
+        // Se o usuário selecionou um mês específico e ainda estava em 'mensal' (ou se a base tem apenas 1 mês), muda para diário
+        const uniqueMonthsCount = new Set(getBaseVeiculosData().map(r => r.month)).size;
+        if ((month !== 'all' || uniqueMonthsCount <= 1) && veiculosEvolutionGranularity === 'mensal') {
+            veiculosEvolutionGranularity = 'diario';
+            document.querySelectorAll('#view-veiculos-container .btn-granularidade-veiculos').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-gran') === 'diario');
+            });
+        }
 
         filteredVeiculosData = getBaseVeiculosData().filter(r => {
             if (month !== 'all' && String(r.month || '').toUpperCase() !== month.toUpperCase()) return false;
@@ -515,52 +525,84 @@ function updateVeiculosCharts() {
         };
     }
 
-    renderVeiculosChart('chart-veiculos-evolution', 'line', {
+    const chartType = (isMensal && evoData.labels.length <= 1) ? 'bar' : 'line';
+
+    const datasets = chartType === 'bar' ? [
+        {
+            label: 'Santa Catarina (SC)',
+            data: evoData.SC,
+            backgroundColor: 'rgba(46,204,113,0.85)',
+            borderColor: '#2ecc71',
+            borderWidth: 1.5,
+            borderRadius: 6,
+            borderSkipped: false,
+        },
+        {
+            label: 'Rio Grande do Sul (RS)',
+            data: evoData.RS,
+            backgroundColor: 'rgba(52,152,219,0.85)',
+            borderColor: '#3498db',
+            borderWidth: 1.5,
+            borderRadius: 6,
+            borderSkipped: false,
+        },
+        {
+            label: 'Paraná (PR)',
+            data: evoData.PR,
+            backgroundColor: 'rgba(243,159,24,0.85)',
+            borderColor: '#f39f18',
+            borderWidth: 1.5,
+            borderRadius: 6,
+            borderSkipped: false,
+        }
+    ] : [
+        {
+            label: 'Santa Catarina (SC)',
+            data: evoData.SC,
+            borderColor: '#2ecc71',
+            backgroundColor: 'rgba(46,204,113,0.08)',
+            tension: 0.35,
+            borderWidth: 2.5,
+            fill: true,
+            pointRadius: 4,
+            pointHoverRadius: 7,
+            pointBackgroundColor: '#2ecc71',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2,
+        },
+        {
+            label: 'Rio Grande do Sul (RS)',
+            data: evoData.RS,
+            borderColor: '#3498db',
+            backgroundColor: 'rgba(52,152,219,0.08)',
+            tension: 0.35,
+            borderWidth: 2.5,
+            fill: true,
+            pointRadius: 4,
+            pointHoverRadius: 7,
+            pointBackgroundColor: '#3498db',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2,
+        },
+        {
+            label: 'Paraná (PR)',
+            data: evoData.PR,
+            borderColor: '#f39f18',
+            backgroundColor: 'rgba(243,159,24,0.08)',
+            tension: 0.35,
+            borderWidth: 2.5,
+            fill: true,
+            pointRadius: 4,
+            pointHoverRadius: 7,
+            pointBackgroundColor: '#f39f18',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2,
+        },
+    ];
+
+    renderVeiculosChart('chart-veiculos-evolution', chartType, {
         labels: evoData.labels,
-        datasets: [
-            {
-                label: 'Santa Catarina (SC)',
-                data: evoData.SC,
-                borderColor: '#2ecc71',
-                backgroundColor: 'rgba(46,204,113,0.08)',
-                tension: 0.35,
-                borderWidth: 2.5,
-                fill: true,
-                pointRadius: 4,
-                pointHoverRadius: 7,
-                pointBackgroundColor: '#2ecc71',
-                pointBorderColor: '#fff',
-                pointBorderWidth: 2,
-            },
-            {
-                label: 'Rio Grande do Sul (RS)',
-                data: evoData.RS,
-                borderColor: '#3498db',
-                backgroundColor: 'rgba(52,152,219,0.08)',
-                tension: 0.35,
-                borderWidth: 2.5,
-                fill: true,
-                pointRadius: 4,
-                pointHoverRadius: 7,
-                pointBackgroundColor: '#3498db',
-                pointBorderColor: '#fff',
-                pointBorderWidth: 2,
-            },
-            {
-                label: 'Paraná (PR)',
-                data: evoData.PR,
-                borderColor: '#f39f18',
-                backgroundColor: 'rgba(243,159,24,0.08)',
-                tension: 0.35,
-                borderWidth: 2.5,
-                fill: true,
-                pointRadius: 4,
-                pointHoverRadius: 7,
-                pointBackgroundColor: '#f39f18',
-                pointBorderColor: '#fff',
-                pointBorderWidth: 2,
-            },
-        ]
+        datasets: datasets
     }, {
         responsive: true,
         maintainAspectRatio: false,
@@ -1297,23 +1339,23 @@ function renderTop3Consumo() {
 
         // Renderizar motoristas
         if (topDrivers.length === 0) {
-            driversContainer.innerHTML = `<div style="font-size: 11px; color: var(--text-secondary); text-align: center; padding: 8px;">Nenhum dado disponível</div>`;
+            driversContainer.innerHTML = `<div style="font-size: 11px; color: var(--text-secondary); text-align: center; padding: 6px;">Nenhum dado disponível</div>`;
         } else {
             driversContainer.innerHTML = topDrivers.map((d, index) => {
-                const ufsBadges = d.ufs.map(uf => `<span class="badge ${uf.toLowerCase()}" style="margin-left: 4px; padding: 2px 6px; font-size: 9px; border-radius: 4px;">${uf}</span>`).join('');
+                const ufsBadges = d.ufs.map(uf => `<span class="badge ${uf.toLowerCase()}" style="margin-left: 3px; padding: 1px 5px; font-size: 8.5px; border-radius: 3px;">${uf}</span>`).join('');
                 const avgSpent = d.count > 0 ? (d.spent / d.count) : 0;
                 return `
-                    <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 12px; font-size: 12px;">
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <strong style="color: var(--text-primary); font-size: 11px;">#${index + 1}</strong>
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 6px; padding: 5px 10px; font-size: 11.5px;">
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                            <strong style="color: var(--text-primary); font-size: 10.5px;">#${index + 1}</strong>
                             <div>
-                                <div style="font-weight: 600; color: var(--text-primary); max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${d.name}">${shortName(d.name)}</div>
-                                <div style="font-size: 10px; color: var(--text-secondary); margin-top: 2px;">
+                                <div style="font-weight: 600; color: var(--text-primary); max-width: 135px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${d.name}">${shortName(d.name)}</div>
+                                <div style="font-size: 9.5px; color: var(--text-secondary); margin-top: 1px;">
                                     ${d.count} abast. • Méd. ${fmtBRL(avgSpent)} ${ufsBadges}
                                 </div>
                             </div>
                         </div>
-                        <div style="text-align: right; font-weight: 700; color: var(--color-primary-light); font-size: 12.5px;">
+                        <div style="text-align: right; font-weight: 700; color: var(--color-primary-light); font-size: 11.5px;">
                             ${fmtBRL(d.spent)}
                         </div>
                     </div>`;
@@ -1322,24 +1364,24 @@ function renderTop3Consumo() {
 
         // Renderizar veículos
         if (topVehicles.length === 0) {
-            vehiclesContainer.innerHTML = `<div style="font-size: 11px; color: var(--text-secondary); text-align: center; padding: 8px;">Nenhum dado disponível</div>`;
+            vehiclesContainer.innerHTML = `<div style="font-size: 11px; color: var(--text-secondary); text-align: center; padding: 6px;">Nenhum dado disponível</div>`;
         } else {
             vehiclesContainer.innerHTML = topVehicles.map((v, index) => {
-                const ufsBadges = v.ufs.map(uf => `<span class="badge ${uf.toLowerCase()}" style="margin-left: 4px; padding: 2px 6px; font-size: 9px; border-radius: 4px;">${uf}</span>`).join('');
+                const ufsBadges = v.ufs.map(uf => `<span class="badge ${uf.toLowerCase()}" style="margin-left: 3px; padding: 1px 5px; font-size: 8.5px; border-radius: 3px;">${uf}</span>`).join('');
                 const avgSpent = v.count > 0 ? (v.spent / v.count) : 0;
-                const modelDisplay = v.model ? ` <span style="font-weight: 500; font-size: 10.5px; color: var(--text-secondary);">(${v.model})</span>` : '';
+                const modelDisplay = v.model ? ` <span style="font-weight: 500; font-size: 10px; color: var(--text-secondary);">(${v.model})</span>` : '';
                 return `
-                    <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 12px; font-size: 12px;">
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <strong style="color: var(--text-primary); font-size: 11px;">#${index + 1}</strong>
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 6px; padding: 5px 10px; font-size: 11.5px;">
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                            <strong style="color: var(--text-primary); font-size: 10.5px;">#${index + 1}</strong>
                             <div>
                                 <div style="font-weight: 700; color: var(--text-primary); letter-spacing: 0.5px;">${v.plate}${modelDisplay}</div>
-                                <div style="font-size: 10px; color: var(--text-secondary); margin-top: 2px;">
+                                <div style="font-size: 9.5px; color: var(--text-secondary); margin-top: 1px;">
                                     ${v.count} abast. • Méd. ${fmtBRL(avgSpent)} ${ufsBadges}
                                 </div>
                             </div>
                         </div>
-                        <div style="text-align: right; font-weight: 700; color: var(--color-secondary-light); font-size: 12.5px;">
+                        <div style="text-align: right; font-weight: 700; color: var(--color-secondary-light); font-size: 11.5px;">
                             ${fmtBRL(v.spent)}
                         </div>
                     </div>`;

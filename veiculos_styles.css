@@ -32,31 +32,26 @@
     border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 14px 16px;
-    display: none !important; /* Escondido por padrão no mobile */
-    grid-template-columns: repeat(2, 1fr);
+    display: flex !important;
+    flex-wrap: wrap;
     gap: 12px;
-    align-items: end;
+    align-items: flex-end;
     box-shadow: var(--shadow-main);
     margin-bottom: 24px;
-}
-
-#view-veiculos-container .filter-bar-veiculos.mobile-expanded {
-    display: grid !important; /* Exibido quando expandido */
-}
-
-@media (min-width: 769px) {
-    #view-veiculos-container .filter-bar-veiculos {
-        display: grid !important; /* Sempre visível no desktop */
-        grid-template-columns: repeat(7, minmax(0, 1fr)) 38px !important;
-        gap: 10px !important;
-        padding: 14px 16px !important;
-    }
+    width: 100%;
 }
 
 #view-veiculos-container .filter-group {
     display: flex;
     flex-direction: column;
     gap: 6px;
+    flex: 1 1 130px;
+    min-width: 120px;
+}
+
+#view-veiculos-container .filter-group.filter-group-clear {
+    flex: 0 0 auto;
+    min-width: unset;
 }
 
 #view-veiculos-container .filter-group label {
