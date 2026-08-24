@@ -519,7 +519,7 @@ module.exports = async (req, res) => {
             const [cHour, cMin] = configTime.split(":").map(Number);
             const [lHour, lMin] = currentTime.split(":").map(Number);
             const timeDiff = (lHour * 60 + lMin) - (cHour * 60 + cMin);
-            const isTimeInWindow = timeDiff >= 0 && timeDiff < 15;
+            const isTimeInWindow = timeDiff >= 0 && timeDiff < 180;
             
             const isRightDay = configDays.includes(currentDay);
             const shouldSend = isTimeInWindow && isRightDay;

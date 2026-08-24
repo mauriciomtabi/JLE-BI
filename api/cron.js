@@ -9,6 +9,9 @@ const SUPABASE_URL = "https://fowlctvebdcodphntsjw.supabase.co";
 const ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZvd2xjdHZlYmRjb2RwaG50c2p3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwNzg2NjUsImV4cCI6MjA5NTY1NDY2NX0.PxzD_PlU4sBFPBukthuXpkBlzYbQqMLXLE4DQwctPOM";
 const RESEND_API_KEY = process.env.RESEND_API_KEY || ['re_bBQyi9qa', 'C5py6HbtiYrNfPoJhZLUATRw'].join('_');
 const FROM_EMAIL = "bi@jletelecom.com.br";
+const BI_URL = "https://jle-bi.vercel.app";
+const SHEETS_URL = "https://docs.google.com/spreadsheets/d/1eEJLaV7D0rthjC5H1MppXyk7dyroqn2h/edit";
+const SHEETS_CSV_URL = "https://docs.google.com/spreadsheets/d/1eEJLaV7D0rthjC5H1MppXyk7dyroqn2h/export?format=csv&gid=260790893";
 
 async function fetchSupabase(endpoint, method = 'GET', body = null) {
     const url = `${SUPABASE_URL}/rest/v1/${endpoint}`;
@@ -448,11 +451,11 @@ module.exports = async (req, res) => {
             const configTime = config.schedule_time.substring(0, 5); // formato "08:00"
             const configDays = config.schedule_days || [];
             
-            // Tolerância de 15 minutos para cobrir atrasos do disparador
+            // Tolerância generosa de 180 minutos (3 horas) para cobrir atrasos e inicialização do computador
             const [cHour, cMin] = configTime.split(":").map(Number);
             const [lHour, lMin] = currentTime.split(":").map(Number);
             const timeDiff = (lHour * 60 + lMin) - (cHour * 60 + cMin);
-            const isTimeInWindow = timeDiff >= 0 && timeDiff < 15;
+            const isTimeInWindow = timeDiff >= 0 && timeDiff < 180;
             
             // 2. Trava de envio diário (Impede múltiplos disparos no mesmo dia)
             if (config.last_sent_at) {

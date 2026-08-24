@@ -511,11 +511,11 @@ async function start() {
             const configTime = config.schedule_time.substring(0, 5); // formato "08:00"
             const configDays = config.schedule_days || [];
             
-            // Dar tolerância de 15 minutos (compatível com cron de 10 min)
+            // Dar tolerância de 180 minutos (3 horas) para cobrir inicialização do PC pela manhã
             const [cHour, cMin] = configTime.split(":").map(Number);
             const [lHour, lMin] = currentTime.split(":").map(Number);
             const timeDiff = (lHour * 60 + lMin) - (cHour * 60 + cMin);
-            const isTimeInWindow = timeDiff >= 0 && timeDiff < 15;
+            const isTimeInWindow = timeDiff >= 0 && timeDiff < 180;
             
             const isRightDay = configDays.includes(currentDay);
             const shouldSend = isTimeInWindow && isRightDay;
