@@ -515,6 +515,17 @@ module.exports = async (req, res) => {
                 const cleanRecipients = (config.recipients || []).filter(e => !e.startsWith('__sched:') && !e.startsWith('__lock:'));
                 await sendResendEmail(cleanRecipients, subject, emailHtml, attachments);
 
+                // 3. Atualizar last_sent_at no Supabase para travar envios duplicados no mesmo dia
+                try {
+                    await fetchSupabase(`bi_email_reports?id=eq.${config.id}`, 'PATCH', {
+                        last_sent_at: new Date().toISOString(),
+                        updated_at: new Date().toISOString()
+                    });
+                    console.log(`[TRAVA] last_sent_at gravado no Supabase para: ${config.report_name}`);
+                } catch (supErr) {
+                    console.error(`Erro ao gravar last_sent_at para ${config.report_name}:`, supErr);
+                }
+
                 sentReports.push(config.report_name);
             }
         }
