@@ -13,14 +13,20 @@ const BI_URL = "https://jle-bi.vercel.app";
 const SHEETS_URL = "https://docs.google.com/spreadsheets/d/1eEJLaV7D0rthjC5H1MppXyk7dyroqn2h/edit";
 const SHEETS_CSV_URL = "https://docs.google.com/spreadsheets/d/1eEJLaV7D0rthjC5H1MppXyk7dyroqn2h/export?format=csv&gid=260790893";
 
-async function fetchSupabase(endpoint, method = 'GET', body = null) {
-    const url = `${SUPABASE_URL}/rest/v1/${endpoint}`;
-    const headers = {
-        "apikey": ANON_KEY,
-        "Authorization": `Bearer ${ANON_KEY}`,
+function getSupabaseAuthHeaders() {
+    const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY;
+    const key = serviceKey || ANON_KEY;
+    return {
+        "apikey": key,
+        "Authorization": `Bearer ${key}`,
         "Content-Type": "application/json",
         "Prefer": "return=representation"
     };
+}
+
+async function fetchSupabase(endpoint, method = 'GET', body = null) {
+    const url = `${SUPABASE_URL}/rest/v1/${endpoint}`;
+    const headers = getSupabaseAuthHeaders();
     const options = { method, headers };
     if (body) {
         options.body = JSON.stringify(body);
@@ -451,11 +457,11 @@ module.exports = async (req, res) => {
             const configTime = config.schedule_time.substring(0, 5); // formato "08:00"
             const configDays = config.schedule_days || [];
             
-            // Tolerância generosa de 180 minutos (3 horas) para cobrir atrasos e inicialização do computador
+            // Tolerância calibrada de 25 minutos (cobre com segurança a execução de 10 em 10 min do Vercel cron)
             const [cHour, cMin] = configTime.split(":").map(Number);
             const [lHour, lMin] = currentTime.split(":").map(Number);
             const timeDiff = (lHour * 60 + lMin) - (cHour * 60 + cMin);
-            const isTimeInWindow = timeDiff >= 0 && timeDiff < 180;
+            const isTimeInWindow = timeDiff >= 0 && timeDiff <= 25;
             
             // 2. Trava de envio diário (Impede múltiplos disparos no mesmo dia)
             if (config.last_sent_at) {
@@ -470,7 +476,7 @@ module.exports = async (req, res) => {
             }
 
             const isRightDay = configDays.includes(currentDay);
-            const shouldSend = isTimeInWindow && isRightDay;
+            const shouldSend = (isTimeInWindow && isRightDay) || config.send_now === true;
 
             console.log(`Relatório: "${config.report_name}" | Agendamento: ${configTime} em [${configDays.join(",")}] | Diferença: ${timeDiff}min | Enviar? ${shouldSend}`);
 
@@ -517,11 +523,12 @@ module.exports = async (req, res) => {
 
                 // 3. Atualizar last_sent_at no Supabase para travar envios duplicados no mesmo dia
                 try {
-                    await fetchSupabase(`bi_email_reports?id=eq.${config.id}`, 'PATCH', {
+                    const updateRes = await fetchSupabase(`bi_email_reports?id=eq.${config.id}`, 'PATCH', {
                         last_sent_at: new Date().toISOString(),
-                        updated_at: new Date().toISOString()
+                        updated_at: new Date().toISOString(),
+                        send_now: false
                     });
-                    console.log(`[TRAVA] last_sent_at gravado no Supabase para: ${config.report_name}`);
+                    console.log(`[TRAVA] last_sent_at gravado no Supabase para: ${config.report_name}`, updateRes);
                 } catch (supErr) {
                     console.error(`Erro ao gravar last_sent_at para ${config.report_name}:`, supErr);
                 }

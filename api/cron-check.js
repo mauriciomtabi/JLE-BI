@@ -568,10 +568,10 @@ module.exports = async (req, res) => {
             }
 
             // Disparar
-            const subject = `${config.report_name} - ${day}/${month}/${year}`;
+            const formattedSubject = (config.report_name || config.report).startsWith('[BI JLE]') ? `${config.report_name} - ${day}/${month}/${year}` : `[BI JLE] ${config.report_name} - ${day}/${month}/${year}`;
             const cleanRecipients = (config.recipients || []).filter(e => !e.startsWith("__sched:") && !e.startsWith("__lock:"));
             
-            await sendResendEmail(cleanRecipients, subject, emailHtml, attachments);
+            await sendResendEmail(cleanRecipients, formattedSubject, emailHtml, attachments);
             
             // Atualizar last_sent_at no Supabase
             await fetchSupabase(`bi_email_reports?id=eq.${config.id}`, 'PATCH', {
