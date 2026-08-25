@@ -1,7 +1,7 @@
-// Dados MDU Compactados - Gerado em: 2026-08-25 08:00:34
+// Dados MDU Compactados - Gerado em: 2026-08-25 09:00:27
 window.MDU_METADATA = {
-    "generated_at": "2026-08-25 08:00:34",
-    "total_rows": 5516,
+    "generated_at": "2026-08-25 09:00:27",
+    "total_rows": 5515,
     "geocoded_new": 30
 };
 
@@ -120514,9 +120514,9 @@ window.MDU_DATA = [
         "data_medicao": "15",
         "valor_medicao": 1285.69,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.054552,
+        "lng": -51.189074,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2503579",
@@ -122018,9 +122018,9 @@ window.MDU_DATA = [
         "data_medicao": "31",
         "valor_medicao": 774.33,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.054552,
+        "lng": -51.189074,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504075",
@@ -129570,9 +129570,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.054552,
+        "lng": -51.189074,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504079",
@@ -131906,9 +131906,9 @@ window.MDU_DATA = [
         "data_medicao": "12",
         "valor_medicao": 977.78,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0473173,
+        "lng": -51.1858033,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2503938",
@@ -134050,9 +134050,9 @@ window.MDU_DATA = [
         "data_medicao": "15",
         "valor_medicao": 898.33,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.054552,
+        "lng": -51.189074,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504007",
@@ -134338,9 +134338,9 @@ window.MDU_DATA = [
         "data_medicao": "13",
         "valor_medicao": 856.35,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0085769,
+        "lng": -51.1698682,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504016",
@@ -144834,9 +144834,9 @@ window.MDU_DATA = [
         "data_medicao": "31",
         "valor_medicao": 1106.55,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0526545,
+        "lng": -51.2159902,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2500876",
@@ -159746,9 +159746,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.031837,
+        "lng": -51.2248536,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504820",
@@ -167170,9 +167170,9 @@ window.MDU_DATA = [
         "data_medicao": "30",
         "valor_medicao": 928.78,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0473173,
+        "lng": -51.1858033,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505052",
@@ -169415,35 +169415,35 @@ window.MDU_DATA = [
         "geocodificado": true
     },
     {
-        "os": "RS.CLR.PRD.2505122",
-        "endereco": "R FERNANDO ABOTT 28",
+        "os": "RS.CLR.PRD.2505147",
+        "endereco": "AV CAI 521",
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
-        "aging": "25",
+        "aging": "22",
         "relatorio_por": "DUDA",
         "pendencia": "Não",
         "status": "Medição",
         "prog": 88.0,
-        "cod_imovel": "610498937",
-        "area": "SPEAA",
-        "node": "",
-        "caixa_m": "SPEAA.011.M010",
-        "hps": 9,
-        "data_adicio": "31/07/2026",
+        "cod_imovel": "610472187",
+        "area": "CTLAA",
+        "node": "CTLAHA",
+        "caixa_m": "CTLAA.031.M020",
+        "hps": 6,
+        "data_adicio": "03/08/2026",
         "equipe": "Paulo Ribaczki",
-        "primeira_visita": "23/07/2026",
-        "segunda_visita": "07/08/2026",
+        "primeira_visita": "29/07/2026",
+        "segunda_visita": "",
         "obs_vistoria": "ADEQUADO",
-        "data_interna": "23/07/2026",
-        "data_fusao": "07/08/2026",
-        "data_baixa": "11/08",
+        "data_interna": "29/07/2026",
+        "data_fusao": "29/07/2026",
+        "data_baixa": "03/08",
         "obs_baixa": "",
-        "data_relatorio": "14/08/2026",
+        "data_relatorio": "03/08/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.006323,
-        "lng": -51.163441,
+        "lat": -30.079748,
+        "lng": -51.2390963,
         "geocodificado": true
     },
     {
@@ -170212,38 +170212,6 @@ window.MDU_DATA = [
         "valor_repasse": 0,
         "lat": -30.058928,
         "lng": -51.2244146,
-        "geocodificado": true
-    },
-    {
-        "os": "RS.CLR.PRD.2505147",
-        "endereco": "AV CAI 521",
-        "cidade": "PORTO ALEGRE",
-        "cluster": "PAE",
-        "aging": "22",
-        "relatorio_por": "DUDA",
-        "pendencia": "Não",
-        "status": "Medição",
-        "prog": 88.0,
-        "cod_imovel": "610472187",
-        "area": "CTLAA",
-        "node": "CTLAHA",
-        "caixa_m": "CTLAA.031.M020",
-        "hps": 6,
-        "data_adicio": "03/08/2026",
-        "equipe": "Paulo Ribaczki",
-        "primeira_visita": "29/07/2026",
-        "segunda_visita": "",
-        "obs_vistoria": "ADEQUADO",
-        "data_interna": "29/07/2026",
-        "data_fusao": "29/07/2026",
-        "data_baixa": "03/08",
-        "obs_baixa": "",
-        "data_relatorio": "03/08/2026",
-        "data_medicao": "",
-        "valor_medicao": 0,
-        "valor_repasse": 0,
-        "lat": -30.079748,
-        "lng": -51.2390963,
         "geocodificado": true
     },
     {
@@ -171432,7 +171400,7 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505185",
-        "endereco": "AV NICOLAU BECKER",
+        "endereco": "AV NICOLAU BECKER ?",
         "cidade": "NOVO HAMBURGO",
         "cluster": "NHO",
         "aging": "19",
@@ -173649,9 +173617,9 @@ window.MDU_DATA = [
         "status": "Fusão",
         "prog": 50.0,
         "cod_imovel": "610494199",
-        "area": "",
+        "area": "PDRAA",
         "node": "",
-        "caixa_m": "",
+        "caixa_m": "PDRAA.123.M040",
         "hps": 20,
         "data_adicio": "17/08/2026",
         "equipe": "Paulo Ribaczki",
