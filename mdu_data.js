@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-08-25 13:00:22
+// Dados MDU Compactados - Gerado em: 2026-08-25 14:00:20
 window.MDU_METADATA = {
-    "generated_at": "2026-08-25 13:00:22",
+    "generated_at": "2026-08-25 14:00:20",
     "total_rows": 5515,
     "geocoded_new": 0
 };
@@ -167884,10 +167884,10 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "29",
-        "relatorio_por": "JENIFFER ( SEM CROQUI)",
-        "pendencia": "SIM",
-        "status": "Pendência",
-        "prog": 0.0,
+        "relatorio_por": "",
+        "pendencia": "Não",
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "700982763",
         "area": "PDRAA",
         "node": "PDRAG",
@@ -173614,8 +173614,8 @@ window.MDU_DATA = [
         "aging": "8",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Fusão",
-        "prog": 50.0,
+        "status": "Baixa",
+        "prog": 63.0,
         "cod_imovel": "610494199",
         "area": "PDRAA",
         "node": "",
@@ -173625,9 +173625,9 @@ window.MDU_DATA = [
         "equipe": "Paulo Ribaczki",
         "primeira_visita": "11/08/2026",
         "segunda_visita": "",
-        "obs_vistoria": "AGUARDANDO SAR",
+        "obs_vistoria": "ADEQUADO",
         "data_interna": "11/08/2026",
-        "data_fusao": "",
+        "data_fusao": "11/08/2026",
         "data_baixa": "",
         "obs_baixa": "",
         "data_relatorio": "",
