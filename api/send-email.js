@@ -46,8 +46,8 @@ async function sendResendEmail(to, subject, html, attachments = null, textAlt = 
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     };
     
-    const formattedSubject = subject;
-    const defaultText = `BI JLE TELECOM\n\nEste é um relatório gerado automaticamente pelo BI JLE Telecom.\nPor favor, visualize o e-mail em um leitor compatível com HTML para ver a tabela e os indicadores.\n\nAcesse o painel do BI: ${BI_URL}`;
+    const formattedSubject = subject.replace(/^\[BI JLE\]\s*/i, '').trim();
+    const defaultText = `${formattedSubject}\n\nEste é um relatório gerado automaticamente pelo BI JLE Telecom.\nPor favor, visualize o e-mail em um leitor compatível com HTML para ver a tabela e os indicadores.\n\nAcesse o painel do BI: ${BI_URL}`;
 
     const body = {
         from: `"BI JLE Telecom" <${FROM_EMAIL}>`,
@@ -110,8 +110,7 @@ function parseCsv(csvText) {
             currentCell += char;
         }
     }
-    if (currentCell || row.length > 0) {
-        row.push(currentCell);
+    if (row.length > 0 && row.some(cell => cell !== '')) {
         lines.push(row);
     }
     return lines;
@@ -155,8 +154,8 @@ async function getMduStatusCounts() {
         // 3. Processar o conteúdo de mdu_data.js se disponível
         if (content) {
             try {
-                const generatedAtMatch = content.match(/"generated_at"s*:s*"([^"]+)"/);
-                if (generatedAtMatch) generatedAt = generatedAtMatch[1];
+                const generatedAtMatch = content.match(/"generated_at"\s*:\s*"([^"]+)"/) || content.match(/Gerado em:\s*([^\r\n]+)/);
+                if (generatedAtMatch) generatedAt = generatedAtMatch[1].trim();
 
                 const idx = content.indexOf('window.MDU_DATA');
                 if (idx !== -1) {
@@ -170,8 +169,8 @@ async function getMduStatusCounts() {
 
                             if (excludeStatus.includes(statusUpper)) return;
 
-                            if (/^1[ºoOaA]?s*Vistoria/i.test(status) || statusUpper === 'VISTORIA' ||
-                                /^2[ºoOaA]?s*Vistoria/i.test(status) ||
+                            if (/^1[ºoOaA]?\s*Vistoria/i.test(status) || statusUpper === 'VISTORIA' ||
+                                /^2[ºoOaA]?\s*Vistoria/i.test(status) ||
                                 statusUpper === 'BAIXA' ||
                                 statusUpper === 'PROJETO' ||
                                 statusUpper === 'NÃO DEFINIDO' || statusUpper === 'NÃO DEFINIDA' || status === '' || status === '-') {
@@ -183,6 +182,19 @@ async function getMduStatusCounts() {
                             counts[status] = (counts[status] || 0) + 1;
                             totalActive++;
                         });
+
+                        // Se generatedAt não foi encontrado no arquivo, gerar a data/hora atual de Brasília
+                        if (!generatedAt || generatedAt === 'N/D') {
+                            const utcDate = new Date();
+                            const brOffset = -3 * 60 * 60 * 1000;
+                            const localDate = new Date(utcDate.getTime() + brOffset);
+                            const day = String(localDate.getUTCDate()).padStart(2, '0');
+                            const month = String(localDate.getUTCMonth() + 1).padStart(2, '0');
+                            const year = localDate.getUTCFullYear();
+                            const hours = String(localDate.getUTCHours()).padStart(2, '0');
+                            const minutes = String(localDate.getUTCMinutes()).padStart(2, '0');
+                            generatedAt = `${year}-${month}-${day} ${hours}:${minutes}:00`;
+                        }
 
                         return { counts, total: totalActive, generated_at: generatedAt };
                     }
