@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-08-25 11:00:17
+// Dados MDU Compactados - Gerado em: 2026-08-25 12:00:44
 window.MDU_METADATA = {
-    "generated_at": "2026-08-25 11:00:17",
+    "generated_at": "2026-08-25 12:00:44",
     "total_rows": 5515,
-    "geocoded_new": 30
+    "geocoded_new": 13
 };
 
 window.MDU_DATA = [
@@ -176098,9 +176098,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -29.9880943,
+        "lng": -51.1928265,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505334",
@@ -176118,7 +176118,7 @@ window.MDU_DATA = [
         "caixa_m": "MTSAA.161.M030",
         "hps": 8,
         "data_adicio": "21/08/2026",
-        "equipe": "Guilherme Albrecth",
+        "equipe": "Guilherme Albrecht",
         "primeira_visita": "18/08/2026",
         "segunda_visita": "",
         "obs_vistoria": "ADEQUADO",
@@ -176130,9 +176130,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0235305,
+        "lng": -51.1920935,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505335",
@@ -176150,7 +176150,7 @@ window.MDU_DATA = [
         "caixa_m": "MTSAA.164.M020",
         "hps": 10,
         "data_adicio": "21/08/2026",
-        "equipe": "Guilherme Albrecth",
+        "equipe": "Guilherme Albrecht",
         "primeira_visita": "18/08/2026",
         "segunda_visita": "",
         "obs_vistoria": "ADEQUADO",
@@ -176162,9 +176162,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0222589,
+        "lng": -51.1921691,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505336",
@@ -176194,9 +176194,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0574911,
+        "lng": -51.225909,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505337",
@@ -176226,9 +176226,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0574911,
+        "lng": -51.225909,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505338",
@@ -176246,7 +176246,7 @@ window.MDU_DATA = [
         "caixa_m": "MTSAA.164.M020",
         "hps": 10,
         "data_adicio": "21/08/2026",
-        "equipe": "Guilherme Albrecth",
+        "equipe": "Guilherme Albrecht",
         "primeira_visita": "18/08/2026",
         "segunda_visita": "",
         "obs_vistoria": "ADEQUADO",
@@ -176258,9 +176258,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0222589,
+        "lng": -51.1921691,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505339",
@@ -176278,7 +176278,7 @@ window.MDU_DATA = [
         "caixa_m": "MTSAA.164.M020",
         "hps": 24,
         "data_adicio": "21/08/2026",
-        "equipe": "Guilherme Albrecth",
+        "equipe": "Guilherme Albrecht",
         "primeira_visita": "17/08/2026",
         "segunda_visita": "",
         "obs_vistoria": "ADEQUADO",
@@ -176290,9 +176290,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0235305,
+        "lng": -51.1920935,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505340",
@@ -176310,7 +176310,7 @@ window.MDU_DATA = [
         "caixa_m": "MTSAA.094.M030",
         "hps": 7,
         "data_adicio": "24/08/2026",
-        "equipe": "Guilherme Albrecth",
+        "equipe": "Guilherme Albrecht",
         "primeira_visita": "17/08/2026",
         "segunda_visita": "",
         "obs_vistoria": "ADEQUADO",
@@ -176322,9 +176322,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0283042,
+        "lng": -51.1906385,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505341",
