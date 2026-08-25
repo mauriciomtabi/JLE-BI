@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-08-25 12:00:44
+// Dados MDU Compactados - Gerado em: 2026-08-25 13:00:22
 window.MDU_METADATA = {
-    "generated_at": "2026-08-25 12:00:44",
+    "generated_at": "2026-08-25 13:00:22",
     "total_rows": 5515,
-    "geocoded_new": 13
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -170902,7 +170902,7 @@ window.MDU_DATA = [
         "caixa_m": "CNTAB.052.M020",
         "hps": 7,
         "data_adicio": "04/08/2026",
-        "equipe": "Everson",
+        "equipe": "GeM Telecom",
         "primeira_visita": "31/07/2026",
         "segunda_visita": "",
         "obs_vistoria": "ADEQUADO",
