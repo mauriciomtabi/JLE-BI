@@ -153,26 +153,33 @@ async function getMduStatusCounts() {
                     if (jsonStart !== -1 && jsonEnd !== -1) {
                         const mduData = JSON.parse(content.substring(jsonStart, jsonEnd + 1));
                         mduData.forEach(r => {
-                            let status = r.status ? r.status.trim() : '';
+                            let status = r.status ? r.status.trim() : 'Não Definido';
                             const statusUpper = status.toUpperCase();
 
                             if (excludeStatus.includes(statusUpper)) return;
 
-                            if (/^1[ºoOaA]?\s*Vistoria/i.test(status) || statusUpper === 'VISTORIA' ||
-                                /^2[ºoOaA]?\s*Vistoria/i.test(status) ||
-                                statusUpper === 'BAIXA' ||
-                                statusUpper === 'PROJETO' ||
-                                statusUpper === 'NÃO DEFINIDO' || statusUpper === 'NÃO DEFINIDA' || status === '' || status === '-') {
-                                status = 'Não Adequado';
+                            if (statusUpper === '1º VISTORIA' || statusUpper === '1ª VISTORIA' || statusUpper === '1 VISTORIA') {
+                                status = '1ª Vistoria';
+                            } else if (statusUpper === '2º VISTORIA' || statusUpper === '2ª VISTORIA' || statusUpper === '2 VISTORIA') {
+                                status = '2ª Vistoria';
                             } else if (statusUpper === 'FUSÃO' || statusUpper === 'FUSAO') {
-                                status = 'Pendências Claro';
+                                status = 'Fusão';
+                            } else if (statusUpper === 'MEDIÇÃO' || statusUpper === 'MEDICAO') {
+                                status = 'Medição';
+                            } else if (statusUpper === 'PENDÊNCIA' || statusUpper === 'PENDENCIA') {
+                                status = 'Pendência';
+                            } else if (statusUpper === 'BAIXA') {
+                                status = 'Baixa';
+                            } else if (statusUpper === 'PROJETO') {
+                                status = 'Projeto';
+                            } else if (statusUpper === 'NÃO DEFINIDO' || statusUpper === 'NÃO DEFINIDA' || statusUpper === '-' || statusUpper === '' || statusUpper === 'FALTA DADOS') {
+                                status = 'Não Definido';
                             }
 
                             counts[status] = (counts[status] || 0) + 1;
                             totalActive++;
                         });
 
-                        // Se generatedAt não foi encontrado no arquivo, gerar a data/hora atual de Brasília
                         if (!generatedAt || generatedAt === 'N/D') {
                             const utcDate = new Date();
                             const brOffset = -3 * 60 * 60 * 1000;
@@ -193,7 +200,6 @@ async function getMduStatusCounts() {
             }
         }
 
-        // 4. Fallback via Google Sheets CSV caso mdu_data.js falhe totalmente
         console.log("Baixando planilha do Google Sheets para o e-mail (fallback)...");
         const res = await fetch('https://docs.google.com/spreadsheets/d/1eEJLaV7D0rthjC5H1MppXyk7dyroqn2h/export?format=csv&gid=260790893', {
             headers: { 'User-Agent': 'Mozilla/5.0' }
@@ -219,14 +225,22 @@ async function getMduStatusCounts() {
             const statusUpper = status.toUpperCase();
             if (excludeStatus.includes(statusUpper)) continue;
             
-            if (/^1[ºoOaA]?s*Vistoria/i.test(status) || statusUpper === 'VISTORIA' ||
-                /^2[ºoOaA]?s*Vistoria/i.test(status) ||
-                statusUpper === 'BAIXA' ||
-                statusUpper === 'PROJETO' ||
-                statusUpper === 'NÃO DEFINIDO' || statusUpper === 'NÃO DEFINIDA' || status === '' || status === '-') {
-                status = 'Não Adequado';
+            if (statusUpper === '1º VISTORIA' || statusUpper === '1ª VISTORIA' || statusUpper === '1 VISTORIA') {
+                status = '1ª Vistoria';
+            } else if (statusUpper === '2º VISTORIA' || statusUpper === '2ª VISTORIA' || statusUpper === '2 VISTORIA') {
+                status = '2ª Vistoria';
             } else if (statusUpper === 'FUSÃO' || statusUpper === 'FUSAO') {
-                status = 'Pendências Claro';
+                status = 'Fusão';
+            } else if (statusUpper === 'MEDIÇÃO' || statusUpper === 'MEDICAO') {
+                status = 'Medição';
+            } else if (statusUpper === 'PENDÊNCIA' || statusUpper === 'PENDENCIA') {
+                status = 'Pendência';
+            } else if (statusUpper === 'BAIXA') {
+                status = 'Baixa';
+            } else if (statusUpper === 'PROJETO') {
+                status = 'Projeto';
+            } else if (statusUpper === 'NÃO DEFINIDO' || statusUpper === 'NÃO DEFINIDA' || statusUpper === '-' || statusUpper === '' || statusUpper === 'FALTA DADOS') {
+                status = 'Não Definido';
             }
             
             counts[status] = (counts[status] || 0) + 1;
@@ -298,48 +312,26 @@ function buildEmailHtml(data, reportName) {
     const minutes = String(localDate.getUTCMinutes()).padStart(2, '0');
     const nowStr = `${day}/${month}/${year} às ${hours}:${minutes}`;
     
-    let medicaoCount = 0;
-    let relatorioCount = 0;
-    Object.keys(data.counts).forEach(k => {
-        const normKey = k.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-        if (normKey === 'medicao') {
-            medicaoCount += data.counts[k];
-        }
-        if (normKey === 'relatorio') {
-            relatorioCount += data.counts[k];
-        }
-    });
+    const vistoriasCount = (data.counts['1ª Vistoria'] || 0) + (data.counts['2ª Vistoria'] || 0);
+    const fusaoCount = data.counts['Fusão'] || 0;
+    const medicaoCount = data.counts['Medição'] || 0;
 
-    const statusOrder = [
-        { key: "Não Adequado", color: "#004f71" },
-        { key: "Pendências Claro", color: "#004f71" },
-        { key: "Medição",     color: "#004f71" },
-        { key: "Relatório",   color: "#004f71" },
-        { key: "Relatório HBOX", color: "#747d8c" },
-        { key: "Pendência",   color: "#ff9f43" }
-    ];
-    
-    const statusItems = [];
-    statusOrder.forEach(s => {
-        let cnt = 0;
-        Object.keys(data.counts).forEach(k => {
-            if (matchStatus(s.key, k)) {
-                cnt = data.counts[k];
-            }
-        });
-        if (cnt > 0) {
-            statusItems.push({ key: s.key, count: cnt, color: s.color });
-        }
-    });
+    const statusColors = {
+        '2ª Vistoria': '#004f71',
+        '1ª Vistoria': '#0077aa',
+        'Fusão': '#1e90ff',
+        'Medição': '#f39f18',
+        'Pendência': '#ff4757',
+        'Baixa': '#2ed573',
+        'Projeto': '#a4b0be',
+        'Não Definido': '#747d8c'
+    };
 
-    Object.keys(data.counts).forEach(k => {
-        const isMapped = statusOrder.some(s => matchStatus(s.key, k));
-        if (!isMapped && data.counts[k] > 0) {
-            statusItems.push({ key: k, count: data.counts[k], color: "#747d8c" });
-        }
-    });
-
-    statusItems.sort((a, b) => b.count - a.count);
+    const statusItems = Object.keys(data.counts).map(key => ({
+        key: key,
+        count: data.counts[key],
+        color: statusColors[key] || '#004f71'
+    })).sort((a, b) => b.count - a.count);
 
     let statusRows = "";
     statusItems.forEach(item => {
@@ -350,7 +342,7 @@ function buildEmailHtml(data, reportName) {
                 ${item.key}
             </td>
             <td style="padding: 12px 20px; border-bottom: 1px solid #f0f0f0; text-align:center;">
-                <span style="background:rgba(0,79,113,0.06); color:#004f71; padding:4px 14px; border-radius:20px; font-size:13px; font-weight:700;">${item.count}</span>
+                <span style="background:rgba(0,79,113,0.06); color:#004f71; padding:4px 14px; border-radius:20px; font-size:13px; font-weight:700;">${item.count.toLocaleString('pt-BR')}</span>
             </td>
         </tr>`;
     });
@@ -381,26 +373,31 @@ function buildEmailHtml(data, reportName) {
                             </td>
                         </tr>
                         
-                        <!-- CARD DE DESTAQUE -->
+                        <!-- CARDS DE DESTAQUE -->
                         <tr>
                             <td style="padding: 30px 40px 0;">
                                 <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                     <tr>
-                                        <td colspan="3" style="background: rgba(0,79,113,0.04); border-radius: 12px; border: 1px solid rgba(0,79,113,0.08); text-align: center; padding: 24px;">
+                                        <td colspan="5" style="background: rgba(0,79,113,0.04); border-radius: 12px; border: 1px solid rgba(0,79,113,0.08); text-align: center; padding: 22px;">
                                             <div style="font-size: 11px; color: #747d8c; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; margin-bottom: 6px;">ORDENS DE SERVIÇO EM ANDAMENTO</div>
-                                            <div style="font-size: 42px; font-weight: 800; color: #004f71; line-height: 1;">${total}</div>
+                                            <div style="font-size: 40px; font-weight: 800; color: #004f71; line-height: 1;">${total.toLocaleString('pt-BR')}</div>
                                         </td>
                                     </tr>
-                                    <tr style="height: 16px;"><td colspan="3"></td></tr>
+                                    <tr style="height: 14px;"><td colspan="5"></td></tr>
                                     <tr>
-                                        <td width="48%" style="background: rgba(243,159,24,0.06); border-radius: 10px; border-left: 4px solid #f39f18; padding: 16px 20px; text-align: center; border-top: 1px solid rgba(243,159,24,0.1); border-right: 1px solid rgba(243,159,24,0.1); border-bottom: 1px solid rgba(243,159,24,0.1);">
-                                            <div style="font-size: 11px; color: #d37f00; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; margin-bottom: 4px;">Medição</div>
-                                            <div style="font-size: 28px; font-weight: 800; color: #b86d00;">${medicaoCount}</div>
+                                        <td width="31%" style="background: rgba(0,79,113,0.05); border-radius: 10px; border-top: 3px solid #004f71; padding: 14px 10px; text-align: center; border-left: 1px solid rgba(0,79,113,0.08); border-right: 1px solid rgba(0,79,113,0.08); border-bottom: 1px solid rgba(0,79,113,0.08);">
+                                            <div style="font-size: 10px; color: #004f71; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; margin-bottom: 4px;">Vistorias (1ª + 2ª)</div>
+                                            <div style="font-size: 22px; font-weight: 800; color: #004f71;">${vistoriasCount.toLocaleString('pt-BR')}</div>
                                         </td>
-                                        <td width="4%"></td>
-                                        <td width="48%" style="background: rgba(0,119,170,0.06); border-radius: 10px; border-left: 4px solid #0077aa; padding: 16px 20px; text-align: center; border-top: 1px solid rgba(0,119,170,0.1); border-right: 1px solid rgba(0,119,170,0.1); border-bottom: 1px solid rgba(0,119,170,0.1);">
-                                            <div style="font-size: 11px; color: #0077aa; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; margin-bottom: 4px;">Relatórios</div>
-                                            <div style="font-size: 28px; font-weight: 800; color: #005f87;">${relatorioCount}</div>
+                                        <td width="3.5%"></td>
+                                        <td width="31%" style="background: rgba(30,144,255,0.05); border-radius: 10px; border-top: 3px solid #1e90ff; padding: 14px 10px; text-align: center; border-left: 1px solid rgba(30,144,255,0.08); border-right: 1px solid rgba(30,144,255,0.08); border-bottom: 1px solid rgba(30,144,255,0.08);">
+                                            <div style="font-size: 10px; color: #1e90ff; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; margin-bottom: 4px;">Fusão</div>
+                                            <div style="font-size: 22px; font-weight: 800; color: #1e90ff;">${fusaoCount.toLocaleString('pt-BR')}</div>
+                                        </td>
+                                        <td width="3.5%"></td>
+                                        <td width="31%" style="background: rgba(243,159,24,0.06); border-radius: 10px; border-top: 3px solid #f39f18; padding: 14px 10px; text-align: center; border-left: 1px solid rgba(243,159,24,0.08); border-right: 1px solid rgba(243,159,24,0.08); border-bottom: 1px solid rgba(243,159,24,0.08);">
+                                            <div style="font-size: 10px; color: #d37f00; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; margin-bottom: 4px;">Medição</div>
+                                            <div style="font-size: 22px; font-weight: 800; color: #b86d00;">${medicaoCount.toLocaleString('pt-BR')}</div>
                                         </td>
                                     </tr>
                                 </table>
@@ -532,7 +529,7 @@ module.exports = async (req, res) => {
             const [cHour, cMin] = configTime.split(":").map(Number);
             const [lHour, lMin] = currentTime.split(":").map(Number);
             const timeDiff = (lHour * 60 + lMin) - (cHour * 60 + cMin);
-            const isTimeInWindow = timeDiff >= 0 && timeDiff < 180;
+            const isTimeInWindow = timeDiff >= 0 && timeDiff <= 25;
             
             const isRightDay = configDays.includes(currentDay);
             const shouldSend = isTimeInWindow && isRightDay;

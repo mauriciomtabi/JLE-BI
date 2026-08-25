@@ -3892,7 +3892,6 @@
                 schedule_time: time,
                 schedule_days: days,
                 is_active: isActive,
-                last_sent_at: null,
                 updated_at: new Date().toISOString()
             };
 
@@ -3900,7 +3899,7 @@
             if (id) {
                 ({ error } = await supabaseClient.from('bi_email_reports').update(payload).eq('id', id));
             } else {
-                ({ error } = await supabaseClient.from('bi_email_reports').insert({ ...payload, created_at: new Date().toISOString() }));
+                ({ error } = await supabaseClient.from('bi_email_reports').insert({ ...payload, last_sent_at: null, created_at: new Date().toISOString() }));
             }
 
             if (error) {
