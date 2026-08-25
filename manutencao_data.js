@@ -1,7 +1,7 @@
 // Data generated 100% from Master Excel Controle de Medições (Mnt. Demanda)
 (function() {
     const db = {
-  "generated_at": "2026-08-25 09:00:24",
+  "generated_at": "2026-08-25 11:00:14",
   "lookups": {
     "tipos_of": [
       "TIPO\nOS CLIENTE",
@@ -56503,7 +56503,7 @@
       "FORNECIMENTO DE MATERIAS - 2/3",
       17,
       36,
-      1,
+      2,
       "",
       4,
       17,
@@ -56511,9 +56511,9 @@
       6400.0,
       7,
       0,
+      "5633272",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3128",
@@ -56521,7 +56521,7 @@
       "FORNECIMENTO DE MATERIAS - 3/3",
       17,
       36,
-      1,
+      2,
       "",
       4,
       17,
@@ -56529,9 +56529,9 @@
       6400.0,
       7,
       0,
+      "5633375",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3129",
