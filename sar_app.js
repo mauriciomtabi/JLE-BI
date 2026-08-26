@@ -331,7 +331,7 @@ function updateSarKpis(data) {
 
     data.forEach(r => {
         const st = (r.status || '').toUpperCase();
-        if (st === 'CONCLUÍDA' || st === 'CONCLUIDA') {
+        if (st === 'CONCLUÍDA' || st === 'CONCLUIDA' || st === 'WF APROVADO') {
             concluidasCount++;
         } else if (st !== 'CANCELADO' && st !== 'CANCELADA') {
             andamentoCount++;
@@ -817,11 +817,13 @@ function renderSarTable(data) {
 
     tbody.innerHTML = pageRecords.map(r => {
         const prazoBadgeClass = r.prazo === 'NO PRAZO' ? 'sar-badge-no-prazo' : (r.prazo === 'ATRASADO' ? 'sar-badge-atrasado' : 'sar-badge-default');
+        const stUpper = (r.status || '').toUpperCase();
         const statusBadgeClass = 
-            r.status === 'CONCLUÍDO' ? 'sar-badge-concluido' :
-            r.status === 'ANDAMENTO' ? 'sar-badge-andamento' :
-            r.status === 'CANCELADO' ? 'sar-badge-cancelado' :
-            r.status === 'SEM SINAL' ? 'sar-badge-sem-sinal' : 'sar-badge-default';
+            (stUpper === 'CONCLUÍDO' || stUpper === 'CONCLUÍDA' || stUpper === 'WF APROVADO') ? 'sar-badge-concluido' :
+            (stUpper === 'ANDAMENTO' || stUpper.includes('AG.') || stUpper.includes('PEND')) ? 'sar-badge-andamento' :
+            (stUpper === 'CANCELADO' || stUpper === 'CANCELADA') ? 'sar-badge-cancelado' :
+            (stUpper === 'SEM SINAL') ? 'sar-badge-sem-sinal' :
+            (stUpper === 'PARALISADO') ? 'sar-badge-paralisado' : 'sar-badge-default';
 
         return `
             <tr>
@@ -952,6 +954,9 @@ function exportSarToExcel() {
         "Serviço": r.servico || '',
         "Data de Entrada": r.data_entrada_fmt || '',
         "Data de Entrega": r.data_entrega_fmt || '',
+        "Data Medição": r.data_medicao_fmt || '',
+        "Nº WF": r.num_wf || '',
+        "Status WF": r.status_wf || '',
         "Status Geral": r.status || '',
         "Prazo (SLA 3 dias)": r.prazo || '',
         "Tempo (Dias)": r.tempo_dias || 0,

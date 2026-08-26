@@ -29,16 +29,16 @@ foreach ($dir in $candidateDirs) {
     if (Test-Path $dir) {
         Write-Output "Buscando planilhas SAR no diretorio: $dir"
         try {
-            # Arquivo exato prioritario
-            $primaryTarget = "$dir\Cpia de Status Projeto F - Nodes, SAR - CERTO.xlsx"
-            if (Test-Path $primaryTarget) {
-                $networkPath = $primaryTarget
-                break
-            }
+            # Arquivo prioritário: Nova Base ou mais recente
+            $primaryTargets = @(
+                "$dir\Status Projeto F - Nodes, SAR - Nova Base.xlsx",
+                "$dir\Cópia de Status Projeto F - Nodes, SAR - CERTO.xlsx",
+                "$dir\Status Projeto F - Nodes, SAR.xlsx"
+            )
             
-            # Busca por padroes SAR
+            # Buscar todos os candidatos e ordenar por mais recente
             $candidateFiles = Get-ChildItem -Path $dir -File | Where-Object { 
-                ($_.Name -like "*Status Projeto F*SAR*.xlsx" -or $_Name -like "*SAR*.xlsx") -and $_.Name -notlike "~$*"
+                ($_.Name -like "*Status Projeto F*SAR*.xlsx" -or $_.Name -like "*SAR*.xlsx" -or $_.Name -like "*Projeto F*Nodes*.xlsx") -and $_.Name -notlike "~$*"
             } | Sort-Object LastWriteTime -Descending
 
             if ($candidateFiles -and $candidateFiles.Count -gt 0) {

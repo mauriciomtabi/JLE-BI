@@ -131,120 +131,126 @@ def main():
                 print(f"Linha de cabeçalho detectada na linha {header_row_idx}")
                 break
                 
-    # Reabrir iterador a partir da linha de cabeçalho
+    # Construir mapa de cabeçalho dinâmico a partir da linha detectada
+    header_map = {}
+    import unicodedata
+    def norm_h(text):
+        if not text: return ""
+        s = str(text).strip().upper()
+        return "".join(c for c in unicodedata.normalize('NFD', s) if unicodedata.category(c) != 'Mn')
+
+    for col_idx, cell in enumerate(ws.iter_rows(min_row=header_row_idx, max_row=header_row_idx, values_only=True).__next__(), start=1):
+        if cell:
+            n_key = norm_h(cell)
+            header_map[n_key] = col_idx - 1 # 0-indexed
+
+    print(f"Colunas mapeadas dinamicamente: {len(header_map)}")
+
+    def get_col(row, *aliases, default_idx=None):
+        for a in aliases:
+            n = norm_h(a)
+            if n in header_map:
+                idx = header_map[n]
+                return row[idx] if idx < len(row) else None
+        if default_idx is not None and default_idx < len(row):
+            return row[default_idx]
+        return None
+
     records = []
     
-    # Mapeamento de colunas padrão (baseado na estrutura do Ext. MDU):
-    # Col 2 (B): COD.
-    # Col 3 (C): AREA TECNICA
-    # Col 4 (D): NODE
-    # Col 5 (E): SITE
-    # Col 6 (F): CIDADE
-    # Col 7 (G): COMDOMÍNIO
-    # Col 8 (H): ENDEREÇO
-    # Col 9 (I): CAIXA MDU
-    # Col 10 (J): MÊS
-    # Col 11 (K): STATUS
-    # Col 12 (L): Classe L
-    # Col 13 (M): Classe F
-    # Col 14 (N): Situação
-    # Col 15 (O): Relatório Fotográfico
-    # Col 16 (P): PROJETADO
-    # Col 17 (Q): EXECUTADO
-    # Col 18 (R): Serviço
-    # Col 19 (S): Medição realizada
-    # Col 20 (T): Data de entrada (Referência)
-    # Col 21 (U): Inicio em
-    # Col 22 (V): Previsão para
-    # Col 23 (W): Data de Entrega
-    # Col 24 (X): Relatorio PPT
-    # Col 26 (Z): Status Medição
-    # Col 27 (AA): Status Relatório
-    # Col 28 (AB): Tempo (Dias)
-    # Col 29 (AC): Prazo (SLA 3 dias)
-    # Col 30 (AD): Atraso (Dias)
-
     for r_idx, row in enumerate(ws.iter_rows(min_row=header_row_idx + 1, values_only=True)):
         if not row or len(row) < 2:
             continue
             
-        cod = clean_str(row[1] if len(row) > 1 else None)
+        cod = clean_str(get_col(row, "COD.", "CODIGO", "COD", default_idx=1))
         if not cod:
             continue
             
-        area_tecnica = clean_str(row[2] if len(row) > 2 else None)
-        node = clean_str(row[3] if len(row) > 3 else None)
-        site = clean_str(row[4] if len(row) > 4 else None)
-        cidade = clean_str(row[5] if len(row) > 5 else None)
-        condominio = clean_str(row[6] if len(row) > 6 else None)
-        endereco = clean_str(row[7] if len(row) > 7 else None)
-        caixa_mdu = clean_str(row[8] if len(row) > 8 else None)
+        area_tecnica = clean_str(get_col(row, "AREA TECNICA", "AREA", default_idx=2))
+        node = clean_str(get_col(row, "NODE", default_idx=3))
+        site = clean_str(get_col(row, "SITE", default_idx=4))
+        cidade = clean_str(get_col(row, "CIDADE", default_idx=5))
+        condominio = clean_str(get_col(row, "COMDOMINIO", "CONDOMINIO", default_idx=6))
+        endereco = clean_str(get_col(row, "ENDERECO", default_idx=7))
+        caixa_mdu = clean_str(get_col(row, "CAIXA MDU", default_idx=8))
         
-        # Status da Obra (Col K / 11)
-        status_obra_raw = clean_str(row[10] if len(row) > 10 else None)
+        # Status da Obra (Coluna STATUS)
+        status_obra_raw = clean_str(get_col(row, "STATUS", default_idx=10))
         
-        # Status Medição (Col Z / 26)
-        status_medicao_raw = clean_str(row[25] if len(row) > 25 else None)
+        # Novas Colunas inseridas Y, Z, AA
+        dt_medicao_iso = parse_date(get_col(row, "DATA MEDICAO", "DATA MEDICAO", default_idx=24))
+        num_wf = clean_str(get_col(row, "N WF", "NO WF", "NUM WF", "Nº WF", default_idx=25))
+        status_wf = clean_str(get_col(row, "STATUS WF", default_idx=26))
         
-        # Status Relatório (Col AA / 27)
-        status_relatorio = clean_str(row[26] if len(row) > 26 else None)
+        # Status Medição e Relatório
+        status_medicao_raw = clean_str(get_col(row, "STATUS MEDICAO", default_idx=28))
+        status_relatorio = clean_str(get_col(row, "STATUS RELATORIO", default_idx=29))
         
-        # Status Geral (Coluna AB / 28)
-        # Fórmula exata do Excel:
-        # =SE(K5="SEM SINAL";"SEM SINAL";SE(K5="PARALISADO";"PARALISADO";SE(Z5="PENDENTE";"AG. MEDIÇÃO";SE(K5="CANCELADO";"CANCELADO";Z5))))
+        # Status Geral
+        status_geral_raw = clean_str(get_col(row, "STATUS GERAL", default_idx=30))
+        
         status_k_upper = status_obra_raw.upper()
         status_z_upper = status_medicao_raw.upper()
+        status_g_upper = status_geral_raw.upper()
         
-        # Cálculo da Coluna AB (Status Geral)
-        if "SEM SINAL" in status_k_upper:
-            status = "SEM SINAL"
-        elif "PARALISAD" in status_k_upper:
-            status = "PARALISADO"
-        elif "CANCELAD" in status_k_upper:
-            status = "CANCELADO"
-        elif "PEND" in status_z_upper or status_z_upper == "AG. MEDIÇÃO" or status_z_upper == "AG. MEDICAO":
-            status = "AG. MEDIÇÃO"
-        elif "RELAT" in status_z_upper or "AG." in status_z_upper:
-            status = "AG. RELATÓRIO"
-        elif "CONCLU" in status_z_upper or "CONCLU" in status_k_upper:
-            status = "CONCLUÍDA"
-        elif status_z_upper != "":
-            status = status_z_upper
+        if status_geral_raw:
+            if "WF APROV" in status_g_upper:
+                status = "WF APROVADO"
+            elif "AG. APROV" in status_g_upper or "AG APROV" in status_g_upper:
+                status = "AG. APROVAÇÃO"
+            elif "SEM SINAL" in status_g_upper:
+                status = "SEM SINAL"
+            elif "PARALISAD" in status_g_upper:
+                status = "PARALISADO"
+            elif "CANCELAD" in status_g_upper:
+                status = "CANCELADO"
+            elif "PEND" in status_g_upper or "AG. MEDI" in status_g_upper:
+                status = "AG. MEDIÇÃO"
+            elif "RELAT" in status_g_upper or "AG. RELAT" in status_g_upper:
+                status = "AG. RELATÓRIO"
+            elif "CONCLU" in status_g_upper:
+                status = "CONCLUÍDA"
+            else:
+                status = status_geral_raw
         else:
-            status = "CONCLUÍDA"
+            # Fallback de cálculo
+            if "SEM SINAL" in status_k_upper:
+                status = "SEM SINAL"
+            elif "PARALISAD" in status_k_upper:
+                status = "PARALISADO"
+            elif "CANCELAD" in status_k_upper:
+                status = "CANCELADO"
+            elif "PEND" in status_z_upper or "AG. MEDI" in status_z_upper:
+                status = "AG. MEDIÇÃO"
+            elif "RELAT" in status_z_upper or "AG. RELAT" in status_z_upper:
+                status = "AG. RELATÓRIO"
+            elif "CONCLU" in status_z_upper or "CONCLU" in status_k_upper:
+                status = "CONCLUÍDA"
+            elif status_z_upper != "":
+                status = status_z_upper
+            else:
+                status = "CONCLUÍDA"
             
-        classe_l = clean_str(row[11] if len(row) > 11 else None)
-        classe_f = clean_str(row[12] if len(row) > 12 else None)
-        situacao = clean_str(row[13] if len(row) > 13 else None)
-        relatorio_foto = clean_str(row[14] if len(row) > 14 else None)
-        servico = clean_str(row[17] if len(row) > 17 else None)
+        classe_l = clean_str(get_col(row, "CLASSE L", default_idx=11))
+        classe_f = clean_str(get_col(row, "CLASSE F", default_idx=12))
+        situacao = clean_str(get_col(row, "SITUACAO", default_idx=13))
+        relatorio_foto = clean_str(get_col(row, "RELATORIO FOTOGRAFICO", default_idx=14))
+        servico = clean_str(get_col(row, "SERVICO", default_idx=17))
         
         # Datas
-        dt_entrada_iso = parse_date(row[19] if len(row) > 19 else None) # Col T (Data de Entrada)
-        dt_inicio_iso = parse_date(row[20] if len(row) > 20 else None) # Col U (Inicio em)
-        dt_previsao_iso = parse_date(row[21] if len(row) > 21 else None) # Col V (Previsao para)
-        dt_entrega_iso = parse_date(row[22] if len(row) > 22 else None) # Col W (Data de Entrega)
+        dt_entrada_iso = parse_date(get_col(row, "DATA DE ENTRADA", default_idx=19))
+        dt_inicio_iso = parse_date(get_col(row, "INICIO EM", default_idx=20))
+        dt_previsao_iso = parse_date(get_col(row, "PREVISAO PARA", default_idx=21))
+        dt_entrega_iso = parse_date(get_col(row, "DATA DE ENTREGA", default_idx=22))
         
         # Competência baseada na data de entrada
         competencia = get_competencia(dt_entrada_iso)
         
-        # Detecção de colunas de Tempo, Prazo e Atraso (suporta formato com ou sem coluna AB física)
-        val_col_27 = clean_str(row[27] if len(row) > 27 else None) # AB
-        val_col_28 = clean_str(row[28] if len(row) > 28 else None) # AC
-        val_col_29 = clean_str(row[29] if len(row) > 29 else None) # AD
-        val_col_30 = clean_str(row[30] if len(row) > 30 else None) # AE
+        # Tempo, Prazo e Atraso
+        tempo_dias = to_number(get_col(row, "TEMPO (DIAS)", "TEMPO", default_idx=31))
+        prazo_raw = clean_str(get_col(row, "PRAZO (SLA 3 DIAS)", "PRAZO", default_idx=32)).upper()
+        atraso_dias = to_number(get_col(row, "ATRASO (DIAS)", "ATRASO", default_idx=33))
         
-        # Se coluna AC tem prazo ("NO PRAZO" ou "ATRASADO"), então AB é tempo
-        if "PRAZO" in val_col_28.upper() or "ATRASAD" in val_col_28.upper():
-            tempo_dias = to_number(row[27] if len(row) > 27 else None)
-            prazo_raw = val_col_28.upper()
-            atraso_dias = to_number(row[29] if len(row) > 29 else None)
-        else:
-            # Caso AB seja Status Geral e AC seja Tempo, AD é Prazo e AE é Atraso
-            tempo_dias = to_number(row[28] if len(row) > 28 else None)
-            prazo_raw = val_col_29.upper()
-            atraso_dias = to_number(row[30] if len(row) > 30 else None)
-            
         if "NO PRAZO" in prazo_raw or "DENTRO" in prazo_raw:
             prazo = "NO PRAZO"
         elif "ATRASAD" in prazo_raw or "FORA" in prazo_raw:
@@ -288,12 +294,17 @@ def main():
             "data_previsao_fmt": format_date_br(dt_previsao_iso),
             "data_entrega": dt_entrega_iso,
             "data_entrega_fmt": format_date_br(dt_entrega_iso),
+            "data_medicao": dt_medicao_iso,
+            "data_medicao_fmt": format_date_br(dt_medicao_iso),
+            "num_wf": num_wf,
+            "status_wf": status_wf,
             "competencia": competencia,
             "ano": ano_entrada,
             "mes": mes_nome,
             "mes_num": mes_num,
             "status": status,
             "status_relatorio": status_relatorio,
+            "status_medicao": status_medicao_raw,
             "status_obra": status_obra_raw,
             "prazo": prazo,
             "tempo_dias": tempo_dias,
