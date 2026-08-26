@@ -727,6 +727,7 @@
                     <label style="font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-secondary); display:block; margin-bottom:8px;">Tipo de Relatório</label>
                     <select id="email-modal-type" style="width:100%; box-sizing:border-box; background:var(--bg-input,rgba(255,255,255,0.05)); border:1px solid var(--border-color); border-radius:10px; padding:12px 16px; color:var(--text-primary); font-size:14px; outline:none;">
                         <option value="mdu">📡 MDU — Status em Andamento</option>
+                        <option value="sar">📦 SAR — Status das OSs</option>
                         <option value="claro">📊 Analítico Claro — Sem Aprovação e Aguardando Pedido</option>
                         <option value="manutencao">🛠️ Manutenção — Resumo de Pendências e Aprovados</option>
                         <option value="tecnodrill">🏭 Tecnodrill — Resumo Financeiro</option>
@@ -4000,7 +4001,7 @@
             });
 
             const dayLabels = { MON:'Seg', TUE:'Ter', WED:'Qua', THU:'Qui', FRI:'Sex', SAT:'Sáb', SUN:'Dom' };
-            const typeLabels = { mdu: '📡 MDU', claro: '📊 Analítico Claro', manutencao: '🛠️ Manutenção' };
+            const typeLabels = { mdu: '📡 MDU', sar: '📦 SAR', claro: '📊 Analítico Claro', manutencao: '🛠️ Manutenção', tecnodrill: '🏭 Tecnodrill' };
 
             tbody.innerHTML = data.map(r => {
                 const days = (r.schedule_days || []).map(d => dayLabels[d] || d).join(', ');

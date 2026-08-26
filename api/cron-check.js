@@ -542,14 +542,19 @@ module.exports = async (req, res) => {
             // Se chegamos aqui, precisamos disparar o e-mail.
             const reportNameLower = (config.report_name || config.report || '').toLowerCase();
             const reportType = config.report_type || 
-                (reportNameLower.includes('manut') ? 'manutencao' : 
+                (reportNameLower.includes('sar') ? 'sar' :
+                 reportNameLower.includes('manut') ? 'manutencao' : 
                  reportNameLower.includes('claro') ? 'claro' : 
                  reportNameLower.includes('tecnodrill') ? 'tecnodrill' : 'mdu');
 
             let emailHtml;
             let attachments = null;
 
-            if (reportType === 'claro') {
+            if (reportType === 'sar') {
+                const sarHelper = require('./sar-report-helper');
+                const sarData = await sarHelper.loadSarDataAsync();
+                emailHtml = sarHelper.buildSarEmailHtml(config.report_name || config.report, sarData);
+            } else if (reportType === 'claro') {
                 const claroHelper = require('./claro-report-helper');
                 const claroData = await claroHelper.loadClaroDataAsync();
                 const excelRes = claroHelper.generateExcelAttachments(claroData);
