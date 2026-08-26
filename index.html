@@ -3791,6 +3791,22 @@
         }
         window.refreshCurrentDashboard = refreshCurrentDashboard;
 
+        // Controle de Grupos de Navegação (Accordion Sidebar)
+        function toggleNavGroup(groupId) {
+            const toggle = document.getElementById(`nav-${groupId}-toggle`);
+            const submenu = document.getElementById(`submenu-${groupId}`);
+            if (!toggle || !submenu) return;
+            const isOpen = submenu.classList.contains('open');
+            if (isOpen) {
+                submenu.classList.remove('open');
+                toggle.classList.remove('open');
+            } else {
+                submenu.classList.add('open');
+                toggle.classList.add('open');
+            }
+        }
+        window.toggleNavGroup = toggleNavGroup;
+
         // Navegação de Telas
         function switchView(viewName) {
             // Se tentar acessar a aba de transações como uma tela separada (legado/redirecionamento)
@@ -3826,6 +3842,14 @@
             if (container) container.style.display = 'block';
             const navEl = document.getElementById(`nav-${viewName}`);
             if (navEl) navEl.classList.add('active');
+
+            // Sincronizar estado do accordion Financeiro se estiver navegando para telas filhas
+            if (viewName === 'dashboard' || viewName === 'tecnodrill') {
+                const submenuFin = document.getElementById('submenu-financeiro');
+                const toggleFin = document.getElementById('nav-financeiro-toggle');
+                if (submenuFin) submenuFin.classList.add('open');
+                if (toggleFin) toggleFin.classList.add('open');
+            }
             
             // Controle de visualização da página Admin para regras CSS mobile
             if (viewName === 'admin') {

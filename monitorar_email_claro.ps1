@@ -1,3 +1,7 @@
+param(
+    [switch]$Force
+)
+
 # Script PowerShell para monitorar e-mail da Claro via IMAP (Zimbra) e atualizar o BI
 # Acessa o servidor de e-mail DIRETAMENTE, sem depender do Outlook Desktop
 # Executa 2x ao dia (09:00 e 14:00) de segunda a sexta
@@ -30,19 +34,11 @@ Write-Log "=========================================================="
 Write-Log "JLE TELECOM - MONITOR E-MAIL CLARO via IMAP (v3)"
 Write-Log "=========================================================="
 
-# Verificar se a senha IMAP foi definida
-if (-not $imapPass) {
-    Write-Log "AVISO: Senha IMAP nao configurada - usando modo Outlook COM direto."
-    # Sem senha IMAP, pula direto para o bloco Outlook COM abaixo
-}
-
-try {
-    # ===== CONEXÃO IMAP SSL =====
-    Write-Log "Conectando ao Zimbra via IMAP: ${imapServer}:${imapPort}..."
-
-    Add-Type -AssemblyName System.Net.Http
-
-    $tcpClient = New-Object System.Net.Sockets.TcpClient
+if ($imapPass) {
+    try {
+        Write-Log "Conectando ao Zimbra via IMAP: ${imapServer}:${imapPort}..."
+        Add-Type -AssemblyName System.Net.Http
+        $tcpClient = New-Object System.Net.Sockets.TcpClient
     $tcpClient.Connect($imapServer, $imapPort)
 
     $sslStream = New-Object System.Net.Security.SslStream($tcpClient.GetStream(), $false,
@@ -143,9 +139,10 @@ try {
     $tcpClient.Close()
     Write-Log "Conexao IMAP encerrada. Usando Outlook COM para extrair o anexo..."
 
-} catch {
-    Write-Log "Erro na conexao IMAP: $($_.Exception.Message)"
-    Write-Log "Continuando via Outlook COM..."
+    } catch {
+        Write-Log "Erro na conexao IMAP: $($_.Exception.Message)"
+        Write-Log "Continuando via Outlook COM..."
+    }
 }
 
 # ===== GARANTIR QUE O OUTLOOK ESTEJA RODANDO E CONECTADO =====
@@ -236,10 +233,10 @@ try {
 
     # Verificar data do email para anti-duplo
     $mailDate = $mostRecent.ReceivedTime.ToString("yyyyMMdd")
-    if (Test-Path $lastMailDateFile) {
+    if (-not $Force -and (Test-Path $lastMailDateFile)) {
         $lastMailDate = (Get-Content $lastMailDateFile -Raw).Trim()
         if ($lastMailDate -eq $mailDate) {
-            Write-Log "E-mail de $mailDate ja foi processado. Nenhuma acao necessaria."
+            Write-Log "E-mail de $mailDate ja foi processado. Nenhuma acao necessaria (use -Force para reprocessar)."
             exit 0
         }
     }
@@ -251,11 +248,11 @@ try {
         Write-Log "Data do relatorio no assunto: $subjectDate"
 
         # Se ja processamos esse relatorio, pular
-        if (Test-Path $lastMailDateFile) {
+        if (-not $Force -and (Test-Path $lastMailDateFile)) {
             $lastMailDate = (Get-Content $lastMailDateFile -Raw).Trim()
             # Comparar pela data do relatorio (nao pela data de recebimento)
             if ($lastMailDate -ge $subjectDate) {
-                Write-Log "Relatorio de $subjectDate ja foi processado (ultimo: $lastMailDate). Nenhuma acao necessaria."
+                Write-Log "Relatorio de $subjectDate ja foi processado (ultimo: $lastMailDate). Nenhuma acao necessaria (use -Force para reprocessar)."
                 exit 0
             }
         }

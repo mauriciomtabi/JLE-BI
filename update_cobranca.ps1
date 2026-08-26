@@ -100,13 +100,18 @@ $filePath = $useFile
 
 # Extrair data de atualizacao do relatorio
 $reportDate = $null
-$fileObject = Get-Item -Path $filePath
-if ($fileObject.Name -match "(\d{4})_(\d{2})_(\d{2})") {
-    # Encontrou a data no formato YYYY_MM_DD no nome do arquivo (ex: 2026_06_16)
+$origName = if ($ExplicitFile) { [System.IO.Path]::GetFileName($ExplicitFile) } else { (Get-Item -Path $filePath).Name }
+if ($origName -match "(\d{4})_(\d{2})_(\d{2})") {
     $reportDate = "$($Matches[1])-$($Matches[2])-$($Matches[3]) 18:00:00"
+} elseif (Test-Path "$PSScriptRoot\.last_claro_mail_date") {
+    $md = (Get-Content "$PSScriptRoot\.last_claro_mail_date" -Raw).Trim()
+    if ($md.Length -eq 8) {
+        $reportDate = "$($md.Substring(0,4))-$($md.Substring(4,2))-$($md.Substring(6,2)) 18:00:00"
+    } else {
+        $reportDate = (Get-Item -Path $filePath).LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss")
+    }
 } else {
-    # Fallback para a data de modificacao do arquivo
-    $reportDate = $fileObject.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss")
+    $reportDate = (Get-Item -Path $filePath).LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss")
 }
 Write-Output "Data de atualizacao identificada para o relatorio: $reportDate"
 
@@ -118,7 +123,7 @@ $pythonSuccess = $false
 
 if (Test-Path $pyScript) {
     Write-Output "Executando ETL ultra-rapido via Python..."
-    & python.exe "$pyScript" "$filePath"
+    & python.exe "$pyScript" "$filePath" "$reportDate"
     if ($LASTEXITCODE -eq 0) {
         $pythonSuccess = $true
         Write-Output "Processamento Python concluido com sucesso!"

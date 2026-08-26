@@ -177,6 +177,8 @@
         if (a >= 1000000) return (a / 1000000).toFixed(1).replace('.', ',') + 'M';
         if (a >= 1000) return (a / 1000).toFixed(0) + 'k';
         return a.toFixed(0);
+    }
+
     function nonTransfer(txs) {
         if (!txs) return [];
         return txs.filter(t => !t.is_transfer && t.categoria !== 'Saldo Inicial');

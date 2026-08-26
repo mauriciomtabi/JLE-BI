@@ -125,23 +125,26 @@ def process_cobranca(input_path=None):
     
     print(f"Lendo base de cobrança: {input_path}")
     
-    # Report date from filename
-    fname = os.path.basename(input_path)
-    m = re.search(r"(\d{4})_(\d{2})_(\d{2})", fname)
-    if m:
-        report_date = f"{m.group(1)}-{m.group(2)}-{m.group(3)} 18:00:00"
+    # Report date from argument or filename
+    if len(sys.argv) > 2 and sys.argv[2].strip():
+        report_date = sys.argv[2].strip()
     else:
-        # Check .last_claro_mail_date
-        mail_date_file = os.path.join(bi_dir, ".last_claro_mail_date")
-        if os.path.exists(mail_date_file):
-            with open(mail_date_file, "r") as mf:
-                md = mf.read().strip()
-                if len(md) == 8:
-                    report_date = f"{md[:4]}-{md[4:6]}-{md[6:8]} 18:00:00"
-                else:
-                    report_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        fname = os.path.basename(input_path)
+        m = re.search(r"(\d{4})_(\d{2})_(\d{2})", fname)
+        if m:
+            report_date = f"{m.group(1)}-{m.group(2)}-{m.group(3)} 18:00:00"
         else:
-            report_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            # Check .last_claro_mail_date
+            mail_date_file = os.path.join(bi_dir, ".last_claro_mail_date")
+            if os.path.exists(mail_date_file):
+                with open(mail_date_file, "r") as mf:
+                    md = mf.read().strip()
+                    if len(md) == 8:
+                        report_date = f"{md[:4]}-{md[4:6]}-{md[6:8]} 18:00:00"
+                    else:
+                        report_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            else:
+                report_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             
     print(f"Data do relatório: {report_date}")
     
