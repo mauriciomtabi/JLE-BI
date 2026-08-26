@@ -65,3 +65,18 @@ Gráficos Chart.js podem causar transbordamento (overflow) da página se não es
 
 ### 2.4. Respeito ao Tema Claro / Escuro
 - O BI oferece alternância de tema. Todas as variáveis de cor devem respeitar as CSS Custom Properties (`--bg-primary`, `--text-primary`, `--card-bg`, `--border-color`) para que o layout não quebre no modo claro.
+
+---
+
+## 3. Modelo Padrão de Novos Dashboards (Benchmark MDU / SAR)
+
+Para implementar ou refatorar qualquer módulo, consulte o documento oficial de especificações arquiteturais:
+- [BI_LAYOUT_STANDARD.md](file:///c:/Users/jlema/.antigravity/BI_JLE/BI_LAYOUT_STANDARD.md)
+
+### Checklist Obrigatório para Novos Módulos:
+1. **Namespace Estrito**: Classes CSS com prefixo do módulo (ex: `.sar-kpi-card`, `.sar-table`), IDs DOM exclusivos e funções escopadas.
+2. **4 KPIs de Destaque**: Total, Positivo/No Prazo, Negativo/Atrasado, Média de Tempo/Atraso.
+3. **Barra de Filtros**: Multi-select de status, selects dimensionados, busca rápida com debounce e botão limpar.
+4. **Gráficos Seguros**: Wrappers com altura definida e Chart.js responsivo com paleta harmoniosa.
+5. **Tabela Paginada**: Client-side com limite de 50 registros por página, ordenação em todas as colunas e exportação em Excel nativa.
+6. **Zero Impacto**: Proibida qualquer mutação em estilos ou elementos de outros módulos do BI.

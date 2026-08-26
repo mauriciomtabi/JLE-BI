@@ -62,7 +62,7 @@ if (Test-Path "$workingDir\update_manutencao.ps1") {
 Write-Output ""
 
 # 6. Atualizar MDU
-Write-Output "--- [6/6] Atualizando MDU ---"
+Write-Output "--- [6/7] Atualizando MDU ---"
 if (Test-Path "$workingDir\update_mdu.ps1") {
     try {
         & "$workingDir\update_mdu.ps1"
@@ -72,11 +72,22 @@ if (Test-Path "$workingDir\update_mdu.ps1") {
 }
 Write-Output ""
 
+# 7. Atualizar SAR
+Write-Output "--- [7/7] Atualizando SAR ---"
+if (Test-Path "$workingDir\update_sar.ps1") {
+    try {
+        & "$workingDir\update_sar.ps1"
+    } catch {
+        Write-Warning "Falha na atualizacao de SAR: $($_.Exception.Message)"
+    }
+}
+Write-Output ""
+
 # Sincronização Consolidada no Git / PWA Cache
 Write-Output "--- Sincronizacao Consolidada com GitHub / PWA ---"
 $gitPath = "C:\Program Files\Git\cmd\git.exe"
 if (Test-Path $gitPath) {
-    $dataFiles = @("data.js", "tecnodrill_data.js", "cobranca_data.js", "veiculos_data.js", "manutencao_data.js", "mdu_data.js")
+    $dataFiles = @("data.js", "tecnodrill_data.js", "cobranca_data.js", "veiculos_data.js", "manutencao_data.js", "mdu_data.js", "sar_data.js")
     $hasChanges = $false
     foreach ($df in $dataFiles) {
         $st = & $gitPath status --porcelain $df
@@ -104,8 +115,9 @@ if (Test-Path $gitPath) {
         }
 
         Write-Output "Enviando alteracoes consolidadas para o repositorio remoto..."
-        & $gitPath add *.js sw.js
-        & $gitPath commit -m "data(auto): atualizacao completa consolidada dos dados do BI JLE"
+        & $gitPath add data.js tecnodrill_data.js cobranca_data.js veiculos_data.js manutencao_data.js mdu_data.js sar_data.js sar_app.js sar_styles.css index.html sw.js update_all.ps1 update_sar.ps1 update_sar.py atualizar_sar.bat BI_LAYOUT_STANDARD.md .gitignore .agents/skills/bi-ui-preservation/SKILL.md
+        & $gitPath commit -m "feat(sar): implantacao do novo dashboard SAR e padronizacao visual BI JLE"
+        & $gitPath pull --rebase origin main
         & $gitPath push origin main
         Write-Output "Deploy automatico disparado via push no GitHub!"
     } else {
@@ -116,3 +128,4 @@ if (Test-Path $gitPath) {
 Write-Output "=========================================================="
 Write-Output "ATUALIZACAO COMPLETA CONCLUIDA COM SUCESSO!"
 Write-Output "=========================================================="
+

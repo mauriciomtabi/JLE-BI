@@ -1,0 +1,451 @@
+/* ============================================================
+   sar_styles.css — Estilos Exclusivos do Módulo SAR
+   Baseado no Padrão de Layout do BI JLE Telecom (Dark Glassmorphism)
+   ============================================================ */
+
+/* -- Barra de Filtros SAR -- */
+#sar-filters-container {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) 38px;
+    gap: 10px;
+    align-items: end;
+    margin-bottom: 24px;
+}
+
+@media (max-width: 768px) {
+    #sar-filters-container {
+        display: none;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    #sar-filters-container.mobile-expanded {
+        display: grid;
+    }
+}
+
+@media (min-width: 769px) {
+    #sar-filters-container {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        align-items: flex-end !important;
+        justify-content: flex-start !important;
+        gap: 12px !important;
+    }
+    
+    #sar-filters-container .filter-group {
+        flex: 1 1 140px;
+        max-width: 200px;
+    }
+    
+    #sar-filters-container .sar-search-group {
+        flex: 1 1 260px !important;
+        flex-grow: 1 !important;
+        max-width: none !important;
+    }
+    
+    #sar-filters-container .sar-clear-group {
+        flex: 0 0 auto !important;
+        max-width: none !important;
+    }
+}
+
+/* -- Multi-select Dropdown para Status SAR -- */
+.sar-multiselect-container {
+    position: relative;
+    width: 100%;
+}
+
+.sar-multiselect-trigger {
+    width: 100%;
+    padding: 8px 12px;
+    background-color: var(--bg-body);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    user-select: none;
+    box-sizing: border-box;
+    height: 38px;
+}
+
+.sar-multiselect-trigger:hover {
+    border-color: var(--color-primary);
+}
+
+.sar-multiselect-value {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 8px;
+}
+
+.sar-multiselect-trigger i {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    transition: transform 0.2s ease;
+}
+
+.sar-multiselect-container.active .sar-multiselect-trigger i {
+    transform: rotate(180deg);
+}
+
+.sar-multiselect-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    width: 100%;
+    max-height: 250px;
+    overflow-y: auto;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    z-index: 2000;
+    padding: 6px 0;
+    box-sizing: border-box;
+}
+
+.sar-multiselect-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+    user-select: none;
+    gap: 8px;
+}
+
+.sar-multiselect-item:hover {
+    background-color: var(--bg-tr-hover);
+}
+
+.sar-multiselect-item input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+}
+
+.sar-multiselect-item label {
+    cursor: pointer;
+    flex-grow: 1;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* -- Selects e Botões dos Filtros -- */
+.sar-select {
+    width: 100%;
+    padding: 8px 12px;
+    background-color: var(--bg-body);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    height: 38px;
+    box-sizing: border-box;
+}
+
+.sar-select:focus {
+    border-color: var(--color-primary);
+}
+
+/* -- Grid Layouts do SAR -- */
+.sar-grid-3cols {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.sar-grid-2cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.sar-grid-1col-wide {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+@media (max-width: 1024px) {
+    .sar-grid-3cols, .sar-grid-2cols, .sar-grid-1col-wide {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+}
+
+/* -- Cards de KPIs do SAR -- */
+.sar-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+@media (max-width: 1200px) {
+    .sar-kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .sar-kpi-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.sar-kpi-card {
+    background: radial-gradient(circle at top right, rgba(var(--kpi-glow-color, 108, 117, 125), 0.06), var(--bg-card) 70%);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: var(--shadow-main);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sar-kpi-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.sar-kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background-color: var(--kpi-border-color, var(--color-primary));
+}
+
+.sar-kpi-card.kpi-total { --kpi-border-color: var(--color-primary); --kpi-glow-color: 30, 144, 255; }
+.sar-kpi-card.kpi-no-prazo { --kpi-border-color: var(--color-success); --kpi-glow-color: 16, 185, 129; }
+.sar-kpi-card.kpi-atrasado { --kpi-border-color: var(--color-danger); --kpi-glow-color: 248, 81, 73; }
+.sar-kpi-card.kpi-tempo { --kpi-border-color: var(--color-warning); --kpi-glow-color: 245, 158, 11; }
+
+.sar-kpi-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.sar-kpi-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.2;
+    margin: 0 0 6px 0;
+}
+
+.sar-kpi-footer {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.sar-kpi-card .kpi-icon-container {
+    position: absolute;
+    right: 12px;
+    bottom: -8px;
+    font-size: 4.5rem;
+    color: var(--kpi-border-color);
+    opacity: 0.12;
+    transform: rotate(12deg);
+    pointer-events: none;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.sar-kpi-card:hover .kpi-icon-container {
+    transform: rotate(0deg) scale(1.1);
+    opacity: 0.18;
+}
+
+/* -- Cards Containers do SAR -- */
+.sar-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow-main);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.sar-card-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.sar-chart-container {
+    position: relative;
+    width: 100%;
+    height: 260px;
+}
+
+/* -- Tabela de Desempenho por Executor do SAR -- */
+.sar-performance-table {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+    margin-top: 8px;
+}
+
+.sar-performance-table tfoot {
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+}
+
+.sar-performance-table tfoot tr {
+    background-color: var(--bg-card) !important;
+    border-top: 2px solid var(--border-color);
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.sar-performance-table tfoot td {
+    background-color: var(--bg-card) !important;
+    font-weight: 700;
+    padding: 8px 4px;
+    border-bottom: none;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+.sar-performance-table tfoot td:first-child {
+    text-align: left;
+}
+
+.sar-performance-table th {
+    background-color: var(--bg-body);
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 8px 4px;
+    border-bottom: 2px solid var(--border-color);
+    text-align: center;
+}
+
+.sar-performance-table th:first-child {
+    text-align: left;
+}
+
+.sar-performance-table td {
+    padding: 8px 4px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-primary);
+    text-align: center;
+}
+
+.sar-performance-table td:first-child {
+    text-align: left;
+    font-weight: 700;
+}
+
+.sar-performance-table td:not(:first-child), 
+.sar-performance-table th:not(:first-child) {
+    border-left: 1px dotted var(--border-color);
+}
+
+.sar-performance-table tbody tr:hover {
+    background-color: var(--bg-tr-hover);
+}
+
+/* -- Tabela Analítica de SARs -- */
+.sar-table-wrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-height: none;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.sar-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.76rem;
+    text-align: left;
+}
+
+.sar-table th {
+    background-color: var(--bg-body);
+    color: var(--text-secondary);
+    font-weight: 600;
+    padding: 7px 6px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-bottom: 2px solid var(--border-color);
+    white-space: nowrap;
+}
+
+.sar-table td {
+    padding: 7px 6px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+.sar-table tbody tr:hover {
+    background-color: var(--bg-tr-hover);
+}
+
+/* -- Badges Semânticos do SAR -- */
+.sar-badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.sar-badge-no-prazo { background-color: rgba(16, 185, 129, 0.15); color: #10b981; }
+.sar-badge-atrasado { background-color: rgba(248, 81, 73, 0.15); color: #f85149; }
+.sar-badge-concluido { background-color: rgba(46, 213, 115, 0.15); color: #2ed573; }
+.sar-badge-andamento { background-color: rgba(245, 158, 11, 0.15); color: #f59e0b; }
+.sar-badge-cancelado { background-color: rgba(255, 71, 87, 0.15); color: #ff4757; }
+.sar-badge-sem-sinal { background-color: rgba(149, 117, 205, 0.15); color: #9575cd; }
+.sar-badge-default { background-color: rgba(108, 117, 125, 0.15); color: #6c757d; }

@@ -50,6 +50,7 @@
     <link rel="stylesheet" href="cobranca_styles.css?v=3.47">
     <link rel="stylesheet" href="gestao_os_styles.css">
     <link rel="stylesheet" href="mdu_styles.css">
+    <link rel="stylesheet" href="sar_styles.css?v=1.0">
     
     <!-- Leaflet Map CSS & JS CDNs -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
@@ -79,6 +80,9 @@
             </a>
             <a class="nav-item" id="nav-mdu" onclick="switchView('mdu')" style="display:none;" title="MDU">
                 <i class="fa-solid fa-building"></i> <span>MDU</span>
+            </a>
+            <a class="nav-item" id="nav-sar" onclick="switchView('sar')" style="display:none;" title="SAR">
+                <i class="fa-solid fa-network-wired"></i> <span>SAR</span>
             </a>
             <a class="nav-item" id="nav-manutencao" onclick="switchView('manutencao')" style="display:none;" title="Manutenção">
                 <i class="fa-solid fa-wrench"></i> <span>Manutenção</span>
@@ -1962,6 +1966,239 @@
             </div>
         </div>
 
+        <!-- SAR CONTAINER -->
+        <div id="view-sar-container" class="view-panel" style="display: none;">
+            <!-- Filters bar -->
+            <section class="filter-bar" id="sar-filters-container">
+                <div class="filter-group">
+                    <label>Status</label>
+                    <div class="sar-multiselect-container" id="sar-multiselect-status-container">
+                        <div class="sar-multiselect-trigger" onclick="toggleSarStatusDropdown(event)">
+                            <span class="sar-multiselect-value" id="sar-multiselect-status-value">Todos os Status</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="sar-multiselect-dropdown" id="sar-multiselect-status-dropdown" style="display: none;"></div>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <label for="sar-filter-prazo">Prazo (SLA 3 dias)</label>
+                    <select id="sar-filter-prazo" class="sar-select" onchange="applySarFilters()">
+                        <option value="">Todos os Prazos</option>
+                        <option value="NO PRAZO">No Prazo</option>
+                        <option value="ATRASADO">Atrasado</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="sar-filter-cidade">Cidade</label>
+                    <select id="sar-filter-cidade" class="sar-select" onchange="applySarFilters()">
+                        <option value="">Todas as Cidades</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="sar-filter-area">Área Técnica</label>
+                    <select id="sar-filter-area" class="sar-select" onchange="applySarFilters()">
+                        <option value="">Todas as Áreas</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="sar-filter-competencia">Competência</label>
+                    <select id="sar-filter-competencia" class="sar-select" onchange="applySarFilters()">
+                        <option value="">Todas as Competências</option>
+                    </select>
+                </div>
+                <!-- Campo de busca rápida -->
+                <div class="filter-group sar-search-group">
+                    <label for="sar-search-bar">Busca Rápida</label>
+                    <div style="position: relative; display: flex; align-items: center;">
+                        <input type="text" id="sar-search-bar"
+                            placeholder="Código, Endereço, Cidade, Node, Executor, Serviço..."
+                            oninput="onSarSearchInput(this.value)"
+                            style="width: 100%; padding: 8px 10px; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 13px; outline: none; transition: border-color 0.2s;"
+                            onfocus="this.style.borderColor='var(--color-primary)'"
+                            onblur="this.style.borderColor='var(--border-color)'">
+                    </div>
+                </div>
+                <div class="filter-group sar-clear-group" style="display: flex; align-items: end; justify-content: end; margin-bottom: 2px;">
+                    <button onclick="clearSarFilters()" title="Limpar Filtros" style="background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 12px; color: var(--text-secondary); cursor: pointer; transition: all 0.2s ease;" onmouseover="this.style.borderColor='var(--color-primary)'; this.style.color='var(--text-primary)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-secondary)'">
+                        <i class="fa-solid fa-eraser"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Sub Tab Selector (Indicadores / Relatório) -->
+            <div class="dashboard-tabs" id="sar-sub-tabs" style="margin-bottom: 20px;">
+                <button class="tab-btn active" id="sar-tab-btn-indicators" onclick="switchSarTab('indicators')">
+                    <i class="fa-solid fa-chart-column"></i> Indicadores
+                </button>
+                <button class="tab-btn" id="sar-tab-btn-table" onclick="switchSarTab('table')">
+                    <i class="fa-solid fa-list-check"></i> Relatório de SARs
+                </button>
+            </div>
+
+            <!-- Sub Tab Pane: Indicadores -->
+            <div id="subview-sar-indicators" class="subtab-pane active">
+                <!-- KPI Cards -->
+                <div class="sar-kpi-grid">
+                    <div class="sar-kpi-card kpi-total">
+                        <div class="kpi-info" style="flex-grow: 1;">
+                            <span class="sar-kpi-title" style="text-transform: none;">TOTAL DE OSs SAR</span>
+                            <h3 class="sar-kpi-value" id="sar-kpi-total">0</h3>
+                            <div class="sar-kpi-footer">
+                                <span>Total no filtro selecionado</span>
+                            </div>
+                        </div>
+                        <div class="kpi-icon-container">
+                            <i class="fa-solid fa-network-wired"></i>
+                        </div>
+                    </div>
+                    <div class="sar-kpi-card kpi-no-prazo">
+                        <div class="kpi-info" style="flex-grow: 1;">
+                            <span class="sar-kpi-title">No Prazo (SLA 3 dias)</span>
+                            <h3 class="sar-kpi-value" id="sar-kpi-no-prazo">0</h3>
+                            <div class="sar-kpi-footer">
+                                <span id="sar-kpi-no-prazo-pct">0%</span> de conformidade
+                            </div>
+                        </div>
+                        <div class="kpi-icon-container">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                    </div>
+                    <div class="sar-kpi-card kpi-atrasado">
+                        <div class="kpi-info" style="flex-grow: 1;">
+                            <span class="sar-kpi-title">Atrasados</span>
+                            <h3 class="sar-kpi-value" id="sar-kpi-atrasado">0</h3>
+                            <div class="sar-kpi-footer">
+                                <span id="sar-kpi-atrasado-pct">0%</span> fora do SLA
+                            </div>
+                        </div>
+                        <div class="kpi-icon-container">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                        </div>
+                    </div>
+                    <div class="sar-kpi-card kpi-tempo">
+                        <div class="kpi-info" style="flex-grow: 1;">
+                            <span class="sar-kpi-title">Tempo Médio de Atendimento</span>
+                            <h3 class="sar-kpi-value" id="sar-kpi-tempo-medio">0 dias</h3>
+                            <div class="sar-kpi-footer">
+                                <span id="sar-kpi-tempo-atraso-detalhe">Atraso médio: 0 dias</span>
+                            </div>
+                        </div>
+                        <div class="kpi-icon-container">
+                            <i class="fa-solid fa-stopwatch"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráficos Row 1: Evolução Temporal + Prazo SLA -->
+                <div class="sar-grid-2cols">
+                    <div class="sar-card">
+                        <div class="sar-card-title">
+                            <span id="sar-evolution-title">Evolução Mensal de Entradas</span>
+                            <button id="sar-drilldown-back-btn" style="display: none; align-items: center; gap: 6px; padding: 5px 10px; font-size: 11px; font-weight: 700; color: #fff; background: var(--color-primary); border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; cursor: pointer; transition: all 0.2s ease;" onclick="backFromSarDrilldown()">
+                                <i class="fa-solid fa-arrow-left"></i> Voltar ao Mensal
+                            </button>
+                        </div>
+                        <div class="sar-chart-container" style="height: 260px;">
+                            <canvas id="sar-chart-evolution"></canvas>
+                        </div>
+                    </div>
+                    <div class="sar-card">
+                        <div class="sar-card-title">Distribuição de SLA (No Prazo vs Atrasado)</div>
+                        <div class="sar-chart-container" style="height: 260px;">
+                            <canvas id="sar-chart-prazo"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráficos Row 2: Status Geral + Top Cidades -->
+                <div class="sar-grid-2cols">
+                    <div class="sar-card">
+                        <div class="sar-card-title">Distribuição por Status Geral</div>
+                        <div class="sar-chart-container" style="height: 260px;">
+                            <canvas id="sar-chart-status"></canvas>
+                        </div>
+                    </div>
+                    <div class="sar-card">
+                        <div class="sar-card-title">Top 8 Cidades por Volume</div>
+                        <div class="sar-chart-container" style="height: 260px;">
+                            <canvas id="sar-chart-cidade"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráficos Row 3: Desempenho por Executor -->
+                <div class="sar-grid-1col-wide">
+                    <div class="sar-card">
+                        <div class="sar-card-title">Desempenho por Executor (Classe L & Classe F)</div>
+                        <div class="sar-table-wrapper" style="border: none; max-height: 400px; overflow-y: auto;">
+                            <table class="sar-performance-table">
+                                <thead>
+                                    <tr>
+                                        <th onclick="sortSarPerformance('nome')" style="cursor:pointer; user-select: none;">Executor <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarPerformance('noPrazo')" style="cursor:pointer; user-select: none;">No Prazo <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarPerformance('atrasado')" style="cursor:pointer; user-select: none;">Atrasado <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarPerformance('noPrazo')" style="cursor:pointer; user-select: none;">% No Prazo <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarPerformance('total')" style="cursor:pointer; user-select: none;">Total <i class="fa-solid fa-sort"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="sar-performance-table-body">
+                                    <tr><td colspan="5" style="text-align:center; color: var(--text-secondary); padding: 20px;">Carregando executores...</td></tr>
+                                </tbody>
+                                <tfoot id="sar-performance-table-footer"></tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sub Tab Pane: Relatório de SARs (Tabela Detalhada) -->
+            <div id="subview-sar-table" class="subtab-pane" style="display: none; padding-bottom: 24px; min-width: 0; max-width: 100%;">
+                <div class="sar-grid-1col-wide" style="min-width: 0; max-width: 100%;">
+                    <div class="sar-card" style="min-width: 0; max-width: 100%; overflow: hidden;">
+                        <div class="sar-card-title" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                            <span>Relação Detalhada de OSs SAR</span>
+                            <button class="btn-export" onclick="exportSarToExcel()" title="Exportar para Excel" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; font-size: 13px; font-weight: 600;">
+                                <i class="fa-solid fa-file-arrow-down"></i> Exportar Excel
+                            </button>
+                        </div>
+                        <div class="sar-table-wrapper" style="overflow-y: hidden;">
+                            <table class="sar-table">
+                                <thead>
+                                    <tr>
+                                        <th onclick="sortSarTable('cod')" style="cursor:pointer; user-select: none;">COD. <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarTable('area_tecnica')" style="cursor:pointer; user-select: none;">Área Técnica <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarTable('node')" style="cursor:pointer; user-select: none;">Node <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarTable('site')" style="cursor:pointer; user-select: none;">Site <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarTable('cidade')" style="cursor:pointer; user-select: none;">Cidade <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarTable('endereco')" style="cursor:pointer; user-select: none;">Endereço <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarTable('caixa_mdu')" style="cursor:pointer; user-select: none;">Caixa MDU <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarTable('classe_l')" style="cursor:pointer; user-select: none;">Classe L <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarTable('classe_f')" style="cursor:pointer; user-select: none;">Classe F <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarTable('servico')" style="cursor:pointer; user-select: none;">Serviço <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarTable('data_entrada')" style="cursor:pointer; user-select: none;">Data Entrada <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarTable('data_entrega')" style="cursor:pointer; user-select: none;">Data Entrega <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarTable('status')" style="cursor:pointer; user-select: none;">Status <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarTable('prazo')" style="cursor:pointer; user-select: none;">Prazo SLA <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarTable('tempo_dias')" style="cursor:pointer; user-select: none; text-align: center;">Tempo (Dias) <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarTable('atraso_dias')" style="cursor:pointer; user-select: none; text-align: center;">Atraso (Dias) <i class="fa-solid fa-sort"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="sar-table-body">
+                                    <tr><td colspan="16" style="text-align:center; color: var(--text-secondary); padding: 30px;">Carregando registros SAR...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div style="padding: 16px 0 0 0; border-top: 1px solid var(--border-color); margin-top: 16px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                                <span id="sar-pagination-info" style="font-size: 13px; color: var(--text-secondary);"></span>
+                                <div id="sar-pagination-btns" style="display: flex; gap: 6px; align-items: center;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Modal: Adicionar/Editar Usuário -->
         <div class="modal-overlay" id="user-permission-modal" onclick="closeUserModal(event)">
             <div class="modal-card" style="max-width: 520px;">
@@ -2363,6 +2600,8 @@
     <script src="gestao_os_app.js?v=4.2"></script>
     <script src="mdu_data.js"></script>
     <script src="mdu_app.js?v=1.3"></script>
+    <script src="sar_data.js"></script>
+    <script src="sar_app.js?v=1.0"></script>
     <script src="manutencao_data.js"></script>
     <script src="manutencao_app.js"></script>
 
@@ -2991,6 +3230,7 @@
             { id: 'cobranca',     label: 'Analítico Claro',         icon: 'fa-file-invoice-dollar', navId: 'nav-cobranca' },
             { id: 'gestao_os',    label: 'Gestão de OS',            icon: 'fa-clipboard-list',    navId: 'nav-gestao_os' },
             { id: 'mdu',          label: 'MDU',                     icon: 'fa-building',          navId: 'nav-mdu' },
+            { id: 'sar',          label: 'SAR',                     icon: 'fa-network-wired',     navId: 'nav-sar' },
             { id: 'manutencao',   label: 'Manutenção',              icon: 'fa-wrench',            navId: 'nav-manutencao' },
             { id: 'admin',        label: 'Painel Admin',            icon: 'fa-shield-halved',    navId: 'nav-admin',        adminOnly: true },
         ];
@@ -3411,6 +3651,12 @@
                 } else {
                     timestampEl.innerText = 'Desconhecido';
                 }
+            } else if (viewName === 'sar') {
+                if (typeof window.SAR_METADATA !== 'undefined' && window.SAR_METADATA.generated_at) {
+                    timestampEl.innerText = formatTimestamp(window.SAR_METADATA.generated_at);
+                } else {
+                    timestampEl.innerText = 'Desconhecido';
+                }
             } else if (viewName === 'manutencao') {
                 if (typeof window.MANUTENCAO_METADATA !== 'undefined' && window.MANUTENCAO_METADATA.generated_at) {
                     timestampEl.innerText = formatTimestamp(window.MANUTENCAO_METADATA.generated_at);
@@ -3488,6 +3734,8 @@
             if (cobFilters) cobFilters.classList.remove('mobile-expanded');
             const mduFilters = document.getElementById('mdu-filters-container');
             if (mduFilters) mduFilters.classList.remove('mobile-expanded');
+            const sarFilters = document.getElementById('sar-filters-container');
+            if (sarFilters) sarFilters.classList.remove('mobile-expanded');
             if (mobileToggleBtn) {
                 mobileToggleBtn.innerHTML = '<i class="fa-solid fa-filter"></i> <span>Mostrar Filtros</span>';
             }
@@ -3536,6 +3784,16 @@
                     initMdu();
                 } else {
                     applyMduFilters();
+                }
+            } else if (viewName === 'sar') {
+                document.getElementById('filters-container').style.display = 'none';
+                if (mobileToggleBtn) mobileToggleBtn.style.display = '';
+                document.getElementById('view-title').innerText = 'SAR';
+                document.getElementById('view-subtitle').innerHTML = 'Acompanhamento e Indicadores SAR — Claro RS';
+                if (!sarDataLoaded) {
+                    initSar();
+                } else {
+                    applySarFilters();
                 }
             } else if (viewName === 'manutencao') {
                 document.getElementById('filters-container').style.display = 'none';
@@ -3587,6 +3845,7 @@
             { id: 'cobranca',     label: 'Analítico Claro',          icon: 'fa-file-invoice-dollar' },
             { id: 'gestao_os',    label: 'Gestão de OS',             icon: 'fa-clipboard-list' },
             { id: 'mdu',          label: 'MDU',                      icon: 'fa-building' },
+            { id: 'sar',          label: 'SAR',                      icon: 'fa-network-wired' },
             { id: 'manutencao',   label: 'Manutenção',              icon: 'fa-wrench' },
         ];
 

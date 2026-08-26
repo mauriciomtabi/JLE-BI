@@ -18,3 +18,10 @@ resend_schedule_state.json
 
 .vercel
 .env*
+
+# Scripts de teste locais e chaves
+test_*.js
+test_*.py
+update_schedule_and_resend.js
+*_temp.xlsx
+*.log
