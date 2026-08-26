@@ -21,10 +21,10 @@ let sarTimeGranularity = 'month'; // 'month' padrão
 // Filtros do SAR
 const sarFilters = {
     status: [],
-    prazo: '',
     cidade: '',
     area_tecnica: '',
-    ano: ''
+    ano: '',
+    mes: ''
 };
 
 let sarSearchQuery = '';
@@ -93,17 +93,7 @@ function populateSarFilterSelects() {
         `).join('');
     }
 
-    // 2. Select Prazo
-    const prazoSelect = document.getElementById('sar-filter-prazo');
-    if (prazoSelect) {
-        prazoSelect.innerHTML = `
-            <option value="">Todos os Prazos</option>
-            <option value="NO PRAZO">No Prazo</option>
-            <option value="ATRASADO">Atrasado</option>
-        `;
-    }
-
-    // 3. Select Cidade
+    // 2. Select Cidade
     const cidadeSelect = document.getElementById('sar-filter-cidade');
     if (cidadeSelect) {
         const uniqueCidades = meta.cidades || [...new Set(data.map(r => r.cidade).filter(Boolean))].sort();
@@ -111,7 +101,7 @@ function populateSarFilterSelects() {
             uniqueCidades.map(c => `<option value="${c}">${c}</option>`).join('');
     }
 
-    // 4. Select Área Técnica
+    // 3. Select Área Técnica
     const areaSelect = document.getElementById('sar-filter-area');
     if (areaSelect) {
         const uniqueAreas = meta.areas_tecnicas || [...new Set(data.map(r => r.area_tecnica).filter(Boolean))].sort();
@@ -119,13 +109,24 @@ function populateSarFilterSelects() {
             uniqueAreas.map(a => `<option value="${a}">${a}</option>`).join('');
     }
 
-    // 5. Select Ano (Ordenação Cronológica Decrescente)
+    // 4. Select Ano (Ordenação Cronológica Decrescente)
     const anoSelect = document.getElementById('sar-filter-ano');
     if (anoSelect) {
         const uniqueAnos = meta.anos || [...new Set(data.map(r => r.ano).filter(a => a && a !== 'NÃO INFORMADO'))];
         uniqueAnos.sort((a, b) => parseInt(b) - parseInt(a));
         anoSelect.innerHTML = '<option value="">Todos os Anos</option>' + 
             uniqueAnos.map(a => `<option value="${a}">${a}</option>`).join('');
+    }
+
+    // 5. Select Mês (Meses em português)
+    const mesSelect = document.getElementById('sar-filter-mes');
+    if (mesSelect) {
+        const meses = meta.meses || [
+            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+        ];
+        mesSelect.innerHTML = '<option value="">Todos os Meses</option>' + 
+            meses.map(m => `<option value="${m.toUpperCase()}">${m}</option>`).join('');
     }
 }
 
@@ -202,10 +203,10 @@ function onSarSearchInput(val) {
  */
 function clearSarFilters() {
     sarFilters.status = [];
-    sarFilters.prazo = '';
     sarFilters.cidade = '';
     sarFilters.area_tecnica = '';
     sarFilters.ano = '';
+    sarFilters.mes = '';
     sarSearchQuery = '';
 
     const chks = document.querySelectorAll('#sar-multiselect-status-dropdown input[type="checkbox"]');
@@ -214,14 +215,14 @@ function clearSarFilters() {
     const lbl = document.getElementById('sar-multiselect-status-value');
     if (lbl) lbl.innerText = 'Todos os Status';
 
-    const pSel = document.getElementById('sar-filter-prazo');
-    if (pSel) pSel.value = '';
     const cSel = document.getElementById('sar-filter-cidade');
     if (cSel) cSel.value = '';
     const aSel = document.getElementById('sar-filter-area');
     if (aSel) aSel.value = '';
     const anoSel = document.getElementById('sar-filter-ano');
     if (anoSel) anoSel.value = '';
+    const mesSel = document.getElementById('sar-filter-mes');
+    if (mesSel) mesSel.value = '';
 
     const searchInput = document.getElementById('sar-search-bar');
     if (searchInput) searchInput.value = '';
@@ -235,22 +236,18 @@ function clearSarFilters() {
 function applySarFilters() {
     const data = window.SAR_DATA || [];
 
-    const pSel = document.getElementById('sar-filter-prazo');
-    if (pSel) sarFilters.prazo = pSel.value;
     const cSel = document.getElementById('sar-filter-cidade');
     if (cSel) sarFilters.cidade = cSel.value;
     const aSel = document.getElementById('sar-filter-area');
     if (aSel) sarFilters.area_tecnica = aSel.value;
     const anoSel = document.getElementById('sar-filter-ano');
     if (anoSel) sarFilters.ano = anoSel.value;
+    const mesSel = document.getElementById('sar-filter-mes');
+    if (mesSel) sarFilters.mes = mesSel.value;
 
     sarFilteredData = data.filter(r => {
         // Filtro Status
         if (sarFilters.status.length > 0 && !sarFilters.status.includes(r.status)) {
-            return false;
-        }
-        // Filtro Prazo
-        if (sarFilters.prazo && r.prazo !== sarFilters.prazo) {
             return false;
         }
         // Filtro Cidade
@@ -264,6 +261,13 @@ function applySarFilters() {
         // Filtro Ano
         if (sarFilters.ano && r.ano !== sarFilters.ano) {
             return false;
+        }
+        // Filtro Mês
+        if (sarFilters.mes) {
+            const rMesUpper = (r.mes || '').toUpperCase();
+            if (rMesUpper !== sarFilters.mes) {
+                return false;
+            }
         }
         // Filtro de Busca Rápida
         if (sarSearchQuery) {
@@ -352,10 +356,9 @@ function renderSarCharts(filteredData) {
     renderSarStatusChart(filteredData);
     renderSarPrazoChart(filteredData);
 
-    // O gráfico de evolução mensal NÃO é afetado pelo filtro de Ano (preserva toda a série temporal histórica)
+    // O gráfico de evolução mensal NÃO é afetado pelos filtros de Ano/Mês (preserva toda a série temporal histórica)
     const evolutionData = (window.SAR_DATA || []).filter(r => {
         if (sarFilters.status.length > 0 && !sarFilters.status.includes(r.status)) return false;
-        if (sarFilters.prazo && r.prazo !== sarFilters.prazo) return false;
         if (sarFilters.cidade && r.cidade !== sarFilters.cidade) return false;
         if (sarFilters.area_tecnica && r.area_tecnica !== sarFilters.area_tecnica) return false;
         if (sarSearchQuery) {

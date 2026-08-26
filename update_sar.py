@@ -260,8 +260,11 @@ def main():
         if prazo == "ATRASADO" and atraso_dias <= 0 and tempo_dias > 3:
             atraso_dias = tempo_dias - 3
             
-        # Ano baseado na data de entrada
+        # Ano e Mês baseados na data de entrada
         ano_entrada = dt_entrada_iso[:4] if dt_entrada_iso else "NÃO INFORMADO"
+        mes_num = dt_entrada_iso[5:7] if dt_entrada_iso and len(dt_entrada_iso) >= 7 else ""
+        mes_idx = int(mes_num) if mes_num.isdigit() and 1 <= int(mes_num) <= 12 else 0
+        mes_nome = MESES_PT[mes_idx] if mes_idx > 0 else "NÃO INFORMADO"
         
         record = {
             "cod": cod,
@@ -287,6 +290,8 @@ def main():
             "data_entrega_fmt": format_date_br(dt_entrega_iso),
             "competencia": competencia,
             "ano": ano_entrada,
+            "mes": mes_nome,
+            "mes_num": mes_num,
             "status": status,
             "status_relatorio": status_relatorio,
             "status_obra": status_obra_raw,
@@ -304,7 +309,8 @@ def main():
     status_list = sorted(list(set(r["status"] for r in records if r["status"])))
     prazos_list = ["NO PRAZO", "ATRASADO"]
     competencias = sorted(list(set(r["competencia"] for r in records if r["competencia"] and r["competencia"] != "NÃO INFORMADO")))
-    anos = sorted(list(set(r["ano"] for r in records if r.get("ano") and r["ano"] != "NÃO INFORMADO")))
+    anos = sorted(list(set(r["ano"] for r in records if r.get("ano") and r["ano"] != "NÃO INFORMADO")), reverse=True)
+    meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
     
     metadata = {
         "total_records": len(records),
@@ -315,7 +321,8 @@ def main():
         "status_list": status_list,
         "prazos": prazos_list,
         "competencias": competencias,
-        "anos": anos
+        "anos": anos,
+        "meses": meses
     }
     
     out_js = os.path.join(base_dir, "sar_data.js")
