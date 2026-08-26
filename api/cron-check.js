@@ -571,15 +571,9 @@ module.exports = async (req, res) => {
                 attachments = tecnoHelper.generateExcelAttachments(tecnoData);
                 emailHtml = tecnoHelper.buildTecnodrillEmailHtml(config.report_name || config.report, tecnoData);
             } else {
-                if (!mduData) {
-                    mduData = await getMduStatusCounts();
-                }
-
-                if (!mduData) {
-                    actions.push({ name: config.report_name, status: "failed_to_get_sheets_data" });
-                    continue;
-                }
-                emailHtml = buildEmailHtml(mduData, config.report_name || config.report);
+                const mduHelper = require('./mdu-report-helper');
+                const mduData = await mduHelper.loadMduDataAsync();
+                emailHtml = mduHelper.buildMduEmailHtml(config.report_name || config.report, mduData);
             }
 
             // Disparar
