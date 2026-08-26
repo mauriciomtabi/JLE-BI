@@ -148,6 +148,9 @@
             </div>
             <div class="last-update-badge">
                 <i class="fa-solid fa-clock"></i> Atualizado: <span id="data-timestamp">N/D</span>
+                <button id="btn-refresh-dashboard" class="btn-refresh-dashboard" onclick="refreshCurrentDashboard()" title="Recarregar dados deste dashboard">
+                    <i class="fa-solid fa-arrows-rotate" id="refresh-dashboard-icon"></i>
+                </button>
             </div>
         </header>
 
@@ -3680,6 +3683,56 @@
                 timestampEl.innerText = 'N/D';
             }
         }
+
+        // Função de Atualização Manual Dinâmica Individual por Dashboard
+        async function refreshCurrentDashboard() {
+            const view = window.activeView || 'dashboard';
+            const refreshBtn = document.getElementById('btn-refresh-dashboard');
+            
+            if (refreshBtn) refreshBtn.classList.add('is-refreshing');
+
+            const viewConfig = {
+                'dashboard': { file: 'data.js', name: 'Financeiro JLE', init: () => { if (typeof applyFilters === 'function') applyFilters(); } },
+                'tecnodrill': { file: 'tecnodrill_data.js', name: 'Tecnodrill', init: () => { if (typeof initTecnodrill === 'function') initTecnodrill(); } },
+                'cobranca': { file: 'cobranca_data.js', name: 'Analítico Claro', init: () => { if (typeof initCobranca === 'function') initCobranca(); } },
+                'gestao_os': { file: 'cobranca_data.js', name: 'Gestão de OS', init: () => { if (typeof initGestaoOs === 'function') initGestaoOs(); } },
+                'mdu': { file: 'mdu_data.js', name: 'MDU', init: () => { if (typeof initMdu === 'function') initMdu(); } },
+                'sar': { file: 'sar_data.js', name: 'SAR', init: () => { if (typeof initSar === 'function') initSar(); } },
+                'manutencao': { file: 'manutencao_data.js', name: 'Manutenção', init: () => { if (typeof initManutencao === 'function') initManutencao(); } },
+                'veiculos': { file: 'veiculos_data.js', name: 'Veículos', init: () => { if (typeof initVeiculos === 'function') initVeiculos(); } }
+            };
+
+            const target = viewConfig[view];
+            if (!target) {
+                if (refreshBtn) refreshBtn.classList.remove('is-refreshing');
+                return;
+            }
+
+            try {
+                const resp = await fetch(`${target.file}?_t=${Date.now()}`, { cache: 'no-store' });
+                if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+                
+                const scriptText = await resp.text();
+                
+                const sEl = document.createElement('script');
+                sEl.text = scriptText;
+                document.head.appendChild(sEl);
+                document.head.removeChild(sEl);
+
+                target.init();
+                updateHeaderTimestamp(view);
+
+                showAdminToast(`Dados de ${target.name} atualizados com sucesso!`);
+            } catch (err) {
+                console.error(`Erro ao atualizar ${target.name}:`, err);
+                showAdminToast(`Aviso ao atualizar: ${err.message}`);
+            } finally {
+                setTimeout(() => {
+                    if (refreshBtn) refreshBtn.classList.remove('is-refreshing');
+                }, 600);
+            }
+        }
+        window.refreshCurrentDashboard = refreshCurrentDashboard;
 
         // Navegação de Telas
         function switchView(viewName) {
