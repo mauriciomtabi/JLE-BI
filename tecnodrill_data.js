@@ -1,5 +1,5 @@
 ﻿window.TECNODRILL_DATA = {
-    "generated_at":  "2026-08-24 15:04:45",
+    "generated_at":  "2026-08-25 22:22:02",
     "empresa":  "Tecnodrill",
     "categories_origin":  {
                               "entradas":  [
@@ -9859,7 +9859,7 @@
                              "uf":  "JULHO",
                              "fluxo":  "Saída",
                              "categoria":  "Despesas Bancárias",
-                             "descricao":  "BDEBITO PACOTE SERVIÇOS",
+                             "descricao":  "DEBITO PACOTE SERVIÇOS",
                              "valor_nominal":  48.9,
                              "valor_liquido":  -48.9,
                              "meio_pagamento":  "Pix",
