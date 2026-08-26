@@ -304,8 +304,9 @@ function getSarRecent60DaysData(dataset) {
     let maxTs = 0;
     allData.forEach(r => {
         if (r.data_entrada) {
-            const ts = new Date(r.data_entrada).getTime();
-            if (ts > maxTs) maxTs = ts;
+            const dtStr = r.data_entrada.length === 10 ? r.data_entrada + 'T00:00:00' : r.data_entrada;
+            const ts = new Date(dtStr).getTime();
+            if (ts && !isNaN(ts) && ts > maxTs) maxTs = ts;
         }
     });
 
@@ -314,7 +315,9 @@ function getSarRecent60DaysData(dataset) {
     const cutoffTs = maxTs - (60 * 24 * 60 * 60 * 1000);
     return dataset.filter(r => {
         if (!r.data_entrada) return false;
-        return new Date(r.data_entrada).getTime() >= cutoffTs;
+        const dtStr = r.data_entrada.length === 10 ? r.data_entrada + 'T00:00:00' : r.data_entrada;
+        const ts = new Date(dtStr).getTime();
+        return ts && !isNaN(ts) && ts >= cutoffTs;
     });
 }
 
