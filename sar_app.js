@@ -462,7 +462,9 @@ function renderSarStatusChart(data) {
                 backgroundColor: 'rgba(56, 139, 253, 0.85)',
                 borderColor: '#388bfd',
                 borderWidth: 1,
-                borderRadius: 4
+                borderRadius: 4,
+                barPercentage: 0.75,
+                categoryPercentage: 0.85
             }]
         },
         plugins: pluginList,
@@ -547,7 +549,9 @@ function renderSarCidadeChart(data) {
                 backgroundColor: 'rgba(56, 139, 253, 0.85)',
                 borderColor: '#388bfd',
                 borderWidth: 1,
-                borderRadius: 4
+                borderRadius: 4,
+                barPercentage: 0.75,
+                categoryPercentage: 0.85
             }]
         },
         plugins: pluginList,
@@ -717,7 +721,9 @@ function renderSarEvolutionChart(data) {
                 backgroundColor: 'rgba(56, 139, 253, 0.85)',
                 borderColor: '#388bfd',
                 borderWidth: 1,
-                borderRadius: 4
+                borderRadius: 4,
+                barPercentage: 0.75,
+                categoryPercentage: 0.85
             }]
         },
         plugins: pluginList,
