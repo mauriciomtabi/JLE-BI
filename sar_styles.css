@@ -323,6 +323,50 @@
     height: 260px;
 }
 
+/* -- Botões de Granularidade Temporal SAR -- */
+.sar-granularity-btns {
+    display: flex;
+    gap: 3px;
+    background: var(--bg-body);
+    padding: 2px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+}
+
+.sar-btn-gran {
+    padding: 3px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.sar-btn-gran:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.sar-btn-gran.active {
+    color: #ffffff;
+    background: var(--color-primary);
+}
+
+/* -- Barra de Rolagem Invisível (no-scrollbar) -- */
+.sar-no-scrollbar {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+.sar-no-scrollbar::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
 /* -- Tabela de Desempenho por Executor do SAR -- */
 .sar-performance-table {
     width: 100%;
@@ -347,7 +391,7 @@
 .sar-performance-table tfoot td {
     background-color: var(--bg-card) !important;
     font-weight: 700;
-    padding: 8px 4px;
+    padding: 7px 4px;
     border-bottom: none;
     color: var(--text-primary);
     text-align: center;
@@ -361,10 +405,10 @@
     background-color: var(--bg-body);
     color: var(--text-secondary);
     font-weight: 600;
-    font-size: 0.74rem;
+    font-size: 0.73rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    padding: 8px 4px;
+    padding: 7px 4px;
     border-bottom: 2px solid var(--border-color);
     text-align: center;
 }
@@ -374,7 +418,7 @@
 }
 
 .sar-performance-table td {
-    padding: 8px 4px;
+    padding: 7px 4px;
     border-bottom: 1px solid var(--border-color);
     color: var(--text-primary);
     text-align: center;
@@ -394,7 +438,7 @@
     background-color: var(--bg-tr-hover);
 }
 
-/* -- Tabela Analítica de SARs -- */
+/* -- Tabela Analítica de SARs (Ajuste para caber 100% sem scroll horizontal no Desktop) -- */
 .sar-table-wrapper {
     overflow-x: auto;
     overflow-y: hidden;
@@ -403,10 +447,16 @@
     border: 1px solid var(--border-color);
 }
 
+.sar-table-fit {
+    overflow-x: auto;
+    width: 100%;
+}
+
 .sar-table {
     width: 100%;
+    table-layout: auto;
     border-collapse: collapse;
-    font-size: 0.76rem;
+    font-size: 0.70rem;
     text-align: left;
 }
 
@@ -414,19 +464,24 @@
     background-color: var(--bg-body);
     color: var(--text-secondary);
     font-weight: 600;
-    padding: 7px 6px;
+    font-size: 0.68rem;
+    padding: 6px 4px;
     position: sticky;
     top: 0;
     z-index: 10;
     border-bottom: 2px solid var(--border-color);
     white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .sar-table td {
-    padding: 7px 6px;
+    padding: 5px 4px;
     border-bottom: 1px solid var(--border-color);
     color: var(--text-primary);
-    white-space: nowrap;
+    line-height: 1.15;
+    word-break: break-word;
+    font-size: 0.69rem;
 }
 
 .sar-table tbody tr:hover {
@@ -435,11 +490,13 @@
 
 /* -- Badges Semânticos do SAR -- */
 .sar-badge {
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 0.75rem;
+    padding: 2px 5px;
+    border-radius: 10px;
+    font-size: 0.65rem;
     font-weight: 600;
     display: inline-block;
+    white-space: nowrap;
+    text-align: center;
 }
 
 .sar-badge-no-prazo { background-color: rgba(16, 185, 129, 0.15); color: #10b981; }
@@ -449,3 +506,4 @@
 .sar-badge-cancelado { background-color: rgba(255, 71, 87, 0.15); color: #ff4757; }
 .sar-badge-sem-sinal { background-color: rgba(149, 117, 205, 0.15); color: #9575cd; }
 .sar-badge-default { background-color: rgba(108, 117, 125, 0.15); color: #6c757d; }
+

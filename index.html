@@ -2089,28 +2089,7 @@
                     </div>
                 </div>
 
-                <!-- Gráficos Row 1: Evolução Temporal + Prazo SLA -->
-                <div class="sar-grid-2cols">
-                    <div class="sar-card">
-                        <div class="sar-card-title">
-                            <span id="sar-evolution-title">Evolução Mensal de Entradas</span>
-                            <button id="sar-drilldown-back-btn" style="display: none; align-items: center; gap: 6px; padding: 5px 10px; font-size: 11px; font-weight: 700; color: #fff; background: var(--color-primary); border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; cursor: pointer; transition: all 0.2s ease;" onclick="backFromSarDrilldown()">
-                                <i class="fa-solid fa-arrow-left"></i> Voltar ao Mensal
-                            </button>
-                        </div>
-                        <div class="sar-chart-container" style="height: 260px;">
-                            <canvas id="sar-chart-evolution"></canvas>
-                        </div>
-                    </div>
-                    <div class="sar-card">
-                        <div class="sar-card-title">Distribuição de SLA (No Prazo vs Atrasado)</div>
-                        <div class="sar-chart-container" style="height: 260px;">
-                            <canvas id="sar-chart-prazo"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Gráficos Row 2: Status Geral + Top Cidades -->
+                <!-- Gráficos Row 1 (Superior): Status Geral (Colunas) + Top Cidades -->
                 <div class="sar-grid-2cols">
                     <div class="sar-card">
                         <div class="sar-card-title">Distribuição por Status Geral</div>
@@ -2126,11 +2105,39 @@
                     </div>
                 </div>
 
+                <!-- Gráficos Row 2 (Inferior): Evolução Temporal + Prazo SLA -->
+                <div class="sar-grid-2cols">
+                    <div class="sar-card">
+                        <div class="sar-card-title" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                            <span id="sar-evolution-title">Evolução de Entradas</span>
+                            <div style="display: flex; gap: 6px; align-items: center;">
+                                <div class="sar-granularity-btns">
+                                    <button class="sar-btn-gran active" id="sar-btn-gran-year" onclick="setSarTimeGranularity('year')">Ano</button>
+                                    <button class="sar-btn-gran" id="sar-btn-gran-month" onclick="setSarTimeGranularity('month')">Mês</button>
+                                    <button class="sar-btn-gran" id="sar-btn-gran-day" onclick="setSarTimeGranularity('day')">Dia</button>
+                                </div>
+                                <button id="sar-drilldown-back-btn" style="display: none; align-items: center; gap: 6px; padding: 4px 8px; font-size: 11px; font-weight: 700; color: #fff; background: var(--color-primary); border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; cursor: pointer; transition: all 0.2s ease;" onclick="backFromSarDrilldown()">
+                                    <i class="fa-solid fa-arrow-left"></i> Voltar
+                                </button>
+                            </div>
+                        </div>
+                        <div class="sar-chart-container" style="height: 260px;">
+                            <canvas id="sar-chart-evolution"></canvas>
+                        </div>
+                    </div>
+                    <div class="sar-card">
+                        <div class="sar-card-title">Distribuição de SLA (No Prazo vs Atrasado)</div>
+                        <div class="sar-chart-container" style="height: 260px;">
+                            <canvas id="sar-chart-prazo"></canvas>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Gráficos Row 3: Desempenho por Executor -->
                 <div class="sar-grid-1col-wide">
                     <div class="sar-card">
                         <div class="sar-card-title">Desempenho por Executor (Classe L & Classe F)</div>
-                        <div class="sar-table-wrapper" style="border: none; max-height: 400px; overflow-y: auto;">
+                        <div class="sar-table-wrapper sar-no-scrollbar" style="border: none; max-height: 400px; overflow-y: auto;">
                             <table class="sar-performance-table">
                                 <thead>
                                     <tr>
@@ -2161,26 +2168,26 @@
                                 <i class="fa-solid fa-file-arrow-down"></i> Exportar Excel
                             </button>
                         </div>
-                        <div class="sar-table-wrapper" style="overflow-y: hidden;">
+                        <div class="sar-table-wrapper sar-table-fit" style="overflow-x: auto; width: 100%;">
                             <table class="sar-table">
                                 <thead>
                                     <tr>
-                                        <th onclick="sortSarTable('cod')" style="cursor:pointer; user-select: none;">COD. <i class="fa-solid fa-sort"></i></th>
-                                        <th onclick="sortSarTable('area_tecnica')" style="cursor:pointer; user-select: none;">Área Técnica <i class="fa-solid fa-sort"></i></th>
-                                        <th onclick="sortSarTable('node')" style="cursor:pointer; user-select: none;">Node <i class="fa-solid fa-sort"></i></th>
-                                        <th onclick="sortSarTable('site')" style="cursor:pointer; user-select: none;">Site <i class="fa-solid fa-sort"></i></th>
-                                        <th onclick="sortSarTable('cidade')" style="cursor:pointer; user-select: none;">Cidade <i class="fa-solid fa-sort"></i></th>
-                                        <th onclick="sortSarTable('endereco')" style="cursor:pointer; user-select: none;">Endereço <i class="fa-solid fa-sort"></i></th>
-                                        <th onclick="sortSarTable('caixa_mdu')" style="cursor:pointer; user-select: none;">Caixa MDU <i class="fa-solid fa-sort"></i></th>
-                                        <th onclick="sortSarTable('classe_l')" style="cursor:pointer; user-select: none;">Classe L <i class="fa-solid fa-sort"></i></th>
-                                        <th onclick="sortSarTable('classe_f')" style="cursor:pointer; user-select: none;">Classe F <i class="fa-solid fa-sort"></i></th>
-                                        <th onclick="sortSarTable('servico')" style="cursor:pointer; user-select: none;">Serviço <i class="fa-solid fa-sort"></i></th>
-                                        <th onclick="sortSarTable('data_entrada')" style="cursor:pointer; user-select: none;">Data Entrada <i class="fa-solid fa-sort"></i></th>
-                                        <th onclick="sortSarTable('data_entrega')" style="cursor:pointer; user-select: none;">Data Entrega <i class="fa-solid fa-sort"></i></th>
-                                        <th onclick="sortSarTable('status')" style="cursor:pointer; user-select: none;">Status <i class="fa-solid fa-sort"></i></th>
-                                        <th onclick="sortSarTable('prazo')" style="cursor:pointer; user-select: none;">Prazo SLA <i class="fa-solid fa-sort"></i></th>
-                                        <th onclick="sortSarTable('tempo_dias')" style="cursor:pointer; user-select: none; text-align: center;">Tempo (Dias) <i class="fa-solid fa-sort"></i></th>
-                                        <th onclick="sortSarTable('atraso_dias')" style="cursor:pointer; user-select: none; text-align: center;">Atraso (Dias) <i class="fa-solid fa-sort"></i></th>
+                                        <th style="width: 70px;" onclick="sortSarTable('cod')" style="cursor:pointer; user-select: none;">COD. <i class="fa-solid fa-sort"></i></th>
+                                        <th style="width: 48px;" onclick="sortSarTable('area_tecnica')" style="cursor:pointer; user-select: none;">Área <i class="fa-solid fa-sort"></i></th>
+                                        <th style="width: 52px;" onclick="sortSarTable('node')" style="cursor:pointer; user-select: none;">Node <i class="fa-solid fa-sort"></i></th>
+                                        <th style="width: 60px;" onclick="sortSarTable('site')" style="cursor:pointer; user-select: none;">Site <i class="fa-solid fa-sort"></i></th>
+                                        <th style="width: 80px;" onclick="sortSarTable('cidade')" style="cursor:pointer; user-select: none;">Cidade <i class="fa-solid fa-sort"></i></th>
+                                        <th style="min-width: 120px;" onclick="sortSarTable('endereco')" style="cursor:pointer; user-select: none;">Endereço <i class="fa-solid fa-sort"></i></th>
+                                        <th style="width: 65px;" onclick="sortSarTable('caixa_mdu')" style="cursor:pointer; user-select: none;">Cx. MDU <i class="fa-solid fa-sort"></i></th>
+                                        <th style="width: 65px;" onclick="sortSarTable('classe_l')" style="cursor:pointer; user-select: none;">Cl. L <i class="fa-solid fa-sort"></i></th>
+                                        <th style="width: 65px;" onclick="sortSarTable('classe_f')" style="cursor:pointer; user-select: none;">Cl. F <i class="fa-solid fa-sort"></i></th>
+                                        <th style="min-width: 110px;" onclick="sortSarTable('servico')" style="cursor:pointer; user-select: none;">Serviço <i class="fa-solid fa-sort"></i></th>
+                                        <th style="width: 65px;" onclick="sortSarTable('data_entrada')" style="cursor:pointer; user-select: none;">Entrada <i class="fa-solid fa-sort"></i></th>
+                                        <th style="width: 65px;" onclick="sortSarTable('data_entrega')" style="cursor:pointer; user-select: none;">Entrega <i class="fa-solid fa-sort"></i></th>
+                                        <th style="width: 80px;" onclick="sortSarTable('status')" style="cursor:pointer; user-select: none;">Status <i class="fa-solid fa-sort"></i></th>
+                                        <th style="width: 72px;" onclick="sortSarTable('prazo')" style="cursor:pointer; user-select: none;">Prazo <i class="fa-solid fa-sort"></i></th>
+                                        <th style="width: 42px; text-align: center;" onclick="sortSarTable('tempo_dias')" style="cursor:pointer; user-select: none;">Dias <i class="fa-solid fa-sort"></i></th>
+                                        <th style="width: 42px; text-align: center;" onclick="sortSarTable('atraso_dias')" style="cursor:pointer; user-select: none;">Atr. <i class="fa-solid fa-sort"></i></th>
                                     </tr>
                                 </thead>
                                 <tbody id="sar-table-body">

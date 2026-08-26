@@ -15,9 +15,11 @@ let sarSortOrder = 'desc';
 let sarPerformanceSortColumn = 'total';
 let sarPerformanceSortOrder = 'desc';
 
-// Estado de visualização de Drill-down
-let sarDrilldownActive = false;
-let sarDrilldownPeriod = null; // Ex: { key: "2024-03", label: "MARÇO/2024" }
+// Estado de visualização de Drill-down e Granularidade Temporal
+let sarTimeGranularity = 'year'; // 'year', 'month', 'day'
+let sarDrilldownYear = null;
+let sarDrilldownMonth = null; // '01'..'12'
+let sarDrilldownMonthLabel = null;
 
 // Filtros do SAR
 const sarFilters = {
@@ -33,10 +35,10 @@ let sarSearchDebounceTimer = null;
 
 // Instâncias dos Gráficos Chart.js
 const sarCharts = {
-    evolution: null,
-    prazo: null,
     status: null,
-    cidade: null
+    cidade: null,
+    evolution: null,
+    prazo: null
 };
 
 // Meses em Português para ordenação cronológica
@@ -45,6 +47,16 @@ const MESES_MAP_PT = {
     "MAIO": 5, "JUNHO": 6, "JULHO": 7, "AGOSTO": 8, "SETEMBRO": 9,
     "OUTUBRO": 10, "NOVEMBRO": 11, "DEZEMBRO": 12
 };
+
+const MESES_PT_LABEL = [
+    "", "Jan", "Fev", "Mar", "Abr", "Mai", "Jun",
+    "Jul", "Ago", "Set", "Out", "Nov", "Dez"
+];
+
+const MESES_PT_FULL = [
+    "", "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+    "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+];
 
 /**
  * Inicializa o Módulo SAR
@@ -227,12 +239,68 @@ function clearSarFilters() {
     const searchInput = document.getElementById('sar-search-bar');
     if (searchInput) searchInput.value = '';
 
-    sarDrilldownActive = false;
-    sarDrilldownPeriod = null;
-    const backBtn = document.getElementById('sar-drilldown-back-btn');
-    if (backBtn) backBtn.style.display = 'none';
+    sarTimeGranularity = 'year';
+    sarDrilldownYear = null;
+    sarDrilldownMonth = null;
+    sarDrilldownMonthLabel = null;
+    updateSarGranularityButtons();
+    updateSarDrilldownBackButton();
 
     applySarFilters();
+}
+
+/**
+ * Alterna granularidade temporal via botões
+ */
+function setSarTimeGranularity(gran) {
+    sarTimeGranularity = gran;
+    sarDrilldownYear = null;
+    sarDrilldownMonth = null;
+    sarDrilldownMonthLabel = null;
+    updateSarGranularityButtons();
+    updateSarDrilldownBackButton();
+    renderSarEvolutionChart(sarFilteredData);
+}
+
+function updateSarGranularityButtons() {
+    ['year', 'month', 'day'].forEach(g => {
+        const btn = document.getElementById(`sar-btn-gran-${g}`);
+        if (btn) {
+            if (g === sarTimeGranularity && !sarDrilldownYear) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        }
+    });
+}
+
+function updateSarDrilldownBackButton() {
+    const backBtn = document.getElementById('sar-drilldown-back-btn');
+    if (!backBtn) return;
+    if (sarDrilldownMonth) {
+        backBtn.style.display = 'inline-flex';
+        backBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> Voltar p/ ${sarDrilldownYear}`;
+    } else if (sarDrilldownYear) {
+        backBtn.style.display = 'inline-flex';
+        backBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> Voltar p/ Anos`;
+    } else {
+        backBtn.style.display = 'none';
+    }
+}
+
+function backFromSarDrilldown() {
+    if (sarDrilldownMonth) {
+        sarDrilldownMonth = null;
+        sarDrilldownMonthLabel = null;
+        sarTimeGranularity = 'month';
+    } else if (sarDrilldownYear) {
+        sarDrilldownYear = null;
+        sarTimeGranularity = 'year';
+    }
+    updateSarGranularityButtons();
+    updateSarDrilldownBackButton();
+    renderSarEvolutionChart(sarFilteredData);
 }
 
 /**
@@ -241,7 +309,6 @@ function clearSarFilters() {
 function applySarFilters() {
     const data = window.SAR_DATA || [];
 
-    // Obter valores selecionados dos selects caso não tenham sido setados
     const pSel = document.getElementById('sar-filter-prazo');
     if (pSel) sarFilters.prazo = pSel.value;
     const cSel = document.getElementById('sar-filter-cidade');
@@ -271,12 +338,6 @@ function applySarFilters() {
         // Filtro Competência
         if (sarFilters.competencia && r.competencia !== sarFilters.competencia) {
             return false;
-        }
-        // Filtro Drill-down Mensal (se ativo)
-        if (sarDrilldownActive && sarDrilldownPeriod) {
-            if (!r.data_entrada || !r.data_entrada.startsWith(sarDrilldownPeriod.key)) {
-                return false;
-            }
         }
         // Filtro de Busca Rápida
         if (sarSearchQuery) {
@@ -359,268 +420,14 @@ function updateSarKpis(data) {
  * Renderiza os Gráficos Chart.js
  */
 function renderSarCharts(data) {
-    renderSarEvolutionChart(data);
-    renderSarPrazoChart(data);
     renderSarStatusChart(data);
     renderSarCidadeChart(data);
+    renderSarEvolutionChart(data);
+    renderSarPrazoChart(data);
 }
 
 /**
- * Gráfico 1: Evolução Temporal (Data de Entrada - Col T) com Drill-down
- */
-function renderSarEvolutionChart(data) {
-    const ctx = document.getElementById('sar-chart-evolution');
-    if (!ctx) return;
-
-    if (sarCharts.evolution) {
-        sarCharts.evolution.destroy();
-        sarCharts.evolution = null;
-    }
-
-    const titleEl = document.getElementById('sar-evolution-title');
-
-    if (!sarDrilldownActive) {
-        // Visão Mensal (Agrupamento por Mês/Ano da data de entrada)
-        if (titleEl) titleEl.innerText = 'Evolução Mensal de Entradas (Clique na barra para detalhar o mês)';
-
-        const monthMap = {};
-        data.forEach(r => {
-            if (r.data_entrada) {
-                const key = r.data_entrada.substring(0, 7); // YYYY-MM
-                const [ano, mes] = key.split('-');
-                const mesNome = MESES_PT_LABEL[parseInt(mes)] || mes;
-                const label = `${mesNome}/${ano}`;
-                if (!monthMap[key]) {
-                    monthMap[key] = { key, label, total: 0, noPrazo: 0, atrasado: 0 };
-                }
-                monthMap[key].total++;
-                if (r.prazo === 'NO PRAZO') monthMap[key].noPrazo++;
-                else if (r.prazo === 'ATRASADO') monthMap[key].atrasado++;
-            }
-        });
-
-        // Ordenação cronológica
-        const sortedKeys = Object.keys(monthMap).sort();
-        const labels = sortedKeys.map(k => monthMap[k].label);
-        const totalData = sortedKeys.map(k => monthMap[k].total);
-        const noPrazoData = sortedKeys.map(k => monthMap[k].noPrazo);
-        const atrasadoData = sortedKeys.map(k => monthMap[k].atrasado);
-
-        sarCharts.evolution = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [
-                    {
-                        label: 'No Prazo',
-                        data: noPrazoData,
-                        backgroundColor: 'rgba(16, 185, 129, 0.85)',
-                        borderColor: '#10b981',
-                        borderWidth: 1,
-                        borderRadius: 4,
-                        stack: 'stack1'
-                    },
-                    {
-                        label: 'Atrasado',
-                        data: atrasadoData,
-                        backgroundColor: 'rgba(248, 81, 73, 0.85)',
-                        borderColor: '#f85149',
-                        borderWidth: 1,
-                        borderRadius: 4,
-                        stack: 'stack1'
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                        labels: { color: '#c9d1d9', font: { family: 'Outfit, Inter', size: 11 } }
-                    },
-                    tooltip: {
-                        backgroundColor: '#161b22',
-                        borderColor: 'rgba(255, 255, 255, 0.15)',
-                        borderWidth: 1,
-                        titleColor: '#ffffff',
-                        bodyColor: '#c9d1d9',
-                        padding: 10,
-                        callbacks: {
-                            afterBody: function(items) {
-                                const idx = items[0].dataIndex;
-                                return `Total do Mês: ${totalData[idx]}`;
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    x: {
-                        stacked: true,
-                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                        ticks: { color: '#8b949e', font: { size: 11 } }
-                    },
-                    y: {
-                        stacked: true,
-                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                        ticks: { color: '#8b949e', font: { size: 11 } }
-                    }
-                },
-                onClick: function(evt, elements) {
-                    if (elements && elements.length > 0) {
-                        const index = elements[0].index;
-                        const selectedKey = sortedKeys[index];
-                        const selectedLabel = labels[index];
-                        enterSarDrilldown(selectedKey, selectedLabel);
-                    }
-                }
-            }
-        });
-
-    } else {
-        // Visão Drill-Down Diária
-        if (titleEl) titleEl.innerText = `Evolução Diária de Entradas — ${sarDrilldownPeriod.label}`;
-
-        const dayMap = {};
-        data.forEach(r => {
-            if (r.data_entrada && r.data_entrada.startsWith(sarDrilldownPeriod.key)) {
-                const day = r.data_entrada.substring(8, 10);
-                if (!dayMap[day]) dayMap[day] = { total: 0, noPrazo: 0, atrasado: 0 };
-                dayMap[day].total++;
-                if (r.prazo === 'NO PRAZO') dayMap[day].noPrazo++;
-                else if (r.prazo === 'ATRASADO') dayMap[day].atrasado++;
-            }
-        });
-
-        const sortedDays = Object.keys(dayMap).sort((a, b) => parseInt(a) - parseInt(b));
-        const labels = sortedDays.map(d => `Dia ${d}`);
-        const noPrazoData = sortedDays.map(d => dayMap[d].noPrazo);
-        const atrasadoData = sortedDays.map(d => dayMap[d].atrasado);
-
-        sarCharts.evolution = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [
-                    {
-                        label: 'No Prazo',
-                        data: noPrazoData,
-                        backgroundColor: 'rgba(16, 185, 129, 0.85)',
-                        borderColor: '#10b981',
-                        borderWidth: 1,
-                        borderRadius: 4,
-                        stack: 'stack1'
-                    },
-                    {
-                        label: 'Atrasado',
-                        data: atrasadoData,
-                        backgroundColor: 'rgba(248, 81, 73, 0.85)',
-                        borderColor: '#f85149',
-                        borderWidth: 1,
-                        borderRadius: 4,
-                        stack: 'stack1'
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                        labels: { color: '#c9d1d9', font: { family: 'Outfit, Inter', size: 11 } }
-                    }
-                },
-                scales: {
-                    x: {
-                        stacked: true,
-                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                        ticks: { color: '#8b949e', font: { size: 11 } }
-                    },
-                    y: {
-                        stacked: true,
-                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                        ticks: { color: '#8b949e', font: { size: 11 } }
-                    }
-                }
-            }
-        });
-    }
-}
-
-const MESES_PT_LABEL = [
-    "", "Jan", "Fev", "Mar", "Abr", "Mai", "Jun",
-    "Jul", "Ago", "Set", "Out", "Nov", "Dez"
-];
-
-function enterSarDrilldown(key, label) {
-    sarDrilldownActive = true;
-    sarDrilldownPeriod = { key, label };
-    const backBtn = document.getElementById('sar-drilldown-back-btn');
-    if (backBtn) backBtn.style.display = 'inline-flex';
-    applySarFilters();
-}
-
-function backFromSarDrilldown() {
-    sarDrilldownActive = false;
-    sarDrilldownPeriod = null;
-    const backBtn = document.getElementById('sar-drilldown-back-btn');
-    if (backBtn) backBtn.style.display = 'none';
-    applySarFilters();
-}
-
-/**
- * Gráfico 2: SLA Prazo (No Prazo vs Atrasado - Doughnut)
- */
-function renderSarPrazoChart(data) {
-    const ctx = document.getElementById('sar-chart-prazo');
-    if (!ctx) return;
-
-    if (sarCharts.prazo) {
-        sarCharts.prazo.destroy();
-        sarCharts.prazo = null;
-    }
-
-    let noPrazo = 0;
-    let atrasado = 0;
-    data.forEach(r => {
-        if (r.prazo === 'NO PRAZO') noPrazo++;
-        else if (r.prazo === 'ATRASADO') atrasado++;
-    });
-
-    sarCharts.prazo = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: ['No Prazo', 'Atrasado'],
-            datasets: [{
-                data: [noPrazo, atrasado],
-                backgroundColor: ['#10b981', '#f85149'],
-                borderColor: '#161b22',
-                borderWidth: 2,
-                hoverOffset: 6
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            cutout: '68%',
-            plugins: {
-                legend: {
-                    position: 'bottom',
-                    labels: { color: '#c9d1d9', font: { family: 'Outfit, Inter', size: 11 }, padding: 14 }
-                },
-                tooltip: {
-                    backgroundColor: '#161b22',
-                    borderColor: 'rgba(255, 255, 255, 0.15)',
-                    borderWidth: 1
-                }
-            }
-        }
-    });
-}
-
-/**
- * Gráfico 3: Distribuição por Status Geral
+ * Gráfico 1 (Superior Esquerdo): Distribuição por Status Geral (Colunas Verticais em Cor Única)
  */
 function renderSarStatusChart(data) {
     const ctx = document.getElementById('sar-chart-status');
@@ -633,36 +440,70 @@ function renderSarStatusChart(data) {
 
     const statusCount = {};
     data.forEach(r => {
-        const st = r.status || 'NÃO INFORMADO';
+        const st = (r.status || 'NÃO INFORMADO').trim();
         statusCount[st] = (statusCount[st] || 0) + 1;
     });
 
-    const labels = Object.keys(statusCount);
-    const counts = Object.values(statusCount);
-    const colors = [
-        '#2ed573', '#ff4757', '#ffa502', '#1e90ff', '#9575cd', '#26c6da', '#ff7043'
-    ];
+    // Ordenar status por volume decrescente
+    const sortedEntries = Object.entries(statusCount).sort((a, b) => b[1] - a[1]);
+    const labels = sortedEntries.map(e => e[0]);
+    const counts = sortedEntries.map(e => e[1]);
+    const totalStatus = counts.reduce((a, b) => a + b, 0);
+
+    const pluginList = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
 
     sarCharts.status = new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
             labels: labels,
             datasets: [{
+                label: 'OSs SAR',
                 data: counts,
-                backgroundColor: colors.slice(0, labels.length),
-                borderColor: '#161b22',
-                borderWidth: 2,
-                hoverOffset: 6
+                backgroundColor: 'rgba(56, 139, 253, 0.85)',
+                borderColor: '#388bfd',
+                borderWidth: 1,
+                borderRadius: 4
             }]
         },
+        plugins: pluginList,
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            cutout: '60%',
             plugins: {
-                legend: {
-                    position: 'bottom',
-                    labels: { color: '#c9d1d9', font: { family: 'Outfit, Inter', size: 11 }, padding: 10 }
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: '#161b22',
+                    borderColor: 'rgba(255, 255, 255, 0.15)',
+                    borderWidth: 1,
+                    titleColor: '#ffffff',
+                    bodyColor: '#c9d1d9',
+                    callbacks: {
+                        afterLabel: function(item) {
+                            const pct = totalStatus > 0 ? ((item.parsed.y / totalStatus) * 100).toFixed(1) : '0';
+                            return `Representatividade: ${pct}%`;
+                        }
+                    }
+                },
+                datalabels: {
+                    display: true,
+                    color: '#ffffff',
+                    anchor: 'end',
+                    align: 'top',
+                    offset: 2,
+                    font: { weight: 'bold', size: 10, family: 'Outfit, Inter' },
+                    formatter: (val) => val > 0 ? val.toLocaleString('pt-BR') : ''
+                }
+            },
+            scales: {
+                x: {
+                    grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                    ticks: { color: '#c9d1d9', font: { size: 10, family: 'Outfit, Inter' } }
+                },
+                y: {
+                    grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                    ticks: { color: '#8b949e', font: { size: 10 } },
+                    beginAtZero: true,
+                    grace: '10%'
                 }
             }
         }
@@ -670,7 +511,7 @@ function renderSarStatusChart(data) {
 }
 
 /**
- * Gráfico 4: Top 8 Cidades por Volume
+ * Gráfico 2 (Superior Direito): Top 8 Cidades por Volume
  */
 function renderSarCidadeChart(data) {
     const ctx = document.getElementById('sar-chart-cidade');
@@ -694,6 +535,8 @@ function renderSarCidadeChart(data) {
     const labels = sortedCities.map(x => x[0]);
     const counts = sortedCities.map(x => x[1]);
 
+    const pluginList = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
+
     sarCharts.cidade = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -701,27 +544,280 @@ function renderSarCidadeChart(data) {
             datasets: [{
                 label: 'OSs SAR',
                 data: counts,
-                backgroundColor: 'rgba(56, 139, 253, 0.8)',
+                backgroundColor: 'rgba(56, 139, 253, 0.85)',
                 borderColor: '#388bfd',
                 borderWidth: 1,
                 borderRadius: 4
             }]
         },
+        plugins: pluginList,
         options: {
             indexAxis: 'y',
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-                legend: { display: false }
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: '#161b22',
+                    borderColor: 'rgba(255, 255, 255, 0.15)',
+                    borderWidth: 1
+                },
+                datalabels: {
+                    display: true,
+                    color: '#ffffff',
+                    anchor: 'end',
+                    align: 'right',
+                    offset: 4,
+                    font: { weight: 'bold', size: 10, family: 'Outfit, Inter' },
+                    formatter: (val) => val > 0 ? val.toLocaleString('pt-BR') : ''
+                }
             },
             scales: {
                 x: {
                     grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                    ticks: { color: '#8b949e', font: { size: 10 } }
+                    ticks: { color: '#8b949e', font: { size: 10 } },
+                    beginAtZero: true,
+                    grace: '12%'
                 },
                 y: {
                     grid: { display: false },
-                    ticks: { color: '#c9d1d9', font: { size: 11 } }
+                    ticks: { color: '#c9d1d9', font: { size: 10, family: 'Outfit, Inter' } }
+                }
+            }
+        }
+    });
+}
+
+/**
+ * Gráfico 3 (Inferior Esquerdo): Evolução Temporal de Entradas com Drill-Down em 3 Níveis (Ano -> Mês -> Dia)
+ */
+function renderSarEvolutionChart(data) {
+    const ctx = document.getElementById('sar-chart-evolution');
+    if (!ctx) return;
+
+    if (sarCharts.evolution) {
+        sarCharts.evolution.destroy();
+        sarCharts.evolution = null;
+    }
+
+    const titleEl = document.getElementById('sar-evolution-title');
+    const pluginList = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
+
+    let labels = [];
+    let counts = [];
+    let keys = [];
+    let clickHandler = null;
+
+    // Nível 1: Visão Anual
+    if (sarTimeGranularity === 'year' && !sarDrilldownYear) {
+        if (titleEl) titleEl.innerText = 'Evolução Anual de Entradas (Clique no ano para detalhar os meses)';
+
+        const yearMap = {};
+        data.forEach(r => {
+            if (r.data_entrada) {
+                const ano = r.data_entrada.substring(0, 4);
+                if (ano && ano.length === 4) {
+                    yearMap[ano] = (yearMap[ano] || 0) + 1;
+                }
+            }
+        });
+
+        keys = Object.keys(yearMap).sort();
+        labels = keys.map(y => `Ano ${y}`);
+        counts = keys.map(y => yearMap[y]);
+
+        clickHandler = function(evt, elements) {
+            if (elements && elements.length > 0) {
+                const idx = elements[0].index;
+                const clickedYear = keys[idx];
+                sarDrilldownYear = clickedYear;
+                sarTimeGranularity = 'month';
+                updateSarGranularityButtons();
+                updateSarDrilldownBackButton();
+                renderSarEvolutionChart(data);
+            }
+        };
+
+    // Nível 2: Visão Mensal
+    } else if (sarTimeGranularity === 'month' || (sarDrilldownYear && !sarDrilldownMonth)) {
+        const yearTarget = sarDrilldownYear;
+        if (titleEl) {
+            titleEl.innerText = yearTarget 
+                ? `Evolução Mensal de Entradas — Ano ${yearTarget} (Clique no mês para ver os dias)`
+                : `Evolução Mensal de Entradas (Clique no mês para ver os dias)`;
+        }
+
+        const monthMap = {};
+        data.forEach(r => {
+            if (r.data_entrada) {
+                const rAno = r.data_entrada.substring(0, 4);
+                if (!yearTarget || rAno === yearTarget) {
+                    const ym = r.data_entrada.substring(0, 7); // YYYY-MM
+                    const [ano, mes] = ym.split('-');
+                    const mesNum = parseInt(mes);
+                    const label = yearTarget ? (MESES_PT_LABEL[mesNum] || mes) : `${MESES_PT_LABEL[mesNum] || mes}/${ano.substring(2)}`;
+                    
+                    if (!monthMap[ym]) {
+                        monthMap[ym] = { ym, label, count: 0, ano, mes };
+                    }
+                    monthMap[ym].count++;
+                }
+            }
+        });
+
+        keys = Object.keys(monthMap).sort();
+        labels = keys.map(k => monthMap[k].label);
+        counts = keys.map(k => monthMap[k].count);
+
+        clickHandler = function(evt, elements) {
+            if (elements && elements.length > 0) {
+                const idx = elements[0].index;
+                const item = monthMap[keys[idx]];
+                sarDrilldownYear = item.ano;
+                sarDrilldownMonth = item.mes;
+                sarDrilldownMonthLabel = `${MESES_PT_FULL[parseInt(item.mes)]}/${item.ano}`;
+                sarTimeGranularity = 'day';
+                updateSarGranularityButtons();
+                updateSarDrilldownBackButton();
+                renderSarEvolutionChart(data);
+            }
+        };
+
+    // Nível 3: Visão Diária
+    } else {
+        const ymTarget = (sarDrilldownYear && sarDrilldownMonth) ? `${sarDrilldownYear}-${sarDrilldownMonth}` : null;
+        if (titleEl) {
+            titleEl.innerText = sarDrilldownMonthLabel 
+                ? `Evolução Diária de Entradas — ${sarDrilldownMonthLabel}`
+                : `Evolução Diária de Entradas`;
+        }
+
+        const dayMap = {};
+        data.forEach(r => {
+            if (r.data_entrada) {
+                if (!ymTarget || r.data_entrada.startsWith(ymTarget)) {
+                    const day = r.data_entrada.substring(8, 10);
+                    dayMap[day] = (dayMap[day] || 0) + 1;
+                }
+            }
+        });
+
+        keys = Object.keys(dayMap).sort((a, b) => parseInt(a) - parseInt(b));
+        labels = keys.map(d => `Dia ${d}`);
+        counts = keys.map(d => dayMap[d]);
+    }
+
+    sarCharts.evolution = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Entradas de OS',
+                data: counts,
+                backgroundColor: 'rgba(56, 139, 253, 0.85)',
+                borderColor: '#388bfd',
+                borderWidth: 1,
+                borderRadius: 4
+            }]
+        },
+        plugins: pluginList,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: '#161b22',
+                    borderColor: 'rgba(255, 255, 255, 0.15)',
+                    borderWidth: 1,
+                    titleColor: '#ffffff',
+                    bodyColor: '#c9d1d9'
+                },
+                datalabels: {
+                    display: true,
+                    color: '#ffffff',
+                    anchor: 'end',
+                    align: 'top',
+                    offset: 2,
+                    font: { weight: 'bold', size: 10, family: 'Outfit, Inter' },
+                    formatter: (val) => val > 0 ? val.toLocaleString('pt-BR') : ''
+                }
+            },
+            scales: {
+                x: {
+                    grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                    ticks: { color: '#c9d1d9', font: { size: 10, family: 'Outfit, Inter' } }
+                },
+                y: {
+                    grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                    ticks: { color: '#8b949e', font: { size: 10 } },
+                    beginAtZero: true,
+                    grace: '10%'
+                }
+            },
+            onClick: clickHandler
+        }
+    });
+}
+
+/**
+ * Gráfico 4 (Inferior Direito): Distribuição de SLA (No Prazo vs Atrasado - Doughnut com Datalabels)
+ */
+function renderSarPrazoChart(data) {
+    const ctx = document.getElementById('sar-chart-prazo');
+    if (!ctx) return;
+
+    if (sarCharts.prazo) {
+        sarCharts.prazo.destroy();
+        sarCharts.prazo = null;
+    }
+
+    let noPrazo = 0;
+    let atrasado = 0;
+    data.forEach(r => {
+        if (r.prazo === 'NO PRAZO') noPrazo++;
+        else if (r.prazo === 'ATRASADO') atrasado++;
+    });
+
+    const totalPrazo = noPrazo + atrasado;
+    const pluginList = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
+
+    sarCharts.prazo = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['No Prazo', 'Atrasado'],
+            datasets: [{
+                data: [noPrazo, atrasado],
+                backgroundColor: ['#10b981', '#f85149'],
+                borderColor: '#161b22',
+                borderWidth: 2,
+                hoverOffset: 6
+            }]
+        },
+        plugins: pluginList,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '62%',
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: { color: '#c9d1d9', font: { family: 'Outfit, Inter', size: 11 }, padding: 12 }
+                },
+                tooltip: {
+                    backgroundColor: '#161b22',
+                    borderColor: 'rgba(255, 255, 255, 0.15)',
+                    borderWidth: 1
+                },
+                datalabels: {
+                    display: true,
+                    color: '#ffffff',
+                    font: { weight: 'bold', size: 11, family: 'Outfit, Inter' },
+                    formatter: (val, ctx) => {
+                        if (!val || totalPrazo === 0) return '';
+                        const pct = ((val * 100) / totalPrazo).toFixed(1) + '%';
+                        return `${val}\n(${pct})`;
+                    }
                 }
             }
         }
@@ -878,18 +974,18 @@ function renderSarTable(data) {
 
         return `
             <tr>
-                <td style="font-weight: 700; color: var(--color-primary);">${r.cod || '-'}</td>
-                <td>${r.area_tecnica || '-'}</td>
-                <td>${r.node || '-'}</td>
-                <td>${r.site || '-'}</td>
-                <td>${r.cidade || '-'}</td>
-                <td style="max-width: 220px; white-space: normal;">${r.endereco || '-'}</td>
-                <td>${r.caixa_mdu || '-'}</td>
-                <td>${r.classe_l || '-'}</td>
-                <td>${r.classe_f || '-'}</td>
-                <td style="max-width: 240px; white-space: normal;">${r.servico || '-'}</td>
-                <td>${r.data_entrada_fmt || '-'}</td>
-                <td>${r.data_entrega_fmt || '-'}</td>
+                <td style="font-weight: 700; color: var(--color-primary); white-space: nowrap;">${r.cod || '-'}</td>
+                <td style="white-space: nowrap;">${r.area_tecnica || '-'}</td>
+                <td style="white-space: nowrap;">${r.node || '-'}</td>
+                <td style="white-space: nowrap;">${r.site || '-'}</td>
+                <td style="white-space: nowrap;" title="${r.cidade || ''}">${r.cidade || '-'}</td>
+                <td title="${r.endereco || ''}" style="line-height: 1.15; max-width: 180px;">${r.endereco || '-'}</td>
+                <td style="white-space: nowrap;">${r.caixa_mdu || '-'}</td>
+                <td style="white-space: nowrap;">${r.classe_l || '-'}</td>
+                <td style="white-space: nowrap;">${r.classe_f || '-'}</td>
+                <td title="${r.servico || ''}" style="line-height: 1.15; max-width: 160px;">${r.servico || '-'}</td>
+                <td style="white-space: nowrap;">${r.data_entrada_fmt || '-'}</td>
+                <td style="white-space: nowrap;">${r.data_entrega_fmt || '-'}</td>
                 <td><span class="sar-badge ${statusBadgeClass}">${r.status || '-'}</span></td>
                 <td><span class="sar-badge ${prazoBadgeClass}">${r.prazo || '-'}</span></td>
                 <td style="text-align: center; font-weight: 600;">${r.tempo_dias > 0 ? r.tempo_dias : '-'}</td>
