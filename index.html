@@ -3692,14 +3692,71 @@
             if (refreshBtn) refreshBtn.classList.add('is-refreshing');
 
             const viewConfig = {
-                'dashboard': { file: 'data.js', name: 'Financeiro JLE', init: () => { if (typeof applyFilters === 'function') applyFilters(); } },
-                'tecnodrill': { file: 'tecnodrill_data.js', name: 'Tecnodrill', init: () => { if (typeof initTecnodrill === 'function') initTecnodrill(); } },
-                'cobranca': { file: 'cobranca_data.js', name: 'Analítico Claro', init: () => { if (typeof initCobranca === 'function') initCobranca(); } },
-                'gestao_os': { file: 'cobranca_data.js', name: 'Gestão de OS', init: () => { if (typeof initGestaoOs === 'function') initGestaoOs(); } },
-                'mdu': { file: 'mdu_data.js', name: 'MDU', init: () => { if (typeof initMdu === 'function') initMdu(); } },
-                'sar': { file: 'sar_data.js', name: 'SAR', init: () => { if (typeof initSar === 'function') initSar(); } },
-                'manutencao': { file: 'manutencao_data.js', name: 'Manutenção', init: () => { if (typeof initManutencao === 'function') initManutencao(); } },
-                'veiculos': { file: 'veiculos_data.js', name: 'Veículos', init: () => { if (typeof initVeiculos === 'function') initVeiculos(); } }
+                'dashboard': { 
+                    file: 'data.js', 
+                    name: 'Financeiro JLE', 
+                    init: () => { 
+                        if (typeof applyFilters === 'function') applyFilters(); 
+                    } 
+                },
+                'tecnodrill': { 
+                    file: 'tecnodrill_data.js', 
+                    name: 'Tecnodrill', 
+                    init: () => { 
+                        if (typeof initTecnodrill === 'function') initTecnodrill();
+                        else if (typeof applyTecnodrillFilters === 'function') applyTecnodrillFilters();
+                    } 
+                },
+                'cobranca': { 
+                    file: 'cobranca_data.js', 
+                    name: 'Analítico Claro', 
+                    init: () => { 
+                        if (typeof populateCobrancaFilterSelects === 'function') populateCobrancaFilterSelects();
+                        if (typeof applyCobrancaFilters === 'function') applyCobrancaFilters(); 
+                    } 
+                },
+                'gestao_os': { 
+                    file: 'cobranca_data.js', 
+                    name: 'Gestão de OS', 
+                    init: () => { 
+                        if (typeof populateGestaoOsFilterSelects === 'function') populateGestaoOsFilterSelects();
+                        if (typeof applyGestaoOsFilters === 'function') applyGestaoOsFilters(); 
+                    } 
+                },
+                'mdu': { 
+                    file: 'mdu_data.js', 
+                    name: 'MDU', 
+                    init: () => { 
+                        if (typeof mduDataLoaded !== 'undefined') mduDataLoaded = false;
+                        if (typeof initMdu === 'function') initMdu(true); 
+                        else if (typeof applyMduFilters === 'function') applyMduFilters(); 
+                    } 
+                },
+                'sar': { 
+                    file: 'sar_data.js', 
+                    name: 'SAR', 
+                    init: () => { 
+                        if (typeof sarDataLoaded !== 'undefined') sarDataLoaded = false;
+                        if (typeof initSar === 'function') initSar(true); 
+                        else if (typeof applySarFilters === 'function') applySarFilters(); 
+                    } 
+                },
+                'manutencao': { 
+                    file: 'manutencao_data.js', 
+                    name: 'Manutenção', 
+                    init: () => { 
+                        if (typeof initManutencao === 'function') initManutencao(); 
+                        else if (typeof applyManutencaoFilters === 'function') applyManutencaoFilters(); 
+                    } 
+                },
+                'veiculos': { 
+                    file: 'veiculos_data.js', 
+                    name: 'Veículos', 
+                    init: () => { 
+                        if (typeof initVeiculos === 'function') initVeiculos(); 
+                        else if (typeof applyVeiculosFilters === 'function') applyVeiculosFilters(); 
+                    } 
+                }
             };
 
             const target = viewConfig[view];

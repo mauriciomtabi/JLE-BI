@@ -57,8 +57,8 @@ const MESES_PT_FULL = [
 /**
  * Inicializa o Módulo SAR
  */
-function initSar() {
-    if (sarDataLoaded) return;
+function initSar(forceReload = false) {
+    if (sarDataLoaded && !forceReload) return;
     sarDataLoaded = true;
 
     if (!window.SAR_DATA || window.SAR_DATA.length === 0) {

@@ -45,8 +45,8 @@ const mduCharts = {
     relatoriosDiarios: null
 };
 
-function initMdu() {
-    if (mduDataLoaded) return;
+function initMdu(forceReload = false) {
+    if (mduDataLoaded && !forceReload) return;
     mduDataLoaded = true;
 
     // Vincular URL da Planilha Google
