@@ -1,11 +1,11 @@
 /**
  * sar_data.js — Base de Dados compilada do módulo SAR
- * Gerado automaticamente em: 2026-08-25 23:52:38
+ * Gerado automaticamente em: 2026-08-26 00:07:12
  */
 
 window.SAR_METADATA = {
   "total_records": 1066,
-  "generated_at": "2026-08-25 23:52:38",
+  "generated_at": "2026-08-26 00:07:12",
   "source_file": "sar_local.xlsx",
   "cidades": [
     "ALVORADA",
@@ -185,7 +185,6 @@ window.SAR_METADATA = {
     "AG. RELATÓRIO",
     "CANCELADO",
     "CONCLUÍDA",
-    "NÃO INFORMADO",
     "PARALISADO",
     "SEM SINAL"
   ],
@@ -31305,7 +31304,7 @@ window.SAR_DATA = [
     "data_entrega_fmt": "24/07/2026",
     "competencia": "JULHO/2026",
     "ano": "2026",
-    "status": "NÃO INFORMADO",
+    "status": "CONCLUÍDA",
     "status_relatorio": "ENTREGUE",
     "status_obra": "CONCLUÍDO",
     "prazo": "NO PRAZO",

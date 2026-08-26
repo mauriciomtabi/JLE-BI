@@ -2026,7 +2026,7 @@
             </section>
 
             <!-- Sub Tab Selector (Indicadores / Relatório) -->
-            <div class="dashboard-tabs" id="sar-sub-tabs" style="margin-bottom: 20px;">
+            <div class="dashboard-tabs" id="sar-sub-tabs" style="margin-bottom: 16px;">
                 <button class="tab-btn active" id="sar-tab-btn-indicators" onclick="switchSarTab('indicators')">
                     <i class="fa-solid fa-chart-column"></i> Indicadores
                 </button>
@@ -2089,31 +2089,42 @@
                     </div>
                 </div>
 
-                <!-- Charts Row 1: 2-Column Grid (Idêntico ao MDU) -->
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: stretch; min-width: 0; margin-bottom: 24px;">
-                    <!-- Coluna Esquerda: Gráficos -->
-                    <div style="display: flex; flex-direction: column; gap: 20px; min-width: 0;">
-                        <!-- Card 1: Distribuição por Status Geral -->
-                        <div class="sar-card">
-                            <div class="sar-card-title">Distribuição por Status Geral</div>
-                            <div class="sar-chart-container" style="height: 250px;">
-                                <canvas id="sar-chart-status"></canvas>
-                            </div>
-                        </div>
-                        <!-- Card 2: Distribuição de SLA (Rosca/Doughnut) -->
-                        <div class="sar-card">
-                            <div class="sar-card-title">Distribuição de SLA (No Prazo vs Atrasado)</div>
-                            <div class="sar-chart-container" style="height: 250px;">
-                                <canvas id="sar-chart-prazo"></canvas>
-                            </div>
+                <!-- Gráficos Row 1 (Superior): Status Geral (Largo) + SLA (Estreito) -->
+                <div class="sar-grid-status-sla">
+                    <!-- Card 1: Distribuição por Status Geral -->
+                    <div class="sar-card">
+                        <div class="sar-card-title">Distribuição por Status Geral</div>
+                        <div class="sar-chart-container" style="height: 250px;">
+                            <canvas id="sar-chart-status"></canvas>
                         </div>
                     </div>
+                    <!-- Card 2: Distribuição de SLA (Rosca/Doughnut) -->
+                    <div class="sar-card">
+                        <div class="sar-card-title">Distribuição de SLA (No Prazo vs Atrasado)</div>
+                        <div class="sar-chart-container" style="height: 250px;">
+                            <canvas id="sar-chart-prazo"></canvas>
+                        </div>
+                    </div>
+                </div>
 
-                    <!-- Coluna Direita: Desempenho por Executor -->
-                    <div class="sar-card" style="display: flex; flex-direction: column; min-width: 0; height: 100%;">
+                <!-- Gráficos Row 2 (Meio): Evolução Mensal de Entradas (Largura Total) -->
+                <div class="sar-grid-1col-wide">
+                    <div class="sar-card">
+                        <div class="sar-card-title">
+                            <span id="sar-evolution-title">Evolução Mensal de Entradas</span>
+                        </div>
+                        <div class="sar-chart-container" style="height: 250px;">
+                            <canvas id="sar-chart-evolution"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráficos Row 3 (Inferior): Desempenho por Executor (Largura Total) -->
+                <div class="sar-grid-1col-wide">
+                    <div class="sar-card">
                         <div class="sar-card-title">Desempenho por Executor (Classe L & Classe F)</div>
-                        <div class="sar-table-wrapper no-scrollbar" style="border: none; overflow-x: auto; max-height: 540px; overflow-y: scroll; flex-grow: 1; display: flex; flex-direction: column;">
-                            <table class="sar-performance-table" style="width: 100%; height: 100%; border-collapse: collapse;">
+                        <div class="sar-table-wrapper sar-no-scrollbar" style="border: none; max-height: 420px; overflow-y: auto;">
+                            <table class="sar-performance-table" style="width: 100%; border-collapse: collapse;">
                                 <thead>
                                     <tr>
                                         <th onclick="sortSarPerformance('nome')" style="cursor:pointer; user-select: none;" id="sar-perf-th-executor">Executor <i class="fa-solid fa-sort"></i></th>
@@ -2130,18 +2141,6 @@
                                     <!-- Populated dynamically -->
                                 </tfoot>
                             </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Charts Row 2: Evolução Mensal de Entradas (Largura Total) -->
-                <div class="sar-grid-1col-wide">
-                    <div class="sar-card">
-                        <div class="sar-card-title">
-                            <span id="sar-evolution-title">Evolução Mensal de Entradas</span>
-                        </div>
-                        <div class="sar-chart-container" style="height: 260px;">
-                            <canvas id="sar-chart-evolution"></canvas>
                         </div>
                     </div>
                 </div>

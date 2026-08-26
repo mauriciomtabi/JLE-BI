@@ -195,37 +195,23 @@ def main():
         status_k_upper = status_obra_raw.upper()
         status_z_upper = status_medicao_raw.upper()
         
-        # Testar se a coluna AB da linha já contém o texto calculado
-        val_ab_raw = clean_str(row[27] if len(row) > 27 else None)
-        val_ab_upper = val_ab_raw.upper()
-        
-        if val_ab_upper in ("CONCLUÍDA", "CONCLUIDA", "AG. RELATÓRIO", "AG. RELATORIO", "CANCELADO", "SEM SINAL", "AG. MEDIÇÃO", "AG. MEDICAO", "PARALISADO"):
-            if "CONCLU" in val_ab_upper:
-                status = "CONCLUÍDA"
-            elif "RELAT" in val_ab_upper:
-                status = "AG. RELATÓRIO"
-            elif "MEDI" in val_ab_upper:
-                status = "AG. MEDIÇÃO"
-            else:
-                status = val_ab_upper
+        # Cálculo da Coluna AB (Status Geral)
+        if "SEM SINAL" in status_k_upper:
+            status = "SEM SINAL"
+        elif "PARALISAD" in status_k_upper:
+            status = "PARALISADO"
+        elif "CANCELAD" in status_k_upper:
+            status = "CANCELADO"
+        elif "PEND" in status_z_upper or status_z_upper == "AG. MEDIÇÃO" or status_z_upper == "AG. MEDICAO":
+            status = "AG. MEDIÇÃO"
+        elif "RELAT" in status_z_upper or "AG." in status_z_upper:
+            status = "AG. RELATÓRIO"
+        elif "CONCLU" in status_z_upper or "CONCLU" in status_k_upper:
+            status = "CONCLUÍDA"
+        elif status_z_upper != "":
+            status = status_z_upper
         else:
-            # Aplicação direta da fórmula da coluna AB
-            if "SEM SINAL" in status_k_upper:
-                status = "SEM SINAL"
-            elif "PARALISAD" in status_k_upper:
-                status = "PARALISADO"
-            elif "PEND" in status_z_upper:
-                status = "AG. MEDIÇÃO"
-            elif "CANCELAD" in status_k_upper:
-                status = "CANCELADO"
-            elif "CONCLU" in status_z_upper:
-                status = "CONCLUÍDA"
-            elif "AG." in status_z_upper or "RELAT" in status_z_upper:
-                status = "AG. RELATÓRIO"
-            elif status_z_upper != "":
-                status = status_z_upper
-            else:
-                status = "NÃO INFORMADO"
+            status = "CONCLUÍDA"
             
         classe_l = clean_str(row[11] if len(row) > 11 else None)
         classe_f = clean_str(row[12] if len(row) > 12 else None)
