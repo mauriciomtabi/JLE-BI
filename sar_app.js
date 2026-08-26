@@ -603,74 +603,139 @@ function renderSarEvolutionChart(data) {
 
     const titleEl = document.getElementById('sar-evolution-title');
     if (titleEl) {
-        titleEl.innerText = 'Evolução Mensal de Entradas';
+        titleEl.innerText = 'Evolução Mensal de Entradas por Status';
     }
 
     const pluginList = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
 
+    // Paleta de cores moderna por Status Oficial
+    const STATUS_COLORS = {
+        'MEDIÇÃO CONCLUÍDA': { bg: '#10b981', border: '#059669' }, // Verde esmeralda (Concluída)
+        'AG. MEDIÇÃO':        { bg: '#388bfd', border: '#1f6feb' }, // Azul vibrante
+        'AG. RELATÓRIO':      { bg: '#f59e0b', border: '#d97706' }, // Âmbar
+        'CANCELADO':         { bg: '#ef4444', border: '#dc2626' }, // Vermelho
+        'SEM SINAL':         { bg: '#8b5cf6', border: '#7c3aed' }, // Roxo
+        'PARALISADO':        { bg: '#64748b', border: '#475569' }  // Cinza ardósia
+    };
+
+    const statusOrder = [
+        'MEDIÇÃO CONCLUÍDA',
+        'AG. MEDIÇÃO',
+        'AG. RELATÓRIO',
+        'CANCELADO',
+        'SEM SINAL',
+        'PARALISADO'
+    ];
+
     const monthMap = {};
+    const presentStatuses = new Set();
+
     data.forEach(r => {
         if (r.data_entrada) {
             const ym = r.data_entrada.substring(0, 7); // YYYY-MM
             const [ano, mes] = ym.split('-');
             const mesNum = parseInt(mes);
             const label = `${MESES_PT_LABEL[mesNum] || mes}/${ano.substring(2)}`;
-            
+            const st = (r.status || 'NÃO INFORMADO').trim();
+
             if (!monthMap[ym]) {
-                monthMap[ym] = { ym, label, count: 0 };
+                monthMap[ym] = { ym, label, totals: {}, totalMonth: 0 };
             }
-            monthMap[ym].count++;
+            monthMap[ym].totals[st] = (monthMap[ym].totals[st] || 0) + 1;
+            monthMap[ym].totalMonth++;
+            presentStatuses.add(st);
         }
     });
 
-    const keys = Object.keys(monthMap).sort();
-    const labels = keys.map(k => monthMap[k].label);
-    const counts = keys.map(k => monthMap[k].count);
+    const sortedYms = Object.keys(monthMap).sort();
+    const labels = sortedYms.map(k => monthMap[k].label);
+
+    // Filtrar e ordenar apenas os status que possuem dados
+    const activeStatuses = statusOrder.filter(s => presentStatuses.has(s));
+    presentStatuses.forEach(s => {
+        if (!activeStatuses.includes(s)) activeStatuses.push(s);
+    });
+
+    // Construir datasets empilhados por status
+    const datasets = activeStatuses.map(st => {
+        const color = STATUS_COLORS[st] || { bg: '#a4b0be', border: '#747d8c' };
+        return {
+            label: st,
+            data: sortedYms.map(ym => monthMap[ym].totals[st] || 0),
+            backgroundColor: color.bg,
+            borderColor: color.border,
+            borderWidth: 1,
+            borderRadius: 2,
+            stack: 'sarStatusStack',
+            barPercentage: 0.75,
+            categoryPercentage: 0.85
+        };
+    });
 
     sarCharts.evolution = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: labels,
-            datasets: [{
-                label: 'Entradas de OS',
-                data: counts,
-                backgroundColor: 'rgba(56, 139, 253, 0.85)',
-                borderColor: '#388bfd',
-                borderWidth: 1,
-                borderRadius: 4,
-                barPercentage: 0.75,
-                categoryPercentage: 0.85
-            }]
+            datasets: datasets
         },
         plugins: pluginList,
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
             plugins: {
-                legend: { display: false },
+                legend: {
+                    display: true,
+                    position: 'top',
+                    align: 'end',
+                    labels: {
+                        color: '#c9d1d9',
+                        font: { family: 'Outfit, Inter', size: 11 },
+                        boxWidth: 12,
+                        boxHeight: 12,
+                        padding: 10,
+                        usePointStyle: true,
+                        pointStyle: 'rectRounded'
+                    }
+                },
                 tooltip: {
                     backgroundColor: '#161b22',
                     borderColor: 'rgba(255, 255, 255, 0.15)',
                     borderWidth: 1,
                     titleColor: '#ffffff',
-                    bodyColor: '#c9d1d9'
+                    bodyColor: '#c9d1d9',
+                    padding: 10,
+                    callbacks: {
+                        footer: function(tooltipItems) {
+                            let sum = 0;
+                            tooltipItems.forEach(function(tooltipItem) {
+                                sum += tooltipItem.parsed.y;
+                            });
+                            return 'Total de Entradas: ' + sum.toLocaleString('pt-BR');
+                        }
+                    }
                 },
                 datalabels: {
-                    display: true,
+                    display: function(context) {
+                        const val = context.dataset.data[context.dataIndex];
+                        return val >= 4; // Exibe o valor do segmento se for relevante (>= 4)
+                    },
                     color: '#ffffff',
-                    anchor: 'end',
-                    align: 'top',
-                    offset: 2,
-                    font: { weight: 'bold', size: 10, family: 'Outfit, Inter' },
-                    formatter: (val) => val > 0 ? val.toLocaleString('pt-BR') : ''
+                    font: { weight: 'bold', size: 9, family: 'Outfit, Inter' },
+                    formatter: (val) => val > 0 ? val : ''
                 }
             },
             scales: {
                 x: {
+                    stacked: true,
                     grid: { color: 'rgba(255, 255, 255, 0.05)' },
                     ticks: { color: '#c9d1d9', font: { size: 10, family: 'Outfit, Inter' } }
                 },
                 y: {
+                    stacked: true,
                     grid: { color: 'rgba(255, 255, 255, 0.05)' },
                     ticks: { color: '#8b949e', font: { size: 10 } },
                     beginAtZero: true,
