@@ -194,7 +194,9 @@ def main():
         status_g_upper = status_geral_raw.upper()
         
         if status_geral_raw:
-            if "WF APROV" in status_g_upper:
+            if "MEDIC" in status_g_upper and "CONCLU" in status_g_upper:
+                status = "MEDIÇÃO CONCLUÍDA"
+            elif "WF APROV" in status_g_upper:
                 status = "WF APROVADO"
             elif "AG. APROV" in status_g_upper or "AG APROV" in status_g_upper:
                 status = "AG. APROVAÇÃO"
@@ -204,12 +206,12 @@ def main():
                 status = "PARALISADO"
             elif "CANCELAD" in status_g_upper:
                 status = "CANCELADO"
-            elif "PEND" in status_g_upper or "AG. MEDI" in status_g_upper:
+            elif "AG. MEDI" in status_g_upper or "AG MEDI" in status_g_upper or status_g_upper == "PENDENTE":
                 status = "AG. MEDIÇÃO"
-            elif "RELAT" in status_g_upper or "AG. RELAT" in status_g_upper:
+            elif "RELAT" in status_g_upper or "AG. RELAT" in status_g_upper or "AG RELAT" in status_g_upper:
                 status = "AG. RELATÓRIO"
-            elif "CONCLU" in status_g_upper:
-                status = "CONCLUÍDA"
+            elif "CONCLU" in status_g_upper or "FINALIZAD" in status_g_upper:
+                status = "MEDIÇÃO CONCLUÍDA"
             else:
                 status = status_geral_raw
         else:
@@ -220,16 +222,22 @@ def main():
                 status = "PARALISADO"
             elif "CANCELAD" in status_k_upper:
                 status = "CANCELADO"
-            elif "PEND" in status_z_upper or "AG. MEDI" in status_z_upper:
+            elif "MEDIC" in status_z_upper and "CONCLU" in status_z_upper:
+                status = "MEDIÇÃO CONCLUÍDA"
+            elif "WF APROV" in status_z_upper:
+                status = "WF APROVADO"
+            elif "AG. APROV" in status_z_upper or "AG APROV" in status_z_upper:
+                status = "AG. APROVAÇÃO"
+            elif "PEND" in status_z_upper or "AG. MEDI" in status_z_upper or "AG MEDI" in status_z_upper:
                 status = "AG. MEDIÇÃO"
-            elif "RELAT" in status_z_upper or "AG. RELAT" in status_z_upper:
+            elif "RELAT" in status_z_upper or "AG. RELAT" in status_z_upper or "AG RELAT" in status_z_upper:
                 status = "AG. RELATÓRIO"
-            elif "CONCLU" in status_z_upper or "CONCLU" in status_k_upper:
-                status = "CONCLUÍDA"
+            elif "CONCLU" in status_z_upper or "CONCLU" in status_k_upper or "FINALIZAD" in status_z_upper:
+                status = "MEDIÇÃO CONCLUÍDA"
             elif status_z_upper != "":
                 status = status_z_upper
             else:
-                status = "CONCLUÍDA"
+                status = "MEDIÇÃO CONCLUÍDA"
             
         classe_l = clean_str(get_col(row, "CLASSE L", default_idx=11))
         classe_f = clean_str(get_col(row, "CLASSE F", default_idx=12))

@@ -331,7 +331,14 @@ function updateSarKpis(data) {
 
     data.forEach(r => {
         const st = (r.status || '').toUpperCase();
-        if (st === 'CONCLUÍDA' || st === 'CONCLUIDA' || st === 'CONCLUÍDO' || st === 'CONCLUIDO' || st.includes('WF APROV') || (st.includes('APROVADO') && !st.includes('AG.'))) {
+        if (
+            st.includes('CONCLU') || 
+            st.includes('FINALIZAD') || 
+            st.includes('WF APROV') || 
+            st.includes('MEDIÇÃO CONCLU') || 
+            st.includes('MEDICAO CONCLU') || 
+            (st.includes('APROVADO') && !st.includes('AG.'))
+        ) {
             concluidasCount++;
         } else if (st === 'CANCELADO' || st === 'CANCELADA') {
             // Cancelada
