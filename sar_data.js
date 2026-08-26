@@ -1,12 +1,12 @@
 /**
  * sar_data.js — Base de Dados compilada do módulo SAR
- * Gerado automaticamente em: 2026-08-26 00:21:02
+ * Gerado automaticamente em: 2026-08-26 08:21:49
  */
 
 window.SAR_METADATA = {
   "total_records": 1066,
-  "generated_at": "2026-08-26 00:21:02",
-  "source_file": "sar_local.xlsx",
+  "generated_at": "2026-08-26 08:21:49",
+  "source_file": "sar_temp.xlsx",
   "cidades": [
     "ALVORADA",
     "ARROIO DO MEIO",
@@ -1300,24 +1300,24 @@ window.SAR_DATA = [
     "situacao": "100% - OK",
     "relatorio_foto": "OK",
     "servico": "3 ABERTURA E FECHAMENTO, 5 FUSÕES, 1 DERIVAÇÃO, 1 CEO, 5 TESTES, 2 TESTES COM OTDR, 339M 12FO. ( FOI TESTADO COM OTDR, FIBRA ESTAVA ABERTA E QUEBRADA NA ESTÇÃO",
-    "data_entrada": null,
-    "data_entrada_fmt": "-",
+    "data_entrada": "2023-03-16",
+    "data_entrada_fmt": "16/03/2023",
     "data_inicio": "2023-03-16",
     "data_inicio_fmt": "16/03/2023",
     "data_previsao": "2023-03-16",
     "data_previsao_fmt": "16/03/2023",
     "data_entrega": "2023-03-16",
     "data_entrega_fmt": "16/03/2023",
-    "competencia": "NÃO INFORMADO",
-    "ano": "NÃO INFORMADO",
-    "mes": "NÃO INFORMADO",
-    "mes_num": "",
+    "competencia": "MARÇO/2023",
+    "ano": "2023",
+    "mes": "MARÇO",
+    "mes_num": "03",
     "status": "CONCLUÍDA",
     "status_relatorio": "ENTREGUE",
     "status_obra": "CONCLUÍDO",
-    "prazo": "ATRASADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "NO PRAZO",
+    "tempo_dias": 0.0,
+    "atraso_dias": -3.0
   },
   {
     "cod": "RSCLER0033",
@@ -1333,24 +1333,24 @@ window.SAR_DATA = [
     "situacao": "100% - OK",
     "relatorio_foto": "OK",
     "servico": "1 ABERTURA E FECHAMENTO, 3 FUSÕES, 3 TESTES",
-    "data_entrada": null,
-    "data_entrada_fmt": "-",
+    "data_entrada": "2023-03-16",
+    "data_entrada_fmt": "16/03/2023",
     "data_inicio": "2023-03-16",
     "data_inicio_fmt": "16/03/2023",
     "data_previsao": "2023-03-16",
     "data_previsao_fmt": "16/03/2023",
     "data_entrega": "2023-03-16",
     "data_entrega_fmt": "16/03/2023",
-    "competencia": "NÃO INFORMADO",
-    "ano": "NÃO INFORMADO",
-    "mes": "NÃO INFORMADO",
-    "mes_num": "",
+    "competencia": "MARÇO/2023",
+    "ano": "2023",
+    "mes": "MARÇO",
+    "mes_num": "03",
     "status": "CONCLUÍDA",
     "status_relatorio": "ENTREGUE",
     "status_obra": "CONCLUÍDO",
-    "prazo": "ATRASADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "NO PRAZO",
+    "tempo_dias": 0.0,
+    "atraso_dias": -3.0
   },
   {
     "cod": "RSCLER0034",
@@ -1547,8 +1547,8 @@ window.SAR_DATA = [
     "status_relatorio": "ENTREGUE",
     "status_obra": "CONCLUÍDO",
     "prazo": "ATRASADO",
-    "tempo_dias": 840.0,
-    "atraso_dias": 837.0
+    "tempo_dias": 841.0,
+    "atraso_dias": 838.0
   },
   {
     "cod": "RSCLER0040",
@@ -2834,8 +2834,8 @@ window.SAR_DATA = [
     "status_relatorio": "ENTREGUE",
     "status_obra": "CONCLUÍDO",
     "prazo": "ATRASADO",
-    "tempo_dias": 831.0,
-    "atraso_dias": 828.0
+    "tempo_dias": 832.0,
+    "atraso_dias": 829.0
   },
   {
     "cod": "RSCLER0079",
@@ -3755,7 +3755,7 @@ window.SAR_DATA = [
     "mes": "NÃO INFORMADO",
     "mes_num": "",
     "status": "CANCELADO",
-    "status_relatorio": "PENDENTE",
+    "status_relatorio": "CANCELADO",
     "status_obra": "CANCELADO",
     "prazo": "ATRASADO",
     "tempo_dias": 0,
@@ -3788,7 +3788,7 @@ window.SAR_DATA = [
     "mes": "JUNHO",
     "mes_num": "06",
     "status": "CANCELADO",
-    "status_relatorio": "PENDENTE",
+    "status_relatorio": "CANCELADO",
     "status_obra": "CANCELADO",
     "prazo": "ATRASADO",
     "tempo_dias": 0,
@@ -3821,7 +3821,7 @@ window.SAR_DATA = [
     "mes": "JANEIRO",
     "mes_num": "01",
     "status": "CANCELADO",
-    "status_relatorio": "PENDENTE",
+    "status_relatorio": "CANCELADO",
     "status_obra": "CANCELADO",
     "prazo": "ATRASADO",
     "tempo_dias": 0,
@@ -3854,7 +3854,7 @@ window.SAR_DATA = [
     "mes": "FEVEREIRO",
     "mes_num": "02",
     "status": "CANCELADO",
-    "status_relatorio": "PENDENTE",
+    "status_relatorio": "CANCELADO",
     "status_obra": "CANCELADO",
     "prazo": "ATRASADO",
     "tempo_dias": 0,
@@ -3887,7 +3887,7 @@ window.SAR_DATA = [
     "mes": "FEVEREIRO",
     "mes_num": "02",
     "status": "CANCELADO",
-    "status_relatorio": "PENDENTE",
+    "status_relatorio": "CANCELADO",
     "status_obra": "CANCELADO",
     "prazo": "ATRASADO",
     "tempo_dias": 0,
@@ -3920,7 +3920,7 @@ window.SAR_DATA = [
     "mes": "MARÇO",
     "mes_num": "03",
     "status": "CANCELADO",
-    "status_relatorio": "PENDENTE",
+    "status_relatorio": "CANCELADO",
     "status_obra": "CANCELADO",
     "prazo": "ATRASADO",
     "tempo_dias": 0,
@@ -6629,8 +6629,8 @@ window.SAR_DATA = [
     "status_relatorio": "ENTREGUE",
     "status_obra": "CONCLUÍDO",
     "prazo": "ATRASADO",
-    "tempo_dias": 744.0,
-    "atraso_dias": 741.0
+    "tempo_dias": 745.0,
+    "atraso_dias": 742.0
   },
   {
     "cod": "RSCLER0194",
@@ -8276,7 +8276,7 @@ window.SAR_DATA = [
     "mes": "ABRIL",
     "mes_num": "04",
     "status": "CANCELADO",
-    "status_relatorio": "PENDENTE",
+    "status_relatorio": "CANCELADO",
     "status_obra": "CANCELADO",
     "prazo": "ATRASADO",
     "tempo_dias": 0,
@@ -16727,8 +16727,8 @@ window.SAR_DATA = [
     "status_relatorio": "ENTREGUE",
     "status_obra": "CONCLUÍDO",
     "prazo": "ATRASADO",
-    "tempo_dias": 405.0,
-    "atraso_dias": 402.0
+    "tempo_dias": 406.0,
+    "atraso_dias": 403.0
   },
   {
     "cod": "RSCLER0500",
@@ -16757,7 +16757,7 @@ window.SAR_DATA = [
     "mes": "FEVEREIRO",
     "mes_num": "02",
     "status": "CANCELADO",
-    "status_relatorio": "ENTREGUE",
+    "status_relatorio": "CANCELADO",
     "status_obra": "CANCELADO",
     "prazo": "ATRASADO",
     "tempo_dias": 0,
@@ -16988,7 +16988,7 @@ window.SAR_DATA = [
     "mes": "FEVEREIRO",
     "mes_num": "02",
     "status": "CANCELADO",
-    "status_relatorio": "ENTREGUE",
+    "status_relatorio": "CANCELADO",
     "status_obra": "CANCELADO",
     "prazo": "ATRASADO",
     "tempo_dias": 0,
@@ -17021,7 +17021,7 @@ window.SAR_DATA = [
     "mes": "FEVEREIRO",
     "mes_num": "02",
     "status": "CANCELADO",
-    "status_relatorio": "ENTREGUE",
+    "status_relatorio": "CANCELADO",
     "status_obra": "CANCELADO",
     "prazo": "ATRASADO",
     "tempo_dias": 0,
@@ -17486,8 +17486,8 @@ window.SAR_DATA = [
     "status_relatorio": "ENTREGUE",
     "status_obra": "CONCLUÍDO",
     "prazo": "ATRASADO",
-    "tempo_dias": 390.0,
-    "atraso_dias": 387.0
+    "tempo_dias": 391.0,
+    "atraso_dias": 388.0
   },
   {
     "cod": "RSCLER0523",
@@ -17585,8 +17585,8 @@ window.SAR_DATA = [
     "status_relatorio": "ENTREGUE",
     "status_obra": "CONCLUÍDO",
     "prazo": "ATRASADO",
-    "tempo_dias": 389.0,
-    "atraso_dias": 386.0
+    "tempo_dias": 390.0,
+    "atraso_dias": 387.0
   },
   {
     "cod": "RSCLER0526",
@@ -18605,7 +18605,7 @@ window.SAR_DATA = [
     "mes": "MARÇO",
     "mes_num": "03",
     "status": "CANCELADO",
-    "status_relatorio": "PENDENTE",
+    "status_relatorio": "CANCELADO",
     "status_obra": "CANCELADO",
     "prazo": "ATRASADO",
     "tempo_dias": 0,
@@ -19169,8 +19169,8 @@ window.SAR_DATA = [
     "status_relatorio": "ENTREGUE",
     "status_obra": "CONCLUÍDO",
     "prazo": "ATRASADO",
-    "tempo_dias": 493.0,
-    "atraso_dias": 490.0
+    "tempo_dias": 494.0,
+    "atraso_dias": 491.0
   },
   {
     "cod": "RSCLER0574",
@@ -20222,7 +20222,7 @@ window.SAR_DATA = [
     "mes": "MAIO",
     "mes_num": "05",
     "status": "CANCELADO",
-    "status_relatorio": "PENDENTE",
+    "status_relatorio": "CANCELADO",
     "status_obra": "CANCELADO",
     "prazo": "ATRASADO",
     "tempo_dias": 0,
@@ -21050,8 +21050,8 @@ window.SAR_DATA = [
     "status_relatorio": "ENTREGUE",
     "status_obra": "CONCLUÍDO",
     "prazo": "ATRASADO",
-    "tempo_dias": 314.0,
-    "atraso_dias": 311.0
+    "tempo_dias": 315.0,
+    "atraso_dias": 312.0
   },
   {
     "cod": "RSCLER0631",
@@ -21413,8 +21413,8 @@ window.SAR_DATA = [
     "status_relatorio": "ENTREGUE",
     "status_obra": "CONCLUÍDO",
     "prazo": "ATRASADO",
-    "tempo_dias": 311.0,
-    "atraso_dias": 308.0
+    "tempo_dias": 312.0,
+    "atraso_dias": 309.0
   },
   {
     "cod": "RSCLER0642",
@@ -21545,8 +21545,8 @@ window.SAR_DATA = [
     "status_relatorio": "ENTREGUE",
     "status_obra": "CONCLUÍDO",
     "prazo": "ATRASADO",
-    "tempo_dias": 309.0,
-    "atraso_dias": 306.0
+    "tempo_dias": 310.0,
+    "atraso_dias": 307.0
   },
   {
     "cod": "RSCLER0646",
@@ -21578,8 +21578,8 @@ window.SAR_DATA = [
     "status_relatorio": "ENTREGUE",
     "status_obra": "CONCLUÍDO",
     "prazo": "ATRASADO",
-    "tempo_dias": 305.0,
-    "atraso_dias": 302.0
+    "tempo_dias": 306.0,
+    "atraso_dias": 303.0
   },
   {
     "cod": "RSCLER0647",
@@ -21677,8 +21677,8 @@ window.SAR_DATA = [
     "status_relatorio": "ENTREGUE",
     "status_obra": "CONCLUÍDO",
     "prazo": "ATRASADO",
-    "tempo_dias": 302.0,
-    "atraso_dias": 299.0
+    "tempo_dias": 303.0,
+    "atraso_dias": 300.0
   },
   {
     "cod": "RSCLER0650",
@@ -21941,8 +21941,8 @@ window.SAR_DATA = [
     "status_relatorio": "ENTREGUE",
     "status_obra": "CONCLUÍDO",
     "prazo": "ATRASADO",
-    "tempo_dias": 324.0,
-    "atraso_dias": 321.0
+    "tempo_dias": 325.0,
+    "atraso_dias": 322.0
   },
   {
     "cod": "RSCLER0658",
@@ -21974,8 +21974,8 @@ window.SAR_DATA = [
     "status_relatorio": "ENTREGUE",
     "status_obra": "CONCLUÍDO",
     "prazo": "ATRASADO",
-    "tempo_dias": 300.0,
-    "atraso_dias": 297.0
+    "tempo_dias": 301.0,
+    "atraso_dias": 298.0
   },
   {
     "cod": "RSCLER0659",
@@ -22601,8 +22601,8 @@ window.SAR_DATA = [
     "status_relatorio": "PENDENTE",
     "status_obra": "CONCLUÍDO",
     "prazo": "ATRASADO",
-    "tempo_dias": 286.0,
-    "atraso_dias": 283.0
+    "tempo_dias": 287.0,
+    "atraso_dias": 284.0
   },
   {
     "cod": "RSCLER0678",
@@ -22865,8 +22865,8 @@ window.SAR_DATA = [
     "status_relatorio": "ENTREGUE",
     "status_obra": "CONCLUÍDO",
     "prazo": "ATRASADO",
-    "tempo_dias": 279.0,
-    "atraso_dias": 276.0
+    "tempo_dias": 280.0,
+    "atraso_dias": 277.0
   },
   {
     "cod": "RSCLER0686",
@@ -22898,8 +22898,8 @@ window.SAR_DATA = [
     "status_relatorio": "ENTREGUE",
     "status_obra": "CONCLUÍDO",
     "prazo": "ATRASADO",
-    "tempo_dias": 279.0,
-    "atraso_dias": 276.0
+    "tempo_dias": 280.0,
+    "atraso_dias": 277.0
   },
   {
     "cod": "RSCLER0687",
@@ -23096,8 +23096,8 @@ window.SAR_DATA = [
     "status_relatorio": "ENTREGUE",
     "status_obra": "CONCLUÍDO",
     "prazo": "ATRASADO",
-    "tempo_dias": 279.0,
-    "atraso_dias": 276.0
+    "tempo_dias": 280.0,
+    "atraso_dias": 277.0
   },
   {
     "cod": "RSCLER0693",
@@ -23129,8 +23129,8 @@ window.SAR_DATA = [
     "status_relatorio": "ENTREGUE",
     "status_obra": "CONCLUÍDO",
     "prazo": "ATRASADO",
-    "tempo_dias": 279.0,
-    "atraso_dias": 276.0
+    "tempo_dias": 280.0,
+    "atraso_dias": 277.0
   },
   {
     "cod": "RSCLER0694",
@@ -23225,7 +23225,7 @@ window.SAR_DATA = [
     "mes": "AGOSTO",
     "mes_num": "08",
     "status": "CANCELADO",
-    "status_relatorio": "PENDENTE",
+    "status_relatorio": "CANCELADO",
     "status_obra": "CANCELADO",
     "prazo": "ATRASADO",
     "tempo_dias": 0,
@@ -23753,7 +23753,7 @@ window.SAR_DATA = [
     "mes": "AGOSTO",
     "mes_num": "08",
     "status": "CANCELADO",
-    "status_relatorio": "PENDENTE",
+    "status_relatorio": "CANCELADO",
     "status_obra": "CANCELADO",
     "prazo": "ATRASADO",
     "tempo_dias": 0,
@@ -23822,8 +23822,8 @@ window.SAR_DATA = [
     "status_relatorio": "ENTREGUE",
     "status_obra": "CONCLUÍDO",
     "prazo": "ATRASADO",
-    "tempo_dias": 262.0,
-    "atraso_dias": 259.0
+    "tempo_dias": 263.0,
+    "atraso_dias": 260.0
   },
   {
     "cod": "RSCLER0715",
@@ -23921,8 +23921,8 @@ window.SAR_DATA = [
     "status_relatorio": "ENTREGUE",
     "status_obra": "CONCLUÍDO",
     "prazo": "ATRASADO",
-    "tempo_dias": 254.0,
-    "atraso_dias": 251.0
+    "tempo_dias": 255.0,
+    "atraso_dias": 252.0
   },
   {
     "cod": "RSCLER0718",
@@ -23954,8 +23954,8 @@ window.SAR_DATA = [
     "status_relatorio": "ENTREGUE",
     "status_obra": "CONCLUÍDO",
     "prazo": "ATRASADO",
-    "tempo_dias": 254.0,
-    "atraso_dias": 251.0
+    "tempo_dias": 255.0,
+    "atraso_dias": 252.0
   },
   {
     "cod": "RSCLER0719",
@@ -24614,8 +24614,8 @@ window.SAR_DATA = [
     "status_relatorio": "PENDENTE",
     "status_obra": "CONCLUÍDO",
     "prazo": "ATRASADO",
-    "tempo_dias": 229.0,
-    "atraso_dias": 226.0
+    "tempo_dias": 230.0,
+    "atraso_dias": 227.0
   },
   {
     "cod": "RSCLER0739",
@@ -26198,8 +26198,8 @@ window.SAR_DATA = [
     "status_relatorio": "PENDENTE",
     "status_obra": "CONCLUÍDO",
     "prazo": "ATRASADO",
-    "tempo_dias": 172.0,
-    "atraso_dias": 169.0
+    "tempo_dias": 173.0,
+    "atraso_dias": 170.0
   },
   {
     "cod": "RSCLER0784",
@@ -26231,8 +26231,8 @@ window.SAR_DATA = [
     "status_relatorio": "ENTREGUE",
     "status_obra": "CONCLUÍDO",
     "prazo": "ATRASADO",
-    "tempo_dias": 171.0,
-    "atraso_dias": 168.0
+    "tempo_dias": 172.0,
+    "atraso_dias": 169.0
   },
   {
     "cod": "RSCLER0785",
@@ -26756,7 +26756,7 @@ window.SAR_DATA = [
     "mes": "FEVEREIRO",
     "mes_num": "02",
     "status": "CANCELADO",
-    "status_relatorio": "PENDENTE",
+    "status_relatorio": "CANCELADO",
     "status_obra": "CANCELADO",
     "prazo": "ATRASADO",
     "tempo_dias": 0,
@@ -33355,9 +33355,9 @@ window.SAR_DATA = [
     "ano": "2026",
     "mes": "JULHO",
     "mes_num": "07",
-    "status": "PARALISADO",
-    "status_relatorio": "PENDENTE",
-    "status_obra": "PARALISADO",
+    "status": "CANCELADO",
+    "status_relatorio": "CANCELADO",
+    "status_obra": "CANCELADO",
     "prazo": "ATRASADO",
     "tempo_dias": 0,
     "atraso_dias": 0
