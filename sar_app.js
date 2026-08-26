@@ -295,16 +295,36 @@ function applySarFilters() {
 }
 
 /**
+ * Retorna os registros dos últimos 60 dias com base na data máxima da base
+ */
+function getSarRecent60DaysData(dataset) {
+    const allData = window.SAR_DATA || [];
+    if (allData.length === 0) return dataset;
+
+    let maxTs = 0;
+    allData.forEach(r => {
+        if (r.data_entrada) {
+            const ts = new Date(r.data_entrada).getTime();
+            if (ts > maxTs) maxTs = ts;
+        }
+    });
+
+    if (maxTs === 0) return dataset;
+
+    const cutoffTs = maxTs - (60 * 24 * 60 * 60 * 1000);
+    return dataset.filter(r => {
+        if (!r.data_entrada) return false;
+        return new Date(r.data_entrada).getTime() >= cutoffTs;
+    });
+}
+
+/**
  * Atualiza os Cards de KPIs
  */
 function updateSarKpis(data) {
     const total = data.length;
     let concluidasCount = 0;
     let andamentoCount = 0;
-    let somaTempo = 0;
-    let countTempo = 0;
-    let somaAtraso = 0;
-    let countAtraso = 0;
 
     data.forEach(r => {
         const st = (r.status || '').toUpperCase();
@@ -313,7 +333,18 @@ function updateSarKpis(data) {
         } else if (st !== 'CANCELADO' && st !== 'CANCELADA') {
             andamentoCount++;
         }
-        
+    });
+
+    // Tempo médio de atendimento e atraso: padrão de 60 dias (a menos que filtrado por Ano/Mês)
+    const isDateFiltered = Boolean(sarFilters.ano || sarFilters.mes);
+    const tempoDataset = isDateFiltered ? data : getSarRecent60DaysData(data);
+
+    let somaTempo = 0;
+    let countTempo = 0;
+    let somaAtraso = 0;
+    let countAtraso = 0;
+
+    tempoDataset.forEach(r => {
         if (r.prazo === 'ATRASADO' && r.atraso_dias > 0) {
             somaAtraso += r.atraso_dias;
             countAtraso++;
@@ -343,10 +374,17 @@ function updateSarKpis(data) {
     if (elAndamento) elAndamento.innerText = andamentoCount.toLocaleString('pt-BR');
     if (elAndamentoPct) elAndamentoPct.innerText = `${andamentoPct}%`;
 
+    const elTempoTitle = document.getElementById('sar-kpi-tempo-title');
     const elTempoMedio = document.getElementById('sar-kpi-tempo-medio');
     const elTempoAtraso = document.getElementById('sar-kpi-tempo-atraso-detalhe');
+    
+    if (elTempoTitle) {
+        elTempoTitle.innerText = isDateFiltered ? 'TEMPO MÉDIO DE ATENDIMENTO' : 'TEMPO MÉDIO (ÚLTIMOS 60 DIAS)';
+    }
     if (elTempoMedio) elTempoMedio.innerText = `${mediaTempo} dias`;
-    if (elTempoAtraso) elTempoAtraso.innerText = `Atraso médio: ${mediaAtraso} dias`;
+    if (elTempoAtraso) {
+        elTempoAtraso.innerText = isDateFiltered ? `Atraso médio: ${mediaAtraso} dias` : `Atraso médio: ${mediaAtraso} dias (60d)`;
+    }
 }
 
 /**
@@ -479,9 +517,17 @@ function renderSarPrazoChart(data) {
         sarCharts.prazo = null;
     }
 
+    const isDateFiltered = Boolean(sarFilters.ano || sarFilters.mes);
+    const slaDataset = isDateFiltered ? data : getSarRecent60DaysData(data);
+
+    const titleEl = document.getElementById('sar-chart-prazo-title');
+    if (titleEl) {
+        titleEl.innerText = isDateFiltered ? 'Distribuição de SLA (No Prazo vs Atrasado)' : 'Distribuição de SLA (Últimos 60 dias)';
+    }
+
     let noPrazo = 0;
     let atrasado = 0;
-    data.forEach(r => {
+    slaDataset.forEach(r => {
         if (r.prazo === 'NO PRAZO') noPrazo++;
         else if (r.prazo === 'ATRASADO') atrasado++;
     });

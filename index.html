@@ -2075,7 +2075,7 @@
                     </div>
                     <div class="sar-kpi-card kpi-tempo">
                         <div class="kpi-info" style="flex-grow: 1;">
-                            <span class="sar-kpi-title">TEMPO MÉDIO DE ATENDIMENTO</span>
+                            <span class="sar-kpi-title" id="sar-kpi-tempo-title">TEMPO MÉDIO DE ATENDIMENTO (60D)</span>
                             <h3 class="sar-kpi-value" id="sar-kpi-tempo-medio">0 dias</h3>
                             <div class="sar-kpi-footer">
                                 <span id="sar-kpi-tempo-atraso-detalhe">Atraso médio: 0 dias</span>
@@ -2098,7 +2098,9 @@
                     </div>
                     <!-- Card 2: Distribuição de SLA (Rosca/Doughnut) -->
                     <div class="sar-card">
-                        <div class="sar-card-title">Distribuição de SLA (No Prazo vs Atrasado)</div>
+                        <div class="sar-card-title">
+                            <span id="sar-chart-prazo-title">Distribuição de SLA (Últimos 60 dias)</span>
+                        </div>
                         <div class="sar-chart-container" style="height: 250px;">
                             <canvas id="sar-chart-prazo"></canvas>
                         </div>
