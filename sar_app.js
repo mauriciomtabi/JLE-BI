@@ -24,7 +24,7 @@ const sarFilters = {
     prazo: '',
     cidade: '',
     area_tecnica: '',
-    competencia: ''
+    ano: ''
 };
 
 let sarSearchQuery = '';
@@ -33,7 +33,6 @@ let sarSearchDebounceTimer = null;
 // Instâncias dos Gráficos Chart.js
 const sarCharts = {
     status: null,
-    cidade: null,
     evolution: null,
     prazo: null
 };
@@ -120,22 +119,13 @@ function populateSarFilterSelects() {
             uniqueAreas.map(a => `<option value="${a}">${a}</option>`).join('');
     }
 
-    // 5. Select Competência (Ordenação Cronológica)
-    const compSelect = document.getElementById('sar-filter-competencia');
-    if (compSelect) {
-        const uniqueComps = [...new Set(data.map(r => r.competencia).filter(c => c && c !== 'NÃO INFORMADO'))];
-        
-        // Ordenar cronologicamente por Ano e Mês
-        uniqueComps.sort((a, b) => {
-            const [mesA, anoA] = a.split('/');
-            const [mesB, anoB] = b.split('/');
-            const valA = (parseInt(anoA) || 0) * 100 + (MESES_MAP_PT[mesA.toUpperCase()] || 0);
-            const valB = (parseInt(anoB) || 0) * 100 + (MESES_MAP_PT[mesB.toUpperCase()] || 0);
-            return valB - valA; // Mais recente primeiro
-        });
-
-        compSelect.innerHTML = '<option value="">Todas as Competências</option>' + 
-            uniqueComps.map(c => `<option value="${c}">${c}</option>`).join('');
+    // 5. Select Ano (Ordenação Cronológica Decrescente)
+    const anoSelect = document.getElementById('sar-filter-ano');
+    if (anoSelect) {
+        const uniqueAnos = meta.anos || [...new Set(data.map(r => r.ano).filter(a => a && a !== 'NÃO INFORMADO'))];
+        uniqueAnos.sort((a, b) => parseInt(b) - parseInt(a));
+        anoSelect.innerHTML = '<option value="">Todos os Anos</option>' + 
+            uniqueAnos.map(a => `<option value="${a}">${a}</option>`).join('');
     }
 }
 
@@ -215,7 +205,7 @@ function clearSarFilters() {
     sarFilters.prazo = '';
     sarFilters.cidade = '';
     sarFilters.area_tecnica = '';
-    sarFilters.competencia = '';
+    sarFilters.ano = '';
     sarSearchQuery = '';
 
     const chks = document.querySelectorAll('#sar-multiselect-status-dropdown input[type="checkbox"]');
@@ -230,74 +220,13 @@ function clearSarFilters() {
     if (cSel) cSel.value = '';
     const aSel = document.getElementById('sar-filter-area');
     if (aSel) aSel.value = '';
-    const compSel = document.getElementById('sar-filter-competencia');
-    if (compSel) compSel.value = '';
+    const anoSel = document.getElementById('sar-filter-ano');
+    if (anoSel) anoSel.value = '';
 
     const searchInput = document.getElementById('sar-search-bar');
     if (searchInput) searchInput.value = '';
 
-    sarTimeGranularity = 'year';
-    sarDrilldownYear = null;
-    sarDrilldownMonth = null;
-    sarDrilldownMonthLabel = null;
-    updateSarGranularityButtons();
-    updateSarDrilldownBackButton();
-
     applySarFilters();
-}
-
-/**
- * Alterna granularidade temporal via botões
- */
-function setSarTimeGranularity(gran) {
-    sarTimeGranularity = gran;
-    sarDrilldownYear = null;
-    sarDrilldownMonth = null;
-    sarDrilldownMonthLabel = null;
-    updateSarGranularityButtons();
-    updateSarDrilldownBackButton();
-    renderSarEvolutionChart(sarFilteredData);
-}
-
-function updateSarGranularityButtons() {
-    ['year', 'month', 'day'].forEach(g => {
-        const btn = document.getElementById(`sar-btn-gran-${g}`);
-        if (btn) {
-            if (g === sarTimeGranularity && !sarDrilldownYear) {
-                btn.classList.add('active');
-            } else {
-                btn.classList.remove('active');
-            }
-        }
-    });
-}
-
-function updateSarDrilldownBackButton() {
-    const backBtn = document.getElementById('sar-drilldown-back-btn');
-    if (!backBtn) return;
-    if (sarDrilldownMonth) {
-        backBtn.style.display = 'inline-flex';
-        backBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> Voltar p/ ${sarDrilldownYear}`;
-    } else if (sarDrilldownYear) {
-        backBtn.style.display = 'inline-flex';
-        backBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> Voltar p/ Anos`;
-    } else {
-        backBtn.style.display = 'none';
-    }
-}
-
-function backFromSarDrilldown() {
-    if (sarDrilldownMonth) {
-        sarDrilldownMonth = null;
-        sarDrilldownMonthLabel = null;
-        sarTimeGranularity = 'month';
-    } else if (sarDrilldownYear) {
-        sarDrilldownYear = null;
-        sarTimeGranularity = 'year';
-    }
-    updateSarGranularityButtons();
-    updateSarDrilldownBackButton();
-    renderSarEvolutionChart(sarFilteredData);
 }
 
 /**
@@ -312,8 +241,8 @@ function applySarFilters() {
     if (cSel) sarFilters.cidade = cSel.value;
     const aSel = document.getElementById('sar-filter-area');
     if (aSel) sarFilters.area_tecnica = aSel.value;
-    const compSel = document.getElementById('sar-filter-competencia');
-    if (compSel) sarFilters.competencia = compSel.value;
+    const anoSel = document.getElementById('sar-filter-ano');
+    if (anoSel) sarFilters.ano = anoSel.value;
 
     sarFilteredData = data.filter(r => {
         // Filtro Status
@@ -332,8 +261,8 @@ function applySarFilters() {
         if (sarFilters.area_tecnica && r.area_tecnica !== sarFilters.area_tecnica) {
             return false;
         }
-        // Filtro Competência
-        if (sarFilters.competencia && r.competencia !== sarFilters.competencia) {
+        // Filtro Ano
+        if (sarFilters.ano && r.ano !== sarFilters.ano) {
             return false;
         }
         // Filtro de Busca Rápida
@@ -388,10 +317,10 @@ function updateSarKpis(data) {
         }
     });
 
-    const noPrazoPct = total > 0 ? ((noPrazoCount / total) * 100).toFixed(1) : '0.0';
-    const atrasadoPct = total > 0 ? ((atrasadoCount / total) * 100).toFixed(1) : '0.0';
-    const mediaTempo = countTempo > 0 ? (somaTempo / countTempo).toFixed(1) : '0.0';
-    const mediaAtraso = countAtraso > 0 ? (somaAtraso / countAtraso).toFixed(1) : '0.0';
+    const noPrazoPct = total > 0 ? ((noPrazoCount / total) * 100).toFixed(1) : '0';
+    const atrasadoPct = total > 0 ? ((atrasadoCount / total) * 100).toFixed(1) : '0';
+    const mediaTempo = countTempo > 0 ? (somaTempo / countTempo).toFixed(1) : '0';
+    const mediaAtraso = countAtraso > 0 ? (somaAtraso / countAtraso).toFixed(1) : '0';
 
     // Elementos DOM
     const elTotal = document.getElementById('sar-kpi-total');
@@ -400,12 +329,12 @@ function updateSarKpis(data) {
     const elNoPrazo = document.getElementById('sar-kpi-no-prazo');
     const elNoPrazoPct = document.getElementById('sar-kpi-no-prazo-pct');
     if (elNoPrazo) elNoPrazo.innerText = noPrazoCount.toLocaleString('pt-BR');
-    if (elNoPrazoPct) elNoPrazoPct.innerText = `${noPrazoPct}%`;
+    if (elNoPrazoPct) elNoPrazoPct.innerText = `${noPrazoPct}% de conformidade`;
 
     const elAtrasado = document.getElementById('sar-kpi-atrasado');
     const elAtrasadoPct = document.getElementById('sar-kpi-atrasado-pct');
     if (elAtrasado) elAtrasado.innerText = atrasadoCount.toLocaleString('pt-BR');
-    if (elAtrasadoPct) elAtrasadoPct.innerText = `${atrasadoPct}%`;
+    if (elAtrasadoPct) elAtrasadoPct.innerText = `${atrasadoPct}% fora do SLA`;
 
     const elTempoMedio = document.getElementById('sar-kpi-tempo-medio');
     const elTempoAtraso = document.getElementById('sar-kpi-tempo-atraso-detalhe');
@@ -414,15 +343,36 @@ function updateSarKpis(data) {
 }
 
 /**
- * Renderiza os Gráficos Chart.js
- */
-/**
  * Renderiza os Gráficos Chart.js do SAR
  */
-function renderSarCharts(data) {
-    renderSarStatusChart(data);
-    renderSarPrazoChart(data);
-    renderSarEvolutionChart(data);
+function renderSarCharts(filteredData) {
+    renderSarStatusChart(filteredData);
+    renderSarPrazoChart(filteredData);
+
+    // O gráfico de evolução mensal NÃO é afetado pelo filtro de Ano (preserva toda a série temporal histórica)
+    const evolutionData = (window.SAR_DATA || []).filter(r => {
+        if (sarFilters.status.length > 0 && !sarFilters.status.includes(r.status)) return false;
+        if (sarFilters.prazo && r.prazo !== sarFilters.prazo) return false;
+        if (sarFilters.cidade && r.cidade !== sarFilters.cidade) return false;
+        if (sarFilters.area_tecnica && r.area_tecnica !== sarFilters.area_tecnica) return false;
+        if (sarSearchQuery) {
+            const match = 
+                (r.cod && r.cod.toLowerCase().includes(sarSearchQuery)) ||
+                (r.endereco && r.endereco.toLowerCase().includes(sarSearchQuery)) ||
+                (r.cidade && r.cidade.toLowerCase().includes(sarSearchQuery)) ||
+                (r.node && r.node.toLowerCase().includes(sarSearchQuery)) ||
+                (r.site && r.site.toLowerCase().includes(sarSearchQuery)) ||
+                (r.area_tecnica && r.area_tecnica.toLowerCase().includes(sarSearchQuery)) ||
+                (r.classe_l && r.classe_l.toLowerCase().includes(sarSearchQuery)) ||
+                (r.classe_f && r.classe_f.toLowerCase().includes(sarSearchQuery)) ||
+                (r.servico && r.servico.toLowerCase().includes(sarSearchQuery)) ||
+                (r.caixa_mdu && r.caixa_mdu.toLowerCase().includes(sarSearchQuery));
+            if (!match) return false;
+        }
+        return true;
+    });
+
+    renderSarEvolutionChart(evolutionData);
 }
 
 /**

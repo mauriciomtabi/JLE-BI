@@ -183,22 +183,49 @@ def main():
         # Status da Obra (Col K / 11)
         status_obra_raw = clean_str(row[10] if len(row) > 10 else None)
         
-        # Status Geral / Medição (Col Z / 26 - Bloco Indicador de Status)
+        # Status Medição (Col Z / 26)
         status_medicao_raw = clean_str(row[25] if len(row) > 25 else None)
-        status_upper = status_medicao_raw.upper()
         
-        if "CONCLU" in status_upper or "OK" in status_upper:
-            status = "CONCLUÍDA"
-        elif "AG." in status_upper or "RELAT" in status_upper:
-            status = "AG. RELATÓRIO"
-        elif "PEND" in status_upper:
-            status = "PENDENTE"
-        elif status_medicao_raw != "":
-            status = status_medicao_raw.upper()
+        # Status Relatório (Col AA / 27)
+        status_relatorio = clean_str(row[26] if len(row) > 26 else None)
+        
+        # Status Geral (Coluna AB / 28)
+        # Fórmula exata do Excel:
+        # =SE(K5="SEM SINAL";"SEM SINAL";SE(K5="PARALISADO";"PARALISADO";SE(Z5="PENDENTE";"AG. MEDIÇÃO";SE(K5="CANCELADO";"CANCELADO";Z5))))
+        status_k_upper = status_obra_raw.upper()
+        status_z_upper = status_medicao_raw.upper()
+        
+        # Testar se a coluna AB da linha já contém o texto calculado
+        val_ab_raw = clean_str(row[27] if len(row) > 27 else None)
+        val_ab_upper = val_ab_raw.upper()
+        
+        if val_ab_upper in ("CONCLUÍDA", "CONCLUIDA", "AG. RELATÓRIO", "AG. RELATORIO", "CANCELADO", "SEM SINAL", "AG. MEDIÇÃO", "AG. MEDICAO", "PARALISADO"):
+            if "CONCLU" in val_ab_upper:
+                status = "CONCLUÍDA"
+            elif "RELAT" in val_ab_upper:
+                status = "AG. RELATÓRIO"
+            elif "MEDI" in val_ab_upper:
+                status = "AG. MEDIÇÃO"
+            else:
+                status = val_ab_upper
         else:
-            status = "NÃO INFORMADO"
-            
-        status_relatorio = clean_str(row[26] if len(row) > 26 else None) # Col AA (Status Relatório)
+            # Aplicação direta da fórmula da coluna AB
+            if "SEM SINAL" in status_k_upper:
+                status = "SEM SINAL"
+            elif "PARALISAD" in status_k_upper:
+                status = "PARALISADO"
+            elif "PEND" in status_z_upper:
+                status = "AG. MEDIÇÃO"
+            elif "CANCELAD" in status_k_upper:
+                status = "CANCELADO"
+            elif "CONCLU" in status_z_upper:
+                status = "CONCLUÍDA"
+            elif "AG." in status_z_upper or "RELAT" in status_z_upper:
+                status = "AG. RELATÓRIO"
+            elif status_z_upper != "":
+                status = status_z_upper
+            else:
+                status = "NÃO INFORMADO"
             
         classe_l = clean_str(row[11] if len(row) > 11 else None)
         classe_f = clean_str(row[12] if len(row) > 12 else None)
@@ -215,9 +242,23 @@ def main():
         # Competência baseada na data de entrada
         competencia = get_competencia(dt_entrada_iso)
         
-        tempo_dias = to_number(row[27] if len(row) > 27 else None) # Col AB (Tempo)
+        # Detecção de colunas de Tempo, Prazo e Atraso (suporta formato com ou sem coluna AB física)
+        val_col_27 = clean_str(row[27] if len(row) > 27 else None) # AB
+        val_col_28 = clean_str(row[28] if len(row) > 28 else None) # AC
+        val_col_29 = clean_str(row[29] if len(row) > 29 else None) # AD
+        val_col_30 = clean_str(row[30] if len(row) > 30 else None) # AE
         
-        prazo_raw = clean_str(row[28] if len(row) > 28 else None).upper() # Col AC (Prazo)
+        # Se coluna AC tem prazo ("NO PRAZO" ou "ATRASADO"), então AB é tempo
+        if "PRAZO" in val_col_28.upper() or "ATRASAD" in val_col_28.upper():
+            tempo_dias = to_number(row[27] if len(row) > 27 else None)
+            prazo_raw = val_col_28.upper()
+            atraso_dias = to_number(row[29] if len(row) > 29 else None)
+        else:
+            # Caso AB seja Status Geral e AC seja Tempo, AD é Prazo e AE é Atraso
+            tempo_dias = to_number(row[28] if len(row) > 28 else None)
+            prazo_raw = val_col_29.upper()
+            atraso_dias = to_number(row[30] if len(row) > 30 else None)
+            
         if "NO PRAZO" in prazo_raw or "DENTRO" in prazo_raw:
             prazo = "NO PRAZO"
         elif "ATRASAD" in prazo_raw or "FORA" in prazo_raw:
@@ -230,10 +271,12 @@ def main():
             else:
                 prazo = "NÃO INFORMADO"
                 
-        atraso_dias = to_number(row[29] if len(row) > 29 else None) # Col AD (Atraso)
         if prazo == "ATRASADO" and atraso_dias <= 0 and tempo_dias > 3:
             atraso_dias = tempo_dias - 3
             
+        # Ano baseado na data de entrada
+        ano_entrada = dt_entrada_iso[:4] if dt_entrada_iso else "NÃO INFORMADO"
+        
         record = {
             "cod": cod,
             "area_tecnica": area_tecnica,
@@ -257,6 +300,7 @@ def main():
             "data_entrega": dt_entrega_iso,
             "data_entrega_fmt": format_date_br(dt_entrega_iso),
             "competencia": competencia,
+            "ano": ano_entrada,
             "status": status,
             "status_relatorio": status_relatorio,
             "status_obra": status_obra_raw,
@@ -274,6 +318,7 @@ def main():
     status_list = sorted(list(set(r["status"] for r in records if r["status"])))
     prazos_list = ["NO PRAZO", "ATRASADO"]
     competencias = sorted(list(set(r["competencia"] for r in records if r["competencia"] and r["competencia"] != "NÃO INFORMADO")))
+    anos = sorted(list(set(r["ano"] for r in records if r.get("ano") and r["ano"] != "NÃO INFORMADO")))
     
     metadata = {
         "total_records": len(records),
@@ -283,7 +328,8 @@ def main():
         "areas_tecnicas": areas,
         "status_list": status_list,
         "prazos": prazos_list,
-        "competencias": competencias
+        "competencias": competencias,
+        "anos": anos
     }
     
     out_js = os.path.join(base_dir, "sar_data.js")
