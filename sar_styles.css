@@ -13,7 +13,7 @@
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) 38px;
     gap: 10px;
     align-items: end;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
 }
 
 @media (max-width: 768px) {
@@ -164,40 +164,60 @@
     border-color: var(--color-primary);
 }
 
-/* -- Grid Layouts do SAR (Exatamente como no MDU) -- */
+/* -- Grid Layouts do SAR (Exatamente como no MDU / Veículos) -- */
+#view-sar-container .subtab-pane {
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    animation: fadeInSubview 0.3s ease-out;
+}
+
+#view-sar-container .subtab-pane.active {
+    display: flex;
+}
+
+/* Cancelar double-gap: elementos internos já separados pelo gap: 20px do subtab-pane */
+#view-sar-container .sar-kpi-grid,
+#view-sar-container .sar-grid-status-sla,
+#view-sar-container .sar-grid-3cols,
+#view-sar-container .sar-grid-2cols,
+#view-sar-container .sar-grid-1col-wide {
+    margin-bottom: 0 !important;
+}
+
 .sar-grid-status-sla {
     display: grid;
     grid-template-columns: 1.4fr 1fr;
     gap: 20px;
-    margin-bottom: 24px;
+    margin-bottom: 0;
 }
 
 .sar-grid-3cols {
     display: grid;
     grid-template-columns: 1.2fr 1fr 1fr;
     gap: 20px;
-    margin-bottom: 24px;
+    margin-bottom: 0;
 }
 
 .sar-grid-2cols {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
-    margin-bottom: 24px;
+    margin-bottom: 0;
 }
 
 .sar-grid-1col-wide {
     display: grid;
     grid-template-columns: 1fr;
     gap: 20px;
-    margin-bottom: 24px;
+    margin-bottom: 0;
 }
 
 @media (max-width: 1024px) {
     .sar-grid-status-sla, .sar-grid-3cols, .sar-grid-2cols, .sar-grid-1col-wide {
         grid-template-columns: 1fr;
         gap: 16px;
-        margin-bottom: 16px;
+        margin-bottom: 0;
     }
 }
 
@@ -206,7 +226,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
-    margin-bottom: 24px;
+    margin-bottom: 0;
 }
 
 @media (max-width: 1200px) {
