@@ -2089,46 +2089,30 @@
                     </div>
                 </div>
 
-                <!-- Gráficos Row 1 (Superior): Status Geral (Colunas) + Top Cidades -->
+                <!-- Gráficos Row 1 (Superior): Status Geral (Colunas) + Distribuição de SLA (Rosca) -->
                 <div class="sar-grid-2cols">
                     <div class="sar-card">
                         <div class="sar-card-title">Distribuição por Status Geral</div>
-                        <div class="sar-chart-container" style="height: 260px;">
+                        <div class="sar-chart-container">
                             <canvas id="sar-chart-status"></canvas>
                         </div>
                     </div>
                     <div class="sar-card">
-                        <div class="sar-card-title">Top 8 Cidades por Volume</div>
-                        <div class="sar-chart-container" style="height: 260px;">
-                            <canvas id="sar-chart-cidade"></canvas>
+                        <div class="sar-card-title">Distribuição de SLA (No Prazo vs Atrasado)</div>
+                        <div class="sar-chart-container">
+                            <canvas id="sar-chart-prazo"></canvas>
                         </div>
                     </div>
                 </div>
 
-                <!-- Gráficos Row 2 (Inferior): Evolução Temporal + Prazo SLA -->
-                <div class="sar-grid-2cols">
+                <!-- Gráficos Row 2 (Inferior): Evolução Mensal de Entradas (Largura Total) -->
+                <div class="sar-grid-1col-wide">
                     <div class="sar-card">
-                        <div class="sar-card-title" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
-                            <span id="sar-evolution-title">Evolução de Entradas</span>
-                            <div style="display: flex; gap: 6px; align-items: center;">
-                                <div class="sar-granularity-btns">
-                                    <button class="sar-btn-gran active" id="sar-btn-gran-year" onclick="setSarTimeGranularity('year')">Ano</button>
-                                    <button class="sar-btn-gran" id="sar-btn-gran-month" onclick="setSarTimeGranularity('month')">Mês</button>
-                                    <button class="sar-btn-gran" id="sar-btn-gran-day" onclick="setSarTimeGranularity('day')">Dia</button>
-                                </div>
-                                <button id="sar-drilldown-back-btn" style="display: none; align-items: center; gap: 6px; padding: 4px 8px; font-size: 11px; font-weight: 700; color: #fff; background: var(--color-primary); border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; cursor: pointer; transition: all 0.2s ease;" onclick="backFromSarDrilldown()">
-                                    <i class="fa-solid fa-arrow-left"></i> Voltar
-                                </button>
-                            </div>
+                        <div class="sar-card-title">
+                            <span id="sar-evolution-title">Evolução Mensal de Entradas</span>
                         </div>
-                        <div class="sar-chart-container" style="height: 260px;">
+                        <div class="sar-chart-container">
                             <canvas id="sar-chart-evolution"></canvas>
-                        </div>
-                    </div>
-                    <div class="sar-card">
-                        <div class="sar-card-title">Distribuição de SLA (No Prazo vs Atrasado)</div>
-                        <div class="sar-chart-container" style="height: 260px;">
-                            <canvas id="sar-chart-prazo"></canvas>
                         </div>
                     </div>
                 </div>

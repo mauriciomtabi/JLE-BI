@@ -180,24 +180,25 @@ def main():
         endereco = clean_str(row[7] if len(row) > 7 else None)
         caixa_mdu = clean_str(row[8] if len(row) > 8 else None)
         
-        status_raw = clean_str(row[10] if len(row) > 10 else None)
-        status_upper = status_raw.upper()
+        # Status da Obra (Col K / 11)
+        status_obra_raw = clean_str(row[10] if len(row) > 10 else None)
         
-        # Normalização do Status Geral
-        if "CONCLU" in status_upper or "FINALIZAD" in status_upper or "OK" in status_upper:
-            status = "CONCLUÍDO"
-        elif "CANCELAD" in status_upper:
-            status = "CANCELADO"
-        elif "ANDAMENTO" in status_upper or "EXECU" in status_upper:
-            status = "ANDAMENTO"
-        elif "SEM SINAL" in status_upper:
-            status = "SEM SINAL"
-        elif "PARALISAD" in status_upper or "PAUSA" in status_upper:
-            status = "PARALISADO"
-        elif status_raw != "":
-            status = status_raw.title()
+        # Status Geral / Medição (Col Z / 26 - Bloco Indicador de Status)
+        status_medicao_raw = clean_str(row[25] if len(row) > 25 else None)
+        status_upper = status_medicao_raw.upper()
+        
+        if "CONCLU" in status_upper or "OK" in status_upper:
+            status = "CONCLUÍDA"
+        elif "AG." in status_upper or "RELAT" in status_upper:
+            status = "AG. RELATÓRIO"
+        elif "PEND" in status_upper:
+            status = "PENDENTE"
+        elif status_medicao_raw != "":
+            status = status_medicao_raw.upper()
         else:
             status = "NÃO INFORMADO"
+            
+        status_relatorio = clean_str(row[26] if len(row) > 26 else None) # Col AA (Status Relatório)
             
         classe_l = clean_str(row[11] if len(row) > 11 else None)
         classe_f = clean_str(row[12] if len(row) > 12 else None)
@@ -214,12 +215,9 @@ def main():
         # Competência baseada na data de entrada
         competencia = get_competencia(dt_entrada_iso)
         
-        status_medicao = clean_str(row[25] if len(row) > 25 else None) # Col Z
-        status_relatorio = clean_str(row[26] if len(row) > 26 else None) # Col AA
+        tempo_dias = to_number(row[27] if len(row) > 27 else None) # Col AB (Tempo)
         
-        tempo_dias = to_number(row[27] if len(row) > 27 else None) # Col AB
-        
-        prazo_raw = clean_str(row[28] if len(row) > 28 else None).upper() # Col AC
+        prazo_raw = clean_str(row[28] if len(row) > 28 else None).upper() # Col AC (Prazo)
         if "NO PRAZO" in prazo_raw or "DENTRO" in prazo_raw:
             prazo = "NO PRAZO"
         elif "ATRASAD" in prazo_raw or "FORA" in prazo_raw:
@@ -232,7 +230,7 @@ def main():
             else:
                 prazo = "NÃO INFORMADO"
                 
-        atraso_dias = to_number(row[29] if len(row) > 29 else None) # Col AD
+        atraso_dias = to_number(row[29] if len(row) > 29 else None) # Col AD (Atraso)
         if prazo == "ATRASADO" and atraso_dias <= 0 and tempo_dias > 3:
             atraso_dias = tempo_dias - 3
             
@@ -245,7 +243,6 @@ def main():
             "condominio": condominio,
             "endereco": endereco,
             "caixa_mdu": caixa_mdu,
-            "status": status,
             "classe_l": classe_l,
             "classe_f": classe_f,
             "situacao": situacao,
@@ -260,10 +257,11 @@ def main():
             "data_entrega": dt_entrega_iso,
             "data_entrega_fmt": format_date_br(dt_entrega_iso),
             "competencia": competencia,
-            "status_medicao": status_medicao,
+            "status": status,
             "status_relatorio": status_relatorio,
-            "tempo_dias": tempo_dias,
+            "status_obra": status_obra_raw,
             "prazo": prazo,
+            "tempo_dias": tempo_dias,
             "atraso_dias": atraso_dias
         }
         records.append(record)

@@ -15,11 +15,8 @@ let sarSortOrder = 'desc';
 let sarPerformanceSortColumn = 'total';
 let sarPerformanceSortOrder = 'desc';
 
-// Estado de visualização de Drill-down e Granularidade Temporal
-let sarTimeGranularity = 'year'; // 'year', 'month', 'day'
-let sarDrilldownYear = null;
-let sarDrilldownMonth = null; // '01'..'12'
-let sarDrilldownMonthLabel = null;
+// Estado de visualização de Granularidade Temporal
+let sarTimeGranularity = 'month'; // 'month' padrão
 
 // Filtros do SAR
 const sarFilters = {
@@ -419,11 +416,13 @@ function updateSarKpis(data) {
 /**
  * Renderiza os Gráficos Chart.js
  */
+/**
+ * Renderiza os Gráficos Chart.js do SAR
+ */
 function renderSarCharts(data) {
     renderSarStatusChart(data);
-    renderSarCidadeChart(data);
-    renderSarEvolutionChart(data);
     renderSarPrazoChart(data);
+    renderSarEvolutionChart(data);
 }
 
 /**
@@ -513,54 +512,49 @@ function renderSarStatusChart(data) {
 }
 
 /**
- * Gráfico 2 (Superior Direito): Top 8 Cidades por Volume
+ * Gráfico 2 (Superior Direito): Distribuição de SLA (No Prazo vs Atrasado - Doughnut com Datalabels)
  */
-function renderSarCidadeChart(data) {
-    const ctx = document.getElementById('sar-chart-cidade');
+function renderSarPrazoChart(data) {
+    const ctx = document.getElementById('sar-chart-prazo');
     if (!ctx) return;
 
-    if (sarCharts.cidade) {
-        sarCharts.cidade.destroy();
-        sarCharts.cidade = null;
+    if (sarCharts.prazo) {
+        sarCharts.prazo.destroy();
+        sarCharts.prazo = null;
     }
 
-    const cityMap = {};
+    let noPrazo = 0;
+    let atrasado = 0;
     data.forEach(r => {
-        const c = r.cidade || 'OUTRAS';
-        cityMap[c] = (cityMap[c] || 0) + 1;
+        if (r.prazo === 'NO PRAZO') noPrazo++;
+        else if (r.prazo === 'ATRASADO') atrasado++;
     });
 
-    const sortedCities = Object.entries(cityMap)
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 8);
-
-    const labels = sortedCities.map(x => x[0]);
-    const counts = sortedCities.map(x => x[1]);
-
+    const totalPrazo = noPrazo + atrasado;
     const pluginList = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
 
-    sarCharts.cidade = new Chart(ctx, {
-        type: 'bar',
+    sarCharts.prazo = new Chart(ctx, {
+        type: 'doughnut',
         data: {
-            labels: labels,
+            labels: ['No Prazo', 'Atrasado'],
             datasets: [{
-                label: 'OSs SAR',
-                data: counts,
-                backgroundColor: 'rgba(56, 139, 253, 0.85)',
-                borderColor: '#388bfd',
-                borderWidth: 1,
-                borderRadius: 4,
-                barPercentage: 0.75,
-                categoryPercentage: 0.85
+                data: [noPrazo, atrasado],
+                backgroundColor: ['#10b981', '#f85149'],
+                borderColor: '#161b22',
+                borderWidth: 2,
+                hoverOffset: 6
             }]
         },
         plugins: pluginList,
         options: {
-            indexAxis: 'y',
             responsive: true,
             maintainAspectRatio: false,
+            cutout: '62%',
             plugins: {
-                legend: { display: false },
+                legend: {
+                    position: 'bottom',
+                    labels: { color: '#c9d1d9', font: { family: 'Outfit, Inter', size: 11 }, padding: 12 }
+                },
                 tooltip: {
                     backgroundColor: '#161b22',
                     borderColor: 'rgba(255, 255, 255, 0.15)',
@@ -569,23 +563,12 @@ function renderSarCidadeChart(data) {
                 datalabels: {
                     display: true,
                     color: '#ffffff',
-                    anchor: 'end',
-                    align: 'right',
-                    offset: 4,
-                    font: { weight: 'bold', size: 10, family: 'Outfit, Inter' },
-                    formatter: (val) => val > 0 ? val.toLocaleString('pt-BR') : ''
-                }
-            },
-            scales: {
-                x: {
-                    grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                    ticks: { color: '#8b949e', font: { size: 10 } },
-                    beginAtZero: true,
-                    grace: '12%'
-                },
-                y: {
-                    grid: { display: false },
-                    ticks: { color: '#c9d1d9', font: { size: 10, family: 'Outfit, Inter' } }
+                    font: { weight: 'bold', size: 11, family: 'Outfit, Inter' },
+                    formatter: (val) => {
+                        if (!val || totalPrazo === 0) return '';
+                        const pct = ((val * 100) / totalPrazo).toFixed(1) + '%';
+                        return `${val}\n(${pct})`;
+                    }
                 }
             }
         }
@@ -593,7 +576,7 @@ function renderSarCidadeChart(data) {
 }
 
 /**
- * Gráfico 3 (Inferior Esquerdo): Evolução Temporal de Entradas com Drill-Down em 3 Níveis (Ano -> Mês -> Dia)
+ * Gráfico 3 (Inferior - Largura Total): Evolução Mensal de Entradas
  */
 function renderSarEvolutionChart(data) {
     const ctx = document.getElementById('sar-chart-evolution');
@@ -605,111 +588,30 @@ function renderSarEvolutionChart(data) {
     }
 
     const titleEl = document.getElementById('sar-evolution-title');
+    if (titleEl) {
+        titleEl.innerText = 'Evolução Mensal de Entradas';
+    }
+
     const pluginList = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
 
-    let labels = [];
-    let counts = [];
-    let keys = [];
-    let clickHandler = null;
-
-    // Nível 1: Visão Anual
-    if (sarTimeGranularity === 'year' && !sarDrilldownYear) {
-        if (titleEl) titleEl.innerText = 'Evolução Anual de Entradas (Clique no ano para detalhar os meses)';
-
-        const yearMap = {};
-        data.forEach(r => {
-            if (r.data_entrada) {
-                const ano = r.data_entrada.substring(0, 4);
-                if (ano && ano.length === 4) {
-                    yearMap[ano] = (yearMap[ano] || 0) + 1;
-                }
+    const monthMap = {};
+    data.forEach(r => {
+        if (r.data_entrada) {
+            const ym = r.data_entrada.substring(0, 7); // YYYY-MM
+            const [ano, mes] = ym.split('-');
+            const mesNum = parseInt(mes);
+            const label = `${MESES_PT_LABEL[mesNum] || mes}/${ano.substring(2)}`;
+            
+            if (!monthMap[ym]) {
+                monthMap[ym] = { ym, label, count: 0 };
             }
-        });
-
-        keys = Object.keys(yearMap).sort();
-        labels = keys.map(y => `Ano ${y}`);
-        counts = keys.map(y => yearMap[y]);
-
-        clickHandler = function(evt, elements) {
-            if (elements && elements.length > 0) {
-                const idx = elements[0].index;
-                const clickedYear = keys[idx];
-                sarDrilldownYear = clickedYear;
-                sarTimeGranularity = 'month';
-                updateSarGranularityButtons();
-                updateSarDrilldownBackButton();
-                renderSarEvolutionChart(data);
-            }
-        };
-
-    // Nível 2: Visão Mensal
-    } else if (sarTimeGranularity === 'month' || (sarDrilldownYear && !sarDrilldownMonth)) {
-        const yearTarget = sarDrilldownYear;
-        if (titleEl) {
-            titleEl.innerText = yearTarget 
-                ? `Evolução Mensal de Entradas — Ano ${yearTarget} (Clique no mês para ver os dias)`
-                : `Evolução Mensal de Entradas (Clique no mês para ver os dias)`;
+            monthMap[ym].count++;
         }
+    });
 
-        const monthMap = {};
-        data.forEach(r => {
-            if (r.data_entrada) {
-                const rAno = r.data_entrada.substring(0, 4);
-                if (!yearTarget || rAno === yearTarget) {
-                    const ym = r.data_entrada.substring(0, 7); // YYYY-MM
-                    const [ano, mes] = ym.split('-');
-                    const mesNum = parseInt(mes);
-                    const label = yearTarget ? (MESES_PT_LABEL[mesNum] || mes) : `${MESES_PT_LABEL[mesNum] || mes}/${ano.substring(2)}`;
-                    
-                    if (!monthMap[ym]) {
-                        monthMap[ym] = { ym, label, count: 0, ano, mes };
-                    }
-                    monthMap[ym].count++;
-                }
-            }
-        });
-
-        keys = Object.keys(monthMap).sort();
-        labels = keys.map(k => monthMap[k].label);
-        counts = keys.map(k => monthMap[k].count);
-
-        clickHandler = function(evt, elements) {
-            if (elements && elements.length > 0) {
-                const idx = elements[0].index;
-                const item = monthMap[keys[idx]];
-                sarDrilldownYear = item.ano;
-                sarDrilldownMonth = item.mes;
-                sarDrilldownMonthLabel = `${MESES_PT_FULL[parseInt(item.mes)]}/${item.ano}`;
-                sarTimeGranularity = 'day';
-                updateSarGranularityButtons();
-                updateSarDrilldownBackButton();
-                renderSarEvolutionChart(data);
-            }
-        };
-
-    // Nível 3: Visão Diária
-    } else {
-        const ymTarget = (sarDrilldownYear && sarDrilldownMonth) ? `${sarDrilldownYear}-${sarDrilldownMonth}` : null;
-        if (titleEl) {
-            titleEl.innerText = sarDrilldownMonthLabel 
-                ? `Evolução Diária de Entradas — ${sarDrilldownMonthLabel}`
-                : `Evolução Diária de Entradas`;
-        }
-
-        const dayMap = {};
-        data.forEach(r => {
-            if (r.data_entrada) {
-                if (!ymTarget || r.data_entrada.startsWith(ymTarget)) {
-                    const day = r.data_entrada.substring(8, 10);
-                    dayMap[day] = (dayMap[day] || 0) + 1;
-                }
-            }
-        });
-
-        keys = Object.keys(dayMap).sort((a, b) => parseInt(a) - parseInt(b));
-        labels = keys.map(d => `Dia ${d}`);
-        counts = keys.map(d => dayMap[d]);
-    }
+    const keys = Object.keys(monthMap).sort();
+    const labels = keys.map(k => monthMap[k].label);
+    const counts = keys.map(k => monthMap[k].count);
 
     sarCharts.evolution = new Chart(ctx, {
         type: 'bar',
@@ -760,8 +662,7 @@ function renderSarEvolutionChart(data) {
                     beginAtZero: true,
                     grace: '10%'
                 }
-            },
-            onClick: clickHandler
+            }
         }
     });
 }
