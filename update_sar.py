@@ -322,7 +322,7 @@ def main():
     
     metadata = {
         "total_records": len(records),
-        "generated_at": datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.000Z"),
+        "generated_at": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "source_file": os.path.basename(input_file),
         "cidades": cidades,
         "areas_tecnicas": areas,

@@ -244,9 +244,11 @@
 }
 
 .sar-kpi-card.kpi-total { --kpi-border-color: var(--color-primary); --kpi-glow-color: 30, 144, 255; }
+.sar-kpi-card.kpi-finalizado, .sar-kpi-card.kpi-concluidas { --kpi-border-color: var(--color-success); --kpi-glow-color: 46, 213, 115; }
+.sar-kpi-card.kpi-andamento { --kpi-border-color: var(--color-warning); --kpi-glow-color: 255, 165, 2; }
+.sar-kpi-card.kpi-tempo { --kpi-border-color: #a855f7; --kpi-glow-color: 168, 85, 247; }
 .sar-kpi-card.kpi-no-prazo { --kpi-border-color: var(--color-success); --kpi-glow-color: 16, 185, 129; }
 .sar-kpi-card.kpi-atrasado { --kpi-border-color: var(--color-danger); --kpi-glow-color: 248, 81, 73; }
-.sar-kpi-card.kpi-tempo { --kpi-border-color: var(--color-warning); --kpi-glow-color: 245, 158, 11; }
 
 .sar-kpi-title {
     font-size: 0.85rem;

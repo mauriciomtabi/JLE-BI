@@ -2037,47 +2037,47 @@
 
             <!-- Sub Tab Pane: Indicadores -->
             <div id="subview-sar-indicators" class="subtab-pane active">
-                <!-- KPI Cards -->
+                <!-- KPI Cards (Não Redundantes) -->
                 <div class="sar-kpi-grid">
                     <div class="sar-kpi-card kpi-total">
                         <div class="kpi-info" style="flex-grow: 1;">
                             <span class="sar-kpi-title" style="text-transform: none;">TOTAL DE OSs SAR</span>
                             <h3 class="sar-kpi-value" id="sar-kpi-total">0</h3>
                             <div class="sar-kpi-footer">
-                                <span>Total no filtro selecionado</span>
+                                <span>Total de registros importados</span>
                             </div>
                         </div>
                         <div class="kpi-icon-container">
                             <i class="fa-solid fa-network-wired"></i>
                         </div>
                     </div>
-                    <div class="sar-kpi-card kpi-no-prazo">
+                    <div class="sar-kpi-card kpi-finalizado">
                         <div class="kpi-info" style="flex-grow: 1;">
-                            <span class="sar-kpi-title">No Prazo (SLA 3 dias)</span>
-                            <h3 class="sar-kpi-value" id="sar-kpi-no-prazo">0</h3>
+                            <span class="sar-kpi-title">CONCLUÍDAS</span>
+                            <h3 class="sar-kpi-value" id="sar-kpi-concluidas">0</h3>
                             <div class="sar-kpi-footer">
-                                <span id="sar-kpi-no-prazo-pct">0%</span> de conformidade
+                                <span id="sar-kpi-concluidas-pct">0%</span> do total
                             </div>
                         </div>
                         <div class="kpi-icon-container">
                             <i class="fa-solid fa-circle-check"></i>
                         </div>
                     </div>
-                    <div class="sar-kpi-card kpi-atrasado">
+                    <div class="sar-kpi-card kpi-andamento">
                         <div class="kpi-info" style="flex-grow: 1;">
-                            <span class="sar-kpi-title">Atrasados</span>
-                            <h3 class="sar-kpi-value" id="sar-kpi-atrasado">0</h3>
+                            <span class="sar-kpi-title">EM ANDAMENTO</span>
+                            <h3 class="sar-kpi-value" id="sar-kpi-andamento">0</h3>
                             <div class="sar-kpi-footer">
-                                <span id="sar-kpi-atrasado-pct">0%</span> fora do SLA
+                                <span id="sar-kpi-andamento-pct">0%</span> em execução
                             </div>
                         </div>
                         <div class="kpi-icon-container">
-                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <i class="fa-solid fa-clock-rotate-left"></i>
                         </div>
                     </div>
                     <div class="sar-kpi-card kpi-tempo">
                         <div class="kpi-info" style="flex-grow: 1;">
-                            <span class="sar-kpi-title">Tempo Médio de Atendimento</span>
+                            <span class="sar-kpi-title">TEMPO MÉDIO DE ATENDIMENTO</span>
                             <h3 class="sar-kpi-value" id="sar-kpi-tempo-medio">0 dias</h3>
                             <div class="sar-kpi-footer">
                                 <span id="sar-kpi-tempo-atraso-detalhe">Atraso médio: 0 dias</span>
@@ -2089,54 +2089,59 @@
                     </div>
                 </div>
 
-                <!-- Gráficos Row 1 (Superior): Status Geral (Colunas) + Distribuição de SLA (Rosca) -->
-                <div class="sar-grid-2cols">
-                    <div class="sar-card">
-                        <div class="sar-card-title">Distribuição por Status Geral</div>
-                        <div class="sar-chart-container">
-                            <canvas id="sar-chart-status"></canvas>
+                <!-- Charts Row 1: 2-Column Grid (Idêntico ao MDU) -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: stretch; min-width: 0; margin-bottom: 24px;">
+                    <!-- Coluna Esquerda: Gráficos -->
+                    <div style="display: flex; flex-direction: column; gap: 20px; min-width: 0;">
+                        <!-- Card 1: Distribuição por Status Geral -->
+                        <div class="sar-card">
+                            <div class="sar-card-title">Distribuição por Status Geral</div>
+                            <div class="sar-chart-container" style="height: 250px;">
+                                <canvas id="sar-chart-status"></canvas>
+                            </div>
+                        </div>
+                        <!-- Card 2: Distribuição de SLA (Rosca/Doughnut) -->
+                        <div class="sar-card">
+                            <div class="sar-card-title">Distribuição de SLA (No Prazo vs Atrasado)</div>
+                            <div class="sar-chart-container" style="height: 250px;">
+                                <canvas id="sar-chart-prazo"></canvas>
+                            </div>
                         </div>
                     </div>
-                    <div class="sar-card">
-                        <div class="sar-card-title">Distribuição de SLA (No Prazo vs Atrasado)</div>
-                        <div class="sar-chart-container">
-                            <canvas id="sar-chart-prazo"></canvas>
+
+                    <!-- Coluna Direita: Desempenho por Executor -->
+                    <div class="sar-card" style="display: flex; flex-direction: column; min-width: 0; height: 100%;">
+                        <div class="sar-card-title">Desempenho por Executor (Classe L & Classe F)</div>
+                        <div class="sar-table-wrapper no-scrollbar" style="border: none; overflow-x: auto; max-height: 540px; overflow-y: scroll; flex-grow: 1; display: flex; flex-direction: column;">
+                            <table class="sar-performance-table" style="width: 100%; height: 100%; border-collapse: collapse;">
+                                <thead>
+                                    <tr>
+                                        <th onclick="sortSarPerformance('nome')" style="cursor:pointer; user-select: none;" id="sar-perf-th-executor">Executor <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarPerformance('noPrazo')" style="cursor:pointer; text-align: center; white-space: nowrap; user-select: none;" id="sar-perf-th-no-prazo">No Prazo <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarPerformance('atrasado')" style="cursor:pointer; text-align: center; white-space: nowrap; user-select: none;" id="sar-perf-th-atrasado">Atrasado <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarPerformance('noPrazoPct')" style="cursor:pointer; text-align: center; white-space: nowrap; user-select: none;" id="sar-perf-th-pct">% SLA <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarPerformance('total')" style="cursor:pointer; text-align: center; white-space: nowrap; user-select: none; font-weight: 700;" id="sar-perf-th-total">Total <i class="fa-solid fa-sort"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="sar-performance-table-body">
+                                    <tr><td colspan="5" style="text-align:center; color: var(--text-secondary); padding: 30px 0;">Carregando executores...</td></tr>
+                                </tbody>
+                                <tfoot id="sar-performance-table-footer">
+                                    <!-- Populated dynamically -->
+                                </tfoot>
+                            </table>
                         </div>
                     </div>
                 </div>
 
-                <!-- Gráficos Row 2 (Inferior): Evolução Mensal de Entradas (Largura Total) -->
+                <!-- Charts Row 2: Evolução Mensal de Entradas (Largura Total) -->
                 <div class="sar-grid-1col-wide">
                     <div class="sar-card">
                         <div class="sar-card-title">
                             <span id="sar-evolution-title">Evolução Mensal de Entradas</span>
                         </div>
-                        <div class="sar-chart-container">
+                        <div class="sar-chart-container" style="height: 260px;">
                             <canvas id="sar-chart-evolution"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Gráficos Row 3: Desempenho por Executor -->
-                <div class="sar-grid-1col-wide">
-                    <div class="sar-card">
-                        <div class="sar-card-title">Desempenho por Executor (Classe L & Classe F)</div>
-                        <div class="sar-table-wrapper sar-no-scrollbar" style="border: none; max-height: 400px; overflow-y: auto;">
-                            <table class="sar-performance-table">
-                                <thead>
-                                    <tr>
-                                        <th onclick="sortSarPerformance('nome')" style="cursor:pointer; user-select: none;">Executor <i class="fa-solid fa-sort"></i></th>
-                                        <th onclick="sortSarPerformance('noPrazo')" style="cursor:pointer; user-select: none;">No Prazo <i class="fa-solid fa-sort"></i></th>
-                                        <th onclick="sortSarPerformance('atrasado')" style="cursor:pointer; user-select: none;">Atrasado <i class="fa-solid fa-sort"></i></th>
-                                        <th onclick="sortSarPerformance('noPrazo')" style="cursor:pointer; user-select: none;">% No Prazo <i class="fa-solid fa-sort"></i></th>
-                                        <th onclick="sortSarPerformance('total')" style="cursor:pointer; user-select: none;">Total <i class="fa-solid fa-sort"></i></th>
-                                    </tr>
-                                </thead>
-                                <tbody id="sar-performance-table-body">
-                                    <tr><td colspan="5" style="text-align:center; color: var(--text-secondary); padding: 20px;">Carregando executores...</td></tr>
-                                </tbody>
-                                <tfoot id="sar-performance-table-footer"></tfoot>
-                            </table>
                         </div>
                     </div>
                 </div>
@@ -3193,14 +3198,19 @@
 
         function formatTimestamp(str) {
             if (!str) return 'N/D';
-            const cleanStr = str.trim();
-            const match = cleanStr.match(/^(\d{4})-(\d{2})-(\d{2})\s+(\d{2}):(\d{2})/);
-            if (match) {
-                const [_, year, month, day, hour, minute] = match;
+            const cleanStr = String(str).trim();
+            const matchSpace = cleanStr.match(/^(\d{4})-(\d{2})-(\d{2})\s+(\d{2}):(\d{2})/);
+            if (matchSpace) {
+                const [_, year, month, day, hour, minute] = matchSpace;
+                return `${day}/${month}/${year} ${hour}:${minute}`;
+            }
+            const matchIso = cleanStr.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/);
+            if (matchIso) {
+                const [_, year, month, day, hour, minute] = matchIso;
                 return `${day}/${month}/${year} ${hour}:${minute}`;
             }
             try {
-                const d = new Date(cleanStr.replace(/-/g, '/'));
+                const d = new Date(cleanStr);
                 if (!isNaN(d.getTime())) {
                     const day = String(d.getDate()).padStart(2, '0');
                     const month = String(d.getMonth() + 1).padStart(2, '0');
@@ -3210,7 +3220,7 @@
                     return `${day}/${month}/${year} ${hour}:${minute}`;
                 }
             } catch (e) {}
-            return str;
+            return cleanStr;
         }
 
         // Known pages registry (for admin panel)

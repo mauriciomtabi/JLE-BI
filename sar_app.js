@@ -295,21 +295,24 @@ function applySarFilters() {
  */
 function updateSarKpis(data) {
     const total = data.length;
-    let noPrazoCount = 0;
-    let atrasadoCount = 0;
+    let concluidasCount = 0;
+    let andamentoCount = 0;
     let somaTempo = 0;
     let countTempo = 0;
     let somaAtraso = 0;
     let countAtraso = 0;
 
     data.forEach(r => {
-        if (r.prazo === 'NO PRAZO') noPrazoCount++;
-        if (r.prazo === 'ATRASADO') {
-            atrasadoCount++;
-            if (r.atraso_dias > 0) {
-                somaAtraso += r.atraso_dias;
-                countAtraso++;
-            }
+        const st = (r.status || '').toUpperCase();
+        if (st === 'CONCLUÍDA' || st === 'CONCLUIDA') {
+            concluidasCount++;
+        } else if (st !== 'CANCELADO' && st !== 'CANCELADA') {
+            andamentoCount++;
+        }
+        
+        if (r.prazo === 'ATRASADO' && r.atraso_dias > 0) {
+            somaAtraso += r.atraso_dias;
+            countAtraso++;
         }
         if (r.tempo_dias > 0) {
             somaTempo += r.tempo_dias;
@@ -317,8 +320,8 @@ function updateSarKpis(data) {
         }
     });
 
-    const noPrazoPct = total > 0 ? ((noPrazoCount / total) * 100).toFixed(1) : '0';
-    const atrasadoPct = total > 0 ? ((atrasadoCount / total) * 100).toFixed(1) : '0';
+    const concluidasPct = total > 0 ? ((concluidasCount / total) * 100).toFixed(1) : '0';
+    const andamentoPct = total > 0 ? ((andamentoCount / total) * 100).toFixed(1) : '0';
     const mediaTempo = countTempo > 0 ? (somaTempo / countTempo).toFixed(1) : '0';
     const mediaAtraso = countAtraso > 0 ? (somaAtraso / countAtraso).toFixed(1) : '0';
 
@@ -326,15 +329,15 @@ function updateSarKpis(data) {
     const elTotal = document.getElementById('sar-kpi-total');
     if (elTotal) elTotal.innerText = total.toLocaleString('pt-BR');
 
-    const elNoPrazo = document.getElementById('sar-kpi-no-prazo');
-    const elNoPrazoPct = document.getElementById('sar-kpi-no-prazo-pct');
-    if (elNoPrazo) elNoPrazo.innerText = noPrazoCount.toLocaleString('pt-BR');
-    if (elNoPrazoPct) elNoPrazoPct.innerText = `${noPrazoPct}% de conformidade`;
+    const elConcluidas = document.getElementById('sar-kpi-concluidas');
+    const elConcluidasPct = document.getElementById('sar-kpi-concluidas-pct');
+    if (elConcluidas) elConcluidas.innerText = concluidasCount.toLocaleString('pt-BR');
+    if (elConcluidasPct) elConcluidasPct.innerText = `${concluidasPct}%`;
 
-    const elAtrasado = document.getElementById('sar-kpi-atrasado');
-    const elAtrasadoPct = document.getElementById('sar-kpi-atrasado-pct');
-    if (elAtrasado) elAtrasado.innerText = atrasadoCount.toLocaleString('pt-BR');
-    if (elAtrasadoPct) elAtrasadoPct.innerText = `${atrasadoPct}% fora do SLA`;
+    const elAndamento = document.getElementById('sar-kpi-andamento');
+    const elAndamentoPct = document.getElementById('sar-kpi-andamento-pct');
+    if (elAndamento) elAndamento.innerText = andamentoCount.toLocaleString('pt-BR');
+    if (elAndamentoPct) elAndamentoPct.innerText = `${andamentoPct}%`;
 
     const elTempoMedio = document.getElementById('sar-kpi-tempo-medio');
     const elTempoAtraso = document.getElementById('sar-kpi-tempo-atraso-detalhe');
@@ -718,11 +721,14 @@ function renderSarPerformanceTable(data) {
     });
 
     let execList = Object.values(execMap);
+    execList.forEach(item => {
+        item.noPrazoPct = item.total > 0 ? (item.noPrazo / item.total) * 100 : 0;
+    });
 
     // Ordenação
     execList.sort((a, b) => {
-        let valA = a[sarPerformanceSortColumn] || 0;
-        let valB = b[sarPerformanceSortColumn] || 0;
+        let valA = a[sarPerformanceSortColumn] !== undefined ? a[sarPerformanceSortColumn] : 0;
+        let valB = b[sarPerformanceSortColumn] !== undefined ? b[sarPerformanceSortColumn] : 0;
         if (sarPerformanceSortColumn === 'nome') {
             return sarPerformanceSortOrder === 'asc' ? a.nome.localeCompare(b.nome) : b.nome.localeCompare(a.nome);
         }
