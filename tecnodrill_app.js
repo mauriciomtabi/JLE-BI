@@ -177,10 +177,9 @@
         if (a >= 1000000) return (a / 1000000).toFixed(1).replace('.', ',') + 'M';
         if (a >= 1000) return (a / 1000).toFixed(0) + 'k';
         return a.toFixed(0);
-    }
-
     function nonTransfer(txs) {
-        return txs;
+        if (!txs) return [];
+        return txs.filter(t => !t.is_transfer && t.categoria !== 'Saldo Inicial');
     }
 
     // ──────────────────────────────────────────────
@@ -328,6 +327,7 @@
             const ufVal = document.getElementById('td-filter-uf')?.value || 'ALL';
 
             const filteredForEvolution = tdAllTransactions.filter(t => {
+                if (t.is_transfer || t.categoria === 'Saldo Inicial') return false;
                 if (catVal !== 'ALL' && t.categoria !== catVal) return false;
                 if (ufVal !== 'ALL' && t.uf !== ufVal) return false;
                 return true;

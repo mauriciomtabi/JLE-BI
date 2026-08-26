@@ -4960,13 +4960,15 @@
             renderTable();
         }
 
-        // KPIs (Geração/Fluxo Líquido removido a pedido do usuário)
+        // KPIs (Entradas e Saídas Operacionais Reais, excluindo Transferências e Saldo Inicial)
         function calculateKPIs() {
             let totalEntradas = 0;
             let totalSaidas = 0;
             
             filteredTransactions.forEach(t => {
-                // Incluímos o Saldo Inicial no total de entradas para bater exatamente com a planilha base original
+                // Excluímos transferências entre contas e saldo inicial dos totais operacionais de Entradas e Saídas
+                if (t.is_transfer || t.categoria === 'Saldo Inicial') return;
+                
                 if (t.fluxo === 'Entrada') {
                     totalEntradas += t.valor_nominal;
                 } else if (t.fluxo === 'Saída') {
@@ -5044,7 +5046,7 @@
             // 2. Comparativo vs. Mês Anterior (Saídas)
             const getMonthSaidas = (m) => {
                 return transactions.filter(t => {
-                    if (t.categoria === 'Saldo Inicial') return false;
+                    if (t.is_transfer || t.categoria === 'Saldo Inicial') return false;
                     if (t.competencia !== m) return false;
                     if (t.fluxo !== 'Saída') return false;
                     if (filterBanco !== 'ALL' && t.banco !== filterBanco) return false;
@@ -5087,7 +5089,7 @@
             // 4. Comparativo vs. Mês Anterior (Entradas)
             const getMonthEntradas = (m) => {
                 return transactions.filter(t => {
-                    if (t.categoria === 'Saldo Inicial') return false;
+                    if (t.is_transfer || t.categoria === 'Saldo Inicial') return false;
                     if (t.competencia !== m) return false;
                     if (t.fluxo !== 'Entrada') return false;
                     if (filterBanco !== 'ALL' && t.banco !== filterBanco) return false;
@@ -5290,6 +5292,7 @@
                 
                 // Usamos as transações filtradas por banco/categoria/uf, mas não por mês
                 const evolutionTxs = transactions.filter(t => {
+                    if (t.is_transfer || t.categoria === 'Saldo Inicial') return false;
                     const banco = document.getElementById('filter-banco').value;
                     const categoria = document.getElementById('filter-categoria').value;
                     const uf = document.getElementById('filter-uf').value;
@@ -5300,7 +5303,6 @@
                 });
                 
                 evolutionTxs.forEach(t => {
-                    if (t.categoria === 'Saldo Inicial') return;
                     const mIdx = months.indexOf(t.competencia);
                     if (mIdx !== -1) {
                         if (t.fluxo === 'Entrada') {
@@ -5435,7 +5437,7 @@
                 const dailySaidas = Array(maxDays).fill(0);
                 
                 filteredTransactions.forEach(t => {
-                    if (t.categoria === 'Saldo Inicial') return;
+                    if (t.is_transfer || t.categoria === 'Saldo Inicial') return;
                     if (t.data) {
                         const parts = t.data.split('-');
                         if (parts.length === 3) {
@@ -5667,6 +5669,7 @@
                 
                 const descSum = {};
                 filteredTransactions.forEach(t => {
+                    if (t.is_transfer || t.categoria === 'Saldo Inicial') return;
                     if (t.fluxo === categoryFluxState && t.categoria === targetCat) {
                         descSum[t.descricao] = (descSum[t.descricao] || 0) + t.valor_nominal;
                     }
@@ -5686,7 +5689,8 @@
                 
                 const categoriesSum = {};
                 filteredTransactions.forEach(t => {
-                    if (t.fluxo === categoryFluxState && t.categoria !== 'Saldo Inicial') {
+                    if (t.is_transfer || t.categoria === 'Saldo Inicial') return;
+                    if (t.fluxo === categoryFluxState) {
                         categoriesSum[t.categoria] = (categoriesSum[t.categoria] || 0) + t.valor_nominal;
                     }
                 });
@@ -5856,7 +5860,7 @@
             };
             
             mapTransactions.forEach(t => {
-                if (t.categoria === 'Saldo Inicial') return;
+                if (t.is_transfer || t.categoria === 'Saldo Inicial') return;
                 const uf = getTransactionUF(t);
                 if (ufMetrics.hasOwnProperty(uf)) {
                     ufMetrics[uf].txCount++;
@@ -6158,8 +6162,8 @@
             
             const customerSum = {};
             
-            // Filtrar transações de Entrada e Categoria 'Cobranças'
             filteredTransactions.forEach(t => {
+                if (t.is_transfer || t.categoria === 'Saldo Inicial') return;
                 if (t.fluxo === 'Entrada' && t.categoria === 'Cobranças') {
                     const clientName = t.descricao ? t.descricao.trim().toUpperCase() : 'OUTROS';
                     customerSum[clientName] = (customerSum[clientName] || 0) + t.valor_nominal;
