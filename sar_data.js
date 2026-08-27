@@ -1,11 +1,11 @@
 /**
  * sar_data.js — Base de Dados compilada do módulo SAR
- * Gerado automaticamente em: 2026-08-26 21:21:37
+ * Gerado automaticamente em: 2026-08-26 22:00:09
  */
 
 window.SAR_METADATA = {
   "total_records": 1066,
-  "generated_at": "2026-08-26 21:21:37",
+  "generated_at": "2026-08-26 22:00:09",
   "source_file": "sar_temp.xlsx",
   "cidades": [
     "ALVORADA",
