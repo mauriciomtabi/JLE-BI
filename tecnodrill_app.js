@@ -193,16 +193,28 @@
         const saidas = txs.filter(t => t.fluxo === 'Saída').reduce((s, t) => s + t.valor_nominal, 0);
         const saldo = entradas - saidas;
 
+        const transfTxs = tdFilteredTransactions.filter(t => t.is_transfer);
+        const transfRec = transfTxs.filter(t => t.fluxo === 'Entrada').reduce((s, t) => s + t.valor_nominal, 0);
+        const transfEnv = transfTxs.filter(t => t.fluxo === 'Saída').reduce((s, t) => s + t.valor_nominal, 0);
+        const transfTotal = transfEnv > 0 ? transfEnv : transfRec;
+
         const dates = [...new Set(txs.map(t => t.data).filter(Boolean))];
         const dias = dates.length || 1;
 
         const kpiEntradas = document.getElementById('td-kpi-entradas');
         const kpiSaidas = document.getElementById('td-kpi-saidas');
+        const kpiTransf = document.getElementById('td-kpi-transferencias');
         const kpiSaldo = document.getElementById('td-kpi-saldo-final');
 
         if (kpiEntradas) kpiEntradas.innerText = formatCurrency(entradas);
         if (kpiSaidas) kpiSaidas.innerText = formatCurrency(saidas);
+        if (kpiTransf) kpiTransf.innerText = formatCurrency(transfTotal);
         if (kpiSaldo) kpiSaldo.innerText = formatCurrency(saldo);
+
+        const subTransfRec = document.getElementById('td-sub-transf-rec');
+        const subTransfEnv = document.getElementById('td-sub-transf-env');
+        if (subTransfRec) subTransfRec.innerHTML = `Recebidas (+): <strong class="trend-up">${formatCurrency(transfRec)}</strong>`;
+        if (subTransfEnv) subTransfEnv.innerHTML = `Enviadas (-): <strong class="trend-down">${formatCurrency(transfEnv)}</strong>`;
 
         const subEntradasDia = document.getElementById('td-sub-entradas-diaria');
         const subSaidasDia = document.getElementById('td-sub-saidas-diaria');

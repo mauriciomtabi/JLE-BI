@@ -270,6 +270,20 @@
                         <i class="fa-solid fa-money-bill-transfer"></i>
                     </div>
                 </div>
+
+                <div class="kpi-card transfers">
+                    <div class="kpi-info">
+                        <span class="kpi-label">Transferências</span>
+                        <h3 class="kpi-value" id="kpi-transferencias">R$ 0,00</h3>
+                        <div class="kpi-analytics">
+                            <span class="kpi-subvalue" id="sub-transf-rec">Recebidas (+): R$ 0,00</span>
+                            <span class="kpi-subvalue" id="sub-transf-env">Enviadas (-): R$ 0,00</span>
+                        </div>
+                    </div>
+                    <div class="kpi-icon-container">
+                        <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                    </div>
+                </div>
                 
                 <div class="kpi-card balance">
                     <div class="kpi-info">
@@ -487,6 +501,20 @@
                         </div>
                         <div class="kpi-icon-container">
                             <i class="fa-solid fa-money-bill-transfer"></i>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card transfers">
+                        <div class="kpi-info">
+                            <span class="kpi-label">Transferências</span>
+                            <h3 class="kpi-value" id="td-kpi-transferencias">R$ 0,00</h3>
+                            <div class="kpi-analytics">
+                                <span class="kpi-subvalue" id="td-sub-transf-rec">Recebidas (+): R$ 0,00</span>
+                                <span class="kpi-subvalue" id="td-sub-transf-env">Enviadas (-): R$ 0,00</span>
+                            </div>
+                        </div>
+                        <div class="kpi-icon-container">
+                            <i class="fa-solid fa-arrow-right-arrow-left"></i>
                         </div>
                     </div>
 
@@ -2589,7 +2617,7 @@
     <!-- Carga de Dados Dinâmica -->
     <script src="data.js"></script>
     <script src="tecnodrill_data.js"></script>
-    <script src="tecnodrill_app.js"></script>
+    <script src="tecnodrill_app.js?v=2.2"></script>
 
     <script src="veiculos_data.js?v=3.43"></script>
     <script src="veiculos_app.js?v=3.43"></script>
@@ -4984,14 +5012,24 @@
             renderTable();
         }
 
-        // KPIs (Entradas e Saídas Operacionais Reais, excluindo Transferências e Saldo Inicial)
+        // KPIs (Entradas e Saídas Operacionais Reais, Transferências e Saldo Inicial)
         function calculateKPIs() {
             let totalEntradas = 0;
             let totalSaidas = 0;
+            let totalTransfRec = 0;
+            let totalTransfEnv = 0;
             
             filteredTransactions.forEach(t => {
-                // Excluímos transferências entre contas e saldo inicial dos totais operacionais de Entradas e Saídas
-                if (t.is_transfer || t.categoria === 'Saldo Inicial') return;
+                if (t.categoria === 'Saldo Inicial') return;
+                
+                if (t.is_transfer) {
+                    if (t.fluxo === 'Entrada') {
+                        totalTransfRec += t.valor_nominal;
+                    } else if (t.fluxo === 'Saída') {
+                        totalTransfEnv += t.valor_nominal;
+                    }
+                    return;
+                }
                 
                 if (t.fluxo === 'Entrada') {
                     totalEntradas += t.valor_nominal;
@@ -5017,9 +5055,22 @@
                 }
             });
             
-            document.getElementById('kpi-entradas').innerText = formatCurrency(totalEntradas);
-            document.getElementById('kpi-saidas').innerText = formatCurrency(totalSaidas);
-            document.getElementById('kpi-saldo-final').innerText = formatCurrency(saldoFinal);
+            const totalTransfVolume = totalTransfEnv > 0 ? totalTransfEnv : totalTransfRec;
+
+            const elEntradas = document.getElementById('kpi-entradas');
+            const elSaidas = document.getElementById('kpi-saidas');
+            const elTransf = document.getElementById('kpi-transferencias');
+            const elSaldo = document.getElementById('kpi-saldo-final');
+
+            if (elEntradas) elEntradas.innerText = formatCurrency(totalEntradas);
+            if (elSaidas) elSaidas.innerText = formatCurrency(totalSaidas);
+            if (elTransf) elTransf.innerText = formatCurrency(totalTransfVolume);
+            if (elSaldo) elSaldo.innerText = formatCurrency(saldoFinal);
+
+            const elSubTransfRec = document.getElementById('sub-transf-rec');
+            const elSubTransfEnv = document.getElementById('sub-transf-env');
+            if (elSubTransfRec) elSubTransfRec.innerHTML = `Recebidas (+): <strong class="trend-up">${formatCurrency(totalTransfRec)}</strong>`;
+            if (elSubTransfEnv) elSubTransfEnv.innerHTML = `Enviadas (-): <strong class="trend-down">${formatCurrency(totalTransfEnv)}</strong>`;
 
             // --- Cálculos de Indicadores Analíticos Avançados ---
             const selectedMonth = document.getElementById('filter-mes').value;
