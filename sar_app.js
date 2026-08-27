@@ -423,7 +423,39 @@ function renderSarCharts(filteredData) {
 }
 
 /**
- * Gráfico 1 (Superior Esquerdo): Distribuição por Status Geral (Colunas Verticais em Cor Única)
+ * Retorna a paleta de cores para cada status do SAR
+ */
+function getSarStatusColor(st) {
+    const key = (st || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().toUpperCase();
+    if (key.includes('WF IMPLANT') || (key.includes('CONCLU') && !key.includes('MEDIC'))) {
+        return { bg: '#10b981', border: '#059669' }; // Verde Esmeralda
+    }
+    if (key.includes('EM MEDIC') || key.includes('AG. MEDIC') || key.includes('AG MEDIC')) {
+        return { bg: '#388bfd', border: '#1f6feb' }; // Azul Royal Vibrante
+    }
+    if (key.includes('ENVIAD')) {
+        return { bg: '#f59e0b', border: '#d97706' }; // Âmbar / Laranja Ouro
+    }
+    if (key.includes('RELAT')) {
+        return { bg: '#06b6d4', border: '#0891b2' }; // Ciano / Turquesa
+    }
+    if (key.includes('ANDAMENTO')) {
+        return { bg: '#6366f1', border: '#4f46e5' }; // Índigo
+    }
+    if (key.includes('SEM SINAL')) {
+        return { bg: '#a855f7', border: '#9333ea' }; // Roxo Neon
+    }
+    if (key.includes('CANCEL')) {
+        return { bg: '#ef4444', border: '#dc2626' }; // Vermelho Coral
+    }
+    if (key.includes('PARALIS')) {
+        return { bg: '#64748b', border: '#475569' }; // Cinza Ardósia
+    }
+    return { bg: '#38bdf8', border: '#0284c7' }; // Azul Claro
+}
+
+/**
+ * Gráfico 1 (Superior Esquerdo): Distribuição por Status Geral
  */
 function renderSarStatusChart(data) {
     const ctx = document.getElementById('sar-chart-status');
@@ -446,6 +478,9 @@ function renderSarStatusChart(data) {
     const counts = sortedEntries.map(e => e[1]);
     const totalStatus = counts.reduce((a, b) => a + b, 0);
 
+    const bgColors = labels.map(l => getSarStatusColor(l).bg);
+    const borderColors = labels.map(l => getSarStatusColor(l).border);
+
     const pluginList = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
 
     sarCharts.status = new Chart(ctx, {
@@ -455,8 +490,8 @@ function renderSarStatusChart(data) {
             datasets: [{
                 label: 'OSs SAR',
                 data: counts,
-                backgroundColor: 'rgba(56, 139, 253, 0.85)',
-                borderColor: '#388bfd',
+                backgroundColor: bgColors,
+                borderColor: borderColors,
                 borderWidth: 1,
                 borderRadius: 4,
                 barPercentage: 0.75,
@@ -599,22 +634,14 @@ function renderSarEvolutionChart(data) {
 
     const pluginList = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
 
-    // Paleta de cores moderna por Status Oficial
-    const STATUS_COLORS = {
-        'MEDIÇÃO CONCLUÍDA': { bg: '#10b981', border: '#059669' }, // Verde esmeralda (Concluída)
-        'AG. MEDIÇÃO':        { bg: '#388bfd', border: '#1f6feb' }, // Azul vibrante
-        'AG. RELATÓRIO':      { bg: '#f59e0b', border: '#d97706' }, // Âmbar
-        'CANCELADO':         { bg: '#ef4444', border: '#dc2626' }, // Vermelho
-        'SEM SINAL':         { bg: '#8b5cf6', border: '#7c3aed' }, // Roxo
-        'PARALISADO':        { bg: '#64748b', border: '#475569' }  // Cinza ardósia
-    };
-
     const statusOrder = [
-        'MEDIÇÃO CONCLUÍDA',
-        'AG. MEDIÇÃO',
-        'AG. RELATÓRIO',
-        'CANCELADO',
+        'WF IMPLANTADO',
+        'EM MEDIÇÃO',
+        'MEDIÇÃO ENVIADA',
+        'RELATÓRIO',
+        'EM ANDAMENTO',
         'SEM SINAL',
+        'CANCELADO',
         'PARALISADO'
     ];
 
@@ -649,7 +676,7 @@ function renderSarEvolutionChart(data) {
 
     // Construir datasets empilhados por status
     const datasets = activeStatuses.map(st => {
-        const color = STATUS_COLORS[st] || { bg: '#a4b0be', border: '#747d8c' };
+        const color = getSarStatusColor(st);
         return {
             label: st,
             data: sortedYms.map(ym => monthMap[ym].totals[st] || 0),
