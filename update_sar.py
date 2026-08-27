@@ -122,11 +122,14 @@ def main():
     
     # Localizar a linha de cabeçalho
     header_row_idx = 4
-    rows = []
     for r_idx, row in enumerate(ws.iter_rows(values_only=True)):
         if r_idx < 15:
             row_str = [str(x).upper() if x is not None else "" for x in row]
-            if "COD." in row_str or "CODIGO" in row_str or "AREA TECNICA" in row_str:
+            # Ignora super-cabeçalhos de seção
+            if any(x.startswith("ETAPA") for x in row_str):
+                continue
+            # Detecta linha de cabeçalho (contém COD/CÓDIGO e CIDADE ou AREA)
+            if any("COD" in x for x in row_str) and any("CIDADE" in x or "AREA" in x for x in row_str):
                 header_row_idx = r_idx + 1
                 print(f"Linha de cabeçalho detectada na linha {header_row_idx}")
                 break
@@ -162,7 +165,10 @@ def main():
         if not row or len(row) < 2:
             continue
             
-        cod = clean_str(get_col(row, "COD.", "CODIGO", "COD", default_idx=1))
+        cod = clean_str(get_col(row, "CODIGO SAR", "COD.", "CODIGO", "COD", default_idx=0))
+        if not cod:
+            # Fallback para coluna 1 se a coluna 0 estiver vazia
+            cod = clean_str(get_col(row, default_idx=1))
         if not cod:
             continue
             
@@ -174,20 +180,22 @@ def main():
         endereco = clean_str(get_col(row, "ENDERECO", default_idx=7))
         caixa_mdu = clean_str(get_col(row, "CAIXA MDU", default_idx=8))
         
-        # Status da Obra (Coluna STATUS)
-        status_obra_raw = clean_str(get_col(row, "STATUS", default_idx=10))
+        # Status da Obra / Operação
+        status_obra_raw = clean_str(get_col(row, "STATUS OPERACAO", "STATUS", default_idx=10))
         
-        # Novas Colunas inseridas Y, Z, AA
-        dt_medicao_iso = parse_date(get_col(row, "DATA MEDICAO", "DATA MEDICAO", default_idx=24))
+        # Colunas inseridas Y, Z, AA (Douglas)
+        dt_medicao_iso = parse_date(get_col(row, "DATA MEDICAO", "DATA MEDIÇÃO", default_idx=24))
         num_wf = clean_str(get_col(row, "N WF", "NO WF", "NUM WF", "Nº WF", default_idx=25))
         status_wf = clean_str(get_col(row, "STATUS WF", default_idx=26))
+        valor_medicao = to_number(get_col(row, "VALOR MEDICAO (R$)", "VALOR MEDICAO", "VALOR", default_idx=19))
+        num_pedido = clean_str(get_col(row, "N DO PEDIDO / CONTRATO", "NO DO PEDIDO / CONTRATO", "NUMERO DO PEDIDO", "PEDIDO", default_idx=22))
         
         # Status Medição e Relatório
         status_medicao_raw = clean_str(get_col(row, "STATUS MEDICAO", default_idx=28))
         status_relatorio = clean_str(get_col(row, "STATUS RELATORIO", default_idx=29))
         
         # Status Geral
-        status_geral_raw = clean_str(get_col(row, "STATUS GERAL", default_idx=30))
+        status_geral_raw = clean_str(get_col(row, "STATUS GERAL SAR", "STATUS GERAL", default_idx=30))
         
         status_k_upper = status_obra_raw.upper()
         status_z_upper = status_medicao_raw.upper()
@@ -229,16 +237,16 @@ def main():
             else:
                 status = "MEDIÇÃO CONCLUÍDA"
             
-        classe_l = clean_str(get_col(row, "CLASSE L", default_idx=11))
-        classe_f = clean_str(get_col(row, "CLASSE F", default_idx=12))
-        situacao = clean_str(get_col(row, "SITUACAO", default_idx=13))
-        relatorio_foto = clean_str(get_col(row, "RELATORIO FOTOGRAFICO", default_idx=14))
-        servico = clean_str(get_col(row, "SERVICO", default_idx=17))
+        classe_l = clean_str(get_col(row, "EXECUTOR LINHA (CLASSE L)", "EXECUTOR LINHA", "CLASSE L", default_idx=11))
+        classe_f = clean_str(get_col(row, "EXECUTOR FUSAO (CLASSE F)", "EXECUTOR FUSAO", "CLASSE F", default_idx=12))
+        situacao = clean_str(get_col(row, "OBSERVACOES", "SITUACAO", default_idx=13))
+        relatorio_foto = clean_str(get_col(row, "RELATORIO PPT / FOTOS", "RELATORIO FOTOGRAFICO", default_idx=14))
+        servico = clean_str(get_col(row, "SERVICO / ESCOPO", "SERVICO", default_idx=17))
         
         # Datas
         dt_entrada_iso = parse_date(get_col(row, "DATA DE ENTRADA", default_idx=19))
         dt_inicio_iso = parse_date(get_col(row, "INICIO EM", default_idx=20))
-        dt_previsao_iso = parse_date(get_col(row, "PREVISAO PARA", default_idx=21))
+        dt_previsao_iso = parse_date(get_col(row, "PREVISAO PARA", "PREVISAO", default_idx=21))
         dt_entrega_iso = parse_date(get_col(row, "DATA DE ENTREGA", default_idx=22))
         
         # Competência baseada na data de entrada

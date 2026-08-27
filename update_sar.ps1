@@ -14,7 +14,10 @@ Write-Output "INICIANDO ATUALIZACAO DA BASE DO DASHBOARD SAR"
 Write-Output "Data/Hora: $(Get-Date -Format 'dd/MM/yyyy HH:mm:ss')"
 Write-Output "=========================================================="
 
-# 1. Candidatos de pastas e arquivos no servidor de rede
+# 1. Candidatos de arquivos locais, Google Sheets e servidor de rede
+$googleSheetUrl = $env:GOOGLE_SHEET_SAR_URL
+$localOperacionalPath = "$workingDir\Planilha_Operacional_SAR_JLE.xlsx"
+
 $candidateDirs = @(
     "\\10.121.21.252\matriz_rs\Claro\PROJETO F",
     "\\10.121.21.252\matriz_rs\Claro\PROJETO F\Nodes 2026",
@@ -25,33 +28,48 @@ $candidateDirs = @(
 $networkPath = $null
 $useFile = $null
 
-foreach ($dir in $candidateDirs) {
-    if (Test-Path $dir) {
-        Write-Output "Buscando planilhas SAR no diretorio: $dir"
-        try {
-            # Arquivo prioritário: Nova Base ou mais recente
-            $primaryTargets = @(
-                "$dir\Status Projeto F - Nodes, SAR - Nova Base.xlsx",
-                "$dir\Cópia de Status Projeto F - Nodes, SAR - CERTO.xlsx",
-                "$dir\Status Projeto F - Nodes, SAR.xlsx"
-            )
-            
-            # Buscar todos os candidatos e ordenar por mais recente
-            $candidateFiles = Get-ChildItem -Path $dir -File | Where-Object { 
-                ($_.Name -like "*Status Projeto F*SAR*.xlsx" -or $_.Name -like "*SAR*.xlsx" -or $_.Name -like "*Projeto F*Nodes*.xlsx") -and $_.Name -notlike "~$*"
-            } | Sort-Object LastWriteTime -Descending
+# 1.1 Se houver URL do Google Sheets configurada, baixar diretamente
+if ($googleSheetUrl -and $googleSheetUrl.Trim() -ne "") {
+    Write-Output "Baixando dados atualizados do Google Sheets SAR..."
+    try {
+        Invoke-WebRequest -Uri $googleSheetUrl -OutFile $localTempPath -UseBasicParsing -TimeoutSec 30
+        Copy-Item -Path $localTempPath -Destination $localCachePath -Force
+        $useFile = $localTempPath
+        Write-Output "Dados do Google Sheets SAR baixados e armazenados em cache com sucesso!"
+    } catch {
+        Write-Warning "Falha ao baixar do Google Sheets ($($_.Exception.Message)). Tentando fontes locais/rede..."
+    }
+}
 
-            if ($candidateFiles -and $candidateFiles.Count -gt 0) {
-                $networkPath = $candidateFiles[0].FullName
-                break
+# 1.2 Se nao usou Google Sheets, verificar se existe Planilha Operacional local ou rede
+if ($null -eq $useFile) {
+    if (Test-Path $localOperacionalPath) {
+        Write-Output "Planilha Operacional SAR localizada: $localOperacionalPath"
+        Copy-Item -Path $localOperacionalPath -Destination $localTempPath -Force
+        Copy-Item -Path $localOperacionalPath -Destination $localCachePath -Force
+        $useFile = $localTempPath
+    } else {
+        foreach ($dir in $candidateDirs) {
+            if (Test-Path $dir) {
+                Write-Output "Buscando planilhas SAR no diretorio: $dir"
+                try {
+                    $candidateFiles = Get-ChildItem -Path $dir -File | Where-Object { 
+                        ($_.Name -like "*Status Projeto F*SAR*.xlsx" -or $_.Name -like "*SAR*.xlsx" -or $_.Name -like "*Projeto F*Nodes*.xlsx" -or $_.Name -like "*Planilha_Operacional_SAR*.xlsx") -and $_.Name -notlike "~$*"
+                    } | Sort-Object LastWriteTime -Descending
+
+                    if ($candidateFiles -and $candidateFiles.Count -gt 0) {
+                        $networkPath = $candidateFiles[0].FullName
+                        break
+                    }
+                } catch {
+                    Write-Warning "Aviso ao listar diretorio $dir : $($_.Exception.Message)"
+                }
             }
-        } catch {
-            Write-Warning "Aviso ao listar diretorio $dir : $($_.Exception.Message)"
         }
     }
 }
 
-if ($null -ne $networkPath -and (Test-Path $networkPath)) {
+if ($null -eq $useFile -and $null -ne $networkPath -and (Test-Path $networkPath)) {
     Write-Output "Planilha SAR localizada na rede: $networkPath"
     try {
         Write-Output "Copiando planilha para ambiente temporario e atualizando cache local..."
