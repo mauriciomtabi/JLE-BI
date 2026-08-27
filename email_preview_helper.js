@@ -227,22 +227,23 @@
         const genAt = metadata.generated_at ? metadata.generated_at : nowInfo.fullStr;
 
         const counts = {};
-        let concluidas = 0;
-        let andamento = 0;
-        let canceladas = 0;
+        let agMedicao = 0;
+        let agRelatorio = 0;
 
         rows.forEach(r => {
             const st = (r.status || 'NÃO INFORMADO').trim().toUpperCase();
             counts[st] = (counts[st] || 0) + 1;
 
-            if (st.includes('CONCLU') || st.includes('FINALIZ') || st.includes('WF APROV')) {
-                concluidas++;
-            } else if (st.includes('CANCEL')) {
-                canceladas++;
-            } else {
-                andamento++;
+            if (st === 'AG. MEDIÇÃO' || st === 'AG. MEDICAO' || st === 'AG MEDIÇÃO' || st === 'AG MEDICAO') {
+                agMedicao++;
+            } else if (st === 'AG. RELATÓRIO' || st === 'AG. RELATORIO' || st === 'AG RELATÓRIO' || st === 'AG RELATORIO') {
+                agRelatorio++;
             }
         });
+
+        // Caso haja divergência de normalização, fazer fallback pelas contagens exatas
+        if (agMedicao === 0) agMedicao = counts['AG. MEDIÇÃO'] || counts['AG. MEDICAO'] || 0;
+        if (agRelatorio === 0) agRelatorio = counts['AG. RELATÓRIO'] || counts['AG. RELATORIO'] || 0;
 
         const statusDotColors = {
             'AG. MEDIÇÃO': '#388bfd',
@@ -303,14 +304,14 @@
                                 </tr>
                                 <tr style="height: 12px;"><td colspan="3"></td></tr>
                                 <tr>
-                                    <td width="48%" style="background: rgba(16,185,129,0.04); border-radius: 10px; border-top: 3px solid #10b981; padding: 16px 10px; text-align: center; border-left: 1px solid rgba(16,185,129,0.1); border-right: 1px solid rgba(16,185,129,0.1); border-bottom: 1px solid rgba(16,185,129,0.1);">
-                                        <div style="font-size: 11px; color: #059669; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 700; margin-bottom: 4px;">CONCLUÍDAS</div>
-                                        <div style="font-size: 26px; font-weight: 800; color: #059669; line-height: 1;">${formatNumber(concluidas)}</div>
+                                    <td width="48%" style="background: rgba(56,139,253,0.04); border-radius: 10px; border-top: 3px solid #388bfd; padding: 16px 10px; text-align: center; border-left: 1px solid rgba(56,139,253,0.1); border-right: 1px solid rgba(56,139,253,0.1); border-bottom: 1px solid rgba(56,139,253,0.1);">
+                                        <div style="font-size: 11px; color: #1f6feb; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 700; margin-bottom: 4px;">AG. MEDIÇÃO</div>
+                                        <div style="font-size: 26px; font-weight: 800; color: #1f6feb; line-height: 1;">${formatNumber(agMedicao)}</div>
                                     </td>
                                     <td width="4%"></td>
-                                    <td width="48%" style="background: rgba(56,139,253,0.04); border-radius: 10px; border-top: 3px solid #388bfd; padding: 16px 10px; text-align: center; border-left: 1px solid rgba(56,139,253,0.1); border-right: 1px solid rgba(56,139,253,0.1); border-bottom: 1px solid rgba(56,139,253,0.1);">
-                                        <div style="font-size: 11px; color: #1f6feb; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 700; margin-bottom: 4px;">EM ANDAMENTO</div>
-                                        <div style="font-size: 26px; font-weight: 800; color: #1f6feb; line-height: 1;">${formatNumber(andamento)}</div>
+                                    <td width="48%" style="background: rgba(243,159,24,0.04); border-radius: 10px; border-top: 3px solid #f39f18; padding: 16px 10px; text-align: center; border-left: 1px solid rgba(243,159,24,0.1); border-right: 1px solid rgba(243,159,24,0.1); border-bottom: 1px solid rgba(243,159,24,0.1);">
+                                        <div style="font-size: 11px; color: #b86d00; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 700; margin-bottom: 4px;">AG. RELATÓRIO</div>
+                                        <div style="font-size: 26px; font-weight: 800; color: #b86d00; line-height: 1;">${formatNumber(agRelatorio)}</div>
                                     </td>
                                 </tr>
                             </table>

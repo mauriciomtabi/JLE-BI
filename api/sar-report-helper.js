@@ -109,22 +109,21 @@ function formatEmailGeneratedAt(genDate) {
 function buildSarEmailHtml(reportName, sarData) {
     const generatedAt = formatEmailGeneratedAt(sarData.generated_at);
     const total = sarData.total;
-    const concluidas = sarData.concluidas;
-    const andamento = sarData.andamento;
-    const agRelatorio = sarData.counts['AG. RELATÓRIO'] || sarData.counts['AG. RELATORIO'] || 0;
+    const agMedicao = sarData.counts['AG. MEDIÇÃO'] || sarData.counts['AG. MEDICAO'] || sarData.counts['AG MEDIÇÃO'] || 0;
+    const agRelatorio = sarData.counts['AG. RELATÓRIO'] || sarData.counts['AG. RELATORIO'] || sarData.counts['AG RELATÓRIO'] || 0;
 
     const BI_URL = process.env.BI_PUBLIC_URL || "https://jle-bi.vercel.app";
 
     const statusColors = {
         'CONCLUÍDA': '#10b981',
         'CONCLUIDA': '#10b981',
-        'AG. RELATÓRIO': '#1e90ff',
-        'AG. RELATORIO': '#1e90ff',
+        'AG. RELATÓRIO': '#f59e0b',
+        'AG. RELATORIO': '#f59e0b',
         'CANCELADO': '#ff4757',
         'CANCELADA': '#ff4757',
-        'SEM SINAL': '#f39f18',
-        'AG. MEDIÇÃO': '#a855f7',
-        'AG. MEDICAO': '#a855f7',
+        'SEM SINAL': '#8b5cf6',
+        'AG. MEDIÇÃO': '#388bfd',
+        'AG. MEDICAO': '#388bfd',
         'PARALISADO': '#747d8c'
     };
 
@@ -178,31 +177,26 @@ function buildSarEmailHtml(reportName, sarData) {
                             </td>
                         </tr>
                         
-                        <!-- CARDS DE DESTAQUE (PADRÃO MDU) -->
+                        <!-- CARDS DE DESTAQUE (PADRÃO MDU: 2 CARDS) -->
                         <tr>
                             <td style="padding: 30px 40px 0;">
                                 <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                     <tr>
-                                        <td colspan="5" style="background: rgba(0,79,113,0.04); border-radius: 12px; border: 1px solid rgba(0,79,113,0.08); text-align: center; padding: 22px;">
+                                        <td colspan="3" style="background: rgba(0,79,113,0.04); border-radius: 12px; border: 1px solid rgba(0,79,113,0.08); text-align: center; padding: 22px;">
                                             <div style="font-size: 11px; color: #747d8c; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; margin-bottom: 6px;">TOTAL DE ORDENS DE SERVIÇO SAR</div>
                                             <div style="font-size: 40px; font-weight: 800; color: #004f71; line-height: 1;">${total.toLocaleString('pt-BR')}</div>
                                         </td>
                                     </tr>
-                                    <tr style="height: 14px;"><td colspan="5"></td></tr>
+                                    <tr style="height: 14px;"><td colspan="3"></td></tr>
                                     <tr>
-                                        <td width="31%" style="background: rgba(16,185,129,0.06); border-radius: 10px; border-top: 3px solid #10b981; padding: 14px 10px; text-align: center; border-left: 1px solid rgba(16,185,129,0.1); border-right: 1px solid rgba(16,185,129,0.1); border-bottom: 1px solid rgba(16,185,129,0.1);">
-                                            <div style="font-size: 10px; color: #10b981; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; margin-bottom: 4px;">Concluídas</div>
-                                            <div style="font-size: 22px; font-weight: 800; color: #10b981;">${concluidas.toLocaleString('pt-BR')}</div>
+                                        <td width="48%" style="background: rgba(56,139,253,0.04); border-radius: 10px; border-top: 3px solid #388bfd; padding: 16px 10px; text-align: center; border-left: 1px solid rgba(56,139,253,0.1); border-right: 1px solid rgba(56,139,253,0.1); border-bottom: 1px solid rgba(56,139,253,0.1);">
+                                            <div style="font-size: 11px; color: #1f6feb; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 700; margin-bottom: 4px;">AG. MEDIÇÃO</div>
+                                            <div style="font-size: 26px; font-weight: 800; color: #1f6feb; line-height: 1;">${agMedicao.toLocaleString('pt-BR')}</div>
                                         </td>
-                                        <td width="3.5%"></td>
-                                        <td width="31%" style="background: rgba(243,159,24,0.06); border-radius: 10px; border-top: 3px solid #f39f18; padding: 14px 10px; text-align: center; border-left: 1px solid rgba(243,159,24,0.1); border-right: 1px solid rgba(243,159,24,0.1); border-bottom: 1px solid rgba(243,159,24,0.1);">
-                                            <div style="font-size: 10px; color: #d37f00; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; margin-bottom: 4px;">Em Andamento</div>
-                                            <div style="font-size: 22px; font-weight: 800; color: #b86d00;">${andamento.toLocaleString('pt-BR')}</div>
-                                        </td>
-                                        <td width="3.5%"></td>
-                                        <td width="31%" style="background: rgba(30,144,255,0.06); border-radius: 10px; border-top: 3px solid #1e90ff; padding: 14px 10px; text-align: center; border-left: 1px solid rgba(30,144,255,0.1); border-right: 1px solid rgba(30,144,255,0.1); border-bottom: 1px solid rgba(30,144,255,0.1);">
-                                            <div style="font-size: 10px; color: #1e90ff; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; margin-bottom: 4px;">Ag. Relatório</div>
-                                            <div style="font-size: 22px; font-weight: 800; color: #1e90ff;">${agRelatorio.toLocaleString('pt-BR')}</div>
+                                        <td width="4%"></td>
+                                        <td width="48%" style="background: rgba(243,159,24,0.04); border-radius: 10px; border-top: 3px solid #f39f18; padding: 16px 10px; text-align: center; border-left: 1px solid rgba(243,159,24,0.1); border-right: 1px solid rgba(243,159,24,0.1); border-bottom: 1px solid rgba(243,159,24,0.1);">
+                                            <div style="font-size: 11px; color: #b86d00; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 700; margin-bottom: 4px;">AG. RELATÓRIO</div>
+                                            <div style="font-size: 26px; font-weight: 800; color: #b86d00; line-height: 1;">${agRelatorio.toLocaleString('pt-BR')}</div>
                                         </td>
                                     </tr>
                                 </table>
