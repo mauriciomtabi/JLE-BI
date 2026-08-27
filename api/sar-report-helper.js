@@ -16,28 +16,32 @@ function parseSarContent(content) {
     const metadata = metaMatch ? JSON.parse(metaMatch[1]) : {};
 
     const counts = {};
-    let concluidas = 0;
-    let andamento = 0;
+    let emMedicao = 0;
+    let medicaoEnviada = 0;
+    let wfImplantado = 0;
     let canceladas = 0;
 
     rows.forEach(r => {
         const st = (r.status || 'NÃO INFORMADO').toUpperCase();
         counts[st] = (counts[st] || 0) + 1;
 
-        if (st.includes('CONCLU') || st.includes('FINALIZAD') || st.includes('WF APROV')) {
-            concluidas++;
-        } else if (st === 'CANCELADO' || st === 'CANCELADA') {
+        if (st.includes('EM MEDIC') || st.includes('AG. MEDIC') || st.includes('AG MEDIC')) {
+            emMedicao++;
+        } else if (st.includes('ENVIAD') || st.includes('RELAT')) {
+            medicaoEnviada++;
+        } else if (st.includes('WF IMPLANT') || st.includes('CONCLU')) {
+            wfImplantado++;
+        } else if (st.includes('CANCEL')) {
             canceladas++;
-        } else {
-            andamento++;
         }
     });
 
     return {
         rows,
         total: rows.length,
-        concluidas,
-        andamento,
+        emMedicao,
+        medicaoEnviada,
+        wfImplantado,
         canceladas,
         counts,
         generated_at: metadata.generated_at || new Date().toISOString()
@@ -125,21 +129,21 @@ function formatEmailGeneratedAt(genDate) {
 function buildSarEmailHtml(reportName, sarData) {
     const generatedAt = formatEmailGeneratedAt(sarData.generated_at);
     const total = sarData.total;
-    const agMedicao = sarData.counts['AG. MEDIÇÃO'] || sarData.counts['AG. MEDICAO'] || sarData.counts['AG MEDIÇÃO'] || 0;
-    const agRelatorio = sarData.counts['AG. RELATÓRIO'] || sarData.counts['AG. RELATORIO'] || sarData.counts['AG RELATÓRIO'] || 0;
+    const emMedicao = sarData.counts['EM MEDIÇÃO'] || sarData.counts['EM MEDICAO'] || sarData.emMedicao || 0;
+    const medicaoEnviada = sarData.counts['MEDIÇÃO ENVIADA'] || sarData.counts['MEDICAO ENVIADA'] || sarData.medicaoEnviada || 0;
 
     const BI_URL = process.env.BI_PUBLIC_URL || "https://jle-bi.vercel.app";
 
     const statusColors = {
-        'CONCLUÍDA': '#10b981',
-        'CONCLUIDA': '#10b981',
-        'AG. RELATÓRIO': '#f59e0b',
-        'AG. RELATORIO': '#f59e0b',
+        'EM MEDIÇÃO': '#388bfd',
+        'EM MEDICAO': '#388bfd',
+        'WF IMPLANTADO': '#10b981',
+        'MEDIÇÃO ENVIADA': '#f59e0b',
+        'MEDICAO ENVIADA': '#f59e0b',
         'CANCELADO': '#ff4757',
         'CANCELADA': '#ff4757',
         'SEM SINAL': '#8b5cf6',
-        'AG. MEDIÇÃO': '#388bfd',
-        'AG. MEDICAO': '#388bfd',
+        'EM ANDAMENTO': '#00bcd4',
         'PARALISADO': '#747d8c'
     };
 
@@ -206,13 +210,13 @@ function buildSarEmailHtml(reportName, sarData) {
                                     <tr style="height: 14px;"><td colspan="3"></td></tr>
                                     <tr>
                                         <td width="48%" style="background: rgba(56,139,253,0.04); border-radius: 10px; border-top: 3px solid #388bfd; padding: 16px 10px; text-align: center; border-left: 1px solid rgba(56,139,253,0.1); border-right: 1px solid rgba(56,139,253,0.1); border-bottom: 1px solid rgba(56,139,253,0.1);">
-                                            <div style="font-size: 11px; color: #1f6feb; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 700; margin-bottom: 4px;">AG. MEDIÇÃO</div>
-                                            <div style="font-size: 26px; font-weight: 800; color: #1f6feb; line-height: 1;">${agMedicao.toLocaleString('pt-BR')}</div>
+                                            <div style="font-size: 11px; color: #1f6feb; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 700; margin-bottom: 4px;">EM MEDIÇÃO</div>
+                                            <div style="font-size: 26px; font-weight: 800; color: #1f6feb; line-height: 1;">${emMedicao.toLocaleString('pt-BR')}</div>
                                         </td>
                                         <td width="4%"></td>
                                         <td width="48%" style="background: rgba(243,159,24,0.04); border-radius: 10px; border-top: 3px solid #f39f18; padding: 16px 10px; text-align: center; border-left: 1px solid rgba(243,159,24,0.1); border-right: 1px solid rgba(243,159,24,0.1); border-bottom: 1px solid rgba(243,159,24,0.1);">
-                                            <div style="font-size: 11px; color: #b86d00; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 700; margin-bottom: 4px;">AG. RELATÓRIO</div>
-                                            <div style="font-size: 26px; font-weight: 800; color: #b86d00; line-height: 1;">${agRelatorio.toLocaleString('pt-BR')}</div>
+                                            <div style="font-size: 11px; color: #b86d00; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 700; margin-bottom: 4px;">MEDIÇÃO ENVIADA</div>
+                                            <div style="font-size: 26px; font-weight: 800; color: #b86d00; line-height: 1;">${medicaoEnviada.toLocaleString('pt-BR')}</div>
                                         </td>
                                     </tr>
                                 </table>

@@ -263,24 +263,9 @@ def main():
         prazo_raw = clean_str(get_col(row, "PRAZO (SLA 3 DIAS)", "PRAZO SLA 3 DIAS", "PRAZO", "SLA", default_idx=21)).upper()
         atraso_raw = get_col(row, "ATRASO (DIAS)", "ATRASO DIAS", "ATRASO", default_idx=22)
 
-        # Status Geral SAR (Coluna X / idx 23)
+        # Status Geral SAR (Coluna X / idx 23) - Exatamente o nome da Planilha Google Sheets
         status_geral_raw = clean_str(get_col(row, "STATUS STATUS GERAL SAR", "STATUS GERAL SAR", "STATUS GERAL", "STATUS", default_idx=23))
-        sg_upper = status_geral_raw.upper()
-
-        if "WF IMPLANT" in sg_upper or "CONCLU" in sg_upper or "FINALIZAD" in sg_upper:
-            status = "MEDIÇÃO CONCLUÍDA"
-        elif "ENVIAD" in sg_upper or "RELAT" in sg_upper:
-            status = "AG. RELATÓRIO"
-        elif "SEM SINAL" in sg_upper:
-            status = "SEM SINAL"
-        elif "PARALISAD" in sg_upper:
-            status = "PARALISADO"
-        elif "CANCELAD" in sg_upper:
-            status = "CANCELADO"
-        elif "EM MEDI" in sg_upper or "AG. MEDI" in sg_upper or "AG MEDI" in sg_upper or "ANDAMENTO" in sg_upper or "PENDENTE" in sg_upper:
-            status = "AG. MEDIÇÃO"
-        else:
-            status = status_geral_raw if status_geral_raw else "AG. MEDIÇÃO"
+        status = status_geral_raw.strip() if status_geral_raw else "EM ANDAMENTO"
 
         # Colunas de Medição & Faturamento (Douglas: Colunas Y, Z, AA, AB, AC)
         dt_medicao_iso = parse_date(get_col(row, "ETAPA 2: MEDICAO (PREENCHIMENTO: DOUGLAS) DATA MEDICAO", "DATA MEDICAO", "DATA MEDIÇÃO", default_idx=24))
@@ -377,7 +362,7 @@ def main():
     # Extrair metadados e listas para filtros
     cidades = sorted(list(set(r["cidade"] for r in records if r["cidade"])))
     areas = sorted(list(set(r["area_tecnica"] for r in records if r["area_tecnica"])))
-    status_list = ["AG. MEDIÇÃO", "MEDIÇÃO CONCLUÍDA", "AG. RELATÓRIO", "CANCELADO", "SEM SINAL", "PARALISADO"]
+    status_list = sorted(list(set(r["status"] for r in records if r["status"])))
     prazos_list = ["NO PRAZO", "ATRASADO"]
     competencias = sorted(list(set(r["competencia"] for r in records if r["competencia"] and r["competencia"] != "NÃO INFORMADO")))
     anos = sorted(list(set(r["ano"] for r in records if r.get("ano") and r["ano"] != "NÃO INFORMADO")), reverse=True)
