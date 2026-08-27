@@ -3867,7 +3867,37 @@
                 'sar': { 
                     file: 'sar_data.js', 
                     name: 'SAR', 
-                    init: () => { 
+                    init: async () => { 
+                        let updatedFromCloud = false;
+                        try {
+                            const res = await fetch(`/api/fetch-sar?_t=${Date.now()}`);
+                            if (res.ok) {
+                                const json = await res.json();
+                                if (json.success && json.data && json.data.length > 0) {
+                                    window.SAR_DATA = json.data;
+                                    window.SAR_METADATA = json.metadata;
+                                    updatedFromCloud = true;
+                                }
+                            }
+                        } catch (e) {
+                            console.warn("Fallback para sar_data.js local:", e);
+                        }
+
+                        if (!updatedFromCloud) {
+                            try {
+                                const resp = await fetch(`sar_data.js?_t=${Date.now()}`, { cache: 'no-store' });
+                                if (resp.ok) {
+                                    const scriptText = await resp.text();
+                                    const sEl = document.createElement('script');
+                                    sEl.text = scriptText;
+                                    document.head.appendChild(sEl);
+                                    document.head.removeChild(sEl);
+                                }
+                            } catch (e) {
+                                console.warn("Erro ao recarregar sar_data.js:", e);
+                            }
+                        }
+
                         if (typeof sarDataLoaded !== 'undefined') sarDataLoaded = false;
                         if (typeof initSar === 'function') initSar(true); 
                         else if (typeof applySarFilters === 'function') applySarFilters(); 
@@ -3908,7 +3938,7 @@
                 document.head.appendChild(sEl);
                 document.head.removeChild(sEl);
 
-                target.init();
+                await target.init();
                 updateHeaderTimestamp(view);
 
                 showAdminToast(`Dados de ${target.name} atualizados com sucesso!`);
