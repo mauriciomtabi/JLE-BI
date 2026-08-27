@@ -24,7 +24,7 @@ function parseSarContent(content) {
         const st = (r.status || 'NÃO INFORMADO').toUpperCase();
         counts[st] = (counts[st] || 0) + 1;
 
-        if (st === 'CONCLUÍDA' || st === 'CONCLUIDA' || st === 'WF APROVADO') {
+        if (st.includes('CONCLU') || st.includes('FINALIZAD') || st.includes('WF APROV')) {
             concluidas++;
         } else if (st === 'CANCELADO' || st === 'CANCELADA') {
             canceladas++;

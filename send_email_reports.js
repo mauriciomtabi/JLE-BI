@@ -530,14 +530,19 @@ async function start() {
             
             const reportNameLower = (config.report_name || '').toLowerCase();
             const reportType = config.report_type || 
-                (reportNameLower.includes('manut') ? 'manutencao' : 
+                (reportNameLower.includes('sar') ? 'sar' :
+                 reportNameLower.includes('manut') ? 'manutencao' : 
                  reportNameLower.includes('claro') ? 'claro' : 
                  reportNameLower.includes('tecnodrill') ? 'tecnodrill' : 'mdu');
 
             let emailHtml;
             let attachments = null;
 
-            if (reportType === 'claro') {
+            if (reportType === 'sar') {
+                const sarHelper = require('./api/sar-report-helper');
+                const sarData = await sarHelper.loadSarDataAsync();
+                emailHtml = sarHelper.buildSarEmailHtml(config.report_name, sarData);
+            } else if (reportType === 'claro') {
                 const claroHelper = require('./api/claro-report-helper');
                 const claroData = await claroHelper.loadClaroDataAsync();
                 const excelRes = claroHelper.generateExcelAttachments(claroData);
@@ -554,8 +559,9 @@ async function start() {
                 attachments = tecnoHelper.generateExcelAttachments(tecnoData);
                 emailHtml = tecnoHelper.buildTecnodrillEmailHtml(config.report_name, tecnoData);
             } else {
-                const mduData = await getMduStatusCounts();
-                emailHtml = buildEmailHtml(mduData, config.report_name);
+                const mduHelper = require('./api/mdu-report-helper');
+                const mduData = await mduHelper.loadMduDataAsync();
+                emailHtml = mduHelper.buildMduEmailHtml(config.report_name, mduData);
             }
 
             const dayStr = String(localDate.getUTCDate()).padStart(2, '0');

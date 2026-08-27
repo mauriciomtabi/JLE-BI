@@ -76,6 +76,16 @@ def to_number(val):
     except Exception:
         return 0
 
+def norm_h(text):
+    """Normaliza texto de cabeçalho removendo acentos, pontuações e símbolos."""
+    if not text:
+        return ""
+    import unicodedata, re
+    s = str(text).strip().upper()
+    s = s.replace('º', ' ').replace('ª', ' ').replace('°', ' ').replace('.', ' ')
+    s = "".join(c for c in unicodedata.normalize('NFD', s) if unicodedata.category(c) != 'Mn')
+    return re.sub(r'\s+', ' ', s).strip()
+
 def clean_str(val):
     """Limpa e padroniza string."""
     if val is None:
@@ -93,6 +103,7 @@ def main():
     else:
         # Tenta temp -> cache local
         candidates = [
+            os.path.join(base_dir, "Planilha_Operacional_SAR_JLE.xlsx"),
             os.path.join(base_dir, "sar_temp.xlsx"),
             os.path.join(base_dir, "sar_local.xlsx")
         ]
@@ -108,9 +119,11 @@ def main():
     print(f"Lendo planilha SAR de: {input_file}")
     wb = openpyxl.load_workbook(input_file, data_only=True, read_only=True)
     
-    # Selecionar a aba de dados do SAR (preferência 'Ext. MDU' ou 'SAR' ou primeira com COD.)
+    # Selecionar a aba de dados do SAR (preferência 'SAR Operacional', 'Ext. MDU', 'SAR')
     sheet_name = None
-    if "Ext. MDU" in wb.sheetnames:
+    if "SAR Operacional" in wb.sheetnames:
+        sheet_name = "SAR Operacional"
+    elif "Ext. MDU" in wb.sheetnames:
         sheet_name = "Ext. MDU"
     elif "SAR" in wb.sheetnames:
         sheet_name = "SAR"
@@ -121,31 +134,29 @@ def main():
     print(f"Processando aba: '{sheet_name}'")
     
     # Localizar a linha de cabeçalho
-    header_row_idx = 4
+    header_row_idx = None
     for r_idx, row in enumerate(ws.iter_rows(values_only=True)):
         if r_idx < 15:
-            row_str = [str(x).upper() if x is not None else "" for x in row]
+            row_norm = [norm_h(x) for x in row if x is not None]
             # Ignora super-cabeçalhos de seção
-            if any(x.startswith("ETAPA") for x in row_str):
+            if any(x.startswith("ETAPA") for x in row_norm):
                 continue
             # Detecta linha de cabeçalho (contém COD/CÓDIGO e CIDADE ou AREA)
-            if any("COD" in x for x in row_str) and any("CIDADE" in x or "AREA" in x for x in row_str):
+            if any("COD" in x for x in row_norm) and any("CIDADE" in x or "AREA" in x for x in row_norm):
                 header_row_idx = r_idx + 1
                 print(f"Linha de cabeçalho detectada na linha {header_row_idx}")
                 break
                 
+    if not header_row_idx:
+        header_row_idx = 4
+        print("Aviso: Linha de cabeçalho não encontrada dinamicamente, usando fallback linha 4.")
+                
     # Construir mapa de cabeçalho dinâmico a partir da linha detectada
     header_map = {}
-    import unicodedata
-    def norm_h(text):
-        if not text: return ""
-        s = str(text).strip().upper()
-        return "".join(c for c in unicodedata.normalize('NFD', s) if unicodedata.category(c) != 'Mn')
-
-    for col_idx, cell in enumerate(ws.iter_rows(min_row=header_row_idx, max_row=header_row_idx, values_only=True).__next__(), start=1):
+    for col_idx, cell in enumerate(ws.iter_rows(min_row=header_row_idx, max_row=header_row_idx, values_only=True).__next__(), start=0):
         if cell:
             n_key = norm_h(cell)
-            header_map[n_key] = col_idx - 1 # 0-indexed
+            header_map[n_key] = col_idx
 
     print(f"Colunas mapeadas dinamicamente: {len(header_map)}")
 
