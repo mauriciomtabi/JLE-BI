@@ -296,15 +296,15 @@
                 
                 <div class="kpi-card balance">
                     <div class="kpi-info">
-                        <span class="kpi-label">Saldo Final Consolidado</span>
+                        <span class="kpi-label">Resultado do Período</span>
                         <h3 class="kpi-value" id="kpi-saldo-final">R$ 0,00</h3>
                         <div class="kpi-analytics">
-                            <span class="kpi-subvalue" id="sub-saldo-sobra">Resultado Período: <strong>+R$ 0,00</strong></span>
                             <span class="kpi-subvalue" id="sub-saldo-conversao">Conversão Líquida: <strong>0,0%</strong></span>
+                            <span class="kpi-subvalue" id="sub-saldo-sobra">Saldo Bancário: <strong>R$ 0,00</strong></span>
                         </div>
                     </div>
                     <div class="kpi-icon-container">
-                        <i class="fa-solid fa-vault"></i>
+                        <i class="fa-solid fa-scale-balanced"></i>
                     </div>
                 </div>
             </div>
@@ -539,15 +539,15 @@
 
                     <div class="kpi-card balance">
                         <div class="kpi-info">
-                            <span class="kpi-label">Saldo Final Consolidado</span>
+                            <span class="kpi-label">Resultado do Período</span>
                             <h3 class="kpi-value" id="td-kpi-saldo-final">R$ 0,00</h3>
                             <div class="kpi-analytics">
-                                <span class="kpi-subvalue" id="td-sub-saldo-sobra">Resultado Período: <strong>+R$ 0,00</strong></span>
                                 <span class="kpi-subvalue" id="td-sub-saldo-conversao">Conversão Líquida: <strong>0,0%</strong></span>
+                                <span class="kpi-subvalue" id="td-sub-saldo-sobra">Margem Líquida: <strong>0,0%</strong></span>
                             </div>
                         </div>
                         <div class="kpi-icon-container">
-                            <i class="fa-solid fa-vault"></i>
+                            <i class="fa-solid fa-scale-balanced"></i>
                         </div>
                     </div>
                 </div>
@@ -2637,7 +2637,7 @@
     <!-- Carga de Dados Dinâmica -->
     <script src="data.js"></script>
     <script src="tecnodrill_data.js"></script>
-    <script src="tecnodrill_app.js?v=2.4"></script>
+    <script src="tecnodrill_app.js?v=2.5"></script>
 
     <script src="veiculos_data.js?v=3.43"></script>
     <script src="veiculos_app.js?v=3.43"></script>
@@ -5082,11 +5082,19 @@
             const elTransfLiq = document.getElementById('sub-transf-liquido');
             const elSaldo = document.getElementById('kpi-saldo-final');
 
+            const resultadoPeriodo = totalEntradas - totalSaidas + totalTransfRec - totalTransfEnv;
+            const resSign = resultadoPeriodo > 0 ? '+' : '';
+            const resClass = resultadoPeriodo >= 0 ? 'trend-up' : 'trend-down';
+
             if (elEntradas) elEntradas.innerText = formatCurrency(totalEntradas);
             if (elSaidas) elSaidas.innerText = formatCurrency(totalSaidas);
             if (elTransfRec) elTransfRec.innerText = formatCurrency(totalTransfRec);
             if (elTransfEnv) elTransfEnv.innerText = formatCurrency(totalTransfEnv);
-            if (elSaldo) elSaldo.innerText = formatCurrency(saldoFinal);
+            
+            // O valor principal do Card 4 agora é o Resultado Líquido do Período!
+            if (elSaldo) {
+                elSaldo.innerHTML = `<span class="${resClass}">${resSign}${formatCurrency(resultadoPeriodo)}</span>`;
+            }
 
             if (elTransfLiq) {
                 const liq = totalTransfRec - totalTransfEnv;
@@ -5190,11 +5198,11 @@
             const elSubSaldoSobra = document.getElementById('sub-saldo-sobra');
             const elSubSaldoConv = document.getElementById('sub-saldo-conversao');
 
-            if (elSubSaldoSobra) {
-                elSubSaldoSobra.innerHTML = `Resultado Período: <span class="${resClass}"><strong>${resSign}${formatCurrency(resultadoPeriodo)}</strong></span>`;
-            }
             if (elSubSaldoConv) {
                 elSubSaldoConv.innerHTML = `Conversão Líquida: <span class="${sobraClass}"><strong>${sobraSign}${sobraLiquida.toFixed(1)}%</strong></span>`;
+            }
+            if (elSubSaldoSobra) {
+                elSubSaldoSobra.innerHTML = `Saldo Bancário: <strong>${formatCurrency(saldoFinal)}</strong>`;
             }
 
             // 4. Comparativo vs. Mês Anterior (Entradas)

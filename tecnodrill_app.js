@@ -209,11 +209,16 @@
         const kpiTransfLiq = document.getElementById('td-sub-transf-liquido');
         const kpiSaldo = document.getElementById('td-kpi-saldo-final');
 
+        const resClass = saldo >= 0 ? 'trend-up' : 'trend-down';
+        const resSign = saldo > 0 ? '+' : '';
+
         if (kpiEntradas) kpiEntradas.innerText = formatCurrency(entradas);
         if (kpiSaidas) kpiSaidas.innerText = formatCurrency(saidas);
         if (kpiTransfRec) kpiTransfRec.innerText = formatCurrency(transfRec);
         if (kpiTransfEnv) kpiTransfEnv.innerText = formatCurrency(transfEnv);
-        if (kpiSaldo) kpiSaldo.innerText = formatCurrency(saldo);
+        if (kpiSaldo) {
+            kpiSaldo.innerHTML = `<span class="${resClass}">${resSign}${formatCurrency(saldo)}</span>`;
+        }
 
         if (kpiTransfLiq) {
             const liq = transfRec - transfEnv;
@@ -234,12 +239,9 @@
         const comp = entradas > 0 ? ((saidas / entradas) * 100).toFixed(1).replace('.', ',') : '0,0';
         if (subSaidasComp) subSaidasComp.innerText = `Comprometimento: ${comp}%`;
 
-        const resClass = saldo >= 0 ? 'trend-up' : 'trend-down';
-        const resSign = saldo >= 0 ? '+' : '';
-        if (subSaldoSobra) subSaldoSobra.innerHTML = `Resultado Período: <strong class="${resClass}">${resSign}${formatCurrency(saldo)}</strong>`;
-
         const efic = entradas > 0 ? ((saldo / entradas) * 100).toFixed(1).replace('.', ',') : '0,0';
         if (subSaldoConv) subSaldoConv.innerHTML = `Conversão Líquida: <strong class="${resClass}">${resSign}${efic}%</strong>`;
+        if (subSaldoSobra) subSaldoSobra.innerHTML = `Margem Líquida: <strong>${efic}%</strong>`;
 
         // vs. Mês Anterior
         const mesEl = document.getElementById('td-filter-mes');
