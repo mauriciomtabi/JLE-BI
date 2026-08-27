@@ -5187,10 +5187,6 @@
             document.getElementById('sub-saidas-comp').innerHTML = compSaidasText;
 
             // 3. Resultado do Período e Eficiência de Caixa (Margem Sobra Líquida com Transferências)
-            const resultadoPeriodo = totalEntradas - totalSaidas + totalTransfRec - totalTransfEnv;
-            const resClass = resultadoPeriodo >= 0 ? 'trend-up' : 'trend-down';
-            const resSign = resultadoPeriodo >= 0 ? '+' : '';
-            
             const sobraLiquida = totalEntradas > 0 ? (resultadoPeriodo / totalEntradas) * 100 : 0;
             const sobraClass = sobraLiquida >= 0 ? 'trend-up' : 'trend-down';
             const sobraSign = sobraLiquida >= 0 ? '+' : '';
