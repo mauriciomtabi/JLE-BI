@@ -279,25 +279,39 @@ async function getMduStatusCounts() {
 }
 
 function formatEmailGeneratedAt(str) {
-    if (!str || str === 'N/D') return str;
-    const parts = str.split(' ');
-    if (parts.length >= 1) {
-        const dateParts = parts[0].split('-');
-        if (dateParts.length === 3) {
-            const yyyy = dateParts[0];
-            const mm = dateParts[1];
-            const dd = dateParts[2];
-            let timeStr = "";
-            if (parts.length >= 2) {
-                const timeParts = parts[1].split(':');
-                if (timeParts.length >= 2) {
-                    timeStr = " " + timeParts[0] + ":" + timeParts[1];
-                }
-            }
-            return `${dd}/${mm}/${yyyy}${timeStr}`;
-        }
+    if (!str || str === 'N/D' || String(str).trim() === '') {
+        const utcDate = new Date();
+        const brOffset = -3 * 60 * 60 * 1000;
+        const localDate = new Date(utcDate.getTime() + brOffset);
+        const day = String(localDate.getUTCDate()).padStart(2, '0');
+        const month = String(localDate.getUTCMonth() + 1).padStart(2, '0');
+        const year = localDate.getUTCFullYear();
+        const hours = String(localDate.getUTCHours()).padStart(2, '0');
+        const minutes = String(localDate.getUTCMinutes()).padStart(2, '0');
+        return `${day}/${month}/${year} às ${hours}:${minutes}`;
     }
-    return str;
+    const val = String(str).trim();
+    const match = val.match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})/);
+    if (match) {
+        return `${match[3]}/${match[2]}/${match[1]} às ${match[4]}:${match[5]}`;
+    }
+    try {
+        if (val.includes('T') || val.includes('-')) {
+            const d = new Date(val.includes('T') ? val : val.replace(' ', 'T'));
+            if (!isNaN(d.getTime())) {
+                const brDate = new Date(d.getTime() - 3 * 60 * 60 * 1000);
+                const day = String(brDate.getUTCDate()).padStart(2, '0');
+                const month = String(brDate.getUTCMonth() + 1).padStart(2, '0');
+                const year = brDate.getUTCFullYear();
+                const hours = String(brDate.getUTCHours()).padStart(2, '0');
+                const minutes = String(brDate.getUTCMinutes()).padStart(2, '0');
+                return `${day}/${month}/${year} às ${hours}:${minutes}`;
+            }
+        }
+        return val;
+    } catch {
+        return val;
+    }
 }
 
 function buildEmailHtml(data, reportName) {

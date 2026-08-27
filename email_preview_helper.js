@@ -42,14 +42,46 @@
         };
     }
 
+    function formatEmailGeneratedAt(genDate) {
+        if (!genDate || genDate === 'N/D' || String(genDate).trim() === '') {
+            const now = new Date();
+            const d = String(now.getDate()).padStart(2, '0');
+            const m = String(now.getMonth() + 1).padStart(2, '0');
+            const y = now.getFullYear();
+            const h = String(now.getHours()).padStart(2, '0');
+            const min = String(now.getMinutes()).padStart(2, '0');
+            return `${d}/${m}/${y} às ${h}:${min}`;
+        }
+        const val = String(genDate).trim();
+        const match = val.match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})/);
+        if (match) {
+            return `${match[3]}/${match[2]}/${match[1]} às ${match[4]}:${match[5]}`;
+        }
+        try {
+            if (val.includes('T') || val.includes('-')) {
+                const d = new Date(val.includes('T') ? val : val.replace(' ', 'T'));
+                if (!isNaN(d.getTime())) {
+                    const day = String(d.getDate()).padStart(2, '0');
+                    const month = String(d.getMonth() + 1).padStart(2, '0');
+                    const year = d.getFullYear();
+                    const hours = String(d.getHours()).padStart(2, '0');
+                    const minutes = String(d.getMinutes()).padStart(2, '0');
+                    return `${day}/${month}/${year} às ${hours}:${minutes}`;
+                }
+            }
+            return val;
+        } catch {
+            return val;
+        }
+    }
+
     // ──────────────────────────────────────────────
     // 1. GERADOR DE HTML: MDU
     // ──────────────────────────────────────────────
     function generateMduPreviewHtml(reportName) {
         const rows = (window.MDU_DATA && Array.isArray(window.MDU_DATA)) ? window.MDU_DATA : [];
         const metadata = window.MDU_METADATA || {};
-        const nowInfo = getNowFormatted();
-        const genAt = metadata.generated_at ? metadata.generated_at : nowInfo.fullStr;
+        const genAt = formatEmailGeneratedAt(metadata.generated_at);
 
         const excludeStatus = ['FINALIZADO', 'FINALIZADA', 'CANCELADO', 'CANCELADA'];
         let totalActive = 0;
@@ -223,8 +255,7 @@
     function generateSarPreviewHtml(reportName) {
         const rows = (window.SAR_DATA && Array.isArray(window.SAR_DATA)) ? window.SAR_DATA : [];
         const metadata = window.SAR_METADATA || {};
-        const nowInfo = getNowFormatted();
-        const genAt = metadata.generated_at ? metadata.generated_at : nowInfo.fullStr;
+        const genAt = formatEmailGeneratedAt(metadata.generated_at);
 
         const counts = {};
         let agMedicao = 0;

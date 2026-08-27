@@ -87,22 +87,38 @@ async function loadSarDataAsync() {
 }
 
 function formatEmailGeneratedAt(genDate) {
-    if (!genDate) return "Atualizado recentemente";
+    if (!genDate || genDate === 'N/D' || String(genDate).trim() === '') {
+        const utcDate = new Date();
+        const brOffset = -3 * 60 * 60 * 1000;
+        const localDate = new Date(utcDate.getTime() + brOffset);
+        const day = String(localDate.getUTCDate()).padStart(2, '0');
+        const month = String(localDate.getUTCMonth() + 1).padStart(2, '0');
+        const year = localDate.getUTCFullYear();
+        const hours = String(localDate.getUTCHours()).padStart(2, '0');
+        const minutes = String(localDate.getUTCMinutes()).padStart(2, '0');
+        return `${day}/${month}/${year} às ${hours}:${minutes}`;
+    }
+    const str = String(genDate).trim();
+    const match = str.match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})/);
+    if (match) {
+        return `${match[3]}/${match[2]}/${match[1]} às ${match[4]}:${match[5]}`;
+    }
     try {
-        if (genDate.includes('T')) {
-            const d = new Date(genDate);
+        if (str.includes('T') || str.includes('-')) {
+            const d = new Date(str.includes('T') ? str : str.replace(' ', 'T'));
             if (!isNaN(d.getTime())) {
-                const day = String(d.getDate()).padStart(2, '0');
-                const month = String(d.getMonth() + 1).padStart(2, '0');
-                const year = d.getFullYear();
-                const hours = String(d.getHours()).padStart(2, '0');
-                const minutes = String(d.getMinutes()).padStart(2, '0');
+                const brDate = new Date(d.getTime() - 3 * 60 * 60 * 1000);
+                const day = String(brDate.getUTCDate()).padStart(2, '0');
+                const month = String(brDate.getUTCMonth() + 1).padStart(2, '0');
+                const year = brDate.getUTCFullYear();
+                const hours = String(brDate.getUTCHours()).padStart(2, '0');
+                const minutes = String(brDate.getUTCMinutes()).padStart(2, '0');
                 return `${day}/${month}/${year} às ${hours}:${minutes}`;
             }
         }
-        return String(genDate);
+        return str;
     } catch {
-        return String(genDate);
+        return str;
     }
 }
 
