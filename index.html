@@ -299,7 +299,8 @@
                         <span class="kpi-label">Saldo Final Consolidado</span>
                         <h3 class="kpi-value" id="kpi-saldo-final">R$ 0,00</h3>
                         <div class="kpi-analytics">
-                            <span class="kpi-subvalue" id="sub-saldo-sobra">Eficiência: 0,0%</span>
+                            <span class="kpi-subvalue" id="sub-saldo-sobra">Resultado Período: <strong>+R$ 0,00</strong></span>
+                            <span class="kpi-subvalue" id="sub-saldo-conversao">Conversão Líquida: <strong>0,0%</strong></span>
                         </div>
                     </div>
                     <div class="kpi-icon-container">
@@ -541,7 +542,8 @@
                             <span class="kpi-label">Saldo Final Consolidado</span>
                             <h3 class="kpi-value" id="td-kpi-saldo-final">R$ 0,00</h3>
                             <div class="kpi-analytics">
-                                <span class="kpi-subvalue" id="td-sub-saldo-sobra">Eficiência: 0,0%</span>
+                                <span class="kpi-subvalue" id="td-sub-saldo-sobra">Resultado Período: <strong>+R$ 0,00</strong></span>
+                                <span class="kpi-subvalue" id="td-sub-saldo-conversao">Conversão Líquida: <strong>0,0%</strong></span>
                             </div>
                         </div>
                         <div class="kpi-icon-container">
@@ -2635,7 +2637,7 @@
     <!-- Carga de Dados Dinâmica -->
     <script src="data.js"></script>
     <script src="tecnodrill_data.js"></script>
-    <script src="tecnodrill_app.js?v=2.3"></script>
+    <script src="tecnodrill_app.js?v=2.4"></script>
 
     <script src="veiculos_data.js?v=3.43"></script>
     <script src="veiculos_app.js?v=3.43"></script>
@@ -5176,11 +5178,24 @@
             }
             document.getElementById('sub-saidas-comp').innerHTML = compSaidasText;
 
-            // 3. Eficiência de Caixa (Margem Sobra Líquida)
-            const sobraLiquida = totalEntradas > 0 ? ((totalEntradas - totalSaidas) / totalEntradas) * 100 : 0;
+            // 3. Resultado do Período e Eficiência de Caixa (Margem Sobra Líquida com Transferências)
+            const resultadoPeriodo = totalEntradas - totalSaidas + totalTransfRec - totalTransfEnv;
+            const resClass = resultadoPeriodo >= 0 ? 'trend-up' : 'trend-down';
+            const resSign = resultadoPeriodo >= 0 ? '+' : '';
+            
+            const sobraLiquida = totalEntradas > 0 ? (resultadoPeriodo / totalEntradas) * 100 : 0;
             const sobraClass = sobraLiquida >= 0 ? 'trend-up' : 'trend-down';
             const sobraSign = sobraLiquida >= 0 ? '+' : '';
-            document.getElementById('sub-saldo-sobra').innerHTML = `Conversão: <span class="${sobraClass}"><strong>${sobraSign}${sobraLiquida.toFixed(1)}%</strong></span>`;
+
+            const elSubSaldoSobra = document.getElementById('sub-saldo-sobra');
+            const elSubSaldoConv = document.getElementById('sub-saldo-conversao');
+
+            if (elSubSaldoSobra) {
+                elSubSaldoSobra.innerHTML = `Resultado Período: <span class="${resClass}"><strong>${resSign}${formatCurrency(resultadoPeriodo)}</strong></span>`;
+            }
+            if (elSubSaldoConv) {
+                elSubSaldoConv.innerHTML = `Conversão Líquida: <span class="${sobraClass}"><strong>${sobraSign}${sobraLiquida.toFixed(1)}%</strong></span>`;
+            }
 
             // 4. Comparativo vs. Mês Anterior (Entradas)
             const getMonthEntradas = (m) => {

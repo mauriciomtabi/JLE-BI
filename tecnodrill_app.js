@@ -191,12 +191,13 @@
         const txs = nonTransfer(tdFilteredTransactions);
         const entradas = txs.filter(t => t.fluxo === 'Entrada').reduce((s, t) => s + t.valor_nominal, 0);
         const saidas = txs.filter(t => t.fluxo === 'Saída').reduce((s, t) => s + t.valor_nominal, 0);
-        const saldo = entradas - saidas;
 
         const transfTxs = tdFilteredTransactions.filter(t => t.is_transfer);
         const transfRec = transfTxs.filter(t => t.fluxo === 'Entrada').reduce((s, t) => s + t.valor_nominal, 0);
         const transfEnv = transfTxs.filter(t => t.fluxo === 'Saída').reduce((s, t) => s + t.valor_nominal, 0);
-        const transfTotal = transfEnv > 0 ? transfEnv : transfRec;
+        
+        // Saldo consolidado inclui o impacto de Entradas - Saídas + Transferências Recebidas - Transferências Enviadas
+        const saldo = entradas - saidas + transfRec - transfEnv;
 
         const dates = [...new Set(txs.map(t => t.data).filter(Boolean))];
         const dias = dates.length || 1;
@@ -225,6 +226,7 @@
         const subSaidasDia = document.getElementById('td-sub-saidas-diaria');
         const subSaidasComp = document.getElementById('td-sub-saidas-comp');
         const subSaldoSobra = document.getElementById('td-sub-saldo-sobra');
+        const subSaldoConv = document.getElementById('td-sub-saldo-conversao');
 
         if (subEntradasDia) subEntradasDia.innerText = `Média: ${formatCurrency(entradas / dias)}/dia`;
         if (subSaidasDia) subSaidasDia.innerText = `Média: ${formatCurrency(saidas / dias)}/dia`;
@@ -232,8 +234,12 @@
         const comp = entradas > 0 ? ((saidas / entradas) * 100).toFixed(1).replace('.', ',') : '0,0';
         if (subSaidasComp) subSaidasComp.innerText = `Comprometimento: ${comp}%`;
 
+        const resClass = saldo >= 0 ? 'trend-up' : 'trend-down';
+        const resSign = saldo >= 0 ? '+' : '';
+        if (subSaldoSobra) subSaldoSobra.innerHTML = `Resultado Período: <strong class="${resClass}">${resSign}${formatCurrency(saldo)}</strong>`;
+
         const efic = entradas > 0 ? ((saldo / entradas) * 100).toFixed(1).replace('.', ',') : '0,0';
-        if (subSaldoSobra) subSaldoSobra.innerText = `Eficiência: ${efic}%`;
+        if (subSaldoConv) subSaldoConv.innerHTML = `Conversão Líquida: <strong class="${resClass}">${resSign}${efic}%</strong>`;
 
         // vs. Mês Anterior
         const mesEl = document.getElementById('td-filter-mes');
