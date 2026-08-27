@@ -203,18 +203,23 @@
 
         const kpiEntradas = document.getElementById('td-kpi-entradas');
         const kpiSaidas = document.getElementById('td-kpi-saidas');
-        const kpiTransf = document.getElementById('td-kpi-transferencias');
+        const kpiTransfRec = document.getElementById('td-kpi-transf-rec');
+        const kpiTransfEnv = document.getElementById('td-kpi-transf-env');
+        const kpiTransfLiq = document.getElementById('td-sub-transf-liquido');
         const kpiSaldo = document.getElementById('td-kpi-saldo-final');
 
         if (kpiEntradas) kpiEntradas.innerText = formatCurrency(entradas);
         if (kpiSaidas) kpiSaidas.innerText = formatCurrency(saidas);
-        if (kpiTransf) kpiTransf.innerText = formatCurrency(transfTotal);
+        if (kpiTransfRec) kpiTransfRec.innerText = formatCurrency(transfRec);
+        if (kpiTransfEnv) kpiTransfEnv.innerText = formatCurrency(transfEnv);
         if (kpiSaldo) kpiSaldo.innerText = formatCurrency(saldo);
 
-        const subTransfRec = document.getElementById('td-sub-transf-rec');
-        const subTransfEnv = document.getElementById('td-sub-transf-env');
-        if (subTransfRec) subTransfRec.innerHTML = `Recebidas (+): <strong class="trend-up">${formatCurrency(transfRec)}</strong>`;
-        if (subTransfEnv) subTransfEnv.innerHTML = `Enviadas (-): <strong class="trend-down">${formatCurrency(transfEnv)}</strong>`;
+        if (kpiTransfLiq) {
+            const liq = transfRec - transfEnv;
+            const sign = liq > 0 ? '+' : '';
+            const liqClass = liq > 0 ? 'trend-up' : (liq < 0 ? 'trend-down' : '');
+            kpiTransfLiq.innerHTML = `Impacto Líquido: <strong class="${liqClass}">${sign}${formatCurrency(liq)}</strong>`;
+        }
 
         const subEntradasDia = document.getElementById('td-sub-entradas-diaria');
         const subSaidasDia = document.getElementById('td-sub-saidas-diaria');

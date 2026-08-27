@@ -44,7 +44,7 @@
     <!-- Supabase Local Configuration -->
     <script src="supabase_config.js"></script>
     <!-- Local Stylesheet -->
-    <link rel="stylesheet" href="styles.css?v=2.2.7">
+    <link rel="stylesheet" href="styles.css?v=2.2.8">
     <link rel="stylesheet" href="veiculos_styles.css?v=3.39">
     
     <link rel="stylesheet" href="cobranca_styles.css?v=3.47">
@@ -272,12 +272,21 @@
                 </div>
 
                 <div class="kpi-card transfers">
-                    <div class="kpi-info">
+                    <div class="kpi-info" style="flex-grow: 1;">
                         <span class="kpi-label">Transferências</span>
-                        <h3 class="kpi-value" id="kpi-transferencias">R$ 0,00</h3>
+                        <div class="kpi-dual-values">
+                            <div class="kpi-dual-item">
+                                <span class="kpi-dual-label"><i class="fa-solid fa-arrow-down-left" style="color: #2ecc71;"></i> Recebidas (+)</span>
+                                <h4 class="kpi-dual-val trend-up" id="kpi-transf-rec">R$ 0,00</h4>
+                            </div>
+                            <div class="kpi-dual-divider"></div>
+                            <div class="kpi-dual-item">
+                                <span class="kpi-dual-label"><i class="fa-solid fa-arrow-up-right" style="color: #e74c3c;"></i> Enviadas (-)</span>
+                                <h4 class="kpi-dual-val trend-down" id="kpi-transf-env">R$ 0,00</h4>
+                            </div>
+                        </div>
                         <div class="kpi-analytics">
-                            <span class="kpi-subvalue" id="sub-transf-rec">Recebidas (+): R$ 0,00</span>
-                            <span class="kpi-subvalue" id="sub-transf-env">Enviadas (-): R$ 0,00</span>
+                            <span class="kpi-subvalue" id="sub-transf-liquido">Impacto Líquido: <strong>R$ 0,00</strong></span>
                         </div>
                     </div>
                     <div class="kpi-icon-container">
@@ -505,12 +514,21 @@
                     </div>
 
                     <div class="kpi-card transfers">
-                        <div class="kpi-info">
+                        <div class="kpi-info" style="flex-grow: 1;">
                             <span class="kpi-label">Transferências</span>
-                            <h3 class="kpi-value" id="td-kpi-transferencias">R$ 0,00</h3>
+                            <div class="kpi-dual-values">
+                                <div class="kpi-dual-item">
+                                    <span class="kpi-dual-label"><i class="fa-solid fa-arrow-down-left" style="color: #2ecc71;"></i> Recebidas (+)</span>
+                                    <h4 class="kpi-dual-val trend-up" id="td-kpi-transf-rec">R$ 0,00</h4>
+                                </div>
+                                <div class="kpi-dual-divider"></div>
+                                <div class="kpi-dual-item">
+                                    <span class="kpi-dual-label"><i class="fa-solid fa-arrow-up-right" style="color: #e74c3c;"></i> Enviadas (-)</span>
+                                    <h4 class="kpi-dual-val trend-down" id="td-kpi-transf-env">R$ 0,00</h4>
+                                </div>
+                            </div>
                             <div class="kpi-analytics">
-                                <span class="kpi-subvalue" id="td-sub-transf-rec">Recebidas (+): R$ 0,00</span>
-                                <span class="kpi-subvalue" id="td-sub-transf-env">Enviadas (-): R$ 0,00</span>
+                                <span class="kpi-subvalue" id="td-sub-transf-liquido">Impacto Líquido: <strong>R$ 0,00</strong></span>
                             </div>
                         </div>
                         <div class="kpi-icon-container">
@@ -2617,7 +2635,7 @@
     <!-- Carga de Dados Dinâmica -->
     <script src="data.js"></script>
     <script src="tecnodrill_data.js"></script>
-    <script src="tecnodrill_app.js?v=2.2"></script>
+    <script src="tecnodrill_app.js?v=2.3"></script>
 
     <script src="veiculos_data.js?v=3.43"></script>
     <script src="veiculos_app.js?v=3.43"></script>
@@ -5055,22 +5073,25 @@
                 }
             });
             
-            const totalTransfVolume = totalTransfEnv > 0 ? totalTransfEnv : totalTransfRec;
-
             const elEntradas = document.getElementById('kpi-entradas');
             const elSaidas = document.getElementById('kpi-saidas');
-            const elTransf = document.getElementById('kpi-transferencias');
+            const elTransfRec = document.getElementById('kpi-transf-rec');
+            const elTransfEnv = document.getElementById('kpi-transf-env');
+            const elTransfLiq = document.getElementById('sub-transf-liquido');
             const elSaldo = document.getElementById('kpi-saldo-final');
 
             if (elEntradas) elEntradas.innerText = formatCurrency(totalEntradas);
             if (elSaidas) elSaidas.innerText = formatCurrency(totalSaidas);
-            if (elTransf) elTransf.innerText = formatCurrency(totalTransfVolume);
+            if (elTransfRec) elTransfRec.innerText = formatCurrency(totalTransfRec);
+            if (elTransfEnv) elTransfEnv.innerText = formatCurrency(totalTransfEnv);
             if (elSaldo) elSaldo.innerText = formatCurrency(saldoFinal);
 
-            const elSubTransfRec = document.getElementById('sub-transf-rec');
-            const elSubTransfEnv = document.getElementById('sub-transf-env');
-            if (elSubTransfRec) elSubTransfRec.innerHTML = `Recebidas (+): <strong class="trend-up">${formatCurrency(totalTransfRec)}</strong>`;
-            if (elSubTransfEnv) elSubTransfEnv.innerHTML = `Enviadas (-): <strong class="trend-down">${formatCurrency(totalTransfEnv)}</strong>`;
+            if (elTransfLiq) {
+                const liq = totalTransfRec - totalTransfEnv;
+                const sign = liq > 0 ? '+' : '';
+                const liqClass = liq > 0 ? 'trend-up' : (liq < 0 ? 'trend-down' : '');
+                elTransfLiq.innerHTML = `Impacto Líquido: <strong class="${liqClass}">${sign}${formatCurrency(liq)}</strong>`;
+            }
 
             // --- Cálculos de Indicadores Analíticos Avançados ---
             const selectedMonth = document.getElementById('filter-mes').value;
