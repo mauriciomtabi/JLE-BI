@@ -2,16 +2,24 @@
 # -*- coding: utf-8 -*-
 """
 update_sar.py — Processador ETL para o Dashboard SAR do BI JLE Telecom
-Lê a planilha do SAR (rede local ou cache local sar_local.xlsx)
+Lê a planilha oficial do SAR (Google Sheets em nuvem com fallback em rede/cache local)
 e compila os dados normalizados em sar_data.js.
 """
 
 import sys
 import os
+import io
+import csv
 import json
 import datetime
-from collections import Counter
+import urllib.request
+import unicodedata
+import re
 import openpyxl
+
+GOOGLE_SHEET_ID = "1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4"
+GOOGLE_SHEET_GID = "1221770117"
+GOOGLE_SHEET_CSV_URL = f"https://docs.google.com/spreadsheets/d/{GOOGLE_SHEET_ID}/gviz/tq?tqx=out:csv&gid={GOOGLE_SHEET_GID}"
 
 # Meses em português
 MESES_PT = [
@@ -20,16 +28,31 @@ MESES_PT = [
 ]
 
 def parse_date(val):
-    """Converte valor para datetime ou string ISO 'YYYY-MM-DD'."""
+    """Converte valor para string ISO 'YYYY-MM-DD'."""
     if val is None:
         return None
     if isinstance(val, (datetime.datetime, datetime.date)):
         return val.strftime("%Y-%m-%d")
     val_str = str(val).strip()
-    if not val_str or val_str == "-" or val_str.lower() == "none":
+    if not val_str or val_str in ("-", "None", "none", "null", "N/A", "n/a", ""):
         return None
     
-    # Formatos comuns: 'DD/MM/YYYY', 'YYYY-MM-DD', 'DD-MM-YYYY'
+    # Formato DD/MM/YYYY
+    m = re.match(r'^(\d{1,2})/(\d{1,2})/(\d{4})', val_str)
+    if m:
+        try:
+            return f"{m.group(3)}-{int(m.group(2)):02d}-{int(m.group(1)):02d}"
+        except Exception:
+            pass
+
+    # Formato YYYY-MM-DD
+    m = re.match(r'^(\d{4})-(\d{1,2})-(\d{1,2})', val_str)
+    if m:
+        try:
+            return f"{m.group(1)}-{int(m.group(2)):02d}-{int(m.group(3)):02d}"
+        except Exception:
+            pass
+
     for fmt in ("%d/%m/%Y", "%Y-%m-%d", "%d-%m-%Y", "%Y/%m/%d", "%d/%m/%Y %H:%M:%S", "%Y-%m-%d %H:%M:%S"):
         try:
             dt = datetime.datetime.strptime(val_str, fmt)
@@ -40,10 +63,10 @@ def parse_date(val):
 
 def format_date_br(iso_str):
     """Converte 'YYYY-MM-DD' para 'DD/MM/YYYY'."""
-    if not iso_str:
+    if not iso_str or len(iso_str) < 10:
         return "-"
     try:
-        parts = iso_str.split("-")
+        parts = iso_str[:10].split("-")
         if len(parts) == 3:
             return f"{parts[2]}/{parts[1]}/{parts[0]}"
     except Exception:
@@ -80,7 +103,6 @@ def norm_h(text):
     """Normaliza texto de cabeçalho removendo acentos, pontuações e símbolos."""
     if not text:
         return ""
-    import unicodedata, re
     s = str(text).strip().upper()
     s = s.replace('º', ' ').replace('ª', ' ').replace('°', ' ').replace('.', ' ')
     s = "".join(c for c in unicodedata.normalize('NFD', s) if unicodedata.category(c) != 'Mn')
@@ -93,67 +115,96 @@ def clean_str(val):
     s = str(val).strip()
     return "" if s.lower() in ("none", "null", "-", "n/a") else s
 
+def load_from_google_sheets(url):
+    """Baixa e converte dados da planilha Google Sheets via export CSV."""
+    try:
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req, timeout=12) as resp:
+            content = resp.read().decode('utf-8')
+            reader = csv.reader(io.StringIO(content))
+            rows = list(reader)
+            if rows and len(rows) > 3:
+                return rows
+    except Exception as e:
+        print(f"Aviso ao acessar Google Sheets ({url}): {e}")
+    return None
+
 def main():
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    input_file = None
+    rows = None
+    source_desc = ""
+
+    # 1. Tentar ler diretamente do Google Sheets
+    print(f"Tentando sincronizar base SAR online do Google Sheets...")
+    gs_url = os.environ.get("GOOGLE_SHEET_SAR_URL") or GOOGLE_SHEET_CSV_URL
+    rows = load_from_google_sheets(gs_url)
     
-    # Se passado via argumento
-    if len(sys.argv) > 1 and os.path.exists(sys.argv[1]):
-        input_file = sys.argv[1]
-    else:
-        # Tenta temp -> cache local
-        candidates = [
-            os.path.join(base_dir, "Planilha_Operacional_SAR_JLE.xlsx"),
-            os.path.join(base_dir, "sar_temp.xlsx"),
-            os.path.join(base_dir, "sar_local.xlsx")
-        ]
-        for c in candidates:
-            if os.path.exists(c):
-                input_file = c
-                break
-                
-    if not input_file:
-        print("ERRO: Nenhum arquivo de entrada SAR encontrado!", file=sys.stderr)
+    if rows:
+        source_desc = f"Google Sheets ({GOOGLE_SHEET_ID})"
+        print(f"[OK] Sucesso! {len(rows)} linhas baixadas do Google Sheets.")
+        # Salvar cópia local de contingência em CSV
+        try:
+            cache_csv_path = os.path.join(base_dir, "sar_local.csv")
+            with open(cache_csv_path, "w", encoding="utf-8", newline="") as f:
+                writer = csv.writer(f)
+                writer.writerows(rows)
+        except Exception:
+            pass
+
+    # 2. Fallback para arquivos locais (se Google Sheets falhar ou offline)
+    if not rows:
+        print("Buscando fontes locais / cache de contingência...")
+        input_file = None
+        if len(sys.argv) > 1 and os.path.exists(sys.argv[1]):
+            input_file = sys.argv[1]
+        else:
+            candidates = [
+                os.path.join(base_dir, "sar_local.csv"),
+                os.path.join(base_dir, "Planilha_Operacional_SAR_JLE.xlsx"),
+                os.path.join(base_dir, "sar_temp.xlsx"),
+                os.path.join(base_dir, "sar_local.xlsx")
+            ]
+            for c in candidates:
+                if os.path.exists(c):
+                    input_file = c
+                    break
+
+        if input_file and input_file.endswith(".csv"):
+            with open(input_file, "r", encoding="utf-8") as f:
+                rows = list(csv.reader(f))
+            source_desc = f"Cache CSV Local ({os.path.basename(input_file)})"
+        elif input_file and input_file.endswith(".xlsx"):
+            wb = openpyxl.load_workbook(input_file, data_only=True, read_only=True)
+            sheet_name = "SAR Operacional" if "SAR Operacional" in wb.sheetnames else ("Ext. MDU" if "Ext. MDU" in wb.sheetnames else wb.sheetnames[0])
+            ws = wb[sheet_name]
+            rows = list(ws.iter_rows(values_only=True))
+            source_desc = f"Arquivo Excel ({os.path.basename(input_file)})"
+
+    if not rows or len(rows) < 2:
+        print("ERRO CRÍTICO: Não foi possível carregar dados do SAR.", file=sys.stderr)
         sys.exit(1)
-        
-    print(f"Lendo planilha SAR de: {input_file}")
-    wb = openpyxl.load_workbook(input_file, data_only=True, read_only=True)
-    
-    # Selecionar a aba de dados do SAR (preferência 'SAR Operacional', 'Ext. MDU', 'SAR')
-    sheet_name = None
-    if "SAR Operacional" in wb.sheetnames:
-        sheet_name = "SAR Operacional"
-    elif "Ext. MDU" in wb.sheetnames:
-        sheet_name = "Ext. MDU"
-    elif "SAR" in wb.sheetnames:
-        sheet_name = "SAR"
-    else:
-        sheet_name = wb.sheetnames[0]
-        
-    ws = wb[sheet_name]
-    print(f"Processando aba: '{sheet_name}'")
-    
+
+    print(f"Processando dados da fonte: {source_desc}")
+
     # Localizar a linha de cabeçalho
     header_row_idx = None
-    for r_idx, row in enumerate(ws.iter_rows(values_only=True)):
-        if r_idx < 15:
-            row_norm = [norm_h(x) for x in row if x is not None]
-            # Ignora super-cabeçalhos de seção
-            if any(x.startswith("ETAPA") for x in row_norm):
-                continue
-            # Detecta linha de cabeçalho (contém COD/CÓDIGO e CIDADE ou AREA)
-            if any("COD" in x for x in row_norm) and any("CIDADE" in x or "AREA" in x for x in row_norm):
-                header_row_idx = r_idx + 1
-                print(f"Linha de cabeçalho detectada na linha {header_row_idx}")
-                break
-                
-    if not header_row_idx:
-        header_row_idx = 4
-        print("Aviso: Linha de cabeçalho não encontrada dinamicamente, usando fallback linha 4.")
-                
-    # Construir mapa de cabeçalho dinâmico a partir da linha detectada
+    for r_idx, row in enumerate(rows[:15]):
+        row_norm = [norm_h(x) for x in row if x is not None]
+        if any(x.startswith("ETAPA") for x in row_norm):
+            continue
+        if any("COD" in x for x in row_norm) and any("CIDADE" in x or "AREA" in x or "ENTRADA" in x for x in row_norm):
+            header_row_idx = r_idx
+            print(f"Linha de cabeçalho detectada no índice {header_row_idx + 1}")
+            break
+
+    if header_row_idx is None:
+        header_row_idx = 0 if len(rows[0]) > 10 else 2
+        print(f"Usando cabeçalho padrão índice {header_row_idx + 1}")
+
+    # Construir mapa de cabeçalho dinâmico
     header_map = {}
-    for col_idx, cell in enumerate(ws.iter_rows(min_row=header_row_idx, max_row=header_row_idx, values_only=True).__next__(), start=0):
+    header_cells = rows[header_row_idx]
+    for col_idx, cell in enumerate(header_cells):
         if cell:
             n_key = norm_h(cell)
             header_map[n_key] = col_idx
@@ -171,33 +222,33 @@ def main():
         return None
 
     records = []
-    
-    for r_idx, row in enumerate(ws.iter_rows(min_row=header_row_idx + 1, values_only=True)):
+    today = datetime.date.today()
+
+    for r_idx, row in enumerate(rows[header_row_idx + 1:], start=header_row_idx + 2):
         if not row or len(row) < 2:
             continue
-            
-        cod = clean_str(get_col(row, "CODIGO SAR", "COD.", "CODIGO", "COD", default_idx=0))
-        if not cod:
-            # Fallback para coluna 1 se a coluna 0 estiver vazia
-            cod = clean_str(get_col(row, default_idx=1))
-        if not cod:
+
+        cod = clean_str(get_col(row, "CODIGO SAR", "CODIGO", "COD.", "COD", default_idx=0))
+        cidade = clean_str(get_col(row, "CIDADE", "MUNICIPIO", default_idx=4))
+
+        # REGRA FUNDAMENTAL: Descartar linhas de rascunho onde a Cidade está vazia
+        if not cod or not cidade:
             continue
-            
-        cidade = clean_str(get_col(row, "CIDADE", "MUNICIPIO", default_idx=1))
-        area_tecnica = clean_str(get_col(row, "AREA TECNICA", "AREA", "AT", default_idx=2))
-        node = clean_str(get_col(row, "NODE", "NO", default_idx=3))
-        site = clean_str(get_col(row, "SITE", "LOCAL", default_idx=4))
+
+        area_tecnica = clean_str(get_col(row, "AREA TECNICA", "AREA", "AT", default_idx=1))
+        node = clean_str(get_col(row, "NODE", "NO", default_idx=2))
+        site = clean_str(get_col(row, "SITE", "LOCAL", default_idx=3))
         condominio = clean_str(get_col(row, "CONDOMINIO", "COMDOMINIO", "CLIENTE", "PREDIO", default_idx=5))
         endereco = clean_str(get_col(row, "ENDERECO", "LOGRADOURO", "RUA", default_idx=6))
         caixa_mdu = clean_str(get_col(row, "CAIXA MDU", "CX MDU", "CAIXA", default_idx=7))
         servico = clean_str(get_col(row, "SERVICO / ESCOPO", "SERVICO", "ESCOPO", default_idx=8))
-        classe_l = clean_str(get_col(row, "EXECUTOR LINHA (CLASSE L)", "EXECUTOR LINHA", "CLASSE L", "LINHA", default_idx=9))
-        classe_f = clean_str(get_col(row, "EXECUTOR FUSAO (CLASSE F)", "EXECUTOR FUSAO", "CLASSE F", "FUSAO", default_idx=10))
+        classe_l = clean_str(get_col(row, "EXECUTOR LINHA (CLASSE L)", "EXECUTOR (CLASSE L)", "EXECUTOR LINHA", "CLASSE L", default_idx=9))
+        classe_f = clean_str(get_col(row, "EXECUTOR FUSAO (CLASSE F)", "EXECUTOR (CLASSE F)", "EXECUTOR FUSAO", "CLASSE F", default_idx=10))
         
-        # Status Operação / Campo
-        status_obra_raw = clean_str(get_col(row, "STATUS OPERACAO", "STATUS OPERAÇÃO", "STATUS CAMPO", "STATUS", default_idx=11))
-        situacao = clean_str(get_col(row, "SITUACAO", "SITUAÇÃO", "OBSERVACOES OPERACAO", default_idx=12))
-        relatorio_foto = clean_str(get_col(row, "RELATORIO FOTOGRAFICO", "RELATORIO FOTOGRÁFICO", default_idx=13))
+        # Campos de Campo / Projeto
+        projetado = clean_str(get_col(row, "PROJETADO", default_idx=11))
+        executado = clean_str(get_col(row, "EXECUTADO", default_idx=12))
+        observacao_op = clean_str(get_col(row, "OBSERVACAO", "OBSERVAÇÃO", "SITUACAO", default_idx=13))
         
         # Datas de Operação
         dt_entrada_iso = parse_date(get_col(row, "DATA ENTRADA", "DATA DE ENTRADA", "ENTRADA", default_idx=14))
@@ -206,66 +257,41 @@ def main():
         dt_entrega_iso = parse_date(get_col(row, "DATA ENTREGA", "DATA DE ENTREGA", "ENTREGA", default_idx=17))
         relatorio_ppt = clean_str(get_col(row, "RELATORIO PPT", "RELATÓRIO PPT", "RELATORIO PPT / FOTOS", default_idx=18))
         data_envio_med = clean_str(get_col(row, "DATA ENVIO MEDICAO", "DATA ENVIO MEDIÇÃO", "MTA ENVIO MEDICAO", "ENVIO MEDICAO", default_idx=19))
-        
-        # Tempo, Prazo e Atraso (Colunas U, V, W / 20, 21, 22)
+
+        # Tempo, Prazo e Atraso (Colunas U, V, W / idx 20, 21, 22)
         tempo_raw = get_col(row, "TEMPO (DIAS)", "TEMPO DIAS", "TEMPO", default_idx=20)
         prazo_raw = clean_str(get_col(row, "PRAZO (SLA 3 DIAS)", "PRAZO SLA 3 DIAS", "PRAZO", "SLA", default_idx=21)).upper()
         atraso_raw = get_col(row, "ATRASO (DIAS)", "ATRASO DIAS", "ATRASO", default_idx=22)
-        
-        # Status Geral SAR (Coluna X / 23)
-        status_geral_raw = clean_str(get_col(row, "STATUS GERAL SAR", "STATUS GERAL", default_idx=23))
-        if not status_geral_raw:
-            # Fallback para Status Geral em outras posições
-            status_geral_raw = clean_str(get_col(row, "STATUS GERAL", "STATUS", default_idx=30))
-            
-        # Colunas de Medição & Faturamento (Douglas)
-        dt_medicao_iso = parse_date(get_col(row, "DATA MEDICAO", "DATA MEDIÇÃO", "DATA DE MEDICAO", default_idx=24))
-        valor_medicao = to_number(get_col(row, "VALOR MEDICAO (R$)", "VALOR MEDICAO", "VALOR", default_idx=25))
-        num_wf = clean_str(get_col(row, "N WF", "NO WF", "NUM WF", "Nº WF", "WORKFLOW", "WF", default_idx=26))
-        status_wf = clean_str(get_col(row, "STATUS WF", default_idx=27))
-        num_pedido = clean_str(get_col(row, "N DO PEDIDO / CONTRATO", "NO DO PEDIDO / CONTRATO", "NUMERO DO PEDIDO", "PEDIDO", default_idx=28))
-        observacoes = clean_str(get_col(row, "OBSERVACOES", "OBSERVAÇÕES", "OBS", default_idx=29))
-        
-        status_k_upper = status_obra_raw.upper()
-        status_g_upper = status_geral_raw.upper()
-        
-        if status_geral_raw:
-            if "MEDIC" in status_g_upper and "CONCLU" in status_g_upper:
-                status = "MEDIÇÃO CONCLUÍDA"
-            elif "WF APROV" in status_g_upper or "CONCLU" in status_g_upper or "FINALIZAD" in status_g_upper or status_wf.upper() == "FINALIZADO":
-                status = "MEDIÇÃO CONCLUÍDA"
-            elif "SEM SINAL" in status_g_upper:
-                status = "SEM SINAL"
-            elif "PARALISAD" in status_g_upper:
-                status = "PARALISADO"
-            elif "CANCELAD" in status_g_upper:
-                status = "CANCELADO"
-            elif "RELAT" in status_g_upper or "AG. RELAT" in status_g_upper or "AG RELAT" in status_g_upper:
-                status = "AG. RELATÓRIO"
-            elif "EM MEDI" in status_g_upper or "AG. MEDI" in status_g_upper or "AG MEDI" in status_g_upper or "AG. APROV" in status_g_upper or "AG APROV" in status_g_upper or status_g_upper == "PENDENTE":
-                status = "AG. MEDIÇÃO"
-            else:
-                status = status_geral_raw
-        else:
-            # Fallback de cálculo a partir do status de campo e WF
-            if "SEM SINAL" in status_k_upper:
-                status = "SEM SINAL"
-            elif "PARALISAD" in status_k_upper:
-                status = "PARALISADO"
-            elif "CANCELAD" in status_k_upper:
-                status = "CANCELADO"
-            elif "CONCLU" in status_k_upper:
-                if status_wf.upper() in ("FINALIZADO", "APROVADO") or dt_medicao_iso:
-                    status = "MEDIÇÃO CONCLUÍDA"
-                else:
-                    status = "AG. MEDIÇÃO"
-            else:
-                status = "AG. MEDIÇÃO"
 
+        # Status Geral SAR (Coluna X / idx 23)
+        status_geral_raw = clean_str(get_col(row, "STATUS STATUS GERAL SAR", "STATUS GERAL SAR", "STATUS GERAL", "STATUS", default_idx=23))
+        sg_upper = status_geral_raw.upper()
+
+        if "WF IMPLANT" in sg_upper or "CONCLU" in sg_upper or "FINALIZAD" in sg_upper:
+            status = "MEDIÇÃO CONCLUÍDA"
+        elif "ENVIAD" in sg_upper or "RELAT" in sg_upper:
+            status = "AG. RELATÓRIO"
+        elif "SEM SINAL" in sg_upper:
+            status = "SEM SINAL"
+        elif "PARALISAD" in sg_upper:
+            status = "PARALISADO"
+        elif "CANCELAD" in sg_upper:
+            status = "CANCELADO"
+        elif "EM MEDI" in sg_upper or "AG. MEDI" in sg_upper or "AG MEDI" in sg_upper or "ANDAMENTO" in sg_upper or "PENDENTE" in sg_upper:
+            status = "AG. MEDIÇÃO"
+        else:
+            status = status_geral_raw if status_geral_raw else "AG. MEDIÇÃO"
+
+        # Colunas de Medição & Faturamento (Douglas: Colunas Y, Z, AA, AB, AC)
+        dt_medicao_iso = parse_date(get_col(row, "ETAPA 2: MEDICAO (PREENCHIMENTO: DOUGLAS) DATA MEDICAO", "DATA MEDICAO", "DATA MEDIÇÃO", default_idx=24))
+        valor_medicao = to_number(get_col(row, "VALOR MEDICAO (R$)", "VALOR MEDICAO", "VALOR", default_idx=25))
+        num_wf = clean_str(get_col(row, "N WF", "NO WF", "NUM WF", "Nº WF", "WORKFLOW", default_idx=26))
+        num_pedido = clean_str(get_col(row, "N DO PEDIDO", "NO DO PEDIDO", "PEDIDO", default_idx=27))
+        observacoes = clean_str(get_col(row, "OBSERVACOES", "OBSERVAÇÕES", "OBS", default_idx=28))
+        status_wf = "100% - OK" if status == "MEDIÇÃO CONCLUÍDA" else ""
+
+        # Cálculo do Tempo e SLA em dias úteis
         tempo_dias = to_number(tempo_raw)
-        today = datetime.date.today()
-        
-        # Se tempo não veio preenchido ou é fórmula/0, calcular via dias úteis
         if tempo_dias <= 0 and dt_entrada_iso:
             try:
                 import numpy as np
@@ -277,7 +303,7 @@ def main():
                     d2 = datetime.datetime.strptime(dt_entrega_iso[:10], "%Y-%m-%d").date()
                 elif "CONCLU" not in status.upper() and "CANCEL" not in status.upper():
                     d2 = today
-                    
+
                 if d1 and d2:
                     if d2 >= d1:
                         tempo_dias = int(np.busday_count(d1, d2))
@@ -291,28 +317,21 @@ def main():
         elif "ATRASAD" in prazo_raw or "FORA" in prazo_raw:
             prazo = "ATRASADO"
         else:
-            if tempo_dias > 3:
-                prazo = "ATRASADO"
-            elif tempo_dias > 0:
-                prazo = "NO PRAZO"
-            else:
-                prazo = "NO PRAZO" if dt_entrada_iso else "NÃO INFORMADO"
-                
+            prazo = "ATRASADO" if tempo_dias > 3 else "NO PRAZO"
+
         atraso_dias = to_number(atraso_raw)
         if prazo == "ATRASADO" and atraso_dias <= 0 and tempo_dias > 3:
             atraso_dias = tempo_dias - 3
         elif prazo == "NO PRAZO":
             atraso_dias = 0
-            
-        # Competência baseada na data de entrada
+
+        # Competência e Períodos
         competencia = get_competencia(dt_entrada_iso)
-        
-        # Ano e Mês baseados na data de entrada
         ano_entrada = dt_entrada_iso[:4] if dt_entrada_iso else "NÃO INFORMADO"
         mes_num = dt_entrada_iso[5:7] if dt_entrada_iso and len(dt_entrada_iso) >= 7 else ""
         mes_idx = int(mes_num) if mes_num.isdigit() and 1 <= int(mes_num) <= 12 else 0
         mes_nome = MESES_PT[mes_idx] if mes_idx > 0 else "NÃO INFORMADO"
-        
+
         record = {
             "cod": cod,
             "area_tecnica": area_tecnica,
@@ -324,8 +343,8 @@ def main():
             "caixa_mdu": caixa_mdu,
             "classe_l": classe_l,
             "classe_f": classe_f,
-            "situacao": situacao,
-            "relatorio_foto": relatorio_foto,
+            "situacao": observacao_op or projetado,
+            "relatorio_foto": executado,
             "servico": servico,
             "data_entrada": dt_entrada_iso,
             "data_entrada_fmt": format_date_br(dt_entrada_iso),
@@ -346,28 +365,28 @@ def main():
             "status": status,
             "status_relatorio": relatorio_ppt,
             "status_medicao": data_envio_med,
-            "status_obra": status_obra_raw,
+            "status_obra": "Concluído Campo" if status == "MEDIÇÃO CONCLUÍDA" else "Em Andamento",
             "prazo": prazo,
             "tempo_dias": tempo_dias,
             "atraso_dias": atraso_dias
         }
         records.append(record)
-        
-    print(f"Total de registros SAR extraídos: {len(records)}")
-    
+
+    print(f"Total de registros operacionais válidos extraídos: {len(records)}")
+
     # Extrair metadados e listas para filtros
     cidades = sorted(list(set(r["cidade"] for r in records if r["cidade"])))
     areas = sorted(list(set(r["area_tecnica"] for r in records if r["area_tecnica"])))
-    status_list = sorted(list(set(r["status"] for r in records if r["status"])))
+    status_list = ["AG. MEDIÇÃO", "MEDIÇÃO CONCLUÍDA", "AG. RELATÓRIO", "CANCELADO", "SEM SINAL", "PARALISADO"]
     prazos_list = ["NO PRAZO", "ATRASADO"]
     competencias = sorted(list(set(r["competencia"] for r in records if r["competencia"] and r["competencia"] != "NÃO INFORMADO")))
     anos = sorted(list(set(r["ano"] for r in records if r.get("ano") and r["ano"] != "NÃO INFORMADO")), reverse=True)
     meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
-    
+
     metadata = {
         "total_records": len(records),
         "generated_at": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "source_file": os.path.basename(input_file),
+        "source_file": source_desc,
         "cidades": cidades,
         "areas_tecnicas": areas,
         "status_list": status_list,
@@ -376,15 +395,16 @@ def main():
         "anos": anos,
         "meses": meses
     }
-    
-    out_js = os.path.join(base_dir, "sar_data.js")
-    with open(out_js, "w", encoding="utf-8") as f:
-        f.write("/**\n * sar_data.js — Base de Dados compilada do módulo SAR\n")
-        f.write(f" * Gerado automaticamente em: {metadata['generated_at']}\n */\n\n")
-        f.write(f"window.SAR_METADATA = {json.dumps(metadata, ensure_ascii=False, indent=2)};\n\n")
-        f.write(f"window.SAR_DATA = {json.dumps(records, ensure_ascii=False, indent=2)};\n")
-        
-    print(f"Arquivo gerado com sucesso: {out_js}")
+
+    # Salvar sar_data.js
+    output_js_path = os.path.join(base_dir, "sar_data.js")
+    with open(output_js_path, "w", encoding="utf-8") as f:
+        f.write(f"// Dados SAR JLE Telecom - Gerado em: {metadata['generated_at']}\n")
+        f.write(f"// Fonte: {source_desc}\n")
+        f.write("window.SAR_METADATA = " + json.dumps(metadata, ensure_ascii=False, indent=4) + ";\n\n")
+        f.write("window.SAR_DATA = " + json.dumps(records, ensure_ascii=False, indent=2) + ";\n")
+
+    print(f"Arquivo gerado com sucesso: {output_js_path}")
 
 if __name__ == "__main__":
     main()

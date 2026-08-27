@@ -14,8 +14,8 @@ Write-Output "INICIANDO ATUALIZACAO DA BASE DO DASHBOARD SAR"
 Write-Output "Data/Hora: $(Get-Date -Format 'dd/MM/yyyy HH:mm:ss')"
 Write-Output "=========================================================="
 
-# 1. Candidatos de arquivos locais, Google Sheets e servidor de rede
-$googleSheetUrl = $env:GOOGLE_SHEET_SAR_URL
+# 1. URL Oficial do Google Sheets SAR
+$googleSheetUrl = if ($env:GOOGLE_SHEET_SAR_URL) { $env:GOOGLE_SHEET_SAR_URL } else { "https://docs.google.com/spreadsheets/d/1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4/gviz/tq?tqx=out:csv&gid=1221770117" }
 $localOperacionalPath = "$workingDir\Planilha_Operacional_SAR_JLE.xlsx"
 
 $candidateDirs = @(
@@ -32,9 +32,8 @@ $useFile = $null
 if ($googleSheetUrl -and $googleSheetUrl.Trim() -ne "") {
     Write-Output "Baixando dados atualizados do Google Sheets SAR..."
     try {
-        Invoke-WebRequest -Uri $googleSheetUrl -OutFile $localTempPath -UseBasicParsing -TimeoutSec 30
-        Copy-Item -Path $localTempPath -Destination $localCachePath -Force
-        $useFile = $localTempPath
+        Invoke-WebRequest -Uri $googleSheetUrl -OutFile "$workingDir\sar_local.csv" -UseBasicParsing -TimeoutSec 30
+        $useFile = "$workingDir\sar_local.csv"
         Write-Output "Dados do Google Sheets SAR baixados e armazenados em cache com sucesso!"
     } catch {
         Write-Warning "Falha ao baixar do Google Sheets ($($_.Exception.Message)). Tentando fontes locais/rede..."
