@@ -183,39 +183,56 @@ def main():
         if not cod:
             continue
             
-        area_tecnica = clean_str(get_col(row, "AREA TECNICA", "AREA", default_idx=2))
-        node = clean_str(get_col(row, "NODE", default_idx=3))
-        site = clean_str(get_col(row, "SITE", default_idx=4))
-        cidade = clean_str(get_col(row, "CIDADE", default_idx=5))
-        condominio = clean_str(get_col(row, "COMDOMINIO", "CONDOMINIO", default_idx=6))
-        endereco = clean_str(get_col(row, "ENDERECO", default_idx=7))
-        caixa_mdu = clean_str(get_col(row, "CAIXA MDU", default_idx=8))
+        cidade = clean_str(get_col(row, "CIDADE", "MUNICIPIO", default_idx=1))
+        area_tecnica = clean_str(get_col(row, "AREA TECNICA", "AREA", "AT", default_idx=2))
+        node = clean_str(get_col(row, "NODE", "NO", default_idx=3))
+        site = clean_str(get_col(row, "SITE", "LOCAL", default_idx=4))
+        condominio = clean_str(get_col(row, "CONDOMINIO", "COMDOMINIO", "CLIENTE", "PREDIO", default_idx=5))
+        endereco = clean_str(get_col(row, "ENDERECO", "LOGRADOURO", "RUA", default_idx=6))
+        caixa_mdu = clean_str(get_col(row, "CAIXA MDU", "CX MDU", "CAIXA", default_idx=7))
+        servico = clean_str(get_col(row, "SERVICO / ESCOPO", "SERVICO", "ESCOPO", default_idx=8))
+        classe_l = clean_str(get_col(row, "EXECUTOR LINHA (CLASSE L)", "EXECUTOR LINHA", "CLASSE L", "LINHA", default_idx=9))
+        classe_f = clean_str(get_col(row, "EXECUTOR FUSAO (CLASSE F)", "EXECUTOR FUSAO", "CLASSE F", "FUSAO", default_idx=10))
         
-        # Status da Obra / Operação
-        status_obra_raw = clean_str(get_col(row, "STATUS OPERACAO", "STATUS", default_idx=10))
+        # Status Operação / Campo
+        status_obra_raw = clean_str(get_col(row, "STATUS OPERACAO", "STATUS OPERAÇÃO", "STATUS CAMPO", "STATUS", default_idx=11))
+        situacao = clean_str(get_col(row, "SITUACAO", "SITUAÇÃO", "OBSERVACOES OPERACAO", default_idx=12))
+        relatorio_foto = clean_str(get_col(row, "RELATORIO FOTOGRAFICO", "RELATORIO FOTOGRÁFICO", default_idx=13))
         
-        # Colunas inseridas Y, Z, AA (Douglas)
-        dt_medicao_iso = parse_date(get_col(row, "DATA MEDICAO", "DATA MEDIÇÃO", default_idx=24))
-        num_wf = clean_str(get_col(row, "N WF", "NO WF", "NUM WF", "Nº WF", default_idx=25))
-        status_wf = clean_str(get_col(row, "STATUS WF", default_idx=26))
-        valor_medicao = to_number(get_col(row, "VALOR MEDICAO (R$)", "VALOR MEDICAO", "VALOR", default_idx=19))
-        num_pedido = clean_str(get_col(row, "N DO PEDIDO / CONTRATO", "NO DO PEDIDO / CONTRATO", "NUMERO DO PEDIDO", "PEDIDO", default_idx=22))
+        # Datas de Operação
+        dt_entrada_iso = parse_date(get_col(row, "DATA ENTRADA", "DATA DE ENTRADA", "ENTRADA", default_idx=14))
+        dt_inicio_iso = parse_date(get_col(row, "INICIO EM", "INÍCIO EM", "DATA INICIO", default_idx=15))
+        dt_previsao_iso = parse_date(get_col(row, "PREVISAO", "PREVISÃO", "PREVISAO PARA", default_idx=16))
+        dt_entrega_iso = parse_date(get_col(row, "DATA ENTREGA", "DATA DE ENTREGA", "ENTREGA", default_idx=17))
+        relatorio_ppt = clean_str(get_col(row, "RELATORIO PPT", "RELATÓRIO PPT", "RELATORIO PPT / FOTOS", default_idx=18))
+        data_envio_med = clean_str(get_col(row, "DATA ENVIO MEDICAO", "DATA ENVIO MEDIÇÃO", "MTA ENVIO MEDICAO", "ENVIO MEDICAO", default_idx=19))
         
-        # Status Medição e Relatório
-        status_medicao_raw = clean_str(get_col(row, "STATUS MEDICAO", default_idx=28))
-        status_relatorio = clean_str(get_col(row, "STATUS RELATORIO", default_idx=29))
+        # Tempo, Prazo e Atraso (Colunas U, V, W / 20, 21, 22)
+        tempo_raw = get_col(row, "TEMPO (DIAS)", "TEMPO DIAS", "TEMPO", default_idx=20)
+        prazo_raw = clean_str(get_col(row, "PRAZO (SLA 3 DIAS)", "PRAZO SLA 3 DIAS", "PRAZO", "SLA", default_idx=21)).upper()
+        atraso_raw = get_col(row, "ATRASO (DIAS)", "ATRASO DIAS", "ATRASO", default_idx=22)
         
-        # Status Geral
-        status_geral_raw = clean_str(get_col(row, "STATUS GERAL SAR", "STATUS GERAL", default_idx=30))
+        # Status Geral SAR (Coluna X / 23)
+        status_geral_raw = clean_str(get_col(row, "STATUS GERAL SAR", "STATUS GERAL", default_idx=23))
+        if not status_geral_raw:
+            # Fallback para Status Geral em outras posições
+            status_geral_raw = clean_str(get_col(row, "STATUS GERAL", "STATUS", default_idx=30))
+            
+        # Colunas de Medição & Faturamento (Douglas)
+        dt_medicao_iso = parse_date(get_col(row, "DATA MEDICAO", "DATA MEDIÇÃO", "DATA DE MEDICAO", default_idx=24))
+        valor_medicao = to_number(get_col(row, "VALOR MEDICAO (R$)", "VALOR MEDICAO", "VALOR", default_idx=25))
+        num_wf = clean_str(get_col(row, "N WF", "NO WF", "NUM WF", "Nº WF", "WORKFLOW", "WF", default_idx=26))
+        status_wf = clean_str(get_col(row, "STATUS WF", default_idx=27))
+        num_pedido = clean_str(get_col(row, "N DO PEDIDO / CONTRATO", "NO DO PEDIDO / CONTRATO", "NUMERO DO PEDIDO", "PEDIDO", default_idx=28))
+        observacoes = clean_str(get_col(row, "OBSERVACOES", "OBSERVAÇÕES", "OBS", default_idx=29))
         
         status_k_upper = status_obra_raw.upper()
-        status_z_upper = status_medicao_raw.upper()
         status_g_upper = status_geral_raw.upper()
         
         if status_geral_raw:
             if "MEDIC" in status_g_upper and "CONCLU" in status_g_upper:
                 status = "MEDIÇÃO CONCLUÍDA"
-            elif "WF APROV" in status_g_upper or "CONCLU" in status_g_upper or "FINALIZAD" in status_g_upper:
+            elif "WF APROV" in status_g_upper or "CONCLU" in status_g_upper or "FINALIZAD" in status_g_upper or status_wf.upper() == "FINALIZADO":
                 status = "MEDIÇÃO CONCLUÍDA"
             elif "SEM SINAL" in status_g_upper:
                 status = "SEM SINAL"
@@ -225,48 +242,25 @@ def main():
                 status = "CANCELADO"
             elif "RELAT" in status_g_upper or "AG. RELAT" in status_g_upper or "AG RELAT" in status_g_upper:
                 status = "AG. RELATÓRIO"
-            elif "AG. APROV" in status_g_upper or "AG APROV" in status_g_upper or "AG. MEDI" in status_g_upper or "AG MEDI" in status_g_upper or status_g_upper == "PENDENTE":
+            elif "EM MEDI" in status_g_upper or "AG. MEDI" in status_g_upper or "AG MEDI" in status_g_upper or "AG. APROV" in status_g_upper or "AG APROV" in status_g_upper or status_g_upper == "PENDENTE":
                 status = "AG. MEDIÇÃO"
             else:
                 status = status_geral_raw
         else:
-            # Fallback de cálculo
+            # Fallback de cálculo a partir do status de campo e WF
             if "SEM SINAL" in status_k_upper:
                 status = "SEM SINAL"
             elif "PARALISAD" in status_k_upper:
                 status = "PARALISADO"
             elif "CANCELAD" in status_k_upper:
                 status = "CANCELADO"
-            elif "MEDIC" in status_z_upper and "CONCLU" in status_z_upper or "WF APROV" in status_z_upper or "CONCLU" in status_z_upper or "FINALIZAD" in status_z_upper:
-                status = "MEDIÇÃO CONCLUÍDA"
-            elif "RELAT" in status_z_upper or "AG. RELAT" in status_z_upper or "AG RELAT" in status_z_upper:
-                status = "AG. RELATÓRIO"
-            elif "AG. APROV" in status_z_upper or "AG APROV" in status_z_upper or "PEND" in status_z_upper or "AG. MEDI" in status_z_upper or "AG MEDI" in status_z_upper:
-                status = "AG. MEDIÇÃO"
-            elif status_z_upper != "":
-                status = status_z_upper
+            elif "CONCLU" in status_k_upper:
+                if status_wf.upper() in ("FINALIZADO", "APROVADO") or dt_medicao_iso:
+                    status = "MEDIÇÃO CONCLUÍDA"
+                else:
+                    status = "AG. MEDIÇÃO"
             else:
-                status = "MEDIÇÃO CONCLUÍDA"
-            
-        classe_l = clean_str(get_col(row, "EXECUTOR LINHA (CLASSE L)", "EXECUTOR LINHA", "CLASSE L", default_idx=11))
-        classe_f = clean_str(get_col(row, "EXECUTOR FUSAO (CLASSE F)", "EXECUTOR FUSAO", "CLASSE F", default_idx=12))
-        situacao = clean_str(get_col(row, "OBSERVACOES", "SITUACAO", default_idx=13))
-        relatorio_foto = clean_str(get_col(row, "RELATORIO PPT / FOTOS", "RELATORIO FOTOGRAFICO", default_idx=14))
-        servico = clean_str(get_col(row, "SERVICO / ESCOPO", "SERVICO", default_idx=17))
-        
-        # Datas
-        dt_entrada_iso = parse_date(get_col(row, "DATA DE ENTRADA", default_idx=19))
-        dt_inicio_iso = parse_date(get_col(row, "INICIO EM", default_idx=20))
-        dt_previsao_iso = parse_date(get_col(row, "PREVISAO PARA", "PREVISAO", default_idx=21))
-        dt_entrega_iso = parse_date(get_col(row, "DATA DE ENTREGA", default_idx=22))
-        
-        # Competência baseada na data de entrada
-        competencia = get_competencia(dt_entrada_iso)
-        
-        # Tempo, Prazo e Atraso
-        tempo_raw = get_col(row, "TEMPO (DIAS)", "TEMPO", default_idx=31)
-        prazo_raw = clean_str(get_col(row, "PRAZO (SLA 3 DIAS)", "PRAZO", default_idx=32)).upper()
-        atraso_raw = get_col(row, "ATRASO (DIAS)", "ATRASO", default_idx=33)
+                status = "AG. MEDIÇÃO"
 
         tempo_dias = to_number(tempo_raw)
         today = datetime.date.today()
@@ -310,6 +304,9 @@ def main():
         elif prazo == "NO PRAZO":
             atraso_dias = 0
             
+        # Competência baseada na data de entrada
+        competencia = get_competencia(dt_entrada_iso)
+        
         # Ano e Mês baseados na data de entrada
         ano_entrada = dt_entrada_iso[:4] if dt_entrada_iso else "NÃO INFORMADO"
         mes_num = dt_entrada_iso[5:7] if dt_entrada_iso and len(dt_entrada_iso) >= 7 else ""
@@ -347,8 +344,8 @@ def main():
             "mes": mes_nome,
             "mes_num": mes_num,
             "status": status,
-            "status_relatorio": status_relatorio,
-            "status_medicao": status_medicao_raw,
+            "status_relatorio": relatorio_ppt,
+            "status_medicao": data_envio_med,
             "status_obra": status_obra_raw,
             "prazo": prazo,
             "tempo_dias": tempo_dias,
