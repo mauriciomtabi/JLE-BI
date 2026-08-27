@@ -3838,6 +3838,47 @@ body.light-theme .pwa-toast {
     box-shadow: 0 2px 6px rgba(0, 79, 113, 0.15);
 }
 
+/* Controles do Modal de Pré-Visualização de E-mail */
+.preview-type-btn {
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.preview-type-btn:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.05);
+}
+.preview-type-btn.active {
+    color: #ffffff !important;
+    background: #004f71 !important;
+    box-shadow: 0 2px 8px rgba(0, 79, 113, 0.35);
+}
+
+.preview-device-btn {
+    padding: 6px 10px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.preview-device-btn:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.05);
+}
+.preview-device-btn.active {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+}
+
 .light-theme .chart-toggle-btn:hover {
     background: rgba(0, 0, 0, 0.05);
 }

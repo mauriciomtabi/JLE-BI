@@ -723,9 +723,14 @@
                                 <h3>E-mails Automáticos</h3>
                                 <p class="admin-card-subtitle">Configure disparos automáticos de relatórios por e-mail</p>
                             </div>
-                            <button class="admin-add-btn" onclick="openEmailReportModal()" style="margin-left:auto; background: linear-gradient(135deg, #1a7a4a, #27ae60);">
-                                <i class="fa-solid fa-plus"></i> Novo Relatório
-                            </button>
+                            <div style="margin-left:auto; display:flex; gap:8px;">
+                                <button class="admin-add-btn" onclick="openEmailPreviewModal('mdu')" style="background: linear-gradient(135deg, #004f71, #0ea5e9);">
+                                    <i class="fa-solid fa-eye"></i> Pré-Visualizar Templates
+                                </button>
+                                <button class="admin-add-btn" onclick="openEmailReportModal()" style="background: linear-gradient(135deg, #1a7a4a, #27ae60);">
+                                    <i class="fa-solid fa-plus"></i> Novo Relatório
+                                </button>
+                            </div>
                         </div>
                         <div class="admin-table-container">
                             <table class="admin-users-table">
@@ -835,6 +840,9 @@
 
                 <!-- Botões -->
                 <div style="display:flex; gap:12px;">
+                    <button type="button" onclick="previewCurrentModalReport()" style="padding:14px 18px; background:rgba(14,165,233,0.15); color:#0ea5e9; border:1px solid rgba(14,165,233,0.3); border-radius:12px; font-weight:700; font-size:14px; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.background='rgba(14,165,233,0.25)'" onmouseout="this.style.background='rgba(14,165,233,0.15)'">
+                        <i class="fa-solid fa-eye" style="margin-right:6px;"></i>Pré-Visualizar
+                    </button>
                     <button onclick="saveEmailReport()" style="flex:1; padding:14px; background:linear-gradient(135deg, #1a7a4a, #27ae60); color:white; border:none; border-radius:12px; font-size:14px; font-weight:700; cursor:pointer; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
                         <i class="fa-solid fa-floppy-disk" style="margin-right:8px;"></i>Salvar Configuração
                     </button>
@@ -842,6 +850,81 @@
                         Cancelar
                     </button>
                 </div>
+            </div>
+        </div>
+
+        <!-- MODAL: Pré-Visualização de E-mail Automático -->
+        <div id="email-preview-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); z-index:10000; align-items:center; justify-content:center; backdrop-filter:blur(6px); padding:20px;">
+            <div style="background:var(--bg-card, #161b22); border-radius:18px; width:950px; max-width:98vw; height:92vh; max-height:92vh; display:flex; flex-direction:column; box-shadow:0 24px 60px rgba(0,0,0,0.6); border:1px solid var(--border-color, rgba(255,255,255,0.1)); overflow:hidden;">
+                
+                <!-- Header do Modal -->
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:16px 24px; border-bottom:1px solid var(--border-color, rgba(255,255,255,0.08)); background:rgba(0,0,0,0.2);">
+                    <div style="display:flex; align-items:center; gap:12px;">
+                        <div style="width:36px; height:36px; border-radius:10px; background:linear-gradient(135deg, rgba(0,79,113,0.3), rgba(14,165,233,0.3)); display:flex; align-items:center; justify-content:center; color:#0ea5e9; font-size:16px;">
+                            <i class="fa-solid fa-envelope-open-text"></i>
+                        </div>
+                        <div>
+                            <h3 style="margin:0; font-size:16px; font-weight:700; color:var(--text-primary);">Pré-Visualização de E-mail Automático</h3>
+                            <p style="margin:2px 0 0; font-size:12px; color:var(--text-secondary);">Simulador de renderização idêntico ao disparo do cron</p>
+                        </div>
+                    </div>
+
+                    <!-- Controles Centrais / Seletor de Tipo e Device -->
+                    <div style="display:flex; align-items:center; gap:12px;">
+                        <!-- Seletor de Módulo -->
+                        <div style="display:flex; background:rgba(0,0,0,0.3); padding:3px; border-radius:8px; border:1px solid rgba(255,255,255,0.08);">
+                            <button class="preview-type-btn active" onclick="switchPreviewReportType('mdu')" id="preview-btn-mdu">MDU</button>
+                            <button class="preview-type-btn" onclick="switchPreviewReportType('sar')" id="preview-btn-sar">SAR</button>
+                            <button class="preview-type-btn" onclick="switchPreviewReportType('claro')" id="preview-btn-claro">Claro</button>
+                            <button class="preview-type-btn" onclick="switchPreviewReportType('manutencao')" id="preview-btn-manutencao">Manutenção</button>
+                            <button class="preview-type-btn" onclick="switchPreviewReportType('tecnodrill')" id="preview-btn-tecnodrill">Tecnodrill</button>
+                        </div>
+
+                        <!-- Toggle Desktop / Mobile -->
+                        <div style="display:flex; background:rgba(0,0,0,0.3); padding:3px; border-radius:8px; border:1px solid rgba(255,255,255,0.08);">
+                            <button class="preview-device-btn active" onclick="setPreviewDeviceMode('desktop')" id="preview-dev-desktop" title="Visualização Desktop (640px)"><i class="fa-solid fa-desktop"></i></button>
+                            <button class="preview-device-btn" onclick="setPreviewDeviceMode('mobile')" id="preview-dev-mobile" title="Visualização Mobile (380px)"><i class="fa-solid fa-mobile-screen"></i></button>
+                        </div>
+
+                        <!-- Botão Fechar -->
+                        <button onclick="closeEmailPreviewModal()" style="background:none; border:none; color:var(--text-secondary); cursor:pointer; font-size:20px; padding:4px 8px; border-radius:6px;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-secondary)'">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Barra de Metadados do E-mail (Simulação de Caixa de Entrada) -->
+                <div style="padding:10px 24px; background:rgba(255,255,255,0.02); border-bottom:1px solid var(--border-color, rgba(255,255,255,0.06)); font-size:12px; display:flex; flex-direction:column; gap:4px;">
+                    <div style="display:flex; gap:8px;">
+                        <span style="color:var(--text-secondary); width:65px; font-weight:600;">De:</span>
+                        <span style="color:var(--text-primary); font-weight:500;">BI JLE Telecom &lt;bi@jletelecom.com.br&gt;</span>
+                    </div>
+                    <div style="display:flex; gap:8px;">
+                        <span style="color:var(--text-secondary); width:65px; font-weight:600;">Assunto:</span>
+                        <span style="color:#0ea5e9; font-weight:700;" id="email-preview-subject">[BI JLE] Relatório Automático</span>
+                    </div>
+                </div>
+
+                <!-- Área de Renderização (Iframe isolado) -->
+                <div style="flex-grow:1; background:#e9edf2; display:flex; justify-content:center; align-items:flex-start; padding:16px; overflow-y:auto;">
+                    <iframe id="email-preview-iframe" style="width:640px; height:100%; min-height:550px; border:none; background:#ffffff; border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,0.15); transition:width 0.3s ease;"></iframe>
+                </div>
+
+                <!-- Footer do Modal -->
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 24px; border-top:1px solid var(--border-color, rgba(255,255,255,0.08)); background:rgba(0,0,0,0.2);">
+                    <div style="font-size:12px; color:var(--text-secondary);" id="email-preview-data-info">
+                        Dados carregados em tempo real da base ativa do BI.
+                    </div>
+                    <div style="display:flex; gap:10px;">
+                        <button onclick="sendTestEmailFromPreview()" style="display:inline-flex; align-items:center; gap:6px; padding:8px 16px; font-size:13px; font-weight:600; background:linear-gradient(135deg, #1a7a4a, #27ae60); color:#fff; border:none; border-radius:8px; cursor:pointer;">
+                            <i class="fa-solid fa-paper-plane"></i> Enviar E-mail de Teste
+                        </button>
+                        <button onclick="closeEmailPreviewModal()" style="padding:8px 16px; font-size:13px; font-weight:600; background:rgba(255,255,255,0.08); color:var(--text-primary); border:1px solid rgba(255,255,255,0.1); border-radius:8px; cursor:pointer;">
+                            Fechar
+                        </button>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -2651,6 +2734,7 @@
     <script src="sar_app.js?v=2.3"></script>
     <script src="manutencao_data.js"></script>
     <script src="manutencao_app.js"></script>
+    <script src="email_preview_helper.js?v=1.0"></script>
 
     <!-- Logica de UI Autônoma (Sem Dependências de CDNs) -->
     <script>
@@ -4204,6 +4288,9 @@
                     <td><span style="padding:3px 8px; border-radius:20px; font-size:10px; font-weight:700; white-space:nowrap; display:inline-block; ${activeStyle}">${activeLabel}</span></td>
                     <td>
                         <div style="display:flex; gap:6px; justify-content:center;">
+                            <button onclick="openEmailPreviewModal('${r.report_type}', '${r.report_name.replace(/'/g, "\\'")}', '${recipients.replace(/'/g, "\\'")}')" style="padding:5px 10px; font-size:11px; background:rgba(14,165,233,0.12); color:#0ea5e9; border:1px solid rgba(14,165,233,0.3); border-radius:6px; cursor:pointer;" title="Pré-visualizar Template">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
                             <button onclick="editEmailReport('${r.id}')" style="padding:5px 10px; font-size:11px; background:rgba(0,79,113,0.15); color:var(--color-primary-light); border:1px solid rgba(0,79,113,0.3); border-radius:6px; cursor:pointer;" title="Editar">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </button>
