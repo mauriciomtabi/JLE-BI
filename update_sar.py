@@ -264,10 +264,34 @@ def main():
         competencia = get_competencia(dt_entrada_iso)
         
         # Tempo, Prazo e Atraso
-        tempo_dias = to_number(get_col(row, "TEMPO (DIAS)", "TEMPO", default_idx=31))
+        tempo_raw = get_col(row, "TEMPO (DIAS)", "TEMPO", default_idx=31)
         prazo_raw = clean_str(get_col(row, "PRAZO (SLA 3 DIAS)", "PRAZO", default_idx=32)).upper()
-        atraso_dias = to_number(get_col(row, "ATRASO (DIAS)", "ATRASO", default_idx=33))
+        atraso_raw = get_col(row, "ATRASO (DIAS)", "ATRASO", default_idx=33)
+
+        tempo_dias = to_number(tempo_raw)
+        today = datetime.date.today()
         
+        # Se tempo não veio preenchido ou é fórmula/0, calcular via dias úteis
+        if tempo_dias <= 0 and dt_entrada_iso:
+            try:
+                import numpy as np
+                d1 = datetime.datetime.strptime(dt_entrada_iso[:10], "%Y-%m-%d").date()
+                d2 = None
+                if dt_medicao_iso:
+                    d2 = datetime.datetime.strptime(dt_medicao_iso[:10], "%Y-%m-%d").date()
+                elif dt_entrega_iso:
+                    d2 = datetime.datetime.strptime(dt_entrega_iso[:10], "%Y-%m-%d").date()
+                elif "CONCLU" not in status.upper() and "CANCEL" not in status.upper():
+                    d2 = today
+                    
+                if d1 and d2:
+                    if d2 >= d1:
+                        tempo_dias = int(np.busday_count(d1, d2))
+                    else:
+                        tempo_dias = 0
+            except Exception:
+                pass
+
         if "NO PRAZO" in prazo_raw or "DENTRO" in prazo_raw:
             prazo = "NO PRAZO"
         elif "ATRASAD" in prazo_raw or "FORA" in prazo_raw:
@@ -278,10 +302,13 @@ def main():
             elif tempo_dias > 0:
                 prazo = "NO PRAZO"
             else:
-                prazo = "NÃO INFORMADO"
+                prazo = "NO PRAZO" if dt_entrada_iso else "NÃO INFORMADO"
                 
+        atraso_dias = to_number(atraso_raw)
         if prazo == "ATRASADO" and atraso_dias <= 0 and tempo_dias > 3:
             atraso_dias = tempo_dias - 3
+        elif prazo == "NO PRAZO":
+            atraso_dias = 0
             
         # Ano e Mês baseados na data de entrada
         ano_entrada = dt_entrada_iso[:4] if dt_entrada_iso else "NÃO INFORMADO"

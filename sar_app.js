@@ -326,24 +326,15 @@ function getSarRecent60DaysData(dataset) {
  */
 function updateSarKpis(data) {
     const total = data.length;
-    let concluidasCount = 0;
-    let andamentoCount = 0;
+    let agMedicaoCount = 0;
+    let agRelatorioCount = 0;
 
     data.forEach(r => {
-        const st = (r.status || '').toUpperCase();
-        if (
-            st.includes('CONCLU') || 
-            st.includes('FINALIZAD') || 
-            st.includes('WF APROV') || 
-            st.includes('MEDIÇÃO CONCLU') || 
-            st.includes('MEDICAO CONCLU') || 
-            (st.includes('APROVADO') && !st.includes('AG.'))
-        ) {
-            concluidasCount++;
-        } else if (st === 'CANCELADO' || st === 'CANCELADA') {
-            // Cancelada
-        } else {
-            andamentoCount++;
+        const st = (r.status || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase();
+        if (st.includes('MEDIC') && !st.includes('CONCLU')) {
+            agMedicaoCount++;
+        } else if (st.includes('RELAT')) {
+            agRelatorioCount++;
         }
     });
 
@@ -367,8 +358,8 @@ function updateSarKpis(data) {
         }
     });
 
-    const concluidasPct = total > 0 ? ((concluidasCount / total) * 100).toFixed(1) : '0';
-    const andamentoPct = total > 0 ? ((andamentoCount / total) * 100).toFixed(1) : '0';
+    const agMedicaoPct = total > 0 ? ((agMedicaoCount / total) * 100).toFixed(1) : '0';
+    const agRelatorioPct = total > 0 ? ((agRelatorioCount / total) * 100).toFixed(1) : '0';
     const mediaTempo = countTempo > 0 ? (somaTempo / countTempo).toFixed(1) : '0';
     const mediaAtraso = countAtraso > 0 ? (somaAtraso / countAtraso).toFixed(1) : '0';
 
@@ -376,15 +367,15 @@ function updateSarKpis(data) {
     const elTotal = document.getElementById('sar-kpi-total');
     if (elTotal) elTotal.innerText = total.toLocaleString('pt-BR');
 
-    const elConcluidas = document.getElementById('sar-kpi-concluidas');
-    const elConcluidasPct = document.getElementById('sar-kpi-concluidas-pct');
-    if (elConcluidas) elConcluidas.innerText = concluidasCount.toLocaleString('pt-BR');
-    if (elConcluidasPct) elConcluidasPct.innerText = `${concluidasPct}%`;
+    const elMedicao = document.getElementById('sar-kpi-concluidas');
+    const elMedicaoPct = document.getElementById('sar-kpi-concluidas-pct');
+    if (elMedicao) elMedicao.innerText = agMedicaoCount.toLocaleString('pt-BR');
+    if (elMedicaoPct) elMedicaoPct.innerText = `${agMedicaoPct}%`;
 
-    const elAndamento = document.getElementById('sar-kpi-andamento');
-    const elAndamentoPct = document.getElementById('sar-kpi-andamento-pct');
-    if (elAndamento) elAndamento.innerText = andamentoCount.toLocaleString('pt-BR');
-    if (elAndamentoPct) elAndamentoPct.innerText = `${andamentoPct}%`;
+    const elRelatorio = document.getElementById('sar-kpi-andamento');
+    const elRelatorioPct = document.getElementById('sar-kpi-andamento-pct');
+    if (elRelatorio) elRelatorio.innerText = agRelatorioCount.toLocaleString('pt-BR');
+    if (elRelatorioPct) elRelatorioPct.innerText = `${agRelatorioPct}%`;
 
     const elTempoTitle = document.getElementById('sar-kpi-tempo-title');
     const elTempoMedio = document.getElementById('sar-kpi-tempo-medio');

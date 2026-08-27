@@ -1,11 +1,11 @@
 /**
  * sar_data.js — Base de Dados compilada do módulo SAR
- * Gerado automaticamente em: 2026-08-27 08:17:45
+ * Gerado automaticamente em: 2026-08-27 08:50:10
  */
 
 window.SAR_METADATA = {
   "total_records": 1066,
-  "generated_at": "2026-08-27 08:17:45",
+  "generated_at": "2026-08-27 08:50:10",
   "source_file": "Planilha_Operacional_SAR_JLE.xlsx",
   "cidades": [
     "ALVORADA",
@@ -297,9 +297,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0002",
@@ -335,9 +335,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0003",
@@ -373,9 +373,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0004",
@@ -411,9 +411,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0005",
@@ -449,9 +449,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0006",
@@ -487,9 +487,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 15,
+    "atraso_dias": 12
   },
   {
     "cod": "RSCLER0007",
@@ -525,9 +525,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 14,
+    "atraso_dias": 11
   },
   {
     "cod": "RSCLER0008",
@@ -563,9 +563,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 15,
+    "atraso_dias": 12
   },
   {
     "cod": "RSCLER0009",
@@ -601,9 +601,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0010",
@@ -639,9 +639,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0011",
@@ -677,9 +677,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 17,
+    "atraso_dias": 14
   },
   {
     "cod": "RSCLER0012",
@@ -715,9 +715,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0013",
@@ -753,9 +753,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 9,
+    "atraso_dias": 6
   },
   {
     "cod": "RSCLER0014",
@@ -791,9 +791,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0015",
@@ -829,9 +829,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0016",
@@ -867,9 +867,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0017",
@@ -905,9 +905,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0018",
@@ -943,9 +943,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0019",
@@ -981,9 +981,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0020",
@@ -1019,9 +1019,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0021",
@@ -1057,9 +1057,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0022",
@@ -1095,8 +1095,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -1133,8 +1133,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -1171,8 +1171,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -1209,9 +1209,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 17,
+    "atraso_dias": 14
   },
   {
     "cod": "RSCLER0026",
@@ -1247,9 +1247,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0027",
@@ -1285,9 +1285,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 28,
+    "atraso_dias": 25
   },
   {
     "cod": "RSCLER0028",
@@ -1323,8 +1323,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -1361,9 +1361,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0030",
@@ -1399,8 +1399,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -1437,9 +1437,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 265,
+    "atraso_dias": 262
   },
   {
     "cod": "RSCLER0032",
@@ -1475,7 +1475,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -1513,7 +1513,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -1551,8 +1551,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -1589,8 +1589,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -1627,8 +1627,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -1665,8 +1665,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -1703,9 +1703,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 21,
+    "atraso_dias": 18
   },
   {
     "cod": "RSCLER0039",
@@ -1741,9 +1741,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 842,
+    "atraso_dias": 839
   },
   {
     "cod": "RSCLER0040",
@@ -1779,9 +1779,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 17,
+    "atraso_dias": 14
   },
   {
     "cod": "RSCLER0041",
@@ -1817,9 +1817,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 12,
+    "atraso_dias": 9
   },
   {
     "cod": "RSCLER0042",
@@ -1855,8 +1855,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -1893,9 +1893,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0044",
@@ -1931,9 +1931,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0045",
@@ -1969,8 +1969,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -2007,9 +2007,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 17,
+    "atraso_dias": 14
   },
   {
     "cod": "RSCLER0047",
@@ -2045,9 +2045,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 265,
+    "atraso_dias": 262
   },
   {
     "cod": "RSCLER0048",
@@ -2083,9 +2083,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0049",
@@ -2121,9 +2121,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 21,
+    "atraso_dias": 18
   },
   {
     "cod": "RSCLER0050",
@@ -2159,9 +2159,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 16,
+    "atraso_dias": 13
   },
   {
     "cod": "RSCLER0051",
@@ -2197,9 +2197,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 17,
+    "atraso_dias": 14
   },
   {
     "cod": "RSCLER0052",
@@ -2235,9 +2235,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 17,
+    "atraso_dias": 14
   },
   {
     "cod": "RSCLER0053",
@@ -2273,9 +2273,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 263,
+    "atraso_dias": 260
   },
   {
     "cod": "RSCLER0054",
@@ -2311,9 +2311,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 265,
+    "atraso_dias": 262
   },
   {
     "cod": "RSCLER0055",
@@ -2349,9 +2349,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0056",
@@ -2387,9 +2387,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 17,
+    "atraso_dias": 14
   },
   {
     "cod": "RSCLER0057",
@@ -2425,9 +2425,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 25,
+    "atraso_dias": 22
   },
   {
     "cod": "RSCLER0058",
@@ -2463,9 +2463,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 25,
+    "atraso_dias": 22
   },
   {
     "cod": "RSCLER0059",
@@ -2501,9 +2501,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 18,
+    "atraso_dias": 15
   },
   {
     "cod": "RSCLER0060",
@@ -2539,9 +2539,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 18,
+    "atraso_dias": 15
   },
   {
     "cod": "RSCLER0061",
@@ -2577,9 +2577,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0062",
@@ -2615,9 +2615,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0063",
@@ -2653,9 +2653,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 264,
+    "atraso_dias": 261
   },
   {
     "cod": "RSCLER0064",
@@ -2691,8 +2691,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -2729,9 +2729,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 18,
+    "atraso_dias": 15
   },
   {
     "cod": "RSCLER0066",
@@ -2767,9 +2767,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0067",
@@ -2805,9 +2805,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 14,
+    "atraso_dias": 11
   },
   {
     "cod": "RSCLER0068",
@@ -2843,9 +2843,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0069",
@@ -2881,9 +2881,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 9,
+    "atraso_dias": 6
   },
   {
     "cod": "RSCLER0070",
@@ -2919,9 +2919,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0071",
@@ -2957,9 +2957,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 11,
+    "atraso_dias": 8
   },
   {
     "cod": "RSCLER0072",
@@ -2995,9 +2995,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0073",
@@ -3033,8 +3033,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -3071,9 +3071,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 12,
+    "atraso_dias": 9
   },
   {
     "cod": "RSCLER0075",
@@ -3109,9 +3109,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 9,
+    "atraso_dias": 6
   },
   {
     "cod": "RSCLER0076",
@@ -3147,9 +3147,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0077",
@@ -3223,9 +3223,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 833,
+    "atraso_dias": 830
   },
   {
     "cod": "RSCLER0079",
@@ -3299,8 +3299,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -3337,8 +3337,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -3375,8 +3375,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -3413,8 +3413,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -3451,8 +3451,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -3489,8 +3489,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -3527,8 +3527,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -3565,8 +3565,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -3603,8 +3603,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -3641,7 +3641,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -3679,8 +3679,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -3717,9 +3717,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 13,
+    "atraso_dias": 10
   },
   {
     "cod": "RSCLER0092",
@@ -3755,9 +3755,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 12,
+    "atraso_dias": 9
   },
   {
     "cod": "RSCLER0093",
@@ -3793,8 +3793,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -3831,9 +3831,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 11,
+    "atraso_dias": 8
   },
   {
     "cod": "RSCLER0095",
@@ -3869,9 +3869,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 11,
+    "atraso_dias": 8
   },
   {
     "cod": "RSCLER0096",
@@ -3907,9 +3907,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0097",
@@ -3945,8 +3945,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -3983,8 +3983,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -4021,8 +4021,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -4059,9 +4059,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 9,
+    "atraso_dias": 6
   },
   {
     "cod": "RSCLER0101",
@@ -4097,8 +4097,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -4135,9 +4135,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 9,
+    "atraso_dias": 6
   },
   {
     "cod": "RSCLER0103",
@@ -4173,9 +4173,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 23,
+    "atraso_dias": 20
   },
   {
     "cod": "RSCLER0104",
@@ -4249,9 +4249,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 52,
+    "atraso_dias": 49
   },
   {
     "cod": "RSCLER0106",
@@ -4325,7 +4325,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Cancelado",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -4363,7 +4363,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Cancelado",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -4401,7 +4401,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Cancelado",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -4439,7 +4439,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Cancelado",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -4477,7 +4477,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Cancelado",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -4515,8 +4515,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -4553,9 +4553,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 27,
+    "atraso_dias": 24
   },
   {
     "cod": "RSCLER0114",
@@ -4591,9 +4591,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 32,
+    "atraso_dias": 29
   },
   {
     "cod": "RSCLER0115",
@@ -4629,9 +4629,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 13,
+    "atraso_dias": 10
   },
   {
     "cod": "RSCLER0116",
@@ -4667,9 +4667,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 782,
+    "atraso_dias": 779
   },
   {
     "cod": "RSCLER0117",
@@ -4705,9 +4705,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 12,
+    "atraso_dias": 9
   },
   {
     "cod": "RSCLER0118",
@@ -4743,8 +4743,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -4781,8 +4781,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -4819,7 +4819,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -4857,9 +4857,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 15,
+    "atraso_dias": 12
   },
   {
     "cod": "RSCLER0122",
@@ -4895,9 +4895,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 19,
+    "atraso_dias": 16
   },
   {
     "cod": "RSCLER0123",
@@ -4933,9 +4933,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0124",
@@ -4971,9 +4971,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 17,
+    "atraso_dias": 14
   },
   {
     "cod": "RSCLER0125",
@@ -5009,8 +5009,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -5047,8 +5047,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -5085,9 +5085,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 15,
+    "atraso_dias": 12
   },
   {
     "cod": "RSCLER0128",
@@ -5123,9 +5123,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0129",
@@ -5161,9 +5161,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 17,
+    "atraso_dias": 14
   },
   {
     "cod": "RSCLER0130",
@@ -5199,9 +5199,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0131",
@@ -5237,7 +5237,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -5275,9 +5275,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 16,
+    "atraso_dias": 13
   },
   {
     "cod": "RSCLER0133",
@@ -5313,9 +5313,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0134",
@@ -5351,9 +5351,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0135",
@@ -5389,9 +5389,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0136",
@@ -5427,9 +5427,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 17,
+    "atraso_dias": 14
   },
   {
     "cod": "RSCLER0137",
@@ -5465,9 +5465,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 13,
+    "atraso_dias": 10
   },
   {
     "cod": "RSCLER0138",
@@ -5503,9 +5503,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0139",
@@ -5541,9 +5541,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 17,
+    "atraso_dias": 14
   },
   {
     "cod": "RSCLER0140",
@@ -5579,9 +5579,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0141",
@@ -5617,8 +5617,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -5655,8 +5655,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -5693,8 +5693,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -5731,8 +5731,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -5769,7 +5769,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -5807,7 +5807,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -5845,9 +5845,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0148",
@@ -5883,7 +5883,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -5921,7 +5921,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -5959,9 +5959,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 18,
+    "atraso_dias": 15
   },
   {
     "cod": "RSCLER0151",
@@ -5997,8 +5997,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -6035,8 +6035,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -6073,8 +6073,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -6111,9 +6111,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0155",
@@ -6149,8 +6149,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -6187,8 +6187,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -6225,8 +6225,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -6263,8 +6263,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -6301,9 +6301,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0160",
@@ -6339,7 +6339,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -6415,8 +6415,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -6453,8 +6453,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -6491,9 +6491,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 9,
+    "atraso_dias": 6
   },
   {
     "cod": "RSCLER0165",
@@ -6529,8 +6529,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -6567,8 +6567,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -6605,9 +6605,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 12,
+    "atraso_dias": 9
   },
   {
     "cod": "RSCLER0168",
@@ -6643,9 +6643,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0169",
@@ -6681,8 +6681,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -6719,9 +6719,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0171",
@@ -6757,9 +6757,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0172",
@@ -6795,9 +6795,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0173",
@@ -6833,9 +6833,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 11,
+    "atraso_dias": 8
   },
   {
     "cod": "RSCLER0174",
@@ -6871,9 +6871,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0175",
@@ -6909,8 +6909,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -6947,9 +6947,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0177",
@@ -6985,8 +6985,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -7023,8 +7023,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -7061,9 +7061,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 13,
+    "atraso_dias": 10
   },
   {
     "cod": "RSCLER0180",
@@ -7099,7 +7099,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -7137,9 +7137,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0182",
@@ -7175,9 +7175,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0183",
@@ -7213,9 +7213,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0184",
@@ -7251,9 +7251,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 11,
+    "atraso_dias": 8
   },
   {
     "cod": "RSCLER0185",
@@ -7289,8 +7289,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -7327,7 +7327,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -7365,8 +7365,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -7403,7 +7403,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -7441,8 +7441,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -7479,8 +7479,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -7517,8 +7517,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -7555,9 +7555,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 9,
+    "atraso_dias": 6
   },
   {
     "cod": "RSCLER0193",
@@ -7593,9 +7593,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 247,
+    "atraso_dias": 244
   },
   {
     "cod": "RSCLER0194",
@@ -7631,9 +7631,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 12,
+    "atraso_dias": 9
   },
   {
     "cod": "RSCLER0195",
@@ -7669,9 +7669,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0196",
@@ -7707,9 +7707,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0197",
@@ -7745,8 +7745,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -7783,8 +7783,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -7821,9 +7821,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0200",
@@ -7859,9 +7859,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 278,
+    "atraso_dias": 275
   },
   {
     "cod": "RSCLER0201",
@@ -7897,9 +7897,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 33,
+    "atraso_dias": 30
   },
   {
     "cod": "RSCLER0202",
@@ -7935,9 +7935,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 25,
+    "atraso_dias": 22
   },
   {
     "cod": "RSCLER0203",
@@ -7973,7 +7973,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -8011,7 +8011,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -8049,9 +8049,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 28,
+    "atraso_dias": 25
   },
   {
     "cod": "RSCLER0206",
@@ -8087,8 +8087,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -8125,7 +8125,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -8163,7 +8163,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -8201,9 +8201,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 23,
+    "atraso_dias": 20
   },
   {
     "cod": "RSCLER0210",
@@ -8239,7 +8239,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -8277,7 +8277,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -8315,9 +8315,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 20,
+    "atraso_dias": 17
   },
   {
     "cod": "RSCLER0213",
@@ -8353,9 +8353,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 34,
+    "atraso_dias": 31
   },
   {
     "cod": "RSCLER0214",
@@ -8391,8 +8391,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -8429,7 +8429,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -8467,9 +8467,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 16,
+    "atraso_dias": 13
   },
   {
     "cod": "RSCLER0217",
@@ -8505,9 +8505,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0218",
@@ -8543,9 +8543,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0219",
@@ -8581,9 +8581,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0220",
@@ -8619,9 +8619,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0221",
@@ -8657,7 +8657,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -8695,7 +8695,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -8733,7 +8733,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -8771,9 +8771,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0225",
@@ -8809,8 +8809,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -8847,9 +8847,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0227",
@@ -8885,9 +8885,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0228",
@@ -8923,9 +8923,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0229",
@@ -8961,8 +8961,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -8999,9 +8999,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 12,
+    "atraso_dias": 9
   },
   {
     "cod": "RSCLER0231",
@@ -9037,9 +9037,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 11,
+    "atraso_dias": 8
   },
   {
     "cod": "RSCLER0232",
@@ -9075,9 +9075,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0233",
@@ -9113,8 +9113,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -9151,9 +9151,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0235",
@@ -9189,9 +9189,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0236",
@@ -9227,9 +9227,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 20,
+    "atraso_dias": 17
   },
   {
     "cod": "RSCLER0237",
@@ -9265,9 +9265,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 19,
+    "atraso_dias": 16
   },
   {
     "cod": "RSCLER0238",
@@ -9303,8 +9303,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -9341,9 +9341,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 9,
+    "atraso_dias": 6
   },
   {
     "cod": "RSCLER0240",
@@ -9379,9 +9379,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 17,
+    "atraso_dias": 14
   },
   {
     "cod": "RSCLER0241",
@@ -9417,9 +9417,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0242",
@@ -9455,9 +9455,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0243",
@@ -9493,9 +9493,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Cancelado",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0244",
@@ -9531,8 +9531,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -9569,8 +9569,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -9607,9 +9607,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0247",
@@ -9645,9 +9645,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0248",
@@ -9683,9 +9683,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0249",
@@ -9721,9 +9721,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 14,
+    "atraso_dias": 11
   },
   {
     "cod": "RSCLER0250",
@@ -9759,9 +9759,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 14,
+    "atraso_dias": 11
   },
   {
     "cod": "RSCLER0251",
@@ -9797,9 +9797,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0252",
@@ -9835,9 +9835,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0253",
@@ -9873,9 +9873,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0254",
@@ -9911,9 +9911,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0255",
@@ -9949,8 +9949,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -9987,9 +9987,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 48,
+    "atraso_dias": 45
   },
   {
     "cod": "RSCLER0257",
@@ -10025,9 +10025,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 28,
+    "atraso_dias": 25
   },
   {
     "cod": "RSCLER0258",
@@ -10063,9 +10063,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 11,
+    "atraso_dias": 8
   },
   {
     "cod": "RSCLER0259",
@@ -10101,9 +10101,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0260",
@@ -10139,9 +10139,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0261",
@@ -10177,9 +10177,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 17,
+    "atraso_dias": 14
   },
   {
     "cod": "RSCLER0262",
@@ -10215,9 +10215,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 12,
+    "atraso_dias": 9
   },
   {
     "cod": "RSCLER0263",
@@ -10253,8 +10253,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -10291,9 +10291,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 15,
+    "atraso_dias": 12
   },
   {
     "cod": "RSCLER0265",
@@ -10329,8 +10329,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -10367,8 +10367,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -10405,8 +10405,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -10443,8 +10443,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -10481,9 +10481,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0270",
@@ -10519,9 +10519,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 15,
+    "atraso_dias": 12
   },
   {
     "cod": "RSCLER0271",
@@ -10557,9 +10557,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 30,
+    "atraso_dias": 27
   },
   {
     "cod": "RSCLER0272",
@@ -10595,9 +10595,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0273",
@@ -10633,9 +10633,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0274",
@@ -10671,9 +10671,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 35,
+    "atraso_dias": 32
   },
   {
     "cod": "RSCLER0275",
@@ -10709,9 +10709,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 27,
+    "atraso_dias": 24
   },
   {
     "cod": "RSCLER0276",
@@ -10747,9 +10747,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 36,
+    "atraso_dias": 33
   },
   {
     "cod": "RSCLER0277",
@@ -10785,9 +10785,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 24,
+    "atraso_dias": 21
   },
   {
     "cod": "RSCLER0278",
@@ -10823,9 +10823,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 27,
+    "atraso_dias": 24
   },
   {
     "cod": "RSCLER0279",
@@ -10861,9 +10861,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 47,
+    "atraso_dias": 44
   },
   {
     "cod": "RSCLER0280",
@@ -10899,9 +10899,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 32,
+    "atraso_dias": 29
   },
   {
     "cod": "RSCLER0281",
@@ -10937,9 +10937,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 35,
+    "atraso_dias": 32
   },
   {
     "cod": "RSCLER0282",
@@ -10975,9 +10975,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 30,
+    "atraso_dias": 27
   },
   {
     "cod": "RSCLER0283",
@@ -11013,9 +11013,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 39,
+    "atraso_dias": 36
   },
   {
     "cod": "RSCLER0284",
@@ -11051,9 +11051,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 34,
+    "atraso_dias": 31
   },
   {
     "cod": "RSCLER0285",
@@ -11089,9 +11089,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 38,
+    "atraso_dias": 35
   },
   {
     "cod": "RSCLER0286",
@@ -11127,8 +11127,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -11165,9 +11165,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 21,
+    "atraso_dias": 18
   },
   {
     "cod": "RSCLER0288",
@@ -11203,9 +11203,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 21,
+    "atraso_dias": 18
   },
   {
     "cod": "RSCLER0289",
@@ -11241,9 +11241,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0290",
@@ -11279,9 +11279,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 19,
+    "atraso_dias": 16
   },
   {
     "cod": "RSCLER0291",
@@ -11317,9 +11317,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 52,
+    "atraso_dias": 49
   },
   {
     "cod": "RSCLER0292",
@@ -11355,9 +11355,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 40,
+    "atraso_dias": 37
   },
   {
     "cod": "RSCLER0293",
@@ -11393,9 +11393,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 33,
+    "atraso_dias": 30
   },
   {
     "cod": "RSCLER0294",
@@ -11431,9 +11431,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 32,
+    "atraso_dias": 29
   },
   {
     "cod": "RSCLER0295",
@@ -11469,9 +11469,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 15,
+    "atraso_dias": 12
   },
   {
     "cod": "RSCLER0296",
@@ -11507,9 +11507,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 27,
+    "atraso_dias": 24
   },
   {
     "cod": "RSCLER0297",
@@ -11545,9 +11545,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 37,
+    "atraso_dias": 34
   },
   {
     "cod": "RSCLER0298",
@@ -11583,9 +11583,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 26,
+    "atraso_dias": 23
   },
   {
     "cod": "RSCLER0299",
@@ -11621,9 +11621,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 33,
+    "atraso_dias": 30
   },
   {
     "cod": "RSCLER0300",
@@ -11659,9 +11659,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0301",
@@ -11697,9 +11697,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 26,
+    "atraso_dias": 23
   },
   {
     "cod": "RSCLER0302",
@@ -11735,9 +11735,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 35,
+    "atraso_dias": 32
   },
   {
     "cod": "RSCLER0303",
@@ -11773,9 +11773,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 15,
+    "atraso_dias": 12
   },
   {
     "cod": "RSCLER0304",
@@ -11811,9 +11811,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 16,
+    "atraso_dias": 13
   },
   {
     "cod": "RSCLER0305",
@@ -11849,9 +11849,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0306",
@@ -11887,9 +11887,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 11,
+    "atraso_dias": 8
   },
   {
     "cod": "RSCLER0307",
@@ -11925,9 +11925,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0308",
@@ -11963,9 +11963,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 9,
+    "atraso_dias": 6
   },
   {
     "cod": "RSCLER0309",
@@ -12001,9 +12001,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0310",
@@ -12039,9 +12039,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 13,
+    "atraso_dias": 10
   },
   {
     "cod": "RSCLER0311",
@@ -12077,9 +12077,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 13,
+    "atraso_dias": 10
   },
   {
     "cod": "RSCLER0312",
@@ -12153,9 +12153,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 30,
+    "atraso_dias": 27
   },
   {
     "cod": "RSCLER0314",
@@ -12191,9 +12191,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0315",
@@ -12229,7 +12229,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -12267,9 +12267,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 16,
+    "atraso_dias": 13
   },
   {
     "cod": "RSCLER0317",
@@ -12305,9 +12305,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 12,
+    "atraso_dias": 9
   },
   {
     "cod": "RSCLER0318",
@@ -12343,9 +12343,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 15,
+    "atraso_dias": 12
   },
   {
     "cod": "RSCLER0319",
@@ -12381,9 +12381,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 26,
+    "atraso_dias": 23
   },
   {
     "cod": "RSCLER0320",
@@ -12419,9 +12419,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 15,
+    "atraso_dias": 12
   },
   {
     "cod": "RSCLER0321",
@@ -12457,9 +12457,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 12,
+    "atraso_dias": 9
   },
   {
     "cod": "RSCLER0322",
@@ -12495,9 +12495,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0323",
@@ -12533,9 +12533,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0324",
@@ -12571,9 +12571,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0325",
@@ -12609,9 +12609,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 11,
+    "atraso_dias": 8
   },
   {
     "cod": "RSCLER0326",
@@ -12647,8 +12647,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -12685,8 +12685,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -12723,9 +12723,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0329",
@@ -12761,9 +12761,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0330",
@@ -12799,9 +12799,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0331",
@@ -12837,9 +12837,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 11,
+    "atraso_dias": 8
   },
   {
     "cod": "RSCLER0332",
@@ -12875,9 +12875,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0333",
@@ -12913,8 +12913,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -12951,9 +12951,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0335",
@@ -12989,9 +12989,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 9,
+    "atraso_dias": 6
   },
   {
     "cod": "RSCLER0336",
@@ -13027,9 +13027,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0337",
@@ -13065,9 +13065,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0338",
@@ -13103,9 +13103,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 9,
+    "atraso_dias": 6
   },
   {
     "cod": "RSCLER0339",
@@ -13141,9 +13141,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0340",
@@ -13179,9 +13179,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0341",
@@ -13217,8 +13217,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -13255,9 +13255,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 11,
+    "atraso_dias": 8
   },
   {
     "cod": "RSCLER0343",
@@ -13293,9 +13293,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 11,
+    "atraso_dias": 8
   },
   {
     "cod": "RSCLER0344",
@@ -13331,9 +13331,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 21,
+    "atraso_dias": 18
   },
   {
     "cod": "RSCLER0345",
@@ -13369,9 +13369,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0346",
@@ -13407,8 +13407,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -13445,9 +13445,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0348",
@@ -13483,9 +13483,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 20,
+    "atraso_dias": 17
   },
   {
     "cod": "RSCLER0349",
@@ -13521,9 +13521,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0350",
@@ -13559,7 +13559,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -13597,9 +13597,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 27,
+    "atraso_dias": 24
   },
   {
     "cod": "RSCLER0352",
@@ -13635,9 +13635,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 13,
+    "atraso_dias": 10
   },
   {
     "cod": "RSCLER0353",
@@ -13673,9 +13673,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0354",
@@ -13711,9 +13711,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 9,
+    "atraso_dias": 6
   },
   {
     "cod": "RSCLER0355",
@@ -13749,9 +13749,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 15,
+    "atraso_dias": 12
   },
   {
     "cod": "RSCLER0356",
@@ -13787,9 +13787,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 27,
+    "atraso_dias": 24
   },
   {
     "cod": "RSCLER0357",
@@ -13825,9 +13825,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0358",
@@ -13863,9 +13863,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0359",
@@ -13901,9 +13901,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0360",
@@ -13939,9 +13939,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0361",
@@ -13977,9 +13977,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 13,
+    "atraso_dias": 10
   },
   {
     "cod": "RSCLER0362",
@@ -14015,9 +14015,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 15,
+    "atraso_dias": 12
   },
   {
     "cod": "RSCLER0363",
@@ -14053,9 +14053,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 17,
+    "atraso_dias": 14
   },
   {
     "cod": "RSCLER0364",
@@ -14091,9 +14091,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 11,
+    "atraso_dias": 8
   },
   {
     "cod": "RSCLER0365",
@@ -14129,9 +14129,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0366",
@@ -14167,9 +14167,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0367",
@@ -14205,9 +14205,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 14,
+    "atraso_dias": 11
   },
   {
     "cod": "RSCLER0368",
@@ -14243,9 +14243,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 42,
+    "atraso_dias": 39
   },
   {
     "cod": "RSCLER0369",
@@ -14281,9 +14281,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 17,
+    "atraso_dias": 14
   },
   {
     "cod": "RSCLER0370",
@@ -14319,9 +14319,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 12,
+    "atraso_dias": 9
   },
   {
     "cod": "RSCLER0371",
@@ -14357,9 +14357,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 12,
+    "atraso_dias": 9
   },
   {
     "cod": "RSCLER0372",
@@ -14395,9 +14395,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0373",
@@ -14433,9 +14433,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0374",
@@ -14471,8 +14471,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -14509,7 +14509,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -14547,9 +14547,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0377",
@@ -14585,9 +14585,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0378",
@@ -14623,9 +14623,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0379",
@@ -14661,9 +14661,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0380",
@@ -14699,9 +14699,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0381",
@@ -14737,9 +14737,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0382",
@@ -14775,8 +14775,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -14813,9 +14813,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0384",
@@ -14851,9 +14851,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 16,
+    "atraso_dias": 13
   },
   {
     "cod": "RSCLER0385",
@@ -14889,9 +14889,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0386",
@@ -14927,9 +14927,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 21,
+    "atraso_dias": 18
   },
   {
     "cod": "RSCLER0387",
@@ -14965,9 +14965,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 12,
+    "atraso_dias": 9
   },
   {
     "cod": "RSCLER0388",
@@ -15003,9 +15003,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 14,
+    "atraso_dias": 11
   },
   {
     "cod": "RSCLER0389",
@@ -15041,9 +15041,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 13,
+    "atraso_dias": 10
   },
   {
     "cod": "RSCLER0390",
@@ -15079,9 +15079,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 12,
+    "atraso_dias": 9
   },
   {
     "cod": "RSCLER0391",
@@ -15117,9 +15117,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0392",
@@ -15155,9 +15155,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0393",
@@ -15193,9 +15193,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0394",
@@ -15231,9 +15231,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0395",
@@ -15269,9 +15269,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0396",
@@ -15307,9 +15307,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 9,
+    "atraso_dias": 6
   },
   {
     "cod": "RSCLER0397",
@@ -15345,9 +15345,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 16,
+    "atraso_dias": 13
   },
   {
     "cod": "RSCLER0398",
@@ -15383,9 +15383,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0399",
@@ -15421,8 +15421,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -15459,9 +15459,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 11,
+    "atraso_dias": 8
   },
   {
     "cod": "RSCLER0401",
@@ -15497,9 +15497,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0402",
@@ -15535,9 +15535,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0403",
@@ -15573,9 +15573,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0404",
@@ -15611,9 +15611,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 14,
+    "atraso_dias": 11
   },
   {
     "cod": "RSCLER0405",
@@ -15649,9 +15649,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0406",
@@ -15687,9 +15687,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0407",
@@ -15725,9 +15725,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0408",
@@ -15763,9 +15763,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 9,
+    "atraso_dias": 6
   },
   {
     "cod": "RSCLER0409",
@@ -15801,9 +15801,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0410",
@@ -15839,9 +15839,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0411",
@@ -15877,9 +15877,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0412",
@@ -15915,9 +15915,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0413",
@@ -15953,9 +15953,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0414",
@@ -15991,9 +15991,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0415",
@@ -16029,9 +16029,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0416",
@@ -16067,9 +16067,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0417",
@@ -16105,9 +16105,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 9,
+    "atraso_dias": 6
   },
   {
     "cod": "RSCLER0418",
@@ -16143,9 +16143,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0419",
@@ -16181,9 +16181,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0420",
@@ -16219,9 +16219,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0421",
@@ -16257,9 +16257,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0422",
@@ -16295,8 +16295,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -16333,9 +16333,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0424",
@@ -16371,9 +16371,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 17,
+    "atraso_dias": 14
   },
   {
     "cod": "RSCLER0425",
@@ -16409,9 +16409,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 13,
+    "atraso_dias": 10
   },
   {
     "cod": "RSCLER0426",
@@ -16447,9 +16447,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0427",
@@ -16485,9 +16485,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0428",
@@ -16523,9 +16523,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0429",
@@ -16561,9 +16561,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0430",
@@ -16599,9 +16599,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0431",
@@ -16637,8 +16637,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -16675,9 +16675,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0433",
@@ -16713,9 +16713,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0434",
@@ -16751,9 +16751,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0435",
@@ -16789,9 +16789,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0436",
@@ -16827,9 +16827,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 15,
+    "atraso_dias": 12
   },
   {
     "cod": "RSCLER0437",
@@ -16865,9 +16865,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 11,
+    "atraso_dias": 8
   },
   {
     "cod": "RSCLER0438",
@@ -16941,9 +16941,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0440",
@@ -16979,9 +16979,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0441",
@@ -17055,9 +17055,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0443",
@@ -17093,9 +17093,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0444",
@@ -17131,8 +17131,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -17169,9 +17169,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0446",
@@ -17207,8 +17207,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -17245,9 +17245,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0448",
@@ -17283,9 +17283,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0449",
@@ -17321,8 +17321,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -17359,8 +17359,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -17397,9 +17397,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 13,
+    "atraso_dias": 10
   },
   {
     "cod": "RSCLER0452",
@@ -17435,9 +17435,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0453",
@@ -17473,9 +17473,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 11,
+    "atraso_dias": 8
   },
   {
     "cod": "RSCLER0454",
@@ -17511,9 +17511,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0455",
@@ -17549,9 +17549,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0456",
@@ -17663,8 +17663,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -17701,9 +17701,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 16,
+    "atraso_dias": 13
   },
   {
     "cod": "RSCLER0460",
@@ -17739,9 +17739,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 9,
+    "atraso_dias": 6
   },
   {
     "cod": "RSCLER0461",
@@ -17777,8 +17777,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -17815,7 +17815,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -17853,9 +17853,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0464",
@@ -17891,8 +17891,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -17929,9 +17929,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 95,
+    "atraso_dias": 92
   },
   {
     "cod": "RSCLER0466",
@@ -18043,9 +18043,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0469",
@@ -18081,9 +18081,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 15,
+    "atraso_dias": 12
   },
   {
     "cod": "RSCLER0470",
@@ -18119,9 +18119,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 9,
+    "atraso_dias": 6
   },
   {
     "cod": "RSCLER0471",
@@ -18157,9 +18157,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0472",
@@ -18195,9 +18195,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0473",
@@ -18233,9 +18233,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0474",
@@ -18271,9 +18271,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0475",
@@ -18309,9 +18309,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0476",
@@ -18347,9 +18347,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0477",
@@ -18385,9 +18385,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0478",
@@ -18423,9 +18423,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0479",
@@ -18461,9 +18461,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 18,
+    "atraso_dias": 15
   },
   {
     "cod": "RSCLER0480",
@@ -18499,9 +18499,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 22,
+    "atraso_dias": 19
   },
   {
     "cod": "RSCLER0481",
@@ -18537,9 +18537,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0482",
@@ -18575,9 +18575,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 11,
+    "atraso_dias": 8
   },
   {
     "cod": "RSCLER0483",
@@ -18613,9 +18613,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 12,
+    "atraso_dias": 9
   },
   {
     "cod": "RSCLER0484",
@@ -18651,9 +18651,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 282,
+    "atraso_dias": 279
   },
   {
     "cod": "RSCLER0485",
@@ -18689,9 +18689,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 21,
+    "atraso_dias": 18
   },
   {
     "cod": "RSCLER0486",
@@ -18727,9 +18727,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Em Andamento",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 13,
+    "atraso_dias": 10
   },
   {
     "cod": "RSCLER0487",
@@ -18765,9 +18765,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Em Andamento",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0488",
@@ -18803,8 +18803,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -18841,9 +18841,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0490",
@@ -18879,9 +18879,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0491",
@@ -18917,9 +18917,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 18,
+    "atraso_dias": 15
   },
   {
     "cod": "RSCLER0492",
@@ -18955,9 +18955,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 20,
+    "atraso_dias": 17
   },
   {
     "cod": "RSCLER0493",
@@ -18993,9 +18993,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0494",
@@ -19031,9 +19031,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0495",
@@ -19069,9 +19069,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 13,
+    "atraso_dias": 10
   },
   {
     "cod": "RSCLER0496",
@@ -19107,9 +19107,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Sem Sinal",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0497",
@@ -19145,9 +19145,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 61,
+    "atraso_dias": 58
   },
   {
     "cod": "RSCLER0498",
@@ -19183,8 +19183,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -19221,9 +19221,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 17,
+    "atraso_dias": 14
   },
   {
     "cod": "RSCLER0500",
@@ -19259,9 +19259,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Cancelado",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0501",
@@ -19297,9 +19297,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0502",
@@ -19335,9 +19335,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0503",
@@ -19373,9 +19373,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0504",
@@ -19411,8 +19411,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -19449,9 +19449,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0506",
@@ -19487,8 +19487,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -19525,8 +19525,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Cancelado",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -19563,9 +19563,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Cancelado",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 14,
+    "atraso_dias": 11
   },
   {
     "cod": "RSCLER0509",
@@ -19601,9 +19601,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 55,
+    "atraso_dias": 52
   },
   {
     "cod": "RSCLER0510",
@@ -19639,8 +19639,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -19677,9 +19677,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 11,
+    "atraso_dias": 8
   },
   {
     "cod": "RSCLER0512",
@@ -19715,9 +19715,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0513",
@@ -19753,9 +19753,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0514",
@@ -19791,9 +19791,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 30,
+    "atraso_dias": 27
   },
   {
     "cod": "RSCLER0515",
@@ -19829,9 +19829,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 12,
+    "atraso_dias": 9
   },
   {
     "cod": "RSCLER0516",
@@ -19867,9 +19867,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0517",
@@ -19905,9 +19905,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0518",
@@ -19943,9 +19943,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0519",
@@ -19981,9 +19981,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0520",
@@ -20019,9 +20019,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0521",
@@ -20057,9 +20057,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0522",
@@ -20095,7 +20095,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -20133,9 +20133,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 42,
+    "atraso_dias": 39
   },
   {
     "cod": "RSCLER0524",
@@ -20171,9 +20171,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0525",
@@ -20209,8 +20209,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -20247,9 +20247,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 11,
+    "atraso_dias": 8
   },
   {
     "cod": "RSCLER0527",
@@ -20285,9 +20285,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 12,
+    "atraso_dias": 9
   },
   {
     "cod": "RSCLER0528",
@@ -20323,9 +20323,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 16,
+    "atraso_dias": 13
   },
   {
     "cod": "RSCLER0529",
@@ -20361,9 +20361,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 11,
+    "atraso_dias": 8
   },
   {
     "cod": "RSCLER0530",
@@ -20399,9 +20399,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0531",
@@ -20437,9 +20437,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0532",
@@ -20475,8 +20475,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -20513,9 +20513,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0534",
@@ -20551,9 +20551,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0535",
@@ -20589,9 +20589,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0536",
@@ -20627,8 +20627,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -20665,9 +20665,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0538",
@@ -20703,9 +20703,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0539",
@@ -20741,9 +20741,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0540",
@@ -20779,9 +20779,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0541",
@@ -20817,9 +20817,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0542",
@@ -20855,9 +20855,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0543",
@@ -20893,9 +20893,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0544",
@@ -20931,8 +20931,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -20969,9 +20969,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0546",
@@ -21007,9 +21007,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Sem Sinal",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0547",
@@ -21045,9 +21045,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0548",
@@ -21083,9 +21083,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0549",
@@ -21121,9 +21121,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 12,
+    "atraso_dias": 9
   },
   {
     "cod": "RSCLER0550",
@@ -21159,9 +21159,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0551",
@@ -21197,9 +21197,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0552",
@@ -21235,9 +21235,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0553",
@@ -21273,8 +21273,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -21311,9 +21311,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0555",
@@ -21349,9 +21349,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 17,
+    "atraso_dias": 14
   },
   {
     "cod": "RSCLER0556",
@@ -21387,9 +21387,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Cancelado",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0557",
@@ -21463,8 +21463,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -21501,8 +21501,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -21539,9 +21539,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0561",
@@ -21577,9 +21577,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 24,
+    "atraso_dias": 21
   },
   {
     "cod": "RSCLER0562",
@@ -21615,9 +21615,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 22,
+    "atraso_dias": 19
   },
   {
     "cod": "RSCLER0563",
@@ -21653,9 +21653,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 22,
+    "atraso_dias": 19
   },
   {
     "cod": "RSCLER0564",
@@ -21691,9 +21691,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0565",
@@ -21729,9 +21729,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 22,
+    "atraso_dias": 19
   },
   {
     "cod": "RSCLER0566",
@@ -21767,9 +21767,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0567",
@@ -21805,9 +21805,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 22,
+    "atraso_dias": 19
   },
   {
     "cod": "RSCLER0568",
@@ -21843,9 +21843,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 16,
+    "atraso_dias": 13
   },
   {
     "cod": "RSCLER0569",
@@ -21881,9 +21881,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 9,
+    "atraso_dias": 6
   },
   {
     "cod": "RSCLER0570",
@@ -21919,9 +21919,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 16,
+    "atraso_dias": 13
   },
   {
     "cod": "RSCLER0571",
@@ -21957,9 +21957,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0572",
@@ -21995,9 +21995,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0573",
@@ -22033,9 +22033,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 144,
+    "atraso_dias": 141
   },
   {
     "cod": "RSCLER0574",
@@ -22071,9 +22071,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 11,
+    "atraso_dias": 8
   },
   {
     "cod": "RSCLER0575",
@@ -22109,9 +22109,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0576",
@@ -22147,9 +22147,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 12,
+    "atraso_dias": 9
   },
   {
     "cod": "RSCLER0577",
@@ -22185,9 +22185,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 14,
+    "atraso_dias": 11
   },
   {
     "cod": "RSCLER0578",
@@ -22223,9 +22223,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 21,
+    "atraso_dias": 18
   },
   {
     "cod": "RSCLER0579",
@@ -22261,9 +22261,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0580",
@@ -22299,9 +22299,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 16,
+    "atraso_dias": 13
   },
   {
     "cod": "RSCLER0581",
@@ -22337,8 +22337,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -22375,8 +22375,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -22413,8 +22413,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -22451,9 +22451,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 14,
+    "atraso_dias": 11
   },
   {
     "cod": "RSCLER0585",
@@ -22489,8 +22489,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -22527,9 +22527,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0587",
@@ -22565,9 +22565,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 36,
+    "atraso_dias": 33
   },
   {
     "cod": "RSCLER0588",
@@ -22603,9 +22603,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 28,
+    "atraso_dias": 25
   },
   {
     "cod": "RSCLER0589",
@@ -22641,9 +22641,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 17,
+    "atraso_dias": 14
   },
   {
     "cod": "RSCLER0590",
@@ -22679,9 +22679,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 12,
+    "atraso_dias": 9
   },
   {
     "cod": "RSCLER0591",
@@ -22717,9 +22717,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 24,
+    "atraso_dias": 21
   },
   {
     "cod": "RSCLER0592",
@@ -22755,9 +22755,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0593",
@@ -22793,9 +22793,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0594",
@@ -22831,9 +22831,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0595",
@@ -22869,9 +22869,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0596",
@@ -22907,7 +22907,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -22945,8 +22945,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -22983,9 +22983,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0599",
@@ -23021,9 +23021,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 11,
+    "atraso_dias": 8
   },
   {
     "cod": "RSCLER0600",
@@ -23059,9 +23059,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 17,
+    "atraso_dias": 14
   },
   {
     "cod": "RSCLER0601",
@@ -23097,8 +23097,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -23135,9 +23135,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0603",
@@ -23173,9 +23173,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0604",
@@ -23211,9 +23211,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0605",
@@ -23249,8 +23249,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Cancelado",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -23287,9 +23287,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 27,
+    "atraso_dias": 24
   },
   {
     "cod": "RSCLER0607",
@@ -23325,8 +23325,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -23363,9 +23363,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0609",
@@ -23401,9 +23401,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0610",
@@ -23439,9 +23439,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0611",
@@ -23477,9 +23477,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0612",
@@ -23515,9 +23515,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0613",
@@ -23553,9 +23553,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0614",
@@ -23591,9 +23591,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0615",
@@ -23629,8 +23629,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -23667,8 +23667,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -23705,7 +23705,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -23743,8 +23743,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -23781,8 +23781,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -23895,9 +23895,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0623",
@@ -23933,9 +23933,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 23,
+    "atraso_dias": 20
   },
   {
     "cod": "RSCLER0624",
@@ -23971,9 +23971,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0625",
@@ -24009,8 +24009,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -24047,8 +24047,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -24085,9 +24085,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0628",
@@ -24123,9 +24123,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0629",
@@ -24161,9 +24161,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0630",
@@ -24199,9 +24199,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 316,
+    "atraso_dias": 313
   },
   {
     "cod": "RSCLER0631",
@@ -24237,9 +24237,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0632",
@@ -24275,8 +24275,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -24313,9 +24313,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 12,
+    "atraso_dias": 9
   },
   {
     "cod": "RSCLER0634",
@@ -24351,8 +24351,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -24389,8 +24389,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -24427,8 +24427,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -24465,8 +24465,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -24503,9 +24503,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0639",
@@ -24541,7 +24541,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -24579,9 +24579,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 12,
+    "atraso_dias": 9
   },
   {
     "cod": "RSCLER0641",
@@ -24617,9 +24617,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0642",
@@ -24655,9 +24655,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0643",
@@ -24693,9 +24693,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 14,
+    "atraso_dias": 11
   },
   {
     "cod": "RSCLER0644",
@@ -24731,9 +24731,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0645",
@@ -24769,9 +24769,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 17,
+    "atraso_dias": 14
   },
   {
     "cod": "RSCLER0646",
@@ -24807,9 +24807,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0647",
@@ -24845,9 +24845,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0648",
@@ -24883,9 +24883,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 9,
+    "atraso_dias": 6
   },
   {
     "cod": "RSCLER0649",
@@ -24921,9 +24921,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0650",
@@ -24959,9 +24959,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0651",
@@ -25035,9 +25035,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 9,
+    "atraso_dias": 6
   },
   {
     "cod": "RSCLER0653",
@@ -25073,9 +25073,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0654",
@@ -25111,9 +25111,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0655",
@@ -25149,8 +25149,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -25187,8 +25187,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -25225,9 +25225,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 326,
+    "atraso_dias": 323
   },
   {
     "cod": "RSCLER0658",
@@ -25263,9 +25263,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 302,
+    "atraso_dias": 299
   },
   {
     "cod": "RSCLER0659",
@@ -25301,9 +25301,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0660",
@@ -25339,9 +25339,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0661",
@@ -25377,9 +25377,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0662",
@@ -25415,9 +25415,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 9,
+    "atraso_dias": 6
   },
   {
     "cod": "RSCLER0663",
@@ -25453,9 +25453,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0664",
@@ -25491,8 +25491,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -25529,8 +25529,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -25567,8 +25567,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -25605,9 +25605,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 23,
+    "atraso_dias": 20
   },
   {
     "cod": "RSCLER0668",
@@ -25643,9 +25643,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0669",
@@ -25681,9 +25681,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0670",
@@ -25719,8 +25719,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -25757,8 +25757,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -25795,9 +25795,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 17,
+    "atraso_dias": 14
   },
   {
     "cod": "RSCLER0673",
@@ -25833,9 +25833,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0674",
@@ -25871,9 +25871,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0675",
@@ -25909,8 +25909,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -25985,9 +25985,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 288,
+    "atraso_dias": 285
   },
   {
     "cod": "RSCLER0678",
@@ -26137,9 +26137,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 9,
+    "atraso_dias": 6
   },
   {
     "cod": "RSCLER0682",
@@ -26175,8 +26175,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -26213,7 +26213,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -26251,7 +26251,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -26289,9 +26289,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 281,
+    "atraso_dias": 278
   },
   {
     "cod": "RSCLER0686",
@@ -26327,9 +26327,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 38,
+    "atraso_dias": 35
   },
   {
     "cod": "RSCLER0687",
@@ -26365,9 +26365,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0688",
@@ -26403,9 +26403,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 16,
+    "atraso_dias": 13
   },
   {
     "cod": "RSCLER0689",
@@ -26441,9 +26441,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0690",
@@ -26479,9 +26479,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 14,
+    "atraso_dias": 11
   },
   {
     "cod": "RSCLER0691",
@@ -26517,9 +26517,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0692",
@@ -26555,9 +26555,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 15,
+    "atraso_dias": 12
   },
   {
     "cod": "RSCLER0693",
@@ -26593,9 +26593,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 281,
+    "atraso_dias": 278
   },
   {
     "cod": "RSCLER0694",
@@ -26669,9 +26669,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 34,
+    "atraso_dias": 31
   },
   {
     "cod": "RSCLER0696",
@@ -26707,9 +26707,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Cancelado",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 24,
+    "atraso_dias": 21
   },
   {
     "cod": "RSCLER0697",
@@ -26745,7 +26745,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -26783,9 +26783,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 22,
+    "atraso_dias": 19
   },
   {
     "cod": "RSCLER0699",
@@ -26821,9 +26821,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 16,
+    "atraso_dias": 13
   },
   {
     "cod": "RSCLER0700",
@@ -26897,9 +26897,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0702",
@@ -26935,8 +26935,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -26973,9 +26973,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 21,
+    "atraso_dias": 18
   },
   {
     "cod": "RSCLER0704",
@@ -27011,9 +27011,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 20,
+    "atraso_dias": 17
   },
   {
     "cod": "RSCLER0705",
@@ -27049,9 +27049,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 11,
+    "atraso_dias": 8
   },
   {
     "cod": "RSCLER0706",
@@ -27087,9 +27087,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0707",
@@ -27125,9 +27125,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0708",
@@ -27163,9 +27163,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0709",
@@ -27201,9 +27201,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0710",
@@ -27239,9 +27239,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 265,
+    "atraso_dias": 262
   },
   {
     "cod": "RSCLER0711",
@@ -27277,8 +27277,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -27315,7 +27315,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Cancelado",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -27353,9 +27353,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0714",
@@ -27391,9 +27391,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 264,
+    "atraso_dias": 261
   },
   {
     "cod": "RSCLER0715",
@@ -27467,9 +27467,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 9,
+    "atraso_dias": 6
   },
   {
     "cod": "RSCLER0717",
@@ -27505,9 +27505,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 256,
+    "atraso_dias": 253
   },
   {
     "cod": "RSCLER0718",
@@ -27543,9 +27543,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 256,
+    "atraso_dias": 253
   },
   {
     "cod": "RSCLER0719",
@@ -27581,9 +27581,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 18,
+    "atraso_dias": 15
   },
   {
     "cod": "RSCLER0720",
@@ -27733,7 +27733,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -27771,8 +27771,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -27809,9 +27809,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 11,
+    "atraso_dias": 8
   },
   {
     "cod": "RSCLER0726",
@@ -27885,9 +27885,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0728",
@@ -27923,8 +27923,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -27961,9 +27961,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0730",
@@ -28037,8 +28037,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -28075,8 +28075,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -28227,9 +28227,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 18,
+    "atraso_dias": 15
   },
   {
     "cod": "RSCLER0737",
@@ -28265,8 +28265,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -28303,9 +28303,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 231,
+    "atraso_dias": 228
   },
   {
     "cod": "RSCLER0739",
@@ -28341,9 +28341,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 30,
+    "atraso_dias": 27
   },
   {
     "cod": "RSCLER0740",
@@ -28379,8 +28379,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -28417,7 +28417,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -28455,8 +28455,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -28493,9 +28493,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0744",
@@ -28531,9 +28531,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0745",
@@ -28569,7 +28569,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -28683,8 +28683,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -28721,8 +28721,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -28835,8 +28835,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -28873,9 +28873,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 9,
+    "atraso_dias": 6
   },
   {
     "cod": "RSCLER0754",
@@ -28911,9 +28911,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0755",
@@ -29025,8 +29025,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -29177,8 +29177,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -29215,7 +29215,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -29291,9 +29291,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0764",
@@ -29329,9 +29329,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0765",
@@ -29367,7 +29367,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -29443,9 +29443,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0767",
@@ -29481,9 +29481,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 9,
+    "atraso_dias": 6
   },
   {
     "cod": "RSCLER0767",
@@ -29557,9 +29557,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0769",
@@ -29633,9 +29633,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0771",
@@ -29671,9 +29671,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0772",
@@ -29709,9 +29709,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0773",
@@ -29747,9 +29747,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 35,
+    "atraso_dias": 32
   },
   {
     "cod": "RSCLER0774",
@@ -29823,8 +29823,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -29861,8 +29861,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -29899,8 +29899,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -29937,8 +29937,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -29975,9 +29975,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0780",
@@ -30013,9 +30013,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0781",
@@ -30051,9 +30051,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 22,
+    "atraso_dias": 19
   },
   {
     "cod": "RSCLER0782",
@@ -30089,9 +30089,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0783",
@@ -30127,9 +30127,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 174,
+    "atraso_dias": 171
   },
   {
     "cod": "RSCLER0784",
@@ -30165,7 +30165,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -30203,9 +30203,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 125,
+    "atraso_dias": 122
   },
   {
     "cod": "RSCLER0786",
@@ -30241,7 +30241,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Sem Sinal",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -30279,9 +30279,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 9,
+    "atraso_dias": 6
   },
   {
     "cod": "RSCLER0788",
@@ -30317,9 +30317,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0789",
@@ -30355,9 +30355,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 109,
+    "atraso_dias": 106
   },
   {
     "cod": "RSCLER0790",
@@ -30393,9 +30393,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 20,
+    "atraso_dias": 17
   },
   {
     "cod": "RSCLER0791",
@@ -30431,9 +30431,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 56,
+    "atraso_dias": 53
   },
   {
     "cod": "RSCLER0792",
@@ -30469,8 +30469,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -30507,8 +30507,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -30545,7 +30545,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -30583,7 +30583,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -30621,9 +30621,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 15,
+    "atraso_dias": 12
   },
   {
     "cod": "RSCLER0797",
@@ -30659,9 +30659,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 23,
+    "atraso_dias": 20
   },
   {
     "cod": "RSCLER0798",
@@ -30697,9 +30697,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 44,
+    "atraso_dias": 41
   },
   {
     "cod": "RSCLER0799",
@@ -30735,8 +30735,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -30773,9 +30773,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Cancelado",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 19,
+    "atraso_dias": 16
   },
   {
     "cod": "RSCLER0801",
@@ -30811,9 +30811,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 20,
+    "atraso_dias": 17
   },
   {
     "cod": "RSCLER0802",
@@ -30849,9 +30849,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 23,
+    "atraso_dias": 20
   },
   {
     "cod": "RSCLER0803",
@@ -30887,9 +30887,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 30,
+    "atraso_dias": 27
   },
   {
     "cod": "RSCLER0804",
@@ -30925,9 +30925,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 38,
+    "atraso_dias": 35
   },
   {
     "cod": "RSCLER0805",
@@ -30963,9 +30963,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 18,
+    "atraso_dias": 15
   },
   {
     "cod": "RSCLER0806",
@@ -31001,9 +31001,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 38,
+    "atraso_dias": 35
   },
   {
     "cod": "RSCLER0807",
@@ -31039,9 +31039,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 11,
+    "atraso_dias": 8
   },
   {
     "cod": "RSCLER0808",
@@ -31077,9 +31077,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 10,
+    "atraso_dias": 7
   },
   {
     "cod": "RSCLER0809",
@@ -31115,7 +31115,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -31153,9 +31153,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 18,
+    "atraso_dias": 15
   },
   {
     "cod": "RSCLER0811",
@@ -31191,9 +31191,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 9,
+    "atraso_dias": 6
   },
   {
     "cod": "RSCLER0812",
@@ -31229,9 +31229,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 9,
+    "atraso_dias": 6
   },
   {
     "cod": "RSCLER0813",
@@ -31267,8 +31267,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -31305,8 +31305,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -31343,8 +31343,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -31381,9 +31381,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 15,
+    "atraso_dias": 12
   },
   {
     "cod": "RSCLER0817",
@@ -31419,9 +31419,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 9,
+    "atraso_dias": 6
   },
   {
     "cod": "RSCLER0818",
@@ -31457,9 +31457,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 12,
+    "atraso_dias": 9
   },
   {
     "cod": "RSCLER0819",
@@ -31495,9 +31495,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 12,
+    "atraso_dias": 9
   },
   {
     "cod": "RSCLER0820",
@@ -31533,7 +31533,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -31571,8 +31571,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -31609,9 +31609,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0823",
@@ -31647,8 +31647,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -31685,8 +31685,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -31723,7 +31723,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -31761,8 +31761,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -31799,8 +31799,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -31837,8 +31837,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -31875,8 +31875,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -31913,9 +31913,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0831",
@@ -31951,8 +31951,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -31989,8 +31989,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -32027,8 +32027,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -32065,8 +32065,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -32103,7 +32103,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -32141,8 +32141,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -32179,8 +32179,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -32217,8 +32217,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -32255,8 +32255,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -32293,8 +32293,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -32331,9 +32331,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 68,
+    "atraso_dias": 65
   },
   {
     "cod": "RSCLER0842",
@@ -32369,7 +32369,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -32407,8 +32407,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -32445,8 +32445,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -32483,8 +32483,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -32521,7 +32521,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -32559,9 +32559,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 63,
+    "atraso_dias": 60
   },
   {
     "cod": "RSCLER0848",
@@ -32597,8 +32597,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -32635,8 +32635,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -32673,9 +32673,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0851",
@@ -32711,9 +32711,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0852",
@@ -32749,8 +32749,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -32787,8 +32787,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -32825,8 +32825,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -32863,8 +32863,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -32901,9 +32901,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0857",
@@ -32939,7 +32939,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -32977,7 +32977,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -33015,8 +33015,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -33053,9 +33053,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0861",
@@ -33091,7 +33091,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -33129,8 +33129,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -33167,9 +33167,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 50,
+    "atraso_dias": 47
   },
   {
     "cod": "RSCLER0864",
@@ -33205,7 +33205,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -33243,7 +33243,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -33319,8 +33319,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -33357,9 +33357,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 36,
+    "atraso_dias": 33
   },
   {
     "cod": "RSCLER0869",
@@ -33395,7 +33395,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -33433,7 +33433,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -33471,9 +33471,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 15,
+    "atraso_dias": 12
   },
   {
     "cod": "RSCLER0872",
@@ -33509,7 +33509,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -33547,8 +33547,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -33585,7 +33585,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -33623,7 +33623,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -33661,8 +33661,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -33699,8 +33699,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -33737,9 +33737,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 52,
+    "atraso_dias": 49
   },
   {
     "cod": "RSCLER0879",
@@ -33775,8 +33775,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -33813,8 +33813,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -33851,9 +33851,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0882",
@@ -33889,8 +33889,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -33927,8 +33927,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -33965,9 +33965,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 46,
+    "atraso_dias": 43
   },
   {
     "cod": "RSCLER0885",
@@ -34003,9 +34003,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 48,
+    "atraso_dias": 45
   },
   {
     "cod": "RSCLER0886",
@@ -34041,9 +34041,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 49,
+    "atraso_dias": 46
   },
   {
     "cod": "RSCLER0887",
@@ -34079,8 +34079,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -34117,8 +34117,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -34155,9 +34155,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 48,
+    "atraso_dias": 45
   },
   {
     "cod": "RSCLER0890",
@@ -34193,9 +34193,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0891",
@@ -34231,7 +34231,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -34269,8 +34269,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -34307,9 +34307,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 46,
+    "atraso_dias": 43
   },
   {
     "cod": "RSCLER0894",
@@ -34345,9 +34345,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0895",
@@ -34383,8 +34383,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -34421,9 +34421,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0897",
@@ -34459,8 +34459,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -34497,9 +34497,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0899",
@@ -34535,9 +34535,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 42,
+    "atraso_dias": 39
   },
   {
     "cod": "RSCLER0900",
@@ -34573,8 +34573,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -34611,8 +34611,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -34649,8 +34649,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -34687,8 +34687,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -34725,8 +34725,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -34763,8 +34763,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -34801,8 +34801,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -34839,9 +34839,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 38,
+    "atraso_dias": 35
   },
   {
     "cod": "RSCLER0908",
@@ -34877,8 +34877,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -34915,9 +34915,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 37,
+    "atraso_dias": 34
   },
   {
     "cod": "RSCLER0910",
@@ -34953,8 +34953,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -34991,8 +34991,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -35029,8 +35029,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -35067,8 +35067,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -35105,9 +35105,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 37,
+    "atraso_dias": 34
   },
   {
     "cod": "RSCLER0915",
@@ -35143,9 +35143,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0916",
@@ -35181,8 +35181,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -35219,8 +35219,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -35257,9 +35257,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0919",
@@ -35295,9 +35295,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0920",
@@ -35333,8 +35333,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -35371,8 +35371,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -35409,9 +35409,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0922",
@@ -35447,8 +35447,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -35485,9 +35485,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0924",
@@ -35523,9 +35523,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0925",
@@ -35561,9 +35561,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 35,
+    "atraso_dias": 32
   },
   {
     "cod": "RSCLER0926",
@@ -35599,9 +35599,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0927",
@@ -35637,9 +35637,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER0928",
@@ -35675,8 +35675,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -35713,7 +35713,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -35751,9 +35751,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 34,
+    "atraso_dias": 31
   },
   {
     "cod": "RSCLER0931",
@@ -35789,9 +35789,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 34,
+    "atraso_dias": 31
   },
   {
     "cod": "RSCLER0932",
@@ -35827,8 +35827,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -35865,9 +35865,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0934",
@@ -35903,9 +35903,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 34,
+    "atraso_dias": 31
   },
   {
     "cod": "RSCLER0935",
@@ -35941,9 +35941,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 8,
+    "atraso_dias": 5
   },
   {
     "cod": "RSCLER0936",
@@ -35979,9 +35979,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0937",
@@ -36017,9 +36017,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0938",
@@ -36055,9 +36055,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 33,
+    "atraso_dias": 30
   },
   {
     "cod": "RSCLER0939",
@@ -36093,8 +36093,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Sem Sinal",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -36131,8 +36131,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -36169,9 +36169,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 6,
+    "atraso_dias": 3
   },
   {
     "cod": "RSCLER0942",
@@ -36207,8 +36207,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Sem Sinal",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -36245,8 +36245,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -36283,8 +36283,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -36321,9 +36321,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0946",
@@ -36359,9 +36359,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 33,
+    "atraso_dias": 30
   },
   {
     "cod": "RSCLER0947",
@@ -36397,8 +36397,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -36435,8 +36435,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -36473,8 +36473,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -36511,8 +36511,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -36549,8 +36549,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -36587,9 +36587,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0953",
@@ -36625,8 +36625,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -36663,8 +36663,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -36701,8 +36701,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -36777,8 +36777,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -36815,7 +36815,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -36853,9 +36853,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0960",
@@ -36891,8 +36891,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -36929,8 +36929,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -36967,7 +36967,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -37005,8 +37005,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -37043,8 +37043,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -37081,8 +37081,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -37119,8 +37119,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -37157,9 +37157,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0968",
@@ -37195,8 +37195,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -37233,8 +37233,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -37271,8 +37271,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Em Andamento",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -37309,8 +37309,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -37347,8 +37347,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -37385,8 +37385,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -37423,9 +37423,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0975",
@@ -37461,8 +37461,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -37499,8 +37499,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -37537,7 +37537,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -37575,7 +37575,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -37613,7 +37613,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -37651,8 +37651,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -37689,8 +37689,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -37727,8 +37727,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -37765,9 +37765,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER0984",
@@ -37803,8 +37803,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -37841,9 +37841,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0986",
@@ -37879,8 +37879,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -37917,7 +37917,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -37955,9 +37955,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 9,
+    "atraso_dias": 6
   },
   {
     "cod": "RSCLER0989",
@@ -37993,8 +37993,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -38031,8 +38031,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -38069,8 +38069,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -38107,8 +38107,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -38145,9 +38145,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 5,
+    "atraso_dias": 2
   },
   {
     "cod": "RSCLER0994",
@@ -38183,8 +38183,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -38221,8 +38221,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -38259,8 +38259,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -38297,8 +38297,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -38335,7 +38335,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -38373,7 +38373,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Cancelado",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -38411,8 +38411,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -38449,7 +38449,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -38487,8 +38487,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -38525,7 +38525,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -38563,8 +38563,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -38601,8 +38601,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -38639,8 +38639,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -38677,8 +38677,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -38715,7 +38715,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -38753,7 +38753,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -38791,8 +38791,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -38829,7 +38829,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -38867,9 +38867,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER1011",
@@ -38905,8 +38905,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -38943,8 +38943,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -38981,8 +38981,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -39019,7 +39019,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -39057,8 +39057,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -39095,9 +39095,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER1021",
@@ -39133,7 +39133,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -39171,7 +39171,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -39209,8 +39209,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -39247,7 +39247,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -39285,8 +39285,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -39323,8 +39323,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -39361,8 +39361,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -39399,8 +39399,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -39437,9 +39437,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 4,
+    "atraso_dias": 1
   },
   {
     "cod": "RSCLER1028",
@@ -39475,8 +39475,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -39513,8 +39513,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -39551,8 +39551,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -39589,8 +39589,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -39627,7 +39627,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -39665,8 +39665,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -39703,7 +39703,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -39741,8 +39741,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -39779,9 +39779,9 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Paralisado",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
-    "atraso_dias": 0
+    "prazo": "ATRASADO",
+    "tempo_dias": 7,
+    "atraso_dias": 4
   },
   {
     "cod": "RSCLER1037",
@@ -39817,8 +39817,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -39855,7 +39855,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -39893,8 +39893,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -39931,8 +39931,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -39969,7 +39969,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -40007,8 +40007,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -40045,7 +40045,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
@@ -40083,8 +40083,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -40121,8 +40121,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -40159,8 +40159,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -40197,8 +40197,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 3,
     "atraso_dias": 0
   },
   {
@@ -40235,8 +40235,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -40273,8 +40273,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 2,
     "atraso_dias": 0
   },
   {
@@ -40311,8 +40311,8 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
-    "tempo_dias": 0,
+    "prazo": "NO PRAZO",
+    "tempo_dias": 1,
     "atraso_dias": 0
   },
   {
@@ -40349,7 +40349,7 @@ window.SAR_DATA = [
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Concluído Campo",
-    "prazo": "NÃO INFORMADO",
+    "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0
   },
