@@ -17,19 +17,20 @@ function parseSarContent(content) {
 
     const counts = {};
     let emMedicao = 0;
-    let medicaoEnviada = 0;
+    let relatorio = 0;
     let wfImplantado = 0;
     let canceladas = 0;
 
     rows.forEach(r => {
-        const st = (r.status || 'NÃO INFORMADO').toUpperCase();
-        counts[st] = (counts[st] || 0) + 1;
+        const rawSt = (r.status || 'NÃO INFORMADO').trim();
+        counts[rawSt] = (counts[rawSt] || 0) + 1;
+        const st = rawSt.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase();
 
         if (st.includes('EM MEDIC') || st.includes('AG. MEDIC') || st.includes('AG MEDIC')) {
             emMedicao++;
-        } else if (st.includes('ENVIAD') || st.includes('RELAT')) {
-            medicaoEnviada++;
-        } else if (st.includes('WF IMPLANT') || st.includes('CONCLU')) {
+        } else if (st.includes('RELAT')) {
+            relatorio++;
+        } else if (st.includes('WF IMPLANT') || st.includes('CONCLU') || st.includes('PEDIDO') || st.includes('APROV')) {
             wfImplantado++;
         } else if (st.includes('CANCEL')) {
             canceladas++;
@@ -40,7 +41,7 @@ function parseSarContent(content) {
         rows,
         total: rows.length,
         emMedicao,
-        medicaoEnviada,
+        relatorio,
         wfImplantado,
         canceladas,
         counts,

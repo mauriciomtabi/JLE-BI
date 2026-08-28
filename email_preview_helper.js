@@ -258,30 +258,38 @@
         const genAt = formatEmailGeneratedAt(metadata.generated_at);
 
         const counts = {};
-        let agMedicao = 0;
-        let agRelatorio = 0;
+        let emMedicao = 0;
+        let relatorio = 0;
 
         rows.forEach(r => {
-            const st = (r.status || 'NÃO INFORMADO').trim().toUpperCase();
-            counts[st] = (counts[st] || 0) + 1;
+            const rawSt = (r.status || 'NÃO INFORMADO').trim();
+            counts[rawSt] = (counts[rawSt] || 0) + 1;
 
-            if (st === 'AG. MEDIÇÃO' || st === 'AG. MEDICAO' || st === 'AG MEDIÇÃO' || st === 'AG MEDICAO') {
-                agMedicao++;
-            } else if (st === 'AG. RELATÓRIO' || st === 'AG. RELATORIO' || st === 'AG RELATÓRIO' || st === 'AG RELATORIO') {
-                agRelatorio++;
+            const stNorm = rawSt.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase();
+            if (stNorm.includes('EM MEDIC') || stNorm.includes('AG. MEDIC') || stNorm.includes('AG MEDIC') || stNorm === 'MEDICAO') {
+                emMedicao++;
+            } else if (stNorm.includes('RELAT')) {
+                relatorio++;
             }
         });
 
         // Caso haja divergência de normalização, fazer fallback pelas contagens exatas
-        if (agMedicao === 0) agMedicao = counts['AG. MEDIÇÃO'] || counts['AG. MEDICAO'] || 0;
-        if (agRelatorio === 0) agRelatorio = counts['AG. RELATÓRIO'] || counts['AG. RELATORIO'] || 0;
+        if (emMedicao === 0) emMedicao = counts['EM MEDIÇÃO'] || counts['EM MEDICAO'] || counts['AG. MEDIÇÃO'] || 0;
+        if (relatorio === 0) relatorio = counts['RELATÓRIO'] || counts['RELATORIO'] || counts['AG. RELATÓRIO'] || 0;
 
         const statusDotColors = {
-            'AG. MEDIÇÃO': '#388bfd',
-            'MEDIÇÃO CONCLUÍDA': '#10b981',
-            'AG. RELATÓRIO': '#f59e0b',
+            'PEDIDO IMPLANTADO': '#10b981',
+            'WF APROVADO': '#14b8a6',
+            'EM MEDIÇÃO': '#388bfd',
+            'EM MEDICAO': '#388bfd',
+            'WF IMPLANTADO': '#22c55e',
+            'MEDIÇÃO ENVIADA': '#eab308',
+            'MEDICAO ENVIADA': '#eab308',
+            'RELATÓRIO': '#f97316',
+            'RELATORIO': '#f97316',
             'CANCELADO': '#ef4444',
             'SEM SINAL': '#8b5cf6',
+            'EM ANDAMENTO': '#6366f1',
             'PARALISADO': '#64748b'
         };
 
@@ -317,7 +325,7 @@
                 <table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px; background:#ffffff; border-radius:16px; overflow:hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.05); border: 1px solid #e1e8ed;">
                     <!-- HEADER -->
                     <tr>
-                        <td style="background: #004f71; padding: 30px 36px; border-bottom: 4px solid #f39f18;">
+                        <td style="background: #004f71; padding: 30px 36px; border-bottom: 4px solid #1e90ff;">
                             <h1 style="margin:0; font-size:22px; font-weight:800; color:#ffffff; line-height:1.2;">${name}</h1>
                             <div style="font-size:12px; color:rgba(255,255,255,0.7); margin-top:6px; font-weight: 500;">Atualizado em: ${genAt}</div>
                         </td>
@@ -336,13 +344,13 @@
                                 <tr style="height: 12px;"><td colspan="3"></td></tr>
                                 <tr>
                                     <td width="48%" style="background: rgba(56,139,253,0.04); border-radius: 10px; border-top: 3px solid #388bfd; padding: 16px 10px; text-align: center; border-left: 1px solid rgba(56,139,253,0.1); border-right: 1px solid rgba(56,139,253,0.1); border-bottom: 1px solid rgba(56,139,253,0.1);">
-                                        <div style="font-size: 11px; color: #1f6feb; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 700; margin-bottom: 4px;">AG. MEDIÇÃO</div>
-                                        <div style="font-size: 26px; font-weight: 800; color: #1f6feb; line-height: 1;">${formatNumber(agMedicao)}</div>
+                                        <div style="font-size: 11px; color: #1f6feb; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 700; margin-bottom: 4px;">EM MEDIÇÃO</div>
+                                        <div style="font-size: 26px; font-weight: 800; color: #1f6feb; line-height: 1;">${formatNumber(emMedicao)}</div>
                                     </td>
                                     <td width="4%"></td>
-                                    <td width="48%" style="background: rgba(243,159,24,0.04); border-radius: 10px; border-top: 3px solid #f39f18; padding: 16px 10px; text-align: center; border-left: 1px solid rgba(243,159,24,0.1); border-right: 1px solid rgba(243,159,24,0.1); border-bottom: 1px solid rgba(243,159,24,0.1);">
-                                        <div style="font-size: 11px; color: #b86d00; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 700; margin-bottom: 4px;">AG. RELATÓRIO</div>
-                                        <div style="font-size: 26px; font-weight: 800; color: #b86d00; line-height: 1;">${formatNumber(agRelatorio)}</div>
+                                    <td width="48%" style="background: rgba(249,115,22,0.04); border-radius: 10px; border-top: 3px solid #f97316; padding: 16px 10px; text-align: center; border-left: 1px solid rgba(249,115,22,0.1); border-right: 1px solid rgba(249,115,22,0.1); border-bottom: 1px solid rgba(249,115,22,0.1);">
+                                        <div style="font-size: 11px; color: #ea580c; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 700; margin-bottom: 4px;">RELATÓRIO</div>
+                                        <div style="font-size: 26px; font-weight: 800; color: #ea580c; line-height: 1;">${formatNumber(relatorio)}</div>
                                     </td>
                                 </tr>
                             </table>
