@@ -12,7 +12,7 @@ let sarPage = 1;
 let sarPageSize = 50;
 let sarSortColumn = 'data_entrada';
 let sarSortOrder = 'desc';
-let sarPerformanceSortColumn = 'total';
+let sarPerformanceSortColumn = 'noPrazoPct';
 let sarPerformanceSortOrder = 'desc';
 
 // Estado de visualização de Granularidade Temporal
@@ -780,8 +780,19 @@ function renderSarPerformanceTable(data) {
     const tfoot = document.getElementById('sar-performance-table-footer');
     if (!tbody) return;
 
+    // SLA dos últimos 60 dias (ou período filtrado se houver filtro de Ano/Mês)
+    const isDateFiltered = Boolean(sarFilters.ano || sarFilters.mes);
+    const targetDataset = isDateFiltered ? data : getSarRecent60DaysData(data);
+
+    const titleEl = document.getElementById('sar-performance-title');
+    if (titleEl) {
+        titleEl.innerText = isDateFiltered 
+            ? 'Desempenho por Executor (Classe L & Classe F)' 
+            : 'Desempenho por Executor (Classe L & Classe F) — Últimos 60 dias';
+    }
+
     const execMap = {};
-    data.forEach(r => {
+    targetDataset.forEach(r => {
         // Considerar executores de Linha e Fusão
         const execs = [r.classe_l, r.classe_f].filter(Boolean);
         if (execs.length === 0) execs.push('NÃO INFORMADO');
@@ -813,18 +824,32 @@ function renderSarPerformanceTable(data) {
         item.noPrazoPct = item.total > 0 ? (item.noPrazo / item.total) * 100 : 0;
     });
 
-    // Ordenação
+    // Ordenação: Por padrão (% SLA desc), com desempate por noPrazo desc e total desc
     execList.sort((a, b) => {
-        let valA = a[sarPerformanceSortColumn] !== undefined ? a[sarPerformanceSortColumn] : 0;
-        let valB = b[sarPerformanceSortColumn] !== undefined ? b[sarPerformanceSortColumn] : 0;
+        if (sarPerformanceSortColumn === 'noPrazoPct') {
+            if (b.noPrazoPct !== a.noPrazoPct) {
+                return sarPerformanceSortOrder === 'desc' 
+                    ? b.noPrazoPct - a.noPrazoPct 
+                    : a.noPrazoPct - b.noPrazoPct;
+            }
+            // Desempate: quem fez mais OSs no prazo
+            return sarPerformanceSortOrder === 'desc' 
+                ? (b.noPrazo !== a.noPrazo ? b.noPrazo - a.noPrazo : b.total - a.total)
+                : (a.noPrazo !== b.noPrazo ? a.noPrazo - b.noPrazo : a.total - b.total);
+        }
         if (sarPerformanceSortColumn === 'nome') {
             return sarPerformanceSortOrder === 'asc' ? a.nome.localeCompare(b.nome) : b.nome.localeCompare(a.nome);
         }
-        return sarPerformanceSortOrder === 'asc' ? valA - valB : valB - valA;
+        let valA = a[sarPerformanceSortColumn] !== undefined ? a[sarPerformanceSortColumn] : 0;
+        let valB = b[sarPerformanceSortColumn] !== undefined ? b[sarPerformanceSortColumn] : 0;
+        if (valA !== valB) {
+            return sarPerformanceSortOrder === 'asc' ? valA - valB : valB - valA;
+        }
+        return b.noPrazoPct - a.noPrazoPct;
     });
 
     if (execList.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color: var(--text-secondary); padding: 20px;">Nenhum executor encontrado no filtro.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color: var(--text-secondary); padding: 20px;">Nenhum executor encontrado para o período.</td></tr>';
         if (tfoot) tfoot.innerHTML = '';
         return;
     }
@@ -845,7 +870,7 @@ function renderSarPerformanceTable(data) {
                 <td style="text-align: left; font-weight: 600;">${item.nome}</td>
                 <td style="text-align: center; color: #10b981; font-weight: 600;">${item.noPrazo}</td>
                 <td style="text-align: center; color: #f85149; font-weight: 600;">${item.atrasado}</td>
-                <td style="text-align: center;">${pctNoPrazo}%</td>
+                <td style="text-align: center; font-weight: 700; color: ${item.noPrazoPct >= 80 ? '#10b981' : item.noPrazoPct >= 50 ? '#f59e0b' : '#f85149'};">${pctNoPrazo}%</td>
                 <td style="text-align: center; font-weight: 700;">${item.total}</td>
             </tr>
         `;
@@ -858,7 +883,7 @@ function renderSarPerformanceTable(data) {
                 <td style="text-align: left;">TOTAL</td>
                 <td style="text-align: center; color: #10b981;">${totalNoPrazo}</td>
                 <td style="text-align: center; color: #f85149;">${totalAtrasado}</td>
-                <td style="text-align: center;">${pctGeralNoPrazo}%</td>
+                <td style="text-align: center; font-weight: 800;">${pctGeralNoPrazo}%</td>
                 <td style="text-align: center;">${totalGeral}</td>
             </tr>
         `;
