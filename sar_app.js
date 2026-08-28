@@ -440,10 +440,10 @@ function getSarStatusColor(st) {
         return { bg: '#388bfd', border: '#1f6feb' }; // Azul Royal Vibrante
     }
     if (key.includes('ENVIAD')) {
-        return { bg: '#f59e0b', border: '#d97706' }; // Âmbar / Laranja Ouro
+        return { bg: '#eab308', border: '#ca8a04' }; // Âmbar Dourado
     }
     if (key.includes('RELAT')) {
-        return { bg: '#06b6d4', border: '#0891b2' }; // Ciano / Turquesa
+        return { bg: '#f97316', border: '#ea580c' }; // Laranja Vibrante / Tangerina
     }
     if (key.includes('ANDAMENTO')) {
         return { bg: '#6366f1', border: '#4f46e5' }; // Índigo
