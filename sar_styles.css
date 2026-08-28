@@ -272,6 +272,8 @@
 }
 
 .sar-kpi-card.kpi-total { --kpi-border-color: var(--color-primary); --kpi-glow-color: 30, 144, 255; }
+.sar-kpi-card.kpi-medicao { --kpi-border-color: #388bfd; --kpi-glow-color: 56, 139, 253; }
+.sar-kpi-card.kpi-relatorio { --kpi-border-color: #06b6d4; --kpi-glow-color: 6, 182, 212; }
 .sar-kpi-card.kpi-finalizado, .sar-kpi-card.kpi-concluidas { --kpi-border-color: var(--color-success); --kpi-glow-color: 46, 213, 115; }
 .sar-kpi-card.kpi-andamento { --kpi-border-color: var(--color-warning); --kpi-glow-color: 255, 165, 2; }
 .sar-kpi-card.kpi-tempo { --kpi-border-color: #a855f7; --kpi-glow-color: 168, 85, 247; }
