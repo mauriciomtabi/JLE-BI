@@ -10,6 +10,17 @@ const MESES_PT = [
     "JULHO", "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"
 ];
 
+function normalizeHeader(str) {
+    if (!str) return "";
+    return String(str)
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toUpperCase()
+        .replace(/[^A-Z0-9]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+
 function parseCsv(csvText) {
     const lines = [];
     let row = [];
@@ -130,6 +141,56 @@ module.exports = async (req, res) => {
             throw new Error('Planilha Google Sheets vazia ou ilegível.');
         }
 
+        // Mapeamento dinâmico de cabeçalho
+        const headerRow = rows[0];
+        const colMap = {};
+        headerRow.forEach((h, idx) => {
+            const nh = normalizeHeader(h);
+            if (nh) colMap[nh] = idx;
+        });
+
+        function getColIdx(aliases, defaultIdx) {
+            for (const a of aliases) {
+                const na = normalizeHeader(a);
+                for (const hKey in colMap) {
+                    if (hKey.includes(na) || na.includes(hKey)) {
+                        return colMap[hKey];
+                    }
+                }
+            }
+            return defaultIdx;
+        }
+
+        const idxCod = getColIdx(['CODIGO SAR', 'CODIGO', 'COD'], 0);
+        const idxArea = getColIdx(['AREA TECNICA', 'AREA'], 1);
+        const idxNode = getColIdx(['NODE', 'NO'], 2);
+        const idxSite = getColIdx(['SITE', 'LOCAL'], 3);
+        const idxCidade = getColIdx(['CIDADE', 'MUNICIPIO'], 4);
+        const idxCondominio = getColIdx(['CONDOMINIO', 'PREDIO'], 5);
+        const idxEndereco = getColIdx(['ENDERECO', 'LOGRADOURO'], 6);
+        const idxCaixaMdu = getColIdx(['CAIXA MDU', 'CX MDU'], 7);
+        const idxServico = getColIdx(['SERVICO', 'ESCOPO'], 8);
+        const idxClasseL = getColIdx(['CLASSE L', 'EXECUTOR L'], 9);
+        const idxClasseF = getColIdx(['CLASSE F', 'EXECUTOR F'], 10);
+        const idxProjetado = getColIdx(['PROJETADO'], 11);
+        const idxExecutado = getColIdx(['EXECUTADO'], 12);
+        const idxEntrada = getColIdx(['DATA ENTRADA', 'ENTRADA'], 13);
+        const idxEntrega = getColIdx(['DATA ENTREGA', 'ENTREGA'], 14);
+        const idxRelatorioPpt = getColIdx(['RELATORIO PPT', 'RELATORIO'], 15);
+        const idxDataEnvioMed = getColIdx(['DATA ENVIO MEDICAO', 'ENVIO MEDICAO'], 16);
+        const idxTempo = getColIdx(['TEMPO DIAS', 'TEMPO'], 17);
+        const idxPrazo = getColIdx(['PRAZO SLA', 'PRAZO'], 18);
+        const idxAtraso = getColIdx(['ATRASO DIAS', 'ATRASO'], 19);
+        const idxStatus = getColIdx(['STATUS GERAL SAR', 'STATUS GERAL', 'STATUS'], 21);
+
+        // Medição e WF (Douglas)
+        const idxDataMedicao = getColIdx(['DATA MEDICAO', 'DATA MEDIÇÃO'], 34);
+        const idxValorMedicao = getColIdx(['VALOR MEDICAO', 'VALOR'], 35);
+        const idxWf = getColIdx(['N WF', 'NO WF', 'NUM WF', 'WORKFLOW'], 36);
+        const idxDataPedido = getColIdx(['DATA PEDIDO'], 37);
+        const idxPedido = getColIdx(['N DO PEDIDO', 'NO DO PEDIDO', 'PEDIDO'], 38);
+        const idxObs = getColIdx(['OBSERVACOES', 'OBSERVAÇÕES'], 39);
+
         const records = [];
         const todayStr = new Date().toISOString().substring(0, 10);
 
@@ -137,47 +198,45 @@ module.exports = async (req, res) => {
             const r = rows[i];
             if (!r || r.length < 2) continue;
 
-            const cod = (r[0] || '').trim();
-            const cidade = (r[4] || '').trim();
+            const cod = (r[idxCod] || '').trim();
+            const cidade = (r[idxCidade] || '').trim();
 
-            // Filtrar linhas sem cidade
+            // Filtrar linhas de rascunho sem cidade
             if (!cod || !cidade) continue;
 
-            const area_tecnica = (r[1] || '').trim();
-            const node = (r[2] || '').trim();
-            const site = (r[3] || '').trim();
-            const condominio = (r[5] || '').trim();
-            const endereco = (r[6] || '').trim();
-            const caixa_mdu = (r[7] || '').trim();
-            const servico = (r[8] || '').trim();
-            const classe_l = (r[9] || '').trim();
-            const classe_f = (r[10] || '').trim();
-            const projetado = (r[11] || '').trim();
-            const executado = (r[12] || '').trim();
-            const observacao_op = (r[13] || '').trim();
+            const area_tecnica = (r[idxArea] || '').trim();
+            const node = (r[idxNode] || '').trim();
+            const site = (r[idxSite] || '').trim();
+            const condominio = (r[idxCondominio] || '').trim();
+            const endereco = (r[idxEndereco] || '').trim();
+            const caixa_mdu = (r[idxCaixaMdu] || '').trim();
+            const servico = (r[idxServico] || '').trim();
+            const classe_l = (r[idxClasseL] || '').trim();
+            const classe_f = (r[idxClasseF] || '').trim();
+            const projetado = (r[idxProjetado] || '').trim();
+            const executado = (r[idxExecutado] || '').trim();
 
-            const dt_entrada_iso = parseDateIso(r[14]);
-            const dt_inicio_iso = parseDateIso(r[15]);
-            const dt_previsao_iso = parseDateIso(r[16]);
-            const dt_entrega_iso = parseDateIso(r[17]);
-            const relatorio_ppt = (r[18] || '').trim();
-            const data_envio_med = (r[19] || '').trim();
+            const dt_entrada_iso = parseDateIso(r[idxEntrada]);
+            const dt_entrega_iso = parseDateIso(r[idxEntrega]);
+            const relatorio_ppt = (r[idxRelatorioPpt] || '').trim();
+            const data_envio_med = (r[idxDataEnvioMed] || '').trim();
 
-            let tempo_dias = toNumber(r[20]);
-            let prazo_raw = (r[21] || '').trim().toUpperCase();
-            let atraso_dias = toNumber(r[22]);
+            let tempo_dias = toNumber(r[idxTempo]);
+            let prazo_raw = (r[idxPrazo] || '').trim().toUpperCase();
+            let atraso_dias = toNumber(r[idxAtraso]);
 
-            // Status Geral (Coluna X / idx 23) - Exatamente o da planilha
-            const status_geral_raw = (r[23] || '').trim();
+            // Status Geral SAR (Coluna 21 ou mapeada dinamicamente)
+            const status_geral_raw = (r[idxStatus] || '').trim();
             const status = status_geral_raw || "EM ANDAMENTO";
 
-            // Douglas (Colunas Y, Z, AA, AB, AC)
-            const dt_medicao_iso = parseDateIso(r[24]);
-            const valor_medicao = toNumber(r[25]);
-            const num_wf = (r[26] || '').trim();
-            const num_pedido = (r[27] || '').trim();
-            const observacoes = (r[28] || '').trim();
-            const status_wf = status === 'WF IMPLANTADO' ? '100% - OK' : '';
+            // Douglas (Campos de Faturamento)
+            const dt_medicao_iso = parseDateIso(r[idxDataMedicao]);
+            const valor_medicao = toNumber(r[idxValorMedicao]);
+            const num_wf = (r[idxWf] || '').trim();
+            const dt_pedido_iso = parseDateIso(r[idxDataPedido]);
+            const num_pedido = (r[idxPedido] || '').trim();
+            const observacoes = (r[idxObs] || '').trim();
+            const status_wf = status === 'WF IMPLANTADO' || status === 'Pedido Implantado' || status === 'WF Aprovado' ? '100% - OK' : '';
 
             // Cálculo do tempo em dias úteis caso zerado
             if (tempo_dias <= 0 && dt_entrada_iso) {
@@ -219,21 +278,21 @@ module.exports = async (req, res) => {
                 caixa_mdu,
                 classe_l,
                 classe_f,
-                situacao: observacao_op || projetado,
+                situacao: projetado,
                 relatorio_foto: executado,
                 servico,
                 data_entrada: dt_entrada_iso,
                 data_entrada_fmt: formatDateBr(dt_entrada_iso),
-                data_inicio: dt_inicio_iso,
-                data_inicio_fmt: formatDateBr(dt_inicio_iso),
-                data_previsao: dt_previsao_iso,
-                data_previsao_fmt: formatDateBr(dt_previsao_iso),
                 data_entrega: dt_entrega_iso,
                 data_entrega_fmt: formatDateBr(dt_entrega_iso),
                 data_medicao: dt_medicao_iso,
                 data_medicao_fmt: formatDateBr(dt_medicao_iso),
                 num_wf,
                 status_wf,
+                num_pedido,
+                data_pedido: dt_pedido_iso,
+                data_pedido_fmt: formatDateBr(dt_pedido_iso),
+                valor_medicao,
                 competencia,
                 ano: ano_entrada,
                 mes: mes_nome,
@@ -241,7 +300,7 @@ module.exports = async (req, res) => {
                 status,
                 status_relatorio: relatorio_ppt,
                 status_medicao: data_envio_med,
-                status_obra: status === 'WF IMPLANTADO' ? 'Concluído Campo' : 'Em Andamento',
+                status_obra: (status.includes('IMPLANTADO') || status.includes('CONCLU') || status.includes('APROV')) ? 'Concluído Campo' : 'Em Andamento',
                 prazo,
                 tempo_dias,
                 atraso_dias

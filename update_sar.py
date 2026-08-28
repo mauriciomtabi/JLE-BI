@@ -258,22 +258,23 @@ def main():
         relatorio_ppt = clean_str(get_col(row, "RELATORIO PPT", "RELATÓRIO PPT", "RELATORIO PPT / FOTOS", default_idx=18))
         data_envio_med = clean_str(get_col(row, "DATA ENVIO MEDICAO", "DATA ENVIO MEDIÇÃO", "MTA ENVIO MEDICAO", "ENVIO MEDICAO", default_idx=19))
 
-        # Tempo, Prazo e Atraso (Colunas U, V, W / idx 20, 21, 22)
-        tempo_raw = get_col(row, "TEMPO (DIAS)", "TEMPO DIAS", "TEMPO", default_idx=20)
-        prazo_raw = clean_str(get_col(row, "PRAZO (SLA 3 DIAS)", "PRAZO SLA 3 DIAS", "PRAZO", "SLA", default_idx=21)).upper()
-        atraso_raw = get_col(row, "ATRASO (DIAS)", "ATRASO DIAS", "ATRASO", default_idx=22)
+        # Tempo, Prazo e Atraso
+        tempo_raw = get_col(row, "TEMPO (DIAS)", "TEMPO DIAS", "TEMPO", default_idx=17)
+        prazo_raw = clean_str(get_col(row, "PRAZO (SLA 3 DIAS)", "PRAZO SLA 3 DIAS", "PRAZO", "SLA", default_idx=18)).upper()
+        atraso_raw = get_col(row, "ATRASO (DIAS)", "ATRASO DIAS", "ATRASO", default_idx=19)
 
-        # Status Geral SAR (Coluna X / idx 23) - Exatamente o nome da Planilha Google Sheets
-        status_geral_raw = clean_str(get_col(row, "STATUS STATUS GERAL SAR", "STATUS GERAL SAR", "STATUS GERAL", "STATUS", default_idx=23))
+        # Status Geral SAR - Exatamente o nome da Planilha Google Sheets
+        status_geral_raw = clean_str(get_col(row, "STATUS STATUS GERAL SAR", "STATUS GERAL SAR", "STATUS GERAL", "STATUS", default_idx=21))
         status = status_geral_raw.strip() if status_geral_raw else "EM ANDAMENTO"
 
-        # Colunas de Medição & Faturamento (Douglas: Colunas Y, Z, AA, AB, AC)
-        dt_medicao_iso = parse_date(get_col(row, "ETAPA 2: MEDICAO (PREENCHIMENTO: DOUGLAS) DATA MEDICAO", "DATA MEDICAO", "DATA MEDIÇÃO", default_idx=24))
-        valor_medicao = to_number(get_col(row, "VALOR MEDICAO (R$)", "VALOR MEDICAO", "VALOR", default_idx=25))
-        num_wf = clean_str(get_col(row, "N WF", "NO WF", "NUM WF", "Nº WF", "WORKFLOW", default_idx=26))
-        num_pedido = clean_str(get_col(row, "N DO PEDIDO", "NO DO PEDIDO", "PEDIDO", default_idx=27))
-        observacoes = clean_str(get_col(row, "OBSERVACOES", "OBSERVAÇÕES", "OBS", default_idx=28))
-        status_wf = "100% - OK" if status == "MEDIÇÃO CONCLUÍDA" else ""
+        # Colunas de Medição & Faturamento (Douglas)
+        dt_medicao_iso = parse_date(get_col(row, "ETAPA 2: MEDICAO (PREENCHIMENTO: DOUGLAS) DATA MEDICAO", "DATA MEDICAO", "DATA MEDIÇÃO", default_idx=34))
+        valor_medicao = to_number(get_col(row, "VALOR MEDICAO (R$)", "VALOR MEDICAO", "VALOR", default_idx=35))
+        num_wf = clean_str(get_col(row, "N WF", "NO WF", "NUM WF", "Nº WF", "WORKFLOW", default_idx=36))
+        dt_pedido_iso = parse_date(get_col(row, "DATA PEDIDO", default_idx=37))
+        num_pedido = clean_str(get_col(row, "N DO PEDIDO", "NO DO PEDIDO", "Nº DO PEDIDO", "PEDIDO", default_idx=38))
+        observacoes = clean_str(get_col(row, "OBSERVACOES", "OBSERVAÇÕES", "OBS", default_idx=39))
+        status_wf = "100% - OK" if "IMPLANTADO" in status or "APROV" in status else ""
 
         # Cálculo do Tempo e SLA em dias úteis
         tempo_dias = to_number(tempo_raw)

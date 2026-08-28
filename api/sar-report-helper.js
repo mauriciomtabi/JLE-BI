@@ -135,15 +135,19 @@ function buildSarEmailHtml(reportName, sarData) {
     const BI_URL = process.env.BI_PUBLIC_URL || "https://jle-bi.vercel.app";
 
     const statusColors = {
+        'PEDIDO IMPLANTADO': '#10b981',
+        'WF APROVADO': '#14b8a6',
         'EM MEDIÇÃO': '#388bfd',
         'EM MEDICAO': '#388bfd',
-        'WF IMPLANTADO': '#10b981',
+        'WF IMPLANTADO': '#22c55e',
         'MEDIÇÃO ENVIADA': '#f59e0b',
         'MEDICAO ENVIADA': '#f59e0b',
+        'RELATÓRIO': '#06b6d4',
+        'RELATORIO': '#06b6d4',
         'CANCELADO': '#ff4757',
         'CANCELADA': '#ff4757',
         'SEM SINAL': '#8b5cf6',
-        'EM ANDAMENTO': '#00bcd4',
+        'EM ANDAMENTO': '#6366f1',
         'PARALISADO': '#747d8c'
     };
 

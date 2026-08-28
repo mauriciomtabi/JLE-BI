@@ -427,8 +427,14 @@ function renderSarCharts(filteredData) {
  */
 function getSarStatusColor(st) {
     const key = (st || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().toUpperCase();
-    if (key.includes('WF IMPLANT') || (key.includes('CONCLU') && !key.includes('MEDIC'))) {
+    if (key.includes('PEDIDO IMPLANTADO') || (key.includes('PEDIDO') && key.includes('IMPLANT'))) {
         return { bg: '#10b981', border: '#059669' }; // Verde Esmeralda
+    }
+    if (key.includes('WF APROVADO') || key.includes('APROVADO')) {
+        return { bg: '#14b8a6', border: '#0d9488' }; // Teal / Verde Azulado
+    }
+    if (key.includes('WF IMPLANT') || (key.includes('CONCLU') && !key.includes('MEDIC'))) {
+        return { bg: '#22c55e', border: '#16a34a' }; // Verde
     }
     if (key.includes('EM MEDIC') || key.includes('AG. MEDIC') || key.includes('AG MEDIC')) {
         return { bg: '#388bfd', border: '#1f6feb' }; // Azul Royal Vibrante
@@ -635,6 +641,8 @@ function renderSarEvolutionChart(data) {
     const pluginList = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
 
     const statusOrder = [
+        'PEDIDO IMPLANTADO',
+        'WF APROVADO',
         'WF IMPLANTADO',
         'EM MEDIÇÃO',
         'MEDIÇÃO ENVIADA',
