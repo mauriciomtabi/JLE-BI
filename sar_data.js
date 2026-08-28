@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-08-28 16:00:24
+// Dados SAR JLE Telecom - Gerado em: 2026-08-28 17:00:21
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1058,
-    "generated_at": "2026-08-28 16:00:24",
+    "generated_at": "2026-08-28 17:00:21",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -725,10 +725,10 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 799772.95,
-        "total_previa_medicao": 1898950.1,
-        "total_classe_l": 272236.96,
-        "total_classe_f": 527535.99
+        "total_terceiros": 800024.95,
+        "total_previa_medicao": 1899788.7,
+        "total_classe_l": 272236.83,
+        "total_classe_f": 527788.12
     }
 };
 
@@ -47494,7 +47494,7 @@ window.SAR_DATA = [
     "classe_f": "AUGUSTO",
     "situacao": "23/10/2025",
     "relatorio_foto": "2303",
-    "servico": "FOI LANÇADO 2303 METROS DE CABO, 94 ABERTURAS E FECHAMENTO, 345 FUSÕES, 31 DERIVAÇÃO.",
+    "servico": "FOI LANÇADO 2303 METROS DE CABO, 122 ABERTURAS E FECHAMENTO, 345 FUSÕES, 31 DERIVAÇÃO.INSTALAÇÃO DE DGO.",
     "data_entrada": "2025-10-23",
     "data_entrada_fmt": "23/10/2025",
     "data_inicio": null,
@@ -47522,13 +47522,13 @@ window.SAR_DATA = [
     "prazo": "ATRASADO",
     "tempo_dias": 163.0,
     "atraso_dias": 160.0,
-    "total_terceiros": 4356.5,
-    "previa_medicao": 11551.35,
+    "total_terceiros": 4608.5,
+    "previa_medicao": 12389.95,
     "valor_medicao": 0.0,
-    "valor_classe_l": 1.08,
-    "valor_classe_f": 4355.42,
+    "valor_classe_l": 0.95,
+    "valor_classe_f": 4607.55,
     "itens_l_resumo": "2.11 CB AS: 2.3m",
-    "itens_f_resumo": "3.15 AB/FE: 94 un, 3.13 FUS/EME: 345 un, 3.12 DER/INS: 31 un",
+    "itens_f_resumo": "3.15 AB/FE: 122 un, 3.13 FUS/EME: 345 un, 3.12 DER/INS: 31 un",
     "lpu_itens": {
       "q_211": 2.3,
       "q_212": 0.0,
@@ -47537,7 +47537,7 @@ window.SAR_DATA = [
       "q_311": 0.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 94.0,
+      "q_315": 122.0,
       "q_313": 345.0,
       "q_314": 0.0,
       "q_312": 31.0
