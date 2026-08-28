@@ -327,14 +327,14 @@ function getSarRecent60DaysData(dataset) {
 function updateSarKpis(data) {
     const total = data.length;
     let emMedicaoCount = 0;
-    let medicaoEnviadaCount = 0;
+    let relatorioCount = 0;
 
     data.forEach(r => {
         const st = (r.status || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase();
         if (st.includes('EM MEDIC') || st.includes('AG. MEDIC') || st.includes('AG MEDIC')) {
             emMedicaoCount++;
-        } else if (st.includes('ENVIAD') || st.includes('RELAT')) {
-            medicaoEnviadaCount++;
+        } else if (st.includes('RELAT')) {
+            relatorioCount++;
         }
     });
 
@@ -359,7 +359,7 @@ function updateSarKpis(data) {
     });
 
     const emMedicaoPct = total > 0 ? ((emMedicaoCount / total) * 100).toFixed(1) : '0';
-    const medicaoEnviadaPct = total > 0 ? ((medicaoEnviadaCount / total) * 100).toFixed(1) : '0';
+    const relatorioPct = total > 0 ? ((relatorioCount / total) * 100).toFixed(1) : '0';
     const mediaTempo = countTempo > 0 ? (somaTempo / countTempo).toFixed(1) : '0';
     const mediaAtraso = countAtraso > 0 ? (somaAtraso / countAtraso).toFixed(1) : '0';
 
@@ -374,8 +374,8 @@ function updateSarKpis(data) {
 
     const elRelatorio = document.getElementById('sar-kpi-andamento');
     const elRelatorioPct = document.getElementById('sar-kpi-andamento-pct');
-    if (elRelatorio) elRelatorio.innerText = medicaoEnviadaCount.toLocaleString('pt-BR');
-    if (elRelatorioPct) elRelatorioPct.innerText = `${medicaoEnviadaPct}%`;
+    if (elRelatorio) elRelatorio.innerText = relatorioCount.toLocaleString('pt-BR');
+    if (elRelatorioPct) elRelatorioPct.innerText = `${relatorioPct}%`;
 
     const elTempoTitle = document.getElementById('sar-kpi-tempo-title');
     const elTempoMedio = document.getElementById('sar-kpi-tempo-medio');

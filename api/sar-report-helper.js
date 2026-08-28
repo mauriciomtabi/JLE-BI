@@ -130,7 +130,7 @@ function buildSarEmailHtml(reportName, sarData) {
     const generatedAt = formatEmailGeneratedAt(sarData.generated_at);
     const total = sarData.total;
     const emMedicao = sarData.counts['EM MEDIÇÃO'] || sarData.counts['EM MEDICAO'] || sarData.emMedicao || 0;
-    const medicaoEnviada = sarData.counts['MEDIÇÃO ENVIADA'] || sarData.counts['MEDICAO ENVIADA'] || sarData.medicaoEnviada || 0;
+    const relatorio = sarData.counts['RELATÓRIO'] || sarData.counts['RELATORIO'] || sarData.relatorio || 0;
 
     const BI_URL = process.env.BI_PUBLIC_URL || "https://jle-bi.vercel.app";
 
@@ -218,9 +218,9 @@ function buildSarEmailHtml(reportName, sarData) {
                                             <div style="font-size: 26px; font-weight: 800; color: #1f6feb; line-height: 1;">${emMedicao.toLocaleString('pt-BR')}</div>
                                         </td>
                                         <td width="4%"></td>
-                                        <td width="48%" style="background: rgba(243,159,24,0.04); border-radius: 10px; border-top: 3px solid #f39f18; padding: 16px 10px; text-align: center; border-left: 1px solid rgba(243,159,24,0.1); border-right: 1px solid rgba(243,159,24,0.1); border-bottom: 1px solid rgba(243,159,24,0.1);">
-                                            <div style="font-size: 11px; color: #b86d00; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 700; margin-bottom: 4px;">MEDIÇÃO ENVIADA</div>
-                                            <div style="font-size: 26px; font-weight: 800; color: #b86d00; line-height: 1;">${medicaoEnviada.toLocaleString('pt-BR')}</div>
+                                        <td width="48%" style="background: rgba(6,182,212,0.04); border-radius: 10px; border-top: 3px solid #06b6d4; padding: 16px 10px; text-align: center; border-left: 1px solid rgba(6,182,212,0.1); border-right: 1px solid rgba(6,182,212,0.1); border-bottom: 1px solid rgba(6,182,212,0.1);">
+                                            <div style="font-size: 11px; color: #0891b2; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 700; margin-bottom: 4px;">RELATÓRIO</div>
+                                            <div style="font-size: 26px; font-weight: 800; color: #0891b2; line-height: 1;">${relatorio.toLocaleString('pt-BR')}</div>
                                         </td>
                                     </tr>
                                 </table>
