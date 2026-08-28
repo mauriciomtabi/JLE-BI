@@ -99,9 +99,25 @@ module.exports = async (req, res) => {
             };
         });
 
+        const now = new Date();
+        const brFormatter = new Intl.DateTimeFormat('pt-BR', {
+            timeZone: 'America/Sao_Paulo',
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+        });
+        const parts = brFormatter.formatToParts(now);
+        const pMap = {};
+        parts.forEach(p => pMap[p.type] = p.value);
+        const generated_at = `${pMap.year}-${pMap.month}-${pMap.day} ${pMap.hour}:${pMap.minute}:${pMap.second}`;
+
         res.status(200).json({
             success: true,
-            generated_at: new Date().toISOString(),
+            generated_at: generated_at,
             count: items.length,
             rows: items
         });

@@ -315,7 +315,20 @@ module.exports = async (req, res) => {
         const meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
 
         const now = new Date();
-        const generated_at = now.toISOString().replace('T', ' ').substring(0, 19);
+        const brFormatter = new Intl.DateTimeFormat('pt-BR', {
+            timeZone: 'America/Sao_Paulo',
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+        });
+        const parts = brFormatter.formatToParts(now);
+        const pMap = {};
+        parts.forEach(p => pMap[p.type] = p.value);
+        const generated_at = `${pMap.year}-${pMap.month}-${pMap.day} ${pMap.hour}:${pMap.minute}:${pMap.second}`;
 
         const metadata = {
             total_records: records.length,
