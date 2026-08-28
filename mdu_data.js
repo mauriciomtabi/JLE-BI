@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-08-28 09:00:17
+// Dados MDU Compactados - Gerado em: 2026-08-28 10:00:20
 window.MDU_METADATA = {
-    "generated_at": "2026-08-28 09:00:17",
+    "generated_at": "2026-08-28 10:00:20",
     "total_rows": 5571,
     "geocoded_new": 0
 };
@@ -110604,10 +110604,10 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "844",
-        "relatorio_por": "DUDA (PENDENCIA: SEM CROQUI TÉCNICO)",
-        "pendencia": "SIM",
-        "status": "Pendência",
-        "prog": 0.0,
+        "relatorio_por": "",
+        "pendencia": "Não",
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "610586584",
         "area": "BVSAB",
         "node": "PETADB",
@@ -112236,10 +112236,10 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "2.079",
-        "relatorio_por": "JENIFFER (PASTA VAZIA)",
-        "pendencia": "SIM",
-        "status": "Pendência",
-        "prog": 0.0,
+        "relatorio_por": "",
+        "pendencia": "Não",
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "610450659",
         "area": "NAVAA",
         "node": "SJOAF",
