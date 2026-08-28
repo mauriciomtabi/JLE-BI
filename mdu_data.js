@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-08-28 12:00:19
+// Dados MDU Compactados - Gerado em: 2026-08-28 13:00:14
 window.MDU_METADATA = {
-    "generated_at": "2026-08-28 12:00:19",
+    "generated_at": "2026-08-28 13:00:14",
     "total_rows": 5571,
     "geocoded_new": 0
 };
@@ -144140,10 +144140,10 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "134",
-        "relatorio_por": "DUDA (N ENCONTRADO PRÉDIO EM ARQUIVOS)",
-        "pendencia": "SIM",
-        "status": "Pendência",
-        "prog": 0.0,
+        "relatorio_por": "",
+        "pendencia": "Não",
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "610502447",
         "area": "RBATB",
         "node": "RBTAE",
@@ -144652,10 +144652,10 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "3.233",
-        "relatorio_por": "PASTA NÃO ENCONTRADA",
-        "pendencia": "SIM",
-        "status": "Pendência",
-        "prog": 0.0,
+        "relatorio_por": "",
+        "pendencia": "Não",
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "610438691",
         "area": "FLOAA",
         "node": "FLOAHA",
