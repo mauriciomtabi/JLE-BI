@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-08-31 12:00:19
+// Dados MDU Compactados - Gerado em: 2026-08-31 13:00:15
 window.MDU_METADATA = {
-    "generated_at": "2026-08-31 12:00:19",
+    "generated_at": "2026-08-31 13:00:15",
     "total_rows": 5575,
-    "geocoded_new": 1
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -178233,7 +178233,7 @@ window.MDU_DATA = [
         "equipe": "GeM Telecom",
         "primeira_visita": "13/07/2026",
         "segunda_visita": "",
-        "obs_vistoria": "MANUTENÇÃO",
+        "obs_vistoria": "MANUTENÇÃO ( FALTA RESUMO DA TIVIDADE PARA RELATORIO)",
         "data_interna": "",
         "data_fusao": "",
         "data_baixa": "",
