@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-08-31 08:03:42
+// Dados SAR JLE Telecom - Gerado em: 2026-08-31 08:08:17
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1058,
-    "generated_at": "2026-08-31 08:03:42",
+    "generated_at": "2026-08-31 08:08:17",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -66287,8 +66287,8 @@ window.SAR_DATA = [
     "data_inicio_fmt": "-",
     "data_previsao": null,
     "data_previsao_fmt": "-",
-    "data_entrega": null,
-    "data_entrega_fmt": "-",
+    "data_entrega": "2026-08-29",
+    "data_entrega_fmt": "29/08/2026",
     "data_medicao": null,
     "data_medicao_fmt": "-",
     "num_wf": "",
@@ -66297,16 +66297,16 @@ window.SAR_DATA = [
     "ano": "2026",
     "mes": "AGOSTO",
     "mes_num": "08",
-    "competencia_entrega": "NÃO INFORMADO",
-    "ano_entrega": "NÃO INFORMADO",
-    "mes_entrega": "NÃO INFORMADO",
-    "mes_num_entrega": "",
+    "competencia_entrega": "AGOSTO/2026",
+    "ano_entrega": "2026",
+    "mes_entrega": "AGOSTO",
+    "mes_num_entrega": "08",
     "status": "EM ANDAMENTO",
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Em Andamento",
     "prazo": "NO PRAZO",
-    "tempo_dias": 2.0,
+    "tempo_dias": 1.0,
     "atraso_dias": 0,
     "total_terceiros": 0.0,
     "previa_medicao": 0.0,
