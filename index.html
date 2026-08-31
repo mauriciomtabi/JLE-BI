@@ -4516,7 +4516,7 @@
             if (navEl) navEl.classList.add('active');
 
             // Sincronizar estado do accordion Financeiro se estiver navegando para telas filhas
-            if (viewName === 'dashboard' || viewName === 'tecnodrill') {
+            if (viewName === 'dashboard' || viewName === 'tecnodrill' || viewName === 'parcelamentos') {
                 const submenuFin = document.getElementById('submenu-financeiro');
                 const toggleFin = document.getElementById('nav-financeiro-toggle');
                 if (submenuFin) submenuFin.classList.add('open');
