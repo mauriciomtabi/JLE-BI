@@ -73,7 +73,7 @@ if (Test-Path "$workingDir\update_mdu.ps1") {
 Write-Output ""
 
 # 7. Atualizar SAR
-Write-Output "--- [7/7] Atualizando SAR ---"
+Write-Output "--- [7/8] Atualizando SAR ---"
 if (Test-Path "$workingDir\update_sar.ps1") {
     try {
         & "$workingDir\update_sar.ps1"
@@ -83,11 +83,22 @@ if (Test-Path "$workingDir\update_sar.ps1") {
 }
 Write-Output ""
 
+# 8. Atualizar Gestão Tributária & Parcelamentos
+Write-Output "--- [8/8] Atualizando Gestão Tributária & Parcelamentos ---"
+if (Test-Path "$workingDir\update_parcelamentos.ps1") {
+    try {
+        & "$workingDir\update_parcelamentos.ps1"
+    } catch {
+        Write-Warning "Falha na atualizacao de Parcelamentos: $($_.Exception.Message)"
+    }
+}
+Write-Output ""
+
 # Sincronização Consolidada no Git / PWA Cache
 Write-Output "--- Sincronizacao Consolidada com GitHub / PWA ---"
 $gitPath = "C:\Program Files\Git\cmd\git.exe"
 if (Test-Path $gitPath) {
-    $dataFiles = @("data.js", "tecnodrill_data.js", "cobranca_data.js", "veiculos_data.js", "manutencao_data.js", "mdu_data.js", "sar_data.js")
+    $dataFiles = @("data.js", "tecnodrill_data.js", "cobranca_data.js", "veiculos_data.js", "manutencao_data.js", "mdu_data.js", "sar_data.js", "parcelamentos_data.js")
     $hasChanges = $false
     foreach ($df in $dataFiles) {
         $st = & $gitPath status --porcelain $df
@@ -104,19 +115,19 @@ if (Test-Path $gitPath) {
             try {
                 $swContent = [System.IO.File]::ReadAllText($swPath)
                 $timestamp = Get-Date -Format "yyyyMMddHHmmss"
-                $newCacheNameLine = "const CACHE_NAME = 'jle-bi-v3.16.$timestamp';"
+                $newCacheNameLine = "const CACHE_NAME = 'jle-bi-v3.17.$timestamp';"
                 $swContent = $swContent -replace "const CACHE_NAME = '([^']+)';", $newCacheNameLine
                 $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
                 [System.IO.File]::WriteAllText($swPath, $swContent, $utf8NoBom)
-                Write-Output "Cache do PWA atualizado para: jle-bi-v3.16.$timestamp"
+                Write-Output "Cache do PWA atualizado para: jle-bi-v3.17.$timestamp"
             } catch {
                 Write-Warning "Nao foi possivel atualizar o sw.js: $($_.Exception.Message)"
             }
         }
 
         Write-Output "Enviando alteracoes consolidadas para o repositorio remoto..."
-        & $gitPath add data.js tecnodrill_data.js cobranca_data.js veiculos_data.js manutencao_data.js mdu_data.js sar_data.js sar_app.js sar_styles.css index.html sw.js update_all.ps1 update_sar.ps1 update_sar.py atualizar_sar.bat BI_LAYOUT_STANDARD.md .gitignore .agents/skills/bi-ui-preservation/SKILL.md
-        & $gitPath commit -m "feat(sar): implantacao do novo dashboard SAR e padronizacao visual BI JLE"
+        & $gitPath add data.js tecnodrill_data.js cobranca_data.js veiculos_data.js manutencao_data.js mdu_data.js sar_data.js sar_app.js sar_styles.css parcelamentos_data.js parcelamentos_app.js parcelamentos_styles.css index.html sw.js update_all.ps1 update_sar.ps1 update_sar.py atualizar_sar.bat update_parcelamentos.ps1 update_parcelamentos.py atualizar_parcelamentos.bat BI_LAYOUT_STANDARD.md .gitignore .agents/skills/bi-ui-preservation/SKILL.md
+        & $gitPath commit -m "feat(tributario): implantacao do modulo de gestao tributaria e parcelamentos"
         & $gitPath pull --rebase origin main
         & $gitPath push origin main
         Write-Output "Deploy automatico disparado via push no GitHub!"

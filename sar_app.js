@@ -15,6 +15,14 @@ let sarSortOrder = 'desc';
 let sarPerformanceSortColumn = 'noPrazoPct';
 let sarPerformanceSortOrder = 'desc';
 
+// Estado do Fechamento de Terceiros
+let sarFechamentoClasse = 'TODOS'; // 'TODOS', 'CLASSE_L', 'CLASSE_F'
+let sarFechamentoCompetencia = ''; // Competência filtrada (MÊS/ANO da data de entrega)
+let sarFechamentoSearch = '';
+let sarFechamentoSortColumn = 'totalPagar';
+let sarFechamentoSortOrder = 'desc';
+let sarActiveTerceiroData = null; // Dados para modal de auditoria
+
 // Estado de visualização de Granularidade Temporal
 let sarTimeGranularity = 'month'; // 'month' padrão
 
@@ -34,7 +42,9 @@ let sarSearchDebounceTimer = null;
 const sarCharts = {
     status: null,
     evolution: null,
-    prazo: null
+    prazo: null,
+    fechEvolution: null,
+    fechDistribuicao: null
 };
 
 // Meses em Português para ordenação cronológica
@@ -127,6 +137,25 @@ function populateSarFilterSelects() {
         ];
         mesSelect.innerHTML = '<option value="">Todos os Meses</option>' + 
             meses.map(m => `<option value="${m.toUpperCase()}">${m}</option>`).join('');
+    }
+
+    // 6. Select Competência de Fechamento de Terceiros (Data de Entrega)
+    const fechCompSelect = document.getElementById('sar-fech-filter-competencia');
+    if (fechCompSelect) {
+        const rawComps = meta.competencias_entrega || [...new Set(data.map(r => r.competencia_entrega).filter(c => c && c !== 'NÃO INFORMADO' && c !== 'SEM DATA'))];
+        const compsSorted = [...rawComps].sort((a, b) => {
+            const pA = a.split('/');
+            const pB = b.split('/');
+            const yA = parseInt(pA[1]) || 0;
+            const yB = parseInt(pB[1]) || 0;
+            if (yA !== yB) return yB - yA;
+            const mA = MESES_MAP_PT[(pA[0] || '').toUpperCase()] || 0;
+            const mB = MESES_MAP_PT[(pB[0] || '').toUpperCase()] || 0;
+            return mB - mA;
+        });
+
+        fechCompSelect.innerHTML = '<option value="">Todas as Competências</option>' + 
+            compsSorted.map(c => `<option value="${c}" ${c === sarFechamentoCompetencia ? 'selected' : ''}>${c}</option>`).join('');
     }
 }
 
@@ -292,6 +321,9 @@ function applySarFilters() {
     renderSarCharts(sarFilteredData);
     renderSarPerformanceTable(sarFilteredData);
     renderSarTable(sarFilteredData);
+    renderSarFechamentoKPIs(sarFilteredData);
+    renderSarFechamentoCharts(sarFilteredData);
+    renderSarFechamentoTable(sarFilteredData);
 }
 
 /**
@@ -901,6 +933,14 @@ function sortSarPerformance(col) {
 }
 
 /**
+ * Formata valor numérico como moeda brasileira (R$)
+ */
+function formatCurrencyBR(val) {
+    const num = (typeof val === 'number' && !isNaN(val)) ? val : 0;
+    return num.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+}
+
+/**
  * Tabela Detalhada Analítica de SARs
  */
 function renderSarTable(data) {
@@ -910,7 +950,7 @@ function renderSarTable(data) {
     if (!tbody) return;
 
     if (data.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="16" style="text-align:center; color: var(--text-secondary); padding: 30px;">Nenhum registro SAR localizado para os filtros selecionados.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="18" style="text-align:center; color: var(--text-secondary); padding: 30px;">Nenhum registro SAR localizado para os filtros selecionados.</td></tr>';
         if (paginationInfo) paginationInfo.innerText = 'Exibindo 0 de 0 registros';
         if (paginationBtns) paginationBtns.innerHTML = '';
         return;
@@ -944,11 +984,14 @@ function renderSarTable(data) {
         const prazoBadgeClass = r.prazo === 'NO PRAZO' ? 'sar-badge-no-prazo' : (r.prazo === 'ATRASADO' ? 'sar-badge-atrasado' : 'sar-badge-default');
         const stUpper = (r.status || '').toUpperCase();
         const statusBadgeClass = 
-            (stUpper === 'CONCLUÍDO' || stUpper === 'CONCLUÍDA' || stUpper === 'WF APROVADO') ? 'sar-badge-concluido' :
+            (stUpper === 'CONCLUÍDO' || stUpper === 'CONCLUÍDA' || stUpper === 'WF APROVADO' || stUpper === 'PEDIDO IMPLANTADO') ? 'sar-badge-concluido' :
             (stUpper === 'ANDAMENTO' || stUpper.includes('AG.') || stUpper.includes('PEND')) ? 'sar-badge-andamento' :
             (stUpper === 'CANCELADO' || stUpper === 'CANCELADA') ? 'sar-badge-cancelado' :
             (stUpper === 'SEM SINAL') ? 'sar-badge-sem-sinal' :
             (stUpper === 'PARALISADO') ? 'sar-badge-paralisado' : 'sar-badge-default';
+
+        const tercFmt = r.total_terceiros > 0 ? formatCurrencyBR(r.total_terceiros) : '-';
+        const prevFmt = r.previa_medicao > 0 ? formatCurrencyBR(r.previa_medicao) : '-';
 
         return `
             <tr>
@@ -966,6 +1009,8 @@ function renderSarTable(data) {
                 <td style="white-space: nowrap;">${r.data_entrega_fmt || '-'}</td>
                 <td><span class="sar-badge ${statusBadgeClass}">${r.status || '-'}</span></td>
                 <td><span class="sar-badge ${prazoBadgeClass}">${r.prazo || '-'}</span></td>
+                <td style="text-align: right; font-weight: 600; color: #f97316; white-space: nowrap;">${tercFmt}</td>
+                <td style="text-align: right; font-weight: 600; color: #10b981; white-space: nowrap;">${prevFmt}</td>
                 <td style="text-align: center; font-weight: 600;">${r.tempo_dias > 0 ? r.tempo_dias : '-'}</td>
                 <td style="text-align: center; color: ${r.atraso_dias > 0 ? '#f85149' : 'inherit'}; font-weight: ${r.atraso_dias > 0 ? '700' : '400'};">${r.atraso_dias > 0 ? r.atraso_dias : '-'}</td>
             </tr>
@@ -1031,29 +1076,727 @@ function sortSarTable(col) {
 }
 
 /**
- * Alterna entre Sub-Abas do SAR (Indicadores / Relatório)
+ * Alterna entre Sub-Abas do SAR (Indicadores / Fechamento de Terceiros / Relatório)
  */
 function switchSarTab(tabName) {
     const subIndicators = document.getElementById('subview-sar-indicators');
+    const subFechamento = document.getElementById('subview-sar-fechamento');
     const subTable = document.getElementById('subview-sar-table');
+
     const btnInd = document.getElementById('sar-tab-btn-indicators');
+    const btnFech = document.getElementById('sar-tab-btn-fechamento');
     const btnTab = document.getElementById('sar-tab-btn-table');
 
-    if (tabName === 'indicators') {
-        if (subIndicators) subIndicators.style.display = 'block';
-        if (subTable) subTable.style.display = 'none';
-        if (btnInd) btnInd.classList.add('active');
-        if (btnTab) btnTab.classList.remove('active');
+    if (subIndicators) subIndicators.style.display = (tabName === 'indicators') ? 'block' : 'none';
+    if (subFechamento) subFechamento.style.display = (tabName === 'fechamento') ? 'block' : 'none';
+    if (subTable) subTable.style.display = (tabName === 'table') ? 'block' : 'none';
+
+    if (btnInd) btnInd.classList.toggle('active', tabName === 'indicators');
+    if (btnFech) btnFech.classList.toggle('active', tabName === 'fechamento');
+    if (btnTab) btnTab.classList.toggle('active', tabName === 'table');
+
+    if (tabName === 'fechamento') {
+        renderSarFechamentoKPIs(sarFilteredData);
+        renderSarFechamentoCharts(sarFilteredData);
+        renderSarFechamentoTable(sarFilteredData);
+    }
+}
+
+// ============================================================
+// CONTROLADORES DO FECHAMENTO DE TERCEIROS
+// ============================================================
+
+/**
+ * Alterna classe filtrada no fechamento (TODOS / CLASSE_L / CLASSE_F)
+ */
+function setSarFechamentoClasse(classe) {
+    sarFechamentoClasse = classe;
+
+    const btnTodos = document.getElementById('sar-fech-btn-classe-todos');
+    const btnL = document.getElementById('sar-fech-btn-classe-l');
+    const btnF = document.getElementById('sar-fech-btn-classe-f');
+
+    if (btnTodos) btnTodos.classList.toggle('active', classe === 'TODOS');
+    if (btnL) btnL.classList.toggle('active', classe === 'CLASSE_L');
+    if (btnF) btnF.classList.toggle('active', classe === 'CLASSE_F');
+
+    renderSarFechamentoKPIs(sarFilteredData);
+    renderSarFechamentoCharts(sarFilteredData);
+    renderSarFechamentoTable(sarFilteredData);
+}
+
+/**
+ * Mudança no filtro de Competência do Fechamento (Data de Entrega)
+ */
+function onSarFechamentoCompetenciaChange(comp) {
+    sarFechamentoCompetencia = comp || '';
+    renderSarFechamentoKPIs(sarFilteredData);
+    renderSarFechamentoCharts(sarFilteredData);
+    renderSarFechamentoTable(sarFilteredData);
+}
+
+/**
+ * Busca rápida por Terceiro / Executor
+ */
+function onSarFechamentoSearch(query) {
+    sarFechamentoSearch = (query || '').trim().toLowerCase();
+    renderSarFechamentoTable(sarFilteredData);
+}
+
+/**
+ * Ordenação da Tabela de Fechamento
+ */
+function sortSarFechamento(col) {
+    if (sarFechamentoSortColumn === col) {
+        sarFechamentoSortOrder = sarFechamentoSortOrder === 'asc' ? 'desc' : 'asc';
     } else {
-        if (subIndicators) subIndicators.style.display = 'none';
-        if (subTable) subTable.style.display = 'block';
-        if (btnInd) btnInd.classList.remove('active');
-        if (btnTab) btnTab.classList.add('active');
+        sarFechamentoSortColumn = col;
+        sarFechamentoSortOrder = 'desc';
+    }
+    renderSarFechamentoTable(sarFilteredData);
+}
+
+/**
+ * Renderiza os KPIs do Fechamento de Terceiros
+ */
+function renderSarFechamentoKPIs(data) {
+    const targetData = (sarFechamentoCompetencia)
+        ? data.filter(r => r.competencia_entrega === sarFechamentoCompetencia)
+        : data;
+
+    let totTerceiros = 0;
+    let totL = 0;
+    let totF = 0;
+    let totPrevia = 0;
+    let countOss = 0;
+    const activeTerceiros = new Set();
+
+    targetData.forEach(r => {
+        if (r.data_entrega) countOss++;
+        if (r.total_terceiros > 0) totTerceiros += r.total_terceiros;
+        if (r.valor_classe_l > 0) totL += r.valor_classe_l;
+        if (r.valor_classe_f > 0) totF += r.valor_classe_f;
+        if (r.previa_medicao > 0) totPrevia += r.previa_medicao;
+
+        if (r.classe_l && r.classe_l.trim()) activeTerceiros.add(r.classe_l.trim().toUpperCase());
+        if (r.classe_f && r.classe_f.trim()) activeTerceiros.add(r.classe_f.trim().toUpperCase());
+    });
+
+    const margem = totPrevia - totTerceiros;
+    const margemPct = totPrevia > 0 ? ((margem / totPrevia) * 100).toFixed(1) : '0';
+
+    const elTotTerc = document.getElementById('sar-kpi-fech-total-terceiros');
+    const elClasseL = document.getElementById('sar-kpi-fech-classe-l');
+    const elClasseF = document.getElementById('sar-kpi-fech-classe-f');
+    const elPrevia = document.getElementById('sar-kpi-fech-previa-medicao');
+    const elMargemVal = document.getElementById('sar-kpi-fech-margem-valor');
+    const elMargemPct = document.getElementById('sar-kpi-fech-margem-pct');
+    const elAtivos = document.getElementById('sar-kpi-fech-terceiros-ativos');
+    const elOss = document.getElementById('sar-kpi-fech-oss-entregues');
+
+    if (elTotTerc) elTotTerc.innerText = formatCurrencyBR(totTerceiros);
+    if (elClasseL) elClasseL.innerText = `L (Cabos): ${formatCurrencyBR(totL)}`;
+    if (elClasseF) elClasseF.innerText = `F (Fusão): ${formatCurrencyBR(totF)}`;
+    if (elPrevia) elPrevia.innerText = formatCurrencyBR(totPrevia);
+    if (elMargemVal) elMargemVal.innerText = formatCurrencyBR(margem);
+    if (elMargemPct) {
+        elMargemPct.innerText = `${margemPct}% de margem operacional`;
+        elMargemPct.style.color = (margem >= 0) ? '#10b981' : '#f85149';
+    }
+    if (elAtivos) elAtivos.innerText = activeTerceiros.size.toLocaleString('pt-BR');
+    if (elOss) elOss.innerText = `${countOss.toLocaleString('pt-BR')} OSs entregues no período`;
+}
+
+/**
+ * Renderiza os Gráficos do Fechamento de Terceiros
+ */
+function renderSarFechamentoCharts(data) {
+    const pluginList = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
+
+    // 1. Gráfico de Evolução Mensal (Data de Entrega)
+    const ctxEvolution = document.getElementById('sar-chart-fech-evolution');
+    if (ctxEvolution) {
+        if (sarCharts.fechEvolution) {
+            sarCharts.fechEvolution.destroy();
+            sarCharts.fechEvolution = null;
+        }
+
+        const monthMap = {};
+        data.forEach(r => {
+            if (r.data_entrega) {
+                const ym = r.data_entrega.substring(0, 7); // YYYY-MM
+                const [ano, mes] = ym.split('-');
+                const mesNum = parseInt(mes);
+                const label = `${MESES_PT_LABEL[mesNum] || mes}/${ano.substring(2)}`;
+
+                if (!monthMap[ym]) {
+                    monthMap[ym] = { ym, label, terceiros: 0, previa: 0 };
+                }
+                monthMap[ym].terceiros += (r.total_terceiros || 0);
+                monthMap[ym].previa += (r.previa_medicao || 0);
+            }
+        });
+
+        const sortedYms = Object.keys(monthMap).sort();
+        const labels = sortedYms.map(k => monthMap[k].label);
+        const dataPrevia = sortedYms.map(k => Math.round(monthMap[k].previa));
+        const dataTerceiros = sortedYms.map(k => Math.round(monthMap[k].terceiros));
+
+        sarCharts.fechEvolution = new Chart(ctxEvolution, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Prévia Medição (Claro)',
+                        data: dataPrevia,
+                        backgroundColor: '#10b981',
+                        borderColor: '#059669',
+                        borderWidth: 1,
+                        borderRadius: 3,
+                        barPercentage: 0.8,
+                        categoryPercentage: 0.85
+                    },
+                    {
+                        label: 'Total Terceiros',
+                        data: dataTerceiros,
+                        backgroundColor: '#f97316',
+                        borderColor: '#ea580c',
+                        borderWidth: 1,
+                        borderRadius: 3,
+                        barPercentage: 0.8,
+                        categoryPercentage: 0.85
+                    }
+                ]
+            },
+            plugins: pluginList,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        align: 'end',
+                        labels: { color: '#c9d1d9', font: { family: 'Outfit, Inter', size: 11 }, usePointStyle: true }
+                    },
+                    tooltip: {
+                        backgroundColor: '#161b22',
+                        borderColor: 'rgba(255, 255, 255, 0.15)',
+                        borderWidth: 1,
+                        callbacks: {
+                            label: function(context) {
+                                const val = context.parsed.y || 0;
+                                return `${context.dataset.label}: ${formatCurrencyBR(val)}`;
+                            },
+                            footer: function(tooltipItems) {
+                                let prev = 0, terc = 0;
+                                tooltipItems.forEach(t => {
+                                    if (t.datasetIndex === 0) prev = t.parsed.y;
+                                    if (t.datasetIndex === 1) terc = t.parsed.y;
+                                });
+                                const saldo = prev - terc;
+                                const pct = prev > 0 ? ((saldo / prev) * 100).toFixed(1) : '0';
+                                return `Margem: ${formatCurrencyBR(saldo)} (${pct}%)`;
+                            }
+                        }
+                    },
+                    datalabels: {
+                        display: false // Não poluir o gráfico com valores muito longos
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                        ticks: { color: '#c9d1d9', font: { size: 10 } }
+                    },
+                    y: {
+                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                        ticks: {
+                            color: '#8b949e',
+                            font: { size: 10 },
+                            callback: (v) => `R$ ${(v / 1000).toFixed(0)}k`
+                        },
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+
+    // 2. Gráfico de Distribuição por Classe (Classe L vs Classe F)
+    const ctxDist = document.getElementById('sar-chart-fech-distribuicao');
+    if (ctxDist) {
+        if (sarCharts.fechDistribuicao) {
+            sarCharts.fechDistribuicao.destroy();
+            sarCharts.fechDistribuicao = null;
+        }
+
+        const targetData = (sarFechamentoCompetencia)
+            ? data.filter(r => r.competencia_entrega === sarFechamentoCompetencia)
+            : data;
+
+        let totL = 0;
+        let totF = 0;
+        targetData.forEach(r => {
+            totL += (r.valor_classe_l || 0);
+            totF += (r.valor_classe_f || 0);
+        });
+
+        const totalGeral = totL + totF;
+
+        sarCharts.fechDistribuicao = new Chart(ctxDist, {
+            type: 'doughnut',
+            data: {
+                labels: ['Classe L (Cabos)', 'Classe F (Fusão)'],
+                datasets: [{
+                    data: [Math.round(totL), Math.round(totF)],
+                    backgroundColor: ['#388bfd', '#a855f7'],
+                    borderColor: '#161b22',
+                    borderWidth: 2,
+                    hoverOffset: 6
+                }]
+            },
+            plugins: pluginList,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { color: '#c9d1d9', font: { family: 'Outfit, Inter', size: 11 }, padding: 10 }
+                    },
+                    tooltip: {
+                        backgroundColor: '#161b22',
+                        borderColor: 'rgba(255, 255, 255, 0.15)',
+                        borderWidth: 1,
+                        callbacks: {
+                            label: function(context) {
+                                const val = context.parsed || 0;
+                                const pct = totalGeral > 0 ? ((val * 100) / totalGeral).toFixed(1) : 0;
+                                return `${context.label}: ${formatCurrencyBR(val)} (${pct}%)`;
+                            }
+                        }
+                    },
+                    datalabels: {
+                        display: true,
+                        color: '#ffffff',
+                        font: { weight: 'bold', size: 11, family: 'Outfit, Inter' },
+                        formatter: (val) => {
+                            if (!val || totalGeral === 0) return '';
+                            const pct = ((val * 100) / totalGeral).toFixed(0) + '%';
+                            return pct;
+                        }
+                    }
+                },
+                cutout: '58%'
+            }
+        });
     }
 }
 
 /**
- * Exportação dos Dados do SAR para Excel via SheetJS (xlsx-js-style)
+ * Renderiza a Tabela Consolidada de Fechamento por Terceiro
+ */
+function renderSarFechamentoTable(data) {
+    const tbody = document.getElementById('sar-fechamento-table-body');
+    const tfoot = document.getElementById('sar-fechamento-table-footer');
+    const badgeCount = document.getElementById('sar-fech-count-badge');
+    if (!tbody) return;
+
+    const targetDataset = (sarFechamentoCompetencia)
+        ? data.filter(r => r.competencia_entrega === sarFechamentoCompetencia)
+        : data;
+
+    const terceirosMap = {};
+
+    targetDataset.forEach(r => {
+        const cL = (r.classe_l || '').trim();
+        const cF = (r.classe_f || '').trim();
+
+        // 1. Processar Classe L se permitida
+        if (cL && sarFechamentoClasse !== 'CLASSE_F') {
+            const keyL = `${cL.toUpperCase()}__CLASSE_L`;
+            if (!terceirosMap[keyL]) {
+                terceirosMap[keyL] = {
+                    nome: cL,
+                    classe: 'Classe L (Cabos)',
+                    classeTag: 'CLASSE_L',
+                    qtdOss: 0,
+                    totalPagar: 0,
+                    previaMedicao: 0,
+                    itensResumo: new Set(),
+                    ossList: []
+                };
+            }
+            terceirosMap[keyL].qtdOss++;
+            terceirosMap[keyL].totalPagar += (r.valor_classe_l || 0);
+            terceirosMap[keyL].previaMedicao += (r.previa_medicao || 0);
+            if (r.itens_l_resumo && r.itens_l_resumo !== '-') terceirosMap[keyL].itensResumo.add(r.itens_l_resumo);
+            terceirosMap[keyL].ossList.push({ ...r, valor_terceiro_individual: r.valor_classe_l, tipo_atuacao: 'Classe L' });
+        }
+
+        // 2. Processar Classe F se permitida
+        if (cF && sarFechamentoClasse !== 'CLASSE_L') {
+            const keyF = `${cF.toUpperCase()}__CLASSE_F`;
+            if (!terceirosMap[keyF]) {
+                terceirosMap[keyF] = {
+                    nome: cF,
+                    classe: 'Classe F (Fusão)',
+                    classeTag: 'CLASSE_F',
+                    qtdOss: 0,
+                    totalPagar: 0,
+                    previaMedicao: 0,
+                    itensResumo: new Set(),
+                    ossList: []
+                };
+            }
+            terceirosMap[keyF].qtdOss++;
+            terceirosMap[keyF].totalPagar += (r.valor_classe_f || 0);
+            terceirosMap[keyF].previaMedicao += (r.previa_medicao || 0);
+            if (r.itens_f_resumo && r.itens_f_resumo !== '-') terceirosMap[keyF].itensResumo.add(r.itens_f_resumo);
+            terceirosMap[keyF].ossList.push({ ...r, valor_terceiro_individual: r.valor_classe_f, tipo_atuacao: 'Classe F' });
+        }
+    });
+
+    let terceirosList = Object.values(terceirosMap);
+
+    // Filtro de Busca por Nome
+    if (sarFechamentoSearch) {
+        terceirosList = terceirosList.filter(item => item.nome.toLowerCase().includes(sarFechamentoSearch));
+    }
+
+    // Cálculos de Margem e Ticket Médio
+    terceirosList.forEach(item => {
+        item.margemValor = item.previaMedicao - item.totalPagar;
+        item.margemPct = item.previaMedicao > 0 ? ((item.margemValor / item.previaMedicao) * 100) : 0;
+        item.ticketMedio = item.qtdOss > 0 ? (item.totalPagar / item.qtdOss) : 0;
+    });
+
+    // Ordenação
+    terceirosList.sort((a, b) => {
+        if (sarFechamentoSortColumn === 'nome' || sarFechamentoSortColumn === 'classe') {
+            return sarFechamentoSortOrder === 'asc'
+                ? a[sarFechamentoSortColumn].localeCompare(b[sarFechamentoSortColumn])
+                : b[sarFechamentoSortColumn].localeCompare(a[sarFechamentoSortColumn]);
+        }
+        const valA = a[sarFechamentoSortColumn] || 0;
+        const valB = b[sarFechamentoSortColumn] || 0;
+        return sarFechamentoSortOrder === 'asc' ? valA - valB : valB - valA;
+    });
+
+    if (badgeCount) {
+        badgeCount.innerText = `${terceirosList.length} terceiros listados`;
+    }
+
+    if (terceirosList.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="10" style="text-align:center; color: var(--text-secondary); padding: 30px;">Nenhum terceiro localizado com os filtros selecionados.</td></tr>';
+        if (tfoot) tfoot.innerHTML = '';
+        return;
+    }
+
+    let sumTotalPagar = 0;
+    let sumPrevia = 0;
+    let sumOss = 0;
+
+    tbody.innerHTML = terceirosList.map(item => {
+        sumTotalPagar += item.totalPagar;
+        sumPrevia += item.previaMedicao;
+        sumOss += item.qtdOss;
+
+        const isClasseL = item.classeTag === 'CLASSE_L';
+        const badgeClass = isClasseL ? 'sar-badge-classe-l' : 'sar-badge-classe-f';
+        const badgeIcon = isClasseL ? 'fa-route' : 'fa-bolt';
+
+        const itensArr = Array.from(item.itensResumo);
+        const itensText = itensArr.length > 0 ? itensArr.slice(0, 2).join('; ') + (itensArr.length > 2 ? '...' : '') : '-';
+
+        return `
+            <tr>
+                <td style="text-align: left; font-weight: 700; color: var(--text-primary);">
+                    ${item.nome}
+                </td>
+                <td style="text-align: center; white-space: nowrap;">
+                    <span class="sar-badge ${badgeClass}">
+                        <i class="fa-solid ${badgeIcon}"></i> ${item.classe}
+                    </span>
+                </td>
+                <td style="text-align: center; font-weight: 600;">${item.qtdOss}</td>
+                <td style="text-align: left; font-size: 11px; color: var(--text-secondary); max-width: 180px; line-height: 1.2;" title="${itensArr.join('; ')}">
+                    ${itensText}
+                </td>
+                <td style="text-align: right; font-weight: 700; color: #f97316; white-space: nowrap;">
+                    ${formatCurrencyBR(item.totalPagar)}
+                </td>
+                <td style="text-align: right; font-weight: 600; color: #10b981; white-space: nowrap;">
+                    ${formatCurrencyBR(item.previaMedicao)}
+                </td>
+                <td style="text-align: right; font-weight: 600; color: ${item.margemValor >= 0 ? '#388bfd' : '#f85149'}; white-space: nowrap;">
+                    ${formatCurrencyBR(item.margemValor)}
+                </td>
+                <td style="text-align: center; font-weight: 700; color: ${item.margemPct >= 50 ? '#10b981' : item.margemPct >= 30 ? '#f59e0b' : '#f85149'}; white-space: nowrap;">
+                    ${item.margemPct.toFixed(1)}%
+                </td>
+                <td style="text-align: right; font-size: 12px; color: var(--text-secondary); white-space: nowrap;">
+                    ${formatCurrencyBR(item.ticketMedio)}
+                </td>
+                <td style="text-align: center; white-space: nowrap;">
+                    <button class="btn-sm-action" onclick="openSarTerceiroDetalhe('${encodeURIComponent(item.nome)}', '${item.classeTag}')" title="Auditar OSs do terceiro">
+                        <i class="fa-solid fa-list-check"></i> Ver OSs
+                    </button>
+                </td>
+            </tr>
+        `;
+    }).join('');
+
+    if (tfoot) {
+        const sumMargem = sumPrevia - sumTotalPagar;
+        const sumMargemPct = sumPrevia > 0 ? ((sumMargem / sumPrevia) * 100).toFixed(1) : '0';
+        const sumTicket = sumOss > 0 ? (sumTotalPagar / sumOss) : 0;
+
+        tfoot.innerHTML = `
+            <tr style="background: rgba(255,255,255,0.04); font-weight: 800;">
+                <td style="text-align: left;">TOTAL CONSOLIDADO</td>
+                <td style="text-align: center;">-</td>
+                <td style="text-align: center;">${sumOss.toLocaleString('pt-BR')}</td>
+                <td style="text-align: left;">-</td>
+                <td style="text-align: right; color: #f97316;">${formatCurrencyBR(sumTotalPagar)}</td>
+                <td style="text-align: right; color: #10b981;">${formatCurrencyBR(sumPrevia)}</td>
+                <td style="text-align: right; color: #388bfd;">${formatCurrencyBR(sumMargem)}</td>
+                <td style="text-align: center;">${sumMargemPct}%</td>
+                <td style="text-align: right;">${formatCurrencyBR(sumTicket)}</td>
+                <td style="text-align: center;">-</td>
+            </tr>
+        `;
+    }
+}
+
+/**
+ * Abre o Modal de Auditoria e Drill-Down do Terceiro
+ */
+function openSarTerceiroDetalhe(terceiroNomeEnc, classeTag) {
+    const terceiroNome = decodeURIComponent(terceiroNomeEnc);
+    const modal = document.getElementById('modal-sar-terceiro-detalhe');
+    const tbody = document.getElementById('modal-sar-terceiro-table-body');
+    if (!modal || !tbody) return;
+
+    const targetDataset = (sarFechamentoCompetencia)
+        ? sarFilteredData.filter(r => r.competencia_entrega === sarFechamentoCompetencia)
+        : sarFilteredData;
+
+    const oss = [];
+    let totPagar = 0;
+    let totPrevia = 0;
+
+    targetDataset.forEach(r => {
+        let isMatch = false;
+        let valPago = 0;
+        let itens = '';
+
+        if (classeTag === 'CLASSE_L' && (r.classe_l || '').trim().toUpperCase() === terceiroNome.toUpperCase()) {
+            isMatch = true;
+            valPago = r.valor_classe_l || 0;
+            itens = r.itens_l_resumo || '-';
+        } else if (classeTag === 'CLASSE_F' && (r.classe_f || '').trim().toUpperCase() === terceiroNome.toUpperCase()) {
+            isMatch = true;
+            valPago = r.valor_classe_f || 0;
+            itens = r.itens_f_resumo || '-';
+        } else if (!classeTag || classeTag === 'TODOS') {
+            if ((r.classe_l || '').trim().toUpperCase() === terceiroNome.toUpperCase()) {
+                isMatch = true;
+                valPago += (r.valor_classe_l || 0);
+                itens += (r.itens_l_resumo || '');
+            }
+            if ((r.classe_f || '').trim().toUpperCase() === terceiroNome.toUpperCase()) {
+                isMatch = true;
+                valPago += (r.valor_classe_f || 0);
+                itens += (itens ? '; ' : '') + (r.itens_f_resumo || '');
+            }
+        }
+
+        if (isMatch) {
+            totPagar += valPago;
+            totPrevia += (r.previa_medicao || 0);
+            oss.push({
+                ...r,
+                valor_pago_terceiro: valPago,
+                itens_executados: itens || '-'
+            });
+        }
+    });
+
+    sarActiveTerceiroData = {
+        nome: terceiroNome,
+        classeTag: classeTag,
+        competencia: sarFechamentoCompetencia || 'Todas as Competências',
+        oss: oss,
+        totPagar: totPagar,
+        totPrevia: totPrevia
+    };
+
+    // Header & KPIs do Modal
+    const elTitle = document.getElementById('modal-sar-terceiro-nome');
+    const elSub = document.getElementById('modal-sar-terceiro-sub');
+    const elKpiPagar = document.getElementById('modal-sar-kpi-total-pagar');
+    const elKpiPrevia = document.getElementById('modal-sar-kpi-previa-medicao');
+    const elKpiMargem = document.getElementById('modal-sar-kpi-margem');
+    const elKpiOss = document.getElementById('modal-sar-kpi-total-oss');
+
+    const classeLabel = classeTag === 'CLASSE_L' ? 'Classe L (Cabos/Linha)' : (classeTag === 'CLASSE_F' ? 'Classe F (Fusão/Caixas)' : 'Geral');
+    if (elTitle) elTitle.innerHTML = `<i class="fa-solid fa-user-gear" style="color: #f97316;"></i> ${terceiroNome} — <span style="font-weight: 400; font-size: 0.95rem; color: var(--text-secondary);">${classeLabel}</span>`;
+    if (elSub) elSub.innerText = `Competência de Entrega: ${sarActiveTerceiroData.competencia} | Total de OSs: ${oss.length}`;
+
+    if (elKpiPagar) elKpiPagar.innerText = formatCurrencyBR(totPagar);
+    if (elKpiPrevia) elKpiPrevia.innerText = formatCurrencyBR(totPrevia);
+    const margemVal = totPrevia - totPagar;
+    const margemPct = totPrevia > 0 ? ((margemVal / totPrevia) * 100).toFixed(1) : '0';
+    if (elKpiMargem) elKpiMargem.innerText = `${formatCurrencyBR(margemVal)} (${margemPct}%)`;
+    if (elKpiOss) elKpiOss.innerText = oss.length.toLocaleString('pt-BR');
+
+    // Linhas da Tabela
+    tbody.innerHTML = oss.map(r => `
+        <tr>
+            <td style="font-weight: 700; color: var(--color-primary); white-space: nowrap;">${r.cod}</td>
+            <td style="white-space: nowrap;">${r.cidade || '-'}</td>
+            <td style="font-size: 12px; line-height: 1.2;">
+                <strong>${r.condominio || ''}</strong><br>
+                <span style="color: var(--text-secondary);">${r.endereco || '-'}</span>
+            </td>
+            <td style="white-space: nowrap; text-align: center;">${r.data_entrega_fmt || '-'}</td>
+            <td style="font-size: 11px; color: var(--text-secondary);">${r.itens_executados}</td>
+            <td style="text-align: right; font-weight: 700; color: #f97316; white-space: nowrap;">${formatCurrencyBR(r.valor_pago_terceiro)}</td>
+            <td style="text-align: right; font-weight: 600; color: #10b981; white-space: nowrap;">${formatCurrencyBR(r.previa_medicao)}</td>
+        </tr>
+    `).join('');
+
+    modal.classList.add('active');
+}
+
+function closeSarTerceiroModal(e) {
+    if (e.target.id === 'modal-sar-terceiro-detalhe') {
+        closeSarTerceiroModalDirect();
+    }
+}
+
+function closeSarTerceiroModalDirect() {
+    const modal = document.getElementById('modal-sar-terceiro-detalhe');
+    if (modal) modal.classList.remove('active');
+}
+
+/**
+ * Exportação Consolidada do Fechamento de Terceiros para Excel
+ */
+function exportSarFechamentoToExcel() {
+    if (typeof XLSX === 'undefined') {
+        alert("Biblioteca XLSX não carregada no navegador.");
+        return;
+    }
+
+    const targetDataset = (sarFechamentoCompetencia)
+        ? sarFilteredData.filter(r => r.competencia_entrega === sarFechamentoCompetencia)
+        : sarFilteredData;
+
+    const terceirosMap = {};
+
+    targetDataset.forEach(r => {
+        const cL = (r.classe_l || '').trim();
+        const cF = (r.classe_f || '').trim();
+
+        if (cL && sarFechamentoClasse !== 'CLASSE_F') {
+            const keyL = `${cL.toUpperCase()}__CLASSE_L`;
+            if (!terceirosMap[keyL]) {
+                terceirosMap[keyL] = { nome: cL, classe: 'Classe L (Cabos)', qtdOss: 0, totalPagar: 0, previaMedicao: 0, itens: new Set() };
+            }
+            terceirosMap[keyL].qtdOss++;
+            terceirosMap[keyL].totalPagar += (r.valor_classe_l || 0);
+            terceirosMap[keyL].previaMedicao += (r.previa_medicao || 0);
+            if (r.itens_l_resumo && r.itens_l_resumo !== '-') terceirosMap[keyL].itens.add(r.itens_l_resumo);
+        }
+
+        if (cF && sarFechamentoClasse !== 'CLASSE_L') {
+            const keyF = `${cF.toUpperCase()}__CLASSE_F`;
+            if (!terceirosMap[keyF]) {
+                terceirosMap[keyF] = { nome: cF, classe: 'Classe F (Fusão)', qtdOss: 0, totalPagar: 0, previaMedicao: 0, itens: new Set() };
+            }
+            terceirosMap[keyF].qtdOss++;
+            terceirosMap[keyF].totalPagar += (r.valor_classe_f || 0);
+            terceirosMap[keyF].previaMedicao += (r.previa_medicao || 0);
+            if (r.itens_f_resumo && r.itens_f_resumo !== '-') terceirosMap[keyF].itens.add(r.itens_f_resumo);
+        }
+    });
+
+    const rows = Object.values(terceirosMap).map(item => {
+        const margem = item.previaMedicao - item.totalPagar;
+        const margemPct = item.previaMedicao > 0 ? (margem / item.previaMedicao) * 100 : 0;
+        const ticket = item.qtdOss > 0 ? item.totalPagar / item.qtdOss : 0;
+
+        return {
+            "Terceiro / Executor": item.nome,
+            "Especialidade": item.classe,
+            "Competência": sarFechamentoCompetencia || 'Geral / Todas',
+            "Qtd OSs Entregues": item.qtdOss,
+            "Total a Pagar (R$)": item.totalPagar,
+            "Prévia Medição Claro (R$)": item.previaMedicao,
+            "Margem Operacional (R$)": margem,
+            "% Margem": `${margemPct.toFixed(1)}%`,
+            "Ticket Médio / OS (R$)": Math.round(ticket * 100) / 100,
+            "Itens LPU Principais": Array.from(item.itens).join('; ')
+        };
+    });
+
+    const ws = XLSX.utils.json_to_sheet(rows);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Fechamento_Terceiros");
+
+    const compLabel = sarFechamentoCompetencia ? sarFechamentoCompetencia.replace('/', '_') : 'Geral';
+    const filename = `Fechamento_Terceiros_SAR_${compLabel}_${new Date().toISOString().substring(0, 10)}.xlsx`;
+    XLSX.writeFile(wb, filename);
+}
+
+/**
+ * Exporta Extrato Individual de OSs do Terceiro Selecionado
+ */
+function exportSarTerceiroIndividualToExcel() {
+    if (!sarActiveTerceiroData || !sarActiveTerceiroData.oss || sarActiveTerceiroData.oss.length === 0) {
+        alert("Nenhum dado selecionado para exportação.");
+        return;
+    }
+
+    if (typeof XLSX === 'undefined') {
+        alert("Biblioteca XLSX não carregada no navegador.");
+        return;
+    }
+
+    const rows = sarActiveTerceiroData.oss.map(r => ({
+        "Código OS": r.cod,
+        "Terceiro": sarActiveTerceiroData.nome,
+        "Especialidade": r.tipo_atuacao || sarActiveTerceiroData.classeTag,
+        "Cidade": r.cidade,
+        "Área Técnica": r.area_tecnica,
+        "Condomínio": r.condominio,
+        "Endereço": r.endereco,
+        "Serviço": r.servico,
+        "Data Entrada": r.data_entrada_fmt,
+        "Data Entrega": r.data_entrega_fmt,
+        "Itens LPU Executados": r.itens_executados,
+        "Valor Pago ao Terceiro (R$)": r.valor_pago_terceiro,
+        "Prévia Medição Claro (R$)": r.previa_medicao,
+        "Status Geral": r.status,
+        "Prazo (SLA)": r.prazo
+    }));
+
+    const ws = XLSX.utils.json_to_sheet(rows);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Extrato_OSs");
+
+    const safeName = sarActiveTerceiroData.nome.replace(/[^a-zA-Z0-9]/g, '_');
+    const compLabel = sarActiveTerceiroData.competencia.replace(/[^a-zA-Z0-9]/g, '_');
+    const filename = `Extrato_SAR_${safeName}_${compLabel}.xlsx`;
+    XLSX.writeFile(wb, filename);
+}
+
+/**
+ * Exportação Geral dos Dados do SAR para Excel via SheetJS
  */
 function exportSarToExcel() {
     if (!sarFilteredData || sarFilteredData.length === 0) {
@@ -1080,6 +1823,10 @@ function exportSarToExcel() {
         "Data de Entrada": r.data_entrada_fmt || '',
         "Data de Entrega": r.data_entrega_fmt || '',
         "Data Medição": r.data_medicao_fmt || '',
+        "Total Terceiros (R$)": r.total_terceiros || 0,
+        "Valor Classe L (R$)": r.valor_classe_l || 0,
+        "Valor Classe F (R$)": r.valor_classe_f || 0,
+        "Prévia Medição (R$)": r.previa_medicao || 0,
         "Nº WF": r.num_wf || '',
         "Status WF": r.status_wf || '',
         "Status Geral": r.status || '',

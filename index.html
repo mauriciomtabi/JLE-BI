@@ -50,7 +50,8 @@
     <link rel="stylesheet" href="cobranca_styles.css?v=3.47">
     <link rel="stylesheet" href="gestao_os_styles.css">
     <link rel="stylesheet" href="mdu_styles.css">
-    <link rel="stylesheet" href="sar_styles.css?v=2.2">
+    <link rel="stylesheet" href="sar_styles.css?v=3.52">
+    <link rel="stylesheet" href="parcelamentos_styles.css?v=1.3">
     
     <!-- Leaflet Map CSS & JS CDNs -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
@@ -100,6 +101,9 @@
                     </a>
                     <a class="nav-item nav-subitem" id="nav-tecnodrill" onclick="switchView('tecnodrill')" style="display:none;" title="Financeiro Tecnodrill">
                         <i class="fa-solid fa-person-digging"></i> <span>Tecnodrill</span>
+                    </a>
+                    <a class="nav-item nav-subitem" id="nav-parcelamentos" onclick="switchView('parcelamentos')" style="display:none;" title="Impostos">
+                        <i class="fa-solid fa-file-invoice"></i> <span>Impostos</span>
                     </a>
                 </div>
             </div>
@@ -2158,17 +2162,20 @@
                 </div>
             </section>
 
-            <!-- Sub Tab Selector (Indicadores / Relatório) -->
+            <!-- Sub Tab Selector (Indicadores / Fechamento de Terceiros / Relatório) -->
             <div class="dashboard-tabs" id="sar-sub-tabs" style="margin-bottom: 20px;">
                 <button class="tab-btn active" id="sar-tab-btn-indicators" onclick="switchSarTab('indicators')">
                     <i class="fa-solid fa-chart-column"></i> Indicadores
+                </button>
+                <button class="tab-btn" id="sar-tab-btn-fechamento" onclick="switchSarTab('fechamento')">
+                    <i class="fa-solid fa-file-invoice-dollar"></i> Fechamento de Terceiros
                 </button>
                 <button class="tab-btn" id="sar-tab-btn-table" onclick="switchSarTab('table')">
                     <i class="fa-solid fa-list-check"></i> Relatório de SARs
                 </button>
             </div>
 
-            <!-- Sub Tab Pane: Indicadores -->
+            <!-- Sub Tab Pane 1: Indicadores Operacionais -->
             <div id="subview-sar-indicators" class="subtab-pane active">
                 <!-- KPI Cards (Não Redundantes) -->
                 <div class="sar-kpi-grid">
@@ -2281,7 +2288,167 @@
                 </div>
             </div>
 
-            <!-- Sub Tab Pane: Relatório de SARs (Tabela Detalhada) -->
+            <!-- Sub Tab Pane 2: Fechamento de Terceiros (Novo Módulo Financeiro) -->
+            <div id="subview-sar-fechamento" class="subtab-pane" style="display: none; padding-bottom: 24px;">
+                <!-- KPIs Financeiros de Fechamento -->
+                <div class="sar-kpi-grid">
+                    <!-- KPI 1: Total Terceiros -->
+                    <div class="sar-kpi-card kpi-fech-terceiros" style="border-left-color: #f97316;">
+                        <div class="kpi-info" style="flex-grow: 1;">
+                            <span class="sar-kpi-title" style="color: #f97316;">TOTAL A PAGAR TERCEIROS</span>
+                            <h3 class="sar-kpi-value" id="sar-kpi-fech-total-terceiros" style="color: #f97316;">R$ 0,00</h3>
+                            <div class="sar-kpi-footer" style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                <span id="sar-kpi-fech-classe-l" style="color: #388bfd; font-weight: 600;">L: R$ 0,00</span>
+                                <span style="color: var(--text-secondary);">|</span>
+                                <span id="sar-kpi-fech-classe-f" style="color: #a855f7; font-weight: 600;">F: R$ 0,00</span>
+                            </div>
+                        </div>
+                        <div class="kpi-icon-container" style="background: rgba(249,115,22,0.12); color: #f97316;">
+                            <i class="fa-solid fa-hand-holding-dollar"></i>
+                        </div>
+                    </div>
+
+                    <!-- KPI 2: Prévia Medição Claro -->
+                    <div class="sar-kpi-card kpi-fech-previa" style="border-left-color: #10b981;">
+                        <div class="kpi-info" style="flex-grow: 1;">
+                            <span class="sar-kpi-title" style="color: #10b981;">PRÉVIA DE MEDIÇÃO (CLARO)</span>
+                            <h3 class="sar-kpi-value" id="sar-kpi-fech-previa-medicao" style="color: #10b981;">R$ 0,00</h3>
+                            <div class="sar-kpi-footer">
+                                <span id="sar-kpi-fech-previa-sub">Faturamento bruto previsto Claro</span>
+                            </div>
+                        </div>
+                        <div class="kpi-icon-container" style="background: rgba(16,185,129,0.12); color: #10b981;">
+                            <i class="fa-solid fa-file-invoice-dollar"></i>
+                        </div>
+                    </div>
+
+                    <!-- KPI 3: Margem Operacional Estimada -->
+                    <div class="sar-kpi-card kpi-fech-margem" style="border-left-color: #388bfd;">
+                        <div class="kpi-info" style="flex-grow: 1;">
+                            <span class="sar-kpi-title" style="color: #388bfd;">MARGEM OPERACIONAL BRUTA</span>
+                            <h3 class="sar-kpi-value" id="sar-kpi-fech-margem-valor" style="color: #388bfd;">R$ 0,00</h3>
+                            <div class="sar-kpi-footer">
+                                <span id="sar-kpi-fech-margem-pct" style="font-weight: 700; color: #10b981;">0.0% de margem</span>
+                            </div>
+                        </div>
+                        <div class="kpi-icon-container" style="background: rgba(56,139,253,0.12); color: #388bfd;">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                    </div>
+
+                    <!-- KPI 4: Terceiros Ativos & Volume -->
+                    <div class="sar-kpi-card kpi-fech-terceiros-count" style="border-left-color: #a855f7;">
+                        <div class="kpi-info" style="flex-grow: 1;">
+                            <span class="sar-kpi-title" style="color: #a855f7;">TERCEIROS ATIVOS</span>
+                            <h3 class="sar-kpi-value" id="sar-kpi-fech-terceiros-ativos" style="color: #a855f7;">0</h3>
+                            <div class="sar-kpi-footer">
+                                <span id="sar-kpi-fech-oss-entregues">0 OSs entregues no período</span>
+                            </div>
+                        </div>
+                        <div class="kpi-icon-container" style="background: rgba(168,85,247,0.12); color: #a855f7;">
+                            <i class="fa-solid fa-users-gear"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Barra de Filtros Internos do Fechamento -->
+                <div class="sar-card" style="margin-bottom: 20px; padding: 14px 18px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+                        <!-- Segmented Switch Classe -->
+                        <div class="sar-fech-segmented-group" style="display: flex; align-items: center; gap: 6px;">
+                            <span style="font-size: 12px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; margin-right: 4px;">Classe:</span>
+                            <button class="sar-pill-btn active" id="sar-fech-btn-classe-todos" onclick="setSarFechamentoClasse('TODOS')">
+                                <i class="fa-solid fa-layer-group"></i> Todos
+                            </button>
+                            <button class="sar-pill-btn" id="sar-fech-btn-classe-l" onclick="setSarFechamentoClasse('CLASSE_L')">
+                                <i class="fa-solid fa-route"></i> Classe L (Cabos)
+                            </button>
+                            <button class="sar-pill-btn" id="sar-fech-btn-classe-f" onclick="setSarFechamentoClasse('CLASSE_F')">
+                                <i class="fa-solid fa-bolt"></i> Classe F (Fusão)
+                            </button>
+                        </div>
+
+                        <!-- Filtro Competência de Entrega + Busca + Botão Excel -->
+                        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                                <label for="sar-fech-filter-competencia" style="font-size: 12px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase;">Competência (Entrega):</label>
+                                <select id="sar-fech-filter-competencia" class="sar-select" style="min-width: 170px;" onchange="onSarFechamentoCompetenciaChange(this.value)">
+                                    <option value="">Todas as Competências</option>
+                                </select>
+                            </div>
+
+                            <div style="position: relative; display: flex; align-items: center;">
+                                <input type="text" id="sar-fech-search" placeholder="Buscar terceiro..." oninput="onSarFechamentoSearch(this.value)"
+                                    style="padding: 7px 10px 7px 28px; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 12px; outline: none; width: 160px; transition: border-color 0.2s;"
+                                    onfocus="this.style.borderColor='var(--color-primary)'" onblur="this.style.borderColor='var(--border-color)'">
+                                <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 9px; color: var(--text-secondary); font-size: 11px; pointer-events: none;"></i>
+                            </div>
+
+                            <button class="btn-export" onclick="exportSarFechamentoToExcel()" title="Exportar Fechamento para Excel" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; font-size: 12px; font-weight: 600; background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.3); border-radius: 8px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(16,185,129,0.25)'" onmouseout="this.style.background='rgba(16,185,129,0.15)'">
+                                <i class="fa-solid fa-file-excel"></i> Exportar Fechamento (.xlsx)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráficos Row Financeiro -->
+                <div class="sar-grid-fechamento-charts" style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 20px;">
+                    <!-- Gráfico 1: Evolução Comparativa Mensal (Data de Entrega) -->
+                    <div class="sar-card">
+                        <div class="sar-card-title">
+                            <span id="sar-chart-fech-evolution-title">Evolução Financeira Mensal (Data de Entrega: Prévia Medição vs Custo Terceiros)</span>
+                        </div>
+                        <div class="sar-chart-container" style="height: 260px;">
+                            <canvas id="sar-chart-fech-evolution"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Gráfico 2: Distribuição de Custo por Classe (Linha vs Fusão) -->
+                    <div class="sar-card">
+                        <div class="sar-card-title">Distribuição por Especialidade (Classe L x F)</div>
+                        <div class="sar-chart-container" style="height: 260px;">
+                            <canvas id="sar-chart-fech-distribuicao"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabela Consolidada de Fechamento por Terceiro -->
+                <div class="sar-grid-1col-wide">
+                    <div class="sar-card" style="overflow: hidden;">
+                        <div class="sar-card-title" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                            <span id="sar-fech-table-title">Fechamento Consolidado de Terceiros</span>
+                            <span id="sar-fech-count-badge" style="font-size: 12px; color: var(--text-secondary); background: var(--bg-input); padding: 4px 10px; border-radius: 12px; border: 1px solid var(--border-color);">0 terceiros listados</span>
+                        </div>
+
+                        <div class="sar-table-wrapper sar-no-scrollbar" style="border: none; max-height: 480px; overflow-y: auto; width: 100%;">
+                            <table class="sar-performance-table sar-fechamento-table" style="width: 100%; border-collapse: collapse;">
+                                <thead>
+                                    <tr>
+                                        <th onclick="sortSarFechamento('nome')" style="cursor:pointer; user-select: none; text-align: left;" id="sar-fech-th-nome">Terceiro / Executor <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarFechamento('classe')" style="cursor:pointer; text-align: center; white-space: nowrap; user-select: none;" id="sar-fech-th-classe">Especialidade <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarFechamento('qtdOss')" style="cursor:pointer; text-align: center; white-space: nowrap; user-select: none;" id="sar-fech-th-oss">Qtd OSs <i class="fa-solid fa-sort"></i></th>
+                                        <th style="text-align: left; white-space: nowrap;">Itens LPU Principais</th>
+                                        <th onclick="sortSarFechamento('totalPagar')" style="cursor:pointer; text-align: right; white-space: nowrap; user-select: none; font-weight: 700;" id="sar-fech-th-total">Total a Pagar (R$) <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarFechamento('previaMedicao')" style="cursor:pointer; text-align: right; white-space: nowrap; user-select: none;" id="sar-fech-th-previa">Prévia Medição (R$) <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarFechamento('margemValor')" style="cursor:pointer; text-align: right; white-space: nowrap; user-select: none;" id="sar-fech-th-margem">Margem (R$) <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarFechamento('margemPct')" style="cursor:pointer; text-align: center; white-space: nowrap; user-select: none;" id="sar-fech-th-pct">% Margem <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarFechamento('ticketMedio')" style="cursor:pointer; text-align: right; white-space: nowrap; user-select: none;" id="sar-fech-th-ticket">Ticket / OS <i class="fa-solid fa-sort"></i></th>
+                                        <th style="text-align: center; white-space: nowrap;">Auditoria</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="sar-fechamento-table-body">
+                                    <tr><td colspan="10" style="text-align:center; color: var(--text-secondary); padding: 30px 0;">Carregando fechamento de terceiros...</td></tr>
+                                </tbody>
+                                <tfoot id="sar-fechamento-table-footer">
+                                    <!-- Populated dynamically -->
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sub Tab Pane 3: Relatório de SARs (Tabela Detalhada com Colunas Financeiras) -->
             <div id="subview-sar-table" class="subtab-pane" style="display: none; padding-bottom: 24px; min-width: 0; max-width: 100%;">
                 <div class="sar-grid-1col-wide" style="min-width: 0; max-width: 100%;">
                     <div class="sar-card" style="min-width: 0; max-width: 100%; overflow: hidden;">
@@ -2309,12 +2476,14 @@
                                         <th style="width: 65px;" onclick="sortSarTable('data_entrega')" style="cursor:pointer; user-select: none;">Entrega <i class="fa-solid fa-sort"></i></th>
                                         <th style="width: 80px;" onclick="sortSarTable('status')" style="cursor:pointer; user-select: none;">Status <i class="fa-solid fa-sort"></i></th>
                                         <th style="width: 72px;" onclick="sortSarTable('prazo')" style="cursor:pointer; user-select: none;">Prazo <i class="fa-solid fa-sort"></i></th>
+                                        <th style="width: 85px; text-align: right;" onclick="sortSarTable('total_terceiros')" style="cursor:pointer; user-select: none;">Terceiros <i class="fa-solid fa-sort"></i></th>
+                                        <th style="width: 85px; text-align: right;" onclick="sortSarTable('previa_medicao')" style="cursor:pointer; user-select: none;">Prévia Med. <i class="fa-solid fa-sort"></i></th>
                                         <th style="width: 42px; text-align: center;" onclick="sortSarTable('tempo_dias')" style="cursor:pointer; user-select: none;">Dias <i class="fa-solid fa-sort"></i></th>
                                         <th style="width: 42px; text-align: center;" onclick="sortSarTable('atraso_dias')" style="cursor:pointer; user-select: none;">Atr. <i class="fa-solid fa-sort"></i></th>
                                     </tr>
                                 </thead>
                                 <tbody id="sar-table-body">
-                                    <tr><td colspan="16" style="text-align:center; color: var(--text-secondary); padding: 30px;">Carregando registros SAR...</td></tr>
+                                    <tr><td colspan="18" style="text-align:center; color: var(--text-secondary); padding: 30px;">Carregando registros SAR...</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -2325,6 +2494,70 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de Auditoria e Drill-Down de OSs por Terceiro -->
+        <div class="modal-overlay" id="modal-sar-terceiro-detalhe" onclick="closeSarTerceiroModal(event)">
+            <div class="modal-card" style="max-width: 960px; width: 95%; max-height: 88vh; display: flex; flex-direction: column;">
+                <div class="modal-header" style="border-bottom: 1px solid var(--border-color); padding: 16px 20px; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h3 id="modal-sar-terceiro-nome" style="font-size: 1.15rem; font-weight: 700; color: var(--text-primary); margin: 0; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-user-tag" style="color: var(--color-primary);"></i> Detalhamento de Fechamento do Terceiro
+                        </h3>
+                        <span id="modal-sar-terceiro-sub" style="font-size: 12px; color: var(--text-secondary); margin-top: 4px; display: block;"></span>
+                    </div>
+                    <button class="modal-close" onclick="closeSarTerceiroModalDirect()" style="background: none; border: none; font-size: 20px; color: var(--text-secondary); cursor: pointer;">&times;</button>
+                </div>
+                <div class="modal-body" style="padding: 16px 20px; overflow-y: auto; flex-grow: 1;">
+                    <!-- Cards Resumo do Modal -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 16px;">
+                        <div style="background: var(--bg-input); padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+                            <span style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase;">Total a Pagar</span>
+                            <div id="modal-sar-kpi-total-pagar" style="font-size: 1.25rem; font-weight: 700; color: #f97316; margin-top: 2px;">R$ 0,00</div>
+                        </div>
+                        <div style="background: var(--bg-input); padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+                            <span style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase;">Prévia Medição</span>
+                            <div id="modal-sar-kpi-previa-medicao" style="font-size: 1.25rem; font-weight: 700; color: #10b981; margin-top: 2px;">R$ 0,00</div>
+                        </div>
+                        <div style="background: var(--bg-input); padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+                            <span style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase;">Margem Operacional</span>
+                            <div id="modal-sar-kpi-margem" style="font-size: 1.25rem; font-weight: 700; color: #388bfd; margin-top: 2px;">R$ 0,00</div>
+                        </div>
+                        <div style="background: var(--bg-input); padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+                            <span style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase;">Total de OSs</span>
+                            <div id="modal-sar-kpi-total-oss" style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-top: 2px;">0</div>
+                        </div>
+                    </div>
+
+                    <!-- Tabela de OSs do Terceiro -->
+                    <div style="overflow-x: auto; border-radius: 8px; border: 1px solid var(--border-color);">
+                        <table class="sar-table" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th style="width: 80px;">Código</th>
+                                    <th style="width: 85px;">Cidade</th>
+                                    <th>Condomínio / Endereço</th>
+                                    <th style="width: 85px;">Entrega</th>
+                                    <th>Itens LPU Executados</th>
+                                    <th style="width: 100px; text-align: right;">Valor Pago (R$)</th>
+                                    <th style="width: 100px; text-align: right;">Prévia Med. (R$)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="modal-sar-terceiro-table-body">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer" style="border-top: 1px solid var(--border-color); padding: 12px 20px; display: flex; justify-content: flex-end; gap: 10px;">
+                    <button type="button" class="btn-export" onclick="exportSarTerceiroIndividualToExcel()" style="padding: 8px 14px; font-size: 12px; font-weight: 600;">
+                        <i class="fa-solid fa-file-arrow-down"></i> Exportar Extrato do Terceiro (.xlsx)
+                    </button>
+                    <button type="button" onclick="closeSarTerceiroModalDirect()" style="padding: 8px 16px; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); cursor: pointer; font-size: 12px;">
+                        Fechar
+                    </button>
                 </div>
             </div>
         </div>
@@ -2541,6 +2774,267 @@
                 </div>
             </div>
         </div>
+
+        <!-- VIEW 9: GESTÃO TRIBUTÁRIA & IMPOSTOS -->
+        <div id="view-parcelamentos-container" class="view-panel" style="display: none;">
+            
+            <!-- SUB-ABAS DE NAVEGAÇÃO INTERNA (2 ABAS) -->
+            <div class="parc-nav-tabs">
+                <button class="parc-tab-btn active" data-tab="visao_geral" onclick="window.switchParcTab('visao_geral')">
+                    <i class="fa-solid fa-chart-pie"></i> <span>Visão Geral & Consolidado</span>
+                </button>
+                <button class="parc-tab-btn" data-tab="acordos" onclick="window.switchParcTab('acordos')">
+                    <i class="fa-solid fa-list-check"></i> <span>Detalhamento por Acordo (60x)</span>
+                </button>
+            </div>
+
+            <!-- SUB-ABA 1: VISÃO GERAL & CONSOLIDADO -->
+            <div id="parc-tab-content-visao_geral" class="parc-tab-content" style="display: block;">
+                <!-- GRID DE 5 KPIS -->
+                <div class="parc-kpi-grid">
+                    <div class="parc-kpi-card kpi-purple">
+                        <div class="parc-kpi-title">
+                            <span>DÍVIDA ORIGINAL</span>
+                            <i class="fa-solid fa-coins"></i>
+                        </div>
+                        <div class="parc-kpi-value" id="parc-kpi-divida-original">R$ 0,00</div>
+                        <div class="parc-kpi-subtitle" id="parc-kpi-divida-original-sub">
+                            <span>5 acordos ativos</span>
+                        </div>
+                        <i class="fa-solid fa-coins parc-kpi-watermark"></i>
+                    </div>
+
+                    <div class="parc-kpi-card kpi-blue">
+                        <div class="parc-kpi-title">
+                            <span>DÍVIDA RESTANTE</span>
+                            <i class="fa-solid fa-file-invoice-dollar"></i>
+                        </div>
+                        <div class="parc-kpi-value" id="parc-kpi-saldo-parcelado">R$ 0,00</div>
+                        <div class="parc-kpi-subtitle" id="parc-kpi-saldo-parcelado-sub">
+                            <span>70.8% a amortizar</span>
+                        </div>
+                        <i class="fa-solid fa-file-invoice-dollar parc-kpi-watermark"></i>
+                    </div>
+
+                    <div class="parc-kpi-card kpi-green">
+                        <div class="parc-kpi-title">
+                            <span>TOTAL JÁ AMORTIZADO</span>
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <div class="parc-kpi-value" id="parc-kpi-total-amortizado">R$ 0,00</div>
+                        <div class="parc-kpi-subtitle" id="parc-kpi-total-amortizado-sub">
+                            <span>29.2% quitado</span>
+                        </div>
+                        <i class="fa-solid fa-circle-check parc-kpi-watermark"></i>
+                    </div>
+
+                    <div class="parc-kpi-card kpi-amber">
+                        <div class="parc-kpi-title">
+                            <span>JUROS SELIC PAGOS</span>
+                            <i class="fa-solid fa-percent"></i>
+                        </div>
+                        <div class="parc-kpi-value" id="parc-kpi-juros-selic">R$ 0,00</div>
+                        <div class="parc-kpi-subtitle">
+                            <span>Acréscimos legais quitados</span>
+                        </div>
+                        <i class="fa-solid fa-percent parc-kpi-watermark"></i>
+                    </div>
+
+                    <div class="parc-kpi-card kpi-blue">
+                        <div class="parc-kpi-title">
+                            <span>COMPROMISSO MENSAL</span>
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </div>
+                        <div class="parc-kpi-value" id="parc-kpi-compromisso-mensal">R$ 0,00</div>
+                        <div class="parc-kpi-subtitle">
+                            <span>Fluxo base mensal de parcelas</span>
+                        </div>
+                        <i class="fa-solid fa-calendar-days parc-kpi-watermark"></i>
+                    </div>
+                </div>
+
+                <!-- 1. GRÁFICO COMBINADO: FATURAMENTO VS IMPOSTOS VS CARGA EFETIVA % -->
+                <div class="parc-card">
+                    <div class="parc-card-header">
+                        <div class="parc-card-title">
+                            <i class="fa-solid fa-chart-line"></i> Evolução do Faturamento vs Provisão Tributária vs Carga Efetiva (%)
+                        </div>
+                    </div>
+                    <div class="parc-chart-container-large">
+                        <canvas id="parc-chart-carga-tributaria"></canvas>
+                    </div>
+                </div>
+
+                <!-- 2. TABELA: MATRIZ MENSAL DE APURAÇÃO TRIBUTÁRIA -->
+                <div class="parc-card">
+                    <div class="parc-card-header">
+                        <div class="parc-card-title">
+                            <i class="fa-solid fa-table"></i> Matriz Mensal de Apuração Tributária (Jul/2025 a Jul/2026)
+                        </div>
+                    </div>
+                    <div class="parc-table-wrapper">
+                        <table class="parc-table">
+                            <thead>
+                                <tr>
+                                    <th>Competência</th>
+                                    <th class="num">Faturamento Bruto</th>
+                                    <th class="num">ISS</th>
+                                    <th class="num">PIS</th>
+                                    <th class="num">COFINS</th>
+                                    <th class="num">IRPJ</th>
+                                    <th class="num">CSLL</th>
+                                    <th class="num">Total Impostos</th>
+                                    <th class="num">Carga Efetiva (%)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="parc-acompanhamento-table-body">
+                                <!-- Preenchido via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 3. TABELA: RESUMO EXECUTIVO DOS ACORDOS TRIBUTÁRIOS -->
+                <div class="parc-card">
+                    <div class="parc-card-header">
+                        <div class="parc-card-title">
+                            <i class="fa-solid fa-table-list"></i> Resumo Executivo dos Acordos Tributários
+                        </div>
+                        <div class="parc-card-actions">
+                            <button class="parc-btn parc-btn-excel" onclick="window.exportParcOverviewExcel()">
+                                <i class="fa-solid fa-file-excel"></i> Exportar Consolidado (.xlsx)
+                            </button>
+                        </div>
+                    </div>
+                    <div class="parc-table-wrapper">
+                        <table class="parc-table">
+                            <thead>
+                                <tr>
+                                    <th>Acordo / Parcelamento</th>
+                                    <th>Adesão</th>
+                                    <th class="num">Dívida Original</th>
+                                    <th class="num">Total Já Pago</th>
+                                    <th class="num">Dívida Restante</th>
+                                    <th class="num">Juros Selic</th>
+                                    <th style="text-align: center;">Pagas</th>
+                                    <th style="text-align: center;">Faltantes</th>
+                                    <th class="num">Parcela Base</th>
+                                    <th style="text-align: center;">% Quitado</th>
+                                    <th style="text-align: center;">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="parc-overview-table-body">
+                                <!-- Preenchido dinamicamente via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUB-ABA 2: DETALHAMENTO POR ACORDO (60X) -->
+            <div id="parc-tab-content-acordos" class="parc-tab-content" style="display: none;">
+                <!-- BARRA DE SELEÇÃO DO ACORDO -->
+                <div class="parc-toolbar">
+                    <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                        <label for="parc-select-acordo" style="font-weight: 600; color: var(--text-primary); font-size: 0.88rem;">
+                            <i class="fa-solid fa-file-signature" style="color: #388bfd; margin-right: 4px;"></i> Selecione o Acordo:
+                        </label>
+                        <select id="parc-select-acordo" class="parc-select" onchange="window.onParcAcordoChange(this.value)" style="min-width: 300px;">
+                            <!-- Preenchido dinamicamente -->
+                        </select>
+                    </div>
+                    <div style="margin-left: auto;">
+                        <button class="parc-btn parc-btn-excel" onclick="window.exportParcScheduleExcel()">
+                            <i class="fa-solid fa-file-excel"></i> Exportar Cronograma (.xlsx)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARD DE INFORMAÇÕES DO ACORDO -->
+                <div class="parc-card" style="padding: 14px 16px;">
+                    <div class="parc-card-title" id="parc-acordo-selected-title" style="margin-bottom: 6px; font-size: 1.05rem;">
+                        Parcelamento
+                    </div>
+                    <div id="parc-acordo-selected-info">
+                        <!-- Métricas rápidas preenchidas via JS -->
+                    </div>
+                </div>
+
+                <!-- TRIBUTOS DE ORIGEM DO ACORDO -->
+                <div class="parc-card">
+                    <div class="parc-card-header">
+                        <div class="parc-card-title">
+                            <i class="fa-solid fa-layer-group"></i> Tributos e Débitos Consolidados no Acordo
+                        </div>
+                    </div>
+                    <div class="parc-table-wrapper">
+                        <table class="parc-table">
+                            <thead>
+                                <tr>
+                                    <th>Código / Descrição</th>
+                                    <th>Apuração</th>
+                                    <th>Venc. Original</th>
+                                    <th class="num">Principal</th>
+                                    <th class="num">Multa Mora</th>
+                                    <th class="num">Juros</th>
+                                    <th class="num">Saldo Consolidado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="parc-debitos-origem-table-body">
+                                <!-- Preenchido via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- CRONOGRAMA DE 60 PARCELAS -->
+                <div class="parc-card">
+                    <div class="parc-card-header">
+                        <div class="parc-card-title">
+                            <i class="fa-solid fa-calendar-check"></i> Cronograma de Amortização das 60 Parcelas
+                        </div>
+                    </div>
+
+                    <!-- BARRA DE FILTROS DO CRONOGRAMA -->
+                    <div class="parc-toolbar">
+                        <div class="parc-search-box">
+                            <i class="fa-solid fa-magnifying-glass parc-search-icon"></i>
+                            <input type="text" placeholder="Buscar por número da parcela ou vencimento..." oninput="window.onParcScheduleSearch(this.value)">
+                        </div>
+                        <select class="parc-select" onchange="window.onParcScheduleFilterChange(this.value)">
+                            <option value="ALL">Todas as Parcelas</option>
+                            <option value="Paga">Somente Pagas</option>
+                            <option value="A Pagar">Somente a Pagar</option>
+                        </select>
+                    </div>
+
+                    <div class="parc-table-wrapper">
+                        <table class="parc-table">
+                            <thead>
+                                <tr>
+                                    <th onclick="window.onParcScheduleSort('numero')">Parcela <i class="fa-solid fa-sort"></i></th>
+                                    <th onclick="window.onParcScheduleSort('vencimento')">Vencimento <i class="fa-solid fa-sort"></i></th>
+                                    <th class="num" onclick="window.onParcScheduleSort('valor_base')">Parcela Base <i class="fa-solid fa-sort"></i></th>
+                                    <th class="num" onclick="window.onParcScheduleSort('juros_selic')">Juros Selic <i class="fa-solid fa-sort"></i></th>
+                                    <th class="num" onclick="window.onParcScheduleSort('valor_total')">Total a Pagar <i class="fa-solid fa-sort"></i></th>
+                                    <th class="num" onclick="window.onParcScheduleSort('saldo_devedor_restante')">Saldo Restante <i class="fa-solid fa-sort"></i></th>
+                                    <th style="text-align: center;" onclick="window.onParcScheduleSort('status')">Status <i class="fa-solid fa-sort"></i></th>
+                                </tr>
+                            </thead>
+                            <tbody id="parc-cronograma-table-body">
+                                <!-- Preenchido via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- PAGINAÇÃO -->
+                    <div class="parc-pagination" id="parc-schedule-pagination">
+                        <!-- Paginação JS -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </main>
 
     <!-- Conteiner de Toast de Notificação -->
@@ -2730,10 +3224,12 @@
     <script src="gestao_os_app.js?v=4.2"></script>
     <script src="mdu_data.js"></script>
     <script src="mdu_app.js?v=1.3"></script>
-    <script src="sar_data.js?v=2.8"></script>
-    <script src="sar_app.js?v=3.0"></script>
+    <script src="sar_data.js?v=3.52"></script>
+    <script src="sar_app.js?v=3.52"></script>
     <script src="manutencao_data.js"></script>
     <script src="manutencao_app.js"></script>
+    <script src="parcelamentos_data.js"></script>
+    <script src="parcelamentos_app.js?v=1.3"></script>
     <script src="email_preview_helper.js?v=1.2"></script>
 
     <!-- Logica de UI Autônoma (Sem Dependências de CDNs) -->
@@ -3368,6 +3864,7 @@
             { id: 'mdu',          label: 'MDU',                     icon: 'fa-building',          navId: 'nav-mdu' },
             { id: 'sar',          label: 'SAR',                     icon: 'fa-network-wired',     navId: 'nav-sar' },
             { id: 'manutencao',   label: 'Manutenção',              icon: 'fa-wrench',            navId: 'nav-manutencao' },
+            { id: 'parcelamentos', label: 'Impostos',               icon: 'fa-file-invoice',      navId: 'nav-parcelamentos' },
             { id: 'admin',        label: 'Painel Admin',            icon: 'fa-shield-halved',    navId: 'nav-admin',        adminOnly: true },
         ];
 
@@ -3811,6 +4308,12 @@
                 } else {
                     timestampEl.innerText = 'Desconhecido';
                 }
+            } else if (viewName === 'parcelamentos') {
+                if (typeof window.PARCELAMENTOS_DATA !== 'undefined' && window.PARCELAMENTOS_DATA.metadata && window.PARCELAMENTOS_DATA.metadata.generated_at) {
+                    timestampEl.innerText = formatTimestamp(window.PARCELAMENTOS_DATA.metadata.generated_at);
+                } else {
+                    timestampEl.innerText = 'Desconhecido';
+                }
             } else {
                 timestampEl.innerText = 'N/D';
             }
@@ -3917,6 +4420,13 @@
                     init: () => { 
                         if (typeof initVeiculos === 'function') initVeiculos(); 
                         else if (typeof applyVeiculosFilters === 'function') applyVeiculosFilters(); 
+                    } 
+                },
+                'parcelamentos': { 
+                    file: 'parcelamentos_data.js', 
+                    name: 'Impostos', 
+                    init: () => { 
+                        if (typeof initParcelamentos === 'function') initParcelamentos(); 
                     } 
                 }
             };
@@ -4112,6 +4622,14 @@
                 } else {
                     applyTecnodrillFilters();
                 }
+            } else if (viewName === 'parcelamentos') {
+                document.getElementById('filters-container').style.display = 'none';
+                if (mobileToggleBtn) mobileToggleBtn.style.display = 'none';
+                document.getElementById('view-title').innerText = 'Impostos';
+                document.getElementById('view-subtitle').innerHTML = 'Controle de Carga Tributária, Faturamento e Parcelamentos de Impostos';
+                if (typeof window.initParcelamentos === 'function') {
+                    window.initParcelamentos();
+                }
             } else {
                 document.getElementById('filters-container').style.display = 'grid';
                 if (mobileToggleBtn) mobileToggleBtn.style.display = '';
@@ -4144,6 +4662,7 @@
             { id: 'mdu',          label: 'MDU',                      icon: 'fa-building' },
             { id: 'sar',          label: 'SAR',                      icon: 'fa-network-wired' },
             { id: 'manutencao',   label: 'Manutenção',              icon: 'fa-wrench' },
+            { id: 'parcelamentos', label: 'Impostos',               icon: 'fa-file-invoice' },
         ];
 
         function renderPageCheckboxes(containerId, selectedPages = []) {

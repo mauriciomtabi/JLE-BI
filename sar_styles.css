@@ -539,3 +539,71 @@
 .sar-badge-sem-sinal { background-color: rgba(149, 117, 205, 0.15); color: #9575cd; }
 .sar-badge-default { background-color: rgba(108, 117, 125, 0.15); color: #6c757d; }
 
+/* -- Badges e Controles do Fechamento de Terceiros -- */
+.sar-badge-classe-l {
+    background-color: rgba(56, 139, 253, 0.15);
+    color: #388bfd;
+    border: 1px solid rgba(56, 139, 253, 0.3);
+}
+
+.sar-badge-classe-f {
+    background-color: rgba(168, 85, 247, 0.15);
+    color: #a855f7;
+    border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.sar-pill-btn {
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.sar-pill-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--text-primary);
+}
+
+.sar-pill-btn.active {
+    background: rgba(56, 139, 253, 0.18);
+    border-color: #388bfd;
+    color: #58a6ff;
+    box-shadow: 0 0 10px rgba(56, 139, 253, 0.25);
+}
+
+.btn-sm-action {
+    background: rgba(56, 139, 253, 0.12);
+    color: #388bfd;
+    border: 1px solid rgba(56, 139, 253, 0.3);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-sm-action:hover {
+    background: rgba(56, 139, 253, 0.25);
+    color: #ffffff;
+    border-color: #388bfd;
+}
+
+@media (max-width: 960px) {
+    .sar-grid-fechamento-charts {
+        grid-template-columns: 1fr !important;
+    }
+}
+

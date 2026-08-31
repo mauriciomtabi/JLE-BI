@@ -1,0 +1,477 @@
+/* ==========================================================================
+   BI JLE TELECOM - MÓDULO GESTÃO TRIBUTÁRIA & IMPOSTOS
+   Padrão: Dark Glassmorphism / UI Preservation / Responsive / Compact Tables
+   ========================================================================== */
+
+#view-parcelamentos-container {
+    animation: parcFadeIn 0.3s ease-in-out;
+}
+
+@keyframes parcFadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Sub-Abas do Módulo */
+.parc-nav-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 12px;
+}
+
+.parc-tab-btn {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 9px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.88rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.parc-tab-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.parc-tab-btn.active {
+    background: linear-gradient(135deg, rgba(0, 80, 115, 0.6), rgba(0, 80, 115, 0.2));
+    color: #388bfd;
+    border-color: #388bfd;
+    box-shadow: 0 0 15px rgba(56, 139, 253, 0.2);
+}
+
+/* Grid de KPIs */
+.parc-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.parc-kpi-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 14px 16px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-main);
+}
+
+.parc-kpi-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.parc-kpi-card.kpi-blue {
+    border-left: 4px solid #388bfd;
+    background: radial-gradient(circle at top right, rgba(56, 139, 253, 0.08), var(--bg-card) 70%);
+}
+.parc-kpi-card.kpi-green {
+    border-left: 4px solid #10b981;
+    background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.08), var(--bg-card) 70%);
+}
+.parc-kpi-card.kpi-amber {
+    border-left: 4px solid #f59e0b;
+    background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.08), var(--bg-card) 70%);
+}
+.parc-kpi-card.kpi-red {
+    border-left: 4px solid #f85149;
+    background: radial-gradient(circle at top right, rgba(248, 81, 73, 0.08), var(--bg-card) 70%);
+}
+.parc-kpi-card.kpi-purple {
+    border-left: 4px solid #8b5cf6;
+    background: radial-gradient(circle at top right, rgba(139, 92, 246, 0.08), var(--bg-card) 70%);
+}
+
+.parc-kpi-title {
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    white-space: nowrap;
+}
+
+.parc-kpi-value {
+    font-size: 1.55rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: -0.5px;
+    white-space: nowrap;
+}
+
+.parc-kpi-subtitle {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+}
+
+.parc-kpi-watermark {
+    position: absolute;
+    right: 10px;
+    bottom: 6px;
+    font-size: 3.2rem;
+    opacity: 0.05;
+    transform: rotate(12deg);
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.parc-kpi-card:hover .parc-kpi-watermark {
+    opacity: 0.10;
+    transform: rotate(0deg) scale(1.06);
+}
+
+/* Gráficos e Seções */
+.parc-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 16px 18px;
+    box-shadow: var(--shadow-main);
+    backdrop-filter: blur(12px);
+    margin-bottom: 20px;
+}
+
+.parc-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.parc-card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.parc-card-title i {
+    color: #388bfd;
+}
+
+.parc-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Container de Gráfico Responsivo Chart.js */
+.parc-chart-container {
+    position: relative;
+    height: 280px;
+    width: 100%;
+}
+
+.parc-chart-container-large {
+    position: relative;
+    height: 350px;
+    width: 100%;
+}
+
+/* Barra de Progresso de Amortização */
+.parc-progress-wrapper {
+    margin: 4px 0;
+}
+
+.parc-progress-bar-bg {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 3px;
+    overflow: hidden;
+    display: flex;
+}
+
+.parc-progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #10b981, #2ed573);
+    border-radius: 3px;
+    transition: width 0.6s ease;
+}
+
+/* Badges e Tags */
+.parc-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.parc-badge-pago {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.parc-badge-aberto {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.parc-badge-info {
+    background: rgba(56, 139, 253, 0.15);
+    color: #388bfd;
+    border: 1px solid rgba(56, 139, 253, 0.3);
+}
+
+/* Filtros e Barra de Ações */
+.parc-toolbar {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.parc-search-box {
+    position: relative;
+    flex: 1;
+    min-width: 200px;
+}
+
+.parc-search-box input {
+    width: 100%;
+    background: var(--bg-input, #0d1117);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 7px 10px 7px 32px;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.82rem;
+}
+
+.parc-search-box input:focus {
+    outline: none;
+    border-color: #388bfd;
+    box-shadow: 0 0 0 2px rgba(56, 139, 253, 0.2);
+}
+
+.parc-search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+.parc-select {
+    background: var(--bg-input, #0d1117);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 7px 10px;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.82rem;
+    cursor: pointer;
+}
+
+.parc-select:focus {
+    outline: none;
+    border-color: #388bfd;
+}
+
+.parc-btn {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.80rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.parc-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.parc-btn-excel {
+    background: #107c41;
+    border-color: #107c41;
+    color: white;
+}
+
+.parc-btn-excel:hover {
+    background: #0e6b37;
+    border-color: #0e6b37;
+}
+
+/* ==========================================================================
+   TABELAS ULTRA COMPACTAS (SEM BARRA DE ROLAGEM HORIZONTAL)
+   ========================================================================== */
+.parc-table-wrapper {
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    width: 100%;
+}
+
+.parc-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.77rem; /* ~11.5px */
+    text-align: left;
+    table-layout: auto;
+}
+
+.parc-table th {
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text-secondary);
+    padding: 7px 8px;
+    font-weight: 600;
+    border-bottom: 1px solid var(--border-color);
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    font-size: 0.73rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    transition: color 0.2s;
+}
+
+.parc-table th:hover {
+    color: var(--text-primary);
+}
+
+.parc-table th i {
+    margin-left: 3px;
+    font-size: 0.70rem;
+    opacity: 0.6;
+}
+
+.parc-table td {
+    padding: 7px 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    color: var(--text-primary);
+    white-space: nowrap;
+    font-size: 0.77rem;
+}
+
+.parc-table tr:hover td {
+    background: rgba(255, 255, 255, 0.025);
+}
+
+.parc-table td.num, .parc-table th.num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.parc-table tfoot td {
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.05);
+    border-top: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+/* Paginação Client-Side */
+.parc-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0 0 0;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.parc-pagination-controls {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.parc-page-btn {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.75rem;
+}
+
+.parc-page-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.parc-page-btn:not(:disabled):hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Acordo Metrics Cards */
+.parc-acordo-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.parc-acordo-metric-item {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 8px 12px;
+}
+
+.parc-acordo-metric-label {
+    font-size: 0.70rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.parc-acordo-metric-val {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: 'Outfit', sans-serif;
+}

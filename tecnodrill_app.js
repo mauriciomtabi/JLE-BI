@@ -1065,7 +1065,7 @@
     if (typeof origSwitchView === 'function') {
         window.switchView = function (viewName) {
             origSwitchView(viewName);
-            if (viewName === 'dashboard' || viewName === 'tecnodrill') {
+            if (viewName === 'dashboard' || viewName === 'tecnodrill' || viewName === 'parcelamentos') {
                 openFinanceiroAccordion();
             }
         };
