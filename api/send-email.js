@@ -38,13 +38,16 @@ async function fetchSupabase(endpoint, method = 'GET', body = null) {
     return res.json();
 }
 
-async function sendResendEmail(to, subject, html, attachments = null, textAlt = null) {
+async function sendResendEmail(to, subject, html, attachments = null, textAlt = null, idempotencyKey = null) {
     const url = "https://api.resend.com/emails";
     const headers = {
         "Authorization": `Bearer ${RESEND_API_KEY}`,
         "Content-Type": "application/json",
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     };
+    if (idempotencyKey) {
+        headers["Idempotency-Key"] = idempotencyKey;
+    }
     
     const formattedSubject = subject.replace(/^\[BI JLE\]\s*/i, '').trim();
     const defaultText = `${formattedSubject}\n\nEste é um relatório gerado automaticamente pelo BI JLE Telecom.\nPor favor, visualize o e-mail em um leitor compatível com HTML para ver a tabela e os indicadores.\n\nAcesse o painel do BI: ${BI_URL}`;
@@ -56,7 +59,7 @@ async function sendResendEmail(to, subject, html, attachments = null, textAlt = 
         html: html,
         text: textAlt || defaultText,
         headers: {
-            "X-Entity-Ref-ID": `bi-report-${Date.now()}`,
+            "X-Entity-Ref-ID": idempotencyKey || `bi-report-${Date.now()}`,
             "X-Auto-Response-Suppress": "OOF, AutoReply",
             "Precedence": "bulk"
         }
@@ -555,14 +558,17 @@ module.exports = async (req, res) => {
         const yearStr = localDate.getUTCFullYear();
         const subject = `${config.report_name} - ${dayStr}/${monthStr}/${yearStr}`;
         
-        const cleanRecipients = (config.recipients || []).filter(e => !e.startsWith('__sched:') && !e.startsWith('__lock:'));
-        await sendResendEmail(cleanRecipients, subject, emailHtml, attachments);
-        
-        // 4. Salvar last_sent_at
+        // Pre-lock imediato no Supabase
+        const lockTimestamp = new Date().toISOString();
         await fetchSupabase(`bi_email_reports?id=eq.${id}`, 'PATCH', {
-            last_sent_at: new Date().toISOString(),
-            updated_at: new Date().toISOString()
+            last_sent_at: lockTimestamp,
+            updated_at: lockTimestamp,
+            send_now: false
         });
+
+        const cleanRecipients = (config.recipients || []).filter(e => !e.startsWith('__sched:') && !e.startsWith('__lock:'));
+        const idempotencyKey = `jle-manual-${id}-${Date.now()}`;
+        await sendResendEmail(cleanRecipients, subject, emailHtml, attachments, null, idempotencyKey);
         
         res.status(200).json({ success: true });
     } catch (err) {

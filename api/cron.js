@@ -39,13 +39,16 @@ async function fetchSupabase(endpoint, method = 'GET', body = null) {
     return res.json();
 }
 
-async function sendResendEmail(to, subject, html, attachments = null, textAlt = null) {
+async function sendResendEmail(to, subject, html, attachments = null, textAlt = null, idempotencyKey = null) {
     const url = "https://api.resend.com/emails";
     const headers = {
         "Authorization": `Bearer ${RESEND_API_KEY}`,
         "Content-Type": "application/json",
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     };
+    if (idempotencyKey) {
+        headers["Idempotency-Key"] = idempotencyKey;
+    }
     const formattedSubject = subject.replace(/^\[BI JLE\]\s*/i, '').trim();
     const defaultText = `${formattedSubject}\n\nEste é um relatório gerado automaticamente pelo BI JLE Telecom.\nPor favor, visualize o e-mail em um leitor compatível com HTML para ver a tabela e os indicadores.`;
 
@@ -56,7 +59,7 @@ async function sendResendEmail(to, subject, html, attachments = null, textAlt = 
         html: html,
         text: textAlt || defaultText,
         headers: {
-            "X-Entity-Ref-ID": `bi-report-${Date.now()}`,
+            "X-Entity-Ref-ID": idempotencyKey || `bi-report-${Date.now()}`,
             "X-Auto-Response-Suppress": "OOF, AutoReply",
             "Precedence": "bulk"
         }
@@ -478,14 +481,22 @@ module.exports = async (req, res) => {
             const timeDiff = (lHour * 60 + lMin) - (cHour * 60 + cMin);
             const isTimeInWindow = timeDiff >= 0 && timeDiff <= 25;
             
-            // 2. Trava de envio diário (Impede múltiplos disparos no mesmo dia)
-            if (config.last_sent_at) {
+            const dayStr = String(localDate.getUTCDate()).padStart(2, '0');
+            const monthStr = String(localDate.getUTCMonth() + 1).padStart(2, '0');
+            const yearStr = localDate.getUTCFullYear();
+            const todayDateStr = `${yearStr}-${monthStr}-${dayStr}`;
+
+            // CAMADA 1: Trava de envio diário por data de Brasília (YYYY-MM-DD)
+            if (config.last_sent_at && !config.send_now) {
                 const lastSentDate = new Date(config.last_sent_at);
                 const lastSentBrt = new Date(lastSentDate.getTime() + brOffset);
-                if (lastSentBrt.getUTCDate() === localDate.getUTCDate() &&
-                    lastSentBrt.getUTCMonth() === localDate.getUTCMonth() &&
-                    lastSentBrt.getUTCFullYear() === localDate.getUTCFullYear()) {
-                    console.log(`Relatório "${config.report_name}" já enviado hoje. Ignorando.`);
+                const lastSentYear = lastSentBrt.getUTCFullYear();
+                const lastSentMonth = String(lastSentBrt.getUTCMonth() + 1).padStart(2, '0');
+                const lastSentDay = String(lastSentBrt.getUTCDate()).padStart(2, '0');
+                const lastSentDateStr = `${lastSentYear}-${lastSentMonth}-${lastSentDay}`;
+
+                if (lastSentDateStr === todayDateStr) {
+                    console.log(`[TRAVA ATIVA] Relatório "${config.report_name}" já enviado hoje (${lastSentDateStr}). Ignorando.`);
                     continue;
                 }
             }
@@ -496,6 +507,21 @@ module.exports = async (req, res) => {
             console.log(`Relatório: "${config.report_name}" | Agendamento: ${configTime} em [${configDays.join(",")}] | Diferença: ${timeDiff}min | Enviar? ${shouldSend}`);
 
             if (shouldSend) {
+                // CAMADA 2: ATOMIC PRE-LOCK NO SUPABASE ANTES DO DISPARO
+                // Grava o last_sent_at imediatamente para impedir que outra instância concorrente passe pelo check
+                const lockTimestamp = new Date().toISOString();
+                try {
+                    await fetchSupabase(`bi_email_reports?id=eq.${config.id}`, 'PATCH', {
+                        last_sent_at: lockTimestamp,
+                        updated_at: lockTimestamp,
+                        send_now: false
+                    });
+                    console.log(`[PRE-LOCK ADQUIRIDO] Lock registrado no Supabase para: ${config.report_name}`);
+                } catch (lockErr) {
+                    console.error(`Erro ao adquirir pre-lock para ${config.report_name}:`, lockErr);
+                    continue;
+                }
+
                 console.log(`=> Enviando "${config.report_name}" para:`, config.recipients);
                 
                 const reportNameLower = (config.report_name || config.report || '').toLowerCase();
@@ -534,27 +560,19 @@ module.exports = async (req, res) => {
                     emailHtml = mduHelper.buildMduEmailHtml(config.report_name || config.report, mduData);
                 }
 
-                const dayStr = String(localDate.getUTCDate()).padStart(2, '0');
-                const monthStr = String(localDate.getUTCMonth() + 1).padStart(2, '0');
-                const yearStr = localDate.getUTCFullYear();
                 const subject = `${config.report_name || config.report} - ${dayStr}/${monthStr}/${yearStr}`;
-                
                 const cleanRecipients = (config.recipients || []).filter(e => !e.startsWith('__sched:') && !e.startsWith('__lock:'));
-                await sendResendEmail(cleanRecipients, subject, emailHtml, attachments);
+                
+                // CAMADA 3: CHAVE DE IDEMPOTÊNCIA RESEND (Garante que o provedor de e-mail nunca envie 2x no mesmo dia)
+                const idempotencyKey = config.send_now ? `jle-manual-${config.id}-${Date.now()}` : `jle-${config.id || reportType}-${todayDateStr}`;
 
-                // 3. Atualizar last_sent_at no Supabase para travar envios duplicados no mesmo dia
                 try {
-                    const updateRes = await fetchSupabase(`bi_email_reports?id=eq.${config.id}`, 'PATCH', {
-                        last_sent_at: new Date().toISOString(),
-                        updated_at: new Date().toISOString(),
-                        send_now: false
-                    });
-                    console.log(`[TRAVA] last_sent_at gravado no Supabase para: ${config.report_name}`, updateRes);
-                } catch (supErr) {
-                    console.error(`Erro ao gravar last_sent_at para ${config.report_name}:`, supErr);
+                    await sendResendEmail(cleanRecipients, subject, emailHtml, attachments, null, idempotencyKey);
+                    console.log(`[SUCESSO] Disparo realizado via Resend para ${config.report_name} com key ${idempotencyKey}`);
+                    sentReports.push(config.report_name);
+                } catch (sendErr) {
+                    console.error(`Erro no disparo Resend para ${config.report_name}:`, sendErr);
                 }
-
-                sentReports.push(config.report_name);
             }
         }
 

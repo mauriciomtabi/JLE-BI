@@ -1,6 +1,12 @@
 // send_email_reports.js
-// Script de disparo de e-mails executado de forma servidora e independente (na nuvem via GitHub Actions)
-// Utiliza a API do Resend para envio sem dependência de máquina ou Outlook local.
+// ATENÇÃO: O disparo automatizado oficial é gerenciado exclusivamente pelo Vercel Cron (/api/cron.js).
+// Este script local permanece apenas para testes manuais sob demanda explícita (com flag --force).
+
+if (!process.argv.includes('--force')) {
+    console.log("[INFO] send_email_reports.js: Disparo automático delegado exclusivamente ao Vercel Cron (/api/cron.js).");
+    console.log("[INFO] Para forçar execução manual de teste, passe o argumento --force.");
+    process.exit(0);
+}
 
 const fs = require('fs');
 const path = require('path');

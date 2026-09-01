@@ -70,16 +70,8 @@ if (Test-Path $gitPath) {
     Write-Warning "Git executavel nao encontrado em '$gitPath'. Nao foi possivel enviar para o repositorio remoto."
 }
 
-# 4. Disparar e-mail de manutenção logo após o sync matinal das 08:00
-$currentHour = (Get-Date).Hour
-if ($currentHour -eq 8 -or $currentHour -eq 9) {
-    Write-Output "Executando disparo matinal de e-mail com a base recem-atualizada..."
-    try {
-        node "$PSScriptRoot\send_email_reports.js"
-    } catch {
-        Write-Warning "Falha ao executar send_email_reports.js: $_"
-    }
-}
+# 4. Disparo de e-mails centralizado exclusivamente na nuvem (Vercel Cron)
+# O disparo local foi removido para evitar duplicidade de e-mails.
 
 Write-Output "=========================================================="
 Write-Output "PROCESSO DE ATUALIZACAO DE MANUTENÇÃO CONCLUIDO!"
