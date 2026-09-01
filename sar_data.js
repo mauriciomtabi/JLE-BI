@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-09-01 17:00:18
+// Dados SAR JLE Telecom - Gerado em: 2026-09-01 18:00:19
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1062,
-    "generated_at": "2026-09-01 17:00:18",
+    "generated_at": "2026-09-01 18:00:19",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -726,10 +726,10 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 646780.75,
-        "total_previa_medicao": 1370133.57,
+        "total_terceiros": 647213.75,
+        "total_previa_medicao": 1371123.34,
         "total_classe_l": 174950.82,
-        "total_classe_f": 471829.93
+        "total_classe_f": 472262.93
     }
 };
 
@@ -66271,8 +66271,8 @@ window.SAR_DATA = [
   {
     "cod": "RSCLER1054",
     "area_tecnica": "CNTAA",
-    "node": "",
-    "site": "",
+    "node": "CNTAL",
+    "site": "PAE MF",
     "cidade": "PORTO ALEGRE",
     "condominio": "COND.ED SÃO RAPHAEL",
     "endereco": "AV. DES. ANDRE DA ROCHA, 25",
@@ -66281,13 +66281,13 @@ window.SAR_DATA = [
     "classe_f": "MAURICIO",
     "situacao": "27/08/2026",
     "relatorio_foto": "",
-    "servico": "",
+    "servico": "4 ABERTURA E FECHAMENTO, 11 FUSÕES, 4 TESTES OTDR, 4 TESTES.",
     "data_entrada": "2026-08-27",
     "data_entrada_fmt": "27/08/2026",
-    "data_inicio": null,
-    "data_inicio_fmt": "-",
-    "data_previsao": null,
-    "data_previsao_fmt": "-",
+    "data_inicio": "2026-09-01",
+    "data_inicio_fmt": "01/09/2026",
+    "data_previsao": "2026-09-01",
+    "data_previsao_fmt": "01/09/2026",
     "data_entrega": "2026-08-29",
     "data_entrega_fmt": "29/08/2026",
     "data_medicao": null,
@@ -66302,20 +66302,20 @@ window.SAR_DATA = [
     "ano_entrega": "2026",
     "mes_entrega": "AGOSTO",
     "mes_num_entrega": "08",
-    "status": "RELATÓRIO",
-    "status_relatorio": "",
-    "status_medicao": "",
+    "status": "EM MEDIÇÃO",
+    "status_relatorio": "01/09/2026",
+    "status_medicao": "01/09/2026",
     "status_obra": "Em Andamento",
     "prazo": "NO PRAZO",
     "tempo_dias": 1.0,
     "atraso_dias": 0,
-    "total_terceiros": 0.0,
-    "previa_medicao": 0.0,
+    "total_terceiros": 433.0,
+    "previa_medicao": 989.77,
     "valor_medicao": 0.0,
     "valor_classe_l": 0.0,
-    "valor_classe_f": 0.0,
+    "valor_classe_f": 433.0,
     "itens_l_resumo": "-",
-    "itens_f_resumo": "-",
+    "itens_f_resumo": "3.15 AB/FE: 4 un, 3.13 FUS/EME: 11 un, 3.14 OTDR: 4 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
@@ -66324,9 +66324,9 @@ window.SAR_DATA = [
       "q_311": 0.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 0.0,
-      "q_313": 0.0,
-      "q_314": 0.0,
+      "q_315": 4.0,
+      "q_313": 11.0,
+      "q_314": 4.0,
       "q_312": 0.0
     }
   },
@@ -66525,7 +66525,7 @@ window.SAR_DATA = [
     "condominio": "",
     "endereco": "R SAPIRANGA, 1340",
     "caixa_mdu": "CNUAB.402.M010",
-    "classe_l": "",
+    "classe_l": "TIAGO FERREIRA",
     "classe_f": "",
     "situacao": "01/09/2026",
     "relatorio_foto": "",
