@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-09-01 11:00:18
+// Dados MDU Compactados - Gerado em: 2026-09-01 12:00:27
 window.MDU_METADATA = {
-    "generated_at": "2026-09-01 11:00:18",
+    "generated_at": "2026-09-01 12:00:27",
     "total_rows": 5585,
     "geocoded_new": 0
 };
@@ -178190,8 +178190,8 @@ window.MDU_DATA = [
         "aging": "1",
         "relatorio_por": "DUDA",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610493350",
         "area": "PDRAA",
         "node": "VJDAM",
@@ -178206,7 +178206,7 @@ window.MDU_DATA = [
         "data_fusao": "25/08/2026",
         "data_baixa": "31/08",
         "obs_baixa": "",
-        "data_relatorio": "",
+        "data_relatorio": "01/09/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
