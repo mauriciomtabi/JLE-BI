@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-09-01 08:00:14
+// Dados MDU Compactados - Gerado em: 2026-09-01 09:00:18
 window.MDU_METADATA = {
-    "generated_at": "2026-09-01 08:00:14",
+    "generated_at": "2026-09-01 09:00:18",
     "total_rows": 5585,
-    "geocoded_new": 0
+    "geocoded_new": 1
 };
 
 window.MDU_DATA = [
@@ -104782,8 +104782,8 @@ window.MDU_DATA = [
         "aging": "214",
         "relatorio_por": "JENIFFER",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610381254",
         "area": "GRIAA",
         "node": "GRIAC",
@@ -104798,7 +104798,7 @@ window.MDU_DATA = [
         "data_fusao": "28/08",
         "data_baixa": "31/08",
         "obs_baixa": "",
-        "data_relatorio": "",
+        "data_relatorio": "01/09/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 780.0,
@@ -140078,12 +140078,12 @@ window.MDU_DATA = [
         "aging": "140",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Fusão",
-        "prog": 50.0,
+        "status": "Baixa",
+        "prog": 63.0,
         "cod_imovel": "610380817",
         "area": "RNDAA",
         "node": "RNDAA",
-        "caixa_m": "",
+        "caixa_m": "IDLAA.053.M070",
         "hps": 32,
         "data_adicio": "14/04/2026",
         "equipe": "KMR Ribaczki",
@@ -140091,13 +140091,13 @@ window.MDU_DATA = [
         "segunda_visita": "",
         "obs_vistoria": "ADEQUADO",
         "data_interna": "14/04",
-        "data_fusao": "",
+        "data_fusao": "31/08",
         "data_baixa": "",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
-        "valor_repasse": 680.0,
+        "valor_repasse": 780.0,
         "lat": -29.6988078,
         "lng": -51.1293994,
         "geocodificado": true
@@ -178408,13 +178408,13 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505412",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "R CIPÓ 1075",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
+        "aging": "46.266",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
+        "status": "FALTA DADOS",
         "prog": 0,
         "cod_imovel": "",
         "area": "",
@@ -178434,9 +178434,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0207671,
+        "lng": -51.1579553,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505413",
