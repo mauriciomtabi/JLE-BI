@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-09-01 16:00:16
+// Dados SAR JLE Telecom - Gerado em: 2026-09-01 17:00:18
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1062,
-    "generated_at": "2026-09-01 16:00:16",
+    "generated_at": "2026-09-01 17:00:18",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -53270,8 +53270,8 @@ window.SAR_DATA = [
     "data_previsao_fmt": "22/05/2026",
     "data_entrega": "2026-05-01",
     "data_entrega_fmt": "01/05/2026",
-    "data_medicao": null,
-    "data_medicao_fmt": "-",
+    "data_medicao": "2026-07-28",
+    "data_medicao_fmt": "28/07/2026",
     "num_wf": "",
     "status_wf": "",
     "competencia": "ABRIL/2026",
@@ -53282,7 +53282,7 @@ window.SAR_DATA = [
     "ano_entrega": "2026",
     "mes_entrega": "MAIO",
     "mes_num_entrega": "05",
-    "status": "EM MEDIÇÃO",
+    "status": "MEDIÇÃO ENVIADA",
     "status_relatorio": "22/05/2026",
     "status_medicao": "22/05/2026",
     "status_obra": "Em Andamento",
@@ -53291,7 +53291,7 @@ window.SAR_DATA = [
     "atraso_dias": 0,
     "total_terceiros": 539.0,
     "previa_medicao": 1100.75,
-    "valor_medicao": 0.0,
+    "valor_medicao": 1801.04,
     "valor_classe_l": 0.0,
     "valor_classe_f": 539.0,
     "itens_l_resumo": "2.11 CB AS: 313m",
