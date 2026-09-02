@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-09-02 12:00:34
+// Dados MDU Compactados - Gerado em: 2026-09-02 13:00:21
 window.MDU_METADATA = {
-    "generated_at": "2026-09-02 12:00:34",
+    "generated_at": "2026-09-02 13:00:21",
     "total_rows": 5597,
-    "geocoded_new": 2
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -178574,7 +178574,7 @@ window.MDU_DATA = [
         "aging": "8",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "2º Vistoria",
+        "status": "Relatório",
         "prog": 0,
         "cod_imovel": "",
         "area": "MTSAA",
@@ -178586,9 +178586,9 @@ window.MDU_DATA = [
         "primeira_visita": "02/09/2026",
         "segunda_visita": "",
         "obs_vistoria": "ADEQUADO",
-        "data_interna": "",
-        "data_fusao": "",
-        "data_baixa": "",
+        "data_interna": "25/08/2026",
+        "data_fusao": "25/08/2026",
+        "data_baixa": "02/09",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
