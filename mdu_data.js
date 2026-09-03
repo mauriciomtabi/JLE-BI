@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-09-03 15:00:32
+// Dados MDU Compactados - Gerado em: 2026-09-03 15:07:39
 window.MDU_METADATA = {
-    "generated_at": "2026-09-03 15:00:32",
+    "generated_at": "2026-09-03 15:07:39",
     "total_rows": 5597,
-    "geocoded_new": 6
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -178811,7 +178811,7 @@ window.MDU_DATA = [
         "segunda_visita": "",
         "obs_vistoria": "ADEQUADO",
         "data_interna": "02/09/2026",
-        "data_fusao": "02/08/2026",
+        "data_fusao": "02/09/2026",
         "data_baixa": "03/09",
         "obs_baixa": "",
         "data_relatorio": "",
@@ -178830,7 +178830,7 @@ window.MDU_DATA = [
         "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "2º Vistoria",
+        "status": "Baixa",
         "prog": 0,
         "cod_imovel": "",
         "area": "BFMAA",
@@ -178841,9 +178841,9 @@ window.MDU_DATA = [
         "equipe": "Abraão Rodrigues",
         "primeira_visita": "02/09/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
-        "data_interna": "",
-        "data_fusao": "",
+        "obs_vistoria": "ADEQUADO",
+        "data_interna": "02/09/2026",
+        "data_fusao": "02/09/2026",
         "data_baixa": "",
         "obs_baixa": "",
         "data_relatorio": "",
