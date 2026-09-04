@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-09-04 20:05:15
+// Dados MDU Compactados - Gerado em: 2026-09-04 16:00:17
 window.MDU_METADATA = {
-    "generated_at": "2026-09-04 20:05:15",
+    "generated_at": "2026-09-04 16:00:17",
     "total_rows": 5599,
     "geocoded_new": 0
 };
@@ -175342,7 +175342,7 @@ window.MDU_DATA = [
         "aging": "15",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Baixa",
+        "status": "Relatório",
         "prog": 0,
         "cod_imovel": "",
         "area": "IDLAA",
@@ -175356,7 +175356,7 @@ window.MDU_DATA = [
         "obs_vistoria": "ADEQUADO",
         "data_interna": "17/08/2026",
         "data_fusao": "31/08/2026",
-        "data_baixa": "",
+        "data_baixa": "04/09",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
@@ -176018,7 +176018,7 @@ window.MDU_DATA = [
         "prog": 75.0,
         "cod_imovel": "610461882",
         "area": "MNDAC",
-        "node": "",
+        "node": "MNDAL",
         "caixa_m": "MNDAC.044.M020",
         "hps": 6,
         "data_adicio": "21/08/2026",
