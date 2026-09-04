@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-09-04 19:00:38
+// Dados MDU Compactados - Gerado em: 2026-09-04 20:00:34
 window.MDU_METADATA = {
-    "generated_at": "2026-09-04 19:00:38",
+    "generated_at": "2026-09-04 20:00:34",
     "total_rows": 5599,
     "geocoded_new": 0
 };
@@ -176016,7 +176016,7 @@ window.MDU_DATA = [
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
-        "cod_imovel": "",
+        "cod_imovel": "610461882",
         "area": "MNDAC",
         "node": "",
         "caixa_m": "MNDAC.044.M020",
@@ -176272,7 +176272,7 @@ window.MDU_DATA = [
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
-        "cod_imovel": "",
+        "cod_imovel": "610583488",
         "area": "RBTAA",
         "node": "",
         "caixa_m": "RBTAA.102.M010",
@@ -178446,11 +178446,11 @@ window.MDU_DATA = [
         "aging": "3",
         "relatorio_por": "JENIFFER",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610278278",
         "area": "CNTAA",
-        "node": "",
+        "node": "CNTAL",
         "caixa_m": "CNTAA.133.M010",
         "hps": 70,
         "data_adicio": "01/09/2026",
@@ -178462,7 +178462,7 @@ window.MDU_DATA = [
         "data_fusao": "24/08/2026",
         "data_baixa": "01/09",
         "obs_baixa": "",
-        "data_relatorio": "",
+        "data_relatorio": "04/09/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
