@@ -50,7 +50,7 @@
     <link rel="stylesheet" href="cobranca_styles.css?v=3.47">
     <link rel="stylesheet" href="gestao_os_styles.css">
     <link rel="stylesheet" href="mdu_styles.css">
-    <link rel="stylesheet" href="sar_styles.css?v=3.52">
+    <link rel="stylesheet" href="sar_styles.css?v=3.56">
     <link rel="stylesheet" href="parcelamentos_styles.css?v=1.3">
     
     <!-- Leaflet Map CSS & JS CDNs -->
@@ -3381,8 +3381,8 @@
     <script src="gestao_os_app.js?v=4.2"></script>
     <script src="mdu_data.js"></script>
     <script src="mdu_app.js?v=1.3"></script>
-    <script src="sar_data.js?v=3.55"></script>
-    <script src="sar_app.js?v=3.55"></script>
+    <script src="sar_data.js?v=3.56"></script>
+    <script src="sar_app.js?v=3.56"></script>
     <script src="manutencao_data.js"></script>
     <script src="manutencao_app.js"></script>
     <script src="parcelamentos_data.js"></script>
@@ -4754,6 +4754,13 @@
                 if (mobileToggleBtn) mobileToggleBtn.style.display = '';
                 document.getElementById('view-title').innerText = 'SAR';
                 document.getElementById('view-subtitle').innerHTML = 'Acompanhamento e Indicadores SAR — Claro RS';
+
+                // Garantir layout flex e espaçamentos no subtab-pane ativo
+                const activePane = document.querySelector('#view-sar-container .subtab-pane.active') || document.getElementById('subview-sar-indicators');
+                if (activePane) {
+                    activePane.style.display = 'flex';
+                }
+
                 if (!sarDataLoaded) {
                     initSar();
                 } else {

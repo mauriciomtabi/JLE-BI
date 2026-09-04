@@ -1114,17 +1114,33 @@ function switchSarTab(tabName) {
     const btnFech = document.getElementById('sar-tab-btn-fechamento');
     const btnTab = document.getElementById('sar-tab-btn-table');
 
-    if (subIndicators) subIndicators.style.display = (tabName === 'indicators') ? 'block' : 'none';
-    if (subMedicao) subMedicao.style.display = (tabName === 'medicao') ? 'block' : 'none';
-    if (subFechamento) subFechamento.style.display = (tabName === 'fechamento') ? 'block' : 'none';
-    if (subTable) subTable.style.display = (tabName === 'table') ? 'block' : 'none';
-
     if (btnInd) btnInd.classList.toggle('active', tabName === 'indicators');
     if (btnMed) btnMed.classList.toggle('active', tabName === 'medicao');
     if (btnFech) btnFech.classList.toggle('active', tabName === 'fechamento');
     if (btnTab) btnTab.classList.toggle('active', tabName === 'table');
 
-    if (tabName === 'medicao') {
+    if (subIndicators) {
+        subIndicators.classList.toggle('active', tabName === 'indicators');
+        subIndicators.style.display = (tabName === 'indicators') ? 'flex' : 'none';
+    }
+    if (subMedicao) {
+        subMedicao.classList.toggle('active', tabName === 'medicao');
+        subMedicao.style.display = (tabName === 'medicao') ? 'flex' : 'none';
+    }
+    if (subFechamento) {
+        subFechamento.classList.toggle('active', tabName === 'fechamento');
+        subFechamento.style.display = (tabName === 'fechamento') ? 'flex' : 'none';
+    }
+    if (subTable) {
+        subTable.classList.toggle('active', tabName === 'table');
+        subTable.style.display = (tabName === 'table') ? 'flex' : 'none';
+    }
+
+    if (tabName === 'indicators') {
+        setTimeout(() => {
+            if (typeof renderSarCharts === 'function') renderSarCharts(sarFilteredData);
+        }, 50);
+    } else if (tabName === 'medicao') {
         renderSarMedicaoKPIs(sarFilteredData);
         renderSarMedicaoCharts(sarFilteredData);
         renderSarMedicaoTable(sarFilteredData);
@@ -1132,6 +1148,8 @@ function switchSarTab(tabName) {
         renderSarFechamentoKPIs(sarFilteredData);
         renderSarFechamentoCharts(sarFilteredData);
         renderSarFechamentoTable(sarFilteredData);
+    } else if (tabName === 'table') {
+        renderSarTable(sarFilteredData);
     }
 }
 

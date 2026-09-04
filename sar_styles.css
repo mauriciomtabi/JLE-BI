@@ -173,16 +173,18 @@
 }
 
 #view-sar-container .subtab-pane.active {
-    display: flex;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
 }
 
-/* Cancelar double-gap: elementos internos já separados pelo gap: 20px do subtab-pane */
-#view-sar-container .sar-kpi-grid,
-#view-sar-container .sar-grid-status-sla,
-#view-sar-container .sar-grid-3cols,
-#view-sar-container .sar-grid-2cols,
-#view-sar-container .sar-grid-1col-wide {
-    margin-bottom: 0 !important;
+/* Espaçamento consistente entre seções do subtab-pane */
+#view-sar-container .subtab-pane > .sar-kpi-grid,
+#view-sar-container .subtab-pane > .sar-grid-status-sla,
+#view-sar-container .subtab-pane > .sar-grid-3cols,
+#view-sar-container .subtab-pane > .sar-grid-2cols,
+#view-sar-container .subtab-pane > .sar-grid-1col-wide {
+    margin-bottom: 0;
 }
 
 .sar-grid-status-sla {
