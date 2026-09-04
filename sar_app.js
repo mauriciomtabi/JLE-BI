@@ -170,7 +170,7 @@ function populateSarFilterSelects() {
     // 7. Select Competência de Medições (Data de Medição)
     const medCompSelect = document.getElementById('sar-medicao-filter-competencia');
     if (medCompSelect) {
-        const rawComps = meta.competencias_medicao || [...new Set(data.filter(r => r.valor_medicao > 0).map(r => r.competencia_medicao).filter(Boolean))];
+        const rawComps = meta.competencias_medicao || [...new Set(data.filter(r => r.valor_medicao > 0).map(r => getSarRecordCompetenciaMedicao(r)).filter(Boolean))];
         medCompSelect.innerHTML = '<option value="">Todas as Competências</option>' + 
             rawComps.map(c => `<option value="${c}" ${c === sarMedicaoCompetenciaFiltro ? 'selected' : ''}>${c}</option>`).join('');
     }
@@ -1841,6 +1841,34 @@ function updateSarMedicaoSummaryKPI(dataset) {
 }
 
 /**
+ * Retorna o grupo canônico de status para fins de medição
+ */
+function getSarRecordStatusGrupo(r) {
+    if (r && r.status_medicao_grupo) return r.status_medicao_grupo;
+    const st = (r && r.status ? r.status : '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase().trim();
+    if (st.includes('MEDI') && st.includes('ENVIAD')) return 'MEDIÇÃO ENVIADA';
+    if (st.includes('FINALIZ')) return 'FINALIZADO';
+    if (st.includes('PEDIDO') && st.includes('EMIT')) return 'PEDIDO EMITIDO';
+    return 'OUTROS';
+}
+
+/**
+ * Retorna a competência formatada para fins de medição
+ */
+function getSarRecordCompetenciaMedicao(r) {
+    if (r && r.competencia_medicao && r.competencia_medicao !== 'SEM DATA' && r.competencia_medicao !== 'SEM DATA (AJ)') {
+        return r.competencia_medicao;
+    }
+    if (r && r.data_medicao && r.data_medicao.length >= 7) {
+        const y = r.data_medicao.substring(0, 4);
+        const m = parseInt(r.data_medicao.substring(5, 7), 10);
+        const meses = ["", "JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO", "JUNHO", "JULHO", "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"];
+        if (m >= 1 && m <= 12) return `${meses[m]}/${y}`;
+    }
+    return 'Sem Data';
+}
+
+/**
  * Filtra os dados exclusivamente para o Painel de Medições
  */
 function getSarMedicaoFilteredDataset(dataset) {
@@ -1850,7 +1878,7 @@ function getSarMedicaoFilteredDataset(dataset) {
         if (!r.valor_medicao || r.valor_medicao <= 0) return false;
 
         // Apenas os 3 status solicitados
-        const stGrupo = r.status_medicao_grupo;
+        const stGrupo = getSarRecordStatusGrupo(r);
         if (!['MEDIÇÃO ENVIADA', 'FINALIZADO', 'PEDIDO EMITIDO'].includes(stGrupo)) {
             return false;
         }
@@ -1861,7 +1889,8 @@ function getSarMedicaoFilteredDataset(dataset) {
         }
 
         // Filtro por Competência da Data de Medição
-        if (sarMedicaoCompetenciaFiltro && r.competencia_medicao !== sarMedicaoCompetenciaFiltro) {
+        const compMed = getSarRecordCompetenciaMedicao(r);
+        if (sarMedicaoCompetenciaFiltro && compMed !== sarMedicaoCompetenciaFiltro) {
             return false;
         }
 
@@ -1891,8 +1920,10 @@ function renderSarMedicaoKPIs(dataset) {
     // Dataset para os KPIs de Medição (respeita competência se selecionada)
     const medDataset = base.filter(r => {
         if (!r.valor_medicao || r.valor_medicao <= 0) return false;
-        if (!['MEDIÇÃO ENVIADA', 'FINALIZADO', 'PEDIDO EMITIDO'].includes(r.status_medicao_grupo)) return false;
-        if (sarMedicaoCompetenciaFiltro && r.competencia_medicao !== sarMedicaoCompetenciaFiltro) return false;
+        const stGrupo = getSarRecordStatusGrupo(r);
+        if (!['MEDIÇÃO ENVIADA', 'FINALIZADO', 'PEDIDO EMITIDO'].includes(stGrupo)) return false;
+        const compMed = getSarRecordCompetenciaMedicao(r);
+        if (sarMedicaoCompetenciaFiltro && compMed !== sarMedicaoCompetenciaFiltro) return false;
         return true;
     });
 
@@ -1903,15 +1934,16 @@ function renderSarMedicaoKPIs(dataset) {
 
     medDataset.forEach(r => {
         const val = r.valor_medicao;
+        const stGrupo = getSarRecordStatusGrupo(r);
         totGeral += val;
         qtdGeral++;
-        if (r.status_medicao_grupo === 'MEDIÇÃO ENVIADA') {
+        if (stGrupo === 'MEDIÇÃO ENVIADA') {
             totEnv += val;
             qtdEnv++;
-        } else if (r.status_medicao_grupo === 'FINALIZADO') {
+        } else if (stGrupo === 'FINALIZADO') {
             totFin += val;
             qtdFin++;
-        } else if (r.status_medicao_grupo === 'PEDIDO EMITIDO') {
+        } else if (stGrupo === 'PEDIDO EMITIDO') {
             totPed += val;
             qtdPed++;
         }
@@ -1969,7 +2001,8 @@ function renderSarMedicaoCharts(dataset) {
     // Para a evolução histórica, usamos todos os registros com medição
     const allMedRecords = (window.SAR_DATA || []).filter(r => {
         if (!r.valor_medicao || r.valor_medicao <= 0) return false;
-        if (!['MEDIÇÃO ENVIADA', 'FINALIZADO', 'PEDIDO EMITIDO'].includes(r.status_medicao_grupo)) return false;
+        const stGrupo = getSarRecordStatusGrupo(r);
+        if (!['MEDIÇÃO ENVIADA', 'FINALIZADO', 'PEDIDO EMITIDO'].includes(stGrupo)) return false;
         if (sarFilters.cidade && r.cidade !== sarFilters.cidade) return false;
         if (sarFilters.area_tecnica && r.area_tecnica !== sarFilters.area_tecnica) return false;
         return true;
@@ -1978,14 +2011,15 @@ function renderSarMedicaoCharts(dataset) {
     // Agrupar por Competência da data de medição
     const compMap = {};
     allMedRecords.forEach(r => {
-        let comp = r.competencia_medicao;
+        let comp = getSarRecordCompetenciaMedicao(r);
         if (!comp || comp === 'SEM DATA (AJ)' || comp === 'SEM DATA') comp = 'Sem Data';
         if (!compMap[comp]) {
             compMap[comp] = { env: 0, fin: 0, ped: 0, total: 0 };
         }
-        if (r.status_medicao_grupo === 'MEDIÇÃO ENVIADA') compMap[comp].env += r.valor_medicao;
-        else if (r.status_medicao_grupo === 'FINALIZADO') compMap[comp].fin += r.valor_medicao;
-        else if (r.status_medicao_grupo === 'PEDIDO EMITIDO') compMap[comp].ped += r.valor_medicao;
+        const stGrupo = getSarRecordStatusGrupo(r);
+        if (stGrupo === 'MEDIÇÃO ENVIADA') compMap[comp].env += r.valor_medicao;
+        else if (stGrupo === 'FINALIZADO') compMap[comp].fin += r.valor_medicao;
+        else if (stGrupo === 'PEDIDO EMITIDO') compMap[comp].ped += r.valor_medicao;
         compMap[comp].total += r.valor_medicao;
     });
 
@@ -2188,10 +2222,11 @@ function renderSarMedicaoTable(dataset) {
     tbody.innerHTML = sorted.map(r => {
         totalSoma += (r.valor_medicao || 0);
 
+        const stGrupo = getSarRecordStatusGrupo(r);
         let badgeClass = 'sar-badge-status-med-outro';
-        if (r.status_medicao_grupo === 'MEDIÇÃO ENVIADA') badgeClass = 'sar-badge-status-med-enviada';
-        else if (r.status_medicao_grupo === 'FINALIZADO') badgeClass = 'sar-badge-status-med-finalizado';
-        else if (r.status_medicao_grupo === 'PEDIDO EMITIDO') badgeClass = 'sar-badge-status-med-pedido';
+        if (stGrupo === 'MEDIÇÃO ENVIADA') badgeClass = 'sar-badge-status-med-enviada';
+        else if (stGrupo === 'FINALIZADO') badgeClass = 'sar-badge-status-med-finalizado';
+        else if (stGrupo === 'PEDIDO EMITIDO') badgeClass = 'sar-badge-status-med-pedido';
 
         const dtMedFmt = r.data_medicao_fmt || (r.data_medicao ? format_date_br(r.data_medicao) : '-');
         const dtPedFmt = r.data_pedido_fmt || (r.data_pedido ? format_date_br(r.data_pedido) : '-');
@@ -2302,10 +2337,10 @@ function exportSarMedicaoToExcel() {
         "Endereço": r.endereco || '',
         "Serviço": r.servico || '',
         "Data Medição": r.data_medicao_fmt || (r.data_medicao ? format_date_br(r.data_medicao) : '-'),
-        "Competência Medição": r.competencia_medicao || '-',
+        "Competência Medição": getSarRecordCompetenciaMedicao(r),
         "Valor Medição (R$)": r.valor_medicao || 0,
         "Status Geral SAR": r.status || '',
-        "Status Medição": r.status_medicao_grupo || '',
+        "Status Medição": getSarRecordStatusGrupo(r),
         "Nº WF": r.num_wf || '',
         "Data Pedido": r.data_pedido_fmt || (r.data_pedido ? format_date_br(r.data_pedido) : '-'),
         "Nº Pedido": r.num_pedido || '',

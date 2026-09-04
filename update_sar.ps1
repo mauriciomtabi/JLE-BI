@@ -27,69 +27,79 @@ $candidateDirs = @(
 $networkPath = $null
 $useFile = $null
 
+# Configurar protocolo TLS seguro para downloads HTTPS
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 -bor [Net.SecurityProtocolType]::Tls13
+
 # 1.1 Se houver URL do Google Sheets configurada, baixar diretamente
 if ($googleSheetUrl -and $googleSheetUrl.Trim() -ne "") {
     Write-Output "Baixando dados atualizados do Google Sheets SAR..."
     try {
-        Invoke-WebRequest -Uri $googleSheetUrl -OutFile "$workingDir\sar_local.csv" -UseBasicParsing -TimeoutSec 30
-        $useFile = "$workingDir\sar_local.csv"
-        Write-Output "Dados do Google Sheets SAR baixados e armazenados em cache com sucesso!"
+        Invoke-WebRequest -Uri $googleSheetUrl -OutFile "$workingDir\sar_local.csv" -UseBasicParsing -UserAgent 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' -TimeoutSec 45
+        if ((Test-Path "$workingDir\sar_local.csv") -and ((Get-Item "$workingDir\sar_local.csv").Length -gt 10000)) {
+            $useFile = "$workingDir\sar_local.csv"
+            Write-Output "Dados do Google Sheets SAR baixados e armazenados em cache com sucesso!"
+        } else {
+            Write-Warning "Arquivo baixado do Google Sheets esta vazio ou incompleto. Tentando rede..."
+        }
     } catch {
-        Write-Warning "Falha ao baixar do Google Sheets ($($_.Exception.Message)). Tentando fontes locais/rede..."
+        Write-Warning "Falha ao baixar do Google Sheets ($($_.Exception.Message)). Tentando fontes de rede..."
     }
 }
 
-# 1.2 Se nao usou Google Sheets, verificar se existe Planilha Operacional local ou rede
+# 1.2 Se nao usou Google Sheets, buscar planilha mais recente na rede local
 if ($null -eq $useFile) {
-    if (Test-Path $localOperacionalPath) {
-        Write-Output "Planilha Operacional SAR localizada: $localOperacionalPath"
-        Copy-Item -Path $localOperacionalPath -Destination $localTempPath -Force
-        Copy-Item -Path $localOperacionalPath -Destination $localCachePath -Force
-        $useFile = $localTempPath
-    } else {
-        foreach ($dir in $candidateDirs) {
-            if (Test-Path $dir) {
-                Write-Output "Buscando planilhas SAR no diretorio: $dir"
-                try {
-                    $candidateFiles = Get-ChildItem -Path $dir -File | Where-Object { 
-                        ($_.Name -like "*Status Projeto F*SAR*.xlsx" -or $_.Name -like "*SAR*.xlsx" -or $_.Name -like "*Projeto F*Nodes*.xlsx" -or $_.Name -like "*Planilha_Operacional_SAR*.xlsx") -and $_.Name -notlike "~$*"
-                    } | Sort-Object LastWriteTime -Descending
+    foreach ($dir in $candidateDirs) {
+        if (Test-Path $dir) {
+            Write-Output "Buscando planilhas SAR no diretorio: $dir"
+            try {
+                $candidateFiles = Get-ChildItem -Path $dir -File | Where-Object { 
+                    ($_.Name -like "*Status Projeto F*SAR*.xlsx" -or $_.Name -like "*SAR*.xlsx" -or $_.Name -like "*Projeto F*Nodes*.xlsx" -or $_.Name -like "*Planilha_Operacional_SAR*.xlsx") -and $_.Name -notlike "~$*"
+                } | Sort-Object LastWriteTime -Descending
 
-                    if ($candidateFiles -and $candidateFiles.Count -gt 0) {
-                        $networkPath = $candidateFiles[0].FullName
-                        break
-                    }
-                } catch {
-                    Write-Warning "Aviso ao listar diretorio $dir : $($_.Exception.Message)"
+                if ($candidateFiles -and $candidateFiles.Count -gt 0) {
+                    $networkPath = $candidateFiles[0].FullName
+                    break
                 }
+            } catch {
+                Write-Warning "Aviso ao listar diretorio $dir : $($_.Exception.Message)"
             }
         }
     }
+
+    if ($networkPath -and (Test-Path $networkPath)) {
+        Write-Output "Planilha SAR localizada na rede: $networkPath"
+        try {
+            Write-Output "Copiando planilha para ambiente temporario e atualizando cache local..."
+            Copy-Item -Path $networkPath -Destination $localTempPath -Force
+            Copy-Item -Path $networkPath -Destination $localCachePath -Force
+            $useFile = $localTempPath
+            Write-Output "Copia e cache de contingencia atualizados com sucesso."
+        } catch {
+            Write-Warning "Falha ao copiar da rede ($($_.Exception.Message)). Tentando cache local..."
+        }
+    } else {
+        Write-Warning "Nenhum arquivo SAR encontrado na rede. Verifique a conexao com \\10.121.21.252."
+    }
 }
 
-if ($null -eq $useFile -and $null -ne $networkPath -and (Test-Path $networkPath)) {
-    Write-Output "Planilha SAR localizada na rede: $networkPath"
-    try {
-        Write-Output "Copiando planilha para ambiente temporario e atualizando cache local..."
-        Copy-Item -Path $networkPath -Destination $localTempPath -Force
-        Copy-Item -Path $networkPath -Destination $localCachePath -Force
+# 1.3 Se rede e Google Sheets falharam, recorrer ao cache local de contingência
+if ($null -eq $useFile) {
+    if (Test-Path "$workingDir\sar_local.csv") {
+        Write-Output "Utilizando cache CSV de contingencia: $workingDir\sar_local.csv"
+        $useFile = "$workingDir\sar_local.csv"
+    } elseif (Test-Path $localCachePath) {
+        Write-Output "Utilizando planilha em cache local de contingencia: $localCachePath"
+        $useFile = $localCachePath
+    } elseif (Test-Path $localOperacionalPath) {
+        Write-Output "Utilizando planilha operacional local de contingencia: $localOperacionalPath"
+        Copy-Item -Path $localOperacionalPath -Destination $localTempPath -Force
         $useFile = $localTempPath
-        Write-Output "Copia e cache de contingencia atualizados com sucesso."
-    } catch {
-        Write-Warning "Falha ao copiar da rede ($($_.Exception.Message)). Tentando cache local..."
     }
-} else {
-    Write-Warning "Nenhum arquivo SAR encontrado na rede. Verifique a conexao com \\10.121.21.252."
 }
 
 if ($null -eq $useFile) {
-    if (Test-Path $localCachePath) {
-        Write-Output "Utilizando planilha em cache local de contingencia: $localCachePath"
-        $useFile = $localCachePath
-    } else {
-        Write-Error "ERRO CRITICO: Nenhum arquivo SAR acessivel na rede nem em cache local!"
-        Exit 1
-    }
+    Write-Error "ERRO CRITICO: Nenhum arquivo SAR acessivel na rede nem em cache local!"
+    Exit 1
 }
 
 # 2. Executar processador em Python

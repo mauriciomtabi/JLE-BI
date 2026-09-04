@@ -246,7 +246,8 @@ module.exports = async (req, res) => {
             const cod = (r[idxCod] || '').trim();
             const cidade = (r[idxCidade] || '').trim();
 
-            if (!cod || !cod.startsWith('RS')) continue;
+            // Descartar rascunhos ou linhas sem código e cidade
+            if (!cod || !cidade || !cod.startsWith('RS')) continue;
 
             const area_tecnica = (r[idxArea] || '').trim();
             const node = (r[idxNode] || '').trim();
@@ -270,7 +271,7 @@ module.exports = async (req, res) => {
             let atraso_dias = toNumber(r[idxAtraso]);
 
             const status_geral_raw = (r[idxStatus] || '').trim();
-            const status = status_geral_raw || "EM MEDIÇÃO";
+            const status = status_geral_raw || "EM ANDAMENTO";
 
             const dt_medicao_iso = parseDateIso(r[idxDataMedicao]);
             const valor_medicao = toNumber(r[idxValorMedicao]);
@@ -279,6 +280,25 @@ module.exports = async (req, res) => {
             const num_pedido = (r[idxPedido] || '').trim().replace('.0', '');
             const observacoes = (r[idxObs] || '').trim();
             const status_wf = status.includes('IMPLANTADO') || status.includes('APROV') ? '100% - OK' : '';
+
+            // Competência da Data de Medição
+            const ano_medicao = dt_medicao_iso ? dt_medicao_iso.substring(0, 4) : 'SEM DATA';
+            const mes_num_medicao = dt_medicao_iso && dt_medicao_iso.length >= 7 ? dt_medicao_iso.substring(5, 7) : '';
+            const mes_idx_medicao = parseInt(mes_num_medicao, 10);
+            const mes_nome_medicao = (mes_idx_medicao >= 1 && mes_idx_medicao <= 12) ? MESES_PT[mes_idx_medicao] : 'SEM DATA';
+            const competencia_medicao = (dt_medicao_iso && ano_medicao !== 'SEM DATA' && mes_nome_medicao !== 'SEM DATA') ? `${mes_nome_medicao}/${ano_medicao}` : 'Sem Data';
+
+            // Status Canônico para Medição
+            const stClean = (status || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase().trim();
+            let status_medicao_grupo = 'OUTROS';
+            if (stClean.includes('MEDI') && stClean.includes('ENVIAD')) {
+                status_medicao_grupo = 'MEDIÇÃO ENVIADA';
+            } else if (stClean.includes('FINALIZ')) {
+                status_medicao_grupo = 'FINALIZADO';
+            } else if (stClean.includes('PEDIDO') && stClean.includes('EMIT')) {
+                status_medicao_grupo = 'PEDIDO EMITIDO';
+            }
+            const tem_medicao = valor_medicao > 0;
 
             // Quantidades LPU
             const q_211 = toNumber(r[idx211]);
@@ -398,6 +418,12 @@ module.exports = async (req, res) => {
                 data_entrega_fmt: formatDateBr(dt_entrega_iso),
                 data_medicao: dt_medicao_iso,
                 data_medicao_fmt: formatDateBr(dt_medicao_iso),
+                competencia_medicao,
+                ano_medicao,
+                mes_medicao: mes_nome_medicao,
+                mes_num_medicao,
+                status_medicao_grupo,
+                tem_medicao,
                 num_wf,
                 status_wf,
                 num_pedido,
@@ -440,6 +466,31 @@ module.exports = async (req, res) => {
         const anos = [...new Set(records.map(r => r.ano).filter(a => a && a !== 'NÃO INFORMADO'))].sort().reverse();
         const competencias_entrega = [...new Set(records.map(r => r.competencia_entrega).filter(c => c && c !== 'NÃO INFORMADO'))].sort();
         const anos_entrega = [...new Set(records.map(r => r.ano_entrega).filter(a => a && a !== 'NÃO INFORMADO'))].sort().reverse();
+
+        // Competências e Anos de Medição
+        const compsMedValidas = [...new Set(records.filter(r => r.valor_medicao > 0 && r.competencia_medicao && r.competencia_medicao !== 'Sem Data' && r.competencia_medicao !== 'SEM DATA').map(r => r.competencia_medicao))];
+        compsMedValidas.sort((a, b) => {
+            const pA = a.split('/');
+            const pB = b.split('/');
+            const yA = parseInt(pA[1], 10) || 0;
+            const yB = parseInt(pB[1], 10) || 0;
+            if (yA !== yB) return yB - yA;
+            const mA = MESES_PT.indexOf(pA[0]) || 0;
+            const mB = MESES_PT.indexOf(pB[0]) || 0;
+            return mB - mA;
+        });
+        if (records.some(r => r.valor_medicao > 0 && (!r.competencia_medicao || r.competencia_medicao === 'Sem Data' || r.competencia_medicao === 'SEM DATA'))) {
+            compsMedValidas.push('Sem Data');
+        }
+        const anos_medicao = [...new Set(records.filter(r => r.valor_medicao > 0 && r.ano_medicao && r.ano_medicao !== 'SEM DATA').map(r => r.ano_medicao))].sort().reverse();
+
+        // Totais e Qtds de Medição
+        const recMedAlvo = records.filter(r => r.valor_medicao > 0 && ['MEDIÇÃO ENVIADA', 'FINALIZADO', 'PEDIDO EMITIDO'].includes(r.status_medicao_grupo));
+        const tot_med_geral = Math.round(recMedAlvo.reduce((acc, r) => acc + (r.valor_medicao || 0), 0) * 100) / 100;
+        const tot_med_enviada = Math.round(recMedAlvo.filter(r => r.status_medicao_grupo === 'MEDIÇÃO ENVIADA').reduce((acc, r) => acc + (r.valor_medicao || 0), 0) * 100) / 100;
+        const tot_med_finalizado = Math.round(recMedAlvo.filter(r => r.status_medicao_grupo === 'FINALIZADO').reduce((acc, r) => acc + (r.valor_medicao || 0), 0) * 100) / 100;
+        const tot_med_pedido = Math.round(recMedAlvo.filter(r => r.status_medicao_grupo === 'PEDIDO EMITIDO').reduce((acc, r) => acc + (r.valor_medicao || 0), 0) * 100) / 100;
+
         const meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
 
         const tot_geral_terceiros = Math.round(records.reduce((acc, r) => acc + (r.total_terceiros || 0), 0) * 100) / 100;
@@ -476,7 +527,19 @@ module.exports = async (req, res) => {
             anos,
             competencias_entrega,
             anos_entrega,
+            competencias_medicao: compsMedValidas,
+            anos_medicao,
             meses,
+            medicao: {
+                total_geral: tot_med_geral,
+                qtd_geral: recMedAlvo.length,
+                total_medicao_enviada: tot_med_enviada,
+                qtd_medicao_enviada: recMedAlvo.filter(r => r.status_medicao_grupo === 'MEDIÇÃO ENVIADA').length,
+                total_finalizado: tot_med_finalizado,
+                qtd_finalizado: recMedAlvo.filter(r => r.status_medicao_grupo === 'FINALIZADO').length,
+                total_pedido_emitido: tot_med_pedido,
+                qtd_pedido_emitido: recMedAlvo.filter(r => r.status_medicao_grupo === 'PEDIDO EMITIDO').length
+            },
             financeiro: {
                 total_terceiros: tot_geral_terceiros,
                 total_previa_medicao: tot_geral_previa,
