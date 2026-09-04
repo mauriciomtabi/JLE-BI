@@ -480,8 +480,14 @@ function renderSarCharts(filteredData) {
  */
 function getSarStatusColor(st) {
     const key = (st || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().toUpperCase();
-    if (key.includes('PEDIDO IMPLANTADO') || (key.includes('PEDIDO') && key.includes('IMPLANT'))) {
-        return { bg: '#10b981', border: '#059669' }; // Verde Esmeralda
+    if (key.includes('PEDIDO EMIT') || key.includes('PEDIDO IMPLANT') || (key.includes('PEDIDO') && (key.includes('EMIT') || key.includes('IMPLANT')))) {
+        return { bg: '#10b981', border: '#059669' }; // Verde Esmeralda (Pedido Emitido)
+    }
+    if (key.includes('FINALIZ')) {
+        return { bg: '#388bfd', border: '#1d70d8' }; // Azul Royal (Finalizado)
+    }
+    if (key.includes('ENVIAD') || (key.includes('MEDIC') && key.includes('ENVIAD'))) {
+        return { bg: '#f97316', border: '#ea580c' }; // Laranja Vibrante (Medição Enviada)
     }
     if (key.includes('WF APROVADO') || key.includes('APROVADO')) {
         return { bg: '#14b8a6', border: '#0d9488' }; // Teal / Verde Azulado
@@ -490,13 +496,10 @@ function getSarStatusColor(st) {
         return { bg: '#22c55e', border: '#16a34a' }; // Verde
     }
     if (key.includes('EM MEDIC') || key.includes('AG. MEDIC') || key.includes('AG MEDIC')) {
-        return { bg: '#388bfd', border: '#1f6feb' }; // Azul Royal Vibrante
-    }
-    if (key.includes('ENVIAD')) {
-        return { bg: '#eab308', border: '#ca8a04' }; // Âmbar Dourado
+        return { bg: '#0284c7', border: '#0369a1' }; // Azul Oceano (Em Medição)
     }
     if (key.includes('RELAT')) {
-        return { bg: '#f97316', border: '#ea580c' }; // Laranja Vibrante / Tangerina
+        return { bg: '#eab308', border: '#ca8a04' }; // Âmbar Dourado (Relatório)
     }
     if (key.includes('ANDAMENTO')) {
         return { bg: '#6366f1', border: '#4f46e5' }; // Índigo
@@ -694,16 +697,16 @@ function renderSarEvolutionChart(data) {
     const pluginList = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
 
     const statusOrder = [
-        'PEDIDO IMPLANTADO',
-        'WF APROVADO',
-        'WF IMPLANTADO',
+        'FINALIZADO',
+        'PEDIDO EMITIDO',
         'EM MEDIÇÃO',
         'MEDIÇÃO ENVIADA',
         'RELATÓRIO',
         'EM ANDAMENTO',
         'SEM SINAL',
         'CANCELADO',
-        'PARALISADO'
+        'PARALISADO',
+        'NÃO COBRAR'
     ];
 
     const monthMap = {};
@@ -1366,7 +1369,7 @@ function renderSarFechamentoCharts(data) {
                         ticks: {
                             color: '#8b949e',
                             font: { size: 10 },
-                            callback: (v) => `R$ ${(v / 1000).toFixed(0)}k`
+                            callback: (v) => `${(v / 1000).toFixed(0)}k`
                         },
                         beginAtZero: true
                     }
@@ -2085,8 +2088,8 @@ function renderSarMedicaoCharts(dataset) {
                 {
                     label: 'Medição Enviada',
                     data: dataEnv,
-                    backgroundColor: '#388bfd',
-                    borderColor: '#1d70d8',
+                    backgroundColor: '#f97316',
+                    borderColor: '#ea580c',
                     borderWidth: 1,
                     borderRadius: 2,
                     stack: 'sarMedicaoStack',
@@ -2096,8 +2099,8 @@ function renderSarMedicaoCharts(dataset) {
                 {
                     label: 'Finalizado',
                     data: dataFin,
-                    backgroundColor: '#10b981',
-                    borderColor: '#059669',
+                    backgroundColor: '#388bfd',
+                    borderColor: '#1d70d8',
                     borderWidth: 1,
                     borderRadius: 2,
                     stack: 'sarMedicaoStack',
@@ -2107,8 +2110,8 @@ function renderSarMedicaoCharts(dataset) {
                 {
                     label: 'Pedido Emitido',
                     data: dataPed,
-                    backgroundColor: '#a855f7',
-                    borderColor: '#9333ea',
+                    backgroundColor: '#10b981',
+                    borderColor: '#059669',
                     borderWidth: 1,
                     borderRadius: 2,
                     stack: 'sarMedicaoStack',
@@ -2169,9 +2172,9 @@ function renderSarMedicaoCharts(dataset) {
                     font: { weight: 'bold', size: 9, family: 'Outfit, Inter' },
                     formatter: function(val) {
                         if (!val || val <= 0) return '';
-                        if (val >= 1000000) return 'R$ ' + (val / 1000000).toFixed(1) + 'M';
-                        if (val >= 1000) return 'R$ ' + Math.round(val / 1000) + 'k';
-                        return 'R$ ' + Math.round(val);
+                        if (val >= 1000000) return (val / 1000000).toFixed(1) + 'M';
+                        if (val >= 1000) return Math.round(val / 1000) + 'k';
+                        return Math.round(val);
                     }
                 }
             },
@@ -2188,9 +2191,9 @@ function renderSarMedicaoCharts(dataset) {
                         color: '#8b949e',
                         font: { size: 10, family: 'Outfit, Inter' },
                         callback: function(value) {
-                            if (value >= 1000000) return 'R$ ' + (value / 1000000).toFixed(1) + 'M';
-                            if (value >= 1000) return 'R$ ' + (value / 1000).toFixed(0) + 'k';
-                            return 'R$ ' + value;
+                            if (value >= 1000000) return (value / 1000000).toFixed(1) + 'M';
+                            if (value >= 1000) return (value / 1000).toFixed(0) + 'k';
+                            return value;
                         }
                     },
                     beginAtZero: true,

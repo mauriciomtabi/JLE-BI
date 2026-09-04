@@ -638,19 +638,19 @@
     background-color: #f59e0b !important;
 }
 .kpi-med-enviada::before {
-    background-color: #388bfd !important;
+    background-color: #f97316 !important;
 }
 .kpi-med-finalizado::before {
-    background-color: #10b981 !important;
+    background-color: #388bfd !important;
 }
 .kpi-med-pedido::before {
-    background-color: #a855f7 !important;
+    background-color: #10b981 !important;
 }
 
 .sar-badge-status-med-enviada {
-    background: rgba(56, 139, 253, 0.15);
-    color: #58a6ff;
-    border: 1px solid rgba(56, 139, 253, 0.3);
+    background: rgba(249, 115, 22, 0.15);
+    color: #fb923c;
+    border: 1px solid rgba(249, 115, 22, 0.3);
     padding: 3px 8px;
     border-radius: 6px;
     font-size: 11px;
@@ -659,9 +659,9 @@
 }
 
 .sar-badge-status-med-finalizado {
-    background: rgba(16, 185, 129, 0.15);
-    color: #34d399;
-    border: 1px solid rgba(16, 185, 129, 0.3);
+    background: rgba(56, 139, 253, 0.15);
+    color: #38bdf8;
+    border: 1px solid rgba(56, 139, 253, 0.3);
     padding: 3px 8px;
     border-radius: 6px;
     font-size: 11px;
@@ -670,9 +670,9 @@
 }
 
 .sar-badge-status-med-pedido {
-    background: rgba(168, 85, 247, 0.15);
-    color: #c084fc;
-    border: 1px solid rgba(168, 85, 247, 0.3);
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.3);
     padding: 3px 8px;
     border-radius: 6px;
     font-size: 11px;
