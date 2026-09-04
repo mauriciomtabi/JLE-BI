@@ -3,12 +3,26 @@
 
 const SHEET_ID = '1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4';
 const GID = '1221770117';
-const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=${GID}`;
+const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${GID}`;
 
 const MESES_PT = [
     "", "JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO", "JUNHO",
     "JULHO", "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"
 ];
+
+const LPU_PRECOS = {
+    q_211: 1.20,
+    q_212: 1.00,
+    q_215: 1.45,
+    q_113: 0.75,
+    q_311: 65.00,
+    q_317: 50.00,
+    q_318: 60.00,
+    q_315: 80.00,
+    q_313: 9.00,
+    q_314: 3.50,
+    q_312: 15.00
+};
 
 function normalizeHeader(str) {
     if (!str) return "";
@@ -90,7 +104,11 @@ function formatDateBr(isoStr) {
 function toNumber(val) {
     if (val === null || val === undefined || val === '') return 0;
     if (typeof val === 'number') return val;
-    const clean = String(val).replace(/\./g, '').replace(',', '.').replace(/[^0-9.-]/g, '');
+    let s = String(val).replace(/R\$/g, '').replace(/\xa0/g, '').trim();
+    if (s.includes(',')) {
+        s = s.replace(/\./g, '').replace(',', '.');
+    }
+    const clean = s.replace(/[^0-9.-]/g, '');
     const num = parseFloat(clean);
     return isNaN(num) ? 0 : num;
 }
@@ -137,12 +155,24 @@ module.exports = async (req, res) => {
         const csvText = await response.text();
         const rows = parseCsv(csvText);
 
-        if (!rows || rows.length < 2) {
+        if (!rows || rows.length < 3) {
             throw new Error('Planilha Google Sheets vazia ou ilegível.');
         }
 
-        // Mapeamento dinâmico de cabeçalho
-        const headerRow = rows[0];
+        // Localizar dinamicamente a linha de cabeçalho
+        let headerRowIdx = -1;
+        for (let i = 0; i < Math.min(10, rows.length); i++) {
+            const rowStr = rows[i].map(normalizeHeader).join(' ');
+            if (rowStr.includes('COD') && rowStr.includes('CIDADE') && (rowStr.includes('ENDERE') || rowStr.includes('AREA'))) {
+                headerRowIdx = i;
+                break;
+            }
+        }
+        if (headerRowIdx === -1) {
+            headerRowIdx = 2; // fallback padrão
+        }
+
+        const headerRow = rows[headerRowIdx];
         const colMap = {};
         headerRow.forEach((h, idx) => {
             const nh = normalizeHeader(h);
@@ -183,26 +213,40 @@ module.exports = async (req, res) => {
         const idxAtraso = getColIdx(['ATRASO DIAS', 'ATRASO'], 19);
         const idxStatus = getColIdx(['STATUS GERAL SAR', 'STATUS GERAL', 'STATUS'], 21);
 
-        // Medição e WF (Douglas)
-        const idxDataMedicao = getColIdx(['DATA MEDICAO', 'DATA MEDIÇÃO'], 34);
-        const idxValorMedicao = getColIdx(['VALOR MEDICAO', 'VALOR'], 35);
-        const idxWf = getColIdx(['N WF', 'NO WF', 'NUM WF', 'WORKFLOW'], 36);
-        const idxDataPedido = getColIdx(['DATA PEDIDO'], 37);
-        const idxPedido = getColIdx(['N DO PEDIDO', 'NO DO PEDIDO', 'PEDIDO'], 38);
-        const idxObs = getColIdx(['OBSERVACOES', 'OBSERVAÇÕES'], 39);
+        // LPU
+        const idx211 = getColIdx(['2 11 CB AS', '2 11', 'CB AS'], 22);
+        const idx212 = getColIdx(['2 12 CB SUB', '2 12', 'CB SUB'], 23);
+        const idx215 = getColIdx(['2 15 CB ESP', '2 15', 'CB ESP'], 24);
+        const idx113 = getColIdx(['1 13 CORD', '1 13', 'CORD'], 25);
+        const idx311 = getColIdx(['3 11 CX EM', '3 11', 'CX EM'], 26);
+        const idx317 = getColIdx(['3 17 DIO', '3 17', 'DIO'], 27);
+        const idx318 = getColIdx(['3 18 NAP', '3 18', 'NAP'], 28);
+        const idx315 = getColIdx(['3 15 AB FE', '3 15', 'AB FE'], 29);
+        const idx313 = getColIdx(['3 13 FUS', '3 13', 'FUS'], 30);
+        const idx314 = getColIdx(['3 14 OTDR', '3 14', 'OTDR'], 31);
+        const idx312 = getColIdx(['3 12 DER', '3 12', 'DER'], 32);
+
+        // Totais e Medição
+        const idxTotalTerc = getColIdx(['TOTAL TERCEIROS', 'TOTAL TERCEIRO'], 33);
+        const idxPreviaMed = getColIdx(['PREVIA MEDICAO', 'PREVIA MEDIÇÃO'], 34);
+        const idxDataMedicao = getColIdx(['DATA MEDICAO', 'DATA MEDIÇÃO'], 35);
+        const idxValorMedicao = getColIdx(['VALOR MEDICAO', 'VALOR'], 36);
+        const idxWf = getColIdx(['N WF', 'NO WF', 'NUM WF', 'WORKFLOW'], 37);
+        const idxDataPedido = getColIdx(['DATA PEDIDO'], 38);
+        const idxPedido = getColIdx(['N DO PEDIDO', 'NO DO PEDIDO', 'PEDIDO'], 39);
+        const idxObs = getColIdx(['OBSERVACOES', 'OBSERVAÇÕES'], 40);
 
         const records = [];
         const todayStr = new Date().toISOString().substring(0, 10);
 
-        for (let i = 1; i < rows.length; i++) {
+        for (let i = headerRowIdx + 1; i < rows.length; i++) {
             const r = rows[i];
             if (!r || r.length < 2) continue;
 
             const cod = (r[idxCod] || '').trim();
             const cidade = (r[idxCidade] || '').trim();
 
-            // Filtrar linhas de rascunho sem cidade
-            if (!cod || !cidade) continue;
+            if (!cod || !cod.startsWith('RS')) continue;
 
             const area_tecnica = (r[idxArea] || '').trim();
             const node = (r[idxNode] || '').trim();
@@ -225,20 +269,81 @@ module.exports = async (req, res) => {
             let prazo_raw = (r[idxPrazo] || '').trim().toUpperCase();
             let atraso_dias = toNumber(r[idxAtraso]);
 
-            // Status Geral SAR (Coluna 21 ou mapeada dinamicamente)
             const status_geral_raw = (r[idxStatus] || '').trim();
-            const status = status_geral_raw || "EM ANDAMENTO";
+            const status = status_geral_raw || "EM MEDIÇÃO";
 
-            // Douglas (Campos de Faturamento)
             const dt_medicao_iso = parseDateIso(r[idxDataMedicao]);
             const valor_medicao = toNumber(r[idxValorMedicao]);
-            const num_wf = (r[idxWf] || '').trim();
+            const num_wf = (r[idxWf] || '').trim().replace('.0', '');
             const dt_pedido_iso = parseDateIso(r[idxDataPedido]);
-            const num_pedido = (r[idxPedido] || '').trim();
+            const num_pedido = (r[idxPedido] || '').trim().replace('.0', '');
             const observacoes = (r[idxObs] || '').trim();
-            const status_wf = status === 'WF IMPLANTADO' || status === 'Pedido Implantado' || status === 'WF Aprovado' ? '100% - OK' : '';
+            const status_wf = status.includes('IMPLANTADO') || status.includes('APROV') ? '100% - OK' : '';
 
-            // Cálculo do tempo em dias úteis caso zerado
+            // Quantidades LPU
+            const q_211 = toNumber(r[idx211]);
+            const q_212 = toNumber(r[idx212]);
+            const q_215 = toNumber(r[idx215]);
+            const q_113 = toNumber(r[idx113]);
+            const q_311 = toNumber(r[idx311]);
+            const q_317 = toNumber(r[idx317]);
+            const q_318 = toNumber(r[idx318]);
+            const q_315 = toNumber(r[idx315]);
+            const q_313 = toNumber(r[idx313]);
+            const q_314 = toNumber(r[idx314]);
+            const q_312 = toNumber(r[idx312]);
+
+            let total_terceiros = toNumber(r[idxTotalTerc]);
+            let previa_medicao = toNumber(r[idxPreviaMed]);
+
+            const calc_l = (q_211 * 1.20) + (q_212 * 1.00) + (q_215 * 1.45) + (q_113 * 0.75);
+            const calc_f = (q_311 * 65.00) + (q_317 * 50.00) + (q_318 * 60.00) + (q_315 * 80.00) + (q_313 * 9.00) + (q_314 * 3.50) + (q_312 * 15.00);
+
+            let val_l = 0.0;
+            let val_f = 0.0;
+            if (total_terceiros > 0) {
+                if (classe_l && classe_f) {
+                    if (calc_l > 0 && calc_f > 0) {
+                        val_l = Math.round((total_terceiros * (calc_l / (calc_l + calc_f))) * 100) / 100;
+                        val_f = Math.round((total_terceiros - val_l) * 100) / 100;
+                    } else if (calc_l > 0) {
+                        val_l = Math.min(total_terceiros, Math.round(calc_l * 100) / 100);
+                        val_f = Math.round((total_terceiros - val_l) * 100) / 100;
+                    } else if (calc_f > 0) {
+                        val_f = Math.min(total_terceiros, Math.round(calc_f * 100) / 100);
+                        val_l = Math.round((total_terceiros - val_f) * 100) / 100;
+                    } else {
+                        val_l = Math.round((total_terceiros / 2.0) * 100) / 100;
+                        val_f = Math.round((total_terceiros - val_l) * 100) / 100;
+                    }
+                } else if (classe_l && !classe_f) {
+                    val_l = total_terceiros;
+                } else if (classe_f && !classe_l) {
+                    val_f = total_terceiros;
+                } else {
+                    val_f = total_terceiros;
+                }
+            } else {
+                val_l = Math.round(calc_l * 100) / 100;
+                val_f = Math.round(calc_f * 100) / 100;
+                total_terceiros = Math.round((val_l + val_f) * 100) / 100;
+            }
+
+            const itens_l_resumo = [];
+            if (q_211 > 0) itens_l_resumo.push(`2.11 CB AS: ${q_211}m`);
+            if (q_212 > 0) itens_l_resumo.push(`2.12 CB SUB: ${q_212}m`);
+            if (q_215 > 0) itens_l_resumo.push(`2.15 CB ESP: ${q_215}m`);
+            if (q_113 > 0) itens_l_resumo.push(`1.13 CORD: ${q_113}m`);
+
+            const itens_f_resumo = [];
+            if (q_311 > 0) itens_f_resumo.push(`3.11 CX EM: ${q_311} un`);
+            if (q_317 > 0) itens_f_resumo.push(`3.17 DIO/DGO: ${q_317} un`);
+            if (q_318 > 0) itens_f_resumo.push(`3.18 NAP/CTO: ${q_318} un`);
+            if (q_315 > 0) itens_f_resumo.push(`3.15 AB/FE: ${q_315} un`);
+            if (q_313 > 0) itens_f_resumo.push(`3.13 FUS/EME: ${q_313} un`);
+            if (q_314 > 0) itens_f_resumo.push(`3.14 OTDR: ${q_314} un`);
+            if (q_312 > 0) itens_f_resumo.push(`3.12 DER/INS: ${q_312} un`);
+
             if (tempo_dias <= 0 && dt_entrada_iso) {
                 const targetDate = dt_medicao_iso || dt_entrega_iso || (!status.includes('CONCLU') && !status.includes('CANCEL') ? todayStr : null);
                 if (targetDate) {
@@ -266,6 +371,12 @@ module.exports = async (req, res) => {
             const mes_idx = parseInt(mes_num, 10);
             const mes_nome = (mes_idx >= 1 && mes_idx <= 12) ? MESES_PT[mes_idx] : 'NÃO INFORMADO';
             const competencia = (ano_entrada !== 'NÃO INFORMADO' && mes_nome !== 'NÃO INFORMADO') ? `${mes_nome}/${ano_entrada}` : 'NÃO INFORMADO';
+
+            const ano_entrega = dt_entrega_iso ? dt_entrega_iso.substring(0, 4) : 'NÃO INFORMADO';
+            const mes_num_entrega = dt_entrega_iso && dt_entrega_iso.length >= 7 ? dt_entrega_iso.substring(5, 7) : '';
+            const mes_idx_entrega = parseInt(mes_num_entrega, 10);
+            const mes_nome_entrega = (mes_idx_entrega >= 1 && mes_idx_entrega <= 12) ? MESES_PT[mes_idx_entrega] : 'NÃO INFORMADO';
+            const competencia_entrega = (ano_entrega !== 'NÃO INFORMADO' && mes_nome_entrega !== 'NÃO INFORMADO') ? `${mes_nome_entrega}/${ano_entrega}` : 'NÃO INFORMADO';
 
             records.push({
                 cod,
@@ -297,13 +408,28 @@ module.exports = async (req, res) => {
                 ano: ano_entrada,
                 mes: mes_nome,
                 mes_num,
+                competencia_entrega,
+                ano_entrega,
+                mes_entrega: mes_nome_entrega,
+                mes_num_entrega,
                 status,
                 status_relatorio: relatorio_ppt,
                 status_medicao: data_envio_med,
                 status_obra: (status.includes('IMPLANTADO') || status.includes('CONCLU') || status.includes('APROV')) ? 'Concluído Campo' : 'Em Andamento',
                 prazo,
                 tempo_dias,
-                atraso_dias
+                atraso_dias,
+                total_terceiros,
+                previa_medicao,
+                valor_classe_l: val_l,
+                valor_classe_f: val_f,
+                itens_l_resumo: itens_l_resumo.length > 0 ? itens_l_resumo.join(', ') : '-',
+                itens_f_resumo: itens_f_resumo.length > 0 ? itens_f_resumo.join(', ') : '-',
+                lpu_itens: {
+                    q_211, q_212, q_215, q_113,
+                    q_311, q_317, q_318, q_315,
+                    q_313, q_314, q_312
+                }
             });
         }
 
@@ -312,7 +438,15 @@ module.exports = async (req, res) => {
         const status_list = [...new Set(records.map(r => r.status).filter(Boolean))].sort();
         const competencias = [...new Set(records.map(r => r.competencia).filter(c => c && c !== 'NÃO INFORMADO'))].sort();
         const anos = [...new Set(records.map(r => r.ano).filter(a => a && a !== 'NÃO INFORMADO'))].sort().reverse();
+        const competencias_entrega = [...new Set(records.map(r => r.competencia_entrega).filter(c => c && c !== 'NÃO INFORMADO'))].sort();
+        const anos_entrega = [...new Set(records.map(r => r.ano_entrega).filter(a => a && a !== 'NÃO INFORMADO'))].sort().reverse();
         const meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+
+        const tot_geral_terceiros = Math.round(records.reduce((acc, r) => acc + (r.total_terceiros || 0), 0) * 100) / 100;
+        const tot_geral_previa = Math.round(records.reduce((acc, r) => acc + (r.previa_medicao || 0), 0) * 100) / 100;
+        const tot_geral_medicao = Math.round(records.reduce((acc, r) => acc + (r.valor_medicao || 0), 0) * 100) / 100;
+        const tot_geral_l = Math.round(records.reduce((acc, r) => acc + (r.valor_classe_l || 0), 0) * 100) / 100;
+        const tot_geral_f = Math.round(records.reduce((acc, r) => acc + (r.valor_classe_f || 0), 0) * 100) / 100;
 
         const now = new Date();
         const brFormatter = new Intl.DateTimeFormat('pt-BR', {
@@ -340,7 +474,16 @@ module.exports = async (req, res) => {
             prazos: ['NO PRAZO', 'ATRASADO'],
             competencias,
             anos,
-            meses
+            competencias_entrega,
+            anos_entrega,
+            meses,
+            financeiro: {
+                total_terceiros: tot_geral_terceiros,
+                total_previa_medicao: tot_geral_previa,
+                total_medicao_claro: tot_geral_medicao,
+                total_classe_l: tot_geral_l,
+                total_classe_f: tot_geral_f
+            }
         };
 
         res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
@@ -349,8 +492,9 @@ module.exports = async (req, res) => {
             metadata,
             data: records
         });
+
     } catch (err) {
-        console.error('Erro em api/fetch-sar:', err);
+        console.error("Erro em /api/fetch-sar:", err);
         return res.status(500).json({
             success: false,
             error: err.message

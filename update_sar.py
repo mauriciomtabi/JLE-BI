@@ -19,7 +19,7 @@ import openpyxl
 
 GOOGLE_SHEET_ID = "1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4"
 GOOGLE_SHEET_GID = "1221770117"
-GOOGLE_SHEET_CSV_URL = f"https://docs.google.com/spreadsheets/d/{GOOGLE_SHEET_ID}/gviz/tq?tqx=out:csv&gid={GOOGLE_SHEET_GID}"
+GOOGLE_SHEET_CSV_URL = f"https://docs.google.com/spreadsheets/d/{GOOGLE_SHEET_ID}/export?format=csv&gid={GOOGLE_SHEET_GID}"
 
 # Meses em português
 MESES_PT = [

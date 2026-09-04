@@ -14,8 +14,7 @@ Write-Output "INICIANDO ATUALIZACAO DA BASE DO DASHBOARD SAR"
 Write-Output "Data/Hora: $(Get-Date -Format 'dd/MM/yyyy HH:mm:ss')"
 Write-Output "=========================================================="
 
-# 1. URL Oficial do Google Sheets SAR
-$googleSheetUrl = if ($env:GOOGLE_SHEET_SAR_URL) { $env:GOOGLE_SHEET_SAR_URL } else { "https://docs.google.com/spreadsheets/d/1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4/gviz/tq?tqx=out:csv&gid=1221770117" }
+$googleSheetUrl = if ($env:GOOGLE_SHEET_SAR_URL) { $env:GOOGLE_SHEET_SAR_URL } else { "https://docs.google.com/spreadsheets/d/1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4/export?format=csv&gid=1221770117" }
 $localOperacionalPath = "$workingDir\Planilha_Operacional_SAR_JLE.xlsx"
 
 $candidateDirs = @(
