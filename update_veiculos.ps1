@@ -18,37 +18,59 @@ Write-Output "=========================================================="
 Write-Output "INICIANDO ATUALIZACAO DA BASE DE VEICULOS (ABASTECIMENTOS)"
 Write-Output "=========================================================="
 
-# 1. Localizar pasta de rede e copiar planilha localmente
-$networkPath = $null
-$useFile = $null
-
+# 1. Localizar diretorios candidatos e o arquivo mais recente
+$candidateDirs = @()
+$ticketDir = $null
 if (Test-Path $networkDirParent) {
-    try {
-        # Busca pasta com wildcard "09. TICKET*" para evitar problemas com acentuacao
-        $targetDir = Get-ChildItem -Path $networkDirParent -Directory | Where-Object { $_.Name -like "09. TICKET*" } | Select-Object -First 1
-        if ($null -ne $targetDir) {
-            $candidateFile = Get-ChildItem -Path $targetDir.FullName -Filter "*ABASTECIMENTO*.xlsx" | Select-Object -First 1
-            if ($null -ne $candidateFile) {
-                $networkPath = $candidateFile.FullName
-                Write-Output "Planilha de rede localizada: $networkPath"
-                
-                Write-Output "Copiando planilha da rede localmente..."
-                Copy-Item -Path $networkPath -Destination $localTempPath -Force
-                # Atualizar copia local de cache para fallback
-                Copy-Item -Path $networkPath -Destination $localCachePath -Force
-                $useFile = $localTempPath
-                Write-Output "Copia realizada e cache local sincronizado com sucesso."
-            } else {
-                Write-Warning "Planilha de abastecimento nao encontrada na pasta $($targetDir.FullName)."
-            }
-        } else {
-            Write-Warning "Pasta 09. TICKET RELATORIOS nao localizada no servidor de rede."
+    $ticketDir = Get-ChildItem -Path $networkDirParent -Directory | Where-Object { $_.Name -like "09. TICKET*" } | Select-Object -First 1
+    if ($null -ne $ticketDir) {
+        $candidateDirs += $ticketDir.FullName
+    }
+}
+$downloadsDir = "$HOME\Downloads"
+if (Test-Path $downloadsDir) {
+    $candidateDirs += $downloadsDir
+    $abastDown = Get-ChildItem -Path $downloadsDir -Directory -Filter "*ABASTECIMENTO*" -ErrorAction SilentlyContinue
+    foreach ($ad in $abastDown) { $candidateDirs += $ad.FullName }
+}
+
+$allCandidates = @()
+foreach ($cd in $candidateDirs) {
+    if (Test-Path -LiteralPath $cd) {
+        $files = Get-ChildItem -LiteralPath $cd -File -ErrorAction SilentlyContinue | Where-Object {
+            ($_.Name -like "*ABASTECIMENTO*.xls*" -or $_.Name -like "RFCV*.xls*") -and ($_.Name -notlike "~$*")
         }
-    } catch {
-        Write-Warning "Falha ao buscar ou copiar da rede: $($_.Exception.Message)"
+        $allCandidates += $files
+    }
+}
+
+$newestFile = $allCandidates | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+
+if ($null -ne $newestFile) {
+    $networkPath = $newestFile.FullName
+    Write-Output "Planilha mais recente localizada: $networkPath (Modificada em: $($newestFile.LastWriteTime))"
+    Write-Output "Copiando planilha localmente..."
+    Copy-Item -LiteralPath $networkPath -Destination $localTempPath -Force
+    Copy-Item -LiteralPath $networkPath -Destination $localCachePath -Force
+    $useFile = $localTempPath
+    Write-Output "Copia realizada e cache local sincronizado com sucesso."
+    
+    # Se o arquivo mais recente estiver em pasta local/downloads, replica para a rede
+    if ($null -ne $ticketDir -and (Test-Path -LiteralPath $ticketDir.FullName)) {
+        try {
+            $destNetFile = Join-Path $ticketDir.FullName $newestFile.Name
+            if (-not (Test-Path -LiteralPath $destNetFile) -or (Get-Item -LiteralPath $destNetFile).LastWriteTime -lt $newestFile.LastWriteTime) {
+                Copy-Item -LiteralPath $newestFile.FullName -Destination $destNetFile -Force
+                Write-Output "Arquivo replicado para a rede: $destNetFile"
+            }
+            $destBi = Join-Path $ticketDir.FullName "RELATORIO ABASTECIMENTO - BI.xlsx"
+            Copy-Item -LiteralPath $newestFile.FullName -Destination $destBi -Force
+        } catch {
+            Write-Warning "Nao foi possivel sincronizar arquivo na rede: $($_.Exception.Message)"
+        }
     }
 } else {
-    Write-Warning "Diretorio de rede inacessivel: $networkDirParent"
+    Write-Warning "Nenhum arquivo novo encontrado nas pastas candidatas."
 }
 
 if ($null -eq $useFile) {
@@ -142,8 +164,13 @@ try {
     }
     
     if ($null -eq $sheet) {
-        Write-Error "Aba 'Transacoes' nao foi localizada no arquivo Excel."
-        Exit 1
+        if ($workbook.Worksheets.Count -gt 0) {
+            $sheet = $workbook.Worksheets.Item(1)
+            Write-Output "Aba 'Transacoes' nao encontrada por nome; usando primeira aba disponivel: $($sheet.Name)"
+        } else {
+            Write-Error "Nenhuma aba foi localizada no arquivo Excel."
+            Exit 1
+        }
     }
     
     Write-Output "Processando aba $($sheet.Name)..."
@@ -166,6 +193,16 @@ try {
     
     $findCol = {
         param($patterns)
+        # 1. Correspondencia exata primeiro
+        foreach ($p in $patterns) {
+            $pNorm = $p.ToUpper().Normalize([System.Text.NormalizationForm]::FormD) -replace "\p{M}", ""
+            foreach ($key in $headerMap.Keys) {
+                if ($key -eq $pNorm) {
+                    return $headerMap[$key]
+                }
+            }
+        }
+        # 2. Correspondencia por substring
         foreach ($p in $patterns) {
             $pNorm = $p.ToUpper().Normalize([System.Text.NormalizationForm]::FormD) -replace "\p{M}", ""
             foreach ($key in $headerMap.Keys) {
@@ -335,25 +372,40 @@ $gitPath = "C:\Program Files\Git\cmd\git.exe"
 if (Test-Path $gitPath) {
     $gitStatus = & $gitPath status --porcelain veiculos_data.js
     if ($null -ne $gitStatus -and $gitStatus.ToString().Trim() -ne "") {
-        Write-Output "Mudancas detectadas! Atualizando a versao do Cache no Service Worker (sw.js)..."
+        Write-Output "Mudancas detectadas! Atualizando a versao do Cache no Service Worker (sw.js) e index.html..."
+        $timestamp = Get-Date -Format "yyyyMMddHHmmss"
         $swPath = "$PSScriptRoot\sw.js"
         if (Test-Path $swPath) {
             try {
                 $swContent = [System.IO.File]::ReadAllText($swPath)
-                $timestamp = Get-Date -Format "yyyyMMddHHmmss"
-                $newCacheNameLine = "const CACHE_NAME = 'jle-bi-v3.16.$timestamp';"
-                $swContent = [regex]::Replace($swContent, "const CACHE_NAME = '([^']+)';", $newCacheNameLine)
-                $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
-                [System.IO.File]::WriteAllText($swPath, $swContent, $utf8NoBom)
-                Write-Output "Cache do Service Worker atualizado para: jle-bi-v3.16.$timestamp"
+                if ($swContent -match "const CACHE_NAME = '([^']+)';") {
+                    $newCacheNameLine = "const CACHE_NAME = 'jle-bi-v3.17.$timestamp';"
+                    $swContent = [regex]::Replace($swContent, "const CACHE_NAME = '([^']+)';", $newCacheNameLine)
+                    $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+                    [System.IO.File]::WriteAllText($swPath, $swContent, $utf8NoBom)
+                    Write-Output "Cache do Service Worker atualizado para: jle-bi-v3.17.$timestamp"
+                }
             } catch {
                 Write-Warning "Nao foi possivel atualizar o sw.js: $($_.Exception.Message)"
             }
         }
 
+        # Atualizar cache-busting em index.html
+        $indexPath = "$PSScriptRoot\index.html"
+        if (Test-Path $indexPath) {
+            try {
+                $indexContent = [System.IO.File]::ReadAllText($indexPath, [System.Text.Encoding]::UTF8)
+                $indexContent = [regex]::Replace($indexContent, 'veiculos_data\.js\?v=[^"''\s>]+', "veiculos_data.js?v=$timestamp")
+                [System.IO.File]::WriteAllText($indexPath, $indexContent, [System.Text.Encoding]::UTF8)
+                Write-Output "index.html atualizado com tag de versao: veiculos_data.js?v=$timestamp"
+            } catch {
+                Write-Warning "Nao foi possivel atualizar o index.html: $($_.Exception.Message)"
+            }
+        }
+
         Write-Output "Enviando commits ao GitHub..."
-        & $gitPath add veiculos_data.js sw.js
-        & $gitPath commit -m "data(veiculos): atualizacao automatica da base de veiculos a partir da rede"
+        & $gitPath add veiculos_data.js veiculos_local.xlsx sw.js index.html
+        & $gitPath commit -m "data(veiculos): atualizacao automatica da base de veiculos ($timestamp)"
         & $gitPath push origin main
         Write-Output "Dados publicados com sucesso no repositorio remoto!"
     } else {
