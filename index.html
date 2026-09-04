@@ -2162,13 +2162,16 @@
                 </div>
             </section>
 
-            <!-- Sub Tab Selector (Indicadores / Fechamento de Terceiros / Relatório) -->
+            <!-- Sub Tab Selector (Indicadores / Medições / Fechamento de Terceiros / Relatório) -->
             <div class="dashboard-tabs" id="sar-sub-tabs" style="margin-bottom: 20px;">
                 <button class="tab-btn active" id="sar-tab-btn-indicators" onclick="switchSarTab('indicators')">
                     <i class="fa-solid fa-chart-column"></i> Indicadores
                 </button>
+                <button class="tab-btn" id="sar-tab-btn-medicao" onclick="switchSarTab('medicao')">
+                    <i class="fa-solid fa-file-invoice-dollar"></i> Medições
+                </button>
                 <button class="tab-btn" id="sar-tab-btn-fechamento" onclick="switchSarTab('fechamento')">
-                    <i class="fa-solid fa-file-invoice-dollar"></i> Fechamento de Terceiros
+                    <i class="fa-solid fa-hand-holding-dollar"></i> Fechamento de Terceiros
                 </button>
                 <button class="tab-btn" id="sar-tab-btn-table" onclick="switchSarTab('table')">
                     <i class="fa-solid fa-list-check"></i> Relatório de SARs
@@ -2200,7 +2203,7 @@
                             </div>
                         </div>
                         <div class="kpi-icon-container" style="background: rgba(56,139,253,0.1);">
-                            <i class="fa-solid fa-file-invoice-dollar" style="color: #388bfd;"></i>
+                            <i class="fa-solid fa-clock-rotate-left" style="color: #388bfd;"></i>
                         </div>
                     </div>
                     <div class="sar-kpi-card kpi-relatorio">
@@ -2280,6 +2283,167 @@
                                     <tr><td colspan="5" style="text-align:center; color: var(--text-secondary); padding: 30px 0;">Carregando executores...</td></tr>
                                 </tbody>
                                 <tfoot id="sar-performance-table-footer">
+                                    <!-- Populated dynamically -->
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sub Tab Pane: Medições Claro (Etapa 2 - Preenchimento Douglas) -->
+            <div id="subview-sar-medicao" class="subtab-pane" style="display: none; padding-bottom: 24px;">
+                <!-- KPIs de Medição -->
+                <div class="sar-kpi-grid">
+                    <!-- KPI 1: Total Medição (Coluna AK > 0) -->
+                    <div class="sar-kpi-card kpi-med-total" style="border-left-color: #f59e0b;">
+                        <div class="kpi-info" style="flex-grow: 1;">
+                            <span class="sar-kpi-title" style="color: #f59e0b;">TOTAL MEDIÇÃO (VALOR AK)</span>
+                            <h3 class="sar-kpi-value" id="sar-kpi-medicao-total" style="color: #f59e0b;">R$ 0,00</h3>
+                            <div class="sar-kpi-footer">
+                                <span id="sar-kpi-medicao-total-sub">0 OSs com medição preenchida</span>
+                            </div>
+                        </div>
+                        <div class="kpi-icon-container" style="background: rgba(245,158,11,0.12); color: #f59e0b;">
+                            <i class="fa-solid fa-coins"></i>
+                        </div>
+                    </div>
+
+                    <!-- KPI 2: Medição Enviada -->
+                    <div class="sar-kpi-card kpi-med-enviada" style="border-left-color: #388bfd;">
+                        <div class="kpi-info" style="flex-grow: 1;">
+                            <span class="sar-kpi-title" style="color: #388bfd;">MEDIÇÃO ENVIADA</span>
+                            <h3 class="sar-kpi-value" id="sar-kpi-medicao-enviada" style="color: #388bfd;">R$ 0,00</h3>
+                            <div class="sar-kpi-footer">
+                                <span id="sar-kpi-medicao-enviada-sub">0 OSs | 0% do total</span>
+                            </div>
+                        </div>
+                        <div class="kpi-icon-container" style="background: rgba(56,139,253,0.12); color: #388bfd;">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </div>
+                    </div>
+
+                    <!-- KPI 3: Finalizado -->
+                    <div class="sar-kpi-card kpi-med-finalizado" style="border-left-color: #10b981;">
+                        <div class="kpi-info" style="flex-grow: 1;">
+                            <span class="sar-kpi-title" style="color: #10b981;">FINALIZADO</span>
+                            <h3 class="sar-kpi-value" id="sar-kpi-medicao-finalizado" style="color: #10b981;">R$ 0,00</h3>
+                            <div class="sar-kpi-footer">
+                                <span id="sar-kpi-medicao-finalizado-sub">0 OSs | 0% do total</span>
+                            </div>
+                        </div>
+                        <div class="kpi-icon-container" style="background: rgba(16,185,129,0.12); color: #10b981;">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                    </div>
+
+                    <!-- KPI 4: Pedido Emitido -->
+                    <div class="sar-kpi-card kpi-med-pedido" style="border-left-color: #a855f7;">
+                        <div class="kpi-info" style="flex-grow: 1;">
+                            <span class="sar-kpi-title" style="color: #a855f7;">PEDIDO EMITIDO</span>
+                            <h3 class="sar-kpi-value" id="sar-kpi-medicao-pedido" style="color: #a855f7;">R$ 0,00</h3>
+                            <div class="sar-kpi-footer">
+                                <span id="sar-kpi-medicao-pedido-sub">0 OSs | 0% do total</span>
+                            </div>
+                        </div>
+                        <div class="kpi-icon-container" style="background: rgba(168,85,247,0.12); color: #a855f7;">
+                            <i class="fa-solid fa-receipt"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Barra de Filtros Internos da Medição -->
+                <div class="sar-card" style="margin-bottom: 20px; padding: 14px 18px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+                        <!-- Segmented Switch Status Medição -->
+                        <div class="sar-medicao-segmented-group" style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                            <span style="font-size: 12px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; margin-right: 4px;">Status:</span>
+                            <button class="sar-pill-btn active" id="sar-med-btn-status-todos" onclick="setSarMedicaoStatus('TODOS')">
+                                <i class="fa-solid fa-layer-group"></i> Todos os 3 Status
+                            </button>
+                            <button class="sar-pill-btn" id="sar-med-btn-status-enviada" onclick="setSarMedicaoStatus('MEDIÇÃO ENVIADA')">
+                                <i class="fa-solid fa-paper-plane"></i> Medição Enviada
+                            </button>
+                            <button class="sar-pill-btn" id="sar-med-btn-status-finalizado" onclick="setSarMedicaoStatus('FINALIZADO')">
+                                <i class="fa-solid fa-circle-check"></i> Finalizado
+                            </button>
+                            <button class="sar-pill-btn" id="sar-med-btn-status-pedido" onclick="setSarMedicaoStatus('PEDIDO EMITIDO')">
+                                <i class="fa-solid fa-receipt"></i> Pedido Emitido
+                            </button>
+                        </div>
+
+                        <!-- Filtro Competência Medição (Data Coluna AJ) + Busca + Botão Excel -->
+                        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                                <label for="sar-medicao-filter-competencia" style="font-size: 12px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase;">Competência (Data AJ):</label>
+                                <select id="sar-medicao-filter-competencia" class="sar-select" style="min-width: 170px;" onchange="onSarMedicaoCompetenciaChange(this.value)">
+                                    <option value="">Todas as Competências</option>
+                                </select>
+                            </div>
+
+                            <div style="position: relative; display: flex; align-items: center;">
+                                <input type="text" id="sar-medicao-search" placeholder="Buscar medição..." oninput="onSarMedicaoSearch(this.value)"
+                                    style="padding: 7px 10px 7px 28px; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 12px; outline: none; width: 160px; transition: border-color 0.2s;"
+                                    onfocus="this.style.borderColor='var(--color-primary)'" onblur="this.style.borderColor='var(--border-color)'">
+                                <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 9px; color: var(--text-secondary); font-size: 11px; pointer-events: none;"></i>
+                            </div>
+
+                            <button class="btn-export" onclick="exportSarMedicaoToExcel()" title="Exportar Medições para Excel" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; font-size: 12px; font-weight: 600; background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.3); border-radius: 8px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(16,185,129,0.25)'" onmouseout="this.style.background='rgba(16,185,129,0.15)'">
+                                <i class="fa-solid fa-file-excel"></i> Exportar Medições (.xlsx)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráficos Row Medição -->
+                <div class="sar-grid-fechamento-charts" style="display: grid; grid-template-columns: 1fr 2fr; gap: 16px; margin-bottom: 20px;">
+                    <!-- Gráfico 1: Distribuição por Status (Coluna AK) -->
+                    <div class="sar-card">
+                        <div class="sar-card-title">Distribuição de Valor por Status (Coluna AK)</div>
+                        <div class="sar-chart-container" style="height: 260px;">
+                            <canvas id="sar-chart-medicao-distribuicao"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Gráfico 2: Evolução das Medições por Competência (Data Coluna AJ) -->
+                    <div class="sar-card">
+                        <div class="sar-card-title">
+                            <span id="sar-chart-medicao-evolution-title">Evolução de Medições por Competência (Data da Coluna AJ)</span>
+                        </div>
+                        <div class="sar-chart-container" style="height: 260px;">
+                            <canvas id="sar-chart-medicao-evolution"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabela Detalhada de Medições -->
+                <div class="sar-grid-1col-wide">
+                    <div class="sar-card" style="overflow: hidden;">
+                        <div class="sar-card-title" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                            <span>Relação Detalhada de Medições (Etapa 2 - Preenchimento Douglas)</span>
+                            <span id="sar-medicao-count-badge" style="font-size: 12px; color: var(--text-secondary); background: var(--bg-input); padding: 4px 10px; border-radius: 12px; border: 1px solid var(--border-color);">0 medições listadas</span>
+                        </div>
+
+                        <div class="sar-table-wrapper sar-no-scrollbar" style="border: none; max-height: 480px; overflow-y: auto; width: 100%;">
+                            <table class="sar-performance-table sar-medicao-table" style="width: 100%; border-collapse: collapse;">
+                                <thead>
+                                    <tr>
+                                        <th onclick="sortSarMedicao('cod')" style="cursor:pointer; user-select: none; text-align: left;" id="sar-med-th-cod">Código <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarMedicao('cidade')" style="cursor:pointer; user-select: none; text-align: left;" id="sar-med-th-cidade">Cidade <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarMedicao('area_tecnica')" style="cursor:pointer; text-align: center; white-space: nowrap; user-select: none;" id="sar-med-th-area">Área <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarMedicao('servico')" style="cursor:pointer; text-align: left; user-select: none;" id="sar-med-th-servico">Serviço <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarMedicao('data_medicao')" style="cursor:pointer; text-align: center; white-space: nowrap; user-select: none; color: #388bfd; font-weight: 700;" id="sar-med-th-dtmed">Data Medição (AJ) <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarMedicao('valor_medicao')" style="cursor:pointer; text-align: right; white-space: nowrap; user-select: none; color: #f59e0b; font-weight: 700;" id="sar-med-th-valmed">Valor Medição AK (R$) <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarMedicao('status')" style="cursor:pointer; text-align: center; white-space: nowrap; user-select: none;" id="sar-med-th-status">Status Geral <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarMedicao('num_wf')" style="cursor:pointer; text-align: center; white-space: nowrap; user-select: none;" id="sar-med-th-wf">N° WF <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarMedicao('data_pedido')" style="cursor:pointer; text-align: center; white-space: nowrap; user-select: none;" id="sar-med-th-dtped">Data Pedido <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarMedicao('num_pedido')" style="cursor:pointer; text-align: center; white-space: nowrap; user-select: none;" id="sar-med-th-numped">N° Pedido <i class="fa-solid fa-sort"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="sar-medicao-table-body">
+                                    <tr><td colspan="10" style="text-align:center; color: var(--text-secondary); padding: 30px 0;">Carregando medições...</td></tr>
+                                </tbody>
+                                <tfoot id="sar-medicao-table-footer">
                                     <!-- Populated dynamically -->
                                 </tfoot>
                             </table>
@@ -2478,12 +2642,14 @@
                                         <th style="width: 72px;" onclick="sortSarTable('prazo')" style="cursor:pointer; user-select: none;">Prazo <i class="fa-solid fa-sort"></i></th>
                                         <th style="width: 85px; text-align: right;" onclick="sortSarTable('total_terceiros')" style="cursor:pointer; user-select: none;">Terceiros <i class="fa-solid fa-sort"></i></th>
                                         <th style="width: 85px; text-align: right;" onclick="sortSarTable('previa_medicao')" style="cursor:pointer; user-select: none;">Prévia Med. <i class="fa-solid fa-sort"></i></th>
+                                        <th style="width: 75px; text-align: center; color: #388bfd;" onclick="sortSarTable('data_medicao')" style="cursor:pointer; user-select: none;">Data Med. <i class="fa-solid fa-sort"></i></th>
+                                        <th style="width: 85px; text-align: right; color: #f59e0b;" onclick="sortSarTable('valor_medicao')" style="cursor:pointer; user-select: none;">Valor Med. <i class="fa-solid fa-sort"></i></th>
                                         <th style="width: 42px; text-align: center;" onclick="sortSarTable('tempo_dias')" style="cursor:pointer; user-select: none;">Dias <i class="fa-solid fa-sort"></i></th>
                                         <th style="width: 42px; text-align: center;" onclick="sortSarTable('atraso_dias')" style="cursor:pointer; user-select: none;">Atr. <i class="fa-solid fa-sort"></i></th>
                                     </tr>
                                 </thead>
                                 <tbody id="sar-table-body">
-                                    <tr><td colspan="18" style="text-align:center; color: var(--text-secondary); padding: 30px;">Carregando registros SAR...</td></tr>
+                                    <tr><td colspan="20" style="text-align:center; color: var(--text-secondary); padding: 30px;">Carregando registros SAR...</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -3224,8 +3390,8 @@
     <script src="gestao_os_app.js?v=4.2"></script>
     <script src="mdu_data.js"></script>
     <script src="mdu_app.js?v=1.3"></script>
-    <script src="sar_data.js?v=3.52"></script>
-    <script src="sar_app.js?v=3.52"></script>
+    <script src="sar_data.js?v=3.53"></script>
+    <script src="sar_app.js?v=3.53"></script>
     <script src="manutencao_data.js"></script>
     <script src="manutencao_app.js"></script>
     <script src="parcelamentos_data.js"></script>

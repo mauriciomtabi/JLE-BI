@@ -392,6 +392,23 @@ def main():
         mes_idx_entrega = int(mes_num_entrega) if mes_num_entrega.isdigit() and 1 <= int(mes_num_entrega) <= 12 else 0
         mes_nome_entrega = MESES_PT[mes_idx_entrega] if mes_idx_entrega > 0 else "NÃO INFORMADO"
 
+        # Competência e Períodos (Data de Medição — Referência para Indicador de Medição)
+        competencia_medicao = get_competencia(dt_medicao_iso) if dt_medicao_iso else "Sem Data"
+        ano_medicao = dt_medicao_iso[:4] if dt_medicao_iso else "SEM DATA"
+        mes_num_medicao = dt_medicao_iso[5:7] if dt_medicao_iso and len(dt_medicao_iso) >= 7 else ""
+        mes_idx_medicao = int(mes_num_medicao) if mes_num_medicao.isdigit() and 1 <= int(mes_num_medicao) <= 12 else 0
+        mes_nome_medicao = MESES_PT[mes_idx_medicao] if mes_idx_medicao > 0 else "SEM DATA"
+
+        # Normalização canônica do Status para fins de Medição
+        st_clean = status.upper().strip()
+        status_medicao_grupo = "OUTROS"
+        if "MEDI" in st_clean and "ENVIAD" in st_clean:
+            status_medicao_grupo = "MEDIÇÃO ENVIADA"
+        elif "FINALIZ" in st_clean:
+            status_medicao_grupo = "FINALIZADO"
+        elif "PEDIDO" in st_clean and "EMIT" in st_clean:
+            status_medicao_grupo = "PEDIDO EMITIDO"
+
         # Resumo formatado de itens LPU para visualização/auditoria
         itens_l_resumo = []
         if q_211 > 0: itens_l_resumo.append(f"2.11 CB AS: {q_211:g}m")
@@ -432,6 +449,12 @@ def main():
             "data_entrega_fmt": format_date_br(dt_entrega_iso),
             "data_medicao": dt_medicao_iso,
             "data_medicao_fmt": format_date_br(dt_medicao_iso),
+            "competencia_medicao": competencia_medicao,
+            "ano_medicao": ano_medicao,
+            "mes_medicao": mes_nome_medicao,
+            "mes_num_medicao": mes_num_medicao,
+            "status_medicao_grupo": status_medicao_grupo,
+            "tem_medicao": bool(valor_medicao > 0),
             "num_wf": num_wf,
             "status_wf": status_wf,
             "competencia": competencia,
@@ -478,6 +501,22 @@ def main():
     competencias_entrega = sorted(list(set(r["competencia_entrega"] for r in records if r.get("competencia_entrega") and r["competencia_entrega"] != "NÃO INFORMADO")))
     anos_entrega = sorted(list(set(r["ano_entrega"] for r in records if r.get("ano_entrega") and r["ano_entrega"] != "NÃO INFORMADO")), reverse=True)
 
+    # Competências e Anos de Medição
+    comps_med_validas = [r["competencia_medicao"] for r in records if r.get("valor_medicao", 0) > 0 and r.get("competencia_medicao") and r["competencia_medicao"] not in ("SEM DATA (AJ)", "Sem Data")]
+    
+    def sort_comp_key(c):
+        parts = c.split("/")
+        if len(parts) == 2 and parts[1].isdigit():
+            m_idx = MESES_PT.index(parts[0]) if parts[0] in MESES_PT else 0
+            return (int(parts[1]), m_idx)
+        return (0, 0)
+
+    competencias_medicao = sorted(list(set(comps_med_validas)), key=sort_comp_key, reverse=True)
+    if any(r.get("valor_medicao", 0) > 0 and r.get("competencia_medicao") in ("SEM DATA (AJ)", "Sem Data") for r in records):
+        competencias_medicao.append("Sem Data")
+
+    anos_medicao = sorted(list(set(r["ano_medicao"] for r in records if r.get("valor_medicao", 0) > 0 and r.get("ano_medicao") and r["ano_medicao"] != "SEM DATA")), reverse=True)
+
     terceiros_l = sorted(list(set(r["classe_l"] for r in records if r.get("classe_l"))))
     terceiros_f = sorted(list(set(r["classe_f"] for r in records if r.get("classe_f"))))
     todos_terceiros = sorted(list(set(terceiros_l + terceiros_f)))
@@ -489,6 +528,18 @@ def main():
     tot_geral_previa = round(sum(r["previa_medicao"] for r in records), 2)
     tot_geral_l = round(sum(r["valor_classe_l"] for r in records), 2)
     tot_geral_f = round(sum(r["valor_classe_f"] for r in records), 2)
+
+    # Totais Exclusivos de Medição (Coluna AK > 0 nos 3 status alvo)
+    rec_med_alvo = [r for r in records if r.get("valor_medicao", 0) > 0 and r.get("status_medicao_grupo") in ("MEDIÇÃO ENVIADA", "FINALIZADO", "PEDIDO EMITIDO")]
+    tot_med_geral = round(sum(r["valor_medicao"] for r in rec_med_alvo), 2)
+    tot_med_enviada = round(sum(r["valor_medicao"] for r in rec_med_alvo if r["status_medicao_grupo"] == "MEDIÇÃO ENVIADA"), 2)
+    tot_med_finalizado = round(sum(r["valor_medicao"] for r in rec_med_alvo if r["status_medicao_grupo"] == "FINALIZADO"), 2)
+    tot_med_pedido = round(sum(r["valor_medicao"] for r in rec_med_alvo if r["status_medicao_grupo"] == "PEDIDO EMITIDO"), 2)
+
+    qtd_med_geral = len(rec_med_alvo)
+    qtd_med_enviada = len([r for r in rec_med_alvo if r["status_medicao_grupo"] == "MEDIÇÃO ENVIADA"])
+    qtd_med_finalizado = len([r for r in rec_med_alvo if r["status_medicao_grupo"] == "FINALIZADO"])
+    qtd_med_pedido = len([r for r in rec_med_alvo if r["status_medicao_grupo"] == "PEDIDO EMITIDO"])
 
     metadata = {
         "total_records": len(records),
@@ -502,6 +553,8 @@ def main():
         "anos": anos,
         "competencias_entrega": competencias_entrega,
         "anos_entrega": anos_entrega,
+        "competencias_medicao": competencias_medicao,
+        "anos_medicao": anos_medicao,
         "terceiros_l": terceiros_l,
         "terceiros_f": terceiros_f,
         "todos_terceiros": todos_terceiros,
@@ -511,6 +564,16 @@ def main():
             "total_previa_medicao": tot_geral_previa,
             "total_classe_l": tot_geral_l,
             "total_classe_f": tot_geral_f
+        },
+        "medicao": {
+            "total_geral": tot_med_geral,
+            "qtd_geral": qtd_med_geral,
+            "total_medicao_enviada": tot_med_enviada,
+            "qtd_medicao_enviada": qtd_med_enviada,
+            "total_finalizado": tot_med_finalizado,
+            "qtd_finalizado": qtd_med_finalizado,
+            "total_pedido_emitido": tot_med_pedido,
+            "qtd_pedido_emitido": qtd_med_pedido
         }
     }
 

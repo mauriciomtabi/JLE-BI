@@ -607,3 +607,89 @@
     }
 }
 
+/* -- Estilos do Painel de Medições (Coluna AK com Data Coluna AJ) -- */
+.sar-kpi-grid-5cols {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 14px;
+}
+
+@media (max-width: 1400px) {
+    .sar-kpi-grid-5cols {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
+
+@media (max-width: 900px) {
+    .sar-kpi-grid-5cols {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .sar-kpi-grid-5cols {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+.kpi-med-total::before, .kpi-medicao-resumo::before {
+    background-color: #f59e0b !important;
+}
+.kpi-med-enviada::before {
+    background-color: #388bfd !important;
+}
+.kpi-med-finalizado::before {
+    background-color: #10b981 !important;
+}
+.kpi-med-pedido::before {
+    background-color: #a855f7 !important;
+}
+
+.sar-badge-status-med-enviada {
+    background: rgba(56, 139, 253, 0.15);
+    color: #58a6ff;
+    border: 1px solid rgba(56, 139, 253, 0.3);
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.sar-badge-status-med-finalizado {
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.sar-badge-status-med-pedido {
+    background: rgba(168, 85, 247, 0.15);
+    color: #c084fc;
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.sar-badge-status-med-outro {
+    background: rgba(148, 163, 184, 0.15);
+    color: #cbd5e1;
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.sar-medicao-table tr:hover td {
+    background-color: rgba(56, 139, 253, 0.05);
+}
+

@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-09-04 10:01:58
+// Dados MDU Compactados - Gerado em: 2026-09-04 10:13:25
 window.MDU_METADATA = {
-    "generated_at": "2026-09-04 10:01:58",
+    "generated_at": "2026-09-04 10:13:25",
     "total_rows": 5599,
     "geocoded_new": 0
 };
@@ -143384,7 +143384,7 @@ window.MDU_DATA = [
         "data_adicio": "12/10/2017",
         "equipe": "Alessandro Fagundes",
         "primeira_visita": "13/09/2025",
-        "segunda_visita": "",
+        "segunda_visita": "28/08/2026",
         "obs_vistoria": "ADEQUADO",
         "data_interna": "13/09",
         "data_fusao": "13/09",
@@ -171564,7 +171564,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "29",
-        "relatorio_por": "JENIFFER",
+        "relatorio_por": "JENIFFER (SEM FOTO DA PONTAS DE CABO E DG DPS",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,

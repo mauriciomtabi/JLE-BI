@@ -23,6 +23,13 @@ let sarFechamentoSortColumn = 'totalPagar';
 let sarFechamentoSortOrder = 'desc';
 let sarActiveTerceiroData = null; // Dados para modal de auditoria
 
+// Estado do Painel de Medições (Coluna AK com data da Coluna AJ)
+let sarMedicaoStatusFiltro = 'TODOS'; // 'TODOS', 'MEDIÇÃO ENVIADA', 'FINALIZADO', 'PEDIDO EMITIDO'
+let sarMedicaoCompetenciaFiltro = ''; // Competência filtrada (MÊS/ANO da data de medição Coluna AJ)
+let sarMedicaoSearch = '';
+let sarMedicaoSortColumn = 'data_medicao';
+let sarMedicaoSortOrder = 'desc';
+
 // Estado de visualização de Granularidade Temporal
 let sarTimeGranularity = 'month'; // 'month' padrão
 
@@ -44,7 +51,9 @@ const sarCharts = {
     evolution: null,
     prazo: null,
     fechEvolution: null,
-    fechDistribuicao: null
+    fechDistribuicao: null,
+    medicaoDistribuicao: null,
+    medicaoEvolution: null
 };
 
 // Meses em Português para ordenação cronológica
@@ -156,6 +165,14 @@ function populateSarFilterSelects() {
 
         fechCompSelect.innerHTML = '<option value="">Todas as Competências</option>' + 
             compsSorted.map(c => `<option value="${c}" ${c === sarFechamentoCompetencia ? 'selected' : ''}>${c}</option>`).join('');
+    }
+
+    // 7. Select Competência de Medições (Data de Medição — Coluna AJ)
+    const medCompSelect = document.getElementById('sar-medicao-filter-competencia');
+    if (medCompSelect) {
+        const rawComps = meta.competencias_medicao || [...new Set(data.filter(r => r.valor_medicao > 0).map(r => r.competencia_medicao).filter(Boolean))];
+        medCompSelect.innerHTML = '<option value="">Todas as Competências</option>' + 
+            rawComps.map(c => `<option value="${c}" ${c === sarMedicaoCompetenciaFiltro ? 'selected' : ''}>${c}</option>`).join('');
     }
 }
 
@@ -318,12 +335,16 @@ function applySarFilters() {
 
     sarPage = 1;
     updateSarKpis(sarFilteredData);
+    updateSarMedicaoSummaryKPI(sarFilteredData);
     renderSarCharts(sarFilteredData);
     renderSarPerformanceTable(sarFilteredData);
     renderSarTable(sarFilteredData);
     renderSarFechamentoKPIs(sarFilteredData);
     renderSarFechamentoCharts(sarFilteredData);
     renderSarFechamentoTable(sarFilteredData);
+    renderSarMedicaoKPIs(sarFilteredData);
+    renderSarMedicaoCharts(sarFilteredData);
+    renderSarMedicaoTable(sarFilteredData);
 }
 
 /**
@@ -992,6 +1013,8 @@ function renderSarTable(data) {
 
         const tercFmt = r.total_terceiros > 0 ? formatCurrencyBR(r.total_terceiros) : '-';
         const prevFmt = r.previa_medicao > 0 ? formatCurrencyBR(r.previa_medicao) : '-';
+        const dtMedFmt = r.data_medicao_fmt || '-';
+        const valMedFmt = r.valor_medicao > 0 ? formatCurrencyBR(r.valor_medicao) : '-';
 
         return `
             <tr>
@@ -1011,6 +1034,8 @@ function renderSarTable(data) {
                 <td><span class="sar-badge ${prazoBadgeClass}">${r.prazo || '-'}</span></td>
                 <td style="text-align: right; font-weight: 600; color: #f97316; white-space: nowrap;">${tercFmt}</td>
                 <td style="text-align: right; font-weight: 600; color: #10b981; white-space: nowrap;">${prevFmt}</td>
+                <td style="text-align: center; color: #388bfd; white-space: nowrap;">${dtMedFmt}</td>
+                <td style="text-align: right; font-weight: 600; color: #f59e0b; white-space: nowrap;">${valMedFmt}</td>
                 <td style="text-align: center; font-weight: 600;">${r.tempo_dias > 0 ? r.tempo_dias : '-'}</td>
                 <td style="text-align: center; color: ${r.atraso_dias > 0 ? '#f85149' : 'inherit'}; font-weight: ${r.atraso_dias > 0 ? '700' : '400'};">${r.atraso_dias > 0 ? r.atraso_dias : '-'}</td>
             </tr>
@@ -1076,26 +1101,34 @@ function sortSarTable(col) {
 }
 
 /**
- * Alterna entre Sub-Abas do SAR (Indicadores / Fechamento de Terceiros / Relatório)
+ * Alterna entre Sub-Abas do SAR (Indicadores / Medições / Fechamento de Terceiros / Relatório)
  */
 function switchSarTab(tabName) {
     const subIndicators = document.getElementById('subview-sar-indicators');
+    const subMedicao = document.getElementById('subview-sar-medicao');
     const subFechamento = document.getElementById('subview-sar-fechamento');
     const subTable = document.getElementById('subview-sar-table');
 
     const btnInd = document.getElementById('sar-tab-btn-indicators');
+    const btnMed = document.getElementById('sar-tab-btn-medicao');
     const btnFech = document.getElementById('sar-tab-btn-fechamento');
     const btnTab = document.getElementById('sar-tab-btn-table');
 
     if (subIndicators) subIndicators.style.display = (tabName === 'indicators') ? 'block' : 'none';
+    if (subMedicao) subMedicao.style.display = (tabName === 'medicao') ? 'block' : 'none';
     if (subFechamento) subFechamento.style.display = (tabName === 'fechamento') ? 'block' : 'none';
     if (subTable) subTable.style.display = (tabName === 'table') ? 'block' : 'none';
 
     if (btnInd) btnInd.classList.toggle('active', tabName === 'indicators');
+    if (btnMed) btnMed.classList.toggle('active', tabName === 'medicao');
     if (btnFech) btnFech.classList.toggle('active', tabName === 'fechamento');
     if (btnTab) btnTab.classList.toggle('active', tabName === 'table');
 
-    if (tabName === 'fechamento') {
+    if (tabName === 'medicao') {
+        renderSarMedicaoKPIs(sarFilteredData);
+        renderSarMedicaoCharts(sarFilteredData);
+        renderSarMedicaoTable(sarFilteredData);
+    } else if (tabName === 'fechamento') {
         renderSarFechamentoKPIs(sarFilteredData);
         renderSarFechamentoCharts(sarFilteredData);
         renderSarFechamentoTable(sarFilteredData);
@@ -1795,6 +1828,520 @@ function exportSarTerceiroIndividualToExcel() {
     XLSX.writeFile(wb, filename);
 }
 
+// ============================================================
+// CONTROLADORES DO PAINEL DE MEDIÇÕES (ETAPA 2 - DOUGLAS)
+// Considera estritamente Valor na Coluna AK e Data na Coluna AJ
+// ============================================================
+
+/**
+ * Atualiza o Card de Resumo de Medição na Sub-Aba Indicadores
+ */
+function updateSarMedicaoSummaryKPI(dataset) {
+    const elTotal = document.getElementById('sar-kpi-medicao-ind-total');
+    const elEnv = document.getElementById('sar-kpi-medicao-ind-enviada');
+    const elFin = document.getElementById('sar-kpi-medicao-ind-fin');
+    const elPed = document.getElementById('sar-kpi-medicao-ind-ped');
+    if (!elTotal) return;
+
+    let totGeral = 0;
+    let totEnv = 0, qtdEnv = 0;
+    let totFin = 0, qtdFin = 0;
+    let totPed = 0, qtdPed = 0;
+
+    (dataset || []).forEach(r => {
+        if (r.valor_medicao > 0) {
+            const stGrupo = r.status_medicao_grupo;
+            if (stGrupo === 'MEDIÇÃO ENVIADA') {
+                totEnv += r.valor_medicao;
+                qtdEnv++;
+                totGeral += r.valor_medicao;
+            } else if (stGrupo === 'FINALIZADO') {
+                totFin += r.valor_medicao;
+                qtdFin++;
+                totGeral += r.valor_medicao;
+            } else if (stGrupo === 'PEDIDO EMITIDO') {
+                totPed += r.valor_medicao;
+                qtdPed++;
+                totGeral += r.valor_medicao;
+            }
+        }
+    });
+
+    elTotal.innerText = formatCurrencyBR(totGeral);
+    if (elEnv) elEnv.innerText = `Env: ${formatCurrencyBR(totEnv)} (${qtdEnv})`;
+    if (elFin) elFin.innerText = `Fin: ${formatCurrencyBR(totFin)} (${qtdFin})`;
+    if (elPed) elPed.innerText = `Ped: ${formatCurrencyBR(totPed)} (${qtdPed})`;
+}
+
+/**
+ * Filtra os dados exclusivamente para o Painel de Medições
+ */
+function getSarMedicaoFilteredDataset(dataset) {
+    const base = dataset || window.SAR_DATA || [];
+    return base.filter(r => {
+        // Exige valor de medição na Coluna AK
+        if (!r.valor_medicao || r.valor_medicao <= 0) return false;
+
+        // Apenas os 3 status solicitados
+        const stGrupo = r.status_medicao_grupo;
+        if (!['MEDIÇÃO ENVIADA', 'FINALIZADO', 'PEDIDO EMITIDO'].includes(stGrupo)) {
+            return false;
+        }
+
+        // Filtro por Status da Medição
+        if (sarMedicaoStatusFiltro !== 'TODOS' && stGrupo !== sarMedicaoStatusFiltro) {
+            return false;
+        }
+
+        // Filtro por Competência da Data de Medição (Coluna AJ)
+        if (sarMedicaoCompetenciaFiltro && r.competencia_medicao !== sarMedicaoCompetenciaFiltro) {
+            return false;
+        }
+
+        // Busca Rápida na Medição
+        if (sarMedicaoSearch) {
+            const match =
+                (r.cod && r.cod.toLowerCase().includes(sarMedicaoSearch)) ||
+                (r.cidade && r.cidade.toLowerCase().includes(sarMedicaoSearch)) ||
+                (r.area_tecnica && r.area_tecnica.toLowerCase().includes(sarMedicaoSearch)) ||
+                (r.servico && r.servico.toLowerCase().includes(sarMedicaoSearch)) ||
+                (r.num_wf && r.num_wf.toLowerCase().includes(sarMedicaoSearch)) ||
+                (r.num_pedido && r.num_pedido.toLowerCase().includes(sarMedicaoSearch)) ||
+                (r.status && r.status.toLowerCase().includes(sarMedicaoSearch));
+            if (!match) return false;
+        }
+
+        return true;
+    });
+}
+
+/**
+ * Renderiza os KPIs da Sub-Aba de Medições
+ */
+function renderSarMedicaoKPIs(dataset) {
+    const base = dataset || window.SAR_DATA || [];
+    
+    // Dataset para os KPIs de Medição (respeita competência se selecionada)
+    const medDataset = base.filter(r => {
+        if (!r.valor_medicao || r.valor_medicao <= 0) return false;
+        if (!['MEDIÇÃO ENVIADA', 'FINALIZADO', 'PEDIDO EMITIDO'].includes(r.status_medicao_grupo)) return false;
+        if (sarMedicaoCompetenciaFiltro && r.competencia_medicao !== sarMedicaoCompetenciaFiltro) return false;
+        return true;
+    });
+
+    let totGeral = 0, qtdGeral = 0;
+    let totEnv = 0, qtdEnv = 0;
+    let totFin = 0, qtdFin = 0;
+    let totPed = 0, qtdPed = 0;
+
+    medDataset.forEach(r => {
+        const val = r.valor_medicao;
+        totGeral += val;
+        qtdGeral++;
+        if (r.status_medicao_grupo === 'MEDIÇÃO ENVIADA') {
+            totEnv += val;
+            qtdEnv++;
+        } else if (r.status_medicao_grupo === 'FINALIZADO') {
+            totFin += val;
+            qtdFin++;
+        } else if (r.status_medicao_grupo === 'PEDIDO EMITIDO') {
+            totPed += val;
+            qtdPed++;
+        }
+    });
+
+    const pctEnv = totGeral > 0 ? ((totEnv / totGeral) * 100).toFixed(1) : '0.0';
+    const pctFin = totGeral > 0 ? ((totFin / totGeral) * 100).toFixed(1) : '0.0';
+    const pctPed = totGeral > 0 ? ((totPed / totGeral) * 100).toFixed(1) : '0.0';
+
+    const elTotVal = document.getElementById('sar-kpi-medicao-total');
+    const elTotSub = document.getElementById('sar-kpi-medicao-total-sub');
+    const elEnvVal = document.getElementById('sar-kpi-medicao-enviada');
+    const elEnvSub = document.getElementById('sar-kpi-medicao-enviada-sub');
+    const elFinVal = document.getElementById('sar-kpi-medicao-finalizado');
+    const elFinSub = document.getElementById('sar-kpi-medicao-finalizado-sub');
+    const elPedVal = document.getElementById('sar-kpi-medicao-pedido');
+    const elPedSub = document.getElementById('sar-kpi-medicao-pedido-sub');
+
+    if (elTotVal) elTotVal.innerText = formatCurrencyBR(totGeral);
+    if (elTotSub) elTotSub.innerText = `${qtdGeral.toLocaleString('pt-BR')} OSs com medição preenchida`;
+
+    if (elEnvVal) elEnvVal.innerText = formatCurrencyBR(totEnv);
+    if (elEnvSub) elEnvSub.innerText = `${qtdEnv.toLocaleString('pt-BR')} OSs | ${pctEnv}% do total`;
+
+    if (elFinVal) elFinVal.innerText = formatCurrencyBR(totFin);
+    if (elFinSub) elFinSub.innerText = `${qtdFin.toLocaleString('pt-BR')} OSs | ${pctFin}% do total`;
+
+    if (elPedVal) elPedVal.innerText = formatCurrencyBR(totPed);
+    if (elPedSub) elPedSub.innerText = `${qtdPed.toLocaleString('pt-BR')} OSs | ${pctPed}% do total`;
+}
+
+/**
+ * Renderiza os Gráficos do Painel de Medições
+ */
+function renderSarMedicaoCharts(dataset) {
+    const base = dataset || window.SAR_DATA || [];
+    const medDataset = base.filter(r => {
+        if (!r.valor_medicao || r.valor_medicao <= 0) return false;
+        if (!['MEDIÇÃO ENVIADA', 'FINALIZADO', 'PEDIDO EMITIDO'].includes(r.status_medicao_grupo)) return false;
+        if (sarMedicaoCompetenciaFiltro && r.competencia_medicao !== sarMedicaoCompetenciaFiltro) return false;
+        return true;
+    });
+
+    // 1. Gráfico de Rosca / Distribuição por Status
+    let totEnv = 0, totFin = 0, totPed = 0;
+    medDataset.forEach(r => {
+        if (r.status_medicao_grupo === 'MEDIÇÃO ENVIADA') totEnv += r.valor_medicao;
+        else if (r.status_medicao_grupo === 'FINALIZADO') totFin += r.valor_medicao;
+        else if (r.status_medicao_grupo === 'PEDIDO EMITIDO') totPed += r.valor_medicao;
+    });
+
+    const ctxDist = document.getElementById('sar-chart-medicao-distribuicao');
+    if (ctxDist) {
+        if (sarCharts.medicaoDistribuicao) sarCharts.medicaoDistribuicao.destroy();
+
+        sarCharts.medicaoDistribuicao = new Chart(ctxDist, {
+            type: 'doughnut',
+            data: {
+                labels: ['Medição Enviada', 'Finalizado', 'Pedido Emitido'],
+                datasets: [{
+                    data: [Math.round(totEnv * 100) / 100, Math.round(totFin * 100) / 100, Math.round(totPed * 100) / 100],
+                    backgroundColor: ['#388bfd', '#10b981', '#a855f7'],
+                    borderColor: '#161b22',
+                    borderWidth: 2,
+                    hoverOffset: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '65%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#c9d1d9',
+                            font: { family: "'Outfit', 'Inter', sans-serif", size: 12 },
+                            padding: 14,
+                            usePointStyle: true
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: '#161b22',
+                        titleColor: '#f0f6fc',
+                        bodyColor: '#c9d1d9',
+                        borderColor: 'rgba(255,255,255,0.1)',
+                        borderWidth: 1,
+                        padding: 10,
+                        callbacks: {
+                            label: function(context) {
+                                const val = context.raw || 0;
+                                const total = (totEnv + totFin + totPed) || 1;
+                                const pct = ((val / total) * 100).toFixed(1);
+                                return ` ${context.label}: ${formatCurrencyBR(val)} (${pct}%)`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // 2. Gráfico de Evolução por Competência da Data de Medição (Coluna AJ)
+    const ctxEvol = document.getElementById('sar-chart-medicao-evolution');
+    if (ctxEvol) {
+        if (sarCharts.medicaoEvolution) sarCharts.medicaoEvolution.destroy();
+
+        // Para a evolução histórica, usamos todos os registros com medição
+        const allMedRecords = (window.SAR_DATA || []).filter(r => {
+            if (!r.valor_medicao || r.valor_medicao <= 0) return false;
+            if (!['MEDIÇÃO ENVIADA', 'FINALIZADO', 'PEDIDO EMITIDO'].includes(r.status_medicao_grupo)) return false;
+            if (sarFilters.cidade && r.cidade !== sarFilters.cidade) return false;
+            if (sarFilters.area_tecnica && r.area_tecnica !== sarFilters.area_tecnica) return false;
+            return true;
+        });
+
+        // Agrupar por Competência da data AJ
+        const compMap = {};
+        allMedRecords.forEach(r => {
+            const comp = r.competencia_medicao || 'SEM DATA (AJ)';
+            if (!compMap[comp]) {
+                compMap[comp] = { env: 0, fin: 0, ped: 0, total: 0 };
+            }
+            if (r.status_medicao_grupo === 'MEDIÇÃO ENVIADA') compMap[comp].env += r.valor_medicao;
+            else if (r.status_medicao_grupo === 'FINALIZADO') compMap[comp].fin += r.valor_medicao;
+            else if (r.status_medicao_grupo === 'PEDIDO EMITIDO') compMap[comp].ped += r.valor_medicao;
+            compMap[comp].total += r.valor_medicao;
+        });
+
+        // Ordenar cronologicamente (da mais antiga para a mais recente)
+        const sortedComps = Object.keys(compMap).sort((a, b) => {
+            if (a === 'SEM DATA (AJ)') return -1;
+            if (b === 'SEM DATA (AJ)') return 1;
+            const pA = a.split('/');
+            const pB = b.split('/');
+            const yA = parseInt(pA[1]) || 0;
+            const yB = parseInt(pB[1]) || 0;
+            if (yA !== yB) return yA - yB;
+            const mA = MESES_MAP_PT[(pA[0] || '').toUpperCase()] || 0;
+            const mB = MESES_MAP_PT[(pB[0] || '').toUpperCase()] || 0;
+            return mA - mB;
+        });
+
+        const labels = sortedComps;
+        const dataEnv = sortedComps.map(c => Math.round(compMap[c].env));
+        const dataFin = sortedComps.map(c => Math.round(compMap[c].fin));
+        const dataPed = sortedComps.map(c => Math.round(compMap[c].ped));
+
+        sarCharts.medicaoEvolution = new Chart(ctxEvol, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Medição Enviada',
+                        data: dataEnv,
+                        backgroundColor: '#388bfd',
+                        borderRadius: 4
+                    },
+                    {
+                        label: 'Finalizado',
+                        data: dataFin,
+                        backgroundColor: '#10b981',
+                        borderRadius: 4
+                    },
+                    {
+                        label: 'Pedido Emitido',
+                        data: dataPed,
+                        backgroundColor: '#a855f7',
+                        borderRadius: 4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        stacked: true,
+                        grid: { color: 'rgba(255,255,255,0.05)' },
+                        ticks: { color: '#8b949e', font: { family: "'Outfit', 'Inter', sans-serif", size: 11 } }
+                    },
+                    y: {
+                        stacked: true,
+                        grid: { color: 'rgba(255,255,255,0.05)' },
+                        ticks: {
+                            color: '#8b949e',
+                            font: { family: "'Outfit', 'Inter', sans-serif", size: 11 },
+                            callback: function(value) {
+                                return 'R$ ' + (value >= 1000 ? (value / 1000).toFixed(0) + 'k' : value);
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        align: 'end',
+                        labels: {
+                            color: '#c9d1d9',
+                            font: { family: "'Outfit', 'Inter', sans-serif", size: 11 },
+                            usePointStyle: true
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: '#161b22',
+                        titleColor: '#f0f6fc',
+                        bodyColor: '#c9d1d9',
+                        borderColor: 'rgba(255,255,255,0.1)',
+                        borderWidth: 1,
+                        padding: 10,
+                        callbacks: {
+                            label: function(context) {
+                                return ` ${context.dataset.label}: ${formatCurrencyBR(context.raw || 0)}`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+}
+
+/**
+ * Renderiza a Tabela Detalhada de Medições
+ */
+function renderSarMedicaoTable(dataset) {
+    const tbody = document.getElementById('sar-medicao-table-body');
+    const tfoot = document.getElementById('sar-medicao-table-footer');
+    const countBadge = document.getElementById('sar-medicao-count-badge');
+    if (!tbody) return;
+
+    const medData = getSarMedicaoFilteredDataset(dataset);
+
+    if (medData.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="10" style="text-align:center; color: var(--text-secondary); padding: 30px;">Nenhuma medição encontrada para os filtros selecionados.</td></tr>';
+        if (tfoot) tfoot.innerHTML = '';
+        if (countBadge) countBadge.innerText = '0 medições listadas';
+        return;
+    }
+
+    // Ordenação
+    const sorted = [...medData].sort((a, b) => {
+        let valA = a[sarMedicaoSortColumn];
+        let valB = b[sarMedicaoSortColumn];
+
+        if (valA === undefined || valA === null) valA = '';
+        if (valB === undefined || valB === null) valB = '';
+
+        if (typeof valA === 'number' && typeof valB === 'number') {
+            return sarMedicaoSortOrder === 'asc' ? valA - valB : valB - valA;
+        }
+        valA = valA.toString().toLowerCase();
+        valB = valB.toString().toLowerCase();
+        return sarMedicaoSortOrder === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
+    });
+
+    let totalSoma = 0;
+
+    tbody.innerHTML = sorted.map(r => {
+        totalSoma += (r.valor_medicao || 0);
+
+        let badgeClass = 'sar-badge-status-med-outro';
+        if (r.status_medicao_grupo === 'MEDIÇÃO ENVIADA') badgeClass = 'sar-badge-status-med-enviada';
+        else if (r.status_medicao_grupo === 'FINALIZADO') badgeClass = 'sar-badge-status-med-finalizado';
+        else if (r.status_medicao_grupo === 'PEDIDO EMITIDO') badgeClass = 'sar-badge-status-med-pedido';
+
+        const dtMedFmt = r.data_medicao_fmt || (r.data_medicao ? format_date_br(r.data_medicao) : '-');
+        const dtPedFmt = r.data_pedido_fmt || (r.data_pedido ? format_date_br(r.data_pedido) : '-');
+
+        return `
+            <tr>
+                <td style="font-weight: 700; color: var(--color-primary); white-space: nowrap;">${r.cod || '-'}</td>
+                <td style="white-space: nowrap;" title="${r.cidade || ''}">${r.cidade || '-'}</td>
+                <td style="text-align: center; white-space: nowrap;">${r.area_tecnica || '-'}</td>
+                <td style="max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${r.servico || ''}">${r.servico || '-'}</td>
+                <td style="text-align: center; white-space: nowrap; font-weight: 600; color: #388bfd;">${dtMedFmt}</td>
+                <td style="text-align: right; white-space: nowrap; font-weight: 700; color: #f59e0b;">${formatCurrencyBR(r.valor_medicao)}</td>
+                <td style="text-align: center; white-space: nowrap;"><span class="${badgeClass}">${r.status || '-'}</span></td>
+                <td style="text-align: center; white-space: nowrap; font-size: 11px;">${r.num_wf || '-'}</td>
+                <td style="text-align: center; white-space: nowrap; font-size: 11px;">${dtPedFmt}</td>
+                <td style="text-align: center; white-space: nowrap; font-size: 11px;">${r.num_pedido || '-'}</td>
+            </tr>
+        `;
+    }).join('');
+
+    if (tfoot) {
+        tfoot.innerHTML = `
+            <tr style="border-top: 2px solid var(--border-color); font-weight: 700; background: rgba(0,0,0,0.2);">
+                <td colspan="4" style="text-align: right; padding: 12px 14px; text-transform: uppercase; font-size: 12px; color: var(--text-secondary);">Totais Consolidados:</td>
+                <td style="text-align: center; padding: 12px 6px; color: #388bfd;">${sorted.length} OSs</td>
+                <td style="text-align: right; padding: 12px 14px; color: #f59e0b; font-size: 14px;">${formatCurrencyBR(totalSoma)}</td>
+                <td colspan="4"></td>
+            </tr>
+        `;
+    }
+
+    if (countBadge) {
+        countBadge.innerText = `${sorted.length.toLocaleString('pt-BR')} medições listadas | Total: ${formatCurrencyBR(totalSoma)}`;
+    }
+}
+
+/**
+ * Filtro por Status da Medição
+ */
+function setSarMedicaoStatus(st) {
+    sarMedicaoStatusFiltro = st;
+
+    const btnTodos = document.getElementById('sar-med-btn-status-todos');
+    const btnEnv = document.getElementById('sar-med-btn-status-enviada');
+    const btnFin = document.getElementById('sar-med-btn-status-finalizado');
+    const btnPed = document.getElementById('sar-med-btn-status-pedido');
+
+    if (btnTodos) btnTodos.classList.toggle('active', st === 'TODOS');
+    if (btnEnv) btnEnv.classList.toggle('active', st === 'MEDIÇÃO ENVIADA');
+    if (btnFin) btnFin.classList.toggle('active', st === 'FINALIZADO');
+    if (btnPed) btnPed.classList.toggle('active', st === 'PEDIDO EMITIDO');
+
+    renderSarMedicaoTable(sarFilteredData);
+}
+
+/**
+ * Filtro por Competência de Medição (Coluna AJ)
+ */
+function onSarMedicaoCompetenciaChange(comp) {
+    sarMedicaoCompetenciaFiltro = comp;
+    renderSarMedicaoKPIs(sarFilteredData);
+    renderSarMedicaoCharts(sarFilteredData);
+    renderSarMedicaoTable(sarFilteredData);
+}
+
+/**
+ * Busca rápida no Painel de Medições
+ */
+function onSarMedicaoSearch(val) {
+    sarMedicaoSearch = (val || '').trim().toLowerCase();
+    renderSarMedicaoTable(sarFilteredData);
+}
+
+/**
+ * Ordenação da Tabela de Medições
+ */
+function sortSarMedicao(col) {
+    if (sarMedicaoSortColumn === col) {
+        sarMedicaoSortOrder = sarMedicaoSortOrder === 'asc' ? 'desc' : 'asc';
+    } else {
+        sarMedicaoSortColumn = col;
+        sarMedicaoSortOrder = (col === 'valor_medicao' || col === 'data_medicao') ? 'desc' : 'asc';
+    }
+    renderSarMedicaoTable(sarFilteredData);
+}
+
+/**
+ * Exportação das Medições Filtradas para Excel
+ */
+function exportSarMedicaoToExcel() {
+    const medData = getSarMedicaoFilteredDataset(sarFilteredData);
+    if (!medData || medData.length === 0) {
+        alert("Nenhuma medição disponível para exportação com os filtros atuais.");
+        return;
+    }
+
+    if (typeof XLSX === 'undefined') {
+        alert("Biblioteca XLSX não carregada no navegador.");
+        return;
+    }
+
+    const rows = medData.map(r => ({
+        "Código SAR": r.cod || '',
+        "Cidade": r.cidade || '',
+        "Área Técnica": r.area_tecnica || '',
+        "Node": r.node || '',
+        "Site": r.site || '',
+        "Endereço": r.endereco || '',
+        "Serviço": r.servico || '',
+        "Data Medição (Coluna AJ)": r.data_medicao_fmt || (r.data_medicao ? format_date_br(r.data_medicao) : '-'),
+        "Competência Medição (Data AJ)": r.competencia_medicao || '-',
+        "Valor Medição R$ (Coluna AK)": r.valor_medicao || 0,
+        "Status Geral SAR": r.status || '',
+        "Status Medição (Grupo)": r.status_medicao_grupo || '',
+        "Nº WF": r.num_wf || '',
+        "Data Pedido": r.data_pedido_fmt || (r.data_pedido ? format_date_br(r.data_pedido) : '-'),
+        "Nº Pedido": r.num_pedido || '',
+        "Prévia Medição (R$)": r.previa_medicao || 0,
+        "Total Terceiros (R$)": r.total_terceiros || 0
+    }));
+
+    const ws = XLSX.utils.json_to_sheet(rows);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Medicoes_Etapa2");
+
+    const stLabel = sarMedicaoStatusFiltro.replace(/[^a-zA-Z0-9]/g, '_');
+    const compLabel = (sarMedicaoCompetenciaFiltro || 'Todas').replace(/[^a-zA-Z0-9]/g, '_');
+    const filename = `Medicoes_SAR_${stLabel}_${compLabel}_${new Date().toISOString().substring(0, 10)}.xlsx`;
+    XLSX.writeFile(wb, filename);
+}
+
 /**
  * Exportação Geral dos Dados do SAR para Excel via SheetJS
  */
@@ -1823,6 +2370,7 @@ function exportSarToExcel() {
         "Data de Entrada": r.data_entrada_fmt || '',
         "Data de Entrega": r.data_entrega_fmt || '',
         "Data Medição": r.data_medicao_fmt || '',
+        "Valor Medição (R$)": r.valor_medicao || 0,
         "Total Terceiros (R$)": r.total_terceiros || 0,
         "Valor Classe L (R$)": r.valor_classe_l || 0,
         "Valor Classe F (R$)": r.valor_classe_f || 0,
