@@ -64,7 +64,9 @@ if ($null -ne $newestFile) {
                 Write-Output "Arquivo replicado para a rede: $destNetFile"
             }
             $destBi = Join-Path $ticketDir.FullName "RELATORIO ABASTECIMENTO - BI.xlsx"
-            Copy-Item -LiteralPath $newestFile.FullName -Destination $destBi -Force
+            if ($newestFile.FullName -ne $destBi) {
+                Copy-Item -LiteralPath $newestFile.FullName -Destination $destBi -Force
+            }
         } catch {
             Write-Warning "Nao foi possivel sincronizar arquivo na rede: $($_.Exception.Message)"
         }
