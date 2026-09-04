@@ -8,8 +8,9 @@ $i_acute = [char]237
 $e_circumflex = [char]234
 $c_cedilla_caps = [char]199
 
-$candidateDirs = @(
-    "\\10.121.21.252\financeiro\Angelita\2026\TECNODRILL\FLUXO CAIXA",
+# Diretórios candidatos ORDENADOS POR PRIORIDADE (FLUXO CAIXA primeiro)
+$primaryDir = "\\10.121.21.252\financeiro\Angelita\2026\TECNODRILL\FLUXO CAIXA"
+$fallbackDirs = @(
     "\\10.121.21.252\financeiro\Angelita\2026\FLUXO DIARIO",
     "\\10.121.21.252\financeiro\Angelita\2026\TECNODRILL",
     "\\10.121.21.252\financeiro\Angelita\2026\FLUXO DIARIO\PLANILHAS ANTIGAS"
@@ -25,16 +26,34 @@ $useFile = $null
 $networkPath = $null
 $foundFiles = @()
 
-foreach ($dir in $candidateDirs) {
-    if (Test-Path $dir) {
-        try {
-            $files = Get-ChildItem -Path $dir -Filter "*.xlsx" -ErrorAction SilentlyContinue |
-                Where-Object { ($_.Name -match "Fluxo de Caixa Anal.*tico TEC.*NDRILL.*\.xlsx$" -or $_.Name -like "*TECONDRILL*.xlsx" -or $_.Name -like "*TECNODRILL*.xlsx") -and $_.Name -notlike "~$*" }
-            if ($null -ne $files) {
-                $foundFiles += $files
+# Filtro de nome de arquivo para Tecnodrill
+$fileFilter = {
+    ($_.Name -match "Fluxo de Caixa Anal.*tico TEC.*NDRILL.*\.xlsx$" -or $_.Name -like "*TECONDRILL*.xlsx" -or $_.Name -like "*TECNODRILL*.xlsx") -and
+    $_.Name -notlike "~$*" -and
+    $_.Name -notlike "*Confer*" -and
+    $_.Name -notlike "*Revisado*"
+}
+
+# 1. Buscar primeiro no diretorio primario (FLUXO CAIXA)
+if (Test-Path $primaryDir) {
+    try {
+        $files = Get-ChildItem -Path $primaryDir -Filter "*.xlsx" -ErrorAction SilentlyContinue | Where-Object $fileFilter
+        if ($null -ne $files) { $foundFiles += $files }
+    } catch {
+        Write-Warning "Falha ao inspecionar diretorio primario: $($_.Exception.Message)"
+    }
+}
+
+# 2. Se nao encontrou no primario, buscar nos fallbacks
+if ($foundFiles.Count -eq 0) {
+    foreach ($dir in $fallbackDirs) {
+        if (Test-Path $dir) {
+            try {
+                $files = Get-ChildItem -Path $dir -Filter "*.xlsx" -ErrorAction SilentlyContinue | Where-Object $fileFilter
+                if ($null -ne $files) { $foundFiles += $files }
+            } catch {
+                Write-Warning "Falha ao inspecionar diretorio $dir : $($_.Exception.Message)"
             }
-        } catch {
-            Write-Warning "Falha ao inspecionar diretorio $dir : $($_.Exception.Message)"
         }
     }
 }
@@ -42,7 +61,7 @@ foreach ($dir in $candidateDirs) {
 if ($foundFiles.Count -gt 0) {
     $networkFile = $foundFiles | Sort-Object LastWriteTime -Descending | Select-Object -First 1
     $networkPath = $networkFile.FullName
-    Write-Output "Arquivo Tecnodrill mais recente encontrado: $networkPath (Modificado em: $($networkFile.LastWriteTime))"
+    Write-Output "Arquivo Tecnodrill selecionado: $networkPath (Modificado em: $($networkFile.LastWriteTime))"
     try {
         Write-Output "Copiando planilha da rede localmente..."
         Copy-Item -Path $networkPath -Destination $localTempPath -Force
