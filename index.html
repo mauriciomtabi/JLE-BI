@@ -2291,14 +2291,14 @@
                 </div>
             </div>
 
-            <!-- Sub Tab Pane: Medições Claro (Etapa 2 - Preenchimento Douglas) -->
+            <!-- Sub Tab Pane: Medições Claro -->
             <div id="subview-sar-medicao" class="subtab-pane" style="display: none; padding-bottom: 24px;">
                 <!-- KPIs de Medição -->
                 <div class="sar-kpi-grid">
-                    <!-- KPI 1: Total Medição (Coluna AK > 0) -->
+                    <!-- KPI 1: Total Medição -->
                     <div class="sar-kpi-card kpi-med-total" style="border-left-color: #f59e0b;">
                         <div class="kpi-info" style="flex-grow: 1;">
-                            <span class="sar-kpi-title" style="color: #f59e0b;">TOTAL MEDIÇÃO (VALOR AK)</span>
+                            <span class="sar-kpi-title" style="color: #f59e0b;">TOTAL MEDIÇÃO</span>
                             <h3 class="sar-kpi-value" id="sar-kpi-medicao-total" style="color: #f59e0b;">R$ 0,00</h3>
                             <div class="sar-kpi-footer">
                                 <span id="sar-kpi-medicao-total-sub">0 OSs com medição preenchida</span>
@@ -2372,10 +2372,10 @@
                             </button>
                         </div>
 
-                        <!-- Filtro Competência Medição (Data Coluna AJ) + Busca + Botão Excel -->
+                        <!-- Filtro Competência Medição + Busca + Botão Excel -->
                         <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
                             <div style="display: flex; align-items: center; gap: 6px;">
-                                <label for="sar-medicao-filter-competencia" style="font-size: 12px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase;">Competência (Data AJ):</label>
+                                <label for="sar-medicao-filter-competencia" style="font-size: 12px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase;">Competência:</label>
                                 <select id="sar-medicao-filter-competencia" class="sar-select" style="min-width: 170px;" onchange="onSarMedicaoCompetenciaChange(this.value)">
                                     <option value="">Todas as Competências</option>
                                 </select>
@@ -2395,22 +2395,13 @@
                     </div>
                 </div>
 
-                <!-- Gráficos Row Medição -->
-                <div class="sar-grid-fechamento-charts" style="display: grid; grid-template-columns: 1fr 2fr; gap: 16px; margin-bottom: 20px;">
-                    <!-- Gráfico 1: Distribuição por Status (Coluna AK) -->
-                    <div class="sar-card">
-                        <div class="sar-card-title">Distribuição de Valor por Status (Coluna AK)</div>
-                        <div class="sar-chart-container" style="height: 260px;">
-                            <canvas id="sar-chart-medicao-distribuicao"></canvas>
-                        </div>
-                    </div>
-
-                    <!-- Gráfico 2: Evolução das Medições por Competência (Data Coluna AJ) -->
+                <!-- Gráfico de Evolução de Medições (Largura Total) -->
+                <div class="sar-grid-1col-wide" style="margin-bottom: 20px;">
                     <div class="sar-card">
                         <div class="sar-card-title">
-                            <span id="sar-chart-medicao-evolution-title">Evolução de Medições por Competência (Data da Coluna AJ)</span>
+                            <span id="sar-chart-medicao-evolution-title">Evolução de Medições</span>
                         </div>
-                        <div class="sar-chart-container" style="height: 260px;">
+                        <div class="sar-chart-container" style="height: 280px;">
                             <canvas id="sar-chart-medicao-evolution"></canvas>
                         </div>
                     </div>
@@ -2420,7 +2411,7 @@
                 <div class="sar-grid-1col-wide">
                     <div class="sar-card" style="overflow: hidden;">
                         <div class="sar-card-title" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-                            <span>Relação Detalhada de Medições (Etapa 2 - Preenchimento Douglas)</span>
+                            <span>Relação Detalhada de Medições</span>
                             <span id="sar-medicao-count-badge" style="font-size: 12px; color: var(--text-secondary); background: var(--bg-input); padding: 4px 10px; border-radius: 12px; border: 1px solid var(--border-color);">0 medições listadas</span>
                         </div>
 
@@ -2432,8 +2423,8 @@
                                         <th onclick="sortSarMedicao('cidade')" style="cursor:pointer; user-select: none; text-align: left;" id="sar-med-th-cidade">Cidade <i class="fa-solid fa-sort"></i></th>
                                         <th onclick="sortSarMedicao('area_tecnica')" style="cursor:pointer; text-align: center; white-space: nowrap; user-select: none;" id="sar-med-th-area">Área <i class="fa-solid fa-sort"></i></th>
                                         <th onclick="sortSarMedicao('servico')" style="cursor:pointer; text-align: left; user-select: none;" id="sar-med-th-servico">Serviço <i class="fa-solid fa-sort"></i></th>
-                                        <th onclick="sortSarMedicao('data_medicao')" style="cursor:pointer; text-align: center; white-space: nowrap; user-select: none; color: #388bfd; font-weight: 700;" id="sar-med-th-dtmed">Data Medição (AJ) <i class="fa-solid fa-sort"></i></th>
-                                        <th onclick="sortSarMedicao('valor_medicao')" style="cursor:pointer; text-align: right; white-space: nowrap; user-select: none; color: #f59e0b; font-weight: 700;" id="sar-med-th-valmed">Valor Medição AK (R$) <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarMedicao('data_medicao')" style="cursor:pointer; text-align: center; white-space: nowrap; user-select: none; color: #388bfd; font-weight: 700;" id="sar-med-th-dtmed">Data Medição <i class="fa-solid fa-sort"></i></th>
+                                        <th onclick="sortSarMedicao('valor_medicao')" style="cursor:pointer; text-align: right; white-space: nowrap; user-select: none; color: #f59e0b; font-weight: 700;" id="sar-med-th-valmed">Valor Medição (R$) <i class="fa-solid fa-sort"></i></th>
                                         <th onclick="sortSarMedicao('status')" style="cursor:pointer; text-align: center; white-space: nowrap; user-select: none;" id="sar-med-th-status">Status Geral <i class="fa-solid fa-sort"></i></th>
                                         <th onclick="sortSarMedicao('num_wf')" style="cursor:pointer; text-align: center; white-space: nowrap; user-select: none;" id="sar-med-th-wf">N° WF <i class="fa-solid fa-sort"></i></th>
                                         <th onclick="sortSarMedicao('data_pedido')" style="cursor:pointer; text-align: center; white-space: nowrap; user-select: none;" id="sar-med-th-dtped">Data Pedido <i class="fa-solid fa-sort"></i></th>
@@ -3390,8 +3381,8 @@
     <script src="gestao_os_app.js?v=4.2"></script>
     <script src="mdu_data.js"></script>
     <script src="mdu_app.js?v=1.3"></script>
-    <script src="sar_data.js?v=3.53"></script>
-    <script src="sar_app.js?v=3.53"></script>
+    <script src="sar_data.js?v=3.54"></script>
+    <script src="sar_app.js?v=3.54"></script>
     <script src="manutencao_data.js"></script>
     <script src="manutencao_app.js"></script>
     <script src="parcelamentos_data.js"></script>

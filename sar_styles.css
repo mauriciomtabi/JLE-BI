@@ -607,7 +607,7 @@
     }
 }
 
-/* -- Estilos do Painel de Medições (Coluna AK com Data Coluna AJ) -- */
+/* -- Estilos do Painel de Medições -- */
 .sar-kpi-grid-5cols {
     display: grid;
     grid-template-columns: repeat(5, 1fr) !important;

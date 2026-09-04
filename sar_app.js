@@ -23,9 +23,9 @@ let sarFechamentoSortColumn = 'totalPagar';
 let sarFechamentoSortOrder = 'desc';
 let sarActiveTerceiroData = null; // Dados para modal de auditoria
 
-// Estado do Painel de Medições (Coluna AK com data da Coluna AJ)
+// Estado do Painel de Medições
 let sarMedicaoStatusFiltro = 'TODOS'; // 'TODOS', 'MEDIÇÃO ENVIADA', 'FINALIZADO', 'PEDIDO EMITIDO'
-let sarMedicaoCompetenciaFiltro = ''; // Competência filtrada (MÊS/ANO da data de medição Coluna AJ)
+let sarMedicaoCompetenciaFiltro = ''; // Competência filtrada (MÊS/ANO da data de medição)
 let sarMedicaoSearch = '';
 let sarMedicaoSortColumn = 'data_medicao';
 let sarMedicaoSortOrder = 'desc';
@@ -167,7 +167,7 @@ function populateSarFilterSelects() {
             compsSorted.map(c => `<option value="${c}" ${c === sarFechamentoCompetencia ? 'selected' : ''}>${c}</option>`).join('');
     }
 
-    // 7. Select Competência de Medições (Data de Medição — Coluna AJ)
+    // 7. Select Competência de Medições (Data de Medição)
     const medCompSelect = document.getElementById('sar-medicao-filter-competencia');
     if (medCompSelect) {
         const rawComps = meta.competencias_medicao || [...new Set(data.filter(r => r.valor_medicao > 0).map(r => r.competencia_medicao).filter(Boolean))];
@@ -1829,48 +1829,15 @@ function exportSarTerceiroIndividualToExcel() {
 }
 
 // ============================================================
-// CONTROLADORES DO PAINEL DE MEDIÇÕES (ETAPA 2 - DOUGLAS)
-// Considera estritamente Valor na Coluna AK e Data na Coluna AJ
+// CONTROLADORES DO PAINEL DE MEDIÇÕES
+// Considera estritamente registros com medição preenchida
 // ============================================================
 
 /**
- * Atualiza o Card de Resumo de Medição na Sub-Aba Indicadores
+ * Card de Resumo de Medição na Sub-Aba Indicadores (Removido a pedido do usuário)
  */
 function updateSarMedicaoSummaryKPI(dataset) {
-    const elTotal = document.getElementById('sar-kpi-medicao-ind-total');
-    const elEnv = document.getElementById('sar-kpi-medicao-ind-enviada');
-    const elFin = document.getElementById('sar-kpi-medicao-ind-fin');
-    const elPed = document.getElementById('sar-kpi-medicao-ind-ped');
-    if (!elTotal) return;
-
-    let totGeral = 0;
-    let totEnv = 0, qtdEnv = 0;
-    let totFin = 0, qtdFin = 0;
-    let totPed = 0, qtdPed = 0;
-
-    (dataset || []).forEach(r => {
-        if (r.valor_medicao > 0) {
-            const stGrupo = r.status_medicao_grupo;
-            if (stGrupo === 'MEDIÇÃO ENVIADA') {
-                totEnv += r.valor_medicao;
-                qtdEnv++;
-                totGeral += r.valor_medicao;
-            } else if (stGrupo === 'FINALIZADO') {
-                totFin += r.valor_medicao;
-                qtdFin++;
-                totGeral += r.valor_medicao;
-            } else if (stGrupo === 'PEDIDO EMITIDO') {
-                totPed += r.valor_medicao;
-                qtdPed++;
-                totGeral += r.valor_medicao;
-            }
-        }
-    });
-
-    elTotal.innerText = formatCurrencyBR(totGeral);
-    if (elEnv) elEnv.innerText = `Env: ${formatCurrencyBR(totEnv)} (${qtdEnv})`;
-    if (elFin) elFin.innerText = `Fin: ${formatCurrencyBR(totFin)} (${qtdFin})`;
-    if (elPed) elPed.innerText = `Ped: ${formatCurrencyBR(totPed)} (${qtdPed})`;
+    // Card removido da aba Indicadores
 }
 
 /**
@@ -1879,7 +1846,7 @@ function updateSarMedicaoSummaryKPI(dataset) {
 function getSarMedicaoFilteredDataset(dataset) {
     const base = dataset || window.SAR_DATA || [];
     return base.filter(r => {
-        // Exige valor de medição na Coluna AK
+        // Exige valor de medição preenchido
         if (!r.valor_medicao || r.valor_medicao <= 0) return false;
 
         // Apenas os 3 status solicitados
@@ -1893,7 +1860,7 @@ function getSarMedicaoFilteredDataset(dataset) {
             return false;
         }
 
-        // Filtro por Competência da Data de Medição (Coluna AJ)
+        // Filtro por Competência da Data de Medição
         if (sarMedicaoCompetenciaFiltro && r.competencia_medicao !== sarMedicaoCompetenciaFiltro) {
             return false;
         }
@@ -1977,195 +1944,209 @@ function renderSarMedicaoKPIs(dataset) {
 }
 
 /**
- * Renderiza os Gráficos do Painel de Medições
+ * Renderiza o Gráfico de Evolução de Medições
  */
 function renderSarMedicaoCharts(dataset) {
-    const base = dataset || window.SAR_DATA || [];
-    const medDataset = base.filter(r => {
+    // Destruir gráfico de rosca se existir
+    if (sarCharts.medicaoDistribuicao) {
+        sarCharts.medicaoDistribuicao.destroy();
+        sarCharts.medicaoDistribuicao = null;
+    }
+
+    const ctxEvol = document.getElementById('sar-chart-medicao-evolution');
+    if (!ctxEvol) return;
+
+    if (sarCharts.medicaoEvolution) {
+        sarCharts.medicaoEvolution.destroy();
+        sarCharts.medicaoEvolution = null;
+    }
+
+    const titleEl = document.getElementById('sar-chart-medicao-evolution-title');
+    if (titleEl) {
+        titleEl.innerText = 'Evolução de Medições';
+    }
+
+    // Para a evolução histórica, usamos todos os registros com medição
+    const allMedRecords = (window.SAR_DATA || []).filter(r => {
         if (!r.valor_medicao || r.valor_medicao <= 0) return false;
         if (!['MEDIÇÃO ENVIADA', 'FINALIZADO', 'PEDIDO EMITIDO'].includes(r.status_medicao_grupo)) return false;
-        if (sarMedicaoCompetenciaFiltro && r.competencia_medicao !== sarMedicaoCompetenciaFiltro) return false;
+        if (sarFilters.cidade && r.cidade !== sarFilters.cidade) return false;
+        if (sarFilters.area_tecnica && r.area_tecnica !== sarFilters.area_tecnica) return false;
         return true;
     });
 
-    // 1. Gráfico de Rosca / Distribuição por Status
-    let totEnv = 0, totFin = 0, totPed = 0;
-    medDataset.forEach(r => {
-        if (r.status_medicao_grupo === 'MEDIÇÃO ENVIADA') totEnv += r.valor_medicao;
-        else if (r.status_medicao_grupo === 'FINALIZADO') totFin += r.valor_medicao;
-        else if (r.status_medicao_grupo === 'PEDIDO EMITIDO') totPed += r.valor_medicao;
+    // Agrupar por Competência da data de medição
+    const compMap = {};
+    allMedRecords.forEach(r => {
+        let comp = r.competencia_medicao;
+        if (!comp || comp === 'SEM DATA (AJ)' || comp === 'SEM DATA') comp = 'Sem Data';
+        if (!compMap[comp]) {
+            compMap[comp] = { env: 0, fin: 0, ped: 0, total: 0 };
+        }
+        if (r.status_medicao_grupo === 'MEDIÇÃO ENVIADA') compMap[comp].env += r.valor_medicao;
+        else if (r.status_medicao_grupo === 'FINALIZADO') compMap[comp].fin += r.valor_medicao;
+        else if (r.status_medicao_grupo === 'PEDIDO EMITIDO') compMap[comp].ped += r.valor_medicao;
+        compMap[comp].total += r.valor_medicao;
     });
 
-    const ctxDist = document.getElementById('sar-chart-medicao-distribuicao');
-    if (ctxDist) {
-        if (sarCharts.medicaoDistribuicao) sarCharts.medicaoDistribuicao.destroy();
+    // Ordenar cronologicamente (da mais antiga para a mais recente)
+    const sortedComps = Object.keys(compMap).sort((a, b) => {
+        if (a === 'Sem Data') return -1;
+        if (b === 'Sem Data') return 1;
+        const pA = a.split('/');
+        const pB = b.split('/');
+        const yA = parseInt(pA[1]) || 0;
+        const yB = parseInt(pB[1]) || 0;
+        if (yA !== yB) return yA - yB;
+        const mA = MESES_MAP_PT[(pA[0] || '').toUpperCase()] || 0;
+        const mB = MESES_MAP_PT[(pB[0] || '').toUpperCase()] || 0;
+        return mA - mB;
+    });
 
-        sarCharts.medicaoDistribuicao = new Chart(ctxDist, {
-            type: 'doughnut',
-            data: {
-                labels: ['Medição Enviada', 'Finalizado', 'Pedido Emitido'],
-                datasets: [{
-                    data: [Math.round(totEnv * 100) / 100, Math.round(totFin * 100) / 100, Math.round(totPed * 100) / 100],
-                    backgroundColor: ['#388bfd', '#10b981', '#a855f7'],
-                    borderColor: '#161b22',
-                    borderWidth: 2,
-                    hoverOffset: 6
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                cutout: '65%',
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            color: '#c9d1d9',
-                            font: { family: "'Outfit', 'Inter', sans-serif", size: 12 },
-                            padding: 14,
-                            usePointStyle: true
-                        }
-                    },
-                    tooltip: {
-                        backgroundColor: '#161b22',
-                        titleColor: '#f0f6fc',
-                        bodyColor: '#c9d1d9',
-                        borderColor: 'rgba(255,255,255,0.1)',
-                        borderWidth: 1,
-                        padding: 10,
-                        callbacks: {
-                            label: function(context) {
-                                const val = context.raw || 0;
-                                const total = (totEnv + totFin + totPed) || 1;
-                                const pct = ((val / total) * 100).toFixed(1);
-                                return ` ${context.label}: ${formatCurrencyBR(val)} (${pct}%)`;
-                            }
-                        }
-                    }
+    // Formatar rótulos curtos idênticos aos da aba Indicadores (ex: Set/26)
+    const labels = sortedComps.map(c => {
+        if (c === 'Sem Data') return 'Sem Data';
+        const parts = c.split('/');
+        if (parts.length === 2) {
+            const mesName = (parts[0] || '').toUpperCase().trim();
+            const mIdx = MESES_MAP_PT[mesName];
+            const anoStr = parts[1].trim();
+            const shortAno = anoStr.length === 4 ? anoStr.substring(2) : anoStr;
+            if (mIdx && MESES_PT_LABEL[mIdx]) {
+                return `${MESES_PT_LABEL[mIdx]}/${shortAno}`;
+            }
+        }
+        return c;
+    });
+
+    const dataEnv = sortedComps.map(c => Math.round(compMap[c].env));
+    const dataFin = sortedComps.map(c => Math.round(compMap[c].fin));
+    const dataPed = sortedComps.map(c => Math.round(compMap[c].ped));
+
+    const pluginList = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
+
+    sarCharts.medicaoEvolution = new Chart(ctxEvol, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Medição Enviada',
+                    data: dataEnv,
+                    backgroundColor: '#388bfd',
+                    borderColor: '#1d70d8',
+                    borderWidth: 1,
+                    borderRadius: 2,
+                    stack: 'sarMedicaoStack',
+                    barPercentage: 0.75,
+                    categoryPercentage: 0.85
+                },
+                {
+                    label: 'Finalizado',
+                    data: dataFin,
+                    backgroundColor: '#10b981',
+                    borderColor: '#059669',
+                    borderWidth: 1,
+                    borderRadius: 2,
+                    stack: 'sarMedicaoStack',
+                    barPercentage: 0.75,
+                    categoryPercentage: 0.85
+                },
+                {
+                    label: 'Pedido Emitido',
+                    data: dataPed,
+                    backgroundColor: '#a855f7',
+                    borderColor: '#9333ea',
+                    borderWidth: 1,
+                    borderRadius: 2,
+                    stack: 'sarMedicaoStack',
+                    barPercentage: 0.75,
+                    categoryPercentage: 0.85
                 }
-            }
-        });
-    }
-
-    // 2. Gráfico de Evolução por Competência da Data de Medição (Coluna AJ)
-    const ctxEvol = document.getElementById('sar-chart-medicao-evolution');
-    if (ctxEvol) {
-        if (sarCharts.medicaoEvolution) sarCharts.medicaoEvolution.destroy();
-
-        // Para a evolução histórica, usamos todos os registros com medição
-        const allMedRecords = (window.SAR_DATA || []).filter(r => {
-            if (!r.valor_medicao || r.valor_medicao <= 0) return false;
-            if (!['MEDIÇÃO ENVIADA', 'FINALIZADO', 'PEDIDO EMITIDO'].includes(r.status_medicao_grupo)) return false;
-            if (sarFilters.cidade && r.cidade !== sarFilters.cidade) return false;
-            if (sarFilters.area_tecnica && r.area_tecnica !== sarFilters.area_tecnica) return false;
-            return true;
-        });
-
-        // Agrupar por Competência da data AJ
-        const compMap = {};
-        allMedRecords.forEach(r => {
-            const comp = r.competencia_medicao || 'SEM DATA (AJ)';
-            if (!compMap[comp]) {
-                compMap[comp] = { env: 0, fin: 0, ped: 0, total: 0 };
-            }
-            if (r.status_medicao_grupo === 'MEDIÇÃO ENVIADA') compMap[comp].env += r.valor_medicao;
-            else if (r.status_medicao_grupo === 'FINALIZADO') compMap[comp].fin += r.valor_medicao;
-            else if (r.status_medicao_grupo === 'PEDIDO EMITIDO') compMap[comp].ped += r.valor_medicao;
-            compMap[comp].total += r.valor_medicao;
-        });
-
-        // Ordenar cronologicamente (da mais antiga para a mais recente)
-        const sortedComps = Object.keys(compMap).sort((a, b) => {
-            if (a === 'SEM DATA (AJ)') return -1;
-            if (b === 'SEM DATA (AJ)') return 1;
-            const pA = a.split('/');
-            const pB = b.split('/');
-            const yA = parseInt(pA[1]) || 0;
-            const yB = parseInt(pB[1]) || 0;
-            if (yA !== yB) return yA - yB;
-            const mA = MESES_MAP_PT[(pA[0] || '').toUpperCase()] || 0;
-            const mB = MESES_MAP_PT[(pB[0] || '').toUpperCase()] || 0;
-            return mA - mB;
-        });
-
-        const labels = sortedComps;
-        const dataEnv = sortedComps.map(c => Math.round(compMap[c].env));
-        const dataFin = sortedComps.map(c => Math.round(compMap[c].fin));
-        const dataPed = sortedComps.map(c => Math.round(compMap[c].ped));
-
-        sarCharts.medicaoEvolution = new Chart(ctxEvol, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [
-                    {
-                        label: 'Medição Enviada',
-                        data: dataEnv,
-                        backgroundColor: '#388bfd',
-                        borderRadius: 4
-                    },
-                    {
-                        label: 'Finalizado',
-                        data: dataFin,
-                        backgroundColor: '#10b981',
-                        borderRadius: 4
-                    },
-                    {
-                        label: 'Pedido Emitido',
-                        data: dataPed,
-                        backgroundColor: '#a855f7',
-                        borderRadius: 4
-                    }
-                ]
+            ]
+        },
+        plugins: pluginList,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                intersect: false
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    x: {
-                        stacked: true,
-                        grid: { color: 'rgba(255,255,255,0.05)' },
-                        ticks: { color: '#8b949e', font: { family: "'Outfit', 'Inter', sans-serif", size: 11 } }
-                    },
-                    y: {
-                        stacked: true,
-                        grid: { color: 'rgba(255,255,255,0.05)' },
-                        ticks: {
-                            color: '#8b949e',
-                            font: { family: "'Outfit', 'Inter', sans-serif", size: 11 },
-                            callback: function(value) {
-                                return 'R$ ' + (value >= 1000 ? (value / 1000).toFixed(0) + 'k' : value);
-                            }
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    align: 'end',
+                    labels: {
+                        color: '#c9d1d9',
+                        font: { family: 'Outfit, Inter', size: 11 },
+                        boxWidth: 12,
+                        boxHeight: 12,
+                        padding: 10,
+                        usePointStyle: true,
+                        pointStyle: 'rectRounded'
+                    }
+                },
+                tooltip: {
+                    backgroundColor: '#161b22',
+                    borderColor: 'rgba(255, 255, 255, 0.15)',
+                    borderWidth: 1,
+                    titleColor: '#ffffff',
+                    bodyColor: '#c9d1d9',
+                    padding: 10,
+                    callbacks: {
+                        label: function(context) {
+                            return ` ${context.dataset.label}: ${formatCurrencyBR(context.raw || 0)}`;
+                        },
+                        footer: function(tooltipItems) {
+                            let sum = 0;
+                            tooltipItems.forEach(function(tooltipItem) {
+                                sum += tooltipItem.parsed.y;
+                            });
+                            return 'Total de Medições: ' + formatCurrencyBR(sum);
                         }
                     }
                 },
-                plugins: {
-                    legend: {
-                        position: 'top',
-                        align: 'end',
-                        labels: {
-                            color: '#c9d1d9',
-                            font: { family: "'Outfit', 'Inter', sans-serif", size: 11 },
-                            usePointStyle: true
-                        }
+                datalabels: {
+                    display: function(context) {
+                        const val = context.dataset.data[context.dataIndex];
+                        return val >= 10000;
                     },
-                    tooltip: {
-                        backgroundColor: '#161b22',
-                        titleColor: '#f0f6fc',
-                        bodyColor: '#c9d1d9',
-                        borderColor: 'rgba(255,255,255,0.1)',
-                        borderWidth: 1,
-                        padding: 10,
-                        callbacks: {
-                            label: function(context) {
-                                return ` ${context.dataset.label}: ${formatCurrencyBR(context.raw || 0)}`;
-                            }
-                        }
+                    color: '#ffffff',
+                    font: { weight: 'bold', size: 9, family: 'Outfit, Inter' },
+                    formatter: function(val) {
+                        if (!val || val <= 0) return '';
+                        if (val >= 1000000) return 'R$ ' + (val / 1000000).toFixed(1) + 'M';
+                        if (val >= 1000) return 'R$ ' + Math.round(val / 1000) + 'k';
+                        return 'R$ ' + Math.round(val);
                     }
                 }
+            },
+            scales: {
+                x: {
+                    stacked: true,
+                    grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                    ticks: { color: '#c9d1d9', font: { size: 10, family: 'Outfit, Inter' } }
+                },
+                y: {
+                    stacked: true,
+                    grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                    ticks: {
+                        color: '#8b949e',
+                        font: { size: 10, family: 'Outfit, Inter' },
+                        callback: function(value) {
+                            if (value >= 1000000) return 'R$ ' + (value / 1000000).toFixed(1) + 'M';
+                            if (value >= 1000) return 'R$ ' + (value / 1000).toFixed(0) + 'k';
+                            return 'R$ ' + value;
+                        }
+                    },
+                    beginAtZero: true,
+                    grace: '10%'
+                }
             }
-        });
-    }
+        }
+    });
 }
 
 /**
@@ -2267,7 +2248,7 @@ function setSarMedicaoStatus(st) {
 }
 
 /**
- * Filtro por Competência de Medição (Coluna AJ)
+ * Filtro por Competência de Medição
  */
 function onSarMedicaoCompetenciaChange(comp) {
     sarMedicaoCompetenciaFiltro = comp;
@@ -2320,11 +2301,11 @@ function exportSarMedicaoToExcel() {
         "Site": r.site || '',
         "Endereço": r.endereco || '',
         "Serviço": r.servico || '',
-        "Data Medição (Coluna AJ)": r.data_medicao_fmt || (r.data_medicao ? format_date_br(r.data_medicao) : '-'),
-        "Competência Medição (Data AJ)": r.competencia_medicao || '-',
-        "Valor Medição R$ (Coluna AK)": r.valor_medicao || 0,
+        "Data Medição": r.data_medicao_fmt || (r.data_medicao ? format_date_br(r.data_medicao) : '-'),
+        "Competência Medição": r.competencia_medicao || '-',
+        "Valor Medição (R$)": r.valor_medicao || 0,
         "Status Geral SAR": r.status || '',
-        "Status Medição (Grupo)": r.status_medicao_grupo || '',
+        "Status Medição": r.status_medicao_grupo || '',
         "Nº WF": r.num_wf || '',
         "Data Pedido": r.data_pedido_fmt || (r.data_pedido ? format_date_br(r.data_pedido) : '-'),
         "Nº Pedido": r.num_pedido || '',
@@ -2334,7 +2315,7 @@ function exportSarMedicaoToExcel() {
 
     const ws = XLSX.utils.json_to_sheet(rows);
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "Medicoes_Etapa2");
+    XLSX.utils.book_append_sheet(wb, ws, "Medicoes");
 
     const stLabel = sarMedicaoStatusFiltro.replace(/[^a-zA-Z0-9]/g, '_');
     const compLabel = (sarMedicaoCompetenciaFiltro || 'Todas').replace(/[^a-zA-Z0-9]/g, '_');
