@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-09-04 20:06:23
+// Dados SAR JLE Telecom - Gerado em: 2026-09-04 16:00:15
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1092,
-    "generated_at": "2026-09-04 20:06:23",
+    "generated_at": "2026-09-04 16:00:15",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -773,10 +773,10 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 803402.1,
-        "total_previa_medicao": 1339798.34,
+        "total_terceiros": 802711.1,
+        "total_previa_medicao": 1337342.88,
         "total_classe_l": 342911.6,
-        "total_classe_f": 460490.5
+        "total_classe_f": 459799.5
     },
     "medicao": {
         "total_geral": 1396908.45,
@@ -49968,13 +49968,13 @@ window.SAR_DATA = [
     "classe_f": "ANDERSON/GILSON/DIOGO",
     "situacao": "21/08/2025",
     "relatorio_foto": "357",
-    "servico": "FOI LANÇADO 357 METROS DE CABO DE 12 FO, 3 ABERTURA E FECHAMENTO, 2 CX NOVA, 101 FUSÕES, 1 DERIVAÇÃO",
+    "servico": "FOI LANÇADO 357 METROS DE CABO DE 12 FO, 5 ABERTURA E FECHAMENTO, 1 CX NOVA, 12 FUSÕES, 2 DERIVAÇÃO, 4 TESTES.",
     "data_entrada": "2025-08-21",
     "data_entrada_fmt": "21/08/2025",
-    "data_inicio": null,
-    "data_inicio_fmt": "-",
-    "data_previsao": null,
-    "data_previsao_fmt": "-",
+    "data_inicio": "2026-09-04",
+    "data_inicio_fmt": "04/09/2026",
+    "data_previsao": "2026-09-04",
+    "data_previsao_fmt": "04/09/2026",
     "data_entrega": "2025-08-22",
     "data_entrega_fmt": "22/08/2025",
     "data_medicao": null,
@@ -49995,32 +49995,32 @@ window.SAR_DATA = [
     "ano_entrega": "2025",
     "mes_entrega": "AGOSTO",
     "mes_num_entrega": "08",
-    "status": "RELATÓRIO",
-    "status_relatorio": "",
-    "status_medicao": "",
+    "status": "EM MEDIÇÃO",
+    "status_relatorio": "04/09/2026",
+    "status_medicao": "04/09/2026",
     "status_obra": "Em Andamento",
     "prazo": "NO PRAZO",
     "tempo_dias": 1.0,
     "atraso_dias": 0,
-    "total_terceiros": 1811.65,
-    "previa_medicao": 4256.6,
+    "total_terceiros": 1120.65,
+    "previa_medicao": 1801.14,
     "valor_medicao": 0.0,
     "valor_classe_l": 517.65,
-    "valor_classe_f": 1294.0,
+    "valor_classe_f": 603.0,
     "itens_l_resumo": "2.15 CB ESP: 357m",
-    "itens_f_resumo": "3.11 CX EM: 2 un, 3.15 AB/FE: 3 un, 3.13 FUS/EME: 101 un, 3.12 DER/INS: 1 un",
+    "itens_f_resumo": "3.11 CX EM: 1 un, 3.15 AB/FE: 5 un, 3.13 FUS/EME: 12 un, 3.12 DER/INS: 2 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
       "q_215": 357.0,
       "q_113": 0.0,
-      "q_311": 2.0,
+      "q_311": 1.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 3.0,
-      "q_313": 101.0,
+      "q_315": 5.0,
+      "q_313": 12.0,
       "q_314": 0.0,
-      "q_312": 1.0
+      "q_312": 2.0
     }
   },
   {
