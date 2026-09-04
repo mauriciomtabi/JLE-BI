@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-09-04 20:00:34
+// Dados MDU Compactados - Gerado em: 2026-09-04 20:05:15
 window.MDU_METADATA = {
-    "generated_at": "2026-09-04 20:00:34",
+    "generated_at": "2026-09-04 20:05:15",
     "total_rows": 5599,
     "geocoded_new": 0
 };
@@ -175342,20 +175342,20 @@ window.MDU_DATA = [
         "aging": "15",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Fusão",
+        "status": "Baixa",
         "prog": 0,
         "cod_imovel": "",
         "area": "IDLAA",
         "node": "",
-        "caixa_m": "",
+        "caixa_m": "IDLAA.053.M050",
         "hps": 32,
         "data_adicio": "20/08/2026",
         "equipe": "David salomão",
         "primeira_visita": "17/08/2026",
         "segunda_visita": "",
-        "obs_vistoria": "ADEQUADO, AGUARDANDO SAR",
+        "obs_vistoria": "ADEQUADO",
         "data_interna": "17/08/2026",
-        "data_fusao": "",
+        "data_fusao": "31/08/2026",
         "data_baixa": "",
         "obs_baixa": "",
         "data_relatorio": "",
