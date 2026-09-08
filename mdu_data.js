@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-09-08 14:00:19
+// Dados MDU Compactados - Gerado em: 2026-09-08 15:00:30
 window.MDU_METADATA = {
-    "generated_at": "2026-09-08 14:00:19",
+    "generated_at": "2026-09-08 15:00:30",
     "total_rows": 5600,
     "geocoded_new": 0
 };
@@ -172462,8 +172462,8 @@ window.MDU_DATA = [
         "aging": "26",
         "relatorio_por": "JENIFFER",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "712923016",
         "area": "CNTAA",
         "node": "",
@@ -172478,7 +172478,7 @@ window.MDU_DATA = [
         "data_fusao": "02/09/2026",
         "data_baixa": "08/09",
         "obs_baixa": "",
-        "data_relatorio": "",
+        "data_relatorio": "08/09/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
@@ -179020,7 +179020,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "0",
-        "relatorio_por": "DUDA",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
