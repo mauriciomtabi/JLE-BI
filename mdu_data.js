@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-09-08 10:00:20
+// Dados MDU Compactados - Gerado em: 2026-09-08 10:04:35
 window.MDU_METADATA = {
-    "generated_at": "2026-09-08 10:00:20",
+    "generated_at": "2026-09-08 10:04:35",
     "total_rows": 5600,
     "geocoded_new": 0
 };
@@ -175408,7 +175408,7 @@ window.MDU_DATA = [
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
-        "cod_imovel": "",
+        "cod_imovel": "610865967",
         "area": "TRZAA",
         "node": "",
         "caixa_m": "TRZAA.014.M010",
@@ -178480,7 +178480,7 @@ window.MDU_DATA = [
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
-        "cod_imovel": "",
+        "cod_imovel": "610451027",
         "area": "BVSAB",
         "node": "",
         "caixa_m": "BVSAB.161.M010",
@@ -179121,10 +179121,10 @@ window.MDU_DATA = [
         "status": "FALTA DADOS",
         "prog": 0,
         "cod_imovel": "",
-        "area": "",
+        "area": "JBOAA",
         "node": "",
-        "caixa_m": "",
-        "hps": null,
+        "caixa_m": "JBOAA.112.M040",
+        "hps": 22,
         "data_adicio": "",
         "equipe": "",
         "primeira_visita": "",
