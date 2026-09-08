@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-09-08 12:00:14
+// Dados SAR JLE Telecom - Gerado em: 2026-09-08 13:00:15
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1078,
-    "generated_at": "2026-09-08 12:00:14",
+    "generated_at": "2026-09-08 13:00:15",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -68853,7 +68853,7 @@ window.SAR_DATA = [
     "area_tecnica": "UMBAA",
     "node": "",
     "site": "RSAVA05",
-    "cidade": "VIAMÃO",
+    "cidade": "ALVORADA",
     "condominio": "Condomínio Residencial VIVER COOMETAL",
     "endereco": "Estr. Caminho do Meio, 4772",
     "caixa_mdu": "UMBAA.401/UMBAA.402",
