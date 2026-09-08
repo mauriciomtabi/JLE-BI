@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-09-08 13:00:17
+// Dados MDU Compactados - Gerado em: 2026-09-08 14:00:19
 window.MDU_METADATA = {
-    "generated_at": "2026-09-08 13:00:17",
+    "generated_at": "2026-09-08 14:00:19",
     "total_rows": 5600,
     "geocoded_new": 0
 };
@@ -172464,7 +172464,7 @@ window.MDU_DATA = [
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
-        "cod_imovel": "#N/A",
+        "cod_imovel": "712923016",
         "area": "CNTAA",
         "node": "",
         "caixa_m": "CNTAA.131.M610",
