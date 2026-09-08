@@ -1,7 +1,7 @@
 // Data generated 100% from Master Excel Controle de Medições (Mnt. Demanda)
 (function() {
     const db = {
-  "generated_at": "2026-09-08 11:00:19",
+  "generated_at": "2026-09-08 12:00:13",
   "lookups": {
     "tipos_of": [
       "TIPO\nOS CLIENTE",
@@ -47561,10 +47561,10 @@
       1,
       "ATENUAÇÃO - RUP CABO OPTICO AUDC01-SCREA",
       2,
-      72,
+      75,
       1,
       "08/07/2026",
-      5,
+      4,
       2,
       1,
       328.9,
