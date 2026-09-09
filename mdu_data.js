@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-09-09 10:06:36
+// Dados MDU Compactados - Gerado em: 2026-09-09 11:00:18
 window.MDU_METADATA = {
-    "generated_at": "2026-09-09 10:06:36",
+    "generated_at": "2026-09-09 11:00:18",
     "total_rows": 5661,
-    "geocoded_new": 1
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -179406,7 +179406,7 @@ window.MDU_DATA = [
         "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "2º Vistoria",
+        "status": "Baixa",
         "prog": 0,
         "cod_imovel": "",
         "area": "FLOAA",
@@ -179417,9 +179417,9 @@ window.MDU_DATA = [
         "equipe": "David Salomão",
         "primeira_visita": "05/09/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
-        "data_interna": "",
-        "data_fusao": "",
+        "obs_vistoria": "ADEQUADO",
+        "data_interna": "05/09/2026",
+        "data_fusao": "05/09/2026",
         "data_baixa": "",
         "obs_baixa": "",
         "data_relatorio": "",
