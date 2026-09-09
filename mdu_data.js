@@ -1,7 +1,7 @@
-// Dados MDU Compactados - Gerado em: 2026-09-09 11:00:18
+// Dados MDU Compactados - Gerado em: 2026-09-09 12:00:44
 window.MDU_METADATA = {
-    "generated_at": "2026-09-09 11:00:18",
-    "total_rows": 5661,
+    "generated_at": "2026-09-09 12:00:44",
+    "total_rows": 5660,
     "geocoded_new": 0
 };
 
@@ -7234,38 +7234,6 @@ window.MDU_DATA = [
         "data_medicao": "29/04",
         "valor_medicao": 1150.41,
         "valor_repasse": 680.0,
-        "lat": -30.0309405,
-        "lng": -51.184536,
-        "geocodificado": true
-    },
-    {
-        "os": "RS.CLR.PRD.2500229",
-        "endereco": "R DR TAUPHICK SAADI 255",
-        "cidade": "PORTO ALEGRE",
-        "cluster": "PAE",
-        "aging": "2.685",
-        "relatorio_por": "",
-        "pendencia": "Não",
-        "status": "Cancelado",
-        "prog": 100.0,
-        "cod_imovel": "610245430",
-        "area": "MTSAA",
-        "node": "MTSAT",
-        "caixa_m": "",
-        "hps": 12,
-        "data_adicio": "04/05/2019",
-        "equipe": "?",
-        "primeira_visita": "07/04/2025",
-        "segunda_visita": "02/06/2025",
-        "obs_vistoria": "Sindico não tem interesse e não quis nos atender.",
-        "data_interna": "",
-        "data_fusao": "",
-        "data_baixa": "",
-        "obs_baixa": "",
-        "data_relatorio": "",
-        "data_medicao": "",
-        "valor_medicao": 0,
-        "valor_repasse": 0,
         "lat": -30.0309405,
         "lng": -51.184536,
         "geocodificado": true
