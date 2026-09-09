@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-09-09 17:00:32
+// Dados MDU Compactados - Gerado em: 2026-09-09 18:05:31
 window.MDU_METADATA = {
-    "generated_at": "2026-09-09 17:00:32",
+    "generated_at": "2026-09-09 18:05:31",
     "total_rows": 5659,
-    "geocoded_new": 2
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -179084,7 +179084,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "1",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 0,
@@ -179148,7 +179148,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "1",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 0,
@@ -179180,7 +179180,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "1",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 0,
@@ -179212,7 +179212,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "1",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 0,
@@ -179244,9 +179244,9 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "0",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
-        "status": "Baixa",
+        "status": "Relatório",
         "prog": 0,
         "cod_imovel": "",
         "area": "VIPAA",
@@ -179260,7 +179260,7 @@ window.MDU_DATA = [
         "obs_vistoria": "ADEQUADO",
         "data_interna": "04/09/2026",
         "data_fusao": "04/09/2026",
-        "data_baixa": "",
+        "data_baixa": "09/09",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
@@ -179340,7 +179340,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "0",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 0,
@@ -179436,7 +179436,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "0",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 0,
