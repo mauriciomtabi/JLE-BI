@@ -38,20 +38,24 @@ if (Test-Path $gitPath) {
         if (Test-Path $swPath) {
             try {
                 $swContent = [System.IO.File]::ReadAllText($swPath)
-                $timestamp = Get-Date -Format "yyyyMMddHHmmss"
-                $newCacheNameLine = "const CACHE_NAME = 'jle-bi-v3.17.$timestamp';"
-                $swContent = $swContent -replace "const CACHE_NAME = '([^']+)';", $newCacheNameLine
+                $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+                if ($swContent -match '// Versao:') {
+                    $swContent = $swContent -replace '// Versao:.*', "// Versao: $timestamp"
+                } elseif ($swContent -match 'const CACHE_NAME') {
+                    $newCacheNameLine = "const CACHE_NAME = 'jle-bi-v3.17.$((Get-Date -Format 'yyyyMMddHHmmss'))';"
+                    $swContent = $swContent -replace "const CACHE_NAME = '([^']+)';", $newCacheNameLine
+                }
                 $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
                 [System.IO.File]::WriteAllText($swPath, $swContent, $utf8NoBom)
-                Write-Output "Cache do PWA atualizado para: jle-bi-v3.17.$timestamp"
+                Write-Output "Cache do PWA atualizado para: $timestamp"
             } catch {
                 Write-Warning "Nao foi possivel atualizar o sw.js: $($_.Exception.Message)"
             }
         }
 
         Write-Output "Enviando atualizacao de Impostos para o repositorio remoto..."
-        & $gitPath add parcelamentos_data.js parcelamentos_local.xlsx sw.js
-        & $gitPath commit -m "data(auto): atualizacao automatica de impostos e parcelamentos"
+        & $gitPath add parcelamentos_data.js parcelamentos_local.xlsx sw.js index.html update_parcelamentos.ps1
+        & $gitPath commit -m "data(impostos): atualizacao automatica da base de impostos e parcelamentos"
         & $gitPath pull --rebase origin main
         & $gitPath push origin main
         Write-Output "Deploy automatico de Impostos disparado com sucesso via GitHub/Vercel!"
