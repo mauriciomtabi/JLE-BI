@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-09-09 10:00:42
+// Dados MDU Compactados - Gerado em: 2026-09-09 10:06:36
 window.MDU_METADATA = {
-    "generated_at": "2026-09-09 10:00:42",
+    "generated_at": "2026-09-09 10:06:36",
     "total_rows": 5661,
-    "geocoded_new": 2
+    "geocoded_new": 1
 };
 
 window.MDU_DATA = [
@@ -179400,22 +179400,22 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505444",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "24 DE OUTUBRO 726",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
+        "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
+        "status": "2º Vistoria",
         "prog": 0,
         "cod_imovel": "",
-        "area": "",
+        "area": "FLOAA",
         "node": "",
-        "caixa_m": "",
-        "hps": null,
-        "data_adicio": "",
-        "equipe": "",
-        "primeira_visita": "",
+        "caixa_m": "FLOAA.154.M020",
+        "hps": 10,
+        "data_adicio": "09/09/2026",
+        "equipe": "David Salomão",
+        "primeira_visita": "05/09/2026",
         "segunda_visita": "",
         "obs_vistoria": "",
         "data_interna": "",
@@ -179426,9 +179426,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0242284,
+        "lng": -51.1250578,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505445",
