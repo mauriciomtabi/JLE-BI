@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-09-08 18:00:22
+// Dados SAR JLE Telecom - Gerado em: 2026-09-09 08:43:53
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1080,
-    "generated_at": "2026-09-08 18:00:22",
+    "generated_at": "2026-09-09 08:43:53",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -70186,8 +70186,8 @@ window.SAR_DATA = [
     "status_medicao": "",
     "status_obra": "Em Andamento",
     "prazo": "ATRASADO",
-    "tempo_dias": 30,
-    "atraso_dias": 27,
+    "tempo_dias": 31,
+    "atraso_dias": 28,
     "total_terceiros": 2912.95,
     "previa_medicao": 3232.59,
     "valor_medicao": 0.0,
@@ -74156,7 +74156,7 @@ window.SAR_DATA = [
   {
     "cod": "RSCLER1066",
     "area_tecnica": "BFMAA",
-    "node": "",
+    "node": "RBRAFA",
     "site": "PAE IND",
     "cidade": "PORTO ALEGRE",
     "condominio": "Edifício Caravelle",
@@ -74198,7 +74198,7 @@ window.SAR_DATA = [
     "status_medicao": "",
     "status_obra": "Em Andamento",
     "prazo": "NO PRAZO",
-    "tempo_dias": 0,
+    "tempo_dias": 1.0,
     "atraso_dias": 0,
     "total_terceiros": 0.0,
     "previa_medicao": 0.0,
