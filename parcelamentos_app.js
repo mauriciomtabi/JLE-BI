@@ -274,6 +274,22 @@
         const tbody = document.getElementById('parc-acompanhamento-table-body');
         if (!tbody) return;
 
+        const titleEl = document.getElementById('parc-matriz-title');
+        if (titleEl && acomp.length > 0) {
+            const formatMesAbbr = (str) => {
+                if (!str) return '';
+                const p = str.split('/');
+                if (p.length === 2) {
+                    const meses = {'01':'Jan','02':'Fev','03':'Mar','04':'Abr','05':'Mai','06':'Jun','07':'Jul','08':'Ago','09':'Set','10':'Out','11':'Nov','12':'Dez'};
+                    return `${meses[p[0]] || p[0]}/${p[1]}`;
+                }
+                return str;
+            };
+            const firstMes = formatMesAbbr(acomp[0].mes);
+            const lastMes = formatMesAbbr(acomp[acomp.length - 1].mes);
+            titleEl.innerText = `Matriz Mensal de Apuração Tributária (${firstMes} a ${lastMes})`;
+        }
+
         let html = '';
         let totFat = 0, totIss = 0, totPis = 0, totCofins = 0, totIr = 0, totCsll = 0, totImp = 0;
 

@@ -54,9 +54,9 @@ if (Test-Path $gitPath) {
         }
 
         Write-Output "Enviando atualizacao de Impostos para o repositorio remoto..."
-        & $gitPath add parcelamentos_data.js parcelamentos_local.xlsx sw.js index.html update_parcelamentos.ps1
-        & $gitPath commit -m "data(impostos): atualizacao automatica da base de impostos e parcelamentos"
-        & $gitPath pull --rebase origin main
+        & $gitPath add parcelamentos_data.js parcelamentos_local.xlsx sw.js index.html parcelamentos_app.js update_parcelamentos.py update_parcelamentos.ps1
+        & $gitPath commit -m "fix(impostos): ajuste da apuracao tributaria e parcelamentos conforme planilha atualizada"
+        & $gitPath pull --rebase --autostash origin main
         & $gitPath push origin main
         Write-Output "Deploy automatico de Impostos disparado com sucesso via GitHub/Vercel!"
     } else {

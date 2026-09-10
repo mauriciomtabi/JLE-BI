@@ -25,27 +25,30 @@ CANDIDATE_DIRS = [
 ]
 
 def find_latest_network_file():
-    """Localiza o arquivo mais recente de controle de parcelamentos na rede"""
+    """Localiza o arquivo mais recente de controle de parcelamentos na rede em todos os diretórios candidatos"""
+    all_matching = []
     for c_dir in CANDIDATE_DIRS:
         if os.path.exists(c_dir):
             try:
                 files = os.listdir(c_dir)
-                matching = []
                 for f in files:
                     if f.startswith("~$"):
                         continue
                     if f.lower().endswith((".xlsx", ".xls")) and ("parcelamento" in f.lower() or "tributario" in f.lower() or "parcelamentos" in f.lower()):
                         full_path = os.path.join(c_dir, f)
-                        mtime = os.path.getmtime(full_path)
-                        matching.append((mtime, full_path, f))
-                
-                if matching:
-                    matching.sort(key=lambda x: x[0], reverse=True)
-                    latest = matching[0][1]
-                    print(f"[ETL] Arquivo de rede selecionado: {latest}")
-                    return latest
+                        try:
+                            mtime = os.path.getmtime(full_path)
+                            all_matching.append((mtime, full_path, f))
+                        except Exception:
+                            pass
             except Exception as e:
                 print(f"[ETL] Aviso ao acessar {c_dir}: {e}")
+                
+    if all_matching:
+        all_matching.sort(key=lambda x: x[0], reverse=True)
+        latest = all_matching[0][1]
+        print(f"[ETL] Arquivo de rede selecionado: {latest}")
+        return latest
     return None
 
 def get_source_file():
@@ -72,6 +75,44 @@ def parse_date(v):
     if isinstance(v, (datetime.datetime, datetime.date)):
         return v.strftime("%d/%m/%Y")
     return str(v).strip()
+
+def parse_date_mes(dt_val):
+    if dt_val is None:
+        return ""
+    if isinstance(dt_val, (datetime.datetime, datetime.date)):
+        return dt_val.strftime("%m/%Y")
+    s = str(dt_val).strip()
+    months_map = {
+        'jan': '01', 'fev': '02', 'mar': '03', 'abr': '04', 'mai': '05', 'jun': '06',
+        'jul': '07', 'ago': '08', 'set': '09', 'out': '10', 'nov': '11', 'dez': '12'
+    }
+    s_low = s.lower()
+    for k, v in months_map.items():
+        if s_low.startswith(k):
+            parts = s_low.split('/')
+            if len(parts) == 2:
+                yr = parts[1].strip()
+                if len(yr) == 2:
+                    yr = f"20{yr}"
+                return f"{v}/{yr}"
+    if "/" in s:
+        parts = s.split("/")
+        if len(parts) == 2:
+            return f"{parts[0].zfill(2)}/{parts[1]}"
+        elif len(parts) == 3:
+            return f"{parts[1].zfill(2)}/{parts[2]}"
+    return s
+
+def format_mes_extenso_full(mes_label):
+    meses_full = {
+        '01': 'Janeiro', '02': 'Fevereiro', '03': 'Março', '04': 'Abril',
+        '05': 'Maio', '06': 'Junho', '07': 'Julho', '08': 'Agosto',
+        '09': 'Setembro', '10': 'Outubro', '11': 'Novembro', '12': 'Dezembro'
+    }
+    parts = mes_label.split('/')
+    if len(parts) == 2:
+        return f"{meses_full.get(parts[0], parts[0])}/{parts[1]}"
+    return mes_label
 
 def parse_float(v):
     if v is None or str(v).strip() in ("", "-", "N/D", "#REF!", "#N/A", "#VALOR!"):
@@ -241,18 +282,54 @@ def process_workbook(file_path):
 
     if sheet_acomp_list:
         ws_acomp = wb[sheet_acomp_list[0]]
+        
+        # Mapear linhas por cabeçalho/categoria (Coluna B ou A)
+        row_map = {}
+        header_row = 2
+        for r in range(1, min(ws_acomp.max_row + 1, 15)):
+            val_col2 = str(ws_acomp.cell(r, 2).value or "").strip().upper()
+            val_col1 = str(ws_acomp.cell(r, 1).value or "").strip().upper()
+            label = val_col2 if val_col2 else val_col1
+            if "FATURAMENTO" in label:
+                row_map["FATURAMENTO"] = r
+            elif "ISS" in label:
+                row_map["ISS"] = r
+            elif "PIS" in label:
+                row_map["PIS"] = r
+            elif "COFINS" in label:
+                row_map["COFINS"] = r
+            elif label == "IR" or "IRPJ" in label:
+                row_map["IR"] = r
+            elif "CSLL" in label:
+                row_map["CSLL"] = r
+            elif "TOTAL" in label:
+                row_map["TOTAL"] = r
+
+        if "FATURAMENTO" in row_map:
+            header_row = max(1, row_map["FATURAMENTO"] - 1)
+
+        r_fat = row_map.get("FATURAMENTO", 3)
+        r_iss = row_map.get("ISS", 4)
+        r_pis = row_map.get("PIS", 5)
+        r_cof = row_map.get("COFINS", 6)
+        r_ir  = row_map.get("IR", 7)
+        r_csl = row_map.get("CSLL", 8)
+        r_tot = row_map.get("TOTAL", 9)
+
         for c in range(3, ws_acomp.max_column + 1):
-            dt_val = ws_acomp.cell(2, c).value
+            dt_val = ws_acomp.cell(header_row, c).value
             if dt_val:
-                mes_label = dt_val.strftime("%m/%Y") if isinstance(dt_val, (datetime.datetime, datetime.date)) else str(dt_val)
-                fat = parse_float(ws_acomp.cell(3, c).value)
-                iss = parse_float(ws_acomp.cell(4, c).value)
-                pis = parse_float(ws_acomp.cell(5, c).value)
-                cofins = parse_float(ws_acomp.cell(6, c).value)
-                ir = parse_float(ws_acomp.cell(7, c).value)
-                csll = parse_float(ws_acomp.cell(8, c).value)
-                tot_impostos = parse_float(ws_acomp.cell(9, c).value)
-                if tot_impostos == 0:
+                mes_label = parse_date_mes(dt_val)
+                if not mes_label:
+                    continue
+                fat = parse_float(ws_acomp.cell(r_fat, c).value)
+                iss = parse_float(ws_acomp.cell(r_iss, c).value)
+                pis = parse_float(ws_acomp.cell(r_pis, c).value)
+                cofins = parse_float(ws_acomp.cell(r_cof, c).value)
+                ir = parse_float(ws_acomp.cell(r_ir, c).value)
+                csll = parse_float(ws_acomp.cell(r_csl, c).value)
+                tot_impostos = parse_float(ws_acomp.cell(r_tot, c).value)
+                if tot_impostos == 0 and (iss > 0 or pis > 0 or cofins > 0 or ir > 0 or csll > 0):
                     tot_impostos = round(iss + pis + cofins + ir + csll, 2)
 
                 carga_pct = round((tot_impostos / fat * 100), 2) if fat > 0 else 0.0
@@ -270,6 +347,9 @@ def process_workbook(file_path):
                 })
 
     data["acompanhamento_mensal"] = acompanhamento_mensal
+    if acompanhamento_mensal:
+        last_mes = acompanhamento_mensal[-1]["mes"]
+        data["metadata"]["reference_position"] = format_mes_extenso_full(last_mes)
 
     # 3. Projeção Mensal de Desembolso Futuro Consolidado (2026 até 2030)
     fluxo_futuro_map = {}
