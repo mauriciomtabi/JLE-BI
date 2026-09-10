@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-09-10 08:15:31
+// Dados MDU Compactados - Gerado em: 2026-09-10 09:00:39
 window.MDU_METADATA = {
-    "generated_at": "2026-09-10 08:15:31",
+    "generated_at": "2026-09-10 09:00:39",
     "total_rows": 5659,
     "geocoded_new": 0
 };
@@ -179472,7 +179472,7 @@ window.MDU_DATA = [
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 0,
-        "cod_imovel": "",
+        "cod_imovel": "62959735",
         "area": "NAVAA",
         "node": "",
         "caixa_m": "NAVAA.016.M050",
