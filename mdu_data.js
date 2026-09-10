@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-09-10 10:01:02
+// Dados MDU Compactados - Gerado em: 2026-09-10 10:06:58
 window.MDU_METADATA = {
-    "generated_at": "2026-09-10 10:01:02",
+    "generated_at": "2026-09-10 10:06:58",
     "total_rows": 5659,
-    "geocoded_new": 8
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -177390,7 +177390,7 @@ window.MDU_DATA = [
         "aging": "14",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Fusão",
+        "status": "Relatório",
         "prog": 0,
         "cod_imovel": "610476691",
         "area": "BFMAA",
@@ -177403,9 +177403,9 @@ window.MDU_DATA = [
         "segunda_visita": "",
         "obs_vistoria": "ADEQUADO",
         "data_interna": "14/07/2026",
-        "data_fusao": "",
-        "data_baixa": "",
-        "obs_baixa": "TESTES SOMENTE COM AGENDAMENTO",
+        "data_fusao": "09/09/2026",
+        "data_baixa": "10/09/2026",
+        "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
