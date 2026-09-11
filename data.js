@@ -1,5 +1,5 @@
 ﻿window.CASH_FLOW_DATA = {
-    "generated_at":  "2026-09-10 15:05:03",
+    "generated_at":  "2026-09-11 15:03:50",
     "categories_origin":  {
                               "entradas":  [
 
@@ -149705,6 +149705,38 @@
                              "descricao":  "BENEDITO ANTONIO DOS SANTOS",
                              "valor_nominal":  150,
                              "valor_liquido":  -150,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET_2026 MAXCREDITO_143",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "SET_2026 MAXCREDITO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-08",
+                             "uf":  "PR",
+                             "fluxo":  "Saída",
+                             "categoria":  "Terceiros",
+                             "descricao":  "PAULO SERGIO DA CRUZ",
+                             "valor_nominal":  500,
+                             "valor_liquido":  -500,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET_2026 MAXCREDITO_144",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "SET_2026 MAXCREDITO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-08",
+                             "uf":  "PR",
+                             "fluxo":  "Saída",
+                             "categoria":  "Terceiros",
+                             "descricao":  "PRISLAINE LOPES BRAZ",
+                             "valor_nominal":  4180,
+                             "valor_liquido":  -4180,
                              "meio_pagamento":  "Pix",
                              "is_transfer":  false
                          },

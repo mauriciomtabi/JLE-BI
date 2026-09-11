@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-09-11 15:00:28
+// Dados MDU Compactados - Gerado em: 2026-09-11 15:04:43
 window.MDU_METADATA = {
-    "generated_at": "2026-09-11 15:00:28",
+    "generated_at": "2026-09-11 15:04:43",
     "total_rows": 5659,
     "geocoded_new": 1
 };
@@ -179816,20 +179816,20 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505459",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "R ERNESTO ALVES 94",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
+        "aging": "3",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
+        "status": "1º Vistoria",
         "prog": 0,
         "cod_imovel": "",
-        "area": "",
+        "area": "BFMAA",
         "node": "",
-        "caixa_m": "",
-        "hps": null,
-        "data_adicio": "",
+        "caixa_m": "BFMAA.276.M010",
+        "hps": 14,
+        "data_adicio": "08/09/2026",
         "equipe": "",
         "primeira_visita": "",
         "segunda_visita": "",
@@ -179842,9 +179842,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0241311,
+        "lng": -51.2156362,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505460",
