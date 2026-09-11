@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-09-11 10:02:37
+// Dados MDU Compactados - Gerado em: 2026-09-11 11:00:17
 window.MDU_METADATA = {
-    "generated_at": "2026-09-11 10:02:37",
+    "generated_at": "2026-09-11 11:00:17",
     "total_rows": 5659,
-    "geocoded_new": 1
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -177582,8 +177582,8 @@ window.MDU_DATA = [
         "aging": "15",
         "relatorio_por": "JENIFFER",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "711752756",
         "area": "BVSAB",
         "node": "BVSAR",
@@ -177598,7 +177598,7 @@ window.MDU_DATA = [
         "data_fusao": "25/08/20226",
         "data_baixa": "27/08",
         "obs_baixa": "",
-        "data_relatorio": "",
+        "data_relatorio": "11/09/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
@@ -179598,7 +179598,7 @@ window.MDU_DATA = [
         "aging": "1",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Baixa",
+        "status": "Relatório",
         "prog": 0,
         "cod_imovel": "",
         "area": "",
@@ -179612,7 +179612,7 @@ window.MDU_DATA = [
         "obs_vistoria": "ADEQUADO",
         "data_interna": "02/09/2026",
         "data_fusao": "02/09/2026",
-        "data_baixa": "",
+        "data_baixa": "10/09",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
@@ -179694,7 +179694,7 @@ window.MDU_DATA = [
         "aging": "1",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Baixa",
+        "status": "Relatório",
         "prog": 0,
         "cod_imovel": "",
         "area": "MTSAA",
@@ -179708,7 +179708,7 @@ window.MDU_DATA = [
         "obs_vistoria": "ADEQUADO",
         "data_interna": "02/09/2026",
         "data_fusao": "02/09/2026",
-        "data_baixa": "",
+        "data_baixa": "10/09",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
