@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-09-11 08:16:39
+// Dados MDU Compactados - Gerado em: 2026-09-11 09:00:16
 window.MDU_METADATA = {
-    "generated_at": "2026-09-11 08:16:39",
+    "generated_at": "2026-09-11 09:00:16",
     "total_rows": 5659,
     "geocoded_new": 0
 };
@@ -177548,7 +177548,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "15",
-        "relatorio_por": "",
+        "relatorio_por": "DUDA",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
@@ -177580,7 +177580,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "15",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
@@ -177996,10 +177996,10 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "14",
-        "relatorio_por": "duda",
+        "relatorio_por": "DUDA",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "63293155",
         "area": "VIPAA",
         "node": "",
@@ -178014,7 +178014,7 @@ window.MDU_DATA = [
         "data_fusao": "27/08/2026",
         "data_baixa": "28/08",
         "obs_baixa": "",
-        "data_relatorio": "",
+        "data_relatorio": "11/09/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
