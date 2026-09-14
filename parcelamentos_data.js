@@ -1,10 +1,10 @@
 // Dados Consolidados de Parcelamentos Tributários JLE Telecom
-// Gerado automaticamente pelo pipeline ETL em 14/09/2026 15:04:57
+// Gerado automaticamente pelo pipeline ETL em 14/09/2026 18:17:28
 
 window.PARCELAMENTOS_DATA = {
   "metadata": {
     "source_file": "Cópia de Controle parcelamentos JLE_Atualizada_BI.xlsx",
-    "generated_at": "14/09/2026 15:04:57",
+    "generated_at": "14/09/2026 18:17:28",
     "reference_position": "Agosto/2026"
   },
   "overview": {},
@@ -4141,5 +4141,106 @@ window.PARCELAMENTOS_DATA = {
         "Parcelamento 25112025": 1521.62
       }
     }
-  ]
+  ],
+  "saldo_credor_inss": {
+    "totais": {
+      "total_retencao_nf": 659771.76,
+      "total_utilizado_folha": 507402.82,
+      "saldo_credor_acumulado": 152368.94,
+      "media_mensal_saldo": 30473.79,
+      "meses_apurados": 5
+    },
+    "itens": [
+      {
+        "competencia": "abr/26",
+        "competencia_iso": "2026-04",
+        "retencao_nf": 120627.34,
+        "utilizado_folha": 102779.58,
+        "saldo_mes": 17847.76,
+        "saldo_acumulado": 17847.76,
+        "has_movement": true,
+        "status": "Compensado"
+      },
+      {
+        "competencia": "mai/26",
+        "competencia_iso": "2026-05",
+        "retencao_nf": 126667.52,
+        "utilizado_folha": 103847.05,
+        "saldo_mes": 22820.47,
+        "saldo_acumulado": 40668.23,
+        "has_movement": true,
+        "status": "Compensado"
+      },
+      {
+        "competencia": "jun/26",
+        "competencia_iso": "2026-06",
+        "retencao_nf": 152096.76,
+        "utilizado_folha": 95919.98,
+        "saldo_mes": 56176.78,
+        "saldo_acumulado": 96845.01,
+        "has_movement": true,
+        "status": "Compensado"
+      },
+      {
+        "competencia": "jul/26",
+        "competencia_iso": "2026-07",
+        "retencao_nf": 135916.62,
+        "utilizado_folha": 97086.87,
+        "saldo_mes": 38829.75,
+        "saldo_acumulado": 135674.76,
+        "has_movement": true,
+        "status": "Compensado"
+      },
+      {
+        "competencia": "ago/26",
+        "competencia_iso": "2026-08",
+        "retencao_nf": 124463.52,
+        "utilizado_folha": 107769.34,
+        "saldo_mes": 16694.18,
+        "saldo_acumulado": 152368.94,
+        "has_movement": true,
+        "status": "Compensado"
+      },
+      {
+        "competencia": "set/26",
+        "competencia_iso": "2026-09",
+        "retencao_nf": 0.0,
+        "utilizado_folha": 0.0,
+        "saldo_mes": 0.0,
+        "saldo_acumulado": 0.0,
+        "has_movement": false,
+        "status": "Pendente"
+      },
+      {
+        "competencia": "out/26",
+        "competencia_iso": "2026-10",
+        "retencao_nf": 0.0,
+        "utilizado_folha": 0.0,
+        "saldo_mes": 0.0,
+        "saldo_acumulado": 0.0,
+        "has_movement": false,
+        "status": "Pendente"
+      },
+      {
+        "competencia": "nov/26",
+        "competencia_iso": "2026-11",
+        "retencao_nf": 0.0,
+        "utilizado_folha": 0.0,
+        "saldo_mes": 0.0,
+        "saldo_acumulado": 0.0,
+        "has_movement": false,
+        "status": "Pendente"
+      },
+      {
+        "competencia": "dez/26",
+        "competencia_iso": "2026-12",
+        "retencao_nf": 0.0,
+        "utilizado_folha": 0.0,
+        "saldo_mes": 0.0,
+        "saldo_acumulado": 0.0,
+        "has_movement": false,
+        "status": "Pendente"
+      }
+    ]
+  }
 };

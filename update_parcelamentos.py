@@ -399,6 +399,91 @@ def process_workbook(file_path):
         "total_acordos_ativos": len(acordos_list)
     }
 
+    # 5. Saldo Credor INSS (Aba 'SALDO CREDOR INSS')
+    saldo_credor_inss = None
+    inss_sheet_name = next((s for s in wb.sheetnames if "SALDO CREDOR INSS" in s.upper() or "CREDOR INSS" in s.upper()), None)
+    if inss_sheet_name:
+        ws_inss = wb[inss_sheet_name]
+        header_r = None
+        c_comp = c_ret = c_folha = c_saldo = None
+        for r in range(1, 16):
+            for c in range(1, 10):
+                val = str(ws_inss.cell(r, c).value or '').upper()
+                if 'COMPET' in val and 'RETEN' in str(ws_inss.cell(r, c+1).value or '').upper():
+                    header_r = r
+                    c_comp = c
+                    c_ret = c + 1
+                    c_folha = c + 2
+                    c_saldo = c + 3
+                    break
+            if header_r:
+                break
+                
+        if header_r:
+            months_pt = {
+                1: 'jan', 2: 'fev', 3: 'mar', 4: 'abr', 5: 'mai', 6: 'jun',
+                7: 'jul', 8: 'ago', 9: 'set', 10: 'out', 11: 'nov', 12: 'dez'
+            }
+            inss_rows = []
+            running_saldo = 0.0
+            
+            for r in range(header_r + 1, ws_inss.max_row + 1):
+                c_val = ws_inss.cell(r, c_comp).value
+                ret_val = ws_inss.cell(r, c_ret).value
+                folha_val = ws_inss.cell(r, c_folha).value
+                saldo_val = ws_inss.cell(r, c_saldo).value
+                
+                if c_val is None:
+                    continue
+                    
+                if isinstance(c_val, (datetime.datetime, datetime.date)):
+                    mes_num = c_val.month
+                    ano_str = str(c_val.year)[-2:]
+                    comp_label = f"{months_pt.get(mes_num, '')}/{ano_str}"
+                    comp_iso = f"{c_val.year}-{mes_num:02d}"
+                else:
+                    comp_label = str(c_val).strip()
+                    comp_iso = str(c_val).strip()
+                    
+                ret = round(float(ret_val or 0.0), 2)
+                folha = round(float(folha_val or 0.0), 2)
+                saldo = round(float(saldo_val if saldo_val is not None else (ret - folha)), 2)
+                has_movement = (ret > 0 or folha > 0)
+                
+                if has_movement:
+                    running_saldo += saldo
+                    
+                inss_rows.append({
+                    'competencia': comp_label,
+                    'competencia_iso': comp_iso,
+                    'retencao_nf': ret,
+                    'utilizado_folha': folha,
+                    'saldo_mes': saldo,
+                    'saldo_acumulado': round(running_saldo, 2) if has_movement else 0.0,
+                    'has_movement': has_movement,
+                    'status': 'Compensado' if has_movement else 'Pendente'
+                })
+                
+            tot_ret = round(sum(r['retencao_nf'] for r in inss_rows), 2)
+            tot_folha = round(sum(r['utilizado_folha'] for r in inss_rows), 2)
+            tot_saldo = round(running_saldo, 2)
+            active_count = len([r for r in inss_rows if r['has_movement']])
+            media_mensal = round(tot_saldo / active_count, 2) if active_count > 0 else 0.0
+            
+            saldo_credor_inss = {
+                "totais": {
+                    "total_retencao_nf": tot_ret,
+                    "total_utilizado_folha": tot_folha,
+                    "saldo_credor_acumulado": tot_saldo,
+                    "media_mensal_saldo": media_mensal,
+                    "meses_apurados": active_count
+                },
+                "itens": inss_rows
+            }
+            print(f"[ETL] Aba '{inss_sheet_name}' processada: {len(inss_rows)} competências, Saldo Acumulado: R$ {tot_saldo:,.2f}")
+            
+    data["saldo_credor_inss"] = saldo_credor_inss
+
     return data
 
 def main():

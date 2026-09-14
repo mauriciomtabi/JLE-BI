@@ -68,6 +68,8 @@
             renderOverviewTable();
         } else if (state.activeTab === 'acordos') {
             renderAcordosTab();
+        } else if (state.activeTab === 'inss') {
+            renderSaldoCredorINSSTab();
         }
     }
 
@@ -727,8 +729,221 @@
         const wsAcomp = XLSX.utils.json_to_sheet(acompRows);
         XLSX.utils.book_append_sheet(wb, wsAcomp, "Acompanhamento Mensal");
 
+        // Saldo Credor INSS
+        if (data.saldo_credor_inss && data.saldo_credor_inss.itens) {
+            const inssRows = data.saldo_credor_inss.itens.map(i => ({
+                'Competência': i.competencia,
+                'Retenção NF (R$)': i.retencao_nf,
+                'Utilizado Folha (R$)': i.utilizado_folha,
+                'Saldo do Mês (R$)': i.saldo_mes,
+                'Saldo Acumulado (R$)': i.saldo_acumulado,
+                'Status': i.status
+            }));
+            const wsInss = XLSX.utils.json_to_sheet(inssRows);
+            XLSX.utils.book_append_sheet(wb, wsInss, "Saldo Credor INSS");
+        }
+
         const fileName = `JLE_Controle_Parcelamentos_Consolidado_${new Date().toISOString().slice(0, 10)}.xlsx`;
         XLSX.writeFile(wb, fileName);
     };
 
+    // ==========================================
+    // 3. ABA: SALDO CREDOR INSS
+    // ==========================================
+    function renderSaldoCredorINSSTab() {
+        const data = window.PARCELAMENTOS_DATA;
+        if (!data || !data.saldo_credor_inss) return;
+
+        const inss = data.saldo_credor_inss;
+        const tot = inss.totais || {};
+        const itens = inss.itens || [];
+
+        // KPIs
+        const elSaldoAcum = document.getElementById('parc-inss-kpi-saldo-acumulado');
+        if (elSaldoAcum) elSaldoAcum.innerText = formatMoeda(tot.saldo_credor_acumulado);
+        const elSaldoSub = document.getElementById('parc-inss-kpi-saldo-acumulado-sub');
+        if (elSaldoSub) elSaldoSub.innerText = `${tot.meses_apurados || 0} competências apuradas (abr a ago/26)`;
+
+        const elRet = document.getElementById('parc-inss-kpi-total-retencao');
+        if (elRet) elRet.innerText = formatMoeda(tot.total_retencao_nf);
+
+        const elFolha = document.getElementById('parc-inss-kpi-total-folha');
+        if (elFolha) elFolha.innerText = formatMoeda(tot.total_utilizado_folha);
+        const elFolhaSub = document.getElementById('parc-inss-kpi-total-folha-sub');
+        if (elFolhaSub && tot.total_retencao_nf > 0) {
+            const pctUtil = (tot.total_utilizado_folha / tot.total_retencao_nf * 100).toFixed(1);
+            elFolhaSub.innerText = `${pctUtil}% da retenção compensada na folha`;
+        }
+
+        const elMedia = document.getElementById('parc-inss-kpi-media-saldo');
+        if (elMedia) elMedia.innerText = formatMoeda(tot.media_mensal_saldo) + '/mês';
+
+        // Gráfico
+        renderChartSaldoCredorINSS(itens);
+
+        // Tabela
+        renderTableSaldoCredorINSS(itens, tot);
+    }
+
+    function renderChartSaldoCredorINSS(itens) {
+        const ctx = document.getElementById('parc-chart-inss-evolution');
+        if (!ctx) return;
+
+        if (state.charts.inssEvolution) {
+            state.charts.inssEvolution.destroy();
+        }
+
+        const labels = itens.map(i => i.competencia);
+        const retencaoData = itens.map(i => i.has_movement ? i.retencao_nf : null);
+        const folhaData = itens.map(i => i.has_movement ? i.utilizado_folha : null);
+        const saldoData = itens.map(i => i.has_movement ? i.saldo_mes : null);
+
+        state.charts.inssEvolution = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        type: 'line',
+                        label: 'Saldo Gerado no Mês',
+                        data: saldoData,
+                        borderColor: '#00d2d3',
+                        backgroundColor: '#00d2d3',
+                        borderWidth: 2.5,
+                        pointRadius: 4.5,
+                        pointHoverRadius: 7,
+                        pointBackgroundColor: '#00d2d3',
+                        tension: 0.25,
+                        order: 1
+                    },
+                    {
+                        type: 'bar',
+                        label: 'Retenção NF',
+                        data: retencaoData,
+                        backgroundColor: 'rgba(163, 113, 247, 0.65)',
+                        borderColor: '#a371f7',
+                        borderWidth: 1,
+                        borderRadius: 4,
+                        order: 2
+                    },
+                    {
+                        type: 'bar',
+                        label: 'Utilizado Folha',
+                        data: folhaData,
+                        backgroundColor: 'rgba(245, 158, 11, 0.65)',
+                        borderColor: '#f59e0b',
+                        borderWidth: 1,
+                        borderRadius: 4,
+                        order: 3
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { color: '#c9d1d9', font: { family: 'Outfit, Inter', size: 12, weight: 'bold' }, boxWidth: 14 }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(13, 17, 23, 0.95)',
+                        titleColor: '#ffffff',
+                        bodyColor: '#c9d1d9',
+                        borderColor: 'rgba(255, 255, 255, 0.1)',
+                        borderWidth: 1,
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) label += ': ';
+                                if (context.parsed.y !== null) {
+                                    label += formatMoeda(context.parsed.y);
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                        ticks: { color: '#8b949e', font: { family: 'Outfit, Inter', size: 11, weight: 'bold' } }
+                    },
+                    y: {
+                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                        ticks: {
+                            color: '#8b949e',
+                            font: { family: 'Outfit, Inter', size: 11 },
+                            callback: val => 'R$ ' + (val >= 1000 ? (val / 1000).toFixed(0) + 'k' : val)
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    function renderTableSaldoCredorINSS(itens, tot) {
+        const tbody = document.getElementById('parc-inss-table-body');
+        const tfoot = document.getElementById('parc-inss-table-foot');
+        if (!tbody) return;
+
+        tbody.innerHTML = '';
+
+        itens.forEach(item => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><strong>${item.competencia}</strong></td>
+                <td class="num">${item.retencao_nf > 0 ? formatMoeda(item.retencao_nf) : '-'}</td>
+                <td class="num">${item.utilizado_folha > 0 ? formatMoeda(item.utilizado_folha) : '-'}</td>
+                <td class="num" style="color: ${item.saldo_mes > 0 ? '#38ef7d' : 'inherit'}; font-weight: ${item.saldo_mes > 0 ? '600' : 'normal'};">
+                    ${item.has_movement ? formatMoeda(item.saldo_mes) : '-'}
+                </td>
+                <td class="num" style="color: ${item.saldo_acumulado > 0 ? '#388bfd' : 'inherit'}; font-weight: 700;">
+                    ${item.has_movement ? formatMoeda(item.saldo_acumulado) : '-'}
+                </td>
+                <td style="text-align: center;">
+                    <span class="parc-tag-badge ${item.has_movement ? 'badge-green' : 'badge-gray'}">${item.status}</span>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+        if (tfoot) {
+            tfoot.innerHTML = `
+                <tr>
+                    <td><strong>TOTAL CONSOLIDADO</strong></td>
+                    <td class="num">${formatMoeda(tot.total_retencao_nf)}</td>
+                    <td class="num">${formatMoeda(tot.total_utilizado_folha)}</td>
+                    <td class="num" style="color: #38ef7d; font-size: 14px;">${formatMoeda(tot.saldo_credor_acumulado)}</td>
+                    <td class="num" style="color: #388bfd; font-size: 14px;">${formatMoeda(tot.saldo_credor_acumulado)}</td>
+                    <td style="text-align: center;"><span class="parc-tag-badge badge-blue">Ativo</span></td>
+                </tr>
+            `;
+        }
+    }
+
+    window.exportSaldoCredorINSSXLSX = function () {
+        const data = window.PARCELAMENTOS_DATA;
+        if (!data || !data.saldo_credor_inss || !window.XLSX) return;
+
+        const inss = data.saldo_credor_inss;
+        const rows = inss.itens.map(i => ({
+            'Competência': i.competencia,
+            'Retenção NF (R$)': i.retencao_nf,
+            'Utilizado Folha (R$)': i.utilizado_folha,
+            'Saldo do Mês (R$)': i.saldo_mes,
+            'Saldo Acumulado (R$)': i.saldo_acumulado,
+            'Status': i.status
+        }));
+
+        const wb = XLSX.utils.book_new();
+        const ws = XLSX.utils.json_to_sheet(rows);
+        XLSX.utils.book_append_sheet(wb, ws, "Saldo Credor INSS");
+
+        const fileName = `JLE_Saldo_Credor_INSS_${new Date().toISOString().slice(0, 10)}.xlsx`;
+        XLSX.writeFile(wb, fileName);
+    };
+
 })();
+

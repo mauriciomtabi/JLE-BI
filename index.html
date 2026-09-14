@@ -2944,6 +2944,9 @@
                 <button class="parc-tab-btn" data-tab="acordos" onclick="window.switchParcTab('acordos')">
                     <i class="fa-solid fa-list-check"></i> <span>Detalhamento por Acordo (60x)</span>
                 </button>
+                <button class="parc-tab-btn" data-tab="inss" onclick="window.switchParcTab('inss')">
+                    <i class="fa-solid fa-scale-balanced"></i> <span>Saldo Credor INSS</span>
+                </button>
             </div>
 
             <!-- SUB-ABA 1: VISÃO GERAL & CONSOLIDADO -->
@@ -3192,6 +3195,108 @@
                 </div>
             </div>
 
+            <!-- SUB-ABA 3: SALDO CREDOR INSS -->
+            <div id="parc-tab-content-inss" class="parc-tab-content" style="display: none;">
+                <!-- GRID DE 4 KPIS -->
+                <div class="parc-kpi-grid">
+                    <div class="parc-kpi-card kpi-green">
+                        <div class="parc-kpi-title">
+                            <span>SALDO CREDOR ACUMULADO</span>
+                            <i class="fa-solid fa-scale-balanced"></i>
+                        </div>
+                        <div class="parc-kpi-value" id="parc-inss-kpi-saldo-acumulado">R$ 0,00</div>
+                        <div class="parc-kpi-subtitle" id="parc-inss-kpi-saldo-acumulado-sub">
+                            <span>Crédito disponível para compensação</span>
+                        </div>
+                        <i class="fa-solid fa-scale-balanced parc-kpi-watermark"></i>
+                    </div>
+
+                    <div class="parc-kpi-card kpi-purple">
+                        <div class="parc-kpi-title">
+                            <span>RETENÇÃO TOTAL NF</span>
+                            <i class="fa-solid fa-file-invoice-dollar"></i>
+                        </div>
+                        <div class="parc-kpi-value" id="parc-inss-kpi-total-retencao">R$ 0,00</div>
+                        <div class="parc-kpi-subtitle" id="parc-inss-kpi-total-retencao-sub">
+                            <span>Retido em NFs de serviços</span>
+                        </div>
+                        <i class="fa-solid fa-file-invoice-dollar parc-kpi-watermark"></i>
+                    </div>
+
+                    <div class="parc-kpi-card kpi-amber">
+                        <div class="parc-kpi-title">
+                            <span>UTILIZADO NA FOLHA</span>
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <div class="parc-kpi-value" id="parc-inss-kpi-total-folha">R$ 0,00</div>
+                        <div class="parc-kpi-subtitle" id="parc-inss-kpi-total-folha-sub">
+                            <span>Compensado na folha de pagamento</span>
+                        </div>
+                        <i class="fa-solid fa-users parc-kpi-watermark"></i>
+                    </div>
+
+                    <div class="parc-kpi-card kpi-blue">
+                        <div class="parc-kpi-title">
+                            <span>MÉDIA MENSAL DE SALDO</span>
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <div class="parc-kpi-value" id="parc-inss-kpi-media-saldo">R$ 0,00</div>
+                        <div class="parc-kpi-subtitle" id="parc-inss-kpi-media-saldo-sub">
+                            <span>Média de crédito gerado/mês</span>
+                        </div>
+                        <i class="fa-solid fa-chart-line parc-kpi-watermark"></i>
+                    </div>
+                </div>
+
+                <!-- GRÁFICO COMPARATIVO MENSAL -->
+                <div class="parc-card">
+                    <div class="parc-card-header">
+                        <div class="parc-card-title">
+                            <i class="fa-solid fa-chart-column"></i> Confronto Mensal: Retenção NF vs Utilizado Folha vs Saldo Gerado
+                        </div>
+                        <span class="parc-tag-badge badge-blue">Exercício 2026</span>
+                    </div>
+                    <div class="parc-chart-wrapper" style="position: relative; height: 320px; width: 100%;">
+                        <canvas id="parc-chart-inss-evolution"></canvas>
+                    </div>
+                </div>
+
+                <!-- TABELA DEMONSTRATIVO MENSAL -->
+                <div class="parc-card">
+                    <div class="parc-card-header">
+                        <div class="parc-card-title">
+                            <i class="fa-solid fa-table-list"></i> Demonstrativo Mensal do Saldo Credor INSS - JLE
+                        </div>
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <button class="parc-btn-export" onclick="window.exportSaldoCredorINSSXLSX()" title="Exportar demonstrativo para Excel">
+                                <i class="fa-solid fa-file-excel"></i> Exportar Excel
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="parc-table-wrapper">
+                        <table class="parc-table" id="parc-table-inss">
+                            <thead>
+                                <tr>
+                                    <th>Competência</th>
+                                    <th class="num">Retenção NF (R$)</th>
+                                    <th class="num">Utilizado Folha (R$)</th>
+                                    <th class="num">Saldo do Mês (R$)</th>
+                                    <th class="num">Saldo Acumulado (R$)</th>
+                                    <th style="text-align: center;">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="parc-inss-table-body">
+                                <!-- Preenchido via JS -->
+                            </tbody>
+                            <tfoot id="parc-inss-table-foot" style="font-weight: 700; background: rgba(255, 255, 255, 0.04); border-top: 2px solid var(--border-color);">
+                                <!-- Totais via JS -->
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </main>
 
@@ -3386,8 +3491,8 @@
     <script src="sar_app.js?v=3.57"></script>
     <script src="manutencao_data.js"></script>
     <script src="manutencao_app.js"></script>
-    <script src="parcelamentos_data.js?v=20260910084000"></script>
-    <script src="parcelamentos_app.js?v=1.4"></script>
+    <script src="parcelamentos_data.js?v=20260914181600"></script>
+    <script src="parcelamentos_app.js?v=1.5"></script>
     <script src="email_preview_helper.js?v=1.2"></script>
 
     <!-- Logica de UI Autônoma (Sem Dependências de CDNs) -->
