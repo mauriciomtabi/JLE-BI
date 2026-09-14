@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-09-14 09:00:12
+// Dados SAR JLE Telecom - Gerado em: 2026-09-14 10:04:24
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1081,
-    "generated_at": "2026-09-14 09:00:12",
+    "generated_at": "2026-09-14 10:04:24",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -762,10 +762,10 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 783420.75,
-        "total_previa_medicao": 1310837.97,
+        "total_terceiros": 783791.75,
+        "total_previa_medicao": 1311628.69,
         "total_classe_l": 330120.25,
-        "total_classe_f": 453300.5
+        "total_classe_f": 453671.5
     },
     "medicao": {
         "total_geral": 1198899.11,
@@ -73883,8 +73883,8 @@ window.SAR_DATA = [
   {
     "cod": "RSCLER1071",
     "area_tecnica": "MNDAB",
-    "node": "",
-    "site": "",
+    "node": "CBXAE",
+    "site": "RSPCE14",
     "cidade": "PORTO ALEGRE",
     "condominio": "COND. EDIF SAO JACO",
     "endereco": "RUA JOSE DO PATROCINIO 653",
@@ -73893,13 +73893,13 @@ window.SAR_DATA = [
     "classe_f": "CATIA",
     "situacao": "10/09/2026",
     "relatorio_foto": "SEM LANÇAMENTO",
-    "servico": "",
+    "servico": "4 ABERTURA E FECHAMENTO, 4 FUSÕES, 1 DERIVAÇÃO, 1 TESTE.",
     "data_entrada": "2026-09-10",
     "data_entrada_fmt": "10/09/2026",
-    "data_inicio": null,
-    "data_inicio_fmt": "-",
-    "data_previsao": null,
-    "data_previsao_fmt": "-",
+    "data_inicio": "2026-09-14",
+    "data_inicio_fmt": "14/09/2026",
+    "data_previsao": "2026-09-14",
+    "data_previsao_fmt": "14/09/2026",
     "data_entrega": "2026-09-10",
     "data_entrega_fmt": "10/09/2026",
     "data_medicao": null,
@@ -73920,20 +73920,20 @@ window.SAR_DATA = [
     "ano_entrega": "2026",
     "mes_entrega": "SETEMBRO",
     "mes_num_entrega": "09",
-    "status": "RELATÓRIO",
-    "status_relatorio": "",
-    "status_medicao": "",
+    "status": "EM MEDIÇÃO",
+    "status_relatorio": "14/09/2026",
+    "status_medicao": "14/09/2026",
     "status_obra": "Em Andamento",
     "prazo": "NO PRAZO",
     "tempo_dias": 0,
     "atraso_dias": 0,
-    "total_terceiros": 0.0,
-    "previa_medicao": 0.0,
+    "total_terceiros": 371.0,
+    "previa_medicao": 790.72,
     "valor_medicao": 0.0,
     "valor_classe_l": 0.0,
-    "valor_classe_f": 0.0,
+    "valor_classe_f": 371.0,
     "itens_l_resumo": "-",
-    "itens_f_resumo": "-",
+    "itens_f_resumo": "3.15 AB/FE: 4 un, 3.13 FUS/EME: 4 un, 3.12 DER/INS: 1 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
@@ -73942,10 +73942,10 @@ window.SAR_DATA = [
       "q_311": 0.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 0.0,
-      "q_313": 0.0,
+      "q_315": 4.0,
+      "q_313": 4.0,
       "q_314": 0.0,
-      "q_312": 0.0
+      "q_312": 1.0
     }
   },
   {
