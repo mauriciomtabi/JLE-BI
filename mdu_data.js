@@ -1,7 +1,7 @@
-// Dados MDU Compactados - Gerado em: 2026-09-14 13:00:13
+// Dados MDU Compactados - Gerado em: 2026-09-14 14:01:19
 window.MDU_METADATA = {
-    "generated_at": "2026-09-14 13:00:13",
-    "total_rows": 5659,
+    "generated_at": "2026-09-14 14:01:19",
+    "total_rows": 5658,
     "geocoded_new": 0
 };
 
@@ -32900,38 +32900,6 @@ window.MDU_DATA = [
         "valor_repasse": 0,
         "lat": -30.0376681,
         "lng": -51.1757783,
-        "geocodificado": true
-    },
-    {
-        "os": "RS.CLR.PRD.2501009",
-        "endereco": "VENANCIO AIRES 62",
-        "cidade": "PORTO ALEGRE",
-        "cluster": "PAE",
-        "aging": "3.015",
-        "relatorio_por": "",
-        "pendencia": "Não",
-        "status": "Fusão",
-        "prog": 50.0,
-        "cod_imovel": "#N/A",
-        "area": "MNDAB",
-        "node": "CBXAA",
-        "caixa_m": "",
-        "hps": null,
-        "data_adicio": "13/06/2018",
-        "equipe": "Kleiton de Paula",
-        "primeira_visita": "08/10/2025",
-        "segunda_visita": "",
-        "obs_vistoria": "SEM SINAL",
-        "data_interna": "08/10",
-        "data_fusao": "",
-        "data_baixa": "",
-        "obs_baixa": "",
-        "data_relatorio": "",
-        "data_medicao": "",
-        "valor_medicao": 0,
-        "valor_repasse": 520.0,
-        "lat": -30.0379016,
-        "lng": -51.2108474,
         "geocodificado": true
     },
     {
