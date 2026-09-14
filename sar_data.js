@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-09-14 08:18:55
+// Dados SAR JLE Telecom - Gerado em: 2026-09-14 09:00:12
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1081,
-    "generated_at": "2026-09-14 08:18:55",
+    "generated_at": "2026-09-14 09:00:12",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -74233,7 +74233,7 @@ window.SAR_DATA = [
     "classe_f": "CATIA",
     "situacao": "11/09/2026",
     "relatorio_foto": "SEM LANÇAMENTO",
-    "servico": "",
+    "servico": "DEVOLVIDO PARA A AREA DE PROJETOS",
     "data_entrada": "2026-09-11",
     "data_entrada_fmt": "11/09/2026",
     "data_inicio": null,
