@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-09-14 15:04:43
+// Dados MDU Compactados - Gerado em: 2026-09-14 16:00:24
 window.MDU_METADATA = {
-    "generated_at": "2026-09-14 15:04:43",
+    "generated_at": "2026-09-14 16:00:24",
     "total_rows": 5657,
     "geocoded_new": 0
 };
@@ -134252,14 +134252,14 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "3.200",
-        "relatorio_por": "",
-        "pendencia": "SIM",
-        "status": "Pendência",
-        "prog": 0.0,
+        "relatorio_por": "JENIFFER",
+        "pendencia": "Não",
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "610481005",
         "area": "BFMAA",
         "node": "FLOAM",
-        "caixa_m": "175",
+        "caixa_m": "BFMAA.241.M020",
         "hps": 10,
         "data_adicio": "10/12/2017",
         "equipe": "Alessandro Fagundes",
