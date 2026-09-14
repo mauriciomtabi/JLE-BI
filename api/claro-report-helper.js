@@ -361,7 +361,8 @@ function parseClaroContent(content) {
         user_pedido: l.users[r[20]] || '-',
         fase_atual_de_para: l.fase_de_para[r[21]] || '-',
         mes_medicao: r[22] || '-',
-        data_inclusao_lpu: r[23] || '-'
+        data_inclusao_lpu: r[23] || '-',
+        data_pedido: r[24] || '-'
     }));
     
     return {

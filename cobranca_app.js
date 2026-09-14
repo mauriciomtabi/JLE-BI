@@ -1780,6 +1780,7 @@ function getCobrancaTableData() {
             (r.projeto_gerencial || '').toUpperCase().includes(q) ||
             (r.item_descritivo || '').toUpperCase().includes(q) ||
             (r.numero_pedido || '').toString().includes(q) ||
+            (r.data_pedido || '').toString().includes(q) ||
             (r.numero_medicao || '').toString().includes(q) ||
             (r.categoria || '').toUpperCase().includes(q) ||
             (r.fase_atual_de_para || '').toUpperCase().includes(q)
@@ -1827,7 +1828,7 @@ function renderCobrancaTable() {
     tbody.innerHTML = '';
 
     if (totalCount === 0) {
-        tbody.innerHTML = `<tr><td colspan="22" style="text-align:center;color:var(--text-secondary);padding:40px 0;">Nenhum registro encontrado.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="23" style="text-align:center;color:var(--text-secondary);padding:40px 0;">Nenhum registro encontrado.</td></tr>`;
         document.getElementById('cobranca-page-info').textContent = 'Pág. 0 de 0';
         document.getElementById('cobranca-pagination-btns').innerHTML = '';
         return;
@@ -1871,6 +1872,7 @@ function renderCobrancaTable() {
             <td data-label="PEP">${r.pep || '-'}</td>
             <td data-label="Nº Medição">${r.numero_medicao || '-'}</td>
             <td data-label="Nº Pedido">${r.numero_pedido || '-'}</td>
+            <td data-label="Dt. Pedido">${fmtDate(r.data_pedido)}</td>
             <td data-label="User Pedido">${r.user_pedido || '-'}</td>
             <td data-label="Fase (De/Para)"><span class="cobranca-badge ${badgeClass}">${r.fase_atual_de_para || '-'}</span></td>
         `;
@@ -1967,7 +1969,7 @@ function exportCobrancaXLSX() {
             'Tipo de Atividade', 'Fase Atual', 'Contrato Número', 'Item Descritivo', 
             'Tipo de Despesa', 'Objeto do Contrato', 'Valor Total', 'Data Cadastro', 
             'Data Aprovação', 'Tempo Aprovação', 'Usuário Inclusão Medição', 'PEP', 
-            'Número Medição', 'Número Pedido', 'Usuário Inclusão Pedido', 'Fase Atual (De Para)'
+            'Número Medição', 'Número Pedido', 'Data do Pedido', 'Usuário Inclusão Pedido', 'Fase Atual (De Para)'
         ];
 
         const rows = data.map(r => [
@@ -1991,6 +1993,7 @@ function exportCobrancaXLSX() {
             r.pep || '',
             r.numero_medicao || '',
             r.numero_pedido || '',
+            r.data_pedido || '',
             r.user_pedido || '',
             r.fase_atual_de_para || ''
         ]);

@@ -263,6 +263,7 @@ def process_cobranca(input_path=None):
             dt_cad = parse_date_str(get_col("DATA_CADASTRO"))
             dt_aprov = parse_date_str(get_col("DATA_APROVACAO_MEDICAO"))
             dt_incl_lpu = parse_date_str(get_col("DATA_INCLUSAO_LPU"))
+            dt_ped = parse_date_str(get_col("DATA_PEDIDO"))
             tempo_aprov = get_days_between(dt_cad, dt_aprov)
             
             if fase_de_para_str in ["APROVADO", "PEDIDO EMITIDO"]:
@@ -278,7 +279,7 @@ def process_cobranca(input_path=None):
                 pep, cat_idx, os_val, cidade_idx, uf_idx, proj_idx, proj_ger_idx, tipo_ativ_idx,
                 fase_idx, contrato_idx, item_desc_idx, tipo_desp_idx, obj_contr_idx, val_num,
                 dt_cad, dt_aprov, tempo_aprov, user_med_idx, num_med, num_ped, user_ped_idx,
-                fase_de_para_idx, mes_med, dt_incl_lpu
+                fase_de_para_idx, mes_med, dt_incl_lpu, dt_ped
             ]
             rows_list.append(row_array)
     else:
@@ -335,6 +336,7 @@ def process_cobranca(input_path=None):
                 dt_cad = parse_date_str(row.get("DATA_CADASTRO"))
                 dt_aprov = parse_date_str(row.get("DATA_APROVACAO_MEDICAO"))
                 dt_incl_lpu = parse_date_str(row.get("DATA_INCLUSAO_LPU"))
+                dt_ped = parse_date_str(row.get("DATA_PEDIDO"))
                 tempo_aprov = get_days_between(dt_cad, dt_aprov)
                 
                 if fase_de_para_str in ["APROVADO", "PEDIDO EMITIDO"]:
@@ -350,7 +352,7 @@ def process_cobranca(input_path=None):
                     pep, cat_idx, os_val, cidade_idx, uf_idx, proj_idx, proj_ger_idx, tipo_ativ_idx,
                     fase_idx, contrato_idx, item_desc_idx, tipo_desp_idx, obj_contr_idx, val_num,
                     dt_cad, dt_aprov, tempo_aprov, user_med_idx, num_med, num_ped, user_ped_idx,
-                    fase_de_para_idx, mes_med, dt_incl_lpu
+                    fase_de_para_idx, mes_med, dt_incl_lpu, dt_ped
                 ]
                 rows_list.append(row_array)
             
@@ -411,7 +413,8 @@ def process_cobranca(input_path=None):
         user_pedido: l.users[r[20]],
         fase_atual_de_para: l.fase_de_para[r[21]],
         mes_medicao: r[22],
-        data_inclusao_lpu: r[23]
+        data_inclusao_lpu: r[23],
+        data_pedido: r[24]
     }}));
     
     window.COBRANCA_METADATA = {{

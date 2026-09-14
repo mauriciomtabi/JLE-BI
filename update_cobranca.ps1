@@ -189,6 +189,7 @@ if (-not $pythonSuccess) {
     $idxValTotal = $headers["VALOR_TOTAL_FINAL"]
     $idxProj = $headers["PROJETO"]
     $idxDtInclLPU = $headers["DATA_INCLUSAO_LPU"]
+    $idxDtPed = $headers["DATA_PEDIDO"]
     
     # Helpers para datas
     function Parse-ExcelDate ($excelDate) {
@@ -313,6 +314,7 @@ if (-not $pythonSuccess) {
         $dtCad = Parse-ExcelDate $data[$r, $idxDtCad]
         $dtAprov = Parse-ExcelDate $data[$r, $idxDtAprov]
         $dtInclLPU = Parse-ExcelDate $data[$r, $idxDtInclLPU]
+        $dtPed = Parse-ExcelDate $data[$r, $idxDtPed]
         
         # Calcular tempo de aprovação
         $tempoAprov = Get-DaysBetween $dtCad $dtAprov
@@ -362,12 +364,13 @@ if (-not $pythonSuccess) {
         # 21: fase_atual_de_para (idx)
         # 22: mes_medicao (str)
         # 23: data_inclusao_lpu (str)
+        # 24: data_pedido (str)
         
         $rowArray = @(
             $pep, $catIdx, $os, $cidadeIdx, $ufIdx, $projIdx, $projGerIdx, $tipoAtivIdx, 
             $faseIdx, $contratoIdx, $itemDescIdx, $tipoDespIdx, $objContrIdx, $valNum, 
             $dtCad, $dtAprov, $tempoAprov, $userMedIdx, $numMed, $numPed, $userPedIdx, 
-            $faseDeParaIdx, $mesMed, $dtInclLPU
+            $faseDeParaIdx, $mesMed, $dtInclLPU, $dtPed
         )
         
         [void]$rowsList.Add($rowArray)
@@ -430,7 +433,8 @@ if (-not $pythonSuccess) {
         user_pedido: l.users[r[20]],
         fase_atual_de_para: l.fase_de_para[r[21]],
         mes_medicao: r[22],
-        data_inclusao_lpu: r[23]
+        data_inclusao_lpu: r[23],
+        data_pedido: r[24]
     }));
     
     window.COBRANCA_METADATA = {
