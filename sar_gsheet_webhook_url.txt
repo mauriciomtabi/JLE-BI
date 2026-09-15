@@ -1,2 +1,1 @@
-# Cole aqui a URL gerada pelo Google Apps Script (Implantar > App da Web)
-# Exemplo: https://script.google.com/macros/s/AKfycbx.../exec
+https://script.google.com/macros/s/AKfycbw1YmLIv5GU7olkcVvQz52iUGMGnOgOO8Jzo3twzIcv9w0XY65cYfJE-P7_YBSwfza6/exec

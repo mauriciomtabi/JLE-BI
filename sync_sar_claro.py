@@ -295,83 +295,69 @@ def format_date_str(d_str):
     return d_str[:10]
 
 def cross_reference(sar_records, claro_map):
-    """Aplica as regras de negócio para identificar atualizações necessárias."""
+    """
+    Regra de Negócio (Alinhada com a Instrução Operacional):
+    Varre TODAS as linhas do SAR que possuem Nº WF preenchido e NÃO possuem Nº DO PEDIDO.
+    Cruza com o Analítico Claro pelo WF:
+    - Se houver número de pedido na Claro:
+        * Status Geral SAR -> 'PEDIDO EMITIDO'
+        * Data Pedido -> Data de Aprovação/Medição da Claro (se houver)
+        * Nº do Pedido -> Número do Pedido da Claro
+    - Se NÃO houver pedido na Claro:
+        * Mantém a linha inalterada (não força status).
+    """
     updates = []
     stats = {
-        'total_wf': 0,
+        'total_wf_sem_pedido': 0,
         'matched_claro': 0,
-        'finalizado_sem_pedido': 0,
-        'pedido_emitido': 0,
-        'sem_alteracao': 0
+        'pedidos_encontrados': 0,
+        'sem_pedido_na_claro': 0,
+        'ja_tinham_pedido': 0
     }
     
     for rec in sar_records:
-        wf_raw = rec['wf']
+        wf_raw = rec.get('wf', '')
         wf_digits = re.sub(r'\D', '', wf_raw)
         if not wf_digits:
             continue
             
-        stats['total_wf'] += 1
+        # Se já possui número de pedido na planilha SAR, ignora
+        if rec.get('num_pedido'):
+            stats['ja_tinham_pedido'] += 1
+            continue
+            
+        stats['total_wf_sem_pedido'] += 1
         
         if wf_digits in claro_map:
             stats['matched_claro'] += 1
             claro_info = claro_map[wf_digits]
-            fase = claro_info['fase']
-            num_ped = claro_info['num_pedido']
-            dt_aprov = format_date_str(claro_info['dt_aprovacao'])
+            num_ped = claro_info.get('num_pedido', '').strip()
+            dt_aprov = format_date_str(claro_info.get('dt_aprovacao', ''))
             
-            is_finalizado_claro = 'FINALIZ' in fase or 'CONCLU' in fase or 'APROV' in fase
+            # Se tiver número de pedido emitido no Analítico Claro
+            if num_ped:
+                stats['pedidos_encontrados'] += 1
+                novo_status = 'PEDIDO EMITIDO'
+                nova_dt_ped = dt_aprov
+                novo_num_ped = num_ped
+                
+                updates.append({
+                    'row': rec['row'],
+                    'cod': rec['cod'],
+                    'wf': wf_digits,
+                    'status': novo_status,
+                    'data_pedido': nova_dt_ped,
+                    'num_pedido': novo_num_ped,
+                    'old_status': rec['status'],
+                    'old_data_pedido': rec['data_pedido'],
+                    'old_num_pedido': rec['num_pedido'],
+                    'motivo': f"Pedido emitido no Analítico Claro ({novo_num_ped})"
+                })
+            else:
+                stats['sem_pedido_na_claro'] += 1
+        else:
+            stats['sem_pedido_na_claro'] += 1
             
-            if is_finalizado_claro:
-                # Regra 1: Se tiver número do pedido no Analítico
-                if num_ped:
-                    stats['pedido_emitido'] += 1
-                    novo_status = 'PEDIDO EMITIDO'
-                    nova_dt_ped = dt_aprov
-                    novo_num_ped = num_ped
-                    
-                    # Checar se precisa atualizar algum campo
-                    status_changed = (rec['status'] != novo_status)
-                    dt_changed = (rec['data_pedido'] != nova_dt_ped and nova_dt_ped != "")
-                    ped_changed = (rec['num_pedido'] != novo_num_ped)
-                    
-                    if status_changed or dt_changed or ped_changed:
-                        updates.append({
-                            'row': rec['row'],
-                            'cod': rec['cod'],
-                            'wf': wf_digits,
-                            'status': novo_status,
-                            'data_pedido': nova_dt_ped,
-                            'num_pedido': novo_num_ped,
-                            'old_status': rec['status'],
-                            'old_data_pedido': rec['data_pedido'],
-                            'old_num_pedido': rec['num_pedido'],
-                            'motivo': f"Pedido emitido no Analítico ({novo_num_ped})"
-                        })
-                    else:
-                        stats['sem_alteracao'] += 1
-                        
-                # Regra 2: Se estiver finalizado sem número de pedido
-                else:
-                    stats['finalizado_sem_pedido'] += 1
-                    novo_status = 'FINALIZADO'
-                    
-                    if rec['status'] != novo_status:
-                        updates.append({
-                            'row': rec['row'],
-                            'cod': rec['cod'],
-                            'wf': wf_digits,
-                            'status': novo_status,
-                            'data_pedido': rec['data_pedido'],
-                            'num_pedido': rec['num_pedido'],
-                            'old_status': rec['status'],
-                            'old_data_pedido': rec['data_pedido'],
-                            'old_num_pedido': rec['num_pedido'],
-                            'motivo': f"WF finalizado no Analítico sem pedido (Fase: {fase})"
-                        })
-                    else:
-                        stats['sem_alteracao'] += 1
-                        
     return updates, stats
 
 def send_updates_to_google_sheet(webhook_url, updates):
@@ -439,11 +425,11 @@ def main():
 
     log(f"Estatísticas do Cruzamento:")
     log(f"  - Total de linhas no SAR analisadas: {len(sar_records)}")
-    log(f"  - Linhas com Nº WF (Coluna AL): {stats['total_wf']}")
+    log(f"  - Linhas com WF e SEM pedido: {stats['total_wf_sem_pedido']}")
+    log(f"  - Linhas que já possuíam pedido: {stats['ja_tinham_pedido']}")
     log(f"  - WFs localizados no Analítico Claro: {stats['matched_claro']}")
-    log(f"    * Com Pedido Emitido: {stats['pedido_emitido']}")
-    log(f"    * Finalizados sem Pedido: {stats['finalizado_sem_pedido']}")
-    log(f"  - Linhas sem alteração necessária: {stats['sem_alteracao']}")
+    log(f"    * Pedidos encontrados para preencher: {stats['pedidos_encontrados']}")
+    log(f"    * Sem pedido emitido na Claro ainda: {stats['sem_pedido_na_claro']}")
     log(f"  - LINHAS QUE REQUEREM ATUALIZAÇÃO: {len(updates)}")
 
     if updates:
