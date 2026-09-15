@@ -25,9 +25,12 @@ $action = New-ScheduledTaskAction -Execute "powershell.exe" `
     -Argument "-ExecutionPolicy Bypass -WindowStyle Hidden -File `"$scriptPath`"" `
     -WorkingDirectory $workingDir
 
-# 3. Definir disparo semanal: Segunda a Sexta às 12:45
+# 3. Definir disparos semanais: Segunda a Sexta às 08:45, 12:45 e 16:45
 $daysOfWeek = @("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
-$trigger = New-ScheduledTaskTrigger -Weekly -DaysOfWeek $daysOfWeek -At "12:45:00"
+$trigger1 = New-ScheduledTaskTrigger -Weekly -DaysOfWeek $daysOfWeek -At "08:45:00"
+$trigger2 = New-ScheduledTaskTrigger -Weekly -DaysOfWeek $daysOfWeek -At "12:45:00"
+$trigger3 = New-ScheduledTaskTrigger -Weekly -DaysOfWeek $daysOfWeek -At "16:45:00"
+$triggers = @($trigger1, $trigger2, $trigger3)
 
 # 4. Configurações de execução
 $settings = New-ScheduledTaskSettingsSet `
@@ -38,14 +41,15 @@ $settings = New-ScheduledTaskSettingsSet `
 
 # 5. Registrar no Windows Task Scheduler
 Register-ScheduledTask -TaskName $taskName `
-    -Trigger $trigger `
+    -Trigger $triggers `
     -Action $action `
     -Settings $settings `
-    -Description "Sincronizacao automatica SAR x Analitico Claro (Seg a Sex as 12:45)" `
+    -Description "Sincronizacao automatica SAR x Analitico Claro (Seg a Sex as 08:45, 12:45 e 16:45)" `
     -Force
 
 Write-Output "=========================================================="
 Write-Output "Tarefa agendada '$taskName' registrada com sucesso!"
-Write-Output "Horario: Segunda a Sexta-feira as 12:45:00"
+Write-Output "Horários: Segunda a Sexta-feira às 08:45, 12:45 e 16:45"
+Write-Output "Configuração: StartWhenAvailable ATIVO (executa ao ligar se o note estava desligado)"
 Write-Output "Script: $scriptPath"
 Write-Output "=========================================================="
