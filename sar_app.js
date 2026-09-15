@@ -2216,7 +2216,7 @@ function renderSarMedicaoTable(dataset) {
     const medData = getSarMedicaoFilteredDataset(dataset);
 
     if (medData.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="10" style="text-align:center; color: var(--text-secondary); padding: 30px;">Nenhuma medição encontrada para os filtros selecionados.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="11" style="text-align:center; color: var(--text-secondary); padding: 30px;">Nenhuma medição encontrada para os filtros selecionados.</td></tr>';
         if (tfoot) tfoot.innerHTML = '';
         if (countBadge) countBadge.innerText = '0 medições listadas';
         return;
@@ -2250,6 +2250,7 @@ function renderSarMedicaoTable(dataset) {
         else if (stGrupo === 'PEDIDO EMITIDO') badgeClass = 'sar-badge-status-med-pedido';
 
         const dtMedFmt = r.data_medicao_fmt || (r.data_medicao ? format_date_br(r.data_medicao) : '-');
+        const dtCadWfFmt = r.data_med_cad_wf_fmt || (r.data_med_cad_wf ? format_date_br(r.data_med_cad_wf) : '-');
         const dtPedFmt = r.data_pedido_fmt || (r.data_pedido ? format_date_br(r.data_pedido) : '-');
 
         return `
@@ -2261,6 +2262,7 @@ function renderSarMedicaoTable(dataset) {
                 <td style="text-align: center; white-space: nowrap; font-weight: 600; color: #388bfd;">${dtMedFmt}</td>
                 <td style="text-align: right; white-space: nowrap; font-weight: 700; color: #f59e0b;">${formatCurrencyBR(r.valor_medicao)}</td>
                 <td style="text-align: center; white-space: nowrap;"><span class="${badgeClass}">${r.status || '-'}</span></td>
+                <td style="text-align: center; white-space: nowrap; font-size: 11px; color: ${r.data_med_cad_wf ? '#00d2d3' : 'inherit'}; font-weight: ${r.data_med_cad_wf ? '700' : 'normal'};">${dtCadWfFmt}</td>
                 <td style="text-align: center; white-space: nowrap; font-size: 11px;">${r.num_wf || '-'}</td>
                 <td style="text-align: center; white-space: nowrap; font-size: 11px;">${dtPedFmt}</td>
                 <td style="text-align: center; white-space: nowrap; font-size: 11px;">${r.num_pedido || '-'}</td>
@@ -2274,7 +2276,7 @@ function renderSarMedicaoTable(dataset) {
                 <td colspan="4" style="text-align: right; padding: 12px 14px; text-transform: uppercase; font-size: 12px; color: var(--text-secondary);">Totais Consolidados:</td>
                 <td style="text-align: center; padding: 12px 6px; color: #388bfd;">${sorted.length} OSs</td>
                 <td style="text-align: right; padding: 12px 14px; color: #f59e0b; font-size: 14px;">${formatCurrencyBR(totalSoma)}</td>
-                <td colspan="4"></td>
+                <td colspan="5"></td>
             </tr>
         `;
     }
@@ -2362,6 +2364,7 @@ function exportSarMedicaoToExcel() {
         "Valor Medição (R$)": r.valor_medicao || 0,
         "Status Geral SAR": r.status || '',
         "Status Medição": getSarRecordStatusGrupo(r),
+        "Data Cad. WF": r.data_med_cad_wf_fmt || (r.data_med_cad_wf ? format_date_br(r.data_med_cad_wf) : '-'),
         "Nº WF": r.num_wf || '',
         "Data Pedido": r.data_pedido_fmt || (r.data_pedido ? format_date_br(r.data_pedido) : '-'),
         "Nº Pedido": r.num_pedido || '',
@@ -2407,6 +2410,7 @@ function exportSarToExcel() {
         "Data de Entrada": r.data_entrada_fmt || '',
         "Data de Entrega": r.data_entrega_fmt || '',
         "Data Medição": r.data_medicao_fmt || '',
+        "Data Cad. WF": r.data_med_cad_wf_fmt || '',
         "Valor Medição (R$)": r.valor_medicao || 0,
         "Total Terceiros (R$)": r.total_terceiros || 0,
         "Valor Classe L (R$)": r.valor_classe_l || 0,

@@ -231,10 +231,11 @@ module.exports = async (req, res) => {
         const idxPreviaMed = getColIdx(['PREVIA MEDICAO', 'PREVIA MEDIÇÃO'], 34);
         const idxDataMedicao = getColIdx(['DATA MEDICAO', 'DATA MEDIÇÃO'], 35);
         const idxValorMedicao = getColIdx(['VALOR MEDICAO', 'VALOR'], 36);
-        const idxWf = getColIdx(['N WF', 'NO WF', 'NUM WF', 'WORKFLOW'], 37);
-        const idxDataPedido = getColIdx(['DATA PEDIDO'], 38);
-        const idxPedido = getColIdx(['N DO PEDIDO', 'NO DO PEDIDO', 'PEDIDO'], 39);
-        const idxObs = getColIdx(['OBSERVACOES', 'OBSERVAÇÕES'], 40);
+        const idxDataMedCadWf = getColIdx(['DATA MED CAD WF2', 'DATA MED CAD WF', 'DATA CAD WF', 'CAD WF'], 37);
+        const idxWf = getColIdx(['N WF', 'NO WF', 'NUM WF', 'WORKFLOW'], 38);
+        const idxDataPedido = getColIdx(['DATA PEDIDO'], 39);
+        const idxPedido = getColIdx(['N DO PEDIDO', 'NO DO PEDIDO', 'PEDIDO'], 40);
+        const idxObs = getColIdx(['OBSERVACOES', 'OBSERVAÇÕES'], 41);
 
         const records = [];
         const todayStr = new Date().toISOString().substring(0, 10);
@@ -275,6 +276,7 @@ module.exports = async (req, res) => {
 
             const dt_medicao_iso = parseDateIso(r[idxDataMedicao]);
             const valor_medicao = toNumber(r[idxValorMedicao]);
+            const dt_med_cad_wf_iso = parseDateIso(r[idxDataMedCadWf]);
             const num_wf = (r[idxWf] || '').trim().replace('.0', '');
             const dt_pedido_iso = parseDateIso(r[idxDataPedido]);
             const num_pedido = (r[idxPedido] || '').trim().replace('.0', '');
@@ -424,6 +426,8 @@ module.exports = async (req, res) => {
                 mes_num_medicao,
                 status_medicao_grupo,
                 tem_medicao,
+                data_med_cad_wf: dt_med_cad_wf_iso,
+                data_med_cad_wf_fmt: formatDateBr(dt_med_cad_wf_iso),
                 num_wf,
                 status_wf,
                 num_pedido,

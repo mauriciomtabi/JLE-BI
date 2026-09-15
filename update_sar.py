@@ -342,10 +342,11 @@ def main():
             val_f = round(calc_f, 2)
             total_terceiros = round(val_l + val_f, 2)
 
-        num_wf = clean_str(get_col(row, "N WF", "NO WF", "NUM WF", "Nº WF", "WORKFLOW", default_idx=37))
-        dt_pedido_iso = parse_date(get_col(row, "DATA PEDIDO", default_idx=38))
-        num_pedido = clean_str(get_col(row, "N DO PEDIDO", "NO DO PEDIDO", "Nº DO PEDIDO", "PEDIDO", default_idx=39))
-        observacoes = clean_str(get_col(row, "OBSERVACOES", "OBSERVAÇÕES", "OBS", default_idx=40))
+        dt_med_cad_wf_iso = parse_date(get_col(row, "DATA MED CAD WF2", "DATA MED CAD WF", "DATA CAD WF", "CAD WF", default_idx=37))
+        num_wf = clean_str(get_col(row, "N WF", "NO WF", "NUM WF", "Nº WF", "WORKFLOW", default_idx=38))
+        dt_pedido_iso = parse_date(get_col(row, "DATA PEDIDO", default_idx=39))
+        num_pedido = clean_str(get_col(row, "N DO PEDIDO", "NO DO PEDIDO", "Nº DO PEDIDO", "PEDIDO", default_idx=40))
+        observacoes = clean_str(get_col(row, "OBSERVACOES", "OBSERVAÇÕES", "OBS", default_idx=41))
         status_wf = "100% - OK" if "IMPLANTADO" in status or "APROV" in status else ""
 
         # Cálculo do Tempo e SLA em dias úteis
@@ -460,6 +461,8 @@ def main():
             "mes_num_medicao": mes_num_medicao,
             "status_medicao_grupo": status_medicao_grupo,
             "tem_medicao": bool(valor_medicao > 0),
+            "data_med_cad_wf": dt_med_cad_wf_iso,
+            "data_med_cad_wf_fmt": format_date_br(dt_med_cad_wf_iso),
             "num_wf": num_wf,
             "status_wf": status_wf,
             "competencia": competencia,

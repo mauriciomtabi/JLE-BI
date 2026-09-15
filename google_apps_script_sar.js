@@ -6,14 +6,14 @@
  * ========================================================================
  * 
  * DIRETRIZ DE SEGURANÇA MÁXIMA:
- * - NUNCA altera nenhuma fórmula ou célula das colunas A até U (1 a 21).
- * - NUNCA toca nas colunas W até AK (23 a 37 - Terceiros, Fórmulas AH, etc).
- * - NUNCA altera a coluna AL (38 - Nº WF, somente leitura).
- * - NUNCA altera a coluna AO (41 - Observações) ou colunas posteriores.
+ * - NUNCA altera fórmulas ou células operacionais de campo.
+ * - Detecção DINÂMICA de colunas a partir do cabeçalho da linha 3.
  * - SOMENTE atualiza cirurgicamente:
- *     * Coluna V (22): STATUS GERAL SAR
- *     * Coluna AM (39): DATA PEDIDO (quando houver pedido emitido)
- *     * Coluna AN (40): Nº DO PEDIDO (quando houver pedido emitido)
+ *     * STATUS GERAL SAR (dinâmico, padrão Col V / 22)
+ *     * DATA PEDIDO (dinâmico, padrão Col AN / 40)
+ *     * Nº DO PEDIDO (dinâmico, padrão Col AO / 41)
+ * - Lê EXCLUSIVAMENTE a coluna do Nº WF (dinâmico, padrão Col AM / 39)
+ *   (Protegendo a coluna AL / 38: DATA MED CAD WF2)
  * ========================================================================
  * 
  * INSTRUÇÕES DE INSTALAÇÃO NA PLANILHA GOOGLE:
@@ -24,13 +24,21 @@
  * 5. Clique em "Implantar" (canto superior direito) > "Nova implantação".
  * 6. Em "Selecionar tipo", escolha "App da Web" (ícone de engrenagem).
  * 7. Configure:
- *    - Descrição: "Sincronizador Seguro SAR Claro"
+ *    - Descrição: "Sincronizador Dinâmico e Seguro SAR Claro"
  *    - Executar como: "Eu (seu_email@...)"
  *    - Quem tem acesso: "Qualquer pessoa"
  * 8. Clique em "Implantar" e autorize as permissões.
  * 9. Copie o "URL do app da Web" gerado e salve no arquivo local:
  *    "sar_gsheet_webhook_url.txt"
  */
+
+function normH(val) {
+  if (!val) return '';
+  return String(val).toUpperCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[ºª°.]/g, ' ')
+    .replace(/\s+/g, ' ').trim();
+}
 
 function doPost(e) {
   var lock = LockService.getScriptLock();
@@ -74,15 +82,37 @@ function doPost(e) {
       })).setMimeType(ContentService.MimeType.JSON);
     }
     
-    // PASSO 1: Ler EXCLUSIVAMENTE a Coluna AL (38 - Nº WF) para mapear as linhas.
-    // Nenhuma outra coluna é lida ou carregada neste momento.
+    // PASSO 0: Identificar dinamicamente as colunas no cabeçalho (Linha 3)
+    var maxCols = Math.min(sheet.getLastColumn(), 55);
+    var headerRowValues = sheet.getRange(3, 1, 1, maxCols).getValues()[0];
+    
+    // Fallbacks 1-based seguros após inserção de DATA MED CAD WF2 (Col AL=38)
+    var colStatus = 22;   // Col V
+    var colWf = 39;       // Col AM (Nº WF)
+    var colDataPed = 40;  // Col AN (DATA PEDIDO)
+    var colNumPed = 41;   // Col AO (Nº DO PEDIDO)
+
+    for (var c = 0; c < headerRowValues.length; c++) {
+      var nh = normH(headerRowValues[c]);
+      if (nh === 'STATUS GERAL SAR' || nh === 'STATUS GERAL') {
+        colStatus = c + 1;
+      } else if (nh === 'N WF' || nh === 'NO WF' || nh === 'NUM WF' || nh === 'WORKFLOW') {
+        colWf = c + 1;
+      } else if (nh === 'DATA PEDIDO') {
+        colDataPed = c + 1;
+      } else if (nh === 'N DO PEDIDO' || nh === 'NO DO PEDIDO' || nh === 'PEDIDO') {
+        colNumPed = c + 1;
+      }
+    }
+
+    // PASSO 1: Ler EXCLUSIVAMENTE a Coluna do Nº WF para mapear as linhas.
     var startRow = 4;
     var numRows = lastRow - startRow + 1;
-    var colAlValues = sheet.getRange(startRow, 38, numRows, 1).getValues();
+    var colWfValues = sheet.getRange(startRow, colWf, numRows, 1).getValues();
     
     var wfRowMap = {};
-    for (var r = 0; r < colAlValues.length; r++) {
-      var rawWf = String(colAlValues[r][0] || '').trim();
+    for (var r = 0; r < colWfValues.length; r++) {
+      var rawWf = String(colWfValues[r][0] || '').trim();
       var digits = rawWf.replace(/\D/g, '');
       if (digits) {
         if (!wfRowMap[digits]) wfRowMap[digits] = [];
@@ -90,7 +120,7 @@ function doPost(e) {
       }
     }
     
-    // PASSO 2: Aplicar alterações CIRURGICAMENTE nas células permitidas
+    // PASSO 2: Aplicar alterações CIRURGICAMENTE nas células mapeadas
     var updatedCount = 0;
     var rowsModified = [];
     
@@ -104,19 +134,19 @@ function doPost(e) {
         for (var j = 0; j < targetRows.length; j++) {
           var realRow = targetRows[j];
           
-          // 1. Atualizar EXCLUSIVAMENTE a Coluna V (22): STATUS GERAL SAR
+          // 1. Atualizar EXCLUSIVAMENTE a Coluna de Status
           if (u.status !== undefined && u.status !== null && u.status !== '') {
-            sheet.getRange(realRow, 22).setValue(u.status);
+            sheet.getRange(realRow, colStatus).setValue(u.status);
           }
           
-          // 2. Se for PEDIDO EMITIDO com data: atualizar EXCLUSIVAMENTE Coluna AM (39)
+          // 2. Atualizar EXCLUSIVAMENTE a Coluna de Data Pedido
           if (u.data_pedido !== undefined && u.data_pedido !== null && u.data_pedido !== '') {
-            sheet.getRange(realRow, 39).setValue(u.data_pedido);
+            sheet.getRange(realRow, colDataPed).setValue(u.data_pedido);
           }
           
-          // 3. Se for PEDIDO EMITIDO com número: atualizar EXCLUSIVAMENTE Coluna AN (40)
+          // 3. Atualizar EXCLUSIVAMENTE a Coluna de Nº do Pedido
           if (u.num_pedido !== undefined && u.num_pedido !== null && u.num_pedido !== '') {
-            sheet.getRange(realRow, 40).setValue(u.num_pedido);
+            sheet.getRange(realRow, colNumPed).setValue(u.num_pedido);
           }
           
           updatedCount++;
@@ -129,6 +159,7 @@ function doPost(e) {
       success: true,
       updated_records: updatedCount,
       unique_rows_updated: rowsModified.length,
+      columns_used: { status: colStatus, wf: colWf, data_pedido: colDataPed, num_pedido: colNumPed },
       sample_modified: rowsModified.slice(0, 5),
       timestamp: new Date().toISOString()
     })).setMimeType(ContentService.MimeType.JSON);
@@ -146,9 +177,8 @@ function doPost(e) {
 function doGet() {
   return ContentService.createTextOutput(JSON.stringify({
     status: "online",
-    service: "Sincronizador Cirúrgico SAR x Claro",
-    protected_columns: "A-U intactas, W-AK intactas, AL somente-leitura, AO+ intactas",
-    allowed_columns: "V (Status), AM (Data Pedido), AN (Nº Pedido)",
+    service: "Sincronizador Dinâmico e Seguro SAR x Claro",
+    columns_mode: "Detecção dinâmica na Linha 3",
     timestamp: new Date().toISOString()
   })).setMimeType(ContentService.MimeType.JSON);
 }

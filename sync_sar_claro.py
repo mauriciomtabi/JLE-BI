@@ -14,6 +14,7 @@ import csv
 import json
 import datetime
 import argparse
+import unicodedata
 import urllib.request
 import urllib.error
 
@@ -201,9 +202,18 @@ def load_claro_data(file_path):
     log(f"Total de OSs/WFs únicos indexados no Analítico Claro: {len(claro_map):,}")
     return claro_map
 
+def norm_h(text):
+    """Normaliza texto de cabeçalho removendo acentos, pontuações e símbolos."""
+    if not text:
+        return ""
+    s = str(text).strip().upper()
+    s = s.replace('º', ' ').replace('ª', ' ').replace('°', ' ').replace('.', ' ')
+    s = "".join(c for c in unicodedata.normalize('NFD', s) if unicodedata.category(c) != 'Mn')
+    return re.sub(r'\s+', ' ', s).strip()
+
 def fetch_current_google_sheet_sar():
-    """Baixa o estado atual da aba 'SAR Operacional' do Google Sheets via CSV."""
-    log(f"Baixando dados online da planilha SAR do Google Sheets...")
+    """Baixa o estado atual da aba 'SAR Operacional' do Google Sheets via CSV com detecção dinâmica de cabeçalhos."""
+    log("Baixando dados online da planilha SAR do Google Sheets...")
     req = urllib.request.Request(
         GOOGLE_SHEET_CSV_URL,
         headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) BI_JLE_Sync/1.0"}
@@ -212,21 +222,51 @@ def fetch_current_google_sheet_sar():
     raw_content = resp.read().decode("utf-8", errors="replace")
     
     lines = raw_content.splitlines()
-    reader = csv.reader(lines)
-    
-    # Linhas 1 a 3 são cabeçalhos
-    for _ in range(3):
-        next(reader, None)
-        
+    all_rows = list(csv.reader(lines))
+    if not all_rows or len(all_rows) < 4:
+        log("Erro: Arquivo recebido do Google Sheets está vazio ou corrompido.")
+        return []
+
+    # Detectar linha de cabeçalho dinamicamente (geralmente linha 3 / índice 2)
+    header_row_idx = 2
+    for r_idx, row in enumerate(all_rows[:10]):
+        row_norm = [norm_h(c) for c in row if c]
+        if any("COD" in c for c in row_norm) and any("CIDADE" in c or "STATUS" in c for c in row_norm):
+            header_row_idx = r_idx
+            break
+
+    header_cells = all_rows[header_row_idx]
+    header_map = {}
+    for col_idx, cell in enumerate(header_cells):
+        if cell:
+            header_map[norm_h(cell)] = col_idx
+
+    def get_col_idx(aliases, fallback):
+        for a in aliases:
+            na = norm_h(a)
+            if na in header_map:
+                return header_map[na]
+        return fallback
+
+    idx_cod = get_col_idx(["CODIGO", "CODIGO SAR", "COD"], 0)
+    idx_status = get_col_idx(["STATUS STATUS GERAL SAR", "STATUS GERAL SAR", "STATUS GERAL", "STATUS"], 21)
+    idx_wf = get_col_idx(["N WF", "NO WF", "NUM WF", "Nº WF", "WORKFLOW"], 38)
+    idx_dt_ped = get_col_idx(["DATA PEDIDO"], 39)
+    idx_num_ped = get_col_idx(["N DO PEDIDO", "NO DO PEDIDO", "Nº DO PEDIDO", "PEDIDO"], 40)
+    idx_dt_med_cad_wf = get_col_idx(["DATA MED CAD WF2", "DATA MED CAD WF", "DATA CAD WF"], 37)
+
+    log(f"Mapeamento dinâmico: COD={idx_cod}, STATUS={idx_status}, WF={idx_wf}, DATA_PED={idx_dt_ped}, NUM_PED={idx_num_ped}, CAD_WF={idx_dt_med_cad_wf}")
+
     records = []
-    for row_idx, r in enumerate(reader, start=4):
-        if len(r) < 38:
+    for row_idx, r in enumerate(all_rows[header_row_idx + 1:], start=header_row_idx + 2):
+        if not r or len(r) <= max(idx_cod, idx_status):
             continue
-        cod = r[0].strip()
-        status = r[21].strip() if len(r) > 21 else ''
-        wf_raw = r[37].strip() if len(r) > 37 else ''
-        dt_ped = r[38].strip() if len(r) > 38 else ''
-        num_ped = r[39].strip() if len(r) > 39 else ''
+        cod = r[idx_cod].strip() if idx_cod < len(r) else ''
+        status = r[idx_status].strip() if idx_status < len(r) else ''
+        wf_raw = r[idx_wf].strip() if idx_wf < len(r) else ''
+        dt_ped = r[idx_dt_ped].strip() if idx_dt_ped < len(r) else ''
+        num_ped = r[idx_num_ped].strip() if idx_num_ped < len(r) else ''
+        dt_cad_wf = r[idx_dt_med_cad_wf].strip() if idx_dt_med_cad_wf < len(r) else ''
         
         records.append({
             'row': row_idx,
@@ -234,7 +274,8 @@ def fetch_current_google_sheet_sar():
             'status': status,
             'wf': wf_raw,
             'data_pedido': dt_ped,
-            'num_pedido': num_ped
+            'num_pedido': num_ped,
+            'data_med_cad_wf': dt_cad_wf
         })
         
     log(f"Total de registros obtidos do Google Sheets: {len(records)}")
