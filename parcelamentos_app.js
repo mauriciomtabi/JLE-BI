@@ -798,7 +798,10 @@
         const folhaData = itens.map(i => i.has_movement ? i.utilizado_folha : null);
         const saldoData = itens.map(i => i.has_movement ? i.saldo_mes : null);
 
+        const datalabelsPlugin = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
+
         state.charts.inssEvolution = new Chart(ctx, {
+            plugins: datalabelsPlugin,
             type: 'bar',
             data: {
                 labels: labels,
@@ -814,7 +817,28 @@
                         pointHoverRadius: 7,
                         pointBackgroundColor: '#00d2d3',
                         tension: 0.25,
-                        order: 1
+                        order: 1,
+                        datalabels: {
+                            display: (ctx) => {
+                                const val = ctx.dataset.data[ctx.dataIndex];
+                                return val !== null && val !== undefined && !isNaN(val) && val > 0;
+                            },
+                            color: '#00e5ff',
+                            backgroundColor: 'rgba(13, 17, 23, 0.9)',
+                            borderColor: 'rgba(0, 210, 211, 0.4)',
+                            borderWidth: 1,
+                            borderRadius: 4,
+                            padding: { top: 2, bottom: 2, left: 4, right: 4 },
+                            anchor: 'end',
+                            align: 'top',
+                            offset: 6,
+                            font: { family: 'Outfit, Inter', weight: 'bold', size: 9.5 },
+                            formatter: (val) => {
+                                if (!val || isNaN(val)) return '';
+                                if (val >= 1000) return 'R$ ' + (val / 1000).toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + 'k';
+                                return 'R$ ' + val.toLocaleString('pt-BR');
+                            }
+                        }
                     },
                     {
                         type: 'bar',
@@ -824,7 +848,28 @@
                         borderColor: '#a371f7',
                         borderWidth: 1,
                         borderRadius: 4,
-                        order: 2
+                        order: 2,
+                        datalabels: {
+                            display: (ctx) => {
+                                const val = ctx.dataset.data[ctx.dataIndex];
+                                return val !== null && val !== undefined && !isNaN(val) && val > 0;
+                            },
+                            color: '#ffffff',
+                            backgroundColor: 'rgba(140, 122, 230, 0.9)',
+                            borderColor: 'rgba(163, 113, 247, 0.4)',
+                            borderWidth: 1,
+                            borderRadius: 4,
+                            padding: { top: 2, bottom: 2, left: 4, right: 4 },
+                            anchor: 'end',
+                            align: 'top',
+                            offset: 4,
+                            font: { family: 'Outfit, Inter', weight: 'bold', size: 9 },
+                            formatter: (val) => {
+                                if (!val || isNaN(val)) return '';
+                                if (val >= 1000) return 'R$ ' + (val / 1000).toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + 'k';
+                                return 'R$ ' + val.toLocaleString('pt-BR');
+                            }
+                        }
                     },
                     {
                         type: 'bar',
@@ -834,7 +879,28 @@
                         borderColor: '#f59e0b',
                         borderWidth: 1,
                         borderRadius: 4,
-                        order: 3
+                        order: 3,
+                        datalabels: {
+                            display: (ctx) => {
+                                const val = ctx.dataset.data[ctx.dataIndex];
+                                return val !== null && val !== undefined && !isNaN(val) && val > 0;
+                            },
+                            color: '#ffffff',
+                            backgroundColor: 'rgba(245, 158, 11, 0.9)',
+                            borderColor: 'rgba(245, 158, 11, 0.4)',
+                            borderWidth: 1,
+                            borderRadius: 4,
+                            padding: { top: 2, bottom: 2, left: 4, right: 4 },
+                            anchor: 'end',
+                            align: 'top',
+                            offset: 4,
+                            font: { family: 'Outfit, Inter', weight: 'bold', size: 9 },
+                            formatter: (val) => {
+                                if (!val || isNaN(val)) return '';
+                                if (val >= 1000) return 'R$ ' + (val / 1000).toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + 'k';
+                                return 'R$ ' + val.toLocaleString('pt-BR');
+                            }
+                        }
                     }
                 ]
             },
@@ -871,6 +937,7 @@
                         ticks: { color: '#8b949e', font: { family: 'Outfit, Inter', size: 11, weight: 'bold' } }
                     },
                     y: {
+                        grace: '15%',
                         grid: { color: 'rgba(255, 255, 255, 0.05)' },
                         ticks: {
                             color: '#8b949e',

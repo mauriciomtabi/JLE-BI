@@ -3493,7 +3493,7 @@
     <script src="manutencao_data.js"></script>
     <script src="manutencao_app.js"></script>
     <script src="parcelamentos_data.js?v=20260914181600"></script>
-    <script src="parcelamentos_app.js?v=1.5"></script>
+    <script src="parcelamentos_app.js?v=1.6"></script>
     <script src="email_preview_helper.js?v=1.2"></script>
 
     <!-- Logica de UI Autônoma (Sem Dependências de CDNs) -->
@@ -3793,7 +3793,7 @@
         // Submissão do Login
         async function handleLoginSubmit(event) {
             event.preventDefault();
-            const email = document.getElementById('login-email').value.trim();
+            const email = document.getElementById('login-email').value.trim().toLowerCase();
             const password = document.getElementById('login-password').value;
             
             const alertBox = document.getElementById('auth-alert');
@@ -4237,14 +4237,15 @@
                 return true;
             }
             try {
-                // Buscar permissão do usuário
+                // Buscar permissão do usuário com email normalizado e busca insensível a maiúsculas
+                const cleanEmail = (email || '').trim().toLowerCase();
                 const { data: permData, error: permErr } = await supabaseClient
                     .from('bi_permissions')
                     .select('*')
-                    .eq('email', email)
+                    .ilike('email', cleanEmail)
                     .maybeSingle();
 
-                console.log('[Admin] bi_permissions lookup:', { email, permData, permErr });
+                console.log('[Admin] bi_permissions lookup:', { email: cleanEmail, permData, permErr });
 
                 let allowedPages;
 
@@ -4297,10 +4298,30 @@
                     }
                 });
 
-                // Recuperar a última tela ativa do localStorage se o usuário tiver acesso a ela
+                // Gerenciar visibilidade e expansão do grupo Financeiro no menu
+                const hasFinanceiroPages = currentUserIsAdmin || allowedPages.some(p => ['dashboard', 'tecnodrill', 'parcelamentos'].includes(p));
+                const groupFin = document.getElementById('nav-group-financeiro');
+                if (groupFin) {
+                    groupFin.style.display = hasFinanceiroPages ? 'flex' : 'none';
+                }
+                if (hasFinanceiroPages) {
+                    const submenuFin = document.getElementById('submenu-financeiro');
+                    const toggleFin = document.getElementById('nav-financeiro-toggle');
+                    if (submenuFin) submenuFin.classList.add('open');
+                    if (toggleFin) toggleFin.classList.add('open');
+                }
+
+                // Suporte a abertura direta por parâmetro de URL (?view=parcelamentos ou #parcelamentos)
+                const urlParams = new URLSearchParams(window.location.search);
+                const requestedView = urlParams.get('view') || (window.location.hash ? window.location.hash.replace('#', '') : null);
                 const savedView = localStorage.getItem('jle_bi_active_view');
-                if (savedView && allowedPages.includes(savedView)) {
+
+                if (requestedView && (currentUserIsAdmin || allowedPages.includes(requestedView))) {
+                    switchView(requestedView);
+                } else if (savedView && (currentUserIsAdmin || allowedPages.includes(savedView))) {
                     switchView(savedView);
+                } else if (allowedPages.includes('parcelamentos') && !allowedPages.includes('cobranca')) {
+                    switchView('parcelamentos');
                 } else if (allowedPages.includes('cobranca')) {
                     switchView('cobranca');
                 } else if (allowedPages.includes('dashboard')) {
