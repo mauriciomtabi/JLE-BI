@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-09-16 15:04:04
+// Dados MDU Compactados - Gerado em: 2026-09-16 15:08:58
 window.MDU_METADATA = {
-    "generated_at": "2026-09-16 15:04:04",
+    "generated_at": "2026-09-16 15:08:58",
     "total_rows": 5657,
-    "geocoded_new": 5
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -180270,8 +180270,8 @@ window.MDU_DATA = [
         "aging": "0",
         "relatorio_por": "DUDA",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610466336",
         "area": "MNDAB",
         "node": "",
@@ -180286,7 +180286,7 @@ window.MDU_DATA = [
         "data_fusao": "09/09/2026",
         "data_baixa": "16/09",
         "obs_baixa": "",
-        "data_relatorio": "",
+        "data_relatorio": "16/09/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
