@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-09-16 08:03:42
+// Dados MDU Compactados - Gerado em: 2026-09-16 09:00:20
 window.MDU_METADATA = {
-    "generated_at": "2026-09-16 08:03:42",
+    "generated_at": "2026-09-16 09:00:20",
     "total_rows": 5657,
-    "geocoded_new": 0
+    "geocoded_new": 7
 };
 
 window.MDU_DATA = [
@@ -179884,10 +179884,10 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "1",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
         "status": "Relatório",
-        "prog": 0,
+        "prog": 75.0,
         "cod_imovel": "",
         "area": "BFMAA",
         "node": "",
@@ -179916,10 +179916,10 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "1",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
         "status": "Relatório",
-        "prog": 0,
+        "prog": 75.0,
         "cod_imovel": "",
         "area": "BFMAA",
         "node": "",
@@ -179976,19 +179976,19 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505466",
-        "endereco": "",
+        "endereco": "R MARCELO DA GAMA 1235",
         "cidade": "NÃO DEFINIDA",
         "cluster": "",
-        "aging": "",
+        "aging": "46.281",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
+        "status": "FALTA DADOS",
         "prog": 0,
         "cod_imovel": "",
-        "area": "",
+        "area": "MTSAA",
         "node": "",
-        "caixa_m": "",
-        "hps": null,
+        "caixa_m": "MTSAA.002.M010",
+        "hps": 6,
         "data_adicio": "",
         "equipe": "",
         "primeira_visita": "",
