@@ -401,6 +401,7 @@ function updateSarKpis(data) {
     let countAtraso = 0;
 
     tempoDataset.forEach(r => {
+        if (r.status === 'CANCELADO' || r.prazo === 'CANCELADO') return;
         if (r.prazo === 'ATRASADO' && r.atraso_dias > 0) {
             somaAtraso += r.atraso_dias;
             countAtraso++;
@@ -865,6 +866,7 @@ function renderSarPerformanceTable(data) {
                     countTempo: 0
                 };
             }
+            if (r.status === 'CANCELADO' || r.prazo === 'CANCELADO') return;
             execMap[exClean].total++;
             if (r.prazo === 'NO PRAZO') execMap[exClean].noPrazo++;
             else if (r.prazo === 'ATRASADO') execMap[exClean].atrasado++;
@@ -1039,7 +1041,7 @@ function renderSarTable(data) {
                 <td style="text-align: right; font-weight: 600; color: #10b981; white-space: nowrap;">${prevFmt}</td>
                 <td style="text-align: center; color: #388bfd; white-space: nowrap;">${dtMedFmt}</td>
                 <td style="text-align: right; font-weight: 600; color: #f59e0b; white-space: nowrap;">${valMedFmt}</td>
-                <td style="text-align: center; font-weight: 600;">${r.tempo_dias > 0 ? r.tempo_dias : '-'}</td>
+                <td style="text-align: center; font-weight: 600;">${r.status === 'CANCELADO' || r.prazo === 'CANCELADO' || r.tempo_dias === null || r.tempo_dias === undefined ? '-' : r.tempo_dias}</td>
                 <td style="text-align: center; color: ${r.atraso_dias > 0 ? '#f85149' : 'inherit'}; font-weight: ${r.atraso_dias > 0 ? '700' : '400'};">${r.atraso_dias > 0 ? r.atraso_dias : '-'}</td>
             </tr>
         `;

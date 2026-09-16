@@ -366,15 +366,35 @@ module.exports = async (req, res) => {
             if (q_314 > 0) itens_f_resumo.push(`3.14 OTDR: ${q_314} un`);
             if (q_312 > 0) itens_f_resumo.push(`3.12 DER/INS: ${q_312} un`);
 
-            if (tempo_dias <= 0 && dt_entrada_iso) {
-                const targetDate = dt_medicao_iso || dt_entrega_iso || (!status.includes('CONCLU') && !status.includes('CANCEL') ? todayStr : null);
-                if (targetDate) {
-                    tempo_dias = countBusinessDays(dt_entrada_iso, targetDate);
+            const isCancelled = (
+                status.toUpperCase().includes('CANCEL') ||
+                prazo_raw.includes('CANCEL') ||
+                (r[idxTempo] || '').toUpperCase().includes('CANCEL') ||
+                (r[idxEntrega] || '').toUpperCase().includes('CANCEL')
+            );
+
+            let tempoVal = null;
+            const tempoCellStr = (r[idxTempo] || '').trim();
+            if (!isCancelled && tempoCellStr !== '') {
+                const parsedT = parseFloat(tempoCellStr.replace(',', '.'));
+                if (!isNaN(parsedT)) {
+                    tempoVal = parsedT;
                 }
             }
 
+            if (tempoVal === null && !isCancelled && dt_entrada_iso) {
+                const targetDate = dt_entrega_iso || (!status.includes('CONCLU') ? todayStr : null);
+                if (targetDate) {
+                    tempoVal = Math.max(0, countBusinessDays(dt_entrada_iso, targetDate) - 1);
+                }
+            }
+            tempo_dias = tempoVal !== null ? tempoVal : 0;
+
             let prazo = 'NO PRAZO';
-            if (prazo_raw.includes('NO PRAZO') || prazo_raw.includes('DENTRO')) {
+            if (isCancelled) {
+                prazo = 'CANCELADO';
+                atraso_dias = 0;
+            } else if (prazo_raw.includes('NO PRAZO') || prazo_raw.includes('DENTRO')) {
                 prazo = 'NO PRAZO';
             } else if (prazo_raw.includes('ATRASAD') || prazo_raw.includes('FORA')) {
                 prazo = 'ATRASADO';
@@ -382,10 +402,10 @@ module.exports = async (req, res) => {
                 prazo = tempo_dias > 3 ? 'ATRASADO' : 'NO PRAZO';
             }
 
-            if (prazo === 'ATRASADO' && atraso_dias <= 0 && tempo_dias > 3) {
-                atraso_dias = tempo_dias - 3;
-            } else if (prazo === 'NO PRAZO') {
+            if (prazo === 'CANCELADO' || prazo === 'NO PRAZO') {
                 atraso_dias = 0;
+            } else if (prazo === 'ATRASADO' && atraso_dias <= 0 && tempo_dias > 3) {
+                atraso_dias = tempo_dias - 3;
             }
 
             const ano_entrada = dt_entrada_iso ? dt_entrada_iso.substring(0, 4) : 'NÃO INFORMADO';
