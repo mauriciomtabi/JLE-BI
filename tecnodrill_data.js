@@ -1,5 +1,5 @@
 ﻿window.TECNODRILL_DATA = {
-    "generated_at":  "2026-09-15 15:07:21",
+    "generated_at":  "2026-09-16 10:05:18",
     "empresa":  "Tecnodrill",
     "categories_origin":  {
                               "entradas":  [

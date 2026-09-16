@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-09-16 10:00:34
+// Dados MDU Compactados - Gerado em: 2026-09-16 10:05:49
 window.MDU_METADATA = {
-    "generated_at": "2026-09-16 10:00:34",
+    "generated_at": "2026-09-16 10:05:49",
     "total_rows": 5657,
-    "geocoded_new": 6
+    "geocoded_new": 1
 };
 
 window.MDU_DATA = [
@@ -180012,10 +180012,10 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "0",
-        "relatorio_por": "",
+        "relatorio_por": "DUDA",
         "pendencia": "Não",
         "status": "Relatório",
-        "prog": 0,
+        "prog": 75.0,
         "cod_imovel": "",
         "area": "MTSAA",
         "node": "",
@@ -180040,35 +180040,35 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505468",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "IJUi 548",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
+        "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
-        "prog": 0,
+        "status": "Baixa",
+        "prog": 63.0,
         "cod_imovel": "",
-        "area": "",
+        "area": "PETAA",
         "node": "",
-        "caixa_m": "",
-        "hps": null,
-        "data_adicio": "",
-        "equipe": "",
-        "primeira_visita": "",
+        "caixa_m": "PETAA.091.M010",
+        "hps": 4,
+        "data_adicio": "16/09/2026",
+        "equipe": "Paulo Keiber",
+        "primeira_visita": "09/09/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
-        "data_interna": "",
-        "data_fusao": "",
+        "obs_vistoria": "ADEQUADO",
+        "data_interna": "09/09/2026",
+        "data_fusao": "09/09/2026",
         "data_baixa": "",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0427543,
+        "lng": -51.1857241,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505469",
