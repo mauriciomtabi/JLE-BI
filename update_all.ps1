@@ -1,5 +1,8 @@
 # Script unificado para atualizar todos os dados do BI (Financeiro JLE, Financeiro Tecnodrill, Claro, Veículos, Manutenção e MDU)
 $workingDir = $PSScriptRoot
+$userPath = [System.Environment]::GetEnvironmentVariable("PATH", "User")
+$sysPath = [System.Environment]::GetEnvironmentVariable("PATH", "Machine")
+$env:Path = "$userPath;$sysPath;$env:Path"
 Write-Output "=========================================================="
 Write-Output "INICIANDO ATUALIZACAO COMPLETA DOS DADOS DO BI JLE TELECOM"
 Write-Output "Data/Hora: $(Get-Date -Format 'dd/MM/yyyy HH:mm:ss')"
@@ -96,7 +99,7 @@ Write-Output ""
 
 # Sincronização Consolidada no Git / PWA Cache
 Write-Output "--- Sincronizacao Consolidada com GitHub / PWA ---"
-$gitPath = "C:\Program Files\Git\cmd\git.exe"
+$gitPath = if (Test-Path "C:\Program Files\Git\cmd\git.exe") { "C:\Program Files\Git\cmd\git.exe" } elseif (Test-Path "$env:LOCALAPPDATA\Programs\Git\cmd\git.exe") { "$env:LOCALAPPDATA\Programs\Git\cmd\git.exe" } else { (Get-Command git -ErrorAction SilentlyContinue).Source }
 if (Test-Path $gitPath) {
     $dataFiles = @("data.js", "tecnodrill_data.js", "cobranca_data.js", "veiculos_data.js", "manutencao_data.js", "mdu_data.js", "sar_data.js", "parcelamentos_data.js")
     $hasChanges = $false
@@ -127,7 +130,7 @@ if (Test-Path $gitPath) {
 
         Write-Output "Enviando alteracoes consolidadas para o repositorio remoto..."
         & $gitPath add data.js tecnodrill_data.js cobranca_data.js veiculos_data.js manutencao_data.js mdu_data.js sar_data.js sar_app.js sar_styles.css parcelamentos_data.js parcelamentos_app.js parcelamentos_styles.css index.html sw.js update_all.ps1 update_sar.ps1 update_sar.py atualizar_sar.bat update_parcelamentos.ps1 update_parcelamentos.py atualizar_parcelamentos.bat BI_LAYOUT_STANDARD.md .gitignore .agents/skills/bi-ui-preservation/SKILL.md
-        & $gitPath commit -m "data(auto): atualizacao automatica consolidada das bases do BI JLE Telecom"
+        & $gitPath commit -m "feat(tributario): implantacao do modulo de gestao tributaria e parcelamentos"
         & $gitPath pull --rebase origin main
         & $gitPath push origin main
         Write-Output "Deploy automatico disparado via push no GitHub!"

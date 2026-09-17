@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-09-17 09:00:29
+// Dados MDU Compactados - Gerado em: 2026-09-17 09:42:42
 window.MDU_METADATA = {
-    "generated_at": "2026-09-17 09:00:29",
+    "generated_at": "2026-09-17 09:42:42",
     "total_rows": 5657,
-    "geocoded_new": 0
+    "geocoded_new": 5
 };
 
 window.MDU_DATA = [
@@ -152782,8 +152782,8 @@ window.MDU_DATA = [
         "aging": "118",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Baixa",
-        "prog": 63.0,
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "#N/A",
         "area": "CNUAB",
         "node": "CNUAI",
@@ -152796,7 +152796,7 @@ window.MDU_DATA = [
         "obs_vistoria": "ADEQUADO",
         "data_interna": "20/05",
         "data_fusao": "16/09",
-        "data_baixa": "",
+        "data_baixa": "16/09",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
@@ -180418,8 +180418,8 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0143911,
-        "lng": -51.1358924,
+        "lat": -30.0104367,
+        "lng": -51.1353859,
         "geocodificado": true
     },
     {

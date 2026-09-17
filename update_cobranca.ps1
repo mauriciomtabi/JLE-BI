@@ -1,3 +1,6 @@
+$userPath = [System.Environment]::GetEnvironmentVariable("PATH", "User")
+$sysPath = [System.Environment]::GetEnvironmentVariable("PATH", "Machine")
+$env:Path = "$userPath;$sysPath;$env:Path"
 # Script ETL para extrair dados da planilha de Cobrança e gerar cobranca_data.js
 # Lê os dados da aba 'Analitico_Empreiteiras_WF1_WF2_' de 'Analítico Claro - Base Geral.xlsx'
 # Aceita parametro -ExplicitFile para usar um arquivo especifico (passado pelo monitor)
@@ -504,7 +507,7 @@ if (-not $pythonSuccess) {
 
 # 5. Publicar atualizações no GitHub se houver alterações em cobranca_data.js
 Write-Output "Verificando se houve alteracoes nos dados para publicar no GitHub..."
-$gitPath = "C:\Program Files\Git\cmd\git.exe"
+$gitPath = if (Test-Path "C:\Program Files\Git\cmd\git.exe") { "C:\Program Files\Git\cmd\git.exe" } elseif (Test-Path "$env:LOCALAPPDATA\Programs\Git\cmd\git.exe") { "$env:LOCALAPPDATA\Programs\Git\cmd\git.exe" } else { (Get-Command git -ErrorAction SilentlyContinue).Source }
 if (Test-Path $gitPath) {
     $gitStatus = & $gitPath status --porcelain "$PSScriptRoot\cobranca_data.js"
     if ($null -ne $gitStatus -and $gitStatus.ToString().Trim() -ne "") {

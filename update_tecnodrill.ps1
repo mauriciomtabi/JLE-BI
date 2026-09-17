@@ -1,3 +1,6 @@
+$userPath = [System.Environment]::GetEnvironmentVariable("PATH", "User")
+$sysPath = [System.Environment]::GetEnvironmentVariable("PATH", "Machine")
+$env:Path = "$userPath;$sysPath;$env:Path"
 # Script ETL para consolidar as planilhas de Fluxo de Caixa da Tecnodrill
 # Le a planilha TECONDRILL da rede, gera tecnodrill_data.js para o dashboard.
 
@@ -371,7 +374,7 @@ try {
 
     # 6. Publicar atualizações no GitHub se houver alterações em tecnodrill_data.js
     Write-Output "Verificando se houve alteracoes em tecnodrill_data.js para publicar no GitHub..."
-    $gitPath = "C:\Program Files\Git\cmd\git.exe"
+    $gitPath = if (Test-Path "C:\Program Files\Git\cmd\git.exe") { "C:\Program Files\Git\cmd\git.exe" } elseif (Test-Path "$env:LOCALAPPDATA\Programs\Git\cmd\git.exe") { "$env:LOCALAPPDATA\Programs\Git\cmd\git.exe" } else { (Get-Command git -ErrorAction SilentlyContinue).Source }
     if (Test-Path $gitPath) {
         $gitStatus = & $gitPath status --porcelain tecnodrill_data.js
         if ($null -ne $gitStatus -and $gitStatus.ToString().Trim() -ne "") {

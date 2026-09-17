@@ -1,3 +1,6 @@
+$userPath = [System.Environment]::GetEnvironmentVariable("PATH", "User")
+$sysPath = [System.Environment]::GetEnvironmentVariable("PATH", "Machine")
+$env:Path = "$userPath;$sysPath;$env:Path"
 # ============================================================
 # sync_sar_claro.ps1 — Orquestrador de Sincronização SAR x Claro
 # Disparado automaticamente pelo Agendador do Windows (12:45)

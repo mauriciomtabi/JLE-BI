@@ -1,3 +1,6 @@
+$userPath = [System.Environment]::GetEnvironmentVariable("PATH", "User")
+$sysPath = [System.Environment]::GetEnvironmentVariable("PATH", "Machine")
+$env:Path = "$userPath;$sysPath;$env:Path"
 # update_sar.ps1
 # Script ETL para processar os dados do Dashboard SAR da Claro / JLE Telecom
 # Le os dados da planilha na rede com fallback e contingencia local, gerando sar_data.js
@@ -7,7 +10,7 @@ $localTempPath = "$workingDir\sar_temp.xlsx"
 $localCachePath = "$workingDir\sar_local.xlsx"
 $outDataJs = "$workingDir\sar_data.js"
 $swPath = "$workingDir\sw.js"
-$gitPath = "C:\Program Files\Git\cmd\git.exe"
+$gitPath = if (Test-Path "C:\Program Files\Git\cmd\git.exe") { "C:\Program Files\Git\cmd\git.exe" } elseif (Test-Path "$env:LOCALAPPDATA\Programs\Git\cmd\git.exe") { "$env:LOCALAPPDATA\Programs\Git\cmd\git.exe" } else { (Get-Command git -ErrorAction SilentlyContinue).Source }
 
 Write-Output "=========================================================="
 Write-Output "INICIANDO ATUALIZACAO DA BASE DO DASHBOARD SAR"

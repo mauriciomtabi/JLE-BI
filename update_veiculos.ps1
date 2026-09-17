@@ -1,3 +1,6 @@
+$userPath = [System.Environment]::GetEnvironmentVariable("PATH", "User")
+$sysPath = [System.Environment]::GetEnvironmentVariable("PATH", "Machine")
+$env:Path = "$userPath;$sysPath;$env:Path"
 # update_veiculos.ps1
 # Script ETL para processar o novo Relatorio de Abastecimento de Veiculos da JLE Telecom
 # Le os dados da planilha de rede localmente e atualiza veiculos_data.js com protecao de historico.
@@ -370,7 +373,7 @@ print('veiculos_data.js atualizado com sucesso!')
 }
 
 # 5. Commit e Push no GitHub (atualizacao na Vercel)
-$gitPath = "C:\Program Files\Git\cmd\git.exe"
+$gitPath = if (Test-Path "C:\Program Files\Git\cmd\git.exe") { "C:\Program Files\Git\cmd\git.exe" } elseif (Test-Path "$env:LOCALAPPDATA\Programs\Git\cmd\git.exe") { "$env:LOCALAPPDATA\Programs\Git\cmd\git.exe" } else { (Get-Command git -ErrorAction SilentlyContinue).Source }
 if (Test-Path $gitPath) {
     $gitStatus = & $gitPath status --porcelain veiculos_data.js
     if ($null -ne $gitStatus -and $gitStatus.ToString().Trim() -ne "") {

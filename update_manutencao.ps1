@@ -1,3 +1,6 @@
+$userPath = [System.Environment]::GetEnvironmentVariable("PATH", "User")
+$sysPath = [System.Environment]::GetEnvironmentVariable("PATH", "Machine")
+$env:Path = "$userPath;$sysPath;$env:Path"
 # Script ETL para processar dados de Manutenção
 # Baixa os dados atualizados do Google Sheets como CSV e executa o processador em Python.
 # Em seguida, atualiza o Service Worker e publica as atualizações no repositório GitHub para refletir na produção.
@@ -6,7 +9,7 @@ $PSScriptRoot = Split-Path -Parent -Path $MyInvocation.MyCommand.Definition
 $csvPath = "$PSScriptRoot\manutencao_data.csv"
 $jsPath = "$PSScriptRoot\manutencao_data.js"
 $swPath = "$PSScriptRoot\sw.js"
-$gitPath = "C:\Program Files\Git\cmd\git.exe"
+$gitPath = if (Test-Path "C:\Program Files\Git\cmd\git.exe") { "C:\Program Files\Git\cmd\git.exe" } elseif (Test-Path "$env:LOCALAPPDATA\Programs\Git\cmd\git.exe") { "$env:LOCALAPPDATA\Programs\Git\cmd\git.exe" } else { (Get-Command git -ErrorAction SilentlyContinue).Source }
 
 # 1. Download do Google Sheets (Tab OFS, gid=0)
 $url = "https://docs.google.com/spreadsheets/d/1fcei-KujFc4oA1DO9xIrATZiY-DeXfdaLFt7s_YIYQA/export?format=csv&gid=0"

@@ -1,3 +1,6 @@
+$userPath = [System.Environment]::GetEnvironmentVariable("PATH", "User")
+$sysPath = [System.Environment]::GetEnvironmentVariable("PATH", "Machine")
+$env:Path = "$userPath;$sysPath;$env:Path"
 # update_parcelamentos.ps1
 # Script ETL PowerShell para sincronização e deploy automatizado de Gestão Tributária e Impostos JLE Telecom
 $workingDir = $PSScriptRoot
@@ -28,7 +31,7 @@ try {
 Write-Output "[ETL PowerShell] Extracao de dados concluida com sucesso."
 
 # 2. Sincronização com GitHub / PWA Cache se executado individualmente
-$gitPath = "C:\Program Files\Git\cmd\git.exe"
+$gitPath = if (Test-Path "C:\Program Files\Git\cmd\git.exe") { "C:\Program Files\Git\cmd\git.exe" } elseif (Test-Path "$env:LOCALAPPDATA\Programs\Git\cmd\git.exe") { "$env:LOCALAPPDATA\Programs\Git\cmd\git.exe" } else { (Get-Command git -ErrorAction SilentlyContinue).Source }
 if (Test-Path $gitPath) {
     Set-Location $workingDir
     $status = & $gitPath status --porcelain parcelamentos_data.js

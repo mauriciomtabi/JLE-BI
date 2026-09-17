@@ -1,5 +1,5 @@
 ﻿window.CASH_FLOW_DATA = {
-    "generated_at":  "2026-09-16 15:08:07",
+    "generated_at":  "2026-09-17 09:41:19",
     "categories_origin":  {
                               "entradas":  [
 
@@ -153435,6 +153435,86 @@
                              "valor_liquido":  -450,
                              "meio_pagamento":  "Pix",
                              "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET_2026 MAXCREDITO_376",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "SET_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-16",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Despesas Operacionais",
+                             "descricao":  "Caixa Gregory",
+                             "valor_nominal":  140,
+                             "valor_liquido":  -140,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET_2026 MAXCREDITO_377",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "SET_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-16",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Frete",
+                             "descricao":  "SAO JOSE - EXPRESSO SAO MIGUEL S",
+                             "valor_nominal":  188.28,
+                             "valor_liquido":  -188.28,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET_2026 MAXCREDITO_378",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "SET_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-16",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "FGTS",
+                             "descricao":  "FGTS CONSIGNADO BASE RS",
+                             "valor_nominal":  10857.74,
+                             "valor_liquido":  -10857.74,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET_2026 MAXCREDITO_379",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "SET_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-16",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "FGTS",
+                             "descricao":  "FGTS BASE RS",
+                             "valor_nominal":  14191.92,
+                             "valor_liquido":  -14191.92,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET_2026 MAXCREDITO_380",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "SET_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-16",
+                             "uf":  "RS",
+                             "fluxo":  "Entrada",
+                             "categoria":  "Transferência entre contas",
+                             "descricao":  "Transferência entre contas",
+                             "valor_nominal":  40000,
+                             "valor_liquido":  40000,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  true
                          },
                          {
                              "id":  "SET_2026 CONFIANÇA_11",

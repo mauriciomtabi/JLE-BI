@@ -1,3 +1,6 @@
+$userPath = [System.Environment]::GetEnvironmentVariable("PATH", "User")
+$sysPath = [System.Environment]::GetEnvironmentVariable("PATH", "Machine")
+$env:Path = "$userPath;$sysPath;$env:Path"
 # Script ETL para consolidar as planilhas de Fluxo de Caixa da JLE Telecom
 # Sem alterar o arquivo original, lê os dados e gera data.js para o dashboard.
 # Usando reconstrução de caracteres via [char] e conversão numérica robusta.
@@ -431,7 +434,7 @@ try {
 
     # 6. Publicar atualizações no GitHub se houver alterações em data.js
     Write-Output "Verificando se houve alteracoes nos dados para publicar no GitHub..."
-    $gitPath = "C:\Program Files\Git\cmd\git.exe"
+    $gitPath = if (Test-Path "C:\Program Files\Git\cmd\git.exe") { "C:\Program Files\Git\cmd\git.exe" } elseif (Test-Path "$env:LOCALAPPDATA\Programs\Git\cmd\git.exe") { "$env:LOCALAPPDATA\Programs\Git\cmd\git.exe" } else { (Get-Command git -ErrorAction SilentlyContinue).Source }
     if (Test-Path $gitPath) {
         $gitStatus = & $gitPath status --porcelain data.js
         if ($null -ne $gitStatus -and $gitStatus.ToString().Trim() -ne "") {
