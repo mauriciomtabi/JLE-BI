@@ -8,6 +8,7 @@ $c_cedilla = [char]231
 $e_acute = [char]233
 $a_tilde = [char]227
 $i_acute = [char]237
+$a_acute = [char]225
 $e_circumflex = [char]234
 $c_cedilla_caps = [char]199
 
@@ -136,13 +137,13 @@ function Parse-ExcelDate-TD ($excelDate) {
 function Get-Caixa-Category ($desc, $fluxo) {
     if ($fluxo -eq "Entrada") { return "Aporte de Caixa" }
     $d = if ($null -ne $desc) { $desc.ToString().ToUpper() } else { "" }
-    if ($d -match "DIESEL|COMBUST|GASOLINA|POSTO|ALCOOL") { return "Combustível" }
-    if ($d -match "REFEI|ALMO|JANTA|CAF|LANCH|CHURRAS|RESTAUR|PIZZ|XIS|PADARIA|ACAI|SORVETE") { return "Alimentação" }
+    if ($d -match "DIESEL|COMBUST|GASOLINA|POSTO|ALCOOL") { return ("Combust" + $i_acute + "vel") }
+    if ($d -match "REFEI|ALMO|JANTA|CAF|LANCH|CHURRAS|RESTAUR|PIZZ|XIS|PADARIA|ACAI|SORVETE") { return ("Alimenta" + $c_cedilla + $a_tilde + "o") }
     if ($d -match "HOTEL|HOSPEDAGEM|POUSADA|DIARIA") { return "Hospedagem" }
-    if ($d -match "PEDAGIO|RODOVIARIA|EGR") { return "Pedágio" }
+    if ($d -match "PEDAGIO|RODOVIARIA|EGR") { return ("Ped" + $a_acute + "gio") }
     if ($d -match "UBER|PASSAGEM|TRANSPORTE|DESLOCAMENTO") { return "Transporte / Uber" }
-    if ($d -match "MANUTEN|VIDRO|AUTO CENTER|PNEU|CHAVE|MECANIC|PECA|OFICINA|COMPACTA") { return "Manutenção Veicular" }
-    if ($d -match "EPI|CREDENCIAL|SEGURAN") { return "EPIs e Segurança" }
+    if ($d -match "MANUTEN|VIDRO|AUTO CENTER|PNEU|CHAVE|MECANIC|PECA|OFICINA|COMPACTA") { return ("Manuten" + $c_cedilla + $a_tilde + "o Veicular") }
+    if ($d -match "EPI|CREDENCIAL|SEGURAN") { return ("EPIs e Seguran" + $c_cedilla + "a") }
     if ($d -match "MOVEIS|COLCH|CAFETEIRA|MERCADO|HAVAN|LIMPEZA") { return "Alojamento e Suprimentos" }
     return "Outros e Diversos"
 }
@@ -558,7 +559,7 @@ try {
                 $deb = Parse-Caixa-Number $dVal
                 $saldo = Parse-Caixa-Number $sVal
 
-                $fluxo = if ($cred -gt 0) { "Entrada" } else { "Saída" }
+                $fluxo = if ($cred -gt 0) { "Entrada" } else { ("Sa" + $i_acute + "da") }
                 $valor = if ($fluxo -eq "Entrada") { $cred } else { $deb }
                 $categoria = Get-Caixa-Category $descText $fluxo
 
@@ -610,7 +611,7 @@ try {
 
     $jsonStr = $payload | ConvertTo-Json -Depth 6
     $jsContent = "window.TECNODRILL_DATA = " + $jsonStr + ";"
-    $jsContent | Out-File -FilePath "$PSScriptRoot\tecnodrill_data.js" -Encoding utf8
+    [System.IO.File]::WriteAllText("$PSScriptRoot\tecnodrill_data.js", $jsContent, [System.Text.Encoding]::UTF8)
 
     Write-Output "Tecnodrill ETL finalizado! tecnodrill_data.js gerado com sucesso."
 
