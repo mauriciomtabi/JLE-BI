@@ -1,5 +1,5 @@
 ﻿window.TECNODRILL_DATA = {
-    "generated_at":  "2026-09-17 15:41:08",
+    "generated_at":  "2026-09-17 15:43:35",
     "empresa":  "Tecnodrill",
     "categories_origin":  {
                               "entradas":  [
@@ -17083,7 +17083,7 @@
                          }
                      ],
     "caixa":  {
-                  "gerado_em":  "2026-09-17 15:40:42",
+                  "gerado_em":  "2026-09-17 15:43:02",
                   "carlos":  [
                                  {
                                      "id":  "carlos-1",
@@ -17094,10 +17094,10 @@
                                      "competencia":  "JUNHO/2026",
                                      "fluxo":  "Entrada",
                                      "categoria":  "Aporte de Caixa",
-                                     "credito":  83699,
+                                     "credito":  836.99,
                                      "debito":  0,
-                                     "valor":  83699,
-                                     "saldo":  83699,
+                                     "valor":  836.99,
+                                     "saldo":  836.99,
                                      "descricao":  "INICIO DO CAIXA"
                                  },
                                  {
@@ -17112,7 +17112,7 @@
                                      "credito":  0,
                                      "debito":  90,
                                      "valor":  90,
-                                     "saldo":  74699,
+                                     "saldo":  746.99,
                                      "descricao":  "CHURRASCARIA VERDES CAMPOS - REFEIÇÃO"
                                  },
                                  {
@@ -17127,7 +17127,7 @@
                                      "credito":  0,
                                      "debito":  1430,
                                      "valor":  1430,
-                                     "saldo":  -68301,
+                                     "saldo":  -683.01,
                                      "descricao":  "PETER AUTO VIDROS - MANUTENÇÃO DE VEICULO"
                                  },
                                  {
@@ -17142,7 +17142,7 @@
                                      "credito":  0,
                                      "debito":  40,
                                      "valor":  40,
-                                     "saldo":  -72301,
+                                     "saldo":  -723.01,
                                      "descricao":  "LANCHERIA DO BICUDO -  CAFÉ"
                                  },
                                  {
@@ -17155,9 +17155,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  837,
-                                     "valor":  837,
-                                     "saldo":  -80671,
+                                     "debito":  83.7,
+                                     "valor":  83.7,
+                                     "saldo":  -806.71,
                                      "descricao":  "TEMPEROS DA EIA - REFEIÇÕES"
                                  },
                                  {
@@ -17170,9 +17170,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  1297,
-                                     "valor":  1297,
-                                     "saldo":  -93641,
+                                     "debito":  129.7,
+                                     "valor":  129.7,
+                                     "saldo":  -936.41,
                                      "descricao":  "RESTAUR BOI PRETO - REFEIÇÕES"
                                  },
                                  {
@@ -17187,7 +17187,7 @@
                                      "credito":  0,
                                      "debito":  337,
                                      "valor":  337,
-                                     "saldo":  -127341,
+                                     "saldo":  -1273.41,
                                      "descricao":  "HOTEL COROADOS - HOSPEDAGEM"
                                  },
                                  {
@@ -17200,9 +17200,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  295163,
-                                     "valor":  295163,
-                                     "saldo":  -422504,
+                                     "debito":  2951.63,
+                                     "valor":  2951.63,
+                                     "saldo":  -4225.04,
                                      "descricao":  "AUTO POSTO - COMBUSTIVEL"
                                  },
                                  {
@@ -17215,9 +17215,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  1287,
-                                     "valor":  1287,
-                                     "saldo":  -435374,
+                                     "debito":  128.7,
+                                     "valor":  128.7,
+                                     "saldo":  -4353.74,
                                      "descricao":  "RESTAUR CHAPAO DO SUL - REFEIÇÃO"
                                  },
                                  {
@@ -17232,7 +17232,7 @@
                                      "credito":  0,
                                      "debito":  115,
                                      "valor":  115,
-                                     "saldo":  -446874,
+                                     "saldo":  -4468.74,
                                      "descricao":  "RESTAUR E LANCH PARAISO DA SERRA - REFEIÇÕES"
                                  },
                                  {
@@ -17245,9 +17245,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  1555,
-                                     "valor":  1555,
-                                     "saldo":  -462424,
+                                     "debito":  155.5,
+                                     "valor":  155.5,
+                                     "saldo":  -4624.24,
                                      "descricao":  "PETIT GATEAU SOUZA"
                                  },
                                  {
@@ -17260,9 +17260,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  1478,
-                                     "valor":  1478,
-                                     "saldo":  -477204,
+                                     "debito":  147.8,
+                                     "valor":  147.8,
+                                     "saldo":  -4772.04,
                                      "descricao":  "CHURRASCARIA FIORAVANTE - REFEIÇÕES"
                                  },
                                  {
@@ -17277,7 +17277,7 @@
                                      "credito":  0,
                                      "debito":  279,
                                      "valor":  279,
-                                     "saldo":  -505104,
+                                     "saldo":  -5051.04,
                                      "descricao":  "HOTEL AMORIM - HOSPEDAGEM"
                                  },
                                  {
@@ -17292,7 +17292,7 @@
                                      "credito":  0,
                                      "debito":  128,
                                      "valor":  128,
-                                     "saldo":  -517904,
+                                     "saldo":  -5179.04,
                                      "descricao":  "PIZARRIA GAUCHA INGLESES - REFEIÇOES"
                                  },
                                  {
@@ -17305,9 +17305,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  191815,
-                                     "valor":  191815,
-                                     "saldo":  -709719,
+                                     "debito":  1918.15,
+                                     "valor":  1918.15,
+                                     "saldo":  -7097.19,
                                      "descricao":  "AUTO POSTO - COMBUSTIVEL"
                                  },
                                  {
@@ -17322,7 +17322,7 @@
                                      "credito":  0,
                                      "debito":  102,
                                      "valor":  102,
-                                     "saldo":  -719919,
+                                     "saldo":  -7199.19,
                                      "descricao":  "RESTAUR SOROCABA - REFEIÇÕES"
                                  },
                                  {
@@ -17337,7 +17337,7 @@
                                      "credito":  0,
                                      "debito":  128,
                                      "valor":  128,
-                                     "saldo":  -732719,
+                                     "saldo":  -7327.19,
                                      "descricao":  "PIZARRIA GAUCHA INGLESES - REFEÇOES"
                                  },
                                  {
@@ -17352,7 +17352,7 @@
                                      "credito":  0,
                                      "debito":  300,
                                      "valor":  300,
-                                     "saldo":  -762719,
+                                     "saldo":  -7627.19,
                                      "descricao":  "HOTEL PONTA - HOSPEDAGEM"
                                  },
                                  {
@@ -17365,9 +17365,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  2938,
-                                     "valor":  2938,
-                                     "saldo":  -792099,
+                                     "debito":  293.8,
+                                     "valor":  293.8,
+                                     "saldo":  -7920.99,
                                      "descricao":  "RAYKAR Q BRUM -REFEIÇOES"
                                  },
                                  {
@@ -17380,9 +17380,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  4068,
-                                     "valor":  4068,
-                                     "saldo":  -832779,
+                                     "debito":  406.8,
+                                     "valor":  406.8,
+                                     "saldo":  -8327.79,
                                      "descricao":  "AÇOUGUE E RESTAUR BARCELOS - REFEIÇOES"
                                  },
                                  {
@@ -17397,7 +17397,7 @@
                                      "credito":  0,
                                      "debito":  3500,
                                      "valor":  3500,
-                                     "saldo":  -1182779,
+                                     "saldo":  -11827.79,
                                      "descricao":  "SERGIO LUIZ FERREIRA - HOSPEDAGEM"
                                  },
                                  {
@@ -17412,7 +17412,7 @@
                                      "credito":  0,
                                      "debito":  105,
                                      "valor":  105,
-                                     "saldo":  -1193279,
+                                     "saldo":  -11932.79,
                                      "descricao":  "MLT NUNES - CAFÉ"
                                  },
                                  {
@@ -17427,7 +17427,7 @@
                                      "credito":  0,
                                      "debito":  314,
                                      "valor":  314,
-                                     "saldo":  -1224679,
+                                     "saldo":  -12246.79,
                                      "descricao":  "ANINHA LANCHES-REFEIÇOES"
                                  },
                                  {
@@ -17442,7 +17442,7 @@
                                      "credito":  0,
                                      "debito":  150,
                                      "valor":  150,
-                                     "saldo":  -1239679,
+                                     "saldo":  -12396.79,
                                      "descricao":  "TORNEARIA LCFER- MANUTENÇÃO"
                                  },
                                  {
@@ -17455,9 +17455,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  65391,
-                                     "valor":  65391,
-                                     "saldo":  -130507,
+                                     "debito":  653.91,
+                                     "valor":  653.91,
+                                     "saldo":  -13050.7,
                                      "descricao":  "POSTO CAVALINHO - COMBUSTIVEL"
                                  },
                                  {
@@ -17470,9 +17470,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  5596,
-                                     "valor":  5596,
-                                     "saldo":  -136103,
+                                     "debito":  559.6,
+                                     "valor":  559.6,
+                                     "saldo":  -13610.3,
                                      "descricao":  "ABAST DE COMB ROTULA 030 - COMBUSTIVEL"
                                  },
                                  {
@@ -17485,9 +17485,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  95157,
-                                     "valor":  95157,
-                                     "saldo":  -1456187,
+                                     "debito":  951.57,
+                                     "valor":  951.57,
+                                     "saldo":  -14561.87,
                                      "descricao":  "ABAST DE COMB ROTULA 030 - COMBUSTIVEL"
                                  },
                                  {
@@ -17500,9 +17500,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  59504,
-                                     "valor":  59504,
-                                     "saldo":  -1515691,
+                                     "debito":  595.04,
+                                     "valor":  595.04,
+                                     "saldo":  -15156.91,
                                      "descricao":  "BROCK E MARQUES - CONSUMIVEIS"
                                  },
                                  {
@@ -17517,7 +17517,7 @@
                                      "credito":  0,
                                      "debito":  38,
                                      "valor":  38,
-                                     "saldo":  -1519491,
+                                     "saldo":  -15194.91,
                                      "descricao":  "FELIPE BUENI DE OLIVEIRA"
                                  },
                                  {
@@ -17532,7 +17532,7 @@
                                      "credito":  0,
                                      "debito":  324,
                                      "valor":  324,
-                                     "saldo":  -1551891,
+                                     "saldo":  -15518.91,
                                      "descricao":  "RAYKAR Q BRUM -REFEIÇOES"
                                  },
                                  {
@@ -17545,9 +17545,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  2797,
-                                     "valor":  2797,
-                                     "saldo":  -1554688,
+                                     "debito":  27.97,
+                                     "valor":  27.97,
+                                     "saldo":  -15546.88,
                                      "descricao":  "CLAUDIO ROBERTO LEITE DE OLIVEIRA - CONSUMIVEIS"
                                  },
                                  {
@@ -17560,9 +17560,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  21366,
-                                     "valor":  21366,
-                                     "saldo":  -1576054,
+                                     "debito":  213.66,
+                                     "valor":  213.66,
+                                     "saldo":  -15760.54,
                                      "descricao":  "POSTO COMB CANQUERINI -COMBUSTIVEL"
                                  },
                                  {
@@ -17577,7 +17577,7 @@
                                      "credito":  0,
                                      "debito":  412,
                                      "valor":  412,
-                                     "saldo":  -1617254,
+                                     "saldo":  -16172.54,
                                      "descricao":  "ANINHA LANCHES-REFEIÇOES"
                                  },
                                  {
@@ -17590,9 +17590,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  3162,
-                                     "valor":  3162,
-                                     "saldo":  -1648874,
+                                     "debito":  316.2,
+                                     "valor":  316.2,
+                                     "saldo":  -16488.74,
                                      "descricao":  "BRUCK E MARQUES -CONSUMIVEIS"
                                  },
                                  {
@@ -17605,9 +17605,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  132943,
-                                     "valor":  132943,
-                                     "saldo":  -1781817,
+                                     "debito":  1329.43,
+                                     "valor":  1329.43,
+                                     "saldo":  -17818.17,
                                      "descricao":  "ABAST DE COMB ROTULA 030 - COMBUSTIVEL"
                                  },
                                  {
@@ -17620,9 +17620,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  2503,
-                                     "valor":  2503,
-                                     "saldo":  -178432,
+                                     "debito":  25.03,
+                                     "valor":  25.03,
+                                     "saldo":  -17843.2,
                                      "descricao":  "POSTO DE COMB CANQUERINI - COMBUSTIVEL"
                                  },
                                  {
@@ -17637,7 +17637,7 @@
                                      "credito":  0,
                                      "debito":  80,
                                      "valor":  80,
-                                     "saldo":  -179232,
+                                     "saldo":  -17923.2,
                                      "descricao":  "CHURRASCARIA VERDES CAMPOS - REFEIÇÃO"
                                  },
                                  {
@@ -17650,9 +17650,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  695,
-                                     "valor":  695,
-                                     "saldo":  -179927,
+                                     "debito":  69.5,
+                                     "valor":  69.5,
+                                     "saldo":  -17992.7,
                                      "descricao":  "MADELIDER CONSTRUÇÃO -VALVULA SUCÇÃO"
                                  },
                                  {
@@ -17667,7 +17667,7 @@
                                      "credito":  0,
                                      "debito":  276,
                                      "valor":  276,
-                                     "saldo":  -182687,
+                                     "saldo":  -18268.7,
                                      "descricao":  "DEL AIR PNEUMITICA - FILTRO 2\u0027\u0027 YP"
                                  },
                                  {
@@ -17682,7 +17682,7 @@
                                      "credito":  0,
                                      "debito":  270,
                                      "valor":  270,
-                                     "saldo":  -185387,
+                                     "saldo":  -18538.7,
                                      "descricao":  "MM COMERCIO DE MADEIRAS - MADEIRA DE GARAPA"
                                  },
                                  {
@@ -17695,9 +17695,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "ManutenÃ§Ã£o Veicular",
                                      "credito":  0,
-                                     "debito":  290569,
-                                     "valor":  290569,
-                                     "saldo":  -2144439,
+                                     "debito":  2905.69,
+                                     "valor":  2905.69,
+                                     "saldo":  -21444.39,
                                      "descricao":  "TERMACO COM DE AC HID PNEU -MATERIAL"
                                  },
                                  {
@@ -17712,7 +17712,7 @@
                                      "credito":  0,
                                      "debito":  2500,
                                      "valor":  2500,
-                                     "saldo":  -2394439,
+                                     "saldo":  -23944.39,
                                      "descricao":  "FELIPE BUENO DE OLIVEIRA - NF 3"
                                  },
                                  {
@@ -17727,7 +17727,7 @@
                                      "credito":  0,
                                      "debito":  604,
                                      "valor":  604,
-                                     "saldo":  -2454839,
+                                     "saldo":  -24548.39,
                                      "descricao":  "FELIPE BUENO DE OLIVEIRA - NF 4"
                                  },
                                  {
@@ -17742,7 +17742,7 @@
                                      "credito":  15000,
                                      "debito":  0,
                                      "valor":  15000,
-                                     "saldo":  -954839,
+                                     "saldo":  -9548.39,
                                      "descricao":  "CAIXA CARLOS"
                                  },
                                  {
@@ -17757,7 +17757,7 @@
                                      "credito":  0,
                                      "debito":  36,
                                      "valor":  36,
-                                     "saldo":  -958439,
+                                     "saldo":  -9584.39,
                                      "descricao":  "FITA EMBALAGEM TRANSPARENTE"
                                  },
                                  {
@@ -17770,9 +17770,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  116046,
-                                     "valor":  116046,
-                                     "saldo":  -1074485,
+                                     "debito":  1160.46,
+                                     "valor":  1160.46,
+                                     "saldo":  -10744.85,
                                      "descricao":  "GOLLOG - FRETES"
                                  },
                                  {
@@ -17787,7 +17787,7 @@
                                      "credito":  0,
                                      "debito":  1430,
                                      "valor":  1430,
-                                     "saldo":  -1217485,
+                                     "saldo":  -12174.85,
                                      "descricao":  "DEISE MM DOS SANTOS - PB CARGO MODERNO 12"
                                  },
                                  {
@@ -17800,9 +17800,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  127009,
-                                     "valor":  127009,
-                                     "saldo":  -1344494,
+                                     "debito":  1270.09,
+                                     "valor":  1270.09,
+                                     "saldo":  -13444.94,
                                      "descricao":  "POSTO GASUP - DIESEL S10"
                                  },
                                  {
@@ -17815,9 +17815,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  1917,
-                                     "valor":  1917,
-                                     "saldo":  -1363664,
+                                     "debito":  191.7,
+                                     "valor":  191.7,
+                                     "saldo":  -13636.64,
                                      "descricao":  "SANDER COMERCIO DE COMBUSTIVEIS - DIESEL S10"
                                  },
                                  {
@@ -17830,9 +17830,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  3199,
-                                     "valor":  3199,
-                                     "saldo":  -1366863,
+                                     "debito":  31.99,
+                                     "valor":  31.99,
+                                     "saldo":  -13668.63,
                                      "descricao":  "POSTO DOS GURI -DIVERSOS"
                                  },
                                  {
@@ -17847,7 +17847,7 @@
                                      "credito":  0,
                                      "debito":  130,
                                      "valor":  130,
-                                     "saldo":  -1379863,
+                                     "saldo":  -13798.63,
                                      "descricao":  "REST E CHURRASC TIGRAO - DIVERSOS"
                                  },
                                  {
@@ -17860,9 +17860,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  44187,
-                                     "valor":  44187,
-                                     "saldo":  -142405,
+                                     "debito":  441.87,
+                                     "valor":  441.87,
+                                     "saldo":  -14240.5,
                                      "descricao":  "POSTO SIM - DIESEL"
                                  },
                                  {
@@ -17877,7 +17877,7 @@
                                      "credito":  0,
                                      "debito":  2500,
                                      "valor":  2500,
-                                     "saldo":  -167405,
+                                     "saldo":  -16740.5,
                                      "descricao":  "COMPACTA EQUEP - CONJ BOMBA 2 E MOTOR GASOLINA"
                                  },
                                  {
@@ -17892,7 +17892,7 @@
                                      "credito":  0,
                                      "debito":  665,
                                      "valor":  665,
-                                     "saldo":  -174055,
+                                     "saldo":  -17405.5,
                                      "descricao":  "REST BARBON"
                                  },
                                  {
@@ -17905,9 +17905,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "EPIs e SeguranÃ§a",
                                      "credito":  0,
-                                     "debito":  199255,
-                                     "valor":  199255,
-                                     "saldo":  -1939805,
+                                     "debito":  1992.55,
+                                     "valor":  1992.55,
+                                     "saldo":  -19398.05,
                                      "descricao":  "PROTEFIX PROTEÇÃO - EPI\u0027S"
                                  },
                                  {
@@ -17920,9 +17920,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  2399,
-                                     "valor":  2399,
-                                     "saldo":  -1963795,
+                                     "debito":  239.9,
+                                     "valor":  239.9,
+                                     "saldo":  -19637.95,
                                      "descricao":  "DO CAMPO AGROPECUARIA  - FOGAREIRO"
                                  },
                                  {
@@ -17935,9 +17935,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  53665,
-                                     "valor":  53665,
-                                     "saldo":  -201746,
+                                     "debito":  536.65,
+                                     "valor":  536.65,
+                                     "saldo":  -20174.6,
                                      "descricao":  "DO CAMPO AGROPECUARIA  -  DIVERSOS"
                                  },
                                  {
@@ -17950,9 +17950,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  219,
-                                     "valor":  219,
-                                     "saldo":  -201965,
+                                     "debito":  21.9,
+                                     "valor":  21.9,
+                                     "saldo":  -20196.5,
                                      "descricao":  "REST PEREIRA - ALMOÇO"
                                  },
                                  {
@@ -17965,9 +17965,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  50786,
-                                     "valor":  50786,
-                                     "saldo":  -2070436,
+                                     "debito":  507.86,
+                                     "valor":  507.86,
+                                     "saldo":  -20704.36,
                                      "descricao":  "AÇOUGUE E RESTAUR BARCELOS - BARCELOS"
                                  },
                                  {
@@ -17982,7 +17982,7 @@
                                      "credito":  0,
                                      "debito":  670,
                                      "valor":  670,
-                                     "saldo":  -2137436,
+                                     "saldo":  -21374.36,
                                      "descricao":  "FERNANDA LOPES GOMES - EPI\u0027S"
                                  },
                                  {
@@ -17995,9 +17995,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  1989,
-                                     "valor":  1989,
-                                     "saldo":  -2139425,
+                                     "debito":  19.89,
+                                     "valor":  19.89,
+                                     "saldo":  -21394.25,
                                      "descricao":  "POSTO SIM - DIVERSOS"
                                  },
                                  {
@@ -18010,9 +18010,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  244,
-                                     "valor":  244,
-                                     "saldo":  -2141865,
+                                     "debito":  24.4,
+                                     "valor":  24.4,
+                                     "saldo":  -21418.65,
                                      "descricao":  "ROGER PONTO PASTEL -DIVERSOS"
                                  },
                                  {
@@ -18025,9 +18025,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  3495,
-                                     "valor":  3495,
-                                     "saldo":  -2176815,
+                                     "debito":  349.5,
+                                     "valor":  349.5,
+                                     "saldo":  -21768.15,
                                      "descricao":  "POSTO COMB CANQUERINI -COMBUSTIVEL"
                                  },
                                  {
@@ -18042,7 +18042,7 @@
                                      "credito":  0,
                                      "debito":  363,
                                      "valor":  363,
-                                     "saldo":  -2213115,
+                                     "saldo":  -22131.15,
                                      "descricao":  "PANELA DE FERRO COMIDA - ALMOÇO"
                                  },
                                  {
@@ -18057,7 +18057,7 @@
                                      "credito":  0,
                                      "debito":  50,
                                      "valor":  50,
-                                     "saldo":  -2218115,
+                                     "saldo":  -22181.15,
                                      "descricao":  "SO EPIS - EPI\u0027S"
                                  },
                                  {
@@ -18070,9 +18070,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "ManutenÃ§Ã£o Veicular",
                                      "credito":  0,
-                                     "debito":  7275,
-                                     "valor":  7275,
-                                     "saldo":  -2290865,
+                                     "debito":  727.5,
+                                     "valor":  727.5,
+                                     "saldo":  -22908.65,
                                      "descricao":  "RAAS COM . DE PEÇAS -  MANUTENÇÃO"
                                  },
                                  {
@@ -18085,9 +18085,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  16412,
-                                     "valor":  16412,
-                                     "saldo":  -2307277,
+                                     "debito":  164.12,
+                                     "valor":  164.12,
+                                     "saldo":  -23072.77,
                                      "descricao":  "POSTO VALVIC -GASOLINA COMUM"
                                  },
                                  {
@@ -18102,7 +18102,7 @@
                                      "credito":  0,
                                      "debito":  13,
                                      "valor":  13,
-                                     "saldo":  -2308577,
+                                     "saldo":  -23085.77,
                                      "descricao":  "EMPRESA GAUCHA"
                                  },
                                  {
@@ -18115,9 +18115,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  3111,
-                                     "valor":  3111,
-                                     "saldo":  -2339687,
+                                     "debito":  311.1,
+                                     "valor":  311.1,
+                                     "saldo":  -23396.87,
                                      "descricao":  "POSTO SIM"
                                  },
                                  {
@@ -18130,9 +18130,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  4672,
-                                     "valor":  4672,
-                                     "saldo":  -2386407,
+                                     "debito":  467.2,
+                                     "valor":  467.2,
+                                     "saldo":  -23864.07,
                                      "descricao":  "POSTO SIM - GASOLINA COMUM"
                                  },
                                  {
@@ -18147,7 +18147,7 @@
                                      "credito":  0,
                                      "debito":  774,
                                      "valor":  774,
-                                     "saldo":  -2463807,
+                                     "saldo":  -24638.07,
                                      "descricao":  "CAMPO AGROPECUARIA E FERRAGEM - DIVERSOS"
                                  },
                                  {
@@ -18162,7 +18162,7 @@
                                      "credito":  0,
                                      "debito":  363,
                                      "valor":  363,
-                                     "saldo":  -2500107,
+                                     "saldo":  -25001.07,
                                      "descricao":  "BANCO BANRISUL BRUNA AGUIAR"
                                  },
                                  {
@@ -18177,7 +18177,7 @@
                                      "credito":  0,
                                      "debito":  100,
                                      "valor":  100,
-                                     "saldo":  -2510107,
+                                     "saldo":  -25101.07,
                                      "descricao":  "FIGUEIRA TRES COMERCIO -COMBUSTIVEL"
                                  },
                                  {
@@ -18190,9 +18190,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  63,
-                                     "valor":  63,
-                                     "saldo":  -2510737,
+                                     "debito":  6.3,
+                                     "valor":  6.3,
+                                     "saldo":  -25107.37,
                                      "descricao":  "EMPRESA GAUCHA DE RODOVIARIA"
                                  },
                                  {
@@ -18205,9 +18205,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  189,
-                                     "valor":  189,
-                                     "saldo":  -2512627,
+                                     "debito":  18.9,
+                                     "valor":  18.9,
+                                     "saldo":  -25126.27,
                                      "descricao":  "EMPRESA GAUCHA DE RODOVIARIA"
                                  },
                                  {
@@ -18220,9 +18220,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  14185,
-                                     "valor":  14185,
-                                     "saldo":  -2526812,
+                                     "debito":  141.85,
+                                     "valor":  141.85,
+                                     "saldo":  -25268.12,
                                      "descricao":  "BUFFON -DIVERSOS"
                                  },
                                  {
@@ -18237,7 +18237,7 @@
                                      "credito":  0,
                                      "debito":  64,
                                      "valor":  64,
-                                     "saldo":  -2533212,
+                                     "saldo":  -25332.12,
                                      "descricao":  "RESTAURANTE PLANALTO -DIVERSOS"
                                  },
                                  {
@@ -18250,9 +18250,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  183149,
-                                     "valor":  183149,
-                                     "saldo":  -2716361,
+                                     "debito":  1831.49,
+                                     "valor":  1831.49,
+                                     "saldo":  -27163.61,
                                      "descricao":  "BUFFON -OLEO DIESEL"
                                  },
                                  {
@@ -18265,9 +18265,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  4378,
-                                     "valor":  4378,
-                                     "saldo":  -2760141,
+                                     "debito":  437.8,
+                                     "valor":  437.8,
+                                     "saldo":  -27601.41,
                                      "descricao":  "COMERCIO DE COMERCIO DE CONSTRUÇÃO - MATERIAL"
                                  },
                                  {
@@ -18282,7 +18282,7 @@
                                      "credito":  0,
                                      "debito":  1520,
                                      "valor":  1520,
-                                     "saldo":  -2912141,
+                                     "saldo":  -29121.41,
                                      "descricao":  "MOURA EPIS -EPI\u0027S"
                                  },
                                  {
@@ -18295,9 +18295,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  1641,
-                                     "valor":  1641,
-                                     "saldo":  -2928551,
+                                     "debito":  164.1,
+                                     "valor":  164.1,
+                                     "saldo":  -29285.51,
                                      "descricao":  "RESTAURANTE FERNANDO - DIVERSOS"
                                  },
                                  {
@@ -18312,7 +18312,7 @@
                                      "credito":  0,
                                      "debito":  161,
                                      "valor":  161,
-                                     "saldo":  -2944651,
+                                     "saldo":  -29446.51,
                                      "descricao":  "DEMINAS EQUIPADORA -MATERIAL"
                                  },
                                  {
@@ -18325,9 +18325,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  102474,
-                                     "valor":  102474,
-                                     "saldo":  -3047125,
+                                     "debito":  1024.74,
+                                     "valor":  1024.74,
+                                     "saldo":  -30471.25,
                                      "descricao":  "POSTO TIO ZICO - DIESEL"
                                  },
                                  {
@@ -18340,9 +18340,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  117348,
-                                     "valor":  117348,
-                                     "saldo":  -3164473,
+                                     "debito":  1173.48,
+                                     "valor":  1173.48,
+                                     "saldo":  -31644.73,
                                      "descricao":  "POSTO DO PEDRO - DIESEL"
                                  },
                                  {
@@ -18357,7 +18357,7 @@
                                      "credito":  0,
                                      "debito":  75,
                                      "valor":  75,
-                                     "saldo":  -3171973,
+                                     "saldo":  -31719.73,
                                      "descricao":  "GP DE OLIVEIRA - REFEIÇÃO"
                                  },
                                  {
@@ -18370,9 +18370,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  20065,
-                                     "valor":  20065,
-                                     "saldo":  -3192038,
+                                     "debito":  200.65,
+                                     "valor":  200.65,
+                                     "saldo":  -31920.38,
                                      "descricao":  "POSTO VIA MAIS - GASOLINA COMUM"
                                  },
                                  {
@@ -18387,7 +18387,7 @@
                                      "credito":  0,
                                      "debito":  35,
                                      "valor":  35,
-                                     "saldo":  -3195538,
+                                     "saldo":  -31955.38,
                                      "descricao":  "LEO GOULART - DIVERSOS"
                                  },
                                  {
@@ -18402,7 +18402,7 @@
                                      "credito":  0,
                                      "debito":  230,
                                      "valor":  230,
-                                     "saldo":  -3218538,
+                                     "saldo":  -32185.38,
                                      "descricao":  "HOTEL FERNANDÃO - ESTADIAS"
                                  },
                                  {
@@ -18417,7 +18417,7 @@
                                      "credito":  0,
                                      "debito":  0,
                                      "valor":  0,
-                                     "saldo":  -3218538,
+                                     "saldo":  -32185.38,
                                      "descricao":  "ROMTEC - (1) 21/07 3368,36 (2) 18/08 3368,36 (3) 15/09 3368,66 (4) 13/10 3368,36 (5) 10/11 3368,37"
                                  },
                                  {
@@ -18432,7 +18432,7 @@
                                      "credito":  0,
                                      "debito":  260,
                                      "valor":  260,
-                                     "saldo":  -3244538,
+                                     "saldo":  -32445.38,
                                      "descricao":  "COMPACTA EQUEP - MANUTENÇÃO"
                                  },
                                  {
@@ -18447,7 +18447,7 @@
                                      "credito":  0,
                                      "debito":  450,
                                      "valor":  450,
-                                     "saldo":  -3289538,
+                                     "saldo":  -32895.38,
                                      "descricao":  "MOURA EPIS -EPI\u0027S"
                                  },
                                  {
@@ -18460,9 +18460,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  44008,
-                                     "valor":  44008,
-                                     "saldo":  -3333546,
+                                     "debito":  440.08,
+                                     "valor":  440.08,
+                                     "saldo":  -33335.46,
                                      "descricao":  "POSTO SIM - OLEO DIESEL"
                                  },
                                  {
@@ -18475,9 +18475,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  18425,
-                                     "valor":  18425,
-                                     "saldo":  -3351971,
+                                     "debito":  184.25,
+                                     "valor":  184.25,
+                                     "saldo":  -33519.71,
                                      "descricao":  "RESTA FERNANDÃO  - DIVERSOS"
                                  },
                                  {
@@ -18490,9 +18490,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  1365,
-                                     "valor":  1365,
-                                     "saldo":  -3353336,
+                                     "debito":  13.65,
+                                     "valor":  13.65,
+                                     "saldo":  -33533.36,
                                      "descricao":  "POSTO COMB CANQUERINI -COMBUSTIVEL"
                                  },
                                  {
@@ -18505,9 +18505,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  33,
-                                     "valor":  33,
-                                     "saldo":  -3353666,
+                                     "debito":  3.3,
+                                     "valor":  3.3,
+                                     "saldo":  -33536.66,
                                      "descricao":  "EMPRESA GAUCHA RODOVIARIA"
                                  },
                                  {
@@ -18520,9 +18520,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  175,
-                                     "valor":  175,
-                                     "saldo":  -3355416,
+                                     "debito":  17.5,
+                                     "valor":  17.5,
+                                     "saldo":  -33554.16,
                                      "descricao":  "COML DE PROD ALIMENTICIOS - DIVERSOS"
                                  },
                                  {
@@ -18537,7 +18537,7 @@
                                      "credito":  0,
                                      "debito":  80,
                                      "valor":  80,
-                                     "saldo":  -3363416,
+                                     "saldo":  -33634.16,
                                      "descricao":  "AUTO CENTER PNEUS - REMENDO"
                                  },
                                  {
@@ -18552,7 +18552,7 @@
                                      "credito":  0,
                                      "debito":  25,
                                      "valor":  25,
-                                     "saldo":  -3365916,
+                                     "saldo":  -33659.16,
                                      "descricao":  "LEO GOULART - DIVERSOS"
                                  },
                                  {
@@ -18565,9 +18565,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  111124,
-                                     "valor":  111124,
-                                     "saldo":  -347704,
+                                     "debito":  1111.24,
+                                     "valor":  1111.24,
+                                     "saldo":  -34770.4,
                                      "descricao":  "DAF SANCAR - COMBUSTIVEL"
                                  },
                                  {
@@ -18582,7 +18582,7 @@
                                      "credito":  0,
                                      "debito":  160,
                                      "valor":  160,
-                                     "saldo":  -349304,
+                                     "saldo":  -34930.4,
                                      "descricao":  "HZM PRESTAÇÃO SERVIÇOS E HOTELARIA - HOSPEDAGEM"
                                  },
                                  {
@@ -18597,7 +18597,7 @@
                                      "credito":  0,
                                      "debito":  260,
                                      "valor":  260,
-                                     "saldo":  -351904,
+                                     "saldo":  -35190.4,
                                      "descricao":  "COMPACTA EQUIP - MANUTENÇÃO"
                                  },
                                  {
@@ -18612,7 +18612,7 @@
                                      "credito":  0,
                                      "debito":  80,
                                      "valor":  80,
-                                     "saldo":  -352704,
+                                     "saldo":  -35270.4,
                                      "descricao":  "COMPACTA EQUIP - MANUTENÇÃO"
                                  },
                                  {
@@ -18627,7 +18627,7 @@
                                      "credito":  0,
                                      "debito":  630,
                                      "valor":  630,
-                                     "saldo":  -359004,
+                                     "saldo":  -35900.4,
                                      "descricao":  "MCD AUTO ELETRICA - MANUTENÇÃO"
                                  },
                                  {
@@ -18642,7 +18642,7 @@
                                      "credito":  0,
                                      "debito":  0,
                                      "valor":  0,
-                                     "saldo":  -359004,
+                                     "saldo":  -35900.4,
                                      "descricao":  "COMPACTA EQUIP - MANUTENÇÃO"
                                  },
                                  {
@@ -18655,9 +18655,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  18833,
-                                     "valor":  18833,
-                                     "saldo":  -3608873,
+                                     "debito":  188.33,
+                                     "valor":  188.33,
+                                     "saldo":  -36088.73,
                                      "descricao":  "RESTAU FERNANDAO - DIVERSOS"
                                  },
                                  {
@@ -18670,9 +18670,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  4194,
-                                     "valor":  4194,
-                                     "saldo":  -3613067,
+                                     "debito":  41.94,
+                                     "valor":  41.94,
+                                     "saldo":  -36130.67,
                                      "descricao":  "DEUTNER E SILVA - OVO DE GALINHA"
                                  },
                                  {
@@ -18687,7 +18687,7 @@
                                      "credito":  0,
                                      "debito":  15,
                                      "valor":  15,
-                                     "saldo":  -3614567,
+                                     "saldo":  -36145.67,
                                      "descricao":  "LEO GOULART - DIVERSOS"
                                  },
                                  {
@@ -18702,7 +18702,7 @@
                                      "credito":  0,
                                      "debito":  230,
                                      "valor":  230,
-                                     "saldo":  -3637567,
+                                     "saldo":  -36375.67,
                                      "descricao":  "HOTEL FERNANDAO - HOTEL"
                                  },
                                  {
@@ -18717,7 +18717,7 @@
                                      "credito":  0,
                                      "debito":  0,
                                      "valor":  0,
-                                     "saldo":  -3637567,
+                                     "saldo":  -36375.67,
                                      "descricao":  "MMG TECH LUBRIFICAQNTES - GRAXA COBREADA"
                                  },
                                  {
@@ -18732,7 +18732,7 @@
                                      "credito":  0,
                                      "debito":  200,
                                      "valor":  200,
-                                     "saldo":  -3657567,
+                                     "saldo":  -36575.67,
                                      "descricao":  "JM2 USINAGEM DE PRECISA - MANUTENÇÃO"
                                  },
                                  {
@@ -18747,7 +18747,7 @@
                                      "credito":  0,
                                      "debito":  1800,
                                      "valor":  1800,
-                                     "saldo":  -3837567,
+                                     "saldo":  -38375.67,
                                      "descricao":  "SERGIO LUIZ FERREIRA - HOSPEDAGEM"
                                  },
                                  {
@@ -18760,9 +18760,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  198,
-                                     "valor":  198,
-                                     "saldo":  -3839547,
+                                     "debito":  19.8,
+                                     "valor":  19.8,
+                                     "saldo":  -38395.47,
                                      "descricao":  "SANTO CHURRASCO - REFEIÇÃO"
                                  },
                                  {
@@ -18775,9 +18775,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  63,
-                                     "valor":  63,
-                                     "saldo":  -3840177,
+                                     "debito":  6.3,
+                                     "valor":  6.3,
+                                     "saldo":  -38401.77,
                                      "descricao":  "EMPRESA GAUCHA RODOVIARIA"
                                  },
                                  {
@@ -18790,9 +18790,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  589,
-                                     "valor":  589,
-                                     "saldo":  -3846067,
+                                     "debito":  58.9,
+                                     "valor":  58.9,
+                                     "saldo":  -38460.67,
                                      "descricao":  "CONVENIENCIA DAS ARTES - DIVERSOS"
                                  },
                                  {
@@ -18805,9 +18805,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  271032,
-                                     "valor":  271032,
-                                     "saldo":  -4117099,
+                                     "debito":  2710.32,
+                                     "valor":  2710.32,
+                                     "saldo":  -41170.99,
                                      "descricao":  "POSTO Z5 - DIESEL"
                                  },
                                  {
@@ -18820,9 +18820,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  2498,
-                                     "valor":  2498,
-                                     "saldo":  -4119597,
+                                     "debito":  24.98,
+                                     "valor":  24.98,
+                                     "saldo":  -41195.97,
                                      "descricao":  "MATELI - MATERIAL"
                                  },
                                  {
@@ -18835,9 +18835,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  31334,
-                                     "valor":  31334,
-                                     "saldo":  -4150931,
+                                     "debito":  313.34,
+                                     "valor":  313.34,
+                                     "saldo":  -41509.31,
                                      "descricao":  "POSTO SIM -  OLEO DIESEL"
                                  },
                                  {
@@ -18852,7 +18852,7 @@
                                      "credito":  0,
                                      "debito":  65,
                                      "valor":  65,
-                                     "saldo":  -4157431,
+                                     "saldo":  -41574.31,
                                      "descricao":  "DELIVERY DA RO - REFEIÇÃO"
                                  },
                                  {
@@ -18867,7 +18867,7 @@
                                      "credito":  0,
                                      "debito":  82,
                                      "valor":  82,
-                                     "saldo":  -4165631,
+                                     "saldo":  -41656.31,
                                      "descricao":  "RESTAU SABOR DO VALE -REFEIÇÃO"
                                  },
                                  {
@@ -18882,7 +18882,7 @@
                                      "credito":  0,
                                      "debito":  190,
                                      "valor":  190,
-                                     "saldo":  -4184631,
+                                     "saldo":  -41846.31,
                                      "descricao":  "HOTEL AMORIM - HOSPEDAGEM"
                                  },
                                  {
@@ -18897,7 +18897,7 @@
                                      "credito":  0,
                                      "debito":  50,
                                      "valor":  50,
-                                     "saldo":  -4189631,
+                                     "saldo":  -41896.31,
                                      "descricao":  "ROBERT DA SILVA DE ARRUDA"
                                  },
                                  {
@@ -18910,9 +18910,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  744,
-                                     "valor":  744,
-                                     "saldo":  -4197071,
+                                     "debito":  74.4,
+                                     "valor":  74.4,
+                                     "saldo":  -41970.71,
                                      "descricao":  "ESTAÇÃO RODOVIRIA CENTRAL DE PORTO ALEGRE"
                                  },
                                  {
@@ -18925,9 +18925,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  1598,
-                                     "valor":  1598,
-                                     "saldo":  -4198669,
+                                     "debito":  15.98,
+                                     "valor":  15.98,
+                                     "saldo":  -41986.69,
                                      "descricao":  "POSTO VIA MAIS -  DIVERSOS"
                                  },
                                  {
@@ -18942,7 +18942,7 @@
                                      "credito":  0,
                                      "debito":  32,
                                      "valor":  32,
-                                     "saldo":  -4201869,
+                                     "saldo":  -42018.69,
                                      "descricao":  "LEO GOULART - DIVERSOS"
                                  },
                                  {
@@ -18957,7 +18957,7 @@
                                      "credito":  0,
                                      "debito":  112,
                                      "valor":  112,
-                                     "saldo":  -4213069,
+                                     "saldo":  -42130.69,
                                      "descricao":  "MARAISA MIOTTO - REFEIÇÃO"
                                  },
                                  {
@@ -18970,9 +18970,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  255,
-                                     "valor":  255,
-                                     "saldo":  -4215619,
+                                     "debito":  25.5,
+                                     "valor":  25.5,
+                                     "saldo":  -42156.19,
                                      "descricao":  "EMPRESA GAUCHA- RODOVIARIA"
                                  },
                                  {
@@ -18985,9 +18985,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  63,
-                                     "valor":  63,
-                                     "saldo":  -4216249,
+                                     "debito":  6.3,
+                                     "valor":  6.3,
+                                     "saldo":  -42162.49,
                                      "descricao":  "EMPRESA GAUCHA- RODOVIARIA"
                                  },
                                  {
@@ -19000,9 +19000,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  13419,
-                                     "valor":  13419,
-                                     "saldo":  -4229668,
+                                     "debito":  134.19,
+                                     "valor":  134.19,
+                                     "saldo":  -42296.68,
                                      "descricao":  "CLAUDIO ALBERTO  - DIVERSOS"
                                  },
                                  {
@@ -19015,9 +19015,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  21573,
-                                     "valor":  21573,
-                                     "saldo":  -4251241,
+                                     "debito":  215.73,
+                                     "valor":  215.73,
+                                     "saldo":  -42512.41,
                                      "descricao":  "POSTO SIM - OLEO DIESEL"
                                  },
                                  {
@@ -19030,9 +19030,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  53551,
-                                     "valor":  53551,
-                                     "saldo":  -4304792,
+                                     "debito":  535.51,
+                                     "valor":  535.51,
+                                     "saldo":  -43047.92,
                                      "descricao":  "POSTO SIM - OLEO DIESEL"
                                  },
                                  {
@@ -19045,9 +19045,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  1598,
-                                     "valor":  1598,
-                                     "saldo":  -430639,
+                                     "debito":  15.98,
+                                     "valor":  15.98,
+                                     "saldo":  -43063.9,
                                      "descricao":  "POSTO VIA MAIS - DIVERSOS"
                                  },
                                  {
@@ -19060,9 +19060,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  43684,
-                                     "valor":  43684,
-                                     "saldo":  -4350074,
+                                     "debito":  436.84,
+                                     "valor":  436.84,
+                                     "saldo":  -43500.74,
                                      "descricao":  "POSTO 44 -  DIESEL"
                                  },
                                  {
@@ -19075,9 +19075,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  693,
-                                     "valor":  693,
-                                     "saldo":  -4357004,
+                                     "debito":  69.3,
+                                     "valor":  69.3,
+                                     "saldo":  -43570.04,
                                      "descricao":  "EXPRESSO FREDERES"
                                  },
                                  {
@@ -19092,7 +19092,7 @@
                                      "credito":  0,
                                      "debito":  5,
                                      "valor":  5,
-                                     "saldo":  -4357504,
+                                     "saldo":  -43575.04,
                                      "descricao":  "ASSOCIAÇÃO EMPRESAS TRANSPORTE"
                                  },
                                  {
@@ -19105,9 +19105,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  639,
-                                     "valor":  639,
-                                     "saldo":  -4363894,
+                                     "debito":  63.9,
+                                     "valor":  63.9,
+                                     "saldo":  -43638.94,
                                      "descricao":  "BURGUER KINGS"
                                  },
                                  {
@@ -19120,9 +19120,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  33541,
-                                     "valor":  33541,
-                                     "saldo":  -4397435,
+                                     "debito":  335.41,
+                                     "valor":  335.41,
+                                     "saldo":  -43974.35,
                                      "descricao":  "BRUCK E MARQUES -DIVERSOS"
                                  },
                                  {
@@ -19135,9 +19135,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  44423,
-                                     "valor":  44423,
-                                     "saldo":  -4441858,
+                                     "debito":  444.23,
+                                     "valor":  444.23,
+                                     "saldo":  -44418.58,
                                      "descricao":  "F10 CAPIVARI - DIESEL"
                                  },
                                  {
@@ -19152,7 +19152,7 @@
                                      "credito":  0,
                                      "debito":  560,
                                      "valor":  560,
-                                     "saldo":  -4497858,
+                                     "saldo":  -44978.58,
                                      "descricao":  "PROCORDAS E COMERCIO DE CORDAS - MATERIAL"
                                  },
                                  {
@@ -19165,9 +19165,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Transporte / Uber",
                                      "credito":  0,
-                                     "debito":  795,
-                                     "valor":  795,
-                                     "saldo":  -4498653,
+                                     "debito":  7.95,
+                                     "valor":  7.95,
+                                     "saldo":  -44986.53,
                                      "descricao":  "UBER"
                                  },
                                  {
@@ -19182,7 +19182,7 @@
                                      "credito":  0,
                                      "debito":  27,
                                      "valor":  27,
-                                     "saldo":  -4501353,
+                                     "saldo":  -45013.53,
                                      "descricao":  "BENDITO PASTELARIA"
                                  },
                                  {
@@ -19195,9 +19195,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  26991,
-                                     "valor":  26991,
-                                     "saldo":  -4528344,
+                                     "debito":  269.91,
+                                     "valor":  269.91,
+                                     "saldo":  -45283.44,
                                      "descricao":  "COPERATIVA AGROINDUSTRIA - DIVERSOS"
                                  },
                                  {
@@ -19210,9 +19210,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  40218,
-                                     "valor":  40218,
-                                     "saldo":  -4568562,
+                                     "debito":  402.18,
+                                     "valor":  402.18,
+                                     "saldo":  -45685.62,
                                      "descricao":  "POSTO SIM - OLEO DIESEL"
                                  },
                                  {
@@ -19225,9 +19225,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  10932,
-                                     "valor":  10932,
-                                     "saldo":  -4579494,
+                                     "debito":  109.32,
+                                     "valor":  109.32,
+                                     "saldo":  -45794.94,
                                      "descricao":  "F10 CAPIVARI - COMUM"
                                  },
                                  {
@@ -19242,7 +19242,7 @@
                                      "credito":  0,
                                      "debito":  224,
                                      "valor":  224,
-                                     "saldo":  -4601894,
+                                     "saldo":  -46018.94,
                                      "descricao":  "BRUCK E MARQUES - DIVERSOS"
                                  },
                                  {
@@ -19255,9 +19255,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  194996,
-                                     "valor":  194996,
-                                     "saldo":  -479689,
+                                     "debito":  1949.96,
+                                     "valor":  1949.96,
+                                     "saldo":  -47968.9,
                                      "descricao":  "F10 CAPIVARI - DIESEL"
                                  },
                                  {
@@ -19270,9 +19270,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  63,
-                                     "valor":  63,
-                                     "saldo":  -479752,
+                                     "debito":  6.3,
+                                     "valor":  6.3,
+                                     "saldo":  -47975.2,
                                      "descricao":  "EMPRESA GAUCHO RODOVIARIA"
                                  },
                                  {
@@ -19287,7 +19287,7 @@
                                      "credito":  0,
                                      "debito":  19,
                                      "valor":  19,
-                                     "saldo":  -479942,
+                                     "saldo":  -47994.2,
                                      "descricao":  "ELAINE CRISTIANA - REFEIÇÃO"
                                  },
                                  {
@@ -19300,9 +19300,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  57975,
-                                     "valor":  57975,
-                                     "saldo":  -4857395,
+                                     "debito":  579.75,
+                                     "valor":  579.75,
+                                     "saldo":  -48573.95,
                                      "descricao":  "AGROPECUARIA TREVO - DIVERSOS"
                                  },
                                  {
@@ -19317,7 +19317,7 @@
                                      "credito":  0,
                                      "debito":  40,
                                      "valor":  40,
-                                     "saldo":  -4861395,
+                                     "saldo":  -48613.95,
                                      "descricao":  "JD RIBEIRO - LAMPADA"
                                  },
                                  {
@@ -19332,7 +19332,7 @@
                                      "credito":  0,
                                      "debito":  70,
                                      "valor":  70,
-                                     "saldo":  -4868395,
+                                     "saldo":  -48683.95,
                                      "descricao":  "SILVA E FRAGA - TROCA PNEU"
                                  },
                                  {
@@ -19347,7 +19347,7 @@
                                      "credito":  0,
                                      "debito":  140,
                                      "valor":  140,
-                                     "saldo":  -4882395,
+                                     "saldo":  -48823.95,
                                      "descricao":  "GABRIEL LIMA DOS SANTOS - HOSPEDAGEM"
                                  },
                                  {
@@ -19362,7 +19362,7 @@
                                      "credito":  0,
                                      "debito":  14,
                                      "valor":  14,
-                                     "saldo":  -4883795,
+                                     "saldo":  -48837.95,
                                      "descricao":  "LEO GOULART - DIVERSOS"
                                  },
                                  {
@@ -19375,9 +19375,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  936,
-                                     "valor":  936,
-                                     "saldo":  -4893155,
+                                     "debito":  93.6,
+                                     "valor":  93.6,
+                                     "saldo":  -48931.55,
                                      "descricao":  "MADENECO COMERCIAL - MATERIAL"
                                  },
                                  {
@@ -19392,7 +19392,7 @@
                                      "credito":  0,
                                      "debito":  60,
                                      "valor":  60,
-                                     "saldo":  -4899155,
+                                     "saldo":  -48991.55,
                                      "descricao":  "SILVA E FRAGA - TROCA PNEU"
                                  },
                                  {
@@ -19407,7 +19407,7 @@
                                      "credito":  0,
                                      "debito":  319,
                                      "valor":  319,
-                                     "saldo":  -4931055,
+                                     "saldo":  -49310.55,
                                      "descricao":  "JGF FOOD - REFEIÇÃO"
                                  },
                                  {
@@ -19420,9 +19420,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  149848,
-                                     "valor":  149848,
-                                     "saldo":  -5080903,
+                                     "debito":  1498.48,
+                                     "valor":  1498.48,
+                                     "saldo":  -50809.03,
                                      "descricao":  "POSTO RADAR - OLEO DIESEL"
                                  },
                                  {
@@ -19437,7 +19437,7 @@
                                      "credito":  0,
                                      "debito":  493,
                                      "valor":  493,
-                                     "saldo":  -5130203,
+                                     "saldo":  -51302.03,
                                      "descricao":  "INSANO BURGUER -  REFEIÇÃO"
                                  },
                                  {
@@ -19450,9 +19450,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  49153,
-                                     "valor":  49153,
-                                     "saldo":  -5179356,
+                                     "debito":  491.53,
+                                     "valor":  491.53,
+                                     "saldo":  -51793.56,
                                      "descricao":  "REDE ALPETRO -DIESEL"
                                  },
                                  {
@@ -19465,9 +19465,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  21578,
-                                     "valor":  21578,
-                                     "saldo":  -5200934,
+                                     "debito":  215.78,
+                                     "valor":  215.78,
+                                     "saldo":  -52009.34,
                                      "descricao":  "POSTO AUTO CENTER - DIESEL S10 + DIVERSOS"
                                  },
                                  {
@@ -19480,9 +19480,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  11868,
-                                     "valor":  11868,
-                                     "saldo":  -5212802,
+                                     "debito":  118.68,
+                                     "valor":  118.68,
+                                     "saldo":  -52128.02,
                                      "descricao":  "AGOUGUE E RESTAURANTE BARCELOS"
                                  },
                                  {
@@ -19497,7 +19497,7 @@
                                      "credito":  0,
                                      "debito":  45,
                                      "valor":  45,
-                                     "saldo":  -5217302,
+                                     "saldo":  -52173.02,
                                      "descricao":  "LEO GOULART - DIVERSOS"
                                  },
                                  {
@@ -19512,7 +19512,7 @@
                                      "credito":  0,
                                      "debito":  60,
                                      "valor":  60,
-                                     "saldo":  -5223302,
+                                     "saldo":  -52233.02,
                                      "descricao":  "AUTO CENTER PNEUS - REMENDO"
                                  },
                                  {
@@ -19525,9 +19525,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  50173,
-                                     "valor":  50173,
-                                     "saldo":  -527347500000000.94,
+                                     "debito":  501.73,
+                                     "valor":  501.73,
+                                     "saldo":  -52734.75,
                                      "descricao":  "ABAST DE COMB OSORIO - DIESEL"
                                  },
                                  {
@@ -19542,7 +19542,7 @@
                                      "credito":  0,
                                      "debito":  15,
                                      "valor":  15,
-                                     "saldo":  -527497500000000.94,
+                                     "saldo":  -52749.75,
                                      "descricao":  "LEO GOULART - DIVERSOS"
                                  },
                                  {
@@ -19555,9 +19555,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  1655,
-                                     "valor":  1655,
-                                     "saldo":  -529152500000000.94,
+                                     "debito":  165.5,
+                                     "valor":  165.5,
+                                     "saldo":  -52915.25,
                                      "descricao":  "BUFFON - GASOLINA"
                                  },
                                  {
@@ -19570,9 +19570,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  63,
-                                     "valor":  63,
-                                     "saldo":  -529215500000000.94,
+                                     "debito":  6.3,
+                                     "valor":  6.3,
+                                     "saldo":  -52921.55,
                                      "descricao":  "EMPRESA GAUCHA RODOVIARIA"
                                  },
                                  {
@@ -19585,9 +19585,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  51473,
-                                     "valor":  51473,
-                                     "saldo":  -534362800000000.94,
+                                     "debito":  514.73,
+                                     "valor":  514.73,
+                                     "saldo":  -53436.28,
                                      "descricao":  "POSTO VANNAR LTDA - DIESEL + CAFÉ"
                                  },
                                  {
@@ -19600,9 +19600,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  252,
-                                     "valor":  252,
-                                     "saldo":  -534614800000000.94,
+                                     "debito":  25.2,
+                                     "valor":  25.2,
+                                     "saldo":  -53461.48,
                                      "descricao":  "EMPRESA GAUCHA RODOVIARIA"
                                  },
                                  {
@@ -19617,7 +19617,7 @@
                                      "credito":  0,
                                      "debito":  223,
                                      "valor":  223,
-                                     "saldo":  -536844800000000.94,
+                                     "saldo":  -53684.48,
                                      "descricao":  "EDILSON GODOI DOS SANTOS"
                                  },
                                  {
@@ -19632,7 +19632,7 @@
                                      "credito":  0,
                                      "debito":  30,
                                      "valor":  30,
-                                     "saldo":  -537144800000000.94,
+                                     "saldo":  -53714.48,
                                      "descricao":  "LEO GOULART - DIVERSOS"
                                  },
                                  {
@@ -19647,7 +19647,7 @@
                                      "credito":  0,
                                      "debito":  35,
                                      "valor":  35,
-                                     "saldo":  -537494800000000.94,
+                                     "saldo":  -53749.48,
                                      "descricao":  "MARCOS VAGAS DE AGUIAR - MATERIAL"
                                  },
                                  {
@@ -19662,7 +19662,7 @@
                                      "credito":  0,
                                      "debito":  40,
                                      "valor":  40,
-                                     "saldo":  -537894800000000.94,
+                                     "saldo":  -53789.48,
                                      "descricao":  "-"
                                  },
                                  {
@@ -19677,7 +19677,7 @@
                                      "credito":  0,
                                      "debito":  15,
                                      "valor":  15,
-                                     "saldo":  -538044800000000.94,
+                                     "saldo":  -53804.48,
                                      "descricao":  "LEO GOULART - DIVERSOS"
                                  },
                                  {
@@ -19692,7 +19692,7 @@
                                      "credito":  0,
                                      "debito":  0,
                                      "valor":  0,
-                                     "saldo":  -538044800000000.94,
+                                     "saldo":  -53804.48,
                                      "descricao":  "STAMPA"
                                  },
                                  {
@@ -19705,9 +19705,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  8921,
-                                     "valor":  8921,
-                                     "saldo":  -546965800000000.94,
+                                     "debito":  892.1,
+                                     "valor":  892.1,
+                                     "saldo":  -54696.58,
                                      "descricao":  "DIESEL"
                                  },
                                  {
@@ -19722,7 +19722,7 @@
                                      "credito":  0,
                                      "debito":  16,
                                      "valor":  16,
-                                     "saldo":  -547125800000000.94,
+                                     "saldo":  -54712.58,
                                      "descricao":  "ADAMS GRIL"
                                  },
                                  {
@@ -19737,7 +19737,7 @@
                                      "credito":  0,
                                      "debito":  12,
                                      "valor":  12,
-                                     "saldo":  -547245800000000.94,
+                                     "saldo":  -54724.58,
                                      "descricao":  "ADAMS GRIL"
                                  },
                                  {
@@ -19750,9 +19750,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  46274,
-                                     "valor":  46274,
-                                     "saldo":  -551873200000000.94,
+                                     "debito":  462.74,
+                                     "valor":  462.74,
+                                     "saldo":  -55187.32,
                                      "descricao":  "POSTO ABASTECEDORA OSORIO"
                                  },
                                  {
@@ -19765,9 +19765,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  55185,
-                                     "valor":  55185,
-                                     "saldo":  -5573917,
+                                     "debito":  551.85,
+                                     "valor":  551.85,
+                                     "saldo":  -55739.17,
                                      "descricao":  "TONGRAX"
                                  },
                                  {
@@ -19780,9 +19780,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  54004,
-                                     "valor":  54004,
-                                     "saldo":  -562792100000000.94,
+                                     "debito":  540.04,
+                                     "valor":  540.04,
+                                     "saldo":  -56279.21,
                                      "descricao":  "JM25 USINAGEM DE PRECISÃO IND - MATERIAL"
                                  },
                                  {
@@ -19797,7 +19797,7 @@
                                      "credito":  0,
                                      "debito":  550,
                                      "valor":  550,
-                                     "saldo":  -568292100000001,
+                                     "saldo":  -56829.21,
                                      "descricao":  "POSTO CANQUERINI -"
                                  },
                                  {
@@ -19812,7 +19812,7 @@
                                      "credito":  50000,
                                      "debito":  0,
                                      "valor":  50000,
-                                     "saldo":  -682921000000005,
+                                     "saldo":  -6829.21,
                                      "descricao":  "CX CARLOS"
                                  },
                                  {
@@ -19825,9 +19825,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  1638,
-                                     "valor":  1638,
-                                     "saldo":  -699301000000005,
+                                     "debito":  163.8,
+                                     "valor":  163.8,
+                                     "saldo":  -6993.01,
                                      "descricao":  "CAPIVARI"
                                  },
                                  {
@@ -19840,9 +19840,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  84379,
-                                     "valor":  84379,
-                                     "saldo":  -783680000000005,
+                                     "debito":  843.79,
+                                     "valor":  843.79,
+                                     "saldo":  -7836.8,
                                      "descricao":  "NF: 332056 F10 - CAPIVARI - DIESEL"
                                  },
                                  {
@@ -19855,9 +19855,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  11121,
-                                     "valor":  11121,
-                                     "saldo":  -794801000000005,
+                                     "debito":  111.21,
+                                     "valor":  111.21,
+                                     "saldo":  -7948.01,
                                      "descricao":  "NF:93868 CLAUDIO ROBERTO  CAPIVARI - JANTA"
                                  },
                                  {
@@ -19870,9 +19870,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  1638,
-                                     "valor":  1638,
-                                     "saldo":  -811181000000005,
+                                     "debito":  163.8,
+                                     "valor":  163.8,
+                                     "saldo":  -8111.81,
                                      "descricao":  "NF: 16760 RAYKAE BRUM - CAPIVARI - JANTA"
                                  },
                                  {
@@ -19885,9 +19885,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  9121,
-                                     "valor":  9121,
-                                     "saldo":  -820302000000005,
+                                     "debito":  91.21,
+                                     "valor":  91.21,
+                                     "saldo":  -8203.02,
                                      "descricao":  "NF:86335 POSTO REDE -GASOLINA"
                                  },
                                  {
@@ -19900,9 +19900,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  252,
-                                     "valor":  252,
-                                     "saldo":  -822822000000005,
+                                     "debito":  25.2,
+                                     "valor":  25.2,
+                                     "saldo":  -8228.22,
                                      "descricao":  "PEDAGIO - VIAMÃO - 9:04"
                                  },
                                  {
@@ -19915,9 +19915,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  899,
-                                     "valor":  899,
-                                     "saldo":  -831812000000005,
+                                     "debito":  89.9,
+                                     "valor":  89.9,
+                                     "saldo":  -8318.12,
                                      "descricao":  "NF:16764 RAYKAR BRUM - JANTA"
                                  },
                                  {
@@ -19930,9 +19930,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  2488,
-                                     "valor":  2488,
-                                     "saldo":  -856692000000005,
+                                     "debito":  248.8,
+                                     "valor":  248.8,
+                                     "saldo":  -8566.92,
                                      "descricao":  "NF:16763 - RAYKAR - CAPIVARI - JANTA"
                                  },
                                  {
@@ -19945,9 +19945,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  172228,
-                                     "valor":  172228,
-                                     "saldo":  -102892,
+                                     "debito":  1722.28,
+                                     "valor":  1722.28,
+                                     "saldo":  -10289.2,
                                      "descricao":  "NF:332691 COM. ROTULA - CAPIVARI -DIESEL"
                                  },
                                  {
@@ -19960,9 +19960,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  84558,
-                                     "valor":  84558,
-                                     "saldo":  -1113478,
+                                     "debito":  845.58,
+                                     "valor":  845.58,
+                                     "saldo":  -11134.78,
                                      "descricao":  "NF:332524 COM. ROTULA - CAPIVARI  - DIESEL"
                                  },
                                  {
@@ -19977,7 +19977,7 @@
                                      "credito":  0,
                                      "debito":  3000,
                                      "valor":  3000,
-                                     "saldo":  -1413478,
+                                     "saldo":  -14134.78,
                                      "descricao":  "NF:10 FELIPE BUENO DE OLIVEIRA"
                                  },
                                  {
@@ -19990,9 +19990,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  92696,
-                                     "valor":  92696,
-                                     "saldo":  -1506174,
+                                     "debito":  926.96,
+                                     "valor":  926.96,
+                                     "saldo":  -15061.74,
                                      "descricao":  "NF:333027 COM. ROTULA - CAPIVARI - DIESEL"
                                  },
                                  {
@@ -20005,9 +20005,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  1094,
-                                     "valor":  1094,
-                                     "saldo":  -1517114,
+                                     "debito":  109.4,
+                                     "valor":  109.4,
+                                     "saldo":  -15171.14,
                                      "descricao":  "NF:238934 BRUCK E MARQUES - JANTA"
                                  },
                                  {
@@ -20020,9 +20020,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  2298,
-                                     "valor":  2298,
-                                     "saldo":  -1519412,
+                                     "debito":  22.98,
+                                     "valor":  22.98,
+                                     "saldo":  -15194.12,
                                      "descricao":  "NF:58675 - CLAUDIO ROBERTO - CAPAIVARI  - JANTA"
                                  },
                                  {
@@ -20035,9 +20035,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  10871,
-                                     "valor":  10871,
-                                     "saldo":  -1530283,
+                                     "debito":  108.71,
+                                     "valor":  108.71,
+                                     "saldo":  -15302.83,
                                      "descricao":  "NF:99348  CLAUDIO ROBERTO - CAPIVARI - LANCHE"
                                  },
                                  {
@@ -20050,9 +20050,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  33136,
-                                     "valor":  33136,
-                                     "saldo":  -1563419,
+                                     "debito":  331.36,
+                                     "valor":  331.36,
+                                     "saldo":  -15634.19,
                                      "descricao":  "NF:239091 BRUCK E MARQUES - CAPIVARI - JANTA"
                                  },
                                  {
@@ -20065,9 +20065,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  89503,
-                                     "valor":  89503,
-                                     "saldo":  -1652922,
+                                     "debito":  895.03,
+                                     "valor":  895.03,
+                                     "saldo":  -16529.22,
                                      "descricao":  "NF:33327 COM. ROTULA - DIESEL"
                                  },
                                  {
@@ -20080,9 +20080,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  53213,
-                                     "valor":  53213,
-                                     "saldo":  -1706135,
+                                     "debito":  532.13,
+                                     "valor":  532.13,
+                                     "saldo":  -17061.35,
                                      "descricao":  "NF:333632 F10 - CAPIVARI - DIESEL"
                                  },
                                  {
@@ -20095,9 +20095,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  62879,
-                                     "valor":  62879,
-                                     "saldo":  -176901400000001,
+                                     "debito":  628.79,
+                                     "valor":  628.79,
+                                     "saldo":  -17690.14,
                                      "descricao":  "NF: 99660 CLAUDIO ROBERTO - CAPIVARI - JANTA"
                                  },
                                  {
@@ -20110,9 +20110,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  16747,
-                                     "valor":  16747,
-                                     "saldo":  -178576100000001,
+                                     "debito":  167.47,
+                                     "valor":  167.47,
+                                     "saldo":  -17857.61,
                                      "descricao":  "NF: 86525 -CLAUDIO ROBERTO - CAPIVARI - JANTA"
                                  },
                                  {
@@ -20125,9 +20125,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  9171,
-                                     "valor":  9171,
-                                     "saldo":  -179493200000001,
+                                     "debito":  91.71,
+                                     "valor":  91.71,
+                                     "saldo":  -17949.32,
                                      "descricao":  "NF:183803 D TUDO - CAPIVARI - JANTA"
                                  },
                                  {
@@ -20140,9 +20140,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  3756,
-                                     "valor":  3756,
-                                     "saldo":  -1832492,
+                                     "debito":  375.6,
+                                     "valor":  375.6,
+                                     "saldo":  -18324.92,
                                      "descricao":  "NF: 197941 BRUCK E MARQUES -JANTA"
                                  },
                                  {
@@ -20155,9 +20155,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  55117,
-                                     "valor":  55117,
-                                     "saldo":  -1887609,
+                                     "debito":  551.17,
+                                     "valor":  551.17,
+                                     "saldo":  -18876.09,
                                      "descricao":  "POSTO CANQUERINI -"
                                  },
                                  {
@@ -20170,9 +20170,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  2405,
-                                     "valor":  2405,
-                                     "saldo":  -1911659,
+                                     "debito":  240.5,
+                                     "valor":  240.5,
+                                     "saldo":  -19116.59,
                                      "descricao":  "NF: 3513 R DOS SANTOS - ALMOÇO"
                                  },
                                  {
@@ -20185,9 +20185,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  52002,
-                                     "valor":  52002,
-                                     "saldo":  -1963661,
+                                     "debito":  520.02,
+                                     "valor":  520.02,
+                                     "saldo":  -19636.61,
                                      "descricao":  "POSTO CANQUERINI -"
                                  },
                                  {
@@ -20200,9 +20200,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  184051,
-                                     "valor":  184051,
-                                     "saldo":  -2147712,
+                                     "debito":  1840.51,
+                                     "valor":  1840.51,
+                                     "saldo":  -21477.12,
                                      "descricao":  "F10 - CAPIVARI - DIESEL"
                                  },
                                  {
@@ -20215,9 +20215,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  13551,
-                                     "valor":  13551,
-                                     "saldo":  -2161263,
+                                     "debito":  135.51,
+                                     "valor":  135.51,
+                                     "saldo":  -21612.63,
                                      "descricao":  "F10 CAPIVARI - GASOLINA"
                                  },
                                  {
@@ -20232,7 +20232,7 @@
                                      "credito":  0,
                                      "debito":  55,
                                      "valor":  55,
-                                     "saldo":  -2166763,
+                                     "saldo":  -21667.63,
                                      "descricao":  "RESTAURANTE CULTURAL"
                                  },
                                  {
@@ -20245,9 +20245,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  27031,
-                                     "valor":  27031,
-                                     "saldo":  -2193794,
+                                     "debito":  270.31,
+                                     "valor":  270.31,
+                                     "saldo":  -21937.94,
                                      "descricao":  "NF:100416 - CLAUDIO ROBERTO - JANTA"
                                  },
                                  {
@@ -20260,9 +20260,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  35751,
-                                     "valor":  35751,
-                                     "saldo":  -2229545,
+                                     "debito":  357.51,
+                                     "valor":  357.51,
+                                     "saldo":  -22295.45,
                                      "descricao":  "NF: 334983 - F10 - DIESEL"
                                  },
                                  {
@@ -20275,9 +20275,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  649,
-                                     "valor":  649,
-                                     "saldo":  -2236035,
+                                     "debito":  64.9,
+                                     "valor":  64.9,
+                                     "saldo":  -22360.35,
                                      "descricao":  "NF:1055 RICARDO SILVEIRA -"
                                  },
                                  {
@@ -20290,9 +20290,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  126,
-                                     "valor":  126,
-                                     "saldo":  -2237295,
+                                     "debito":  12.6,
+                                     "valor":  12.6,
+                                     "saldo":  -22372.95,
                                      "descricao":  "PEDAGIO VIAMÃO 17:13"
                                  },
                                  {
@@ -20305,9 +20305,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  147094,
-                                     "valor":  147094,
-                                     "saldo":  -2384389,
+                                     "debito":  1470.94,
+                                     "valor":  1470.94,
+                                     "saldo":  -23843.89,
                                      "descricao":  "NF:335212 F10 CAPIVARI - DIESEL"
                                  },
                                  {
@@ -20320,9 +20320,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  16114,
-                                     "valor":  16114,
-                                     "saldo":  -2400503,
+                                     "debito":  161.14,
+                                     "valor":  161.14,
+                                     "saldo":  -24005.03,
                                      "descricao":  "NF:35211  F10 CAPIVARI  -DIESEL"
                                  },
                                  {
@@ -20335,9 +20335,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  126,
-                                     "valor":  126,
-                                     "saldo":  -2401763,
+                                     "debito":  12.6,
+                                     "valor":  12.6,
+                                     "saldo":  -24017.63,
                                      "descricao":  "PEDAGIO VIAMÃO 9:27"
                                  },
                                  {
@@ -20352,7 +20352,7 @@
                                      "credito":  0,
                                      "debito":  15,
                                      "valor":  15,
-                                     "saldo":  -2403263,
+                                     "saldo":  -24032.63,
                                      "descricao":  "NF:13005 CANQUERINI"
                                  },
                                  {
@@ -20365,9 +20365,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  1998,
-                                     "valor":  1998,
-                                     "saldo":  -2405261,
+                                     "debito":  19.98,
+                                     "valor":  19.98,
+                                     "saldo":  -24052.61,
                                      "descricao":  "NF:258547 BRUCK E MARQUES - LANCHE"
                                  },
                                  {
@@ -20382,7 +20382,7 @@
                                      "credito":  0,
                                      "debito":  15,
                                      "valor":  15,
-                                     "saldo":  -2406761,
+                                     "saldo":  -24067.61,
                                      "descricao":  "NF:13024 CANQUERINI"
                                  },
                                  {
@@ -20395,9 +20395,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "ManutenÃ§Ã£o Veicular",
                                      "credito":  0,
-                                     "debito":  170183,
-                                     "valor":  170183,
-                                     "saldo":  -2576944,
+                                     "debito":  1701.83,
+                                     "valor":  1701.83,
+                                     "saldo":  -25769.44,
                                      "descricao":  "NF:420 FERRAMENTAS - MARRETA/PONTEIRA/CHAVES/ALICATE/MARTELO...."
                                  },
                                  {
@@ -20410,9 +20410,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  1898,
-                                     "valor":  1898,
-                                     "saldo":  -2578842,
+                                     "debito":  18.98,
+                                     "valor":  18.98,
+                                     "saldo":  -25788.42,
                                      "descricao":  "NF:783193 POSTO GASUP - CAFÉ"
                                  },
                                  {
@@ -20427,7 +20427,7 @@
                                      "credito":  0,
                                      "debito":  125,
                                      "valor":  125,
-                                     "saldo":  -2591342,
+                                     "saldo":  -25913.42,
                                      "descricao":  "NF:111390 COMPACTA EQUIPAMENTOS- CORDA/ VALVULA/OLEO"
                                  },
                                  {
@@ -20442,7 +20442,7 @@
                                      "credito":  0,
                                      "debito":  753,
                                      "valor":  753,
-                                     "saldo":  -2666642,
+                                     "saldo":  -26666.42,
                                      "descricao":  "NF:241417 TERMACO - ENG.REFINARIA / PINO REFINARIA"
                                  },
                                  {
@@ -20457,7 +20457,7 @@
                                      "credito":  0,
                                      "debito":  125,
                                      "valor":  125,
-                                     "saldo":  -2679142,
+                                     "saldo":  -26791.42,
                                      "descricao":  "NF:1023 COMPACTA -CONSERTO MOTOR BUFFALO"
                                  },
                                  {
@@ -20472,7 +20472,7 @@
                                      "credito":  0,
                                      "debito":  3000,
                                      "valor":  3000,
-                                     "saldo":  -2979142,
+                                     "saldo":  -29791.42,
                                      "descricao":  "NF:9 FELIPE BUENO DE OLIVEIRA"
                                  },
                                  {
@@ -20487,7 +20487,7 @@
                                      "credito":  0,
                                      "debito":  347,
                                      "valor":  347,
-                                     "saldo":  -3013842,
+                                     "saldo":  -30138.42,
                                      "descricao":  "COMPACTA EQUIP - MANUTENÇÃO"
                                  },
                                  {
@@ -20500,9 +20500,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  3383,
-                                     "valor":  3383,
-                                     "saldo":  -3047672,
+                                     "debito":  338.3,
+                                     "valor":  338.3,
+                                     "saldo":  -30476.72,
                                      "descricao":  "RESTAURANTE"
                                  },
                                  {
@@ -20515,8 +20515,8 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  74028,
-                                     "valor":  74028,
+                                     "debito":  740.28,
+                                     "valor":  740.28,
                                      "saldo":  -31217,
                                      "descricao":  "ABASTECEDORA ROBELO"
                                  },
@@ -20575,9 +20575,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  198,
-                                     "valor":  198,
-                                     "saldo":  -177858,
+                                     "debito":  19.8,
+                                     "valor":  19.8,
+                                     "saldo":  -17785.8,
                                      "descricao":  "PAPER CENTER"
                                  },
                                  {
@@ -20590,9 +20590,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  63,
-                                     "valor":  63,
-                                     "saldo":  -177921,
+                                     "debito":  6.3,
+                                     "valor":  6.3,
+                                     "saldo":  -17792.1,
                                      "descricao":  "PEDAGIO VIAMÃO 15:13"
                                  },
                                  {
@@ -20607,7 +20607,7 @@
                                      "credito":  0,
                                      "debito":  35,
                                      "valor":  35,
-                                     "saldo":  -178271,
+                                     "saldo":  -17827.1,
                                      "descricao":  "MOURA EPIS -EPI\u0027S"
                                  },
                                  {
@@ -20620,9 +20620,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  252,
-                                     "valor":  252,
-                                     "saldo":  -178523,
+                                     "debito":  25.2,
+                                     "valor":  25.2,
+                                     "saldo":  -17852.3,
                                      "descricao":  "PEDAGIO VIAMÃO 21:34"
                                  },
                                  {
@@ -20635,9 +20635,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  35352,
-                                     "valor":  35352,
-                                     "saldo":  -1820582,
+                                     "debito":  353.52,
+                                     "valor":  353.52,
+                                     "saldo":  -18205.82,
                                      "descricao":  "JANTA - CAPIVARI"
                                  },
                                  {
@@ -20650,9 +20650,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  260946,
-                                     "valor":  260946,
-                                     "saldo":  -2081528,
+                                     "debito":  2609.46,
+                                     "valor":  2609.46,
+                                     "saldo":  -20815.28,
                                      "descricao":  "F10 - CAPIVARI - DIESEL"
                                  },
                                  {
@@ -20665,9 +20665,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  63,
-                                     "valor":  63,
-                                     "saldo":  -2082158,
+                                     "debito":  6.3,
+                                     "valor":  6.3,
+                                     "saldo":  -20821.58,
                                      "descricao":  "PEDAGIO VIAMÃO 7:31"
                                  },
                                  {
@@ -20680,9 +20680,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  126,
-                                     "valor":  126,
-                                     "saldo":  -2083418,
+                                     "debito":  12.6,
+                                     "valor":  12.6,
+                                     "saldo":  -20834.18,
                                      "descricao":  "PEDAGIO VIAMÃO 9:30"
                                  },
                                  {
@@ -20697,7 +20697,7 @@
                                      "credito":  0,
                                      "debito":  420,
                                      "valor":  420,
-                                     "saldo":  -2125418,
+                                     "saldo":  -21254.18,
                                      "descricao":  "SILVA FRAGA -N:12680"
                                  },
                                  {
@@ -20710,9 +20710,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  126,
-                                     "valor":  126,
-                                     "saldo":  -2126678,
+                                     "debito":  12.6,
+                                     "valor":  12.6,
+                                     "saldo":  -21266.78,
                                      "descricao":  "PEDAGIO VIAMÃO 16:40"
                                  },
                                  {
@@ -20725,9 +20725,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Transporte / Uber",
                                      "credito":  0,
-                                     "debito":  2478,
-                                     "valor":  2478,
-                                     "saldo":  -2151458,
+                                     "debito":  247.8,
+                                     "valor":  247.8,
+                                     "saldo":  -21514.58,
                                      "descricao":  "PASSAGEM POA A DOM PEDRITO"
                                  },
                                  {
@@ -20740,9 +20740,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  3386,
-                                     "valor":  3386,
-                                     "saldo":  -2185318,
+                                     "debito":  338.6,
+                                     "valor":  338.6,
+                                     "saldo":  -21853.18,
                                      "descricao":  "JANTA - CAPIVARI"
                                  },
                                  {
@@ -20755,9 +20755,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  47328,
-                                     "valor":  47328,
-                                     "saldo":  -2232646,
+                                     "debito":  473.28,
+                                     "valor":  473.28,
+                                     "saldo":  -22326.46,
                                      "descricao":  "DIESEL - POSTO SIM"
                                  },
                                  {
@@ -20770,9 +20770,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  867,
-                                     "valor":  867,
-                                     "saldo":  -2241316,
+                                     "debito":  86.7,
+                                     "valor":  86.7,
+                                     "saldo":  -22413.16,
                                      "descricao":  "ALMOÇO PORTÃO"
                                  },
                                  {
@@ -20787,7 +20787,7 @@
                                      "credito":  0,
                                      "debito":  27,
                                      "valor":  27,
-                                     "saldo":  -2244016,
+                                     "saldo":  -22440.16,
                                      "descricao":  "ALMOÇO NH"
                                  },
                                  {
@@ -20800,9 +20800,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  12887,
-                                     "valor":  12887,
-                                     "saldo":  -2256903,
+                                     "debito":  128.87,
+                                     "valor":  128.87,
+                                     "saldo":  -22569.03,
                                      "descricao":  "JANTA - CAPIVARI"
                                  },
                                  {
@@ -20817,7 +20817,7 @@
                                      "credito":  0,
                                      "debito":  101,
                                      "valor":  101,
-                                     "saldo":  -2267003,
+                                     "saldo":  -22670.03,
                                      "descricao":  "ALMOÇO"
                                  },
                                  {
@@ -20832,7 +20832,7 @@
                                      "credito":  0,
                                      "debito":  852,
                                      "valor":  852,
-                                     "saldo":  -2352203,
+                                     "saldo":  -23522.03,
                                      "descricao":  "DIESEL - VIAMÃO"
                                  },
                                  {
@@ -20847,7 +20847,7 @@
                                      "credito":  0,
                                      "debito":  24,
                                      "valor":  24,
-                                     "saldo":  -2354603,
+                                     "saldo":  -23546.03,
                                      "descricao":  "ALMOÇO CANOAS"
                                  },
                                  {
@@ -20860,9 +20860,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  15049,
-                                     "valor":  15049,
-                                     "saldo":  -2505093,
+                                     "debito":  1504.9,
+                                     "valor":  1504.9,
+                                     "saldo":  -25050.93,
                                      "descricao":  "DIESEL F10 CAPIVARI"
                                  },
                                  {
@@ -20875,9 +20875,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  63,
-                                     "valor":  63,
-                                     "saldo":  -2505723,
+                                     "debito":  6.3,
+                                     "valor":  6.3,
+                                     "saldo":  -25057.23,
                                      "descricao":  "PEDAGIO VIAMÃO 10:29"
                                  },
                                  {
@@ -20892,7 +20892,7 @@
                                      "credito":  0,
                                      "debito":  118,
                                      "valor":  118,
-                                     "saldo":  -2517523,
+                                     "saldo":  -25175.23,
                                      "descricao":  "ALMOÇO SL"
                                  },
                                  {
@@ -20907,7 +20907,7 @@
                                      "credito":  0,
                                      "debito":  20,
                                      "valor":  20,
-                                     "saldo":  -2519523,
+                                     "saldo":  -25195.23,
                                      "descricao":  "CAFÉ VIAMÃO"
                                  },
                                  {
@@ -20920,9 +20920,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  13137,
-                                     "valor":  13137,
-                                     "saldo":  -253266,
+                                     "debito":  131.37,
+                                     "valor":  131.37,
+                                     "saldo":  -25326.6,
                                      "descricao":  "DIESEL POSTO CANQUERINI"
                                  },
                                  {
@@ -20935,9 +20935,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  32336,
-                                     "valor":  32336,
-                                     "saldo":  -2564996,
+                                     "debito":  323.36,
+                                     "valor":  323.36,
+                                     "saldo":  -25649.96,
                                      "descricao":  "DIESEL - POSTO SIM"
                                  },
                                  {
@@ -20950,9 +20950,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  812,
-                                     "valor":  812,
-                                     "saldo":  -2573116,
+                                     "debito":  81.2,
+                                     "valor":  81.2,
+                                     "saldo":  -25731.16,
                                      "descricao":  "ALMOÇO VIAMÃO"
                                  },
                                  {
@@ -20965,9 +20965,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  126,
-                                     "valor":  126,
-                                     "saldo":  -2574376,
+                                     "debito":  12.6,
+                                     "valor":  12.6,
+                                     "saldo":  -25743.76,
                                      "descricao":  "PEDAGIO VIAMÃO 13:26"
                                  },
                                  {
@@ -20980,9 +20980,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  25,
-                                     "valor":  25,
-                                     "saldo":  -2574626,
+                                     "debito":  2.5,
+                                     "valor":  2.5,
+                                     "saldo":  -25746.26,
                                      "descricao":  "FRAGA FERRAGENS - PARAFUSO- CORDA"
                                  },
                                  {
@@ -20997,7 +20997,7 @@
                                      "credito":  0,
                                      "debito":  10,
                                      "valor":  10,
-                                     "saldo":  -2575626,
+                                     "saldo":  -25756.26,
                                      "descricao":  "TORRES"
                                  },
                                  {
@@ -21012,7 +21012,7 @@
                                      "credito":  0,
                                      "debito":  178,
                                      "valor":  178,
-                                     "saldo":  -2593426,
+                                     "saldo":  -25934.26,
                                      "descricao":  "MARAISA MIOTTO - REFEIÇÃO"
                                  },
                                  {
@@ -21027,7 +21027,7 @@
                                      "credito":  0,
                                      "debito":  75,
                                      "valor":  75,
-                                     "saldo":  -2600926,
+                                     "saldo":  -26009.26,
                                      "descricao":  "CAFÉ - TORRES"
                                  },
                                  {
@@ -21040,9 +21040,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  206524,
-                                     "valor":  206524,
-                                     "saldo":  -280745,
+                                     "debito":  2065.24,
+                                     "valor":  2065.24,
+                                     "saldo":  -28074.5,
                                      "descricao":  "DIESEL - POSTO MACIAMBU"
                                  },
                                  {
@@ -21055,9 +21055,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  16688,
-                                     "valor":  16688,
-                                     "saldo":  -2824138,
+                                     "debito":  166.88,
+                                     "valor":  166.88,
+                                     "saldo":  -28241.38,
                                      "descricao":  "JANTA - CAPIVARI"
                                  },
                                  {
@@ -21072,7 +21072,7 @@
                                      "credito":  0,
                                      "debito":  114,
                                      "valor":  114,
-                                     "saldo":  -2835538,
+                                     "saldo":  -28355.38,
                                      "descricao":  "ALMOÇO LANCHONETE PADILHA"
                                  },
                                  {
@@ -21085,9 +21085,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  126,
-                                     "valor":  126,
-                                     "saldo":  -2836798,
+                                     "debito":  12.6,
+                                     "valor":  12.6,
+                                     "saldo":  -28367.98,
                                      "descricao":  "PEDAGIO - VIAMÃO - 9:21"
                                  },
                                  {
@@ -21100,9 +21100,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  11598,
-                                     "valor":  11598,
-                                     "saldo":  -2848396,
+                                     "debito":  115.98,
+                                     "valor":  115.98,
+                                     "saldo":  -28483.96,
                                      "descricao":  "JANTA - INGLESES"
                                  },
                                  {
@@ -21115,9 +21115,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  6485,
-                                     "valor":  6485,
-                                     "saldo":  -2854881,
+                                     "debito":  64.85,
+                                     "valor":  64.85,
+                                     "saldo":  -28548.81,
                                      "descricao":  "POSTO RIO VERMELHO - SC - GASOLINA"
                                  },
                                  {
@@ -21132,7 +21132,7 @@
                                      "credito":  0,
                                      "debito":  239,
                                      "valor":  239,
-                                     "saldo":  -2878781,
+                                     "saldo":  -28787.81,
                                      "descricao":  "SOUZA LANZ PARAFUSOS - MATERIAL OBRA"
                                  },
                                  {
@@ -21145,9 +21145,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  16137,
-                                     "valor":  16137,
-                                     "saldo":  -2894918,
+                                     "debito":  161.37,
+                                     "valor":  161.37,
+                                     "saldo":  -28949.18,
                                      "descricao":  "JANTA - CAPIVARI"
                                  },
                                  {
@@ -21162,7 +21162,7 @@
                                      "credito":  0,
                                      "debito":  44,
                                      "valor":  44,
-                                     "saldo":  -2899318,
+                                     "saldo":  -28993.18,
                                      "descricao":  "LANCHE - LANCHONETE ARAUCARIA"
                                  },
                                  {
@@ -21177,7 +21177,7 @@
                                      "credito":  0,
                                      "debito":  17,
                                      "valor":  17,
-                                     "saldo":  -2901018,
+                                     "saldo":  -29010.18,
                                      "descricao":  "LANCHE LANCHONETE PARAISO DA SERRA"
                                  },
                                  {
@@ -21190,9 +21190,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  174712,
-                                     "valor":  174712,
-                                     "saldo":  -307573,
+                                     "debito":  1747.12,
+                                     "valor":  1747.12,
+                                     "saldo":  -30757.3,
                                      "descricao":  "DIESEL - AUTO POSTO"
                                  },
                                  {
@@ -21207,7 +21207,7 @@
                                      "credito":  0,
                                      "debito":  130,
                                      "valor":  130,
-                                     "saldo":  -308873,
+                                     "saldo":  -30887.3,
                                      "descricao":  "ALMOÇO - MPOUSADA LANCHONETE PIZZARI"
                                  },
                                  {
@@ -21222,7 +21222,7 @@
                                      "credito":  0,
                                      "debito":  105,
                                      "valor":  105,
-                                     "saldo":  -309923,
+                                     "saldo":  -30992.3,
                                      "descricao":  "JANTA - TRANSPORTES NAPOLY"
                                  },
                                  {
@@ -21237,7 +21237,7 @@
                                      "credito":  0,
                                      "debito":  740,
                                      "valor":  740,
-                                     "saldo":  -317323,
+                                     "saldo":  -31732.3,
                                      "descricao":  "DIESEL POSTO CANQUERINI"
                                  },
                                  {
@@ -21252,7 +21252,7 @@
                                      "credito":  0,
                                      "debito":  140,
                                      "valor":  140,
-                                     "saldo":  -318723,
+                                     "saldo":  -31872.3,
                                      "descricao":  "MARCOS VAGAS DE AGUIAR - MATERIAL"
                                  },
                                  {
@@ -21267,7 +21267,7 @@
                                      "credito":  0,
                                      "debito":  15,
                                      "valor":  15,
-                                     "saldo":  -318873,
+                                     "saldo":  -31887.3,
                                      "descricao":  "LEO GOULART - DIVERSOS"
                                  },
                                  {
@@ -21280,9 +21280,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  1298,
-                                     "valor":  1298,
-                                     "saldo":  -320171,
+                                     "debito":  129.8,
+                                     "valor":  129.8,
+                                     "saldo":  -32017.1,
                                      "descricao":  "POSTO SIM DISCO TACOGRAFO"
                                  },
                                  {
@@ -21297,7 +21297,7 @@
                                      "credito":  0,
                                      "debito":  270,
                                      "valor":  270,
-                                     "saldo":  -322871,
+                                     "saldo":  -32287.1,
                                      "descricao":  "JANTA - CAPIVARI"
                                  },
                                  {
@@ -21310,9 +21310,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  186628,
-                                     "valor":  186628,
-                                     "saldo":  -3415338,
+                                     "debito":  1866.28,
+                                     "valor":  1866.28,
+                                     "saldo":  -34153.38,
                                      "descricao":  "POSTO SIM - DIESEL"
                                  },
                                  {
@@ -21327,7 +21327,7 @@
                                      "credito":  0,
                                      "debito":  132,
                                      "valor":  132,
-                                     "saldo":  -3428538,
+                                     "saldo":  -34285.38,
                                      "descricao":  "DIESEL POSTO CANQUERINI"
                                  },
                                  {
@@ -21342,7 +21342,7 @@
                                      "credito":  0,
                                      "debito":  116,
                                      "valor":  116,
-                                     "saldo":  -3440138,
+                                     "saldo":  -34401.38,
                                      "descricao":  "POSTO CANQUERINI -"
                                  },
                                  {
@@ -21355,9 +21355,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  59882,
-                                     "valor":  59882,
-                                     "saldo":  -350002,
+                                     "debito":  598.82,
+                                     "valor":  598.82,
+                                     "saldo":  -35000.2,
                                      "descricao":  "DIESEL - COMBUSTIVEL OSORIO"
                                  },
                                  {
@@ -21372,7 +21372,7 @@
                                      "credito":  0,
                                      "debito":  116,
                                      "valor":  116,
-                                     "saldo":  -351162,
+                                     "saldo":  -35116.2,
                                      "descricao":  "ALMOÇO -CHURRASCARIA TIGRÃO"
                                  },
                                  {
@@ -21385,9 +21385,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  1199,
-                                     "valor":  1199,
-                                     "saldo":  -352361,
+                                     "debito":  119.9,
+                                     "valor":  119.9,
+                                     "saldo":  -35236.1,
                                      "descricao":  "POSTO SIM - DIESEL"
                                  },
                                  {
@@ -21400,9 +21400,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  46013,
-                                     "valor":  46013,
-                                     "saldo":  -3569623,
+                                     "debito":  460.13,
+                                     "valor":  460.13,
+                                     "saldo":  -35696.23,
                                      "descricao":  "POSTO SIM DIESEL"
                                  },
                                  {
@@ -21417,7 +21417,7 @@
                                      "credito":  0,
                                      "debito":  133,
                                      "valor":  133,
-                                     "saldo":  -3582923,
+                                     "saldo":  -35829.23,
                                      "descricao":  "CHURRASCARIA VERDES CAMPOS - REFEIÇÃO"
                                  },
                                  {
@@ -21430,9 +21430,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  5311,
-                                     "valor":  5311,
-                                     "saldo":  -3588234,
+                                     "debito":  53.11,
+                                     "valor":  53.11,
+                                     "saldo":  -35882.34,
                                      "descricao":  "REDE DE POSTO - DIESEL"
                                  },
                                  {
@@ -21447,7 +21447,7 @@
                                      "credito":  0,
                                      "debito":  45,
                                      "valor":  45,
-                                     "saldo":  -3592734,
+                                     "saldo":  -35927.34,
                                      "descricao":  "CAFÉ - VIAMÃO"
                                  },
                                  {
@@ -21460,9 +21460,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  67349,
-                                     "valor":  67349,
-                                     "saldo":  -3660083,
+                                     "debito":  673.49,
+                                     "valor":  673.49,
+                                     "saldo":  -36600.83,
                                      "descricao":  "DIESEL - F10 CAPIVARI"
                                  },
                                  {
@@ -21477,7 +21477,7 @@
                                      "credito":  0,
                                      "debito":  788,
                                      "valor":  788,
-                                     "saldo":  -3738883,
+                                     "saldo":  -37388.83,
                                      "descricao":  "DIESEL POSTO CANQUERINI"
                                  },
                                  {
@@ -21492,7 +21492,7 @@
                                      "credito":  0,
                                      "debito":  900,
                                      "valor":  900,
-                                     "saldo":  -3828883,
+                                     "saldo":  -38288.83,
                                      "descricao":  "JM2 USINAGEM - MATERIAL"
                                  },
                                  {
@@ -21505,9 +21505,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  24218,
-                                     "valor":  24218,
-                                     "saldo":  -3853101,
+                                     "debito":  242.18,
+                                     "valor":  242.18,
+                                     "saldo":  -38531.01,
                                      "descricao":  "JANTA - CAPIVARI"
                                  },
                                  {
@@ -21522,7 +21522,7 @@
                                      "credito":  0,
                                      "debito":  1500,
                                      "valor":  1500,
-                                     "saldo":  -4003101,
+                                     "saldo":  -40031.01,
                                      "descricao":  "NF: 14 FELIPE BUENO DE OLIVEIRA"
                                  },
                                  {
@@ -21535,9 +21535,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  35978,
-                                     "valor":  35978,
-                                     "saldo":  -4039079,
+                                     "debito":  359.78,
+                                     "valor":  359.78,
+                                     "saldo":  -40390.79,
                                      "descricao":  "JANTA - CAPIVARI"
                                  },
                                  {
@@ -21550,9 +21550,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  5502,
-                                     "valor":  5502,
-                                     "saldo":  -4094099,
+                                     "debito":  550.2,
+                                     "valor":  550.2,
+                                     "saldo":  -40940.99,
                                      "descricao":  "DIESEL - POSTO CANQUINI"
                                  },
                                  {
@@ -21565,9 +21565,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  20759,
-                                     "valor":  20759,
-                                     "saldo":  -4114858,
+                                     "debito":  207.59,
+                                     "valor":  207.59,
+                                     "saldo":  -41148.58,
                                      "descricao":  "DIESEL -CAPIVARI"
                                  },
                                  {
@@ -21580,9 +21580,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  1239,
-                                     "valor":  1239,
-                                     "saldo":  -4127248,
+                                     "debito":  123.9,
+                                     "valor":  123.9,
+                                     "saldo":  -41272.48,
                                      "descricao":  "RAYKAR QUADROS BRUM"
                                  },
                                  {
@@ -21595,9 +21595,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  30557,
-                                     "valor":  30557,
-                                     "saldo":  -4157805,
+                                     "debito":  305.57,
+                                     "valor":  305.57,
+                                     "saldo":  -41578.05,
                                      "descricao":  "DIESEL - F10 CAPIVARI"
                                  },
                                  {
@@ -21612,7 +21612,7 @@
                                      "credito":  0,
                                      "debito":  602,
                                      "valor":  602,
-                                     "saldo":  -4218005,
+                                     "saldo":  -42180.05,
                                      "descricao":  "NF: 25 NOVA MEDITERRANEO - ESTADIA - FLORIANOPOLIS SC"
                                  },
                                  {
@@ -21627,7 +21627,7 @@
                                      "credito":  0,
                                      "debito":  401,
                                      "valor":  401,
-                                     "saldo":  -4258105,
+                                     "saldo":  -42581.05,
                                      "descricao":  "NF: 27 NOVA MEDITERRANEO - ESTADIA  - FLORIANOPOLIS SC"
                                  },
                                  {
@@ -21642,7 +21642,7 @@
                                      "credito":  0,
                                      "debito":  650,
                                      "valor":  650,
-                                     "saldo":  -4323105,
+                                     "saldo":  -43231.05,
                                      "descricao":  "NF:87 ANDERSON DELFES - ESTADIA - CERRO NEGRO SC"
                                  },
                                  {
@@ -21657,7 +21657,7 @@
                                      "credito":  0,
                                      "debito":  236,
                                      "valor":  236,
-                                     "saldo":  -4346705,
+                                     "saldo":  -43467.05,
                                      "descricao":  "JANTA"
                                  },
                                  {
@@ -21672,7 +21672,7 @@
                                      "credito":  0,
                                      "debito":  208,
                                      "valor":  208,
-                                     "saldo":  -4367505,
+                                     "saldo":  -43675.05,
                                      "descricao":  "ALMOÇO"
                                  },
                                  {
@@ -21687,7 +21687,7 @@
                                      "credito":  0,
                                      "debito":  156,
                                      "valor":  156,
-                                     "saldo":  -4383105,
+                                     "saldo":  -43831.05,
                                      "descricao":  "JANTA"
                                  },
                                  {
@@ -21702,7 +21702,7 @@
                                      "credito":  0,
                                      "debito":  182,
                                      "valor":  182,
-                                     "saldo":  -4401305,
+                                     "saldo":  -44013.05,
                                      "descricao":  "ALMOÇO"
                                  },
                                  {
@@ -21717,7 +21717,7 @@
                                      "credito":  0,
                                      "debito":  205,
                                      "valor":  205,
-                                     "saldo":  -4421805,
+                                     "saldo":  -44218.05,
                                      "descricao":  "JANTA"
                                  },
                                  {
@@ -21730,9 +21730,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  19718,
-                                     "valor":  19718,
-                                     "saldo":  -4441523,
+                                     "debito":  197.18,
+                                     "valor":  197.18,
+                                     "saldo":  -44415.23,
                                      "descricao":  "DETRAN RS  MULTA NOVAS"
                                  },
                                  {
@@ -21747,7 +21747,7 @@
                                      "credito":  0,
                                      "debito":  3000,
                                      "valor":  3000,
-                                     "saldo":  -4741523,
+                                     "saldo":  -47415.23,
                                      "descricao":  "NF:12 FELIPE BUENO DE OLIVEIRA"
                                  },
                                  {
@@ -21762,7 +21762,7 @@
                                      "credito":  0,
                                      "debito":  2000,
                                      "valor":  2000,
-                                     "saldo":  -4941523,
+                                     "saldo":  -49415.23,
                                      "descricao":  "NF: 13 FELIPE BUENO DE OLIVEIRA"
                                  },
                                  {
@@ -21775,9 +21775,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  9815,
-                                     "valor":  9815,
-                                     "saldo":  -5039673,
+                                     "debito":  981.5,
+                                     "valor":  981.5,
+                                     "saldo":  -50396.73,
                                      "descricao":  "REDEMAC NF: 12249 - MATERIAL AREA/BRITA"
                                  },
                                  {
@@ -21790,9 +21790,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  7535,
-                                     "valor":  7535,
-                                     "saldo":  -5115023,
+                                     "debito":  753.5,
+                                     "valor":  753.5,
+                                     "saldo":  -51150.23,
                                      "descricao":  "REDEMAC NF:12248 - MATERIAL CIMENTO/AREA/BRITA"
                                  },
                                  {
@@ -21807,7 +21807,7 @@
                                      "credito":  0,
                                      "debito":  8148,
                                      "valor":  8148,
-                                     "saldo":  -5929823,
+                                     "saldo":  -59298.23,
                                      "descricao":  "MECANICA DINAMICA NF:7262 -PLACA JBK0J31"
                                  },
                                  {
@@ -21822,7 +21822,7 @@
                                      "credito":  0,
                                      "debito":  1910,
                                      "valor":  1910,
-                                     "saldo":  -6120823,
+                                     "saldo":  -61208.23,
                                      "descricao":  "MECANICA DINAMICA NF:3281 -PLACA JBK0J31"
                                  },
                                  {
@@ -21837,7 +21837,7 @@
                                      "credito":  52000,
                                      "debito":  0,
                                      "valor":  52000,
-                                     "saldo":  -920823000000001.88,
+                                     "saldo":  -9208.23,
                                      "descricao":  "Reposição caixa e cartões"
                                  },
                                  {
@@ -21850,9 +21850,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  63,
-                                     "valor":  63,
-                                     "saldo":  -921453000000001.88,
+                                     "debito":  6.3,
+                                     "valor":  6.3,
+                                     "saldo":  -9214.53,
                                      "descricao":  "PEDAGIO"
                                  },
                                  {
@@ -21865,9 +21865,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  66,
-                                     "valor":  66,
-                                     "saldo":  -922113000000001.88,
+                                     "debito":  6.6,
+                                     "valor":  6.6,
+                                     "saldo":  -9221.13,
                                      "descricao":  "PEDAGIO"
                                  },
                                  {
@@ -21880,9 +21880,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  3286,
-                                     "valor":  3286,
-                                     "saldo":  -954973000000001.88,
+                                     "debito":  328.6,
+                                     "valor":  328.6,
+                                     "saldo":  -9549.73,
                                      "descricao":  "BRUCK E MARQUES LTDA"
                                  },
                                  {
@@ -21895,9 +21895,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  24001,
-                                     "valor":  24001,
-                                     "saldo":  -978974000000001.88,
+                                     "debito":  240.01,
+                                     "valor":  240.01,
+                                     "saldo":  -9789.74,
                                      "descricao":  "GASOLINA COMUM -"
                                  },
                                  {
@@ -21912,7 +21912,7 @@
                                      "credito":  0,
                                      "debito":  303,
                                      "valor":  303,
-                                     "saldo":  -1009274,
+                                     "saldo":  -10092.74,
                                      "descricao":  "NUTRIFRANGO"
                                  },
                                  {
@@ -21927,7 +21927,7 @@
                                      "credito":  0,
                                      "debito":  115,
                                      "valor":  115,
-                                     "saldo":  -1020774,
+                                     "saldo":  -10207.74,
                                      "descricao":  "COSTELÃO CARNES - ALMOÇO"
                                  },
                                  {
@@ -21940,9 +21940,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  3207,
-                                     "valor":  3207,
-                                     "saldo":  -1052844,
+                                     "debito":  320.7,
+                                     "valor":  320.7,
+                                     "saldo":  -10528.44,
                                      "descricao":  "RAYKAR Q. BRUM LTDA - DIVERSOS"
                                  },
                                  {
@@ -21957,7 +21957,7 @@
                                      "credito":  0,
                                      "debito":  420,
                                      "valor":  420,
-                                     "saldo":  -1094844,
+                                     "saldo":  -10948.44,
                                      "descricao":  "PRO CORDAS - MANILHA CURVA"
                                  },
                                  {
@@ -21970,9 +21970,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  48544,
-                                     "valor":  48544,
-                                     "saldo":  -1143388,
+                                     "debito":  485.44,
+                                     "valor":  485.44,
+                                     "saldo":  -11433.88,
                                      "descricao":  "VALVIC - DIESEL"
                                  },
                                  {
@@ -21985,9 +21985,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  16719,
-                                     "valor":  16719,
-                                     "saldo":  -1160107,
+                                     "debito":  167.19,
+                                     "valor":  167.19,
+                                     "saldo":  -11601.07,
                                      "descricao":  "ABAST DE COMB - DIESEL"
                                  },
                                  {
@@ -22000,9 +22000,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  37408,
-                                     "valor":  37408,
-                                     "saldo":  -1197515,
+                                     "debito":  374.08,
+                                     "valor":  374.08,
+                                     "saldo":  -11975.15,
                                      "descricao":  "BRUCK E MARQUES LTDA"
                                  },
                                  {
@@ -22017,7 +22017,7 @@
                                      "credito":  0,
                                      "debito":  72,
                                      "valor":  72,
-                                     "saldo":  -1204715,
+                                     "saldo":  -12047.15,
                                      "descricao":  "LANCHERIA PERDIZ"
                                  },
                                  {
@@ -22030,9 +22030,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  54601,
-                                     "valor":  54601,
-                                     "saldo":  -1259316,
+                                     "debito":  546.01,
+                                     "valor":  546.01,
+                                     "saldo":  -12593.16,
                                      "descricao":  "DIESEL"
                                  },
                                  {
@@ -22045,9 +22045,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  44825,
-                                     "valor":  44825,
-                                     "saldo":  -1304141,
+                                     "debito":  448.25,
+                                     "valor":  448.25,
+                                     "saldo":  -13041.41,
                                      "descricao":  "F10 - CAPIVARI - DIESEL"
                                  },
                                  {
@@ -22062,7 +22062,7 @@
                                      "credito":  0,
                                      "debito":  34,
                                      "valor":  34,
-                                     "saldo":  -1307541,
+                                     "saldo":  -13075.41,
                                      "descricao":  "E\u0026G COM DE COMB - DIVERSOS"
                                  },
                                  {
@@ -22077,7 +22077,7 @@
                                      "credito":  0,
                                      "debito":  58,
                                      "valor":  58,
-                                     "saldo":  -1313341,
+                                     "saldo":  -13133.41,
                                      "descricao":  "SELVA E RESTAURANTE- JANTA"
                                  },
                                  {
@@ -22090,9 +22090,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  21795,
-                                     "valor":  21795,
-                                     "saldo":  -1335136,
+                                     "debito":  217.95,
+                                     "valor":  217.95,
+                                     "saldo":  -13351.36,
                                      "descricao":  "BRUCK E MARQUES LTDA - DIVERSOS"
                                  },
                                  {
@@ -22105,9 +22105,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  46978,
-                                     "valor":  46978,
-                                     "saldo":  -1382114,
+                                     "debito":  469.78,
+                                     "valor":  469.78,
+                                     "saldo":  -13821.14,
                                      "descricao":  "F10 - CAPIVARI - DIESEL"
                                  },
                                  {
@@ -22122,7 +22122,7 @@
                                      "credito":  7450,
                                      "debito":  0,
                                      "valor":  7450,
-                                     "saldo":  -637114000000002,
+                                     "saldo":  -6371.14,
                                      "descricao":  "Caixa Carlos pagamento pessoal"
                                  },
                                  {
@@ -22137,7 +22137,7 @@
                                      "credito":  0,
                                      "debito":  1800,
                                      "valor":  1800,
-                                     "saldo":  -817114000000001.88,
+                                     "saldo":  -8171.14,
                                      "descricao":  "FELIPE BUENO"
                                  },
                                  {
@@ -22150,9 +22150,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  126,
-                                     "valor":  126,
-                                     "saldo":  -818374000000001.88,
+                                     "debito":  12.6,
+                                     "valor":  12.6,
+                                     "saldo":  -8183.74,
                                      "descricao":  "PEDAGIO"
                                  },
                                  {
@@ -22165,9 +22165,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  2293,
-                                     "valor":  2293,
-                                     "saldo":  -820667000000001.88,
+                                     "debito":  22.93,
+                                     "valor":  22.93,
+                                     "saldo":  -8206.67,
                                      "descricao":  "F10 - CAPIVARI - DIESEL"
                                  },
                                  {
@@ -22182,7 +22182,7 @@
                                      "credito":  0,
                                      "debito":  160,
                                      "valor":  160,
-                                     "saldo":  -836667000000001.88,
+                                     "saldo":  -8366.67,
                                      "descricao":  "SERGIO-MAO DE OBRA"
                                  },
                                  {
@@ -22195,9 +22195,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  12239,
-                                     "valor":  12239,
-                                     "saldo":  -848906000000001.88,
+                                     "debito":  122.39,
+                                     "valor":  122.39,
+                                     "saldo":  -8489.06,
                                      "descricao":  "BRUCK - DIVERSOS"
                                  },
                                  {
@@ -22210,9 +22210,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  11714,
-                                     "valor":  11714,
-                                     "saldo":  -860620000000001.88,
+                                     "debito":  117.14,
+                                     "valor":  117.14,
+                                     "saldo":  -8606.2,
                                      "descricao":  "ABST DE COMB - GASOLINA"
                                  },
                                  {
@@ -22227,7 +22227,7 @@
                                      "credito":  0,
                                      "debito":  27,
                                      "valor":  27,
-                                     "saldo":  -863320000000001.88,
+                                     "saldo":  -8633.2,
                                      "descricao":  "DOCE SABOR - ALMOÇO"
                                  },
                                  {
@@ -22240,9 +22240,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  3288,
-                                     "valor":  3288,
-                                     "saldo":  -896200000000001.88,
+                                     "debito":  328.8,
+                                     "valor":  328.8,
+                                     "saldo":  -8962,
                                      "descricao":  "BRUCK - DIVERSOS"
                                  },
                                  {
@@ -22255,9 +22255,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  54448,
-                                     "valor":  54448,
-                                     "saldo":  -950648000000001.88,
+                                     "debito":  544.48,
+                                     "valor":  544.48,
+                                     "saldo":  -9506.48,
                                      "descricao":  ""
                                  },
                                  {
@@ -22270,9 +22270,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  3207,
-                                     "valor":  3207,
-                                     "saldo":  -982718000000001.88,
+                                     "debito":  320.7,
+                                     "valor":  320.7,
+                                     "saldo":  -9827.18,
                                      "descricao":  "RAYKAR"
                                  },
                                  {
@@ -22285,9 +22285,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  77355,
-                                     "valor":  77355,
-                                     "saldo":  -1060073,
+                                     "debito":  773.55,
+                                     "valor":  773.55,
+                                     "saldo":  -10600.73,
                                      "descricao":  "QCJ COM DE COMB - DIESEL"
                                  },
                                  {
@@ -22300,9 +22300,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  15949,
-                                     "valor":  15949,
-                                     "saldo":  -1076022,
+                                     "debito":  159.49,
+                                     "valor":  159.49,
+                                     "saldo":  -10760.22,
                                      "descricao":  "QCJ COM DE COMB - DIESEL"
                                  },
                                  {
@@ -22315,9 +22315,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  49505,
-                                     "valor":  49505,
-                                     "saldo":  -1125527,
+                                     "debito":  495.05,
+                                     "valor":  495.05,
+                                     "saldo":  -11255.27,
                                      "descricao":  "ABASTEC DE COMB - DIESEL"
                                  },
                                  {
@@ -22330,9 +22330,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  15913,
-                                     "valor":  15913,
-                                     "saldo":  -114144,
+                                     "debito":  159.13,
+                                     "valor":  159.13,
+                                     "saldo":  -11414.4,
                                      "descricao":  "BRUCK - DIVERSOS"
                                  },
                                  {
@@ -22347,7 +22347,7 @@
                                      "credito":  0,
                                      "debito":  28,
                                      "valor":  28,
-                                     "saldo":  -114424,
+                                     "saldo":  -11442.4,
                                      "descricao":  "LEO GOULART - DIVERSOS"
                                  },
                                  {
@@ -22362,7 +22362,7 @@
                                      "credito":  0,
                                      "debito":  175,
                                      "valor":  175,
-                                     "saldo":  -116174,
+                                     "saldo":  -11617.4,
                                      "descricao":  "CHURRASCARIA VERDES CAMPOS - REFEIÇÃO"
                                  },
                                  {
@@ -22375,8 +22375,8 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  126,
-                                     "valor":  126,
+                                     "debito":  12.6,
+                                     "valor":  12.6,
                                      "saldo":  -11630,
                                      "descricao":  "PEDAGIO"
                                  },
@@ -22405,9 +22405,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  369,
-                                     "valor":  369,
-                                     "saldo":  -118769,
+                                     "debito":  36.9,
+                                     "valor":  36.9,
+                                     "saldo":  -11876.9,
                                      "descricao":  "REST PEREIRA - ALMOÇO"
                                  },
                                  {
@@ -22420,9 +22420,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  304,
-                                     "valor":  304,
-                                     "saldo":  -119073,
+                                     "debito":  30.4,
+                                     "valor":  30.4,
+                                     "saldo":  -11907.3,
                                      "descricao":  "REDEMAC - DIVERSOS"
                                  },
                                  {
@@ -22435,9 +22435,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  28457,
-                                     "valor":  28457,
-                                     "saldo":  -1219187,
+                                     "debito":  284.57,
+                                     "valor":  284.57,
+                                     "saldo":  -12191.87,
                                      "descricao":  "BRUCK E MARQUES - DIVERSOS"
                                  },
                                  {
@@ -22450,9 +22450,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  126,
-                                     "valor":  126,
-                                     "saldo":  -1220447,
+                                     "debito":  12.6,
+                                     "valor":  12.6,
+                                     "saldo":  -12204.47,
                                      "descricao":  "PEDAGIO"
                                  },
                                  {
@@ -22465,9 +22465,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "ManutenÃ§Ã£o Veicular",
                                      "credito":  0,
-                                     "debito":  35987,
-                                     "valor":  35987,
-                                     "saldo":  -1256434,
+                                     "debito":  359.87,
+                                     "valor":  359.87,
+                                     "saldo":  -12564.34,
                                      "descricao":  "TERMACO COM DE AC HID PNEU - MATERIAL"
                                  },
                                  {
@@ -22482,7 +22482,7 @@
                                      "credito":  0,
                                      "debito":  80,
                                      "valor":  80,
-                                     "saldo":  -1264434,
+                                     "saldo":  -12644.34,
                                      "descricao":  "M.C.D AUTO ELETRICA LTDA - TROCA DE CAMB"
                                  },
                                  {
@@ -22497,7 +22497,7 @@
                                      "credito":  0,
                                      "debito":  36,
                                      "valor":  36,
-                                     "saldo":  -1268034,
+                                     "saldo":  -12680.34,
                                      "descricao":  "AUTO PECAS -FILTRO OLEO"
                                  },
                                  {
@@ -22512,7 +22512,7 @@
                                      "credito":  0,
                                      "debito":  117,
                                      "valor":  117,
-                                     "saldo":  -1279734,
+                                     "saldo":  -12797.34,
                                      "descricao":  "COSTELÃO CARNES - ALMOÇO"
                                  },
                                  {
@@ -22525,9 +22525,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  52475,
-                                     "valor":  52475,
-                                     "saldo":  -1332209,
+                                     "debito":  524.75,
+                                     "valor":  524.75,
+                                     "saldo":  -13322.09,
                                      "descricao":  "ABAST DE COMB - DIESEL"
                                  },
                                  {
@@ -22542,7 +22542,7 @@
                                      "credito":  0,
                                      "debito":  590,
                                      "valor":  590,
-                                     "saldo":  -1391209,
+                                     "saldo":  -13912.09,
                                      "descricao":  "P.R DE OLIVEIRA  - MAO DE OBRA"
                                  },
                                  {
@@ -22555,9 +22555,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  693,
-                                     "valor":  693,
-                                     "saldo":  -1398139,
+                                     "debito":  69.3,
+                                     "valor":  69.3,
+                                     "saldo":  -13981.39,
                                      "descricao":  "ESTAÇÃO RODOVIARIA POA - WENDEL"
                                  },
                                  {
@@ -22570,9 +22570,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Transporte / Uber",
                                      "credito":  0,
-                                     "debito":  6615,
-                                     "valor":  6615,
-                                     "saldo":  -1404754,
+                                     "debito":  66.15,
+                                     "valor":  66.15,
+                                     "saldo":  -14047.54,
                                      "descricao":  "PASSAGEM FREDERES - WENDEL"
                                  },
                                  {
@@ -22587,7 +22587,7 @@
                                      "credito":  0,
                                      "debito":  50,
                                      "valor":  50,
-                                     "saldo":  -1409754,
+                                     "saldo":  -14097.54,
                                      "descricao":  "LANCHE GULLA"
                                  },
                                  {
@@ -22602,7 +22602,7 @@
                                      "credito":  0,
                                      "debito":  5,
                                      "valor":  5,
-                                     "saldo":  -1410254,
+                                     "saldo":  -14102.54,
                                      "descricao":  "PASSAGEM DENTRO DE POA - WENDEL"
                                  },
                                  {
@@ -22615,9 +22615,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  663,
-                                     "valor":  663,
-                                     "saldo":  -1416884,
+                                     "debito":  66.3,
+                                     "valor":  66.3,
+                                     "saldo":  -14168.84,
                                      "descricao":  "ESTAÇÃO RODOVIARIA POA  - WENDEL"
                                  },
                                  {
@@ -22630,9 +22630,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  693,
-                                     "valor":  693,
-                                     "saldo":  -1423814,
+                                     "debito":  69.3,
+                                     "valor":  69.3,
+                                     "saldo":  -14238.14,
                                      "descricao":  "ESTAÇÃO RODOVIARIA POA  - WENDEL"
                                  },
                                  {
@@ -22647,7 +22647,7 @@
                                      "credito":  0,
                                      "debito":  5,
                                      "valor":  5,
-                                     "saldo":  -1424314,
+                                     "saldo":  -14243.14,
                                      "descricao":  "PASSAGEM DENTRO DE POA - WENDEL"
                                  },
                                  {
@@ -22662,7 +22662,7 @@
                                      "credito":  0,
                                      "debito":  5,
                                      "valor":  5,
-                                     "saldo":  -1424814,
+                                     "saldo":  -14248.14,
                                      "descricao":  "PASSAGEM DENTRO DE POA - WENDEL"
                                  },
                                  {
@@ -22677,7 +22677,7 @@
                                      "credito":  0,
                                      "debito":  53,
                                      "valor":  53,
-                                     "saldo":  -1430114,
+                                     "saldo":  -14301.14,
                                      "descricao":  "JANTA - LANCHERIA REUNIDAS"
                                  },
                                  {
@@ -22690,9 +22690,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  3745,
-                                     "valor":  3745,
-                                     "saldo":  -1433859,
+                                     "debito":  37.45,
+                                     "valor":  37.45,
+                                     "saldo":  -14338.59,
                                      "descricao":  "ESTAÇÃO RODOVIARIA POA - WENDEL"
                                  },
                                  {
@@ -22707,7 +22707,7 @@
                                      "credito":  0,
                                      "debito":  42,
                                      "valor":  42,
-                                     "saldo":  -1438059,
+                                     "saldo":  -14380.59,
                                      "descricao":  "GULA LANCHES - WENDEL"
                                  },
                                  {
@@ -22722,7 +22722,7 @@
                                      "credito":  0,
                                      "debito":  36,
                                      "valor":  36,
-                                     "saldo":  -1441659,
+                                     "saldo":  -14416.59,
                                      "descricao":  "ESTAÇÃO RODOVIARIA POA  - WENDEL"
                                  },
                                  {
@@ -22735,9 +22735,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  693,
-                                     "valor":  693,
-                                     "saldo":  -1448589,
+                                     "debito":  69.3,
+                                     "valor":  69.3,
+                                     "saldo":  -14485.89,
                                      "descricao":  "EXPRESSO FREDERES -WENDEL"
                                  },
                                  {
@@ -22752,7 +22752,7 @@
                                      "credito":  0,
                                      "debito":  38,
                                      "valor":  38,
-                                     "saldo":  -1452389,
+                                     "saldo":  -14523.89,
                                      "descricao":  "LANCHERIA REUNIDAS - WENDEL"
                                  },
                                  {
@@ -22765,9 +22765,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  714,
-                                     "valor":  714,
-                                     "saldo":  -1459529,
+                                     "debito":  71.4,
+                                     "valor":  71.4,
+                                     "saldo":  -14595.29,
                                      "descricao":  "ESTAÇÃO RODOVIARIA POA  - WENDEL"
                                  },
                                  {
@@ -22782,7 +22782,7 @@
                                      "credito":  0,
                                      "debito":  5,
                                      "valor":  5,
-                                     "saldo":  -1460029,
+                                     "saldo":  -14600.29,
                                      "descricao":  "PASSAGEM DENTRO DE POA - WENDEL"
                                  },
                                  {
@@ -22797,7 +22797,7 @@
                                      "credito":  0,
                                      "debito":  2000,
                                      "valor":  2000,
-                                     "saldo":  -1660029,
+                                     "saldo":  -16600.29,
                                      "descricao":  "FELIPE BUENO - NOTA 13"
                                  },
                                  {
@@ -22812,7 +22812,7 @@
                                      "credito":  0,
                                      "debito":  1500,
                                      "valor":  1500,
-                                     "saldo":  -1810029,
+                                     "saldo":  -18100.29,
                                      "descricao":  "FELIPE BUENO - NOTA 14"
                                  },
                                  {
@@ -22827,7 +22827,7 @@
                                      "credito":  0,
                                      "debito":  1500,
                                      "valor":  1500,
-                                     "saldo":  -1960029,
+                                     "saldo":  -19600.29,
                                      "descricao":  "FELIPE BUENO - NOTA 15"
                                  },
                                  {
@@ -22842,7 +22842,7 @@
                                      "credito":  0,
                                      "debito":  1800,
                                      "valor":  1800,
-                                     "saldo":  -2140029,
+                                     "saldo":  -21400.29,
                                      "descricao":  "FELIPE BUENO - NOTA 16"
                                  },
                                  {
@@ -22857,7 +22857,7 @@
                                      "credito":  0,
                                      "debito":  1800,
                                      "valor":  1800,
-                                     "saldo":  -2320029,
+                                     "saldo":  -23200.29,
                                      "descricao":  "FELIPE BUENO - NOTA 17"
                                  },
                                  {
@@ -22870,9 +22870,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  693,
-                                     "valor":  693,
-                                     "saldo":  -2326959,
+                                     "debito":  69.3,
+                                     "valor":  69.3,
+                                     "saldo":  -23269.59,
                                      "descricao":  "EXPRESSO FREDERES -WENDEL"
                                  },
                                  {
@@ -22885,9 +22885,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Transporte / Uber",
                                      "credito":  0,
-                                     "debito":  535,
-                                     "valor":  535,
-                                     "saldo":  -2332309,
+                                     "debito":  53.5,
+                                     "valor":  53.5,
+                                     "saldo":  -23323.09,
                                      "descricao":  "PASSAGEM POA A OSORIO"
                                  },
                                  {
@@ -22900,9 +22900,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Transporte / Uber",
                                      "credito":  0,
-                                     "debito":  4694,
-                                     "valor":  4694,
-                                     "saldo":  -2337003,
+                                     "debito":  46.94,
+                                     "valor":  46.94,
+                                     "saldo":  -23370.03,
                                      "descricao":  "UBER"
                                  },
                                  {
@@ -22917,7 +22917,7 @@
                                      "credito":  0,
                                      "debito":  50,
                                      "valor":  50,
-                                     "saldo":  -2342003,
+                                     "saldo":  -23420.03,
                                      "descricao":  "OLMIRO BARBOSA MEDEIROS -WENDEL"
                                  },
                                  {
@@ -22930,9 +22930,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  275,
-                                     "valor":  275,
-                                     "saldo":  -2344753,
+                                     "debito":  27.5,
+                                     "valor":  27.5,
+                                     "saldo":  -23447.53,
                                      "descricao":  "ROCHA - PONTEIRA REDONDO"
                                  },
                                  {
@@ -22947,7 +22947,7 @@
                                      "credito":  0,
                                      "debito":  1300,
                                      "valor":  1300,
-                                     "saldo":  -2474753,
+                                     "saldo":  -24747.53,
                                      "descricao":  "MANUTENÇÃO TAMPA TRASEIRA DO IMM4770"
                                  },
                                  {
@@ -22962,7 +22962,7 @@
                                      "credito":  0,
                                      "debito":  900,
                                      "valor":  900,
-                                     "saldo":  -2564753,
+                                     "saldo":  -25647.53,
                                      "descricao":  "MÃO DE OBRA INSTALAÇÃO CAIXA DE FERRAMENTA PLACA MBB"
                                  },
                                  {
@@ -22977,7 +22977,7 @@
                                      "credito":  0,
                                      "debito":  2700,
                                      "valor":  2700,
-                                     "saldo":  -2834753,
+                                     "saldo":  -28347.53,
                                      "descricao":  "COMPACTA - BOMBA E MOTOR"
                                  },
                                  {
@@ -22992,7 +22992,7 @@
                                      "credito":  0,
                                      "debito":  180,
                                      "valor":  180,
-                                     "saldo":  -2852753,
+                                     "saldo":  -28527.53,
                                      "descricao":  "COMPACTA - CONSERTO BOMBA E MOTOR"
                                  },
                                  {
@@ -23005,9 +23005,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  315,
-                                     "valor":  315,
-                                     "saldo":  -2855903,
+                                     "debito":  31.5,
+                                     "valor":  31.5,
+                                     "saldo":  -28559.03,
                                      "descricao":  "MADENECO CAPIVARI- TUBO/LUVAS"
                                  },
                                  {
@@ -23022,7 +23022,7 @@
                                      "credito":  0,
                                      "debito":  201,
                                      "valor":  201,
-                                     "saldo":  -2876003,
+                                     "saldo":  -28760.03,
                                      "descricao":  "COMERCIAL SÃO FRANCISCO -CAVADEIRA/FACÃO/ENCHADA"
                                  },
                                  {
@@ -23035,9 +23035,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  3207,
-                                     "valor":  3207,
-                                     "saldo":  -2908073,
+                                     "debito":  320.7,
+                                     "valor":  320.7,
+                                     "saldo":  -29080.73,
                                      "descricao":  "RAYKAR - 3 JANTAS"
                                  },
                                  {
@@ -23052,7 +23052,7 @@
                                      "credito":  0,
                                      "debito":  62,
                                      "valor":  62,
-                                     "saldo":  -2914273,
+                                     "saldo":  -29142.73,
                                      "descricao":  "COMERCIAL SÃO FRANCISCO -BROCA/LUVAS"
                                  },
                                  {
@@ -23065,9 +23065,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  1656,
-                                     "valor":  1656,
-                                     "saldo":  -2930833,
+                                     "debito":  165.6,
+                                     "valor":  165.6,
+                                     "saldo":  -29308.33,
                                      "descricao":  "DIESEL - ABAST F10 CAPIVARI"
                                  },
                                  {
@@ -23080,9 +23080,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  82502,
-                                     "valor":  82502,
-                                     "saldo":  -3013335,
+                                     "debito":  825.02,
+                                     "valor":  825.02,
+                                     "saldo":  -30133.35,
                                      "descricao":  "F10 - CAPIVARI - DIESEL"
                                  },
                                  {
@@ -23097,7 +23097,7 @@
                                      "credito":  0,
                                      "debito":  100,
                                      "valor":  100,
-                                     "saldo":  -3023335,
+                                     "saldo":  -30233.35,
                                      "descricao":  "POSTO REDE SALVADO - GASOLINA"
                                  },
                                  {
@@ -23110,9 +23110,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "PedÃ¡gio",
                                      "credito":  0,
-                                     "debito":  126,
-                                     "valor":  126,
-                                     "saldo":  -3024595,
+                                     "debito":  12.6,
+                                     "valor":  12.6,
+                                     "saldo":  -30245.95,
                                      "descricao":  "PEDAGIO"
                                  },
                                  {
@@ -23125,9 +23125,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Alojamento e Suprimentos",
                                      "credito":  0,
-                                     "debito":  156107,
-                                     "valor":  156107,
-                                     "saldo":  -3180702,
+                                     "debito":  1561.07,
+                                     "valor":  1561.07,
+                                     "saldo":  -31807.02,
                                      "descricao":  "SUPERMERCADO POPULAR-BOLINHA BOVINO"
                                  },
                                  {
@@ -23142,7 +23142,7 @@
                                      "credito":  0,
                                      "debito":  182,
                                      "valor":  182,
-                                     "saldo":  -3198902,
+                                     "saldo":  -31989.02,
                                      "descricao":  "ALMOÇO - PORTAL DIEHL RESTAURANTE"
                                  },
                                  {
@@ -23157,7 +23157,7 @@
                                      "credito":  0,
                                      "debito":  72,
                                      "valor":  72,
-                                     "saldo":  -3206102,
+                                     "saldo":  -32061.02,
                                      "descricao":  "ALMOÇO - BATATAS RESTAURANTE"
                                  },
                                  {
@@ -23170,9 +23170,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Alojamento e Suprimentos",
                                      "credito":  0,
-                                     "debito":  17832,
-                                     "valor":  17832,
-                                     "saldo":  -3223934,
+                                     "debito":  178.32,
+                                     "valor":  178.32,
+                                     "saldo":  -32239.34,
                                      "descricao":  "SUPERMERCADO BENTO G"
                                  },
                                  {
@@ -23185,9 +23185,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  598,
-                                     "valor":  598,
-                                     "saldo":  -3224532,
+                                     "debito":  5.98,
+                                     "valor":  5.98,
+                                     "saldo":  -32245.32,
                                      "descricao":  "CLAUDIO ROBERTO - CAPIVARI"
                                  },
                                  {
@@ -23200,9 +23200,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  45706,
-                                     "valor":  45706,
-                                     "saldo":  -3270238,
+                                     "debito":  457.06,
+                                     "valor":  457.06,
+                                     "saldo":  -32702.38,
                                      "descricao":  "DIESEL -REDE SIM"
                                  },
                                  {
@@ -23217,7 +23217,7 @@
                                      "credito":  0,
                                      "debito":  100,
                                      "valor":  100,
-                                     "saldo":  -3280238,
+                                     "saldo":  -32802.38,
                                      "descricao":  "REDE SALVADO - GASOLINA"
                                  },
                                  {
@@ -23232,7 +23232,7 @@
                                      "credito":  0,
                                      "debito":  40,
                                      "valor":  40,
-                                     "saldo":  -3284238,
+                                     "saldo":  -32842.38,
                                      "descricao":  "SANTO CHURRASCO"
                                  },
                                  {
@@ -23247,7 +23247,7 @@
                                      "credito":  0,
                                      "debito":  34,
                                      "valor":  34,
-                                     "saldo":  -3287638,
+                                     "saldo":  -32876.38,
                                      "descricao":  "LANCHERIA RENASCENÇA"
                                  },
                                  {
@@ -23262,7 +23262,7 @@
                                      "credito":  0,
                                      "debito":  73,
                                      "valor":  73,
-                                     "saldo":  -3294938,
+                                     "saldo":  -32949.38,
                                      "descricao":  "SANTO CHURRASCO"
                                  },
                                  {
@@ -23277,7 +23277,7 @@
                                      "credito":  0,
                                      "debito":  187,
                                      "valor":  187,
-                                     "saldo":  -3313638,
+                                     "saldo":  -33136.38,
                                      "descricao":  "WALDO FERRAGEM - TUBO/GESSO"
                                  },
                                  {
@@ -23290,9 +23290,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  15537,
-                                     "valor":  15537,
-                                     "saldo":  -3329175,
+                                     "debito":  155.37,
+                                     "valor":  155.37,
+                                     "saldo":  -33291.75,
                                      "descricao":  "BRUCK E MARQUES - DIVERSOS CAPIVARI"
                                  },
                                  {
@@ -23305,9 +23305,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  17815,
-                                     "valor":  17815,
-                                     "saldo":  -334699,
+                                     "debito":  178.15,
+                                     "valor":  178.15,
+                                     "saldo":  -33469.9,
                                      "descricao":  "DIESEL"
                                  },
                                  {
@@ -23320,9 +23320,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  36093,
-                                     "valor":  36093,
-                                     "saldo":  -3383083,
+                                     "debito":  360.93,
+                                     "valor":  360.93,
+                                     "saldo":  -33830.83,
                                      "descricao":  "BRUCK E MARQUES - DIVERSOS CAPIVARI"
                                  },
                                  {
@@ -23337,7 +23337,7 @@
                                      "credito":  0,
                                      "debito":  80,
                                      "valor":  80,
-                                     "saldo":  -3391083,
+                                     "saldo":  -33910.83,
                                      "descricao":  "REDE MAIS - GASOLINA"
                                  },
                                  {
@@ -23350,9 +23350,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Alojamento e Suprimentos",
                                      "credito":  0,
-                                     "debito":  83934,
-                                     "valor":  83934,
-                                     "saldo":  -3475017,
+                                     "debito":  839.34,
+                                     "valor":  839.34,
+                                     "saldo":  -34750.17,
                                      "descricao":  "SUPERMERCADO POPULAR-DIVERSOS"
                                  },
                                  {
@@ -23365,9 +23365,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  45706,
-                                     "valor":  45706,
-                                     "saldo":  -3520723,
+                                     "debito":  457.06,
+                                     "valor":  457.06,
+                                     "saldo":  -35207.23,
                                      "descricao":  "REDE SIM - DIESEL"
                                  },
                                  {
@@ -23380,9 +23380,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "Outros e Diversos",
                                      "credito":  0,
-                                     "debito":  665,
-                                     "valor":  665,
-                                     "saldo":  -3527373,
+                                     "debito":  66.5,
+                                     "valor":  66.5,
+                                     "saldo":  -35273.73,
                                      "descricao":  "CANQUERINI"
                                  },
                                  {
@@ -23395,9 +23395,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "AlimentaÃ§Ã£o",
                                      "credito":  0,
-                                     "debito":  4198,
-                                     "valor":  4198,
-                                     "saldo":  -3569353,
+                                     "debito":  419.8,
+                                     "valor":  419.8,
+                                     "saldo":  -35693.53,
                                      "descricao":  "HAVAN - CAFETEIRA E CHALEIRA"
                                  },
                                  {
@@ -23410,9 +23410,9 @@
                                      "fluxo":  "SaÃ­da",
                                      "categoria":  "CombustÃ­vel",
                                      "credito":  0,
-                                     "debito":  91006,
-                                     "valor":  91006,
-                                     "saldo":  -3660359,
+                                     "debito":  910.06,
+                                     "valor":  910.06,
+                                     "saldo":  -36603.59,
                                      "descricao":  "DIESEL"
                                  },
                                  {
@@ -23427,7 +23427,7 @@
                                      "credito":  0,
                                      "debito":  3000,
                                      "valor":  3000,
-                                     "saldo":  -3960359,
+                                     "saldo":  -39603.59,
                                      "descricao":  "BARTOLOMEU MOVEIS - BELICHE-COLCHÃO- MULTIUSO"
                                  },
                                  {
@@ -23442,7 +23442,7 @@
                                      "credito":  0,
                                      "debito":  15,
                                      "valor":  15,
-                                     "saldo":  -3961859,
+                                     "saldo":  -39618.59,
                                      "descricao":  "SANTO CHURRASCO"
                                  },
                                  {
@@ -23457,7 +23457,7 @@
                                      "credito":  0,
                                      "debito":  73,
                                      "valor":  73,
-                                     "saldo":  -3969159,
+                                     "saldo":  -39691.59,
                                      "descricao":  "PAULO RENAN BRITO"
                                  },
                                  {
@@ -23472,7 +23472,7 @@
                                      "credito":  40000,
                                      "debito":  0,
                                      "valor":  40000,
-                                     "saldo":  308409999999989,
+                                     "saldo":  308.41,
                                      "descricao":  "Caixa Carlos pagamentos de cartões"
                                  }
                              ],
@@ -23502,9 +23502,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "Transporte / Uber",
                                        "credito":  0,
-                                       "debito":  6394,
-                                       "valor":  6394,
-                                       "saldo":  278606,
+                                       "debito":  63.94,
+                                       "valor":  63.94,
+                                       "saldo":  2786.06,
                                        "descricao":  "UBER - POA A SL"
                                    },
                                    {
@@ -23517,9 +23517,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "Transporte / Uber",
                                        "credito":  0,
-                                       "debito":  2698,
-                                       "valor":  2698,
-                                       "saldo":  275908,
+                                       "debito":  26.98,
+                                       "valor":  26.98,
+                                       "saldo":  2759.08,
                                        "descricao":  "UBER - CACHOEIRINHA A SL"
                                    },
                                    {
@@ -23532,9 +23532,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "Transporte / Uber",
                                        "credito":  0,
-                                       "debito":  994,
-                                       "valor":  994,
-                                       "saldo":  274914,
+                                       "debito":  9.94,
+                                       "valor":  9.94,
+                                       "saldo":  2749.14,
                                        "descricao":  "UBER - DESLOCAMENTO EM ITAPEVA"
                                    },
                                    {
@@ -23547,9 +23547,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "Transporte / Uber",
                                        "credito":  0,
-                                       "debito":  2467,
-                                       "valor":  2467,
-                                       "saldo":  272447,
+                                       "debito":  24.67,
+                                       "valor":  24.67,
+                                       "saldo":  2724.47,
                                        "descricao":  "UBER -  DESLOCAMENTO CURITIBA"
                                    },
                                    {
@@ -23562,9 +23562,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "AlimentaÃ§Ã£o",
                                        "credito":  0,
-                                       "debito":  11429,
-                                       "valor":  11429,
-                                       "saldo":  261018,
+                                       "debito":  114.29,
+                                       "valor":  114.29,
+                                       "saldo":  2610.18,
                                        "descricao":  "CIA DO LANCHE - JANTA"
                                    },
                                    {
@@ -23579,7 +23579,7 @@
                                        "credito":  0,
                                        "debito":  32,
                                        "valor":  32,
-                                       "saldo":  257818,
+                                       "saldo":  2578.18,
                                        "descricao":  "LITORAL PIONEIRO"
                                    },
                                    {
@@ -23594,7 +23594,7 @@
                                        "credito":  0,
                                        "debito":  12,
                                        "valor":  12,
-                                       "saldo":  256618,
+                                       "saldo":  2566.18,
                                        "descricao":  "PEDAGIO -P3 ARARANGUA - 12:20"
                                    },
                                    {
@@ -23609,7 +23609,7 @@
                                        "credito":  0,
                                        "debito":  90,
                                        "valor":  90,
-                                       "saldo":  247618,
+                                       "saldo":  2476.18,
                                        "descricao":  "NF: 57953 - CRACCO RESTAURANTE - JANTA"
                                    },
                                    {
@@ -23624,7 +23624,7 @@
                                        "credito":  0,
                                        "debito":  12,
                                        "valor":  12,
-                                       "saldo":  246418,
+                                       "saldo":  2464.18,
                                        "descricao":  "PEDAGIO - LAGUNA - 4:11"
                                    },
                                    {
@@ -23637,9 +23637,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "AlimentaÃ§Ã£o",
                                        "credito":  0,
-                                       "debito":  1626,
-                                       "valor":  1626,
-                                       "saldo":  230158,
+                                       "debito":  162.6,
+                                       "valor":  162.6,
+                                       "saldo":  2301.58,
                                        "descricao":  "NF: 102301 - PEDRO BERGMANN - ALMOÇO"
                                    },
                                    {
@@ -23654,7 +23654,7 @@
                                        "credito":  0,
                                        "debito":  42,
                                        "valor":  42,
-                                       "saldo":  225958,
+                                       "saldo":  2259.58,
                                        "descricao":  "PEDAGIO - ITARARE -13:23"
                                    },
                                    {
@@ -23667,9 +23667,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "PedÃ¡gio",
                                        "credito":  0,
-                                       "debito":  484,
-                                       "valor":  484,
-                                       "saldo":  221118,
+                                       "debito":  48.4,
+                                       "valor":  48.4,
+                                       "saldo":  2211.18,
                                        "descricao":  "PEDAGIO - SÃO JOSE DOS PINHAIS 10:27"
                                    },
                                    {
@@ -23682,9 +23682,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "PedÃ¡gio",
                                        "credito":  0,
-                                       "debito":  228,
-                                       "valor":  228,
-                                       "saldo":  218838,
+                                       "debito":  22.8,
+                                       "valor":  22.8,
+                                       "saldo":  2188.38,
                                        "descricao":  "PEDAGIO - PALHOÇA - 14:54"
                                    },
                                    {
@@ -23699,7 +23699,7 @@
                                        "credito":  0,
                                        "debito":  12,
                                        "valor":  12,
-                                       "saldo":  217638,
+                                       "saldo":  2176.38,
                                        "descricao":  "PEDAGIO - TUBARÃO - 13:40"
                                    },
                                    {
@@ -23712,9 +23712,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "PedÃ¡gio",
                                        "credito":  0,
-                                       "debito":  228,
-                                       "valor":  228,
-                                       "saldo":  215358,
+                                       "debito":  22.8,
+                                       "valor":  22.8,
+                                       "saldo":  2153.58,
                                        "descricao":  "PEDAGIO - PORTO BELO - 16:19"
                                    },
                                    {
@@ -23727,9 +23727,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "PedÃ¡gio",
                                        "credito":  0,
-                                       "debito":  198,
-                                       "valor":  198,
-                                       "saldo":  213378,
+                                       "debito":  19.8,
+                                       "valor":  19.8,
+                                       "saldo":  2133.78,
                                        "descricao":  "PEDAGIO - TRES CACHOEIRAS - 11:09"
                                    },
                                    {
@@ -23742,9 +23742,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "CombustÃ­vel",
                                        "credito":  0,
-                                       "debito":  123707,
-                                       "valor":  123707,
-                                       "saldo":  896709999999999,
+                                       "debito":  1237.07,
+                                       "valor":  1237.07,
+                                       "saldo":  896.71,
                                        "descricao":  "NF: 1619832 - POSTO ROTA - DIESEL 13:29"
                                    },
                                    {
@@ -23757,9 +23757,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "PedÃ¡gio",
                                        "credito":  0,
-                                       "debito":  372,
-                                       "valor":  372,
-                                       "saldo":  859509999999999,
+                                       "debito":  37.2,
+                                       "valor":  37.2,
+                                       "saldo":  859.51,
                                        "descricao":  "PEDAGIO - ARAUCARIA - 8:58"
                                    },
                                    {
@@ -23772,9 +23772,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "PedÃ¡gio",
                                        "credito":  0,
-                                       "debito":  264,
-                                       "valor":  264,
-                                       "saldo":  833109999999999,
+                                       "debito":  26.4,
+                                       "valor":  26.4,
+                                       "saldo":  833.11,
                                        "descricao":  "PEDAGIO - SA DA PATRULHA 10:09"
                                    },
                                    {
@@ -23787,9 +23787,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "AlimentaÃ§Ã£o",
                                        "credito":  0,
-                                       "debito":  1677,
-                                       "valor":  1677,
-                                       "saldo":  665409999999999,
+                                       "debito":  167.7,
+                                       "valor":  167.7,
+                                       "saldo":  665.41,
                                        "descricao":  "NF: 2304  ALMOÇO 13:17"
                                    },
                                    {
@@ -23802,9 +23802,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "PedÃ¡gio",
                                        "credito":  0,
-                                       "debito":  228,
-                                       "valor":  228,
-                                       "saldo":  642609999999999,
+                                       "debito":  22.8,
+                                       "valor":  22.8,
+                                       "saldo":  642.61,
                                        "descricao":  "PEDAGIO - ARAQUARI - 18:20"
                                    },
                                    {
@@ -23817,9 +23817,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "PedÃ¡gio",
                                        "credito":  0,
-                                       "debito":  228,
-                                       "valor":  228,
-                                       "saldo":  619809999999999,
+                                       "debito":  22.8,
+                                       "valor":  22.8,
+                                       "saldo":  619.81,
                                        "descricao":  "PEDAGIO - SÃO JOSE DOS PINHAIS -20:11"
                                    },
                                    {
@@ -23834,7 +23834,7 @@
                                        "credito":  0,
                                        "debito":  12,
                                        "valor":  12,
-                                       "saldo":  607809999999999,
+                                       "saldo":  607.81,
                                        "descricao":  "PEDAGIO - SÃO JOÃO DO SUL -11:43"
                                    },
                                    {
@@ -23847,9 +23847,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "PedÃ¡gio",
                                        "credito":  0,
-                                       "debito":  226,
-                                       "valor":  226,
-                                       "saldo":  585209999999999,
+                                       "debito":  22.6,
+                                       "valor":  22.6,
+                                       "saldo":  585.21,
                                        "descricao":  "PEDAGIO - GARUVA - 19:23"
                                    },
                                    {
@@ -23864,7 +23864,7 @@
                                        "credito":  0,
                                        "debito":  24,
                                        "valor":  24,
-                                       "saldo":  561209999999999.06,
+                                       "saldo":  561.21,
                                        "descricao":  "PEDAGIO - WITMARSUM - 9:13"
                                    },
                                    {
@@ -23879,7 +23879,7 @@
                                        "credito":  0,
                                        "debito":  1380,
                                        "valor":  1380,
-                                       "saldo":  -818790000000001,
+                                       "saldo":  -818.79,
                                        "descricao":  "NF: 89658 - POSTO JARDIM QUARANY - 8:26"
                                    },
                                    {
@@ -23892,9 +23892,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "PedÃ¡gio",
                                        "credito":  0,
-                                       "debito":  308,
-                                       "valor":  308,
-                                       "saldo":  -84959,
+                                       "debito":  30.8,
+                                       "valor":  30.8,
+                                       "saldo":  -849.59,
                                        "descricao":  "PEDAGIO - SÃO JOSE DOS PINHAIS - 12:63"
                                    },
                                    {
@@ -23907,9 +23907,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "PedÃ¡gio",
                                        "credito":  0,
-                                       "debito":  198,
-                                       "valor":  198,
-                                       "saldo":  -86939,
+                                       "debito":  19.8,
+                                       "valor":  19.8,
+                                       "saldo":  -869.39,
                                        "descricao":  "PEDAGIO - GRAVATAI - 9:40"
                                    },
                                    {
@@ -23924,7 +23924,7 @@
                                        "credito":  3000,
                                        "debito":  0,
                                        "valor":  3000,
-                                       "saldo":  213061,
+                                       "saldo":  2130.61,
                                        "descricao":  "CX DENILSON SP"
                                    },
                                    {
@@ -23939,7 +23939,7 @@
                                        "credito":  2500,
                                        "debito":  0,
                                        "valor":  2500,
-                                       "saldo":  463061,
+                                       "saldo":  4630.61,
                                        "descricao":  "Caixa Denilson SP"
                                    },
                                    {
@@ -23954,7 +23954,7 @@
                                        "credito":  3500,
                                        "debito":  0,
                                        "valor":  3500,
-                                       "saldo":  813061,
+                                       "saldo":  8130.61,
                                        "descricao":  "Caixa Denilson SP"
                                    },
                                    {
@@ -23967,9 +23967,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "Transporte / Uber",
                                        "credito":  0,
-                                       "debito":  996,
-                                       "valor":  996,
-                                       "saldo":  812065,
+                                       "debito":  9.96,
+                                       "valor":  9.96,
+                                       "saldo":  8120.65,
                                        "descricao":  "UBER"
                                    },
                                    {
@@ -23984,7 +23984,7 @@
                                        "credito":  0,
                                        "debito":  55,
                                        "valor":  55,
-                                       "saldo":  806565,
+                                       "saldo":  8065.65,
                                        "descricao":  "LAVANDERIA"
                                    },
                                    {
@@ -23999,7 +23999,7 @@
                                        "credito":  0,
                                        "debito":  73,
                                        "valor":  73,
-                                       "saldo":  799265,
+                                       "saldo":  7992.65,
                                        "descricao":  "ALMOÇO  - RESTAURANTE SABOR CASEIRO"
                                    },
                                    {
@@ -24014,7 +24014,7 @@
                                        "credito":  0,
                                        "debito":  2700,
                                        "valor":  2700,
-                                       "saldo":  529265,
+                                       "saldo":  5292.65,
                                        "descricao":  "HOTEL BARRIL ITAPEVA-  13 DIARIAS PARA 3 PESSOAS (7O O DIA )"
                                    },
                                    {
@@ -24027,9 +24027,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "Transporte / Uber",
                                        "credito":  0,
-                                       "debito":  1084,
-                                       "valor":  1084,
-                                       "saldo":  528181,
+                                       "debito":  10.84,
+                                       "valor":  10.84,
+                                       "saldo":  5281.81,
                                        "descricao":  "UBER"
                                    },
                                    {
@@ -24044,7 +24044,7 @@
                                        "credito":  0,
                                        "debito":  106,
                                        "valor":  106,
-                                       "saldo":  517581,
+                                       "saldo":  5175.81,
                                        "descricao":  "JANTA -RESTAURANTE SABOR CASEIRO"
                                    },
                                    {
@@ -24057,9 +24057,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "CombustÃ­vel",
                                        "credito":  0,
-                                       "debito":  170839,
-                                       "valor":  170839,
-                                       "saldo":  346742,
+                                       "debito":  1708.39,
+                                       "valor":  1708.39,
+                                       "saldo":  3467.42,
                                        "descricao":  "DIESEL - NF:244569 AUTO POSTO ESPLANADA"
                                    },
                                    {
@@ -24072,9 +24072,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "AlimentaÃ§Ã£o",
                                        "credito":  0,
-                                       "debito":  396,
-                                       "valor":  396,
-                                       "saldo":  342782,
+                                       "debito":  39.6,
+                                       "valor":  39.6,
+                                       "saldo":  3427.82,
                                        "descricao":  "CAFÉ NF: 3945 CASTELÃO"
                                    },
                                    {
@@ -24087,9 +24087,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "CombustÃ­vel",
                                        "credito":  0,
-                                       "debito":  5867,
-                                       "valor":  5867,
-                                       "saldo":  284112,
+                                       "debito":  586.7,
+                                       "valor":  586.7,
+                                       "saldo":  2841.12,
                                        "descricao":  "DIESEL NF:246453"
                                    },
                                    {
@@ -24104,7 +24104,7 @@
                                        "credito":  0,
                                        "debito":  69,
                                        "valor":  69,
-                                       "saldo":  277212,
+                                       "saldo":  2772.12,
                                        "descricao":  "CAFÉ RESTAURANTE SABOR CASEIRO"
                                    },
                                    {
@@ -24117,9 +24117,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "EPIs e SeguranÃ§a",
                                        "credito":  0,
-                                       "debito":  23338,
-                                       "valor":  23338,
-                                       "saldo":  253874,
+                                       "debito":  233.38,
+                                       "valor":  233.38,
+                                       "saldo":  2538.74,
                                        "descricao":  "MEGA CREDENCIAL -SEGURANÇA DO TRABALHO"
                                    },
                                    {
@@ -24134,7 +24134,7 @@
                                        "credito":  0,
                                        "debito":  95,
                                        "valor":  95,
-                                       "saldo":  244374,
+                                       "saldo":  2443.74,
                                        "descricao":  "JANTA - XIS"
                                    },
                                    {
@@ -24149,7 +24149,7 @@
                                        "credito":  0,
                                        "debito":  50,
                                        "valor":  50,
-                                       "saldo":  239374,
+                                       "saldo":  2393.74,
                                        "descricao":  "ALMOÇO SALGADOS"
                                    },
                                    {
@@ -24164,7 +24164,7 @@
                                        "credito":  0,
                                        "debito":  126,
                                        "valor":  126,
-                                       "saldo":  226774,
+                                       "saldo":  2267.74,
                                        "descricao":  "JANTA"
                                    },
                                    {
@@ -24179,7 +24179,7 @@
                                        "credito":  2500,
                                        "debito":  0,
                                        "valor":  2500,
-                                       "saldo":  476774,
+                                       "saldo":  4767.74,
                                        "descricao":  "Caixa Denilson SP"
                                    },
                                    {
@@ -24194,7 +24194,7 @@
                                        "credito":  2500,
                                        "debito":  0,
                                        "valor":  2500,
-                                       "saldo":  726774,
+                                       "saldo":  7267.74,
                                        "descricao":  "Caixa Denilson SP"
                                    },
                                    {
@@ -24209,7 +24209,7 @@
                                        "credito":  0,
                                        "debito":  15,
                                        "valor":  15,
-                                       "saldo":  725274,
+                                       "saldo":  7252.74,
                                        "descricao":  "jk auto center - COPIA CHAVE"
                                    },
                                    {
@@ -24224,7 +24224,7 @@
                                        "credito":  0,
                                        "debito":  139,
                                        "valor":  139,
-                                       "saldo":  711374,
+                                       "saldo":  7113.74,
                                        "descricao":  "Comercio de combustivel - alcool"
                                    },
                                    {
@@ -24239,7 +24239,7 @@
                                        "credito":  0,
                                        "debito":  35,
                                        "valor":  35,
-                                       "saldo":  707874,
+                                       "saldo":  7078.74,
                                        "descricao":  "itaboa auto posto - gasolina"
                                    },
                                    {
@@ -24252,9 +24252,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "Outros e Diversos",
                                        "credito":  0,
-                                       "debito":  81841,
-                                       "valor":  81841,
-                                       "saldo":  626033,
+                                       "debito":  818.41,
+                                       "valor":  818.41,
+                                       "saldo":  6260.33,
                                        "descricao":  "LOCALIZA RAC"
                                    },
                                    {
@@ -24267,9 +24267,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "CombustÃ­vel",
                                        "credito":  0,
-                                       "debito":  14363,
-                                       "valor":  14363,
-                                       "saldo":  61167,
+                                       "debito":  143.63,
+                                       "valor":  143.63,
+                                       "saldo":  6116.7,
                                        "descricao":  "POSTO ESPLENDOR - ETANOL"
                                    },
                                    {
@@ -24284,7 +24284,7 @@
                                        "credito":  0,
                                        "debito":  110,
                                        "valor":  110,
-                                       "saldo":  60067,
+                                       "saldo":  6006.7,
                                        "descricao":  "LAVAGEM DE ROUPA"
                                    },
                                    {
@@ -24299,7 +24299,7 @@
                                        "credito":  0,
                                        "debito":  60,
                                        "valor":  60,
-                                       "saldo":  59467,
+                                       "saldo":  5946.7,
                                        "descricao":  "JANTA - ELIANA YOSHIE"
                                    },
                                    {
@@ -24312,9 +24312,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "CombustÃ­vel",
                                        "credito":  0,
-                                       "debito":  214006,
-                                       "valor":  214006,
-                                       "saldo":  380664,
+                                       "debito":  2140.06,
+                                       "valor":  2140.06,
+                                       "saldo":  3806.64,
                                        "descricao":  "ITABOA auto posto - DIESEL"
                                    },
                                    {
@@ -24329,7 +24329,7 @@
                                        "credito":  2500,
                                        "debito":  0,
                                        "valor":  2500,
-                                       "saldo":  630664,
+                                       "saldo":  6306.64,
                                        "descricao":  "Caixa Denilson"
                                    },
                                    {
@@ -24344,7 +24344,7 @@
                                        "credito":  1500,
                                        "debito":  0,
                                        "valor":  1500,
-                                       "saldo":  780664,
+                                       "saldo":  7806.64,
                                        "descricao":  "Caixa Denilson"
                                    },
                                    {
@@ -24359,7 +24359,7 @@
                                        "credito":  0,
                                        "debito":  50,
                                        "valor":  50,
-                                       "saldo":  775664,
+                                       "saldo":  7756.64,
                                        "descricao":  "ADÃO CUNHA - NOTA 28"
                                    },
                                    {
@@ -24374,7 +24374,7 @@
                                        "credito":  0,
                                        "debito":  42,
                                        "valor":  42,
-                                       "saldo":  771464,
+                                       "saldo":  7714.64,
                                        "descricao":  "PEDAGIO- 3:56"
                                    },
                                    {
@@ -24389,7 +24389,7 @@
                                        "credito":  0,
                                        "debito":  32,
                                        "valor":  32,
-                                       "saldo":  768264,
+                                       "saldo":  7682.64,
                                        "descricao":  "PEDAGIO - 5:45"
                                    },
                                    {
@@ -24404,7 +24404,7 @@
                                        "credito":  0,
                                        "debito":  48,
                                        "valor":  48,
-                                       "saldo":  763464,
+                                       "saldo":  7634.64,
                                        "descricao":  "PEDAGIO  - 8:04"
                                    },
                                    {
@@ -24417,9 +24417,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "PedÃ¡gio",
                                        "credito":  0,
-                                       "debito":  372,
-                                       "valor":  372,
-                                       "saldo":  759744,
+                                       "debito":  37.2,
+                                       "valor":  37.2,
+                                       "saldo":  7597.44,
                                        "descricao":  "PEDAGIO  - 8:25"
                                    },
                                    {
@@ -24432,9 +24432,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "AlimentaÃ§Ã£o",
                                        "credito":  0,
-                                       "debito":  597,
-                                       "valor":  597,
-                                       "saldo":  753774,
+                                       "debito":  59.7,
+                                       "valor":  59.7,
+                                       "saldo":  7537.74,
                                        "descricao":  "ALMOÇO - ANA ANGELICA - ARAPONGAS PR"
                                    },
                                    {
@@ -24447,9 +24447,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "CombustÃ­vel",
                                        "credito":  0,
-                                       "debito":  2191,
-                                       "valor":  2191,
-                                       "saldo":  731864,
+                                       "debito":  219.1,
+                                       "valor":  219.1,
+                                       "saldo":  7318.64,
                                        "descricao":  "GASOLINA - REDE PUPPI - COLOMBO"
                                    },
                                    {
@@ -24462,9 +24462,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "CombustÃ­vel",
                                        "credito":  0,
-                                       "debito":  75796,
-                                       "valor":  75796,
-                                       "saldo":  656068,
+                                       "debito":  757.96,
+                                       "valor":  757.96,
+                                       "saldo":  6560.68,
                                        "descricao":  "DIESEL - REDE PUPPI NOTA 7677"
                                    },
                                    {
@@ -24477,9 +24477,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "AlimentaÃ§Ã£o",
                                        "credito":  0,
-                                       "debito":  698,
-                                       "valor":  698,
-                                       "saldo":  649088,
+                                       "debito":  69.8,
+                                       "valor":  69.8,
+                                       "saldo":  6490.88,
                                        "descricao":  "ALMOÇO - FERREIRA MENDES - CURITIBA"
                                    },
                                    {
@@ -24492,9 +24492,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "AlimentaÃ§Ã£o",
                                        "credito":  0,
-                                       "debito":  718,
-                                       "valor":  718,
-                                       "saldo":  641908,
+                                       "debito":  71.8,
+                                       "valor":  71.8,
+                                       "saldo":  6419.08,
                                        "descricao":  "ALMOÇO - FERREIRA MENDES - CURITIBA"
                                    },
                                    {
@@ -24507,9 +24507,9 @@
                                        "fluxo":  "SaÃ­da",
                                        "categoria":  "Alojamento e Suprimentos",
                                        "credito":  0,
-                                       "debito":  36034,
-                                       "valor":  36034,
-                                       "saldo":  605874,
+                                       "debito":  360.34,
+                                       "valor":  360.34,
+                                       "saldo":  6058.74,
                                        "descricao":  "PRODUTOS DIVERSOS MERCADO"
                                    }
                                ]
