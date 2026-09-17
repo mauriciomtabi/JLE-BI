@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-09-17 08:45:37
+// Dados SAR JLE Telecom - Gerado em: 2026-09-17 08:48:42
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1088,
-    "generated_at": "2026-09-17 08:45:37",
+    "generated_at": "2026-09-17 08:48:42",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -768,10 +768,10 @@ window.SAR_METADATA = {
         "total_classe_f": 454663.5
     },
     "medicao": {
-        "total_geral": 1355037.85,
-        "qtd_geral": 611,
-        "total_medicao_enviada": 323153.38,
-        "qtd_medicao_enviada": 127,
+        "total_geral": 1355854.53,
+        "qtd_geral": 612,
+        "total_medicao_enviada": 323970.06,
+        "qtd_medicao_enviada": 128,
         "total_finalizado": 16767.45,
         "qtd_finalizado": 11,
         "total_pedido_emitido": 1015117.02,
@@ -59048,7 +59048,7 @@ window.SAR_DATA = [
     "ano_medicao": "2026",
     "mes_medicao": "SETEMBRO",
     "mes_num_medicao": "09",
-    "status_medicao_grupo": "OUTROS",
+    "status_medicao_grupo": "MEDIÇÃO ENVIADA",
     "tem_medicao": true,
     "data_med_cad_wf": null,
     "data_med_cad_wf_fmt": "-",
@@ -59062,7 +59062,7 @@ window.SAR_DATA = [
     "ano_entrega": "2026",
     "mes_entrega": "SETEMBRO",
     "mes_num_entrega": "09",
-    "status": "EM MEDIÇÃO",
+    "status": "MEDIÇÃO ENVIADA",
     "status_relatorio": "03/09/2026",
     "status_medicao": "03/09/2026",
     "status_obra": "Em Andamento",
