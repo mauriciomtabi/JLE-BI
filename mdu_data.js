@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-09-17 11:00:18
+// Dados MDU Compactados - Gerado em: 2026-09-17 12:00:20
 window.MDU_METADATA = {
-    "generated_at": "2026-09-17 11:00:18",
+    "generated_at": "2026-09-17 12:00:20",
     "total_rows": 5657,
-    "geocoded_new": 3
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -180430,9 +180430,9 @@ window.MDU_DATA = [
         "aging": "0",
         "relatorio_por": "DUDA",
         "pendencia": "Não",
-        "status": "Relatório",
+        "status": "Medição",
         "prog": 0,
-        "cod_imovel": "",
+        "cod_imovel": "610499645",
         "area": "NAVAA",
         "node": "",
         "caixa_m": "NAVAA.016.M040",
@@ -180446,7 +180446,7 @@ window.MDU_DATA = [
         "data_fusao": "10/09/2026",
         "data_baixa": "17/09",
         "obs_baixa": "",
-        "data_relatorio": "",
+        "data_relatorio": "17/09/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
@@ -180492,7 +180492,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "0",
-        "relatorio_por": "",
+        "relatorio_por": "DUDA",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 0,
