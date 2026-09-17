@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-09-17 15:06:32
+// Dados MDU Compactados - Gerado em: 2026-09-17 16:00:29
 window.MDU_METADATA = {
-    "generated_at": "2026-09-17 15:06:32",
+    "generated_at": "2026-09-17 16:00:29",
     "total_rows": 5655,
     "geocoded_new": 0
 };
@@ -152686,8 +152686,8 @@ window.MDU_DATA = [
         "aging": "118",
         "relatorio_por": "DUDA",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "704307095",
         "area": "CNUAB",
         "node": "CNUAI",
@@ -152702,7 +152702,7 @@ window.MDU_DATA = [
         "data_fusao": "16/09",
         "data_baixa": "16/09",
         "obs_baixa": "",
-        "data_relatorio": "",
+        "data_relatorio": "17/09/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 780.0,
@@ -176112,7 +176112,7 @@ window.MDU_DATA = [
         "pendencia": "Não",
         "status": "2º Vistoria",
         "prog": 0,
-        "cod_imovel": "",
+        "cod_imovel": "610429458",
         "area": "MTSAA",
         "node": "",
         "caixa_m": "MTSAA.093.M040",
