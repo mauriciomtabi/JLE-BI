@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-09-17 09:55:26
+// Dados MDU Compactados - Gerado em: 2026-09-17 10:05:15
 window.MDU_METADATA = {
-    "generated_at": "2026-09-17 09:55:26",
+    "generated_at": "2026-09-17 10:05:15",
     "total_rows": 5657,
     "geocoded_new": 0
 };
@@ -152780,7 +152780,7 @@ window.MDU_DATA = [
         "cidade": "NOVO HAMBURGO",
         "cluster": "NHO",
         "aging": "118",
-        "relatorio_por": "",
+        "relatorio_por": "DUDA (sem cód ged)",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
