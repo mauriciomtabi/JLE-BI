@@ -66,6 +66,7 @@
         populateTecnodrillMonthFilter();
         populateTecnodrillCategoryFilter();
         applyTecnodrillFilters();
+        initTecnodrillCaixa();
     };
 
     // ──────────────────────────────────────────────
@@ -127,8 +128,11 @@
         const mesText = rawMesText.replace(/\s*\/\s*/g, '/');
         if (tdActiveTab === 'indicators') {
             subtitleEl.innerHTML = `Dashboard de Gestão e Análise de Indicadores.${mesText && mesText !== 'Todos os Meses' ? ' <span class="badge-competencia">COMPETÊNCIA: ' + mesText.toUpperCase() + '</span>' : ''}`;
-        } else {
+        } else if (tdActiveTab === 'transactions') {
             subtitleEl.innerHTML = `Relação completa de transações com ferramentas de busca e auditoria${mesText && mesText !== 'Todos os Meses' ? ' <span class="badge-competencia">COMPETÊNCIA: ' + mesText.toUpperCase() + '</span>' : ''}`;
+        } else if (tdActiveTab === 'caixa') {
+            const respNome = tdCaixaActivePerson === 'carlos' ? 'Carlos' : (tdCaixaActivePerson === 'denilson' ? 'Denilson' : 'Consolidado');
+            subtitleEl.innerHTML = `Fluxo de Caixa Operacional — Controle de Despesas <span class="badge-competencia">${respNome.toUpperCase()}</span>`;
         }
     }
 
@@ -976,16 +980,30 @@
     // ──────────────────────────────────────────────
     window.switchTecnodrillTab = function (tab) {
         tdActiveTab = tab;
-        document.getElementById('td-subview-indicators').style.display = tab === 'indicators' ? 'block' : 'none';
-        document.getElementById('td-subview-transactions').style.display = tab === 'transactions' ? 'block' : 'none';
-        document.getElementById('td-tab-btn-indicators').classList.toggle('active', tab === 'indicators');
-        document.getElementById('td-tab-btn-transactions').classList.toggle('active', tab === 'transactions');
+        const indEl = document.getElementById('td-subview-indicators');
+        const txEl = document.getElementById('td-subview-transactions');
+        const cxEl = document.getElementById('td-subview-caixa');
+        const mainFilters = document.getElementById('td-filters-container');
+
+        if (indEl) indEl.style.display = tab === 'indicators' ? 'block' : 'none';
+        if (txEl) txEl.style.display = tab === 'transactions' ? 'block' : 'none';
+        if (cxEl) cxEl.style.display = tab === 'caixa' ? 'block' : 'none';
+
+        if (mainFilters) mainFilters.style.display = tab === 'caixa' ? 'none' : 'grid';
+
+        document.getElementById('td-tab-btn-indicators')?.classList.toggle('active', tab === 'indicators');
+        document.getElementById('td-tab-btn-transactions')?.classList.toggle('active', tab === 'transactions');
+        document.getElementById('td-tab-btn-caixa')?.classList.toggle('active', tab === 'caixa');
+
         updateTecnodrillHeaderSubtitle();
         if (tab === 'indicators') {
             window.dispatchEvent(new Event('resize'));
             renderTecnodrillCharts();
-        } else {
+        } else if (tab === 'transactions') {
             renderTecnodrillTable();
+        } else if (tab === 'caixa') {
+            window.dispatchEvent(new Event('resize'));
+            applyTecnodrillCaixaFilters();
         }
     };
 
@@ -1058,6 +1076,502 @@
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, 'Tecnodrill');
         XLSX.writeFile(wb, `Tecnodrill_${new Date().toISOString().slice(0,10)}.xlsx`);
+    };
+
+    // ──────────────────────────────────────────────
+    // Módulo: Fluxo de Caixa (Carlos & Denilson)
+    // ──────────────────────────────────────────────
+    let tdCaixaActivePerson = 'carlos'; // 'carlos' | 'denilson' | 'consolidado'
+    let tdCaixaAllTransactions = { carlos: [], denilson: [] };
+    let tdCaixaFilteredTransactions = [];
+    let tdCaixaCurrentPage = 1;
+    const TD_CAIXA_PAGE_SIZE = 50;
+
+    let tdCaixaCharts = {
+        evolution: null,
+        categories: null
+    };
+
+    function fmtCaixaCurrency(val) {
+        if (typeof formatCurrency === 'function') {
+            return formatCurrency(val);
+        }
+        return (val || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
+    function initTecnodrillCaixa() {
+        if (!window.TECNODRILL_DATA || !window.TECNODRILL_DATA.caixa) {
+            console.warn('[Tecnodrill Caixa] window.TECNODRILL_DATA.caixa não disponível.');
+            return;
+        }
+
+        tdCaixaAllTransactions.carlos = window.TECNODRILL_DATA.caixa.carlos || [];
+        tdCaixaAllTransactions.denilson = window.TECNODRILL_DATA.caixa.denilson || [];
+
+        // Atualizar badges de quantidade
+        const bCarlos = document.getElementById('td-caixa-badge-carlos');
+        const bDenilson = document.getElementById('td-caixa-badge-denilson');
+        const bConsolidado = document.getElementById('td-caixa-badge-consolidado');
+        if (bCarlos) bCarlos.innerText = tdCaixaAllTransactions.carlos.length;
+        if (bDenilson) bDenilson.innerText = tdCaixaAllTransactions.denilson.length;
+        if (bConsolidado) bConsolidado.innerText = tdCaixaAllTransactions.carlos.length + tdCaixaAllTransactions.denilson.length;
+
+        const updateEl = document.getElementById('td-caixa-last-update');
+        if (updateEl && window.TECNODRILL_DATA.caixa.gerado_em) {
+            updateEl.innerHTML = `<i class="fa-solid fa-clock-rotate-left"></i> Atualizado em ${window.TECNODRILL_DATA.caixa.gerado_em}`;
+        }
+
+        populateTecnodrillCaixaMonthFilter();
+        populateTecnodrillCaixaCategoryFilter();
+        applyTecnodrillCaixaFilters();
+    }
+
+    window.switchTecnodrillCaixaPerson = function (person) {
+        tdCaixaActivePerson = person;
+        document.getElementById('td-caixa-btn-carlos')?.classList.toggle('active', person === 'carlos');
+        document.getElementById('td-caixa-btn-denilson')?.classList.toggle('active', person === 'denilson');
+        document.getElementById('td-caixa-btn-consolidado')?.classList.toggle('active', person === 'consolidado');
+        
+        updateTecnodrillHeaderSubtitle();
+        populateTecnodrillCaixaMonthFilter();
+        populateTecnodrillCaixaCategoryFilter();
+        tdCaixaCurrentPage = 1;
+        applyTecnodrillCaixaFilters();
+    };
+
+    function getCaixaActiveDataset() {
+        if (tdCaixaActivePerson === 'carlos') return tdCaixaAllTransactions.carlos;
+        if (tdCaixaActivePerson === 'denilson') return tdCaixaAllTransactions.denilson;
+        return [...tdCaixaAllTransactions.carlos, ...tdCaixaAllTransactions.denilson];
+    }
+
+    function populateTecnodrillCaixaMonthFilter() {
+        const sel = document.getElementById('td-caixa-filter-mes');
+        if (!sel) return;
+
+        const prevVal = sel.value;
+        const raw = getCaixaActiveDataset();
+        const monthOrder = {
+            'JANEIRO': 1, 'FEVEREIRO': 2, 'MARÇO': 3, 'ABRIL': 4,
+            'MAIO': 5, 'JUNHO': 6, 'JULHO': 7, 'AGOSTO': 8,
+            'SETEMBRO': 9, 'OUTUBRO': 10, 'NOVEMBRO': 11, 'DEZEMBRO': 12
+        };
+
+        const comps = [...new Set(raw.map(t => t.competencia).filter(c => c && c !== 'OUTROS'))];
+        comps.sort((a, b) => {
+            const [ma, ya] = a.split('/');
+            const [mb, yb] = b.split('/');
+            return (parseInt(ya || '2026') - parseInt(yb || '2026')) || ((monthOrder[ma] || 0) - (monthOrder[mb] || 0));
+        });
+
+        sel.innerHTML = '<option value="ALL">Todos os Meses</option>';
+        comps.forEach(c => {
+            const opt = document.createElement('option');
+            opt.value = c;
+            opt.text = c.charAt(0) + c.slice(1).toLowerCase();
+            sel.appendChild(opt);
+        });
+
+        if (prevVal && comps.includes(prevVal)) {
+            sel.value = prevVal;
+        } else {
+            sel.value = 'ALL';
+        }
+    }
+
+    function populateTecnodrillCaixaCategoryFilter() {
+        const sel = document.getElementById('td-caixa-filter-categoria');
+        if (!sel) return;
+
+        const prevVal = sel.value;
+        const raw = getCaixaActiveDataset();
+        const cats = [...new Set(raw.map(t => t.categoria).filter(Boolean))].sort();
+
+        sel.innerHTML = '<option value="ALL">Todas as Categorias</option>';
+        cats.forEach(c => {
+            const opt = document.createElement('option');
+            opt.value = c;
+            opt.text = c;
+            sel.appendChild(opt);
+        });
+
+        if (prevVal && cats.includes(prevVal)) {
+            sel.value = prevVal;
+        } else {
+            sel.value = 'ALL';
+        }
+    }
+
+    window.clearTecnodrillCaixaDateRange = function () {
+        const di = document.getElementById('td-caixa-filter-data-inicio');
+        const df = document.getElementById('td-caixa-filter-data-fim');
+        if (di) di.value = '';
+        if (df) df.value = '';
+        applyTecnodrillCaixaFilters();
+    };
+
+    window.applyTecnodrillCaixaFilters = function () {
+        const raw = getCaixaActiveDataset();
+        const mesVal = document.getElementById('td-caixa-filter-mes')?.value || 'ALL';
+        const catVal = document.getElementById('td-caixa-filter-categoria')?.value || 'ALL';
+        const fluxoVal = document.getElementById('td-caixa-filter-fluxo')?.value || 'ALL';
+        const di = document.getElementById('td-caixa-filter-data-inicio')?.value || '';
+        const df = document.getElementById('td-caixa-filter-data-fim')?.value || '';
+
+        tdCaixaFilteredTransactions = raw.filter(t => {
+            if (mesVal !== 'ALL' && t.competencia !== mesVal) return false;
+            if (catVal !== 'ALL' && t.categoria !== catVal) return false;
+            if (fluxoVal !== 'ALL' && t.fluxo !== fluxoVal) return false;
+            if (di && t.data && t.data < di) return false;
+            if (df && t.data && t.data > df) return false;
+            return true;
+        });
+
+        tdCaixaCurrentPage = 1;
+        renderTecnodrillCaixaKPIs();
+        renderTecnodrillCaixaCharts();
+        renderTecnodrillCaixaTable();
+    };
+
+    function renderTecnodrillCaixaKPIs() {
+        let totalEntradas = 0, countEntradas = 0;
+        let totalSaidas = 0, countSaidas = 0;
+
+        tdCaixaFilteredTransactions.forEach(t => {
+            if (t.fluxo === 'Entrada') {
+                totalEntradas += (t.credito || t.valor || 0);
+                countEntradas++;
+            } else {
+                totalSaidas += (t.debito || t.valor || 0);
+                countSaidas++;
+            }
+        });
+
+        let saldo = 0;
+        const mesVal = document.getElementById('td-caixa-filter-mes')?.value || 'ALL';
+        const catVal = document.getElementById('td-caixa-filter-categoria')?.value || 'ALL';
+        const fluxoVal = document.getElementById('td-caixa-filter-fluxo')?.value || 'ALL';
+        const di = document.getElementById('td-caixa-filter-data-inicio')?.value || '';
+        const df = document.getElementById('td-caixa-filter-data-fim')?.value || '';
+        const isDefaultView = (mesVal === 'ALL' && catVal === 'ALL' && fluxoVal === 'ALL' && !di && !df);
+
+        if (isDefaultView && (tdCaixaActivePerson === 'carlos' || tdCaixaActivePerson === 'denilson')) {
+            const personData = tdCaixaAllTransactions[tdCaixaActivePerson];
+            if (personData && personData.length > 0) {
+                saldo = personData[personData.length - 1].saldo || 0;
+            } else {
+                saldo = totalEntradas - totalSaidas;
+            }
+        } else if (isDefaultView && tdCaixaActivePerson === 'consolidado') {
+            const sc = (tdCaixaAllTransactions.carlos && tdCaixaAllTransactions.carlos.length > 0) ? tdCaixaAllTransactions.carlos[tdCaixaAllTransactions.carlos.length - 1].saldo : 0;
+            const sd = (tdCaixaAllTransactions.denilson && tdCaixaAllTransactions.denilson.length > 0) ? tdCaixaAllTransactions.denilson[tdCaixaAllTransactions.denilson.length - 1].saldo : 0;
+            saldo = sc + sd;
+        } else {
+            saldo = totalEntradas - totalSaidas;
+        }
+
+        const media = countSaidas > 0 ? (totalSaidas / countSaidas) : 0;
+
+        const kpiEntradas = document.getElementById('td-caixa-kpi-entradas');
+        const kpiSaidas = document.getElementById('td-caixa-kpi-saidas');
+        const kpiSaldo = document.getElementById('td-caixa-kpi-saldo');
+        const kpiMedia = document.getElementById('td-caixa-kpi-media');
+
+        if (kpiEntradas) kpiEntradas.innerText = fmtCaixaCurrency(totalEntradas);
+        if (kpiSaidas) kpiSaidas.innerText = fmtCaixaCurrency(totalSaidas);
+        if (kpiSaldo) {
+            kpiSaldo.innerText = fmtCaixaCurrency(saldo);
+            kpiSaldo.style.color = (saldo >= 0) ? '#388bfd' : '#f85149';
+        }
+        if (kpiMedia) kpiMedia.innerText = fmtCaixaCurrency(media);
+
+        const subEnt = document.getElementById('td-caixa-sub-entradas-count');
+        const subSai = document.getElementById('td-caixa-sub-saidas-count');
+        const subSld = document.getElementById('td-caixa-sub-saldo-status');
+        const subTot = document.getElementById('td-caixa-sub-total-txs');
+
+        if (subEnt) subEnt.innerText = `${countEntradas} aportes no período`;
+        if (subSai) subSai.innerText = `${countSaidas} despesas registradas`;
+        if (subSld) subSld.innerText = (saldo >= 0) ? 'Saldo positivo em caixa' : 'Caixa em débito';
+        if (subTot) subTot.innerText = `${tdCaixaFilteredTransactions.length} movimentações filtradas`;
+    }
+
+    function renderTecnodrillCaixaCharts() {
+        const isDark = !document.body.classList.contains('light-theme');
+        const textColor = isDark ? '#c9d1d9' : '#24292f';
+        const gridColor = isDark ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0, 0, 0, 0.06)';
+
+        // 1. Gráfico de Evolução (Agrupado por Competência)
+        const ctxEvol = document.getElementById('td-caixa-chart-evolution')?.getContext('2d');
+        if (ctxEvol) {
+            if (tdCaixaCharts.evolution) tdCaixaCharts.evolution.destroy();
+
+            const monthOrder = {
+                'JANEIRO': 1, 'FEVEREIRO': 2, 'MARÇO': 3, 'ABRIL': 4,
+                'MAIO': 5, 'JUNHO': 6, 'JULHO': 7, 'AGOSTO': 8,
+                'SETEMBRO': 9, 'OUTUBRO': 10, 'NOVEMBRO': 11, 'DEZEMBRO': 12
+            };
+
+            const comps = [...new Set(tdCaixaFilteredTransactions.map(t => t.competencia).filter(Boolean))];
+            comps.sort((a, b) => {
+                const [ma, ya] = a.split('/');
+                const [mb, yb] = b.split('/');
+                return (parseInt(ya || '2026') - parseInt(yb || '2026')) || ((monthOrder[ma] || 0) - (monthOrder[mb] || 0));
+            });
+
+            const dataEntradas = new Array(comps.length).fill(0);
+            const dataSaidas = new Array(comps.length).fill(0);
+
+            tdCaixaFilteredTransactions.forEach(t => {
+                const idx = comps.indexOf(t.competencia);
+                if (idx !== -1) {
+                    if (t.fluxo === 'Entrada') dataEntradas[idx] += (t.credito || t.valor || 0);
+                    else if (t.fluxo === 'Saída') dataSaidas[idx] += (t.debito || t.valor || 0);
+                }
+            });
+
+            const shortMonths = {'JANEIRO':'Jan','FEVEREIRO':'Fev','MARÇO':'Mar','ABRIL':'Abr','MAIO':'Mai','JUNHO':'Jun','JULHO':'Jul','AGOSTO':'Ago','SETEMBRO':'Set','OUTUBRO':'Out','NOVEMBRO':'Nov','DEZEMBRO':'Dez'};
+            const labels = comps.map(c => {
+                const p = c.split('/');
+                return `${shortMonths[p[0]] || p[0]}/${(p[1] || '').slice(-2)}`;
+            });
+
+            tdCaixaCharts.evolution = new Chart(ctxEvol, {
+                type: 'bar',
+                data: {
+                    labels: labels.length > 0 ? labels : ['Sem dados'],
+                    datasets: [
+                        {
+                            label: 'Entradas (Aportes)',
+                            data: dataEntradas,
+                            backgroundColor: '#10b981',
+                            borderColor: '#10b981',
+                            borderRadius: 4
+                        },
+                        {
+                            label: 'Saídas (Despesas)',
+                            data: dataSaidas,
+                            backgroundColor: '#f59e0b',
+                            borderColor: '#f59e0b',
+                            borderRadius: 4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: { color: textColor, font: { family: 'Outfit', size: 12, weight: '600' } }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: ctx => ` ${ctx.dataset.label}: ${fmtCaixaCurrency(ctx.raw)}`
+                            }
+                        },
+                        datalabels: {
+                            display: ctx => ctx.dataset.data[ctx.dataIndex] > 0,
+                            align: 'end',
+                            anchor: 'end',
+                            color: textColor,
+                            font: { family: 'Outfit', size: 10, weight: '600' },
+                            formatter: val => {
+                                if (val >= 1000) return `R$ ${(val / 1000).toFixed(1)}k`;
+                                return `R$ ${Math.round(val)}`;
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: { color: textColor, font: { family: 'Outfit' } },
+                            grid: { display: false }
+                        },
+                        y: {
+                            ticks: {
+                                color: textColor,
+                                font: { family: 'Outfit' },
+                                callback: val => `R$ ${(val / 1000).toFixed(0)}k`
+                            },
+                            grid: { color: gridColor }
+                        }
+                    }
+                }
+            });
+        }
+
+        // 2. Gráfico de Categorias (Rosca/Doughnut das Saídas)
+        const ctxCat = document.getElementById('td-caixa-chart-categories')?.getContext('2d');
+        if (ctxCat) {
+            if (tdCaixaCharts.categories) tdCaixaCharts.categories.destroy();
+
+            const catMap = {};
+            tdCaixaFilteredTransactions.forEach(t => {
+                if (t.fluxo === 'Saída') {
+                    const c = t.categoria || 'Outros';
+                    catMap[c] = (catMap[c] || 0) + (t.debito || t.valor || 0);
+                }
+            });
+
+            const sortedCats = Object.entries(catMap).sort((a, b) => b[1] - a[1]);
+            const catLabels = sortedCats.map(x => x[0]);
+            const catValues = sortedCats.map(x => Math.round(x[1] * 100) / 100);
+
+            const catPalette = [
+                '#ff9f43', '#f39c12', '#54a0ff', '#38ef7d', '#00d2d3',
+                '#ee5253', '#a29bfe', '#fdcb6e', '#6c5ce7', '#636e72'
+            ];
+
+            tdCaixaCharts.categories = new Chart(ctxCat, {
+                type: 'doughnut',
+                data: {
+                    labels: catLabels.length > 0 ? catLabels : ['Nenhuma Despesa'],
+                    datasets: [{
+                        data: catValues.length > 0 ? catValues : [1],
+                        backgroundColor: catPalette.slice(0, Math.max(1, catLabels.length)),
+                        borderWidth: 2,
+                        borderColor: isDark ? '#161b22' : '#ffffff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '62%',
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                color: textColor,
+                                font: { family: 'Outfit', size: 11 },
+                                boxWidth: 12,
+                                padding: 10
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: ctx => {
+                                    const val = ctx.raw || 0;
+                                    const total = catValues.reduce((a, b) => a + b, 0);
+                                    const pct = total > 0 ? ((val / total) * 100).toFixed(1) : '0';
+                                    return ` ${ctx.label}: ${fmtCaixaCurrency(val)} (${pct}%)`;
+                                }
+                            }
+                        },
+                        datalabels: { display: false }
+                    }
+                }
+            });
+        }
+    }
+
+    function renderTecnodrillCaixaTable() {
+        const tbody = document.getElementById('td-caixa-table-body');
+        if (!tbody) return;
+
+        const search = (document.getElementById('td-caixa-table-search')?.value || '').toLowerCase().trim();
+        let list = tdCaixaFilteredTransactions;
+
+        if (search) {
+            list = list.filter(t =>
+                (t.descricao || '').toLowerCase().includes(search) ||
+                (t.categoria || '').toLowerCase().includes(search) ||
+                (t.responsavel || '').toLowerCase().includes(search)
+            );
+        }
+
+        const total = list.length;
+        const start = (tdCaixaCurrentPage - 1) * TD_CAIXA_PAGE_SIZE;
+        const pageData = list.slice(start, start + TD_CAIXA_PAGE_SIZE);
+
+        const infoEl = document.getElementById('td-caixa-pagination-info');
+        if (infoEl) infoEl.innerText = `Mostrando ${start + 1}-${Math.min(start + TD_CAIXA_PAGE_SIZE, total)} de ${total} movimentações`;
+
+        const prevBtn = document.getElementById('td-caixa-pagination-prev');
+        const nextBtn = document.getElementById('td-caixa-pagination-next');
+        if (prevBtn) prevBtn.disabled = tdCaixaCurrentPage <= 1;
+        if (nextBtn) nextBtn.disabled = (start + TD_CAIXA_PAGE_SIZE) >= total;
+
+        tbody.innerHTML = pageData.map(t => {
+            const isEntrada = t.fluxo === 'Entrada';
+            const fluxoColor = isEntrada ? '#10b981' : '#f59e0b';
+            const fluxoBg = isEntrada ? 'rgba(16, 185, 129, 0.12)' : 'rgba(245, 158, 11, 0.12)';
+            const credFmt = t.credito > 0 ? fmtCaixaCurrency(t.credito) : '-';
+            const debFmt = t.debito > 0 ? fmtCaixaCurrency(t.debito) : '-';
+            const saldoFmt = fmtCaixaCurrency(t.saldo);
+            const saldoColor = (t.saldo >= 0) ? 'var(--text-primary)' : '#f85149';
+
+            return `<tr>
+                <td style="font-weight: 500;">${t.data_fmt || t.data || ''}</td>
+                <td>
+                    <span style="background: rgba(255,255,255,0.06); color: var(--text-secondary); padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 600;">
+                        ${t.responsavel || ''}
+                    </span>
+                </td>
+                <td>
+                    <span style="background: ${fluxoBg}; color: ${fluxoColor}; padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 700;">
+                        ${t.fluxo || ''}
+                    </span>
+                </td>
+                <td>
+                    <span style="font-size: 12px; color: var(--text-secondary);">
+                        ${t.categoria || ''}
+                    </span>
+                </td>
+                <td style="max-width: 320px; word-break: break-word;" title="${t.descricao || ''}">
+                    ${t.descricao || ''}
+                </td>
+                <td style="text-align: right; color: #10b981; font-weight: 600;">
+                    ${credFmt}
+                </td>
+                <td style="text-align: right; color: #f59e0b; font-weight: 600;">
+                    ${debFmt}
+                </td>
+                <td style="text-align: right; color: ${saldoColor}; font-weight: 700;">
+                    ${saldoFmt}
+                </td>
+            </tr>`;
+        }).join('');
+    }
+
+    window.handleTecnodrillCaixaSearch = function () {
+        tdCaixaCurrentPage = 1;
+        renderTecnodrillCaixaTable();
+    };
+
+    window.changeTecnodrillCaixaPage = function (dir) {
+        tdCaixaCurrentPage += dir;
+        renderTecnodrillCaixaTable();
+    };
+
+    window.exportTecnodrillCaixaToXLSX = function () {
+        if (typeof XLSX === 'undefined') { alert('Biblioteca XLSX não disponível.'); return; }
+        const search = (document.getElementById('td-caixa-table-search')?.value || '').toLowerCase().trim();
+        let list = tdCaixaFilteredTransactions;
+        if (search) {
+            list = list.filter(t =>
+                (t.descricao || '').toLowerCase().includes(search) ||
+                (t.categoria || '').toLowerCase().includes(search) ||
+                (t.responsavel || '').toLowerCase().includes(search)
+            );
+        }
+
+        const data = list.map(t => ({
+            Data: t.data_fmt || t.data || '',
+            Responsável: t.responsavel || '',
+            Competência: t.competencia || '',
+            Fluxo: t.fluxo || '',
+            Categoria: t.categoria || '',
+            Descrição: t.descricao || '',
+            'Crédito (R$)': t.credito || 0,
+            'Débito (R$)': t.debito || 0,
+            'Saldo (R$)': t.saldo || 0
+        }));
+
+        const ws = XLSX.utils.json_to_sheet(data);
+        const wb = XLSX.utils.book_new();
+        const sheetTitle = `Caixa_${tdCaixaActivePerson}`;
+        XLSX.utils.book_append_sheet(wb, ws, sheetTitle.slice(0, 31));
+        const dateStr = new Date().toISOString().slice(0, 10);
+        XLSX.writeFile(wb, `Fluxo_Caixa_Tecnodrill_${tdCaixaActivePerson}_${dateStr}.xlsx`);
     };
 
     // Override de switchView para manter accordion sincronizado

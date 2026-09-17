@@ -21,6 +21,16 @@ $fallbackDirs = @(
 $localTempPath = "$PSScriptRoot\temp_tecnodrill.xlsx"
 $fallbackPath = "$PSScriptRoot\tecnodrill_local.xlsx"
 
+# Configuracao para Planilha de Caixa (Carlos e Denilson)
+$caixaPrimaryDir = "\\10.121.21.252\financeiro\Angelita\2026\TECNODRILL\CARLOS\CAIXA_BI"
+$caixaFallbackDirs = @(
+    "\\10.121.21.252\financeiro\Angelita\2026\TECNODRILL\CARLOS",
+    "\\10.121.21.252\financeiro\Angelita\2026\TECNODRILL"
+)
+$caixaLocalTempPath = "$PSScriptRoot\temp_tecnodrill_caixa.xlsx"
+$caixaFallbackPath = "$PSScriptRoot\tecnodrill_caixa_local.xlsx"
+$caixaWorkbook = $null
+
 Write-Output "======================================================="
 Write-Output "Iniciando download da planilha Tecnodrill da rede..."
 Write-Output "======================================================="
@@ -121,6 +131,79 @@ function Parse-ExcelDate-TD ($excelDate) {
         }
     }
     return $excelDate.ToString()
+}
+
+function Get-Caixa-Category ($desc, $fluxo) {
+    if ($fluxo -eq "Entrada") { return "Aporte de Caixa" }
+    $d = if ($null -ne $desc) { $desc.ToString().ToUpper() } else { "" }
+    if ($d -match "DIESEL|COMBUST|GASOLINA|POSTO|ALCOOL") { return "Combustível" }
+    if ($d -match "REFEI|ALMO|JANTA|CAF|LANCH|CHURRAS|RESTAUR|PIZZ|XIS|PADARIA|ACAI|SORVETE") { return "Alimentação" }
+    if ($d -match "HOTEL|HOSPEDAGEM|POUSADA|DIARIA") { return "Hospedagem" }
+    if ($d -match "PEDAGIO|RODOVIARIA|EGR") { return "Pedágio" }
+    if ($d -match "UBER|PASSAGEM|TRANSPORTE|DESLOCAMENTO") { return "Transporte / Uber" }
+    if ($d -match "MANUTEN|VIDRO|AUTO CENTER|PNEU|CHAVE|MECANIC|PECA|OFICINA|COMPACTA") { return "Manutenção Veicular" }
+    if ($d -match "EPI|CREDENCIAL|SEGURAN") { return "EPIs e Segurança" }
+    if ($d -match "MOVEIS|COLCH|CAFETEIRA|MERCADO|HAVAN|LIMPEZA") { return "Alojamento e Suprimentos" }
+    return "Outros e Diversos"
+}
+
+function Parse-Caixa-Number ($val) {
+    if ($null -eq $val) { return 0.0 }
+    if ($val -is [double] -or $val -is [decimal] -or $val -is [int] -or $val -is [float] -or $val -is [int64]) {
+        return [double]$val
+    }
+    $valStr = $val.ToString().Trim() -replace "R\$", "" -replace "\s", ""
+    if ($valStr -eq "" -or $valStr -eq "-") { return 0.0 }
+    if ($valStr -match "\." -and $valStr -match ",") {
+        $valStr = $valStr -replace "\.", "" -replace ",", "."
+    } else {
+        $valStr = $valStr -replace ",", "."
+    }
+    $num = 0.0
+    if ([double]::TryParse($valStr, [System.Globalization.NumberStyles]::Any, [System.Globalization.CultureInfo]::InvariantCulture, [ref]$num)) {
+        return $num
+    }
+    return 0.0
+}
+
+function Parse-Caixa-Date ($excelDate, $textDate) {
+    if ($null -ne $excelDate) {
+        $doubleVal = 0.0
+        if ([double]::TryParse($excelDate.ToString(), [System.Globalization.NumberStyles]::Any, [System.Globalization.CultureInfo]::InvariantCulture, [ref]$doubleVal)) {
+            try {
+                $dt = [System.DateTime]::FromOADate($doubleVal)
+                return @{
+                    iso = $dt.ToString("yyyy-MM-dd")
+                    fmt = $dt.ToString("dd/MM/yyyy")
+                    monthNum = $dt.Month
+                    year = $dt.Year
+                }
+            } catch {}
+        }
+    }
+    if ($null -ne $textDate -and $textDate.Trim() -ne "") {
+        $t = $textDate.Trim()
+        if ($t -match "^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$") {
+            $d = [int]$Matches[1]
+            $m = [int]$Matches[2]
+            $y = [int]$Matches[3]
+            try {
+                $dt = New-Object System.DateTime($y, $m, $d)
+                return @{
+                    iso = $dt.ToString("yyyy-MM-dd")
+                    fmt = $dt.ToString("dd/MM/yyyy")
+                    monthNum = $dt.Month
+                    year = $dt.Year
+                }
+            } catch {}
+        }
+    }
+    return @{
+        iso = ""
+        fmt = if ($null -ne $textDate) { $textDate.Trim() } else { "" }
+        monthNum = 0
+        year = 2026
+    }
 }
 
 try {
@@ -352,8 +435,166 @@ try {
         Write-Output "  -> $($txCount) transacoes extraidas."
     }
 
+    # Fechar pasta de trabalho principal para liberar memoria
+    if ($null -ne $workbook) {
+        $workbook.Close($false)
+        $workbook = $null
+    }
+
+    # =======================================================
+    # Processar Planilha de Caixa (Carlos e Denilson)
+    # =======================================================
+    Write-Output "======================================================="
+    Write-Output "Iniciando download da planilha de Caixa (Carlos e Denilson)..."
+    Write-Output "======================================================="
+
+    $useCaixaFile = $null
+    $foundCaixaFiles = @()
+    $caixaFileFilter = {
+        ($_.Name -match "CAIXA.*TECNODRILL.*\.xlsx$" -or $_.Name -like "*CAIXA*.xlsx") -and
+        $_.Name -notlike "~$*"
+    }
+
+    if (Test-Path $caixaPrimaryDir) {
+        try {
+            $cFiles = Get-ChildItem -Path $caixaPrimaryDir -Filter "*.xlsx" -ErrorAction SilentlyContinue | Where-Object $caixaFileFilter
+            if ($null -ne $cFiles) { $foundCaixaFiles += $cFiles }
+        } catch {
+            Write-Warning "Falha ao consultar diretorio primario de caixa: $($_.Exception.Message)"
+        }
+    }
+
+    if ($foundCaixaFiles.Count -eq 0) {
+        foreach ($d in $caixaFallbackDirs) {
+            if (Test-Path $d) {
+                try {
+                    $cFiles = Get-ChildItem -Path $d -Filter "*.xlsx" -ErrorAction SilentlyContinue | Where-Object $caixaFileFilter
+                    if ($null -ne $cFiles) { $foundCaixaFiles += $cFiles }
+                } catch {
+                    Write-Warning "Falha ao consultar diretorio fallback de caixa: $($_.Exception.Message)"
+                }
+            }
+        }
+    }
+
+    if ($foundCaixaFiles.Count -gt 0) {
+        $caixaNetworkFile = $foundCaixaFiles | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+        $caixaNetPath = $caixaNetworkFile.FullName
+        Write-Output "Arquivo de Caixa selecionado: $caixaNetPath (Modificado em: $($caixaNetworkFile.LastWriteTime))"
+        try {
+            Copy-Item -Path $caixaNetPath -Destination $caixaLocalTempPath -Force
+            Copy-Item -Path $caixaNetPath -Destination $caixaFallbackPath -Force
+            $useCaixaFile = $caixaLocalTempPath
+            Write-Output "Planilha de Caixa copiada localmente e cache sincronizado."
+        } catch {
+            Write-Warning "Falha ao copiar planilha de Caixa da rede: $($_.Exception.Message)"
+        }
+    }
+
+    if ($null -eq $useCaixaFile) {
+        if (Test-Path $caixaFallbackPath) {
+            Write-Output "Usando planilha de Caixa em cache local: $caixaFallbackPath"
+            $useCaixaFile = $caixaFallbackPath
+        } else {
+            Write-Warning "Planilha de Caixa nao encontrada na rede nem no cache local."
+        }
+    }
+
+    $caixaPayload = [PSCustomObject]@{
+        gerado_em = (Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+        carlos    = @()
+        denilson  = @()
+    }
+
+    if ($null -ne $useCaixaFile -and (Test-Path $useCaixaFile)) {
+        Write-Output "Abrindo planilha de Caixa..."
+        $caixaWorkbook = $excel.Workbooks.Open($useCaixaFile, 0, $true)
+
+        $mesMapNum = @{
+            1="JANEIRO"; 2="FEVEREIRO"; 3=("MAR" + $c_cedilla_caps + "O"); 4="ABRIL";
+            5="MAIO"; 6="JUNHO"; 7="JULHO"; 8="AGOSTO";
+            9="SETEMBRO"; 10="OUTUBRO"; 11="NOVEMBRO"; 12="DEZEMBRO"
+        }
+
+        foreach ($person in @("carlos", "denilson")) {
+            $sName = $person.ToUpper()
+            $cWs = $null
+            foreach ($sheet in $caixaWorkbook.Worksheets) {
+                if ($sheet.Name.Trim().ToUpper() -eq $sName) {
+                    $cWs = $sheet
+                    break
+                }
+            }
+
+            if ($null -eq $cWs) {
+                Write-Warning "Aba '$sName' nao encontrada na planilha de Caixa."
+                continue
+            }
+
+            Write-Output "Processando Caixa de $person (Aba $sName)..."
+            $cTotalRows = $cWs.UsedRange.Rows.Count
+            $pList = @()
+            $pIdx = 0
+
+            for ($r = 5; $r -le $cTotalRows; $r++) {
+                $dtVal = $cWs.Cells.Item($r, 2).Value2
+                $dtText = $cWs.Cells.Item($r, 2).Text
+                $cVal = $cWs.Cells.Item($r, 3).Value2
+                $dVal = $cWs.Cells.Item($r, 4).Value2
+                $sVal = $cWs.Cells.Item($r, 5).Value2
+                $descText = $cWs.Cells.Item($r, 6).Text
+
+                $hasData = (($null -ne $dtText -and $dtText.Trim() -ne "") -or 
+                            ($null -ne $cVal -and $cVal -ne 0) -or 
+                            ($null -ne $dVal -and $dVal -ne 0) -or 
+                            ($null -ne $descText -and $descText.Trim() -ne ""))
+
+                if (-not $hasData) { continue }
+
+                $dtInfo = Parse-Caixa-Date $dtVal $dtText
+                $comp = if ($dtInfo.monthNum -gt 0) { "$($mesMapNum[$dtInfo.monthNum])/$($dtInfo.year)" } else { "OUTROS" }
+
+                $cred = Parse-Caixa-Number $cVal
+                $deb = Parse-Caixa-Number $dVal
+                $saldo = Parse-Caixa-Number $sVal
+
+                $fluxo = if ($cred -gt 0) { "Entrada" } else { "Saída" }
+                $valor = if ($fluxo -eq "Entrada") { $cred } else { $deb }
+                $categoria = Get-Caixa-Category $descText $fluxo
+
+                $pIdx++
+                $txCaixa = [PSCustomObject]@{
+                    id             = "$person-$pIdx"
+                    linha          = $r
+                    responsavel    = if ($person -eq "carlos") { "Carlos" } else { "Denilson" }
+                    data           = $dtInfo.iso
+                    data_fmt       = $dtInfo.fmt
+                    competencia    = $comp
+                    fluxo          = $fluxo
+                    categoria      = $categoria
+                    credito        = [Math]::Round($cred, 2)
+                    debito         = [Math]::Round($deb, 2)
+                    valor          = [Math]::Round($valor, 2)
+                    saldo          = [Math]::Round($saldo, 2)
+                    descricao      = if ($null -ne $descText) { $descText.Trim() } else { "" }
+                }
+                $pList += $txCaixa
+            }
+
+            if ($person -eq "carlos") {
+                $caixaPayload.carlos = $pList
+            } else {
+                $caixaPayload.denilson = $pList
+            }
+            Write-Output "  -> Caixa de $($person): $($pList.Count) lancamentos extraidos."
+        }
+
+        $caixaWorkbook.Close($false)
+        $caixaWorkbook = $null
+    }
+
     # Gerar tecnodrill_data.js
-    Write-Output "Gerando tecnodrill_data.js com $($allTransactions.Count) lancamentos..."
+    Write-Output "Gerando tecnodrill_data.js com $($allTransactions.Count) lancamentos principais e $($caixaPayload.carlos.Count + $caixaPayload.denilson.Count) lancamentos de caixa..."
 
     $payload = [PSCustomObject]@{
         generated_at       = (Get-Date -Format "yyyy-MM-dd HH:mm:ss")
@@ -364,6 +605,7 @@ try {
             tipos    = $tiposTransacao
         }
         transactions = $allTransactions
+        caixa        = $caixaPayload
     }
 
     $jsonStr = $payload | ConvertTo-Json -Depth 6
@@ -410,7 +652,9 @@ try {
     Write-Error "Erro no ETL Tecnodrill: $($_.Exception.Message)"
 } finally {
     if ($null -ne $workbook) { $workbook.Close($false) }
+    if ($null -ne $caixaWorkbook) { $caixaWorkbook.Close($false) }
     $excel.Quit()
     [System.Runtime.Interopservices.Marshal]::ReleaseComObject($excel) | Out-Null
     if (Test-Path $localTempPath) { Remove-Item -Path $localTempPath -Force }
+    if (Test-Path $caixaLocalTempPath) { Remove-Item -Path $caixaLocalTempPath -Force }
 }

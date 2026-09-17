@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -484,6 +484,9 @@
                 <button class="tab-btn" id="td-tab-btn-transactions" onclick="switchTecnodrillTab('transactions')">
                     <i class="fa-solid fa-list-ol"></i> Lançamentos
                 </button>
+                <button class="tab-btn" id="td-tab-btn-caixa" onclick="switchTecnodrillTab('caixa')">
+                    <i class="fa-solid fa-cash-register"></i> Fluxo de Caixa
+                </button>
             </div>
 
             <!-- SUB-VIEW: INDICADORES -->
@@ -656,6 +659,190 @@
                                 <i class="fa-solid fa-chevron-left"></i>
                             </button>
                             <button class="pagination-btn" id="td-pagination-next" onclick="changeTecnodrillPage(1)">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUB-VIEW: FLUXO DE CAIXA (CARLOS & DENILSON) -->
+            <div id="td-subview-caixa" class="dashboard-subview" style="display: none;">
+                <!-- SELETOR DE RESPONSÁVEL (CARLOS / DENILSON / CONSOLIDADO) -->
+                <div class="td-caixa-person-switcher" style="display: flex; gap: 12px; margin-bottom: 20px; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+                    <div style="display: flex; gap: 8px; background: rgba(0, 0, 0, 0.25); padding: 4px; border-radius: 12px; border: 1px solid var(--border-color);">
+                        <button class="tab-btn active" id="td-caixa-btn-carlos" onclick="switchTecnodrillCaixaPerson('carlos')" style="padding: 8px 18px; border-radius: 8px; font-size: 13px; font-weight: 600;">
+                            <i class="fa-solid fa-user-tie"></i> Carlos <span id="td-caixa-badge-carlos" style="background: rgba(255,255,255,0.15); padding: 2px 7px; border-radius: 10px; font-size: 11px; margin-left: 6px;">0</span>
+                        </button>
+                        <button class="tab-btn" id="td-caixa-btn-denilson" onclick="switchTecnodrillCaixaPerson('denilson')" style="padding: 8px 18px; border-radius: 8px; font-size: 13px; font-weight: 600;">
+                            <i class="fa-solid fa-user-check"></i> Denilson <span id="td-caixa-badge-denilson" style="background: rgba(255,255,255,0.15); padding: 2px 7px; border-radius: 10px; font-size: 11px; margin-left: 6px;">0</span>
+                        </button>
+                        <button class="tab-btn" id="td-caixa-btn-consolidado" onclick="switchTecnodrillCaixaPerson('consolidado')" style="padding: 8px 18px; border-radius: 8px; font-size: 13px; font-weight: 600;">
+                            <i class="fa-solid fa-layer-group"></i> Consolidado <span id="td-caixa-badge-consolidado" style="background: rgba(255,255,255,0.15); padding: 2px 7px; border-radius: 10px; font-size: 11px; margin-left: 6px;">0</span>
+                        </button>
+                    </div>
+                    <div style="color: var(--text-secondary); font-size: 12px; display: flex; align-items: center; gap: 8px;">
+                        <span style="background: rgba(56, 189, 248, 0.1); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.2); padding: 4px 10px; border-radius: 16px; font-weight: 600;">
+                            <i class="fa-solid fa-wallet"></i> Caixa Operacional
+                        </span>
+                        <span id="td-caixa-last-update"><i class="fa-solid fa-clock-rotate-left"></i> Atualizado</span>
+                    </div>
+                </div>
+
+                <!-- FILTROS DO CAIXA -->
+                <section class="filter-bar" id="td-caixa-filters-container" style="margin-bottom: 20px;">
+                    <div class="filter-group">
+                        <label for="td-caixa-filter-mes">Competência / Mês</label>
+                        <select id="td-caixa-filter-mes" onchange="applyTecnodrillCaixaFilters()">
+                            <option value="ALL">Todos os Meses</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="td-caixa-filter-categoria">Categoria</label>
+                        <select id="td-caixa-filter-categoria" onchange="applyTecnodrillCaixaFilters()">
+                            <option value="ALL">Todas as Categorias</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="td-caixa-filter-fluxo">Tipo de Fluxo</label>
+                        <select id="td-caixa-filter-fluxo" onchange="applyTecnodrillCaixaFilters()">
+                            <option value="ALL">Todos os Lançamentos</option>
+                            <option value="Entrada">Entradas (Créditos / Aportes)</option>
+                            <option value="Saída">Saídas (Despesas / Débitos)</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="td-caixa-filter-data-inicio">Data Início</label>
+                        <input type="date" id="td-caixa-filter-data-inicio" onchange="applyTecnodrillCaixaFilters()">
+                    </div>
+                    <div class="filter-group">
+                        <label for="td-caixa-filter-data-fim">Data Fim</label>
+                        <div style="display: flex; gap: 8px; align-items: center; width: 100%;">
+                            <input type="date" id="td-caixa-filter-data-fim" onchange="applyTecnodrillCaixaFilters()" style="flex-grow: 1;">
+                            <button onclick="clearTecnodrillCaixaDateRange()" title="Limpar período" style="background-color: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 12px; color: var(--text-secondary); cursor: pointer; transition: all 0.2s ease;" onmouseover="this.style.borderColor='var(--color-primary)'; this.style.color='var(--text-primary)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-secondary)'">
+                                <i class="fa-solid fa-eraser"></i>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KPI CARDS DO CAIXA -->
+                <div class="kpi-container" style="margin-bottom: 24px;">
+                    <div class="kpi-card inflows">
+                        <div class="kpi-info">
+                            <span class="kpi-label">Total de Entradas (Aportes)</span>
+                            <h3 class="kpi-value" id="td-caixa-kpi-entradas">R$ 0,00</h3>
+                            <div class="kpi-analytics">
+                                <span class="kpi-subvalue" id="td-caixa-sub-entradas-count">0 depósitos</span>
+                            </div>
+                        </div>
+                        <div class="kpi-icon-container">
+                            <i class="fa-solid fa-hand-holding-dollar"></i>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card outflows">
+                        <div class="kpi-info">
+                            <span class="kpi-label">Total de Saídas (Despesas)</span>
+                            <h3 class="kpi-value" id="td-caixa-kpi-saidas">R$ 0,00</h3>
+                            <div class="kpi-analytics">
+                                <span class="kpi-subvalue" id="td-caixa-sub-saidas-count">0 pagamentos</span>
+                            </div>
+                        </div>
+                        <div class="kpi-icon-container">
+                            <i class="fa-solid fa-receipt"></i>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card balance">
+                        <div class="kpi-info">
+                            <span class="kpi-label">Saldo Atual em Caixa</span>
+                            <h3 class="kpi-value" id="td-caixa-kpi-saldo">R$ 0,00</h3>
+                            <div class="kpi-analytics">
+                                <span class="kpi-subvalue" id="td-caixa-sub-saldo-status">Disponível em caixa</span>
+                            </div>
+                        </div>
+                        <div class="kpi-icon-container">
+                            <i class="fa-solid fa-vault"></i>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card transfers">
+                        <div class="kpi-info">
+                            <span class="kpi-label">Média por Lançamento</span>
+                            <h3 class="kpi-value" id="td-caixa-kpi-media">R$ 0,00</h3>
+                            <div class="kpi-analytics">
+                                <span class="kpi-subvalue" id="td-caixa-sub-total-txs">0 movimentações</span>
+                            </div>
+                        </div>
+                        <div class="kpi-icon-container">
+                            <i class="fa-solid fa-calculator"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GRÁFICOS DO CAIXA -->
+                <div class="charts-grid" style="margin-bottom: 24px;">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <div class="chart-title">
+                                <h2 id="td-caixa-evolution-title">Evolução Mensal (Entradas vs Saídas)</h2>
+                            </div>
+                        </div>
+                        <div class="chart-body" style="position: relative; height: 320px; width: 100%;">
+                            <canvas id="td-caixa-chart-evolution"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <div class="chart-title">
+                                <h2 id="td-caixa-categories-title">Despesas por Categoria</h2>
+                            </div>
+                        </div>
+                        <div class="chart-body" style="position: relative; height: 320px; width: 100%; display: flex; align-items: center; justify-content: center;">
+                            <canvas id="td-caixa-chart-categories"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TABELA DE LANÇAMENTOS DO CAIXA -->
+                <div class="data-table-card">
+                    <div class="table-controls">
+                        <div class="search-wrapper">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" id="td-caixa-table-search" placeholder="Buscar por descrição, comprovante ou categoria..." oninput="handleTecnodrillCaixaSearch()">
+                        </div>
+                        <div class="table-actions">
+                            <button class="btn-secondary" onclick="exportTecnodrillCaixaToXLSX()">
+                                <i class="fa-solid fa-file-excel"></i> Exportar Excel
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Responsável</th>
+                                    <th>Fluxo</th>
+                                    <th>Categoria</th>
+                                    <th>Descrição</th>
+                                    <th style="text-align: right;">Crédito (+)</th>
+                                    <th style="text-align: right;">Débito (-)</th>
+                                    <th style="text-align: right;">Saldo</th>
+                                </tr>
+                            </thead>
+                            <tbody id="td-caixa-table-body"></tbody>
+                        </table>
+                    </div>
+                    <div class="pagination">
+                        <span class="pagination-info" id="td-caixa-pagination-info">Mostrando 0-0 de 0 transações</span>
+                        <div class="pagination-buttons">
+                            <button class="pagination-btn" id="td-caixa-pagination-prev" onclick="changeTecnodrillCaixaPage(-1)">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </button>
+                            <button class="pagination-btn" id="td-caixa-pagination-next" onclick="changeTecnodrillCaixaPage(1)">
                                 <i class="fa-solid fa-chevron-right"></i>
                             </button>
                         </div>
@@ -3477,8 +3664,8 @@
 
     <!-- Carga de Dados Dinâmica -->
     <script src="data.js"></script>
-    <script src="tecnodrill_data.js?v=20260904091018"></script>
-    <script src="tecnodrill_app.js?v=2.6"></script>
+    <script src="tecnodrill_data.js?v=20260917154336"></script>
+    <script src="tecnodrill_app.js?v=3.00"></script>
 
     <script src="veiculos_data.js?v=20260917094213"></script>
     <script src="veiculos_app.js?v=3.43"></script>
