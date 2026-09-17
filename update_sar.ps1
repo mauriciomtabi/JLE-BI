@@ -168,7 +168,7 @@ if (Test-Path $gitPath) {
         Write-Output "Enviando commits ao GitHub..."
         & $gitPath add "$outDataJs" "$swPath"
         & $gitPath commit -m "data(sar): atualizacao automatica da base SAR via rede local"
-        & $gitPath pull --rebase origin main
+        & $gitPath pull --rebase --autostash origin main
         & $gitPath push origin main
         Write-Output "Dados do SAR publicados com sucesso no repositorio remoto!"
     } else {
