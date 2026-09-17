@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-09-17 14:00:09
+// Dados SAR JLE Telecom - Gerado em: 2026-09-17 15:00:10
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1088,
-    "generated_at": "2026-09-17 14:00:09",
+    "generated_at": "2026-09-17 15:00:10",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -759,10 +759,10 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 785165.1,
-        "total_previa_medicao": 1314104.44,
+        "total_terceiros": 785708.6,
+        "total_previa_medicao": 1315241.63,
         "total_classe_l": 330501.6,
-        "total_classe_f": 454663.5
+        "total_classe_f": 455207.0
     },
     "medicao": {
         "total_geral": 1354014.93,
@@ -70300,7 +70300,7 @@ window.SAR_DATA = [
     "classe_f": "CLEVERSON",
     "situacao": "20/07/2026",
     "relatorio_foto": "4.330,00",
-    "servico": "FOI LANÇADO 520 METROS DE CABO AS, E 3810 METROS DE CABO DDS, COBRAR 2400 METROS DE CORDOALHA. 7 ABERTURA E FECHAMENTO, 3 CX NOVAS, 36 NAPS NOVAS, 4 DERIVAÇÕES, 139 FUSÕES, 56 TESTES.",
+    "servico": "FOI LANÇADO 520 METROS DE CABO AS, E 3810 METROS DE CABO DDS, COBRAR 2400 METROS DE CORDOALHA. 7 ABERTURA E FECHAMENTO, 3 CX NOVAS, 36 NAPS NOVAS, 4 DERIVAÇÕES, 162 FUSÕES, 56 TESTES.",
     "data_entrada": "2026-07-20",
     "data_entrada_fmt": "20/07/2026",
     "data_inicio": null,
@@ -76380,7 +76380,7 @@ window.SAR_DATA = [
   {
     "cod": "RSCLER1076",
     "area_tecnica": "BFMAB",
-    "node": "",
+    "node": "BFMAE",
     "site": "RSPCE13",
     "cidade": "PORTO ALEGRE",
     "condominio": "CENTRO PROFISSIONAL FERNANDES VIEIRA II",
@@ -76390,7 +76390,7 @@ window.SAR_DATA = [
     "classe_f": "CATIA",
     "situacao": "11/09/2026",
     "relatorio_foto": "SEM LANÇAMENTO",
-    "servico": "DEVOLVIDO PARA A AREA DE PROJETOS",
+    "servico": "6 ABERTURA E FECHAMENTO, 5 FUSÕES, 1 DERIVAÇÃO, 1 TESTE OTDR, 1 TESTE.",
     "data_entrada": "2026-09-11",
     "data_entrada_fmt": "11/09/2026",
     "data_inicio": null,
@@ -76426,13 +76426,13 @@ window.SAR_DATA = [
     "prazo": "NO PRAZO",
     "tempo_dias": 2.0,
     "atraso_dias": 0,
-    "total_terceiros": 0.0,
-    "previa_medicao": 0.0,
+    "total_terceiros": 543.5,
+    "previa_medicao": 1137.19,
     "valor_medicao": 0.0,
     "valor_classe_l": 0.0,
-    "valor_classe_f": 0.0,
+    "valor_classe_f": 543.5,
     "itens_l_resumo": "-",
-    "itens_f_resumo": "-",
+    "itens_f_resumo": "3.15 AB/FE: 6 un, 3.13 FUS/EME: 5 un, 3.14 OTDR: 1 un, 3.12 DER/INS: 1 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
@@ -76441,10 +76441,10 @@ window.SAR_DATA = [
       "q_311": 0.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 0.0,
-      "q_313": 0.0,
-      "q_314": 0.0,
-      "q_312": 0.0
+      "q_315": 6.0,
+      "q_313": 5.0,
+      "q_314": 1.0,
+      "q_312": 1.0
     }
   },
   {
