@@ -1,5 +1,5 @@
 ﻿window.CASH_FLOW_DATA = {
-    "generated_at":  "2026-09-17 15:05:19",
+    "generated_at":  "2026-09-18 10:05:30",
     "categories_origin":  {
                               "entradas":  [
 
@@ -154201,6 +154201,54 @@
                              "descricao":  "DEBITO CONV. DEMAIS EMPRESAS",
                              "valor_nominal":  1827.04,
                              "valor_liquido":  -1827.04,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET_2026 CONFIANÇA_41",
+                             "banco":  "Sicoob Confiança",
+                             "aba":  "SET_2026 CONFIANÇA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-17",
+                             "uf":  "RS",
+                             "fluxo":  "Entrada",
+                             "categoria":  "Transferência entre contas",
+                             "descricao":  "Transferência entre contas",
+                             "valor_nominal":  50000,
+                             "valor_liquido":  50000,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  true
+                         },
+                         {
+                             "id":  "SET_2026 CONFIANÇA_42",
+                             "banco":  "Sicoob Confiança",
+                             "aba":  "SET_2026 CONFIANÇA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-17",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Material utilizado em serviços",
+                             "descricao":  "HELICA PREFORMADOS LTDA",
+                             "valor_nominal":  3675.7,
+                             "valor_liquido":  -3675.7,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET_2026 CONFIANÇA_43",
+                             "banco":  "Sicoob Confiança",
+                             "aba":  "SET_2026 CONFIANÇA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-17",
+                             "uf":  "SC",
+                             "fluxo":  "Entrada",
+                             "categoria":  "Outros Recebimentos",
+                             "descricao":  "JAIR RODRIGUES",
+                             "valor_nominal":  200,
+                             "valor_liquido":  200,
                              "meio_pagamento":  "Pix",
                              "is_transfer":  false
                          },
