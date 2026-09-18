@@ -243,8 +243,8 @@ def main():
         cod = clean_str(get_col(row, "CODIGO SAR", "CODIGO", "COD.", "COD", default_idx=0))
         cidade = clean_str(get_col(row, "CIDADE", "MUNICIPIO", default_idx=4))
 
-        # REGRA FUNDAMENTAL: Descartar linhas de rascunho onde a Cidade está vazia
-        if not cod or not cidade:
+        # REGRA FUNDAMENTAL: Descartar linhas de rascunho onde a Cidade está vazia ou código inválido
+        if not cod or not cidade or not cod.upper().startswith("RS"):
             continue
 
         area_tecnica = clean_str(get_col(row, "AREA TECNICA", "AREA", "AT", default_idx=1))
@@ -350,28 +350,42 @@ def main():
         status_wf = "100% - OK" if "IMPLANTADO" in status or "APROV" in status else ""
 
         # Cálculo do Tempo e SLA em dias úteis
-        tempo_dias = to_number(tempo_raw)
-        if tempo_dias <= 0 and dt_entrada_iso:
-            try:
-                import numpy as np
-                d1 = datetime.datetime.strptime(dt_entrada_iso[:10], "%Y-%m-%d").date()
-                d2 = None
-                if dt_medicao_iso:
-                    d2 = datetime.datetime.strptime(dt_medicao_iso[:10], "%Y-%m-%d").date()
-                elif dt_entrega_iso:
-                    d2 = datetime.datetime.strptime(dt_entrega_iso[:10], "%Y-%m-%d").date()
-                elif "CONCLU" not in status.upper() and "CANCEL" not in status.upper():
-                    d2 = today
+        is_cancelled = (
+            "CANCEL" in status.upper() or
+            "CANCEL" in prazo_raw or
+            "CANCEL" in str(tempo_raw).upper() or
+            "CANCEL" in str(get_col(row, "DATA ENTREGA", "ENTREGA", default_idx=16)).upper()
+        )
 
-                if d1 and d2:
-                    if d2 >= d1:
-                        tempo_dias = int(np.busday_count(d1, d2))
-                    else:
-                        tempo_dias = 0
+        tempo_val = None
+        tempo_cell_str = str(tempo_raw).strip() if tempo_raw is not None else ""
+        if not is_cancelled and tempo_cell_str != "" and tempo_cell_str != "-" and tempo_cell_str.lower() != "none":
+            try:
+                tempo_val = float(tempo_cell_str.replace(",", "."))
             except Exception:
                 pass
 
-        if "NO PRAZO" in prazo_raw or "DENTRO" in prazo_raw:
+        if tempo_val is None and not is_cancelled and dt_entrada_iso:
+            target_date = dt_entrega_iso or (today.isoformat() if "CONCLU" not in status.upper() else None)
+            if target_date:
+                try:
+                    import numpy as np
+                    d1 = datetime.datetime.strptime(dt_entrada_iso[:10], "%Y-%m-%d").date()
+                    d2 = datetime.datetime.strptime(target_date[:10], "%Y-%m-%d").date()
+                    if d2 >= d1:
+                        tempo_val = max(0, int(np.busday_count(d1, d2)) - 1)
+                    else:
+                        tempo_val = 0
+                except Exception:
+                    pass
+
+        tempo_dias = tempo_val if tempo_val is not None else 0
+
+        prazo = "NO PRAZO"
+        if is_cancelled:
+            prazo = "CANCELADO"
+            atraso_dias = 0
+        elif "NO PRAZO" in prazo_raw or "DENTRO" in prazo_raw:
             prazo = "NO PRAZO"
         elif "ATRASAD" in prazo_raw or "FORA" in prazo_raw:
             prazo = "ATRASADO"
@@ -379,10 +393,10 @@ def main():
             prazo = "ATRASADO" if tempo_dias > 3 else "NO PRAZO"
 
         atraso_dias = to_number(atraso_raw)
-        if prazo == "ATRASADO" and atraso_dias <= 0 and tempo_dias > 3:
-            atraso_dias = tempo_dias - 3
-        elif prazo == "NO PRAZO":
+        if prazo == "CANCELADO" or prazo == "NO PRAZO":
             atraso_dias = 0
+        elif prazo == "ATRASADO" and atraso_dias <= 0 and tempo_dias > 3:
+            atraso_dias = tempo_dias - 3
 
         # Competência e Períodos (Data de Entrada)
         competencia = get_competencia(dt_entrada_iso)

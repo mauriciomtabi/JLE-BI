@@ -73,6 +73,31 @@ const MESES_PT_FULL = [
     "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
 ];
 
+let sarBackgroundSyncDone = false;
+
+/**
+ * Sincroniza em segundo plano com a API SAR na nuvem para manter dados em tempo real
+ */
+async function syncSarLiveInBackground(force = false) {
+    if (sarBackgroundSyncDone && !force) return;
+    try {
+        const res = await fetch(`/api/fetch-sar?_t=${Date.now()}`);
+        if (res.ok) {
+            const json = await res.json();
+            if (json.success && Array.isArray(json.data) && json.data.length > 0) {
+                window.SAR_DATA = json.data;
+                if (json.metadata) window.SAR_METADATA = json.metadata;
+                sarBackgroundSyncDone = true;
+                populateSarFilterSelects();
+                applySarFilters();
+                console.log("[SAR] Base sincronizada em background com sucesso:", json.data.length);
+            }
+        }
+    } catch (err) {
+        console.debug("[SAR] Sincronização em background indisponível (offline/local):", err);
+    }
+}
+
 /**
  * Inicializa o Módulo SAR
  */
@@ -81,16 +106,16 @@ function initSar(forceReload = false) {
     sarDataLoaded = true;
 
     if (!window.SAR_DATA || window.SAR_DATA.length === 0) {
-        console.warn("Base SAR_DATA não encontrada ou vazia.");
-        const tbody = document.getElementById('sar-table-body');
-        if (tbody) {
-            tbody.innerHTML = '<tr><td colspan="16" style="text-align:center; color: var(--text-secondary); padding: 30px;">Nenhum dado SAR disponível. Verifique a execução do script update_sar.ps1.</td></tr>';
-        }
+        console.warn("Base SAR_DATA não encontrada ou vazia. Buscando dados da nuvem...");
+        syncSarLiveInBackground(true);
         return;
     }
 
     populateSarFilterSelects();
     applySarFilters();
+
+    // Sincronização em segundo plano caso haja novidades no Google Sheets
+    syncSarLiveInBackground(false);
 }
 
 /**

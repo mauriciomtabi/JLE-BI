@@ -117,9 +117,11 @@ try {
         $pythonFound = $true
     }
 } catch {}
-
 if (-not $pythonFound) {
     $pythonCandidates = @(
+        "$env:LOCALAPPDATA\Programs\Python\Python312\python.exe",
+        "$env:LOCALAPPDATA\Programs\Python\Python311\python.exe",
+        "C:\Users\lenovo\AppData\Local\Programs\Python\Python312\python.exe",
         "C:\Users\jlema\AppData\Local\hermes\hermes-agent\venv\Scripts\python.exe",
         "C:\Program Files (x86)\Google\Cloud SDK\google-cloud-sdk\platform\bundledpython\python.exe"
     )
