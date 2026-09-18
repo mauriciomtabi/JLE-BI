@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-09-18 10:00:16
+// Dados MDU Compactados - Gerado em: 2026-09-18 10:07:13
 window.MDU_METADATA = {
-    "generated_at": "2026-09-18 10:00:16",
+    "generated_at": "2026-09-18 10:07:13",
     "total_rows": 5655,
     "geocoded_new": 0
 };
@@ -99950,8 +99950,8 @@ window.MDU_DATA = [
         "aging": "238",
         "relatorio_por": "JENIFFER",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610380143",
         "area": "IDLAA",
         "node": "IDLAG",
@@ -99966,7 +99966,7 @@ window.MDU_DATA = [
         "data_fusao": "16/05",
         "data_baixa": "18/09",
         "obs_baixa": "",
-        "data_relatorio": "",
+        "data_relatorio": "18/09/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 520.0,
