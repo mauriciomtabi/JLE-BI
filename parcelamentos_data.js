@@ -1,11 +1,11 @@
 // Dados Consolidados de Parcelamentos Tributários JLE Telecom
-// Gerado automaticamente pelo pipeline ETL em 18/09/2026 10:07:41
+// Gerado automaticamente pelo pipeline ETL em 18/09/2026 15:06:36
 
 window.PARCELAMENTOS_DATA = {
   "metadata": {
     "source_file": "Cópia de Controle parcelamentos JLE_Atualizada_BI.xlsx",
-    "generated_at": "18/09/2026 10:07:41",
-    "reference_position": "Agosto/2026"
+    "generated_at": "18/09/2026 15:06:36",
+    "reference_position": "Setembro/2026"
   },
   "overview": {},
   "acordos": [
@@ -3495,6 +3495,17 @@ window.PARCELAMENTOS_DATA = {
       "csll": 0.0,
       "total_impostos": 298787.91,
       "carga_tributaria_pct": 9.35
+    },
+    {
+      "mes": "09/2026",
+      "faturamento": 3796974.4,
+      "iss": 0.0,
+      "pis": 16179.2,
+      "cofins": 74452.63,
+      "ir": 0.0,
+      "csll": 0.0,
+      "total_impostos": 90631.83,
+      "carga_tributaria_pct": 2.39
     }
   ],
   "totais_gerais": {
