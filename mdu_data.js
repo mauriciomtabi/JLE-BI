@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-09-18 08:10:04
+// Dados MDU Compactados - Gerado em: 2026-09-18 09:00:18
 window.MDU_METADATA = {
-    "generated_at": "2026-09-18 08:10:04",
+    "generated_at": "2026-09-18 09:00:18",
     "total_rows": 5655,
     "geocoded_new": 0
 };
@@ -66518,7 +66518,7 @@ window.MDU_DATA = [
         "caixa_m": "",
         "hps": 3,
         "data_adicio": "28/01/2026",
-        "equipe": "Marcos Martins",
+        "equipe": "Marcos Vinicius",
         "primeira_visita": "",
         "segunda_visita": "",
         "obs_vistoria": "",
@@ -99950,8 +99950,8 @@ window.MDU_DATA = [
         "aging": "238",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Baixa",
-        "prog": 63.0,
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "610380143",
         "area": "IDLAA",
         "node": "IDLAG",
@@ -99961,10 +99961,10 @@ window.MDU_DATA = [
         "equipe": "David Salomão",
         "primeira_visita": "16/05/2026",
         "segunda_visita": "",
-        "obs_vistoria": "ADEQUADO, SEM SINAL",
+        "obs_vistoria": "ADEQUADO",
         "data_interna": "16/05",
         "data_fusao": "16/05",
-        "data_baixa": "",
+        "data_baixa": "18/09",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
@@ -180530,7 +180530,7 @@ window.MDU_DATA = [
         "prog": 75.0,
         "cod_imovel": "701231385",
         "area": "SPEAA",
-        "node": "",
+        "node": "SJOAAA FASE 2 E 3",
         "caixa_m": "SPEAA.023.M030",
         "hps": 10,
         "data_adicio": "17/09/2026",
