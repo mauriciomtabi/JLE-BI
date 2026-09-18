@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-09-18 10:07:36
+// Dados SAR JLE Telecom - Gerado em: 2026-09-18 11:00:13
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1087,
-    "generated_at": "2026-09-18 10:07:36",
+    "generated_at": "2026-09-18 11:00:13",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -759,10 +759,10 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 787088.1,
-        "total_previa_medicao": 1318551.79,
+        "total_terceiros": 787358.6,
+        "total_previa_medicao": 1319109.6,
         "total_classe_l": 330501.6,
-        "total_classe_f": 456586.5
+        "total_classe_f": 456857.0
     },
     "medicao": {
         "total_geral": 1356807.82,
@@ -76740,13 +76740,13 @@ window.SAR_DATA = [
     "classe_f": "CATIA",
     "situacao": "15/09/2026",
     "relatorio_foto": "SEM LANÇAMENTO",
-    "servico": "",
+    "servico": "3 ABERTURA E FECHAMENTO, 3 FUSÕES, 1 TESTES OTDR, 1 TESTE.",
     "data_entrada": "2026-09-15",
     "data_entrada_fmt": "15/09/2026",
-    "data_inicio": null,
-    "data_inicio_fmt": "-",
-    "data_previsao": null,
-    "data_previsao_fmt": "-",
+    "data_inicio": "2026-09-18",
+    "data_inicio_fmt": "18/09/2026",
+    "data_previsao": "2026-09-18",
+    "data_previsao_fmt": "18/09/2026",
     "data_entrega": "2026-09-16",
     "data_entrega_fmt": "16/09/2026",
     "data_medicao": null,
@@ -76769,20 +76769,20 @@ window.SAR_DATA = [
     "ano_entrega": "2026",
     "mes_entrega": "SETEMBRO",
     "mes_num_entrega": "09",
-    "status": "RELATÓRIO",
-    "status_relatorio": "",
-    "status_medicao": "",
+    "status": "EM MEDIÇÃO",
+    "status_relatorio": "18/09/2026",
+    "status_medicao": "18/09/2026",
     "status_obra": "Em Andamento",
     "prazo": "NO PRAZO",
     "tempo_dias": 1.0,
     "atraso_dias": 0,
-    "total_terceiros": 0.0,
-    "previa_medicao": 0.0,
+    "total_terceiros": 270.5,
+    "previa_medicao": 557.81,
     "valor_medicao": 0.0,
     "valor_classe_l": 0.0,
-    "valor_classe_f": 0.0,
+    "valor_classe_f": 270.5,
     "itens_l_resumo": "-",
-    "itens_f_resumo": "-",
+    "itens_f_resumo": "3.15 AB/FE: 3 un, 3.13 FUS/EME: 3 un, 3.14 OTDR: 1 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
@@ -76791,9 +76791,9 @@ window.SAR_DATA = [
       "q_311": 0.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 0.0,
-      "q_313": 0.0,
-      "q_314": 0.0,
+      "q_315": 3.0,
+      "q_313": 3.0,
+      "q_314": 1.0,
       "q_312": 0.0
     }
   },
