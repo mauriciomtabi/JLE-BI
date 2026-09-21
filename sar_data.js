@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-09-21 13:00:10
+// Dados SAR JLE Telecom - Gerado em: 2026-09-21 14:00:13
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1087,
-    "generated_at": "2026-09-21 13:00:10",
+    "generated_at": "2026-09-21 14:00:13",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -759,10 +759,10 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 789635.45,
-        "total_previa_medicao": 1323082.89,
+        "total_terceiros": 789656.95,
+        "total_previa_medicao": 1323156.43,
         "total_classe_l": 331738.45,
-        "total_classe_f": 457897.0
+        "total_classe_f": 457918.5
     },
     "medicao": {
         "total_geral": 1356807.82,
@@ -57910,7 +57910,7 @@ window.SAR_DATA = [
     "classe_f": "CATIA",
     "situacao": "09/09/2026",
     "relatorio_foto": "SEM LANÇAMENTO",
-    "servico": "3 ABERTURA E FECHAMENTO, 2 FUSÕES, 1 TESTES OTDR, 1 TESTES.",
+    "servico": "3 ABERTURA E FECHAMENTO, 4 FUSÕES, 2 TESTES OTDR, 2 TESTES.",
     "data_entrada": "2026-09-09",
     "data_entrada_fmt": "09/09/2026",
     "data_inicio": "2026-09-09",
@@ -57946,13 +57946,13 @@ window.SAR_DATA = [
     "prazo": "NO PRAZO",
     "tempo_dias": 0.0,
     "atraso_dias": 0,
-    "total_terceiros": 261.5,
-    "previa_medicao": 527.86,
+    "total_terceiros": 283.0,
+    "previa_medicao": 601.4,
     "valor_medicao": 541.5,
     "valor_classe_l": 0.0,
-    "valor_classe_f": 261.5,
+    "valor_classe_f": 283.0,
     "itens_l_resumo": "-",
-    "itens_f_resumo": "3.15 AB/FE: 3 un, 3.13 FUS/EME: 2 un, 3.14 OTDR: 1 un",
+    "itens_f_resumo": "3.15 AB/FE: 3 un, 3.13 FUS/EME: 4 un, 3.14 OTDR: 2 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
@@ -57962,8 +57962,8 @@ window.SAR_DATA = [
       "q_317": 0.0,
       "q_318": 0.0,
       "q_315": 3.0,
-      "q_313": 2.0,
-      "q_314": 1.0,
+      "q_313": 4.0,
+      "q_314": 2.0,
       "q_312": 0.0
     }
   },
@@ -71560,7 +71560,7 @@ window.SAR_DATA = [
     "classe_f": "",
     "situacao": "28/07/2026",
     "relatorio_foto": "1.631,00",
-    "servico": "FOI LANÇADO 1631 METROS DE CABO, 4 ABERTURA E FECHAMENTO, 18 FUSÕES, 3 DERIVAÇÕES, 6 TESTES OTDR",
+    "servico": "FOI LANÇADO 1631 METROS DE CABO, 4 ABERTURA E FECHAMENTO, 18 FUSÕES, 3 DERIVAÇÕES, 6 TESTES OTDR , 5 NAP NOVA, 5 FUSÕES",
     "data_entrada": "2026-07-28",
     "data_entrada_fmt": "28/07/2026",
     "data_inicio": null,
@@ -76810,7 +76810,7 @@ window.SAR_DATA = [
     "classe_f": "CATIA",
     "situacao": "16/09/2026",
     "relatorio_foto": "SEM LANÇAMENTO",
-    "servico": "",
+    "servico": "4 ABERTURA E FECHAMENTO, 12 FUSÕES, 2 TESTES OTDR, 3 TESTES.",
     "data_entrada": "2026-09-16",
     "data_entrada_fmt": "16/09/2026",
     "data_inicio": null,
