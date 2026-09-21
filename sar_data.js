@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-09-21 10:07:14
+// Dados SAR JLE Telecom - Gerado em: 2026-09-21 11:00:10
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1087,
-    "generated_at": "2026-09-21 10:07:14",
+    "generated_at": "2026-09-21 11:00:10",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -759,10 +759,10 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 789715.45,
-        "total_previa_medicao": 1323234.33,
+        "total_terceiros": 789635.45,
+        "total_previa_medicao": 1323082.89,
         "total_classe_l": 331738.45,
-        "total_classe_f": 457977.0
+        "total_classe_f": 457897.0
     },
     "medicao": {
         "total_geral": 1356807.82,
@@ -57350,7 +57350,7 @@ window.SAR_DATA = [
     "classe_f": "CATIA",
     "situacao": "03/09/2026",
     "relatorio_foto": "548",
-    "servico": "FOI LANÇADO 548 METROS DE CABO DE 12FO,  5 ABERTURA E FECHAMENTO, 8 FUSÕES, 1 CX NOVA, 1 DERIVAÇÃO, 1 TESTE OTDR, 1 TESTE.",
+    "servico": "FOI LANÇADO 548 METROS DE CABO DE 12FO,  4 ABERTURA E FECHAMENTO, 8 FUSÕES, 1 CX NOVA, 1 DERIVAÇÃO, 1 TESTE OTDR, 1 TESTE.",
     "data_entrada": "2026-09-03",
     "data_entrada_fmt": "03/09/2026",
     "data_inicio": "2026-09-09",
@@ -57386,13 +57386,13 @@ window.SAR_DATA = [
     "prazo": "NO PRAZO",
     "tempo_dias": 1.0,
     "atraso_dias": 0,
-    "total_terceiros": 1350.1,
-    "previa_medicao": 1841.83,
+    "total_terceiros": 1270.1,
+    "previa_medicao": 1690.39,
     "valor_medicao": 3031.98,
     "valor_classe_l": 794.6,
-    "valor_classe_f": 555.5,
+    "valor_classe_f": 475.5,
     "itens_l_resumo": "2.15 CB ESP: 548m",
-    "itens_f_resumo": "3.11 CX EM: 1 un, 3.15 AB/FE: 5 un, 3.13 FUS/EME: 8 un, 3.14 OTDR: 1 un, 3.12 DER/INS: 1 un",
+    "itens_f_resumo": "3.11 CX EM: 1 un, 3.15 AB/FE: 4 un, 3.13 FUS/EME: 8 un, 3.14 OTDR: 1 un, 3.12 DER/INS: 1 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
@@ -57401,7 +57401,7 @@ window.SAR_DATA = [
       "q_311": 1.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 5.0,
+      "q_315": 4.0,
       "q_313": 8.0,
       "q_314": 1.0,
       "q_312": 1.0
