@@ -1,9 +1,9 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-09-20 21:03:09
-// Fonte: Cache CSV Local (sar_local.csv)
+// Dados SAR JLE Telecom - Gerado em: 2026-09-21 08:23:22
+// Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1087,
-    "generated_at": "2026-09-20 21:03:09",
-    "source_file": "Cache CSV Local (sar_local.csv)",
+    "generated_at": "2026-09-21 08:23:22",
+    "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
         "ARROIO DO MEIO",
@@ -71594,7 +71594,7 @@ window.SAR_DATA = [
     "status_medicao": "",
     "status_obra": "Em Andamento",
     "prazo": "NO PRAZO",
-    "tempo_dias": 38.0,
+    "tempo_dias": 39.0,
     "atraso_dias": 0,
     "total_terceiros": 2912.95,
     "previa_medicao": 3232.59,
