@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-09-21 10:00:15
+// Dados MDU Compactados - Gerado em: 2026-09-21 10:06:47
 window.MDU_METADATA = {
-    "generated_at": "2026-09-21 10:00:15",
+    "generated_at": "2026-09-21 10:06:47",
     "total_rows": 5692,
-    "geocoded_new": 10
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -181003,23 +181003,23 @@ window.MDU_DATA = [
         "endereco": "R BUARQUE DE MACEDO 143",
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
-        "aging": "46.286",
+        "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "FALTA DADOS",
+        "status": "Baixa",
         "prog": 0,
         "cod_imovel": "",
         "area": "NAVAA",
         "node": "",
         "caixa_m": "NAVAA.012.M010",
         "hps": 8,
-        "data_adicio": "",
-        "equipe": "",
-        "primeira_visita": "",
+        "data_adicio": "21/09/2026",
+        "equipe": "Abraão Rodrigues",
+        "primeira_visita": "15/09/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
-        "data_interna": "",
-        "data_fusao": "",
+        "obs_vistoria": "ADEQUADO",
+        "data_interna": "15/09/2026",
+        "data_fusao": "15/09/2026",
         "data_baixa": "",
         "obs_baixa": "",
         "data_relatorio": "",
