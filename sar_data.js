@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-09-21 11:00:10
+// Dados SAR JLE Telecom - Gerado em: 2026-09-21 12:00:10
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1087,
-    "generated_at": "2026-09-21 11:00:10",
+    "generated_at": "2026-09-21 12:00:10",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -63157,7 +63157,7 @@ window.SAR_DATA = [
     "endereco": "R SÃO LUIS GONZAGA 140, 150",
     "caixa_mdu": "GRIAA.053.M040",
     "classe_l": "CLEVERSON",
-    "classe_f": "CLEVERSON",
+    "classe_f": "CLEVERSON/CATIA",
     "situacao": "13/08/2026",
     "relatorio_foto": "261",
     "servico": "FOI LANÇADO 261 METROS DE CABO, 3 ABERTURA E FECHAMENTO, 1 CX NOVA, 1 DERIVAÇÃO, 16 FUSÕES,12 TESTES.",
