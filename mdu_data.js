@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-09-21 12:00:13
+// Dados MDU Compactados - Gerado em: 2026-09-21 13:00:15
 window.MDU_METADATA = {
-    "generated_at": "2026-09-21 12:00:13",
+    "generated_at": "2026-09-21 13:00:15",
     "total_rows": 5692,
-    "geocoded_new": 3
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -180975,7 +180975,7 @@ window.MDU_DATA = [
         "relatorio_por": "DUDA",
         "pendencia": "Não",
         "status": "Relatório",
-        "prog": 0,
+        "prog": 75.0,
         "cod_imovel": "610059220",
         "area": "SANNAA",
         "node": "",
@@ -181039,7 +181039,7 @@ window.MDU_DATA = [
         "relatorio_por": "DUDA",
         "pendencia": "Não",
         "status": "Relatório",
-        "prog": 0,
+        "prog": 75.0,
         "cod_imovel": "700068390",
         "area": "BFMAA",
         "node": "",
@@ -181071,7 +181071,7 @@ window.MDU_DATA = [
         "relatorio_por": "",
         "pendencia": "Não",
         "status": "Relatório",
-        "prog": 0,
+        "prog": 75.0,
         "cod_imovel": "",
         "area": "BFMAA",
         "node": "",
@@ -181100,10 +181100,10 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "0",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
         "status": "Relatório",
-        "prog": 0,
+        "prog": 75.0,
         "cod_imovel": "610499425",
         "area": "NAVAA",
         "node": "",
@@ -181135,7 +181135,7 @@ window.MDU_DATA = [
         "relatorio_por": "",
         "pendencia": "Não",
         "status": "Relatório",
-        "prog": 0,
+        "prog": 75.0,
         "cod_imovel": "",
         "area": "NAVAB",
         "node": "",
@@ -181167,7 +181167,7 @@ window.MDU_DATA = [
         "relatorio_por": "",
         "pendencia": "Não",
         "status": "Relatório",
-        "prog": 0,
+        "prog": 75.0,
         "cod_imovel": "",
         "area": "SANAA",
         "node": "",
@@ -181199,7 +181199,7 @@ window.MDU_DATA = [
         "relatorio_por": "",
         "pendencia": "Não",
         "status": "Relatório",
-        "prog": 0,
+        "prog": 75.0,
         "cod_imovel": "",
         "area": "",
         "node": "",
