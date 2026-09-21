@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-09-21 15:00:22
+// Dados MDU Compactados - Gerado em: 2026-09-21 15:07:12
 window.MDU_METADATA = {
-    "generated_at": "2026-09-21 15:00:22",
+    "generated_at": "2026-09-21 15:07:12",
     "total_rows": 5692,
-    "geocoded_new": 2
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -181037,9 +181037,9 @@ window.MDU_DATA = [
         "cluster": "PAE",
         "aging": "0",
         "relatorio_por": "DUDA (aguardando arq unifilar)",
-        "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "pendencia": "SIM",
+        "status": "Pendência",
+        "prog": 0.0,
         "cod_imovel": "700068390",
         "area": "BFMAA",
         "node": "",
@@ -181198,8 +181198,8 @@ window.MDU_DATA = [
         "aging": "0",
         "relatorio_por": "DUDA",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610450715",
         "area": "",
         "node": "",
@@ -181214,7 +181214,7 @@ window.MDU_DATA = [
         "data_fusao": "16/09/2026",
         "data_baixa": "21/09",
         "obs_baixa": "",
-        "data_relatorio": "",
+        "data_relatorio": "21/09/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
