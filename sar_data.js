@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-09-21 14:00:13
+// Dados SAR JLE Telecom - Gerado em: 2026-09-21 15:00:13
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1087,
-    "generated_at": "2026-09-21 14:00:13",
+    "generated_at": "2026-09-21 15:00:13",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -759,10 +759,10 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 789656.95,
-        "total_previa_medicao": 1323156.43,
-        "total_classe_l": 331738.45,
-        "total_classe_f": 457918.5
+        "total_terceiros": 789692.95,
+        "total_previa_medicao": 1323276.23,
+        "total_classe_l": 331190.45,
+        "total_classe_f": 458502.5
     },
     "medicao": {
         "total_geral": 1356807.82,
@@ -57910,7 +57910,7 @@ window.SAR_DATA = [
     "classe_f": "CATIA",
     "situacao": "09/09/2026",
     "relatorio_foto": "SEM LANÇAMENTO",
-    "servico": "3 ABERTURA E FECHAMENTO, 4 FUSÕES, 2 TESTES OTDR, 2 TESTES.",
+    "servico": "3 ABERTURA E FECHAMENTO, 6 FUSÕES, 2 TESTES OTDR, 2 TESTES.",
     "data_entrada": "2026-09-09",
     "data_entrada_fmt": "09/09/2026",
     "data_inicio": "2026-09-09",
@@ -57946,13 +57946,13 @@ window.SAR_DATA = [
     "prazo": "NO PRAZO",
     "tempo_dias": 0.0,
     "atraso_dias": 0,
-    "total_terceiros": 283.0,
-    "previa_medicao": 601.4,
+    "total_terceiros": 301.0,
+    "previa_medicao": 661.3,
     "valor_medicao": 541.5,
     "valor_classe_l": 0.0,
-    "valor_classe_f": 283.0,
+    "valor_classe_f": 301.0,
     "itens_l_resumo": "-",
-    "itens_f_resumo": "3.15 AB/FE: 3 un, 3.13 FUS/EME: 4 un, 3.14 OTDR: 2 un",
+    "itens_f_resumo": "3.15 AB/FE: 3 un, 3.13 FUS/EME: 6 un, 3.14 OTDR: 2 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
@@ -57962,7 +57962,7 @@ window.SAR_DATA = [
       "q_317": 0.0,
       "q_318": 0.0,
       "q_315": 3.0,
-      "q_313": 4.0,
+      "q_313": 6.0,
       "q_314": 2.0,
       "q_312": 0.0
     }
@@ -60280,8 +60280,8 @@ window.SAR_DATA = [
   {
     "cod": "RSCLER1008",
     "area_tecnica": "RBTAB",
-    "node": "",
-    "site": "",
+    "node": "RBTAD",
+    "site": "RSPNO22",
     "cidade": "PORTO ALEGRE",
     "condominio": "",
     "endereco": "R DR CARLOS MARIA BINS 230",
@@ -71557,7 +71557,7 @@ window.SAR_DATA = [
     "endereco": "Av. Juca Batista, 5505 - Hípica",
     "caixa_mdu": "HPCAA.402",
     "classe_l": "TIAGO FERREIRA",
-    "classe_f": "",
+    "classe_f": "CATIA",
     "situacao": "28/07/2026",
     "relatorio_foto": "1.631,00",
     "servico": "FOI LANÇADO 1631 METROS DE CABO, 4 ABERTURA E FECHAMENTO, 18 FUSÕES, 3 DERIVAÇÕES, 6 TESTES OTDR , 5 NAP NOVA, 5 FUSÕES",
@@ -71599,8 +71599,8 @@ window.SAR_DATA = [
     "total_terceiros": 2912.95,
     "previa_medicao": 3232.59,
     "valor_medicao": 0.0,
-    "valor_classe_l": 2912.95,
-    "valor_classe_f": 0.0,
+    "valor_classe_l": 2364.95,
+    "valor_classe_f": 548.0,
     "itens_l_resumo": "2.15 CB ESP: 1631m",
     "itens_f_resumo": "3.15 AB/FE: 4 un, 3.13 FUS/EME: 18 un, 3.14 OTDR: 6 un, 3.12 DER/INS: 3 un",
     "lpu_itens": {
@@ -75060,7 +75060,7 @@ window.SAR_DATA = [
     "classe_f": "CATIA",
     "situacao": "01/09/2026",
     "relatorio_foto": "90",
-    "servico": "FOI LANÇADO 90 METROS DE CABO DE 12FO, 3 ABERTURA E FECHAMENTO, 4 FUSÕES, 2 DERIVAÇÕES, 2 TESTES OTDR, 2 TESTES.",
+    "servico": "FOI LANÇADO 90 METROS DE CABO DE 12FO, 3 ABERTURA E FECHAMENTO, 6 FUSÕES, 2 DERIVAÇÕES, 2 TESTES OTDR, 2 TESTES.",
     "data_entrada": "2026-09-01",
     "data_entrada_fmt": "01/09/2026",
     "data_inicio": "2026-09-03",
@@ -75096,13 +75096,13 @@ window.SAR_DATA = [
     "prazo": "NO PRAZO",
     "tempo_dias": 2.0,
     "atraso_dias": 0,
-    "total_terceiros": 443.5,
-    "previa_medicao": 831.62,
+    "total_terceiros": 461.5,
+    "previa_medicao": 891.52,
     "valor_medicao": 960.44,
     "valor_classe_l": 130.5,
-    "valor_classe_f": 313.0,
+    "valor_classe_f": 331.0,
     "itens_l_resumo": "2.15 CB ESP: 90m",
-    "itens_f_resumo": "3.15 AB/FE: 3 un, 3.13 FUS/EME: 4 un, 3.14 OTDR: 2 un, 3.12 DER/INS: 2 un",
+    "itens_f_resumo": "3.15 AB/FE: 3 un, 3.13 FUS/EME: 6 un, 3.14 OTDR: 2 un, 3.12 DER/INS: 2 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
@@ -75112,7 +75112,7 @@ window.SAR_DATA = [
       "q_317": 0.0,
       "q_318": 0.0,
       "q_315": 3.0,
-      "q_313": 4.0,
+      "q_313": 6.0,
       "q_314": 2.0,
       "q_312": 2.0
     }
