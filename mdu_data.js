@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-09-22 15:00:32
+// Dados MDU Compactados - Gerado em: 2026-09-22 15:10:22
 window.MDU_METADATA = {
-    "generated_at": "2026-09-22 15:00:32",
+    "generated_at": "2026-09-22 15:10:22",
     "total_rows": 5687,
-    "geocoded_new": 8
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -181355,23 +181355,23 @@ window.MDU_DATA = [
         "endereco": "R GERMANO PETERSEN JUNIO 627",
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
-        "aging": "46.287",
+        "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "FALTA DADOS",
+        "status": "Baixa",
         "prog": 0,
         "cod_imovel": "",
         "area": "MTSAA",
         "node": "",
         "caixa_m": "MTSAA.015.M050",
         "hps": 16,
-        "data_adicio": "",
-        "equipe": "",
-        "primeira_visita": "",
+        "data_adicio": "22/09/2026",
+        "equipe": "Guilherme Albrecht",
+        "primeira_visita": "10/09/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
-        "data_interna": "",
-        "data_fusao": "",
+        "obs_vistoria": "ADEQUADO",
+        "data_interna": "10/09/2026",
+        "data_fusao": "10/09/2026",
         "data_baixa": "",
         "obs_baixa": "",
         "data_relatorio": "",
