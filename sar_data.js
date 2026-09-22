@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-09-22 10:07:10
+// Dados SAR JLE Telecom - Gerado em: 2026-09-22 11:00:09
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1090,
-    "generated_at": "2026-09-22 10:07:10",
+    "generated_at": "2026-09-22 11:00:09",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -71560,7 +71560,7 @@ window.SAR_DATA = [
     "classe_f": "CATIA",
     "situacao": "28/07/2026",
     "relatorio_foto": "1.631,00",
-    "servico": "FOI LANÇADO 1631 METROS DE CABO, 4 ABERTURA E FECHAMENTO, 18 FUSÕES, 3 DERIVAÇÕES, 6 TESTES OTDR , 5 NAP NOVA, 5 FUSÕES",
+    "servico": "FOI LANÇADO 1631 METROS DE CABO,FOI LANÇADO 1427 METROS DE CABO DE 24FO DDS, FOI LANÇADO 429 METROS DE CABO DE 12FO AS, FOI LANÇADO 1350 METROS DE CORDOALHA,  4 ABERTURA E FECHAMENTO, 18 FUSÕES, 3 DERIVAÇÕES, 6 TESTES OTDR , 5 NAP NOVA, 5 FUSÕES",
     "data_entrada": "2026-07-28",
     "data_entrada_fmt": "28/07/2026",
     "data_inicio": null,
