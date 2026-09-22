@@ -1,7 +1,7 @@
-// Dados MDU Compactados - Gerado em: 2026-09-22 10:00:16
+// Dados MDU Compactados - Gerado em: 2026-09-22 10:06:48
 window.MDU_METADATA = {
-    "generated_at": "2026-09-22 10:00:16",
-    "total_rows": 5692,
+    "generated_at": "2026-09-22 10:06:48",
+    "total_rows": 5691,
     "geocoded_new": 0
 };
 
@@ -51318,38 +51318,6 @@ window.MDU_DATA = [
         "caixa_m": "",
         "hps": 48,
         "data_adicio": "06/10/2021",
-        "equipe": "?",
-        "primeira_visita": "05/11/2025",
-        "segunda_visita": "",
-        "obs_vistoria": "PREDIO NAO FOI ADEQUADO, POIS É LOCAL DE DIFICIL ACESSO",
-        "data_interna": "",
-        "data_fusao": "",
-        "data_baixa": "",
-        "obs_baixa": "",
-        "data_relatorio": "",
-        "data_medicao": "",
-        "valor_medicao": 0,
-        "valor_repasse": 0,
-        "lat": -30.0278424,
-        "lng": -51.2183016,
-        "geocodificado": true
-    },
-    {
-        "os": "RS.CLR.PRD.2501481",
-        "endereco": "ALBERTO BINS 392",
-        "cidade": "PORTO ALEGRE",
-        "cluster": "PAE",
-        "aging": "1.811",
-        "relatorio_por": "",
-        "pendencia": "Não",
-        "status": "2º Vistoria",
-        "prog": 13.0,
-        "cod_imovel": "#N/A",
-        "area": "BFMAA",
-        "node": "CNTAN",
-        "caixa_m": "",
-        "hps": 72,
-        "data_adicio": "07/10/2021",
         "equipe": "?",
         "primeira_visita": "05/11/2025",
         "segunda_visita": "",
