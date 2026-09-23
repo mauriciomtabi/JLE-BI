@@ -1,7 +1,7 @@
 // Data generated 100% from Master Excel Controle de Medições (Mnt. Demanda)
 (function() {
     const db = {
-  "generated_at": "2026-09-23 15:07:34",
+  "generated_at": "2026-09-23 16:00:14",
   "lookups": {
     "tipos_of": [
       "TIPO\nOS CLIENTE",
@@ -57209,7 +57209,7 @@
       "ROMPIMENTO - PAE/IP/20964 / IERGS INSTITUTO EDUCACI",
       1,
       1,
-      1,
+      2,
       "20/08/2026",
       1,
       1,
@@ -57217,9 +57217,9 @@
       1079.49,
       7,
       0,
+      "5646569",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3167",
@@ -57263,7 +57263,7 @@
       "ATENUAÇÃO - DM2104G2_PAEIU-01 PORTA 2",
       6,
       1,
-      1,
+      2,
       "21/08/2026",
       1,
       6,
@@ -57271,9 +57271,9 @@
       328.9,
       7,
       0,
+      "5646603",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3170",
@@ -57281,7 +57281,7 @@
       "ROMPIMENTO - JUSTICA FEDERAL DE PRIMEI",
       1,
       1,
-      1,
+      2,
       "21/08/2026",
       1,
       1,
@@ -57289,9 +57289,9 @@
       328.9,
       7,
       0,
+      "5646612",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3171",
@@ -57407,7 +57407,7 @@
       "ROMPIMENTO - NODE B RSCHN22 X RSCHN11",
       1,
       3,
-      1,
+      2,
       "22/08/2026",
       1,
       1,
@@ -57415,9 +57415,9 @@
       1732.46,
       7,
       0,
+      "5646644",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3178",
@@ -57425,7 +57425,7 @@
       "ROMPIMENTO - C220-PAEMAD-001 - 4/4",
       1,
       1,
-      1,
+      2,
       "22/08/2026",
       1,
       1,
@@ -57433,9 +57433,9 @@
       2614.78,
       7,
       0,
+      "5646648",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3179",
@@ -57461,7 +57461,7 @@
       "ROMPIMENTO - PNO16 - AGUARDANDO NOTA",
       1,
       1,
-      1,
+      2,
       "23/08/2026",
       1,
       1,
@@ -57469,9 +57469,9 @@
       1523.31,
       7,
       0,
+      "5646684",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3181",
@@ -57479,7 +57479,7 @@
       "ROMPIMENTO - NODE B RSPSU02 X RSPCE24",
       1,
       1,
-      1,
+      2,
       "23/08/2026",
       1,
       1,
@@ -57487,9 +57487,9 @@
       6662.41,
       7,
       0,
+      "5646710",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3182",
@@ -57839,7 +57839,7 @@
       "ROMPIMENTO - RIO GRANDE DO SUL DEFENSO",
       1,
       1,
-      1,
+      2,
       "24/08/2026",
       1,
       1,
@@ -57847,9 +57847,9 @@
       1375.75,
       7,
       0,
+      "5646742",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3202",
@@ -57857,7 +57857,7 @@
       "ATENUAÇÃO - FLEURY S.A.",
       2,
       3,
-      1,
+      2,
       "24/08/2026",
       1,
       2,
@@ -57865,9 +57865,9 @@
       365.1,
       7,
       0,
+      "5646758",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3203",
@@ -58253,7 +58253,7 @@
       "ROMPIMENTO - OI S.A. - EM RECUPERACAO",
       1,
       1,
-      1,
+      2,
       "24/08/2026",
       1,
       1,
@@ -58261,9 +58261,9 @@
       1767.02,
       7,
       0,
+      "5646782",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3225",
@@ -58343,7 +58343,7 @@
       "ROMPIMENTO - CHN07",
       1,
       3,
-      1,
+      2,
       "25/08/2026",
       1,
       1,
@@ -58351,9 +58351,9 @@
       735.81,
       7,
       0,
+      "5646800",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3230",
@@ -58361,7 +58361,7 @@
       "ROMPIMENTO - NODE B RSPCE14",
       1,
       1,
-      1,
+      2,
       "25/08/2026",
       1,
       1,
@@ -58369,9 +58369,9 @@
       1472.88,
       7,
       0,
+      "5646834",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3231",
