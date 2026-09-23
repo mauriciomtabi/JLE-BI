@@ -1,5 +1,5 @@
 ﻿window.TECNODRILL_DATA = {
-    "generated_at":  "2026-09-22 15:09:46",
+    "generated_at":  "2026-09-23 10:08:35",
     "empresa":  "Tecnodrill",
     "categories_origin":  {
                               "entradas":  [
@@ -16090,9 +16090,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_11",
+                             "id":  "SET__2026_TECNODRILL_MAX_11",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-01",
@@ -16106,9 +16106,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_12",
+                             "id":  "SET__2026_TECNODRILL_MAX_12",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-01",
@@ -16122,9 +16122,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_13",
+                             "id":  "SET__2026_TECNODRILL_MAX_13",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-01",
@@ -16138,9 +16138,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_14",
+                             "id":  "SET__2026_TECNODRILL_MAX_14",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-01",
@@ -16154,9 +16154,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_15",
+                             "id":  "SET__2026_TECNODRILL_MAX_15",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-02",
@@ -16170,9 +16170,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_16",
+                             "id":  "SET__2026_TECNODRILL_MAX_16",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-02",
@@ -16186,9 +16186,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_17",
+                             "id":  "SET__2026_TECNODRILL_MAX_17",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-02",
@@ -16202,9 +16202,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_18",
+                             "id":  "SET__2026_TECNODRILL_MAX_18",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-02",
@@ -16218,9 +16218,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_19",
+                             "id":  "SET__2026_TECNODRILL_MAX_19",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-03",
@@ -16234,9 +16234,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_20",
+                             "id":  "SET__2026_TECNODRILL_MAX_20",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-03",
@@ -16250,9 +16250,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_21",
+                             "id":  "SET__2026_TECNODRILL_MAX_21",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-03",
@@ -16266,9 +16266,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_22",
+                             "id":  "SET__2026_TECNODRILL_MAX_22",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-04",
@@ -16282,9 +16282,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_23",
+                             "id":  "SET__2026_TECNODRILL_MAX_23",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-04",
@@ -16298,9 +16298,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_24",
+                             "id":  "SET__2026_TECNODRILL_MAX_24",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-04",
@@ -16314,9 +16314,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_25",
+                             "id":  "SET__2026_TECNODRILL_MAX_25",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-04",
@@ -16330,9 +16330,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_26",
+                             "id":  "SET__2026_TECNODRILL_MAX_26",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-04",
@@ -16346,9 +16346,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_27",
+                             "id":  "SET__2026_TECNODRILL_MAX_27",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-04",
@@ -16362,9 +16362,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_28",
+                             "id":  "SET__2026_TECNODRILL_MAX_28",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-04",
@@ -16378,9 +16378,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_29",
+                             "id":  "SET__2026_TECNODRILL_MAX_29",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-04",
@@ -16394,9 +16394,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_30",
+                             "id":  "SET__2026_TECNODRILL_MAX_30",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-08",
@@ -16410,9 +16410,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_31",
+                             "id":  "SET__2026_TECNODRILL_MAX_31",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-08",
@@ -16426,9 +16426,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_32",
+                             "id":  "SET__2026_TECNODRILL_MAX_32",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-08",
@@ -16442,9 +16442,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_33",
+                             "id":  "SET__2026_TECNODRILL_MAX_33",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-08",
@@ -16458,9 +16458,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_34",
+                             "id":  "SET__2026_TECNODRILL_MAX_34",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-08",
@@ -16474,9 +16474,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_35",
+                             "id":  "SET__2026_TECNODRILL_MAX_35",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-08",
@@ -16490,9 +16490,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_36",
+                             "id":  "SET__2026_TECNODRILL_MAX_36",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-08",
@@ -16506,9 +16506,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_37",
+                             "id":  "SET__2026_TECNODRILL_MAX_37",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-08",
@@ -16522,9 +16522,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_38",
+                             "id":  "SET__2026_TECNODRILL_MAX_38",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-08",
@@ -16538,9 +16538,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_39",
+                             "id":  "SET__2026_TECNODRILL_MAX_39",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-08",
@@ -16554,9 +16554,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_40",
+                             "id":  "SET__2026_TECNODRILL_MAX_40",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-08",
@@ -16570,9 +16570,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_41",
+                             "id":  "SET__2026_TECNODRILL_MAX_41",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-08",
@@ -16586,9 +16586,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_42",
+                             "id":  "SET__2026_TECNODRILL_MAX_42",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-08",
@@ -16602,9 +16602,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_43",
+                             "id":  "SET__2026_TECNODRILL_MAX_43",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-08",
@@ -16618,9 +16618,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_44",
+                             "id":  "SET__2026_TECNODRILL_MAX_44",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-08",
@@ -16634,9 +16634,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_45",
+                             "id":  "SET__2026_TECNODRILL_MAX_45",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-08",
@@ -16650,9 +16650,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_46",
+                             "id":  "SET__2026_TECNODRILL_MAX_46",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-08",
@@ -16666,9 +16666,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_47",
+                             "id":  "SET__2026_TECNODRILL_MAX_47",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-08",
@@ -16682,9 +16682,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_48",
+                             "id":  "SET__2026_TECNODRILL_MAX_48",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-08",
@@ -16698,9 +16698,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_49",
+                             "id":  "SET__2026_TECNODRILL_MAX_49",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-08",
@@ -16714,9 +16714,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_50",
+                             "id":  "SET__2026_TECNODRILL_MAX_50",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-08",
@@ -16730,9 +16730,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_51",
+                             "id":  "SET__2026_TECNODRILL_MAX_51",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-09",
@@ -16746,9 +16746,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_52",
+                             "id":  "SET__2026_TECNODRILL_MAX_52",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-10",
@@ -16762,9 +16762,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_53",
+                             "id":  "SET__2026_TECNODRILL_MAX_53",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-10",
@@ -16778,9 +16778,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_54",
+                             "id":  "SET__2026_TECNODRILL_MAX_54",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-10",
@@ -16794,9 +16794,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_55",
+                             "id":  "SET__2026_TECNODRILL_MAX_55",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-10",
@@ -16810,9 +16810,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_56",
+                             "id":  "SET__2026_TECNODRILL_MAX_56",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-10",
@@ -16826,9 +16826,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_57",
+                             "id":  "SET__2026_TECNODRILL_MAX_57",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-10",
@@ -16842,9 +16842,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_58",
+                             "id":  "SET__2026_TECNODRILL_MAX_58",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-10",
@@ -16858,9 +16858,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_59",
+                             "id":  "SET__2026_TECNODRILL_MAX_59",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-10",
@@ -16874,9 +16874,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_60",
+                             "id":  "SET__2026_TECNODRILL_MAX_60",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-10",
@@ -16890,9 +16890,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_61",
+                             "id":  "SET__2026_TECNODRILL_MAX_61",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-11",
@@ -16906,9 +16906,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_62",
+                             "id":  "SET__2026_TECNODRILL_MAX_62",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-11",
@@ -16922,9 +16922,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_63",
+                             "id":  "SET__2026_TECNODRILL_MAX_63",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-11",
@@ -16938,9 +16938,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_64",
+                             "id":  "SET__2026_TECNODRILL_MAX_64",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-11",
@@ -16954,9 +16954,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_65",
+                             "id":  "SET__2026_TECNODRILL_MAX_65",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-11",
@@ -16970,9 +16970,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_66",
+                             "id":  "SET__2026_TECNODRILL_MAX_66",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-11",
@@ -16986,9 +16986,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_67",
+                             "id":  "SET__2026_TECNODRILL_MAX_67",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-11",
@@ -17002,9 +17002,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_68",
+                             "id":  "SET__2026_TECNODRILL_MAX_68",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-11",
@@ -17018,9 +17018,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_69",
+                             "id":  "SET__2026_TECNODRILL_MAX_69",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-14",
@@ -17034,9 +17034,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_70",
+                             "id":  "SET__2026_TECNODRILL_MAX_70",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-14",
@@ -17050,9 +17050,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_71",
+                             "id":  "SET__2026_TECNODRILL_MAX_71",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-14",
@@ -17066,9 +17066,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_72",
+                             "id":  "SET__2026_TECNODRILL_MAX_72",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-14",
@@ -17082,9 +17082,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_73",
+                             "id":  "SET__2026_TECNODRILL_MAX_73",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-15",
@@ -17098,9 +17098,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_74",
+                             "id":  "SET__2026_TECNODRILL_MAX_74",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-15",
@@ -17114,9 +17114,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_75",
+                             "id":  "SET__2026_TECNODRILL_MAX_75",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-15",
@@ -17130,9 +17130,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_76",
+                             "id":  "SET__2026_TECNODRILL_MAX_76",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-16",
@@ -17146,9 +17146,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_77",
+                             "id":  "SET__2026_TECNODRILL_MAX_77",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-16",
@@ -17162,9 +17162,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_78",
+                             "id":  "SET__2026_TECNODRILL_MAX_78",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-16",
@@ -17178,9 +17178,9 @@
                              "is_transfer":  false
                          },
                          {
-                             "id":  "SET__2026_TECNODRILL_79",
+                             "id":  "SET__2026_TECNODRILL_MAX_79",
                              "banco":  "SICOOB",
-                             "aba":  "SET _2026 TECNODRILL",
+                             "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
                              "data":  "2026-09-16",
@@ -17192,10 +17192,410 @@
                              "valor_liquido":  -743.75,
                              "meio_pagamento":  "Pix",
                              "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET__2026_TECNODRILL_MAX_80",
+                             "banco":  "SICOOB",
+                             "aba":  "SET _2026 TECNODRILL MAX",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-17",
+                             "uf":  "SETEMBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Frete",
+                             "descricao":  "CONCEPT CARGO LOGISTICA - Frete peças",
+                             "valor_nominal":  448.21,
+                             "valor_liquido":  -448.21,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET__2026_TECNODRILL_MAX_81",
+                             "banco":  "SICOOB",
+                             "aba":  "SET _2026 TECNODRILL MAX",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-17",
+                             "uf":  "SETEMBRO",
+                             "fluxo":  "Entrada",
+                             "categoria":  "Outros Recebimentos",
+                             "descricao":  "TRAnsferência BRADESCO JLE",
+                             "valor_nominal":  15000,
+                             "valor_liquido":  15000,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET__2026_TECNODRILL_MAX_82",
+                             "banco":  "SICOOB",
+                             "aba":  "SET _2026 TECNODRILL MAX",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-17",
+                             "uf":  "SETEMBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Telefone",
+                             "descricao":  "Conta Claro",
+                             "valor_nominal":  159.96,
+                             "valor_liquido":  -159.96,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET__2026_TECNODRILL_MAX_83",
+                             "banco":  "SICOOB",
+                             "aba":  "SET _2026 TECNODRILL MAX",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-17",
+                             "uf":  "SETEMBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Material utilizado em serviços",
+                             "descricao":  "Confecção Placas Rodovia",
+                             "valor_nominal":  8662.5,
+                             "valor_liquido":  -8662.5,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET__2026_TECNODRILL_MAX_84",
+                             "banco":  "SICOOB",
+                             "aba":  "SET _2026 TECNODRILL MAX",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-17",
+                             "uf":  "SETEMBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Alimentação",
+                             "descricao":  "Almoços Dom Pedrito",
+                             "valor_nominal":  640,
+                             "valor_liquido":  -640,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET__2026_TECNODRILL_MAX_85",
+                             "banco":  "SICOOB",
+                             "aba":  "SET _2026 TECNODRILL MAX",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-18",
+                             "uf":  "SETEMBRO",
+                             "fluxo":  "Entrada",
+                             "categoria":  "Cobranças",
+                             "descricao":  "ICOMON TECNOLOGIA",
+                             "valor_nominal":  12200.27,
+                             "valor_liquido":  12200.27,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET__2026_TECNODRILL_MAX_86",
+                             "banco":  "SICOOB",
+                             "aba":  "SET _2026 TECNODRILL MAX",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-18",
+                             "uf":  "SETEMBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Folha De Pagamento",
+                             "descricao":  "SALARIO TECNODRILL",
+                             "valor_nominal":  2400,
+                             "valor_liquido":  -2400,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET__2026_TECNODRILL_MAX_87",
+                             "banco":  "SICOOB",
+                             "aba":  "SET _2026 TECNODRILL MAX",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-18",
+                             "uf":  "SETEMBRO",
+                             "fluxo":  "Entrada",
+                             "categoria":  "Outros Recebimentos",
+                             "descricao":  "TRAnsferência BRADESCO JLE",
+                             "valor_nominal":  16000,
+                             "valor_liquido":  16000,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET__2026_TECNODRILL_MAX_88",
+                             "banco":  "SICOOB",
+                             "aba":  "SET _2026 TECNODRILL MAX",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-18",
+                             "uf":  "SETEMBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Manut. De Veículos",
+                             "descricao":  "Atual pneus",
+                             "valor_nominal":  287.5,
+                             "valor_liquido":  -287.5,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET__2026_TECNODRILL_MAX_89",
+                             "banco":  "SICOOB",
+                             "aba":  "SET _2026 TECNODRILL MAX",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-18",
+                             "uf":  "SETEMBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Impostos",
+                             "descricao":  "Imposto",
+                             "valor_nominal":  4467.85,
+                             "valor_liquido":  -4467.85,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET__2026_TECNODRILL_MAX_90",
+                             "banco":  "SICOOB",
+                             "aba":  "SET _2026 TECNODRILL MAX",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-18",
+                             "uf":  "SETEMBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Despesas com Veículos/Documentos",
+                             "descricao":  "Lavagens veículos",
+                             "valor_nominal":  960,
+                             "valor_liquido":  -960,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET__2026_TECNODRILL_MAX_91",
+                             "banco":  "SICOOB",
+                             "aba":  "SET _2026 TECNODRILL MAX",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-18",
+                             "uf":  "SETEMBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Manut. De Veículos",
+                             "descricao":  "Atual pneus",
+                             "valor_nominal":  1028,
+                             "valor_liquido":  -1028,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET__2026_TECNODRILL_MAX_92",
+                             "banco":  "SICOOB",
+                             "aba":  "SET _2026 TECNODRILL MAX",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-18",
+                             "uf":  "SETEMBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "FGTS",
+                             "descricao":  "FGTS consignado",
+                             "valor_nominal":  624,
+                             "valor_liquido":  -624,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET__2026_TECNODRILL_MAX_93",
+                             "banco":  "SICOOB",
+                             "aba":  "SET _2026 TECNODRILL MAX",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-18",
+                             "uf":  "SETEMBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "FGTS",
+                             "descricao":  "FGTS",
+                             "valor_nominal":  591.36,
+                             "valor_liquido":  -591.36,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET__2026_TECNODRILL_MAX_94",
+                             "banco":  "SICOOB",
+                             "aba":  "SET _2026 TECNODRILL MAX",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-18",
+                             "uf":  "SETEMBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Folha De Pagamento",
+                             "descricao":  "Pagamentos pessoal quinzena",
+                             "valor_nominal":  8250,
+                             "valor_liquido":  -8250,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET__2026_TECNODRILL_MAX_95",
+                             "banco":  "SICOOB",
+                             "aba":  "SET _2026 TECNODRILL MAX",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-21",
+                             "uf":  "SETEMBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Aluguel",
+                             "descricao":  "Reembolso Denilson pagamento aluguel Florianópolis",
+                             "valor_nominal":  391,
+                             "valor_liquido":  -391,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET__2026_TECNODRILL_MAX_96",
+                             "banco":  "SICOOB",
+                             "aba":  "SET _2026 TECNODRILL MAX",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-21",
+                             "uf":  "SETEMBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Transferência entre contas",
+                             "descricao":  "TECNODRILL CONFIANÇA",
+                             "valor_nominal":  5000,
+                             "valor_liquido":  -5000,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  true
+                         },
+                         {
+                             "id":  "SET__2026_TECNODRILL_MAX_97",
+                             "banco":  "SICOOB",
+                             "aba":  "SET _2026 TECNODRILL MAX",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-21",
+                             "uf":  "SETEMBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Despesas com Veículos/Documentos",
+                             "descricao":  "TARIFA BANCARIIA",
+                             "valor_nominal":  3.6,
+                             "valor_liquido":  -3.6,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET__2026_TECNODRILL_CONFIANÇA_11",
+                             "banco":  "SICOOB",
+                             "aba":  "SET _2026 TECNODRILL CONFIANÇA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-01",
+                             "uf":  "SETEMBRO",
+                             "fluxo":  "Entrada",
+                             "categoria":  "Saldo Inicial",
+                             "descricao":  "Transferência entre contas",
+                             "valor_nominal":  100,
+                             "valor_liquido":  100,
+                             "meio_pagamento":  "Transferência Bancária",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET__2026_TECNODRILL_CONFIANÇA_12",
+                             "banco":  "SICOOB",
+                             "aba":  "SET _2026 TECNODRILL CONFIANÇA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-01",
+                             "uf":  "SETEMBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Despesas Bancárias",
+                             "descricao":  "DEBITO PARCELAS SUBS/INTEGR.",
+                             "valor_nominal":  50,
+                             "valor_liquido":  -50,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET__2026_TECNODRILL_CONFIANÇA_13",
+                             "banco":  "SICOOB",
+                             "aba":  "SET _2026 TECNODRILL CONFIANÇA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-10",
+                             "uf":  "SETEMBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Despesas Bancárias",
+                             "descricao":  "DEBITO PACOTE SERVIÇOS",
+                             "valor_nominal":  49.9,
+                             "valor_liquido":  -49.9,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET__2026_TECNODRILL_CONFIANÇA_14",
+                             "banco":  "SICOOB",
+                             "aba":  "SET _2026 TECNODRILL CONFIANÇA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-21",
+                             "uf":  "SETEMBRO",
+                             "fluxo":  "Entrada",
+                             "categoria":  "Transferência entre contas",
+                             "descricao":  "Transferência entre contas - MAX",
+                             "valor_nominal":  5000,
+                             "valor_liquido":  5000,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  true
+                         },
+                         {
+                             "id":  "SET__2026_TECNODRILL_CONFIANÇA_15",
+                             "banco":  "SICOOB",
+                             "aba":  "SET _2026 TECNODRILL CONFIANÇA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-21",
+                             "uf":  "SETEMBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Manut. De Veículos",
+                             "descricao":  "ROMTEC",
+                             "valor_nominal":  764,
+                             "valor_liquido":  -764,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET__2026_TECNODRILL_CONFIANÇA_16",
+                             "banco":  "SICOOB",
+                             "aba":  "SET _2026 TECNODRILL CONFIANÇA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-21",
+                             "uf":  "SETEMBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Manut. De Veículos",
+                             "descricao":  "ROMTEC",
+                             "valor_nominal":  1111.94,
+                             "valor_liquido":  -1111.94,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET__2026_TECNODRILL_CONFIANÇA_17",
+                             "banco":  "SICOOB",
+                             "aba":  "SET _2026 TECNODRILL CONFIANÇA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-21",
+                             "uf":  "SETEMBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Uniformes",
+                             "descricao":  "VEST FASHION",
+                             "valor_nominal":  1502.67,
+                             "valor_liquido":  -1502.67,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
                          }
                      ],
     "caixa":  {
-                  "gerado_em":  "2026-09-22 15:08:38",
+                  "gerado_em":  "2026-09-23 10:07:54",
                   "carlos":  [
                                  {
                                      "id":  "carlos-1",
@@ -23586,6 +23986,246 @@
                                      "valor":  40000,
                                      "saldo":  308.41,
                                      "descricao":  "Caixa Carlos pagamentos de cartões"
+                                 },
+                                 {
+                                     "id":  "carlos-427",
+                                     "linha":  431,
+                                     "responsavel":  "Carlos",
+                                     "data":  "2026-08-17",
+                                     "data_fmt":  "17/08/2026",
+                                     "competencia":  "AGOSTO/2026",
+                                     "fluxo":  "Saída",
+                                     "categoria":  "Outros e Diversos",
+                                     "credito":  0,
+                                     "debito":  669.95,
+                                     "valor":  669.95,
+                                     "saldo":  -361.54,
+                                     "descricao":  "REDEMAC  - N:12262 -TIJOLO, CIMENTO"
+                                 },
+                                 {
+                                     "id":  "carlos-428",
+                                     "linha":  432,
+                                     "responsavel":  "Carlos",
+                                     "data":  "2026-09-07",
+                                     "data_fmt":  "07/09/2026",
+                                     "competencia":  "SETEMBRO/2026",
+                                     "fluxo":  "Saída",
+                                     "categoria":  "Outros e Diversos",
+                                     "credito":  0,
+                                     "debito":  478.1,
+                                     "valor":  478.1,
+                                     "saldo":  -839.64,
+                                     "descricao":  "ROCHA - NOTA 1071 - PICARETA, TRENA, ENXADA, PA, CABO"
+                                 },
+                                 {
+                                     "id":  "carlos-429",
+                                     "linha":  433,
+                                     "responsavel":  "Carlos",
+                                     "data":  "2026-09-08",
+                                     "data_fmt":  "08/09/2026",
+                                     "competencia":  "SETEMBRO/2026",
+                                     "fluxo":  "Saída",
+                                     "categoria":  "Alimentação",
+                                     "credito":  0,
+                                     "debito":  1100,
+                                     "valor":  1100,
+                                     "saldo":  -1939.64,
+                                     "descricao":  "FELIPE NOTA 20 - REFEIÇÕES"
+                                 },
+                                 {
+                                     "id":  "carlos-430",
+                                     "linha":  434,
+                                     "responsavel":  "Carlos",
+                                     "data":  "2026-09-09",
+                                     "data_fmt":  "09/09/2026",
+                                     "competencia":  "SETEMBRO/2026",
+                                     "fluxo":  "Saída",
+                                     "categoria":  "Alimentação",
+                                     "credito":  0,
+                                     "debito":  152,
+                                     "valor":  152,
+                                     "saldo":  -2091.64,
+                                     "descricao":  "CHURRASCARIA VITORIA"
+                                 },
+                                 {
+                                     "id":  "carlos-431",
+                                     "linha":  435,
+                                     "responsavel":  "Carlos",
+                                     "data":  "2026-09-09",
+                                     "data_fmt":  "09/09/2026",
+                                     "competencia":  "SETEMBRO/2026",
+                                     "fluxo":  "Saída",
+                                     "categoria":  "Outros e Diversos",
+                                     "credito":  0,
+                                     "debito":  27.5,
+                                     "valor":  27.5,
+                                     "saldo":  -2119.14,
+                                     "descricao":  "ROCHA - NOTA 1076 - PONTEIRA"
+                                 },
+                                 {
+                                     "id":  "carlos-432",
+                                     "linha":  436,
+                                     "responsavel":  "Carlos",
+                                     "data":  "2026-09-14",
+                                     "data_fmt":  "14/09/2026",
+                                     "competencia":  "SETEMBRO/2026",
+                                     "fluxo":  "Saída",
+                                     "categoria":  "Combustível",
+                                     "credito":  0,
+                                     "debito":  782.9,
+                                     "valor":  782.9,
+                                     "saldo":  -2902.04,
+                                     "descricao":  "REDE SIM - DIESEL"
+                                 },
+                                 {
+                                     "id":  "carlos-433",
+                                     "linha":  437,
+                                     "responsavel":  "Carlos",
+                                     "data":  "2026-09-14",
+                                     "data_fmt":  "14/09/2026",
+                                     "competencia":  "SETEMBRO/2026",
+                                     "fluxo":  "Saída",
+                                     "categoria":  "Alojamento e Suprimentos",
+                                     "credito":  0,
+                                     "debito":  304.35,
+                                     "valor":  304.35,
+                                     "saldo":  -3206.39,
+                                     "descricao":  "S E COMERCIO - COBERTOR CASAL , CAPA COLCHÃO SOLTEIRO"
+                                 },
+                                 {
+                                     "id":  "carlos-434",
+                                     "linha":  438,
+                                     "responsavel":  "Carlos",
+                                     "data":  "2026-09-14",
+                                     "data_fmt":  "14/09/2026",
+                                     "competencia":  "SETEMBRO/2026",
+                                     "fluxo":  "Saída",
+                                     "categoria":  "Outros e Diversos",
+                                     "credito":  0,
+                                     "debito":  91.35,
+                                     "valor":  91.35,
+                                     "saldo":  -3297.74,
+                                     "descricao":  "MODINHA BRAS - CALÇA JEANS , MOLETON, MEIAS"
+                                 },
+                                 {
+                                     "id":  "carlos-435",
+                                     "linha":  439,
+                                     "responsavel":  "Carlos",
+                                     "data":  "2026-09-15",
+                                     "data_fmt":  "15/09/2026",
+                                     "competencia":  "SETEMBRO/2026",
+                                     "fluxo":  "Saída",
+                                     "categoria":  "Combustível",
+                                     "credito":  0,
+                                     "debito":  498,
+                                     "valor":  498,
+                                     "saldo":  -3795.74,
+                                     "descricao":  "REDE SIM - DIESEL"
+                                 },
+                                 {
+                                     "id":  "carlos-436",
+                                     "linha":  440,
+                                     "responsavel":  "Carlos",
+                                     "data":  "2026-09-16",
+                                     "data_fmt":  "16/09/2026",
+                                     "competencia":  "SETEMBRO/2026",
+                                     "fluxo":  "Saída",
+                                     "categoria":  "Combustível",
+                                     "credito":  0,
+                                     "debito":  525.33,
+                                     "valor":  525.33,
+                                     "saldo":  -4321.07,
+                                     "descricao":  "REDE SIM - DIESEL"
+                                 },
+                                 {
+                                     "id":  "carlos-437",
+                                     "linha":  441,
+                                     "responsavel":  "Carlos",
+                                     "data":  "2026-09-17",
+                                     "data_fmt":  "17/09/2026",
+                                     "competencia":  "SETEMBRO/2026",
+                                     "fluxo":  "Saída",
+                                     "categoria":  "Alimentação",
+                                     "credito":  0,
+                                     "debito":  131,
+                                     "valor":  131,
+                                     "saldo":  -4452.07,
+                                     "descricao":  "CHURRASCARIA CAMPO VERDE - REFEIÇÃO"
+                                 },
+                                 {
+                                     "id":  "carlos-438",
+                                     "linha":  442,
+                                     "responsavel":  "Carlos",
+                                     "data":  "2026-09-17",
+                                     "data_fmt":  "17/09/2026",
+                                     "competencia":  "SETEMBRO/2026",
+                                     "fluxo":  "Saída",
+                                     "categoria":  "Alimentação",
+                                     "credito":  0,
+                                     "debito":  13.55,
+                                     "valor":  13.55,
+                                     "saldo":  -4465.62,
+                                     "descricao":  "PADARIA LAZARO - PÃO E MORTANDELA"
+                                 },
+                                 {
+                                     "id":  "carlos-439",
+                                     "linha":  443,
+                                     "responsavel":  "Carlos",
+                                     "data":  "2026-09-17",
+                                     "data_fmt":  "17/09/2026",
+                                     "competencia":  "SETEMBRO/2026",
+                                     "fluxo":  "Saída",
+                                     "categoria":  "Manutenção Veicular",
+                                     "credito":  0,
+                                     "debito":  80,
+                                     "valor":  80,
+                                     "saldo":  -4545.62,
+                                     "descricao":  "MECANICA E BORRACHARIA"
+                                 },
+                                 {
+                                     "id":  "carlos-440",
+                                     "linha":  444,
+                                     "responsavel":  "Carlos",
+                                     "data":  "2026-09-18",
+                                     "data_fmt":  "18/09/2026",
+                                     "competencia":  "SETEMBRO/2026",
+                                     "fluxo":  "Saída",
+                                     "categoria":  "Alimentação",
+                                     "credito":  0,
+                                     "debito":  120,
+                                     "valor":  120,
+                                     "saldo":  -4665.62,
+                                     "descricao":  "PREFEITURA DE CHAPECÓ"
+                                 },
+                                 {
+                                     "id":  "carlos-441",
+                                     "linha":  445,
+                                     "responsavel":  "Carlos",
+                                     "data":  "2026-09-21",
+                                     "data_fmt":  "21/09/2026",
+                                     "competencia":  "SETEMBRO/2026",
+                                     "fluxo":  "Saída",
+                                     "categoria":  "Combustível",
+                                     "credito":  0,
+                                     "debito":  540.07,
+                                     "valor":  540.07,
+                                     "saldo":  -5205.69,
+                                     "descricao":  "REDE SIM - DIESEL"
+                                 },
+                                 {
+                                     "id":  "carlos-442",
+                                     "linha":  446,
+                                     "responsavel":  "Carlos",
+                                     "data":  "2026-09-21",
+                                     "data_fmt":  "21/09/2026",
+                                     "competencia":  "SETEMBRO/2026",
+                                     "fluxo":  "Saída",
+                                     "categoria":  "Outros e Diversos",
+                                     "credito":  0,
+                                     "debito":  28.37,
+                                     "valor":  28.37,
+                                     "saldo":  -5234.06,
+                                     "descricao":  "HB COMPENSADOS - NOTA 86612 - GUIA, TAPA FURO"
                                  }
                              ],
                   "denilson":  [
