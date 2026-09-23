@@ -117,6 +117,14 @@ def get_zimbra_credentials():
         
     try:
         import winreg
+        try:
+            with winreg.OpenKey(winreg.HKEY_CURRENT_USER, r"Environment") as env_k:
+                env_pw, _ = winreg.QueryValueEx(env_k, "ZIMBRA_PASS")
+                if env_pw:
+                    return host, user, str(env_pw)
+        except Exception:
+            pass
+
         import win32crypt
         base_key = r"Software\Microsoft\Office\16.0\Outlook\Profiles\Outlook\9375CFF0413111d3B88A00104B2A6676"
         with winreg.OpenKey(winreg.HKEY_CURRENT_USER, base_key) as k:
