@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-09-23 10:00:16
+// Dados SAR JLE Telecom - Gerado em: 2026-09-23 10:09:47
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1090,
-    "generated_at": "2026-09-23 10:00:16",
+    "generated_at": "2026-09-23 10:09:47",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -759,9 +759,9 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 790241.95,
-        "total_previa_medicao": 1324429.73,
-        "total_classe_l": 331190.45,
+        "total_terceiros": 790589.95,
+        "total_previa_medicao": 1324696.13,
+        "total_classe_l": 331538.45,
         "total_classe_f": 459051.5
     },
     "medicao": {
@@ -77019,8 +77019,8 @@ window.SAR_DATA = [
     "classe_l": "TIAGO FERREIRA",
     "classe_f": "CATIA",
     "situacao": "21/09/2026",
-    "relatorio_foto": "",
-    "servico": "1 ABERTURA E FECHAMENTO, 3 FUSÕES, 1 CX NOVA, 1 DERIVAÇÃO, 3 TESTES.",
+    "relatorio_foto": "240",
+    "servico": "FOI LANÇADO 240 METROS DE CABO DE 12FO, 1 ABERTURA E FECHAMENTO, 3 FUSÕES, 1 CX NOVA, 1 DERIVAÇÃO, 3 TESTES.",
     "data_entrada": "2026-09-21",
     "data_entrada_fmt": "21/09/2026",
     "data_inicio": null,
@@ -77056,17 +77056,17 @@ window.SAR_DATA = [
     "prazo": "NO PRAZO",
     "tempo_dias": 1.0,
     "atraso_dias": 0,
-    "total_terceiros": 122.0,
-    "previa_medicao": 306.45,
+    "total_terceiros": 470.0,
+    "previa_medicao": 572.85,
     "valor_medicao": 0.0,
-    "valor_classe_l": 0.0,
+    "valor_classe_l": 348.0,
     "valor_classe_f": 122.0,
-    "itens_l_resumo": "-",
+    "itens_l_resumo": "2.15 CB ESP: 240m",
     "itens_f_resumo": "3.15 AB/FE: 1 un, 3.13 FUS/EME: 3 un, 3.12 DER/INS: 1 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
-      "q_215": 0.0,
+      "q_215": 240.0,
       "q_113": 0.0,
       "q_311": 0.0,
       "q_317": 0.0,
