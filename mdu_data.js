@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-09-23 15:00:18
+// Dados MDU Compactados - Gerado em: 2026-09-23 15:07:48
 window.MDU_METADATA = {
-    "generated_at": "2026-09-23 15:00:18",
+    "generated_at": "2026-09-23 15:07:48",
     "total_rows": 5684,
-    "geocoded_new": 5
+    "geocoded_new": 1
 };
 
 window.MDU_DATA = [
@@ -152432,7 +152432,7 @@ window.MDU_DATA = [
         "pendencia": "SIM",
         "status": "Pendência",
         "prog": 0.0,
-        "cod_imovel": "#N/A",
+        "cod_imovel": "704267681",
         "area": "CNUAB",
         "node": "CNUAI",
         "caixa_m": "CNUAB.011.M010",
@@ -181644,7 +181644,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "0",
-        "relatorio_por": "",
+        "relatorio_por": "DUDA",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
@@ -181666,8 +181666,8 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0179846,
-        "lng": -51.1903681,
+        "lat": -30.017025,
+        "lng": -51.1904777,
         "geocodificado": true
     },
     {
@@ -181704,35 +181704,35 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505534",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "R GERMANO PETERSEN JUNIOR 543 BL B",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
+        "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
+        "status": "Baixa",
         "prog": 0,
         "cod_imovel": "",
-        "area": "",
+        "area": "MTSAA",
         "node": "",
-        "caixa_m": "",
-        "hps": null,
-        "data_adicio": "",
-        "equipe": "",
-        "primeira_visita": "",
+        "caixa_m": "MTSAA.015.M060",
+        "hps": 6,
+        "data_adicio": "23/09/2026",
+        "equipe": "Guilherme Albrecht",
+        "primeira_visita": "10/09/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
-        "data_interna": "",
-        "data_fusao": "",
+        "obs_vistoria": "ADEQUADO",
+        "data_interna": "10/09/2026",
+        "data_fusao": "10/09/2026",
         "data_baixa": "",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0207158,
+        "lng": -51.1901218,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505535",
