@@ -1,7 +1,7 @@
 // Data generated 100% from Master Excel Controle de Medições (Mnt. Demanda)
 (function() {
     const db = {
-  "generated_at": "2026-09-24 10:06:40",
+  "generated_at": "2026-09-24 11:00:11",
   "lookups": {
     "tipos_of": [
       "TIPO\nOS CLIENTE",
@@ -55121,7 +55121,7 @@
       "ROMPIMENTO - VP COMERCIO DE AUTOMOVEIS",
       1,
       12,
-      1,
+      2,
       "07/08/2026",
       2,
       1,
@@ -55129,9 +55129,9 @@
       1097.69,
       7,
       0,
+      "5699112",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3051",
@@ -55139,7 +55139,7 @@
       "ROMPIMENTO - RUP CABO OPTICO CSLVS-MORUMR",
       1,
       71,
-      1,
+      2,
       "07/08/2026",
       2,
       1,
@@ -55147,9 +55147,9 @@
       4301.82,
       7,
       0,
+      "5699130",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3052",
@@ -55157,7 +55157,7 @@
       "ROMPIMENTO - SITE RSMRT01 ISOLADO",
       1,
       102,
-      1,
+      2,
       "11/08/2026",
       2,
       1,
@@ -55165,9 +55165,9 @@
       2644.46,
       7,
       0,
+      "5699159",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3053",
@@ -55661,7 +55661,7 @@
       "ROMPIMENTO - NODE B RSLCR01 X RSIVI01",
       1,
       103,
-      1,
+      2,
       "13/08/2026",
       2,
       1,
@@ -55669,9 +55669,9 @@
       1869.56,
       7,
       0,
+      "5699155",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3081",
@@ -55697,7 +55697,7 @@
       "ROMPIMENTO - RSNHO13 (DGO)",
       6,
       12,
-      1,
+      2,
       "13/08/2026",
       2,
       6,
@@ -55705,9 +55705,9 @@
       2168.34,
       7,
       0,
+      "5699108",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3083",
@@ -55895,7 +55895,7 @@
       "ROMPIMENTO - NODE B RSTQR07 X RSIJH04",
       1,
       9,
-      1,
+      2,
       "14/08/2026",
       2,
       1,
@@ -55903,9 +55903,9 @@
       3604.17,
       7,
       0,
+      "5699203",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3094",
@@ -55985,7 +55985,7 @@
       "ROMPIMENTO - NODE B RSSPG02 X RSSPG01",
       1,
       11,
-      1,
+      2,
       "16/08/2026",
       2,
       1,
@@ -55993,9 +55993,9 @@
       400.32,
       7,
       0,
+      "5699246",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3099",
@@ -56165,7 +56165,7 @@
       "ROMPIMENTO - NHO LOLINENHO TOLINEB1S 001",
       1,
       12,
-      1,
+      2,
       "14/08/2026",
       2,
       1,
@@ -56173,9 +56173,9 @@
       1881.51,
       7,
       0,
+      "5699299",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3109",
@@ -56201,7 +56201,7 @@
       "ROMPIMENTO - NODE B RSNHO06 X RSIVIO7",
       1,
       2,
-      1,
+      2,
       "13/08/2026",
       2,
       1,
@@ -56209,9 +56209,9 @@
       1828.69,
       7,
       0,
+      "5699318",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3111",
@@ -56273,7 +56273,7 @@
       "ROMPIMENTO - NODE B RSEVA13 X RSEVA11",
       1,
       2,
-      1,
+      2,
       "17/08/2026",
       2,
       1,
@@ -56281,9 +56281,9 @@
       2591.3,
       7,
       0,
+      "5699331",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3115",
@@ -56687,7 +56687,7 @@
       "ATENUAÇÃO - AMBEV S A",
       2,
       6,
-      1,
+      2,
       "18/08/2026",
       2,
       2,
@@ -56695,9 +56695,9 @@
       334.85,
       7,
       0,
+      "5699340",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3138",
@@ -56759,7 +56759,7 @@
       "ROMPIMENTO - FARM SAO JOAO - SLE/IP/01138",
       1,
       25,
-      1,
+      2,
       "19/08/2026",
       2,
       1,
@@ -56767,9 +56767,9 @@
       1234.95,
       7,
       0,
+      "5699349",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3142",
@@ -56831,7 +56831,7 @@
       "ATENUAÇÃO - IVI 0ELINENHO LOLINEB1S 002",
       2,
       31,
-      1,
+      2,
       "19/08/2026",
       2,
       2,
@@ -56839,9 +56839,9 @@
       328.9,
       7,
       0,
+      "5699363",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3146",
@@ -57299,7 +57299,7 @@
       "ROMPIMENTO - NHO ACCLINNHO 0GVLINB1S 001",
       1,
       12,
-      1,
+      2,
       "20/08/2026",
       2,
       1,
@@ -57307,9 +57307,9 @@
       328.9,
       7,
       0,
+      "5699389",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3172",
@@ -57335,7 +57335,7 @@
       "ROMPIMENTO - NODE B RSLCR01 X RSEVA01",
       1,
       31,
-      1,
+      2,
       "20/08/2026",
       2,
       1,
@@ -57343,9 +57343,9 @@
       1213.75,
       7,
       0,
+      "5699424",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3174",
@@ -57533,7 +57533,7 @@
       "ROMPIMENTO - COMEXI DO BRASIL LTDA",
       1,
       8,
-      1,
+      2,
       "21/08/2026",
       2,
       1,
@@ -57541,9 +57541,9 @@
       1381.74,
       7,
       0,
+      "5699430",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3185",
@@ -57677,7 +57677,7 @@
       "ROMPIMENTO - NODE B RSPAK07 X RSPAK06",
       1,
       26,
-      1,
+      2,
       "22/08/2026",
       2,
       1,
@@ -57685,9 +57685,9 @@
       1014.1,
       7,
       0,
+      "5699441",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3193",
@@ -58271,7 +58271,7 @@
       "ROMPIMENTO - RUP NODEB RSNHO06-RMD02",
       1,
       12,
-      1,
+      2,
       "25/08/2026",
       2,
       1,
@@ -58279,9 +58279,9 @@
       2096.59,
       7,
       0,
+      "5699453",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3226",
@@ -58325,7 +58325,7 @@
       "MUDANÇA DE TRAÇADO - NODE B RSSPG12 X RSNHO06",
       12,
       11,
-      1,
+      2,
       "25/08/2026",
       2,
       12,
@@ -58333,9 +58333,9 @@
       4101.25,
       7,
       0,
+      "5699494",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3229",
@@ -58397,7 +58397,7 @@
       "ROMPIMENTO - NODE B RSTSS03 X RSTSS02",
       1,
       38,
-      1,
+      2,
       "25/08/2026",
       2,
       1,
@@ -58405,9 +58405,9 @@
       953.44,
       7,
       0,
+      "5699508",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3233",
@@ -59891,7 +59891,7 @@
       "ROMPIMENTO - ISOLADO RSEVA11 X RSEVA13",
       1,
       2,
-      1,
+      2,
       "31/08/2026",
       2,
       1,
@@ -59899,9 +59899,9 @@
       1520.12,
       7,
       0,
+      "5701054",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3316",
@@ -60359,7 +60359,7 @@
       "ROMPIMENTO NODE B RSNHO34 X RSNHO06",
       1,
       12,
-      1,
+      2,
       "31/08/2026",
       2,
       1,
@@ -60367,9 +60367,9 @@
       365.1,
       7,
       0,
+      "5701050",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3342",
@@ -60611,7 +60611,7 @@
       "ROMPIMENTO - NODE B RSNHO10 X RSNHO06",
       1,
       12,
-      1,
+      2,
       "01/09/2026",
       2,
       1,
@@ -60619,9 +60619,9 @@
       802.6,
       7,
       0,
+      "5701046",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3356",
@@ -60719,7 +60719,7 @@
       "ATENUAÇÃO - CBM/IP/00432",
       2,
       6,
-      1,
+      2,
       "02/09/2026",
       2,
       2,
@@ -60727,9 +60727,9 @@
       328.9,
       7,
       0,
+      "5701042",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3362",
@@ -60737,7 +60737,7 @@
       "ROMPIMENTO - SLE BB0ANESLE GGANELB0480N001",
       1,
       25,
-      1,
+      2,
       "02/09/2026",
       2,
       1,
@@ -60745,9 +60745,9 @@
       1406.65,
       7,
       0,
+      "5701034",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3363",
@@ -61061,7 +61061,7 @@
       "ROMPIMENTO - NODE B RSSPG18 X RSSPG09",
       1,
       11,
-      1,
+      2,
       "03/09/2026",
       2,
       1,
@@ -61069,9 +61069,9 @@
       328.9,
       7,
       0,
+      "5701030",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3381",
@@ -61367,7 +61367,7 @@
       "ROMPIMENTO - NODE B RSNHO13 X RSCBM12",
       1,
       12,
-      1,
+      2,
       "05/09/2026",
       2,
       1,
@@ -61375,9 +61375,9 @@
       2111.79,
       7,
       0,
+      "5701026",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3398",
@@ -61403,7 +61403,7 @@
       "ROMPIMENTO - NODE B RSSPG13 X RSSPG12",
       1,
       11,
-      1,
+      2,
       "04/09/2026",
       2,
       1,
@@ -61411,9 +61411,9 @@
       1749.29,
       7,
       0,
+      "5701022",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3400",
@@ -61439,7 +61439,7 @@
       "ROMPIMENTO - NHO/IP/00996 / BUNZL EQUIPAMENTOS PARA P",
       1,
       12,
-      1,
+      2,
       "04/09/2026",
       2,
       1,
@@ -61447,9 +61447,9 @@
       328.9,
       7,
       0,
+      "5701018",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3402",
@@ -61673,7 +61673,7 @@
       "ROMPIMENTO - NODE B RSNHO06 X RSNHO01",
       1,
       12,
-      1,
+      2,
       "08/09/2026",
       2,
       1,
@@ -61681,9 +61681,9 @@
       2369.89,
       7,
       0,
+      "5701014",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3415",
@@ -61763,7 +61763,7 @@
       "ROMPIMENTO - NODE B RSSPG03 X RSCBM03",
       1,
       11,
-      1,
+      2,
       "08/09/2026",
       2,
       1,
@@ -61771,9 +61771,9 @@
       1481.12,
       7,
       0,
+      "5701006",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3420",
