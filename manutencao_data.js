@@ -1,7 +1,7 @@
 // Data generated 100% from Master Excel Controle de Medições (Mnt. Demanda)
 (function() {
     const db = {
-  "generated_at": "2026-09-24 11:00:11",
+  "generated_at": "2026-09-24 12:00:14",
   "lookups": {
     "tipos_of": [
       "TIPO\nOS CLIENTE",
@@ -43295,7 +43295,7 @@
       "MUDANÇA DE TRAÇADO - NODE B RSIVI08 X RSDSR09 3/3",
       12,
       31,
-      1,
+      2,
       "18/04/2026",
       2,
       12,
@@ -43303,9 +43303,9 @@
       8974.11,
       7,
       0,
+      "5698901",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2394",
@@ -46283,7 +46283,7 @@
       "ROMPIMENTO - NODE B RSSCR29 X RSSCR24",
       1,
       36,
-      1,
+      2,
       "03/07/2026",
       4,
       1,
@@ -46291,9 +46291,9 @@
       1440.12,
       7,
       0,
+      "5692927",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2560",
@@ -46661,7 +46661,7 @@
       "RABICHO ETA01 - ESTRELA",
       5,
       24,
-      1,
+      2,
       "29/06/2026",
       4,
       5,
@@ -46669,9 +46669,9 @@
       3570.08,
       7,
       0,
+      "5692931",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2581",
@@ -47561,7 +47561,7 @@
       "ATENUAÇÃO - RUP CABO OPTICO AUDC01-SCREA",
       2,
       75,
-      1,
+      2,
       "08/07/2026",
       4,
       2,
@@ -47569,9 +47569,9 @@
       328.9,
       7,
       0,
+      "5692935",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2631",
@@ -54167,7 +54167,7 @@
       "ROMPIMENTO - NODE B RSSPG11 X RSSPG09",
       1,
       11,
-      1,
+      2,
       "06/08/2026",
       2,
       1,
@@ -54175,9 +54175,9 @@
       1579.19,
       7,
       0,
+      "5698905",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.2998",
@@ -54311,7 +54311,7 @@
       "ROMPIMENTO - #DESIGNAÇÃO: SCRDTCRTD03 0/3/0/5",
       1,
       12,
-      1,
+      2,
       "08/08/2026",
       2,
       1,
@@ -54319,9 +54319,9 @@
       1644.5,
       7,
       0,
+      "5698920",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3006",
@@ -54725,7 +54725,7 @@
       "ROMPIMENTO - SLE UXILINSPS COLINEVC4S 003",
       1,
       25,
-      1,
+      2,
       "10/08/2026",
       2,
       1,
@@ -54733,9 +54733,9 @@
       986.7,
       7,
       0,
+      "5698924",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3029",
@@ -54743,7 +54743,7 @@
       "ROMPIMENTO - ISOLADO RSVRE02",
       1,
       101,
-      1,
+      2,
       "10/08/2026",
       2,
       1,
@@ -54751,9 +54751,9 @@
       2311.81,
       7,
       0,
+      "5699075",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3030",
@@ -54779,7 +54779,7 @@
       "ROMPIMENTO - WMS SUPERMERCADOS DO BRASIL - NHO/IP/00893",
       1,
       12,
-      1,
+      2,
       "10/08/2026",
       2,
       1,
@@ -54787,9 +54787,9 @@
       1040.86,
       7,
       0,
+      "5699101",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3032",
@@ -55319,7 +55319,7 @@
       "ROMPIMENTO - RUP CABO OPTICO LJODE-VAIR2",
       1,
       79,
-      1,
+      2,
       "12/08/2026",
       4,
       1,
@@ -55327,9 +55327,9 @@
       3126.49,
       7,
       0,
+      "5692939",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3062",
@@ -57569,7 +57569,7 @@
       "ROMPIMENTO - NODE B RSSCR29 X RSSCR24",
       1,
       36,
-      1,
+      2,
       "23/08/2026",
       4,
       1,
@@ -57577,9 +57577,9 @@
       1870.16,
       7,
       0,
+      "5692955",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3187",
