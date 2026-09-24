@@ -52,12 +52,11 @@ if (Test-Path $gitPath) {
         if (Test-Path $swPath) {
             try {
                 $swContent = [System.IO.File]::ReadAllText($swPath)
-                $timestamp = Get-Date -Format "yyyyMMddHHmmss"
-                $newCacheNameLine = "const CACHE_NAME = 'jle-bi-v3.16.$timestamp';"
-                $swContent = $swContent -replace "const CACHE_NAME = '([^']+)';", $newCacheNameLine
+                $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+                $swContent = $swContent -replace "// Versao: .*", "// Versao: $timestamp"
                 $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
                 [System.IO.File]::WriteAllText($swPath, $swContent, $utf8NoBom)
-                Write-Output "Cache do Service Worker atualizado para: jle-bi-v3.16.$timestamp"
+                Write-Output "Cache do Service Worker atualizado para: $timestamp"
             } catch {
                 Write-Warning "Nao foi possivel atualizar o sw.js: $($_.Exception.Message)"
             }
