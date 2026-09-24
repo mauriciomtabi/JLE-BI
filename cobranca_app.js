@@ -102,12 +102,23 @@ function initCobranca() {
             baseAgingDate = new Date(genDateParts[0], genDateParts[1] - 1, genDateParts[2]);
         }
 
-        // Assegurar aplicação do De/Para de Projeto Gerencial em todos os registros
+        // Assegurar aplicação do De/Para de Projeto Gerencial em todos os registros e normalização de Categorias
+        const validCategories = new Set(['MANUTENÇÃO', 'ENGENHARIA', 'PROJETO F', 'SAR', 'MDU', 'ACESSO', 'PRÉ-VIÁVEL', 'ATIVAÇÃO/DESATIVAÇÃO']);
         COBRANCA_DATA.forEach(r => {
             if (!r.projeto_original) {
                 r.projeto_original = r.projeto || '-';
             }
-            r.projeto = mapCobrancaProjetoDePara(r.projeto_gerencial, r.tipo_atividade, r.projeto_original, r.categoria);
+            if (!r.categoria_original) {
+                r.categoria_original = r.categoria || '-';
+            }
+            r.projeto = mapCobrancaProjetoDePara(r.projeto_gerencial, r.tipo_atividade, r.projeto_original, r.categoria_original);
+            if (r.categoria_original === 'FIXO MENSAL' || r.categoria === 'FIXO MENSAL') {
+                r.categoria = 'FIXO MENSAL';
+            } else if (validCategories.has(r.projeto)) {
+                r.categoria = r.projeto;
+            } else {
+                r.categoria = 'OUTROS';
+            }
         });
 
         cobrancaFilteredData = [...COBRANCA_DATA];
@@ -410,12 +421,15 @@ function renderCategoryCards() {
     const sortedCats = Object.keys(categorySums).sort((a, b) => categorySums[b] - categorySums[a]);
 
     const categoryIcons = {
-        'RECUPERAÇÃO REDE': 'fa-solid fa-wrench',
-        'PLANTA EXTERNA': 'fa-solid fa-network-wired',
+        'MANUTENÇÃO': 'fa-solid fa-wrench',
         'FIXO MENSAL': 'fa-solid fa-calendar-check',
-        'DESATIVAÇÃO': 'fa-solid fa-ban',
-        'CONSTRUÇÃO': 'fa-solid fa-helmet-safety',
-        'ATIVAÇÃO': 'fa-solid fa-toggle-on',
+        'ENGENHARIA': 'fa-solid fa-network-wired',
+        'PROJETO F': 'fa-solid fa-tower-broadcast',
+        'MDU': 'fa-solid fa-building',
+        'ACESSO': 'fa-solid fa-route',
+        'ATIVAÇÃO/DESATIVAÇÃO': 'fa-solid fa-toggle-on',
+        'SAR': 'fa-solid fa-satellite-dish',
+        'PRÉ-VIÁVEL': 'fa-solid fa-clipboard-check',
         'OUTROS': 'fa-solid fa-folder-open'
     };
 

@@ -357,16 +357,19 @@ function parseClaroContent(content) {
     const db = JSON.parse(match[1]);
     const l = db.lookups;
     
+    const validCategories = new Set(['MANUTENÇÃO', 'ENGENHARIA', 'PROJETO F', 'SAR', 'MDU', 'ACESSO', 'PRÉ-VIÁVEL', 'ATIVAÇÃO/DESATIVAÇÃO']);
     const rows = db.rows.map(r => {
         const cat = l.categorias[r[1]] || '-';
         const rawProj = l.projetos[r[5]] || '-';
         const pg = l.projetos_gerenciais[r[6]] || '-';
         const ta = l.tipos_atividade[r[7]] || '-';
         const mappedProj = mapClaroProjetoDePara(pg, ta, rawProj, cat);
+        const finalCat = (cat === 'FIXO MENSAL') ? 'FIXO MENSAL' : (validCategories.has(mappedProj) ? mappedProj : 'OUTROS');
 
         return {
             pep: r[0] || '-',
-            categoria: cat,
+            categoria: finalCat,
+            categoria_original: cat,
             os: r[2] || '-',
             cidade: l.cidades[r[3]] || '-',
             uf: l.ufs[r[4]] || '-',

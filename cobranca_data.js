@@ -55,17 +55,20 @@
         return projRaw || 'OUTROS';
     }
 
-    // Descomprimir na memória com De/Para de Projeto Gerencial aplicado em projeto
+    // Descomprimir na memória com De/Para de Projeto Gerencial aplicado em projeto e categoria
+    const validCategories = new Set(['MANUTENÇÃO', 'ENGENHARIA', 'PROJETO F', 'SAR', 'MDU', 'ACESSO', 'PRÉ-VIÁVEL', 'ATIVAÇÃO/DESATIVAÇÃO']);
     window.COBRANCA_DATA = db.rows.map(r => {
-        var cat = l.categorias[r[1]];
+        var rawCat = l.categorias[r[1]];
         var rawProj = l.projetos[r[5]];
         var pg = l.projetos_gerenciais[r[6]];
         var ta = l.tipos_atividade[r[7]];
-        var mappedProj = mapProjetoDePara(pg, ta, rawProj, cat);
+        var mappedProj = mapProjetoDePara(pg, ta, rawProj, rawCat);
+        var finalCat = (rawCat === 'FIXO MENSAL') ? 'FIXO MENSAL' : (validCategories.has(mappedProj) ? mappedProj : 'OUTROS');
 
         return {
             pep: r[0],
-            categoria: cat,
+            categoria: finalCat,
+            categoria_original: rawCat,
             os: r[2],
             cidade: l.cidades[r[3]],
             uf: l.ufs[r[4]],

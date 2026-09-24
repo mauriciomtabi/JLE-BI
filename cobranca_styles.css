@@ -57,35 +57,31 @@
 
 /* -- KPI Category Cards Grid -- */
 .cobranca-category-grid {
-    display: flex !important;
-    flex-wrap: nowrap !important;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
     gap: 12px;
     margin-bottom: 0 !important;
 }
 
 @media (max-width: 1200px) {
     .cobranca-category-grid {
-        display: grid !important;
-        grid-template-columns: repeat(3, 1fr) !important;
+        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)) !important;
     }
 }
 
 @media (max-width: 768px) {
     .cobranca-category-grid {
-        display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
     }
 }
 
 @media (max-width: 480px) {
     .cobranca-category-grid {
-        display: grid !important;
         grid-template-columns: 1fr !important;
     }
 }
 
 .cobranca-category-card {
-    flex: 1 1 0px !important;
     min-width: 0 !important;
     background: var(--bg-card);
     border: 1px solid var(--border-color);
