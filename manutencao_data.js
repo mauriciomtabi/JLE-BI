@@ -1,7 +1,7 @@
 // Data generated 100% from Master Excel Controle de Medições (Mnt. Demanda)
 (function() {
     const db = {
-  "generated_at": "2026-09-24 09:00:11",
+  "generated_at": "2026-09-24 10:00:14",
   "lookups": {
     "tipos_of": [
       "TIPO\nOS CLIENTE",
@@ -58991,7 +58991,7 @@
       "ROMPIMENTO - SPG11 x PAK1",
       1,
       11,
-      1,
+      2,
       "26/08/2026",
       2,
       1,
@@ -58999,9 +58999,9 @@
       2499.26,
       7,
       0,
+      "5701070",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3266",
@@ -59117,7 +59117,7 @@
       "ATENUAÇÃO - NODE B RSNHO06 X RSMGO03",
       2,
       8,
-      1,
+      2,
       "26/08/2026",
       2,
       2,
@@ -59125,9 +59125,9 @@
       730.2,
       7,
       0,
+      "5701066",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3273",
@@ -59621,7 +59621,7 @@
       "ROMPIMENTO - NODE B RSPCE48 X RSPCE06",
       1,
       9,
-      1,
+      2,
       "28/08/2026",
       2,
       1,
@@ -59629,9 +59629,9 @@
       2868.24,
       7,
       0,
+      "5701058",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3301",
