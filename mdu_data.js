@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-09-24 08:07:32
+// Dados MDU Compactados - Gerado em: 2026-09-24 09:00:15
 window.MDU_METADATA = {
-    "generated_at": "2026-09-24 08:07:32",
+    "generated_at": "2026-09-24 09:00:15",
     "total_rows": 5684,
     "geocoded_new": 0
 };
@@ -181708,10 +181708,10 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "1",
-        "relatorio_por": "JENIFFER (sem termo e croqui)",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610441679",
         "area": "MTSAA",
         "node": "",
@@ -181726,7 +181726,7 @@ window.MDU_DATA = [
         "data_fusao": "10/09/2026",
         "data_baixa": "23/09",
         "obs_baixa": "",
-        "data_relatorio": "",
+        "data_relatorio": "24/09/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
