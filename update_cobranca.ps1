@@ -411,34 +411,79 @@ if (-not $pythonSuccess) {
     const db = $jsonStr;
     const l = db.lookups;
     
-    // Descomprimir na memória
-    window.COBRANCA_DATA = db.rows.map(r => ({
-        pep: r[0],
-        categoria: l.categorias[r[1]],
-        os: r[2],
-        cidade: l.cidades[r[3]],
-        uf: l.ufs[r[4]],
-        projeto: l.projetos[r[5]],
-        projeto_gerencial: l.projetos_gerenciais[r[6]],
-        tipo_atividade: l.tipos_atividade[r[7]],
-        fase_atual: l.fase_atual[r[8]],
-        contrato_numero: l.contratos[r[9]],
-        item_descritivo: l.itens_descritivos[r[10]],
-        tipo_despesa: l.tipos_despesa[r[11]],
-        objeto_do_contrato: l.objetos_contrato[r[12]],
-        valor_total: r[13],
-        data_cadastro: r[14],
-        data_aprovacao: r[15],
-        tempo_aprovacao: r[16],
-        user_inclusao_medicao: l.users[r[17]],
-        numero_medicao: r[18],
-        numero_pedido: r[19],
-        user_pedido: l.users[r[20]],
-        fase_atual_de_para: l.fase_de_para[r[21]],
-        mes_medicao: r[22],
-        data_inclusao_lpu: r[23],
-        data_pedido: r[24]
-    }));
+    function mapProjetoDePara(pgRaw, taRaw, projRaw, catRaw) {
+        var clean = function(s) {
+            return s ? String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toUpperCase().trim() : '';
+        };
+        var pg = clean(pgRaw);
+        var ta = clean(taRaw);
+        var proj = clean(projRaw);
+        var cat = clean(catRaw);
+
+        // 1. LANÇAMENTO DE CABO = ENGENHARIA
+        if (ta.includes('LANCAMENTO DE CABO') || pg.includes('LANCAMENTO DE CABO')) return 'ENGENHARIA';
+
+        // 2. CONSTRUÇÃO DE ACESSO RE GPON PRÉ-VIÁVEL = PRÉ-VIÁVEL
+        if (pg.includes('PRE-VIAVEL') || pg.includes('PRE VIEL') || pg.includes('PRE-VIEL') || pg.includes('PREVIAVEL') || ta.includes('PRE-VIAVEL')) return 'PRÉ-VIÁVEL';
+
+        // 3. MO GBF MDU = MDU
+        if (pg.includes('MO GBF MDU') || pg.includes('GBF MDU') || pg.includes('MDU')) return 'MDU';
+
+        // 4. MO SAR = SAR
+        if (pg.includes('MO SAR') || pg.includes('SAR GPON') || (pg.includes('RE GPON PR') && pg.includes('SAR')) || pg === 'SAR' || pg.startsWith('SAR ') || pg.includes(' SAR ')) return 'SAR';
+
+        // 5. GBF = PROJETO F
+        if (pg.includes('GBF') || pg.includes('GGF') || pg.includes('PROJETO F')) return 'PROJETO F';
+
+        // 6. CONTRUÇÃO DE ACESSO = ACESSO (CONTRUCAO / CONSTRUCAO)
+        if (pg.includes('CONSTRUCAO DE ACESSO') || pg.includes('CONTRUCAO DE ACESSO') || pg.includes('CONSTRUCAO ACESSO') || pg.includes('ACESSO EXTERNO') || pg.includes('ACESSO REDE') || ta.includes('CONSTRUCAO DE ACESSO')) return 'ACESSO';
+
+        // 7. ATIVAÇÃO/PADRAO = ATIVAÇÃO/DESATIVAÇÃO
+        if (pg.includes('ATIVACAO') || pg.includes('PADRAO') || pg.includes('DESATIVACAO') || cat === 'ATIVACAO' || cat === 'DESATIVACAO') return 'ATIVAÇÃO/DESATIVAÇÃO';
+
+        // 8. MANUTENÇÃO = MANUTENÇÃO
+        if (pg.includes('MANUTENCAO') || proj.includes('MANUTENCAO') || ta.includes('MANUTENCAO')) return 'MANUTENÇÃO';
+
+        return projRaw || 'OUTROS';
+    }
+
+    // Descomprimir na memória com De/Para de Projeto Gerencial aplicado em projeto
+    window.COBRANCA_DATA = db.rows.map(r => {
+        var cat = l.categorias[r[1]];
+        var rawProj = l.projetos[r[5]];
+        var pg = l.projetos_gerenciais[r[6]];
+        var ta = l.tipos_atividade[r[7]];
+        var mappedProj = mapProjetoDePara(pg, ta, rawProj, cat);
+
+        return {
+            pep: r[0],
+            categoria: cat,
+            os: r[2],
+            cidade: l.cidades[r[3]],
+            uf: l.ufs[r[4]],
+            projeto: mappedProj,
+            projeto_original: rawProj,
+            projeto_gerencial: pg,
+            tipo_atividade: ta,
+            fase_atual: l.fase_atual[r[8]],
+            contrato_numero: l.contratos[r[9]],
+            item_descritivo: l.itens_descritivos[r[10]],
+            tipo_despesa: l.tipos_despesa[r[11]],
+            objeto_do_contrato: l.objetos_contrato[r[12]],
+            valor_total: r[13],
+            data_cadastro: r[14],
+            data_aprovacao: r[15],
+            tempo_aprovacao: r[16],
+            user_inclusao_medicao: l.users[r[17]],
+            numero_medicao: r[18],
+            numero_pedido: r[19],
+            user_pedido: l.users[r[20]],
+            fase_atual_de_para: l.fase_de_para[r[21]],
+            mes_medicao: r[22],
+            data_inclusao_lpu: r[23],
+            data_pedido: r[24]
+        };
+    });
     
     window.COBRANCA_METADATA = {
         generated_at: db.generated_at,

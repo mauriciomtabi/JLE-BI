@@ -37,6 +37,57 @@ let cobrancaClickFilters = {
 // Utiliza a data de geração da base de dados se disponível, ou a data de hoje
 let baseAgingDate = new Date();
 
+// ── Mapeamento De/Para de Projeto Gerencial -> Projeto ────────────────────────
+function mapCobrancaProjetoDePara(pgRaw, taRaw, projRaw, catRaw) {
+    const clean = s => s ? String(s).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase().trim() : '';
+    const pg = clean(pgRaw);
+    const ta = clean(taRaw);
+    const proj = clean(projRaw);
+    const cat = clean(catRaw);
+
+    // 1. LANÇAMENTO DE CABO = ENGENHARIA
+    if (ta.includes('LANCAMENTO DE CABO') || pg.includes('LANCAMENTO DE CABO')) {
+        return 'ENGENHARIA';
+    }
+
+    // 2. CONSTRUÇÃO DE ACESSO RE GPON PRÉ-VIÁVEL = PRÉ-VIÁVEL
+    if (pg.includes('PRE-VIAVEL') || pg.includes('PRE VIEL') || pg.includes('PRE-VIEL') || pg.includes('PREVIAVEL') || ta.includes('PRE-VIAVEL')) {
+        return 'PRÉ-VIÁVEL';
+    }
+
+    // 3. MO GBF MDU = MDU
+    if (pg.includes('MO GBF MDU') || pg.includes('GBF MDU') || pg.includes('MDU')) {
+        return 'MDU';
+    }
+
+    // 4. MO SAR = SAR
+    if (pg.includes('MO SAR') || pg.includes('SAR GPON') || (pg.includes('RE GPON PR') && pg.includes('SAR')) || pg === 'SAR' || pg.startsWith('SAR ') || pg.includes(' SAR ')) {
+        return 'SAR';
+    }
+
+    // 5. GBF = PROJETO F
+    if (pg.includes('GBF') || pg.includes('GGF') || pg.includes('PROJETO F')) {
+        return 'PROJETO F';
+    }
+
+    // 6. CONTRUÇÃO DE ACESSO = ACESSO (CONTRUCAO / CONSTRUCAO)
+    if (pg.includes('CONSTRUCAO DE ACESSO') || pg.includes('CONTRUCAO DE ACESSO') || pg.includes('CONSTRUCAO ACESSO') || pg.includes('ACESSO EXTERNO') || pg.includes('ACESSO REDE') || ta.includes('CONSTRUCAO DE ACESSO')) {
+        return 'ACESSO';
+    }
+
+    // 7. ATIVAÇÃO/PADRAO = ATIVAÇÃO/DESATIVAÇÃO
+    if (pg.includes('ATIVACAO') || pg.includes('PADRAO') || pg.includes('DESATIVACAO') || cat === 'ATIVACAO' || cat === 'DESATIVACAO') {
+        return 'ATIVAÇÃO/DESATIVAÇÃO';
+    }
+
+    // 8. MANUTENÇÃO = MANUTENÇÃO
+    if (pg.includes('MANUTENCAO') || proj.includes('MANUTENCAO') || ta.includes('MANUTENCAO')) {
+        return 'MANUTENÇÃO';
+    }
+
+    return projRaw || 'OUTROS';
+}
+
 // ── Inicialização ────────────────────────────────────────────────────────────
 function initCobranca() {
     try {
@@ -50,6 +101,14 @@ function initCobranca() {
             const genDateParts = window.COBRANCA_METADATA.generated_at.split(' ')[0].split('-');
             baseAgingDate = new Date(genDateParts[0], genDateParts[1] - 1, genDateParts[2]);
         }
+
+        // Assegurar aplicação do De/Para de Projeto Gerencial em todos os registros
+        COBRANCA_DATA.forEach(r => {
+            if (!r.projeto_original) {
+                r.projeto_original = r.projeto || '-';
+            }
+            r.projeto = mapCobrancaProjetoDePara(r.projeto_gerencial, r.tipo_atividade, r.projeto_original, r.categoria);
+        });
 
         cobrancaFilteredData = [...COBRANCA_DATA];
         populateCobrancaFilters();
@@ -1777,7 +1836,9 @@ function getCobrancaTableData() {
             (r.pep || '').toUpperCase().includes(q) ||
             (r.cidade || '').toUpperCase().includes(q) ||
             (r.projeto || '').toUpperCase().includes(q) ||
+            (r.projeto_original || '').toUpperCase().includes(q) ||
             (r.projeto_gerencial || '').toUpperCase().includes(q) ||
+            (r.tipo_atividade || '').toUpperCase().includes(q) ||
             (r.item_descritivo || '').toUpperCase().includes(q) ||
             (r.numero_pedido || '').toString().includes(q) ||
             (r.data_pedido || '').toString().includes(q) ||
@@ -1856,7 +1917,7 @@ function renderCobrancaTable() {
             <td data-label="OS"><strong>${r.os || '-'}</strong></td>
             <td data-label="Cidade">${r.cidade || '-'}</td>
             <td data-label="UF"><span class="badge ${String(r.uf || '').toLowerCase()}">${r.uf || '-'}</span></td>
-            <td data-label="Projeto">${r.projeto || '-'}</td>
+            <td data-label="Projeto" title="${r.projeto_original && r.projeto_original !== r.projeto ? 'Original: ' + r.projeto_original : ''}">${r.projeto || '-'}</td>
             <td data-label="Proj. Gerencial">${r.projeto_gerencial || '-'}</td>
             <td data-label="Tipo Atividade" title="${r.tipo_atividade || ''}">${r.tipo_atividade || '-'}</td>
             <td data-label="Fase Atual">${r.fase_atual || '-'}</td>

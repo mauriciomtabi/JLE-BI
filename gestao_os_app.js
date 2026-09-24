@@ -37,6 +37,29 @@ let gestao_osClickFilters = {
 // Utiliza a data de geração da base de dados se disponível, ou a data de hoje
 let gestaoOs_baseAgingDate = new Date();
 
+// ── Mapeamento De/Para de Projeto Gerencial -> Projeto ────────────────────────
+function mapGestaoOsProjetoDePara(pgRaw, taRaw, projRaw, catRaw) {
+    if (typeof mapCobrancaProjetoDePara === 'function') {
+        return mapCobrancaProjetoDePara(pgRaw, taRaw, projRaw, catRaw);
+    }
+    const clean = s => s ? String(s).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase().trim() : '';
+    const pg = clean(pgRaw);
+    const ta = clean(taRaw);
+    const proj = clean(projRaw);
+    const cat = clean(catRaw);
+
+    if (ta.includes('LANCAMENTO DE CABO') || pg.includes('LANCAMENTO DE CABO')) return 'ENGENHARIA';
+    if (pg.includes('PRE-VIAVEL') || pg.includes('PRE VIEL') || pg.includes('PRE-VIEL') || pg.includes('PREVIAVEL') || ta.includes('PRE-VIAVEL')) return 'PRÉ-VIÁVEL';
+    if (pg.includes('MO GBF MDU') || pg.includes('GBF MDU') || pg.includes('MDU')) return 'MDU';
+    if (pg.includes('MO SAR') || pg.includes('SAR GPON') || (pg.includes('RE GPON PR') && pg.includes('SAR')) || pg === 'SAR' || pg.startsWith('SAR ') || pg.includes(' SAR ')) return 'SAR';
+    if (pg.includes('GBF') || pg.includes('GGF') || pg.includes('PROJETO F')) return 'PROJETO F';
+    if (pg.includes('CONSTRUCAO DE ACESSO') || pg.includes('CONTRUCAO DE ACESSO') || pg.includes('CONSTRUCAO ACESSO') || pg.includes('ACESSO EXTERNO') || pg.includes('ACESSO REDE') || ta.includes('CONSTRUCAO DE ACESSO')) return 'ACESSO';
+    if (pg.includes('ATIVACAO') || pg.includes('PADRAO') || pg.includes('DESATIVACAO') || cat === 'ATIVACAO' || cat === 'DESATIVACAO') return 'ATIVAÇÃO/DESATIVAÇÃO';
+    if (pg.includes('MANUTENCAO') || proj.includes('MANUTENCAO') || ta.includes('MANUTENCAO')) return 'MANUTENÇÃO';
+
+    return projRaw || 'OUTROS';
+}
+
 // ── Inicialização ────────────────────────────────────────────────────────────
 function initGestaoOs() {
     try {
@@ -50,6 +73,14 @@ function initGestaoOs() {
             const genDateParts = window.COBRANCA_METADATA.generated_at.split(' ')[0].split('-');
             gestaoOs_baseAgingDate = new Date(genDateParts[0], genDateParts[1] - 1, genDateParts[2]);
         }
+
+        // Assegurar aplicação do De/Para de Projeto Gerencial em todos os registros
+        COBRANCA_DATA.forEach(r => {
+            if (!r.projeto_original) {
+                r.projeto_original = r.projeto || '-';
+            }
+            r.projeto = mapGestaoOsProjetoDePara(r.projeto_gerencial, r.tipo_atividade, r.projeto_original, r.categoria);
+        });
 
         gestao_osFilteredData = [...COBRANCA_DATA];
         populateGestaoOsFilters();
@@ -1808,7 +1839,9 @@ function getGestaoOsTableData() {
             (r.pep || '').toUpperCase().includes(q) ||
             (r.cidade || '').toUpperCase().includes(q) ||
             (r.projeto || '').toUpperCase().includes(q) ||
+            (r.projeto_original || '').toUpperCase().includes(q) ||
             (r.projeto_gerencial || '').toUpperCase().includes(q) ||
+            (r.tipo_atividade || '').toUpperCase().includes(q) ||
             (r.item_descritivo || '').toUpperCase().includes(q) ||
             (r.numero_pedido || '').toString().includes(q) ||
             (r.numero_medicao || '').toString().includes(q) ||
@@ -1886,7 +1919,7 @@ function renderGestaoOsTable() {
             <td data-label="OS"><strong>${r.os || '-'}</strong></td>
             <td data-label="Cidade">${r.cidade || '-'}</td>
             <td data-label="UF"><span class="badge ${String(r.uf || '').toLowerCase()}">${r.uf || '-'}</span></td>
-            <td data-label="Projeto">${r.projeto || '-'}</td>
+            <td data-label="Projeto" title="${r.projeto_original && r.projeto_original !== r.projeto ? 'Original: ' + r.projeto_original : ''}">${r.projeto || '-'}</td>
             <td data-label="Proj. Gerencial">${r.projeto_gerencial || '-'}</td>
             <td data-label="Tipo Atividade" title="${r.tipo_atividade || ''}">${r.tipo_atividade || '-'}</td>
             <td data-label="Fase Atual">${r.fase_atual || '-'}</td>

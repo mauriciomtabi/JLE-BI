@@ -68,6 +68,7 @@ function generateExcelAttachments(claroData) {
     const mapToExcelJson = (arr) => arr.map(r => ({
         "OS": r.os,
         "Categoria": r.categoria,
+        "Projeto": r.projeto,
         "Projeto Gerencial": r.projeto_gerencial,
         "Cidade": r.cidade,
         "UF": r.uf,
@@ -328,6 +329,25 @@ module.exports = {
     buildClaroEmailHtml
 };
 
+function mapClaroProjetoDePara(pgRaw, taRaw, projRaw, catRaw) {
+    const clean = s => s ? String(s).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase().trim() : '';
+    const pg = clean(pgRaw);
+    const ta = clean(taRaw);
+    const proj = clean(projRaw);
+    const cat = clean(catRaw);
+
+    if (ta.includes('LANCAMENTO DE CABO') || pg.includes('LANCAMENTO DE CABO')) return 'ENGENHARIA';
+    if (pg.includes('PRE-VIAVEL') || pg.includes('PRE VIEL') || pg.includes('PRE-VIEL') || pg.includes('PREVIAVEL') || ta.includes('PRE-VIAVEL')) return 'PRÉ-VIÁVEL';
+    if (pg.includes('MO GBF MDU') || pg.includes('GBF MDU') || pg.includes('MDU')) return 'MDU';
+    if (pg.includes('MO SAR') || pg.includes('SAR GPON') || (pg.includes('RE GPON PR') && pg.includes('SAR')) || pg === 'SAR' || pg.startsWith('SAR ') || pg.includes(' SAR ')) return 'SAR';
+    if (pg.includes('GBF') || pg.includes('GGF') || pg.includes('PROJETO F')) return 'PROJETO F';
+    if (pg.includes('CONSTRUCAO DE ACESSO') || pg.includes('CONTRUCAO DE ACESSO') || pg.includes('CONSTRUCAO ACESSO') || pg.includes('ACESSO EXTERNO') || pg.includes('ACESSO REDE') || ta.includes('CONSTRUCAO DE ACESSO')) return 'ACESSO';
+    if (pg.includes('ATIVACAO') || pg.includes('PADRAO') || pg.includes('DESATIVACAO') || cat === 'ATIVACAO' || cat === 'DESATIVACAO') return 'ATIVAÇÃO/DESATIVAÇÃO';
+    if (pg.includes('MANUTENCAO') || proj.includes('MANUTENCAO') || ta.includes('MANUTENCAO')) return 'MANUTENÇÃO';
+
+    return projRaw || 'OUTROS';
+}
+
 function parseClaroContent(content) {
     const match = content.match(/const db = ({[\s\S]*?});\r?\n/);
     if (!match) {
@@ -337,33 +357,42 @@ function parseClaroContent(content) {
     const db = JSON.parse(match[1]);
     const l = db.lookups;
     
-    const rows = db.rows.map(r => ({
-        pep: r[0] || '-',
-        categoria: l.categorias[r[1]] || '-',
-        os: r[2] || '-',
-        cidade: l.cidades[r[3]] || '-',
-        uf: l.ufs[r[4]] || '-',
-        projeto: l.projetos[r[5]] || '-',
-        projeto_gerencial: l.projetos_gerenciais[r[6]] || '-',
-        tipo_atividade: l.tipos_atividade[r[7]] || '-',
-        fase_atual: l.fase_atual[r[8]] || '-',
-        contrato_numero: l.contratos[r[9]] || '-',
-        item_descritivo: l.itens_descritivos[r[10]] || '-',
-        tipo_despesa: l.tipos_despesa[r[11]] || '-',
-        objeto_do_contrato: l.objetos_contrato[r[12]] || '-',
-        valor_total: r[13] || 0,
-        data_cadastro: r[14] || '-',
-        data_aprovacao: r[15] || '-',
-        tempo_aprovacao: r[16] !== null && r[16] !== undefined ? r[16] : '-',
-        user_inclusao_medicao: l.users[r[17]] || '-',
-        numero_medicao: r[18] || '-',
-        numero_pedido: r[19] || '-',
-        user_pedido: l.users[r[20]] || '-',
-        fase_atual_de_para: l.fase_de_para[r[21]] || '-',
-        mes_medicao: r[22] || '-',
-        data_inclusao_lpu: r[23] || '-',
-        data_pedido: r[24] || '-'
-    }));
+    const rows = db.rows.map(r => {
+        const cat = l.categorias[r[1]] || '-';
+        const rawProj = l.projetos[r[5]] || '-';
+        const pg = l.projetos_gerenciais[r[6]] || '-';
+        const ta = l.tipos_atividade[r[7]] || '-';
+        const mappedProj = mapClaroProjetoDePara(pg, ta, rawProj, cat);
+
+        return {
+            pep: r[0] || '-',
+            categoria: cat,
+            os: r[2] || '-',
+            cidade: l.cidades[r[3]] || '-',
+            uf: l.ufs[r[4]] || '-',
+            projeto: mappedProj,
+            projeto_original: rawProj,
+            projeto_gerencial: pg,
+            tipo_atividade: ta,
+            fase_atual: l.fase_atual[r[8]] || '-',
+            contrato_numero: l.contratos[r[9]] || '-',
+            item_descritivo: l.itens_descritivos[r[10]] || '-',
+            tipo_despesa: l.tipos_despesa[r[11]] || '-',
+            objeto_do_contrato: l.objetos_contrato[r[12]] || '-',
+            valor_total: r[13] || 0,
+            data_cadastro: r[14] || '-',
+            data_aprovacao: r[15] || '-',
+            tempo_aprovacao: r[16] !== null && r[16] !== undefined ? r[16] : '-',
+            user_inclusao_medicao: l.users[r[17]] || '-',
+            numero_medicao: r[18] || '-',
+            numero_pedido: r[19] || '-',
+            user_pedido: l.users[r[20]] || '-',
+            fase_atual_de_para: l.fase_de_para[r[21]] || '-',
+            mes_medicao: r[22] || '-',
+            data_inclusao_lpu: r[23] || '-',
+            data_pedido: r[24] || '-'
+        };
+    });
     
     return {
         generated_at: db.generated_at,
