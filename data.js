@@ -1,5 +1,5 @@
 ﻿window.CASH_FLOW_DATA = {
-    "generated_at":  "2026-09-24 10:05:03",
+    "generated_at":  "2026-09-25 10:05:10",
     "categories_origin":  {
                               "entradas":  [
 
