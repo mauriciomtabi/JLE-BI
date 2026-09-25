@@ -1,5 +1,5 @@
 ﻿window.TECNODRILL_DATA = {
-    "generated_at":  "2026-09-24 10:06:22",
+    "generated_at":  "2026-09-25 10:06:27",
     "empresa":  "Tecnodrill",
     "categories_origin":  {
                               "entradas":  [
@@ -16243,7 +16243,7 @@
                              "uf":  "SETEMBRO",
                              "fluxo":  "Saída",
                              "categoria":  "Despesas Operacionais",
-                             "descricao":  "Reembolso Denison casa Curitiba de sábado a segunda",
+                             "descricao":  "Reembolso Denilson casa Curitiba de sábado a segunda",
                              "valor_nominal":  479.7,
                              "valor_liquido":  -479.7,
                              "meio_pagamento":  "Pix",
@@ -17595,7 +17595,7 @@
                          }
                      ],
     "caixa":  {
-                  "gerado_em":  "2026-09-24 10:05:50",
+                  "gerado_em":  "2026-09-25 10:05:57",
                   "carlos":  [
                                  {
                                      "id":  "carlos-1",
