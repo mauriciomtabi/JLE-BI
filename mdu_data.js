@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-09-28 15:06:09
+// Dados MDU Compactados - Gerado em: 2026-09-28 16:00:14
 window.MDU_METADATA = {
-    "generated_at": "2026-09-28 15:06:09",
+    "generated_at": "2026-09-28 16:00:14",
     "total_rows": 5756,
     "geocoded_new": 0
 };
@@ -182096,7 +182096,7 @@ window.MDU_DATA = [
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
-        "cod_imovel": "",
+        "cod_imovel": "711766330",
         "area": "MTSAA",
         "node": "",
         "caixa_m": "MTSAA.005.M030",
@@ -182128,7 +182128,7 @@ window.MDU_DATA = [
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
-        "cod_imovel": "",
+        "cod_imovel": "711766314",
         "area": "MTSAA",
         "node": "",
         "caixa_m": "MTSAA.005.M020",
