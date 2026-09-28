@@ -1,5 +1,5 @@
 ﻿window.CASH_FLOW_DATA = {
-    "generated_at":  "2026-09-28 10:05:00",
+    "generated_at":  "2026-09-28 15:04:30",
     "categories_origin":  {
                               "entradas":  [
 
@@ -154569,6 +154569,38 @@
                              "descricao":  "MUNICIPIO DE CURITIBA",
                              "valor_nominal":  6.27,
                              "valor_liquido":  6.27,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET_2026 MAXCREDITO_447",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "SET_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-24",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Material utilizado em serviços",
+                             "descricao":  "SER.DISTRITAL PINHEIRINHO FORO C",
+                             "valor_nominal":  34.26,
+                             "valor_liquido":  -34.26,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET_2026 MAXCREDITO_448",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "SET_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-25",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Prestadores de Serviços",
+                             "descricao":  "Pagamento Jair pedreiro",
+                             "valor_nominal":  4000,
+                             "valor_liquido":  -4000,
                              "meio_pagamento":  "Pix",
                              "is_transfer":  false
                          },
