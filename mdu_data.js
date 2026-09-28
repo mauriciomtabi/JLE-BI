@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-09-28 17:00:16
+// Dados MDU Compactados - Gerado em: 2026-09-28 18:00:16
 window.MDU_METADATA = {
-    "generated_at": "2026-09-28 17:00:16",
+    "generated_at": "2026-09-28 18:00:16",
     "total_rows": 5756,
     "geocoded_new": 0
 };
@@ -182416,7 +182416,7 @@ window.MDU_DATA = [
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
-        "cod_imovel": "",
+        "cod_imovel": "610437675",
         "area": "MTSAA",
         "node": "",
         "caixa_m": "MTSAA.015.M030",
