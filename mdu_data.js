@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-09-28 16:00:14
+// Dados MDU Compactados - Gerado em: 2026-09-28 17:00:16
 window.MDU_METADATA = {
-    "generated_at": "2026-09-28 16:00:14",
+    "generated_at": "2026-09-28 17:00:16",
     "total_rows": 5756,
     "geocoded_new": 0
 };
@@ -182160,7 +182160,7 @@ window.MDU_DATA = [
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
-        "cod_imovel": "",
+        "cod_imovel": "711766275",
         "area": "MTSAA",
         "node": "",
         "caixa_m": "MTSAA.005.M010",
@@ -182192,7 +182192,7 @@ window.MDU_DATA = [
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
-        "cod_imovel": "",
+        "cod_imovel": "610461451",
         "area": "MNDAC",
         "node": "",
         "caixa_m": "MNDAC.071.M010",
@@ -182256,7 +182256,7 @@ window.MDU_DATA = [
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
-        "cod_imovel": "",
+        "cod_imovel": "610466316",
         "area": "MNDAA",
         "node": "",
         "caixa_m": "MNDAA.091.M030",
@@ -182320,7 +182320,7 @@ window.MDU_DATA = [
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
-        "cod_imovel": "",
+        "cod_imovel": "703681423",
         "area": "BVSAA",
         "node": "",
         "caixa_m": "BVSAA.015.M030",
@@ -182352,7 +182352,7 @@ window.MDU_DATA = [
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
-        "cod_imovel": "",
+        "cod_imovel": "700737905",
         "area": "BVSAA",
         "node": "",
         "caixa_m": "BVSAA.015.M030",
@@ -182384,7 +182384,7 @@ window.MDU_DATA = [
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
-        "cod_imovel": "",
+        "cod_imovel": "610441253",
         "area": "MTSAA",
         "node": "",
         "caixa_m": "MTSAA.015.M020",
