@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-09-28 09:00:09
+// Dados SAR JLE Telecom - Gerado em: 2026-09-28 10:00:10
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1092,
-    "generated_at": "2026-09-28 09:00:09",
+    "generated_at": "2026-09-28 10:00:10",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -76381,7 +76381,7 @@ window.SAR_DATA = [
     "cod": "RSCLER1083",
     "area_tecnica": "CNTAA",
     "node": "",
-    "site": "",
+    "site": "RSNHOLO",
     "cidade": "NOVO HAMBURGO",
     "condominio": "Edifício Galeria Central",
     "endereco": "R LIMA E SILVA 426",
@@ -76419,7 +76419,7 @@ window.SAR_DATA = [
     "ano_entrega": "2026",
     "mes_entrega": "SETEMBRO",
     "mes_num_entrega": "09",
-    "status": "SEM SINAL",
+    "status": "RELATÓRIO",
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Em Andamento",
