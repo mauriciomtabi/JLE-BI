@@ -1,5 +1,5 @@
 ﻿window.CASH_FLOW_DATA = {
-    "generated_at":  "2026-09-25 15:05:18",
+    "generated_at":  "2026-09-28 10:05:00",
     "categories_origin":  {
                               "entradas":  [
 
@@ -154525,6 +154525,54 @@
                              "is_transfer":  false
                          },
                          {
+                             "id":  "SET_2026 MAXCREDITO_444",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "SET_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-24",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Financiamento Veículos",
+                             "descricao":  "Parcela Fluence",
+                             "valor_nominal":  878.19,
+                             "valor_liquido":  -878.19,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET_2026 MAXCREDITO_445",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "SET_2026 MAXCREDITO",
+                             "remessa":  "REMESSA",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-24",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Taxas e Tarifas",
+                             "descricao":  "DNIT - O pagamento é necessário para que o DNIT possa dar continuidade à análise técn",
+                             "valor_nominal":  1063.51,
+                             "valor_liquido":  -1063.51,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET_2026 MAXCREDITO_446",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "SET_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-24",
+                             "uf":  "RS",
+                             "fluxo":  "Entrada",
+                             "categoria":  "Rendimentos de Juros",
+                             "descricao":  "MUNICIPIO DE CURITIBA",
+                             "valor_nominal":  6.27,
+                             "valor_liquido":  6.27,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
                              "id":  "SET_2026 CONFIANÇA_11",
                              "banco":  "Sicoob Confiança",
                              "aba":  "SET_2026 CONFIANÇA",
@@ -156201,6 +156249,38 @@
                              "descricao":  "GILSON DOS SANTOS - MONTAGEM DOS MOVEIS RECEPÇÃO",
                              "valor_nominal":  220,
                              "valor_liquido":  -220,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET_2026 CONFIANÇA_116",
+                             "banco":  "Sicoob Confiança",
+                             "aba":  "SET_2026 CONFIANÇA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-24",
+                             "uf":  "SC",
+                             "fluxo":  "Saída",
+                             "categoria":  "Manut. De Veículos",
+                             "descricao":  "Pagamento lavacar fns mobi e Fiorino",
+                             "valor_nominal":  140,
+                             "valor_liquido":  -140,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "SET_2026 CONFIANÇA_117",
+                             "banco":  "Sicoob Confiança",
+                             "aba":  "SET_2026 CONFIANÇA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "SETEMBRO/2026",
+                             "data":  "2026-09-24",
+                             "uf":  "SC",
+                             "fluxo":  "Saída",
+                             "categoria":  "Material utilizado em serviços",
+                             "descricao":  "Compra material engenharia pr",
+                             "valor_nominal":  2200,
+                             "valor_liquido":  -2200,
                              "meio_pagamento":  "Pix",
                              "is_transfer":  false
                          },
