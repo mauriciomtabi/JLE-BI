@@ -315,17 +315,32 @@
             mapComp[comp] = { maquinas: 0, imoveis: 0, veiculos: 0, total: 0 };
         });
 
-        filteredContracts.forEach(c => {
-            (c.parcelas || []).forEach(p => {
-                if (p.competencia && mapComp[p.competencia]) {
-                    const v = p.prestacao || 0;
-                    if (c.categoria === 'Máquinas') mapComp[p.competencia].maquinas += v;
-                    else if (c.categoria === 'Imóveis') mapComp[p.competencia].imoveis += v;
-                    else if (c.categoria === 'Veículos') mapComp[p.competencia].veiculos += v;
-                    mapComp[p.competencia].total += v;
+        const hasFilters = (state.filterCategoria !== 'TODAS' || state.filterInstituicao !== 'TODAS' || state.filterStatus !== 'TODOS' || state.searchQuery);
+
+        if (!hasFilters && data.totais_gerais && data.totais_gerais.fluxo_mensal) {
+            data.totais_gerais.fluxo_mensal.forEach(m => {
+                if (m.competencia && mapComp[m.competencia]) {
+                    mapComp[m.competencia].maquinas = m.maquinas || 0;
+                    mapComp[m.competencia].imoveis = m.imoveis || 0;
+                    mapComp[m.competencia].veiculos = m.veiculos || 0;
+                    mapComp[m.competencia].total = m.total_previsto || 0;
                 }
             });
-        });
+        } else {
+            filteredContracts.forEach(c => {
+                const cat = c.categoria;
+                (c.parcelas || []).forEach(p => {
+                    const comp = p.mes_ano || p.competencia || (p.vencimento && p.vencimento.length === 10 ? p.vencimento.substring(3, 10) : null);
+                    if (comp && mapComp[comp]) {
+                        const v = Number(p.prestacao) || 0;
+                        if (cat === 'Máquinas') mapComp[comp].maquinas += v;
+                        else if (cat === 'Imóveis') mapComp[comp].imoveis += v;
+                        else if (cat === 'Veículos') mapComp[comp].veiculos += v;
+                        mapComp[comp].total += v;
+                    }
+                });
+            });
+        }
 
         const maq = labels.map(c => mapComp[c].maquinas);
         const imo = labels.map(c => mapComp[c].imoveis);
