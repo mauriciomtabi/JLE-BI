@@ -52,7 +52,7 @@
     <link rel="stylesheet" href="mdu_styles.css">
     <link rel="stylesheet" href="sar_styles.css?v=3.57">
     <link rel="stylesheet" href="parcelamentos_styles.css?v=1.3">
-    <link rel="stylesheet" href="financiamentos_styles.css?v=1.0">
+    <link rel="stylesheet" href="financiamentos_styles.css?v=1.2">
     
     <!-- Leaflet Map CSS & JS CDNs -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
@@ -3480,7 +3480,54 @@
 
             <!-- SUB-ABA 1: VISÃO GERAL & CONSOLIDADO -->
             <div id="fin-tab-content-visao_geral" class="fin-tab-content" style="display: block;">
-                <!-- GRID DE 5 KPIS -->
+
+                <!-- 1. BARRA DE FILTROS SUPERIOR (SEMPRE NO TOPO) -->
+                <div class="fin-filter-bar">
+                    <div class="fin-filter-group">
+                        <label class="fin-filter-label">Categoria do Bem</label>
+                        <select id="fin-filter-categoria" class="fin-select" onchange="window.setFinFilterCategoria(this.value)">
+                            <option value="TODAS">Todas as Categorias</option>
+                            <option value="Máquinas">Máquinas & Perfuratrizes</option>
+                            <option value="Veículos">Veículos & Caminhões</option>
+                            <option value="Imóveis">Imóveis & Patrimônio</option>
+                        </select>
+                    </div>
+
+                    <div class="fin-filter-group">
+                        <label class="fin-filter-label">Instituição</label>
+                        <select id="fin-filter-instituicao" class="fin-select" onchange="window.setFinFilterInstituicao(this.value)">
+                            <option value="TODAS">Todas as Instituições</option>
+                            <option value="SICOOB">SICOOB</option>
+                            <option value="Banco Senff">Banco Senff</option>
+                            <option value="Pro-Formula">Pro-Formula (Base NH)</option>
+                            <option value="F. E. Hugentobler">F. E. Hugentobler (Terreno)</option>
+                        </select>
+                    </div>
+
+                    <div class="fin-filter-group">
+                        <label class="fin-filter-label">Status</label>
+                        <select id="fin-filter-status" class="fin-select" onchange="window.setFinFilterStatus(this.value)">
+                            <option value="TODOS">Todos os Status</option>
+                            <option value="EM_ABERTO">Com Parcelas em Aberto</option>
+                            <option value="PAGO">Totalmente Quitado</option>
+                        </select>
+                    </div>
+
+                    <div class="fin-filter-group fin-filter-search">
+                        <label class="fin-filter-label">Buscar Financiamento</label>
+                        <input type="text" id="fin-filter-search" class="fin-input" placeholder="Buscar por contrato, máquina, veículo ou imóvel..." oninput="window.setFinSearchQuery(this.value)">
+                    </div>
+
+                    <button class="fin-btn" onclick="window.clearFinFilters()" title="Limpar Filtros">
+                        <i class="fa-solid fa-filter-circle-xmark"></i> <span>Limpar</span>
+                    </button>
+
+                    <button class="fin-btn fin-btn-excel" onclick="window.exportFinOverviewExcel()" title="Exportar Resumo em Excel">
+                        <i class="fa-solid fa-file-excel"></i> <span>Exportar Excel</span>
+                    </button>
+                </div>
+
+                <!-- 2. GRID DE 5 KPIS -->
                 <div class="fin-kpi-grid">
                     <div class="fin-kpi-card kpi-purple">
                         <div class="fin-kpi-title">
@@ -3543,75 +3590,24 @@
                     </div>
                 </div>
 
-                <!-- GRÁFICOS (FLUXO PMTS + DISTRIBUIÇÃO) -->
-                <div class="fin-charts-grid">
-                    <div class="fin-card">
-                        <div class="fin-card-header">
-                            <div class="fin-card-title">
-                                <i class="fa-solid fa-chart-column"></i> Evolução e Projeção do Fluxo de PMTs por Competência
-                            </div>
-                        </div>
-                        <div class="fin-chart-container-large">
-                            <canvas id="fin-chart-fluxo-pmts"></canvas>
-                        </div>
-                    </div>
-
-                    <div class="fin-card">
-                        <div class="fin-card-header">
-                            <div class="fin-card-title">
-                                <i class="fa-solid fa-chart-pie"></i> Saldo por Categoria
-                            </div>
-                        </div>
-                        <div class="fin-chart-container-large">
-                            <canvas id="fin-chart-distribuicao"></canvas>
-                        </div>
-                    </div>
+                <!-- 3. COMPOSIÇÃO DA CARTEIRA POR CATEGORIA (SUBSTITUIÇÃO DA ROSCA) -->
+                <div class="fin-composition-grid" id="fin-composition-container">
+                    <!-- Preenchido via JS com Máquinas, Imóveis e Veículos -->
                 </div>
 
-                <!-- BARRA DE FILTROS DA TABELA CONSOLIDADA -->
-                <div class="fin-filter-bar">
-                    <div class="fin-filter-group">
-                        <label class="fin-filter-label">Categoria do Bem</label>
-                        <select id="fin-filter-categoria" class="fin-select" onchange="window.setFinFilterCategoria(this.value)">
-                            <option value="TODAS">Todas as Categorias</option>
-                            <option value="Máquinas">Máquinas & Perfuratrizes</option>
-                            <option value="Veículos">Veículos & Caminhões</option>
-                            <option value="Imóveis">Imóveis & Patrimônio</option>
-                        </select>
+                <!-- 4. GRÁFICO COMBINADO: EVOLUÇÃO E PROJEÇÃO DO FLUXO DE PMTs (LARGURA TOTAL 100%) -->
+                <div class="fin-card">
+                    <div class="fin-card-header">
+                        <div class="fin-card-title">
+                            <i class="fa-solid fa-chart-line"></i> Evolução e Projeção do Fluxo de PMTs por Competência
+                        </div>
+                        <div style="font-size: 0.78rem; color: var(--text-secondary);">
+                            <span>Horizonte 2026 – 2028 (36 competências)</span>
+                        </div>
                     </div>
-
-                    <div class="fin-filter-group">
-                        <label class="fin-filter-label">Instituição</label>
-                        <select id="fin-filter-instituicao" class="fin-select" onchange="window.setFinFilterInstituicao(this.value)">
-                            <option value="TODAS">Todas as Instituições</option>
-                            <option value="SICOOB">SICOOB</option>
-                            <option value="Banco Senff">Banco Senff</option>
-                            <option value="Pro-Formula">Pro-Formula (Base NH)</option>
-                            <option value="F. E. Hugentobler">F. E. Hugentobler (Terreno)</option>
-                        </select>
+                    <div class="fin-chart-container-large">
+                        <canvas id="fin-chart-fluxo-pmts"></canvas>
                     </div>
-
-                    <div class="fin-filter-group">
-                        <label class="fin-filter-label">Status</label>
-                        <select id="fin-filter-status" class="fin-select" onchange="window.setFinFilterStatus(this.value)">
-                            <option value="TODOS">Todos os Status</option>
-                            <option value="EM_ABERTO">Com Parcelas em Aberto</option>
-                            <option value="PAGO">Totalmente Quitado</option>
-                        </select>
-                    </div>
-
-                    <div class="fin-filter-group fin-filter-search">
-                        <label class="fin-filter-label">Buscar Financiamento</label>
-                        <input type="text" id="fin-filter-search" class="fin-input" placeholder="Buscar por contrato, máquina, veículo ou imóvel..." oninput="window.setFinSearchQuery(this.value)">
-                    </div>
-
-                    <button class="fin-btn" onclick="window.clearFinFilters()" title="Limpar Filtros">
-                        <i class="fa-solid fa-filter-circle-xmark"></i> <span>Limpar</span>
-                    </button>
-
-                    <button class="fin-btn fin-btn-excel" onclick="window.exportFinOverviewExcel()" title="Exportar Resumo em Excel">
-                        <i class="fa-solid fa-file-excel"></i> <span>Exportar Excel</span>
-                    </button>
                 </div>
 
                 <!-- TABELA: RESUMO EXECUTIVO DOS CONTRATOS -->
@@ -3958,7 +3954,7 @@
     <script src="parcelamentos_data.js?v=20260914181600"></script>
     <script src="parcelamentos_app.js?v=1.6"></script>
     <script src="financiamentos_data.js?v=20260929090000"></script>
-    <script src="financiamentos_app.js?v=1.0"></script>
+    <script src="financiamentos_app.js?v=1.2"></script>
     <script src="email_preview_helper.js?v=1.2"></script>
 
     <!-- Logica de UI Autônoma (Sem Dependências de CDNs) -->

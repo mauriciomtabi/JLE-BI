@@ -33,13 +33,6 @@
         return val.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%';
     }
 
-    function parseIsoDate(isoStr) {
-        if (!isoStr) return null;
-        const p = isoStr.split('-');
-        if (p.length === 3) return new Date(parseInt(p[0]), parseInt(p[1]) - 1, parseInt(p[2]));
-        return null;
-    }
-
     // Inicializador do Módulo
     window.initFinanciamentos = function () {
         if (!window.FINANCIAMENTOS_DATA) {
@@ -73,7 +66,9 @@
 
     function renderActiveTab() {
         if (state.activeTab === 'visao_geral') {
-            renderOverviewCharts();
+            renderOverviewKPIs();
+            renderCompositionCards();
+            renderChartFluxoPMTs();
             renderContractsTable();
         } else if (state.activeTab === 'cronograma') {
             renderScheduleTab();
@@ -83,56 +78,7 @@
     }
 
     // ==========================================
-    // 1. TOP KPIS
-    // ==========================================
-    function renderOverviewKPIs() {
-        const data = window.FINANCIAMENTOS_DATA;
-        if (!data || !data.totais_gerais) return;
-
-        const tot = data.totais_gerais;
-
-        // KPI 1: Total Financiado Original
-        const elFin = document.getElementById('fin-kpi-total-financiado');
-        if (elFin) elFin.innerText = formatMoeda(tot.total_financiado);
-        const elFinSub = document.getElementById('fin-kpi-total-financiado-sub');
-        if (elFinSub) elFinSub.innerText = `${data.contratos.length} contratos ativos`;
-
-        // KPI 2: Total Já Amortizado / Pago
-        const elPago = document.getElementById('fin-kpi-total-amortizado');
-        if (elPago) elPago.innerText = formatMoeda(tot.total_pago);
-        const elPagoSub = document.getElementById('fin-kpi-total-amortizado-sub');
-        if (elPagoSub) elPagoSub.innerText = `${formatPct(tot.pct_quitado)} quitado (${tot.total_pagas} parcelas)`;
-
-        // KPI 3: Saldo Devedor Projetado
-        const elSaldo = document.getElementById('fin-kpi-saldo-devedor');
-        if (elSaldo) elSaldo.innerText = formatMoeda(tot.saldo_devedor);
-        const elSaldoSub = document.getElementById('fin-kpi-saldo-devedor-sub');
-        if (elSaldoSub) elSaldoSub.innerText = `${tot.total_pendentes} parcelas pendentes`;
-
-        // KPI 4: Compromisso Mensal Atual
-        const elMensal = document.getElementById('fin-kpi-compromisso-mensal');
-        if (elMensal) elMensal.innerText = formatMoeda(tot.compromisso_mensal);
-
-        // KPI 5: Próximo Vencimento
-        const elProx = document.getElementById('fin-kpi-proximo-vencimento');
-        const elProxSub = document.getElementById('fin-kpi-proximo-vencimento-sub');
-        if (tot.proxima_parcela) {
-            if (elProx) elProx.innerText = tot.proxima_parcela.vencimento;
-            if (elProxSub) elProxSub.innerText = `${tot.proxima_parcela.contrato_nome} • ${formatMoeda(tot.proxima_parcela.prestacao)}`;
-        } else {
-            if (elProx) elProx.innerText = 'Em dia';
-            if (elProxSub) elProxSub.innerText = 'Sem parcelas pendentes';
-        }
-
-        // Timestamp
-        const elTs = document.getElementById('fin-data-timestamp');
-        if (elTs && data.metadata) {
-            elTs.innerText = data.metadata.generated_at || 'Atualizado';
-        }
-    }
-
-    // ==========================================
-    // 2. ABA 1: VISÃO GERAL & CONSOLIDADO
+    // FILTRAGEM DE CONTRATOS
     // ==========================================
     function getFilteredContracts() {
         const data = window.FINANCIAMENTOS_DATA;
@@ -156,17 +102,193 @@
         });
     }
 
-    function renderOverviewCharts() {
+    // ==========================================
+    // 1. TOP KPIS DINÂMICOS
+    // ==========================================
+    function renderOverviewKPIs() {
         const data = window.FINANCIAMENTOS_DATA;
-        if (!data) return;
+        if (!data || !data.totais_gerais) return;
 
-        // Gráfico 1: Evolução do Fluxo de PMTs por Competência
-        renderChartFluxoPMTs();
+        const filtered = getFilteredContracts();
+        const hasFilters = (state.filterCategoria !== 'TODAS' || state.filterInstituicao !== 'TODAS' || state.filterStatus !== 'TODOS' || state.searchQuery);
 
-        // Gráfico 2: Distribuição por Categoria de Bem
-        renderChartDistribuicao();
+        let totalFin = 0;
+        let totalPago = 0;
+        let saldoDev = 0;
+        let totalParc = 0;
+        let totalPagas = 0;
+        let totalPend = 0;
+        let compromisso = 0;
+        let proximaParc = null;
+
+        if (!hasFilters) {
+            const tot = data.totais_gerais;
+            totalFin = tot.total_financiado;
+            totalPago = tot.total_pago;
+            saldoDev = tot.saldo_devedor;
+            totalParc = tot.total_parcelas;
+            totalPagas = tot.total_pagas;
+            totalPend = tot.total_pendentes;
+            compromisso = tot.compromisso_mensal;
+            proximaParc = tot.proxima_parcela;
+        } else {
+            totalFin = filtered.reduce((acc, c) => acc + c.valor_financiado, 0);
+            totalPago = filtered.reduce((acc, c) => acc + c.total_pago, 0);
+            saldoDev = filtered.reduce((acc, c) => acc + c.saldo_devedor, 0);
+            totalParc = filtered.reduce((acc, c) => acc + c.total_parcelas, 0);
+            totalPagas = filtered.reduce((acc, c) => acc + c.qtd_pagas, 0);
+            totalPend = filtered.reduce((acc, c) => acc + c.qtd_pendentes, 0);
+            compromisso = filtered.reduce((acc, c) => acc + (c.prestacao_mensal || 0), 0);
+
+            // Próxima parcela do conjunto filtrado
+            let allPending = [];
+            filtered.forEach(c => {
+                (c.parcelas || []).forEach(p => {
+                    if (p.status === 'Pendente' && p.vencimento_iso) {
+                        allPending.push({
+                            vencimento: p.vencimento,
+                            vencimento_iso: p.vencimento_iso,
+                            prestacao: p.prestacao,
+                            contrato_nome: c.nome
+                        });
+                    }
+                });
+            });
+            allPending.sort((a, b) => a.vencimento_iso.localeCompare(b.vencimento_iso));
+            proximaParc = allPending.length > 0 ? allPending[0] : null;
+        }
+
+        const pctQuit = totalParc > 0 ? (totalPagas / totalParc * 100.0) : 0.0;
+
+        // KPI 1: Total Financiado Original
+        const elFin = document.getElementById('fin-kpi-total-financiado');
+        if (elFin) elFin.innerText = formatMoeda(totalFin);
+        const elFinSub = document.getElementById('fin-kpi-total-financiado-sub');
+        if (elFinSub) elFinSub.innerText = `${filtered.length} contrato(s) ${hasFilters ? 'filtrado(s)' : 'ativos'}`;
+
+        // KPI 2: Total Já Amortizado / Pago
+        const elPago = document.getElementById('fin-kpi-total-amortizado');
+        if (elPago) elPago.innerText = formatMoeda(totalPago);
+        const elPagoSub = document.getElementById('fin-kpi-total-amortizado-sub');
+        if (elPagoSub) elPagoSub.innerText = `${formatPct(pctQuit)} quitado (${totalPagas} parcelas)`;
+
+        // KPI 3: Saldo Devedor Projetado
+        const elSaldo = document.getElementById('fin-kpi-saldo-devedor');
+        if (elSaldo) elSaldo.innerText = formatMoeda(saldoDev);
+        const elSaldoSub = document.getElementById('fin-kpi-saldo-devedor-sub');
+        if (elSaldoSub) elSaldoSub.innerText = `${totalPend} parcelas pendentes`;
+
+        // KPI 4: Compromisso Mensal Atual
+        const elMensal = document.getElementById('fin-kpi-compromisso-mensal');
+        if (elMensal) elMensal.innerText = formatMoeda(compromisso);
+
+        // KPI 5: Próximo Vencimento
+        const elProx = document.getElementById('fin-kpi-proximo-vencimento');
+        const elProxSub = document.getElementById('fin-kpi-proximo-vencimento-sub');
+        if (proximaParc) {
+            if (elProx) elProx.innerText = proximaParc.vencimento;
+            if (elProxSub) elProxSub.innerText = `${proximaParc.contrato_nome} • ${formatMoeda(proximaParc.prestacao)}`;
+        } else {
+            if (elProx) elProx.innerText = 'Em dia';
+            if (elProxSub) elProxSub.innerText = 'Sem parcelas pendentes';
+        }
+
+        // Timestamp
+        const elTs = document.getElementById('fin-data-timestamp');
+        if (elTs && data.metadata) {
+            elTs.innerText = data.metadata.generated_at || 'Atualizado';
+        }
     }
 
+    // ==========================================
+    // 2. CARDS DE COMPOSIÇÃO DA CARTEIRA POR CATEGORIA
+    // ==========================================
+    function renderCompositionCards() {
+        const container = document.getElementById('fin-composition-container');
+        if (!container) return;
+
+        const data = window.FINANCIAMENTOS_DATA;
+        if (!data || !data.totais_gerais || !data.totais_gerais.por_categoria) return;
+
+        const catData = data.totais_gerais.por_categoria;
+        const totalSaldo = data.totais_gerais.saldo_devedor || 1;
+
+        const categories = [
+            {
+                key: 'Máquinas',
+                title: 'Máquinas & Perfuratrizes',
+                icon: 'fa-person-digging',
+                cardClass: 'card-maquinas',
+                badgeClass: 'fin-badge-cat-maquinas',
+                color: '#388bfd'
+            },
+            {
+                key: 'Imóveis',
+                title: 'Imóveis & Patrimônio',
+                icon: 'fa-building',
+                cardClass: 'card-imoveis',
+                badgeClass: 'fin-badge-cat-imoveis',
+                color: '#8b5cf6'
+            },
+            {
+                key: 'Veículos',
+                title: 'Veículos & Caminhões',
+                icon: 'fa-truck',
+                cardClass: 'card-veiculos',
+                badgeClass: 'fin-badge-cat-veiculos',
+                color: '#f59e0b'
+            }
+        ];
+
+        let html = '';
+        categories.forEach(c => {
+            const info = catData[c.key] || { financiado: 0, pago: 0, saldo_devedor: 0, contratos: 0, total_parcelas: 0, qtd_pagas: 0, pct_quitado: 0 };
+            const pctCarteira = (info.saldo_devedor / totalSaldo * 100.0);
+            const isSelected = state.filterCategoria === c.key;
+
+            html += `
+            <div class="fin-composition-card ${c.cardClass}" style="cursor: pointer; ${isSelected ? 'outline: 2px solid ' + c.color + '; box-shadow: 0 0 15px rgba(56, 139, 253, 0.25);' : ''}" onclick="window.selectCategoryFilter('${c.key}')" title="Clique para filtrar por ${c.title}">
+                <div class="fin-comp-header">
+                    <span class="fin-comp-title">
+                        <i class="fa-solid ${c.icon}" style="color: ${c.color};"></i> ${c.title}
+                    </span>
+                    <span class="fin-comp-badge ${c.badgeClass}">${formatPct(pctCarteira)} da carteira</span>
+                </div>
+                <div class="fin-comp-saldo" style="color: ${c.color};">${formatMoeda(info.saldo_devedor)}</div>
+                <div style="font-size: 0.76rem; color: var(--text-secondary); margin-bottom: 8px;">
+                    Saldo restante a amortizar (${info.contratos} contratos)
+                </div>
+                <div class="fin-progress-wrapper">
+                    <div class="fin-progress-bar-bg">
+                        <div class="fin-progress-bar-fill" style="width: ${info.pct_quitado}%; background: ${c.color};"></div>
+                    </div>
+                    <span class="fin-progress-text">${info.pct_quitado}%</span>
+                </div>
+                <div class="fin-comp-sub">
+                    <span>Original: <strong>${formatMoeda(info.financiado)}</strong></span>
+                    <span style="color: #10b981;">Pago: <strong>${formatMoeda(info.pago)}</strong></span>
+                </div>
+            </div>
+            `;
+        });
+
+        container.innerHTML = html;
+    }
+
+    window.selectCategoryFilter = function (cat) {
+        if (state.filterCategoria === cat) {
+            state.filterCategoria = 'TODAS';
+        } else {
+            state.filterCategoria = cat;
+        }
+        const selCat = document.getElementById('fin-filter-categoria');
+        if (selCat) selCat.value = state.filterCategoria;
+        renderActiveTab();
+    };
+
+    // ==========================================
+    // 3. GRÁFICO COMBINADO (PADRÃO IMPOSTOS)
+    // ==========================================
     function renderChartFluxoPMTs() {
         const ctx = document.getElementById('fin-chart-fluxo-pmts');
         if (!ctx) return;
@@ -176,84 +298,154 @@
         }
 
         const data = window.FINANCIAMENTOS_DATA;
-        const fluxo = data.totais_gerais.fluxo_mensal || [];
+        if (!data) return;
 
-        // Exibir os próximos 24 meses a partir do início de 2026 até 2027/2028
-        const filteredFluxo = fluxo.filter(m => m.ano >= 2026 && m.ano <= 2028);
-        const labels = filteredFluxo.map(m => m.competencia);
-        const maq = filteredFluxo.map(m => m.maquinas);
-        const vei = filteredFluxo.map(m => m.veiculos);
-        const imo = filteredFluxo.map(m => m.imoveis);
-        const tot = filteredFluxo.map(m => m.total_previsto);
+        const filteredContracts = getFilteredContracts();
 
-        const datalabelsPlugin = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
+        // Gerar horizonte de 2026 a 2028 (36 competências)
+        const labels = [];
+        for (let a = 2026; a <= 2028; a++) {
+            for (let m = 1; m <= 12; m++) {
+                labels.push(`${String(m).padStart(2, '0')}/${a}`);
+            }
+        }
+
+        const mapComp = {};
+        labels.forEach(comp => {
+            mapComp[comp] = { maquinas: 0, imoveis: 0, veiculos: 0, total: 0 };
+        });
+
+        filteredContracts.forEach(c => {
+            (c.parcelas || []).forEach(p => {
+                if (p.competencia && mapComp[p.competencia]) {
+                    const v = p.prestacao || 0;
+                    if (c.categoria === 'Máquinas') mapComp[p.competencia].maquinas += v;
+                    else if (c.categoria === 'Imóveis') mapComp[p.competencia].imoveis += v;
+                    else if (c.categoria === 'Veículos') mapComp[p.competencia].veiculos += v;
+                    mapComp[p.competencia].total += v;
+                }
+            });
+        });
+
+        const maq = labels.map(c => mapComp[c].maquinas);
+        const imo = labels.map(c => mapComp[c].imoveis);
+        const vei = labels.map(c => mapComp[c].veiculos);
+        const tot = labels.map(c => mapComp[c].total);
+
+        // Plugin de Linha Vertical Guia no Cursor (Crosshair)
+        const verticalGuidePlugin = {
+            id: 'verticalGuideLine',
+            afterDraw: (chart) => {
+                if (chart.tooltip && chart.tooltip._active && chart.tooltip._active.length) {
+                    const activePoint = chart.tooltip._active[0];
+                    const chartCtx = chart.ctx;
+                    const x = activePoint.element.x;
+                    const topY = chart.scales.y.top;
+                    const bottomY = chart.scales.y.bottom;
+                    chartCtx.save();
+                    chartCtx.beginPath();
+                    chartCtx.moveTo(x, topY);
+                    chartCtx.lineTo(x, bottomY);
+                    chartCtx.lineWidth = 1.5;
+                    chartCtx.strokeStyle = 'rgba(0, 210, 211, 0.45)';
+                    chartCtx.setLineDash([4, 4]);
+                    chartCtx.stroke();
+                    chartCtx.restore();
+                }
+            }
+        };
+
+        const activePlugins = [verticalGuidePlugin];
+        if (typeof ChartDataLabels !== 'undefined') activePlugins.push(ChartDataLabels);
 
         state.charts.fluxoPmts = new Chart(ctx, {
-            plugins: datalabelsPlugin,
-            type: 'bar',
+            plugins: activePlugins,
             data: {
                 labels: labels,
                 datasets: [
                     {
-                        label: 'Máquinas & Perfuratrizes',
-                        data: maq,
-                        backgroundColor: 'rgba(139, 92, 246, 0.75)',
-                        borderColor: '#8b5cf6',
-                        borderWidth: 1,
-                        stack: 'stack1',
-                        borderRadius: 3,
-                        datalabels: { display: false }
-                    },
-                    {
-                        label: 'Veículos & Caminhões',
-                        data: vei,
-                        backgroundColor: 'rgba(56, 139, 253, 0.75)',
-                        borderColor: '#388bfd',
-                        borderWidth: 1,
-                        stack: 'stack1',
-                        borderRadius: 3,
-                        datalabels: { display: false }
-                    },
-                    {
-                        label: 'Imóveis & Patrimônio',
-                        data: imo,
-                        backgroundColor: 'rgba(0, 210, 211, 0.75)',
-                        borderColor: '#00d2d3',
-                        borderWidth: 1,
-                        stack: 'stack1',
-                        borderRadius: 3,
-                        datalabels: { display: false }
-                    },
-                    {
                         type: 'line',
                         label: 'Compromisso Total Mensal',
                         data: tot,
-                        borderColor: '#f59e0b',
-                        backgroundColor: '#f59e0b',
+                        borderColor: '#00d2d3',
+                        backgroundColor: '#00d2d3',
                         borderWidth: 2.5,
-                        pointRadius: 3.5,
-                        pointHoverRadius: 6,
-                        tension: 0.2,
+                        pointRadius: 4,
+                        pointHoverRadius: 7,
+                        pointBackgroundColor: '#00d2d3',
+                        pointBorderColor: '#161b22',
+                        pointBorderWidth: 2,
+                        tension: 0.25,
+                        order: 1,
+                        yAxisID: 'y',
                         datalabels: {
-                            display: (ctx) => ctx.dataIndex % 2 === 0, // alterna rótulos para legibilidade
-                            color: '#fbbf24',
-                            backgroundColor: 'rgba(13, 17, 23, 0.88)',
-                            borderColor: 'rgba(245, 158, 11, 0.4)',
+                            display: (ctxD) => ctxD.dataset.data[ctxD.dataIndex] > 0,
+                            color: '#00e5ff',
+                            backgroundColor: 'rgba(13, 17, 23, 0.90)',
+                            borderColor: 'rgba(0, 210, 211, 0.45)',
                             borderWidth: 1,
                             borderRadius: 4,
                             padding: { top: 2, bottom: 2, left: 4, right: 4 },
                             anchor: 'end',
                             align: 'top',
-                            offset: 4,
+                            offset: 6,
                             font: { family: 'Outfit, Inter', weight: 'bold', size: 9 },
                             formatter: (val) => val >= 1000 ? 'R$ ' + (val / 1000).toFixed(0) + 'k' : ''
                         }
+                    },
+                    {
+                        type: 'bar',
+                        label: 'Máquinas & Perfuratrizes',
+                        data: maq,
+                        backgroundColor: 'rgba(56, 139, 253, 0.55)',
+                        borderColor: '#388bfd',
+                        borderWidth: 1,
+                        stack: 'stack1',
+                        borderRadius: 3,
+                        order: 2,
+                        yAxisID: 'y',
+                        datalabels: { display: false }
+                    },
+                    {
+                        type: 'bar',
+                        label: 'Imóveis & Patrimônio',
+                        data: imo,
+                        backgroundColor: 'rgba(139, 92, 246, 0.55)',
+                        borderColor: '#8b5cf6',
+                        borderWidth: 1,
+                        stack: 'stack1',
+                        borderRadius: 3,
+                        order: 2,
+                        yAxisID: 'y',
+                        datalabels: { display: false }
+                    },
+                    {
+                        type: 'bar',
+                        label: 'Veículos & Caminhões',
+                        data: vei,
+                        backgroundColor: 'rgba(245, 158, 11, 0.65)',
+                        borderColor: '#f59e0b',
+                        borderWidth: 1,
+                        stack: 'stack1',
+                        borderRadius: 3,
+                        order: 2,
+                        yAxisID: 'y',
+                        datalabels: { display: false }
                     }
                 ]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                    axis: 'x'
+                },
+                hover: {
+                    mode: 'index',
+                    intersect: false
+                },
                 scales: {
                     x: {
                         stacked: true,
@@ -272,82 +464,39 @@
                 },
                 plugins: {
                     legend: {
-                        position: 'top',
-                        labels: { color: '#c9d1d9', font: { family: 'Outfit, Inter', size: 11 }, boxWidth: 12 }
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function (context) {
-                                return ` ${context.dataset.label}: ${formatMoeda(context.parsed.y)}`;
-                            }
-                        }
-                    }
-                }
-            }
-        });
-    }
-
-    function renderChartDistribuicao() {
-        const ctx = document.getElementById('fin-chart-distribuicao');
-        if (!ctx) return;
-
-        if (state.charts.distribuicao) {
-            state.charts.distribuicao.destroy();
-        }
-
-        const data = window.FINANCIAMENTOS_DATA;
-        const cat = data.totais_gerais.por_categoria || {};
-
-        const labels = ['Máquinas', 'Veículos', 'Imóveis'];
-        const values = [
-            cat['Máquinas'] ? cat['Máquinas'].saldo_devedor : 0,
-            cat['Veículos'] ? cat['Veículos'].saldo_devedor : 0,
-            cat['Imóveis'] ? cat['Imóveis'].saldo_devedor : 0
-        ];
-
-        const datalabelsPlugin = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
-
-        state.charts.distribuicao = new Chart(ctx, {
-            plugins: datalabelsPlugin,
-            type: 'doughnut',
-            data: {
-                labels: labels,
-                datasets: [{
-                    data: values,
-                    backgroundColor: [
-                        'rgba(139, 92, 246, 0.85)',
-                        'rgba(56, 139, 253, 0.85)',
-                        'rgba(0, 210, 211, 0.85)'
-                    ],
-                    borderColor: '#161b22',
-                    borderWidth: 2,
-                    hoverOffset: 6
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                cutout: '65%',
-                plugins: {
-                    legend: {
                         position: 'bottom',
-                        labels: { color: '#c9d1d9', font: { family: 'Outfit, Inter', size: 11 }, boxWidth: 12, padding: 12 }
-                    },
-                    datalabels: {
-                        display: true,
-                        color: '#ffffff',
-                        font: { family: 'Outfit, Inter', weight: 'bold', size: 10 },
-                        formatter: (val, ctx) => {
-                            const sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
-                            const pct = sum > 0 ? (val / sum * 100).toFixed(1) + '%' : '';
-                            return pct;
-                        }
+                        labels: { color: '#c9d1d9', font: { family: 'Outfit, Inter', size: 11 }, boxWidth: 12, padding: 15 }
                     },
                     tooltip: {
+                        enabled: true,
+                        mode: 'index',
+                        intersect: false,
+                        backgroundColor: 'rgba(13, 17, 23, 0.96)',
+                        titleColor: '#ffffff',
+                        titleFont: { family: 'Outfit, Inter', weight: 'bold', size: 12 },
+                        bodyColor: '#c9d1d9',
+                        bodyFont: { family: 'Outfit, Inter', size: 11 },
+                        borderColor: 'rgba(255, 255, 255, 0.15)',
+                        borderWidth: 1,
+                        padding: 12,
+                        cornerRadius: 8,
+                        displayColors: true,
+                        boxWidth: 10,
+                        boxHeight: 10,
+                        usePointStyle: true,
                         callbacks: {
+                            title: function (items) {
+                                if (!items.length) return '';
+                                return `Competência: ${items[0].label}`;
+                            },
                             label: function (context) {
-                                const val = context.parsed;
-                                return ` ${context.label}: ${formatMoeda(val)}`;
+                                const label = context.dataset.label || '';
+                                const val = context.parsed.y || 0;
+                                if (context.dataset.type === 'line') {
+                                    return ` ${label}: ${formatMoeda(val)}`;
+                                }
+                                if (val === 0) return ` ${label}: –`;
+                                return ` ${label}: ${formatMoeda(val)}`;
                             }
                         }
                     }
@@ -356,6 +505,9 @@
         });
     }
 
+    // ==========================================
+    // 4. TABELA CONSOLIDADA DOS CONTRATOS
+    // ==========================================
     function renderContractsTable() {
         const tbody = document.getElementById('fin-contracts-table-body');
         if (!tbody) return;
@@ -405,7 +557,7 @@
     }
 
     // ==========================================
-    // 3. ABA 2: CRONOGRAMA DETALHADO & PMTs
+    // 5. ABA 2: CRONOGRAMA DETALHADO & PMTs
     // ==========================================
     function populateContractDropdown() {
         const select = document.getElementById('fin-contract-select');
@@ -441,10 +593,7 @@
         const c = data.contratos.find(item => item.id === state.selectedContractId) || data.contratos[0];
         if (!c) return;
 
-        // Renderizar banner com parâmetros do contrato
         renderContractBanner(c);
-
-        // Renderizar tabela de parcelas com paginação
         renderScheduleTable(c);
     }
 
@@ -540,7 +689,6 @@
         pageItems.forEach(p => {
             const isPago = p.status === 'Pago';
             const statusBadge = isPago ? `<span class="fin-badge fin-badge-pago"><i class="fa-solid fa-check"></i> Pago</span>` : `<span class="fin-badge fin-badge-pendente"><i class="fa-solid fa-clock"></i> Pendente</span>`;
-            const difClass = p.diferenca < 0 ? 'color: #f85149;' : (p.diferenca > 0 ? 'color: #10b981;' : 'color: var(--text-secondary);');
 
             html += `
             <tr>
@@ -600,7 +748,7 @@
     };
 
     // ==========================================
-    // 4. ABA 3: PROJEÇÃO DE DESEMBOLSO ANUAL
+    // 6. ABA 3: PROJEÇÃO DE DESEMBOLSO ANUAL
     // ==========================================
     function renderDesembolsoTab() {
         const data = window.FINANCIAMENTOS_DATA;
@@ -648,7 +796,7 @@
                     {
                         label: 'Já Liquidado / Pago',
                         data: pagos,
-                        backgroundColor: 'rgba(16, 185, 129, 0.75)',
+                        backgroundColor: 'rgba(16, 185, 129, 0.65)',
                         borderColor: '#10b981',
                         borderWidth: 1,
                         stack: 'stack1',
@@ -658,7 +806,7 @@
                     {
                         label: 'Saldo Pendente de Amortização',
                         data: pendentes,
-                        backgroundColor: 'rgba(56, 139, 253, 0.75)',
+                        backgroundColor: 'rgba(56, 139, 253, 0.45)',
                         borderColor: '#388bfd',
                         borderWidth: 1,
                         stack: 'stack1',
@@ -681,6 +829,10 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false
+                },
                 scales: {
                     x: {
                         stacked: true,
@@ -703,6 +855,19 @@
                         labels: { color: '#c9d1d9', font: { family: 'Outfit, Inter', size: 11 }, boxWidth: 12 }
                     },
                     tooltip: {
+                        enabled: true,
+                        mode: 'index',
+                        intersect: false,
+                        backgroundColor: 'rgba(13, 17, 23, 0.95)',
+                        titleColor: '#ffffff',
+                        titleFont: { family: 'Outfit, Inter', weight: 'bold', size: 12 },
+                        bodyColor: '#c9d1d9',
+                        bodyFont: { family: 'Outfit, Inter', size: 11 },
+                        borderColor: 'rgba(255, 255, 255, 0.15)',
+                        borderWidth: 1,
+                        padding: 12,
+                        cornerRadius: 8,
+                        displayColors: true,
                         callbacks: {
                             label: function (context) {
                                 return ` ${context.dataset.label}: ${formatMoeda(context.parsed.y)}`;
@@ -726,8 +891,8 @@
             html += `
             <tr>
                 <td style="font-weight: 600; color: var(--text-primary);">${m.competencia}</td>
-                <td class="num" style="color: #a78bfa;">${m.maquinas > 0 ? formatMoeda(m.maquinas) : '–'}</td>
-                <td class="num" style="color: #58a6ff;">${m.veiculos > 0 ? formatMoeda(m.veiculos) : '–'}</td>
+                <td class="num" style="color: #58a6ff;">${m.maquinas > 0 ? formatMoeda(m.maquinas) : '–'}</td>
+                <td class="num" style="color: #f59e0b;">${m.veiculos > 0 ? formatMoeda(m.veiculos) : '–'}</td>
                 <td class="num" style="color: #00d2d3;">${m.imoveis > 0 ? formatMoeda(m.imoveis) : '–'}</td>
                 <td class="num" style="font-weight: 700; color: var(--text-primary);">${formatMoeda(m.total_previsto)}</td>
                 <td class="num" style="color: #10b981; font-weight: 600;">${m.total_pago > 0 ? formatMoeda(m.total_pago) : '–'}</td>
@@ -740,7 +905,7 @@
     }
 
     // ==========================================
-    // 5. EXPORTAÇÃO EXCEL (.XLSX) VIA SHEETJS
+    // 7. EXPORTAÇÃO EXCEL (.XLSX)
     // ==========================================
     window.exportFinScheduleExcel = function () {
         const data = window.FINANCIAMENTOS_DATA;
@@ -783,8 +948,7 @@
 
         const wb = XLSX.utils.book_new();
 
-        // Aba 1: Resumo dos Contratos
-        const contractsRows = (data.contratos || []).map(c => ({
+        const contractsRows = (getFilteredContracts() || []).map(c => ({
             'Categoria': c.categoria,
             'Financiamento / Bem': c.nome,
             'Contrato': c.contrato,
@@ -803,7 +967,6 @@
         const wsContracts = XLSX.utils.json_to_sheet(contractsRows);
         XLSX.utils.book_append_sheet(wb, wsContracts, "Resumo Financiamentos");
 
-        // Aba 2: Fluxo Mensal Consolidado
         const fluxoRows = (data.totais_gerais.fluxo_mensal || []).map(m => ({
             'Competência': m.competencia,
             'Máquinas (R$)': m.maquinas,
@@ -820,25 +983,26 @@
     };
 
     // ==========================================
-    // 6. EVENT LISTENERS DE FILTROS
+    // 8. EVENT LISTENERS DE FILTROS SUPERIORES
     // ==========================================
     window.setFinFilterCategoria = function (cat) {
         state.filterCategoria = cat;
-        renderContractsTable();
+        renderActiveTab();
     };
 
     window.setFinFilterInstituicao = function (inst) {
         state.filterInstituicao = inst;
-        renderContractsTable();
+        renderActiveTab();
     };
 
     window.setFinFilterStatus = function (st) {
         state.filterStatus = st;
-        renderContractsTable();
+        renderActiveTab();
     };
 
     window.setFinSearchQuery = function (val) {
         state.searchQuery = val;
+        renderOverviewKPIs();
         renderContractsTable();
     };
 
@@ -857,7 +1021,7 @@
         const inpSearch = document.getElementById('fin-filter-search');
         if (inpSearch) inpSearch.value = '';
 
-        renderContractsTable();
+        renderActiveTab();
     };
 
     window.setFinScheduleFilterStatus = function (st) {
