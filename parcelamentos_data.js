@@ -1,10 +1,10 @@
 // Dados Consolidados de Parcelamentos Tributários JLE Telecom
-// Gerado automaticamente pelo pipeline ETL em 29/09/2026 10:10:33
+// Gerado automaticamente pelo pipeline ETL em 29/09/2026 18:45:24
 
 window.PARCELAMENTOS_DATA = {
   "metadata": {
     "source_file": "Cópia de Controle parcelamentos JLE_Atualizada_BI.xlsx",
-    "generated_at": "29/09/2026 10:10:33",
+    "generated_at": "29/09/2026 18:45:24",
     "reference_position": "Setembro/2026"
   },
   "overview": {},
