@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-09-29 15:00:21
+// Dados MDU Compactados - Gerado em: 2026-09-29 15:07:07
 window.MDU_METADATA = {
-    "generated_at": "2026-09-29 15:00:21",
+    "generated_at": "2026-09-29 15:07:07",
     "total_rows": 5756,
-    "geocoded_new": 3
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -181996,7 +181996,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "5",
-        "relatorio_por": "JENIFFER",
+        "relatorio_por": "JENIFFER (SEM FOTO DOS CABO)",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
@@ -183272,24 +183272,24 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505583",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "AV VIENA 243",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
+        "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
-        "prog": 0,
-        "cod_imovel": "",
-        "area": "",
+        "status": "2º Vistoria",
+        "prog": 13.0,
+        "cod_imovel": "610498826",
+        "area": "NAVAA",
         "node": "",
-        "caixa_m": "",
-        "hps": null,
-        "data_adicio": "",
-        "equipe": "",
-        "primeira_visita": "",
+        "caixa_m": "NAVAA.112.M060",
+        "hps": 13,
+        "data_adicio": "29/09/2026",
+        "equipe": "Abraão Rodrigues",
+        "primeira_visita": "28/09/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
+        "obs_vistoria": "ADEQUADO",
         "data_interna": "",
         "data_fusao": "",
         "data_baixa": "",
@@ -183298,9 +183298,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.01406,
+        "lng": -51.2001869,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505584",
