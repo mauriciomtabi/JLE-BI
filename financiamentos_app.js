@@ -403,9 +403,15 @@
                             padding: { top: 2, bottom: 2, left: 4, right: 4 },
                             anchor: 'end',
                             align: 'top',
-                            offset: 6,
+                            offset: 5,
+                            clip: false,
                             font: { family: 'Outfit, Inter', weight: 'bold', size: 9 },
-                            formatter: (val) => val >= 1000 ? 'R$ ' + (val / 1000).toFixed(0) + 'k' : ''
+                            formatter: (val) => {
+                                if (!val || val <= 0) return '';
+                                if (val >= 1000000) return (val / 1000000).toFixed(1) + 'M';
+                                if (val >= 1000) return (val / 1000).toFixed(0) + 'k';
+                                return String(val);
+                            }
                         }
                     },
                     {
@@ -452,6 +458,14 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                        top: 25,
+                        bottom: 5,
+                        left: 5,
+                        right: 5
+                    }
+                },
                 interaction: {
                     mode: 'index',
                     intersect: false,
@@ -469,6 +483,7 @@
                     },
                     y: {
                         stacked: true,
+                        grace: '18%',
                         grid: { color: 'rgba(255, 255, 255, 0.05)' },
                         ticks: {
                             color: '#8b949e',
