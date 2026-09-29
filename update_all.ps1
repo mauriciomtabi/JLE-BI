@@ -87,7 +87,7 @@ if (Test-Path "$workingDir\update_sar.ps1") {
 Write-Output ""
 
 # 8. Atualizar Gestão Tributária & Parcelamentos
-Write-Output "--- [8/8] Atualizando Gestão Tributária & Parcelamentos ---"
+Write-Output "--- [8/9] Atualizando Gestão Tributária & Parcelamentos ---"
 if (Test-Path "$workingDir\update_parcelamentos.ps1") {
     try {
         & "$workingDir\update_parcelamentos.ps1"
@@ -97,11 +97,22 @@ if (Test-Path "$workingDir\update_parcelamentos.ps1") {
 }
 Write-Output ""
 
+# 9. Atualizar Financiamentos & PMTs
+Write-Output "--- [9/9] Atualizando Financiamentos & PMTs ---"
+if (Test-Path "$workingDir\update_financiamentos.ps1") {
+    try {
+        & "$workingDir\update_financiamentos.ps1"
+    } catch {
+        Write-Warning "Falha na atualizacao de Financiamentos: $($_.Exception.Message)"
+    }
+}
+Write-Output ""
+
 # Sincronização Consolidada no Git / PWA Cache
 Write-Output "--- Sincronizacao Consolidada com GitHub / PWA ---"
 $gitPath = if (Test-Path "C:\Program Files\Git\cmd\git.exe") { "C:\Program Files\Git\cmd\git.exe" } elseif (Test-Path "$env:LOCALAPPDATA\Programs\Git\cmd\git.exe") { "$env:LOCALAPPDATA\Programs\Git\cmd\git.exe" } else { (Get-Command git -ErrorAction SilentlyContinue).Source }
 if (Test-Path $gitPath) {
-    $dataFiles = @("data.js", "tecnodrill_data.js", "cobranca_data.js", "veiculos_data.js", "manutencao_data.js", "mdu_data.js", "sar_data.js", "parcelamentos_data.js")
+    $dataFiles = @("data.js", "tecnodrill_data.js", "cobranca_data.js", "veiculos_data.js", "manutencao_data.js", "mdu_data.js", "sar_data.js", "parcelamentos_data.js", "financiamentos_data.js")
     $hasChanges = $false
     foreach ($df in $dataFiles) {
         $st = & $gitPath status --porcelain $df
