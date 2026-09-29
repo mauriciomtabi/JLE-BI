@@ -52,6 +52,7 @@
     <link rel="stylesheet" href="mdu_styles.css">
     <link rel="stylesheet" href="sar_styles.css?v=3.57">
     <link rel="stylesheet" href="parcelamentos_styles.css?v=1.3">
+    <link rel="stylesheet" href="financiamentos_styles.css?v=1.0">
     
     <!-- Leaflet Map CSS & JS CDNs -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
@@ -104,6 +105,9 @@
                     </a>
                     <a class="nav-item nav-subitem" id="nav-parcelamentos" onclick="switchView('parcelamentos')" style="display:none;" title="Impostos">
                         <i class="fa-solid fa-file-invoice"></i> <span>Impostos</span>
+                    </a>
+                    <a class="nav-item nav-subitem" id="nav-financiamentos" onclick="switchView('financiamentos')" style="display:none;" title="Financiamentos">
+                        <i class="fa-solid fa-hand-holding-dollar"></i> <span>Financiamentos</span>
                     </a>
                 </div>
             </div>
@@ -3455,6 +3459,309 @@
             </div>
 
         </div>
+
+        <!-- ========================================== -->
+        <!-- VIEW: FINANCIAMENTOS & PMTs               -->
+        <!-- ========================================== -->
+        <div id="view-financiamentos-container" class="view-panel" style="display: none;">
+
+            <!-- SUB-ABAS DE NAVEGAÇÃO INTERNA -->
+            <div class="fin-nav-tabs">
+                <button class="fin-tab-btn active" data-tab="visao_geral" onclick="window.switchFinTab('visao_geral')">
+                    <i class="fa-solid fa-chart-pie"></i> <span>Visão Geral & Consolidado</span>
+                </button>
+                <button class="fin-tab-btn" data-tab="cronograma" onclick="window.switchFinTab('cronograma')">
+                    <i class="fa-solid fa-calendar-days"></i> <span>Cronograma Detalhado & PMTs</span>
+                </button>
+                <button class="fin-tab-btn" data-tab="desembolso" onclick="window.switchFinTab('desembolso')">
+                    <i class="fa-solid fa-timeline"></i> <span>Projeção de Desembolso Anual</span>
+                </button>
+            </div>
+
+            <!-- SUB-ABA 1: VISÃO GERAL & CONSOLIDADO -->
+            <div id="fin-tab-content-visao_geral" class="fin-tab-content" style="display: block;">
+                <!-- GRID DE 5 KPIS -->
+                <div class="fin-kpi-grid">
+                    <div class="fin-kpi-card kpi-purple">
+                        <div class="fin-kpi-title">
+                            <span>TOTAL FINANCIADO</span>
+                            <i class="fa-solid fa-coins"></i>
+                        </div>
+                        <div class="fin-kpi-value" id="fin-kpi-total-financiado">R$ 0,00</div>
+                        <div class="fin-kpi-subtitle" id="fin-kpi-total-financiado-sub">
+                            <span>9 contratos ativos</span>
+                        </div>
+                        <i class="fa-solid fa-coins fin-kpi-watermark"></i>
+                    </div>
+
+                    <div class="fin-kpi-card kpi-green">
+                        <div class="fin-kpi-title">
+                            <span>TOTAL AMORTIZADO</span>
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <div class="fin-kpi-value" id="fin-kpi-total-amortizado">R$ 0,00</div>
+                        <div class="fin-kpi-subtitle" id="fin-kpi-total-amortizado-sub">
+                            <span>0,0% quitado</span>
+                        </div>
+                        <i class="fa-solid fa-circle-check fin-kpi-watermark"></i>
+                    </div>
+
+                    <div class="fin-kpi-card kpi-blue">
+                        <div class="fin-kpi-title">
+                            <span>SALDO DEVEDOR</span>
+                            <i class="fa-solid fa-file-invoice-dollar"></i>
+                        </div>
+                        <div class="fin-kpi-value" id="fin-kpi-saldo-devedor">R$ 0,00</div>
+                        <div class="fin-kpi-subtitle" id="fin-kpi-saldo-devedor-sub">
+                            <span>0 parcelas pendentes</span>
+                        </div>
+                        <i class="fa-solid fa-file-invoice-dollar fin-kpi-watermark"></i>
+                    </div>
+
+                    <div class="fin-kpi-card kpi-amber">
+                        <div class="fin-kpi-title">
+                            <span>COMPROMISSO MENSAL</span>
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </div>
+                        <div class="fin-kpi-value" id="fin-kpi-compromisso-mensal">R$ 0,00</div>
+                        <div class="fin-kpi-subtitle">
+                            <span>Fluxo base mensal de PMTs</span>
+                        </div>
+                        <i class="fa-solid fa-calendar-days fin-kpi-watermark"></i>
+                    </div>
+
+                    <div class="fin-kpi-card kpi-cyan">
+                        <div class="fin-kpi-title">
+                            <span>PRÓXIMO VENCIMENTO</span>
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                        <div class="fin-kpi-value" id="fin-kpi-proximo-vencimento">--/--/----</div>
+                        <div class="fin-kpi-subtitle" id="fin-kpi-proximo-vencimento-sub">
+                            <span>Próxima parcela a vencer</span>
+                        </div>
+                        <i class="fa-solid fa-clock fin-kpi-watermark"></i>
+                    </div>
+                </div>
+
+                <!-- GRÁFICOS (FLUXO PMTS + DISTRIBUIÇÃO) -->
+                <div class="fin-charts-grid">
+                    <div class="fin-card">
+                        <div class="fin-card-header">
+                            <div class="fin-card-title">
+                                <i class="fa-solid fa-chart-column"></i> Evolução e Projeção do Fluxo de PMTs por Competência
+                            </div>
+                        </div>
+                        <div class="fin-chart-container-large">
+                            <canvas id="fin-chart-fluxo-pmts"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="fin-card">
+                        <div class="fin-card-header">
+                            <div class="fin-card-title">
+                                <i class="fa-solid fa-chart-pie"></i> Saldo por Categoria
+                            </div>
+                        </div>
+                        <div class="fin-chart-container-large">
+                            <canvas id="fin-chart-distribuicao"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BARRA DE FILTROS DA TABELA CONSOLIDADA -->
+                <div class="fin-filter-bar">
+                    <div class="fin-filter-group">
+                        <label class="fin-filter-label">Categoria do Bem</label>
+                        <select id="fin-filter-categoria" class="fin-select" onchange="window.setFinFilterCategoria(this.value)">
+                            <option value="TODAS">Todas as Categorias</option>
+                            <option value="Máquinas">Máquinas & Perfuratrizes</option>
+                            <option value="Veículos">Veículos & Caminhões</option>
+                            <option value="Imóveis">Imóveis & Patrimônio</option>
+                        </select>
+                    </div>
+
+                    <div class="fin-filter-group">
+                        <label class="fin-filter-label">Instituição</label>
+                        <select id="fin-filter-instituicao" class="fin-select" onchange="window.setFinFilterInstituicao(this.value)">
+                            <option value="TODAS">Todas as Instituições</option>
+                            <option value="SICOOB">SICOOB</option>
+                            <option value="Banco Senff">Banco Senff</option>
+                            <option value="Pro-Formula">Pro-Formula (Base NH)</option>
+                            <option value="F. E. Hugentobler">F. E. Hugentobler (Terreno)</option>
+                        </select>
+                    </div>
+
+                    <div class="fin-filter-group">
+                        <label class="fin-filter-label">Status</label>
+                        <select id="fin-filter-status" class="fin-select" onchange="window.setFinFilterStatus(this.value)">
+                            <option value="TODOS">Todos os Status</option>
+                            <option value="EM_ABERTO">Com Parcelas em Aberto</option>
+                            <option value="PAGO">Totalmente Quitado</option>
+                        </select>
+                    </div>
+
+                    <div class="fin-filter-group fin-filter-search">
+                        <label class="fin-filter-label">Buscar Financiamento</label>
+                        <input type="text" id="fin-filter-search" class="fin-input" placeholder="Buscar por contrato, máquina, veículo ou imóvel..." oninput="window.setFinSearchQuery(this.value)">
+                    </div>
+
+                    <button class="fin-btn" onclick="window.clearFinFilters()" title="Limpar Filtros">
+                        <i class="fa-solid fa-filter-circle-xmark"></i> <span>Limpar</span>
+                    </button>
+
+                    <button class="fin-btn fin-btn-excel" onclick="window.exportFinOverviewExcel()" title="Exportar Resumo em Excel">
+                        <i class="fa-solid fa-file-excel"></i> <span>Exportar Excel</span>
+                    </button>
+                </div>
+
+                <!-- TABELA: RESUMO EXECUTIVO DOS CONTRATOS -->
+                <div class="fin-card">
+                    <div class="fin-card-header">
+                        <div class="fin-card-title">
+                            <i class="fa-solid fa-file-contract"></i> Resumo Consolidado dos Financiamentos e Contratos
+                        </div>
+                    </div>
+                    <div class="fin-table-wrapper">
+                        <table class="fin-table">
+                            <thead>
+                                <tr>
+                                    <th>Categoria</th>
+                                    <th>Financiamento / Bem</th>
+                                    <th>Instituição</th>
+                                    <th>Sistema / Modalidade</th>
+                                    <th class="num">Valor Financiado</th>
+                                    <th class="num">Total Já Pago</th>
+                                    <th class="num">Saldo Restante</th>
+                                    <th style="min-width: 150px;">Progresso Quitação</th>
+                                    <th style="text-align: center;">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="fin-contracts-table-body">
+                                <!-- Preenchido via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUB-ABA 2: CRONOGRAMA DETALHADO & PMTs -->
+            <div id="fin-tab-content-cronograma" class="fin-tab-content" style="display: none;">
+                <!-- SELETOR DO CONTRATO E BANNER -->
+                <div class="fin-card" style="padding-bottom: 8px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+                        <div style="display: flex; align-items: center; gap: 10px; flex: 1; min-width: 280px;">
+                            <label style="font-size: 0.8rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Selecionar Financiamento:</label>
+                            <select id="fin-contract-select" class="fin-select" style="flex: 1; max-width: 480px; font-weight: 600;">
+                                <!-- Preenchido via JS -->
+                            </select>
+                        </div>
+                        <button class="fin-btn fin-btn-excel" onclick="window.exportFinScheduleExcel()" title="Exportar Cronograma do Contrato">
+                            <i class="fa-solid fa-file-excel"></i> <span>Exportar Cronograma XLSX</span>
+                        </button>
+                    </div>
+
+                    <!-- BANNER COM DADOS DO CONTRATO SELECIONADO -->
+                    <div id="fin-contract-banner" class="fin-contract-banner">
+                        <!-- Preenchido via JS -->
+                    </div>
+                </div>
+
+                <!-- TABELA DE PARCELAS DO CRONOGRAMA PMT -->
+                <div class="fin-card">
+                    <div class="fin-card-header">
+                        <div class="fin-card-title">
+                            <i class="fa-solid fa-calendar-check"></i> Cronograma de Amortização e Acompanhamento de PMTs
+                        </div>
+                        <!-- FILTROS DO CRONOGRAMA -->
+                        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                            <input type="text" class="fin-input" placeholder="Buscar parcela, vencimento ou valor..." oninput="window.setFinScheduleSearch(this.value)" style="min-width: 220px;">
+                            <select class="fin-select" onchange="window.setFinScheduleFilterStatus(this.value)">
+                                <option value="TODOS">Todas as Parcelas</option>
+                                <option value="PENDENTE">Somente Pendentes</option>
+                                <option value="PAGO">Somente Pagas</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="fin-table-wrapper">
+                        <table class="fin-table">
+                            <thead>
+                                <tr>
+                                    <th>Parcela</th>
+                                    <th>Tipo</th>
+                                    <th>Vencimento</th>
+                                    <th class="num">Prestação PMT</th>
+                                    <th class="num">Juros Previstos</th>
+                                    <th class="num">Amortização</th>
+                                    <th style="text-align: center;">Status</th>
+                                    <th style="text-align: center;">Data Pagamento</th>
+                                    <th class="num">Valor Pago</th>
+                                </tr>
+                            </thead>
+                            <tbody id="fin-schedule-table-body">
+                                <!-- Preenchido via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- PAGINAÇÃO -->
+                    <div class="fin-pagination">
+                        <span id="fin-schedule-pagination-info">Exibindo 0 registros</span>
+                        <div class="fin-pagination-controls" id="fin-schedule-pagination-controls">
+                            <!-- Botões de página via JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUB-ABA 3: PROJEÇÃO DE DESEMBOLSO ANUAL -->
+            <div id="fin-tab-content-desembolso" class="fin-tab-content" style="display: none;">
+                <!-- CARDS POR ANO -->
+                <div id="fin-anual-cards-grid" class="fin-anual-grid">
+                    <!-- Preenchido via JS -->
+                </div>
+
+                <!-- GRÁFICO ANUAL -->
+                <div class="fin-card">
+                    <div class="fin-card-header">
+                        <div class="fin-card-title">
+                            <i class="fa-solid fa-chart-column"></i> Projeção de Desembolso Anual (Amortizado vs Saldo Restante)
+                        </div>
+                    </div>
+                    <div class="fin-chart-container-large">
+                        <canvas id="fin-chart-desembolso-anual"></canvas>
+                    </div>
+                </div>
+
+                <!-- TABELA MATRIZ MÊS A MÊS -->
+                <div class="fin-card">
+                    <div class="fin-card-header">
+                        <div class="fin-card-title">
+                            <i class="fa-solid fa-table-list"></i> Matriz Mensal Consolidada de Desembolso por Categoria
+                        </div>
+                    </div>
+                    <div class="fin-table-wrapper">
+                        <table class="fin-table">
+                            <thead>
+                                <tr>
+                                    <th>Competência</th>
+                                    <th class="num">Máquinas</th>
+                                    <th class="num">Veículos</th>
+                                    <th class="num">Imóveis</th>
+                                    <th class="num">Compromisso Total</th>
+                                    <th class="num">Já Pago</th>
+                                    <th class="num">Saldo Pendente</th>
+                                </tr>
+                            </thead>
+                            <tbody id="fin-matrix-table-body">
+                                <!-- Preenchido via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </main>
 
     <!-- Conteiner de Toast de Notificação -->
@@ -3650,6 +3957,8 @@
     <script src="manutencao_app.js"></script>
     <script src="parcelamentos_data.js?v=20260914181600"></script>
     <script src="parcelamentos_app.js?v=1.6"></script>
+    <script src="financiamentos_data.js?v=20260929090000"></script>
+    <script src="financiamentos_app.js?v=1.0"></script>
     <script src="email_preview_helper.js?v=1.2"></script>
 
     <!-- Logica de UI Autônoma (Sem Dependências de CDNs) -->
@@ -4285,6 +4594,7 @@
             { id: 'sar',          label: 'SAR',                     icon: 'fa-network-wired',     navId: 'nav-sar' },
             { id: 'manutencao',   label: 'Manutenção',              icon: 'fa-wrench',            navId: 'nav-manutencao' },
             { id: 'parcelamentos', label: 'Impostos',               icon: 'fa-file-invoice',      navId: 'nav-parcelamentos' },
+            { id: 'financiamentos', label: 'Financiamentos',        icon: 'fa-hand-holding-dollar', navId: 'nav-financiamentos' },
             { id: 'admin',        label: 'Painel Admin',            icon: 'fa-shield-halved',    navId: 'nav-admin',        adminOnly: true },
         ];
 
@@ -4455,7 +4765,7 @@
                 });
 
                 // Gerenciar visibilidade e expansão do grupo Financeiro no menu
-                const hasFinanceiroPages = currentUserIsAdmin || allowedPages.some(p => ['dashboard', 'tecnodrill', 'parcelamentos'].includes(p));
+                const hasFinanceiroPages = currentUserIsAdmin || allowedPages.some(p => ['dashboard', 'tecnodrill', 'parcelamentos', 'financiamentos'].includes(p));
                 const groupFin = document.getElementById('nav-group-financeiro');
                 if (groupFin) {
                     groupFin.style.display = hasFinanceiroPages ? 'flex' : 'none';
@@ -4755,6 +5065,12 @@
                 } else {
                     timestampEl.innerText = 'Desconhecido';
                 }
+            } else if (viewName === 'financiamentos') {
+                if (typeof window.FINANCIAMENTOS_DATA !== 'undefined' && window.FINANCIAMENTOS_DATA.metadata && window.FINANCIAMENTOS_DATA.metadata.generated_at) {
+                    timestampEl.innerText = formatTimestamp(window.FINANCIAMENTOS_DATA.metadata.generated_at);
+                } else {
+                    timestampEl.innerText = 'Desconhecido';
+                }
             } else {
                 timestampEl.innerText = 'N/D';
             }
@@ -4869,6 +5185,13 @@
                     init: () => { 
                         if (typeof initParcelamentos === 'function') initParcelamentos(); 
                     } 
+                },
+                'financiamentos': { 
+                    file: 'financiamentos_data.js', 
+                    name: 'Financiamentos & PMTs', 
+                    init: () => { 
+                        if (typeof initFinanciamentos === 'function') initFinanciamentos(); 
+                    } 
                 }
             };
 
@@ -4957,7 +5280,7 @@
             if (navEl) navEl.classList.add('active');
 
             // Sincronizar estado do accordion Financeiro se estiver navegando para telas filhas
-            if (viewName === 'dashboard' || viewName === 'tecnodrill' || viewName === 'parcelamentos') {
+            if (viewName === 'dashboard' || viewName === 'tecnodrill' || viewName === 'parcelamentos' || viewName === 'financiamentos') {
                 const submenuFin = document.getElementById('submenu-financeiro');
                 const toggleFin = document.getElementById('nav-financeiro-toggle');
                 if (submenuFin) submenuFin.classList.add('open');
@@ -5078,6 +5401,14 @@
                 if (typeof window.initParcelamentos === 'function') {
                     window.initParcelamentos();
                 }
+            } else if (viewName === 'financiamentos') {
+                document.getElementById('filters-container').style.display = 'none';
+                if (mobileToggleBtn) mobileToggleBtn.style.display = 'none';
+                document.getElementById('view-title').innerText = 'Financiamentos & PMTs';
+                document.getElementById('view-subtitle').innerHTML = 'Acompanhamento de Empréstimos, Máquinas, Veículos, Imóveis e Cronogramas de PMT';
+                if (typeof window.initFinanciamentos === 'function') {
+                    window.initFinanciamentos();
+                }
             } else {
                 document.getElementById('filters-container').style.display = 'grid';
                 if (mobileToggleBtn) mobileToggleBtn.style.display = '';
@@ -5111,6 +5442,7 @@
             { id: 'sar',          label: 'SAR',                      icon: 'fa-network-wired' },
             { id: 'manutencao',   label: 'Manutenção',              icon: 'fa-wrench' },
             { id: 'parcelamentos', label: 'Impostos',               icon: 'fa-file-invoice' },
+            { id: 'financiamentos', label: 'Financiamentos & PMTs', icon: 'fa-hand-holding-dollar' },
         ];
 
         function renderPageCheckboxes(containerId, selectedPages = []) {
