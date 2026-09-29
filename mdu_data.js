@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-09-29 11:00:21
+// Dados MDU Compactados - Gerado em: 2026-09-29 12:00:24
 window.MDU_METADATA = {
-    "generated_at": "2026-09-29 11:00:21",
+    "generated_at": "2026-09-29 12:00:24",
     "total_rows": 5756,
     "geocoded_new": 0
 };
@@ -183023,7 +183023,7 @@ window.MDU_DATA = [
         "relatorio_por": "",
         "pendencia": "Não",
         "status": "Relatório",
-        "prog": 0,
+        "prog": 75.0,
         "cod_imovel": "",
         "area": "CNTAB",
         "node": "",
@@ -183055,7 +183055,7 @@ window.MDU_DATA = [
         "relatorio_por": "",
         "pendencia": "Não",
         "status": "Relatório",
-        "prog": 0,
+        "prog": 75.0,
         "cod_imovel": "",
         "area": "MNDAA",
         "node": "",
@@ -183087,7 +183087,7 @@ window.MDU_DATA = [
         "relatorio_por": "",
         "pendencia": "Não",
         "status": "Relatório",
-        "prog": 0,
+        "prog": 75.0,
         "cod_imovel": "",
         "area": "MNDAA",
         "node": "",
@@ -183119,7 +183119,7 @@ window.MDU_DATA = [
         "relatorio_por": "",
         "pendencia": "Não",
         "status": "Relatório",
-        "prog": 0,
+        "prog": 75.0,
         "cod_imovel": "",
         "area": "MNDAA",
         "node": "",
@@ -183151,7 +183151,7 @@ window.MDU_DATA = [
         "relatorio_por": "",
         "pendencia": "Não",
         "status": "Relatório",
-        "prog": 0,
+        "prog": 75.0,
         "cod_imovel": "",
         "area": "MNDAC",
         "node": "",
