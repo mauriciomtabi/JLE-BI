@@ -723,6 +723,20 @@ def consolidate_data(contratos, source_folder):
         "contratos": contratos
     }
 
+def load_existing_data():
+    if not os.path.exists(OUTPUT_JS_FILE):
+        return None
+    try:
+        with open(OUTPUT_JS_FILE, "r", encoding="utf-8") as f:
+            content = f.read()
+        idx = content.find("window.FINANCIAMENTOS_DATA = ")
+        if idx != -1:
+            json_str = content[idx + len("window.FINANCIAMENTOS_DATA = "):].strip().rstrip(";")
+            return json.loads(json_str)
+    except Exception as e:
+        print(f"[ETL] Aviso ao carregar financiamentos_data.js existente: {e}")
+    return None
+
 def main():
     print("==================================================")
     print("BI JLE Telecom - ETL Financiamentos & PMTs")
@@ -736,13 +750,24 @@ def main():
             
         data_model = consolidate_data(contratos, active_folder)
         
+        # Verificar se os dados realmente sofreram alterações em relação ao cache atual
+        existing_data = load_existing_data()
+        if existing_data:
+            old_body = {k: v for k, v in existing_data.items() if k != "metadata"}
+            new_body = {k: v for k, v in data_model.items() if k != "metadata"}
+            if json.dumps(old_body, sort_keys=True) == json.dumps(new_body, sort_keys=True):
+                print("\n[ETL] Nenhuma alteração financeira ou cadastral detectada nas planilhas de Financiamentos.")
+                print(f"[ETL] A base '{OUTPUT_JS_FILE}' já se encontra 100% atualizada e alinhada com o servidor.")
+                print("==================================================")
+                return 0
+
         # Gerar arquivo JS
         js_content = f"// BI JLE Telecom - Financiamentos & PMTs Data Source\n// Gerado automaticamente em {data_model['metadata']['generated_at']}\nwindow.FINANCIAMENTOS_DATA = {json.dumps(data_model, ensure_ascii=False, indent=2)};\n"
         
         with open(OUTPUT_JS_FILE, "w", encoding="utf-8") as f:
             f.write(js_content)
             
-        print(f"[ETL] Sucesso! Arquivo gerado: {OUTPUT_JS_FILE}")
+        print(f"[ETL] Sucesso! Novo arquivo gerado: {OUTPUT_JS_FILE}")
         print(f"      Total de Contratos : {len(contratos)}")
         print(f"      Total Financiado   : R$ {data_model['totais_gerais']['total_financiado']:,.2f}")
         print(f"      Total Já Pago      : R$ {data_model['totais_gerais']['total_pago']:,.2f}")
