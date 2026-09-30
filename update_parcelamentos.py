@@ -27,6 +27,8 @@ CANDIDATE_DIRS = [
 def find_latest_network_file():
     """Localiza o arquivo mais recente de controle de parcelamentos na rede em todos os diretórios candidatos"""
     all_matching = []
+    ignored_terms = ["consulta", "extrato", "simples nacional", "calculo", "cálculo", "cenário", "cenario", "comparativo"]
+    
     for c_dir in CANDIDATE_DIRS:
         if os.path.exists(c_dir):
             try:
@@ -34,9 +36,16 @@ def find_latest_network_file():
                 for f in files:
                     if f.startswith("~$"):
                         continue
-                    if f.lower().endswith((".xlsx", ".xls")) and ("parcelamento" in f.lower() or "tributario" in f.lower() or "parcelamentos" in f.lower()):
+                    f_low = f.lower()
+                    if f_low.endswith((".xlsx", ".xls")) and ("parcelamento" in f_low or "tributario" in f_low or "parcelamentos" in f_low):
+                        if any(term in f_low for term in ignored_terms):
+                            continue
                         full_path = os.path.join(c_dir, f)
                         try:
+                            # Planilhas mestras de parcelamento possuem mais de 30KB
+                            f_size = os.path.getsize(full_path)
+                            if f_size < 30000:
+                                continue
                             mtime = os.path.getmtime(full_path)
                             all_matching.append((mtime, full_path, f))
                         except Exception:
@@ -486,6 +495,20 @@ def process_workbook(file_path):
 
     return data
 
+def load_existing_data():
+    if not os.path.exists(OUTPUT_JS_FILE):
+        return None
+    try:
+        with open(OUTPUT_JS_FILE, "r", encoding="utf-8") as f:
+            content = f.read()
+        idx = content.find("window.PARCELAMENTOS_DATA = ")
+        if idx != -1:
+            json_str = content[idx + len("window.PARCELAMENTOS_DATA = "):].strip().rstrip(";")
+            return json.loads(json_str)
+    except Exception as e:
+        print(f"[ETL] Aviso ao carregar parcelamentos_data.js existente: {e}")
+    return None
+
 def main():
     print("=" * 70)
     print("INICIANDO ETL: CONTROLE DE PARCELAMENTOS (ACORDOS VIGENTES)")
@@ -495,8 +518,20 @@ def main():
     try:
         source_file = get_source_file()
         processed_data = process_workbook(source_file)
+        
+        # Verificar se os dados realmente sofreram alterações em relação ao cache atual
+        existing_data = load_existing_data()
+        if existing_data:
+            # Compara corpo dos dados ignorando apenas o timestamp de geração
+            old_body = {k: v for k, v in existing_data.items() if k != "metadata"}
+            new_body = {k: v for k, v in processed_data.items() if k != "metadata"}
+            if json.dumps(old_body, sort_keys=True) == json.dumps(new_body, sort_keys=True):
+                print("\n[ETL] Nenhuma alteração cadastral ou financeira detectada na planilha de Parcelamentos.")
+                print(f"[ETL] A base '{OUTPUT_JS_FILE}' já se encontra 100% atualizada e alinhada com o servidor.")
+                print("=" * 70)
+                return
 
-        # Gravação do arquivo JavaScript
+        # Gravação do arquivo JavaScript se houver alteração
         js_content = f"// Dados Consolidados de Parcelamentos Tributários JLE Telecom\n"
         js_content += f"// Gerado automaticamente pelo pipeline ETL em {processed_data['metadata']['generated_at']}\n\n"
         js_content += f"window.PARCELAMENTOS_DATA = {json.dumps(processed_data, indent=2, ensure_ascii=False)};\n"
@@ -504,7 +539,7 @@ def main():
         with open(OUTPUT_JS_FILE, "w", encoding="utf-8") as f:
             f.write(js_content)
 
-        print(f"[ETL] Sucesso! Base compilada salva em: {OUTPUT_JS_FILE}")
+        print(f"[ETL] Sucesso! Nova base compilada salva em: {OUTPUT_JS_FILE}")
         print("\n--- RESUMO EXECUTIVO DO PROCESSAMENTO ---")
         tot = processed_data["totais_gerais"]
         print(f"  • Dívida Consolidada Original: R$ {tot['divida_original_parcelados']:,.2f}")

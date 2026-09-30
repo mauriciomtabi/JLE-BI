@@ -44,7 +44,8 @@ if (Test-Path $gitPath) {
                 $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
                 if ($swContent -match '// Versao:') {
                     $swContent = $swContent -replace '// Versao:.*', "// Versao: $timestamp"
-                } elseif ($swContent -match 'const CACHE_NAME') {
+                }
+                if ($swContent -match 'const CACHE_NAME') {
                     $newCacheNameLine = "const CACHE_NAME = 'jle-bi-v3.17.$((Get-Date -Format 'yyyyMMddHHmmss'))';"
                     $swContent = $swContent -replace "const CACHE_NAME = '([^']+)';", $newCacheNameLine
                 }
@@ -53,6 +54,20 @@ if (Test-Path $gitPath) {
                 Write-Output "Cache do PWA atualizado para: $timestamp"
             } catch {
                 Write-Warning "Nao foi possivel atualizar o sw.js: $($_.Exception.Message)"
+            }
+        }
+
+        # Atualizar cache-busting em index.html
+        $indexPath = "$workingDir\index.html"
+        if (Test-Path $indexPath) {
+            try {
+                $indexContent = [System.IO.File]::ReadAllText($indexPath, [System.Text.Encoding]::UTF8)
+                $tsShort = Get-Date -Format "yyyyMMddHHmmss"
+                $indexContent = [regex]::Replace($indexContent, 'parcelamentos_data\.js\?v=[^"''\s>]+', "parcelamentos_data.js?v=$tsShort")
+                [System.IO.File]::WriteAllText($indexPath, $indexContent, [System.Text.Encoding]::UTF8)
+                Write-Output "index.html atualizado com tag de versao: parcelamentos_data.js?v=$tsShort"
+            } catch {
+                Write-Warning "Nao foi possivel atualizar o index.html: $($_.Exception.Message)"
             }
         }
 
