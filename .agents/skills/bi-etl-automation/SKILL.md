@@ -21,8 +21,10 @@ Este documento estabelece as diretrizes obrigatórias para manipulação, extra�
 | **Analítico Claro** | `update_cobranca.ps1` | `\\10.121.21.252\mauricio.maciel@jletelecom.com.br\ANALÍTICO CLARO\` | `local_cobranca_file.xlsx` | `cobranca_data.js` (`window.COBRANCA_DATA`) |
 | **Veículos (Abastecimento)** | `update_veiculos.ps1` | `\\10.121.21.252\administrativo\09. TICKET RELATORIOS\` | `veiculos_local.xlsx` | `veiculos_data.js` (`window.VEICULOS_DATA`) |
 | **Manutenção** | `update_manutencao.ps1` | Google Sheets (CSV export gid=0) | `manutencao_data.csv` | `manutencao_data.js` (`window.MANUTENCAO_DATA`) |
-| **MDU** | `update_mdu.ps1` | Google Sheets (CSV export gid=260790893) | `mdu_data.csv` | `mdu_data.js` (`window.MDU_DATA`) |
-| **Orquestrador Mestre** | `update_all.ps1` | Executa todos os 6 módulos acima em sequência e sincroniza git/PWA | - | Todos os arquivos `*_data.js` |
+| **SAR Operacional** | `update_sar.ps1` | `\\10.121.21.252\operacao\SAR\` / GSheets | `sar_local.csv` | `sar_data.js` (`window.SAR_DATA`) |
+| **Gestão Tributária & Impostos** | `update_parcelamentos.ps1` | `\\10.121.21.252\controladoria\Vitor\TRIBUTARIO\` | `parcelamentos_local.xlsx` | `parcelamentos_data.js` (`window.PARCELAMENTOS_DATA`) |
+| **Financiamentos & PMTs** | `update_financiamentos.ps1` | `\\10.121.21.252\controladoria\Vitor\FINANCEIRO\PMTs FINANCIAMENTOS\` | `financiamentos_local/` | `financiamentos_data.js` (`window.FINANCIAMENTOS_DATA`) |
+| **Orquestrador Mestre** | `update_all.ps1` | Executa todos os módulos acima em sequência e sincroniza git/PWA | - | Todos os arquivos `*_data.js` |
 
 ---
 
