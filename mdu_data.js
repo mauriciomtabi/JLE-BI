@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-09-30 15:00:21
+// Dados MDU Compactados - Gerado em: 2026-09-30 15:08:20
 window.MDU_METADATA = {
-    "generated_at": "2026-09-30 15:00:21",
+    "generated_at": "2026-09-30 15:08:20",
     "total_rows": 5756,
-    "geocoded_new": 9
+    "geocoded_new": 7
 };
 
 window.MDU_DATA = [
@@ -184046,7 +184046,7 @@ window.MDU_DATA = [
         "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Baixa",
+        "status": "Relatório",
         "prog": 0,
         "cod_imovel": "",
         "area": "FLOAA",
@@ -184060,7 +184060,7 @@ window.MDU_DATA = [
         "obs_vistoria": "ADEQUADO",
         "data_interna": "29/09/2026",
         "data_fusao": "29/09/2026",
-        "data_baixa": "",
+        "data_baixa": "30/09",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
@@ -184072,24 +184072,24 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505608",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "R COND DE POA 544",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
+        "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
+        "status": "2º Vistoria",
         "prog": 0,
         "cod_imovel": "",
-        "area": "",
+        "area": "FLOAA",
         "node": "",
-        "caixa_m": "",
-        "hps": null,
-        "data_adicio": "",
-        "equipe": "",
-        "primeira_visita": "",
+        "caixa_m": "FLOAA.023.M030",
+        "hps": 6,
+        "data_adicio": "30/09/2026",
+        "equipe": "Abraão Rodrigues",
+        "primeira_visita": "29/09/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
+        "obs_vistoria": "ADEQUADO",
         "data_interna": "",
         "data_fusao": "",
         "data_baixa": "",
