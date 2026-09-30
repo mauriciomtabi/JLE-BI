@@ -1,10 +1,10 @@
 // Dados Consolidados de Parcelamentos Tributários JLE Telecom
-// Gerado automaticamente pelo pipeline ETL em 30/09/2026 11:47:56
+// Gerado automaticamente pelo pipeline ETL em 30/09/2026 15:00:06
 
 window.PARCELAMENTOS_DATA = {
   "metadata": {
     "source_file": "Cópia de Controle parcelamentos JLE_Atualizada_BI.xlsx",
-    "generated_at": "30/09/2026 11:47:56",
+    "generated_at": "30/09/2026 15:00:06",
     "reference_position": "Setembro/2026"
   },
   "overview": {},
@@ -3030,11 +3030,11 @@ window.PARCELAMENTOS_DATA = {
       "nome": "PARCELAMENTO SC",
       "label": "Parcelamento SC",
       "data_adesao": "30/08/2024",
-      "divida_original": 10105.3,
-      "total_pago": 6249.6,
-      "saldo_devedor": 3855.7,
-      "juros_totais_pagos": 1312.35,
-      "pct_amortizado": 61.8,
+      "divida_original": 20210.739999999998,
+      "total_pago": 10105.3,
+      "saldo_devedor": 6249.6,
+      "juros_totais_pagos": 3855.7,
+      "pct_amortizado": 50.0,
       "total_parcelas": 48,
       "parcelas_pagas": 48,
       "parcelas_faltantes": 0,
@@ -3056,7 +3056,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 12.67,
           "valor_total": 223.2,
-          "saldo_devedor_restante": -210.53,
+          "saldo_devedor_restante": 9894.77,
           "status": "Paga"
         },
         {
@@ -3065,7 +3065,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 12.67,
           "valor_total": 223.2,
-          "saldo_devedor_restante": -421.06,
+          "saldo_devedor_restante": 9684.24,
           "status": "Paga"
         },
         {
@@ -3074,7 +3074,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 12.67,
           "valor_total": 223.2,
-          "saldo_devedor_restante": -631.59,
+          "saldo_devedor_restante": 9473.71,
           "status": "Paga"
         },
         {
@@ -3083,7 +3083,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 12.67,
           "valor_total": 223.2,
-          "saldo_devedor_restante": -842.12,
+          "saldo_devedor_restante": 9263.18,
           "status": "Paga"
         },
         {
@@ -3092,7 +3092,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 12.67,
           "valor_total": 223.2,
-          "saldo_devedor_restante": -1052.65,
+          "saldo_devedor_restante": 9052.65,
           "status": "Paga"
         },
         {
@@ -3101,7 +3101,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 12.67,
           "valor_total": 223.2,
-          "saldo_devedor_restante": -1263.18,
+          "saldo_devedor_restante": 8842.12,
           "status": "Paga"
         },
         {
@@ -3110,7 +3110,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 12.67,
           "valor_total": 223.2,
-          "saldo_devedor_restante": -1473.71,
+          "saldo_devedor_restante": 8631.59,
           "status": "Paga"
         },
         {
@@ -3119,7 +3119,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 12.67,
           "valor_total": 223.2,
-          "saldo_devedor_restante": -1684.24,
+          "saldo_devedor_restante": 8421.06,
           "status": "Paga"
         },
         {
@@ -3128,7 +3128,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 12.67,
           "valor_total": 223.2,
-          "saldo_devedor_restante": -1894.77,
+          "saldo_devedor_restante": 8210.53,
           "status": "Paga"
         },
         {
@@ -3137,7 +3137,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 12.67,
           "valor_total": 223.2,
-          "saldo_devedor_restante": -2105.3,
+          "saldo_devedor_restante": 8000.0,
           "status": "Paga"
         },
         {
@@ -3146,7 +3146,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 12.67,
           "valor_total": 223.2,
-          "saldo_devedor_restante": -2315.83,
+          "saldo_devedor_restante": 7789.47,
           "status": "Paga"
         },
         {
@@ -3155,7 +3155,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 12.67,
           "valor_total": 223.2,
-          "saldo_devedor_restante": -2526.36,
+          "saldo_devedor_restante": 7578.94,
           "status": "Paga"
         },
         {
@@ -3164,7 +3164,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 12.67,
           "valor_total": 223.2,
-          "saldo_devedor_restante": -2736.89,
+          "saldo_devedor_restante": 7368.41,
           "status": "Paga"
         },
         {
@@ -3173,7 +3173,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 12.67,
           "valor_total": 223.2,
-          "saldo_devedor_restante": -2947.42,
+          "saldo_devedor_restante": 7157.88,
           "status": "Paga"
         },
         {
@@ -3182,7 +3182,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 12.67,
           "valor_total": 223.2,
-          "saldo_devedor_restante": -3157.95,
+          "saldo_devedor_restante": 6947.35,
           "status": "Paga"
         },
         {
@@ -3191,7 +3191,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 12.67,
           "valor_total": 223.2,
-          "saldo_devedor_restante": -3368.48,
+          "saldo_devedor_restante": 6736.82,
           "status": "Paga"
         },
         {
@@ -3200,7 +3200,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 12.67,
           "valor_total": 223.2,
-          "saldo_devedor_restante": -3579.01,
+          "saldo_devedor_restante": 6526.29,
           "status": "Paga"
         },
         {
@@ -3209,7 +3209,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 12.67,
           "valor_total": 223.2,
-          "saldo_devedor_restante": -3789.54,
+          "saldo_devedor_restante": 6315.76,
           "status": "Paga"
         },
         {
@@ -3218,7 +3218,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 12.67,
           "valor_total": 223.2,
-          "saldo_devedor_restante": -4000.07,
+          "saldo_devedor_restante": 6105.23,
           "status": "Paga"
         },
         {
@@ -3227,7 +3227,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 12.67,
           "valor_total": 223.2,
-          "saldo_devedor_restante": -4210.6,
+          "saldo_devedor_restante": 5894.7,
           "status": "Paga"
         },
         {
@@ -3236,7 +3236,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 12.67,
           "valor_total": 223.2,
-          "saldo_devedor_restante": -4421.13,
+          "saldo_devedor_restante": 5684.17,
           "status": "Paga"
         },
         {
@@ -3245,7 +3245,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 12.67,
           "valor_total": 223.2,
-          "saldo_devedor_restante": -4631.66,
+          "saldo_devedor_restante": 5473.64,
           "status": "Paga"
         },
         {
@@ -3254,7 +3254,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 12.67,
           "valor_total": 223.2,
-          "saldo_devedor_restante": -4842.19,
+          "saldo_devedor_restante": 5263.11,
           "status": "Paga"
         },
         {
@@ -3263,7 +3263,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 12.67,
           "valor_total": 223.2,
-          "saldo_devedor_restante": -5052.72,
+          "saldo_devedor_restante": 5052.58,
           "status": "Paga"
         },
         {
@@ -3272,7 +3272,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 12.67,
           "valor_total": 223.2,
-          "saldo_devedor_restante": -5263.25,
+          "saldo_devedor_restante": 4842.05,
           "status": "Paga"
         },
         {
@@ -3281,7 +3281,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 12.67,
           "valor_total": 223.2,
-          "saldo_devedor_restante": -5473.78,
+          "saldo_devedor_restante": 4631.52,
           "status": "Paga"
         },
         {
@@ -3290,7 +3290,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 12.67,
           "valor_total": 223.2,
-          "saldo_devedor_restante": -5684.31,
+          "saldo_devedor_restante": 4420.99,
           "status": "Paga"
         },
         {
@@ -3299,7 +3299,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 12.67,
           "valor_total": 223.2,
-          "saldo_devedor_restante": -5894.84,
+          "saldo_devedor_restante": 4210.46,
           "status": "Paga"
         },
         {
@@ -3308,7 +3308,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 69.07,
           "valor_total": 279.6,
-          "saldo_devedor_restante": -6105.37,
+          "saldo_devedor_restante": 3999.93,
           "status": "Paga"
         },
         {
@@ -3317,7 +3317,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 69.07,
           "valor_total": 279.6,
-          "saldo_devedor_restante": -6315.9,
+          "saldo_devedor_restante": 3789.4,
           "status": "Paga"
         },
         {
@@ -3326,7 +3326,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 69.07,
           "valor_total": 279.6,
-          "saldo_devedor_restante": -6526.43,
+          "saldo_devedor_restante": 3578.87,
           "status": "Paga"
         },
         {
@@ -3335,7 +3335,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 69.07,
           "valor_total": 279.6,
-          "saldo_devedor_restante": -6736.96,
+          "saldo_devedor_restante": 3368.34,
           "status": "Paga"
         },
         {
@@ -3344,7 +3344,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 69.07,
           "valor_total": 279.6,
-          "saldo_devedor_restante": -6947.49,
+          "saldo_devedor_restante": 3157.81,
           "status": "Paga"
         },
         {
@@ -3353,7 +3353,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 69.07,
           "valor_total": 279.6,
-          "saldo_devedor_restante": -7158.02,
+          "saldo_devedor_restante": 2947.28,
           "status": "Paga"
         },
         {
@@ -3362,7 +3362,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 69.07,
           "valor_total": 279.6,
-          "saldo_devedor_restante": -7368.55,
+          "saldo_devedor_restante": 2736.75,
           "status": "Paga"
         },
         {
@@ -3371,7 +3371,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 69.07,
           "valor_total": 279.6,
-          "saldo_devedor_restante": -7579.08,
+          "saldo_devedor_restante": 2526.22,
           "status": "Paga"
         },
         {
@@ -3380,7 +3380,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 69.07,
           "valor_total": 279.6,
-          "saldo_devedor_restante": -7789.61,
+          "saldo_devedor_restante": 2315.69,
           "status": "Paga"
         },
         {
@@ -3389,7 +3389,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 69.07,
           "valor_total": 279.6,
-          "saldo_devedor_restante": -8000.14,
+          "saldo_devedor_restante": 2105.16,
           "status": "Paga"
         },
         {
@@ -3398,7 +3398,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 69.07,
           "valor_total": 279.6,
-          "saldo_devedor_restante": -8210.67,
+          "saldo_devedor_restante": 1894.63,
           "status": "Paga"
         },
         {
@@ -3407,7 +3407,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 69.07,
           "valor_total": 279.6,
-          "saldo_devedor_restante": -8421.2,
+          "saldo_devedor_restante": 1684.1,
           "status": "Paga"
         },
         {
@@ -3416,7 +3416,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 69.07,
           "valor_total": 279.6,
-          "saldo_devedor_restante": -8631.73,
+          "saldo_devedor_restante": 1473.57,
           "status": "Paga"
         },
         {
@@ -3425,7 +3425,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 69.07,
           "valor_total": 279.6,
-          "saldo_devedor_restante": -8842.26,
+          "saldo_devedor_restante": 1263.04,
           "status": "Paga"
         },
         {
@@ -3434,7 +3434,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 69.07,
           "valor_total": 279.6,
-          "saldo_devedor_restante": -9052.79,
+          "saldo_devedor_restante": 1052.51,
           "status": "Paga"
         },
         {
@@ -3443,7 +3443,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 69.07,
           "valor_total": 279.6,
-          "saldo_devedor_restante": -9263.32,
+          "saldo_devedor_restante": 841.98,
           "status": "Paga"
         },
         {
@@ -3452,7 +3452,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 69.07,
           "valor_total": 279.6,
-          "saldo_devedor_restante": -9473.85,
+          "saldo_devedor_restante": 631.45,
           "status": "Paga"
         },
         {
@@ -3461,7 +3461,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 69.07,
           "valor_total": 279.6,
-          "saldo_devedor_restante": -9684.38,
+          "saldo_devedor_restante": 420.92,
           "status": "Paga"
         },
         {
@@ -3470,7 +3470,7 @@ window.PARCELAMENTOS_DATA = {
           "valor_base": 210.53,
           "juros_selic": 69.07,
           "valor_total": 279.6,
-          "saldo_devedor_restante": -9894.91,
+          "saldo_devedor_restante": 210.39,
           "status": "Paga"
         }
       ]
@@ -3644,10 +3644,10 @@ window.PARCELAMENTOS_DATA = {
     }
   ],
   "totais_gerais": {
-    "divida_original_parcelados": 3527262.65,
-    "total_pago_amortizado": 1150297.98,
-    "saldo_devedor_parcelado": 2376964.67,
-    "juros_selic_pagos_parcelas": 124396.94,
+    "divida_original_parcelados": 3537368.09,
+    "total_pago_amortizado": 1154153.68,
+    "saldo_devedor_parcelado": 2379358.57,
+    "juros_selic_pagos_parcelas": 126940.29,
     "compromisso_mensal_atual": 58619.27,
     "pct_quitado_geral": 32.6,
     "total_acordos_ativos": 5
