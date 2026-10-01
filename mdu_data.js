@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-10-01 12:00:18
+// Dados MDU Compactados - Gerado em: 2026-10-01 14:00:16
 window.MDU_METADATA = {
-    "generated_at": "2026-10-01 12:00:18",
+    "generated_at": "2026-10-01 14:00:16",
     "total_rows": 5816,
-    "geocoded_new": 0
+    "geocoded_new": 1
 };
 
 window.MDU_DATA = [
@@ -183502,8 +183502,8 @@ window.MDU_DATA = [
         "aging": "2",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Baixa",
-        "prog": 63.0,
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "610151504",
         "area": "VIPAA",
         "node": "VIPAJ",
@@ -183516,7 +183516,7 @@ window.MDU_DATA = [
         "obs_vistoria": "ADEQUADO",
         "data_interna": "18/09/2026",
         "data_fusao": "22/09/2026",
-        "data_baixa": "",
+        "data_baixa": "01/10",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
@@ -184360,24 +184360,24 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505617",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "LUIS AFONSO 576",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
+        "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
+        "status": "2º Vistoria",
         "prog": 0,
         "cod_imovel": "",
-        "area": "",
+        "area": "CNTAA",
         "node": "",
-        "caixa_m": "",
-        "hps": null,
-        "data_adicio": "",
-        "equipe": "",
-        "primeira_visita": "",
+        "caixa_m": "CNTAA.353.M020",
+        "hps": 31,
+        "data_adicio": "01/10/2026",
+        "equipe": "David Salomão",
+        "primeira_visita": "01/10/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
+        "obs_vistoria": "ADEQUADO",
         "data_interna": "",
         "data_fusao": "",
         "data_baixa": "",
@@ -184386,9 +184386,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.039494,
+        "lng": -51.2218132,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505618",
