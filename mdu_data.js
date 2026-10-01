@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-10-01 11:00:18
+// Dados MDU Compactados - Gerado em: 2026-10-01 12:00:18
 window.MDU_METADATA = {
-    "generated_at": "2026-10-01 11:00:18",
+    "generated_at": "2026-10-01 12:00:18",
     "total_rows": 5816,
     "geocoded_new": 0
 };
@@ -183470,8 +183470,8 @@ window.MDU_DATA = [
         "aging": "2",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Baixa",
-        "prog": 63.0,
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "610151496",
         "area": "VIPAA",
         "node": "VIPAJ",
@@ -183484,7 +183484,7 @@ window.MDU_DATA = [
         "obs_vistoria": "ADEQUADO",
         "data_interna": "18/09/2026",
         "data_fusao": "22/09/2026",
-        "data_baixa": "",
+        "data_baixa": "01/10",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
@@ -183534,8 +183534,8 @@ window.MDU_DATA = [
         "aging": "2",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Baixa",
-        "prog": 63.0,
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "610151510",
         "area": "VIPAA",
         "node": "VIPAJ",
@@ -183548,7 +183548,7 @@ window.MDU_DATA = [
         "obs_vistoria": "ADEQUADO",
         "data_interna": "18/09/2026",
         "data_fusao": "22/09/2026",
-        "data_baixa": "",
+        "data_baixa": "01/10",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
