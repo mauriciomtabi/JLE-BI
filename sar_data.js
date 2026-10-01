@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-01 16:45:14
+// Dados SAR JLE Telecom - Gerado em: 2026-10-01 17:00:11
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1101,
-    "generated_at": "2026-10-01 16:45:14",
+    "generated_at": "2026-10-01 17:00:11",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -77163,7 +77163,7 @@ window.SAR_DATA = [
     "classe_f": "CLEVERSON",
     "situacao": "28/09/2026",
     "relatorio_foto": "",
-    "servico": "",
+    "servico": "FOI LANÇADO 310 METROS DE CABO DE 12FO, 1 ABERTURA E FECHAMENTO,1 CX NOVA, 1 DERIVAÇÃO,",
     "data_entrada": "2026-09-28",
     "data_entrada_fmt": "28/09/2026",
     "data_inicio": null,
