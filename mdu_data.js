@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-10-01 10:08:48
+// Dados MDU Compactados - Gerado em: 2026-10-01 11:00:18
 window.MDU_METADATA = {
-    "generated_at": "2026-10-01 10:08:48",
+    "generated_at": "2026-10-01 11:00:18",
     "total_rows": 5816,
     "geocoded_new": 0
 };
@@ -164409,7 +164409,7 @@ window.MDU_DATA = [
         "equipe": "Paulo Ribaczki",
         "primeira_visita": "09/07/2026",
         "segunda_visita": "",
-        "obs_vistoria": "AGUARDANDO SAR",
+        "obs_vistoria": "ADEQUADO",
         "data_interna": "09/07",
         "data_fusao": "17/08",
         "data_baixa": "17/08",
