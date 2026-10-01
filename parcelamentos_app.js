@@ -133,6 +133,10 @@
         const imp = acomp.map(m => m.total_impostos);
         const carga = acomp.map(m => m.carga_tributaria_pct);
 
+        const maxCarga = Math.max(...carga.filter(v => typeof v === 'number' && !isNaN(v)), 1);
+        // Calibrar o teto do eixo Y1 para que a linha acompanhe de perto as colunas de impostos no quadrante inferior
+        const y1Max = Math.max(30, Math.ceil((maxCarga * 4.2) / 10) * 10);
+
         const datalabelsPlugin = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
 
         state.charts.cargaTributaria = new Chart(ctx, {
@@ -152,6 +156,7 @@
                         pointHoverRadius: 7.5,
                         pointBackgroundColor: '#00d2d3',
                         tension: 0.25,
+                        order: 1,
                         datalabels: {
                             display: true,
                             color: '#00e5ff',
@@ -176,6 +181,7 @@
                         borderWidth: 1,
                         yAxisID: 'y',
                         borderRadius: 4,
+                        order: 2,
                         datalabels: {
                             display: (ctx) => ctx.dataset.data[ctx.dataIndex] > 0,
                             color: '#ffffff',
@@ -195,6 +201,7 @@
                         borderWidth: 1,
                         yAxisID: 'y',
                         borderRadius: 4,
+                        order: 2,
                         datalabels: {
                             display: (ctx) => ctx.dataset.data[ctx.dataIndex] > 0,
                             color: '#f59e0b',
@@ -223,25 +230,28 @@
                         type: 'linear',
                         display: true,
                         position: 'left',
+                        min: 0,
                         grid: { color: 'rgba(255, 255, 255, 0.05)' },
                         ticks: {
                             color: '#8b949e',
                             font: { family: 'Outfit, Inter', size: 10 },
                             callback: val => 'R$ ' + (val / 1000000).toFixed(1) + 'M'
                         },
-                        grace: '18%'
+                        grace: '15%'
                     },
                     y1: {
                         type: 'linear',
                         display: true,
                         position: 'right',
+                        min: 0,
+                        max: y1Max,
                         grid: { drawOnChartArea: false },
                         ticks: {
                             color: '#00d2d3',
                             font: { family: 'Outfit, Inter', size: 10 },
-                            callback: val => val.toFixed(1) + '%'
-                        },
-                        grace: '25%'
+                            stepSize: 10,
+                            callback: val => (val % 1 === 0 ? val.toFixed(0) : val.toFixed(1)) + '%'
+                        }
                     }
                 },
                 plugins: {
