@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-01 16:00:15
+// Dados SAR JLE Telecom - Gerado em: 2026-10-01 16:45:14
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1101,
-    "generated_at": "2026-10-01 16:00:15",
+    "generated_at": "2026-10-01 16:45:14",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -762,10 +762,10 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 795543.5,
-        "total_previa_medicao": 1333006.31,
-        "total_classe_l": 334465.0,
-        "total_classe_f": 461078.5
+        "total_terceiros": 796596.5,
+        "total_previa_medicao": 1334116.09,
+        "total_classe_l": 335340.0,
+        "total_classe_f": 461256.5
     },
     "medicao": {
         "total_geral": 1464392.08,
@@ -77232,14 +77232,14 @@ window.SAR_DATA = [
     "classe_l": "CLEVERSON",
     "classe_f": "CLEVERSON",
     "situacao": "28/09/2026",
-    "relatorio_foto": "",
-    "servico": "2 ABERTURA E FECHAMENTO, 2 FUSÕES, 1 CX NOVA, 1 TESTE.",
+    "relatorio_foto": "500",
+    "servico": "FOI LANÇADO 500 METROS DE CABO DE 12FO, 4 ABERTURA E FECHAMENTO, 4 FUSÕES, 1 CX NOVA, 1 TESTE. COBRAR 200 METROS DE CORDOALHA",
     "data_entrada": "2026-09-28",
     "data_entrada_fmt": "28/09/2026",
-    "data_inicio": null,
-    "data_inicio_fmt": "-",
-    "data_previsao": null,
-    "data_previsao_fmt": "-",
+    "data_inicio": "2026-10-01",
+    "data_inicio_fmt": "01/10/2026",
+    "data_previsao": "2026-10-01",
+    "data_previsao_fmt": "01/10/2026",
     "data_entrega": "2026-09-30",
     "data_entrega_fmt": "30/09/2026",
     "data_medicao": null,
@@ -77263,29 +77263,29 @@ window.SAR_DATA = [
     "mes_entrega": "SETEMBRO",
     "mes_num_entrega": "09",
     "status": "RELATÓRIO",
-    "status_relatorio": "",
-    "status_medicao": "",
+    "status_relatorio": "01/10/2026",
+    "status_medicao": "01/10/2026",
     "status_obra": "Em Andamento",
     "prazo": "NO PRAZO",
     "tempo_dias": 2.0,
     "atraso_dias": 0,
-    "total_terceiros": 243.0,
-    "previa_medicao": 520.73,
+    "total_terceiros": 1296.0,
+    "previa_medicao": 1630.51,
     "valor_medicao": 0.0,
-    "valor_classe_l": 0.0,
-    "valor_classe_f": 243.0,
-    "itens_l_resumo": "-",
-    "itens_f_resumo": "3.11 CX EM: 1 un, 3.15 AB/FE: 2 un, 3.13 FUS/EME: 2 un",
+    "valor_classe_l": 875.0,
+    "valor_classe_f": 421.0,
+    "itens_l_resumo": "2.15 CB ESP: 500m, 1.13 CORD: 200m",
+    "itens_f_resumo": "3.11 CX EM: 1 un, 3.15 AB/FE: 4 un, 3.13 FUS/EME: 4 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
-      "q_215": 0.0,
-      "q_113": 0.0,
+      "q_215": 500.0,
+      "q_113": 200.0,
       "q_311": 1.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 2.0,
-      "q_313": 2.0,
+      "q_315": 4.0,
+      "q_313": 4.0,
       "q_314": 0.0,
       "q_312": 0.0
     }
