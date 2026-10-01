@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-10-01 09:00:18
+// Dados MDU Compactados - Gerado em: 2026-10-01 10:00:23
 window.MDU_METADATA = {
-    "generated_at": "2026-10-01 09:00:18",
+    "generated_at": "2026-10-01 10:00:23",
     "total_rows": 5816,
-    "geocoded_new": 1
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -184334,7 +184334,7 @@ window.MDU_DATA = [
         "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Baixa",
+        "status": "Relatório",
         "prog": 0,
         "cod_imovel": "",
         "area": "RBRAA",
@@ -184348,7 +184348,7 @@ window.MDU_DATA = [
         "obs_vistoria": "ADEQUADO",
         "data_interna": "30/09/2026",
         "data_fusao": "30/09/2026",
-        "data_baixa": "",
+        "data_baixa": "01/10",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
