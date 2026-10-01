@@ -1,10 +1,10 @@
 // Dados Consolidados de Parcelamentos Tributários JLE Telecom
-// Gerado automaticamente pelo pipeline ETL em 30/09/2026 15:00:06
+// Gerado automaticamente pelo pipeline ETL em 01/10/2026 15:03:12
 
 window.PARCELAMENTOS_DATA = {
   "metadata": {
     "source_file": "Cópia de Controle parcelamentos JLE_Atualizada_BI.xlsx",
-    "generated_at": "30/09/2026 15:00:06",
+    "generated_at": "01/10/2026 15:03:12",
     "reference_position": "Setembro/2026"
   },
   "overview": {},
@@ -3030,14 +3030,14 @@ window.PARCELAMENTOS_DATA = {
       "nome": "PARCELAMENTO SC",
       "label": "Parcelamento SC",
       "data_adesao": "30/08/2024",
-      "divida_original": 20210.739999999998,
-      "total_pago": 10105.3,
-      "saldo_devedor": 6249.6,
-      "juros_totais_pagos": 3855.7,
-      "pct_amortizado": 50.0,
+      "divida_original": 10105.3,
+      "total_pago": 6249.6,
+      "saldo_devedor": 3855.7,
+      "juros_totais_pagos": 1312.35,
+      "pct_amortizado": 61.8,
       "total_parcelas": 48,
-      "parcelas_pagas": 48,
-      "parcelas_faltantes": 0,
+      "parcelas_pagas": 29,
+      "parcelas_faltantes": 19,
       "valor_parcela_base": 210.53,
       "debitos_origem": [],
       "cronograma_parcelas": [
@@ -3309,7 +3309,7 @@ window.PARCELAMENTOS_DATA = {
           "juros_selic": 69.07,
           "valor_total": 279.6,
           "saldo_devedor_restante": 3999.93,
-          "status": "Paga"
+          "status": "A Pagar"
         },
         {
           "numero": 31,
@@ -3318,7 +3318,7 @@ window.PARCELAMENTOS_DATA = {
           "juros_selic": 69.07,
           "valor_total": 279.6,
           "saldo_devedor_restante": 3789.4,
-          "status": "Paga"
+          "status": "A Pagar"
         },
         {
           "numero": 32,
@@ -3327,7 +3327,7 @@ window.PARCELAMENTOS_DATA = {
           "juros_selic": 69.07,
           "valor_total": 279.6,
           "saldo_devedor_restante": 3578.87,
-          "status": "Paga"
+          "status": "A Pagar"
         },
         {
           "numero": 33,
@@ -3336,7 +3336,7 @@ window.PARCELAMENTOS_DATA = {
           "juros_selic": 69.07,
           "valor_total": 279.6,
           "saldo_devedor_restante": 3368.34,
-          "status": "Paga"
+          "status": "A Pagar"
         },
         {
           "numero": 34,
@@ -3345,7 +3345,7 @@ window.PARCELAMENTOS_DATA = {
           "juros_selic": 69.07,
           "valor_total": 279.6,
           "saldo_devedor_restante": 3157.81,
-          "status": "Paga"
+          "status": "A Pagar"
         },
         {
           "numero": 35,
@@ -3354,7 +3354,7 @@ window.PARCELAMENTOS_DATA = {
           "juros_selic": 69.07,
           "valor_total": 279.6,
           "saldo_devedor_restante": 2947.28,
-          "status": "Paga"
+          "status": "A Pagar"
         },
         {
           "numero": 36,
@@ -3363,7 +3363,7 @@ window.PARCELAMENTOS_DATA = {
           "juros_selic": 69.07,
           "valor_total": 279.6,
           "saldo_devedor_restante": 2736.75,
-          "status": "Paga"
+          "status": "A Pagar"
         },
         {
           "numero": 37,
@@ -3372,7 +3372,7 @@ window.PARCELAMENTOS_DATA = {
           "juros_selic": 69.07,
           "valor_total": 279.6,
           "saldo_devedor_restante": 2526.22,
-          "status": "Paga"
+          "status": "A Pagar"
         },
         {
           "numero": 38,
@@ -3381,7 +3381,7 @@ window.PARCELAMENTOS_DATA = {
           "juros_selic": 69.07,
           "valor_total": 279.6,
           "saldo_devedor_restante": 2315.69,
-          "status": "Paga"
+          "status": "A Pagar"
         },
         {
           "numero": 39,
@@ -3390,7 +3390,7 @@ window.PARCELAMENTOS_DATA = {
           "juros_selic": 69.07,
           "valor_total": 279.6,
           "saldo_devedor_restante": 2105.16,
-          "status": "Paga"
+          "status": "A Pagar"
         },
         {
           "numero": 40,
@@ -3399,7 +3399,7 @@ window.PARCELAMENTOS_DATA = {
           "juros_selic": 69.07,
           "valor_total": 279.6,
           "saldo_devedor_restante": 1894.63,
-          "status": "Paga"
+          "status": "A Pagar"
         },
         {
           "numero": 41,
@@ -3408,7 +3408,7 @@ window.PARCELAMENTOS_DATA = {
           "juros_selic": 69.07,
           "valor_total": 279.6,
           "saldo_devedor_restante": 1684.1,
-          "status": "Paga"
+          "status": "A Pagar"
         },
         {
           "numero": 42,
@@ -3417,7 +3417,7 @@ window.PARCELAMENTOS_DATA = {
           "juros_selic": 69.07,
           "valor_total": 279.6,
           "saldo_devedor_restante": 1473.57,
-          "status": "Paga"
+          "status": "A Pagar"
         },
         {
           "numero": 43,
@@ -3426,7 +3426,7 @@ window.PARCELAMENTOS_DATA = {
           "juros_selic": 69.07,
           "valor_total": 279.6,
           "saldo_devedor_restante": 1263.04,
-          "status": "Paga"
+          "status": "A Pagar"
         },
         {
           "numero": 44,
@@ -3435,7 +3435,7 @@ window.PARCELAMENTOS_DATA = {
           "juros_selic": 69.07,
           "valor_total": 279.6,
           "saldo_devedor_restante": 1052.51,
-          "status": "Paga"
+          "status": "A Pagar"
         },
         {
           "numero": 45,
@@ -3444,7 +3444,7 @@ window.PARCELAMENTOS_DATA = {
           "juros_selic": 69.07,
           "valor_total": 279.6,
           "saldo_devedor_restante": 841.98,
-          "status": "Paga"
+          "status": "A Pagar"
         },
         {
           "numero": 46,
@@ -3453,7 +3453,7 @@ window.PARCELAMENTOS_DATA = {
           "juros_selic": 69.07,
           "valor_total": 279.6,
           "saldo_devedor_restante": 631.45,
-          "status": "Paga"
+          "status": "A Pagar"
         },
         {
           "numero": 47,
@@ -3462,7 +3462,7 @@ window.PARCELAMENTOS_DATA = {
           "juros_selic": 69.07,
           "valor_total": 279.6,
           "saldo_devedor_restante": 420.92,
-          "status": "Paga"
+          "status": "A Pagar"
         },
         {
           "numero": 48,
@@ -3471,7 +3471,7 @@ window.PARCELAMENTOS_DATA = {
           "juros_selic": 69.07,
           "valor_total": 279.6,
           "saldo_devedor_restante": 210.39,
-          "status": "Paga"
+          "status": "A Pagar"
         }
       ]
     }
@@ -3644,11 +3644,11 @@ window.PARCELAMENTOS_DATA = {
     }
   ],
   "totais_gerais": {
-    "divida_original_parcelados": 3537368.09,
-    "total_pago_amortizado": 1154153.68,
-    "saldo_devedor_parcelado": 2379358.57,
-    "juros_selic_pagos_parcelas": 126940.29,
-    "compromisso_mensal_atual": 58619.27,
+    "divida_original_parcelados": 3527262.65,
+    "total_pago_amortizado": 1150297.98,
+    "saldo_devedor_parcelado": 2376964.67,
+    "juros_selic_pagos_parcelas": 124396.94,
+    "compromisso_mensal_atual": 58829.8,
     "pct_quitado_geral": 32.6,
     "total_acordos_ativos": 5
   },
@@ -3786,210 +3786,229 @@ window.PARCELAMENTOS_DATA = {
     {
       "mes_ano": "01/2027",
       "sort_key": "2027-01",
-      "valor_total_projetado": 58619.27,
+      "valor_total_projetado": 58829.8,
       "por_acordo": {
         "Parcelamento 06062024": 8813.76,
         "Parcelamento 05122024": 18504.38,
         "Parcelamento 06062025": 29779.51,
-        "Parcelamento 25112025": 1521.62
+        "Parcelamento 25112025": 1521.62,
+        "Parcelamento SC": 210.53
       }
     },
     {
       "mes_ano": "02/2027",
       "sort_key": "2027-02",
-      "valor_total_projetado": 58619.27,
+      "valor_total_projetado": 58829.8,
       "por_acordo": {
         "Parcelamento 06062024": 8813.76,
         "Parcelamento 05122024": 18504.38,
         "Parcelamento 06062025": 29779.51,
-        "Parcelamento 25112025": 1521.62
+        "Parcelamento 25112025": 1521.62,
+        "Parcelamento SC": 210.53
       }
     },
     {
       "mes_ano": "03/2027",
       "sort_key": "2027-03",
-      "valor_total_projetado": 58619.27,
+      "valor_total_projetado": 58829.8,
       "por_acordo": {
         "Parcelamento 06062024": 8813.76,
         "Parcelamento 05122024": 18504.38,
         "Parcelamento 06062025": 29779.51,
-        "Parcelamento 25112025": 1521.62
+        "Parcelamento 25112025": 1521.62,
+        "Parcelamento SC": 210.53
       }
     },
     {
       "mes_ano": "04/2027",
       "sort_key": "2027-04",
-      "valor_total_projetado": 58619.27,
+      "valor_total_projetado": 58829.8,
       "por_acordo": {
         "Parcelamento 06062024": 8813.76,
         "Parcelamento 05122024": 18504.38,
         "Parcelamento 06062025": 29779.51,
-        "Parcelamento 25112025": 1521.62
+        "Parcelamento 25112025": 1521.62,
+        "Parcelamento SC": 210.53
       }
     },
     {
       "mes_ano": "05/2027",
       "sort_key": "2027-05",
-      "valor_total_projetado": 58619.27,
+      "valor_total_projetado": 58829.8,
       "por_acordo": {
         "Parcelamento 06062024": 8813.76,
         "Parcelamento 05122024": 18504.38,
         "Parcelamento 06062025": 29779.51,
-        "Parcelamento 25112025": 1521.62
+        "Parcelamento 25112025": 1521.62,
+        "Parcelamento SC": 210.53
       }
     },
     {
       "mes_ano": "06/2027",
       "sort_key": "2027-06",
-      "valor_total_projetado": 58619.27,
+      "valor_total_projetado": 58829.8,
       "por_acordo": {
         "Parcelamento 06062024": 8813.76,
         "Parcelamento 05122024": 18504.38,
         "Parcelamento 06062025": 29779.51,
-        "Parcelamento 25112025": 1521.62
+        "Parcelamento 25112025": 1521.62,
+        "Parcelamento SC": 210.53
       }
     },
     {
       "mes_ano": "07/2027",
       "sort_key": "2027-07",
-      "valor_total_projetado": 58619.27,
+      "valor_total_projetado": 58829.8,
       "por_acordo": {
         "Parcelamento 06062024": 8813.76,
         "Parcelamento 05122024": 18504.38,
         "Parcelamento 06062025": 29779.51,
-        "Parcelamento 25112025": 1521.62
+        "Parcelamento 25112025": 1521.62,
+        "Parcelamento SC": 210.53
       }
     },
     {
       "mes_ano": "08/2027",
       "sort_key": "2027-08",
-      "valor_total_projetado": 58619.27,
+      "valor_total_projetado": 58829.8,
       "por_acordo": {
         "Parcelamento 06062024": 8813.76,
         "Parcelamento 05122024": 18504.38,
         "Parcelamento 06062025": 29779.51,
-        "Parcelamento 25112025": 1521.62
+        "Parcelamento 25112025": 1521.62,
+        "Parcelamento SC": 210.53
       }
     },
     {
       "mes_ano": "09/2027",
       "sort_key": "2027-09",
-      "valor_total_projetado": 58619.27,
+      "valor_total_projetado": 58829.8,
       "por_acordo": {
         "Parcelamento 06062024": 8813.76,
         "Parcelamento 05122024": 18504.38,
         "Parcelamento 06062025": 29779.51,
-        "Parcelamento 25112025": 1521.62
+        "Parcelamento 25112025": 1521.62,
+        "Parcelamento SC": 210.53
       }
     },
     {
       "mes_ano": "10/2027",
       "sort_key": "2027-10",
-      "valor_total_projetado": 58619.27,
+      "valor_total_projetado": 58829.8,
       "por_acordo": {
         "Parcelamento 06062024": 8813.76,
         "Parcelamento 05122024": 18504.38,
         "Parcelamento 06062025": 29779.51,
-        "Parcelamento 25112025": 1521.62
+        "Parcelamento 25112025": 1521.62,
+        "Parcelamento SC": 210.53
       }
     },
     {
       "mes_ano": "11/2027",
       "sort_key": "2027-11",
-      "valor_total_projetado": 58619.27,
+      "valor_total_projetado": 58829.8,
       "por_acordo": {
         "Parcelamento 06062024": 8813.76,
         "Parcelamento 05122024": 18504.38,
         "Parcelamento 06062025": 29779.51,
-        "Parcelamento 25112025": 1521.62
+        "Parcelamento 25112025": 1521.62,
+        "Parcelamento SC": 210.53
       }
     },
     {
       "mes_ano": "12/2027",
       "sort_key": "2027-12",
-      "valor_total_projetado": 58619.27,
+      "valor_total_projetado": 58829.8,
       "por_acordo": {
         "Parcelamento 06062024": 8813.76,
         "Parcelamento 05122024": 18504.38,
         "Parcelamento 06062025": 29779.51,
-        "Parcelamento 25112025": 1521.62
+        "Parcelamento 25112025": 1521.62,
+        "Parcelamento SC": 210.53
       }
     },
     {
       "mes_ano": "01/2028",
       "sort_key": "2028-01",
-      "valor_total_projetado": 58619.27,
+      "valor_total_projetado": 58829.8,
       "por_acordo": {
         "Parcelamento 06062024": 8813.76,
         "Parcelamento 05122024": 18504.38,
         "Parcelamento 06062025": 29779.51,
-        "Parcelamento 25112025": 1521.62
+        "Parcelamento 25112025": 1521.62,
+        "Parcelamento SC": 210.53
       }
     },
     {
       "mes_ano": "02/2028",
       "sort_key": "2028-02",
-      "valor_total_projetado": 58619.27,
+      "valor_total_projetado": 58829.8,
       "por_acordo": {
         "Parcelamento 06062024": 8813.76,
         "Parcelamento 05122024": 18504.38,
         "Parcelamento 06062025": 29779.51,
-        "Parcelamento 25112025": 1521.62
+        "Parcelamento 25112025": 1521.62,
+        "Parcelamento SC": 210.53
       }
     },
     {
       "mes_ano": "03/2028",
       "sort_key": "2028-03",
-      "valor_total_projetado": 58619.27,
+      "valor_total_projetado": 58829.8,
       "por_acordo": {
         "Parcelamento 06062024": 8813.76,
         "Parcelamento 05122024": 18504.38,
         "Parcelamento 06062025": 29779.51,
-        "Parcelamento 25112025": 1521.62
+        "Parcelamento 25112025": 1521.62,
+        "Parcelamento SC": 210.53
       }
     },
     {
       "mes_ano": "04/2028",
       "sort_key": "2028-04",
-      "valor_total_projetado": 58619.27,
+      "valor_total_projetado": 58829.8,
       "por_acordo": {
         "Parcelamento 06062024": 8813.76,
         "Parcelamento 05122024": 18504.38,
         "Parcelamento 06062025": 29779.51,
-        "Parcelamento 25112025": 1521.62
+        "Parcelamento 25112025": 1521.62,
+        "Parcelamento SC": 210.53
       }
     },
     {
       "mes_ano": "05/2028",
       "sort_key": "2028-05",
-      "valor_total_projetado": 58619.27,
+      "valor_total_projetado": 58829.8,
       "por_acordo": {
         "Parcelamento 06062024": 8813.76,
         "Parcelamento 05122024": 18504.38,
         "Parcelamento 06062025": 29779.51,
-        "Parcelamento 25112025": 1521.62
+        "Parcelamento 25112025": 1521.62,
+        "Parcelamento SC": 210.53
       }
     },
     {
       "mes_ano": "06/2028",
       "sort_key": "2028-06",
-      "valor_total_projetado": 58619.27,
+      "valor_total_projetado": 58829.8,
       "por_acordo": {
         "Parcelamento 06062024": 8813.76,
         "Parcelamento 05122024": 18504.38,
         "Parcelamento 06062025": 29779.51,
-        "Parcelamento 25112025": 1521.62
+        "Parcelamento 25112025": 1521.62,
+        "Parcelamento SC": 210.53
       }
     },
     {
       "mes_ano": "07/2028",
       "sort_key": "2028-07",
-      "valor_total_projetado": 58619.27,
+      "valor_total_projetado": 58829.8,
       "por_acordo": {
         "Parcelamento 06062024": 8813.76,
         "Parcelamento 05122024": 18504.38,
         "Parcelamento 06062025": 29779.51,
-        "Parcelamento 25112025": 1521.62
+        "Parcelamento 25112025": 1521.62,
+        "Parcelamento SC": 210.53
       }
     },
     {

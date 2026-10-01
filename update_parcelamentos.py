@@ -170,22 +170,73 @@ def process_workbook(file_path):
         ws = wb[sname]
         clean_name = sname.strip()
         
-        # Leitura da caixa de resumo (O4:R6)
-        divida_orig = parse_float(ws.cell(4, 15).value)
-        pago_acum = parse_float(ws.cell(4, 16).value)
-        saldo_dev = parse_float(ws.cell(4, 17).value)
-        juros_tot = parse_float(ws.cell(4, 18).value)
+        # Identificação dinâmica das colunas pelos cabeçalhos na linha 3
+        col_status = None
+        col_divida = None
+        col_pago = None
+        col_saldo = None
+        col_juros_resumo = None
+        col_valor_parcela = None
+        col_juros_parcela = None
+        col_valor_total = None
+        col_vencimento = None
+        col_amortizacao = None
+
+        header_row = 3
+        for c in range(1, ws.max_column + 1):
+            h = str(ws.cell(header_row, c).value or "").strip().upper()
+            if "STATUS" in h:
+                col_status = c
+            elif ("DIVIDA" in h or "DÍVIDA" in h):
+                col_divida = c
+            elif "PAGO" in h and c > 8:
+                col_pago = c
+            elif "SALDO" in h and c > 8:
+                col_saldo = c
+            elif "JUROS" in h and c > 11:
+                col_juros_resumo = c
+            elif "PARCELA" in h and c <= 10:
+                col_valor_parcela = c
+            elif "JUROS" in h and c <= 11:
+                col_juros_parcela = c
+            elif "TOTAL" in h and c <= 12:
+                col_valor_total = c
+            elif ("VENC" in h or "DATA" in h) and c <= 13:
+                col_vencimento = c
+            elif "AMORTIZ" in h:
+                col_amortizacao = c
+
+        # Fallbacks padrão caso algum cabeçalho não tenha sido localizado
+        if not col_divida: col_divida = 15
+        if not col_pago: col_pago = 16
+        if not col_saldo: col_saldo = 17
+        if not col_juros_resumo: col_juros_resumo = 18
+        if not col_valor_parcela: col_valor_parcela = 9
+        if not col_juros_parcela: col_juros_parcela = 10
+        if not col_valor_total: col_valor_total = 11
+        if not col_vencimento: col_vencimento = 12
+        if not col_amortizacao: col_amortizacao = 13
+
+        # Leitura da caixa de resumo
+        divida_orig = parse_float(ws.cell(4, col_divida).value)
+        pago_acum = parse_float(ws.cell(4, col_pago).value)
+        saldo_dev = parse_float(ws.cell(4, col_saldo).value)
+        juros_tot = parse_float(ws.cell(4, col_juros_resumo).value)
 
         # Ajuste de consistência se saldo devedor ou divida estiverem zerados na célula
         if divida_orig == 0 and ws.max_row > 4:
-            divida_orig = sum(parse_float(ws.cell(r, 9).value) for r in range(4, ws.max_row + 1) if ws.cell(r, 9).value is not None)
+            divida_orig = sum(
+                parse_float(ws.cell(r, col_valor_parcela).value)
+                for r in range(4, ws.max_row + 1)
+                if ws.cell(r, col_vencimento).value is not None and ws.cell(r, col_valor_parcela).value is not None
+            )
         if saldo_dev == 0 and divida_orig > 0:
             saldo_dev = round(divida_orig - pago_acum, 2)
 
         # Determinar data inicial e identificador amigável
         label_acordo = clean_name.replace("PARCELAMENTO", "Parcelamento").strip()
         data_adesao = ""
-        first_venc = ws.cell(4, 12).value
+        first_venc = ws.cell(4, col_vencimento).value
         if first_venc:
             data_adesao = parse_date(first_venc)
             
@@ -207,35 +258,49 @@ def process_workbook(file_path):
                     "saldo_consolidado": parse_float(saldo_col)
                 })
 
-        # Extração do Cronograma das Parcelas (Colunas I a M)
+        # Extração do Cronograma das Parcelas
         parcelas_schedule = []
         parcelas_pagas_count = 0
         acum_pago_check = 0.0
 
         for r in range(4, ws.max_row + 1):
-            v_parc = ws.cell(r, 9).value
-            v_venc = ws.cell(r, 12).value
+            v_parc = ws.cell(r, col_valor_parcela).value
+            v_venc = ws.cell(r, col_vencimento).value
             
             if v_parc is not None and v_venc is not None:
                 val_base = parse_float(v_parc)
-                juros_selic = parse_float(ws.cell(r, 10).value)
-                val_total = parse_float(ws.cell(r, 11).value)
+                juros_selic = parse_float(ws.cell(r, col_juros_parcela).value)
+                val_total = parse_float(ws.cell(r, col_valor_total).value)
                 if val_total == 0:
                     val_total = round(val_base + juros_selic, 2)
                     
                 venc_dt_str = parse_date(v_venc)
-                saldo_remanescente = ws.cell(r, 13).value
+                saldo_remanescente = ws.cell(r, col_amortizacao).value
                 saldo_rem_float = parse_float(saldo_remanescente) if saldo_remanescente is not None else None
 
                 p_num = len(parcelas_schedule) + 1
 
                 is_paga = False
-                if acum_pago_check + val_base <= pago_acum + 1.0:
-                    is_paga = True
-                    acum_pago_check += val_base
-                    parcelas_pagas_count += 1
-                elif juros_selic > 0:
-                    is_paga = True
+                if col_status is not None:
+                    raw_status = ws.cell(r, col_status).value
+                    if raw_status is not None and str(raw_status).strip() != "":
+                        s_norm = str(raw_status).strip().lower()
+                        if any(term in s_norm for term in ["pag", "quit", "liquid"]) or s_norm in ["sim", "ok"]:
+                            is_paga = True
+                        else:
+                            is_paga = False
+                    else:
+                        if acum_pago_check + val_base <= pago_acum + 1.0:
+                            is_paga = True
+                            acum_pago_check += val_base
+                else:
+                    if acum_pago_check + val_base <= pago_acum + 1.0:
+                        is_paga = True
+                        acum_pago_check += val_base
+                    elif juros_selic > 0:
+                        is_paga = True
+
+                if is_paga:
                     parcelas_pagas_count += 1
 
                 parcelas_schedule.append({
