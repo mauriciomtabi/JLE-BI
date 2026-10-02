@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-02 13:00:11
+// Dados SAR JLE Telecom - Gerado em: 2026-10-02 14:14:59
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1101,
-    "generated_at": "2026-10-02 13:00:11",
+    "generated_at": "2026-10-02 14:14:59",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -763,10 +763,10 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 798284.0,
-        "total_previa_medicao": 1337186.68,
-        "total_classe_l": 335789.5,
-        "total_classe_f": 462494.5
+        "total_terceiros": 798837.55,
+        "total_previa_medicao": 1338055.9,
+        "total_classe_l": 336063.55,
+        "total_classe_f": 462774.0
     },
     "medicao": {
         "total_geral": 1461795.81,
@@ -43904,17 +43904,17 @@ window.SAR_DATA = [
   {
     "cod": "RSCLER1092",
     "area_tecnica": "RBTAB",
-    "node": "",
-    "site": "",
+    "node": "RBTAD",
+    "site": "RSPNO22",
     "cidade": "PORTO ALEGRE",
     "condominio": "",
     "endereco": "R CARLOS ESTEVÃO, 680",
     "caixa_mdu": "RBTAB.034.M030",
-    "classe_l": "",
+    "classe_l": "TIAGO FERREIRA",
     "classe_f": "CATIA",
-    "situacao": "SEM LANÇAMENTO",
-    "relatorio_foto": "SEM LANÇAMENTO",
-    "servico": "",
+    "situacao": "189",
+    "relatorio_foto": "189",
+    "servico": "FOI LANÇADO 189 METROS DE CABO DE 24FO. 2 ABERTURA E FECHAMENTO, 1 CX NOVA, 1 DERIVAÇÃO,4 FUSÕES, 1 TESTE OTDR, 3 TESTES.",
     "data_entrada": "2026-09-26",
     "data_entrada_fmt": "26/09/2026",
     "data_inicio": "2026-10-02",
@@ -43950,25 +43950,25 @@ window.SAR_DATA = [
     "prazo": "NO PRAZO",
     "tempo_dias": 4.0,
     "atraso_dias": 0,
-    "total_terceiros": 0.0,
-    "previa_medicao": 0.0,
+    "total_terceiros": 553.55,
+    "previa_medicao": 869.22,
     "valor_medicao": 0.0,
-    "valor_classe_l": 0.0,
-    "valor_classe_f": 0.0,
-    "itens_l_resumo": "-",
-    "itens_f_resumo": "-",
+    "valor_classe_l": 274.05,
+    "valor_classe_f": 279.5,
+    "itens_l_resumo": "2.15 CB ESP: 189m",
+    "itens_f_resumo": "3.11 CX EM: 1 un, 3.15 AB/FE: 2 un, 3.13 FUS/EME: 4 un, 3.14 OTDR: 1 un, 3.12 DER/INS: 1 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
-      "q_215": 0.0,
+      "q_215": 189.0,
       "q_113": 0.0,
-      "q_311": 0.0,
+      "q_311": 1.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 0.0,
-      "q_313": 0.0,
-      "q_314": 0.0,
-      "q_312": 0.0
+      "q_315": 2.0,
+      "q_313": 4.0,
+      "q_314": 1.0,
+      "q_312": 1.0
     }
   },
   {
@@ -75991,9 +75991,9 @@ window.SAR_DATA = [
     "mes_num_medicao": "09",
     "status_medicao_grupo": "MEDIÇÃO ENVIADA",
     "tem_medicao": true,
-    "data_med_cad_wf": null,
-    "data_med_cad_wf_fmt": "-",
-    "num_wf": "",
+    "data_med_cad_wf": "2026-10-02",
+    "data_med_cad_wf_fmt": "02/10/2026",
+    "num_wf": "5718379",
     "status_wf": "",
     "competencia": "SETEMBRO/2026",
     "ano": "2026",
