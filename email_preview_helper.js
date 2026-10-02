@@ -698,9 +698,9 @@
         ];
 
         const dailyProduction = [
-            { data: '02/10/2026', dia: 'Sexta-feira', count: 11, isToday: true, isD1: false },
             { data: '01/10/2026', dia: 'Quinta-feira', count: 14, isToday: false, isD1: true },
-            { data: '30/09/2026', dia: 'Quarta-feira', count: 3, isToday: false, isD1: false }
+            { data: '30/09/2026', dia: 'Quarta-feira', count: 3, isToday: false, isD1: false },
+            { data: '29/09/2026', dia: 'Terça-feira', count: 5, isToday: false, isD1: false }
         ];
 
         const technicians = [
@@ -713,59 +713,26 @@
         let dailyRowsHtml = "";
         dailyProduction.forEach(d => {
             const isD1 = d.isD1;
-            const isToday = d.isToday;
-            const bgRow = isD1 ? 'background: #fff9e6; border-left: 4px solid #f5a623;' : (isToday ? 'background: #f0f7fb;' : '');
+            const bgRow = isD1 ? 'background: #fff9e6; border-left: 4px solid #f5a623;' : '';
             const badge = isD1 
-                ? '<span style="background: #f5a623; color: #ffffff; padding: 3px 8px; border-radius: 12px; font-size: 10px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase;">⭐ DIA ANTERIOR (D-1)</span>'
-                : (isToday ? '<span style="background: rgba(14,165,233,0.15); color: #0284c7; padding: 3px 8px; border-radius: 12px; font-size: 10px; font-weight: 700;">HOJE</span>' : '<span style="color: #94a3b8; font-size: 11px;">Finalizado</span>');
+                ? '<span style="background: #f5a623; color: #ffffff; padding: 3px 8px; border-radius: 12px; font-size: 10px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; white-space: nowrap;">⭐ DIA ANTERIOR (D-1)</span>'
+                : '<span style="color: #94a3b8; font-size: 11px; white-space: nowrap;">Finalizado</span>';
 
             dailyRowsHtml += `
             <tr style="${bgRow}">
-                <td style="padding: 10px 14px; border-bottom: 1px solid #edf2f7; font-size: 13px; font-weight: ${isD1 ? '700' : '600'}; color: ${isD1 ? '#b45309' : '#1e293b'};">
+                <td style="padding: 10px 14px; border-bottom: 1px solid #edf2f7; font-size: 13px; font-weight: ${isD1 ? '700' : '600'}; color: ${isD1 ? '#b45309' : '#1e293b'}; white-space: nowrap;">
                     ${d.data}
                 </td>
-                <td style="padding: 10px 14px; border-bottom: 1px solid #edf2f7; font-size: 12px; color: #64748b;">
+                <td style="padding: 10px 14px; border-bottom: 1px solid #edf2f7; font-size: 12px; color: #64748b; white-space: nowrap;">
                     ${d.dia}
                 </td>
                 <td style="padding: 10px 14px; border-bottom: 1px solid #edf2f7; text-align: center;">
-                    <span style="background: ${isD1 ? '#fef3c7' : 'rgba(0,79,113,0.06)'}; color: ${isD1 ? '#b45309' : '#004f71'}; font-weight: 800; padding: 4px 12px; border-radius: 14px; font-size: 13px; display: inline-block;">
-                        ${d.count} postes
+                    <span style="background: ${isD1 ? '#fef3c7' : 'rgba(0,79,113,0.06)'}; color: ${isD1 ? '#b45309' : '#004f71'}; font-weight: 800; padding: 4px 12px; border-radius: 14px; font-size: 13px; display: inline-block; white-space: nowrap;">
+                        ${d.count}
                     </span>
                 </td>
-                <td style="padding: 10px 14px; border-bottom: 1px solid #edf2f7; text-align: right;">
+                <td style="padding: 10px 14px; border-bottom: 1px solid #edf2f7; text-align: right; white-space: nowrap;">
                     ${badge}
-                </td>
-            </tr>`;
-        });
-
-        let servicesRowsHtml = "";
-        services.forEach(s => {
-            const barColor = s.pct >= 70 ? '#10b981' : (s.pct >= 30 ? '#f59e0b' : '#ef4444');
-            const d1Badge = s.d1 > 0 
-                ? `<span style="background: #fef3c7; color: #b45309; font-weight: 800; padding: 2px 8px; border-radius: 10px; font-size: 11px; border: 1px solid #fde68a;">+${s.d1} em D-1</span>`
-                : `<span style="color: #94a3b8; font-size: 11px;">0</span>`;
-
-            servicesRowsHtml += `
-            <tr>
-                <td style="padding: 12px 14px; border-bottom: 1px solid #edf2f7;">
-                    <div style="font-size: 12.5px; font-weight: 800; color: #0f172a; font-family: monospace; letter-spacing: 0.5px;">${s.site_id}</div>
-                    <div style="font-size: 11px; color: #64748b; margin-top: 2px; max-width: 220px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${s.nome}</div>
-                </td>
-                <td style="padding: 12px 14px; border-bottom: 1px solid #edf2f7; text-align: center;">
-                    <span style="font-weight: 700; font-size: 13px; color: #334155;">${s.concluidos}</span>
-                    <span style="font-size: 11px; color: #94a3b8;"> / ${s.meta}</span>
-                    <div style="width: 100%; height: 5px; background: #e2e8f0; border-radius: 3px; margin-top: 5px; overflow: hidden;">
-                        <div style="width: ${s.pct}%; height: 100%; background: ${barColor}; border-radius: 3px;"></div>
-                    </div>
-                </td>
-                <td style="padding: 12px 14px; border-bottom: 1px solid #edf2f7; text-align: center; font-size: 12px; font-weight: 800; color: ${barColor};">
-                    ${s.pct}%
-                </td>
-                <td style="padding: 12px 14px; border-bottom: 1px solid #edf2f7; text-align: center;">
-                    ${d1Badge}
-                </td>
-                <td style="padding: 12px 14px; border-bottom: 1px solid #edf2f7; font-size: 11.5px; color: #475569;">
-                    ${s.tec}
                 </td>
             </tr>`;
         });
@@ -774,20 +741,20 @@
         technicians.forEach((t, idx) => {
             const medal = idx === 0 ? '🥇 ' : (idx === 1 ? '🥈 ' : (idx === 2 ? '🥉 ' : ''));
             const d1Highlight = t.d1 > 0 
-                ? `<span style="background: #fef3c7; color: #b45309; font-weight: 800; padding: 4px 10px; border-radius: 12px; font-size: 12px; border: 1px solid #fde68a;">+${t.d1} postes</span>`
+                ? `<span style="background: #fef3c7; color: #b45309; font-weight: 800; padding: 4px 10px; border-radius: 12px; font-size: 12px; border: 1px solid #fde68a; white-space: nowrap; display: inline-block;">+${t.d1}</span>`
                 : `<span style="color: #94a3b8; font-size: 12px;">0</span>`;
 
             techRowsHtml += `
             <tr>
-                <td style="padding: 11px 14px; border-bottom: 1px solid #edf2f7; font-size: 13px; font-weight: 600; color: #1e293b;">
+                <td style="padding: 11px 14px; border-bottom: 1px solid #edf2f7; font-size: 13px; font-weight: 600; color: #1e293b; white-space: nowrap;">
                     ${medal}${t.nome}
                 </td>
-                <td style="padding: 11px 14px; border-bottom: 1px solid #edf2f7; text-align: center;">
+                <td style="padding: 11px 14px; border-bottom: 1px solid #edf2f7; text-align: center; white-space: nowrap;">
                     ${d1Highlight}
                 </td>
-                <td style="padding: 11px 14px; border-bottom: 1px solid #edf2f7; text-align: center;">
+                <td style="padding: 11px 14px; border-bottom: 1px solid #edf2f7; text-align: center; white-space: nowrap;">
                     <span style="background: rgba(0,79,113,0.06); color: #004f71; font-weight: 800; padding: 4px 10px; border-radius: 12px; font-size: 12px;">
-                        ${t.total} postes
+                        ${t.total}
                     </span>
                 </td>
                 <td style="padding: 11px 14px; border-bottom: 1px solid #edf2f7; font-size: 11.5px; color: #64748b;">
@@ -902,30 +869,7 @@
                                 </td>
                             </tr>
 
-                            <!-- SEÇÃO 2: ACOMPANHAMENTO POR SERVIÇO (OS) -->
-                            <tr>
-                                <td style="padding: 24px 32px 0;">
-                                    <div style="font-size: 13px; font-weight: 800; color: #004f71; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 10px;">
-                                        📍 Acompanhamento por Serviço (OS TELEMONT)
-                                    </div>
-                                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; border-collapse: separate; border-spacing: 0;">
-                                        <thead>
-                                            <tr style="background: #f1f5f9;">
-                                                <th style="padding: 9px 14px; font-size: 11px; font-weight: 700; color: #475569; text-align: left; text-transform: uppercase;">OS / Serviço</th>
-                                                <th style="padding: 9px 14px; font-size: 11px; font-weight: 700; color: #475569; text-align: center; text-transform: uppercase;">Concluídos / Meta</th>
-                                                <th style="padding: 9px 14px; font-size: 11px; font-weight: 700; color: #475569; text-align: center; text-transform: uppercase;">%</th>
-                                                <th style="padding: 9px 14px; font-size: 11px; font-weight: 700; color: #475569; text-align: center; text-transform: uppercase;">D-1 (Ontem)</th>
-                                                <th style="padding: 9px 14px; font-size: 11px; font-weight: 700; color: #475569; text-align: left; text-transform: uppercase;">Técnicos</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            ${servicesRowsHtml}
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-
-                            <!-- SEÇÃO 3: PRODUTIVIDADE POR TÉCNICO -->
+                            <!-- SEÇÃO 2: PRODUTIVIDADE POR TÉCNICO -->
                             <tr>
                                 <td style="padding: 24px 32px 0;">
                                     <div style="font-size: 13px; font-weight: 800; color: #004f71; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 10px;">

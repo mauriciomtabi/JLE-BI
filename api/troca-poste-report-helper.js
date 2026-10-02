@@ -46,6 +46,30 @@ function getBrazilDateInfo(dateInput = new Date()) {
     };
 }
 
+function getPastBrazilDate(daysAgo = 0) {
+    const nowUtc = new Date();
+    const brOffset = -3 * 60 * 60 * 1000;
+    const brNow = new Date(nowUtc.getTime() + brOffset);
+    
+    const targetDate = new Date(Date.UTC(brNow.getUTCFullYear(), brNow.getUTCMonth(), brNow.getUTCDate() - daysAgo, 12, 0, 0));
+    
+    const y = targetDate.getUTCFullYear();
+    const m = String(targetDate.getUTCMonth() + 1).padStart(2, '0');
+    const d = String(targetDate.getUTCDate()).padStart(2, '0');
+    
+    const daysOfWeek = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+    const dayOfWeek = daysOfWeek[targetDate.getUTCDay()];
+    
+    return {
+        isoDate: `${y}-${m}-${d}`,
+        formattedDate: `${d}/${m}/${y}`,
+        dayOfWeek,
+        year: y,
+        month: m,
+        day: d
+    };
+}
+
 async function loadTrocaPosteDataAsync() {
     try {
         const [users, allObras] = await Promise.all([
@@ -66,7 +90,9 @@ async function loadTrocaPosteDataAsync() {
         });
 
         const nowBr = getBrazilDateInfo();
-        const d1Br = getBrazilDateInfo(new Date(Date.now() - 24 * 60 * 60 * 1000));
+        const d1Br = getPastBrazilDate(1);
+        const d2Br = getPastBrazilDate(2);
+        const d3Br = getPastBrazilDate(3);
 
         if (obras.length === 0) {
             return {
@@ -202,28 +228,19 @@ async function loadTrocaPosteDataAsync() {
             dailyMap[iso].count++;
         });
 
-        if (!dailyMap[d1Br.isoDate]) {
-            dailyMap[d1Br.isoDate] = {
-                isoDate: d1Br.isoDate,
-                formattedDate: d1Br.formattedDate,
-                dayOfWeek: d1Br.dayOfWeek,
-                count: 0,
-                isD1: true,
+        // Daily Production: apenas ontem (D-1) e os 2 dias anteriores a ontem (D-2 e D-3)
+        const targetDays = [d1Br, d2Br, d3Br];
+        const dailyProduction = targetDays.map(tDay => {
+            const existing = dailyMap[tDay.isoDate];
+            return {
+                isoDate: tDay.isoDate,
+                formattedDate: tDay.formattedDate,
+                dayOfWeek: tDay.dayOfWeek,
+                count: existing ? existing.count : 0,
+                isD1: tDay.isoDate === d1Br.isoDate,
                 isToday: false
             };
-        }
-        if (!dailyMap[nowBr.isoDate]) {
-            dailyMap[nowBr.isoDate] = {
-                isoDate: nowBr.isoDate,
-                formattedDate: nowBr.formattedDate,
-                dayOfWeek: nowBr.dayOfWeek,
-                count: 0,
-                isD1: false,
-                isToday: true
-            };
-        }
-
-        const dailyProduction = Object.values(dailyMap).sort((a, b) => b.isoDate.localeCompare(a.isoDate));
+        });
 
         // Technician productivity
         const tecMap = {};
@@ -293,87 +310,53 @@ function buildTrocaPosteEmailHtml(reportName, data) {
     const generatedAt = data.generated_at || 'Agora';
     const BI_URL = process.env.BI_PUBLIC_URL || "https://jle-bi.vercel.app";
 
-    // 1. Linhas de Produção Diária
+    // 1. Linhas de Produção Diária (D-1, D-2, D-3)
     let dailyRowsHtml = "";
-    (data.dailyProduction || []).slice(0, 10).forEach(d => {
+    (data.dailyProduction || []).forEach(d => {
         const isD1 = d.isD1;
-        const isToday = d.isToday;
-        const bgRow = isD1 ? 'background: #fff9e6; border-left: 4px solid #f5a623;' : (isToday ? 'background: #f0f7fb;' : '');
+        const bgRow = isD1 ? 'background: #fff9e6; border-left: 4px solid #f5a623;' : '';
         const badge = isD1 
-            ? '<span style="background: #f5a623; color: #ffffff; padding: 3px 8px; border-radius: 12px; font-size: 10px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase;">⭐ DIA ANTERIOR (D-1)</span>'
-            : (isToday ? '<span style="background: rgba(14,165,233,0.15); color: #0284c7; padding: 3px 8px; border-radius: 12px; font-size: 10px; font-weight: 700;">HOJE</span>' : '<span style="color: #94a3b8; font-size: 11px;">Finalizado</span>');
+            ? '<span style="background: #f5a623; color: #ffffff; padding: 3px 8px; border-radius: 12px; font-size: 10px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; white-space: nowrap;">⭐ DIA ANTERIOR (D-1)</span>'
+            : '<span style="color: #94a3b8; font-size: 11px; white-space: nowrap;">Finalizado</span>';
 
         dailyRowsHtml += `
         <tr style="${bgRow}">
-            <td style="padding: 10px 14px; border-bottom: 1px solid #edf2f7; font-size: 13px; font-weight: ${isD1 ? '700' : '600'}; color: ${isD1 ? '#b45309' : '#1e293b'};">
+            <td style="padding: 10px 14px; border-bottom: 1px solid #edf2f7; font-size: 13px; font-weight: ${isD1 ? '700' : '600'}; color: ${isD1 ? '#b45309' : '#1e293b'}; white-space: nowrap;">
                 ${d.formattedDate}
             </td>
-            <td style="padding: 10px 14px; border-bottom: 1px solid #edf2f7; font-size: 12px; color: #64748b;">
+            <td style="padding: 10px 14px; border-bottom: 1px solid #edf2f7; font-size: 12px; color: #64748b; white-space: nowrap;">
                 ${d.dayOfWeek}
             </td>
             <td style="padding: 10px 14px; border-bottom: 1px solid #edf2f7; text-align: center;">
-                <span style="background: ${isD1 ? '#fef3c7' : 'rgba(0,79,113,0.06)'}; color: ${isD1 ? '#b45309' : '#004f71'}; font-weight: 800; padding: 4px 12px; border-radius: 14px; font-size: 13px; display: inline-block;">
-                    ${d.count} ${d.count === 1 ? 'poste' : 'postes'}
+                <span style="background: ${isD1 ? '#fef3c7' : 'rgba(0,79,113,0.06)'}; color: ${isD1 ? '#b45309' : '#004f71'}; font-weight: 800; padding: 4px 12px; border-radius: 14px; font-size: 13px; display: inline-block; white-space: nowrap;">
+                    ${d.count}
                 </span>
             </td>
-            <td style="padding: 10px 14px; border-bottom: 1px solid #edf2f7; text-align: right;">
+            <td style="padding: 10px 14px; border-bottom: 1px solid #edf2f7; text-align: right; white-space: nowrap;">
                 ${badge}
             </td>
         </tr>`;
     });
 
-    // 2. Linhas de Acompanhamento por Serviço (OS)
-    let servicesRowsHtml = "";
-    (data.services || []).forEach(s => {
-        const barColor = s.percent >= 70 ? '#10b981' : (s.percent >= 30 ? '#f59e0b' : '#ef4444');
-        const d1Badge = s.d1_concluidos > 0 
-            ? `<span style="background: #fef3c7; color: #b45309; font-weight: 800; padding: 2px 8px; border-radius: 10px; font-size: 11px; border: 1px solid #fde68a;">+${s.d1_concluidos} em D-1</span>`
-            : `<span style="color: #94a3b8; font-size: 11px;">0</span>`;
-
-        servicesRowsHtml += `
-        <tr>
-            <td style="padding: 12px 14px; border-bottom: 1px solid #edf2f7;">
-                <div style="font-size: 12.5px; font-weight: 800; color: #0f172a; font-family: monospace; letter-spacing: 0.5px;">${s.site_id}</div>
-                <div style="font-size: 11px; color: #64748b; margin-top: 2px; max-width: 220px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${s.nome}">${s.nome}</div>
-            </td>
-            <td style="padding: 12px 14px; border-bottom: 1px solid #edf2f7; text-align: center;">
-                <span style="font-weight: 700; font-size: 13px; color: #334155;">${s.concluidos}</span>
-                <span style="font-size: 11px; color: #94a3b8;"> / ${s.meta}</span>
-                <div style="width: 100%; height: 5px; background: #e2e8f0; border-radius: 3px; margin-top: 5px; overflow: hidden;">
-                    <div style="width: ${s.percent}%; height: 100%; background: ${barColor}; border-radius: 3px;"></div>
-                </div>
-            </td>
-            <td style="padding: 12px 14px; border-bottom: 1px solid #edf2f7; text-align: center; font-size: 12px; font-weight: 800; color: ${barColor};">
-                ${s.percent}%
-            </td>
-            <td style="padding: 12px 14px; border-bottom: 1px solid #edf2f7; text-align: center;">
-                ${d1Badge}
-            </td>
-            <td style="padding: 12px 14px; border-bottom: 1px solid #edf2f7; font-size: 11.5px; color: #475569;">
-                ${s.tecnicos.length > 0 ? s.tecnicos.join(', ') : '<span style="color:#94a3b8;">Sem técnico</span>'}
-            </td>
-        </tr>`;
-    });
-
-    // 3. Linhas de Produtividade por Técnico
+    // 2. Linhas de Produtividade por Técnico
     let techRowsHtml = "";
     (data.technicians || []).forEach((t, idx) => {
         const medal = idx === 0 ? '🥇 ' : (idx === 1 ? '🥈 ' : (idx === 2 ? '🥉 ' : ''));
         const d1Highlight = t.d1 > 0 
-            ? `<span style="background: #fef3c7; color: #b45309; font-weight: 800; padding: 4px 10px; border-radius: 12px; font-size: 12px; border: 1px solid #fde68a;">+${t.d1} postes</span>`
-            : `<span style="color: #94a3b8; font-size: 12px;">0</span>`;
+            ? `<span style="background: #fef3c7; color: #b45309; font-weight: 800; padding: 4px 10px; border-radius: 12px; font-size: 12px; border: 1px solid #fde68a; white-space: nowrap; display: inline-block;">+${t.d1}</span>`
+            : `<span style="color: #94a3b8; font-size: 12px; white-space: nowrap;">0</span>`;
 
         techRowsHtml += `
         <tr>
-            <td style="padding: 11px 14px; border-bottom: 1px solid #edf2f7; font-size: 13px; font-weight: 600; color: #1e293b;">
+            <td style="padding: 11px 14px; border-bottom: 1px solid #edf2f7; font-size: 13px; font-weight: 600; color: #1e293b; white-space: nowrap;">
                 ${medal}${t.nome}
             </td>
-            <td style="padding: 11px 14px; border-bottom: 1px solid #edf2f7; text-align: center;">
+            <td style="padding: 11px 14px; border-bottom: 1px solid #edf2f7; text-align: center; white-space: nowrap;">
                 ${d1Highlight}
             </td>
-            <td style="padding: 11px 14px; border-bottom: 1px solid #edf2f7; text-align: center;">
-                <span style="background: rgba(0,79,113,0.06); color: #004f71; font-weight: 800; padding: 4px 10px; border-radius: 12px; font-size: 12px;">
-                    ${t.total} postes
+            <td style="padding: 11px 14px; border-bottom: 1px solid #edf2f7; text-align: center; white-space: nowrap;">
+                <span style="background: rgba(0,79,113,0.06); color: #004f71; font-weight: 800; padding: 4px 10px; border-radius: 12px; font-size: 12px; white-space: nowrap; display: inline-block;">
+                    ${t.total}
                 </span>
             </td>
             <td style="padding: 11px 14px; border-bottom: 1px solid #edf2f7; font-size: 11.5px; color: #64748b;">
@@ -494,30 +477,7 @@ function buildTrocaPosteEmailHtml(reportName, data) {
                             </td>
                         </tr>
 
-                        <!-- SEÇÃO 2: ACOMPANHAMENTO POR SERVIÇO (OS) -->
-                        <tr>
-                            <td style="padding: 24px 32px 0;">
-                                <div style="font-size: 13px; font-weight: 800; color: #004f71; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 10px;">
-                                    📍 Acompanhamento por Serviço (OS TELEMONT)
-                                </div>
-                                <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; border-collapse: separate; border-spacing: 0;">
-                                    <thead>
-                                        <tr style="background: #f1f5f9;">
-                                            <th style="padding: 9px 14px; font-size: 11px; font-weight: 700; color: #475569; text-align: left; text-transform: uppercase;">OS / Serviço</th>
-                                            <th style="padding: 9px 14px; font-size: 11px; font-weight: 700; color: #475569; text-align: center; text-transform: uppercase;">Concluídos / Meta</th>
-                                            <th style="padding: 9px 14px; font-size: 11px; font-weight: 700; color: #475569; text-align: center; text-transform: uppercase;">%</th>
-                                            <th style="padding: 9px 14px; font-size: 11px; font-weight: 700; color: #475569; text-align: center; text-transform: uppercase;">D-1 (Ontem)</th>
-                                            <th style="padding: 9px 14px; font-size: 11px; font-weight: 700; color: #475569; text-align: left; text-transform: uppercase;">Técnicos</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        ${servicesRowsHtml}
-                                    </tbody>
-                                </table>
-                            </td>
-                        </tr>
-
-                        <!-- SEÇÃO 3: PRODUTIVIDADE POR TÉCNICO -->
+                        <!-- SEÇÃO 2: PRODUTIVIDADE POR TÉCNICO -->
                         <tr>
                             <td style="padding: 24px 32px 0;">
                                 <div style="font-size: 13px; font-weight: 800; color: #004f71; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 10px;">
