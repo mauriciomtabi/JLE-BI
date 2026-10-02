@@ -65,6 +65,8 @@
         openFinanceiroAccordion();
         populateTecnodrillMonthFilter();
         populateTecnodrillCategoryFilter();
+        const selBanco = document.getElementById('td-filter-banco');
+        if (selBanco) selBanco.value = 'ALL';
         applyTecnodrillFilters();
         initTecnodrillCaixa();
     };
@@ -146,6 +148,7 @@
         const mes = document.getElementById('td-filter-mes')?.value || 'ALL';
         const cat = document.getElementById('td-filter-categoria')?.value || 'ALL';
         const uf = document.getElementById('td-filter-uf')?.value || 'ALL';
+        const banco = document.getElementById('td-filter-banco')?.value || 'ALL';
         const di = document.getElementById('td-filter-data-inicio')?.value || '';
         const df = document.getElementById('td-filter-data-fim')?.value || '';
 
@@ -153,6 +156,7 @@
             if (mes !== 'ALL' && t.competencia !== mes) return false;
             if (cat !== 'ALL' && t.categoria !== cat) return false;
             if (uf !== 'ALL' && t.uf !== uf) return false;
+            if (banco !== 'ALL' && t.banco !== banco) return false;
             if (di && t.data < di) return false;
             if (df && t.data > df) return false;
             if (tdCategoryDrillDown.active && t.categoria !== tdCategoryDrillDown.category) return false;
@@ -279,7 +283,156 @@
                 subComp.innerText = `vs. Mês Ant.: N/D`;
             }
         }
+
+        // --- Cálculo e Renderização dos Cards de Bancos Tecnodrill ---
+        const bancosMapeados = ['Bradesco', 'Sicoob Confiança', 'Sicoob MaxiCrédito'];
+        const filterBanco = document.getElementById('td-filter-banco')?.value || 'ALL';
+        const mesFiltro = document.getElementById('td-filter-mes')?.value || 'ALL';
+        
+        const bankData = [];
+        let totalSaldoBancarioGeral = 0;
+
+        bancosMapeados.forEach(b => {
+            const isFiltered = filterBanco !== 'ALL' && b !== filterBanco;
+            const bankTxs = tdFilteredTransactions.filter(t => t.banco === b);
+            const saldoInicial = isFiltered ? 0 : getSaldoInicialTecnodrillBanco(b, mesFiltro);
+            
+            let bEntradas = 0;
+            let bSaidas = 0;
+            let bTransfRec = 0;
+            let bTransfEnv = 0;
+            
+            if (!isFiltered) {
+                bankTxs.forEach(t => {
+                    if (t.categoria === 'Saldo Inicial') return;
+                    if (t.is_transfer) {
+                        if (t.fluxo === 'Entrada') bTransfRec += t.valor_nominal;
+                        else if (t.fluxo === 'Saída') bTransfEnv += t.valor_nominal;
+                    } else {
+                        if (t.fluxo === 'Entrada') bEntradas += t.valor_nominal;
+                        else if (t.fluxo === 'Saída') bSaidas += t.valor_nominal;
+                    }
+                });
+            }
+            
+            const bSaldoFinal = isFiltered ? 0 : (saldoInicial + bEntradas - bSaidas + bTransfRec - bTransfEnv);
+            if (!isFiltered) {
+                totalSaldoBancarioGeral += bSaldoFinal;
+            }
+            
+            bankData.push({
+                banco: b,
+                saldoInicial,
+                entradas: bEntradas,
+                saidas: bSaidas,
+                transfRec: bTransfRec,
+                transfEnv: bTransfEnv,
+                saldoFinal: bSaldoFinal,
+                isFiltered
+            });
+        });
+
+        renderTecnodrillBankBalancesList(bankData, filterBanco);
+
+        if (subSaldoSobra) {
+            subSaldoSobra.innerHTML = `Saldo Bancário: <strong>${formatCurrency(totalSaldoBancarioGeral)}</strong>`;
+        }
     }
+
+    function getSaldoInicialTecnodrillBanco(banco, mesFiltro) {
+        let targetTxs = tdAllTransactions.filter(t => t.banco === banco);
+        if (mesFiltro !== 'ALL') {
+            targetTxs = targetTxs.filter(t => t.competencia === mesFiltro);
+        }
+        const saldoInicialRow = targetTxs.find(t => t.categoria === 'Saldo Inicial');
+        return saldoInicialRow ? saldoInicialRow.valor_nominal : 0;
+    }
+
+    function renderTecnodrillBankBalancesList(bankData, filterBanco) {
+        const container = document.getElementById('td-banks-balance-list');
+        if (!container) return;
+        container.innerHTML = '';
+        
+        const displayLabels = ['Bradesco', 'Sicoob Confiança', 'Sicoob MaxiCrédito'];
+        const colors = ['#cc0000', '#0a7c59', '#ffb83d'];
+        const badges = [
+            `<img src="assets/logo_bradesco.png" alt="Bradesco" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">`,
+            `<img src="assets/logo_sicoob.png" alt="Sicoob" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">`,
+            `<img src="assets/logo_sicoob.png" alt="Sicoob" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">`
+        ];
+        const badgeStyles = [
+            'background: none; padding: 0; overflow: hidden;',
+            'background: none; padding: 0; overflow: hidden;',
+            'background: none; padding: 0; overflow: hidden;'
+        ];
+        
+        const totalSaldo = bankData.reduce((sum, item) => sum + item.saldoFinal, 0);
+        
+        bankData.forEach((item, idx) => {
+            if (item.isFiltered) return;
+            
+            const pct = totalSaldo > 0 ? (item.saldoFinal / totalSaldo) * 100 : 0;
+            const bancosMapeados = ['Bradesco', 'Sicoob Confiança', 'Sicoob MaxiCrédito'];
+            const isActive = filterBanco === bancosMapeados[idx];
+            
+            const bankItem = document.createElement('div');
+            bankItem.className = 'bank-card-item' + (isActive ? ' active' : '');
+            bankItem.setAttribute('onclick', `toggleTecnodrillBankFilter('${bancosMapeados[idx]}')`);
+            
+            bankItem.innerHTML = `
+                <div class="bank-item-header">
+                    <div class="bank-name-group">
+                        <div class="bank-badge" style="${badgeStyles[idx]}">
+                            ${badges[idx]}
+                        </div>
+                        <span class="bank-name">${displayLabels[idx]}</span>
+                    </div>
+                    <span class="bank-value">${formatCurrency(item.saldoFinal)}</span>
+                </div>
+                <div class="bank-progress-wrapper">
+                    <div class="bank-progress-bar">
+                        <div class="bank-progress-fill" style="width: ${pct.toFixed(1)}%; background-color: ${colors[idx]};"></div>
+                    </div>
+                    <span class="bank-percentage">${pct.toFixed(1)}%</span>
+                </div>
+                
+                <div class="bank-details-grid">
+                    <div class="bank-detail-item" style="grid-column: span 2; border-bottom: 1px dashed var(--border-color); padding-bottom: 4px; margin-bottom: 2px;">
+                        <span>Saldo Inicial:</span>
+                        <strong>${formatCurrency(item.saldoInicial)}</strong>
+                    </div>
+                    <div class="bank-detail-item">
+                        <span>Entradas (+):</span>
+                        <strong class="trend-up">${formatCurrency(item.entradas)}</strong>
+                    </div>
+                    <div class="bank-detail-item">
+                        <span>Tr. Rec. (+):</span>
+                        <strong class="trend-up">${formatCurrency(item.transfRec)}</strong>
+                    </div>
+                    <div class="bank-detail-item">
+                        <span>Saídas (-):</span>
+                        <strong class="trend-down">${formatCurrency(item.saidas)}</strong>
+                    </div>
+                    <div class="bank-detail-item">
+                        <span>Tr. Env. (-):</span>
+                        <strong class="trend-down">${formatCurrency(item.transfEnv)}</strong>
+                    </div>
+                </div>
+            `;
+            container.appendChild(bankItem);
+        });
+    }
+
+    window.toggleTecnodrillBankFilter = function(banco) {
+        const sel = document.getElementById('td-filter-banco');
+        if (!sel) return;
+        if (sel.value === banco) {
+            sel.value = 'ALL';
+        } else {
+            sel.value = banco;
+        }
+        applyTecnodrillFilters();
+    };
 
     // ──────────────────────────────────────────────
     // Gráficos (Mesma lógica e palette visual do JLE)

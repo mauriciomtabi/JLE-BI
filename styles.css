@@ -2130,15 +2130,19 @@ body.sidebar-collapsed .sidebar #user-display-name {
     margin-bottom: 24px;
 }
 
+.banks-grid.td-banks {
+    grid-template-columns: repeat(3, 1fr);
+}
+
 @media (max-width: 1200px) {
-    .banks-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .banks-grid, .banks-grid.td-banks {
+        grid-template-columns: repeat(2, 1fr) !important;
     }
 }
 
 @media (max-width: 600px) {
-    .banks-grid {
-        grid-template-columns: 1fr;
+    .banks-grid, .banks-grid.td-banks {
+        grid-template-columns: 1fr !important;
     }
 }
 

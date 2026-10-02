@@ -315,6 +315,17 @@ try {
         $defaultDate = if ($anoAba -ne "") { "$anoAba-$monthNum-01" } else { "2026-01-01" }
         $lastValidDate = $defaultDate
 
+        # Identificar Instituição / Banco da aba
+        $bancoAba = "Sicoob MaxiCr" + $e_acute + "dito"
+        $nameUpper = $name.ToUpper()
+        if ($nameUpper -like "*BRADESCO*") {
+            $bancoAba = "Bradesco"
+        } elseif ($nameUpper -like "*CONFIA*") {
+            $bancoAba = "Sicoob Confian" + $c_cedilla + "a"
+        } elseif ($nameUpper -like "*MAX*") {
+            $bancoAba = "Sicoob MaxiCr" + $e_acute + "dito"
+        }
+
         $txCount = 0
         for ($r = $headerRowIdx + 1; $r -le $totalRows; $r++) {
             # Entrada / Saida
@@ -381,6 +392,7 @@ try {
                 }
             }
 
+
             # Descricao (coluna "Coluna1" na Tecnodrill)
             $descricao = ""
             foreach ($hk in @("coluna1", "descricao", "detalhamento")) {
@@ -415,7 +427,7 @@ try {
 
             $txObj = [PSCustomObject]@{
                 id              = "$($name.Replace(' ','_'))_$($r)"
-                banco           = "SICOOB"
+                banco           = $bancoAba
                 aba             = $name.Trim()
                 remessa         = "MANUAL"
                 competencia     = $competenciaAba

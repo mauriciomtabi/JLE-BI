@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -465,6 +465,15 @@
                         <option value="N/D">N/D</option>
                     </select>
                 </div>
+                <div class="filter-group" id="td-filter-group-banco">
+                    <label for="td-filter-banco">Instituição / Banco</label>
+                    <select id="td-filter-banco" onchange="applyTecnodrillFilters()">
+                        <option value="ALL">Todos os Bancos</option>
+                        <option value="Bradesco">Bradesco</option>
+                        <option value="Sicoob Confiança">Sicoob Confiança</option>
+                        <option value="Sicoob MaxiCrédito">Sicoob MaxiCrédito</option>
+                    </select>
+                </div>
                 <div class="filter-group" id="td-filter-group-caixa-fluxo" style="display: none;">
                     <label for="td-caixa-filter-fluxo">Tipo de Fluxo</label>
                     <select id="td-caixa-filter-fluxo" onchange="applyTecnodrillCaixaFilters()">
@@ -584,6 +593,11 @@
                             <i class="fa-solid fa-scale-balanced"></i>
                         </div>
                     </div>
+                </div>
+
+                <!-- Seção de Contas Bancárias (Lado a Lado - Tecnodrill) -->
+                <div class="banks-grid td-banks" id="td-banks-balance-list">
+                    <!-- Loaded dynamically -->
                 </div>
 
                 <!-- Charts Row 1 -->
@@ -3936,8 +3950,8 @@
 
     <!-- Carga de Dados Dinâmica -->
     <script src="data.js"></script>
-    <script src="tecnodrill_data.js?v=20260917154336"></script>
-    <script src="tecnodrill_app.js?v=3.00"></script>
+    <script src="tecnodrill_data.js?v=20261002101330"></script>
+    <script src="tecnodrill_app.js?v=3.10"></script>
 
     <script src="veiculos_data.js?v=20261002095216"></script>
     <script src="veiculos_app.js?v=3.43"></script>
