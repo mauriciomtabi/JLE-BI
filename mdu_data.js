@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-10-02 15:00:19
+// Dados MDU Compactados - Gerado em: 2026-10-02 15:07:44
 window.MDU_METADATA = {
-    "generated_at": "2026-10-02 15:00:19",
+    "generated_at": "2026-10-02 15:07:44",
     "total_rows": 5816,
-    "geocoded_new": 1
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -184016,7 +184016,7 @@ window.MDU_DATA = [
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
-        "cod_imovel": "",
+        "cod_imovel": "610472854",
         "area": "BVSAA",
         "node": "",
         "caixa_m": "BVSAA.142.M010",
