@@ -965,6 +965,7 @@
                         <option value="claro">📊 Analítico Claro — Sem Aprovação e Aguardando Pedido</option>
                         <option value="manutencao">🛠️ Manutenção — Resumo de Pendências e Aprovados</option>
                         <option value="tecnodrill">🏭 Tecnodrill — Resumo Financeiro</option>
+                        <option value="troca_poste">⚡ Troca de Postes — TELEMONT (Acompanhamento e Produtividade)</option>
                     </select>
                 </div>
 
@@ -1056,6 +1057,7 @@
                             <button class="preview-type-btn" onclick="switchPreviewReportType('claro')" id="preview-btn-claro">Claro</button>
                             <button class="preview-type-btn" onclick="switchPreviewReportType('manutencao')" id="preview-btn-manutencao">Manutenção</button>
                             <button class="preview-type-btn" onclick="switchPreviewReportType('tecnodrill')" id="preview-btn-tecnodrill">Tecnodrill</button>
+                    <button class="preview-type-btn" onclick="switchPreviewReportType('troca_poste')" id="preview-btn-troca_poste">Troca de Postes</button>
                         </div>
 
                         <!-- Toggle Desktop / Mobile -->
@@ -5606,7 +5608,7 @@
             });
 
             const dayLabels = { MON:'Seg', TUE:'Ter', WED:'Qua', THU:'Qui', FRI:'Sex', SAT:'Sáb', SUN:'Dom' };
-            const typeLabels = { mdu: '📡 MDU', sar: '📦 SAR', claro: '📊 Analítico Claro', manutencao: '🛠️ Manutenção', tecnodrill: '🏭 Tecnodrill' };
+            const typeLabels = { mdu: '📡 MDU', sar: '📦 SAR', claro: '📊 Analítico Claro', manutencao: '🛠️ Manutenção', tecnodrill: '🏭 Tecnodrill', troca_poste: '⚡ Troca de Postes TELEMONT' };
 
             tbody.innerHTML = data.map(r => {
                 const days = (r.schedule_days || []).map(d => dayLabels[d] || d).join(', ');

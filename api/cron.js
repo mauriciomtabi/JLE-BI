@@ -529,7 +529,7 @@ module.exports = async (req, res) => {
                     (reportNameLower.includes('sar') ? 'sar' :
                      reportNameLower.includes('manut') ? 'manutencao' : 
                      reportNameLower.includes('claro') ? 'claro' : 
-                     reportNameLower.includes('tecnodrill') ? 'tecnodrill' : 'mdu');
+                     reportNameLower.includes('tecnodrill') ? 'tecnodrill' : reportNameLower.includes('poste') || reportNameLower.includes('troca') ? 'troca_poste' : 'mdu');
 
                 let emailHtml;
                 let attachments = null;
@@ -554,6 +554,10 @@ module.exports = async (req, res) => {
                     const tecnoData = await tecnoHelper.loadTecnodrillDataAsync();
                     attachments = tecnoHelper.generateExcelAttachments(tecnoData);
                     emailHtml = tecnoHelper.buildTecnodrillEmailHtml(config.report_name || config.report, tecnoData);
+                } else if (reportType === 'troca_poste') {
+                    const posteHelper = require('./troca-poste-report-helper');
+                    const posteData = await posteHelper.loadTrocaPosteDataAsync();
+                    emailHtml = posteHelper.buildTrocaPosteEmailHtml(config.report_name || config.report || 'Troca de Postes TELEMONT', posteData);
                 } else {
                     const mduHelper = require('./mdu-report-helper');
                     const mduData = await mduHelper.loadMduDataAsync();

@@ -17,7 +17,8 @@
         sar: 'Relatório Diário de Operações SAR',
         claro: 'Relatório Diário - Analítico Claro',
         manutencao: 'Relatório Diário - Manutenção de Rede',
-        tecnodrill: 'Relatório Financeiro Tecnodrill'
+        tecnodrill: 'Relatório Financeiro Tecnodrill',
+        troca_poste: 'Troca de Postes TELEMONT'
     };
 
     function formatBRL(val) {
@@ -679,7 +680,293 @@
     // ──────────────────────────────────────────────
     // CONTROLADOR PRINCIPAL DO MODAL DE PREVIEW
     // ──────────────────────────────────────────────
-    function getPreviewHtmlForType(type, reportName) {
+    
+    // ──────────────────────────────────────────────
+    // 5. TROCA DE POSTES TELEMONT PREVIEW
+    // ──────────────────────────────────────────────
+    function generateTrocaPostePreviewHtml(reportName) {
+        const title = reportName || 'Troca de Postes TELEMONT';
+        const nowInfo = getNowFormatted();
+        const d1Formatted = '01/10/2026';
+        const BI_URL = 'https://jle-bi.vercel.app';
+
+        const services = [
+            { site_id: 'RS-POS-0002', nome: 'VTAL CFOA SM AS-80S-36-ROTA CLARO -BRBN-2208', meta: 243, concluidos: 14, d1: 10, pct: 6, tec: 'Giovani Alves' },
+            { site_id: 'RS-POS-0003', nome: 'VITAL CFOA SM-AS-80-S36F0-ROTA CLARO BRBN-2208', meta: 102, concluidos: 8, d1: 0, pct: 8, tec: 'Jefferson Gomes De Oliveira' },
+            { site_id: 'RS-POS-0006', nome: 'VTALCFOA SM-AS80 -S 36FO -ROTA CLARO BRBN-2208', meta: 51, concluidos: 4, d1: 2, pct: 8, tec: 'Albenir Farias' },
+            { site_id: 'RS-POS-0005', nome: 'TROCA DE POSTE - ROTA CLARO', meta: 11, concluidos: 2, d1: 2, pct: 18, tec: 'Rafael Dallasta' }
+        ];
+
+        const dailyProduction = [
+            { data: '02/10/2026', dia: 'Sexta-feira', count: 11, isToday: true, isD1: false },
+            { data: '01/10/2026', dia: 'Quinta-feira', count: 14, isToday: false, isD1: true },
+            { data: '30/09/2026', dia: 'Quarta-feira', count: 3, isToday: false, isD1: false }
+        ];
+
+        const technicians = [
+            { nome: 'Giovani Alves', d1: 10, total: 14, servicos: 'RS-POS-0002' },
+            { nome: 'Albenir Farias', d1: 2, total: 4, servicos: 'RS-POS-0006' },
+            { nome: 'Rafael Dallasta', d1: 2, total: 2, servicos: 'RS-POS-0005' },
+            { nome: 'Jefferson Gomes De Oliveira', d1: 0, total: 8, servicos: 'RS-POS-0003' }
+        ];
+
+        let dailyRowsHtml = "";
+        dailyProduction.forEach(d => {
+            const isD1 = d.isD1;
+            const isToday = d.isToday;
+            const bgRow = isD1 ? 'background: #fff9e6; border-left: 4px solid #f5a623;' : (isToday ? 'background: #f0f7fb;' : '');
+            const badge = isD1 
+                ? '<span style="background: #f5a623; color: #ffffff; padding: 3px 8px; border-radius: 12px; font-size: 10px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase;">⭐ DIA ANTERIOR (D-1)</span>'
+                : (isToday ? '<span style="background: rgba(14,165,233,0.15); color: #0284c7; padding: 3px 8px; border-radius: 12px; font-size: 10px; font-weight: 700;">HOJE</span>' : '<span style="color: #94a3b8; font-size: 11px;">Finalizado</span>');
+
+            dailyRowsHtml += `
+            <tr style="${bgRow}">
+                <td style="padding: 10px 14px; border-bottom: 1px solid #edf2f7; font-size: 13px; font-weight: ${isD1 ? '700' : '600'}; color: ${isD1 ? '#b45309' : '#1e293b'};">
+                    ${d.data}
+                </td>
+                <td style="padding: 10px 14px; border-bottom: 1px solid #edf2f7; font-size: 12px; color: #64748b;">
+                    ${d.dia}
+                </td>
+                <td style="padding: 10px 14px; border-bottom: 1px solid #edf2f7; text-align: center;">
+                    <span style="background: ${isD1 ? '#fef3c7' : 'rgba(0,79,113,0.06)'}; color: ${isD1 ? '#b45309' : '#004f71'}; font-weight: 800; padding: 4px 12px; border-radius: 14px; font-size: 13px; display: inline-block;">
+                        ${d.count} postes
+                    </span>
+                </td>
+                <td style="padding: 10px 14px; border-bottom: 1px solid #edf2f7; text-align: right;">
+                    ${badge}
+                </td>
+            </tr>`;
+        });
+
+        let servicesRowsHtml = "";
+        services.forEach(s => {
+            const barColor = s.pct >= 70 ? '#10b981' : (s.pct >= 30 ? '#f59e0b' : '#ef4444');
+            const d1Badge = s.d1 > 0 
+                ? `<span style="background: #fef3c7; color: #b45309; font-weight: 800; padding: 2px 8px; border-radius: 10px; font-size: 11px; border: 1px solid #fde68a;">+${s.d1} em D-1</span>`
+                : `<span style="color: #94a3b8; font-size: 11px;">0</span>`;
+
+            servicesRowsHtml += `
+            <tr>
+                <td style="padding: 12px 14px; border-bottom: 1px solid #edf2f7;">
+                    <div style="font-size: 12.5px; font-weight: 800; color: #0f172a; font-family: monospace; letter-spacing: 0.5px;">${s.site_id}</div>
+                    <div style="font-size: 11px; color: #64748b; margin-top: 2px; max-width: 220px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${s.nome}</div>
+                </td>
+                <td style="padding: 12px 14px; border-bottom: 1px solid #edf2f7; text-align: center;">
+                    <span style="font-weight: 700; font-size: 13px; color: #334155;">${s.concluidos}</span>
+                    <span style="font-size: 11px; color: #94a3b8;"> / ${s.meta}</span>
+                    <div style="width: 100%; height: 5px; background: #e2e8f0; border-radius: 3px; margin-top: 5px; overflow: hidden;">
+                        <div style="width: ${s.pct}%; height: 100%; background: ${barColor}; border-radius: 3px;"></div>
+                    </div>
+                </td>
+                <td style="padding: 12px 14px; border-bottom: 1px solid #edf2f7; text-align: center; font-size: 12px; font-weight: 800; color: ${barColor};">
+                    ${s.pct}%
+                </td>
+                <td style="padding: 12px 14px; border-bottom: 1px solid #edf2f7; text-align: center;">
+                    ${d1Badge}
+                </td>
+                <td style="padding: 12px 14px; border-bottom: 1px solid #edf2f7; font-size: 11.5px; color: #475569;">
+                    ${s.tec}
+                </td>
+            </tr>`;
+        });
+
+        let techRowsHtml = "";
+        technicians.forEach((t, idx) => {
+            const medal = idx === 0 ? '🥇 ' : (idx === 1 ? '🥈 ' : (idx === 2 ? '🥉 ' : ''));
+            const d1Highlight = t.d1 > 0 
+                ? `<span style="background: #fef3c7; color: #b45309; font-weight: 800; padding: 4px 10px; border-radius: 12px; font-size: 12px; border: 1px solid #fde68a;">+${t.d1} postes</span>`
+                : `<span style="color: #94a3b8; font-size: 12px;">0</span>`;
+
+            techRowsHtml += `
+            <tr>
+                <td style="padding: 11px 14px; border-bottom: 1px solid #edf2f7; font-size: 13px; font-weight: 600; color: #1e293b;">
+                    ${medal}${t.nome}
+                </td>
+                <td style="padding: 11px 14px; border-bottom: 1px solid #edf2f7; text-align: center;">
+                    ${d1Highlight}
+                </td>
+                <td style="padding: 11px 14px; border-bottom: 1px solid #edf2f7; text-align: center;">
+                    <span style="background: rgba(0,79,113,0.06); color: #004f71; font-weight: 800; padding: 4px 10px; border-radius: 12px; font-size: 12px;">
+                        ${t.total} postes
+                    </span>
+                </td>
+                <td style="padding: 11px 14px; border-bottom: 1px solid #edf2f7; font-size: 11.5px; color: #64748b;">
+                    ${t.servicos}
+                </td>
+            </tr>`;
+        });
+
+        return `
+        <!DOCTYPE html>
+        <html lang="pt-BR">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        </head>
+        <body style="margin:0; padding:0; background:#f4f6f9; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f4f6f9; padding: 25px 10px;">
+                <tr>
+                    <td align="center">
+                        <table width="640" cellpadding="0" cellspacing="0" border="0" style="background:#ffffff; border-radius:14px; overflow:hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; max-width: 640px; width: 100%;">
+                            
+                            <!-- HEADER -->
+                            <tr>
+                                <td style="background: #004f71; padding: 28px 32px; border-bottom: 4px solid #f5a623;">
+                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                        <tr>
+                                            <td align="left" valign="middle">
+                                                <div style="font-size: 11px; font-weight: 800; color: #f5a623; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 4px;">
+                                                    JLE TELECOM • RELATÓRIO OPERACIONAL
+                                                </div>
+                                                <h1 style="margin:0; font-size:23px; font-weight:800; color:#ffffff; line-height:1.2;">
+                                                    ⚡ ${title}
+                                                </h1>
+                                                <div style="font-size:12px; color:rgba(255,255,255,0.75); margin-top:6px; font-weight: 500;">
+                                                    Acompanhamento de Produtividade de Campo • Atualizado em: ${nowInfo.fullStr}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <!-- CARDS DE DESTAQUE -->
+                            <tr>
+                                <td style="padding: 24px 32px 10px;">
+                                    
+                                    <!-- CARD GRANDE: DESTAQUE D-1 (DIA ANTERIOR) -->
+                                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 2px solid #f5a623; border-radius: 12px; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(245,166,35,0.12);">
+                                        <tr>
+                                            <td style="padding: 18px 22px; text-align: center;">
+                                                <div style="display: inline-block; background: #f5a623; color: #ffffff; font-size: 10px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; margin-bottom: 6px;">
+                                                    ⭐ DESTAQUE DO DIA ANTERIOR (D-1: ${d1Formatted})
+                                                </div>
+                                                <div style="font-size: 42px; font-weight: 900; color: #92400e; line-height: 1.05; margin: 4px 0;">
+                                                    14
+                                                </div>
+                                                <div style="font-size: 13px; font-weight: 700; color: #78350f;">
+                                                    POSTES FINALIZADOS ONTEM (COM ANTES E DEPOIS)
+                                                </div>
+                                                <div style="font-size: 11px; color: #a16207; margin-top: 4px;">
+                                                    Acompanhamento diário de entrega e produtividade técnica de campo
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <!-- GRID 3 CARDS SECUNDÁRIOS -->
+                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                        <tr>
+                                            <td width="32%" style="background: #f8fafc; border-radius: 10px; border: 1px solid #e2e8f0; border-top: 3px solid #004f71; padding: 14px 10px; text-align: center;">
+                                                <div style="font-size: 10px; color: #64748b; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">TOTAL CONCLUÍDO</div>
+                                                <div style="font-size: 24px; font-weight: 800; color: #004f71; margin-top: 2px;">28</div>
+                                                <div style="font-size: 10.5px; color: #94a3b8; margin-top: 2px;">de 407 meta (7%)</div>
+                                            </td>
+                                            <td width="2%"></td>
+                                            <td width="32%" style="background: #f8fafc; border-radius: 10px; border: 1px solid #e2e8f0; border-top: 3px solid #0ea5e9; padding: 14px 10px; text-align: center;">
+                                                <div style="font-size: 10px; color: #64748b; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">ORDENS DE SERVIÇO</div>
+                                                <div style="font-size: 24px; font-weight: 800; color: #0284c7; margin-top: 2px;">4</div>
+                                                <div style="font-size: 10.5px; color: #94a3b8; margin-top: 2px;">obras mapeadas</div>
+                                            </td>
+                                            <td width="2%"></td>
+                                            <td width="32%" style="background: #f8fafc; border-radius: 10px; border: 1px solid #e2e8f0; border-top: 3px solid #10b981; padding: 14px 10px; text-align: center;">
+                                                <div style="font-size: 10px; color: #64748b; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">TÉCNICOS ATIVOS</div>
+                                                <div style="font-size: 24px; font-weight: 800; color: #059669; margin-top: 2px;">4</div>
+                                                <div style="font-size: 10.5px; color: #94a3b8; margin-top: 2px;">em campo</div>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                </td>
+                            </tr>
+
+                            <!-- SEÇÃO 1: HISTÓRICO DE PRODUÇÃO DIÁRIA -->
+                            <tr>
+                                <td style="padding: 20px 32px 0;">
+                                    <div style="font-size: 13px; font-weight: 800; color: #004f71; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 10px;">
+                                        📅 Produção Diária de Postes Finalizados
+                                    </div>
+                                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; border-collapse: separate; border-spacing: 0;">
+                                        <thead>
+                                            <tr style="background: #f1f5f9;">
+                                                <th style="padding: 9px 14px; font-size: 11px; font-weight: 700; color: #475569; text-align: left; text-transform: uppercase;">Data</th>
+                                                <th style="padding: 9px 14px; font-size: 11px; font-weight: 700; color: #475569; text-align: left; text-transform: uppercase;">Dia</th>
+                                                <th style="padding: 9px 14px; font-size: 11px; font-weight: 700; color: #475569; text-align: center; text-transform: uppercase;">Finalizados</th>
+                                                <th style="padding: 9px 14px; font-size: 11px; font-weight: 700; color: #475569; text-align: right; text-transform: uppercase;">Destaque</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            ${dailyRowsHtml}
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <!-- SEÇÃO 2: ACOMPANHAMENTO POR SERVIÇO (OS) -->
+                            <tr>
+                                <td style="padding: 24px 32px 0;">
+                                    <div style="font-size: 13px; font-weight: 800; color: #004f71; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 10px;">
+                                        📍 Acompanhamento por Serviço (OS TELEMONT)
+                                    </div>
+                                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; border-collapse: separate; border-spacing: 0;">
+                                        <thead>
+                                            <tr style="background: #f1f5f9;">
+                                                <th style="padding: 9px 14px; font-size: 11px; font-weight: 700; color: #475569; text-align: left; text-transform: uppercase;">OS / Serviço</th>
+                                                <th style="padding: 9px 14px; font-size: 11px; font-weight: 700; color: #475569; text-align: center; text-transform: uppercase;">Concluídos / Meta</th>
+                                                <th style="padding: 9px 14px; font-size: 11px; font-weight: 700; color: #475569; text-align: center; text-transform: uppercase;">%</th>
+                                                <th style="padding: 9px 14px; font-size: 11px; font-weight: 700; color: #475569; text-align: center; text-transform: uppercase;">D-1 (Ontem)</th>
+                                                <th style="padding: 9px 14px; font-size: 11px; font-weight: 700; color: #475569; text-align: left; text-transform: uppercase;">Técnicos</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            ${servicesRowsHtml}
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <!-- SEÇÃO 3: PRODUTIVIDADE POR TÉCNICO -->
+                            <tr>
+                                <td style="padding: 24px 32px 0;">
+                                    <div style="font-size: 13px; font-weight: 800; color: #004f71; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 10px;">
+                                        👷 Produtividade Técnica de Campo
+                                    </div>
+                                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; border-collapse: separate; border-spacing: 0;">
+                                        <thead>
+                                            <tr style="background: #f1f5f9;">
+                                                <th style="padding: 9px 14px; font-size: 11px; font-weight: 700; color: #475569; text-align: left; text-transform: uppercase;">Técnico</th>
+                                                <th style="padding: 9px 14px; font-size: 11px; font-weight: 700; color: #475569; text-align: center; text-transform: uppercase;">D-1 (Ontem)</th>
+                                                <th style="padding: 9px 14px; font-size: 11px; font-weight: 700; color: #475569; text-align: center; text-transform: uppercase;">Total Geral</th>
+                                                <th style="padding: 9px 14px; font-size: 11px; font-weight: 700; color: #475569; text-align: left; text-transform: uppercase;">Serviços Atendidos</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            ${techRowsHtml}
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <!-- FOOTER -->
+                            <tr>
+                                <td style="padding: 24px 32px 28px; text-align: center; border-top: 1px solid #edf2f7; margin-top: 20px;">
+                                    <div style="font-size: 11px; color: #94a3b8; line-height: 1.5;">
+                                        Este é um relatório gerado automaticamente pelo sistema de monitoramento técnico da <strong>JLE Telecom</strong>.<br>
+                                        Critério de Conclusão: Postes com registros fotográficos de <strong>Antes</strong> e <strong>Depois</strong> validados.<br>
+                                        © ${new Date().getFullYear()} JLE Telecomunicações. Todos os direitos reservados.
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </body>
+        </html>`;
+    }
+
+function getPreviewHtmlForType(type, reportName) {
         switch ((type || '').toLowerCase()) {
             case 'sar':
                 return generateSarPreviewHtml(reportName);
@@ -690,6 +977,8 @@
                 return generateManutencaoPreviewHtml(reportName);
             case 'tecnodrill':
                 return generateTecnodrillPreviewHtml(reportName);
+            case 'troca_poste':
+                return generateTrocaPostePreviewHtml(reportName);
             case 'mdu':
             default:
                 return generateMduPreviewHtml(reportName);
