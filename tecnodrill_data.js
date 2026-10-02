@@ -1,5 +1,5 @@
 ﻿window.TECNODRILL_DATA = {
-    "generated_at":  "2026-10-01 15:10:28",
+    "generated_at":  "2026-10-02 10:07:48",
     "empresa":  "Tecnodrill",
     "categories_origin":  {
                               "entradas":  [
@@ -107,7 +107,7 @@
     "transactions":  [
                          {
                              "id":  "JAN_2026_TECNODRILL_11",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JAN_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JANEIRO/2026",
@@ -123,7 +123,7 @@
                          },
                          {
                              "id":  "JAN_2026_TECNODRILL_12",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JAN_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JANEIRO/2026",
@@ -139,7 +139,7 @@
                          },
                          {
                              "id":  "JAN_2026_TECNODRILL_13",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JAN_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JANEIRO/2026",
@@ -155,7 +155,7 @@
                          },
                          {
                              "id":  "JAN_2026_TECNODRILL_14",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JAN_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JANEIRO/2026",
@@ -171,7 +171,7 @@
                          },
                          {
                              "id":  "JAN_2026_TECNODRILL_15",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JAN_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JANEIRO/2026",
@@ -187,7 +187,7 @@
                          },
                          {
                              "id":  "JAN_2026_TECNODRILL_16",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JAN_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JANEIRO/2026",
@@ -203,7 +203,7 @@
                          },
                          {
                              "id":  "JAN_2026_TECNODRILL_17",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JAN_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JANEIRO/2026",
@@ -219,7 +219,7 @@
                          },
                          {
                              "id":  "JAN_2026_TECNODRILL_18",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JAN_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JANEIRO/2026",
@@ -235,7 +235,7 @@
                          },
                          {
                              "id":  "JAN_2026_TECNODRILL_19",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JAN_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JANEIRO/2026",
@@ -251,7 +251,7 @@
                          },
                          {
                              "id":  "JAN_2026_TECNODRILL_20",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JAN_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JANEIRO/2026",
@@ -267,7 +267,7 @@
                          },
                          {
                              "id":  "JAN_2026_TECNODRILL_21",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JAN_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JANEIRO/2026",
@@ -283,7 +283,7 @@
                          },
                          {
                              "id":  "JAN_2026_TECNODRILL_22",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JAN_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JANEIRO/2026",
@@ -299,7 +299,7 @@
                          },
                          {
                              "id":  "JAN_2026_TECNODRILL_23",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JAN_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JANEIRO/2026",
@@ -315,7 +315,7 @@
                          },
                          {
                              "id":  "JAN_2026_TECNODRILL_24",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JAN_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JANEIRO/2026",
@@ -331,7 +331,7 @@
                          },
                          {
                              "id":  "JAN_2026_TECNODRILL_25",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JAN_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JANEIRO/2026",
@@ -347,7 +347,7 @@
                          },
                          {
                              "id":  "FEV_2026_TECNODRILL_11",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "FEV_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "FEVEREIRO/2026",
@@ -363,7 +363,7 @@
                          },
                          {
                              "id":  "FEV_2026_TECNODRILL_12",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "FEV_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "FEVEREIRO/2026",
@@ -379,7 +379,7 @@
                          },
                          {
                              "id":  "FEV_2026_TECNODRILL_13",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "FEV_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "FEVEREIRO/2026",
@@ -395,7 +395,7 @@
                          },
                          {
                              "id":  "FEV_2026_TECNODRILL_14",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "FEV_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "FEVEREIRO/2026",
@@ -411,7 +411,7 @@
                          },
                          {
                              "id":  "FEV_2026_TECNODRILL_15",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "FEV_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "FEVEREIRO/2026",
@@ -427,7 +427,7 @@
                          },
                          {
                              "id":  "FEV_2026_TECNODRILL_16",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "FEV_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "FEVEREIRO/2026",
@@ -443,7 +443,7 @@
                          },
                          {
                              "id":  "FEV_2026_TECNODRILL_17",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "FEV_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "FEVEREIRO/2026",
@@ -459,7 +459,7 @@
                          },
                          {
                              "id":  "FEV_2026_TECNODRILL_18",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "FEV_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "FEVEREIRO/2026",
@@ -475,7 +475,7 @@
                          },
                          {
                              "id":  "FEV_2026_TECNODRILL_19",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "FEV_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "FEVEREIRO/2026",
@@ -491,7 +491,7 @@
                          },
                          {
                              "id":  "FEV_2026_TECNODRILL_20",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "FEV_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "FEVEREIRO/2026",
@@ -507,7 +507,7 @@
                          },
                          {
                              "id":  "FEV_2026_TECNODRILL_21",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "FEV_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "FEVEREIRO/2026",
@@ -523,7 +523,7 @@
                          },
                          {
                              "id":  "FEV_2026_TECNODRILL_22",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "FEV_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "FEVEREIRO/2026",
@@ -539,7 +539,7 @@
                          },
                          {
                              "id":  "FEV_2026_TECNODRILL_23",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "FEV_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "FEVEREIRO/2026",
@@ -555,7 +555,7 @@
                          },
                          {
                              "id":  "FEV_2026_TECNODRILL_24",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "FEV_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "FEVEREIRO/2026",
@@ -571,7 +571,7 @@
                          },
                          {
                              "id":  "FEV_2026_TECNODRILL_25",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "FEV_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "FEVEREIRO/2026",
@@ -587,7 +587,7 @@
                          },
                          {
                              "id":  "FEV_2026_TECNODRILL_26",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "FEV_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "FEVEREIRO/2026",
@@ -603,7 +603,7 @@
                          },
                          {
                              "id":  "FEV_2026_TECNODRILL_27",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "FEV_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "FEVEREIRO/2026",
@@ -619,7 +619,7 @@
                          },
                          {
                              "id":  "FEV_2026_TECNODRILL_28",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "FEV_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "FEVEREIRO/2026",
@@ -635,7 +635,7 @@
                          },
                          {
                              "id":  "FEV_2026_TECNODRILL_29",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "FEV_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "FEVEREIRO/2026",
@@ -651,7 +651,7 @@
                          },
                          {
                              "id":  "FEV_2026_TECNODRILL_30",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "FEV_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "FEVEREIRO/2026",
@@ -667,7 +667,7 @@
                          },
                          {
                              "id":  "FEV_2026_TECNODRILL_31",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "FEV_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "FEVEREIRO/2026",
@@ -683,7 +683,7 @@
                          },
                          {
                              "id":  "FEV_2026_TECNODRILL_32",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "FEV_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "FEVEREIRO/2026",
@@ -699,7 +699,7 @@
                          },
                          {
                              "id":  "FEV_2026_TECNODRILL_33",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "FEV_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "FEVEREIRO/2026",
@@ -715,7 +715,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_11",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -731,7 +731,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_12",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -747,7 +747,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_13",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -763,7 +763,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_14",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -779,7 +779,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_15",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -795,7 +795,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_16",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -811,7 +811,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_17",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -827,7 +827,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_18",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -843,7 +843,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_19",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -859,7 +859,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_20",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -875,7 +875,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_21",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -891,7 +891,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_22",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -907,7 +907,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_23",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -923,7 +923,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_24",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -939,7 +939,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_25",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -955,7 +955,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_26",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -971,7 +971,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_27",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -987,7 +987,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_28",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1003,7 +1003,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_29",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1019,7 +1019,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_30",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1035,7 +1035,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_31",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1051,7 +1051,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_32",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1067,7 +1067,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_33",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1083,7 +1083,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_34",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1099,7 +1099,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_35",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1115,7 +1115,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_36",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1131,7 +1131,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_37",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1147,7 +1147,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_38",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1163,7 +1163,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_39",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1179,7 +1179,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_40",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1195,7 +1195,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_41",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1211,7 +1211,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_42",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1227,7 +1227,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_43",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1243,7 +1243,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_44",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1259,7 +1259,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_45",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1275,7 +1275,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_46",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1291,7 +1291,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_47",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1307,7 +1307,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_48",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1323,7 +1323,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_49",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1339,7 +1339,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_50",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1355,7 +1355,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_51",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1371,7 +1371,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_52",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1387,7 +1387,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_53",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1403,7 +1403,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_54",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1419,7 +1419,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_55",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1435,7 +1435,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_56",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1451,7 +1451,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_57",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1467,7 +1467,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_58",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1483,7 +1483,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_59",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1499,7 +1499,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_60",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1515,7 +1515,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_61",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1531,7 +1531,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_62",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1547,7 +1547,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_63",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1563,7 +1563,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_64",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1579,7 +1579,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_65",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1595,7 +1595,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_66",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1611,7 +1611,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_67",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1627,7 +1627,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_68",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1643,7 +1643,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_69",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1659,7 +1659,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_70",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1675,7 +1675,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_71",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1691,7 +1691,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_72",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1707,7 +1707,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_73",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1723,7 +1723,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_74",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1739,7 +1739,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_75",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1755,7 +1755,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_76",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1771,7 +1771,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_77",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1787,7 +1787,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_78",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1803,7 +1803,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_79",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1819,7 +1819,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_80",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1835,7 +1835,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_81",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1851,7 +1851,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_82",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1867,7 +1867,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_83",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1883,7 +1883,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_84",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1899,7 +1899,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_85",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1915,7 +1915,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_86",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1931,7 +1931,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_87",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1947,7 +1947,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_88",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1963,7 +1963,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_89",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1979,7 +1979,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_90",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -1995,7 +1995,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_91",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2011,7 +2011,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_92",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2027,7 +2027,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_93",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2043,7 +2043,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_94",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2059,7 +2059,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_95",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2075,7 +2075,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_96",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2091,7 +2091,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_97",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2107,7 +2107,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_98",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2123,7 +2123,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_99",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2139,7 +2139,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_100",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2155,7 +2155,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_101",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2171,7 +2171,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_102",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2187,7 +2187,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_103",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2203,7 +2203,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_104",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2219,7 +2219,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_105",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2235,7 +2235,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_106",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2251,7 +2251,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_107",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2267,7 +2267,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_108",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2283,7 +2283,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_109",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2299,7 +2299,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_110",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2315,7 +2315,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_111",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2331,7 +2331,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_112",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2347,7 +2347,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_113",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2363,7 +2363,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_114",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2379,7 +2379,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_115",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2395,7 +2395,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_116",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2411,7 +2411,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_117",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2427,7 +2427,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_118",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2443,7 +2443,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_119",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2459,7 +2459,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_120",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2475,7 +2475,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_121",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2491,7 +2491,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_122",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2507,7 +2507,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_123",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2523,7 +2523,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_124",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2539,7 +2539,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_125",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2555,7 +2555,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_126",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2571,7 +2571,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_127",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2587,7 +2587,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_128",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2603,7 +2603,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_129",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2619,7 +2619,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_130",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2635,7 +2635,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_131",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2651,7 +2651,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_132",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2667,7 +2667,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_133",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2683,7 +2683,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_134",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2699,7 +2699,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_135",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2715,7 +2715,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_136",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2731,7 +2731,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_137",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2747,7 +2747,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_138",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2763,7 +2763,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_139",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2779,7 +2779,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_140",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2795,7 +2795,7 @@
                          },
                          {
                              "id":  "MAR_2026_TECNODRILL_141",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAR_2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MARÇO/2026",
@@ -2811,7 +2811,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_11",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -2827,7 +2827,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_12",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -2843,7 +2843,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_13",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -2859,7 +2859,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_14",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -2875,7 +2875,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_15",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -2891,7 +2891,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_16",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -2907,7 +2907,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_17",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -2923,7 +2923,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_18",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -2939,7 +2939,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_19",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -2955,7 +2955,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_20",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -2971,7 +2971,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_21",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -2987,7 +2987,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_22",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3003,7 +3003,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_23",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3019,7 +3019,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_24",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3035,7 +3035,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_25",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3051,7 +3051,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_26",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3067,7 +3067,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_27",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3083,7 +3083,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_28",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3099,7 +3099,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_29",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3115,7 +3115,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_30",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3131,7 +3131,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_31",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3147,7 +3147,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_32",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3163,7 +3163,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_33",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3179,7 +3179,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_34",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3195,7 +3195,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_35",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3211,7 +3211,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_36",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3227,7 +3227,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_37",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3243,7 +3243,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_38",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3259,7 +3259,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_39",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3275,7 +3275,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_40",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3291,7 +3291,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_41",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3307,7 +3307,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_42",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3323,7 +3323,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_43",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3339,7 +3339,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_44",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3355,7 +3355,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_45",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3371,7 +3371,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_46",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3387,7 +3387,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_47",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3403,7 +3403,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_48",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3419,7 +3419,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_49",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3435,7 +3435,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_50",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3451,7 +3451,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_51",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3467,7 +3467,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_52",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3483,7 +3483,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_53",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3499,7 +3499,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_54",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3515,7 +3515,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_55",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3531,7 +3531,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_56",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3547,7 +3547,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_57",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3563,7 +3563,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_58",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3579,7 +3579,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_59",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3595,7 +3595,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_60",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3611,7 +3611,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_61",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3627,7 +3627,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_62",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3643,7 +3643,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_63",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3659,7 +3659,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_64",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3675,7 +3675,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_65",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3691,7 +3691,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_66",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3707,7 +3707,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_67",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3723,7 +3723,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_68",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3739,7 +3739,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_69",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3755,7 +3755,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_70",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3771,7 +3771,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_71",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3787,7 +3787,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_72",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3803,7 +3803,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_73",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3819,7 +3819,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_74",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3835,7 +3835,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_75",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3851,7 +3851,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_76",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3867,7 +3867,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_77",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3883,7 +3883,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_78",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3899,7 +3899,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_79",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3915,7 +3915,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_80",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3931,7 +3931,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_81",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3947,7 +3947,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_82",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3963,7 +3963,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_83",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3979,7 +3979,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_84",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -3995,7 +3995,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_85",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4011,7 +4011,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_86",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4027,7 +4027,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_87",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4043,7 +4043,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_88",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4059,7 +4059,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_89",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4075,7 +4075,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_90",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4091,7 +4091,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_91",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4107,7 +4107,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_92",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4123,7 +4123,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_93",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4139,7 +4139,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_94",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4155,7 +4155,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_95",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4171,7 +4171,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_96",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4187,7 +4187,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_97",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4203,7 +4203,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_98",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4219,7 +4219,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_99",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4235,7 +4235,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_100",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4251,7 +4251,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_101",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4267,7 +4267,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_102",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4283,7 +4283,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_103",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4299,7 +4299,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_104",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4315,7 +4315,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_105",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4331,7 +4331,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_106",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4347,7 +4347,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_107",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4363,7 +4363,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_108",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4379,7 +4379,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_109",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4395,7 +4395,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_110",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4411,7 +4411,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_111",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4427,7 +4427,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_112",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4443,7 +4443,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_113",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4459,7 +4459,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_114",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4475,7 +4475,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_115",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4491,7 +4491,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_116",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4507,7 +4507,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_117",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4523,7 +4523,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_118",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4539,7 +4539,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_119",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4555,7 +4555,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_120",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4571,7 +4571,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_121",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4587,7 +4587,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_122",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4603,7 +4603,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_123",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4619,7 +4619,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_124",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4635,7 +4635,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_125",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4651,7 +4651,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_126",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4667,7 +4667,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_127",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4683,7 +4683,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_128",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4699,7 +4699,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_129",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4715,7 +4715,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_130",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4731,7 +4731,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_131",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4747,7 +4747,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_132",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4763,7 +4763,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_133",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4779,7 +4779,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_134",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4795,7 +4795,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_135",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4811,7 +4811,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_136",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4827,7 +4827,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_137",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4843,7 +4843,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_138",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4859,7 +4859,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_139",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4875,7 +4875,7 @@
                          },
                          {
                              "id":  "ABR__2026_TECNODRILL_140",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "ABR _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "ABRIL/2026",
@@ -4891,7 +4891,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_11",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -4907,7 +4907,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_12",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -4923,7 +4923,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_13",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -4939,7 +4939,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_14",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -4955,7 +4955,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_15",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -4971,7 +4971,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_16",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -4987,7 +4987,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_17",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5003,7 +5003,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_18",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5019,7 +5019,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_19",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5035,7 +5035,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_20",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5051,7 +5051,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_21",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5067,7 +5067,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_22",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5083,7 +5083,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_23",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5099,7 +5099,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_24",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5115,7 +5115,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_25",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5131,7 +5131,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_26",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5147,7 +5147,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_27",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5163,7 +5163,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_28",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5179,7 +5179,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_29",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5195,7 +5195,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_30",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5211,7 +5211,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_31",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5227,7 +5227,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_32",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5243,7 +5243,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_33",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5259,7 +5259,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_34",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5275,7 +5275,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_35",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5291,7 +5291,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_36",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5307,7 +5307,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_37",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5323,7 +5323,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_38",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5339,7 +5339,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_39",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5355,7 +5355,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_40",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5371,7 +5371,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_41",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5387,7 +5387,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_42",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5403,7 +5403,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_43",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5419,7 +5419,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_44",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5435,7 +5435,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_45",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5451,7 +5451,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_46",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5467,7 +5467,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_47",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5483,7 +5483,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_48",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5499,7 +5499,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_49",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5515,7 +5515,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_50",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5531,7 +5531,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_51",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5547,7 +5547,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_52",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5563,7 +5563,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_53",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5579,7 +5579,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_54",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5595,7 +5595,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_55",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5611,7 +5611,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_56",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5627,7 +5627,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_57",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5643,7 +5643,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_58",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5659,7 +5659,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_59",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5675,7 +5675,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_60",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5691,7 +5691,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_61",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5707,7 +5707,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_62",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5723,7 +5723,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_63",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5739,7 +5739,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_64",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5755,7 +5755,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_65",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5771,7 +5771,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_66",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5787,7 +5787,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_67",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5803,7 +5803,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_68",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5819,7 +5819,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_69",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5835,7 +5835,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_70",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5851,7 +5851,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_71",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5867,7 +5867,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_72",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5883,7 +5883,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_73",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5899,7 +5899,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_74",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5915,7 +5915,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_75",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5931,7 +5931,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_76",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5947,7 +5947,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_77",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5963,7 +5963,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_78",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5979,7 +5979,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_79",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -5995,7 +5995,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_80",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6011,7 +6011,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_81",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6027,7 +6027,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_82",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6043,7 +6043,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_83",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6059,7 +6059,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_84",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6075,7 +6075,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_85",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6091,7 +6091,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_86",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6107,7 +6107,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_87",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6123,7 +6123,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_88",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6139,7 +6139,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_89",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6155,7 +6155,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_90",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6171,7 +6171,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_91",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6187,7 +6187,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_92",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6203,7 +6203,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_93",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6219,7 +6219,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_94",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6235,7 +6235,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_95",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6251,7 +6251,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_96",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6267,7 +6267,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_97",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6283,7 +6283,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_98",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6299,7 +6299,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_99",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6315,7 +6315,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_100",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6331,7 +6331,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_101",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6347,7 +6347,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_102",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6363,7 +6363,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_103",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6379,7 +6379,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_104",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6395,7 +6395,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_105",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6411,7 +6411,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_106",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6427,7 +6427,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_107",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6443,7 +6443,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_108",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6459,7 +6459,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_109",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6475,7 +6475,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_110",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6491,7 +6491,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_111",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6507,7 +6507,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_112",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6523,7 +6523,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_113",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6539,7 +6539,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_114",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6555,7 +6555,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_115",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6571,7 +6571,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_116",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6587,7 +6587,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_117",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6603,7 +6603,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_118",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6619,7 +6619,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_119",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6635,7 +6635,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_120",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6651,7 +6651,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_121",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6667,7 +6667,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_122",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6683,7 +6683,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_123",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6699,7 +6699,7 @@
                          },
                          {
                              "id":  "MAI__2026_TECNODRILL_124",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "MAI _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "MAIO/2026",
@@ -6715,7 +6715,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_11",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -6731,7 +6731,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_12",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -6747,7 +6747,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_13",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -6763,7 +6763,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_14",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -6779,7 +6779,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_15",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -6795,7 +6795,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_16",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -6811,7 +6811,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_17",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -6827,7 +6827,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_18",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -6843,7 +6843,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_19",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -6859,7 +6859,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_20",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -6875,7 +6875,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_21",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -6891,7 +6891,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_22",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -6907,7 +6907,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_23",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -6923,7 +6923,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_24",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -6939,7 +6939,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_25",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -6955,7 +6955,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_26",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -6971,7 +6971,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_27",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -6987,7 +6987,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_28",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7003,7 +7003,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_29",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7019,7 +7019,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_30",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7035,7 +7035,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_31",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7051,7 +7051,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_32",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7067,7 +7067,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_33",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7083,7 +7083,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_34",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7099,7 +7099,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_35",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7115,7 +7115,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_36",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7131,7 +7131,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_37",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7147,7 +7147,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_38",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7163,7 +7163,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_39",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7179,7 +7179,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_40",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7195,7 +7195,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_41",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7211,7 +7211,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_42",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7227,7 +7227,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_43",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7243,7 +7243,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_44",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7259,7 +7259,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_45",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7275,7 +7275,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_46",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7291,7 +7291,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_47",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7307,7 +7307,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_48",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7323,7 +7323,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_49",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7339,7 +7339,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_50",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7355,7 +7355,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_51",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7371,7 +7371,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_52",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7387,7 +7387,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_53",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7403,7 +7403,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_54",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7419,7 +7419,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_55",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7435,7 +7435,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_56",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7451,7 +7451,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_57",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7467,7 +7467,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_58",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7483,7 +7483,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_59",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7499,7 +7499,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_60",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7515,7 +7515,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_61",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7531,7 +7531,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_62",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7547,7 +7547,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_63",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7563,7 +7563,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_64",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7579,7 +7579,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_65",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7595,7 +7595,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_66",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7611,7 +7611,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_67",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7627,7 +7627,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_68",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7643,7 +7643,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_69",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7659,7 +7659,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_70",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7675,7 +7675,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_71",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7691,7 +7691,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_72",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7707,7 +7707,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_73",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7723,7 +7723,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_74",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7739,7 +7739,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_75",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7755,7 +7755,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_76",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7771,7 +7771,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_77",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7787,7 +7787,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_78",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7803,7 +7803,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_79",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7819,7 +7819,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_80",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7835,7 +7835,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_81",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7851,7 +7851,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_82",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7867,7 +7867,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_83",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7883,7 +7883,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_84",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7899,7 +7899,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_85",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7915,7 +7915,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_86",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7931,7 +7931,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_87",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7947,7 +7947,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_88",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7963,7 +7963,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_89",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7979,7 +7979,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_90",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -7995,7 +7995,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_91",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8011,7 +8011,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_92",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8027,7 +8027,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_93",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8043,7 +8043,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_94",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8059,7 +8059,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_95",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8075,7 +8075,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_96",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8091,7 +8091,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_97",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8107,7 +8107,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_98",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8123,7 +8123,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_99",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8139,7 +8139,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_100",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8155,7 +8155,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_101",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8171,7 +8171,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_102",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8187,7 +8187,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_103",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8203,7 +8203,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_104",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8219,7 +8219,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_105",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8235,7 +8235,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_106",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8251,7 +8251,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_107",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8267,7 +8267,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_108",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8283,7 +8283,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_109",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8299,7 +8299,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_110",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8315,7 +8315,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_111",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8331,7 +8331,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_112",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8347,7 +8347,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_113",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8363,7 +8363,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_114",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8379,7 +8379,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_115",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8395,7 +8395,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_116",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8411,7 +8411,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_117",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8427,7 +8427,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_118",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8443,7 +8443,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_119",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8459,7 +8459,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_120",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8475,7 +8475,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_121",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8491,7 +8491,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_122",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8507,7 +8507,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_123",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8523,7 +8523,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_124",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8539,7 +8539,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_125",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8555,7 +8555,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_126",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8571,7 +8571,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_127",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8587,7 +8587,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_128",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8603,7 +8603,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_129",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8619,7 +8619,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_130",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8635,7 +8635,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_131",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8651,7 +8651,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_132",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8667,7 +8667,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_133",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8683,7 +8683,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_134",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8699,7 +8699,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_135",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8715,7 +8715,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_136",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8731,7 +8731,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_137",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8747,7 +8747,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_138",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8763,7 +8763,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_139",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8779,7 +8779,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_140",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8795,7 +8795,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_141",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8811,7 +8811,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_142",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8827,7 +8827,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_143",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8843,7 +8843,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_144",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8859,7 +8859,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_145",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8875,7 +8875,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_146",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8891,7 +8891,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_147",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8907,7 +8907,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_148",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8923,7 +8923,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_149",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8939,7 +8939,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_150",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8955,7 +8955,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_151",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8971,7 +8971,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_152",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -8987,7 +8987,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_153",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9003,7 +9003,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_154",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9019,7 +9019,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_155",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9035,7 +9035,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_156",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9051,7 +9051,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_157",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9067,7 +9067,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_158",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9083,7 +9083,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_159",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9099,7 +9099,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_160",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9115,7 +9115,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_161",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9131,7 +9131,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_162",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9147,7 +9147,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_163",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9163,7 +9163,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_164",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9179,7 +9179,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_165",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9195,7 +9195,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_166",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9211,7 +9211,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_167",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9227,7 +9227,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_168",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9243,7 +9243,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_169",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9259,7 +9259,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_170",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9275,7 +9275,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_171",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9291,7 +9291,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_172",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9307,7 +9307,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_173",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9323,7 +9323,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_174",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9339,7 +9339,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_175",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9355,7 +9355,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_176",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9371,7 +9371,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_177",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9387,7 +9387,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_178",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9403,7 +9403,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_179",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9419,7 +9419,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_180",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9435,7 +9435,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_181",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9451,7 +9451,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_182",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9467,7 +9467,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_183",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9483,7 +9483,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_184",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9499,7 +9499,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_185",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9515,7 +9515,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_186",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9531,7 +9531,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_187",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9547,7 +9547,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_188",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9563,7 +9563,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_189",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9579,7 +9579,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_190",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9595,7 +9595,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_191",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9611,7 +9611,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_192",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9627,7 +9627,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_193",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9643,7 +9643,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_194",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9659,7 +9659,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_195",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9675,7 +9675,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_196",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9691,7 +9691,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_197",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9707,7 +9707,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_198",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9723,7 +9723,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_199",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9739,7 +9739,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_200",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9755,7 +9755,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_201",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9771,7 +9771,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_202",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9787,7 +9787,7 @@
                          },
                          {
                              "id":  "JUN__2026_TECNODRILL_203",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUN _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JUNHO/2026",
@@ -9803,7 +9803,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_11",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -9819,7 +9819,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_12",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -9835,7 +9835,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_13",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -9851,7 +9851,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_14",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -9867,7 +9867,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_15",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -9883,7 +9883,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_16",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -9899,7 +9899,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_17",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -9915,7 +9915,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_18",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -9931,7 +9931,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_19",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -9947,7 +9947,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_20",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -9963,7 +9963,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_21",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -9979,7 +9979,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_22",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -9995,7 +9995,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_23",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10011,7 +10011,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_24",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10027,7 +10027,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_25",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10043,7 +10043,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_26",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10059,7 +10059,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_27",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10075,7 +10075,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_28",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10091,7 +10091,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_29",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10107,7 +10107,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_30",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10123,7 +10123,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_31",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10139,7 +10139,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_32",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10155,7 +10155,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_33",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10171,7 +10171,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_34",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10187,7 +10187,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_35",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10203,7 +10203,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_36",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10219,7 +10219,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_37",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10235,7 +10235,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_38",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10251,7 +10251,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_39",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10267,7 +10267,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_40",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10283,7 +10283,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_41",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10299,7 +10299,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_42",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10315,7 +10315,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_43",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10331,7 +10331,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_44",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10347,7 +10347,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_45",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10363,7 +10363,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_46",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10379,7 +10379,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_47",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10395,7 +10395,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_48",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10411,7 +10411,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_49",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10427,7 +10427,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_50",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10443,7 +10443,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_51",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10459,7 +10459,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_52",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10475,7 +10475,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_53",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10491,7 +10491,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_54",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10507,7 +10507,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_55",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10523,7 +10523,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_56",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10539,7 +10539,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_57",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10555,7 +10555,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_58",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10571,7 +10571,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_59",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10587,7 +10587,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_60",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10603,7 +10603,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_61",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10619,7 +10619,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_62",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10635,7 +10635,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_63",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10651,7 +10651,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_64",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10667,7 +10667,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_65",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10683,7 +10683,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_66",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10699,7 +10699,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_67",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10715,7 +10715,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_68",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10731,7 +10731,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_69",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10747,7 +10747,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_70",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10763,7 +10763,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_71",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10779,7 +10779,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_72",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10795,7 +10795,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_73",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10811,7 +10811,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_74",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10827,7 +10827,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_75",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10843,7 +10843,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_76",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10859,7 +10859,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_77",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10875,7 +10875,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_78",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10891,7 +10891,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_79",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10907,7 +10907,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_80",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10923,7 +10923,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_81",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10939,7 +10939,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_82",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10955,7 +10955,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_83",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10971,7 +10971,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_84",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -10987,7 +10987,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_85",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11003,7 +11003,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_86",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11019,7 +11019,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_87",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11035,7 +11035,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_88",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11051,7 +11051,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_89",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11067,7 +11067,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_90",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11083,7 +11083,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_91",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11099,7 +11099,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_92",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11115,7 +11115,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_93",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11131,7 +11131,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_94",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11147,7 +11147,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_95",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11163,7 +11163,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_96",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11179,7 +11179,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_97",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11195,7 +11195,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_98",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11211,7 +11211,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_99",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11227,7 +11227,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_100",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11243,7 +11243,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_101",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11259,7 +11259,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_102",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11275,7 +11275,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_103",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11291,7 +11291,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_104",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11307,7 +11307,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_105",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11323,7 +11323,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_106",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11339,7 +11339,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_107",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11355,7 +11355,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_108",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11371,7 +11371,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_109",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11387,7 +11387,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_110",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11403,7 +11403,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_111",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11419,7 +11419,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_112",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11435,7 +11435,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_113",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11451,7 +11451,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_114",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11467,7 +11467,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_115",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11483,7 +11483,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_116",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11499,7 +11499,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_117",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11515,7 +11515,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_118",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11531,7 +11531,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_119",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11547,7 +11547,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_120",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11563,7 +11563,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_121",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11579,7 +11579,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_122",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11595,7 +11595,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_123",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11611,7 +11611,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_124",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11627,7 +11627,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_125",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11643,7 +11643,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_126",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11659,7 +11659,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_127",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11675,7 +11675,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_128",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11691,7 +11691,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_129",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11707,7 +11707,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_130",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11723,7 +11723,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_131",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11739,7 +11739,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_132",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11755,7 +11755,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_133",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11771,7 +11771,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_134",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11787,7 +11787,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_135",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11803,7 +11803,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_136",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11819,7 +11819,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_137",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11835,7 +11835,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_138",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11851,7 +11851,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_139",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11867,7 +11867,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_140",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11883,7 +11883,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_141",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11899,7 +11899,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_142",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11915,7 +11915,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_143",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11931,7 +11931,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_144",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11947,7 +11947,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_145",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11963,7 +11963,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_146",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11979,7 +11979,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_147",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -11995,7 +11995,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_148",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12011,7 +12011,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_149",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12027,7 +12027,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_150",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12043,7 +12043,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_151",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12059,7 +12059,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_152",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12075,7 +12075,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_153",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12091,7 +12091,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_154",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12107,7 +12107,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_155",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12123,7 +12123,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_156",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12139,7 +12139,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_157",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12155,7 +12155,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_158",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12171,7 +12171,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_159",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12187,7 +12187,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_160",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12203,7 +12203,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_161",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12219,7 +12219,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_162",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12235,7 +12235,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_163",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12251,7 +12251,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_164",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12267,7 +12267,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_165",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12283,7 +12283,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_166",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12299,7 +12299,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_167",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12315,7 +12315,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_168",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12331,7 +12331,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_169",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12347,7 +12347,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_170",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12363,7 +12363,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_171",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12379,7 +12379,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_172",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12395,7 +12395,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_173",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12411,7 +12411,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_174",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12427,7 +12427,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_175",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12443,7 +12443,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_176",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12459,7 +12459,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_177",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12475,7 +12475,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_178",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12491,7 +12491,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_179",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12507,7 +12507,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_180",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12523,7 +12523,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_181",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12539,7 +12539,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_182",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12555,7 +12555,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_183",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12571,7 +12571,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_184",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12587,7 +12587,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_185",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12603,7 +12603,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_186",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12619,7 +12619,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_187",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12635,7 +12635,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_188",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12651,7 +12651,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_189",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12667,7 +12667,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_190",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12683,7 +12683,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_191",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12699,7 +12699,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_192",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12715,7 +12715,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_193",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12731,7 +12731,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_194",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12747,7 +12747,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_195",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12763,7 +12763,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_196",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12779,7 +12779,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_197",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12795,7 +12795,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_198",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12811,7 +12811,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_199",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12827,7 +12827,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_200",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12843,7 +12843,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_201",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12859,7 +12859,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_202",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12875,7 +12875,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_203",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12891,7 +12891,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_204",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12907,7 +12907,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_205",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12923,7 +12923,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_206",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12939,7 +12939,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_207",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12955,7 +12955,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_208",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12971,7 +12971,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_209",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -12987,7 +12987,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_210",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -13003,7 +13003,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_211",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -13019,7 +13019,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_212",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -13035,7 +13035,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_213",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -13051,7 +13051,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_214",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -13067,7 +13067,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_215",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -13083,7 +13083,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_216",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -13099,7 +13099,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_217",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -13115,7 +13115,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_218",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -13131,7 +13131,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_219",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -13147,7 +13147,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_220",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -13163,7 +13163,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_221",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -13179,7 +13179,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_222",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -13195,7 +13195,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_223",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -13211,7 +13211,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_224",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -13227,7 +13227,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_225",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -13243,7 +13243,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_226",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -13259,7 +13259,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_227",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -13275,7 +13275,7 @@
                          },
                          {
                              "id":  "JUL__2026_TECNODRILL_228",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "JUL _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "JULHO/2026",
@@ -13291,7 +13291,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_11",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13307,7 +13307,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_12",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13323,7 +13323,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_13",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13339,7 +13339,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_14",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13355,7 +13355,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_15",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13371,7 +13371,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_16",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13387,7 +13387,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_17",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13403,7 +13403,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_18",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13419,7 +13419,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_19",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13435,7 +13435,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_20",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13451,7 +13451,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_21",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13467,7 +13467,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_22",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13483,7 +13483,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_23",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13499,7 +13499,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_24",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13515,7 +13515,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_25",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13531,7 +13531,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_26",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13547,7 +13547,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_27",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13563,7 +13563,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_28",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13579,7 +13579,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_29",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13595,7 +13595,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_30",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13611,7 +13611,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_31",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13627,7 +13627,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_32",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13643,7 +13643,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_33",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13659,7 +13659,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_34",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13675,7 +13675,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_35",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13691,7 +13691,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_36",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13707,7 +13707,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_37",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13723,7 +13723,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_38",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13739,7 +13739,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_39",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13755,7 +13755,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_40",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13771,7 +13771,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_41",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13787,7 +13787,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_42",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13803,7 +13803,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_43",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13819,7 +13819,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_44",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13835,7 +13835,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_45",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13851,7 +13851,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_46",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13867,7 +13867,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_47",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13883,7 +13883,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_48",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13899,7 +13899,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_49",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13915,7 +13915,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_50",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13931,7 +13931,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_51",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13947,7 +13947,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_52",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13963,7 +13963,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_53",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13979,7 +13979,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_54",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -13995,7 +13995,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_55",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14011,7 +14011,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_56",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14027,7 +14027,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_57",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14043,7 +14043,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_58",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14059,7 +14059,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_59",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14075,7 +14075,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_60",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14091,7 +14091,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_61",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14107,7 +14107,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_62",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14123,7 +14123,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_63",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14139,7 +14139,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_64",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14155,7 +14155,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_65",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14171,7 +14171,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_66",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14187,7 +14187,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_67",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14203,7 +14203,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_68",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14219,7 +14219,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_69",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14235,7 +14235,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_70",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14251,7 +14251,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_71",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14267,7 +14267,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_72",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14283,7 +14283,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_73",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14299,7 +14299,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_74",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14315,7 +14315,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_75",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14331,7 +14331,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_76",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14347,7 +14347,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_77",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14363,7 +14363,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_78",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14379,7 +14379,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_79",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14395,7 +14395,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_80",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14411,7 +14411,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_81",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14427,7 +14427,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_82",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14443,7 +14443,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_83",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14459,7 +14459,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_84",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14475,7 +14475,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_85",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14491,7 +14491,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_86",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14507,7 +14507,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_87",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14523,7 +14523,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_88",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14539,7 +14539,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_89",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14555,7 +14555,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_90",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14571,7 +14571,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_91",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14587,7 +14587,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_92",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14603,7 +14603,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_93",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14619,7 +14619,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_94",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14635,7 +14635,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_95",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14651,7 +14651,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_96",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14667,7 +14667,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_97",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14683,7 +14683,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_98",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14699,7 +14699,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_99",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14715,7 +14715,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_100",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14731,7 +14731,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_101",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14747,7 +14747,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_102",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14763,7 +14763,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_103",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14779,7 +14779,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_104",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14795,7 +14795,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_105",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14811,7 +14811,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_106",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14827,7 +14827,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_107",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14843,7 +14843,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_108",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14859,7 +14859,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_109",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14875,7 +14875,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_110",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14891,7 +14891,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_111",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14907,7 +14907,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_112",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14923,7 +14923,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_113",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14939,7 +14939,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_114",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14955,7 +14955,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_115",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14971,7 +14971,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_116",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -14987,7 +14987,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_117",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15003,7 +15003,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_118",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15019,7 +15019,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_119",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15035,7 +15035,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_120",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15051,7 +15051,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_121",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15067,7 +15067,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_122",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15083,7 +15083,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_123",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15099,7 +15099,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_124",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15115,7 +15115,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_125",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15131,7 +15131,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_126",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15147,7 +15147,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_127",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15163,7 +15163,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_128",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15179,7 +15179,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_129",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15195,7 +15195,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_130",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15211,7 +15211,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_131",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15227,7 +15227,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_132",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15243,7 +15243,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_133",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15259,7 +15259,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_134",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15275,7 +15275,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_135",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15291,7 +15291,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_136",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15307,7 +15307,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_137",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15323,7 +15323,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_138",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15339,7 +15339,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_139",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15355,7 +15355,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_140",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15371,7 +15371,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_141",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15387,7 +15387,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_142",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15403,7 +15403,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_143",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15419,7 +15419,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_144",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15435,7 +15435,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_145",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15451,7 +15451,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_146",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15467,7 +15467,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_147",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15483,7 +15483,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_148",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15499,7 +15499,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_149",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15515,7 +15515,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_150",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15531,7 +15531,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_151",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15547,7 +15547,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_152",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15563,7 +15563,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_153",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15579,7 +15579,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_154",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15595,7 +15595,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_155",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15611,7 +15611,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_156",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15627,7 +15627,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_157",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15643,7 +15643,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_158",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15659,7 +15659,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_159",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15675,7 +15675,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_160",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15691,7 +15691,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_161",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15707,7 +15707,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_162",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15723,7 +15723,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_163",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15739,7 +15739,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_164",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15755,7 +15755,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_165",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15771,7 +15771,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_166",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15787,7 +15787,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_167",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15803,7 +15803,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_168",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15819,7 +15819,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_169",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15835,7 +15835,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_170",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15851,7 +15851,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_171",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15867,7 +15867,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_172",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15883,7 +15883,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_173",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15899,7 +15899,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_174",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15915,7 +15915,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_175",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15931,7 +15931,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_176",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15947,7 +15947,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_177",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15963,7 +15963,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_178",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15979,7 +15979,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_179",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -15995,7 +15995,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_180",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -16011,7 +16011,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_181",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -16027,7 +16027,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_182",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -16043,7 +16043,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_183",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -16059,7 +16059,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_184",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -16075,7 +16075,7 @@
                          },
                          {
                              "id":  "AGOS__2026_TECNODRILL_185",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "AGOS _2026 TECNODRILL",
                              "remessa":  "MANUAL",
                              "competencia":  "AGOSTO/2026",
@@ -16091,7 +16091,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_11",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16107,7 +16107,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_12",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16123,7 +16123,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_13",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16139,7 +16139,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_14",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16155,7 +16155,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_15",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16171,7 +16171,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_16",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16187,7 +16187,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_17",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16203,7 +16203,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_18",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16219,7 +16219,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_19",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16235,7 +16235,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_20",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16251,7 +16251,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_21",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16267,7 +16267,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_22",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16283,7 +16283,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_23",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16299,7 +16299,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_24",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16315,7 +16315,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_25",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16331,7 +16331,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_26",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16347,7 +16347,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_27",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16363,7 +16363,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_28",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16379,7 +16379,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_29",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16395,7 +16395,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_30",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16411,7 +16411,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_31",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16427,7 +16427,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_32",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16443,7 +16443,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_33",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16459,7 +16459,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_34",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16475,7 +16475,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_35",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16491,7 +16491,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_36",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16507,7 +16507,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_37",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16523,7 +16523,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_38",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16539,7 +16539,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_39",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16555,7 +16555,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_40",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16571,7 +16571,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_41",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16587,7 +16587,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_42",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16603,7 +16603,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_43",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16619,7 +16619,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_44",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16635,7 +16635,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_45",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16651,7 +16651,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_46",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16667,7 +16667,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_47",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16683,7 +16683,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_48",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16699,7 +16699,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_49",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16715,7 +16715,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_50",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16731,7 +16731,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_51",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16747,7 +16747,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_52",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16763,7 +16763,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_53",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16779,7 +16779,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_54",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16795,7 +16795,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_55",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16811,7 +16811,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_56",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16827,7 +16827,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_57",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16843,7 +16843,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_58",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16859,7 +16859,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_59",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16875,7 +16875,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_60",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16891,7 +16891,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_61",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16907,7 +16907,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_62",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16923,7 +16923,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_63",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16939,7 +16939,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_64",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16955,7 +16955,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_65",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16971,7 +16971,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_66",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -16987,7 +16987,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_67",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17003,7 +17003,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_68",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17019,7 +17019,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_69",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17035,7 +17035,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_70",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17051,7 +17051,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_71",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17067,7 +17067,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_72",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17083,7 +17083,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_73",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17099,7 +17099,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_74",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17115,7 +17115,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_75",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17131,7 +17131,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_76",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17147,7 +17147,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_77",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17163,7 +17163,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_78",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17179,7 +17179,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_79",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17195,7 +17195,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_80",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17211,7 +17211,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_81",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17227,7 +17227,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_82",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17243,7 +17243,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_83",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17259,7 +17259,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_84",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17275,7 +17275,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_85",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17291,7 +17291,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_86",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17307,7 +17307,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_87",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17323,7 +17323,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_88",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17339,7 +17339,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_89",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17355,7 +17355,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_90",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17371,7 +17371,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_91",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17387,7 +17387,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_92",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17403,7 +17403,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_93",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17419,7 +17419,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_94",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17435,7 +17435,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_95",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17451,7 +17451,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_96",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17467,7 +17467,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_97",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17483,7 +17483,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_98",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17499,7 +17499,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_99",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17515,7 +17515,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_100",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17531,7 +17531,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_101",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17547,7 +17547,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_102",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17563,7 +17563,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_103",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17579,7 +17579,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_104",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17595,7 +17595,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_105",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17611,7 +17611,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_106",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17627,7 +17627,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_MAX_107",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob MaxiCrÃ©dito",
                              "aba":  "SET _2026 TECNODRILL MAX",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17643,7 +17643,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_CONFIA_11",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob ConfianÃ§a",
                              "aba":  "SET _2026 TECNODRILL CONFIA",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17659,7 +17659,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_CONFIA_12",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob ConfianÃ§a",
                              "aba":  "SET _2026 TECNODRILL CONFIA",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17675,7 +17675,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_CONFIA_13",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob ConfianÃ§a",
                              "aba":  "SET _2026 TECNODRILL CONFIA",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17691,7 +17691,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_CONFIA_14",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob ConfianÃ§a",
                              "aba":  "SET _2026 TECNODRILL CONFIA",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17707,7 +17707,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_CONFIA_15",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob ConfianÃ§a",
                              "aba":  "SET _2026 TECNODRILL CONFIA",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17723,7 +17723,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_CONFIA_16",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob ConfianÃ§a",
                              "aba":  "SET _2026 TECNODRILL CONFIA",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17739,7 +17739,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_CONFIA_17",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob ConfianÃ§a",
                              "aba":  "SET _2026 TECNODRILL CONFIA",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17755,7 +17755,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_CONFIA_18",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob ConfianÃ§a",
                              "aba":  "SET _2026 TECNODRILL CONFIA",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17771,7 +17771,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_CONFIA_19",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob ConfianÃ§a",
                              "aba":  "SET _2026 TECNODRILL CONFIA",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17787,7 +17787,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_CONFIA_20",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob ConfianÃ§a",
                              "aba":  "SET _2026 TECNODRILL CONFIA",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17803,7 +17803,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_CONFIA_21",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob ConfianÃ§a",
                              "aba":  "SET _2026 TECNODRILL CONFIA",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17819,7 +17819,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_CONFIA_22",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob ConfianÃ§a",
                              "aba":  "SET _2026 TECNODRILL CONFIA",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17835,7 +17835,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_CONFIA_23",
-                             "banco":  "SICOOB",
+                             "banco":  "Sicoob ConfianÃ§a",
                              "aba":  "SET _2026 TECNODRILL CONFIA",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17851,7 +17851,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_BRADESCO_11",
-                             "banco":  "SICOOB",
+                             "banco":  "Bradesco",
                              "aba":  "SET _2026 TECNODRILL BRADESCO",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17860,14 +17860,14 @@
                              "fluxo":  "Entrada",
                              "categoria":  "Saldo Inicial",
                              "descricao":  "Transferência entre contas",
-                             "valor_nominal":  0,
-                             "valor_liquido":  0,
+                             "valor_nominal":  100,
+                             "valor_liquido":  100,
                              "meio_pagamento":  "Transferência Bancária",
                              "is_transfer":  false
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_BRADESCO_12",
-                             "banco":  "SICOOB",
+                             "banco":  "Bradesco",
                              "aba":  "SET _2026 TECNODRILL BRADESCO",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17883,7 +17883,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_BRADESCO_13",
-                             "banco":  "SICOOB",
+                             "banco":  "Bradesco",
                              "aba":  "SET _2026 TECNODRILL BRADESCO",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17899,7 +17899,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_BRADESCO_14",
-                             "banco":  "SICOOB",
+                             "banco":  "Bradesco",
                              "aba":  "SET _2026 TECNODRILL BRADESCO",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17915,7 +17915,7 @@
                          },
                          {
                              "id":  "SET__2026_TECNODRILL_BRADESCO_15",
-                             "banco":  "SICOOB",
+                             "banco":  "Bradesco",
                              "aba":  "SET _2026 TECNODRILL BRADESCO",
                              "remessa":  "MANUAL",
                              "competencia":  "SETEMBRO/2026",
@@ -17931,7 +17931,7 @@
                          }
                      ],
     "caixa":  {
-                  "gerado_em":  "2026-10-01 15:09:52",
+                  "gerado_em":  "2026-10-02 10:06:36",
                   "carlos":  [
                                  {
                                      "id":  "carlos-1",
