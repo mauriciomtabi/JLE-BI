@@ -35,6 +35,8 @@ if (Test-Path $downloadsDir) {
     $candidateDirs += $downloadsDir
     $abastDown = Get-ChildItem -Path $downloadsDir -Directory -Filter "*ABASTECIMENTO*" -ErrorAction SilentlyContinue
     foreach ($ad in $abastDown) { $candidateDirs += $ad.FullName }
+    $rfcvDown = Get-ChildItem -Path $downloadsDir -Directory -Filter "*RFCV*" -ErrorAction SilentlyContinue
+    foreach ($rd in $rfcvDown) { $candidateDirs += $rd.FullName }
 }
 
 $allCandidates = @()
