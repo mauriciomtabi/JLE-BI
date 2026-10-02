@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-02 16:48:12
+// Dados SAR JLE Telecom - Gerado em: 2026-10-02 17:00:24
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1102,
-    "generated_at": "2026-10-02 16:48:12",
+    "generated_at": "2026-10-02 17:00:24",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -77574,8 +77574,8 @@ window.SAR_DATA = [
   {
     "cod": "RSCLER1100",
     "area_tecnica": "MNDAC",
-    "node": "",
-    "site": "",
+    "node": "MNDAL",
+    "site": "PAE CL",
     "cidade": "PORTO ALEGRE",
     "condominio": "COND. TIMBAUVA",
     "endereco": "R GUMERCINDO SARAIVA 100",
@@ -77714,8 +77714,8 @@ window.SAR_DATA = [
   {
     "cod": "RSCLER1102",
     "area_tecnica": "FLOAA",
-    "node": "",
-    "site": "",
+    "node": "FLOAO",
+    "site": "RSPNO11",
     "cidade": "PORTO ALEGRE",
     "condominio": "COND. ED DIJON",
     "endereco": "R PARANA 2535 BL 01 BLO 02",
@@ -77784,8 +77784,8 @@ window.SAR_DATA = [
   {
     "cod": "RSCLER1103",
     "area_tecnica": "FLOAA",
-    "node": "",
-    "site": "",
+    "node": "FLOAO",
+    "site": "RSPNO11",
     "cidade": "PORTO ALEGRE",
     "condominio": "COND. ED INTERLAGOS",
     "endereco": "R TRES DE MAIO, 302",
@@ -77865,8 +77865,8 @@ window.SAR_DATA = [
     "situacao": "187",
     "relatorio_foto": "",
     "servico": "",
-    "data_entrada": null,
-    "data_entrada_fmt": "-",
+    "data_entrada": "2026-10-02",
+    "data_entrada_fmt": "02/10/2026",
     "data_inicio": null,
     "data_inicio_fmt": "-",
     "data_previsao": null,
@@ -77885,10 +77885,10 @@ window.SAR_DATA = [
     "data_med_cad_wf_fmt": "-",
     "num_wf": "",
     "status_wf": "",
-    "competencia": "NÃO INFORMADO",
-    "ano": "NÃO INFORMADO",
-    "mes": "NÃO INFORMADO",
-    "mes_num": "",
+    "competencia": "OUTUBRO/2026",
+    "ano": "2026",
+    "mes": "OUTUBRO",
+    "mes_num": "10",
     "competencia_entrega": "NÃO INFORMADO",
     "ano_entrega": "NÃO INFORMADO",
     "mes_entrega": "NÃO INFORMADO",
@@ -77898,7 +77898,7 @@ window.SAR_DATA = [
     "status_medicao": "",
     "status_obra": "Em Andamento",
     "prazo": "NO PRAZO",
-    "tempo_dias": 0,
+    "tempo_dias": 0.0,
     "atraso_dias": 0,
     "total_terceiros": 0.0,
     "previa_medicao": 0.0,
