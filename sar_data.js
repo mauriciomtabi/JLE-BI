@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-05 16:34:32
+// Dados SAR JLE Telecom - Gerado em: 2026-10-05 16:42:04
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1103,
-    "generated_at": "2026-10-05 16:34:32",
+    "generated_at": "2026-10-05 16:42:04",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -76952,15 +76952,15 @@ window.SAR_DATA = [
     "caixa_mdu": "CNTAA.122.M050",
     "classe_l": "TIAGO FERREIRA",
     "classe_f": "MAURICIO",
-    "situacao": "250,00",
-    "relatorio_foto": "",
+    "situacao": "248",
+    "relatorio_foto": "248",
     "servico": "FOI LANÇADO 248 METROS DE CABO DE 12 FO, 3 ABERTURA E FECHAMENTO, 3 DERIVAÇÕES, 1 TESTE OTDR, 16 FUSÕES. 6 TESTES.",
     "data_entrada": "2026-09-26",
     "data_entrada_fmt": "26/09/2026",
     "data_inicio": "2026-10-01",
     "data_inicio_fmt": "01/10/2026",
-    "data_previsao": null,
-    "data_previsao_fmt": "-",
+    "data_previsao": "2026-10-05",
+    "data_previsao_fmt": "05/10/2026",
     "data_entrega": "2026-10-01",
     "data_entrega_fmt": "01/10/2026",
     "data_medicao": null,
@@ -76983,9 +76983,9 @@ window.SAR_DATA = [
     "ano_entrega": "2026",
     "mes_entrega": "OUTUBRO",
     "mes_num_entrega": "10",
-    "status": "RELATÓRIO",
-    "status_relatorio": "",
-    "status_medicao": "",
+    "status": "EM MEDIÇÃO",
+    "status_relatorio": "05/10/2026",
+    "status_medicao": "05/10/2026",
     "status_obra": "Em Andamento",
     "prazo": "NO PRAZO",
     "tempo_dias": 3.0,
