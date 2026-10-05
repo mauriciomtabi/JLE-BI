@@ -1,43 +1,32 @@
 // BI JLE Telecom - Financiamentos & PMTs Data Source
-// Gerado automaticamente em 30/09/2026 12:03:52
+// Gerado automaticamente em 05/10/2026 16:34:07
 window.FINANCIAMENTOS_DATA = {
   "metadata": {
-    "generated_at": "30/09/2026 12:03:52",
+    "generated_at": "05/10/2026 16:34:07",
     "source_directory": "\\\\10.121.21.252\\controladoria\\Vitor\\FINANCEIRO\\PMTs FINANCIAMENTOS",
     "total_contratos": 9
   },
   "totais_gerais": {
     "total_financiado": 7396247.2,
-    "total_pago": 1170093.61,
-    "saldo_devedor": 8462812.89,
+    "total_pago": 1190649.09,
+    "saldo_devedor": 8442257.33,
     "total_parcelas": 442,
-    "total_pagas": 61,
-    "total_pendentes": 381,
-    "pct_quitado": 13.8,
+    "total_pagas": 62,
+    "total_pendentes": 380,
+    "pct_quitado": 14.0,
     "compromisso_mensal": 198706.04,
     "proxima_parcela": {
-      "contrato_id": "compra_terreno_sl",
-      "contrato_nome": "Compra Terreno São Leopoldo",
+      "contrato_id": "compra_base_nh",
+      "contrato_nome": "Compra Base Novo Hamburgo",
       "categoria": "Imóveis",
-      "instituicao": "F. E. Hugentobler",
-      "numero": 12,
+      "instituicao": "Pro-Formula",
+      "numero": 1,
       "tipo": "Mensal",
-      "vencimento": "10/10/2026",
-      "vencimento_iso": "2026-10-10",
-      "prestacao": 20555.56
+      "vencimento": "15/10/2026",
+      "vencimento_iso": "2026-10-15",
+      "prestacao": 47750.0
     },
     "proximas_parcelas_top10": [
-      {
-        "contrato_id": "compra_terreno_sl",
-        "contrato_nome": "Compra Terreno São Leopoldo",
-        "categoria": "Imóveis",
-        "instituicao": "F. E. Hugentobler",
-        "numero": 12,
-        "tipo": "Mensal",
-        "vencimento": "10/10/2026",
-        "vencimento_iso": "2026-10-10",
-        "prestacao": 20555.56
-      },
       {
         "contrato_id": "compra_base_nh",
         "contrato_nome": "Compra Base Novo Hamburgo",
@@ -136,6 +125,17 @@ window.FINANCIAMENTOS_DATA = {
         "vencimento": "10/11/2026",
         "vencimento_iso": "2026-11-10",
         "prestacao": 20555.56
+      },
+      {
+        "contrato_id": "compra_base_nh",
+        "contrato_nome": "Compra Base Novo Hamburgo",
+        "categoria": "Imóveis",
+        "instituicao": "Pro-Formula",
+        "numero": 2,
+        "tipo": "Mensal",
+        "vencimento": "15/11/2026",
+        "vencimento_iso": "2026-11-15",
+        "prestacao": 47750.0
       }
     ],
     "por_categoria": {
@@ -159,12 +159,12 @@ window.FINANCIAMENTOS_DATA = {
       },
       "Imóveis": {
         "financiado": 2822000.0,
-        "pago": 226110.28,
-        "saldo_devedor": 3075888.92,
+        "pago": 246665.76,
+        "saldo_devedor": 3055333.36,
         "contratos": 2,
         "total_parcelas": 70,
-        "qtd_pagas": 11,
-        "pct_quitado": 15.7
+        "qtd_pagas": 12,
+        "pct_quitado": 17.1
       }
     },
     "por_instituicao": {
@@ -188,8 +188,8 @@ window.FINANCIAMENTOS_DATA = {
       },
       "F. E. Hugentobler": {
         "financiado": 370000.0,
-        "pago": 226110.28,
-        "saldo_devedor": 143888.92,
+        "pago": 246665.76,
+        "saldo_devedor": 123333.36,
         "contratos": 1
       }
     },
@@ -203,8 +203,8 @@ window.FINANCIAMENTOS_DATA = {
       {
         "ano": 2026,
         "total_previsto": 1602296.34,
-        "total_pago": 1028065.27,
-        "total_pendente": 611049.17
+        "total_pago": 1048620.75,
+        "total_pendente": 590493.61
       },
       {
         "ano": 2027,
@@ -388,8 +388,8 @@ window.FINANCIAMENTOS_DATA = {
         "ano": 2026,
         "mes": 10,
         "total_previsto": 208116.08,
-        "total_pago": 8264.89,
-        "total_pendente": 199892.01,
+        "total_pago": 28820.37,
+        "total_pendente": 179336.45,
         "maquinas": 120109.78,
         "veiculos": 19700.74,
         "imoveis": 68305.56
@@ -8631,11 +8631,11 @@ window.FINANCIAMENTOS_DATA = {
       "taxa_mensal": 0.0,
       "prestacao_mensal": 20555.56,
       "total_parcelas": 18,
-      "qtd_pagas": 11,
-      "qtd_pendentes": 7,
-      "total_pago": 226110.28,
-      "saldo_devedor": 143888.92,
-      "pct_quitado": 61.1,
+      "qtd_pagas": 12,
+      "qtd_pendentes": 6,
+      "total_pago": 246665.76,
+      "saldo_devedor": 123333.36,
+      "pct_quitado": 66.7,
       "parcelas": [
         {
           "numero": 1,
@@ -8823,11 +8823,11 @@ window.FINANCIAMENTOS_DATA = {
           "prestacao": 20555.56,
           "juros": 0.0,
           "amortizacao": 20555.56,
-          "saldo_devedor": 20555.56,
-          "status": "Pendente",
-          "data_pagamento": "",
-          "valor_pago": 0.0,
-          "diferenca": 0.0
+          "saldo_devedor": 0.0,
+          "status": "Pago",
+          "data_pagamento": "10/10/2026",
+          "valor_pago": 20555.48,
+          "diferenca": 0.08
         },
         {
           "numero": 13,
