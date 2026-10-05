@@ -570,7 +570,31 @@ module.exports = async (req, res) => {
             send_now: false
         });
 
-        const cleanRecipients = (config.recipients || []).filter(e => !e.startsWith('__sched:') && !e.startsWith('__lock:'));
+        // Normaliza destinatários separando por quebras de linha, vírgula ou ponto-e-vírgula
+        const cleanRecipients = [];
+        const rawRecipients = config.recipients || [];
+        rawRecipients.forEach(item => {
+            if (typeof item === 'string') {
+                item.split(/[\n\r,;]+/).map(e => e.trim()).forEach(e => {
+                    if (e && e.includes('@') && !e.startsWith('__sched:') && !e.startsWith('__lock:')) {
+                        if (!cleanRecipients.includes(e)) {
+                            cleanRecipients.push(e);
+                        }
+                    }
+                });
+            }
+        });
+
+        // Auto-persiste no Supabase caso estivesse malformatado
+        if (JSON.stringify(config.recipients) !== JSON.stringify(cleanRecipients) && cleanRecipients.length > 0) {
+            try {
+                await fetchSupabase(`bi_email_reports?id=eq.${id}`, 'PATCH', {
+                    recipients: cleanRecipients,
+                    updated_at: new Date().toISOString()
+                });
+            } catch (e) {}
+        }
+
         const idempotencyKey = `jle-manual-${id}-${Date.now()}`;
         await sendResendEmail(cleanRecipients, subject, emailHtml, attachments, null, idempotencyKey);
         

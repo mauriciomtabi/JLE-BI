@@ -5594,16 +5594,28 @@
                 return;
             }
 
-            // Auto-sanitizar tokens legados __sched: / __lock: se existirem
+            // Auto-sanitizar destinatários malformatados (quebras de linha, vírgulas embutidas ou tokens legados)
             data.forEach(r => {
-                if (r.recipients && r.recipients.some(e => e.startsWith('__sched:') || e.startsWith('__lock:'))) {
-                    const cleanRecipients = r.recipients.filter(e => !e.startsWith('__sched:') && !e.startsWith('__lock:'));
-                    supabaseClient.from('bi_email_reports').update({
-                        recipients: cleanRecipients,
-                        updated_at: new Date().toISOString()
-                    }).eq('id', r.id).then(() => {
-                        console.log(`[Email Reports] Auto-sanitizado destinatários de "${r.report_name}".`);
+                if (r.recipients && Array.isArray(r.recipients)) {
+                    const sanitized = [];
+                    r.recipients.forEach(item => {
+                        if (typeof item === 'string') {
+                            item.split(/[\n\r,;]+/).map(e => e.trim()).forEach(e => {
+                                if (e && e.includes('@') && !e.startsWith('__sched:') && !e.startsWith('__lock:') && !sanitized.includes(e)) {
+                                    sanitized.push(e);
+                                }
+                            });
+                        }
                     });
+                    if (JSON.stringify(r.recipients) !== JSON.stringify(sanitized) && sanitized.length > 0) {
+                        supabaseClient.from('bi_email_reports').update({
+                            recipients: sanitized,
+                            updated_at: new Date().toISOString()
+                        }).eq('id', r.id).then(() => {
+                            console.log(`[Email Reports] Auto-sanitizado destinatários de "${r.report_name}".`);
+                        });
+                        r.recipients = sanitized;
+                    }
                 }
             });
 
@@ -5703,7 +5715,17 @@
                 document.getElementById('email-modal-id').value = data.id;
                 document.getElementById('email-modal-name').value = data.report_name;
                 document.getElementById('email-modal-type').value = data.report_type;
-                document.getElementById('email-modal-recipients').value = (data.recipients || []).filter(e => !e.startsWith('__sched:') && !e.startsWith('__lock:')).join(', ');
+                const modalRecipients = [];
+                (data.recipients || []).forEach(item => {
+                    if (typeof item === 'string') {
+                        item.split(/[\n\r,;]+/).map(e => e.trim()).forEach(e => {
+                            if (e && e.includes('@') && !e.startsWith('__sched:') && !e.startsWith('__lock:') && !modalRecipients.includes(e)) {
+                                modalRecipients.push(e);
+                            }
+                        });
+                    }
+                });
+                document.getElementById('email-modal-recipients').value = modalRecipients.join(',\n');
                 document.getElementById('email-modal-time').value = data.schedule_time;
                 document.getElementById('email-modal-title').textContent = 'Editar Relatório de E-mail';
 
@@ -5747,7 +5769,7 @@
             if (!name) { alert('Informe um nome para o relatório.'); return; }
             if (!recipientsRaw.trim()) { alert('Informe ao menos um e-mail destinatário.'); return; }
 
-            const recipients = recipientsRaw.split(',').map(e => e.trim()).filter(e => e.includes('@'));
+            const recipients = recipientsRaw.split(/[\n\r,;]+/).map(e => e.trim()).filter(e => e.includes('@'));
             if (recipients.length === 0) { alert('Nenhum e-mail válido informado.'); return; }
 
             const days = Array.from(document.querySelectorAll('.email-day-check:checked')).map(cb => cb.value);

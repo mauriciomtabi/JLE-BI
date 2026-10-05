@@ -534,38 +534,76 @@ module.exports = async (req, res) => {
                 let emailHtml;
                 let attachments = null;
 
-                if (reportType === 'sar') {
-                    const sarHelper = require('./sar-report-helper');
-                    const sarData = await sarHelper.loadSarDataAsync();
-                    emailHtml = sarHelper.buildSarEmailHtml(config.report_name || config.report, sarData);
-                } else if (reportType === 'claro') {
-                    const claroHelper = require('./claro-report-helper');
-                    const claroData = await claroHelper.loadClaroDataAsync();
-                    const excelRes = claroHelper.generateExcelAttachments(claroData);
-                    attachments = excelRes.attachments;
-                    emailHtml = claroHelper.buildClaroEmailHtml(config.report_name || config.report, excelRes, claroData.generated_at);
-                } else if (reportType === 'manutencao') {
-                    const manutHelper = require('./manutencao-report-helper');
-                    const manutData = await manutHelper.loadManutencaoDataAsync();
-                    attachments = manutHelper.generateExcelAttachments(manutData);
-                    emailHtml = manutHelper.buildManutencaoEmailHtml(config.report_name || config.report, manutData);
-                } else if (reportType === 'tecnodrill') {
-                    const tecnoHelper = require('./tecnodrill-report-helper');
-                    const tecnoData = await tecnoHelper.loadTecnodrillDataAsync();
-                    attachments = tecnoHelper.generateExcelAttachments(tecnoData);
-                    emailHtml = tecnoHelper.buildTecnodrillEmailHtml(config.report_name || config.report, tecnoData);
-                } else if (reportType === 'troca_poste') {
-                    const posteHelper = require('./troca-poste-report-helper');
-                    const posteData = await posteHelper.loadTrocaPosteDataAsync();
-                    emailHtml = posteHelper.buildTrocaPosteEmailHtml(config.report_name || config.report || 'Troca de Postes TELEMONT', posteData);
-                } else {
-                    const mduHelper = require('./mdu-report-helper');
-                    const mduData = await mduHelper.loadMduDataAsync();
-                    emailHtml = mduHelper.buildMduEmailHtml(config.report_name || config.report, mduData);
+                try {
+                    if (reportType === 'sar') {
+                        const sarHelper = require('./sar-report-helper');
+                        const sarData = await sarHelper.loadSarDataAsync();
+                        emailHtml = sarHelper.buildSarEmailHtml(config.report_name || config.report, sarData);
+                    } else if (reportType === 'claro') {
+                        const claroHelper = require('./claro-report-helper');
+                        const claroData = await claroHelper.loadClaroDataAsync();
+                        const excelRes = claroHelper.generateExcelAttachments(claroData);
+                        attachments = excelRes.attachments;
+                        emailHtml = claroHelper.buildClaroEmailHtml(config.report_name || config.report, excelRes, claroData.generated_at);
+                    } else if (reportType === 'manutencao') {
+                        const manutHelper = require('./manutencao-report-helper');
+                        const manutData = await manutHelper.loadManutencaoDataAsync();
+                        attachments = manutHelper.generateExcelAttachments(manutData);
+                        emailHtml = manutHelper.buildManutencaoEmailHtml(config.report_name || config.report, manutData);
+                    } else if (reportType === 'tecnodrill') {
+                        const tecnoHelper = require('./tecnodrill-report-helper');
+                        const tecnoData = await tecnoHelper.loadTecnodrillDataAsync();
+                        attachments = tecnoHelper.generateExcelAttachments(tecnoData);
+                        emailHtml = tecnoHelper.buildTecnodrillEmailHtml(config.report_name || config.report, tecnoData);
+                    } else if (reportType === 'troca_poste') {
+                        const posteHelper = require('./troca-poste-report-helper');
+                        const posteData = await posteHelper.loadTrocaPosteDataAsync();
+                        emailHtml = posteHelper.buildTrocaPosteEmailHtml(config.report_name || config.report || 'Troca de Postes TELEMONT', posteData);
+                    } else {
+                        const mduHelper = require('./mdu-report-helper');
+                        const mduData = await mduHelper.loadMduDataAsync();
+                        emailHtml = mduHelper.buildMduEmailHtml(config.report_name || config.report, mduData);
+                    }
+                } catch (renderErr) {
+                    console.error(`Erro ao gerar relatório para ${config.report_name}:`, renderErr);
+                    // Reverte o pre-lock para permitir nova tentativa
+                    try {
+                        await fetchSupabase(`bi_email_reports?id=eq.${config.id}`, 'PATCH', {
+                            last_sent_at: config.last_sent_at
+                        });
+                    } catch (e) {}
+                    continue;
                 }
 
                 const subject = `${config.report_name || config.report} - ${dayStr}/${monthStr}/${yearStr}`;
-                const cleanRecipients = (config.recipients || []).filter(e => !e.startsWith('__sched:') && !e.startsWith('__lock:'));
+                
+                // Normaliza destinatários separando por quebras de linha, vírgula ou ponto-e-vírgula
+                const cleanRecipients = [];
+                const rawRecipients = config.recipients || [];
+                rawRecipients.forEach(item => {
+                    if (typeof item === 'string') {
+                        item.split(/[\n\r,;]+/).map(e => e.trim()).forEach(e => {
+                            if (e && e.includes('@') && !e.startsWith('__sched:') && !e.startsWith('__lock:')) {
+                                if (!cleanRecipients.includes(e)) {
+                                    cleanRecipients.push(e);
+                                }
+                            }
+                        });
+                    }
+                });
+
+                // Auto-persiste no Supabase caso o banco estivesse com quebras de linha ou formato malformado
+                if (JSON.stringify(config.recipients) !== JSON.stringify(cleanRecipients) && cleanRecipients.length > 0) {
+                    try {
+                        await fetchSupabase(`bi_email_reports?id=eq.${config.id}`, 'PATCH', {
+                            recipients: cleanRecipients,
+                            updated_at: new Date().toISOString()
+                        });
+                        console.log(`[AUTO-SANITIZADO] Destinatários normalizados no Supabase para ${config.report_name}`);
+                    } catch (sanErr) {
+                        console.warn(`Aviso ao persistir destinatários sanitizados:`, sanErr.message);
+                    }
+                }
                 
                 // CAMADA 3: CHAVE DE IDEMPOTÊNCIA RESEND (Garante que o provedor de e-mail nunca envie 2x no mesmo dia)
                 const idempotencyKey = config.send_now ? `jle-manual-${config.id}-${Date.now()}` : `jle-${config.id || reportType}-${todayDateStr}`;
@@ -576,6 +614,14 @@ module.exports = async (req, res) => {
                     sentReports.push(config.report_name);
                 } catch (sendErr) {
                     console.error(`Erro no disparo Resend para ${config.report_name}:`, sendErr);
+                    // Reverte o pre-lock em caso de falha no envio para não dar falso positivo
+                    try {
+                        await fetchSupabase(`bi_email_reports?id=eq.${config.id}`, 'PATCH', {
+                            last_sent_at: config.last_sent_at
+                        });
+                    } catch (revErr) {
+                        console.error(`Erro ao reverter pre-lock para ${config.report_name}:`, revErr);
+                    }
                 }
             }
         }

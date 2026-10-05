@@ -553,7 +553,8 @@ async function start() {
                 (reportNameLower.includes('sar') ? 'sar' :
                  reportNameLower.includes('manut') ? 'manutencao' : 
                  reportNameLower.includes('claro') ? 'claro' : 
-                 reportNameLower.includes('tecnodrill') ? 'tecnodrill' : 'mdu');
+                 reportNameLower.includes('tecnodrill') ? 'tecnodrill' : 
+                 reportNameLower.includes('poste') || reportNameLower.includes('troca') ? 'troca_poste' : 'mdu');
 
             let emailHtml;
             let attachments = null;
@@ -578,6 +579,10 @@ async function start() {
                 const tecnoData = await tecnoHelper.loadTecnodrillDataAsync();
                 attachments = tecnoHelper.generateExcelAttachments(tecnoData);
                 emailHtml = tecnoHelper.buildTecnodrillEmailHtml(config.report_name, tecnoData);
+            } else if (reportType === 'troca_poste') {
+                const posteHelper = require('./api/troca-poste-report-helper');
+                const posteData = await posteHelper.loadTrocaPosteDataAsync();
+                emailHtml = posteHelper.buildTrocaPosteEmailHtml(config.report_name || 'Troca de Postes TELEMONT', posteData);
             } else {
                 const mduHelper = require('./api/mdu-report-helper');
                 const mduData = await mduHelper.loadMduDataAsync();
@@ -589,7 +594,19 @@ async function start() {
             const yearStr = localDate.getUTCFullYear();
             const subject = `${config.report_name} - ${dayStr}/${monthStr}/${yearStr}`;
             
-            const cleanRecipients = (config.recipients || []).filter(e => !e.startsWith("__sched:") && !e.startsWith("__lock:"));
+            const cleanRecipients = [];
+            const rawRecipients = config.recipients || [];
+            rawRecipients.forEach(item => {
+                if (typeof item === 'string') {
+                    item.split(/[\n\r,;]+/).map(e => e.trim()).forEach(e => {
+                        if (e && e.includes('@') && !e.startsWith('__sched:') && !e.startsWith('__lock:')) {
+                            if (!cleanRecipients.includes(e)) {
+                                cleanRecipients.push(e);
+                            }
+                        }
+                    });
+                }
+            });
             await sendResendEmail(cleanRecipients, subject, emailHtml, attachments);
             console.log("E-mail disparado com sucesso via Resend!");
 
