@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-05 10:29:25
+// Dados SAR JLE Telecom - Gerado em: 2026-10-05 11:00:19
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1103,
-    "generated_at": "2026-10-05 10:29:25",
+    "generated_at": "2026-10-05 11:00:19",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -763,10 +763,10 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 799480.15,
-        "total_previa_medicao": 1338932.58,
+        "total_terceiros": 800139.15,
+        "total_previa_medicao": 1340601.39,
         "total_classe_l": 336423.15,
-        "total_classe_f": 463057.0
+        "total_classe_f": 463716.0
     },
     "medicao": {
         "total_geral": 1456376.71,
@@ -76990,13 +76990,13 @@ window.SAR_DATA = [
     "prazo": "NO PRAZO",
     "tempo_dias": 3.0,
     "atraso_dias": 0,
-    "total_terceiros": 359.6,
-    "previa_medicao": 275.28,
+    "total_terceiros": 792.1,
+    "previa_medicao": 1417.92,
     "valor_medicao": 0.0,
     "valor_classe_l": 359.6,
-    "valor_classe_f": 0.0,
+    "valor_classe_f": 432.5,
     "itens_l_resumo": "2.15 CB ESP: 248m",
-    "itens_f_resumo": "-",
+    "itens_f_resumo": "3.15 AB/FE: 3 un, 3.13 FUS/EME: 16 un, 3.14 OTDR: 1 un, 3.12 DER/INS: 3 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
@@ -77005,10 +77005,10 @@ window.SAR_DATA = [
       "q_311": 0.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 0.0,
-      "q_313": 0.0,
-      "q_314": 0.0,
-      "q_312": 0.0
+      "q_315": 3.0,
+      "q_313": 16.0,
+      "q_314": 1.0,
+      "q_312": 3.0
     }
   },
   {
@@ -77924,8 +77924,8 @@ window.SAR_DATA = [
   {
     "cod": "RSCLER1105",
     "area_tecnica": "NAVAA",
-    "node": "",
-    "site": "",
+    "node": "NAVAA",
+    "site": "RSPNO05",
     "cidade": "PORTO ALEGRE",
     "condominio": "Cond. Edifício Pinheiros",
     "endereco": "AV PARANÁ, 2600",
@@ -77934,13 +77934,13 @@ window.SAR_DATA = [
     "classe_f": "CATIA",
     "situacao": "SEM LANÇAMENTO",
     "relatorio_foto": "SEM LANÇAMENTO",
-    "servico": "",
+    "servico": "2 ABERTURA E FECHAMENTO, 7 FUSÕES, 1 TESTE OTDR, 6 TESTES.",
     "data_entrada": "2026-10-03",
     "data_entrada_fmt": "03/10/2026",
     "data_inicio": "2026-10-05",
     "data_inicio_fmt": "05/10/2026",
-    "data_previsao": null,
-    "data_previsao_fmt": "-",
+    "data_previsao": "2026-10-05",
+    "data_previsao_fmt": "05/10/2026",
     "data_entrega": "2026-10-05",
     "data_entrega_fmt": "05/10/2026",
     "data_medicao": null,
@@ -77963,20 +77963,20 @@ window.SAR_DATA = [
     "ano_entrega": "2026",
     "mes_entrega": "OUTUBRO",
     "mes_num_entrega": "10",
-    "status": "RELATÓRIO",
-    "status_relatorio": "",
-    "status_medicao": "",
+    "status": "EM MEDIÇÃO",
+    "status_relatorio": "05/10/2026",
+    "status_medicao": "05/10/2026",
     "status_obra": "Em Andamento",
     "prazo": "NO PRAZO",
     "tempo_dias": 0.0,
     "atraso_dias": 0,
-    "total_terceiros": 0.0,
-    "previa_medicao": 0.0,
+    "total_terceiros": 226.5,
+    "previa_medicao": 526.17,
     "valor_medicao": 0.0,
     "valor_classe_l": 0.0,
-    "valor_classe_f": 0.0,
+    "valor_classe_f": 226.5,
     "itens_l_resumo": "-",
-    "itens_f_resumo": "-",
+    "itens_f_resumo": "3.15 AB/FE: 2 un, 3.13 FUS/EME: 7 un, 3.14 OTDR: 1 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
@@ -77985,9 +77985,9 @@ window.SAR_DATA = [
       "q_311": 0.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 0.0,
-      "q_313": 0.0,
-      "q_314": 0.0,
+      "q_315": 2.0,
+      "q_313": 7.0,
+      "q_314": 1.0,
       "q_312": 0.0
     }
   }
