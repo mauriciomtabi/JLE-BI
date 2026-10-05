@@ -1,7 +1,7 @@
 // Data generated 100% from Master Excel Controle de Medições (Mnt. Demanda)
 (function() {
     const db = {
-  "generated_at": "2026-10-05 16:34:36",
+  "generated_at": "2026-10-05 16:40:42",
   "lookups": {
     "tipos_of": [
       "TIPO\nOS CLIENTE",
