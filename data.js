@@ -1,5 +1,5 @@
 ﻿window.CASH_FLOW_DATA = {
-    "generated_at":  "2026-10-05 10:26:38",
+    "generated_at":  "2026-10-05 16:39:08",
     "categories_origin":  {
                               "entradas":  [
 
@@ -160746,6 +160746,54 @@
                              "valor_nominal":  638.61,
                              "valor_liquido":  -638.61,
                              "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "OUT_2026 MAXCREDITO_11",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "OUT_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "OUTUBRO/2026",
+                             "data":  "2026-10-01",
+                             "uf":  "RS",
+                             "fluxo":  "Entrada",
+                             "categoria":  "Saldo Inicial",
+                             "descricao":  "Transferência entre contas",
+                             "valor_nominal":  5173.5,
+                             "valor_liquido":  5173.5,
+                             "meio_pagamento":  "Transferência Bancária",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "OUT_2026 CONFIANÇA_11",
+                             "banco":  "Sicoob Confiança",
+                             "aba":  "OUT_2026 CONFIANÇA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "OUTUBRO/2026",
+                             "data":  "2026-10-01",
+                             "uf":  "RS",
+                             "fluxo":  "Entrada",
+                             "categoria":  "Saldo Inicial",
+                             "descricao":  "Transferência entre contas",
+                             "valor_nominal":  120623.95,
+                             "valor_liquido":  120623.95,
+                             "meio_pagamento":  "Transferência Bancária",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "OUT_2026 BRADESCO_11",
+                             "banco":  "Bradesco",
+                             "aba":  "OUT_2026 BRADESCO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "OUTUBRO/2026",
+                             "data":  "2026-10-01",
+                             "uf":  "RS",
+                             "fluxo":  "Entrada",
+                             "categoria":  "Saldo Inicial",
+                             "descricao":  "Transferência entre contas",
+                             "valor_nominal":  3618893.64,
+                             "valor_liquido":  3618893.64,
+                             "meio_pagamento":  "Transferência Bancária",
                              "is_transfer":  false
                          }
                      ]
