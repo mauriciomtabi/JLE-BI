@@ -1,9 +1,9 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-06 01:08:05
-// Fonte: Cache CSV Local (sar_local.csv)
+// Dados SAR JLE Telecom - Gerado em: 2026-10-06 08:26:19
+// Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1103,
-    "generated_at": "2026-10-06 01:08:05",
-    "source_file": "Cache CSV Local (sar_local.csv)",
+    "generated_at": "2026-10-06 08:26:19",
+    "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
         "ARROIO DO MEIO",
@@ -308,6 +308,7 @@ window.SAR_METADATA = {
         "2023"
     ],
     "competencias_medicao": [
+        "OUTUBRO/2026",
         "SETEMBRO/2026",
         "AGOSTO/2026",
         "JULHO/2026",
@@ -769,10 +770,10 @@ window.SAR_METADATA = {
         "total_classe_f": 466420.0
     },
     "medicao": {
-        "total_geral": 1451912.45,
-        "qtd_geral": 637,
-        "total_medicao_enviada": 428657.39,
-        "qtd_medicao_enviada": 156,
+        "total_geral": 1470501.29,
+        "qtd_geral": 638,
+        "total_medicao_enviada": 447246.23,
+        "qtd_medicao_enviada": 157,
         "total_finalizado": 19147.97,
         "qtd_finalizado": 12,
         "total_pedido_emitido": 1004107.09,
@@ -77313,14 +77314,14 @@ window.SAR_DATA = [
     "data_previsao_fmt": "05/10/2026",
     "data_entrega": "2026-09-09",
     "data_entrega_fmt": "09/09/2026",
-    "data_medicao": null,
-    "data_medicao_fmt": "-",
-    "competencia_medicao": "Sem Data",
-    "ano_medicao": "SEM DATA",
-    "mes_medicao": "SEM DATA",
-    "mes_num_medicao": "",
-    "status_medicao_grupo": "OUTROS",
-    "tem_medicao": false,
+    "data_medicao": "2026-10-05",
+    "data_medicao_fmt": "05/10/2026",
+    "competencia_medicao": "OUTUBRO/2026",
+    "ano_medicao": "2026",
+    "mes_medicao": "OUTUBRO",
+    "mes_num_medicao": "10",
+    "status_medicao_grupo": "MEDIÇÃO ENVIADA",
+    "tem_medicao": true,
     "data_med_cad_wf": null,
     "data_med_cad_wf_fmt": "-",
     "num_wf": "",
@@ -77333,7 +77334,7 @@ window.SAR_DATA = [
     "ano_entrega": "2026",
     "mes_entrega": "SETEMBRO",
     "mes_num_entrega": "09",
-    "status": "EM MEDIÇÃO",
+    "status": "MEDIÇÃO ENVIADA",
     "status_relatorio": "05/10/2026",
     "status_medicao": "05/10/2026",
     "status_obra": "Em Andamento",
@@ -77342,7 +77343,7 @@ window.SAR_DATA = [
     "atraso_dias": 0,
     "total_terceiros": 7509.35,
     "previa_medicao": 11456.01,
-    "valor_medicao": 0.0,
+    "valor_medicao": 18588.84,
     "valor_classe_l": 4805.35,
     "valor_classe_f": 2704.0,
     "itens_l_resumo": "2.11 CB AS: 197m, 2.15 CB ESP: 3151m",
@@ -77898,7 +77899,7 @@ window.SAR_DATA = [
     "status_medicao": "",
     "status_obra": "Em Andamento",
     "prazo": "NO PRAZO",
-    "tempo_dias": 1.0,
+    "tempo_dias": 2.0,
     "atraso_dias": 0,
     "total_terceiros": 0.0,
     "previa_medicao": 0.0,
