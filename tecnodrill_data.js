@@ -1,5 +1,5 @@
 ﻿window.TECNODRILL_DATA = {
-    "generated_at":  "2026-10-06 10:10:16",
+    "generated_at":  "2026-10-06 15:12:14",
     "empresa":  "Tecnodrill",
     "categories_origin":  {
                               "entradas":  [
@@ -17931,7 +17931,7 @@
                          }
                      ],
     "caixa":  {
-                  "gerado_em":  "2026-10-06 10:09:28",
+                  "gerado_em":  "2026-10-06 15:11:42",
                   "carlos":  [
                                  {
                                      "id":  "carlos-1",
@@ -24562,6 +24562,66 @@
                                      "valor":  28.37,
                                      "saldo":  -5234.06,
                                      "descricao":  "HB COMPENSADOS - NOTA 86612 - GUIA, TAPA FURO"
+                                 },
+                                 {
+                                     "id":  "carlos-443",
+                                     "linha":  447,
+                                     "responsavel":  "Carlos",
+                                     "data":  "2026-09-22",
+                                     "data_fmt":  "22/09/2026",
+                                     "competencia":  "SETEMBRO/2026",
+                                     "fluxo":  "Saída",
+                                     "categoria":  "Outros e Diversos",
+                                     "credito":  0,
+                                     "debito":  31.9,
+                                     "valor":  31.9,
+                                     "saldo":  -5265.96,
+                                     "descricao":  "ARV - ROCHA N: 1107 - MATERIAL , DISCO"
+                                 },
+                                 {
+                                     "id":  "carlos-444",
+                                     "linha":  448,
+                                     "responsavel":  "Carlos",
+                                     "data":  "2026-09-22",
+                                     "data_fmt":  "22/09/2026",
+                                     "competencia":  "SETEMBRO/2026",
+                                     "fluxo":  "Saída",
+                                     "categoria":  "Outros e Diversos",
+                                     "credito":  0,
+                                     "debito":  23.9,
+                                     "valor":  23.9,
+                                     "saldo":  -5289.86,
+                                     "descricao":  "ARV - ROCHA N: 1109 - MATERIAL , BICO, SOQUETE"
+                                 },
+                                 {
+                                     "id":  "carlos-445",
+                                     "linha":  449,
+                                     "responsavel":  "Carlos",
+                                     "data":  "2026-09-22",
+                                     "data_fmt":  "22/09/2026",
+                                     "competencia":  "SETEMBRO/2026",
+                                     "fluxo":  "Saída",
+                                     "categoria":  "Outros e Diversos",
+                                     "credito":  0,
+                                     "debito":  101.9,
+                                     "valor":  101.9,
+                                     "saldo":  -5391.76,
+                                     "descricao":  "ARV - ROCHA N: 1110 - MATERIAL PINCEL, ESCOVA , CONVERTEDOR DE FERRUGEM"
+                                 },
+                                 {
+                                     "id":  "carlos-446",
+                                     "linha":  450,
+                                     "responsavel":  "Carlos",
+                                     "data":  "",
+                                     "data_fmt":  "22/0*/2026",
+                                     "competencia":  "OUTROS",
+                                     "fluxo":  "Saída",
+                                     "categoria":  "Outros e Diversos",
+                                     "credito":  0,
+                                     "debito":  18.9,
+                                     "valor":  18.9,
+                                     "saldo":  -5410.66,
+                                     "descricao":  "ARV - ROCHA N: 11102- MATERIAL LIMPA CONTATO"
                                  }
                              ],
                   "denilson":  [
