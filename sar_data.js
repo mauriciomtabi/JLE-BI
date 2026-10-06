@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-06 17:00:11
+// Dados SAR JLE Telecom - Gerado em: 2026-10-06 18:00:14
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1102,
-    "generated_at": "2026-10-06 17:00:11",
+    "generated_at": "2026-10-06 18:00:14",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -763,10 +763,10 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 809729.55,
-        "total_previa_medicao": 1356758.51,
+        "total_terceiros": 810165.55,
+        "total_previa_medicao": 1357635.51,
         "total_classe_l": 341531.55,
-        "total_classe_f": 468198.0
+        "total_classe_f": 468634.0
     },
     "medicao": {
         "total_geral": 1470501.29,
@@ -55114,7 +55114,7 @@ window.SAR_DATA = [
     "classe_f": "DIOGO",
     "situacao": "SEM LANÇAMENTO",
     "relatorio_foto": "SEM LANÇAMENTO",
-    "servico": "",
+    "servico": "5 ABERTURA E FECHAMENTO, 4 FUSÕES, 1 TESTE.",
     "data_entrada": "2025-11-12",
     "data_entrada_fmt": "12/11/2025",
     "data_inicio": "2025-11-13",
@@ -55150,13 +55150,13 @@ window.SAR_DATA = [
     "prazo": "NO PRAZO",
     "tempo_dias": 1.0,
     "atraso_dias": 0,
-    "total_terceiros": 0.0,
-    "previa_medicao": 0.0,
+    "total_terceiros": 436.0,
+    "previa_medicao": 877.0,
     "valor_medicao": 0.0,
     "valor_classe_l": 0.0,
-    "valor_classe_f": 0.0,
+    "valor_classe_f": 436.0,
     "itens_l_resumo": "-",
-    "itens_f_resumo": "-",
+    "itens_f_resumo": "3.15 AB/FE: 5 un, 3.13 FUS/EME: 4 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
@@ -55165,8 +55165,8 @@ window.SAR_DATA = [
       "q_311": 0.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 0.0,
-      "q_313": 0.0,
+      "q_315": 5.0,
+      "q_313": 4.0,
       "q_314": 0.0,
       "q_312": 0.0
     }
