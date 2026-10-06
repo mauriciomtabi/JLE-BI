@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-10-06 10:00:59
+// Dados MDU Compactados - Gerado em: 2026-10-06 10:10:54
 window.MDU_METADATA = {
-    "generated_at": "2026-10-06 10:00:59",
+    "generated_at": "2026-10-06 10:10:54",
     "total_rows": 5816,
     "geocoded_new": 0
 };
@@ -184882,7 +184882,7 @@ window.MDU_DATA = [
         "prog": 0,
         "cod_imovel": "704479643",
         "area": "FLOAA",
-        "node": "",
+        "node": "FLOAHA",
         "caixa_m": "FLOAA.154.M030",
         "hps": 28,
         "data_adicio": "05/10/2026",
@@ -184914,7 +184914,7 @@ window.MDU_DATA = [
         "prog": 0,
         "cod_imovel": "703957871",
         "area": "CMQAA",
-        "node": "",
+        "node": "CMQAG",
         "caixa_m": "CMQAA.092.M010",
         "hps": 6,
         "data_adicio": "05/10/2026",
