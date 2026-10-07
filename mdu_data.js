@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-10-07 09:00:18
+// Dados MDU Compactados - Gerado em: 2026-10-07 10:00:19
 window.MDU_METADATA = {
-    "generated_at": "2026-10-07 09:00:18",
+    "generated_at": "2026-10-07 10:00:19",
     "total_rows": 5816,
     "geocoded_new": 0
 };
@@ -182893,9 +182893,9 @@ window.MDU_DATA = [
         "cluster": "PAE",
         "aging": "12",
         "relatorio_por": "DUDA (sem croqui e termo)",
-        "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "pendencia": "SIM",
+        "status": "Pendência",
+        "prog": 0.0,
         "cod_imovel": "610503204",
         "area": "VIPAA",
         "node": "",
@@ -183853,9 +183853,9 @@ window.MDU_DATA = [
         "cluster": "PAE",
         "aging": "7",
         "relatorio_por": "JENIFFER (AGUARDANDO  QUANT DE DROP)",
-        "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "pendencia": "SIM",
+        "status": "Pendência",
+        "prog": 0.0,
         "cod_imovel": "610341870",
         "area": "TRLAA",
         "node": "",
@@ -184686,7 +184686,7 @@ window.MDU_DATA = [
         "aging": "2",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Baixa",
+        "status": "Relatório",
         "prog": 0,
         "cod_imovel": "610331378",
         "area": "CNTAA",
@@ -184700,7 +184700,7 @@ window.MDU_DATA = [
         "obs_vistoria": "ADEQUADO",
         "data_interna": "25/09/2026",
         "data_fusao": "05/10/2026",
-        "data_baixa": "",
+        "data_baixa": "07/10",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
