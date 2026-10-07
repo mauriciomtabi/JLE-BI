@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-07 14:00:22
+// Dados SAR JLE Telecom - Gerado em: 2026-10-07 15:00:14
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1103,
-    "generated_at": "2026-10-07 14:00:22",
+    "generated_at": "2026-10-07 15:00:14",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -764,10 +764,10 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 810165.55,
-        "total_previa_medicao": 1357635.51,
+        "total_terceiros": 808241.05,
+        "total_previa_medicao": 1353175.87,
         "total_classe_l": 341531.55,
-        "total_classe_f": 468634.0
+        "total_classe_f": 466709.5
     },
     "medicao": {
         "total_geral": 1470501.29,
@@ -55115,13 +55115,13 @@ window.SAR_DATA = [
     "classe_f": "DIOGO",
     "situacao": "SEM LANÇAMENTO",
     "relatorio_foto": "SEM LANÇAMENTO",
-    "servico": "5 ABERTURA E FECHAMENTO, 4 FUSÕES, 1 TESTE.",
+    "servico": "4 ABERTURA E FECHAMENTO, 3 FUSÕES, 1 TESTE.",
     "data_entrada": "2025-11-12",
     "data_entrada_fmt": "12/11/2025",
     "data_inicio": "2025-11-13",
     "data_inicio_fmt": "13/11/2025",
-    "data_previsao": null,
-    "data_previsao_fmt": "-",
+    "data_previsao": "2026-10-07",
+    "data_previsao_fmt": "07/10/2026",
     "data_entrega": "2025-11-13",
     "data_entrega_fmt": "13/11/2025",
     "data_medicao": null,
@@ -55144,20 +55144,20 @@ window.SAR_DATA = [
     "ano_entrega": "2025",
     "mes_entrega": "NOVEMBRO",
     "mes_num_entrega": "11",
-    "status": "RELATÓRIO",
-    "status_relatorio": "",
-    "status_medicao": "",
+    "status": "EM MEDIÇÃO",
+    "status_relatorio": "07/10/2026",
+    "status_medicao": "07/10/2026",
     "status_obra": "Em Andamento",
     "prazo": "NO PRAZO",
     "tempo_dias": 1.0,
     "atraso_dias": 0,
-    "total_terceiros": 436.0,
-    "previa_medicao": 877.0,
+    "total_terceiros": 347.0,
+    "previa_medicao": 695.61,
     "valor_medicao": 0.0,
     "valor_classe_l": 0.0,
-    "valor_classe_f": 436.0,
+    "valor_classe_f": 347.0,
     "itens_l_resumo": "-",
-    "itens_f_resumo": "3.15 AB/FE: 5 un, 3.13 FUS/EME: 4 un",
+    "itens_f_resumo": "3.15 AB/FE: 4 un, 3.13 FUS/EME: 3 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
@@ -55166,8 +55166,8 @@ window.SAR_DATA = [
       "q_311": 0.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 5.0,
-      "q_313": 4.0,
+      "q_315": 4.0,
+      "q_313": 3.0,
       "q_314": 0.0,
       "q_312": 0.0
     }
@@ -55815,7 +55815,7 @@ window.SAR_DATA = [
     "classe_f": "DERIK / MARCOS EMILIANO",
     "situacao": "SEM LANÇAMENTO",
     "relatorio_foto": "SEM LANÇAMENTO",
-    "servico": "16 ABERTURA E FECHAMENTO, 93 FUSÕES, 4 TESTES.COBRAR 130 METROS DE CABO DE 24FO A MAIS ,130 METROS DE DROP A MAIS E 1023 METROS DE CABO DE 12FO. E 130 METROS DE RETIRADA DE DROP, 3 DERIVAÇÕES.1 CX NOVA",
+    "servico": "4 ABERTURA E FECHAMENTO, 20 FUSÕES,1 DERIVAÇÃO, 1 CX NOVA, 5 TESTES.",
     "data_entrada": "2025-12-26",
     "data_entrada_fmt": "26/12/2025",
     "data_inicio": "2025-12-27",
@@ -55851,25 +55851,25 @@ window.SAR_DATA = [
     "prazo": "NO PRAZO",
     "tempo_dias": 0.0,
     "atraso_dias": 0,
-    "total_terceiros": 2415.5,
-    "previa_medicao": 5706.12,
+    "total_terceiros": 580.0,
+    "previa_medicao": 1427.87,
     "valor_medicao": 0.0,
     "valor_classe_l": 0.0,
-    "valor_classe_f": 2415.5,
-    "itens_l_resumo": "2.15 CB ESP: 130m",
-    "itens_f_resumo": "3.11 CX EM: 1 un, 3.15 AB/FE: 16 un, 3.13 FUS/EME: 93 un, 3.12 DER/INS: 3 un",
+    "valor_classe_f": 580.0,
+    "itens_l_resumo": "-",
+    "itens_f_resumo": "3.11 CX EM: 1 un, 3.15 AB/FE: 4 un, 3.13 FUS/EME: 20 un, 3.12 DER/INS: 1 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
-      "q_215": 130.0,
+      "q_215": 0.0,
       "q_113": 0.0,
       "q_311": 1.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 16.0,
-      "q_313": 93.0,
+      "q_315": 4.0,
+      "q_313": 20.0,
       "q_314": 0.0,
-      "q_312": 3.0
+      "q_312": 1.0
     }
   },
   {
