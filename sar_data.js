@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-07 15:00:14
+// Dados SAR JLE Telecom - Gerado em: 2026-10-07 15:09:03
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1103,
-    "generated_at": "2026-10-07 15:00:14",
+    "generated_at": "2026-10-07 15:09:03",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -55816,14 +55816,14 @@ window.SAR_DATA = [
     "situacao": "SEM LANÇAMENTO",
     "relatorio_foto": "SEM LANÇAMENTO",
     "servico": "4 ABERTURA E FECHAMENTO, 20 FUSÕES,1 DERIVAÇÃO, 1 CX NOVA, 5 TESTES.",
-    "data_entrada": "2025-12-26",
-    "data_entrada_fmt": "26/12/2025",
-    "data_inicio": "2025-12-27",
-    "data_inicio_fmt": "27/12/2025",
+    "data_entrada": "2025-12-24",
+    "data_entrada_fmt": "24/12/2025",
+    "data_inicio": "2025-12-26",
+    "data_inicio_fmt": "26/12/2025",
     "data_previsao": null,
     "data_previsao_fmt": "-",
-    "data_entrega": "2025-12-27",
-    "data_entrega_fmt": "27/12/2025",
+    "data_entrega": "2025-12-26",
+    "data_entrega_fmt": "26/12/2025",
     "data_medicao": null,
     "data_medicao_fmt": "-",
     "competencia_medicao": "Sem Data",
@@ -55849,7 +55849,7 @@ window.SAR_DATA = [
     "status_medicao": "",
     "status_obra": "Em Andamento",
     "prazo": "NO PRAZO",
-    "tempo_dias": 0.0,
+    "tempo_dias": 2.0,
     "atraso_dias": 0,
     "total_terceiros": 580.0,
     "previa_medicao": 1427.87,
