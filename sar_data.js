@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-07 15:09:03
+// Dados SAR JLE Telecom - Gerado em: 2026-10-07 16:00:11
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1103,
-    "generated_at": "2026-10-07 15:09:03",
+    "generated_at": "2026-10-07 16:00:11",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -52805,7 +52805,7 @@ window.SAR_DATA = [
     "classe_f": "AUGUSTO",
     "situacao": "1700",
     "relatorio_foto": "1700",
-    "servico": "FOI LANÇADO 1700 METROS DE CABO DE 144 AUTO SUSTENTAVEL E 220 METROS DE CABO PRECON, 36 METROS DE CORDOALHA, 2 DIO, 1 CX NOVA E 144 FUSÕES E 1 DERIVAÇÃO",
+    "servico": "FOI LANÇADO 1781 METROS DE CABO DE 144 AUTO SUSTENTAVEL E 220 METROS DE CABO PRECON, 36 METROS DE CORDOALHA, 2 DIO, 1 CX NOVA E 144 FUSÕES E 1 DERIVAÇÃO",
     "data_entrada": "2025-10-10",
     "data_entrada_fmt": "10/10/2025",
     "data_inicio": "2025-10-16",
