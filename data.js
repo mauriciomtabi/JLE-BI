@@ -1,5 +1,5 @@
 ﻿window.CASH_FLOW_DATA = {
-    "generated_at":  "2026-10-06 15:10:43",
+    "generated_at":  "2026-10-07 10:05:05",
     "categories_origin":  {
                               "entradas":  [
 
@@ -12,22 +12,6 @@
                                         ]
                           },
     "transactions":  [
-                         {
-                             "id":  "Cartão de Crédito_11",
-                             "banco":  "Outros",
-                             "aba":  "Cartão de Crédito",
-                             "remessa":  "MANUAL",
-                             "competencia":  "N/D",
-                             "data":  "2026-01-01",
-                             "uf":  "N/D",
-                             "fluxo":  "Saída",
-                             "categoria":  "Saldo Inicial",
-                             "descricao":  "Cartão de Crédito",
-                             "valor_nominal":  0,
-                             "valor_liquido":  0,
-                             "meio_pagamento":  "Cartão Crédito",
-                             "is_transfer":  false
-                         },
                          {
                              "id":  "JAN_2026 CONFIANÇA_11",
                              "banco":  "Sicoob Confiança",
@@ -161290,6 +161274,22 @@
                              "valor_nominal":  3618893.64,
                              "valor_liquido":  3618893.64,
                              "meio_pagamento":  "Transferência Bancária",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "CARTAO VISA_OUT_2026_11",
+                             "banco":  "Cartão de Crédito",
+                             "aba":  "CARTAO VISA_OUT_2026",
+                             "remessa":  "MANUAL",
+                             "competencia":  "OUTUBRO/2026",
+                             "data":  "2026-01-01",
+                             "uf":  "N/D",
+                             "fluxo":  "Saída",
+                             "categoria":  "Saldo Inicial",
+                             "descricao":  "Cartão de Crédito",
+                             "valor_nominal":  0,
+                             "valor_liquido":  0,
+                             "meio_pagamento":  "Cartão Crédito",
                              "is_transfer":  false
                          }
                      ]
