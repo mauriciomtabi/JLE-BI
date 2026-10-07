@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-10-07 10:00:19
+// Dados MDU Compactados - Gerado em: 2026-10-07 10:06:57
 window.MDU_METADATA = {
-    "generated_at": "2026-10-07 10:00:19",
+    "generated_at": "2026-10-07 10:06:57",
     "total_rows": 5816,
-    "geocoded_new": 0
+    "geocoded_new": 1
 };
 
 window.MDU_DATA = [
@@ -185096,35 +185096,35 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505640",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "JORDÃO 142",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
+        "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
+        "status": "Baixa",
         "prog": 0,
         "cod_imovel": "",
-        "area": "",
+        "area": "BVSAB",
         "node": "",
-        "caixa_m": "",
-        "hps": null,
-        "data_adicio": "",
-        "equipe": "",
-        "primeira_visita": "",
+        "caixa_m": "BVSAB.223.M020",
+        "hps": 6,
+        "data_adicio": "07/10/2026",
+        "equipe": "David Salomão",
+        "primeira_visita": "03/10/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
-        "data_interna": "",
-        "data_fusao": "",
+        "obs_vistoria": "ADEQUADO",
+        "data_interna": "03/10/2026",
+        "data_fusao": "03/10/2026",
         "data_baixa": "",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0424343,
+        "lng": -51.1651714,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505641",
