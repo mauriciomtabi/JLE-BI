@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-08 10:00:20
+// Dados SAR JLE Telecom - Gerado em: 2026-10-08 10:07:35
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1103,
-    "generated_at": "2026-10-08 10:00:20",
+    "generated_at": "2026-10-08 10:07:35",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -769,10 +769,10 @@ window.SAR_METADATA = {
         "total_classe_f": 466709.5
     },
     "medicao": {
-        "total_geral": 1465323.72,
-        "qtd_geral": 636,
-        "total_medicao_enviada": 442068.66,
-        "qtd_medicao_enviada": 155,
+        "total_geral": 1464933.66,
+        "qtd_geral": 635,
+        "total_medicao_enviada": 441678.6,
+        "qtd_medicao_enviada": 154,
         "total_finalizado": 19147.97,
         "qtd_finalizado": 12,
         "total_pedido_emitido": 1004107.09,
@@ -72139,7 +72139,7 @@ window.SAR_DATA = [
     "ano_medicao": "2026",
     "mes_medicao": "SETEMBRO",
     "mes_num_medicao": "09",
-    "status_medicao_grupo": "MEDIÇÃO ENVIADA",
+    "status_medicao_grupo": "OUTROS",
     "tem_medicao": true,
     "data_med_cad_wf": "2026-10-08",
     "data_med_cad_wf_fmt": "08/10/2026",
@@ -72153,10 +72153,10 @@ window.SAR_DATA = [
     "ano_entrega": "2026",
     "mes_entrega": "JUNHO",
     "mes_num_entrega": "06",
-    "status": "MEDIÇÃO ENVIADA",
+    "status": "MEDIÇÃO CONCLUÍDA",
     "status_relatorio": "07/07/2026",
     "status_medicao": "07/07/2026",
-    "status_obra": "Em Andamento",
+    "status_obra": "Concluído Campo",
     "prazo": "NO PRAZO",
     "tempo_dias": 1.0,
     "atraso_dias": 0,
@@ -72211,9 +72211,9 @@ window.SAR_DATA = [
     "mes_num_medicao": "09",
     "status_medicao_grupo": "MEDIÇÃO ENVIADA",
     "tem_medicao": true,
-    "data_med_cad_wf": null,
-    "data_med_cad_wf_fmt": "-",
-    "num_wf": "",
+    "data_med_cad_wf": "2026-10-08",
+    "data_med_cad_wf_fmt": "08/10/2026",
+    "num_wf": "5725137",
     "status_wf": "",
     "competencia": "JUNHO/2026",
     "ano": "2026",
