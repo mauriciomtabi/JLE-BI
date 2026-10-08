@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-10-08 15:00:27
+// Dados MDU Compactados - Gerado em: 2026-10-08 15:08:18
 window.MDU_METADATA = {
-    "generated_at": "2026-10-08 15:00:27",
+    "generated_at": "2026-10-08 15:08:18",
     "total_rows": 5815,
     "geocoded_new": 0
 };
@@ -152428,7 +152428,7 @@ window.MDU_DATA = [
         "cidade": "NOVO HAMBURGO",
         "cluster": "NHO",
         "aging": "139",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
@@ -152492,7 +152492,7 @@ window.MDU_DATA = [
         "cidade": "NOVO HAMBURGO",
         "cluster": "NHO",
         "aging": "139",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
@@ -152556,7 +152556,7 @@ window.MDU_DATA = [
         "cidade": "NOVO HAMBURGO",
         "cluster": "NHO",
         "aging": "139",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
@@ -152652,7 +152652,7 @@ window.MDU_DATA = [
         "cidade": "NOVO HAMBURGO",
         "cluster": "NHO",
         "aging": "139",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
@@ -182252,7 +182252,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "14",
-        "relatorio_por": "JENIFFER",
+        "relatorio_por": "",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
