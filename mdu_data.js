@@ -1,7 +1,7 @@
-// Dados MDU Compactados - Gerado em: 2026-10-09 15:07:04
+// Dados MDU Compactados - Gerado em: 2026-10-09 16:00:24
 window.MDU_METADATA = {
-    "generated_at": "2026-10-09 15:07:04",
-    "total_rows": 5840,
+    "generated_at": "2026-10-09 16:00:24",
+    "total_rows": 5839,
     "geocoded_new": 0
 };
 
@@ -171191,7 +171191,7 @@ window.MDU_DATA = [
         "hps": 20,
         "data_adicio": "06/08/2026",
         "equipe": "David Salomão",
-        "primeira_visita": "",
+        "primeira_visita": "06/08/2026",
         "segunda_visita": "",
         "obs_vistoria": "ADEQUADO",
         "data_interna": "06/08/2026",
@@ -185996,10 +185996,10 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "0",
-        "relatorio_por": "JENIFFER (ponta de cabo)",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610661401",
         "area": "MNDAB",
         "node": "",
@@ -186014,7 +186014,7 @@ window.MDU_DATA = [
         "data_fusao": "07/10/2026",
         "data_baixa": "09/10",
         "obs_baixa": "",
-        "data_relatorio": "",
+        "data_relatorio": "09/10/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
@@ -186062,8 +186062,8 @@ window.MDU_DATA = [
         "aging": "0",
         "relatorio_por": "JENIFFER",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610500035",
         "area": "NAVAA",
         "node": "",
@@ -186078,7 +186078,7 @@ window.MDU_DATA = [
         "data_fusao": "07/10/2026",
         "data_baixa": "09/10",
         "obs_baixa": "",
-        "data_relatorio": "",
+        "data_relatorio": "09/10/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
@@ -186094,9 +186094,9 @@ window.MDU_DATA = [
         "aging": "0",
         "relatorio_por": "JENIFFER",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
-        "cod_imovel": "",
+        "status": "Medição",
+        "prog": 88.0,
+        "cod_imovel": "703411388",
         "area": "NAVAB",
         "node": "",
         "caixa_m": "NAVAB.124.M010",
@@ -186110,7 +186110,7 @@ window.MDU_DATA = [
         "data_fusao": "08/10/2026",
         "data_baixa": "09/10",
         "obs_baixa": "",
-        "data_relatorio": "",
+        "data_relatorio": "09/10/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
@@ -186128,7 +186128,7 @@ window.MDU_DATA = [
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
-        "cod_imovel": "",
+        "cod_imovel": "610459198",
         "area": "MNDAB",
         "node": "",
         "caixa_m": "MNDAB.021.M020",
@@ -186159,7 +186159,7 @@ window.MDU_DATA = [
         "relatorio_por": "",
         "pendencia": "Não",
         "status": "Relatório",
-        "prog": 0,
+        "prog": 75.0,
         "cod_imovel": "",
         "area": "CTLAA",
         "node": "",
@@ -186183,7 +186183,7 @@ window.MDU_DATA = [
         "geocodificado": true
     },
     {
-        "os": "RS.CLR.PRD.2505675",
+        "os": "RS.CLR.PRD.2505620",
         "endereco": "",
         "cidade": "NÃO DEFINIDA",
         "cluster": "",
@@ -186215,7 +186215,7 @@ window.MDU_DATA = [
         "geocodificado": false
     },
     {
-        "os": "RS.CLR.PRD.2505676",
+        "os": "RS.CLR.PRD.2505621",
         "endereco": "",
         "cidade": "NÃO DEFINIDA",
         "cluster": "",
@@ -186247,7 +186247,7 @@ window.MDU_DATA = [
         "geocodificado": false
     },
     {
-        "os": "RS.CLR.PRD.2505677",
+        "os": "RS.CLR.PRD.2505622",
         "endereco": "",
         "cidade": "NÃO DEFINIDA",
         "cluster": "",
@@ -186279,7 +186279,7 @@ window.MDU_DATA = [
         "geocodificado": false
     },
     {
-        "os": "RS.CLR.PRD.2505678",
+        "os": "RS.CLR.PRD.2505623",
         "endereco": "",
         "cidade": "NÃO DEFINIDA",
         "cluster": "",
@@ -186311,7 +186311,7 @@ window.MDU_DATA = [
         "geocodificado": false
     },
     {
-        "os": "RS.CLR.PRD.2505679",
+        "os": "RS.CLR.PRD.2505624",
         "endereco": "",
         "cidade": "NÃO DEFINIDA",
         "cluster": "",
@@ -186343,7 +186343,7 @@ window.MDU_DATA = [
         "geocodificado": false
     },
     {
-        "os": "RS.CLR.PRD.2505680",
+        "os": "RS.CLR.PRD.2505625",
         "endereco": "",
         "cidade": "NÃO DEFINIDA",
         "cluster": "",
@@ -186375,39 +186375,7 @@ window.MDU_DATA = [
         "geocodificado": false
     },
     {
-        "os": "RS.CLR.PRD.2505681",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
-        "relatorio_por": "",
-        "pendencia": "Não",
-        "status": "",
-        "prog": 0,
-        "cod_imovel": "",
-        "area": "",
-        "node": "",
-        "caixa_m": "",
-        "hps": null,
-        "data_adicio": "",
-        "equipe": "",
-        "primeira_visita": "",
-        "segunda_visita": "",
-        "obs_vistoria": "",
-        "data_interna": "",
-        "data_fusao": "",
-        "data_baixa": "",
-        "obs_baixa": "",
-        "data_relatorio": "",
-        "data_medicao": "",
-        "valor_medicao": 0,
-        "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
-    },
-    {
-        "os": "RS.CLR.PRD.2505682",
+        "os": "RS.CLR.PRD.2505626",
         "endereco": "",
         "cidade": "NÃO DEFINIDA",
         "cluster": "",
