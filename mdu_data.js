@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-10-10 14:52:12
+// Dados MDU Compactados - Gerado em: 2026-10-10 15:00:31
 window.MDU_METADATA = {
-    "generated_at": "2026-10-10 14:52:12",
+    "generated_at": "2026-10-10 15:00:31",
     "total_rows": 5839,
     "geocoded_new": 0
 };
