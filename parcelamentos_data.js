@@ -1,10 +1,10 @@
 // Dados Consolidados de Parcelamentos Tributários JLE Telecom
-// Gerado automaticamente pelo pipeline ETL em 01/10/2026 15:03:12
+// Gerado automaticamente pelo pipeline ETL em 13/10/2026 16:17:39
 
 window.PARCELAMENTOS_DATA = {
   "metadata": {
     "source_file": "Cópia de Controle parcelamentos JLE_Atualizada_BI.xlsx",
-    "generated_at": "01/10/2026 15:03:12",
+    "generated_at": "13/10/2026 16:17:39",
     "reference_position": "Setembro/2026"
   },
   "overview": {},
@@ -4266,11 +4266,11 @@ window.PARCELAMENTOS_DATA = {
   ],
   "saldo_credor_inss": {
     "totais": {
-      "total_retencao_nf": 659771.76,
-      "total_utilizado_folha": 507402.82,
-      "saldo_credor_acumulado": 152368.94,
-      "media_mensal_saldo": 30473.79,
-      "meses_apurados": 5
+      "total_retencao_nf": 790646.99,
+      "total_utilizado_folha": 609188.02,
+      "saldo_credor_acumulado": 181458.97,
+      "media_mensal_saldo": 30243.16,
+      "meses_apurados": 6
     },
     "itens": [
       {
@@ -4326,12 +4326,12 @@ window.PARCELAMENTOS_DATA = {
       {
         "competencia": "set/26",
         "competencia_iso": "2026-09",
-        "retencao_nf": 0.0,
-        "utilizado_folha": 0.0,
-        "saldo_mes": 0.0,
-        "saldo_acumulado": 0.0,
-        "has_movement": false,
-        "status": "Pendente"
+        "retencao_nf": 130875.23,
+        "utilizado_folha": 101785.2,
+        "saldo_mes": 29090.03,
+        "saldo_acumulado": 181458.97,
+        "has_movement": true,
+        "status": "Compensado"
       },
       {
         "competencia": "out/26",
