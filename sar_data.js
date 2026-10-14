@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-14 16:00:12
+// Dados SAR JLE Telecom - Gerado em: 2026-10-14 16:45:14
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1110,
-    "generated_at": "2026-10-14 16:00:12",
+    "generated_at": "2026-10-14 16:45:14",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -763,10 +763,10 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 808241.05,
-        "total_previa_medicao": 1353175.87,
+        "total_terceiros": 808750.55,
+        "total_previa_medicao": 1354303.44,
         "total_classe_l": 341531.55,
-        "total_classe_f": 466709.5
+        "total_classe_f": 467219.0
     },
     "medicao": {
         "total_geral": 1417109.2,
@@ -77924,7 +77924,7 @@ window.SAR_DATA = [
   {
     "cod": "RSCLER1106",
     "area_tecnica": "BFMAB",
-    "node": "",
+    "node": "BFMAH",
     "site": "RSPCE13",
     "cidade": "PORTO ALEGRE",
     "condominio": "ED. AÇORES",
@@ -77934,7 +77934,7 @@ window.SAR_DATA = [
     "classe_f": "CATIA",
     "situacao": "SEM LANÇAMENTO",
     "relatorio_foto": "SEM LANÇAMENTO",
-    "servico": "",
+    "servico": "5 ABERTURA E FECHAMENTO, 11 FUSÕES, 3 TESTES OTDR, 4 TESTES.",
     "data_entrada": "2026-10-07",
     "data_entrada_fmt": "07/10/2026",
     "data_inicio": "2026-10-12",
@@ -77970,13 +77970,13 @@ window.SAR_DATA = [
     "prazo": "NO PRAZO",
     "tempo_dias": 3.0,
     "atraso_dias": 0,
-    "total_terceiros": 0.0,
-    "previa_medicao": 0.0,
+    "total_terceiros": 509.5,
+    "previa_medicao": 1127.57,
     "valor_medicao": 0.0,
     "valor_classe_l": 0.0,
-    "valor_classe_f": 0.0,
+    "valor_classe_f": 509.5,
     "itens_l_resumo": "-",
-    "itens_f_resumo": "-",
+    "itens_f_resumo": "3.15 AB/FE: 5 un, 3.13 FUS/EME: 11 un, 3.14 OTDR: 3 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
@@ -77985,9 +77985,9 @@ window.SAR_DATA = [
       "q_311": 0.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 0.0,
-      "q_313": 0.0,
-      "q_314": 0.0,
+      "q_315": 5.0,
+      "q_313": 11.0,
+      "q_314": 3.0,
       "q_312": 0.0
     }
   },
