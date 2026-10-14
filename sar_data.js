@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-14 10:00:16
+// Dados SAR JLE Telecom - Gerado em: 2026-10-14 10:09:01
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1110,
-    "generated_at": "2026-10-14 10:00:16",
+    "generated_at": "2026-10-14 10:09:01",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -769,10 +769,10 @@ window.SAR_METADATA = {
         "total_classe_f": 466709.5
     },
     "medicao": {
-        "total_geral": 1426519.09,
-        "qtd_geral": 618,
-        "total_medicao_enviada": 403264.03,
-        "qtd_medicao_enviada": 137,
+        "total_geral": 1425527.63,
+        "qtd_geral": 617,
+        "total_medicao_enviada": 402272.57,
+        "qtd_medicao_enviada": 136,
         "total_finalizado": 19147.97,
         "qtd_finalizado": 12,
         "total_pedido_emitido": 1004107.09,
@@ -67591,9 +67591,9 @@ window.SAR_DATA = [
     "mes_num_medicao": "09",
     "status_medicao_grupo": "MEDIÇÃO ENVIADA",
     "tem_medicao": true,
-    "data_med_cad_wf": null,
-    "data_med_cad_wf_fmt": "-",
-    "num_wf": "",
+    "data_med_cad_wf": "2026-10-14",
+    "data_med_cad_wf_fmt": "14/10/2026",
+    "num_wf": "5735240",
     "status_wf": "",
     "competencia": "JUNHO/2026",
     "ano": "2026",
@@ -67729,7 +67729,7 @@ window.SAR_DATA = [
     "ano_medicao": "2026",
     "mes_medicao": "SETEMBRO",
     "mes_num_medicao": "09",
-    "status_medicao_grupo": "MEDIÇÃO ENVIADA",
+    "status_medicao_grupo": "OUTROS",
     "tem_medicao": true,
     "data_med_cad_wf": "2026-10-14",
     "data_med_cad_wf_fmt": "14/10/2026",
@@ -67743,10 +67743,10 @@ window.SAR_DATA = [
     "ano_entrega": "2026",
     "mes_entrega": "AGOSTO",
     "mes_num_entrega": "08",
-    "status": "MEDIÇÃO ENVIADA",
+    "status": "MEDIÇÃO CONCLUÍDA",
     "status_relatorio": "27/08/2026",
     "status_medicao": "27/08/2026",
-    "status_obra": "Em Andamento",
+    "status_obra": "Concluído Campo",
     "prazo": "NO PRAZO",
     "tempo_dias": 0.0,
     "atraso_dias": 0,
