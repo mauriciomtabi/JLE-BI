@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-10-14 15:00:46
+// Dados MDU Compactados - Gerado em: 2026-10-14 15:10:35
 window.MDU_METADATA = {
-    "generated_at": "2026-10-14 15:00:46",
+    "generated_at": "2026-10-14 15:10:35",
     "total_rows": 5840,
     "geocoded_new": 0
 };
@@ -160878,8 +160878,8 @@ window.MDU_DATA = [
         "aging": "104",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Baixa",
-        "prog": 63.0,
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "610511103",
         "area": "CNTAA",
         "node": "CNTAL",
@@ -160892,7 +160892,7 @@ window.MDU_DATA = [
         "obs_vistoria": "ADEQUADO, AGUARDANDO SAR PARA UMA NAP",
         "data_interna": "25/06",
         "data_fusao": "25/06",
-        "data_baixa": "",
+        "data_baixa": "14/10",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
