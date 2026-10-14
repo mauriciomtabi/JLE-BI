@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-14 16:45:14
+// Dados SAR JLE Telecom - Gerado em: 2026-10-14 17:00:25
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1110,
-    "generated_at": "2026-10-14 16:45:14",
+    "generated_at": "2026-10-14 17:00:25",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -77939,8 +77939,8 @@ window.SAR_DATA = [
     "data_entrada_fmt": "07/10/2026",
     "data_inicio": "2026-10-12",
     "data_inicio_fmt": "12/10/2026",
-    "data_previsao": null,
-    "data_previsao_fmt": "-",
+    "data_previsao": "2026-10-14",
+    "data_previsao_fmt": "14/10/2026",
     "data_entrega": "2026-10-12",
     "data_entrega_fmt": "12/10/2026",
     "data_medicao": null,
@@ -77963,9 +77963,9 @@ window.SAR_DATA = [
     "ano_entrega": "2026",
     "mes_entrega": "OUTUBRO",
     "mes_num_entrega": "10",
-    "status": "RELATÓRIO",
-    "status_relatorio": "",
-    "status_medicao": "",
+    "status": "EM MEDIÇÃO",
+    "status_relatorio": "14/10/2026",
+    "status_medicao": "14/10/2026",
     "status_obra": "Em Andamento",
     "prazo": "NO PRAZO",
     "tempo_dias": 3.0,
@@ -78002,8 +78002,8 @@ window.SAR_DATA = [
     "caixa_mdu": "BFMAA.061.M040",
     "classe_l": "CLEVERSON",
     "classe_f": "CATIA",
-    "situacao": "290",
-    "relatorio_foto": "",
+    "situacao": "299",
+    "relatorio_foto": "299",
     "servico": "",
     "data_entrada": "2026-10-08",
     "data_entrada_fmt": "08/10/2026",
