@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-15 14:00:15
+// Dados SAR JLE Telecom - Gerado em: 2026-10-15 15:00:17
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1118,
-    "generated_at": "2026-10-15 14:00:15",
+    "generated_at": "2026-10-15 15:00:17",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -763,10 +763,10 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 811204.85,
-        "total_previa_medicao": 1359397.21,
-        "total_classe_l": 342247.85,
-        "total_classe_f": 468957.0
+        "total_terceiros": 811983.4,
+        "total_previa_medicao": 1360970.71,
+        "total_classe_l": 342362.4,
+        "total_classe_f": 469621.0
     },
     "medicao": {
         "total_geral": 1417109.2,
@@ -78282,9 +78282,9 @@ window.SAR_DATA = [
     "caixa_mdu": "TRLAA.101.M030",
     "classe_l": "CLEVERSON",
     "classe_f": "CATIA",
-    "situacao": "75",
-    "relatorio_foto": "",
-    "servico": "",
+    "situacao": "79",
+    "relatorio_foto": "79",
+    "servico": "FOI LANÇADO 79 METROS DE CABO DE 12FO, 6 ABERTURA E FECHAMENTO,",
     "data_entrada": "2026-10-09",
     "data_entrada_fmt": "09/10/2026",
     "data_inicio": "2026-10-14",
@@ -78313,32 +78313,32 @@ window.SAR_DATA = [
     "ano_entrega": "2026",
     "mes_entrega": "OUTUBRO",
     "mes_num_entrega": "10",
-    "status": "RELATÓRIO",
+    "status": "EM MEDIÇÃO",
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Em Andamento",
     "prazo": "NO PRAZO",
     "tempo_dias": 3.0,
     "atraso_dias": 0,
-    "total_terceiros": 0.0,
-    "previa_medicao": 0.0,
+    "total_terceiros": 778.55,
+    "previa_medicao": 1573.5,
     "valor_medicao": 0.0,
-    "valor_classe_l": 0.0,
-    "valor_classe_f": 0.0,
-    "itens_l_resumo": "-",
-    "itens_f_resumo": "-",
+    "valor_classe_l": 114.55,
+    "valor_classe_f": 664.0,
+    "itens_l_resumo": "2.15 CB ESP: 79m",
+    "itens_f_resumo": "3.11 CX EM: 1 un, 3.15 AB/FE: 6 un, 3.13 FUS/EME: 10 un, 3.14 OTDR: 4 un, 3.12 DER/INS: 1 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
-      "q_215": 0.0,
+      "q_215": 79.0,
       "q_113": 0.0,
-      "q_311": 0.0,
+      "q_311": 1.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 0.0,
-      "q_313": 0.0,
-      "q_314": 0.0,
-      "q_312": 0.0
+      "q_315": 6.0,
+      "q_313": 10.0,
+      "q_314": 4.0,
+      "q_312": 1.0
     }
   },
   {
