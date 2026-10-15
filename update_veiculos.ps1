@@ -1,3 +1,14 @@
+param([switch]$UseSpreadsheet)
+
+# API e a fonte padrao. Planilha somente por solicitacao explicita de contingencia.
+if (-not $UseSpreadsheet) {
+    & python "$PSScriptRoot\fetch_veiculos_ticket_api.py"
+    if ($LASTEXITCODE -ne 0) {
+        throw "Falha na API Ticket. Base anterior preservada; nenhuma planilha foi importada automaticamente."
+    }
+    return
+}
+
 $userPath = [System.Environment]::GetEnvironmentVariable("PATH", "User")
 $sysPath = [System.Environment]::GetEnvironmentVariable("PATH", "Machine")
 $env:Path = "$userPath;$sysPath;$env:Path"
