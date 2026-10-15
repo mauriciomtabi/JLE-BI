@@ -1,7 +1,7 @@
 // Data generated 100% from Master Excel Controle de Medições (Mnt. Demanda)
 (function() {
     const db = {
-  "generated_at": "2026-10-15 16:00:32",
+  "generated_at": "2026-10-15 17:00:27",
   "lookups": {
     "tipos_of": [
       "TIPO\nOS CLIENTE",
@@ -166,7 +166,8 @@
     ],
     "statuses": [
       "PEDIDO_GERADO",
-      "AGUARD_APROVACAO"
+      "AGUARD_APROVACAO",
+      "APROVADO"
     ],
     "tipos_defeito": [
       "TIPO DE ATIVIDADE",
@@ -65871,7 +65872,7 @@
       "ROMPIMENTO - NODE B RSGTI56 X RSGTI29",
       1,
       5,
-      1,
+      2,
       "28/09/2026",
       1,
       1,
@@ -65879,9 +65880,9 @@
       1422.29,
       7,
       0,
+      "5723073",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3648",
