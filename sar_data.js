@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-15 15:11:31
+// Dados SAR JLE Telecom - Gerado em: 2026-10-15 16:00:21
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1120,
-    "generated_at": "2026-10-15 15:11:31",
+    "generated_at": "2026-10-15 16:00:21",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -763,10 +763,10 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 811983.4,
-        "total_previa_medicao": 1360970.71,
+        "total_terceiros": 812599.4,
+        "total_previa_medicao": 1362446.71,
         "total_classe_l": 342362.4,
-        "total_classe_f": 469621.0
+        "total_classe_f": 470237.0
     },
     "medicao": {
         "total_geral": 1417109.2,
@@ -78289,8 +78289,8 @@ window.SAR_DATA = [
     "data_entrada_fmt": "09/10/2026",
     "data_inicio": "2026-10-14",
     "data_inicio_fmt": "14/10/2026",
-    "data_previsao": null,
-    "data_previsao_fmt": "-",
+    "data_previsao": "2026-10-15",
+    "data_previsao_fmt": "15/10/2026",
     "data_entrega": "2026-10-14",
     "data_entrega_fmt": "14/10/2026",
     "data_medicao": null,
@@ -78314,8 +78314,8 @@ window.SAR_DATA = [
     "mes_entrega": "OUTUBRO",
     "mes_num_entrega": "10",
     "status": "EM MEDIÇÃO",
-    "status_relatorio": "",
-    "status_medicao": "",
+    "status_relatorio": "15/10/2026",
+    "status_medicao": "15/10/2026",
     "status_obra": "Em Andamento",
     "prazo": "NO PRAZO",
     "tempo_dias": 3.0,
@@ -78354,13 +78354,13 @@ window.SAR_DATA = [
     "classe_f": "CATIA",
     "situacao": "SEM LANÇAMENTO",
     "relatorio_foto": "SEM LANÇAMENTO",
-    "servico": "",
+    "servico": "5 ABERTURA E FECHAMENTO, 24 FUSÕES, 6 TESTES.",
     "data_entrada": "2026-10-09",
     "data_entrada_fmt": "09/10/2026",
     "data_inicio": "2026-10-12",
     "data_inicio_fmt": "12/10/2026",
-    "data_previsao": null,
-    "data_previsao_fmt": "-",
+    "data_previsao": "2026-10-15",
+    "data_previsao_fmt": "15/10/2026",
     "data_entrega": "2026-10-12",
     "data_entrega_fmt": "12/10/2026",
     "data_medicao": null,
@@ -78383,20 +78383,20 @@ window.SAR_DATA = [
     "ano_entrega": "2026",
     "mes_entrega": "OUTUBRO",
     "mes_num_entrega": "10",
-    "status": "RELATÓRIO",
-    "status_relatorio": "",
-    "status_medicao": "",
+    "status": "EM MEDIÇÃO",
+    "status_relatorio": "15/10/2026",
+    "status_medicao": "15/10/2026",
     "status_obra": "Em Andamento",
     "prazo": "NO PRAZO",
     "tempo_dias": 1.0,
     "atraso_dias": 0,
-    "total_terceiros": 0.0,
-    "previa_medicao": 0.0,
+    "total_terceiros": 616.0,
+    "previa_medicao": 1476.0,
     "valor_medicao": 0.0,
     "valor_classe_l": 0.0,
-    "valor_classe_f": 0.0,
+    "valor_classe_f": 616.0,
     "itens_l_resumo": "-",
-    "itens_f_resumo": "-",
+    "itens_f_resumo": "3.15 AB/FE: 5 un, 3.13 FUS/EME: 24 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
@@ -78405,8 +78405,8 @@ window.SAR_DATA = [
       "q_311": 0.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 0.0,
-      "q_313": 0.0,
+      "q_315": 5.0,
+      "q_313": 24.0,
       "q_314": 0.0,
       "q_312": 0.0
     }
