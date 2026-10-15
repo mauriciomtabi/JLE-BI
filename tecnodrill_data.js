@@ -1,5 +1,5 @@
 ﻿window.TECNODRILL_DATA = {
-    "generated_at":  "2026-10-15 10:07:55",
+    "generated_at":  "2026-10-15 15:10:20",
     "empresa":  "Tecnodrill",
     "categories_origin":  {
                               "entradas":  [
@@ -18442,6 +18442,22 @@
                              "is_transfer":  false
                          },
                          {
+                             "id":  "OUT__2026_TECNODRILL_CONFIA_43",
+                             "banco":  "Sicoob Confiança",
+                             "aba":  "OUT _2026 TECNODRILL CONFIA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "OUTUBRO/2026",
+                             "data":  "2026-10-14",
+                             "uf":  "OUTUBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Manut. De Veículos",
+                             "descricao":  "HS CENTRO AUTOMOTIVO",
+                             "valor_nominal":  490,
+                             "valor_liquido":  -490,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
                              "id":  "OUT__2026_TECNODRILL_MAX_11",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "OUT _2026 TECNODRILL MAX",
@@ -18811,7 +18827,7 @@
                          }
                      ],
     "caixa":  {
-                  "gerado_em":  "2026-10-15 10:07:17",
+                  "gerado_em":  "2026-10-15 15:09:53",
                   "carlos":  [
                                  {
                                      "id":  "carlos-1",
