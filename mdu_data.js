@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-10-15 08:18:39
+// Dados MDU Compactados - Gerado em: 2026-10-15 09:00:45
 window.MDU_METADATA = {
-    "generated_at": "2026-10-15 08:18:39",
+    "generated_at": "2026-10-15 09:00:45",
     "total_rows": 5840,
-    "geocoded_new": 0
+    "geocoded_new": 1
 };
 
 window.MDU_DATA = [
@@ -186600,35 +186600,35 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505688",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "AV MARILAND 1730",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
+        "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
+        "status": "Baixa",
         "prog": 0,
         "cod_imovel": "",
-        "area": "",
+        "area": "MTSAA",
         "node": "",
-        "caixa_m": "",
-        "hps": null,
-        "data_adicio": "",
-        "equipe": "",
-        "primeira_visita": "",
+        "caixa_m": "MTSAA.182.M040",
+        "hps": 14,
+        "data_adicio": "15/10/2026",
+        "equipe": "Guilherme Albrecht",
+        "primeira_visita": "06/10/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
-        "data_interna": "",
-        "data_fusao": "",
+        "obs_vistoria": "ADEQUADO",
+        "data_interna": "06/10/2026",
+        "data_fusao": "06/10/2026",
         "data_baixa": "",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0300985,
+        "lng": -51.1929378,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505689",
