@@ -11,7 +11,7 @@ Write-Output "REGISTRANDO AGENDAMENTO AUTOMATICO - FINANCIAMENTOS JLE"
 Write-Output "=========================================================="
 
 # Definir ação: Powershell com execução oculta
-$action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-ExecutionPolicy Bypass -WindowStyle Hidden -File `"$scriptPath`"" -WorkingDirectory "$workingDir"
+$action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -NonInteractive -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$scriptPath`"" -WorkingDirectory "$workingDir"
 
 # Definir gatilhos: Segunda a Sexta das 08h às 18h (de hora em hora)
 $triggers = @()
@@ -19,9 +19,10 @@ $triggers = @()
     $hourStr = "{0:D2}:00" -f $_
     $triggers += (New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -At $hourStr)
 }
+$triggers += New-ScheduledTaskTrigger -AtLogOn -User ([System.Security.Principal.WindowsIdentity]::GetCurrent().Name)
 
 # Definir configurações de resiliência
-$settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -ExecutionTimeLimit (New-TimeSpan -Hours 1)
+$settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -WakeToRun -RestartCount 3 -RestartInterval (New-TimeSpan -Minutes 10) -MultipleInstances IgnoreNew -ExecutionTimeLimit (New-TimeSpan -Hours 1)
 
 # Registrar a tarefa para o usuário atual
 try {

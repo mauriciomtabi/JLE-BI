@@ -1,3 +1,5 @@
+$ErrorActionPreference = 'Stop'
+Start-Transcript -Path "$PSScriptRoot\financiamentos_update.log" -Append | Out-Null
 $userPath = [System.Environment]::GetEnvironmentVariable("PATH", "User")
 $sysPath = [System.Environment]::GetEnvironmentVariable("PATH", "Machine")
 $env:Path = "$userPath;$sysPath;$env:Path"
@@ -55,9 +57,13 @@ if (Test-Path $gitPath) {
 
         Write-Output "Enviando atualizacao de Financiamentos para o repositorio remoto..."
         & $gitPath add financiamentos_data.js sw.js index.html financiamentos_app.js financiamentos_styles.css update_financiamentos.py update_financiamentos.ps1
+        if ($LASTEXITCODE -ne 0) { throw "Falha ao preparar arquivos no Git." }
         & $gitPath commit -m "feat(financiamentos): atualizacao das PMTs e cronogramas de financiamento"
+        if ($LASTEXITCODE -ne 0) { throw "Falha ao registrar atualizacao no Git." }
         & $gitPath pull --rebase --autostash origin main
+        if ($LASTEXITCODE -ne 0) { throw "Falha ao sincronizar o repositorio remoto." }
         & $gitPath push origin main
+        if ($LASTEXITCODE -ne 0) { throw "Falha ao publicar atualizacao de Financiamentos." }
         Write-Output "Deploy automatico de Financiamentos disparado com sucesso via GitHub/Vercel!"
     } else {
         Write-Output "Base de Financiamentos ja esta em dia com o repositorio remoto."
@@ -67,3 +73,4 @@ if (Test-Path $gitPath) {
 Write-Output "=========================================================="
 Write-Output "PROCESSO DE ATUALIZACAO DE FINANCIAMENTOS CONCLUIDO!"
 Write-Output "=========================================================="
+Stop-Transcript | Out-Null
