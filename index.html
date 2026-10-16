@@ -3969,7 +3969,7 @@
     <script src="manutencao_app.js"></script>
     <script src="parcelamentos_data.js?v=20261013161739"></script>
     <script src="parcelamentos_app.js?v=1.7"></script>
-    <script src="financiamentos_data.js?v=20260930120108"></script>
+    <script src="financiamentos_data.js?v=20261016084048"></script>
     <script src="financiamentos_app.js?v=1.4"></script>
     <script src="email_preview_helper.js?v=1.3"></script>
 
@@ -4571,6 +4571,12 @@
         function formatTimestamp(str) {
             if (!str) return 'N/D';
             const cleanStr = String(str).trim();
+            // Datas dos ETLs locais ja estao em dia/mes/ano; nao passar ao parser americano.
+            const matchBr = cleanStr.match(/^(\d{2})\/(\d{2})\/(\d{4})(?:\s+(\d{2}):(\d{2})(?::\d{2})?)?$/);
+            if (matchBr) {
+                const [_, day, month, year, hour, minute] = matchBr;
+                return `${day}/${month}/${year}${hour ? ` ${hour}:${minute}` : ''}`;
+            }
             const matchSpace = cleanStr.match(/^(\d{4})-(\d{2})-(\d{2})\s+(\d{2}):(\d{2})/);
             if (matchSpace) {
                 const [_, year, month, day, hour, minute] = matchSpace;

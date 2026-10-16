@@ -1,43 +1,32 @@
 // BI JLE Telecom - Financiamentos & PMTs Data Source
-// Gerado automaticamente em 05/10/2026 16:34:07
+// Gerado automaticamente em 16/10/2026 08:40:15
 window.FINANCIAMENTOS_DATA = {
   "metadata": {
-    "generated_at": "05/10/2026 16:34:07",
+    "generated_at": "16/10/2026 08:40:15",
     "source_directory": "\\\\10.121.21.252\\controladoria\\Vitor\\FINANCEIRO\\PMTs FINANCIAMENTOS",
     "total_contratos": 9
   },
   "totais_gerais": {
     "total_financiado": 7396247.2,
-    "total_pago": 1190649.09,
-    "saldo_devedor": 8442257.33,
+    "total_pago": 1238399.09,
+    "saldo_devedor": 8394507.33,
     "total_parcelas": 442,
-    "total_pagas": 62,
-    "total_pendentes": 380,
-    "pct_quitado": 14.0,
+    "total_pagas": 63,
+    "total_pendentes": 379,
+    "pct_quitado": 14.3,
     "compromisso_mensal": 198706.04,
     "proxima_parcela": {
-      "contrato_id": "compra_base_nh",
-      "contrato_nome": "Compra Base Novo Hamburgo",
-      "categoria": "Imóveis",
-      "instituicao": "Pro-Formula",
-      "numero": 1,
+      "contrato_id": "sicoob_wilian",
+      "contrato_nome": "Carro Wilian (Osório)",
+      "categoria": "Veículos",
+      "instituicao": "SICOOB",
+      "numero": 7,
       "tipo": "Mensal",
-      "vencimento": "15/10/2026",
-      "vencimento_iso": "2026-10-15",
-      "prestacao": 47750.0
+      "vencimento": "17/10/2026",
+      "vencimento_iso": "2026-10-17",
+      "prestacao": 1466.59
     },
     "proximas_parcelas_top10": [
-      {
-        "contrato_id": "compra_base_nh",
-        "contrato_nome": "Compra Base Novo Hamburgo",
-        "categoria": "Imóveis",
-        "instituicao": "Pro-Formula",
-        "numero": 1,
-        "tipo": "Mensal",
-        "vencimento": "15/10/2026",
-        "vencimento_iso": "2026-10-15",
-        "prestacao": 47750.0
-      },
       {
         "contrato_id": "sicoob_wilian",
         "contrato_nome": "Carro Wilian (Osório)",
@@ -136,6 +125,17 @@ window.FINANCIAMENTOS_DATA = {
         "vencimento": "15/11/2026",
         "vencimento_iso": "2026-11-15",
         "prestacao": 47750.0
+      },
+      {
+        "contrato_id": "sicoob_wilian",
+        "contrato_nome": "Carro Wilian (Osório)",
+        "categoria": "Veículos",
+        "instituicao": "SICOOB",
+        "numero": 8,
+        "tipo": "Mensal",
+        "vencimento": "17/11/2026",
+        "vencimento_iso": "2026-11-17",
+        "prestacao": 1466.59
       }
     ],
     "por_categoria": {
@@ -159,12 +159,12 @@ window.FINANCIAMENTOS_DATA = {
       },
       "Imóveis": {
         "financiado": 2822000.0,
-        "pago": 246665.76,
-        "saldo_devedor": 3055333.36,
+        "pago": 294415.76,
+        "saldo_devedor": 3007583.36,
         "contratos": 2,
         "total_parcelas": 70,
-        "qtd_pagas": 12,
-        "pct_quitado": 17.1
+        "qtd_pagas": 13,
+        "pct_quitado": 18.6
       }
     },
     "por_instituicao": {
@@ -182,8 +182,8 @@ window.FINANCIAMENTOS_DATA = {
       },
       "Pro-Formula": {
         "financiado": 2452000.0,
-        "pago": 0.0,
-        "saldo_devedor": 2932000.0,
+        "pago": 47750.0,
+        "saldo_devedor": 2884250.0,
         "contratos": 1
       },
       "F. E. Hugentobler": {
@@ -203,8 +203,8 @@ window.FINANCIAMENTOS_DATA = {
       {
         "ano": 2026,
         "total_previsto": 1602296.34,
-        "total_pago": 1048620.75,
-        "total_pendente": 590493.61
+        "total_pago": 1096370.75,
+        "total_pendente": 542743.61
       },
       {
         "ano": 2027,
@@ -388,8 +388,8 @@ window.FINANCIAMENTOS_DATA = {
         "ano": 2026,
         "mes": 10,
         "total_previsto": 208116.08,
-        "total_pago": 28820.37,
-        "total_pendente": 179336.45,
+        "total_pago": 76570.37,
+        "total_pendente": 131586.45,
         "maquinas": 120109.78,
         "veiculos": 19700.74,
         "imoveis": 68305.56
@@ -7773,11 +7773,11 @@ window.FINANCIAMENTOS_DATA = {
       "reforcos_anuais": 4,
       "valor_reforco": 160000.0,
       "total_parcelas": 52,
-      "qtd_pagas": 0,
-      "qtd_pendentes": 52,
-      "total_pago": 0.0,
-      "saldo_devedor": 2932000.0,
-      "pct_quitado": 0.0,
+      "qtd_pagas": 1,
+      "qtd_pendentes": 51,
+      "total_pago": 47750.0,
+      "saldo_devedor": 2884250.0,
+      "pct_quitado": 1.9,
       "parcelas": [
         {
           "numero": 1,
@@ -7789,10 +7789,10 @@ window.FINANCIAMENTOS_DATA = {
           "prestacao": 47750.0,
           "juros": 0.0,
           "amortizacao": 47750.0,
-          "saldo_devedor": 47750.0,
-          "status": "Pendente",
+          "saldo_devedor": 0.0,
+          "status": "Pago",
           "data_pagamento": "",
-          "valor_pago": 0.0,
+          "valor_pago": 47750.0,
           "diferenca": 0.0
         },
         {
