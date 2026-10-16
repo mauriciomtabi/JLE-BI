@@ -1,62 +1,414 @@
-#view-executivo-container{display:none;flex-direction:column;gap:24px}
-#view-executivo-container .exec-jle-toolbar{display:flex;flex-wrap:nowrap;align-items:flex-end;gap:12px;padding:18px 20px;overflow-x:auto;border:1px solid var(--border-color);border-radius:14px;background:var(--bg-card)}
-#view-executivo-container .exec-jle-toolbar label{display:flex;flex-direction:column;flex:1 0 124px;min-width:124px;gap:8px;color:var(--text-secondary);font-size:12px;text-transform:uppercase;font-weight:600;letter-spacing:.5px;white-space:nowrap}
-#view-executivo-container select,#view-executivo-container .exec-jle-button{font:inherit;color:var(--text-primary);background:var(--bg-input);border:1px solid var(--border-color);border-radius:8px;padding:10px 14px;min-height:42px}
-#view-executivo-container select{min-width:0}
-#view-executivo-container button{cursor:pointer}
-#view-executivo-container button:focus-visible,#view-executivo-container select:focus-visible{outline:2px solid var(--color-info);outline-offset:3px}
-#view-executivo-container .exec-jle-period{margin-left:auto;font-weight:600;color:var(--text-primary);padding-bottom:12px;text-transform:capitalize}
-#view-executivo-container .exec-jle-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
-#view-executivo-container .exec-jle-card{position:relative;overflow:hidden;border:1px solid var(--border-color);border-left:4px solid var(--exec-accent);border-radius:14px;padding:22px 24px;background:radial-gradient(circle at top right,color-mix(in srgb,var(--exec-accent) 9%,transparent),transparent 65%),var(--bg-card);min-height:170px}
-#view-executivo-container .exec-jle-card h3{color:var(--text-secondary);font-size:13px;text-transform:uppercase;font-weight:600;letter-spacing:.4px;margin:0 0 10px}
-#view-executivo-container .exec-jle-value{display:block;font-size:28px;font-weight:750;line-height:1.2;letter-spacing:-.7px;color:var(--text-primary)}
-#view-executivo-container .exec-jle-card p{margin:14px 0 0;font-size:12px;color:var(--text-secondary);line-height:1.5;max-width:90%}
-#view-executivo-container .exec-jle-watermark{position:absolute;right:18px;bottom:20px;font-size:58px;color:var(--exec-accent);opacity:.08;pointer-events:none}
-#view-executivo-container .exec-jle-positive{color:var(--color-success)!important;font-weight:600}
-#view-executivo-container .exec-jle-negative{color:var(--color-danger)!important;font-weight:600}
-#view-executivo-container .exec-jle-panel{border:1px solid var(--border-color);border-radius:14px;padding:24px;background:var(--bg-card)}
-#view-executivo-container .exec-jle-panel h3{font-size:18px;margin:0 0 8px;color:var(--text-primary)}
-#view-executivo-container .exec-jle-panel p,#view-executivo-container .exec-jle-source{font-size:12px;line-height:1.6;color:var(--text-secondary)}
-#view-executivo-container .exec-jle-chart{position:relative;width:100%;height:320px;margin-top:18px}
-#view-executivo-container .exec-jle-notice{color:var(--text-secondary);font-size:13px;line-height:1.5;padding:0 4px}
-#view-executivo-container .exec-jle-table-wrap{overflow-x:auto;margin-top:16px}
-#view-executivo-container table{width:100%;border-collapse:collapse;font-size:14px}
-#view-executivo-container th,#view-executivo-container td{padding:13px 12px;text-align:right;border-bottom:1px solid var(--border-color);white-space:nowrap}
-#view-executivo-container th{font-weight:600;font-size:11px;text-transform:uppercase;color:var(--text-secondary)}
-#view-executivo-container th:first-child,#view-executivo-container td:first-child{text-align:left}
-#view-executivo-container th:last-child,#view-executivo-container td:last-child{text-align:left}
-#view-executivo-container .exec-jle-selected{background:rgba(56,139,253,.08)}
-#view-executivo-container .exec-jle-month-link{background:none;border:none;color:var(--text-primary);font:inherit;font-weight:600;text-decoration:underline;text-underline-offset:4px}
-#view-executivo-container .exec-jle-pending{color:var(--color-secondary)}
-#view-executivo-container details{color:var(--text-secondary);font-size:12px;line-height:1.7}
-#view-executivo-container summary{cursor:pointer;color:var(--text-primary);font-weight:600;padding-bottom:8px}
-#view-executivo-container .exec-jle-source{margin-top:8px;overflow-wrap:anywhere}
-#view-executivo-container #exec-jle-pagination{margin-top:14px;text-align:right}
-@media(max-width:1050px){#view-executivo-container .exec-jle-cards{gap:14px}#view-executivo-container .exec-jle-card{padding:22px 18px}#view-executivo-container .exec-jle-value{font-size:25px}}
-@media(max-width:700px){#view-executivo-container .exec-jle-cards{grid-template-columns:1fr}#view-executivo-container .exec-jle-period{margin-left:0;width:100%;padding:0}#view-executivo-container select{min-width:0;width:100%}#view-executivo-container .exec-jle-panel{padding:18px}#view-executivo-container .exec-jle-chart{height:280px}}
-#view-executivo-container .exec-jle-toolbar select,#view-executivo-container input{width:100%;min-width:0}
-#view-executivo-container input{font:inherit;color:var(--text-primary);background:var(--bg-input);border:1px solid var(--border-color);border-radius:8px;padding:10px 14px;min-height:42px; color-scheme:dark}
-body.light-theme #view-executivo-container input{color-scheme:light}
-#view-executivo-container .exec-jle-search{flex:1.25 0 150px}
-#view-executivo-container .exec-jle-card{transition:transform var(--transition-speed,.3s) ease,box-shadow var(--transition-speed,.3s) ease,border-color var(--transition-speed,.3s) ease;box-shadow:var(--shadow-main)}
-#view-executivo-container .exec-jle-card:hover{transform:translateY(-5px);border-color:var(--exec-accent);box-shadow:0 10px 25px color-mix(in srgb,var(--exec-accent) 18%,transparent)}
-#view-executivo-container .exec-jle-watermark{right:15px;bottom:-8px;font-size:110px;opacity:.15;transition:all .4s cubic-bezier(.4,0,.2,1)}
-#view-executivo-container .exec-jle-card:hover .exec-jle-watermark{transform:scale(1.12) rotate(-5deg);opacity:.25}
-#view-executivo-container .exec-jle-value,#view-executivo-container .exec-jle-card p,#view-executivo-container .exec-jle-card h3{position:relative;z-index:1}
-#view-executivo-container .exec-jle-card p{max-width:85%}
-#view-executivo-container .exec-jle-chart{height:360px}
-#exec-jle-indicators{display:flex;flex-direction:column;gap:24px}
-#exec-jle-indicators[hidden],#exec-jle-records[hidden]{display:none}
-#view-executivo-container .exec-jle-records-header{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
-#view-executivo-container .exec-jle-sort{background:none;border:0;color:inherit;font:inherit;text-transform:inherit}
-#view-executivo-container .exec-jle-period{align-self:center;font-size:13px;padding:0 16px}
-#view-executivo-container tbody tr:hover{background:rgba(128,128,128,.05)}
-#view-executivo-container #exec-jle-records td:nth-child(3){white-space:normal;min-width:220px;text-align:left;max-width:500px}
-#view-executivo-container #exec-jle-pagination{margin-top:16px;text-align:right}
-@media(max-width:600px){#view-executivo-container .exec-jle-period{display:none}#view-executivo-container .exec-jle-chart{height:320px}}
-@media(prefers-reduced-motion:reduce){#view-executivo-container .exec-jle-card,#view-executivo-container .exec-jle-watermark{transition:none}#view-executivo-container .exec-jle-card:hover,#view-executivo-container .exec-jle-card:hover .exec-jle-watermark{transform:none}}
+/* ============================================================
+   CONSOLIDADO JLE - DESIGN SYSTEM DARK GLASSMORPHISM
+   Padrão visual corporativo unificado com Financeiro JLE e Tecnodrill
+   ============================================================ */
 
-#view-executivo-container .exec-jle-toolbar select,#view-executivo-container .exec-jle-toolbar input{height:48px;padding:10px 14px;font-size:14px;font-weight:400;box-sizing:border-box;text-transform:none;letter-spacing:normal}
-#view-executivo-container .exec-jle-toolbar label[for="exec-jle-customer"]{flex:1.2 0 150px}
-#view-executivo-container .exec-jle-toolbar label[for="exec-jle-start"],#view-executivo-container .exec-jle-toolbar label[for="exec-jle-end"]{flex:1 0 144px}
-#view-executivo-container .exec-jle-toolbar>.exec-jle-button{flex:0 0 46px;width:46px;height:48px;padding:0;font-size:16px}
+#view-executivo-container {
+    display: none;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+}
+
+/* 1. BARRA DE FILTROS */
+#view-executivo-container .filter-bar {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: var(--shadow-main);
+}
+
+#view-executivo-container .filter-group label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+}
+
+#view-executivo-container .filter-group select,
+#view-executivo-container .filter-group input {
+    width: 100%;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: var(--text-primary);
+    font-size: 13.5px;
+    outline: none;
+    transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    min-height: 42px;
+    box-sizing: border-box;
+}
+
+#view-executivo-container .filter-group select:focus,
+#view-executivo-container .filter-group input:focus {
+    border-color: var(--color-primary-light);
+    box-shadow: 0 0 0 3px rgba(0, 119, 170, 0.2);
+}
+
+/* 2. KPI CARDS ESTILIZADOS */
+#view-executivo-container .kpi-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+#view-executivo-container .kpi-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 22px 24px;
+    box-shadow: var(--shadow-main);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    min-height: 140px;
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, border-color var(--transition-speed) ease;
+}
+
+#view-executivo-container .kpi-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+#view-executivo-container .kpi-card.inflows {
+    border-left: 5px solid #10b981;
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.08);
+}
+
+#view-executivo-container .kpi-card.inflows:hover {
+    border-color: #34d399;
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.2);
+}
+
+#view-executivo-container .kpi-card.outflows {
+    border-left: 5px solid #f59e0b;
+    box-shadow: 0 4px 20px rgba(245, 158, 11, 0.08);
+}
+
+#view-executivo-container .kpi-card.outflows:hover {
+    border-color: #fbbf24;
+    box-shadow: 0 10px 25px rgba(245, 158, 11, 0.2);
+}
+
+#view-executivo-container .kpi-card.balance {
+    border-left: 5px solid #38bdf8;
+    box-shadow: 0 4px 20px rgba(56, 189, 248, 0.08);
+}
+
+#view-executivo-container .kpi-card.balance.is-positive {
+    border-left-color: #2ecc71;
+}
+
+#view-executivo-container .kpi-card.balance.is-positive:hover {
+    border-color: #2ecc71;
+    box-shadow: 0 10px 25px rgba(46, 204, 113, 0.2);
+}
+
+#view-executivo-container .kpi-card.balance.is-negative {
+    border-left-color: #e74c3c;
+}
+
+#view-executivo-container .kpi-card.balance.is-negative:hover {
+    border-color: #e74c3c;
+    box-shadow: 0 10px 25px rgba(231, 76, 60, 0.2);
+}
+
+#view-executivo-container .kpi-card.balance.is-negative .kpi-value {
+    color: #e74c3c !important;
+}
+
+#view-executivo-container .kpi-card.balance.is-positive .kpi-value {
+    color: #2ecc71 !important;
+}
+
+#view-executivo-container .kpi-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 2;
+}
+
+#view-executivo-container .kpi-label {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#view-executivo-container .kpi-value {
+    font-size: 26px;
+    font-weight: 750;
+    color: var(--text-primary);
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+}
+
+#view-executivo-container .kpi-analytics {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-top: 4px;
+}
+
+#view-executivo-container .kpi-subvalue {
+    font-size: 11.5px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+#view-executivo-container .kpi-icon-container {
+    font-size: 65px;
+    opacity: 0.12;
+    position: absolute;
+    right: 18px;
+    bottom: 12px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    z-index: 1;
+}
+
+#view-executivo-container .kpi-card:hover .kpi-icon-container {
+    transform: scale(1.15) rotate(-6deg);
+    opacity: 0.22;
+}
+
+#view-executivo-container .kpi-card.inflows .kpi-icon-container { color: #10b981; }
+#view-executivo-container .kpi-card.outflows .kpi-icon-container { color: #f59e0b; }
+#view-executivo-container .kpi-card.balance .kpi-icon-container { color: #38bdf8; }
+#view-executivo-container .kpi-card.balance.is-positive .kpi-icon-container { color: #2ecc71; }
+#view-executivo-container .kpi-card.balance.is-negative .kpi-icon-container { color: #e74c3c; }
+
+/* 3. CONTROLES DE GRANULARIDADE DO GRÁFICO DE EVOLUÇÃO */
+#exec-jle-chart-controls {
+    display: flex;
+    gap: 4px;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 3px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+body.light-theme #exec-jle-chart-controls {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+#exec-jle-chart-controls .chart-toggle-btn {
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    color: var(--text-secondary);
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 650;
+    padding: 5px 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+#exec-jle-chart-controls .chart-toggle-btn:hover:not([disabled]) {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+#exec-jle-chart-controls .chart-toggle-btn.active {
+    color: #ffffff !important;
+    background: var(--color-primary-light, #0077aa) !important;
+    box-shadow: 0 2px 8px rgba(0, 119, 170, 0.45);
+}
+
+#exec-jle-chart-controls .chart-toggle-btn[disabled] {
+    opacity: 0.35 !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+}
+
+/* 4. TABELAS DE DADOS E BADGES */
+#view-executivo-container .table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+#view-executivo-container table.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+}
+
+#view-executivo-container table.data-table th,
+#view-executivo-container table.data-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border-color);
+    white-space: nowrap;
+}
+
+#view-executivo-container table.data-table th {
+    background-color: rgba(0, 0, 0, 0.12);
+    color: var(--text-secondary);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+
+body.light-theme #view-executivo-container table.data-table th {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+#view-executivo-container table.data-table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+#view-executivo-container table.data-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+body.light-theme #view-executivo-container table.data-table tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+#view-executivo-container table.data-table tfoot td {
+    font-weight: 750;
+    border-top: 2px solid var(--border-color);
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Badges Semânticos */
+.exec-badge-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 9px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 650;
+}
+
+.exec-badge-status.success {
+    background: rgba(46, 204, 113, 0.12);
+    color: #2ecc71;
+    border: 1px solid rgba(46, 204, 113, 0.25);
+}
+
+.exec-badge-status.warning {
+    background: rgba(245, 158, 11, 0.12);
+    color: #f59e0b;
+    border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.exec-badge-kind {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 650;
+}
+
+.exec-badge-kind.revenue {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+}
+
+.exec-badge-kind.expense {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+}
+
+.exec-badge-uf {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.08);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.exec-month-btn {
+    background: rgba(56, 189, 248, 0.08);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    color: #38bdf8;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.exec-month-btn:hover {
+    background: #38bdf8;
+    color: #0a1118;
+    transform: translateY(-1px);
+}
+
+.exec-month-btn.active {
+    background: #38bdf8;
+    color: #0a1118;
+    box-shadow: 0 2px 8px rgba(56, 189, 248, 0.4);
+}
+
+.exec-back-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 5px 11px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.exec-back-btn:hover {
+    background: rgba(56, 189, 248, 0.2);
+    border-color: #38bdf8;
+    color: #38bdf8;
+}
+
+.cell-pos {
+    color: #2ecc71 !important;
+    font-weight: 600;
+}
+
+.cell-neg {
+    color: #e74c3c !important;
+    font-weight: 600;
+}
+
+/* 5. RESPONSIVIDADE */
+@media (max-width: 1024px) {
+    #view-executivo-container .kpi-container {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+    #view-executivo-container .charts-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+@media (max-width: 768px) {
+    #view-executivo-container .kpi-value {
+        font-size: 22px;
+    }
+    #view-executivo-container .chart-body {
+        height: 290px !important;
+    }
+}
