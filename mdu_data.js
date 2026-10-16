@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-10-16 15:00:24
+// Dados MDU Compactados - Gerado em: 2026-10-16 15:08:11
 window.MDU_METADATA = {
-    "generated_at": "2026-10-16 15:00:24",
+    "generated_at": "2026-10-16 15:08:11",
     "total_rows": 5864,
     "geocoded_new": 0
 };
@@ -68464,7 +68464,7 @@ window.MDU_DATA = [
         "pendencia": "Não",
         "status": "2º Vistoria",
         "prog": 13.0,
-        "cod_imovel": "33828",
+        "cod_imovel": "610494909",
         "area": "PDRAA",
         "node": "PDRAA",
         "caixa_m": "",
