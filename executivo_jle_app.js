@@ -68,9 +68,7 @@
 
     const charts = {
         evolution: null,
-        customers: null,
-        banks: null,
-        uf: null
+        banks: null
     };
 
     let installed = false;
@@ -120,6 +118,93 @@
     }
 
     // ============================================================
+    // LOGOS SVG DOS CLIENTES
+    // ============================================================
+    function getCustomerLogoSvg(customerName) {
+        const c = String(customerName || '').toUpperCase();
+
+        if (c.includes('CLARO S.A') || c === 'CLARO') {
+            return `
+            <svg viewBox="0 0 100 100" width="100%" height="100%">
+                <rect width="100" height="100" rx="14" fill="#da291c"/>
+                <circle cx="50" cy="50" r="32" fill="#ffffff"/>
+                <circle cx="50" cy="50" r="23" fill="#da291c"/>
+                <ellipse cx="50" cy="50" rx="27" ry="14" fill="none" stroke="#ffffff" stroke-width="4.5" transform="rotate(-30 50 50)"/>
+                <circle cx="50" cy="50" r="12" fill="#ffffff"/>
+            </svg>`;
+        }
+
+        if (c.includes('NXT') || c.includes('NEXTEL')) {
+            return `
+            <svg viewBox="0 0 100 100" width="100%" height="100%">
+                <rect width="100" height="100" rx="14" fill="#18181b"/>
+                <circle cx="50" cy="50" r="38" fill="#da291c"/>
+                <text x="50" y="58" font-family="'Outfit', sans-serif" font-weight="900" font-size="24" fill="#ffffff" text-anchor="middle">NXT</text>
+            </svg>`;
+        }
+
+        if (c.includes('FIBRASIL')) {
+            return `
+            <svg viewBox="0 0 100 100" width="100%" height="100%">
+                <defs>
+                    <linearGradient id="fibrasilGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#00c0f3"/>
+                        <stop offset="100%" stop-color="#4a00e0"/>
+                    </linearGradient>
+                </defs>
+                <rect width="100" height="100" rx="14" fill="url(#fibrasilGrad)"/>
+                <path d="M30 70 L30 30 Q45 25 55 35 Q65 45 55 55 L38 55 M30 45 L50 45" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+                <circle cx="70" cy="40" r="6" fill="#00ffff"/>
+            </svg>`;
+        }
+
+        if (c.includes('TELEMONT')) {
+            return `
+            <svg viewBox="0 0 100 100" width="100%" height="100%">
+                <rect width="100" height="100" rx="14" fill="#002d62"/>
+                <path d="M25 35 L75 35 M50 35 L50 72" fill="none" stroke="#ff7900" stroke-width="9" stroke-linecap="round"/>
+                <path d="M32 46 L68 46" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+            </svg>`;
+        }
+
+        if (c.includes('TLP')) {
+            return `
+            <svg viewBox="0 0 100 100" width="100%" height="100%">
+                <rect width="100" height="100" rx="14" fill="#0353a4"/>
+                <text x="50" y="60" font-family="'Outfit', sans-serif" font-weight="900" font-size="28" fill="#ffffff" text-anchor="middle" letter-spacing="1">TLP</text>
+            </svg>`;
+        }
+
+        if (c.includes('WIP') || c.includes('TOWER')) {
+            return `
+            <svg viewBox="0 0 100 100" width="100%" height="100%">
+                <rect width="100" height="100" rx="14" fill="#6d28d9"/>
+                <path d="M50 20 L50 75 M35 75 L65 75 M40 50 L60 50 M44 35 L56 35" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+                <circle cx="50" cy="20" r="5" fill="#f59e0b"/>
+            </svg>`;
+        }
+
+        // Outros Clientes
+        return `
+        <svg viewBox="0 0 100 100" width="100%" height="100%">
+            <rect width="100" height="100" rx="14" fill="#334155"/>
+            <path d="M30 70 L30 40 L50 25 L70 40 L70 70 Z" fill="none" stroke="#94a3b8" stroke-width="6" stroke-linejoin="round"/>
+            <rect x="44" y="52" width="12" height="18" fill="#38bdf8"/>
+        </svg>`;
+    }
+
+    function getCleanCustomerName(customerName) {
+        const c = String(customerName || '').toUpperCase();
+        if (c.includes('CLARO S.A')) return 'Claro S.A.';
+        if (c.includes('CLARO NXT') || c.includes('NEXTEL')) return 'Claro NXT (Nextel)';
+        if (c.includes('FIBRASIL')) return 'FiBrasil Infraestrutura';
+        if (c.includes('TELEMONT')) return 'Telemont Engenharia';
+        if (c.includes('TLP')) return 'TLP CP Serviços';
+        if (c.includes('WIP') || c.includes('TOWER')) return 'AP Wip Tower';
+        return customerName || 'Outros';
+    }
+
+    // ============================================================
     // RENDER PRINCIPAL
     // ============================================================
     function render() {
@@ -157,7 +242,7 @@
         const totalExpense = aggregate('expense');
         const totalResult = aggregate('result');
 
-        // 1. Atualizar KPIs Cards
+        // 1. Atualizar KPIs Cards (Valores do Período)
         set('revenue', money(totalRevenue));
         set('expense', money(totalExpense));
         set('result', money(totalResult));
@@ -168,23 +253,83 @@
         set('revenue-note', totalRevenue == null ? 'Faturamento indisponível' : `${revCount.toLocaleString('pt-BR')} notas · faturado bruto ERP`);
         set('expense-note', (state.customer !== 'ALL' && state.customer) ? 'Despesas sem vínculo com cliente ERP' : totalExpense == null ? 'Despesas indisponíveis' : `${expCount.toLocaleString('pt-BR')} saídas · sem transferências`);
 
-        // Médias Diárias / Mensais
-        const revDailyEl = el('revenue-daily');
-        const expDailyEl = el('expense-daily');
-        if (!isAllSelected) {
-            const [y, m] = state.month.split('-').map(Number);
-            const daysInMonth = new Date(y, m, 0).getDate();
-            if (revDailyEl) revDailyEl.textContent = totalRevenue ? `Média: ${money(totalRevenue / daysInMonth)}/dia` : 'Média: —/dia';
-            if (expDailyEl) expDailyEl.textContent = totalExpense ? `Média: ${money(totalExpense / daysInMonth)}/dia` : 'Média: —/dia';
+        // 2. CALCULAR E EXIBIR SEMPRE A RECEITA E DESPESA DO MÊS ANTERIOR (REQUISITO 1)
+        let prevPeriod = null;
+        let prevRev = null;
+        let prevExp = null;
+        let prevRes = null;
+
+        if (state.month !== 'ALL') {
+            const idx = data.months.findIndex(m => m.period === state.month);
+            if (idx > 0) {
+                prevPeriod = data.months[idx - 1].period;
+            }
         } else {
-            const compCount = periods.length || 1;
-            if (revDailyEl) revDailyEl.textContent = totalRevenue ? `Média: ${money(totalRevenue / compCount)}/mês` : 'Média: —/mês';
-            if (expDailyEl) expDailyEl.textContent = totalExpense ? `Média: ${money(totalExpense / compCount)}/mês` : 'Média: —/mês';
+            // No acumulado, pegar o penúltimo mês comparável vs último mês comparável
+            const compMonths = data.months.filter(m => m.comparable);
+            if (compMonths.length >= 2) {
+                prevPeriod = compMonths[compMonths.length - 2].period; // ex: Agosto/2026
+            }
         }
 
-        // Formatação do Resultado (Positivo / Negativo)
+        if (prevPeriod) {
+            const prevRs = data.records.filter(r => r.period === prevPeriod && matches(r));
+            const mMeta = data.months.find(m => m.period === prevPeriod);
+            prevRev = mMeta?.revenue == null ? null : sum(prevRs, 'revenue');
+            prevExp = (state.customer !== 'ALL' && state.customer) || mMeta?.expense == null ? null : sum(prevRs, 'expense');
+            prevRes = (prevRev == null || prevExp == null) ? null : Math.round((prevRev - prevExp) * 100) / 100;
+        }
+
+        // Receita do Mês Anterior
+        const revPrevEl = el('revenue-prev');
+        if (revPrevEl) {
+            if (prevRev != null) {
+                let diffPctStr = '';
+                if (totalRevenue != null && prevRev > 0) {
+                    const diffPct = ((totalRevenue - prevRev) / prevRev) * 100;
+                    const sign = diffPct >= 0 ? '+' : '';
+                    const color = diffPct >= 0 ? '#10b981' : '#e74c3c';
+                    const icon = diffPct >= 0 ? 'fa-arrow-trend-up' : 'fa-arrow-trend-down';
+                    diffPctStr = ` <span style="color: ${color}; font-weight: 700; margin-left: 4px;"><i class="fa-solid ${icon}"></i> ${sign}${diffPct.toFixed(1).replace('.', ',')}%</span>`;
+                }
+                revPrevEl.innerHTML = `Mês Ant. (${shortMonthLabel(prevPeriod)}): <strong>${money(prevRev)}</strong>${diffPctStr}`;
+            } else {
+                revPrevEl.innerHTML = `Mês Anterior: <strong>—</strong>`;
+            }
+        }
+
+        // Despesa do Mês Anterior
+        const expPrevEl = el('expense-prev');
+        if (expPrevEl) {
+            if (prevExp != null) {
+                let diffPctStr = '';
+                if (totalExpense != null && prevExp > 0) {
+                    const diffPct = ((totalExpense - prevExp) / prevExp) * 100;
+                    const sign = diffPct >= 0 ? '+' : '';
+                    // Para despesas, redução é positivo (#10b981), aumento é alerta (#f59e0b)
+                    const color = diffPct <= 0 ? '#10b981' : '#f59e0b';
+                    const icon = diffPct >= 0 ? 'fa-arrow-trend-up' : 'fa-arrow-trend-down';
+                    diffPctStr = ` <span style="color: ${color}; font-weight: 700; margin-left: 4px;"><i class="fa-solid ${icon}"></i> ${sign}${diffPct.toFixed(1).replace('.', ',')}%</span>`;
+                }
+                expPrevEl.innerHTML = `Mês Ant. (${shortMonthLabel(prevPeriod)}): <strong>${money(prevExp)}</strong>${diffPctStr}`;
+            } else {
+                expPrevEl.innerHTML = `Mês Anterior: <strong>—</strong>`;
+            }
+        }
+
+        // Resultado do Mês Anterior
+        const resPrevEl = el('result-prev');
+        if (resPrevEl) {
+            if (prevRes != null) {
+                const color = prevRes >= 0 ? '#2ecc71' : '#e74c3c';
+                resPrevEl.innerHTML = `Mês Ant. (${shortMonthLabel(prevPeriod)}): <strong style="color: ${color};">${money(prevRes)}</strong>`;
+            } else {
+                resPrevEl.innerHTML = `Mês Anterior: <strong>—</strong>`;
+            }
+        }
+
+        // Formatação do Card de Resultado
         const resultCard = el('result-card');
-        const resultStatusEl = el('result-status');
         const resultNoteEl = el('result-note');
 
         if (resultCard) {
@@ -195,21 +340,8 @@
         if (totalResult != null) {
             const marginStr = totalRevenue ? pct(totalResult, totalRevenue) : '0,0%';
             if (resultNoteEl) resultNoteEl.textContent = `Margem Líquida: ${marginStr}`;
-            if (resultStatusEl) {
-                if (totalResult >= 0) {
-                    resultStatusEl.textContent = 'Superávit Operacional';
-                    resultStatusEl.style.color = '#2ecc71';
-                } else {
-                    resultStatusEl.textContent = 'Déficit Operacional';
-                    resultStatusEl.style.color = '#e74c3c';
-                }
-            }
         } else {
             if (resultNoteEl) resultNoteEl.textContent = (state.customer !== 'ALL' && state.customer) ? 'Resultado por cliente indisponível' : 'Aguardando fontes completas';
-            if (resultStatusEl) {
-                resultStatusEl.textContent = 'Indisponível';
-                resultStatusEl.style.color = 'var(--text-secondary)';
-            }
         }
 
         // Badge de Período Ativo
@@ -233,12 +365,12 @@
             }
         }
 
-        // 2. Renderizar Gráficos e Tabelas
+        // 3. Renderizar Gráficos, Minicards de Clientes e Mapa de Estados
         updateGranularityButtons();
         renderEvolutionChart(data, filteredRecords, periods);
-        renderCustomersChart(filteredRecords);
+        renderCustomersMinicards(filteredRecords);
         renderBanksChart(filteredRecords);
-        renderUfChart(filteredRecords);
+        renderUfMap(filteredRecords);
         renderMonthlyTable(data, monthlySummaries);
         renderRecordsTable(filteredRecords);
     }
@@ -250,7 +382,6 @@
         const isAllSelected = state.month === 'ALL';
         const isMobile = window.innerWidth <= 768;
 
-        // Se 'ALL' estiver selecionado, a única granularidade viável é 'monthly'
         if (isAllSelected) {
             state.granularity = 'monthly';
         } else if (!state.userSelectedGranularity) {
@@ -318,14 +449,12 @@
         const gran = state.granularity;
 
         if (gran === 'monthly') {
-            // MENSAL: Exibe todos os meses disponíveis na base histórica
             const isAll = state.month === 'ALL';
             set('chart-title', isAll ? 'Evolução Mensal Consolidada' : `Evolução Mensal (Visão Geral) · ${monthLabel(state.month)}`);
             set('chart-note', 'Faturamento bruto ERP vs saídas bancárias · Clique em um mês para detalhar');
 
             chartLabels = data.months.map(m => shortMonthLabel(m.period));
 
-            // Para cada mês da base, calcular receita e despesa conforme filtros globais (UF, cliente, busca)
             revenueData = data.months.map(m => {
                 const rs = data.records.filter(r => r.period === m.period && r.kind === 'revenue' && matches(r));
                 return m.revenue == null && !rs.length ? null : rs.reduce((s, r) => s + r.value, 0);
@@ -338,7 +467,6 @@
             });
 
         } else if (gran === 'weekly') {
-            // SEMANAL: Agrupa os dias do mês selecionado em Semana 1..5
             set('chart-title', `Evolução Semanal · ${monthLabel(state.month)}`);
             set('chart-note', 'Consolidação semanal do fluxo operacional');
 
@@ -366,7 +494,6 @@
             });
 
         } else {
-            // DIÁRIO: Exibe cada dia (1..28/30/31) do mês selecionado
             set('chart-title', `Evolução Diária · ${monthLabel(state.month)}`);
             set('chart-note', 'Detalhamento dia a dia dos lançamentos operacionais');
 
@@ -497,21 +624,16 @@
     }
 
     // ============================================================
-    // 2. GRÁFICO DE RECEITA POR CLIENTE (COBRANÇAS / ERP)
+    // 2. MINICARDS COM LOGOS DOS CLIENTES (REQUISITO 2)
     // ============================================================
-    function renderCustomersChart(records) {
-        if (charts.customers) {
-            charts.customers.destroy();
-            charts.customers = null;
-        }
-
-        const canvas = el('chart-customers');
-        if (!canvas || typeof Chart === 'undefined') return;
+    function renderCustomersMinicards(records) {
+        const container = el('customer-cards');
+        if (!container) return;
 
         const backContainer = el('customers-back-container');
         if (backContainer) {
             if (state.customer !== 'ALL' && state.customer) {
-                backContainer.innerHTML = `<button class="exec-back-btn" onclick="window.clearExecutivoCustomer()"><i class="fa-solid fa-arrow-left"></i> Todos os clientes</button>`;
+                backContainer.innerHTML = `<button class="exec-back-btn" onclick="window.clearExecutivoCustomer()"><i class="fa-solid fa-arrow-left"></i> Ver Todos</button>`;
             } else {
                 backContainer.innerHTML = '';
             }
@@ -521,82 +643,88 @@
         const byCustomer = {};
 
         revRecords.forEach(r => {
-            const cust = r.customer || 'Não Identificado';
-            byCustomer[cust] = (byCustomer[cust] || 0) + r.value;
+            const rawName = r.customer || 'Não Identificado';
+            if (!byCustomer[rawName]) {
+                byCustomer[rawName] = { value: 0, count: 0 };
+            }
+            byCustomer[rawName].value += r.value;
+            byCustomer[rawName].count++;
         });
 
-        const sorted = Object.entries(byCustomer).sort((a, b) => b[1] - a[1]);
-        const top5 = sorted.slice(0, 5);
-        const othersSum = sorted.slice(5).reduce((s, c) => s + c[1], 0);
+        const totalRev = revRecords.reduce((s, r) => s + r.value, 0) || 1;
+        const sorted = Object.entries(byCustomer).sort((a, b) => b[1].value - a[1].value);
 
-        if (othersSum > 0) {
-            top5.push(['Outros Clientes', othersSum]);
+        // Pegar os top 5 clientes individuais e agrupar os demais em "Demais Clientes"
+        const topClients = sorted.slice(0, 5);
+        const remainder = sorted.slice(5);
+
+        container.replaceChildren();
+
+        if (!sorted.length) {
+            const emptyEl = document.createElement('div');
+            emptyEl.style.padding = '30px';
+            emptyEl.style.textAlign = 'center';
+            emptyEl.style.color = 'var(--text-secondary)';
+            emptyEl.textContent = 'Nenhum faturamento registrado para os filtros ativos.';
+            container.appendChild(emptyEl);
+            return;
         }
 
-        const labels = top5.map(c => c[0].length > 22 ? c[0].slice(0, 20) + '…' : c[0]);
-        const values = top5.map(c => c[1]);
-        const total = values.reduce((s, v) => s + v, 0);
+        topClients.forEach(([rawName, dataObj]) => {
+            const cleanName = getCleanCustomerName(rawName);
+            const logoSvg = getCustomerLogoSvg(rawName);
+            const pctStr = ((dataObj.value / totalRev) * 100).toFixed(1).replace('.', ',') + '%';
+            const isActive = state.customer === rawName;
 
-        const palette = ['#10b981', '#38bdf8', '#f59e0b', '#a855f7', '#ec4899', '#64748b'];
-        const isLight = document.body.classList.contains('light-theme');
-        const textColor = isLight ? '#1f2c3d' : '#f5f6f8';
+            const card = document.createElement('div');
+            card.className = `exec-client-card ${isActive ? 'active' : ''}`;
+            card.onclick = () => window.toggleExecutivoCustomer(rawName);
 
-        charts.customers = new Chart(canvas, {
-            type: 'doughnut',
-            data: {
-                labels,
-                datasets: [{
-                    data: values,
-                    backgroundColor: palette.slice(0, values.length),
-                    borderColor: isLight ? '#ffffff' : '#111c24',
-                    borderWidth: 2,
-                    hoverOffset: 6
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                cutout: '68%',
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            color: textColor,
-                            boxWidth: 12,
-                            usePointStyle: true,
-                            font: { family: 'Outfit', size: 10.5 },
-                            padding: 10
-                        }
-                    },
-                    datalabels: {
-                        display: false
-                    },
-                    tooltip: {
-                        backgroundColor: 'rgba(10, 17, 24, 0.95)',
-                        titleColor: '#ffffff',
-                        bodyColor: '#ffffff',
-                        callbacks: {
-                            label: c => {
-                                const val = c.raw;
-                                const p = total ? ((val / total) * 100).toFixed(1).replace('.', ',') + '%' : '0%';
-                                return ` ${money(val)} (${p})`;
-                            }
-                        }
-                    }
-                },
-                onClick: (_, items) => {
-                    if (items.length) {
-                        const clicked = top5[items[0].index][0];
-                        if (clicked && clicked !== 'Outros Clientes') {
-                            state.customer = clicked;
-                            if (el('customer')) el('customer').value = clicked;
-                            state.page = 0;
-                            render();
-                        }
-                    }
-                }
-            }
+            card.innerHTML = `
+                <div class="exec-client-logo-box">
+                    ${logoSvg}
+                </div>
+                <div class="exec-client-details">
+                    <div class="exec-client-top">
+                        <span class="exec-client-title" title="${rawName}">${cleanName}</span>
+                        <span class="exec-client-share">${pctStr}</span>
+                    </div>
+                    <div class="exec-client-bottom">
+                        <span class="exec-client-amount">${money(dataObj.value)}</span>
+                        <span class="exec-client-sub">${dataObj.count} ${dataObj.count === 1 ? 'nota' : 'notas'}</span>
+                    </div>
+                </div>
+            `;
+            container.appendChild(card);
         });
+
+        // Se houver mais clientes, adicionar minicard consolidado "Demais Clientes"
+        if (remainder.length > 0) {
+            const remVal = remainder.reduce((s, r) => s + r[1].value, 0);
+            const remCount = remainder.reduce((s, r) => s + r[1].count, 0);
+            const remPctStr = ((remVal / totalRev) * 100).toFixed(1).replace('.', ',') + '%';
+
+            const card = document.createElement('div');
+            card.className = `exec-client-card`;
+            card.style.opacity = '0.9';
+
+            card.innerHTML = `
+                <div class="exec-client-logo-box">
+                    ${getCustomerLogoSvg('OUTROS')}
+                </div>
+                <div class="exec-client-details">
+                    <div class="exec-client-top">
+                        <span class="exec-client-title">Demais Clientes (${remainder.length})</span>
+                        <span class="exec-client-share" style="color: #a855f7; background: rgba(168, 85, 247, 0.12);">${remPctStr}</span>
+                    </div>
+                    <div class="exec-client-bottom">
+                        <span class="exec-client-amount" style="color: #a855f7;">${money(remVal)}</span>
+                        <span class="exec-client-sub">${remCount} notas</span>
+                    </div>
+                </div>
+            `;
+            container.appendChild(card);
+        }
     }
 
     // ============================================================
@@ -671,90 +799,185 @@
     }
 
     // ============================================================
-    // 4. GRÁFICO DE FATURAMENTO POR UF
+    // 4. MAPA DE ESTADOS INTERATIVO (REQUISITO 3)
     // ============================================================
-    function renderUfChart(records) {
-        if (charts.uf) {
-            charts.uf.destroy();
-            charts.uf = null;
-        }
-
-        const canvas = el('chart-uf');
-        if (!canvas || typeof Chart === 'undefined') return;
+    function renderUfMap(records) {
+        const mapContainer = el('map-container');
+        if (!mapContainer) return;
 
         const revRecords = records.filter(r => r.kind === 'revenue');
-        const byUf = {};
+        const expRecords = records.filter(r => r.kind === 'expense');
+
+        const ufMetrics = {
+            'PR': { faturamento: 0, txCount: 0 },
+            'SC': { faturamento: 0, txCount: 0 },
+            'RS': { faturamento: 0, txCount: 0 },
+            'OUTROS': { faturamento: 0, txCount: 0 }
+        };
 
         revRecords.forEach(r => {
-            const uf = r.uf || 'N/D';
-            byUf[uf] = (byUf[uf] || 0) + r.value;
-        });
-
-        const sorted = Object.entries(byUf).sort((a, b) => b[1] - a[1]);
-        const labels = sorted.map(u => u[0]);
-        const values = sorted.map(u => u[1]);
-
-        const isLight = document.body.classList.contains('light-theme');
-        const textColor = isLight ? '#1f2c3d' : '#f5f6f8';
-        const textSecondary = isLight ? '#637381' : '#8a99a8';
-        const gridColor = isLight ? '#e0e6ed' : 'rgba(255, 255, 255, 0.06)';
-
-        charts.uf = new Chart(canvas, {
-            type: 'bar',
-            data: {
-                labels,
-                datasets: [{
-                    label: 'Faturamento Bruto',
-                    data: values,
-                    backgroundColor: '#004f71',
-                    hoverBackgroundColor: '#0077aa',
-                    borderRadius: 4
-                }]
-            },
-            options: {
-                indexAxis: 'y',
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false },
-                    datalabels: {
-                        anchor: 'end',
-                        align: 'right',
-                        color: textSecondary,
-                        font: { family: 'Outfit', size: 9.5, weight: 'bold' },
-                        formatter: compact
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: c => ` Faturamento: ${money(c.raw)}`
-                        }
-                    }
-                },
-                scales: {
-                    x: {
-                        beginAtZero: true,
-                        grace: '15%',
-                        grid: { color: gridColor },
-                        ticks: { color: textSecondary, callback: compact, font: { family: 'Outfit', size: 10 } }
-                    },
-                    y: {
-                        grid: { display: false },
-                        ticks: { color: textColor, font: { family: 'Outfit', size: 11, weight: '600' } }
-                    }
-                },
-                onClick: (_, items) => {
-                    if (items.length) {
-                        const clickedUf = labels[items[0].index];
-                        if (clickedUf) {
-                            state.uf = clickedUf;
-                            if (el('uf')) el('uf').value = clickedUf;
-                            state.page = 0;
-                            render();
-                        }
-                    }
-                }
+            const uf = r.uf;
+            if (uf === 'PR' || uf === 'SC' || uf === 'RS') {
+                ufMetrics[uf].faturamento += r.value;
+                ufMetrics[uf].txCount++;
+            } else {
+                ufMetrics['OUTROS'].faturamento += r.value;
+                ufMetrics['OUTROS'].txCount++;
             }
         });
+
+        const maxFat = Math.max(ufMetrics.PR.faturamento, ufMetrics.SC.faturamento, ufMetrics.RS.faturamento, 1);
+
+        const getColorForUF = (uf) => {
+            const fat = ufMetrics[uf]?.faturamento || 0;
+            const opacity = fat > 0 ? (0.25 + 0.7 * (fat / maxFat)) : 0.12;
+            return `rgba(0, 79, 113, ${opacity.toFixed(2)})`;
+        };
+
+        const isSelectPR = state.uf === 'PR' ? 'active' : (state.uf !== 'ALL' ? 'dimmed' : '');
+        const isSelectSC = state.uf === 'SC' ? 'active' : (state.uf !== 'ALL' ? 'dimmed' : '');
+        const isSelectRS = state.uf === 'RS' ? 'active' : (state.uf !== 'ALL' ? 'dimmed' : '');
+        const isSelectOutros = (state.uf !== 'ALL' && state.uf !== 'PR' && state.uf !== 'SC' && state.uf !== 'RS') ? 'active' : (state.uf !== 'ALL' ? 'dimmed' : '');
+
+        mapContainer.innerHTML = `
+            <div class="uf-premium-container">
+                <div class="uf-map-side">
+                    <svg class="map-svg-centered" viewBox="125 242 136 136" style="overflow: visible;">
+                        <!-- PARANÁ -->
+                        <polygon class="map-state ${isSelectPR}" id="exec-state-PR" points="
+                            234.456,277.734 235.218,274.689 232.173,276.213 229.318,273.357 228.368,269.744 224.942,269.172 221.898,269.363
+                            220.375,266.127 220.757,263.463 220.945,258.326 218.663,256.424 212.384,257.186 207.056,254.33 203.061,254.33 202.109,254.33
+                            201.158,252.809 199.635,253.189 196.591,253.949 193.356,254.141 190.407,253.475 186.887,256.709 185.364,259.564
+                            184.604,263.369 183.556,265.082 180.196,265.885 177.763,274.082 177.664,278.756 176.28,281.801 182.956,283.033
+                            184.454,288.203 183.603,290.621 186.648,288.984 189.502,290.197 192.356,289.484 193.927,291.41 196.425,291.34
+                            199.706,292.695 204.844,293.695 206.058,292.98 205.985,291.197 207.199,289.414 212.052,286.273 214.478,286.844
+                            217.401,286.346 220.686,288.344 224.823,285.988 228.248,287.129 230.233,287.793 230.184,284.873 229.085,284.475
+                            230.033,284.375 231.132,282.336 232.28,281.49 231.682,281.291 231.082,281.49 231.032,280.943 229.585,281.043 229.085,281.143
+                            229.385,280.695 228.485,279.9 229.934,280.396 230.482,280.098 230.932,279.6 231.381,278.807 231.932,279.004
+                            232.33,278.705 232.28,279.502 232.879,279.9 233.478,279.451 233.777,279.65 233.029,280.297 233.129,281.143 233.528,281.094
+                            234.377,279.65 236.125,278.635" 
+                            style="fill: ${getColorForUF('PR')};" 
+                            onclick="window.toggleExecutivoUF('PR')">
+                        </polygon>
+                        <text class="map-label ${isSelectPR}" x="205" y="272" style="font-size: 3.5px;" onclick="window.toggleExecutivoUF('PR')">PR</text>
+
+                        <!-- SANTA CATARINA -->
+                        <polygon class="map-state ${isSelectSC}" id="exec-state-SC" points="
+                            224.823,285.988 220.686,288.344 217.401,286.346 214.478,286.844 212.052,286.273 207.199,289.414 205.985,291.197
+                            206.058,292.98 204.844,293.695 199.706,292.695 196.425,291.34 193.927,291.41 192.356,289.484 189.502,290.197 186.648,288.984
+                            183.603,290.621 185.153,294.27 183.62,298.275 185.364,298.57 188.98,298.191 192.976,298.191 196.211,298.762 198.873,300.379
+                            201.348,301.615 205.153,302.566 207.342,303.613 209.054,306.941 211.053,310.463 213.052,312.271 214.478,312.271
+                            216.569,311.32 218.378,310.844 219.71,311.795 219.899,313.508 217.235,316.076 214.667,320.357 215.714,320.738 217.33,319.502
+                            218.663,320.547 226.838,312.867 227.688,313.016 228.336,312.471 227.937,311.176 228.186,310.182 229.285,309.934
+                            229.435,308.641 229.885,308.59 229.535,310.133 229.834,309.982 230.282,307.746 230.333,305.807 230.184,305.605
+                            230.433,304.465 229.834,302.873 230.033,301.68 230.433,301.23 229.834,300.834 229.885,300.039 230.732,299.691
+                            230.832,299.393 230.533,298.893 231.432,298.348 231.932,298.646 232.33,298.1 231.381,297.203 231.032,297.75 230.533,297.551
+                            230.732,296.756 230.184,296.707 230.033,295.762 230.533,294.867 229.783,294.619 229.634,292.777 230.083,290.689
+                            229.285,289.496 228.535,289.695 227.786,289.545 228.685,288.998 227.837,287.955 229.034,288.75 230.233,287.793
+                            228.248,287.129" 
+                            style="fill: ${getColorForUF('SC')};" 
+                            onclick="window.toggleExecutivoUF('SC')">
+                        </polygon>
+                        <text class="map-label ${isSelectSC}" x="215" y="298" style="font-size: 3.5px;" onclick="window.toggleExecutivoUF('SC')">SC</text>
+
+                        <!-- RIO GRANDE DO SUL -->
+                        <polygon class="map-state ${isSelectRS}" id="exec-state-RS" points="
+                            215.714,320.738 214.667,320.357 217.235,316.076 219.899,313.508 219.71,311.795 218.378,310.844 216.569,311.32
+                            214.478,312.271 213.052,312.271 211.053,310.463 209.054,306.941 207.342,303.613 205.153,302.566 201.348,301.615
+                            198.873,300.379 196.211,298.762 192.976,298.191 188.98,298.191 185.364,298.57 183.62,298.275 171.023,304.363 165.032,310.133
+                            159.191,319.432 151.903,325.398 150.604,328.383 155.53,328.646 158.924,331.697 161.122,332.293 161.988,334.215
+                            163.452,335.875 163.384,336.668 164.583,337.729 165.981,336.934 166.381,335.875 168.843,335.807 171.04,338.459
+                            180.825,347.012 183.354,347.674 189.013,354.637 186.883,359.477 187.082,362.857 185.951,366.57 186.449,367.764
+                            187.647,364.881 192.641,360.205 195.536,356.029 197.033,350.758 200.129,348.77 199.829,348.371 198.532,348.869
+                            198.432,347.773 199.629,347.477 197.934,346.879 198.232,346.082 199.23,345.984 199.829,344.988 200.129,342.803
+                            201.527,341.707 202.725,341.906 203.125,340.613 203.724,340.912 203.923,338.027 205.021,336.535 205.121,337.631
+                            205.722,335.74 206.818,334.547 206.818,333.752 205.121,333.156 205.021,332.559 205.621,331.762 206.021,332.758
+                            207.019,333.254 208.616,333.156 209.614,331.861 211.612,331.166 212.012,333.254 211.312,333.553 211.212,332.857
+                            210.612,332.758 210.812,336.535 209.314,337.232 209.216,338.027 208.117,338.525 207.917,341.111 206.52,342.305
+                            205.321,342.404 203.623,345.189 202.825,345.189 202.226,346.184 200.629,345.785 200.329,346.283 201.028,347.277
+                            200.43,348.172 200.828,348.57 201.327,347.477 204.822,345.389 211.312,338.824 211.312,338.824 216.604,326.889 218.351,320.922
+                            218.663,320.547 217.33,319.502" 
+                            style="fill: ${getColorForUF('RS')};" 
+                            onclick="window.toggleExecutivoUF('RS')">
+                        </polygon>
+                        <text class="map-label ${isSelectRS}" x="186" y="335" style="font-size: 3.5px;" onclick="window.toggleExecutivoUF('RS')">RS</text>
+                    </svg>
+                </div>
+
+                <!-- PARANÁ CAPSULE -->
+                <div class="uf-compact-card pr-card ${isSelectPR}" onclick="window.toggleExecutivoUF('PR')">
+                    <div class="uf-compact-header">
+                        <span class="uf-compact-name"><span class="uf-status-indicator pr-dot"></span><strong>Paraná</strong></span>
+                    </div>
+                    <div class="uf-compact-content">
+                        <div class="uf-compact-main-stat">
+                            <span class="uf-stat-label"><i class="fa-solid fa-file-invoice"></i> Notas ERP</span>
+                            <span class="uf-stat-value">${ufMetrics.PR.txCount}</span>
+                        </div>
+                        <div class="uf-compact-sub-stats">
+                            <div class="uf-sub-stat success">
+                                <span class="uf-sub-val success">${money(ufMetrics.PR.faturamento)}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SANTA CATARINA CAPSULE -->
+                <div class="uf-compact-card sc-card ${isSelectSC}" onclick="window.toggleExecutivoUF('SC')">
+                    <div class="uf-compact-header">
+                        <span class="uf-compact-name"><span class="uf-status-indicator sc-dot"></span><strong>Santa Catarina</strong></span>
+                    </div>
+                    <div class="uf-compact-content">
+                        <div class="uf-compact-main-stat">
+                            <span class="uf-stat-label"><i class="fa-solid fa-file-invoice"></i> Notas ERP</span>
+                            <span class="uf-stat-value">${ufMetrics.SC.txCount}</span>
+                        </div>
+                        <div class="uf-compact-sub-stats">
+                            <div class="uf-sub-stat success">
+                                <span class="uf-sub-val success">${money(ufMetrics.SC.faturamento)}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIO GRANDE DO SUL CAPSULE -->
+                <div class="uf-compact-card rs-card ${isSelectRS}" onclick="window.toggleExecutivoUF('RS')">
+                    <div class="uf-compact-header">
+                        <span class="uf-compact-name"><span class="uf-status-indicator rs-dot"></span><strong>Rio Grande do Sul</strong></span>
+                    </div>
+                    <div class="uf-compact-content">
+                        <div class="uf-compact-main-stat">
+                            <span class="uf-stat-label"><i class="fa-solid fa-file-invoice"></i> Notas ERP</span>
+                            <span class="uf-stat-value">${ufMetrics.RS.txCount}</span>
+                        </div>
+                        <div class="uf-compact-sub-stats">
+                            <div class="uf-sub-stat success">
+                                <span class="uf-sub-val success">${money(ufMetrics.RS.faturamento)}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OUTROS ESTADOS (SE HOUVER) -->
+                ${ufMetrics.OUTROS.faturamento > 0 ? `
+                <div class="uf-compact-card outros-card ${isSelectOutros}" onclick="window.toggleExecutivoUF('OUTROS')" style="right: 8px; bottom: 15px; border-left-color: #a855f7;">
+                    <div class="uf-compact-header">
+                        <span class="uf-compact-name"><span class="uf-status-indicator" style="background:#a855f7; box-shadow:0 0 6px #a855f7;"></span><strong>Demais Estados</strong></span>
+                    </div>
+                    <div class="uf-compact-content">
+                        <div class="uf-compact-main-stat">
+                            <span class="uf-stat-label"><i class="fa-solid fa-file-invoice"></i> Notas ERP</span>
+                            <span class="uf-stat-value">${ufMetrics.OUTROS.txCount}</span>
+                        </div>
+                        <div class="uf-compact-sub-stats">
+                            <div class="uf-sub-stat success">
+                                <span class="uf-sub-val success">${money(ufMetrics.OUTROS.faturamento)}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>` : ''}
+            </div>
+        `;
     }
 
     // ============================================================
@@ -765,11 +988,9 @@
         if (!body) return;
         body.replaceChildren();
 
-        // Para a tabela completa, exibimos todos os meses do exercício
         let totRev = 0, totExp = 0, totRes = 0;
 
         for (const m of data.months) {
-            // Calcular valores do mês aplicando filtros de UF, busca e cliente
             const mRs = data.records.filter(r => r.period === m.period && matches(r));
             const rev = m.revenue == null ? null : sum(mRs, 'revenue');
             const exp = (state.customer !== 'ALL' && state.customer) || m.expense == null ? null : sum(mRs, 'expense');
@@ -891,13 +1112,11 @@
             pageRecords.forEach(r => {
                 const tr = document.createElement('tr');
 
-                // Data DD/MM/AAAA
                 const tdDate = document.createElement('td');
                 tdDate.textContent = r.date ? r.date.split('-').reverse().join('/') : '—';
                 tdDate.style.fontWeight = '500';
                 tr.appendChild(tdDate);
 
-                // Tipo (Badge)
                 const tdKind = document.createElement('td');
                 tdKind.style.textAlign = 'center';
                 tdKind.innerHTML = r.kind === 'revenue'
@@ -905,7 +1124,6 @@
                     : `<span class="exec-badge-kind expense"><i class="fa-solid fa-arrow-up-right"></i> Despesa</span>`;
                 tr.appendChild(tdKind);
 
-                // Cliente / Descrição
                 const tdDesc = document.createElement('td');
                 tdDesc.style.maxWidth = '400px';
                 tdDesc.style.whiteSpace = 'normal';
@@ -916,13 +1134,11 @@
                 }
                 tr.appendChild(tdDesc);
 
-                // UF
                 const tdUf = document.createElement('td');
                 tdUf.style.textAlign = 'center';
                 tdUf.innerHTML = `<span class="exec-badge-uf">${r.uf || 'N/D'}</span>`;
                 tr.appendChild(tdUf);
 
-                // Banco / Categoria
                 const tdCat = document.createElement('td');
                 const catInfo = [r.bank, r.category].filter(Boolean).join(' · ');
                 tdCat.textContent = catInfo || '—';
@@ -930,7 +1146,6 @@
                 tdCat.style.fontSize = '12.5px';
                 tr.appendChild(tdCat);
 
-                // Valor
                 const tdVal = document.createElement('td');
                 tdVal.style.textAlign = 'right';
                 tdVal.style.fontWeight = '700';
@@ -942,7 +1157,6 @@
             });
         }
 
-        // Contadores e Paginação
         set('record-count', `(${totalCount.toLocaleString('pt-BR')} registros)`);
         set('record-tab-badge', totalCount.toLocaleString('pt-BR'));
         set('page', `${state.page + 1} de ${totalPages}`);
@@ -966,9 +1180,19 @@
     window.selectExecutivoMonth = function (period) {
         state.month = period;
         if (el('month')) el('month').value = period;
-        // Ao selecionar um mês específico, define como 'daily' (ou 'weekly' se mobile)
         state.granularity = window.innerWidth <= 768 ? 'weekly' : 'daily';
         state.userSelectedGranularity = null;
+        state.page = 0;
+        render();
+    };
+
+    window.toggleExecutivoCustomer = function (custName) {
+        if (state.customer === custName) {
+            state.customer = 'ALL';
+        } else {
+            state.customer = custName;
+        }
+        if (el('customer')) el('customer').value = state.customer;
         state.page = 0;
         render();
     };
@@ -976,6 +1200,17 @@
     window.clearExecutivoCustomer = function () {
         state.customer = 'ALL';
         if (el('customer')) el('customer').value = 'ALL';
+        state.page = 0;
+        render();
+    };
+
+    window.toggleExecutivoUF = function (ufCode) {
+        if (state.uf === ufCode) {
+            state.uf = 'ALL';
+        } else {
+            state.uf = ufCode;
+        }
+        if (el('uf')) el('uf').value = state.uf;
         state.page = 0;
         render();
     };

@@ -53,7 +53,7 @@
     <link rel="stylesheet" href="sar_styles.css?v=3.57">
     <link rel="stylesheet" href="parcelamentos_styles.css?v=1.3">
     <link rel="stylesheet" href="financiamentos_styles.css?v=1.2">
-    <link rel="stylesheet" href="executivo_jle_styles.css?v=3.0">
+    <link rel="stylesheet" href="executivo_jle_styles.css?v=3.1">
     
     <!-- Leaflet Map CSS & JS CDNs -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
@@ -297,7 +297,7 @@
                         <h3 class="kpi-value" id="exec-jle-revenue">R$ 0,00</h3>
                         <div class="kpi-analytics">
                             <span class="kpi-subvalue" id="exec-jle-revenue-note">0 notas · bruto faturado no ERP</span>
-                            <span class="kpi-subvalue" id="exec-jle-revenue-daily">Média: R$ 0,00/dia</span>
+                            <span class="kpi-subvalue" id="exec-jle-revenue-prev">Mês Anterior: <strong>R$ 0,00</strong></span>
                         </div>
                     </div>
                     <div class="kpi-icon-container">
@@ -311,7 +311,7 @@
                         <h3 class="kpi-value" id="exec-jle-expense">R$ 0,00</h3>
                         <div class="kpi-analytics">
                             <span class="kpi-subvalue" id="exec-jle-expense-note">0 saídas · sem transferências</span>
-                            <span class="kpi-subvalue" id="exec-jle-expense-daily">Média: R$ 0,00/dia</span>
+                            <span class="kpi-subvalue" id="exec-jle-expense-prev">Mês Anterior: <strong>R$ 0,00</strong></span>
                         </div>
                     </div>
                     <div class="kpi-icon-container">
@@ -325,7 +325,7 @@
                         <h3 class="kpi-value" id="exec-jle-result">R$ 0,00</h3>
                         <div class="kpi-analytics">
                             <span class="kpi-subvalue" id="exec-jle-result-note">Margem: 0,0%</span>
-                            <span class="kpi-subvalue" id="exec-jle-result-status" style="font-weight: 600;">Superávit</span>
+                            <span class="kpi-subvalue" id="exec-jle-result-prev">Mês Anterior: <strong>R$ 0,00</strong></span>
                         </div>
                     </div>
                     <div class="kpi-icon-container">
@@ -363,26 +363,26 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="chart-body" style="position: relative; height: 340px; width: 100%;">
+                        <div class="chart-body" style="position: relative; height: 350px; width: 100%;">
                             <canvas id="exec-jle-chart" role="img" aria-label="Evolução de receita e despesa"></canvas>
                         </div>
                     </div>
 
-                    <!-- GRÁFICO 2: RECEITA POR CLIENTE (COBRANÇAS / FATURAMENTO) -->
-                    <div class="chart-card">
-                        <div class="chart-header">
+                    <!-- CARD 2: FATURAMENTO POR CLIENTE (MINICARDS COM LOGOS) -->
+                    <div class="chart-card" style="display: flex; flex-direction: column;">
+                        <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
                             <div class="chart-title">
-                                <h2 id="exec-jle-customers-title">Receita por Cliente</h2>
+                                <h2 id="exec-jle-customers-title"><i class="fa-solid fa-users-viewfinder"></i> Faturamento por Cliente</h2>
                             </div>
                             <div id="exec-jle-customers-back-container"></div>
                         </div>
-                        <div class="chart-body" style="position: relative; height: 340px; width: 100%; display: flex; align-items: center; justify-content: center;">
-                            <canvas id="exec-jle-chart-customers"></canvas>
+                        <div class="exec-clients-grid" id="exec-jle-customer-cards" style="display: flex; flex-direction: column; gap: 8px; overflow-y: auto; max-height: 350px; padding-right: 4px;">
+                            <!-- Minicards com logos injetados via JS -->
                         </div>
                     </div>
                 </div>
 
-                <!-- LINHA 2 DE GRÁFICOS: DESPESAS POR BANCO (1fr) + FATURAMENTO POR UF (1fr) -->
+                <!-- LINHA 2 DE GRÁFICOS: DESPESAS POR BANCO (1fr) + MAPA POR ESTADO (1fr) -->
                 <div class="charts-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 24px;">
                     <div class="chart-card">
                         <div class="chart-header">
@@ -390,7 +390,7 @@
                                 <h2><i class="fa-solid fa-building-columns"></i> Despesas por Banco</h2>
                             </div>
                         </div>
-                        <div class="chart-body" style="position: relative; height: 290px; width: 100%; display: flex; align-items: center; justify-content: center;">
+                        <div class="chart-body" style="position: relative; height: 380px; width: 100%; display: flex; align-items: center; justify-content: center;">
                             <canvas id="exec-jle-chart-banks"></canvas>
                         </div>
                     </div>
@@ -398,11 +398,13 @@
                     <div class="chart-card">
                         <div class="chart-header">
                             <div class="chart-title">
-                                <h2><i class="fa-solid fa-map-location-dot"></i> Faturamento por UF</h2>
+                                <h2><i class="fa-solid fa-map-location-dot"></i> Faturamento por Estado</h2>
                             </div>
                         </div>
-                        <div class="chart-body" style="position: relative; height: 290px; width: 100%; display: flex; align-items: center; justify-content: center;">
-                            <canvas id="exec-jle-chart-uf"></canvas>
+                        <div class="chart-body map-chart-body" style="overflow: hidden !important; height: 380px; position: relative;">
+                            <div class="map-wrapper" id="exec-jle-map-container" style="width: 100%; height: 100%; position: relative;">
+                                <!-- SVG Map injetado dinamicamente -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -4219,7 +4221,7 @@
     <!-- Carga de Dados Dinâmica -->
     <script src="data.js"></script>
     <script src="executivo_jle_data.js?v=2.0"></script>
-    <script src="executivo_jle_app.js?v=3.0"></script>
+    <script src="executivo_jle_app.js?v=3.1"></script>
     <script src="tecnodrill_data.js?v=20261002101330"></script>
     <script src="tecnodrill_app.js?v=3.10"></script>
 

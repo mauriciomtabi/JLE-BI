@@ -61,7 +61,7 @@
     background-color: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    padding: 22px 24px;
+    padding: 20px 22px;
     box-shadow: var(--shadow-main);
     display: flex;
     align-items: center;
@@ -154,14 +154,19 @@
 #view-executivo-container .kpi-analytics {
     display: flex;
     flex-direction: column;
-    gap: 3px;
-    margin-top: 4px;
+    gap: 4px;
+    margin-top: 5px;
 }
 
 #view-executivo-container .kpi-subvalue {
     font-size: 11.5px;
     color: var(--text-secondary);
     line-height: 1.4;
+}
+
+#view-executivo-container .kpi-subvalue strong {
+    color: var(--text-primary);
+    font-weight: 700;
 }
 
 #view-executivo-container .kpi-icon-container {
@@ -232,7 +237,145 @@ body.light-theme #exec-jle-chart-controls {
     pointer-events: none !important;
 }
 
-/* 4. TABELAS DE DADOS E BADGES */
+/* 4. MINICARDS DE CLIENTES COM LOGOS */
+.exec-clients-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+    max-height: 350px;
+    padding-right: 4px;
+}
+
+.exec-clients-grid::-webkit-scrollbar {
+    width: 5px;
+}
+
+.exec-clients-grid::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+}
+
+.exec-client-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 9px 12px;
+    cursor: pointer;
+    transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.exec-client-card:hover {
+    transform: translateY(-2px);
+    border-color: #38bdf8;
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+.exec-client-card.active {
+    background-color: rgba(56, 189, 248, 0.12);
+    border-color: #38bdf8;
+    box-shadow: 0 4px 16px rgba(56, 189, 248, 0.25);
+}
+
+.exec-client-card.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: #38bdf8;
+}
+
+.exec-client-logo-box {
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    background: #111c24;
+}
+
+.exec-client-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.exec-client-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.exec-client-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.exec-client-share {
+    font-size: 11px;
+    font-weight: 700;
+    color: #38bdf8;
+    background: rgba(56, 189, 248, 0.12);
+    padding: 1px 7px;
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+
+.exec-client-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.exec-client-amount {
+    font-size: 14.5px;
+    font-weight: 750;
+    color: #10b981;
+    font-variant-numeric: tabular-nums;
+}
+
+.exec-client-sub {
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+/* 5. MAPA DE ESTADOS (SVG INTERATIVO) */
+#exec-jle-map-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+#exec-jle-map-container .uf-premium-container {
+    min-height: 380px;
+}
+
+#exec-jle-map-container .map-svg-centered {
+    transform: scale(1.18);
+}
+
+/* 6. TABELAS DE DADOS E BADGES */
 #view-executivo-container .table-container {
     width: 100%;
     overflow-x: auto;
@@ -393,7 +536,7 @@ body.light-theme #view-executivo-container table.data-table tbody tr:hover {
     font-weight: 600;
 }
 
-/* 5. RESPONSIVIDADE */
+/* 7. RESPONSIVIDADE */
 @media (max-width: 1024px) {
     #view-executivo-container .kpi-container {
         grid-template-columns: 1fr;
@@ -409,6 +552,9 @@ body.light-theme #view-executivo-container table.data-table tbody tr:hover {
         font-size: 22px;
     }
     #view-executivo-container .chart-body {
-        height: 290px !important;
+        height: 300px !important;
+    }
+    #exec-jle-map-container .uf-premium-container {
+        min-height: 340px;
     }
 }
