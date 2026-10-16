@@ -118,79 +118,58 @@
     }
 
     // ============================================================
-    // LOGOS SVG DOS CLIENTES
+    // LOGOS OFICIAIS DOS CLIENTES
     // ============================================================
-    function getCustomerLogoSvg(customerName) {
+    function getCustomerLogoInfo(customerName) {
         const c = String(customerName || '').toUpperCase();
 
         if (c.includes('CLARO S.A') || c === 'CLARO') {
-            return `
-            <svg viewBox="0 0 100 100" width="100%" height="100%">
-                <rect width="100" height="100" rx="14" fill="#da291c"/>
-                <circle cx="50" cy="50" r="32" fill="#ffffff"/>
-                <circle cx="50" cy="50" r="23" fill="#da291c"/>
-                <ellipse cx="50" cy="50" rx="27" ry="14" fill="none" stroke="#ffffff" stroke-width="4.5" transform="rotate(-30 50 50)"/>
-                <circle cx="50" cy="50" r="12" fill="#ffffff"/>
-            </svg>`;
+            return {
+                html: '<img src="assets/logo_claro.svg" alt="Claro S.A.">',
+                boxStyle: 'background: #e4242d; padding: 2px;'
+            };
         }
 
         if (c.includes('NXT') || c.includes('NEXTEL')) {
-            return `
-            <svg viewBox="0 0 100 100" width="100%" height="100%">
-                <rect width="100" height="100" rx="14" fill="#18181b"/>
-                <circle cx="50" cy="50" r="38" fill="#da291c"/>
-                <text x="50" y="58" font-family="'Outfit', sans-serif" font-weight="900" font-size="24" fill="#ffffff" text-anchor="middle">NXT</text>
-            </svg>`;
+            return {
+                html: '<img src="assets/logo_nextel.svg" alt="Claro NXT (Nextel)">',
+                boxStyle: 'background: #ffffff; padding: 4px;'
+            };
         }
 
         if (c.includes('FIBRASIL')) {
-            return `
-            <svg viewBox="0 0 100 100" width="100%" height="100%">
-                <defs>
-                    <linearGradient id="fibrasilGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#00c0f3"/>
-                        <stop offset="100%" stop-color="#4a00e0"/>
-                    </linearGradient>
-                </defs>
-                <rect width="100" height="100" rx="14" fill="url(#fibrasilGrad)"/>
-                <path d="M30 70 L30 30 Q45 25 55 35 Q65 45 55 55 L38 55 M30 45 L50 45" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
-                <circle cx="70" cy="40" r="6" fill="#00ffff"/>
-            </svg>`;
+            return {
+                html: '<img src="assets/logo_fibrasil.svg" alt="FiBrasil Infraestrutura">',
+                boxStyle: 'background: #ffffff; padding: 4px;'
+            };
         }
 
         if (c.includes('TELEMONT')) {
-            return `
-            <svg viewBox="0 0 100 100" width="100%" height="100%">
-                <rect width="100" height="100" rx="14" fill="#002d62"/>
-                <path d="M25 35 L75 35 M50 35 L50 72" fill="none" stroke="#ff7900" stroke-width="9" stroke-linecap="round"/>
-                <path d="M32 46 L68 46" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
-            </svg>`;
+            return {
+                html: '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;"><img src="assets/logo_telemont.svg" alt="Telemont Engenharia" style="max-height: 20px;"></div>',
+                boxStyle: 'background: #ffffff; padding: 3px;'
+            };
         }
 
         if (c.includes('TLP')) {
-            return `
-            <svg viewBox="0 0 100 100" width="100%" height="100%">
-                <rect width="100" height="100" rx="14" fill="#0353a4"/>
-                <text x="50" y="60" font-family="'Outfit', sans-serif" font-weight="900" font-size="28" fill="#ffffff" text-anchor="middle" letter-spacing="1">TLP</text>
-            </svg>`;
+            return {
+                html: '<img src="assets/logo_tlp.png" alt="TLP CP Serviços">',
+                boxStyle: 'background: #ffffff; padding: 4px;'
+            };
         }
 
         if (c.includes('WIP') || c.includes('TOWER')) {
-            return `
-            <svg viewBox="0 0 100 100" width="100%" height="100%">
-                <rect width="100" height="100" rx="14" fill="#6d28d9"/>
-                <path d="M50 20 L50 75 M35 75 L65 75 M40 50 L60 50 M44 35 L56 35" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
-                <circle cx="50" cy="20" r="5" fill="#f59e0b"/>
-            </svg>`;
+            return {
+                html: '<img src="assets/logo_apwip.svg" alt="AP Wip Tower (APWireless)">',
+                boxStyle: 'background: #ffffff; padding: 4px;'
+            };
         }
 
-        // Outros Clientes
-        return `
-        <svg viewBox="0 0 100 100" width="100%" height="100%">
-            <rect width="100" height="100" rx="14" fill="#334155"/>
-            <path d="M30 70 L30 40 L50 25 L70 40 L70 70 Z" fill="none" stroke="#94a3b8" stroke-width="6" stroke-linejoin="round"/>
-            <rect x="44" y="52" width="12" height="18" fill="#38bdf8"/>
-        </svg>`;
+        // Demais Clientes / Outros
+        return {
+            html: '<i class="fa-solid fa-users" style="color: #a855f7; font-size: 16px;"></i>',
+            boxStyle: 'background: rgba(168, 85, 247, 0.15); border: 1px dashed rgba(168, 85, 247, 0.4);'
+        };
     }
 
     function getCleanCustomerName(customerName) {
@@ -671,7 +650,7 @@
 
         topClients.forEach(([rawName, dataObj]) => {
             const cleanName = getCleanCustomerName(rawName);
-            const logoSvg = getCustomerLogoSvg(rawName);
+            const logoInfo = getCustomerLogoInfo(rawName);
             const pctStr = ((dataObj.value / totalRev) * 100).toFixed(1).replace('.', ',') + '%';
             const isActive = state.customer === rawName;
 
@@ -680,8 +659,8 @@
             card.onclick = () => window.toggleExecutivoCustomer(rawName);
 
             card.innerHTML = `
-                <div class="exec-client-logo-box">
-                    ${logoSvg}
+                <div class="exec-client-logo-box" style="${logoInfo.boxStyle}">
+                    ${logoInfo.html}
                 </div>
                 <div class="exec-client-details">
                     <div class="exec-client-top">
@@ -702,14 +681,15 @@
             const remVal = remainder.reduce((s, r) => s + r[1].value, 0);
             const remCount = remainder.reduce((s, r) => s + r[1].count, 0);
             const remPctStr = ((remVal / totalRev) * 100).toFixed(1).replace('.', ',') + '%';
+            const logoInfo = getCustomerLogoInfo('OUTROS');
 
             const card = document.createElement('div');
             card.className = `exec-client-card`;
             card.style.opacity = '0.9';
 
             card.innerHTML = `
-                <div class="exec-client-logo-box">
-                    ${getCustomerLogoSvg('OUTROS')}
+                <div class="exec-client-logo-box" style="${logoInfo.boxStyle}">
+                    ${logoInfo.html}
                 </div>
                 <div class="exec-client-details">
                     <div class="exec-client-top">
