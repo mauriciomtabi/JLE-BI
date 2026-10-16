@@ -53,7 +53,7 @@
     <link rel="stylesheet" href="sar_styles.css?v=3.57">
     <link rel="stylesheet" href="parcelamentos_styles.css?v=1.3">
     <link rel="stylesheet" href="financiamentos_styles.css?v=1.2">
-    <link rel="stylesheet" href="executivo_jle_styles.css?v=3.1">
+    <link rel="stylesheet" href="executivo_jle_styles.css?v=3.2">
     
     <!-- Leaflet Map CSS & JS CDNs -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
@@ -342,33 +342,33 @@
 
             <!-- SUBVIEW: INDICADORES -->
             <div id="exec-jle-indicators">
-                <!-- LINHA 1 DE GRÁFICOS: EVOLUÇÃO (2fr) + RECEITA POR CLIENTE (1fr) -->
-                <div class="charts-grid" style="grid-template-columns: 2fr 1fr; margin-bottom: 24px;">
-                    <!-- GRÁFICO 1: EVOLUÇÃO COM CONTROLES DE GRANULARIDADE (MENSAL, SEMANAL, DIÁRIO) -->
-                    <div class="chart-card">
-                        <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;">
-                            <div class="chart-title">
-                                <h2 id="exec-jle-chart-title">Evolução de Receita e Despesa</h2>
-                                <span id="exec-jle-chart-note" style="font-size: 11.5px; color: var(--text-secondary); font-weight: 500; display: block; margin-top: 2px;"></span>
-                            </div>
-                            <div class="chart-controls" id="exec-jle-chart-controls">
-                                <button class="chart-toggle-btn active" id="exec-btn-monthly" onclick="window.setExecutivoGranularity?.('monthly')">
-                                    Mensal
-                                </button>
-                                <button class="chart-toggle-btn" id="exec-btn-weekly" onclick="window.setExecutivoGranularity?.('weekly')">
-                                    Semanal
-                                </button>
-                                <button class="chart-toggle-btn" id="exec-btn-daily" onclick="window.setExecutivoGranularity?.('daily')">
-                                    Diário
-                                </button>
-                            </div>
+                <!-- LINHA 1 DE GRÁFICOS: EVOLUÇÃO TEMPORAL (LARGURA TOTAL 100%) -->
+                <div class="chart-card" style="margin-bottom: 24px; width: 100%;">
+                    <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;">
+                        <div class="chart-title">
+                            <h2 id="exec-jle-chart-title">Evolução de Receita e Despesa</h2>
+                            <span id="exec-jle-chart-note" style="font-size: 11.5px; color: var(--text-secondary); font-weight: 500; display: block; margin-top: 2px;"></span>
                         </div>
-                        <div class="chart-body" style="position: relative; height: 350px; width: 100%;">
-                            <canvas id="exec-jle-chart" role="img" aria-label="Evolução de receita e despesa"></canvas>
+                        <div class="chart-controls" id="exec-jle-chart-controls">
+                            <button class="chart-toggle-btn active" id="exec-btn-monthly" onclick="window.setExecutivoGranularity?.('monthly')">
+                                Mensal
+                            </button>
+                            <button class="chart-toggle-btn" id="exec-btn-weekly" onclick="window.setExecutivoGranularity?.('weekly')">
+                                Semanal
+                            </button>
+                            <button class="chart-toggle-btn" id="exec-btn-daily" onclick="window.setExecutivoGranularity?.('daily')">
+                                Diário
+                            </button>
                         </div>
                     </div>
+                    <div class="chart-body" style="position: relative; height: 360px; width: 100%;">
+                        <canvas id="exec-jle-chart" role="img" aria-label="Evolução de receita e despesa"></canvas>
+                    </div>
+                </div>
 
-                    <!-- CARD 2: FATURAMENTO POR CLIENTE (MINICARDS COM LOGOS) -->
+                <!-- LINHA 2 DE GRÁFICOS: FATURAMENTO POR CLIENTE (1fr) + FATURAMENTO POR ESTADO (1fr) -->
+                <div class="charts-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 24px;">
+                    <!-- CARD 1: FATURAMENTO POR CLIENTE (MINICARDS COM LOGOS) -->
                     <div class="chart-card" style="display: flex; flex-direction: column;">
                         <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
                             <div class="chart-title">
@@ -376,25 +376,12 @@
                             </div>
                             <div id="exec-jle-customers-back-container"></div>
                         </div>
-                        <div class="exec-clients-grid" id="exec-jle-customer-cards" style="display: flex; flex-direction: column; gap: 8px; overflow-y: auto; max-height: 350px; padding-right: 4px;">
+                        <div class="exec-clients-grid" id="exec-jle-customer-cards" style="display: flex; flex-direction: column; gap: 8px; overflow-y: auto; max-height: 380px; padding-right: 4px;">
                             <!-- Minicards com logos injetados via JS -->
                         </div>
                     </div>
-                </div>
 
-                <!-- LINHA 2 DE GRÁFICOS: DESPESAS POR BANCO (1fr) + MAPA POR ESTADO (1fr) -->
-                <div class="charts-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 24px;">
-                    <div class="chart-card">
-                        <div class="chart-header">
-                            <div class="chart-title">
-                                <h2><i class="fa-solid fa-building-columns"></i> Despesas por Banco</h2>
-                            </div>
-                        </div>
-                        <div class="chart-body" style="position: relative; height: 380px; width: 100%; display: flex; align-items: center; justify-content: center;">
-                            <canvas id="exec-jle-chart-banks"></canvas>
-                        </div>
-                    </div>
-
+                    <!-- CARD 2: FATURAMENTO POR ESTADO (MAPA INTERATIVO) -->
                     <div class="chart-card">
                         <div class="chart-header">
                             <div class="chart-title">
@@ -4221,7 +4208,7 @@
     <!-- Carga de Dados Dinâmica -->
     <script src="data.js"></script>
     <script src="executivo_jle_data.js?v=2.0"></script>
-    <script src="executivo_jle_app.js?v=3.1"></script>
+    <script src="executivo_jle_app.js?v=3.2"></script>
     <script src="tecnodrill_data.js?v=20261002101330"></script>
     <script src="tecnodrill_app.js?v=3.10"></script>
 

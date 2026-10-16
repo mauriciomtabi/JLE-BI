@@ -369,7 +369,6 @@
         updateGranularityButtons();
         renderEvolutionChart(data, filteredRecords, periods);
         renderCustomersMinicards(filteredRecords);
-        renderBanksChart(filteredRecords);
         renderUfMap(filteredRecords);
         renderMonthlyTable(data, monthlySummaries);
         renderRecordsTable(filteredRecords);
@@ -567,7 +566,7 @@
                     datalabels: {
                         display: ctx => {
                             const val = ctx.dataset.data[ctx.dataIndex];
-                            return val != null && val > 0 && (gran !== 'daily' || ctx.dataIndex % 2 === 0);
+                            return val != null && val > 0;
                         },
                         anchor: 'end',
                         align: 'top',
@@ -597,7 +596,7 @@
                             color: textSecondary,
                             font: { family: 'Outfit', size: 11 },
                             maxRotation: 0,
-                            autoSkip: gran === 'daily'
+                            autoSkip: false
                         }
                     },
                     y: {
@@ -728,75 +727,9 @@
     }
 
     // ============================================================
-    // 3. GRÁFICO DE DESPESAS POR BANCO
+    // 3. GRÁFICO DE DESPESAS POR BANCO (REMOVIDO A PEDIDO DO USUÁRIO)
     // ============================================================
-    function renderBanksChart(records) {
-        if (charts.banks) {
-            charts.banks.destroy();
-            charts.banks = null;
-        }
-
-        const canvas = el('chart-banks');
-        if (!canvas || typeof Chart === 'undefined') return;
-
-        const expRecords = records.filter(r => r.kind === 'expense');
-        const byBank = {};
-
-        expRecords.forEach(r => {
-            const b = r.bank || 'Não Informado';
-            byBank[b] = (byBank[b] || 0) + r.value;
-        });
-
-        const sorted = Object.entries(byBank).sort((a, b) => b[1] - a[1]);
-        const labels = sorted.map(b => b[0]);
-        const values = sorted.map(b => b[1]);
-        const total = values.reduce((s, v) => s + v, 0);
-
-        const palette = ['#38bdf8', '#10b981', '#f59e0b', '#a855f7', '#64748b'];
-        const isLight = document.body.classList.contains('light-theme');
-        const textColor = isLight ? '#1f2c3d' : '#f5f6f8';
-
-        charts.banks = new Chart(canvas, {
-            type: 'doughnut',
-            data: {
-                labels,
-                datasets: [{
-                    data: values,
-                    backgroundColor: palette.slice(0, values.length),
-                    borderColor: isLight ? '#ffffff' : '#111c24',
-                    borderWidth: 2,
-                    hoverOffset: 6
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                cutout: '66%',
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            color: textColor,
-                            boxWidth: 12,
-                            usePointStyle: true,
-                            font: { family: 'Outfit', size: 10.5 },
-                            padding: 10
-                        }
-                    },
-                    datalabels: { display: false },
-                    tooltip: {
-                        callbacks: {
-                            label: c => {
-                                const val = c.raw;
-                                const p = total ? ((val / total) * 100).toFixed(1).replace('.', ',') + '%' : '0%';
-                                return ` ${money(val)} (${p})`;
-                            }
-                        }
-                    }
-                }
-            }
-        });
-    }
+    function renderBanksChart() {}
 
     // ============================================================
     // 4. MAPA DE ESTADOS INTERATIVO (REQUISITO 3)
