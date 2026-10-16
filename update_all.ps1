@@ -112,7 +112,7 @@ Write-Output ""
 Write-Output "--- Sincronizacao Consolidada com GitHub / PWA ---"
 $gitPath = if (Test-Path "C:\Program Files\Git\cmd\git.exe") { "C:\Program Files\Git\cmd\git.exe" } elseif (Test-Path "$env:LOCALAPPDATA\Programs\Git\cmd\git.exe") { "$env:LOCALAPPDATA\Programs\Git\cmd\git.exe" } else { (Get-Command git -ErrorAction SilentlyContinue).Source }
 if (Test-Path $gitPath) {
-    $dataFiles = @("data.js", "tecnodrill_data.js", "cobranca_data.js", "veiculos_data.js", "manutencao_data.js", "mdu_data.js", "sar_data.js", "parcelamentos_data.js", "financiamentos_data.js")
+    $dataFiles = @("data.js", "executivo_jle_data.js", "tecnodrill_data.js", "cobranca_data.js", "veiculos_data.js", "manutencao_data.js", "mdu_data.js", "sar_data.js", "parcelamentos_data.js", "financiamentos_data.js")
     $hasChanges = $false
     foreach ($df in $dataFiles) {
         $st = & $gitPath status --porcelain $df
@@ -140,7 +140,7 @@ if (Test-Path $gitPath) {
         }
 
         Write-Output "Enviando alteracoes consolidadas para o repositorio remoto..."
-        & $gitPath add data.js tecnodrill_data.js cobranca_data.js veiculos_data.js manutencao_data.js mdu_data.js sar_data.js sar_app.js sar_styles.css parcelamentos_data.js parcelamentos_app.js parcelamentos_styles.css index.html sw.js update_all.ps1 update_sar.ps1 update_sar.py atualizar_sar.bat update_parcelamentos.ps1 update_parcelamentos.py atualizar_parcelamentos.bat BI_LAYOUT_STANDARD.md .gitignore .agents/skills/bi-ui-preservation/SKILL.md
+        & $gitPath add data.js executivo_jle_data.js tecnodrill_data.js cobranca_data.js veiculos_data.js manutencao_data.js mdu_data.js sar_data.js sar_app.js sar_styles.css parcelamentos_data.js parcelamentos_app.js parcelamentos_styles.css index.html sw.js update_all.ps1 update_sar.ps1 update_sar.py atualizar_sar.bat update_parcelamentos.ps1 update_parcelamentos.py atualizar_parcelamentos.bat BI_LAYOUT_STANDARD.md .gitignore .agents/skills/bi-ui-preservation/SKILL.md
         & $gitPath commit -m "feat(tributario): implantacao do modulo de gestao tributaria e parcelamentos"
         & $gitPath pull --rebase --autostash origin main
         & $gitPath push origin main

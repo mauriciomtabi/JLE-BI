@@ -432,11 +432,20 @@ try {
     
     Write-Output "ETL Finalizado! Dados salvos em data.js com $($allTransactions.Count) lancamentos."
 
+    # Mesma copia da fonte para o consolidado executivo: ERP RECEITA x saidas bancarias.
+    $executivoScript = Join-Path $PSScriptRoot 'update_executivo_jle.py'
+    if (Test-Path $executivoScript) {
+        $executivoArgs = @('--source', $useFile, '--original-source', $(if ($networkPath) { $networkPath } else { $fallbackPath }))
+        if ($useFile -eq $fallbackPath) { $executivoArgs += '--fallback-cache' }
+        & python $executivoScript @executivoArgs
+        if ($LASTEXITCODE -ne 0) { throw 'Falha ao consolidar a visao executiva JLE; verificar a aba RECEITA.' }
+    }
+
     # 6. Publicar atualizações no GitHub se houver alterações em data.js
     Write-Output "Verificando se houve alteracoes nos dados para publicar no GitHub..."
     $gitPath = if (Test-Path "C:\Program Files\Git\cmd\git.exe") { "C:\Program Files\Git\cmd\git.exe" } elseif (Test-Path "$env:LOCALAPPDATA\Programs\Git\cmd\git.exe") { "$env:LOCALAPPDATA\Programs\Git\cmd\git.exe" } else { (Get-Command git -ErrorAction SilentlyContinue).Source }
     if (Test-Path $gitPath) {
-        $gitStatus = & $gitPath status --porcelain data.js
+        $gitStatus = & $gitPath status --porcelain data.js executivo_jle_data.js
         if ($null -ne $gitStatus -and $gitStatus.ToString().Trim() -ne "") {
             Write-Output "Novas alteracoes nos dados detectadas! Atualizando a versao do Cache no Service Worker (sw.js)..."
             $swPath = "$PSScriptRoot\sw.js"
@@ -446,6 +455,7 @@ try {
                     $timestamp = Get-Date -Format "yyyyMMddHHmmss"
                     $newCacheNameLine = "const CACHE_NAME = 'jle-bi-v3.16.$timestamp';"
                     $swContent = $swContent -replace "const CACHE_NAME = '([^']+)';", $newCacheNameLine
+                    $swContent = $swContent -replace '// Versao:.*', "// Versao: $timestamp"
                     $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
                     [System.IO.File]::WriteAllText($swPath, $swContent, $utf8NoBom)
                     Write-Output "Cache do Service Worker atualizado com sucesso para: jle-bi-v3.16.$timestamp"
@@ -455,7 +465,7 @@ try {
             }
 
             Write-Output "Fazendo commit e push para o GitHub..."
-            & $gitPath add data.js sw.js
+            & $gitPath add data.js executivo_jle_data.js sw.js
             & $gitPath commit -m "data(auto): atualizacao automatica de dados e cache do PWA"
             & $gitPath push origin main
             Write-Output "Dados e Service Worker publicados com sucesso no GitHub!"
