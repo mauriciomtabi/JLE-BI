@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-16 10:08:38
+// Dados SAR JLE Telecom - Gerado em: 2026-10-16 11:00:14
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1122,
-    "generated_at": "2026-10-16 10:08:38",
+    "generated_at": "2026-10-16 11:00:14",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -763,10 +763,10 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 813350.9,
-        "total_previa_medicao": 1364031.27,
-        "total_classe_l": 342362.4,
-        "total_classe_f": 470988.5
+        "total_terceiros": 814526.1,
+        "total_previa_medicao": 1365822.08,
+        "total_classe_l": 343052.6,
+        "total_classe_f": 471473.5
     },
     "medicao": {
         "total_geral": 1417109.2,
@@ -78422,9 +78422,9 @@ window.SAR_DATA = [
     "caixa_mdu": "HPCAA.042",
     "classe_l": "BRUNO",
     "classe_f": "CATIA",
-    "situacao": "600",
-    "relatorio_foto": "",
-    "servico": "",
+    "situacao": "476",
+    "relatorio_foto": "476",
+    "servico": "FOI LANÇADO 476 METROS DE CABO DE 12FO, 1 ABERTURA E FECHAMENTO, 1 DERIVAÇÃO, 5 NAP NOVA, 10 FUSÕES, 5 TESTES.",
     "data_entrada": "2026-10-13",
     "data_entrada_fmt": "13/10/2026",
     "data_inicio": "2026-10-15",
@@ -78460,25 +78460,25 @@ window.SAR_DATA = [
     "prazo": "NO PRAZO",
     "tempo_dias": 2.0,
     "atraso_dias": 0,
-    "total_terceiros": 0.0,
-    "previa_medicao": 0.0,
+    "total_terceiros": 1175.2,
+    "previa_medicao": 1790.81,
     "valor_medicao": 0.0,
-    "valor_classe_l": 0.0,
-    "valor_classe_f": 0.0,
-    "itens_l_resumo": "-",
-    "itens_f_resumo": "-",
+    "valor_classe_l": 690.2,
+    "valor_classe_f": 485.0,
+    "itens_l_resumo": "2.15 CB ESP: 476m",
+    "itens_f_resumo": "3.18 NAP/CTO: 5 un, 3.15 AB/FE: 1 un, 3.13 FUS/EME: 10 un, 3.12 DER/INS: 1 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
-      "q_215": 0.0,
+      "q_215": 476.0,
       "q_113": 0.0,
       "q_311": 0.0,
       "q_317": 0.0,
-      "q_318": 0.0,
-      "q_315": 0.0,
-      "q_313": 0.0,
+      "q_318": 5.0,
+      "q_315": 1.0,
+      "q_313": 10.0,
       "q_314": 0.0,
-      "q_312": 0.0
+      "q_312": 1.0
     }
   },
   {
