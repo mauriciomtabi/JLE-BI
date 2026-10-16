@@ -82,7 +82,7 @@ def consolidate(source, original_name=None, fallback=False):
         def rev(row,name): return row[revenue_headers[key(name)]]
         for required in ('Dt.fatur','Valor Bruto','Retenção','Valor Líquido','Razão social','Posição detalhada','UF','Série','Nota','Cli/for'):
             if key(required) not in revenue_headers: raise ValueError(f'Coluna RECEITA ausente: {required}')
-        ids=set(); canceled=0; last_invoice=None
+        ids=set(); canceled=0; last_invoice=None; records=[]
         for rowno,row in enumerate(receita.iter_rows(min_row=2,values_only=True),2):
             if not rev(row,'Dt.fatur'): continue  # Linhas de resumo nao sao notas.
             status=normalize(rev(row,'Posição detalhada'))
@@ -97,6 +97,11 @@ def consolidate(source, original_name=None, fallback=False):
             m=monthly[period];m['gross']+=gross;m['withholding']+=withholding;m['net']+=net;m['revenue_count']+=1
             m['by_uf'][str(rev(row,'UF') or 'N/D').split('-')[0].strip()]+=gross
             m['by_customer'][str(rev(row,'Razão social') or 'N/D')]+=gross
+            records.append({'kind':'revenue','period':period,'date':day.isoformat(),
+                            'customer':str(rev(row,'Razão social') or 'N/D'),
+                            'uf':str(rev(row,'UF') or 'N/D').split('-')[0].strip(),
+                            'description':'Nota '+str(rev(row,'Nota')),'category':'Faturamento ERP',
+                            'bank':'','value':gross/100,'net':net/100,'withholding':withholding/100})
             last_invoice=max(last_invoice,day) if last_invoice else day
         if not ids: raise ValueError('Nenhuma nota faturada valida encontrada.')
         years={int(k[:4]) for k in monthly}; bank_sheets=[]; mismatch_count=0; last_expense=None
@@ -139,6 +144,9 @@ def consolidate(source, original_name=None, fallback=False):
                 if 'transferenciaentreconta' in classification or key(category) in ('transferencia','transferencias','transferenciainterna'):
                     m['transfer_excluded']+=value;m['transfer_count']+=1;continue
                 m['expense']+=value;m['expense_count']+=1;m['by_bank'][bank]+=value
+                records.append({'kind':'expense','period':period,'date':day.isoformat(),'customer':'',
+                                'uf':str(get('UF') or '').strip().upper() if str(get('UF') or '').strip().upper() in {'AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO'} else 'N/D',
+                                'description':str(description),'category':str(category),'bank':bank,'value':value/100})
                 last_expense=max(last_expense,day) if last_expense else day
             if found: bank_sheets.append(sheet.title.strip())
         if not bank_sheets: raise ValueError('Nenhuma aba bancaria valida encontrada.')
@@ -164,7 +172,7 @@ def consolidate(source, original_name=None, fallback=False):
                             'expense_basis':'competencia_registrada_ou_data_pagamento','default_period':max(comparable),
                             'last_invoice_date':last_invoice.isoformat(),'last_expense_date':last_expense.isoformat() if last_expense else None,
                             'bank_sheets':bank_sheets,'canceled_revenue_rows':canceled,'competence_date_differences':mismatch_count},
-                'months':result}
+                'months':result,'records':records}
     finally: wb.close()
 
 
@@ -178,7 +186,7 @@ def main():
     name=Path(args.original_source).name if args.original_source else source.name
     data=consolidate(source,name,fallback or args.fallback_cache)
     if source.resolve()!=CACHE.resolve(): shutil.copy2(source,CACHE)
-    body='window.EXECUTIVO_JLE_DATA = '+json.dumps(data,ensure_ascii=False,indent=2)+';\n'
+    body='window.EXECUTIVO_JLE_DATA = '+json.dumps(data,ensure_ascii=False,separators=(',',':'))+';\n'
     temporary=OUTPUT.with_suffix('.js.tmp');temporary.write_text(body,encoding='utf-8');temporary.replace(OUTPUT)
     print('Executivo JLE: notas',sum(m['revenue_count'] for m in data['months']),
           '| saidas',sum(m['expense_count'] for m in data['months']),'| ultimo mes comparavel',data['metadata']['default_period'])
