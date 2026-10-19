@@ -1,7 +1,7 @@
 // Data generated 100% from Master Excel Controle de Medições (Mnt. Demanda)
 (function() {
     const db = {
-  "generated_at": "2026-10-19 10:07:35",
+  "generated_at": "2026-10-19 11:00:22",
   "lookups": {
     "tipos_of": [
       "TIPO\nOS CLIENTE",
@@ -26332,7 +26332,7 @@
       1,
       3,
       1735.17,
-      7,
+      8,
       0,
       "5634764",
       "46275",
@@ -60058,7 +60058,7 @@
       "ROMPIMENTO - LABS B BRAUN - CAN/IP/01596",
       1,
       16,
-      1,
+      2,
       "31/08/2026",
       1,
       1,
@@ -60066,9 +60066,9 @@
       1080.4,
       7,
       0,
+      "5721811",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3325",
@@ -60346,7 +60346,7 @@
       "ROMPIMENTO - DM2104G2_PAEGH0-01",
       1,
       1,
-      1,
+      2,
       "31/08/2026",
       1,
       1,
@@ -60354,9 +60354,9 @@
       657.8,
       7,
       0,
+      "5721824",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3341",
@@ -60814,7 +60814,7 @@
       "ATENUAÇÃO - NODE B RSPNO82 X RSPNO74",
       2,
       1,
-      1,
+      2,
       "02/09/2026",
       1,
       2,
@@ -60822,9 +60822,9 @@
       745.57,
       7,
       0,
+      "5722865",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3367",
@@ -61228,7 +61228,7 @@
       "ROMPIMENTO - PAE/IP/22207",
       1,
       1,
-      1,
+      2,
       "04/09/2026",
       1,
       1,
@@ -61236,9 +61236,9 @@
       805.06,
       7,
       0,
+      "5721842",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3390",
@@ -61264,7 +61264,7 @@
       "ROMPIMENTO - AVA ASLINEVAO 0GMLINB1S 001",
       1,
       5,
-      1,
+      2,
       "04/09/2026",
       1,
       1,
@@ -61272,9 +61272,9 @@
       247.08,
       7,
       0,
+      "5721857",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3392",
@@ -62326,7 +62326,7 @@
       "ROMPIMENTO - \"CLIENTE/DESIGNAÇÃO: GTI/IP/00440 / PANATLANTICA S A\n\"",
       1,
       5,
-      1,
+      2,
       "10/09/2026",
       1,
       1,
@@ -62334,9 +62334,9 @@
       2592.93,
       7,
       0,
+      "5721896",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3451",
@@ -62380,7 +62380,7 @@
       "ROMPIMENTO -TSD LOGISTICA E DISTRIBUI",
       1,
       1,
-      1,
+      2,
       "10/09/2026",
       1,
       1,
@@ -62388,9 +62388,9 @@
       2232.6,
       7,
       0,
+      "5722020",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3454",
@@ -62506,7 +62506,7 @@
       "ROMPIMENTO - ITAU UNIBANCO - EIO/IP/00388",
       1,
       40,
-      1,
+      2,
       "11/09/2026",
       1,
       1,
@@ -62514,9 +62514,9 @@
       328.9,
       7,
       0,
+      "5722040",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3461",
@@ -62614,7 +62614,7 @@
       "ROMPIMENTO - NODE B RSPNOB1 X RSPCE42 PROBL",
       1,
       1,
-      1,
+      2,
       "14/09/2026",
       1,
       1,
@@ -62622,9 +62622,9 @@
       4369.94,
       7,
       0,
+      "5722056",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3467",
@@ -62830,7 +62830,7 @@
       "ROMPIMENTO - PAE BV PAE TX B16S 001",
       1,
       1,
-      1,
+      2,
       "15/09/2026",
       1,
       1,
@@ -62838,9 +62838,9 @@
       7780.68,
       7,
       0,
+      "5722068",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3479",
@@ -62866,7 +62866,7 @@
       "ROMPIMENTO - PAE 0IBLINPAE 272LINVC4S 001",
       1,
       1,
-      1,
+      2,
       "15/09/2026",
       1,
       1,
@@ -62874,9 +62874,9 @@
       328.9,
       7,
       0,
+      "5722881",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3481",
@@ -62974,7 +62974,7 @@
       "ROMPIMENTO - SON/IP/00139",
       1,
       43,
-      1,
+      2,
       "15/09/2026",
       1,
       1,
@@ -62982,9 +62982,9 @@
       665.49,
       7,
       0,
+      "5722897",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3487",
@@ -63082,7 +63082,7 @@
       "ATENUAÇÃO - DMSTM-1_PAE2LW-01",
       2,
       1,
-      1,
+      2,
       "16/09/2026",
       1,
       2,
@@ -63090,9 +63090,9 @@
       986.7,
       7,
       0,
+      "5722907",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3493",
@@ -63136,7 +63136,7 @@
       "ROMPIMENTO - GTI/IP/01173 / COMERCIO DE MEDICAMENTOS",
       1,
       5,
-      1,
+      2,
       "16/09/2026",
       1,
       1,
@@ -63144,9 +63144,9 @@
       1773.22,
       7,
       0,
+      "5722924",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3496",
@@ -63262,7 +63262,7 @@
       "ROMPIMENTO - PAE/IP/21330 / TAVI PAPELARIA M DE ESCRI",
       1,
       1,
-      1,
+      2,
       "17/09/2026",
       1,
       1,
@@ -63270,9 +63270,9 @@
       1279.4,
       7,
       0,
+      "5722932",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3503",
@@ -66556,7 +66556,7 @@
       "ROMPIMENTO - NODE B RSPNOA2 X RSPLE65",
       1,
       1,
-      1,
+      2,
       "",
       1,
       1,
@@ -66564,9 +66564,9 @@
       1264.58,
       7,
       0,
+      "5751863",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3686",
@@ -66574,7 +66574,7 @@
       "ROMPIMENTO - C220-PAEMAD-001 - 4/3",
       1,
       1,
-      1,
+      2,
       "",
       1,
       1,
@@ -66582,9 +66582,9 @@
       1066.69,
       7,
       0,
+      "5751871",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3687",
@@ -66592,7 +66592,7 @@
       "ROMPIMENTO - GTI/IP/01191 / TELMEX DO BRASIL S A",
       1,
       5,
-      1,
+      2,
       "",
       1,
       1,
@@ -66600,9 +66600,9 @@
       328.9,
       7,
       0,
+      "5751887",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3688",
@@ -66646,7 +66646,7 @@
       "ROMPIMENTO - POADAMOLT01",
       1,
       1,
-      1,
+      2,
       "",
       1,
       1,
@@ -66654,9 +66654,9 @@
       2446.84,
       7,
       0,
+      "5751912",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3691",
@@ -66664,7 +66664,7 @@
       "ROMPIMENTO - NODE B RSCHN18 X RSCHN05",
       1,
       3,
-      1,
+      2,
       "",
       1,
       1,
@@ -66672,9 +66672,9 @@
       1630.46,
       7,
       0,
+      "5751940",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3692",
@@ -66682,7 +66682,7 @@
       "ROMPIMENTO - PAE/IP/21094 / TOXILAB LABORATORIO DE AN",
       1,
       1,
-      1,
+      2,
       "",
       1,
       1,
@@ -66690,9 +66690,9 @@
       328.9,
       7,
       0,
+      "5751972",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3693",
@@ -66700,7 +66700,7 @@
       "ROMPIMENTO - PAE/IP/20951 / POLIPECAS DISTRIBUIDORA A",
       1,
       1,
-      1,
+      2,
       "",
       1,
       1,
@@ -66708,9 +66708,9 @@
       108.6,
       7,
       0,
+      "5752005",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3694",
@@ -66718,7 +66718,7 @@
       "ROMPIMENTO - PAE/IP/22030 / JJGC INDUSTRIA E COMERCIO",
       1,
       1,
-      1,
+      2,
       "",
       1,
       1,
@@ -66726,9 +66726,9 @@
       1549.79,
       7,
       0,
+      "5752025",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3695",
@@ -66754,7 +66754,7 @@
       "ROMPIMENTO - NODE B RSMAP01 X RSBAT01",
       2,
       68,
-      1,
+      2,
       "",
       1,
       2,
@@ -66762,9 +66762,9 @@
       1239.26,
       7,
       0,
+      "5752050",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3697",
@@ -66808,7 +66808,7 @@
       "ATENUAÇÃO - GUB/IP/00168 / TK ELEVADORES BRASIL LTDA",
       2,
       10,
-      1,
+      2,
       "",
       1,
       2,
@@ -66816,9 +66816,9 @@
       328.9,
       7,
       0,
+      "5752066",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3700",
@@ -66916,7 +66916,7 @@
       "ROMPIMENTO - C220-PAEARY-001 - 3/3",
       1,
       1,
-      1,
+      2,
       "",
       1,
       1,
@@ -66924,9 +66924,9 @@
       1681.48,
       7,
       0,
+      "5752098",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3706",
@@ -66952,7 +66952,7 @@
       "ROMPIMENTO - C220-PAEMAD-001 - 9/3",
       1,
       1,
-      1,
+      2,
       "",
       1,
       1,
@@ -66960,9 +66960,9 @@
       2263.09,
       7,
       0,
+      "5752114",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3708",
@@ -66970,7 +66970,7 @@
       "ATENUAÇÃO - NODE B RSPSU59 X RSPSU23",
       2,
       1,
-      1,
+      2,
       "",
       1,
       2,
@@ -66978,9 +66978,9 @@
       277.33,
       7,
       0,
+      "5752150",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3709",
@@ -67258,7 +67258,7 @@
       "ROMPIMENTO - PAE AP6LINPAE FARLINVC4S 002",
       1,
       1,
-      1,
+      2,
       "",
       1,
       1,
@@ -67266,9 +67266,9 @@
       4036.5,
       7,
       0,
+      "5752174",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3725",
@@ -67276,7 +67276,7 @@
       "ROMPIMENTO - PAE FARANEPAE ZNOANEB0480N001",
       1,
       1,
-      1,
+      2,
       "",
       1,
       1,
@@ -67284,9 +67284,9 @@
       4134.59,
       7,
       0,
+      "5752206",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3726",
@@ -67402,7 +67402,7 @@
       "ROMPIMENTO - FALHA MARCONI PAE BV - CHN DIS",
       1,
       1,
-      1,
+      2,
       "",
       1,
       1,
@@ -67410,9 +67410,9 @@
       241.13,
       7,
       0,
+      "5752230",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3733",
@@ -67420,7 +67420,7 @@
       "ROMPIMENTO - C220-PAAERY-001 - 6/2",
       1,
       1,
-      1,
+      2,
       "",
       1,
       1,
@@ -67428,9 +67428,9 @@
       2440.19,
       7,
       0,
+      "5752286",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3734",
@@ -67456,7 +67456,7 @@
       "ROMPIMENTO - CAN/IP/01594 / LOJAS RIACHUELO SA",
       1,
       16,
-      1,
+      2,
       "",
       1,
       1,
@@ -67464,9 +67464,9 @@
       482.26,
       7,
       0,
+      "5752307",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3736",
