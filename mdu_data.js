@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-10-19 13:00:17
+// Dados MDU Compactados - Gerado em: 2026-10-19 14:00:36
 window.MDU_METADATA = {
-    "generated_at": "2026-10-19 13:00:17",
+    "generated_at": "2026-10-19 14:00:36",
     "total_rows": 5863,
-    "geocoded_new": 0
+    "geocoded_new": 2
 };
 
 window.MDU_DATA = [
@@ -187022,7 +187022,7 @@ window.MDU_DATA = [
         "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Baixa",
+        "status": "Relatório",
         "prog": 0,
         "cod_imovel": "",
         "area": "JBOAA",
@@ -187036,7 +187036,7 @@ window.MDU_DATA = [
         "obs_vistoria": "ADEQUADO",
         "data_interna": "16/10/2026",
         "data_fusao": "16/10/2026",
-        "data_baixa": "",
+        "data_baixa": "19/10",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
@@ -187048,35 +187048,35 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505706",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "R DR SEBASTIÃO LEÃO 64",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
+        "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
+        "status": "Baixa",
         "prog": 0,
         "cod_imovel": "",
-        "area": "",
+        "area": "MNDAB",
         "node": "",
-        "caixa_m": "",
-        "hps": null,
-        "data_adicio": "",
-        "equipe": "",
-        "primeira_visita": "",
+        "caixa_m": "MNDAB.021.M030",
+        "hps": 7,
+        "data_adicio": "19/10/2026",
+        "equipe": "Abraão Rodrigues",
+        "primeira_visita": "16/10/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
-        "data_interna": "",
-        "data_fusao": "",
+        "obs_vistoria": "ADEQUADO",
+        "data_interna": "16/10/2026",
+        "data_fusao": "16/10/2026",
         "data_baixa": "",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0442072,
+        "lng": -51.2159082,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505707",
