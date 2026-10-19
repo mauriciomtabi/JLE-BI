@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-19 08:00:22
+// Dados SAR JLE Telecom - Gerado em: 2026-10-19 08:45:20
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1143,
-    "generated_at": "2026-10-19 08:00:22",
+    "generated_at": "2026-10-19 08:45:20",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -79122,8 +79122,8 @@ window.SAR_DATA = [
     "caixa_mdu": "MNDAC.043.M060",
     "classe_l": "CLEVERSON",
     "classe_f": "CATIA",
-    "situacao": "400",
-    "relatorio_foto": "",
+    "situacao": "406",
+    "relatorio_foto": "406",
     "servico": "",
     "data_entrada": "2026-10-15",
     "data_entrada_fmt": "15/10/2026",
