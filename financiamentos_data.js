@@ -1,54 +1,32 @@
 // BI JLE Telecom - Financiamentos & PMTs Data Source
-// Gerado automaticamente em 16/10/2026 08:40:15
+// Gerado automaticamente em 19/10/2026 09:00:05
 window.FINANCIAMENTOS_DATA = {
   "metadata": {
-    "generated_at": "16/10/2026 08:40:15",
+    "generated_at": "19/10/2026 09:00:05",
     "source_directory": "\\\\10.121.21.252\\controladoria\\Vitor\\FINANCEIRO\\PMTs FINANCIAMENTOS",
     "total_contratos": 9
   },
   "totais_gerais": {
     "total_financiado": 7396247.2,
-    "total_pago": 1238399.09,
-    "saldo_devedor": 8394507.33,
+    "total_pago": 1282008.77,
+    "saldo_devedor": 8351019.73,
     "total_parcelas": 442,
-    "total_pagas": 63,
-    "total_pendentes": 379,
-    "pct_quitado": 14.3,
+    "total_pagas": 65,
+    "total_pendentes": 377,
+    "pct_quitado": 14.7,
     "compromisso_mensal": 198706.04,
     "proxima_parcela": {
-      "contrato_id": "sicoob_wilian",
-      "contrato_nome": "Carro Wilian (Osório)",
+      "contrato_id": "sicoob_mko",
+      "contrato_nome": "Caminhão Vermelho MKO",
       "categoria": "Veículos",
       "instituicao": "SICOOB",
-      "numero": 7,
+      "numero": 5,
       "tipo": "Mensal",
-      "vencimento": "17/10/2026",
-      "vencimento_iso": "2026-10-17",
-      "prestacao": 1466.59
+      "vencimento": "22/10/2026",
+      "vencimento_iso": "2026-10-22",
+      "prestacao": 10010.08
     },
     "proximas_parcelas_top10": [
-      {
-        "contrato_id": "sicoob_wilian",
-        "contrato_nome": "Carro Wilian (Osório)",
-        "categoria": "Veículos",
-        "instituicao": "SICOOB",
-        "numero": 7,
-        "tipo": "Mensal",
-        "vencimento": "17/10/2026",
-        "vencimento_iso": "2026-10-17",
-        "prestacao": 1466.59
-      },
-      {
-        "contrato_id": "sicoob_maq3",
-        "contrato_nome": "3ª Perfuratriz Sicoob",
-        "categoria": "Máquinas",
-        "instituicao": "SICOOB",
-        "numero": 4,
-        "tipo": "Mensal",
-        "vencimento": "20/10/2026",
-        "vencimento_iso": "2026-10-20",
-        "prestacao": 42021.01
-      },
       {
         "contrato_id": "sicoob_mko",
         "contrato_nome": "Caminhão Vermelho MKO",
@@ -136,26 +114,48 @@ window.FINANCIAMENTOS_DATA = {
         "vencimento": "17/11/2026",
         "vencimento_iso": "2026-11-17",
         "prestacao": 1466.59
+      },
+      {
+        "contrato_id": "sicoob_maq3",
+        "contrato_nome": "3ª Perfuratriz Sicoob",
+        "categoria": "Máquinas",
+        "instituicao": "SICOOB",
+        "numero": 5,
+        "tipo": "Mensal",
+        "vencimento": "20/11/2026",
+        "vencimento_iso": "2026-11-20",
+        "prestacao": 42021.01
+      },
+      {
+        "contrato_id": "sicoob_mko",
+        "contrato_nome": "Caminhão Vermelho MKO",
+        "categoria": "Veículos",
+        "instituicao": "SICOOB",
+        "numero": 6,
+        "tipo": "Mensal",
+        "vencimento": "22/11/2026",
+        "vencimento_iso": "2026-11-22",
+        "prestacao": 10010.08
       }
     ],
     "por_categoria": {
       "Máquinas": {
         "financiado": 3919496.93,
-        "pago": 829795.35,
-        "saldo_devedor": 4488597.15,
+        "pago": 871939.02,
+        "saldo_devedor": 4446576.14,
         "contratos": 4,
         "total_parcelas": 240,
-        "qtd_pagas": 32,
-        "pct_quitado": 13.3
+        "qtd_pagas": 33,
+        "pct_quitado": 13.8
       },
       "Veículos": {
         "financiado": 654750.27,
-        "pago": 114187.98,
-        "saldo_devedor": 898326.82,
+        "pago": 115653.99,
+        "saldo_devedor": 896860.23,
         "contratos": 3,
         "total_parcelas": 132,
-        "qtd_pagas": 18,
-        "pct_quitado": 13.6
+        "qtd_pagas": 19,
+        "pct_quitado": 14.4
       },
       "Imóveis": {
         "financiado": 2822000.0,
@@ -176,8 +176,8 @@ window.FINANCIAMENTOS_DATA = {
       },
       "SICOOB": {
         "financiado": 2948809.74,
-        "pago": 406030.81,
-        "saldo_devedor": 4127585.88,
+        "pago": 449640.49,
+        "saldo_devedor": 4084098.28,
         "contratos": 5
       },
       "Pro-Formula": {
@@ -203,8 +203,8 @@ window.FINANCIAMENTOS_DATA = {
       {
         "ano": 2026,
         "total_previsto": 1602296.34,
-        "total_pago": 1096370.75,
-        "total_pendente": 542743.61
+        "total_pago": 1139980.43,
+        "total_pendente": 499256.01
       },
       {
         "ano": 2027,
@@ -388,8 +388,8 @@ window.FINANCIAMENTOS_DATA = {
         "ano": 2026,
         "mes": 10,
         "total_previsto": 208116.08,
-        "total_pago": 76570.37,
-        "total_pendente": 131586.45,
+        "total_pago": 120180.05,
+        "total_pendente": 88098.85,
         "maquinas": 120109.78,
         "veiculos": 19700.74,
         "imoveis": 68305.56
@@ -4025,11 +4025,11 @@ window.FINANCIAMENTOS_DATA = {
       "taxa_mensal": 2.0,
       "prestacao_mensal": 42021.01,
       "total_parcelas": 60,
-      "qtd_pagas": 3,
-      "qtd_pendentes": 57,
-      "total_pago": 126430.71,
-      "saldo_devedor": 1890945.45,
-      "pct_quitado": 5.0,
+      "qtd_pagas": 4,
+      "qtd_pendentes": 56,
+      "total_pago": 168574.38,
+      "saldo_devedor": 1848924.44,
+      "pct_quitado": 6.7,
       "parcelas": [
         {
           "numero": 1,
@@ -4099,12 +4099,12 @@ window.FINANCIAMENTOS_DATA = {
           "juros": 22427.96,
           "amortizacao": 19593.05,
           "prestacao": 42021.01,
-          "saldo_devedor": 42021.01,
+          "saldo_devedor": 0.0,
           "saldo_final_contrato": 1291983.42,
-          "status": "Pendente",
-          "data_pagamento": "",
-          "valor_pago": 0.0,
-          "diferenca": 0.0,
+          "status": "Pago",
+          "data_pagamento": "19/10/2026",
+          "valor_pago": 42143.67,
+          "diferenca": 122.66,
           "dias_atraso": 0
         },
         {
@@ -5189,11 +5189,11 @@ window.FINANCIAMENTOS_DATA = {
       "taxa_mensal": 2.0,
       "prestacao_mensal": 1466.59,
       "total_parcelas": 12,
-      "qtd_pagas": 6,
-      "qtd_pendentes": 6,
-      "total_pago": 8796.06,
-      "saldo_devedor": 8799.54,
-      "pct_quitado": 50.0,
+      "qtd_pagas": 7,
+      "qtd_pendentes": 5,
+      "total_pago": 10262.07,
+      "saldo_devedor": 7332.95,
+      "pct_quitado": 58.3,
       "parcelas": [
         {
           "numero": 1,
@@ -5320,12 +5320,12 @@ window.FINANCIAMENTOS_DATA = {
           "juros": 141.08,
           "amortizacao": 1325.51,
           "prestacao": 1466.59,
-          "saldo_devedor": 1466.59,
+          "saldo_devedor": 0.0,
           "saldo_final_contrato": 6973.31,
-          "status": "Pendente",
-          "data_pagamento": "",
-          "valor_pago": 0.0,
-          "diferenca": 0.0,
+          "status": "Pago",
+          "data_pagamento": "17/10/2026",
+          "valor_pago": 1466.01,
+          "diferenca": -0.58,
           "dias_atraso": 0
         },
         {
