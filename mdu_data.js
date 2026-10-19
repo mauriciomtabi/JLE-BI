@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-10-19 10:07:52
+// Dados MDU Compactados - Gerado em: 2026-10-19 11:00:24
 window.MDU_METADATA = {
-    "generated_at": "2026-10-19 10:07:52",
+    "generated_at": "2026-10-19 11:00:24",
     "total_rows": 5863,
     "geocoded_new": 0
 };
@@ -186958,9 +186958,9 @@ window.MDU_DATA = [
         "aging": "0",
         "relatorio_por": "DUDA",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 0,
-        "cod_imovel": "",
+        "status": "Medição",
+        "prog": 88.0,
+        "cod_imovel": "610435876",
         "area": "BFMAB",
         "node": "",
         "caixa_m": "BFMAB.302.M020",
@@ -186974,7 +186974,7 @@ window.MDU_DATA = [
         "data_fusao": "15/10/2026",
         "data_baixa": "19/10",
         "obs_baixa": "",
-        "data_relatorio": "",
+        "data_relatorio": "19/10/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
@@ -186984,19 +186984,19 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505704",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "R FELIPE CAMARÃO 426 BL B",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
+        "aging": "46.314",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
+        "status": "FALTA DADOS",
         "prog": 0,
         "cod_imovel": "",
-        "area": "",
+        "area": "BFMAB",
         "node": "",
-        "caixa_m": "",
-        "hps": null,
+        "caixa_m": "BFMAB.302.M020",
+        "hps": 14,
         "data_adicio": "",
         "equipe": "",
         "primeira_visita": "",
@@ -187010,9 +187010,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0332147,
+        "lng": -51.2097575,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505705",
