@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-10-20 11:00:18
+// Dados MDU Compactados - Gerado em: 2026-10-20 12:00:17
 window.MDU_METADATA = {
-    "generated_at": "2026-10-20 11:00:18",
+    "generated_at": "2026-10-20 12:00:17",
     "total_rows": 5863,
-    "geocoded_new": 1
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -186860,7 +186860,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "1",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
@@ -187118,8 +187118,8 @@ window.MDU_DATA = [
         "aging": "1",
         "relatorio_por": "JENIFFER",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610517669",
         "area": "MTSAA",
         "node": "MTSARA",
@@ -187134,7 +187134,7 @@ window.MDU_DATA = [
         "data_fusao": "13/10/2026",
         "data_baixa": "19/10",
         "obs_baixa": "",
-        "data_relatorio": "",
+        "data_relatorio": "20/10/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
@@ -187212,7 +187212,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "1",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER (CAIXA M E PONTA DE CABO)",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
