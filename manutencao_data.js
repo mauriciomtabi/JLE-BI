@@ -1,7 +1,7 @@
 // Data generated 100% from Master Excel Controle de Medições (Mnt. Demanda)
 (function() {
     const db = {
-  "generated_at": "2026-10-20 11:00:16",
+  "generated_at": "2026-10-20 12:00:16",
   "lookups": {
     "tipos_of": [
       "TIPO\nOS CLIENTE",
@@ -55738,7 +55738,7 @@
       "GERADORES - MÊS DE AGOSTO",
       18,
       1,
-      1,
+      2,
       "28/07/2026",
       1,
       18,
@@ -55746,9 +55746,9 @@
       12325.29,
       7,
       0,
+      "5758532",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3085",
@@ -62451,10 +62451,10 @@
       2,
       "ROMPIMENTO - VEZ/IP/00147 / TELMEX DO BRASIL S A",
       1,
-      72,
+      75,
       1,
       "11/09/2026",
-      5,
+      4,
       1,
       1,
       454.92,
@@ -66274,7 +66274,7 @@
       12,
       1,
       30048.44,
-      0,
+      7,
       0,
       "-",
       "-",
