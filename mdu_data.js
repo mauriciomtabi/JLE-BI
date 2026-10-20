@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-10-20 13:02:53
+// Dados MDU Compactados - Gerado em: 2026-10-20 14:01:23
 window.MDU_METADATA = {
-    "generated_at": "2026-10-20 13:02:53",
+    "generated_at": "2026-10-20 14:01:23",
     "total_rows": 5863,
     "geocoded_new": 0
 };
@@ -186316,7 +186316,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "1",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
@@ -186700,7 +186700,7 @@ window.MDU_DATA = [
         "cidade": "NOVO HAMBURGO",
         "cluster": "NHO",
         "aging": "1",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
@@ -186764,7 +186764,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "1",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
@@ -186860,7 +186860,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "1",
-        "relatorio_por": "JENIFFER",
+        "relatorio_por": "JENIFFER (FALATA UMA PONTA DE CABO)",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
