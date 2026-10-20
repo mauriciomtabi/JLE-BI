@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-10-20 08:05:42
+// Dados MDU Compactados - Gerado em: 2026-10-20 09:00:21
 window.MDU_METADATA = {
-    "generated_at": "2026-10-20 08:05:42",
+    "generated_at": "2026-10-20 09:00:21",
     "total_rows": 5863,
     "geocoded_new": 0
 };
@@ -187088,7 +187088,7 @@ window.MDU_DATA = [
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
-        "cod_imovel": "",
+        "cod_imovel": "610435461",
         "area": "MTSAA",
         "node": "",
         "caixa_m": "MTSAA.116.M010",
@@ -187120,7 +187120,7 @@ window.MDU_DATA = [
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
-        "cod_imovel": "",
+        "cod_imovel": "610443295",
         "area": "MTSAA",
         "node": "",
         "caixa_m": "MTSAA.116.M010",
@@ -187152,7 +187152,7 @@ window.MDU_DATA = [
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
-        "cod_imovel": "",
+        "cod_imovel": "610433366",
         "area": "MTSAA",
         "node": "",
         "caixa_m": "MTSAA.116.M020",
@@ -187184,7 +187184,7 @@ window.MDU_DATA = [
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
-        "cod_imovel": "",
+        "cod_imovel": "610517669",
         "area": "MTSAA",
         "node": "",
         "caixa_m": "MTSAA.116.M010",
