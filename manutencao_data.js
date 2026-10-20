@@ -1,7 +1,7 @@
 // Data generated 100% from Master Excel Controle de Medições (Mnt. Demanda)
 (function() {
     const db = {
-  "generated_at": "2026-10-20 14:01:09",
+  "generated_at": "2026-10-20 15:00:31",
   "lookups": {
     "tipos_of": [
       "TIPO\nOS CLIENTE",
@@ -62110,7 +62110,7 @@
       "ATENUAÇÃO",
       2,
       5,
-      1,
+      2,
       "04/09/2026",
       1,
       2,
@@ -62118,9 +62118,9 @@
       328.9,
       7,
       0,
+      "5759395",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3439",
@@ -62164,7 +62164,7 @@
       "ROMPIMENTO",
       1,
       1,
-      1,
+      2,
       "09/09/2026",
       1,
       1,
@@ -62172,9 +62172,9 @@
       730.2,
       7,
       0,
+      "5759413",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3442",
@@ -67024,7 +67024,7 @@
       "ROMPIMENTO",
       1,
       5,
-      1,
+      2,
       "",
       1,
       1,
@@ -67032,9 +67032,9 @@
       4353.3,
       7,
       0,
+      "5759437",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3712",
