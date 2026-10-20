@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-10-20 17:00:21
+// Dados MDU Compactados - Gerado em: 2026-10-20 18:00:21
 window.MDU_METADATA = {
-    "generated_at": "2026-10-20 17:00:21",
+    "generated_at": "2026-10-20 18:00:21",
     "total_rows": 5863,
     "geocoded_new": 0
 };
@@ -182348,7 +182348,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "26",
-        "relatorio_por": "JENIFFER",
+        "relatorio_por": "JENIFFER ( caixa m)",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
@@ -183308,10 +183308,10 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "21",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610503035",
         "area": "VIPAA",
         "node": "VIPAJ",
@@ -183326,7 +183326,7 @@ window.MDU_DATA = [
         "data_fusao": "23/09/2026",
         "data_baixa": "20/10",
         "obs_baixa": "",
-        "data_relatorio": "",
+        "data_relatorio": "20/10/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
