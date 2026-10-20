@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-10-20 10:15:14
+// Dados MDU Compactados - Gerado em: 2026-10-20 11:00:18
 window.MDU_METADATA = {
-    "generated_at": "2026-10-20 10:15:14",
+    "generated_at": "2026-10-20 11:00:18",
     "total_rows": 5863,
     "geocoded_new": 1
 };
@@ -182348,10 +182348,10 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "26",
-        "relatorio_por": "JENIFFER (SEM TERMO E CROQUI)",
-        "pendencia": "SIM",
-        "status": "Pendência",
-        "prog": 0.0,
+        "relatorio_por": "",
+        "pendencia": "Não",
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "610503092",
         "area": "VIPAA",
         "node": "",
@@ -183310,8 +183310,8 @@ window.MDU_DATA = [
         "aging": "21",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Baixa",
-        "prog": 63.0,
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "610503035",
         "area": "VIPAA",
         "node": "VIPAJ",
@@ -183324,7 +183324,7 @@ window.MDU_DATA = [
         "obs_vistoria": "ADEQUADO",
         "data_interna": "23/09/2026",
         "data_fusao": "23/09/2026",
-        "data_baixa": "",
+        "data_baixa": "20/10",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
@@ -187304,13 +187304,13 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505714",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "TRAVESSA OLIMPIO DE OLIVEIRA PACHECO 38",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
+        "aging": "46.315",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
+        "status": "FALTA DADOS",
         "prog": 0,
         "cod_imovel": "",
         "area": "",
@@ -187330,9 +187330,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0112883,
+        "lng": -51.1468779,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505715",
