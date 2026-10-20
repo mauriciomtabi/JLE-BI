@@ -1,7 +1,7 @@
 // Data generated 100% from Master Excel Controle de Medições (Mnt. Demanda)
 (function() {
     const db = {
-  "generated_at": "2026-10-20 15:09:54",
+  "generated_at": "2026-10-20 16:00:25",
   "lookups": {
     "tipos_of": [
       "TIPO\nOS CLIENTE",
@@ -64900,7 +64900,7 @@
       "MIGRAÇÃO DE REDE- RUP CABO OPTICO GLIC02-OSRCB 1/3",
       12,
       43,
-      1,
+      2,
       "21/09/2026",
       1,
       12,
@@ -64908,9 +64908,9 @@
       30048.44,
       7,
       0,
+      "5760022",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3594",
@@ -66268,7 +66268,7 @@
       "MIGRAÇÃO DE REDE- RUP CABO OPTICO GLIC02-OSRCB 2/3",
       12,
       43,
-      1,
+      2,
       "21/09/2026",
       1,
       12,
@@ -66276,9 +66276,9 @@
       30048.44,
       7,
       0,
+      "5760057",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3670",
