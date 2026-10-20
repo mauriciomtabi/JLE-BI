@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-10-20 14:01:23
+// Dados MDU Compactados - Gerado em: 2026-10-20 15:00:37
 window.MDU_METADATA = {
-    "generated_at": "2026-10-20 14:01:23",
+    "generated_at": "2026-10-20 15:00:37",
     "total_rows": 5863,
     "geocoded_new": 0
 };
@@ -183308,7 +183308,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "21",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
@@ -186702,8 +186702,8 @@ window.MDU_DATA = [
         "aging": "1",
         "relatorio_por": "JENIFFER",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610654934",
         "area": "CNTAA",
         "node": "CNTAG",
@@ -186718,7 +186718,7 @@ window.MDU_DATA = [
         "data_fusao": "13/10/2026",
         "data_baixa": "19/10",
         "obs_baixa": "",
-        "data_relatorio": "",
+        "data_relatorio": "20/10/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
@@ -186766,8 +186766,8 @@ window.MDU_DATA = [
         "aging": "1",
         "relatorio_por": "JENIFFER",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610975128",
         "area": "JBOAA",
         "node": "PETAA",
@@ -186782,7 +186782,7 @@ window.MDU_DATA = [
         "data_fusao": "16/10/2026",
         "data_baixa": "19/10",
         "obs_baixa": "",
-        "data_relatorio": "",
+        "data_relatorio": "20/10/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
