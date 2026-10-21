@@ -59815,5 +59815,37 @@ const VEICULOS_DATA = [
     "km": 139927,
     "kml": 8.64,
     "transactionId": "1107044740"
+  },
+  {
+    "date": "2026-10-21 12:30:02",
+    "plate": "HLH1C45",
+    "driver": "AMIZAEL ROMILIO DO SANTOS",
+    "value": 275.42,
+    "uf": "RS",
+    "month": "OUTUBRO",
+    "liters": 48.4,
+    "vlLiter": 5.69,
+    "model": "CELTA",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 195702,
+    "kml": 14.92,
+    "transactionId": "1107084411"
+  },
+  {
+    "date": "2026-10-21 13:26:16",
+    "plate": "QHA7J87",
+    "driver": "BRUNO MILLER LOPES DA SILVA",
+    "value": 337.74,
+    "uf": "SC",
+    "month": "OUTUBRO",
+    "liters": 50.49,
+    "vlLiter": 6.69,
+    "model": "MONTANA",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 206622,
+    "kml": 10.28,
+    "transactionId": "1107096915"
   }
 ];
