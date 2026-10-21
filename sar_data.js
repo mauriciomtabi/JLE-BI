@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-21 08:06:50
+// Dados SAR JLE Telecom - Gerado em: 2026-10-21 08:45:37
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1149,
-    "generated_at": "2026-10-21 08:06:50",
+    "generated_at": "2026-10-21 08:45:37",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -192,7 +192,8 @@ window.SAR_METADATA = {
         "NÃO COBRAR",
         "PARALISADO",
         "PEDIDO EMITIDO",
-        "RELATÓRIO"
+        "RELATÓRIO",
+        "SEM SINAL"
     ],
     "prazos": [
         "NO PRAZO",
@@ -80247,12 +80248,12 @@ window.SAR_DATA = [
     "servico": "",
     "data_entrada": "2026-10-16",
     "data_entrada_fmt": "16/10/2026",
-    "data_inicio": null,
-    "data_inicio_fmt": "-",
+    "data_inicio": "2026-10-20",
+    "data_inicio_fmt": "20/10/2026",
     "data_previsao": null,
     "data_previsao_fmt": "-",
-    "data_entrega": null,
-    "data_entrega_fmt": "-",
+    "data_entrega": "2026-10-20",
+    "data_entrega_fmt": "20/10/2026",
     "data_medicao": null,
     "data_medicao_fmt": "-",
     "competencia_medicao": "Sem Data",
@@ -80269,16 +80270,16 @@ window.SAR_DATA = [
     "ano": "2026",
     "mes": "OUTUBRO",
     "mes_num": "10",
-    "competencia_entrega": "NÃO INFORMADO",
-    "ano_entrega": "NÃO INFORMADO",
-    "mes_entrega": "NÃO INFORMADO",
-    "mes_num_entrega": "",
-    "status": "EM ANDAMENTO",
+    "competencia_entrega": "OUTUBRO/2026",
+    "ano_entrega": "2026",
+    "mes_entrega": "OUTUBRO",
+    "mes_num_entrega": "10",
+    "status": "SEM SINAL",
     "status_relatorio": "",
     "status_medicao": "",
     "status_obra": "Em Andamento",
     "prazo": "NO PRAZO",
-    "tempo_dias": 3.0,
+    "tempo_dias": 2.0,
     "atraso_dias": 0,
     "total_terceiros": 0.0,
     "previa_medicao": 0.0,
