@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-21 16:45:13
+// Dados SAR JLE Telecom - Gerado em: 2026-10-21 17:00:13
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1150,
-    "generated_at": "2026-10-21 16:45:13",
+    "generated_at": "2026-10-21 17:00:13",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -79123,8 +79123,8 @@ window.SAR_DATA = [
     "caixa_mdu": "MNDAC.043.M060",
     "classe_l": "CLEVERSON",
     "classe_f": "CATIA",
-    "situacao": "406",
-    "relatorio_foto": "406",
+    "situacao": "506",
+    "relatorio_foto": "506",
     "servico": "4 ABERTURA E FECHAMENTO, 14 FUSÕES, 1 DERIVAÇÃO, 1 TESTE OTDR",
     "data_entrada": "2026-10-15",
     "data_entrada_fmt": "15/10/2026",
@@ -80453,8 +80453,8 @@ window.SAR_DATA = [
     "caixa_mdu": "TRLAA.181.M020",
     "classe_l": "CLEVERSON",
     "classe_f": "CLEVERSON",
-    "situacao": "281",
-    "relatorio_foto": "",
+    "situacao": "326",
+    "relatorio_foto": "326",
     "servico": "1 ABERTURA E FECHAMENTO, 1 FUSÃO,",
     "data_entrada": "2026-10-17",
     "data_entrada_fmt": "17/10/2026",
