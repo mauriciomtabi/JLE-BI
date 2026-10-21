@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-21 14:00:43
+// Dados SAR JLE Telecom - Gerado em: 2026-10-21 15:00:23
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1149,
-    "generated_at": "2026-10-21 14:00:43",
+    "generated_at": "2026-10-21 15:00:23",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -764,10 +764,10 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 816401.1,
-        "total_previa_medicao": 1370496.8,
+        "total_terceiros": 816938.6,
+        "total_previa_medicao": 1371598.78,
         "total_classe_l": 343052.6,
-        "total_classe_f": 473348.5
+        "total_classe_f": 473886.0
     },
     "medicao": {
         "total_geral": 1404235.78,
@@ -79475,7 +79475,7 @@ window.SAR_DATA = [
     "classe_f": "CATIA",
     "situacao": "SEM LANÇAMENTO",
     "relatorio_foto": "SEM LANÇAMENTO",
-    "servico": "",
+    "servico": "2 ABERTURA E FECHAMENTO, 2 FUSÕES, 1 TESTE OTDR, 2 TESTES.",
     "data_entrada": "2026-10-16",
     "data_entrada_fmt": "16/10/2026",
     "data_inicio": "2026-10-17",
@@ -79511,13 +79511,13 @@ window.SAR_DATA = [
     "prazo": "NO PRAZO",
     "tempo_dias": 0.0,
     "atraso_dias": 0,
-    "total_terceiros": 0.0,
-    "previa_medicao": 0.0,
+    "total_terceiros": 181.5,
+    "previa_medicao": 376.42,
     "valor_medicao": 0.0,
     "valor_classe_l": 0.0,
-    "valor_classe_f": 0.0,
+    "valor_classe_f": 181.5,
     "itens_l_resumo": "-",
-    "itens_f_resumo": "-",
+    "itens_f_resumo": "3.15 AB/FE: 2 un, 3.13 FUS/EME: 2 un, 3.14 OTDR: 1 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
@@ -79526,9 +79526,9 @@ window.SAR_DATA = [
       "q_311": 0.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 0.0,
-      "q_313": 0.0,
-      "q_314": 0.0,
+      "q_315": 2.0,
+      "q_313": 2.0,
+      "q_314": 1.0,
       "q_312": 0.0
     }
   },
@@ -79685,7 +79685,7 @@ window.SAR_DATA = [
     "classe_f": "CATIA",
     "situacao": "SEM LANÇAMENTO",
     "relatorio_foto": "SEM LANÇAMENTO",
-    "servico": "",
+    "servico": "2 ABERTURA E FECHAMENTO, 1 FUSÃO, 1 TESTE.",
     "data_entrada": "2026-10-16",
     "data_entrada_fmt": "16/10/2026",
     "data_inicio": "2026-10-17",
@@ -79721,13 +79721,13 @@ window.SAR_DATA = [
     "prazo": "NO PRAZO",
     "tempo_dias": 0.0,
     "atraso_dias": 0,
-    "total_terceiros": 0.0,
-    "previa_medicao": 0.0,
+    "total_terceiros": 169.0,
+    "previa_medicao": 332.83,
     "valor_medicao": 0.0,
     "valor_classe_l": 0.0,
-    "valor_classe_f": 0.0,
+    "valor_classe_f": 169.0,
     "itens_l_resumo": "-",
-    "itens_f_resumo": "-",
+    "itens_f_resumo": "3.15 AB/FE: 2 un, 3.13 FUS/EME: 1 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
@@ -79736,8 +79736,8 @@ window.SAR_DATA = [
       "q_311": 0.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 0.0,
-      "q_313": 0.0,
+      "q_315": 2.0,
+      "q_313": 1.0,
       "q_314": 0.0,
       "q_312": 0.0
     }
@@ -80175,7 +80175,7 @@ window.SAR_DATA = [
     "classe_f": "CATIA",
     "situacao": "SEM LANÇAMENTO",
     "relatorio_foto": "SEM LANÇAMENTO",
-    "servico": "",
+    "servico": "2 ABERTURA E FECHAMENTO, 3 FUSÕES, 3 TESTES.",
     "data_entrada": "2026-10-16",
     "data_entrada_fmt": "16/10/2026",
     "data_inicio": "2026-10-17",
@@ -80211,13 +80211,13 @@ window.SAR_DATA = [
     "prazo": "NO PRAZO",
     "tempo_dias": 0.0,
     "atraso_dias": 0,
-    "total_terceiros": 0.0,
-    "previa_medicao": 0.0,
+    "total_terceiros": 187.0,
+    "previa_medicao": 392.73,
     "valor_medicao": 0.0,
     "valor_classe_l": 0.0,
-    "valor_classe_f": 0.0,
+    "valor_classe_f": 187.0,
     "itens_l_resumo": "-",
-    "itens_f_resumo": "-",
+    "itens_f_resumo": "3.15 AB/FE: 2 un, 3.13 FUS/EME: 3 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
@@ -80226,8 +80226,8 @@ window.SAR_DATA = [
       "q_311": 0.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 0.0,
-      "q_313": 0.0,
+      "q_315": 2.0,
+      "q_313": 3.0,
       "q_314": 0.0,
       "q_312": 0.0
     }
