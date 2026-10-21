@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-21 15:15:20
+// Dados SAR JLE Telecom - Gerado em: 2026-10-21 16:00:25
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1150,
-    "generated_at": "2026-10-21 15:15:20",
+    "generated_at": "2026-10-21 16:00:25",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -764,10 +764,10 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 818119.1,
-        "total_previa_medicao": 1374167.77,
+        "total_terceiros": 819136.6,
+        "total_previa_medicao": 1376609.65,
         "total_classe_l": 343052.6,
-        "total_classe_f": 475066.5
+        "total_classe_f": 476084.0
     },
     "medicao": {
         "total_geral": 1404235.78,
@@ -79125,7 +79125,7 @@ window.SAR_DATA = [
     "classe_f": "CATIA",
     "situacao": "406",
     "relatorio_foto": "406",
-    "servico": "",
+    "servico": "4 ABERTURA E FECHAMENTO, 14 FUSÕES, 1 DERIVAÇÃO, 1 TESTE OTDR",
     "data_entrada": "2026-10-15",
     "data_entrada_fmt": "15/10/2026",
     "data_inicio": null,
@@ -79161,13 +79161,13 @@ window.SAR_DATA = [
     "prazo": "ATRASADO",
     "tempo_dias": 4.0,
     "atraso_dias": 1.0,
-    "total_terceiros": 0.0,
-    "previa_medicao": 0.0,
+    "total_terceiros": 464.5,
+    "previa_medicao": 1103.86,
     "valor_medicao": 0.0,
     "valor_classe_l": 0.0,
-    "valor_classe_f": 0.0,
+    "valor_classe_f": 464.5,
     "itens_l_resumo": "-",
-    "itens_f_resumo": "-",
+    "itens_f_resumo": "3.15 AB/FE: 4 un, 3.13 FUS/EME: 14 un, 3.14 OTDR: 1 un, 3.12 DER/INS: 1 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
@@ -79176,10 +79176,10 @@ window.SAR_DATA = [
       "q_311": 0.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 0.0,
-      "q_313": 0.0,
-      "q_314": 0.0,
-      "q_312": 0.0
+      "q_315": 4.0,
+      "q_313": 14.0,
+      "q_314": 1.0,
+      "q_312": 1.0
     }
   },
   {
@@ -79405,7 +79405,7 @@ window.SAR_DATA = [
     "classe_f": "CATIA",
     "situacao": "SEM LANÇAMENTO",
     "relatorio_foto": "SEM LANÇAMENTO",
-    "servico": "",
+    "servico": "2 ABERTURA E FECHAMENTO, 2 FUSÕES, 2 TESTES.",
     "data_entrada": "2026-10-16",
     "data_entrada_fmt": "16/10/2026",
     "data_inicio": "2026-10-17",
@@ -79441,13 +79441,13 @@ window.SAR_DATA = [
     "prazo": "NO PRAZO",
     "tempo_dias": 0.0,
     "atraso_dias": 0,
-    "total_terceiros": 0.0,
-    "previa_medicao": 0.0,
+    "total_terceiros": 178.0,
+    "previa_medicao": 362.78,
     "valor_medicao": 0.0,
     "valor_classe_l": 0.0,
-    "valor_classe_f": 0.0,
+    "valor_classe_f": 178.0,
     "itens_l_resumo": "-",
-    "itens_f_resumo": "-",
+    "itens_f_resumo": "3.15 AB/FE: 2 un, 3.13 FUS/EME: 2 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
@@ -79456,8 +79456,8 @@ window.SAR_DATA = [
       "q_311": 0.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 0.0,
-      "q_313": 0.0,
+      "q_315": 2.0,
+      "q_313": 2.0,
       "q_314": 0.0,
       "q_312": 0.0
     }
@@ -79755,7 +79755,7 @@ window.SAR_DATA = [
     "classe_f": "CATIA",
     "situacao": "475",
     "relatorio_foto": "",
-    "servico": "",
+    "servico": "1 ABERTURA E FECHAMENTO, 1 CX NOVA, 14 FUSÕES, 1 DERIVAÇÃO",
     "data_entrada": "2026-10-16",
     "data_entrada_fmt": "16/10/2026",
     "data_inicio": "2026-10-20",
@@ -79791,25 +79791,25 @@ window.SAR_DATA = [
     "prazo": "NO PRAZO",
     "tempo_dias": 2.0,
     "atraso_dias": 0,
-    "total_terceiros": 0.0,
-    "previa_medicao": 0.0,
+    "total_terceiros": 286.0,
+    "previa_medicao": 793.85,
     "valor_medicao": 0.0,
     "valor_classe_l": 0.0,
-    "valor_classe_f": 0.0,
+    "valor_classe_f": 286.0,
     "itens_l_resumo": "-",
-    "itens_f_resumo": "-",
+    "itens_f_resumo": "3.11 CX EM: 1 un, 3.15 AB/FE: 1 un, 3.13 FUS/EME: 14 un, 3.12 DER/INS: 1 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
       "q_215": 0.0,
       "q_113": 0.0,
-      "q_311": 0.0,
+      "q_311": 1.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 0.0,
-      "q_313": 0.0,
+      "q_315": 1.0,
+      "q_313": 14.0,
       "q_314": 0.0,
-      "q_312": 0.0
+      "q_312": 1.0
     }
   },
   {
@@ -80455,7 +80455,7 @@ window.SAR_DATA = [
     "classe_f": "CLEVERSON",
     "situacao": "281",
     "relatorio_foto": "",
-    "servico": "",
+    "servico": "1 ABERTURA E FECHAMENTO, 1 FUSÃO,",
     "data_entrada": "2026-10-17",
     "data_entrada_fmt": "17/10/2026",
     "data_inicio": "2026-10-18",
@@ -80491,13 +80491,13 @@ window.SAR_DATA = [
     "prazo": "NO PRAZO",
     "tempo_dias": 0.0,
     "atraso_dias": 0,
-    "total_terceiros": 0.0,
-    "previa_medicao": 0.0,
+    "total_terceiros": 89.0,
+    "previa_medicao": 181.39,
     "valor_medicao": 0.0,
     "valor_classe_l": 0.0,
-    "valor_classe_f": 0.0,
+    "valor_classe_f": 89.0,
     "itens_l_resumo": "-",
-    "itens_f_resumo": "-",
+    "itens_f_resumo": "3.15 AB/FE: 1 un, 3.13 FUS/EME: 1 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
@@ -80506,8 +80506,8 @@ window.SAR_DATA = [
       "q_311": 0.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 0.0,
-      "q_313": 0.0,
+      "q_315": 1.0,
+      "q_313": 1.0,
       "q_314": 0.0,
       "q_312": 0.0
     }
