@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-21 11:00:17
+// Dados SAR JLE Telecom - Gerado em: 2026-10-21 12:00:18
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1149,
-    "generated_at": "2026-10-21 11:00:17",
+    "generated_at": "2026-10-21 12:00:18",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -764,10 +764,10 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 816336.1,
-        "total_previa_medicao": 1370338.85,
+        "total_terceiros": 816401.1,
+        "total_previa_medicao": 1370496.8,
         "total_classe_l": 343052.6,
-        "total_classe_f": 473283.5
+        "total_classe_f": 473348.5
     },
     "medicao": {
         "total_geral": 1404235.78,
@@ -76571,19 +76571,19 @@ window.SAR_DATA = [
     "prazo": "NO PRAZO",
     "tempo_dias": 1.0,
     "atraso_dias": 0,
-    "total_terceiros": 470.0,
-    "previa_medicao": 572.85,
+    "total_terceiros": 535.0,
+    "previa_medicao": 730.8,
     "valor_medicao": 0.0,
     "valor_classe_l": 348.0,
-    "valor_classe_f": 122.0,
+    "valor_classe_f": 187.0,
     "itens_l_resumo": "2.15 CB ESP: 240m",
-    "itens_f_resumo": "3.15 AB/FE: 1 un, 3.13 FUS/EME: 3 un, 3.12 DER/INS: 1 un",
+    "itens_f_resumo": "3.11 CX EM: 1 un, 3.15 AB/FE: 1 un, 3.13 FUS/EME: 3 un, 3.12 DER/INS: 1 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
       "q_215": 240.0,
       "q_113": 0.0,
-      "q_311": 0.0,
+      "q_311": 1.0,
       "q_317": 0.0,
       "q_318": 0.0,
       "q_315": 1.0,
@@ -79546,8 +79546,8 @@ window.SAR_DATA = [
     "situacao": "SEM LANÇAMENTO",
     "relatorio_foto": "SEM LANÇAMENTO",
     "servico": "",
-    "data_entrada": null,
-    "data_entrada_fmt": "-",
+    "data_entrada": "2026-10-16",
+    "data_entrada_fmt": "16/10/2026",
     "data_inicio": "2026-10-19",
     "data_inicio_fmt": "19/10/2026",
     "data_previsao": null,
@@ -79566,10 +79566,10 @@ window.SAR_DATA = [
     "data_med_cad_wf_fmt": "-",
     "num_wf": "",
     "status_wf": "",
-    "competencia": "NÃO INFORMADO",
-    "ano": "NÃO INFORMADO",
-    "mes": "NÃO INFORMADO",
-    "mes_num": "",
+    "competencia": "OUTUBRO/2026",
+    "ano": "2026",
+    "mes": "OUTUBRO",
+    "mes_num": "10",
     "competencia_entrega": "OUTUBRO/2026",
     "ano_entrega": "2026",
     "mes_entrega": "OUTUBRO",
@@ -79579,7 +79579,7 @@ window.SAR_DATA = [
     "status_medicao": "",
     "status_obra": "Em Andamento",
     "prazo": "NO PRAZO",
-    "tempo_dias": 0,
+    "tempo_dias": 1.0,
     "atraso_dias": 0,
     "total_terceiros": 0.0,
     "previa_medicao": 0.0,
