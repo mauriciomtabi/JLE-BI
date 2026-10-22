@@ -1,5 +1,5 @@
 ﻿window.CASH_FLOW_DATA = {
-    "generated_at":  "2026-10-21 15:08:40",
+    "generated_at":  "2026-10-22 10:07:47",
     "categories_origin":  {
                               "entradas":  [
 
@@ -165893,7 +165893,7 @@
                              "data":  "2026-10-13",
                              "uf":  "SC",
                              "fluxo":  "Saída",
-                             "categoria":  "Locação de Veículos",
+                             "categoria":  "Manut. De Veículos",
                              "descricao":  "Compra peca frota",
                              "valor_nominal":  251.07,
                              "valor_liquido":  -251.07,
