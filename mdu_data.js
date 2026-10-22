@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-10-22 12:00:23
+// Dados MDU Compactados - Gerado em: 2026-10-22 13:00:30
 window.MDU_METADATA = {
-    "generated_at": "2026-10-22 12:00:23",
+    "generated_at": "2026-10-22 13:00:30",
     "total_rows": 6009,
-    "geocoded_new": 8
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -187931,7 +187931,7 @@ window.MDU_DATA = [
         "segunda_visita": "",
         "obs_vistoria": "ADEQUADO",
         "data_interna": "02/10/2026",
-        "data_fusao": "02/10/2026",
+        "data_fusao": "",
         "data_baixa": "",
         "obs_baixa": "FALTA BAIXA DE MATERIAIS",
         "data_relatorio": "",
@@ -187950,7 +187950,7 @@ window.MDU_DATA = [
         "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "2º Vistoria",
+        "status": "Fusão",
         "prog": 0,
         "cod_imovel": "",
         "area": "VIPAA",
@@ -187962,8 +187962,8 @@ window.MDU_DATA = [
         "primeira_visita": "01/10/2026",
         "segunda_visita": "",
         "obs_vistoria": "ADEQUADO",
-        "data_interna": "",
-        "data_fusao": "",
+        "data_interna": "01/10/2026",
+        "data_fusao": "01/10/2026",
         "data_baixa": "",
         "obs_baixa": "",
         "data_relatorio": "",
