@@ -107,6 +107,17 @@ $trig7 = @()
 }
 Criar-Tarefa -Nome "JLE_Telecom_SAR_Update" -ScriptRelativo "update_sar.ps1" -Triggers $trig7 -Descricao "Atualizacao SAR Operacional JLE Telecom"
 
+# 8. JLE_Telecom_Financiamentos_Update (Seg a Sex a cada 30 min das 08h às 18h)
+$trig8 = @()
+8..18 | ForEach-Object {
+    $h = $_
+    $trig8 += (New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -At ("{0:D2}:00" -f $h))
+    if ($h -lt 18) {
+        $trig8 += (New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -At ("{0:D2}:30" -f $h))
+    }
+}
+Criar-Tarefa -Nome "JLE_Telecom_Financiamentos_Update" -ScriptRelativo "update_financiamentos.ps1" -Triggers $trig8 -Descricao "Atualizacao Financiamentos & PMTs JLE Telecom (8h as 18h a cada 30m)"
+
 Write-Host ""
 Write-Host "==========================================================" -ForegroundColor Cyan
 Write-Host " Processo concluido! Verifique o Agendador de Tarefas." -ForegroundColor Green

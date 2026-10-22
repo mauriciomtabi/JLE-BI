@@ -13,11 +13,14 @@ Write-Output "=========================================================="
 # Definir ação: Powershell com execução oculta
 $action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -NonInteractive -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$scriptPath`"" -WorkingDirectory "$workingDir"
 
-# Definir gatilhos: Segunda a Sexta das 08h às 18h (de hora em hora)
+# Definir gatilhos: Segunda a Sexta das 08h às 18h (a cada 30 minutos)
 $triggers = @()
 8..18 | ForEach-Object {
-    $hourStr = "{0:D2}:00" -f $_
-    $triggers += (New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -At $hourStr)
+    $h = $_
+    $triggers += (New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -At ("{0:D2}:00" -f $h))
+    if ($h -lt 18) {
+        $triggers += (New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -At ("{0:D2}:30" -f $h))
+    }
 }
 $triggers += New-ScheduledTaskTrigger -AtLogOn -User ([System.Security.Principal.WindowsIdentity]::GetCurrent().Name)
 
@@ -28,7 +31,7 @@ $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoi
 try {
     Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $triggers -Settings $settings -User "$env:USERNAME" -Force
     Write-Output "Tarefa '$taskName' registrada com sucesso!"
-    Write-Output "Frequencia: Segunda a Sexta-feira das 08h as 18h (horaria)"
+    Write-Output "Frequencia: Segunda a Sexta-feira das 08h as 18h (a cada 30 minutos)"
     Write-Output "Script associado: $scriptPath"
 } catch {
     Write-Error "Erro ao registrar a tarefa no Windows: $($_.Exception.Message)"
