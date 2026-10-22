@@ -59991,5 +59991,53 @@ const VEICULOS_DATA = [
     "km": 252459,
     "kml": 3.5,
     "transactionId": "1107293820"
+  },
+  {
+    "date": "2026-10-22 10:26:48",
+    "plate": "QXB2J58",
+    "driver": "PAULO ROBERTO DEGRACIA",
+    "value": 245.85,
+    "uf": "SC",
+    "month": "OUTUBRO",
+    "liters": 37.88,
+    "vlLiter": 6.49,
+    "model": "STRADA",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 165277,
+    "kml": 8.71,
+    "transactionId": "1107300722"
+  },
+  {
+    "date": "2026-10-22 12:59:04",
+    "plate": "QHJ5H03",
+    "driver": "ILMAR FONTES VIEIRA FILHO",
+    "value": 358.93,
+    "uf": "SC",
+    "month": "OUTUBRO",
+    "liters": 54.47,
+    "vlLiter": 6.59,
+    "model": "FIORINO",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 207880,
+    "kml": 9.31,
+    "transactionId": "1107339882"
+  },
+  {
+    "date": "2026-10-22 14:05:22",
+    "plate": "QNZ1F16",
+    "driver": "EVERSON LUIS DOS SANTOS",
+    "value": 301.27,
+    "uf": "SC",
+    "month": "OUTUBRO",
+    "liters": 46.42,
+    "vlLiter": 6.49,
+    "model": "STRADA",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 180402,
+    "kml": 10.58,
+    "transactionId": "1107355638"
   }
 ];
