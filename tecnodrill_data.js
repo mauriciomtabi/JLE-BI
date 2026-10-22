@@ -1,5 +1,5 @@
 ﻿window.TECNODRILL_DATA = {
-    "generated_at":  "2026-10-22 10:09:35",
+    "generated_at":  "2026-10-22 15:12:03",
     "empresa":  "Tecnodrill",
     "categories_origin":  {
                               "entradas":  [
@@ -18762,6 +18762,54 @@
                              "is_transfer":  false
                          },
                          {
+                             "id":  "OUT__2026_TECNODRILL_CONFIA_63",
+                             "banco":  "Sicoob Confiança",
+                             "aba":  "OUT _2026 TECNODRILL CONFIA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "OUTUBRO/2026",
+                             "data":  "2026-10-21",
+                             "uf":  "OUTUBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Folha De Pagamento",
+                             "descricao":  "Pagamento BICA",
+                             "valor_nominal":  1022,
+                             "valor_liquido":  -1022,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "OUT__2026_TECNODRILL_CONFIA_64",
+                             "banco":  "Sicoob Confiança",
+                             "aba":  "OUT _2026 TECNODRILL CONFIA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "OUTUBRO/2026",
+                             "data":  "2026-10-21",
+                             "uf":  "OUTUBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Despesas Diversas",
+                             "descricao":  "Caixa Diego",
+                             "valor_nominal":  350.79,
+                             "valor_liquido":  -350.79,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "OUT__2026_TECNODRILL_CONFIA_65",
+                             "banco":  "Sicoob Confiança",
+                             "aba":  "OUT _2026 TECNODRILL CONFIA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "OUTUBRO/2026",
+                             "data":  "2026-10-21",
+                             "uf":  "OUTUBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Medicina do Trabalho",
+                             "descricao":  "Exames",
+                             "valor_nominal":  744,
+                             "valor_liquido":  -744,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
                              "id":  "OUT__2026_TECNODRILL_MAX_11",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "OUT _2026 TECNODRILL MAX",
@@ -19291,7 +19339,7 @@
                          }
                      ],
     "caixa":  {
-                  "gerado_em":  "2026-10-22 10:08:58",
+                  "gerado_em":  "2026-10-22 15:11:27",
                   "carlos":  [
                                  {
                                      "id":  "carlos-1",
