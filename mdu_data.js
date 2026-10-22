@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-10-22 13:00:30
+// Dados MDU Compactados - Gerado em: 2026-10-22 14:00:24
 window.MDU_METADATA = {
-    "generated_at": "2026-10-22 13:00:30",
+    "generated_at": "2026-10-22 14:00:24",
     "total_rows": 6009,
     "geocoded_new": 0
 };
@@ -187950,7 +187950,7 @@ window.MDU_DATA = [
         "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Fusão",
+        "status": "Relatório",
         "prog": 0,
         "cod_imovel": "",
         "area": "VIPAA",
@@ -187964,7 +187964,7 @@ window.MDU_DATA = [
         "obs_vistoria": "ADEQUADO",
         "data_interna": "01/10/2026",
         "data_fusao": "01/10/2026",
-        "data_baixa": "",
+        "data_baixa": "22/10",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
