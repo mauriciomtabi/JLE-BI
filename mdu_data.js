@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-10-22 15:00:32
+// Dados MDU Compactados - Gerado em: 2026-10-22 15:13:43
 window.MDU_METADATA = {
-    "generated_at": "2026-10-22 15:00:32",
+    "generated_at": "2026-10-22 15:13:43",
     "total_rows": 6009,
-    "geocoded_new": 5
+    "geocoded_new": 1
 };
 
 window.MDU_DATA = [
@@ -188104,35 +188104,35 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505737",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "VERANÓPOLIS 467",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
+        "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
+        "status": "Relatório",
         "prog": 0,
         "cod_imovel": "",
-        "area": "",
+        "area": "BVSAA",
         "node": "",
-        "caixa_m": "",
-        "hps": null,
-        "data_adicio": "",
-        "equipe": "",
-        "primeira_visita": "",
+        "caixa_m": "BVSAA.015.M020",
+        "hps": 6,
+        "data_adicio": "22/10/2026",
+        "equipe": "David Salomão",
+        "primeira_visita": "17/10/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
-        "data_interna": "",
-        "data_fusao": "",
-        "data_baixa": "",
+        "obs_vistoria": "ADEQUADO",
+        "data_interna": "17/10/2026",
+        "data_fusao": "17/10/2026",
+        "data_baixa": "22/10",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0175333,
+        "lng": -51.1752309,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505738",
