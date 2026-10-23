@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-10-23 15:00:21
+// Dados MDU Compactados - Gerado em: 2026-10-23 15:08:09
 window.MDU_METADATA = {
-    "generated_at": "2026-10-23 15:00:21",
+    "generated_at": "2026-10-23 15:08:09",
     "total_rows": 6009,
     "geocoded_new": 1
 };
@@ -187918,7 +187918,7 @@ window.MDU_DATA = [
         "aging": "1",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Baixa",
+        "status": "Relatório",
         "prog": 0,
         "cod_imovel": "",
         "area": "CNTAA",
@@ -187931,8 +187931,8 @@ window.MDU_DATA = [
         "segunda_visita": "",
         "obs_vistoria": "ADEQUADO",
         "data_interna": "02/10/2026",
-        "data_fusao": "",
-        "data_baixa": "",
+        "data_fusao": "02/10/2026",
+        "data_baixa": "23/10",
         "obs_baixa": "FALTA BAIXA DE MATERIAIS",
         "data_relatorio": "",
         "data_medicao": "",
@@ -188648,19 +188648,19 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505754",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "TUNISIA 25",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
+        "aging": "46.318",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
+        "status": "FALTA DADOS",
         "prog": 0,
         "cod_imovel": "",
-        "area": "",
+        "area": "VIPAA",
         "node": "",
-        "caixa_m": "",
-        "hps": null,
+        "caixa_m": "VIPAA.003.M010",
+        "hps": 8,
         "data_adicio": "",
         "equipe": "",
         "primeira_visita": "",
@@ -188674,9 +188674,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0167102,
+        "lng": -51.1482936,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505755",
