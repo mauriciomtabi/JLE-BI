@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-10-23 15:08:09
+// Dados MDU Compactados - Gerado em: 2026-10-23 16:00:19
 window.MDU_METADATA = {
-    "generated_at": "2026-10-23 15:08:09",
+    "generated_at": "2026-10-23 16:00:19",
     "total_rows": 6009,
-    "geocoded_new": 1
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -188651,23 +188651,23 @@ window.MDU_DATA = [
         "endereco": "TUNISIA 25",
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
-        "aging": "46.318",
+        "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "FALTA DADOS",
+        "status": "Baixa",
         "prog": 0,
         "cod_imovel": "",
         "area": "VIPAA",
         "node": "",
         "caixa_m": "VIPAA.003.M010",
         "hps": 8,
-        "data_adicio": "",
-        "equipe": "",
-        "primeira_visita": "",
+        "data_adicio": "23/10/2026",
+        "equipe": "LUIZ FERNANDO",
+        "primeira_visita": "28/09/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
-        "data_interna": "",
-        "data_fusao": "",
+        "obs_vistoria": "ADEQUADO",
+        "data_interna": "28/09/2026",
+        "data_fusao": "28/09/2026",
         "data_baixa": "",
         "obs_baixa": "",
         "data_relatorio": "",
