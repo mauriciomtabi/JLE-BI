@@ -290,13 +290,13 @@
             </div>
 
             <!-- KPI CARDS NO MODELO PADRÃO DOS OUTROS BI FINANCEIROS -->
-            <div class="kpi-container" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="kpi-container" style="grid-template-columns: repeat(4, 1fr);">
                 <div class="kpi-card inflows">
                     <div class="kpi-info">
                         <span class="kpi-label">Receita Bruta (ERP)</span>
                         <h3 class="kpi-value" id="exec-jle-revenue">R$ 0,00</h3>
                         <div class="kpi-analytics">
-                            <span class="kpi-subvalue" id="exec-jle-revenue-note">0 notas · bruto faturado no ERP</span>
+                            <span class="kpi-subvalue" id="exec-jle-revenue-note">0 notas · faturado bruto no ERP</span>
                             <span class="kpi-subvalue" id="exec-jle-revenue-prev">Mês Anterior: <strong>R$ 0,00</strong></span>
                         </div>
                     </div>
@@ -316,6 +316,20 @@
                     </div>
                     <div class="kpi-icon-container">
                         <i class="fa-solid fa-money-bill-transfer"></i>
+                    </div>
+                </div>
+
+                <div class="kpi-card applications" id="exec-jle-application-card">
+                    <div class="kpi-info">
+                        <span class="kpi-label">Aplicação</span>
+                        <h3 class="kpi-value" id="exec-jle-application">R$ 0,00</h3>
+                        <div class="kpi-analytics">
+                            <span class="kpi-subvalue" id="exec-jle-application-note">0 aplicações financeiras</span>
+                            <span class="kpi-subvalue" id="exec-jle-application-prev">Mês Anterior: <strong>R$ 0,00</strong></span>
+                        </div>
+                    </div>
+                    <div class="kpi-icon-container">
+                        <i class="fa-solid fa-piggy-bank"></i>
                     </div>
                 </div>
 
@@ -411,6 +425,7 @@
                                     <th>Mês / Competência</th>
                                     <th style="text-align: right;">Receita Bruta</th>
                                     <th style="text-align: right;">Despesas</th>
+                                    <th style="text-align: right;">Aplicação</th>
                                     <th style="text-align: right;">Resultado Líquido</th>
                                     <th style="text-align: right;">Margem</th>
                                     <th style="text-align: center;">Situação</th>
@@ -435,9 +450,10 @@
                         <div style="display: flex; align-items: center; gap: 6px;">
                             <label for="exec-jle-kind" style="font-size: 12px; color: var(--text-secondary); font-weight: 600;">Tipo:</label>
                             <select id="exec-jle-kind" style="padding: 7px 12px; font-size: 13px; border-radius: 8px; background: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-primary);">
-                                <option value="">Todos (Receitas e Despesas)</option>
+                                <option value="">Todos os Lançamentos</option>
                                 <option value="revenue">Somente Receitas</option>
                                 <option value="expense">Somente Despesas</option>
+                                <option value="application">Somente Aplicações</option>
                             </select>
                         </div>
                         <button id="exec-jle-export" class="btn-secondary" type="button" style="background: #107c41; color: white; border: none; font-weight: 600; padding: 7px 16px;">
@@ -4224,7 +4240,7 @@
     <script src="sar_app.js?v=3.58"></script>
     <script src="manutencao_data.js"></script>
     <script src="manutencao_app.js"></script>
-    <script src="parcelamentos_data.js?v=20261023100011"></script>
+    <script src="parcelamentos_data.js?v=20261023143721"></script>
     <script src="parcelamentos_app.js?v=1.7"></script>
     <script src="financiamentos_data.js?v=20261016084048"></script>
     <script src="financiamentos_app.js?v=1.4"></script>

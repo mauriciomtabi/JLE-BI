@@ -3,7 +3,7 @@ chcp 65001 > nul
 echo ========================================================
 echo ATUALIZANDO DADOS TRIBUTARIOS E PARCELAMENTOS - JLE TELECOM
 echo ========================================================
-python "%~dp0update_parcelamentos.py"
+python "%~dp0update_parcelamentos.py" --force
 if %ERRORLEVEL% EQU 0 (
     echo.
     echo ========================================================

@@ -61,22 +61,31 @@ def find_latest_network_file():
     return None
 
 def get_source_file():
-    """Retorna o caminho do arquivo de origem (rede com fallback local)"""
+    """Retorna o caminho do arquivo de origem (rede com fallback local) e seus metadados de modificação"""
     net_file = find_latest_network_file()
+    chosen_file = None
     if net_file and os.path.exists(net_file):
         try:
             shutil.copy2(net_file, LOCAL_FALLBACK_FILE)
             print(f"[ETL] Cache local atualizado com sucesso: {LOCAL_FALLBACK_FILE}")
-            return net_file
+            chosen_file = net_file
         except Exception as e:
             print(f"[ETL] Erro ao copiar cache local (utilizando rede diretamente): {e}")
-            return net_file
-            
-    if os.path.exists(LOCAL_FALLBACK_FILE):
+            chosen_file = net_file
+    elif os.path.exists(LOCAL_FALLBACK_FILE):
         print(f"[ETL] Rede indisponível. Utilizando cache local de contingência: {LOCAL_FALLBACK_FILE}")
-        return LOCAL_FALLBACK_FILE
+        chosen_file = LOCAL_FALLBACK_FILE
+    else:
+        raise FileNotFoundError("[ETL] Nenhuma fonte de dados encontrada (rede e cache local indisponíveis).")
         
-    raise FileNotFoundError("[ETL] Nenhuma fonte de dados encontrada (rede e cache local indisponíveis).")
+    try:
+        mtime_val = os.path.getmtime(chosen_file)
+        mtime_str = datetime.datetime.fromtimestamp(mtime_val).strftime("%d/%m/%Y %H:%M:%S")
+    except Exception:
+        mtime_val = 0
+        mtime_str = ""
+        
+    return chosen_file, mtime_str, mtime_val
 
 def parse_date(v):
     if v is None:
@@ -139,13 +148,14 @@ def parse_float(v):
     except Exception:
         return 0.0
 
-def process_workbook(file_path):
+def process_workbook(file_path, source_modified_at=""):
     print(f"[ETL] Carregando pasta de trabalho: {file_path}")
     wb = openpyxl.load_workbook(file_path, data_only=True)
     
     data = {
         "metadata": {
             "source_file": os.path.basename(file_path),
+            "source_modified_at": source_modified_at,
             "generated_at": datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
             "reference_position": "Agosto/2026"
         },
@@ -581,30 +591,60 @@ def main():
     print("=" * 70)
 
     try:
-        source_file = get_source_file()
-        processed_data = process_workbook(source_file)
+        force = "--force" in sys.argv
+        source_file, source_mtime_str, source_mtime_val = get_source_file()
+        processed_data = process_workbook(source_file, source_mtime_str)
         
-        # Verificar se os dados realmente sofreram alterações em relação ao cache atual
+        # Verificar se os dados precisam ser regerados
         existing_data = load_existing_data()
-        if existing_data:
-            # Compara corpo dos dados ignorando apenas o timestamp de geração
+        should_write = False
+        write_reason = ""
+        
+        if not existing_data:
+            should_write = True
+            write_reason = "Base de dados inexistente"
+        elif force:
+            should_write = True
+            write_reason = "Execução forçada (--force)"
+        else:
             old_body = {k: v for k, v in existing_data.items() if k != "metadata"}
             new_body = {k: v for k, v in processed_data.items() if k != "metadata"}
-            if json.dumps(old_body, sort_keys=True) == json.dumps(new_body, sort_keys=True):
-                print("\n[ETL] Nenhuma alteração cadastral ou financeira detectada na planilha de Parcelamentos.")
-                print(f"[ETL] A base '{OUTPUT_JS_FILE}' já se encontra 100% atualizada e alinhada com o servidor.")
-                print("=" * 70)
-                return
+            if json.dumps(old_body, sort_keys=True) != json.dumps(new_body, sort_keys=True):
+                should_write = True
+                write_reason = "Alterações detectadas nas informações cadastrais ou financeiras da planilha"
+            else:
+                old_meta = existing_data.get("metadata", {})
+                old_mtime_str = old_meta.get("source_modified_at", "")
+                if source_mtime_str and source_mtime_str != old_mtime_str:
+                    should_write = True
+                    write_reason = f"Planilha de origem foi salva/atualizada na rede ({source_mtime_str})"
+                else:
+                    old_gen = old_meta.get("generated_at", "")
+                    today_str = datetime.date.today().strftime("%d/%m/%Y")
+                    if not old_gen.startswith(today_str):
+                        should_write = True
+                        write_reason = f"Sincronização diária de conformidade ({today_str})"
 
-        # Gravação do arquivo JavaScript se houver alteração
+        if not should_write:
+            print("\n[ETL] Nenhuma alteração cadastral ou financeira detectada na planilha de Parcelamentos.")
+            print(f"[ETL] A base '{OUTPUT_JS_FILE}' já se encontra 100% atualizada na data de hoje e alinhada com o servidor.")
+            print(f"      • Planilha de Origem: {os.path.basename(source_file)} (Modificada em {source_mtime_str})")
+            print(f"      • Última Geração:     {existing_data.get('metadata', {}).get('generated_at', 'N/D')}")
+            print("=" * 70)
+            return
+
+        # Gravação do arquivo JavaScript
         js_content = f"// Dados Consolidados de Parcelamentos Tributários JLE Telecom\n"
-        js_content += f"// Gerado automaticamente pelo pipeline ETL em {processed_data['metadata']['generated_at']}\n\n"
-        js_content += f"window.PARCELAMENTOS_DATA = {json.dumps(processed_data, indent=2, ensure_ascii=False)};\n"
+        js_content += f"// Gerado automaticamente pelo pipeline ETL em {processed_data['metadata']['generated_at']}\n"
+        if source_mtime_str:
+            js_content += f"// Planilha de origem modificada em: {source_mtime_str}\n"
+        js_content += f"\nwindow.PARCELAMENTOS_DATA = {json.dumps(processed_data, indent=2, ensure_ascii=False)};\n"
 
         with open(OUTPUT_JS_FILE, "w", encoding="utf-8") as f:
             f.write(js_content)
 
-        print(f"[ETL] Sucesso! Nova base compilada salva em: {OUTPUT_JS_FILE}")
+        print(f"[ETL] Sucesso! Base compilada salva em: {OUTPUT_JS_FILE}")
+        print(f"[ETL] Motivo da gravação: {write_reason}")
         print("\n--- RESUMO EXECUTIVO DO PROCESSAMENTO ---")
         tot = processed_data["totais_gerais"]
         print(f"  • Dívida Consolidada Original: R$ {tot['divida_original_parcelados']:,.2f}")
@@ -613,6 +653,7 @@ def main():
         print(f"  • Juros Selic Pagos:           R$ {tot['juros_selic_pagos_parcelas']:,.2f}")
         print(f"  • Compromisso Mensal Atual:    R$ {tot['compromisso_mensal_atual']:,.2f}/mês")
         print(f"  • Total de Acordos Ativos:     {tot['total_acordos_ativos']}")
+        print(f"  • Competência Referência:      {processed_data['metadata'].get('reference_position', 'N/D')}")
         print("=" * 70)
 
     except Exception as e:
@@ -623,3 +664,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
