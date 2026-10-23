@@ -115,7 +115,19 @@ async function loadTrocaPosteDataAsync() {
 
         const obraIds = obras.map(o => o.id);
         const filterIds = obraIds.join(',');
-        const lances = await fetchAppJle(`lances?obra_id=in.(${filterIds})&deletado_em=is.null&select=id,obra_id,numero,ponto_numero,tipo,capturado_em,enviado_em,tecnico_id`);
+        // Busca paginada de lances para contornar o limite rígido de 1000 registros do PostgREST
+        let allLances = [];
+        let page = 0;
+        const pageSize = 1000;
+        while (true) {
+            const url = `lances?obra_id=in.(${filterIds})&deletado_em=is.null&select=id,obra_id,numero,ponto_numero,tipo,capturado_em,enviado_em,tecnico_id&order=numero.asc&limit=${pageSize}&offset=${page * pageSize}`;
+            const batch = await fetchAppJle(url);
+            if (!Array.isArray(batch) || batch.length === 0) break;
+            allLances = allLances.concat(batch);
+            if (batch.length < pageSize) break;
+            page++;
+        }
+        const lances = allLances;
 
         const lancesByObra = {};
         (lances || []).forEach(l => {
