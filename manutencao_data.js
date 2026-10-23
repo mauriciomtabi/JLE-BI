@@ -1,7 +1,7 @@
 // Data generated 100% from Master Excel Controle de Medições (Mnt. Demanda)
 (function() {
     const db = {
-  "generated_at": "2026-10-22 17:00:28",
+  "generated_at": "2026-10-23 10:01:00",
   "lookups": {
     "tipos_of": [
       "TIPO\nOS CLIENTE",
@@ -211,7 +211,8 @@
       "JULHO/2026",
       "OUTUBRO/2026",
       "SETEMBRO/2026",
-      "AGOSTO/2026"
+      "AGOSTO/2026",
+      "NOVEMBRO/2026"
     ],
     "demanda_integ": [
       "DEMANDA",
@@ -27808,10 +27809,10 @@
       12,
       1,
       6484.18,
-      7,
+      10,
       0,
       "-",
-      "-",
+      "RESIDENCIAL",
       "AGUARD_APROVACAO"
     ],
     [
@@ -33280,10 +33281,10 @@
       4,
       1,
       293.94,
-      7,
+      10,
       0,
       "-",
-      "-",
+      "RESIDENCIAL",
       "AGUARD_APROVACAO"
     ],
     [
@@ -45448,10 +45449,10 @@
       12,
       1,
       13744.72,
-      7,
+      10,
       0,
       "-",
-      "-",
+      "INTEGRIDADE",
       "AGUARD_APROVACAO"
     ],
     [
@@ -59776,10 +59777,10 @@
       1,
       1,
       3051.07,
-      7,
+      10,
       0,
       "-",
-      "-",
+      "INTEGRIDADE",
       "AGUARD_APROVACAO"
     ],
     [
@@ -61810,10 +61811,10 @@
       1,
       1,
       3762.04,
-      7,
+      10,
       0,
       "-",
-      "-",
+      "INTEGRIDADE",
       "AGUARD_APROVACAO"
     ],
     [
@@ -61882,10 +61883,10 @@
       1,
       1,
       3600.46,
-      7,
+      10,
       0,
       "-",
-      "-",
+      "INTEGRIDADE",
       "AGUARD_APROVACAO"
     ],
     [
@@ -62728,10 +62729,10 @@
       1,
       1,
       1678.29,
-      7,
+      10,
       0,
       "-",
-      "-",
+      "INTEGRIDADE",
       "AGUARD_APROVACAO"
     ],
     [
@@ -64908,7 +64909,7 @@
       30048.44,
       7,
       0,
-      "5760022",
+      "5763358",
       "-",
       "APROVADO"
     ],
@@ -66148,10 +66149,10 @@
       1,
       1,
       9661.18,
-      7,
+      10,
       0,
       "-",
-      "-",
+      "OBRA",
       "AGUARD_APROVACAO"
     ],
     [
@@ -66436,10 +66437,10 @@
       1,
       1,
       3446.52,
-      7,
+      10,
       0,
       "-",
-      "-",
+      "INTEGRIDADE",
       "AGUARD_APROVACAO"
     ],
     [
@@ -67246,10 +67247,10 @@
       1,
       1,
       2030.3,
-      7,
+      10,
       0,
       "-",
-      "-",
+      "INTEGRIDADE",
       "AGUARD_APROVACAO"
     ],
     [
