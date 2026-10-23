@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-10-23 14:00:40
+// Dados MDU Compactados - Gerado em: 2026-10-23 15:00:21
 window.MDU_METADATA = {
-    "generated_at": "2026-10-23 14:00:40",
+    "generated_at": "2026-10-23 15:00:21",
     "total_rows": 6009,
-    "geocoded_new": 2
+    "geocoded_new": 1
 };
 
 window.MDU_DATA = [
@@ -188616,35 +188616,35 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505753",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "GENERAL NETO 243",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
+        "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
+        "status": "Relatório",
         "prog": 0,
         "cod_imovel": "",
-        "area": "",
+        "area": "BFMAA",
         "node": "",
-        "caixa_m": "",
-        "hps": null,
-        "data_adicio": "",
-        "equipe": "",
-        "primeira_visita": "",
+        "caixa_m": "BFMAA.291.M040",
+        "hps": 8,
+        "data_adicio": "23/10/2026",
+        "equipe": "LUIZ FERNANDO",
+        "primeira_visita": "15/10/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
-        "data_interna": "",
-        "data_fusao": "",
-        "data_baixa": "",
+        "obs_vistoria": "ADEQUADO",
+        "data_interna": "15/10/2026",
+        "data_fusao": "15/10/2026",
+        "data_baixa": "23/10",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0232161,
+        "lng": -51.2083254,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505754",
