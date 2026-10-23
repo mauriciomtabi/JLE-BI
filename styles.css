@@ -681,6 +681,15 @@ body.light-theme .badge-competencia {
     border-color: var(--color-success);
 }
 
+.kpi-card.applications {
+    border-left: 5px solid #8b5cf6;
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.08);
+}
+.kpi-card.applications:hover {
+    box-shadow: 0 10px 25px rgba(139, 92, 246, 0.18);
+    border-color: #a78bfa;
+}
+
 .kpi-info {
     display: flex;
     flex-direction: column;
@@ -825,6 +834,10 @@ body.light-theme .kpi-card:hover .kpi-icon-container {
 
 .kpi-card.balance .kpi-icon-container {
     color: var(--color-success);
+}
+
+.kpi-card.applications .kpi-icon-container {
+    color: #a78bfa;
 }
 
 /* Charts Grid */

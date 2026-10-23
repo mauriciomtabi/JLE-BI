@@ -53,7 +53,7 @@
 /* 2. KPI CARDS ESTILIZADOS */
 #view-executivo-container .kpi-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
 }
 
@@ -95,6 +95,16 @@
 #view-executivo-container .kpi-card.outflows:hover {
     border-color: #fbbf24;
     box-shadow: 0 10px 25px rgba(245, 158, 11, 0.2);
+}
+
+#view-executivo-container .kpi-card.applications {
+    border-left: 5px solid #8b5cf6;
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.08);
+}
+
+#view-executivo-container .kpi-card.applications:hover {
+    border-color: #a78bfa;
+    box-shadow: 0 10px 25px rgba(139, 92, 246, 0.2);
 }
 
 #view-executivo-container .kpi-card.balance {
@@ -187,6 +197,7 @@
 
 #view-executivo-container .kpi-card.inflows .kpi-icon-container { color: #10b981; }
 #view-executivo-container .kpi-card.outflows .kpi-icon-container { color: #f59e0b; }
+#view-executivo-container .kpi-card.applications .kpi-icon-container { color: #8b5cf6; }
 #view-executivo-container .kpi-card.balance .kpi-icon-container { color: #38bdf8; }
 #view-executivo-container .kpi-card.balance.is-positive .kpi-icon-container { color: #2ecc71; }
 #view-executivo-container .kpi-card.balance.is-negative .kpi-icon-container { color: #e74c3c; }
@@ -476,6 +487,11 @@ body.light-theme #view-executivo-container table.data-table tbody tr:hover {
     color: #f59e0b;
 }
 
+.exec-badge-kind.application {
+    background: rgba(139, 92, 246, 0.15);
+    color: #a78bfa;
+}
+
 .exec-badge-uf {
     display: inline-block;
     padding: 2px 7px;
@@ -544,20 +560,29 @@ body.light-theme #view-executivo-container table.data-table tbody tr:hover {
     font-weight: 600;
 }
 
+.cell-app {
+    color: #a78bfa !important;
+    font-weight: 600;
+}
+
 /* 7. RESPONSIVIDADE */
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
     #view-executivo-container .kpi-container {
-        grid-template-columns: 1fr;
-        gap: 14px;
-    }
-    #view-executivo-container .charts-grid {
-        grid-template-columns: 1fr !important;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
     }
 }
 
 @media (max-width: 768px) {
+    #view-executivo-container .kpi-container {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
     #view-executivo-container .kpi-value {
         font-size: 22px;
+    }
+    #view-executivo-container .charts-grid {
+        grid-template-columns: 1fr !important;
     }
     #view-executivo-container .chart-body {
         height: 300px !important;

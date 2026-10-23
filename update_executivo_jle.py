@@ -75,7 +75,8 @@ def consolidate(source, original_name=None, fallback=False):
         receita=next((s for s in wb if key(s.title)=='receita'),None)
         if receita is None: raise ValueError('Aba RECEITA ausente; base anterior preservada.')
         monthly=defaultdict(lambda:{'gross':0,'withholding':0,'net':0,'expense':0,'revenue_count':0,
-                                   'expense_count':0,'transfer_excluded':0,'transfer_count':0,
+                                   'expense_count':0,'application':0,'application_count':0,
+                                   'transfer_excluded':0,'transfer_count':0,
                                    'initial_excluded':0,'by_uf':defaultdict(int),'by_customer':defaultdict(int),
                                    'by_bank':defaultdict(int),'expense_source_month':False})
         revenue_headers={key(v):i for i,v in enumerate(next(receita.iter_rows(values_only=True)))}
@@ -143,6 +144,17 @@ def consolidate(source, original_name=None, fallback=False):
                 classification=key(str(category)+' '+str(description))
                 if 'transferenciaentreconta' in classification or key(category) in ('transferencia','transferencias','transferenciainterna'):
                     m['transfer_excluded']+=value;m['transfer_count']+=1;continue
+                
+                # Aplicações financeiras na coluna de movimentos não entram como despesa
+                mov_val = str(get('Movimento') or category or '')
+                if 'aplicac' in key(mov_val) or key(mov_val).startswith('aplic'):
+                    m['application']+=value;m['application_count']+=1
+                    records.append({'kind':'application','period':period,'date':day.isoformat(),'customer':'',
+                                    'uf':str(get('UF') or '').strip().upper() if str(get('UF') or '').strip().upper() in {'AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO'} else 'N/D',
+                                    'description':str(description),'category':str(category) if category else 'Aplicação','bank':bank,'value':value/100})
+                    last_expense=max(last_expense,day) if last_expense else day
+                    continue
+
                 m['expense']+=value;m['expense_count']+=1;m['by_bank'][bank]+=value
                 records.append({'kind':'expense','period':period,'date':day.isoformat(),'customer':'',
                                 'uf':str(get('UF') or '').strip().upper() if str(get('UF') or '').strip().upper() in {'AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO'} else 'N/D',
@@ -156,6 +168,8 @@ def consolidate(source, original_name=None, fallback=False):
             comparable=m['revenue_count']>0 and m['expense_source_month']
             result.append({'period':period,'revenue':money(m['gross']) if m['revenue_count'] else None,
                            'expense':money(m['expense']) if m['expense_source_month'] else None,
+                           'application':money(m['application']),
+                           'application_count':m['application_count'],
                            'result':money(m['gross']-m['expense']) if comparable else None,
                            'comparable':comparable,'revenue_count':m['revenue_count'],'expense_count':m['expense_count'],
                            'withholding':money(m['withholding']),'net_revenue':money(m['net']),

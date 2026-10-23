@@ -106,14 +106,17 @@
         const revenue = meta.revenue == null ? null : sum(rs, 'revenue');
         // A base bancária de despesas não possui atribuição de cliente ERP
         const expense = (state.customer !== 'ALL' && state.customer) || meta.expense == null ? null : sum(rs, 'expense');
+        const application = (state.customer !== 'ALL' && state.customer) ? 0 : sum(rs, 'application');
         const result = (revenue == null || expense == null) ? null : Math.round((revenue - expense) * 100) / 100;
         return {
             ...meta,
             revenue,
             expense,
+            application,
             result,
             revenue_count: rs.filter(r => r.kind === 'revenue').length,
-            expense_count: rs.filter(r => r.kind === 'expense').length
+            expense_count: rs.filter(r => r.kind === 'expense').length,
+            application_count: rs.filter(r => r.kind === 'application').length
         };
     }
 
@@ -219,23 +222,28 @@
 
         const totalRevenue = aggregate('revenue');
         const totalExpense = aggregate('expense');
+        const totalApplication = aggregate('application');
         const totalResult = aggregate('result');
 
         // 1. Atualizar KPIs Cards (Valores do Período)
         set('revenue', money(totalRevenue));
         set('expense', money(totalExpense));
+        set('application', money(totalApplication));
         set('result', money(totalResult));
 
         const revCount = filteredRecords.filter(r => r.kind === 'revenue').length;
         const expCount = filteredRecords.filter(r => r.kind === 'expense').length;
+        const appCount = filteredRecords.filter(r => r.kind === 'application').length;
 
         set('revenue-note', totalRevenue == null ? 'Faturamento indisponível' : `${revCount.toLocaleString('pt-BR')} notas · faturado bruto ERP`);
         set('expense-note', (state.customer !== 'ALL' && state.customer) ? 'Despesas sem vínculo com cliente ERP' : totalExpense == null ? 'Despesas indisponíveis' : `${expCount.toLocaleString('pt-BR')} saídas · sem transferências`);
+        set('application-note', (state.customer !== 'ALL' && state.customer) ? 'Aplicações sem vínculo com cliente ERP' : `${appCount.toLocaleString('pt-BR')} ${appCount === 1 ? 'aplicação' : 'aplicações'} · alocação financeira`);
 
         // 2. CALCULAR E EXIBIR SEMPRE A RECEITA E DESPESA DO MÊS ANTERIOR (REQUISITO 1)
         let prevPeriod = null;
         let prevRev = null;
         let prevExp = null;
+        let prevApp = null;
         let prevRes = null;
 
         if (state.month !== 'ALL') {
@@ -256,6 +264,7 @@
             const mMeta = data.months.find(m => m.period === prevPeriod);
             prevRev = mMeta?.revenue == null ? null : sum(prevRs, 'revenue');
             prevExp = (state.customer !== 'ALL' && state.customer) || mMeta?.expense == null ? null : sum(prevRs, 'expense');
+            prevApp = (state.customer !== 'ALL' && state.customer) ? 0 : sum(prevRs, 'application');
             prevRes = (prevRev == null || prevExp == null) ? null : Math.round((prevRev - prevExp) * 100) / 100;
         }
 
@@ -293,6 +302,24 @@
                 expPrevEl.innerHTML = `Mês Ant. (${shortMonthLabel(prevPeriod)}): <strong>${money(prevExp)}</strong>${diffPctStr}`;
             } else {
                 expPrevEl.innerHTML = `Mês Anterior: <strong>—</strong>`;
+            }
+        }
+
+        // Aplicação do Mês Anterior
+        const appPrevEl = el('application-prev');
+        if (appPrevEl) {
+            if (prevApp != null) {
+                let diffPctStr = '';
+                if (totalApplication != null && prevApp > 0) {
+                    const diffPct = ((totalApplication - prevApp) / prevApp) * 100;
+                    const sign = diffPct >= 0 ? '+' : '';
+                    const color = '#a78bfa';
+                    const icon = diffPct >= 0 ? 'fa-arrow-trend-up' : 'fa-arrow-trend-down';
+                    diffPctStr = ` <span style="color: ${color}; font-weight: 700; margin-left: 4px;"><i class="fa-solid ${icon}"></i> ${sign}${diffPct.toFixed(1).replace('.', ',')}%</span>`;
+                }
+                appPrevEl.innerHTML = `Mês Ant. (${shortMonthLabel(prevPeriod)}): <strong>${money(prevApp)}</strong>${diffPctStr}`;
+            } else {
+                appPrevEl.innerHTML = `Mês Anterior: <strong>—</strong>`;
             }
         }
 
@@ -901,16 +928,18 @@
         if (!body) return;
         body.replaceChildren();
 
-        let totRev = 0, totExp = 0, totRes = 0;
+        let totRev = 0, totExp = 0, totApp = 0, totRes = 0;
 
         for (const m of data.months) {
             const mRs = data.records.filter(r => r.period === m.period && matches(r));
             const rev = m.revenue == null ? null : sum(mRs, 'revenue');
             const exp = (state.customer !== 'ALL' && state.customer) || m.expense == null ? null : sum(mRs, 'expense');
+            const app = (state.customer !== 'ALL' && state.customer) ? 0 : sum(mRs, 'application');
             const res = (rev == null || exp == null) ? null : Math.round((rev - exp) * 100) / 100;
 
             if (rev != null) totRev += rev;
             if (exp != null) totExp += exp;
+            if (app != null) totApp += app;
             if (res != null) totRes += res;
 
             const tr = document.createElement('tr');
@@ -942,7 +971,15 @@
             tdExp.textContent = money(exp);
             tr.appendChild(tdExp);
 
-            // Coluna 4: Resultado
+            // Coluna 4: Aplicação
+            const tdApp = document.createElement('td');
+            tdApp.style.textAlign = 'right';
+            tdApp.style.fontWeight = '600';
+            tdApp.textContent = money(app);
+            if (app > 0) tdApp.className = 'cell-app';
+            tr.appendChild(tdApp);
+
+            // Coluna 5: Resultado
             const tdRes = document.createElement('td');
             tdRes.style.textAlign = 'right';
             tdRes.style.fontWeight = '700';
@@ -950,7 +987,7 @@
             if (res != null) tdRes.className = res >= 0 ? 'cell-pos' : 'cell-neg';
             tr.appendChild(tdRes);
 
-            // Coluna 5: Margem
+            // Coluna 6: Margem
             const tdMargin = document.createElement('td');
             tdMargin.style.textAlign = 'right';
             tdMargin.style.fontWeight = '600';
@@ -958,7 +995,7 @@
             if (res != null) tdMargin.className = res >= 0 ? 'cell-pos' : 'cell-neg';
             tr.appendChild(tdMargin);
 
-            // Coluna 6: Situação
+            // Coluna 7: Situação
             const tdStatus = document.createElement('td');
             tdStatus.style.textAlign = 'center';
             const isComp = m.comparable;
@@ -980,6 +1017,7 @@
             <td>TOTAL CONSOLIDADO</td>
             <td style="text-align: right; color: #10b981;">${money(totRev)}</td>
             <td style="text-align: right; color: #f59e0b;">${money(totExp)}</td>
+            <td style="text-align: right; color: #a78bfa;">${money(totApp)}</td>
             <td style="text-align: right;" class="${totRes >= 0 ? 'cell-pos' : 'cell-neg'}">${money(totRes)}</td>
             <td style="text-align: right;" class="${totRes >= 0 ? 'cell-pos' : 'cell-neg'}">${pct(totRes, totRev)}</td>
             <td style="text-align: center;"><span class="badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8;">Exercício</span></td>
@@ -1032,9 +1070,13 @@
 
                 const tdKind = document.createElement('td');
                 tdKind.style.textAlign = 'center';
-                tdKind.innerHTML = r.kind === 'revenue'
-                    ? `<span class="exec-badge-kind revenue"><i class="fa-solid fa-arrow-down-left"></i> Receita</span>`
-                    : `<span class="exec-badge-kind expense"><i class="fa-solid fa-arrow-up-right"></i> Despesa</span>`;
+                if (r.kind === 'revenue') {
+                    tdKind.innerHTML = `<span class="exec-badge-kind revenue"><i class="fa-solid fa-arrow-down-left"></i> Receita</span>`;
+                } else if (r.kind === 'application') {
+                    tdKind.innerHTML = `<span class="exec-badge-kind application"><i class="fa-solid fa-piggy-bank"></i> Aplicação</span>`;
+                } else {
+                    tdKind.innerHTML = `<span class="exec-badge-kind expense"><i class="fa-solid fa-arrow-up-right"></i> Despesa</span>`;
+                }
                 tr.appendChild(tdKind);
 
                 const tdDesc = document.createElement('td');
@@ -1062,8 +1104,16 @@
                 const tdVal = document.createElement('td');
                 tdVal.style.textAlign = 'right';
                 tdVal.style.fontWeight = '700';
-                tdVal.textContent = (r.kind === 'revenue' ? '+ ' : '- ') + money(r.value);
-                tdVal.className = r.kind === 'revenue' ? 'cell-pos' : 'cell-neg';
+                if (r.kind === 'revenue') {
+                    tdVal.textContent = '+ ' + money(r.value);
+                    tdVal.className = 'cell-pos';
+                } else if (r.kind === 'application') {
+                    tdVal.textContent = money(r.value);
+                    tdVal.className = 'cell-app';
+                } else {
+                    tdVal.textContent = '- ' + money(r.value);
+                    tdVal.className = 'cell-neg';
+                }
                 tr.appendChild(tdVal);
 
                 body.appendChild(tr);
@@ -1342,7 +1392,7 @@
                     const rows = displayedRecords.map(r => ({
                         'Data': r.date ? r.date.split('-').reverse().join('/') : '',
                         'Competência': monthLabel(r.period),
-                        'Tipo': r.kind === 'revenue' ? 'Receita' : 'Despesa',
+                        'Tipo': r.kind === 'revenue' ? 'Receita' : r.kind === 'application' ? 'Aplicação' : 'Despesa',
                         'Cliente': r.customer || '',
                         'Descrição': r.description || '',
                         'UF': r.uf || '',

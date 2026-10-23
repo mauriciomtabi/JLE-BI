@@ -47,7 +47,7 @@ try {
     if (Test-Path $gitPath) {
         Set-Location $workingDir
         
-        # Limpar possivel index.lock orfao de processos concorrentes
+        # Limpar possivel index.lock ou rebase orfao de processos concorrentes
         $lockFile = "$workingDir\.git\index.lock"
         if (Test-Path $lockFile) {
             try {
@@ -57,6 +57,14 @@ try {
                     Remove-Item -Path $lockFile -Force -ErrorAction SilentlyContinue
                 }
             } catch {}
+        }
+        $rebaseMerge = "$workingDir\.git\rebase-merge"
+        if (Test-Path $rebaseMerge) {
+            try { Remove-Item -Path $rebaseMerge -Recurse -Force -ErrorAction SilentlyContinue } catch {}
+        }
+        $rebaseApply = "$workingDir\.git\rebase-apply"
+        if (Test-Path $rebaseApply) {
+            try { Remove-Item -Path $rebaseApply -Recurse -Force -ErrorAction SilentlyContinue } catch {}
         }
 
         $status = & $gitPath status --porcelain parcelamentos_data.js

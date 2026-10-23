@@ -750,16 +750,37 @@ def main():
             
         data_model = consolidate_data(contratos, active_folder)
         
+        force = "--force" in sys.argv
         # Verificar se os dados realmente sofreram alterações em relação ao cache atual
         existing_data = load_existing_data()
-        if existing_data:
+        should_write = False
+        write_reason = ""
+        
+        if not existing_data:
+            should_write = True
+            write_reason = "Base de dados inexistente"
+        elif force:
+            should_write = True
+            write_reason = "Execução forçada (--force)"
+        else:
             old_body = {k: v for k, v in existing_data.items() if k != "metadata"}
             new_body = {k: v for k, v in data_model.items() if k != "metadata"}
-            if json.dumps(old_body, sort_keys=True) == json.dumps(new_body, sort_keys=True):
-                print("\n[ETL] Nenhuma alteração financeira ou cadastral detectada nas planilhas de Financiamentos.")
-                print(f"[ETL] A base '{OUTPUT_JS_FILE}' já se encontra 100% atualizada e alinhada com o servidor.")
-                print("==================================================")
-                return 0
+            if json.dumps(old_body, sort_keys=True) != json.dumps(new_body, sort_keys=True):
+                should_write = True
+                write_reason = "Alterações detectadas nas informações financeiras ou cadastrais das planilhas"
+            else:
+                old_meta = existing_data.get("metadata", {})
+                old_gen = old_meta.get("generated_at", "")
+                today_str = datetime.date.today().strftime("%d/%m/%Y")
+                if not old_gen.startswith(today_str):
+                    should_write = True
+                    write_reason = f"Sincronização diária de conformidade ({today_str})"
+
+        if not should_write:
+            print("\n[ETL] Nenhuma alteração financeira ou cadastral detectada nas planilhas de Financiamentos.")
+            print(f"[ETL] A base '{OUTPUT_JS_FILE}' já se encontra 100% atualizada na data de hoje e alinhada com o servidor.")
+            print("==================================================")
+            return 0
 
         # Gerar arquivo JS
         js_content = f"// BI JLE Telecom - Financiamentos & PMTs Data Source\n// Gerado automaticamente em {data_model['metadata']['generated_at']}\nwindow.FINANCIAMENTOS_DATA = {json.dumps(data_model, ensure_ascii=False, indent=2)};\n"

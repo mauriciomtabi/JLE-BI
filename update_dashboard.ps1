@@ -383,11 +383,15 @@ try {
                 $valorLiquido = -$valorNominal
             }
             
-            # 10. Identificar Transferência
+            # 10. Identificar Transferência e Aplicação
             $isTransfer = $false
             $trans_str = "Transfer" + $e_circumflex + "ncia entre contas"
             if ($categoria -eq $trans_str) {
                 $isTransfer = $true
+            }
+            $isApplication = $false
+            if ($categoria -like "*Aplica*" -or $categoria -like "*APLICA*") {
+                $isApplication = $true
             }
             
             $txObj = [PSCustomObject]@{
@@ -405,6 +409,7 @@ try {
                 valor_liquido = [Math]::Round($valorLiquido, 2)
                 meio_pagamento = $meioPagamento
                 is_transfer = $isTransfer
+                is_application = $isApplication
             }
             
             $allTransactions += $txObj
