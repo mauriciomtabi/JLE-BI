@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-10-26 10:00:21
+// Dados MDU Compactados - Gerado em: 2026-10-26 10:08:36
 window.MDU_METADATA = {
-    "generated_at": "2026-10-26 10:00:21",
+    "generated_at": "2026-10-26 10:08:36",
     "total_rows": 6009,
-    "geocoded_new": 2
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -170156,7 +170156,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "82",
-        "relatorio_por": "MATHEUS",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
@@ -172446,7 +172446,7 @@ window.MDU_DATA = [
         "data_fusao": "12/08/2026",
         "data_baixa": "14/08",
         "obs_baixa": "",
-        "data_relatorio": "14/08/2026",
+        "data_relatorio": "26/10/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
