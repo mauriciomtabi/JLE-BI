@@ -132,19 +132,19 @@ function populateVeiculosFilters() {
                 uniqueMonths.forEach(m => {
                     const opt = document.createElement('option');
                     opt.value = m;
-                    const formattedText = m.charAt(0).toUpperCase() + m.slice(1).toLowerCase() + '/2026';
+                    const sampleRec = baseData.find(r => String(r.month || '').trim().toUpperCase() === m.toUpperCase() && r.date);
+                    const year = sampleRec && sampleRec.date ? sampleRec.date.substring(0, 4) : new Date().getFullYear().toString();
+                    const formattedText = m.charAt(0).toUpperCase() + m.slice(1).toLowerCase() + '/' + year;
                     opt.textContent = formattedText;
                     monthSelect.appendChild(opt);
                 });
 
-                // Pré-seleção do mês anterior do sistema
+                // Pré-seleção da competência atual do sistema (ou mais recente disponível)
                 const monthsPt = ["JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO", "JUNHO", "JULHO", "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"];
-                const prevMonthDate = new Date();
-                prevMonthDate.setMonth(prevMonthDate.getMonth() - 1);
-                const prevMonthName = monthsPt[prevMonthDate.getMonth()];
+                const currentMonthName = monthsPt[new Date().getMonth()];
 
-                if (uniqueMonths.includes(prevMonthName)) {
-                    monthSelect.value = prevMonthName;
+                if (uniqueMonths.includes(currentMonthName)) {
+                    monthSelect.value = currentMonthName;
                 } else {
                     monthSelect.value = uniqueMonths[uniqueMonths.length - 1];
                 }
