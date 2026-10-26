@@ -193,12 +193,14 @@ def fetch_via_zimbra_imap(force=False):
             res, _ = mail.select(f'"{fld}"', readonly=True)
             if res != 'OK':
                 continue
-            res, data = mail.search(None, 'ALL')
+            res, data = mail.search(None, 'SUBJECT', '"Analitico_Empreiteiras"')
             if res != 'OK' or not data or not data[0]:
-                continue
+                res, data = mail.search(None, 'SUBJECT', '"Analitico"')
+                if res != 'OK' or not data or not data[0]:
+                    continue
             ids = data[0].split()
-            # Checa os ultimos 30 emails de cada pasta
-            for msg_id in ids[-30:]:
+            # Avalia os e-mails encontrados que correspondam ao padrão
+            for msg_id in ids[-10:]:
                 try:
                     res, msg_data = mail.fetch(msg_id, '(BODY.PEEK[HEADER.FIELDS (SUBJECT DATE FROM)])')
                     raw_h = msg_data[0][1].decode('utf-8', errors='ignore')
