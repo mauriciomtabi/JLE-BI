@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-27 13:58:06
+// Dados SAR JLE Telecom - Gerado em: 2026-10-27 13:59:00
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1153,
-    "generated_at": "2026-10-27 13:58:06",
+    "generated_at": "2026-10-27 13:59:00",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
