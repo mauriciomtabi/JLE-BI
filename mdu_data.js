@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-10-27 13:58:14
+// Dados MDU Compactados - Gerado em: 2026-10-27 14:00:36
 window.MDU_METADATA = {
-    "generated_at": "2026-10-27 13:58:14",
+    "generated_at": "2026-10-27 14:00:36",
     "total_rows": 6009,
     "geocoded_new": 0
 };
@@ -188176,7 +188176,7 @@ window.MDU_DATA = [
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
-        "cod_imovel": "",
+        "cod_imovel": "610452904",
         "area": "JBOAA",
         "node": "",
         "caixa_m": "JBOAA.031.M010",
