@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-10-27 14:00:36
+// Dados MDU Compactados - Gerado em: 2026-10-27 15:00:23
 window.MDU_METADATA = {
-    "generated_at": "2026-10-27 14:00:36",
+    "generated_at": "2026-10-27 15:00:23",
     "total_rows": 6009,
     "geocoded_new": 0
 };
@@ -187950,8 +187950,8 @@ window.MDU_DATA = [
         "aging": "5",
         "relatorio_por": "JENIFFER",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610041766",
         "area": "VIPAA",
         "node": "",
@@ -187966,7 +187966,7 @@ window.MDU_DATA = [
         "data_fusao": "01/10/2026",
         "data_baixa": "22/10",
         "obs_baixa": "",
-        "data_relatorio": "",
+        "data_relatorio": "27/10/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
