@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-27 07:38:00
+// Dados SAR JLE Telecom - Gerado em: 2026-10-27 07:38:28
 // Fonte: Cache CSV Local (sar_local.csv)
 window.SAR_METADATA = {
     "total_records": 1154,
-    "generated_at": "2026-10-27 07:38:00",
+    "generated_at": "2026-10-27 07:38:28",
     "source_file": "Cache CSV Local (sar_local.csv)",
     "cidades": [
         "ALVORADA",
