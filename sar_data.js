@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-27 16:45:47
+// Dados SAR JLE Telecom - Gerado em: 2026-10-27 17:00:31
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1153,
-    "generated_at": "2026-10-27 16:45:47",
+    "generated_at": "2026-10-27 17:00:31",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -763,10 +763,10 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 821962.55,
-        "total_previa_medicao": 1381589.38,
+        "total_terceiros": 822477.55,
+        "total_previa_medicao": 1382733.26,
         "total_classe_l": 343808.05,
-        "total_classe_f": 478154.5
+        "total_classe_f": 478669.5
     },
     "medicao": {
         "total_geral": 1432122.41,
@@ -79884,8 +79884,8 @@ window.SAR_DATA = [
   {
     "cod": "RSCLER1136",
     "area_tecnica": "BFMAB",
-    "node": "",
-    "site": "",
+    "node": "RBRAH",
+    "site": "RSPCE13",
     "cidade": "PORTO ALEGRE",
     "condominio": "ED MOSTARDEIRO",
     "endereco": "R MOSTARDEIRO,488",
@@ -79894,7 +79894,7 @@ window.SAR_DATA = [
     "classe_f": "CATIA",
     "situacao": "SEM LANÇAMENTO",
     "relatorio_foto": "SEM LANÇAMENTO",
-    "servico": "",
+    "servico": "5 ABERTURA E FECHAMENTO, 12 FUSÕES, 2 TESTES OTDR, 2 TESTES.",
     "data_entrada": "2026-10-16",
     "data_entrada_fmt": "16/10/2026",
     "data_inicio": "2026-10-17",
@@ -79930,13 +79930,13 @@ window.SAR_DATA = [
     "prazo": "NO PRAZO",
     "tempo_dias": 0.0,
     "atraso_dias": 0,
-    "total_terceiros": 0.0,
-    "previa_medicao": 0.0,
+    "total_terceiros": 515.0,
+    "previa_medicao": 1143.88,
     "valor_medicao": 0.0,
     "valor_classe_l": 0.0,
-    "valor_classe_f": 0.0,
+    "valor_classe_f": 515.0,
     "itens_l_resumo": "-",
-    "itens_f_resumo": "-",
+    "itens_f_resumo": "3.15 AB/FE: 5 un, 3.13 FUS/EME: 12 un, 3.14 OTDR: 2 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
@@ -79945,9 +79945,9 @@ window.SAR_DATA = [
       "q_311": 0.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 0.0,
-      "q_313": 0.0,
-      "q_314": 0.0,
+      "q_315": 5.0,
+      "q_313": 12.0,
+      "q_314": 2.0,
       "q_312": 0.0
     }
   },
