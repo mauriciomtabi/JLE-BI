@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-27 16:00:31
+// Dados SAR JLE Telecom - Gerado em: 2026-10-27 16:45:47
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1153,
-    "generated_at": "2026-10-27 16:00:31",
+    "generated_at": "2026-10-27 16:45:47",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -763,10 +763,10 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 821241.5,
-        "total_previa_medicao": 1380595.34,
-        "total_classe_l": 343360.0,
-        "total_classe_f": 477881.5
+        "total_terceiros": 821962.55,
+        "total_previa_medicao": 1381589.38,
+        "total_classe_l": 343808.05,
+        "total_classe_f": 478154.5
     },
     "medicao": {
         "total_geral": 1432122.41,
@@ -78982,15 +78982,15 @@ window.SAR_DATA = [
     "caixa_mdu": "MNDAC.043.M060",
     "classe_l": "CLEVERSON",
     "classe_f": "CATIA",
-    "situacao": "506",
-    "relatorio_foto": "506",
-    "servico": "4 ABERTURA E FECHAMENTO, 14 FUSÕES, 1 DERIVAÇÃO, 1 TESTE OTDR",
+    "situacao": "815",
+    "relatorio_foto": "815",
+    "servico": "FOI LANÇADO 815 METROS DE CABO DE 12FO, 6 ABERTURA E FECHAMENTO, 16 FUSÕES, 3 DERIVAÇÃO, 1 CX NOVA, 1 TESTE OTDR, 5 TESTES.",
     "data_entrada": "2026-10-15",
     "data_entrada_fmt": "15/10/2026",
     "data_inicio": "2026-10-26",
     "data_inicio_fmt": "26/10/2026",
-    "data_previsao": null,
-    "data_previsao_fmt": "-",
+    "data_previsao": "2026-10-27",
+    "data_previsao_fmt": "27/10/2026",
     "data_entrega": "2026-10-26",
     "data_entrega_fmt": "26/10/2026",
     "data_medicao": null,
@@ -79013,32 +79013,32 @@ window.SAR_DATA = [
     "ano_entrega": "2026",
     "mes_entrega": "OUTUBRO",
     "mes_num_entrega": "10",
-    "status": "RELATÓRIO",
-    "status_relatorio": "",
-    "status_medicao": "",
+    "status": "EM MEDIÇÃO",
+    "status_relatorio": "27/10/2026",
+    "status_medicao": "27/10/2026",
     "status_obra": "Em Andamento",
     "prazo": "ATRASADO",
     "tempo_dias": 7.0,
     "atraso_dias": 4.0,
-    "total_terceiros": 1198.2,
-    "previa_medicao": 1665.52,
+    "total_terceiros": 1919.25,
+    "previa_medicao": 2659.56,
     "valor_medicao": 0.0,
-    "valor_classe_l": 733.7,
-    "valor_classe_f": 464.5,
-    "itens_l_resumo": "2.15 CB ESP: 506m",
-    "itens_f_resumo": "3.15 AB/FE: 4 un, 3.13 FUS/EME: 14 un, 3.14 OTDR: 1 un, 3.12 DER/INS: 1 un",
+    "valor_classe_l": 1181.75,
+    "valor_classe_f": 737.5,
+    "itens_l_resumo": "2.15 CB ESP: 815m",
+    "itens_f_resumo": "3.11 CX EM: 1 un, 3.15 AB/FE: 6 un, 3.13 FUS/EME: 16 un, 3.14 OTDR: 1 un, 3.12 DER/INS: 3 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
-      "q_215": 506.0,
+      "q_215": 815.0,
       "q_113": 0.0,
-      "q_311": 0.0,
+      "q_311": 1.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 4.0,
-      "q_313": 14.0,
+      "q_315": 6.0,
+      "q_313": 16.0,
       "q_314": 1.0,
-      "q_312": 1.0
+      "q_312": 3.0
     }
   },
   {
