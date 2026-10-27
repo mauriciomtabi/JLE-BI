@@ -90,7 +90,7 @@ Write-Output ""
 Write-Output "--- [8/9] Atualizando Gestão Tributária & Parcelamentos ---"
 if (Test-Path "$workingDir\update_parcelamentos.ps1") {
     try {
-        & "$workingDir\update_parcelamentos.ps1"
+        & "$workingDir\update_parcelamentos.ps1" -Force
     } catch {
         Write-Warning "Falha na atualizacao de Parcelamentos: $($_.Exception.Message)"
     }
@@ -101,7 +101,7 @@ Write-Output ""
 Write-Output "--- [9/9] Atualizando Financiamentos & PMTs ---"
 if (Test-Path "$workingDir\update_financiamentos.ps1") {
     try {
-        & "$workingDir\update_financiamentos.ps1"
+        & "$workingDir\update_financiamentos.ps1" -Force
     } catch {
         Write-Warning "Falha na atualizacao de Financiamentos: $($_.Exception.Message)"
     }
@@ -141,7 +141,8 @@ if (Test-Path $gitPath) {
 
         Write-Output "Enviando alteracoes consolidadas para o repositorio remoto..."
         & $gitPath add data.js executivo_jle_data.js tecnodrill_data.js cobranca_data.js veiculos_data.js manutencao_data.js mdu_data.js sar_data.js sar_app.js sar_styles.css parcelamentos_data.js parcelamentos_app.js parcelamentos_styles.css index.html sw.js update_all.ps1 update_sar.ps1 update_sar.py atualizar_sar.bat update_parcelamentos.ps1 update_parcelamentos.py atualizar_parcelamentos.bat BI_LAYOUT_STANDARD.md .gitignore .agents/skills/bi-ui-preservation/SKILL.md
-        & $gitPath commit -m "feat(tributario): implantacao do modulo de gestao tributaria e parcelamentos"
+        $commitDate = Get-Date -Format 'dd/MM/yyyy HH:mm'
+        & $gitPath commit -m "data(auto): atualizacao consolidada dos dados do BI ($commitDate)"
         & $gitPath pull --rebase --autostash origin main
         & $gitPath push origin main
         Write-Output "Deploy automatico disparado via push no GitHub!"

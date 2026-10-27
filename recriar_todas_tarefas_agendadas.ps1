@@ -55,12 +55,13 @@ function Criar-Tarefa {
     }
 }
 
-# 1. JLE_Telecom_BI_Update (Seg a Sex às 10h e 15h)
+# 1. JLE_Telecom_BI_Update (Seg a Sex às 08h30, 13h00 e 17h30)
 $trig1 = @(
-    (New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -At "10:00AM"),
-    (New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -At "03:00PM")
+    (New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -At "08:30AM"),
+    (New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -At "01:00PM"),
+    (New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -At "05:30PM")
 )
-Criar-Tarefa -Nome "JLE_Telecom_BI_Update" -ScriptRelativo "update_all.ps1" -Triggers $trig1 -Descricao "Atualizacao automatica do BI JLE (Financeiro e Analitico Claro) as 10h e 15h (seg-sex)"
+Criar-Tarefa -Nome "JLE_Telecom_BI_Update" -ScriptRelativo "update_all.ps1" -Triggers $trig1 -Descricao "Atualizacao automatica unificada do BI JLE (Financeiro e Modulos Operacionais) as 08h30, 13h00 e 17h30 (seg-sex)"
 
 # 2. JLE_Telecom_Claro_Email_Monitor (Terças às 15h e 22h)
 $trig2 = @(
@@ -68,12 +69,6 @@ $trig2 = @(
     (New-ScheduledTaskTrigger -Weekly -DaysOfWeek Tuesday -At "10:00PM")
 )
 Criar-Tarefa -Nome "JLE_Telecom_Claro_Email_Monitor" -ScriptRelativo "monitorar_email_claro.ps1" -Triggers $trig2 -Descricao "Monitoramento de e-mail da Claro via Outlook e atualizacao do BI de Cobranca"
-
-# 3. JLE_Telecom_Impostos_Diario (Seg a Sex às 09h)
-$trig3 = @(
-    (New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -At "09:00AM")
-)
-Criar-Tarefa -Nome "JLE_Telecom_Impostos_Diario" -ScriptRelativo "update_parcelamentos.ps1" -Triggers $trig3 -Descricao "Atualizacao tributaria e parcelamentos JLE Telecom"
 
 # 4. JLE_Telecom_Manutencao_Update (Seg a Sex de hora em hora das 08h às 18h)
 $trig4 = @()

@@ -1,3 +1,5 @@
+param([switch]$Force)
+
 $ErrorActionPreference = 'Stop'
 Start-Transcript -Path "$PSScriptRoot\financiamentos_update.log" -Append | Out-Null
 $userPath = [System.Environment]::GetEnvironmentVariable("PATH", "User")
@@ -20,7 +22,11 @@ if (-not (Test-Path $pythonScript)) {
 
 # 1. Executar o extrator Python
 try {
-    & python $pythonScript
+    if ($Force) {
+        & python $pythonScript --force
+    } else {
+        & python $pythonScript
+    }
     if ($LASTEXITCODE -ne 0) {
         Write-Error "Falha na execucao do extrator Python de Financiamentos."
         exit $LASTEXITCODE
