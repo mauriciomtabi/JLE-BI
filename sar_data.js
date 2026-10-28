@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-28 17:43:54
+// Dados SAR JLE Telecom - Gerado em: 2026-10-28 18:00:17
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1158,
-    "generated_at": "2026-10-28 17:43:54",
+    "generated_at": "2026-10-28 18:00:17",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -80094,7 +80094,7 @@ window.SAR_DATA = [
   {
     "cod": "RSCLER1139",
     "area_tecnica": "TRZAA",
-    "node": "",
+    "node": "TRZAJA",
     "site": "RSPSU11",
     "cidade": "PORTO ALEGRE",
     "condominio": "Residencial Moradas da Zona Sul",
@@ -80109,8 +80109,8 @@ window.SAR_DATA = [
     "data_entrada_fmt": "16/10/2026",
     "data_inicio": "2026-10-20",
     "data_inicio_fmt": "20/10/2026",
-    "data_previsao": null,
-    "data_previsao_fmt": "-",
+    "data_previsao": "2026-10-28",
+    "data_previsao_fmt": "28/10/2026",
     "data_entrega": "2026-10-20",
     "data_entrega_fmt": "20/10/2026",
     "data_medicao": null,
@@ -80134,7 +80134,7 @@ window.SAR_DATA = [
     "mes_entrega": "OUTUBRO",
     "mes_num_entrega": "10",
     "status": "RELATÓRIO",
-    "status_relatorio": "",
+    "status_relatorio": "28/10/2026",
     "status_medicao": "",
     "status_obra": "Em Andamento",
     "prazo": "NO PRAZO",
