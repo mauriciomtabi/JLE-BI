@@ -1,8 +1,8 @@
 // BI JLE Telecom - Financiamentos & PMTs Data Source
-// Gerado automaticamente em 28/10/2026 08:41:18
+// Gerado automaticamente em 28/10/2026 13:09:04
 window.FINANCIAMENTOS_DATA = {
   "metadata": {
-    "generated_at": "28/10/2026 08:41:18",
+    "generated_at": "28/10/2026 13:09:04",
     "source_directory": "\\\\10.121.21.252\\controladoria\\Vitor\\FINANCEIRO\\PMTs FINANCIAMENTOS",
     "total_contratos": 9
   },
