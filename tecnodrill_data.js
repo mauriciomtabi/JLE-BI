@@ -1,5 +1,5 @@
 ﻿window.TECNODRILL_DATA = {
-    "generated_at":  "2026-10-28 08:38:51",
+    "generated_at":  "2026-10-28 13:07:25",
     "empresa":  "Tecnodrill",
     "categories_origin":  {
                               "entradas":  [
@@ -19672,10 +19672,74 @@
                              "valor_liquido":  -23.7,
                              "meio_pagamento":  "Pix",
                              "is_transfer":  false
+                         },
+                         {
+                             "id":  "OUT__2026_TECNODRILL_MAX_50",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "OUT _2026 TECNODRILL MAX",
+                             "remessa":  "MANUAL",
+                             "competencia":  "OUTUBRO/2026",
+                             "data":  "2026-10-26",
+                             "uf":  "OUTUBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Pedágio",
+                             "descricao":  "PEDAGIO",
+                             "valor_nominal":  87.92,
+                             "valor_liquido":  -87.92,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "OUT__2026_TECNODRILL_MAX_51",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "OUT _2026 TECNODRILL MAX",
+                             "remessa":  "MANUAL",
+                             "competencia":  "OUTUBRO/2026",
+                             "data":  "2026-10-26",
+                             "uf":  "OUTUBRO",
+                             "fluxo":  "Entrada",
+                             "categoria":  "Cobranças",
+                             "descricao":  "EQUIPE AZUL",
+                             "valor_nominal":  83880,
+                             "valor_liquido":  83880,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "OUT__2026_TECNODRILL_MAX_52",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "OUT _2026 TECNODRILL MAX",
+                             "remessa":  "MANUAL",
+                             "competencia":  "OUTUBRO/2026",
+                             "data":  "2026-10-27",
+                             "uf":  "OUTUBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Pedágio",
+                             "descricao":  "PEDAGIO",
+                             "valor_nominal":  9.9,
+                             "valor_liquido":  -9.9,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "OUT__2026_TECNODRILL_MAX_53",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "OUT _2026 TECNODRILL MAX",
+                             "remessa":  "MANUAL",
+                             "competencia":  "OUTUBRO/2026",
+                             "data":  "2026-10-27",
+                             "uf":  "OUTUBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Manut. De Veículos",
+                             "descricao":  "Peças para MND CAVALETE",
+                             "valor_nominal":  10179,
+                             "valor_liquido":  -10179,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
                          }
                      ],
     "caixa":  {
-                  "gerado_em":  "2026-10-28 08:38:21",
+                  "gerado_em":  "2026-10-28 13:07:00",
                   "carlos":  [
                                  {
                                      "id":  "carlos-1",
