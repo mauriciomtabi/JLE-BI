@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-28 09:00:17
+// Dados SAR JLE Telecom - Gerado em: 2026-10-28 10:00:18
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1155,
-    "generated_at": "2026-10-28 09:00:17",
+    "generated_at": "2026-10-28 10:00:18",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -763,10 +763,10 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 822477.55,
-        "total_previa_medicao": 1382733.26,
+        "total_terceiros": 822888.05,
+        "total_previa_medicao": 1383657.42,
         "total_classe_l": 343808.05,
-        "total_classe_f": 478669.5
+        "total_classe_f": 479080.0
     },
     "medicao": {
         "total_geral": 1432122.41,
@@ -79954,8 +79954,8 @@ window.SAR_DATA = [
   {
     "cod": "RSCLER1137",
     "area_tecnica": "MTSAA",
-    "node": "",
-    "site": "",
+    "node": "MTSAE",
+    "site": "PAE BV",
     "cidade": "PORTO ALEGRE",
     "condominio": "",
     "endereco": "R TITO LIVIO ZAMBECARI 56",
@@ -79964,7 +79964,7 @@ window.SAR_DATA = [
     "classe_f": "CATIA",
     "situacao": "SEM LANÇAMENTO",
     "relatorio_foto": "SEM LANÇAMENTO",
-    "servico": "2 ABERTURA E FECHAMENTO, 5 FUSÕES, 2 TESTES OTDR",
+    "servico": "6 ABERTURA E FECHAMENTO, 13 FUSÕES, 1 DERIVAÇÃO, 3 TESTES OTDR, 1 TESTE.",
     "data_entrada": "2026-10-20",
     "data_entrada_fmt": "20/10/2026",
     "data_inicio": "2026-10-21",
@@ -80000,13 +80000,13 @@ window.SAR_DATA = [
     "prazo": "NO PRAZO",
     "tempo_dias": 1.0,
     "atraso_dias": 0,
-    "total_terceiros": 212.0,
-    "previa_medicao": 479.91,
+    "total_terceiros": 622.5,
+    "previa_medicao": 1404.07,
     "valor_medicao": 0.0,
     "valor_classe_l": 0.0,
-    "valor_classe_f": 212.0,
+    "valor_classe_f": 622.5,
     "itens_l_resumo": "-",
-    "itens_f_resumo": "3.15 AB/FE: 2 un, 3.13 FUS/EME: 5 un, 3.14 OTDR: 2 un",
+    "itens_f_resumo": "3.15 AB/FE: 6 un, 3.13 FUS/EME: 13 un, 3.14 OTDR: 3 un, 3.12 DER/INS: 1 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
@@ -80015,10 +80015,10 @@ window.SAR_DATA = [
       "q_311": 0.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 2.0,
-      "q_313": 5.0,
-      "q_314": 2.0,
-      "q_312": 0.0
+      "q_315": 6.0,
+      "q_313": 13.0,
+      "q_314": 3.0,
+      "q_312": 1.0
     }
   },
   {
@@ -81361,7 +81361,7 @@ window.SAR_DATA = [
     "endereco": "R Carlos Estevão 353/293",
     "caixa_mdu": "RBTAB.032.M040",
     "classe_l": "BRUNO",
-    "classe_f": "CATIA",
+    "classe_f": "MAURICIO",
     "situacao": "344",
     "relatorio_foto": "",
     "servico": "",
