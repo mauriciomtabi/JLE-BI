@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-28 11:00:13
+// Dados SAR JLE Telecom - Gerado em: 2026-10-28 12:00:17
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1155,
-    "generated_at": "2026-10-28 11:00:13",
+    "generated_at": "2026-10-28 12:00:17",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -80024,8 +80024,8 @@ window.SAR_DATA = [
   {
     "cod": "RSCLER1138",
     "area_tecnica": "PDRAA",
-    "node": "",
-    "site": "",
+    "node": "VIPAG",
+    "site": "RSPNO17",
     "cidade": "PORTO ALEGRE",
     "condominio": "ED. ESTRELA CANOPUS",
     "endereco": "R D DIOGO DE SOUZA 694",
@@ -80039,8 +80039,8 @@ window.SAR_DATA = [
     "data_entrada_fmt": "16/10/2026",
     "data_inicio": "2026-10-17",
     "data_inicio_fmt": "17/10/2026",
-    "data_previsao": null,
-    "data_previsao_fmt": "-",
+    "data_previsao": "2026-10-28",
+    "data_previsao_fmt": "28/10/2026",
     "data_entrega": "2026-10-17",
     "data_entrega_fmt": "17/10/2026",
     "data_medicao": null,
@@ -80063,9 +80063,9 @@ window.SAR_DATA = [
     "ano_entrega": "2026",
     "mes_entrega": "OUTUBRO",
     "mes_num_entrega": "10",
-    "status": "RELATÓRIO",
-    "status_relatorio": "",
-    "status_medicao": "",
+    "status": "EM MEDIÇÃO",
+    "status_relatorio": "28/10/2026",
+    "status_medicao": "28/10/2026",
     "status_obra": "Em Andamento",
     "prazo": "NO PRAZO",
     "tempo_dias": 0.0,
