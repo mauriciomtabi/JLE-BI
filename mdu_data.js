@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-10-28 08:40:08
+// Dados MDU Compactados - Gerado em: 2026-10-28 09:00:24
 window.MDU_METADATA = {
-    "generated_at": "2026-10-28 08:40:08",
+    "generated_at": "2026-10-28 09:00:24",
     "total_rows": 6009,
-    "geocoded_new": 2
+    "geocoded_new": 4
 };
 
 window.MDU_DATA = [
@@ -188809,8 +188809,8 @@ window.MDU_DATA = [
     {
         "os": "RS.CLR.PRD.2505759",
         "endereco": "BENTO GONÇALVES 1043",
-        "cidade": "PORTO ALEGRE",
-        "cluster": "PAE",
+        "cidade": "ESTEIO",
+        "cluster": "NHO",
         "aging": "2",
         "relatorio_por": "JENIFFER",
         "pendencia": "Não",
@@ -188834,8 +188834,8 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0644136,
-        "lng": -51.1807621,
+        "lat": -29.8630114,
+        "lng": -51.1791687,
         "geocodificado": true
     },
     {
@@ -188944,7 +188944,7 @@ window.MDU_DATA = [
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
-        "cod_imovel": "",
+        "cod_imovel": "610429513",
         "area": "MTSAA",
         "node": "",
         "caixa_m": "MTSAA.295.M020",
@@ -188968,7 +188968,7 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505764",
-        "endereco": "RUA EUDORO BERLINCK 322",
+        "endereco": "RUA EUDORO BERLINK 322",
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "1",
@@ -188976,7 +188976,7 @@ window.MDU_DATA = [
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
-        "cod_imovel": "",
+        "cod_imovel": "610438525",
         "area": "MTSAA",
         "node": "",
         "caixa_m": "MTSAA.071.M010",
@@ -188994,13 +188994,13 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0246523,
+        "lng": -51.195065,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505765",
-        "endereco": "RUA EUDORO BERLINCK 366",
+        "endereco": "RUA EUDORO BERLINK 366",
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "1",
@@ -189008,7 +189008,7 @@ window.MDU_DATA = [
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
-        "cod_imovel": "",
+        "cod_imovel": "610439697",
         "area": "MTSAA",
         "node": "",
         "caixa_m": "MTSAA.071.M010",
@@ -189026,9 +189026,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0246523,
+        "lng": -51.195065,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505766",
@@ -189070,7 +189070,7 @@ window.MDU_DATA = [
         "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Baixa",
+        "status": "Relatório",
         "prog": 0,
         "cod_imovel": "",
         "area": "JBOAA",
@@ -189084,7 +189084,7 @@ window.MDU_DATA = [
         "obs_vistoria": "ADEQUADO",
         "data_interna": "20/10/2026",
         "data_fusao": "23/10/2026",
-        "data_baixa": "",
+        "data_baixa": "27/10",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
@@ -189096,35 +189096,35 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505768",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "RUA PEREIRA NETO 1870 BL A",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
+        "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
+        "status": "Fusão",
         "prog": 0,
         "cod_imovel": "",
-        "area": "",
+        "area": "CMQAA",
         "node": "",
-        "caixa_m": "",
-        "hps": null,
-        "data_adicio": "",
-        "equipe": "",
-        "primeira_visita": "",
+        "caixa_m": "CMQAA.101.M020",
+        "hps": 8,
+        "data_adicio": "28/10/2026",
+        "equipe": "Paulo Ribaczki",
+        "primeira_visita": "22/10/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
-        "data_interna": "",
+        "obs_vistoria": "ADEQUADO",
+        "data_interna": "22/10/2026",
         "data_fusao": "",
         "data_baixa": "",
-        "obs_baixa": "",
+        "obs_baixa": "NODE EM CONSTRUÇÃO",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.1079753,
+        "lng": -51.2396278,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505769",
