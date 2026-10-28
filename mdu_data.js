@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-10-28 13:08:22
+// Dados MDU Compactados - Gerado em: 2026-10-28 14:00:53
 window.MDU_METADATA = {
-    "generated_at": "2026-10-28 13:08:22",
+    "generated_at": "2026-10-28 14:00:53",
     "total_rows": 6009,
-    "geocoded_new": 0
+    "geocoded_new": 1
 };
 
 window.MDU_DATA = [
@@ -188174,8 +188174,8 @@ window.MDU_DATA = [
         "aging": "6",
         "relatorio_por": "JENIFFER",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610452904",
         "area": "JBOAA",
         "node": "",
@@ -188190,7 +188190,7 @@ window.MDU_DATA = [
         "data_fusao": "23/10/2026",
         "data_baixa": "26/10",
         "obs_baixa": "",
-        "data_relatorio": "",
+        "data_relatorio": "28/10/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
@@ -189263,7 +189263,7 @@ window.MDU_DATA = [
         "relatorio_por": "",
         "pendencia": "Não",
         "status": "Relatório",
-        "prog": 0,
+        "prog": 75.0,
         "cod_imovel": "",
         "area": "FLOAA",
         "node": "",
@@ -189295,7 +189295,7 @@ window.MDU_DATA = [
         "relatorio_por": "",
         "pendencia": "Não",
         "status": "Relatório",
-        "prog": 0,
+        "prog": 75.0,
         "cod_imovel": "",
         "area": "CTLAA",
         "node": "",
@@ -189327,7 +189327,7 @@ window.MDU_DATA = [
         "relatorio_por": "",
         "pendencia": "Não",
         "status": "Relatório",
-        "prog": 0,
+        "prog": 75.0,
         "cod_imovel": "",
         "area": "MNDAB",
         "node": "",
@@ -189352,14 +189352,14 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505776",
-        "endereco": "RUA SÃO MIGUES 310",
+        "endereco": "RUA SÃO MIGUEL 310",
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Baixa",
-        "prog": 0,
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "",
         "area": "TRLAA",
         "node": "",
@@ -189372,15 +189372,15 @@ window.MDU_DATA = [
         "obs_vistoria": "ADEQUADO",
         "data_interna": "20/10/2026",
         "data_fusao": "28/10/2026",
-        "data_baixa": "",
+        "data_baixa": "28/10",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0717561,
+        "lng": -51.1931936,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505777",
