@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-28 17:00:15
+// Dados SAR JLE Telecom - Gerado em: 2026-10-28 17:43:54
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1158,
-    "generated_at": "2026-10-28 17:00:15",
+    "generated_at": "2026-10-28 17:43:54",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -80095,7 +80095,7 @@ window.SAR_DATA = [
     "cod": "RSCLER1139",
     "area_tecnica": "TRZAA",
     "node": "",
-    "site": "",
+    "site": "RSPSU11",
     "cidade": "PORTO ALEGRE",
     "condominio": "Residencial Moradas da Zona Sul",
     "endereco": "R DR BARCELOS 931",
@@ -80104,7 +80104,7 @@ window.SAR_DATA = [
     "classe_f": "MAURICIO",
     "situacao": "SEM LANÇAMENTO",
     "relatorio_foto": "SEM LANÇAMENTO",
-    "servico": "2 ABERTURA E FECHAMENTO, 3 FUSÕES, 3 TESTES.",
+    "servico": "2 ABERTURA E FECHAMENTO, 4 FUSÕES, 2 TESTES OTDR, 2 TESTES.",
     "data_entrada": "2026-10-16",
     "data_entrada_fmt": "16/10/2026",
     "data_inicio": "2026-10-20",
