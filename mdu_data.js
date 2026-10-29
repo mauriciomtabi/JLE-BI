@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-10-29 08:37:57
+// Dados MDU Compactados - Gerado em: 2026-10-29 09:00:26
 window.MDU_METADATA = {
-    "generated_at": "2026-10-29 08:37:57",
+    "generated_at": "2026-10-29 09:00:26",
     "total_rows": 6009,
-    "geocoded_new": 0
+    "geocoded_new": 4
 };
 
 window.MDU_DATA = [
@@ -189512,24 +189512,24 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505781",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "DR BARCELOS 931",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
+        "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
+        "status": "2º Vistoria",
         "prog": 0,
         "cod_imovel": "",
-        "area": "",
+        "area": "TRZAA",
         "node": "",
-        "caixa_m": "",
-        "hps": null,
-        "data_adicio": "",
-        "equipe": "",
-        "primeira_visita": "",
+        "caixa_m": "TRZAA.012.M040",
+        "hps": 14,
+        "data_adicio": "29/10/2026",
+        "equipe": "LUIZ FERNANDO",
+        "primeira_visita": "28/10/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
+        "obs_vistoria": "ADEQUADO",
         "data_interna": "",
         "data_fusao": "",
         "data_baixa": "",
