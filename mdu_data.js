@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-10-29 09:00:26
+// Dados MDU Compactados - Gerado em: 2026-10-29 10:00:27
 window.MDU_METADATA = {
-    "generated_at": "2026-10-29 09:00:26",
+    "generated_at": "2026-10-29 10:00:27",
     "total_rows": 6009,
-    "geocoded_new": 4
+    "geocoded_new": 1
 };
 
 window.MDU_DATA = [
@@ -189038,7 +189038,7 @@ window.MDU_DATA = [
         "aging": "1",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Baixa",
+        "status": "Relatório",
         "prog": 0,
         "cod_imovel": "",
         "area": "MTSAA",
@@ -189052,7 +189052,7 @@ window.MDU_DATA = [
         "obs_vistoria": "ADEQUADO",
         "data_interna": "14/10/2026",
         "data_fusao": "14/10/2026",
-        "data_baixa": "",
+        "data_baixa": "29/10",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
@@ -189518,7 +189518,7 @@ window.MDU_DATA = [
         "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "2º Vistoria",
+        "status": "Relatório",
         "prog": 0,
         "cod_imovel": "",
         "area": "TRZAA",
@@ -189530,17 +189530,17 @@ window.MDU_DATA = [
         "primeira_visita": "28/10/2026",
         "segunda_visita": "",
         "obs_vistoria": "ADEQUADO",
-        "data_interna": "",
-        "data_fusao": "",
-        "data_baixa": "",
+        "data_interna": "28/10/2026",
+        "data_fusao": "28/10/2026",
+        "data_baixa": "28/10",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.1005354,
+        "lng": -51.2342477,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505782",
