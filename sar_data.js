@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-29 17:50:59
+// Dados SAR JLE Telecom - Gerado em: 2026-10-29 18:00:16
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1161,
-    "generated_at": "2026-10-29 17:50:59",
+    "generated_at": "2026-10-29 18:00:16",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -80654,7 +80654,7 @@ window.SAR_DATA = [
   {
     "cod": "RSCLER1147",
     "area_tecnica": "TRLAA",
-    "node": "",
+    "node": "MNDAR",
     "site": "PAE HZS",
     "cidade": "PORTO ALEGRE",
     "condominio": "Ed. Unità Menino Deus",
@@ -80669,8 +80669,8 @@ window.SAR_DATA = [
     "data_entrada_fmt": "19/10/2026",
     "data_inicio": "2026-10-23",
     "data_inicio_fmt": "23/10/2026",
-    "data_previsao": null,
-    "data_previsao_fmt": "-",
+    "data_previsao": "2026-10-29",
+    "data_previsao_fmt": "29/10/2026",
     "data_entrega": "2026-10-23",
     "data_entrega_fmt": "23/10/2026",
     "data_medicao": null,
@@ -80693,9 +80693,9 @@ window.SAR_DATA = [
     "ano_entrega": "2026",
     "mes_entrega": "OUTUBRO",
     "mes_num_entrega": "10",
-    "status": "RELATÓRIO",
-    "status_relatorio": "",
-    "status_medicao": "",
+    "status": "EM MEDIÇÃO",
+    "status_relatorio": "29/10/2026",
+    "status_medicao": "29/10/2026",
     "status_obra": "Em Andamento",
     "prazo": "ATRASADO",
     "tempo_dias": 4.0,
@@ -80724,7 +80724,7 @@ window.SAR_DATA = [
   {
     "cod": "RSCLER1148",
     "area_tecnica": "TRLAA",
-    "node": "",
+    "node": "MNDAR",
     "site": "PAE HZS",
     "cidade": "PORTO ALEGRE",
     "condominio": "Ed. Solar da Liberdade",
@@ -80739,8 +80739,8 @@ window.SAR_DATA = [
     "data_entrada_fmt": "19/10/2026",
     "data_inicio": "2026-10-23",
     "data_inicio_fmt": "23/10/2026",
-    "data_previsao": null,
-    "data_previsao_fmt": "-",
+    "data_previsao": "2026-10-29",
+    "data_previsao_fmt": "29/10/2026",
     "data_entrega": "2026-10-23",
     "data_entrega_fmt": "23/10/2026",
     "data_medicao": null,
@@ -80763,9 +80763,9 @@ window.SAR_DATA = [
     "ano_entrega": "2026",
     "mes_entrega": "OUTUBRO",
     "mes_num_entrega": "10",
-    "status": "RELATÓRIO",
-    "status_relatorio": "",
-    "status_medicao": "",
+    "status": "EM MEDIÇÃO",
+    "status_relatorio": "29/10/2026",
+    "status_medicao": "29/10/2026",
     "status_obra": "Em Andamento",
     "prazo": "ATRASADO",
     "tempo_dias": 4.0,
@@ -80794,7 +80794,7 @@ window.SAR_DATA = [
   {
     "cod": "RSCLER1149",
     "area_tecnica": "TRLAA",
-    "node": "MNDAR",
+    "node": "MDRAAA",
     "site": "PAE HZS",
     "cidade": "PORTO ALEGRE",
     "condominio": "Residencial Morada Del Fuerte",
@@ -80864,7 +80864,7 @@ window.SAR_DATA = [
   {
     "cod": "RSCLER1150",
     "area_tecnica": "TRLAA",
-    "node": "MNDAR",
+    "node": "MDRAAA",
     "site": "PAE HZS",
     "cidade": "PORTO ALEGRE",
     "condominio": "Residencial Saint Michel",
@@ -80934,7 +80934,7 @@ window.SAR_DATA = [
   {
     "cod": "RSCLER1151",
     "area_tecnica": "TRLAA",
-    "node": "MNDAR",
+    "node": "MDRAAA",
     "site": "PAE HZS",
     "cidade": "PORTO ALEGRE",
     "condominio": "Cond. My Rooftop 350",
