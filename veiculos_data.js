@@ -61639,5 +61639,53 @@ const VEICULOS_DATA = [
     "km": 34490,
     "kml": 15.59,
     "transactionId": "1108996081"
+  },
+  {
+    "date": "2026-10-30 09:25:23",
+    "plate": "ASL1041",
+    "driver": "CLICEU JOSE VIEIRA DE OLIVEIRA",
+    "value": 43.0,
+    "uf": "PR",
+    "month": "OUTUBRO",
+    "liters": 6.33,
+    "vlLiter": 6.79,
+    "model": "SIENA",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 241422,
+    "kml": 70.3,
+    "transactionId": "1109016268"
+  },
+  {
+    "date": "2026-10-30 11:07:25",
+    "plate": "IRK9908",
+    "driver": "MARCELO DA SILVA",
+    "value": 301.84,
+    "uf": "RS",
+    "month": "OUTUBRO",
+    "liters": 50.73,
+    "vlLiter": 5.95,
+    "model": "RANGER",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 355603,
+    "kml": 6.68,
+    "transactionId": "1109046729"
+  },
+  {
+    "date": "2026-10-30 13:14:16",
+    "plate": "AZW3J83",
+    "driver": "ILMAR FONTES VIEIRA FILHO",
+    "value": 298.22,
+    "uf": "SC",
+    "month": "OUTUBRO",
+    "liters": 45.95,
+    "vlLiter": 6.49,
+    "model": "MONTANA",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 281023,
+    "kml": 4.05,
+    "transactionId": "1109078486"
   }
 ];
