@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-10-30 16:00:27
+// Dados MDU Compactados - Gerado em: 2026-10-30 17:00:16
 window.MDU_METADATA = {
-    "generated_at": "2026-10-30 16:00:27",
+    "generated_at": "2026-10-30 17:00:16",
     "total_rows": 6009,
-    "geocoded_new": 0
+    "geocoded_new": 3
 };
 
 window.MDU_DATA = [
@@ -189544,35 +189544,35 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505782",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "TITO LIVIO ZABECARI 56",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
+        "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
+        "status": "Baixa",
         "prog": 0,
         "cod_imovel": "",
-        "area": "",
+        "area": "MTSAA",
         "node": "",
-        "caixa_m": "",
-        "hps": null,
-        "data_adicio": "",
-        "equipe": "",
-        "primeira_visita": "",
+        "caixa_m": "MTSAA.093.M030",
+        "hps": 20,
+        "data_adicio": "30/10/2026",
+        "equipe": "Paulo Keiber",
+        "primeira_visita": "21/10/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
-        "data_interna": "",
-        "data_fusao": "",
+        "obs_vistoria": "ADEQUADO",
+        "data_interna": "21/10/2026",
+        "data_fusao": "21/10/2026",
         "data_baixa": "",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0283042,
+        "lng": -51.1906385,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505783",
