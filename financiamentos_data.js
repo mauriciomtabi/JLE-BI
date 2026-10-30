@@ -1,43 +1,32 @@
 // BI JLE Telecom - Financiamentos & PMTs Data Source
-// Gerado automaticamente em 29/10/2026 08:38:52
+// Gerado automaticamente em 30/10/2026 08:41:22
 window.FINANCIAMENTOS_DATA = {
   "metadata": {
-    "generated_at": "29/10/2026 08:38:52",
+    "generated_at": "30/10/2026 08:41:22",
     "source_directory": "\\\\10.121.21.252\\controladoria\\Vitor\\FINANCEIRO\\PMTs FINANCIAMENTOS",
     "total_contratos": 9
   },
   "totais_gerais": {
     "total_financiado": 7396247.2,
-    "total_pago": 1291826.97,
-    "saldo_devedor": 8341009.65,
+    "total_pago": 1311534.65,
+    "saldo_devedor": 8324485.07,
     "total_parcelas": 442,
-    "total_pagas": 66,
-    "total_pendentes": 376,
-    "pct_quitado": 14.9,
+    "total_pagas": 67,
+    "total_pendentes": 375,
+    "pct_quitado": 15.2,
     "compromisso_mensal": 198706.04,
     "proxima_parcela": {
-      "contrato_id": "senff_2953975",
-      "contrato_nome": "1ª Perfuratriz Senff (PEAC)",
+      "contrato_id": "senff_2948041",
+      "contrato_nome": "1ª Perfuratriz Senff (ECG)",
       "categoria": "Máquinas",
       "instituicao": "Banco Senff",
       "numero": 13,
       "tipo": "Mensal",
-      "vencimento": "28/10/2026",
-      "vencimento_iso": "2026-10-28",
-      "prestacao": 16524.58
+      "vencimento": "30/10/2026",
+      "vencimento_iso": "2026-10-30",
+      "prestacao": 29669.97
     },
     "proximas_parcelas_top10": [
-      {
-        "contrato_id": "senff_2953975",
-        "contrato_nome": "1ª Perfuratriz Senff (PEAC)",
-        "categoria": "Máquinas",
-        "instituicao": "Banco Senff",
-        "numero": 13,
-        "tipo": "Mensal",
-        "vencimento": "28/10/2026",
-        "vencimento_iso": "2026-10-28",
-        "prestacao": 16524.58
-      },
       {
         "contrato_id": "senff_2948041",
         "contrato_nome": "1ª Perfuratriz Senff (ECG)",
@@ -136,17 +125,28 @@ window.FINANCIAMENTOS_DATA = {
         "vencimento": "30/11/2026",
         "vencimento_iso": "2026-11-30",
         "prestacao": 16098.47
+      },
+      {
+        "contrato_id": "senff_2948041",
+        "contrato_nome": "1ª Perfuratriz Senff (ECG)",
+        "categoria": "Máquinas",
+        "instituicao": "Banco Senff",
+        "numero": 14,
+        "tipo": "Mensal",
+        "vencimento": "30/11/2026",
+        "vencimento_iso": "2026-11-30",
+        "prestacao": 28089.17
       }
     ],
     "por_categoria": {
       "Máquinas": {
         "financiado": 3919496.93,
-        "pago": 871939.02,
-        "saldo_devedor": 4446576.14,
+        "pago": 891646.7,
+        "saldo_devedor": 4430051.56,
         "contratos": 4,
         "total_parcelas": 240,
-        "qtd_pagas": 33,
-        "pct_quitado": 13.8
+        "qtd_pagas": 34,
+        "pct_quitado": 14.2
       },
       "Veículos": {
         "financiado": 654750.27,
@@ -170,8 +170,8 @@ window.FINANCIAMENTOS_DATA = {
     "por_instituicao": {
       "Banco Senff": {
         "financiado": 1625437.46,
-        "pago": 537952.52,
-        "saldo_devedor": 1259338.09,
+        "pago": 557660.2,
+        "saldo_devedor": 1242813.51,
         "contratos": 2
       },
       "SICOOB": {
@@ -203,8 +203,8 @@ window.FINANCIAMENTOS_DATA = {
       {
         "ano": 2026,
         "total_previsto": 1602296.34,
-        "total_pago": 1149798.63,
-        "total_pendente": 489245.93
+        "total_pago": 1169506.31,
+        "total_pendente": 472721.35
       },
       {
         "ano": 2027,
@@ -388,8 +388,8 @@ window.FINANCIAMENTOS_DATA = {
         "ano": 2026,
         "mes": 10,
         "total_previsto": 208116.08,
-        "total_pago": 129998.25,
-        "total_pendente": 78088.77,
+        "total_pago": 149705.93,
+        "total_pendente": 61564.19,
         "maquinas": 120109.78,
         "veiculos": 19700.74,
         "imoveis": 68305.56
@@ -1073,11 +1073,11 @@ window.FINANCIAMENTOS_DATA = {
       "taxa_mensal": 1.0,
       "prestacao_mensal": 12064.56,
       "total_parcelas": 60,
-      "qtd_pagas": 12,
-      "qtd_pendentes": 48,
-      "total_pago": 192990.08,
-      "saldo_devedor": 450478.45,
-      "pct_quitado": 20.0,
+      "qtd_pagas": 13,
+      "qtd_pendentes": 47,
+      "total_pago": 212697.76,
+      "saldo_devedor": 433953.87,
+      "pct_quitado": 21.7,
       "parcelas": [
         {
           "numero": 1,
@@ -1281,11 +1281,11 @@ window.FINANCIAMENTOS_DATA = {
           "prestacao": 16524.58,
           "juros": 0.0,
           "amortizacao": 0.0,
-          "saldo_devedor": 16524.58,
-          "status": "Pendente",
-          "data_pagamento": "",
-          "valor_pago": 0.0,
-          "diferenca": 0.0
+          "saldo_devedor": 0.0,
+          "status": "Pago",
+          "data_pagamento": "28/10/2026",
+          "valor_pago": 19707.68,
+          "diferenca": 3183.1
         },
         {
           "numero": 14,
