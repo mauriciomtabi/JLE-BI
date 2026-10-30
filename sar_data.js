@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-10-30 16:00:17
+// Dados SAR JLE Telecom - Gerado em: 2026-10-30 16:45:17
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1162,
-    "generated_at": "2026-10-30 16:00:17",
+    "generated_at": "2026-10-30 16:45:17",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -764,10 +764,10 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 825572.6,
-        "total_previa_medicao": 1388285.59,
-        "total_classe_l": 345169.6,
-        "total_classe_f": 480403.0
+        "total_terceiros": 826394.5,
+        "total_previa_medicao": 1389459.51,
+        "total_classe_l": 345694.5,
+        "total_classe_f": 480700.0
     },
     "medicao": {
         "total_geral": 1459095.88,
@@ -80445,17 +80445,17 @@ window.SAR_DATA = [
   {
     "cod": "RSCLER1144",
     "area_tecnica": "PRTAB",
-    "node": "",
-    "site": "",
+    "node": "PRTALA",
+    "site": "RSPLE21",
     "cidade": "PORTO ALEGRE",
     "condominio": "ED. Acrópole",
     "endereco": "R HUMBERTO DE CAMPOS 681",
-    "caixa_mdu": "PRTAB.022.M050",
+    "caixa_mdu": "PRTAB.052.M030",
     "classe_l": "BRUNO",
     "classe_f": "MAURICIO",
     "situacao": "362",
     "relatorio_foto": "362",
-    "servico": "",
+    "servico": "FOI LANÇADO 362 METROS DE 24FO, 1 ABERTURA E FECHAMENTO, 8 FUSÕES, 2 CXS NOVAS. 1 DERIVAÇÃO, 6 TESTES.",
     "data_entrada": "2026-10-21",
     "data_entrada_fmt": "21/10/2026",
     "data_inicio": "2026-10-27",
@@ -80491,25 +80491,25 @@ window.SAR_DATA = [
     "prazo": "ATRASADO",
     "tempo_dias": 4.0,
     "atraso_dias": 1.0,
-    "total_terceiros": 0.0,
-    "previa_medicao": 0.0,
+    "total_terceiros": 821.9,
+    "previa_medicao": 1173.92,
     "valor_medicao": 0.0,
-    "valor_classe_l": 0.0,
-    "valor_classe_f": 0.0,
-    "itens_l_resumo": "-",
-    "itens_f_resumo": "-",
+    "valor_classe_l": 524.9,
+    "valor_classe_f": 297.0,
+    "itens_l_resumo": "2.15 CB ESP: 362m",
+    "itens_f_resumo": "3.11 CX EM: 2 un, 3.15 AB/FE: 1 un, 3.13 FUS/EME: 8 un, 3.12 DER/INS: 1 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
-      "q_215": 0.0,
+      "q_215": 362.0,
       "q_113": 0.0,
-      "q_311": 0.0,
+      "q_311": 2.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 0.0,
-      "q_313": 0.0,
+      "q_315": 1.0,
+      "q_313": 8.0,
       "q_314": 0.0,
-      "q_312": 0.0
+      "q_312": 1.0
     }
   },
   {
