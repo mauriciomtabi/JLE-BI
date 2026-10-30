@@ -1,65 +1,32 @@
 // BI JLE Telecom - Financiamentos & PMTs Data Source
-// Gerado automaticamente em 30/10/2026 08:41:22
+// Gerado automaticamente em 30/10/2026 13:15:47
 window.FINANCIAMENTOS_DATA = {
   "metadata": {
-    "generated_at": "30/10/2026 08:41:22",
+    "generated_at": "30/10/2026 13:15:47",
     "source_directory": "\\\\10.121.21.252\\controladoria\\Vitor\\FINANCEIRO\\PMTs FINANCIAMENTOS",
     "total_contratos": 9
   },
   "totais_gerais": {
     "total_financiado": 7396247.2,
-    "total_pago": 1311534.65,
-    "saldo_devedor": 8324485.07,
+    "total_pago": 1387138.94,
+    "saldo_devedor": 8254696.81,
     "total_parcelas": 442,
-    "total_pagas": 67,
-    "total_pendentes": 375,
-    "pct_quitado": 15.2,
+    "total_pagas": 70,
+    "total_pendentes": 372,
+    "pct_quitado": 15.8,
     "compromisso_mensal": 198706.04,
     "proxima_parcela": {
-      "contrato_id": "senff_2948041",
-      "contrato_nome": "1ª Perfuratriz Senff (ECG)",
-      "categoria": "Máquinas",
-      "instituicao": "Banco Senff",
+      "contrato_id": "compra_terreno_sl",
+      "contrato_nome": "Compra Terreno São Leopoldo",
+      "categoria": "Imóveis",
+      "instituicao": "F. E. Hugentobler",
       "numero": 13,
       "tipo": "Mensal",
-      "vencimento": "30/10/2026",
-      "vencimento_iso": "2026-10-30",
-      "prestacao": 29669.97
+      "vencimento": "10/11/2026",
+      "vencimento_iso": "2026-11-10",
+      "prestacao": 20555.56
     },
     "proximas_parcelas_top10": [
-      {
-        "contrato_id": "senff_2948041",
-        "contrato_nome": "1ª Perfuratriz Senff (ECG)",
-        "categoria": "Máquinas",
-        "instituicao": "Banco Senff",
-        "numero": 13,
-        "tipo": "Mensal",
-        "vencimento": "30/10/2026",
-        "vencimento_iso": "2026-10-30",
-        "prestacao": 29669.97
-      },
-      {
-        "contrato_id": "sicoob_maq2",
-        "contrato_nome": "2ª Perfuratriz Sicoob",
-        "categoria": "Máquinas",
-        "instituicao": "SICOOB",
-        "numero": 6,
-        "tipo": "Mensal",
-        "vencimento": "30/10/2026",
-        "vencimento_iso": "2026-10-30",
-        "prestacao": 31894.22
-      },
-      {
-        "contrato_id": "sicoob_daf",
-        "contrato_nome": "Caminhão DAF Azul JBK",
-        "categoria": "Veículos",
-        "instituicao": "SICOOB",
-        "numero": 9,
-        "tipo": "Mensal",
-        "vencimento": "02/11/2026",
-        "vencimento_iso": "2026-11-02",
-        "prestacao": 8224.07
-      },
       {
         "contrato_id": "compra_terreno_sl",
         "contrato_nome": "Compra Terreno São Leopoldo",
@@ -136,26 +103,59 @@ window.FINANCIAMENTOS_DATA = {
         "vencimento": "30/11/2026",
         "vencimento_iso": "2026-11-30",
         "prestacao": 28089.17
+      },
+      {
+        "contrato_id": "sicoob_maq2",
+        "contrato_nome": "2ª Perfuratriz Sicoob",
+        "categoria": "Máquinas",
+        "instituicao": "SICOOB",
+        "numero": 7,
+        "tipo": "Mensal",
+        "vencimento": "30/11/2026",
+        "vencimento_iso": "2026-11-30",
+        "prestacao": 32126.34
+      },
+      {
+        "contrato_id": "sicoob_daf",
+        "contrato_nome": "Caminhão DAF Azul JBK",
+        "categoria": "Veículos",
+        "instituicao": "SICOOB",
+        "numero": 10,
+        "tipo": "Mensal",
+        "vencimento": "02/12/2026",
+        "vencimento_iso": "2026-12-02",
+        "prestacao": 8224.07
+      },
+      {
+        "contrato_id": "compra_terreno_sl",
+        "contrato_nome": "Compra Terreno São Leopoldo",
+        "categoria": "Imóveis",
+        "instituicao": "F. E. Hugentobler",
+        "numero": 14,
+        "tipo": "Mensal",
+        "vencimento": "10/12/2026",
+        "vencimento_iso": "2026-12-10",
+        "prestacao": 20555.56
       }
     ],
     "por_categoria": {
       "Máquinas": {
         "financiado": 3919496.93,
-        "pago": 891646.7,
-        "saldo_devedor": 4430051.56,
+        "pago": 958986.1,
+        "saldo_devedor": 4368487.37,
         "contratos": 4,
         "total_parcelas": 240,
-        "qtd_pagas": 34,
-        "pct_quitado": 14.2
+        "qtd_pagas": 36,
+        "pct_quitado": 15.0
       },
       "Veículos": {
         "financiado": 654750.27,
-        "pago": 125472.19,
-        "saldo_devedor": 886850.15,
+        "pago": 133737.08,
+        "saldo_devedor": 878626.08,
         "contratos": 3,
         "total_parcelas": 132,
-        "qtd_pagas": 20,
-        "pct_quitado": 15.2
+        "qtd_pagas": 21,
+        "pct_quitado": 15.9
       },
       "Imóveis": {
         "financiado": 2822000.0,
@@ -170,14 +170,14 @@ window.FINANCIAMENTOS_DATA = {
     "por_instituicao": {
       "Banco Senff": {
         "financiado": 1625437.46,
-        "pago": 557660.2,
-        "saldo_devedor": 1242813.51,
+        "pago": 593105.38,
+        "saldo_devedor": 1213143.54,
         "contratos": 2
       },
       "SICOOB": {
         "financiado": 2948809.74,
-        "pago": 459458.69,
-        "saldo_devedor": 4074088.2,
+        "pago": 499617.8,
+        "saldo_devedor": 4033969.91,
         "contratos": 5
       },
       "Pro-Formula": {
@@ -203,8 +203,8 @@ window.FINANCIAMENTOS_DATA = {
       {
         "ano": 2026,
         "total_previsto": 1602296.34,
-        "total_pago": 1169506.31,
-        "total_pendente": 472721.35
+        "total_pago": 1245110.6,
+        "total_pendente": 402933.09
       },
       {
         "ano": 2027,
@@ -388,8 +388,8 @@ window.FINANCIAMENTOS_DATA = {
         "ano": 2026,
         "mes": 10,
         "total_previsto": 208116.08,
-        "total_pago": 149705.93,
-        "total_pendente": 61564.19,
+        "total_pago": 217045.33,
+        "total_pendente": 0.0,
         "maquinas": 120109.78,
         "veiculos": 19700.74,
         "imoveis": 68305.56
@@ -400,8 +400,8 @@ window.FINANCIAMENTOS_DATA = {
         "ano": 2026,
         "mes": 11,
         "total_previsto": 206341.29,
-        "total_pago": 0.0,
-        "total_pendente": 206341.29,
+        "total_pago": 8264.89,
+        "total_pendente": 198117.22,
         "maquinas": 118334.99,
         "veiculos": 19700.74,
         "imoveis": 68305.56
@@ -2057,11 +2057,11 @@ window.FINANCIAMENTOS_DATA = {
       "taxa_mensal": 1.0,
       "prestacao_mensal": 22149.73,
       "total_parcelas": 60,
-      "qtd_pagas": 12,
-      "qtd_pendentes": 48,
-      "total_pago": 344962.44,
-      "saldo_devedor": 808859.64,
-      "pct_quitado": 20.0,
+      "qtd_pagas": 13,
+      "qtd_pendentes": 47,
+      "total_pago": 380407.62,
+      "saldo_devedor": 779189.67,
+      "pct_quitado": 21.7,
       "parcelas": [
         {
           "numero": 1,
@@ -2265,11 +2265,11 @@ window.FINANCIAMENTOS_DATA = {
           "prestacao": 29669.97,
           "juros": 0.0,
           "amortizacao": 0.0,
-          "saldo_devedor": 29669.97,
-          "status": "Pendente",
+          "saldo_devedor": 0.0,
+          "status": "Pago",
           "data_pagamento": "",
-          "valor_pago": 0.0,
-          "diferenca": 0.0
+          "valor_pago": 35445.18,
+          "diferenca": 5775.21
         },
         {
           "numero": 14,
@@ -3041,11 +3041,11 @@ window.FINANCIAMENTOS_DATA = {
       "taxa_mensal": 2.0,
       "prestacao_mensal": 34464.44,
       "total_parcelas": 60,
-      "qtd_pagas": 5,
-      "qtd_pendentes": 55,
-      "total_pago": 165412.12,
-      "saldo_devedor": 1338313.61,
-      "pct_quitado": 8.3,
+      "qtd_pagas": 6,
+      "qtd_pendentes": 54,
+      "total_pago": 197306.34,
+      "saldo_devedor": 1306419.39,
+      "pct_quitado": 10.0,
       "parcelas": [
         {
           "numero": 1,
@@ -3137,10 +3137,10 @@ window.FINANCIAMENTOS_DATA = {
           "prestacao": 31894.22,
           "juros": 15642.4,
           "amortizacao": 16251.82,
-          "saldo_devedor": 31894.22,
-          "status": "Pendente",
-          "data_pagamento": "",
-          "valor_pago": 0.0,
+          "saldo_devedor": 0.0,
+          "status": "Pago",
+          "data_pagamento": "30/10/2026",
+          "valor_pago": 31894.22,
           "diferenca": 0.0
         },
         {
@@ -5441,11 +5441,11 @@ window.FINANCIAMENTOS_DATA = {
       "taxa_mensal": 2.0,
       "prestacao_mensal": 8224.07,
       "total_parcelas": 60,
-      "qtd_pagas": 8,
-      "qtd_pendentes": 52,
-      "total_pago": 66119.12,
-      "saldo_devedor": 328962.8,
-      "pct_quitado": 13.3,
+      "qtd_pagas": 9,
+      "qtd_pendentes": 51,
+      "total_pago": 74384.01,
+      "saldo_devedor": 320738.73,
+      "pct_quitado": 15.0,
       "parcelas": [
         {
           "numero": 1,
@@ -5610,12 +5610,12 @@ window.FINANCIAMENTOS_DATA = {
           "juros": 4017.22,
           "amortizacao": 4206.85,
           "prestacao": 8224.07,
-          "saldo_devedor": 8224.07,
+          "saldo_devedor": 0.0,
           "saldo_final_contrato": 233498.57,
-          "status": "Pendente",
-          "data_pagamento": "",
-          "valor_pago": 0.0,
-          "diferenca": 0.0,
+          "status": "Pago",
+          "data_pagamento": "30/10/2026",
+          "valor_pago": 8264.89,
+          "diferenca": 40.82,
           "dias_atraso": 0
         },
         {
