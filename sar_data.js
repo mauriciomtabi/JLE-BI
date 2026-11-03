@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-11-03 10:00:12
+// Dados SAR JLE Telecom - Gerado em: 2026-11-03 11:00:09
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1164,
-    "generated_at": "2026-11-03 10:00:12",
+    "generated_at": "2026-11-03 11:00:09",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -76764,7 +76764,7 @@ window.SAR_DATA = [
     "tem_medicao": true,
     "data_med_cad_wf": null,
     "data_med_cad_wf_fmt": "-",
-    "num_wf": "",
+    "num_wf": "5776660",
     "status_wf": "",
     "competencia": "SETEMBRO/2026",
     "ano": "2026",
