@@ -122,12 +122,251 @@ def date_to_ano(dt_str):
             return 0
     return 0
 
+def estimate_monthly_rate(pv, pmt, n):
+    """Estima a taxa de juros mensal (Tabela Price) via método numérico de Newton-Raphson."""
+    if pv <= 0 or pmt <= 0 or n <= 0 or (pmt * n) <= pv:
+        return 0.0
+    r = 0.015  # chute inicial 1.5% a.m.
+    for _ in range(35):
+        if r <= 0: r = 0.001
+        factor = (1.0 + r) ** (-n)
+        f = pmt * (1.0 - factor) / r - pv
+        f_prime = pmt * ((n * r * factor / (1.0 + r)) - (1.0 - factor)) / (r * r)
+        if abs(f_prime) < 1e-12: break
+        r_new = r - f / f_prime
+        if abs(r_new - r) < 1e-6:
+            r = r_new
+            break
+        r = max(0.0001, min(0.15, r_new))
+    return round(r * 100.0, 2)
+
+def extract_generic_contract(folder, fname):
+    """
+    Parser universal e resiliente para qualquer nova planilha de financiamento
+    adicionada à pasta de rede da Controladoria. Identifica automaticamente
+    cabeçalhos, parcelas, valores, vencimentos, status e parâmetros.
+    """
+    fpath = os.path.join(folder, fname)
+    if not os.path.exists(fpath):
+        return None
+    try:
+        wb = openpyxl.load_workbook(fpath, data_only=True)
+    except Exception as e:
+        print(f"[ETL Dinâmico] Erro ao abrir {fname}: {e}")
+        return None
+
+    # Nome limpo e ID
+    clean_name = fname.replace("Financiamento ", "").replace("financiamento ", "")
+    clean_name = os.path.splitext(clean_name)[0].replace("_", " ").strip()
+    c_id = "fin_" + clean_name.lower().replace(" ", "_").replace("-", "_")
+
+    # Detectar Categoria
+    lower_fname = fname.lower()
+    if any(k in lower_fname for k in ["corolla", "carro", "veiculo", "veículo", "caminhao", "caminhão", "daf", "mko", "van", "fiat", "strada", "hilux", "fluence", "auto"]):
+        categoria = "Veículos"
+        produto_default = "Veículo"
+    elif any(k in lower_fname for k in ["maquina", "máquina", "perfuratriz", "trator", "escavadeira", "drill", "compressor"]):
+        categoria = "Máquinas"
+        produto_default = "Equipamento / Máquina"
+    elif any(k in lower_fname for k in ["base", "terreno", "imovel", "imóvel", "predio", "prédio", "galpao", "galpão", "sala"]):
+        categoria = "Imóveis"
+        produto_default = "Imóvel"
+    else:
+        categoria = "Outros"
+        produto_default = "Financiamento"
+
+    # Detectar Instituição
+    instituicao = "Financeira / Banco"
+    for k, inst in [("sicoob", "SICOOB"), ("senff", "Banco Senff"), ("bradesco", "Bradesco"), ("itau", "Itaú"), ("santander", "Santander"), ("bb", "Banco do Brasil"), ("caixa", "Caixa Econômica"), ("bv", "Banco BV"), ("safra", "Banco Safra"), ("pan", "Banco Pan")]:
+        if k in lower_fname:
+            instituicao = inst
+            break
+
+    # Escolher a melhor aba para as parcelas
+    target_ws = None
+    priority_sheets = ["controle", "cronograma pmt", "cronograma", "acompanhamento", "pmt", "parcelas", "fluxo"]
+    for s in wb.sheetnames:
+        if s.lower().strip() in priority_sheets:
+            target_ws = wb[s]
+            break
+    if not target_ws:
+        for s in wb.sheetnames:
+            if "dashboard" not in s.lower() and "resumo" not in s.lower():
+                target_ws = wb[s]
+                break
+    if not target_ws:
+        target_ws = wb.worksheets[0]
+
+    # Detectar parâmetros gerais (ex: Colunas laterais ou outras abas)
+    v_fin = 0.0
+    taxa = 0.0
+    contrato_num = ""
+    produto = produto_default
+    sistema = "Tabela PRICE"
+
+    for ws_scan in wb.worksheets:
+        for r in range(1, min(25, ws_scan.max_row + 1)):
+            for c in range(1, min(15, ws_scan.max_column + 1)):
+                cell_txt = str(ws_scan.cell(r, c).value or "").strip().lower()
+                if "valor financiado" in cell_txt:
+                    v_fin = parse_val(ws_scan.cell(r, c + 1).value)
+                elif "taxa" in cell_txt and taxa == 0.0:
+                    t_val = ws_scan.cell(r, c + 1).value
+                    if isinstance(t_val, (int, float)):
+                        taxa = float(t_val) * (100.0 if t_val < 1.0 else 1.0)
+                elif "contrato" in cell_txt and not contrato_num:
+                    c_val = str(ws_scan.cell(r, c + 1).value or "").strip()
+                    if c_val and c_val != "None":
+                        contrato_num = c_val
+
+    # Detectar cabeçalho da tabela de parcelas
+    header_row = -1
+    col_map = {}
+    for r in range(1, min(15, target_ws.max_row + 1)):
+        row_txts = [str(target_ws.cell(r, c).value or "").strip().lower() for c in range(1, target_ws.max_column + 1)]
+        has_parcela = any("parcela" in t or "nº" in t or t == "num" or t == "item" for t in row_txts)
+        has_venc = any("vencimento" in t or "venc" in t for t in row_txts)
+        if has_parcela or has_venc:
+            header_row = r
+            for c in range(1, target_ws.max_column + 1):
+                t = str(target_ws.cell(r, c).value or "").strip().lower()
+                if not t: continue
+                if any(x in t for x in ["parcela", "nº", "numero", "num", "item"]):
+                    if "col_num" not in col_map: col_map["col_num"] = c
+                elif any(x in t for x in ["vencimento", "venc", "dt venc"]):
+                    if "col_venc" not in col_map: col_map["col_venc"] = c
+                elif any(x in t for x in ["previsto", "prestacao", "prestação", "pmt", "valor parcela", "valor previsto", "valor doc"]):
+                    if "col_pmt" not in col_map: col_map["col_pmt"] = c
+                elif any(x in t for x in ["valor pago", "vlr pago", "pago"]):
+                    if "col_pago" not in col_map: col_map["col_pago"] = c
+                elif any(x in t for x in ["data pgto", "dt pgto", "data pag", "data pagamento"]):
+                    if "col_dt_pag" not in col_map: col_map["col_dt_pag"] = c
+                elif any(x in t for x in ["status", "situacao", "situação"]):
+                    if "col_status" not in col_map: col_map["col_status"] = c
+                elif any(x in t for x in ["saldo projetado", "saldo devedor", "saldo final", "saldo"]):
+                    if "col_saldo" not in col_map: col_map["col_saldo"] = c
+                elif "juros" in t:
+                    if "col_juros" not in col_map: col_map["col_juros"] = c
+                elif any(x in t for x in ["amortizacao", "amortização"]):
+                    if "col_amort" not in col_map: col_map["col_amort"] = c
+                elif any(x in t for x in ["diferenca", "diferença"]):
+                    if "col_dif" not in col_map: col_map["col_dif"] = c
+            break
+
+    if header_row == -1 or "col_venc" not in col_map:
+        print(f"[ETL Dinâmico] Não foi possível identificar cabeçalho em {fname}")
+        return None
+
+    # Extrair parcelas
+    parcelas = []
+    col_num = col_map.get("col_num", 1)
+    col_venc = col_map.get("col_venc", 2)
+    col_pmt = col_map.get("col_pmt", 3)
+    col_pago = col_map.get("col_pago")
+    col_dt_pag = col_map.get("col_dt_pag")
+    col_status = col_map.get("col_status")
+    col_saldo = col_map.get("col_saldo")
+    col_juros = col_map.get("col_juros")
+    col_amort = col_map.get("col_amort")
+    col_dif = col_map.get("col_dif")
+
+    for r in range(header_row + 1, target_ws.max_row + 1):
+        raw_num = target_ws.cell(r, col_num).value if col_num else None
+        raw_venc = target_ws.cell(r, col_venc).value if col_venc else None
+        if raw_num is None and raw_venc is None:
+            continue
+        
+        p_num = len(parcelas) + 1
+        if raw_num is not None and str(raw_num).strip().isdigit():
+            p_num = int(raw_num)
+        elif raw_venc is None:
+            continue
+
+        dt_venc = parse_date(raw_venc)
+        if not dt_venc or "/" not in dt_venc:
+            continue
+
+        v_pmt = parse_val(target_ws.cell(r, col_pmt).value) if col_pmt else 0.0
+        v_pago = parse_val(target_ws.cell(r, col_pago).value) if col_pago else 0.0
+        dt_pag = parse_date(target_ws.cell(r, col_dt_pag).value) if col_dt_pag else ""
+        st_raw = str(target_ws.cell(r, col_status).value or "").strip().lower() if col_status else ""
+        saldo_proj = parse_val(target_ws.cell(r, col_saldo).value) if col_saldo else 0.0
+        juros_val = parse_val(target_ws.cell(r, col_juros).value) if col_juros else 0.0
+        amort_val = parse_val(target_ws.cell(r, col_amort).value) if col_amort else 0.0
+        dif_val = parse_val(target_ws.cell(r, col_dif).value) if col_dif else 0.0
+
+        is_pago = (st_raw in ["paga", "pago", "liquidado", "liquidada"] or v_pago > 0)
+        status = "Pago" if is_pago else "Pendente"
+        if is_pago and v_pago == 0.0:
+            v_pago = v_pmt
+
+        saldo_rest = 0.0 if is_pago else v_pmt
+
+        parcelas.append({
+            "numero": p_num,
+            "tipo": "Mensal",
+            "vencimento": dt_venc,
+            "vencimento_iso": date_to_iso(dt_venc),
+            "mes_ano": date_to_mes_ano(dt_venc),
+            "ano": date_to_ano(dt_venc),
+            "prestacao": v_pmt,
+            "juros": juros_val,
+            "amortizacao": amort_val,
+            "saldo_devedor": saldo_rest,
+            "status": status,
+            "data_pagamento": dt_pag if is_pago else "",
+            "valor_pago": v_pago if is_pago else 0.0,
+            "diferenca": dif_val
+        })
+
+    if not parcelas:
+        print(f"[ETL Dinâmico] Nenhuma parcela extraída em {fname}")
+        return None
+
+    tot_pago = round(sum(p["valor_pago"] for p in parcelas), 2)
+    tot_aberto = round(sum(p["prestacao"] for p in parcelas if p["status"] == "Pendente"), 2)
+    qtd_pagas = sum(1 for p in parcelas if p["status"] == "Pago")
+    qtd_pend = len(parcelas) - qtd_pagas
+    prest_media = parcelas[0]["prestacao"] if parcelas else 0.0
+
+    if v_fin == 0.0:
+        v_fin = round(sum(p["prestacao"] for p in parcelas), 2)
+
+    if taxa == 0.0 and v_fin > 0 and len(parcelas) > 0 and prest_media > 0:
+        taxa = estimate_monthly_rate(v_fin, prest_media, len(parcelas))
+
+    return {
+        "id": c_id,
+        "nome": clean_name,
+        "arquivo": fname,
+        "instituicao": instituicao,
+        "categoria": categoria,
+        "contrato": contrato_num or clean_name,
+        "produto": produto,
+        "sistema": sistema,
+        "data_operacao": parcelas[0]["vencimento"] if parcelas else "",
+        "vencimento_final": parcelas[-1]["vencimento"] if parcelas else "",
+        "valor_financiado": v_fin,
+        "valor_liquido": v_fin,
+        "taxa_mensal": round(taxa, 2),
+        "prestacao_mensal": prest_media,
+        "total_parcelas": len(parcelas),
+        "qtd_pagas": qtd_pagas,
+        "qtd_pendentes": qtd_pend,
+        "total_pago": tot_pago,
+        "saldo_devedor": tot_aberto,
+        "pct_quitado": round((qtd_pagas / len(parcelas) * 100.0) if parcelas else 0.0, 1),
+        "parcelas": parcelas
+    }
+
 def extract_all_contracts(folder):
     contratos = []
+    processed_files = set()
     
     # ----------------------------------------------------
     # 1. Financiamento 1ª Maquina Senff.xlsx (2 Contratos)
     # ----------------------------------------------------
+    processed_files.add("Financiamento 1ª Maquina Senff.xlsx")
     f_senff = os.path.join(folder, "Financiamento 1ª Maquina Senff.xlsx")
     if os.path.exists(f_senff):
         try:
@@ -225,6 +464,7 @@ def extract_all_contracts(folder):
     # ----------------------------------------------------
     # 2. Financiamento 2ª Máquina.xlsx
     # ----------------------------------------------------
+    processed_files.add("Financiamento 2ª Máquina.xlsx")
     f_maq2 = os.path.join(folder, "Financiamento 2ª Máquina.xlsx")
     if os.path.exists(f_maq2):
         try:
@@ -327,6 +567,7 @@ def extract_all_contracts(folder):
         ("Financiamento Vermelho MKO.xlsx", "sicoob_mko", "Caminhão Vermelho MKO", "Veículos", "Caminhão Pesado")
     ]
     for fname, c_id, nome, cat, prod in std_sicoob:
+        processed_files.add(fname)
         fpath = os.path.join(folder, fname)
         if os.path.exists(fpath):
             try:
@@ -418,6 +659,7 @@ def extract_all_contracts(folder):
     # ----------------------------------------------------
     # 5. Financiamento Compra Base NH.xlsx
     # ----------------------------------------------------
+    processed_files.add("Financiamento Compra Base NH.xlsx")
     f_nh = os.path.join(folder, "Financiamento Compra Base NH.xlsx")
     if os.path.exists(f_nh):
         try:
@@ -501,6 +743,7 @@ def extract_all_contracts(folder):
     # ----------------------------------------------------
     # 6. Financiamento Compra Terreno.xlsx
     # ----------------------------------------------------
+    processed_files.add("Financiamento Compra Terreno.xlsx")
     f_ter = os.path.join(folder, "Financiamento Compra Terreno.xlsx")
     if os.path.exists(f_ter):
         try:
@@ -577,6 +820,28 @@ def extract_all_contracts(folder):
         except Exception as e:
             print(f"[ETL] Erro ao ler Financiamento Compra Terreno.xlsx: {e}")
 
+    # ----------------------------------------------------
+    # Descoberta e Extração Dinâmica de Qualquer Nova Planilha na Pasta
+    # ----------------------------------------------------
+    try:
+        if os.path.exists(folder):
+            all_entries = sorted(os.listdir(folder))
+            for fname in all_entries:
+                if fname.startswith("~$") or not fname.lower().endswith(".xlsx"):
+                    continue
+                if fname in processed_files:
+                    continue
+                print(f"[ETL Dinâmico] Nova planilha detectada: {fname}. Processando contrato...")
+                dynamic_contract = extract_generic_contract(folder, fname)
+                if dynamic_contract:
+                    contratos.append(dynamic_contract)
+                    processed_files.add(fname)
+                    print(f"[ETL Dinâmico] Sucesso! Contrato integrado: {dynamic_contract['nome']} ({dynamic_contract['total_parcelas']} parcelas, Saldo: R$ {dynamic_contract['saldo_devedor']:,.2f})")
+                else:
+                    print(f"[ETL Dinâmico] Aviso: A planilha {fname} não pôde ser interpretada como cronograma de parcelas.")
+    except Exception as e:
+        print(f"[ETL Dinâmico] Erro ao varrer novas planilhas na pasta: {e}")
+
     return contratos
 
 def consolidate_data(contratos, source_folder):
@@ -615,7 +880,8 @@ def consolidate_data(contratos, source_folder):
     
     # Agrupamento por Categoria
     por_categoria = {}
-    for cat in ["Máquinas", "Veículos", "Imóveis"]:
+    all_categories = list(dict.fromkeys(["Máquinas", "Veículos", "Imóveis"] + [c.get("categoria", "Outros") for c in contratos]))
+    for cat in all_categories:
         c_list = [c for c in contratos if c["categoria"] == cat]
         fin = round(sum(c["valor_financiado"] for c in c_list), 2)
         pag = round(sum(c["total_pago"] for c in c_list), 2)
