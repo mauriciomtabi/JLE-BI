@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-11-03 11:00:15
+// Dados MDU Compactados - Gerado em: 2026-11-03 12:00:18
 window.MDU_METADATA = {
-    "generated_at": "2026-11-03 11:00:15",
+    "generated_at": "2026-11-03 12:00:18",
     "total_rows": 6014,
-    "geocoded_new": 0
+    "geocoded_new": 1
 };
 
 window.MDU_DATA = [
@@ -189264,7 +189264,7 @@ window.MDU_DATA = [
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
-        "cod_imovel": "35626220",
+        "cod_imovel": "713251132",
         "area": "FLOAA",
         "node": "",
         "caixa_m": "FLOAA.062.M010",
@@ -189576,35 +189576,35 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505783",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "RUA ITABORAÍ 1158",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
+        "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
-        "prog": 0,
-        "cod_imovel": "",
-        "area": "",
+        "status": "Relatório",
+        "prog": 75.0,
+        "cod_imovel": "702641891",
+        "area": "BVSAB",
         "node": "",
-        "caixa_m": "",
+        "caixa_m": "BVSAB.152.M020",
         "hps": null,
-        "data_adicio": "",
-        "equipe": "",
-        "primeira_visita": "",
+        "data_adicio": "03/11/2026",
+        "equipe": "ABRAAO RODRIGUES",
+        "primeira_visita": "02/11/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
-        "data_interna": "",
-        "data_fusao": "",
-        "data_baixa": "",
+        "obs_vistoria": "ADEQUADO",
+        "data_interna": "02/11/2026",
+        "data_fusao": "02/11/2026",
+        "data_baixa": "03/11",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0538248,
+        "lng": -51.1803849,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505784",
