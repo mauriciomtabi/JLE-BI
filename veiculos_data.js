@@ -62439,5 +62439,37 @@ const VEICULOS_DATA = [
     "km": 43013,
     "kml": 17.43,
     "transactionId": "1109839718"
+  },
+  {
+    "date": "2026-11-04 09:14:59",
+    "plate": "MLY8323",
+    "driver": "LUIZ H. ARANTE",
+    "value": 200.0,
+    "uf": "SC",
+    "month": "NOVEMBRO",
+    "liters": 31.55,
+    "vlLiter": 6.34,
+    "model": "MONTANA",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 397650,
+    "kml": 14.39,
+    "transactionId": "1109892447"
+  },
+  {
+    "date": "2026-11-04 11:45:34",
+    "plate": "PYD3520",
+    "driver": "KAUE GABRIEL KELLER DE ALMEIDA",
+    "value": 269.9,
+    "uf": "RS",
+    "month": "NOVEMBRO",
+    "liters": 46.86,
+    "vlLiter": 5.76,
+    "model": "MONTANA",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 204693,
+    "kml": 10.39,
+    "transactionId": "1109940767"
   }
 ];
