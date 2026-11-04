@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-11-04 17:36:46
+// Dados MDU Compactados - Gerado em: 2026-11-04 18:00:11
 window.MDU_METADATA = {
-    "generated_at": "2026-11-04 17:36:46",
+    "generated_at": "2026-11-04 18:00:11",
     "total_rows": 6014,
     "geocoded_new": 0
 };
@@ -30988,14 +30988,14 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "433",
-        "relatorio_por": "DUDA (PENDENCIA: CROQUI, TERMO, CORREIO,CAIXA M)",
+        "relatorio_por": "DUDA (PENDENCIA: CROQUI, TERMO, CORREIO)",
         "pendencia": "SIM",
         "status": "Pendência",
         "prog": 0.0,
         "cod_imovel": "610428199",
         "area": "PETAA",
         "node": "PETATA",
-        "caixa_m": "",
+        "caixa_m": "PETAA.161.M040",
         "hps": 4,
         "data_adicio": "28/08/2025",
         "equipe": "Mário Souza",
@@ -35564,7 +35564,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "347",
-        "relatorio_por": "DUDA (PENDENCIA: TERMO, CORREIO)",
+        "relatorio_por": "DUDA (PENDENCIA: TERMO,)",
         "pendencia": "SIM",
         "status": "Pendência",
         "prog": 0.0,
@@ -40723,7 +40723,7 @@ window.MDU_DATA = [
         "cod_imovel": "610515157",
         "area": "MNDAB",
         "node": "CBXAA",
-        "caixa_m": "",
+        "caixa_m": "MNDAB.015.M020",
         "hps": 12,
         "data_adicio": "07/11/2025",
         "equipe": "Kleiton de Paula",
