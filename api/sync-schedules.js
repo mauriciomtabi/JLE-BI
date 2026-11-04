@@ -4,8 +4,14 @@
 // duplicações e envios com dados obsoletos/incorretos.
 // Os disparos agora ocorrem exclusivamente em tempo real no horário programado.
 
-const SUPABASE_URL = process.env.SUPABASE_URL || "https://dmwefcngefeonxuukwdl.supabase.co";
-const ANON_KEY = process.env.SUPABASE_ANON_KEY || "sb_publishable_j3AShmEr6aEWjqBv2rruhw_5EE4NnOt";
+let SUPABASE_URL = process.env.SUPABASE_URL;
+if (!SUPABASE_URL || SUPABASE_URL.includes("fowlctve") || SUPABASE_URL.includes("dkscchjz")) {
+    SUPABASE_URL = "https://dmwefcngefeonxuukwdl.supabase.co";
+}
+let ANON_KEY = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
+if (!ANON_KEY || ANON_KEY.includes("fowlctve") || ANON_KEY.includes("dkscchjz")) {
+    ANON_KEY = "sb_publishable_j3AShmEr6aEWjqBv2rruhw_5EE4NnOt";
+}
 
 async function fetchSupabase(endpoint, method = 'GET', body = null, token = null) {
     const url = `${SUPABASE_URL}/rest/v1/${endpoint}`;

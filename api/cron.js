@@ -5,8 +5,14 @@
 const fs = require('fs');
 const path = require('path');
 
-const SUPABASE_URL = process.env.SUPABASE_URL || "https://dmwefcngefeonxuukwdl.supabase.co";
-const ANON_KEY = process.env.SUPABASE_ANON_KEY || "sb_publishable_j3AShmEr6aEWjqBv2rruhw_5EE4NnOt";
+let SUPABASE_URL = process.env.SUPABASE_URL;
+if (!SUPABASE_URL || SUPABASE_URL.includes("fowlctve") || SUPABASE_URL.includes("dkscchjz")) {
+    SUPABASE_URL = "https://dmwefcngefeonxuukwdl.supabase.co";
+}
+let ANON_KEY = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
+if (!ANON_KEY || ANON_KEY.includes("fowlctve") || ANON_KEY.includes("dkscchjz")) {
+    ANON_KEY = "sb_publishable_j3AShmEr6aEWjqBv2rruhw_5EE4NnOt";
+}
 const RESEND_API_KEY = process.env.RESEND_API_KEY || ['re_bBQyi9qa', 'C5py6HbtiYrNfPoJhZLUATRw'].join('_');
 const FROM_EMAIL = "bi@jletelecom.com.br";
 const BI_URL = "https://jle-bi.vercel.app";
@@ -14,7 +20,10 @@ const SHEETS_URL = "https://docs.google.com/spreadsheets/d/1eEJLaV7D0rthjC5H1Mpp
 const SHEETS_CSV_URL = "https://docs.google.com/spreadsheets/d/1eEJLaV7D0rthjC5H1MppXyk7dyroqn2h/export?format=csv&gid=260790893";
 
 function getSupabaseAuthHeaders() {
-    const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY;
+    let serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_KEY;
+    if (serviceKey && (serviceKey.includes("fowlctve") || serviceKey.includes("dkscchjz") || !serviceKey.startsWith("sb_"))) {
+        serviceKey = null;
+    }
     const key = serviceKey || ANON_KEY;
     return {
         "apikey": key,

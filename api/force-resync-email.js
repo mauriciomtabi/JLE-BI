@@ -2,11 +2,20 @@
 // Endpoint de force-resync legado.
 // Desativado para evitar pré-agendamentos obsoletos no Resend.
 
-const SUPABASE_URL = process.env.SUPABASE_URL || "https://dmwefcngefeonxuukwdl.supabase.co";
-const ANON_KEY = process.env.SUPABASE_ANON_KEY || "sb_publishable_j3AShmEr6aEWjqBv2rruhw_5EE4NnOt";
+let SUPABASE_URL = process.env.SUPABASE_URL;
+if (!SUPABASE_URL || SUPABASE_URL.includes("fowlctve") || SUPABASE_URL.includes("dkscchjz")) {
+    SUPABASE_URL = "https://dmwefcngefeonxuukwdl.supabase.co";
+}
+let ANON_KEY = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
+if (!ANON_KEY || ANON_KEY.includes("fowlctve") || ANON_KEY.includes("dkscchjz")) {
+    ANON_KEY = "sb_publishable_j3AShmEr6aEWjqBv2rruhw_5EE4NnOt";
+}
 
 function getSupabaseAuthHeaders() {
-    const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY;
+    let serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_KEY;
+    if (serviceKey && (serviceKey.includes("fowlctve") || serviceKey.includes("dkscchjz") || !serviceKey.startsWith("sb_"))) {
+        serviceKey = null;
+    }
     const key = serviceKey || ANON_KEY;
     return {
         "apikey": key,
