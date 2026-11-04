@@ -2,8 +2,8 @@
 // Endpoint de force-resync legado.
 // Desativado para evitar pré-agendamentos obsoletos no Resend.
 
-const SUPABASE_URL = "https://fowlctvebdcodphntsjw.supabase.co";
-const ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZvd2xjdHZlYmRjb2RwaG50c2p3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwNzg2NjUsImV4cCI6MjA5NTY1NDY2NX0.PxzD_PlU4sBFPBukthuXpkBlzYbQqMLXLE4DQwctPOM";
+const SUPABASE_URL = process.env.SUPABASE_URL || "https://dmwefcngefeonxuukwdl.supabase.co";
+const ANON_KEY = process.env.SUPABASE_ANON_KEY || "sb_publishable_j3AShmEr6aEWjqBv2rruhw_5EE4NnOt";
 
 function getSupabaseAuthHeaders() {
     const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY;

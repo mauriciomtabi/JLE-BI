@@ -2,8 +2,8 @@
 // Utility module to process Troca de Postes TELEMONT data and build responsive HTML email reports.
 // Follows the exact visual standard of other BI JLE email reports (MDU, SAR, Manutencao, Claro).
 
-const APP_JLE_SUPABASE_URL = process.env.APP_JLE_SUPABASE_URL || "https://dkscchjzztwyjzjpllob.supabase.co";
-const APP_JLE_SUPABASE_KEY = process.env.APP_JLE_SUPABASE_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRrc2NjaGp6enR3eWp6anBsbG9iIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MTI0NDcwMCwiZXhwIjoyMDk2ODIwNzAwfQ.QDco_35MhHsnHWDMrtcAsQyRXKJOntO1otClAWTA5KU";
+const APP_JLE_SUPABASE_URL = process.env.APP_JLE_SUPABASE_URL || process.env.SUPABASE_URL || "https://dmwefcngefeonxuukwdl.supabase.co";
+const APP_JLE_SUPABASE_KEY = process.env.APP_JLE_SUPABASE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY || "";
 
 async function fetchAppJle(endpoint) {
     const url = `${APP_JLE_SUPABASE_URL}/rest/v1/${endpoint}`;
