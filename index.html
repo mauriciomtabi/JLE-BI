@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -63,9 +63,13 @@
 
     <!-- SIDEBAR -->
     <aside class="sidebar" id="dashboard-sidebar" style="display: none;">
-        <!-- Botão de Colapso Flutuante -->
-        <button class="sidebar-toggle-btn" onclick="toggleSidebar()" id="sidebar-toggle-btn">
+        <!-- Botão de Colapso Flutuante (Desktop) -->
+        <button class="sidebar-toggle-btn" onclick="toggleSidebar()" id="sidebar-toggle-btn" title="Recolher / Expandir menu">
             <i class="fa-solid fa-chevron-left" id="sidebar-toggle-icon"></i>
+        </button>
+        <!-- Botão de Fechar Gaveta no Mobile -->
+        <button class="sidebar-close-btn" id="sidebar-close-btn" onclick="closeMobileDrawer()" title="Fechar Menu" aria-label="Fechar Menu">
+            <i class="fa-solid fa-xmark"></i>
         </button>
         <div class="logo-container">
             <div class="logo-glow-wrapper">
@@ -149,20 +153,34 @@
         </div>
     </aside>
 
+    <!-- BACKDROP DA GAVETA MOBILE -->
+    <div class="sidebar-backdrop" id="sidebar-backdrop" onclick="closeMobileDrawer()"></div>
+
     <!-- MAIN CONTENT -->
     <main class="main-content" id="dashboard-main-content" style="display: none;">
         
         <!-- HEADER -->
-        <header>
-            <div class="header-title">
-                <h1 id="view-title">Dashboard Financeiro</h1>
-                <p id="view-subtitle">Dashboard de Gestão e Análise de Indicadores.</p>
-            </div>
-            <div class="last-update-badge">
-                <i class="fa-solid fa-clock"></i> Atualizado: <span id="data-timestamp">N/D</span>
-                <button id="btn-refresh-dashboard" class="btn-refresh-dashboard" onclick="refreshCurrentDashboard()" title="Recarregar dados deste dashboard">
-                    <i class="fa-solid fa-arrows-rotate" id="refresh-dashboard-icon"></i>
+        <header class="main-header" id="main-header">
+            <div class="header-left">
+                <button class="mobile-menu-btn" id="mobile-menu-btn" onclick="toggleMobileDrawer()" title="Abrir Menu" aria-label="Abrir Menu">
+                    <i class="fa-solid fa-bars"></i>
                 </button>
+                <div class="header-logo-mobile">
+                    <img src="assets/logo_jle_dark.png" alt="JLE Telecom" class="mobile-logo-img logo-dark-mode">
+                    <img src="assets/logo_jle_full.png" alt="JLE Telecom" class="mobile-logo-img logo-light-mode">
+                </div>
+                <div class="header-title">
+                    <h1 id="view-title">Dashboard Financeiro</h1>
+                    <p id="view-subtitle">Dashboard de Gestão e Análise de Indicadores.</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="last-update-badge">
+                    <i class="fa-solid fa-clock"></i> <span class="update-label-text">Atualizado: </span><span id="data-timestamp">N/D</span>
+                    <button id="btn-refresh-dashboard" class="btn-refresh-dashboard" onclick="refreshCurrentDashboard()" title="Recarregar dados deste dashboard">
+                        <i class="fa-solid fa-arrows-rotate" id="refresh-dashboard-icon"></i>
+                    </button>
+                </div>
             </div>
         </header>
 
@@ -4929,6 +4947,7 @@
                 document.getElementById('auth-panel').style.display = 'none';
                 document.getElementById('dashboard-sidebar').style.display = 'flex';
                 document.getElementById('dashboard-main-content').style.display = 'flex';
+                if (typeof applyInitialSidebarResponsiveness === 'function') applyInitialSidebarResponsiveness();
                 
                 const fullName = (user.user_metadata && user.user_metadata.full_name) || user.email.split('@')[0];
                 const nameEl = document.getElementById('user-display-name');
@@ -5533,6 +5552,14 @@
 
         // Controle de Grupos de Navegação (Accordion Sidebar)
         function toggleNavGroup(groupId) {
+            // Se a barra estiver no modo colapsado (ícones em notebooks), expande automaticamente para 260px
+            if (document.body.classList.contains('sidebar-collapsed')) {
+                if (typeof setSidebarCollapsed === 'function') {
+                    setSidebarCollapsed(false);
+                    localStorage.setItem('jle_bi_sidebar_collapsed_user', 'false');
+                }
+            }
+
             const toggle = document.getElementById(`nav-${groupId}-toggle`);
             const submenu = document.getElementById(`submenu-${groupId}`);
             if (!toggle || !submenu) return;
@@ -5549,6 +5576,11 @@
 
         // Navegação de Telas
         function switchView(viewName) {
+            // Fechar gaveta no mobile ao navegar
+            if (typeof closeMobileDrawer === 'function') {
+                closeMobileDrawer();
+            }
+
             // Se tentar acessar a aba de transações como uma tela separada (legado/redirecionamento)
             if (viewName === 'transactions') {
                 switchView('dashboard');
@@ -6523,16 +6555,18 @@
             renderCharts();
         }
 
-        function toggleSidebar() {
+        function setSidebarCollapsed(collapsed) {
             const body = document.body;
-            body.classList.toggle('sidebar-collapsed');
+            if (collapsed) {
+                body.classList.add('sidebar-collapsed');
+            } else {
+                body.classList.remove('sidebar-collapsed');
+            }
             const isCollapsed = body.classList.contains('sidebar-collapsed');
             
             const icon = document.getElementById('sidebar-toggle-icon');
-            if (isCollapsed) {
-                icon.className = 'fa-solid fa-chevron-right';
-            } else {
-                icon.className = 'fa-solid fa-chevron-left';
+            if (icon) {
+                icon.className = isCollapsed ? 'fa-solid fa-chevron-right' : 'fa-solid fa-chevron-left';
             }
             
             // Alternar exibição do nome do usuário (completo vs iniciais)
@@ -6548,6 +6582,94 @@
                 window.dispatchEvent(new Event('resize'));
             }, 320);
         }
+        window.setSidebarCollapsed = setSidebarCollapsed;
+
+        function toggleSidebar() {
+            const body = document.body;
+            const willCollapse = !body.classList.contains('sidebar-collapsed');
+            setSidebarCollapsed(willCollapse);
+            localStorage.setItem('jle_bi_sidebar_collapsed_user', willCollapse ? 'true' : 'false');
+        }
+        window.toggleSidebar = toggleSidebar;
+
+        // Controle da Gaveta Lateral (Drawer) para Dispositivos Móveis e Tablets (< 1024px)
+        function toggleMobileDrawer() {
+            const sidebar = document.getElementById('dashboard-sidebar');
+            const backdrop = document.getElementById('sidebar-backdrop');
+            if (!sidebar || !backdrop) return;
+            if (sidebar.classList.contains('drawer-open')) {
+                closeMobileDrawer();
+            } else {
+                openMobileDrawer();
+            }
+        }
+        window.toggleMobileDrawer = toggleMobileDrawer;
+
+        function openMobileDrawer() {
+            const sidebar = document.getElementById('dashboard-sidebar');
+            const backdrop = document.getElementById('sidebar-backdrop');
+            if (!sidebar || !backdrop) return;
+            // Garantir que a gaveta mobile mostre o conteúdo completo em 280px (não em ícones)
+            document.body.classList.remove('sidebar-collapsed');
+            sidebar.classList.add('drawer-open');
+            backdrop.classList.add('active');
+            document.body.classList.add('drawer-active');
+        }
+        window.openMobileDrawer = openMobileDrawer;
+
+        function closeMobileDrawer() {
+            const sidebar = document.getElementById('dashboard-sidebar');
+            const backdrop = document.getElementById('sidebar-backdrop');
+            if (sidebar) sidebar.classList.remove('drawer-open');
+            if (backdrop) backdrop.classList.remove('active');
+            document.body.classList.remove('drawer-active');
+        }
+        window.closeMobileDrawer = closeMobileDrawer;
+
+        // Auto-adaptação do menu para notebooks (1024px a 1366px)
+        function applyInitialSidebarResponsiveness() {
+            const width = window.innerWidth;
+            if (width < 1024) {
+                // Mobile: remove estado collapsed para que a gaveta abra por completo
+                document.body.classList.remove('sidebar-collapsed');
+                closeMobileDrawer();
+            } else if (width <= 1366) {
+                // Notebook / Monitor médio: se não houver preferência explícita, inicia recolhido (70px)
+                const saved = localStorage.getItem('jle_bi_sidebar_collapsed_user');
+                if (saved === null) {
+                    setSidebarCollapsed(true);
+                } else {
+                    setSidebarCollapsed(saved === 'true');
+                }
+            } else {
+                // Monitores grandes (> 1366px): respeita preferência salva ou mantém expandido
+                const saved = localStorage.getItem('jle_bi_sidebar_collapsed_user');
+                if (saved !== null) {
+                    setSidebarCollapsed(saved === 'true');
+                } else {
+                    setSidebarCollapsed(false);
+                }
+            }
+        }
+        window.applyInitialSidebarResponsiveness = applyInitialSidebarResponsiveness;
+
+        // Fechar gaveta mobile ao pressionar ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeMobileDrawer();
+            }
+        });
+
+        // Fechar gaveta mobile e reavaliar estado se a tela for redimensionada para desktop
+        let resizeBreakpointTimer = null;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeBreakpointTimer);
+            resizeBreakpointTimer = setTimeout(() => {
+                if (window.innerWidth >= 1024) {
+                    closeMobileDrawer();
+                }
+            }, 150);
+        });
 
         function formatCurrency(val) {
             return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(val);
