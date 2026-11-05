@@ -6440,13 +6440,12 @@
                 }
 
                 const firstName = formattedNameInput ? formattedNameInput.split(' ')[0] : (fullName.split(' ')[0] || 'Colaborador');
-                const userNameOnly = email.split('@')[0];
 
                 let passSection = '';
                 if (effectivePassword) {
-                    passSection = `Usuário: ${userNameOnly}\nSenha: ${effectivePassword}\n\nApós acessar a senha deverá ser trocada`;
+                    passSection = `Usuário: ${email}\nSenha: ${effectivePassword}\n\nApós acessar a senha deverá ser trocada`;
                 } else {
-                    passSection = `Usuário: ${userNameOnly}\nSenha: (mantida a senha anterior)\n\nApós acessar a senha poderá ser trocada`;
+                    passSection = `Usuário: ${email}\nSenha: (mantida a senha anterior)\n\nApós acessar a senha poderá ser trocada`;
                 }
 
                 const invitationText = `Olá, ${firstName}!\n\nSeu acesso ao painel BI JLE Telecom foi liberado.\nClique no link abaixo para criar sua senha corporativa:\n\n👉 ${cleanOrigin}\n\n${passSection}`;
