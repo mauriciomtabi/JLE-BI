@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-11-05 12:00:15
+// Dados MDU Compactados - Gerado em: 2026-11-05 13:00:22
 window.MDU_METADATA = {
-    "generated_at": "2026-11-05 12:00:15",
+    "generated_at": "2026-11-05 13:00:22",
     "total_rows": 6014,
-    "geocoded_new": 1
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -77836,14 +77836,14 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "666",
-        "relatorio_por": "DUDA (falta foto de croqui, termo, dg antes e pontas de cabo)",
-        "pendencia": "SIM",
-        "status": "Pendência",
-        "prog": 0.0,
+        "relatorio_por": "",
+        "pendencia": "Não",
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "610492785",
         "area": "PRTAB",
         "node": "PRTAJ",
-        "caixa_m": "PRTAB.062",
+        "caixa_m": "PRTAB.062.M010",
         "hps": 16,
         "data_adicio": "08/01/2025",
         "equipe": "Thiago Santana",
@@ -77868,14 +77868,14 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "665",
-        "relatorio_por": "DUDA (falta foto de croqui, termo, dg antes e pontas de cabo)",
-        "pendencia": "SIM",
-        "status": "Pendência",
-        "prog": 0.0,
+        "relatorio_por": "",
+        "pendencia": "Não",
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "610026378",
         "area": "PRTAB",
         "node": "PRTAJ",
-        "caixa_m": "",
+        "caixa_m": "PRTAB.062.M010",
         "hps": 16,
         "data_adicio": "09/01/2025",
         "equipe": "Thiago Santana",
