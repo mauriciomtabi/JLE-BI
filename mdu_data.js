@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-11-05 17:40:52
+// Dados MDU Compactados - Gerado em: 2026-11-05 18:00:23
 window.MDU_METADATA = {
-    "generated_at": "2026-11-05 17:40:52",
+    "generated_at": "2026-11-05 18:00:23",
     "total_rows": 6014,
-    "geocoded_new": 1
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -170187,11 +170187,11 @@ window.MDU_DATA = [
         "endereco": "COMENDADOR DE AZEVEDO 464",
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
-        "aging": "92",
+        "aging": "85",
         "relatorio_por": "JENIFFER",
         "pendencia": "Não",
-        "status": "Medição",
-        "prog": 88.0,
+        "status": "Finalizado",
+        "prog": 100.0,
         "cod_imovel": "610474976",
         "area": "BFMAA",
         "node": "",
@@ -170207,8 +170207,8 @@ window.MDU_DATA = [
         "data_baixa": "12/08",
         "obs_baixa": "",
         "data_relatorio": "26/10/2026",
-        "data_medicao": "",
-        "valor_medicao": 0,
+        "data_medicao": "38",
+        "valor_medicao": 2202.49,
         "valor_repasse": 0,
         "lat": -30.0346,
         "lng": -51.2177,
@@ -172427,11 +172427,11 @@ window.MDU_DATA = [
         "endereco": "R VICENTE DA FONTOURA 2929",
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
-        "aging": "83",
+        "aging": "85",
         "relatorio_por": "JENIFFER",
         "pendencia": "Não",
-        "status": "Medição",
-        "prog": 88.0,
+        "status": "Finalizado",
+        "prog": 100.0,
         "cod_imovel": "610435942",
         "area": "MTSAA",
         "node": "",
@@ -172447,8 +172447,8 @@ window.MDU_DATA = [
         "data_baixa": "14/08",
         "obs_baixa": "",
         "data_relatorio": "26/10/2026",
-        "data_medicao": "",
-        "valor_medicao": 0,
+        "data_medicao": "38",
+        "valor_medicao": 1025.45,
         "valor_repasse": 0,
         "lat": -30.0363181,
         "lng": -51.1957656,
