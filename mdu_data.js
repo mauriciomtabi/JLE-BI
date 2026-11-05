@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-11-05 14:00:18
+// Dados MDU Compactados - Gerado em: 2026-11-05 15:00:16
 window.MDU_METADATA = {
-    "generated_at": "2026-11-05 14:00:18",
+    "generated_at": "2026-11-05 15:00:16",
     "total_rows": 6014,
     "geocoded_new": 0
 };
@@ -40716,15 +40716,15 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "363",
-        "relatorio_por": "FALTA CROQUI",
-        "pendencia": "SIM",
-        "status": "Pendência",
-        "prog": 0.0,
+        "relatorio_por": "",
+        "pendencia": "Não",
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "610515157",
         "area": "MNDAB",
         "node": "CBXAA",
         "caixa_m": "MNDAB.015.M020",
-        "hps": 12,
+        "hps": 18,
         "data_adicio": "07/11/2025",
         "equipe": "Kleiton de Paula",
         "primeira_visita": "18/09/2025",
