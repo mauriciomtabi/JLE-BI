@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-11-05 13:08:34
+// Dados MDU Compactados - Gerado em: 2026-11-05 14:00:18
 window.MDU_METADATA = {
-    "generated_at": "2026-11-05 13:08:34",
+    "generated_at": "2026-11-05 14:00:18",
     "total_rows": 6014,
     "geocoded_new": 0
 };
@@ -190478,8 +190478,8 @@ window.MDU_DATA = [
         "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610631338",
         "area": "PRTAB",
         "node": "PRTALA",
@@ -190494,7 +190494,7 @@ window.MDU_DATA = [
         "data_fusao": "31/10/2026",
         "data_baixa": "05/11/2026",
         "obs_baixa": "",
-        "data_relatorio": "",
+        "data_relatorio": "05/11/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
