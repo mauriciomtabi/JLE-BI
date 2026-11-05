@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -4085,7 +4085,7 @@
                 <p style="font-size: 13.5px; color: var(--text-secondary); margin-bottom: 20px;">Os dados de acesso foram copiados para compartilhar.</p>
                 
                 <p style="font-size: 13px; color: var(--text-secondary); text-align: left; margin-bottom: 8px; font-weight: 500;">
-                    Os dados abaixo foram copiados automaticamente para a sua área de transferência. Você pode colar e enviá-los para o novo usuário:
+                    Os dados abaixo foram copiados automaticamente para a sua área de transferência. Você pode colar e enviá-los para o colaborador:
                 </p>
                 <div id="user-success-text-area" style="background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); border-radius: 8px; padding: 16px; text-align: left; font-family: 'Courier New', Courier, monospace; font-size: 13px; color: var(--text-primary); line-height: 1.5; white-space: pre-wrap; margin-bottom: 20px; word-break: break-all;">
                     <!-- Populated dynamically -->
@@ -4240,7 +4240,7 @@
     <script src="sar_app.js?v=3.58"></script>
     <script src="manutencao_data.js"></script>
     <script src="manutencao_app.js"></script>
-    <script src="parcelamentos_data.js?v=20261104173717"></script>
+    <script src="parcelamentos_data.js?v=20261105091254"></script>
     <script src="parcelamentos_app.js?v=1.7"></script>
     <script src="financiamentos_data.js?v=20261016084048"></script>
     <script src="financiamentos_app.js?v=1.4"></script>
@@ -4543,13 +4543,17 @@
         // Submissão do Login
         async function handleLoginSubmit(event) {
             event.preventDefault();
-            const email = document.getElementById('login-email').value.trim().toLowerCase();
+            let email = document.getElementById('login-email').value.trim().toLowerCase();
             const password = document.getElementById('login-password').value;
             
             const alertBox = document.getElementById('auth-alert');
             alertBox.style.display = 'none';
             
-            if (!email.toLowerCase().endsWith('@jletelecom.com.br')) {
+            if (!email.includes('@')) {
+                email += '@jletelecom.com.br';
+            }
+
+            if (!email.endsWith('@jletelecom.com.br')) {
                 showAuthAlert('Acesso restrito: Apenas e-mails corporativos @jletelecom.com.br são permitidos.', 'error');
                 return;
             }
@@ -6298,8 +6302,12 @@
 
         let lastGeneratedInvitationText = '';
 
-        window.showUserSuccessModal = function(email, invitationText) {
+        window.showUserSuccessModal = function(email, invitationText, titleText) {
             lastGeneratedInvitationText = invitationText;
+            const titleEl = document.querySelector('#user-success-modal h3');
+            if (titleEl) {
+                titleEl.innerText = titleText || 'Usuário Criado com Sucesso!';
+            }
             document.getElementById('user-success-text-area').innerText = invitationText;
             copyTextToClipboard(invitationText)
                 .then(() => {
@@ -6340,10 +6348,10 @@
             document.getElementById('modal-user-name').value = '';
             document.getElementById('modal-user-email').value = '';
             document.getElementById('modal-user-email').disabled = false;
-            document.getElementById('modal-user-password').value = '';
-            document.getElementById('modal-user-password').placeholder = 'Senha de no mínimo 6 caracteres';
+            document.getElementById('modal-user-password').value = '123456';
+            document.getElementById('modal-user-password').placeholder = 'Senha inicial (padrão: 123456)';
             document.getElementById('modal-user-password-label').innerText = 'Senha de acesso';
-            document.getElementById('modal-user-password-container').style.display = 'none';
+            document.getElementById('modal-user-password-container').style.display = 'block';
             document.getElementById('modal-user-is-admin').value = 'false';
             renderPageCheckboxes('modal-pages-list', ['dashboard', 'transactions']);
             document.getElementById('user-permission-modal').classList.add('active');
@@ -6376,8 +6384,9 @@
 
         async function saveUserPermission() {
             if (!supabaseClient || !currentUserIsAdmin) return;
-            const email = editingEmail || document.getElementById('modal-user-email').value.trim();
-            const password = document.getElementById('modal-user-password').value;
+            const email = (editingEmail || document.getElementById('modal-user-email').value).trim().toLowerCase();
+            const password = document.getElementById('modal-user-password').value.trim();
+            const effectivePassword = password || (!editingEmail ? '123456' : '');
             const isAdmin = document.getElementById('modal-user-is-admin').value === 'true';
             const pages = isAdmin ? PAGES_CATALOG.filter(p => !p.disabled).map(p => p.id) : getCheckedPages('modal-pages-list');
 
@@ -6394,9 +6403,8 @@
                 return;
             }
 
-            // Se for edição, e a senha for digitada, deve ter pelo menos 6 caracteres
-            if (editingEmail && password && password.length < 6) {
-                alert('A nova senha deve conter pelo menos 6 caracteres.');
+            if (password && password.length < 6) {
+                alert('A senha deve conter pelo menos 6 caracteres.');
                 return;
             }
 
@@ -6409,77 +6417,43 @@
             const fullName = formattedNameInput || email.split('@')[0].split('.').map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
 
             try {
-                let error;
-                if (!editingEmail) {
-                    // Novo usuário: cadastrar apenas na tabela bi_permissions (autocadastro posterior pelo usuário)
-                    const { error: upsertError } = await supabaseClient
-                        .from('bi_permissions')
-                        .upsert({
-                            email: email,
-                            is_admin: isAdmin,
-                            allowed_pages: pages
-                        }, { onConflict: 'email' });
-                    error = upsertError;
-                } else {
-                    // Edição: sempre tenta usar o RPC para atualizar auth e permissões (incluindo o nome)
-                    const { error: rpcError } = await supabaseClient.rpc('create_or_update_user_admin', {
-                        new_email: email,
-                        new_password: password || null,
-                        full_name: fullName,
-                        is_admin_user: isAdmin,
-                        allowed_pages: pages
-                    });
-                    
-                    if (rpcError) {
-                        console.warn("RPC create_or_update_user_admin falhou:", rpcError);
-                        
-                        if (editingUserRegistered) {
-                            // Se for um usuário que já tem acesso (registrado), o RPC não deveria falhar.
-                            // Vamos mostrar o erro para diagnóstico em vez de falhar silenciosamente.
-                            alert('Erro ao atualizar cadastro no Supabase: ' + rpcError.message);
-                            error = rpcError;
-                        } else {
-                            // Fallback: se o usuário ainda não tiver conta de autenticação criada (não registrado), o RPC pode falhar.
-                            // Nesse caso, atualizamos apenas as permissões e o perfil na tabela pública.
-                            const { error: updateError } = await supabaseClient
-                                .from('bi_permissions')
-                                .update({
-                                    is_admin: isAdmin,
-                                    allowed_pages: pages
-                                })
-                                .eq('email', email);
-                            error = updateError;
-                        }
-                    } else {
-                        error = null;
-                    }
+                // Sempre executa o RPC para sincronizar permissões e auth
+                const { error: rpcError } = await supabaseClient.rpc('create_or_update_user_admin', {
+                    new_email: email,
+                    new_password: effectivePassword || null,
+                    full_name: fullName,
+                    is_admin_user: isAdmin,
+                    allowed_pages: pages
+                });
+
+                if (rpcError) {
+                    console.warn("RPC create_or_update_user_admin falhou:", rpcError);
+                    alert('Erro ao salvar no banco de dados: ' + rpcError.message);
+                    return;
                 }
 
-                if (error) {
-                    alert('Erro ao salvar usuário: ' + error.message);
-                } else {
-                    document.getElementById('user-permission-modal').classList.remove('active');
-                    
-                    if (!editingEmail) {
-                        // Novo usuário criado com sucesso! Gerar texto de convite e abrir o modal de sucesso
-                        let cleanOrigin = window.location.origin + window.location.pathname;
-                        if (cleanOrigin.endsWith('/index.html')) {
-                            cleanOrigin = cleanOrigin.slice(0, -11);
-                        }
-                        
-                        const nameParam = formattedNameInput ? `&n=${encodeURIComponent(formattedNameInput)}` : '';
-                        const invitationLink = `${cleanOrigin}?r=1&e=${encodeURIComponent(email)}${nameParam}`;
-                        
-                        const firstName = formattedNameInput ? formattedNameInput.split(' ')[0] : 'Colaborador';
-                        const invitationText = `Olá, ${firstName}!\n\nSeu acesso ao painel BI JLE Telecom foi liberado.\nClique no link abaixo para criar sua senha corporativa:\n\n👉 ${invitationLink}`;
-                        
-                        showUserSuccessModal(email, invitationText);
-                    } else {
-                        showAdminToast('Acesso do usuário atualizado com sucesso!');
-                    }
-                    
-                    loadAdminPanel();
+                document.getElementById('user-permission-modal').classList.remove('active');
+
+                let cleanOrigin = window.location.origin + window.location.pathname;
+                if (cleanOrigin.endsWith('/index.html')) {
+                    cleanOrigin = cleanOrigin.slice(0, -11);
                 }
+
+                const firstName = formattedNameInput ? formattedNameInput.split(' ')[0] : (fullName.split(' ')[0] || 'Colaborador');
+                const userNameOnly = email.split('@')[0];
+
+                let passSection = '';
+                if (effectivePassword) {
+                    passSection = `Usuário: ${userNameOnly}\nSenha: ${effectivePassword}\n\nApós acessar a senha deverá ser trocada`;
+                } else {
+                    passSection = `Usuário: ${userNameOnly}\nSenha: (mantida a senha anterior)\n\nApós acessar a senha poderá ser trocada`;
+                }
+
+                const invitationText = `Olá, ${firstName}!\n\nSeu acesso ao painel BI JLE Telecom foi liberado.\nClique no link abaixo para criar sua senha corporativa:\n\n👉 ${cleanOrigin}\n\n${passSection}`;
+
+                showUserSuccessModal(email, invitationText, !editingEmail ? 'Usuário Criado com Sucesso!' : 'Usuário Atualizado com Sucesso!');
+
+                loadAdminPanel();
             } catch (err) {
                 alert('Erro ao processar: ' + err.message);
             } finally {
