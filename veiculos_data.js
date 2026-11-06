@@ -62887,5 +62887,37 @@ const VEICULOS_DATA = [
     "km": 216878,
     "kml": 11.77,
     "transactionId": "1110284087"
+  },
+  {
+    "date": "2026-11-06 01:01:29",
+    "plate": "MIS4573",
+    "driver": "ALEXANDRE ALVES",
+    "value": 150.0,
+    "uf": "SC",
+    "month": "NOVEMBRO",
+    "liters": 23.11,
+    "vlLiter": 6.49,
+    "model": "FIORINO",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 235004,
+    "kml": 14.28,
+    "transactionId": "1110335020"
+  },
+  {
+    "date": "2026-11-06 06:29:11",
+    "plate": "QNZ1F23",
+    "driver": "WESLEY DA ROSA",
+    "value": 328.59,
+    "uf": "RS",
+    "month": "NOVEMBRO",
+    "liters": 57.04,
+    "vlLiter": 5.76,
+    "model": "STRADA",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 131513,
+    "kml": 11.04,
+    "transactionId": "1110344417"
   }
 ];
