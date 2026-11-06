@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-11-06 13:09:07
+// Dados MDU Compactados - Gerado em: 2026-11-06 14:00:16
 window.MDU_METADATA = {
-    "generated_at": "2026-11-06 13:09:07",
+    "generated_at": "2026-11-06 14:00:16",
     "total_rows": 6014,
-    "geocoded_new": 0
+    "geocoded_new": 1
 };
 
 window.MDU_DATA = [
@@ -190792,35 +190792,35 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505821",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "AV IGUAÇU 322",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
+        "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
-        "prog": 0,
-        "cod_imovel": "",
-        "area": "",
+        "status": "Relatório",
+        "prog": 75.0,
+        "cod_imovel": "610090494",
+        "area": "PETAA",
         "node": "",
-        "caixa_m": "",
-        "hps": null,
-        "data_adicio": "",
-        "equipe": "",
-        "primeira_visita": "",
+        "caixa_m": "PETAA.062.M010",
+        "hps": 12,
+        "data_adicio": "06/11/2026",
+        "equipe": "GUILHERME E RODRIGO",
+        "primeira_visita": "03/11/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
-        "data_interna": "",
-        "data_fusao": "",
-        "data_baixa": "",
+        "obs_vistoria": "ADEQUADO",
+        "data_interna": "03/11/2026",
+        "data_fusao": "03/11/2026",
+        "data_baixa": "06/11/2026",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0404464,
+        "lng": -51.1782618,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505822",
