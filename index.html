@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -4612,6 +4612,21 @@
                     if (error) {
                         showAuthAlert(error.message, 'error');
                     } else if (data && data.user) {
+                        // Validação preliminar de segurança: verificar se usuário está cadastrado em bi_permissions
+                        const cleanEmail = (data.user.email || '').trim().toLowerCase();
+                        const { data: permCheck } = await supabaseClient
+                            .from('bi_permissions')
+                            .select('email, allowed_pages, is_admin')
+                            .ilike('email', cleanEmail)
+                            .maybeSingle();
+
+                        if (!permCheck || (!permCheck.is_admin && (!permCheck.allowed_pages || permCheck.allowed_pages.length === 0))) {
+                            console.warn('[Segurança] Tentativa de login bloqueada - Usuário sem registro em bi_permissions:', cleanEmail);
+                            await supabaseClient.auth.signOut();
+                            showAuthAlert('Acesso negado: Seu usuário não possui liberação de acesso ao BI. Solicite acesso ao gestor.', 'error');
+                            return;
+                        }
+
                         showDashboard(data.user);
                     }
                 } catch (err) {
@@ -5028,22 +5043,22 @@
 
                 console.log('[Admin] bi_permissions lookup:', { email: cleanEmail, permData, permErr });
 
-                let allowedPages;
-
-                if (!permErr && permData) {
-                    allowedPages = permData.allowed_pages || [];
-                    currentUserIsAdmin = permData.is_admin === true;
-                } else {
-                    // Usuário não cadastrado ou erro de RLS - buscar padrão
-                    console.warn('[Admin] Sem permissão no DB, usando padrão. Erro:', permErr);
-                    const { data: settData } = await supabaseClient
-                        .from('bi_settings')
-                        .select('value')
-                        .eq('key', 'default_pages')
-                        .maybeSingle();
-                    allowedPages = (settData && settData.value) ? settData.value : ['dashboard', 'transactions'];
+                // REGRA INEGOCIÁVEL DE SEGURANÇA (Zero-Trust):
+                // Se o usuário não existir na tabela bi_permissions ou houver erro, BLOQUEIA IMEDIATAMENTE!
+                if (permErr || !permData) {
+                    console.warn('[Segurança] Acesso negado: Usuário não cadastrado na tabela bi_permissions:', cleanEmail);
+                    currentUserAllowedPages = [];
                     currentUserIsAdmin = false;
+                    if (supabaseClient) {
+                        await supabaseClient.auth.signOut();
+                    }
+                    showLoginScreen();
+                    showAuthAlert('Acesso negado: Seu e-mail não possui permissão de acesso ao BI liberada pelo gestor. Entre em contato com o administrador.', 'error');
+                    return false;
                 }
+
+                let allowedPages = permData.allowed_pages || [];
+                currentUserIsAdmin = permData.is_admin === true;
 
                 // O consolidado usa a mesma fronteira de acesso do Financeiro JLE.
                 if (allowedPages.includes('dashboard') && !allowedPages.includes('executivo')) {
