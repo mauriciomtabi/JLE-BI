@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-11-09 08:29:41
+// Dados MDU Compactados - Gerado em: 2026-11-09 09:00:25
 window.MDU_METADATA = {
-    "generated_at": "2026-11-09 08:29:41",
+    "generated_at": "2026-11-09 09:00:25",
     "total_rows": 6014,
-    "geocoded_new": 0
+    "geocoded_new": 3
 };
 
 window.MDU_DATA = [
@@ -190888,15 +190888,15 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505824",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "RUA HUMBERTO DE CAMPOS 681 (BLOCO 1)",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
+        "aging": "46.335",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
+        "status": "FALTA DADOS",
         "prog": 0,
-        "cod_imovel": "",
+        "cod_imovel": "610492252",
         "area": "",
         "node": "",
         "caixa_m": "",
@@ -190914,9 +190914,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0614783,
+        "lng": -51.1970514,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505825",
