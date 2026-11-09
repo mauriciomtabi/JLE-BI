@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-11-09 13:00:27
+// Dados MDU Compactados - Gerado em: 2026-11-09 13:09:53
 window.MDU_METADATA = {
-    "generated_at": "2026-11-09 13:00:27",
+    "generated_at": "2026-11-09 13:09:53",
     "total_rows": 6014,
-    "geocoded_new": 2
+    "geocoded_new": 7
 };
 
 window.MDU_DATA = [
@@ -190984,16 +190984,16 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505827",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "RUA PROFESSOR JOAQUIM LACERDA 300",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
+        "aging": "46.335",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
+        "status": "FALTA DADOS",
         "prog": 0,
         "cod_imovel": "",
-        "area": "",
+        "area": "CMQAA",
         "node": "",
         "caixa_m": "",
         "hps": null,
@@ -191010,9 +191010,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.1106263,
+        "lng": -51.237714,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505828",
