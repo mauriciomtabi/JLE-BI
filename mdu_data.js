@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-11-09 12:00:25
+// Dados MDU Compactados - Gerado em: 2026-11-09 13:00:27
 window.MDU_METADATA = {
-    "generated_at": "2026-11-09 12:00:25",
+    "generated_at": "2026-11-09 13:00:27",
     "total_rows": 6014,
-    "geocoded_new": 0
+    "geocoded_new": 2
 };
 
 window.MDU_DATA = [
@@ -190952,35 +190952,35 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505826",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "RUA AURORA 1100 CX 2",
+        "cidade": "CANOAS",
+        "cluster": "PAE",
+        "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
-        "prog": 0,
-        "cod_imovel": "",
-        "area": "",
-        "node": "",
-        "caixa_m": "",
-        "hps": null,
-        "data_adicio": "",
-        "equipe": "",
-        "primeira_visita": "",
+        "status": "Baixa",
+        "prog": 63.0,
+        "cod_imovel": "364498374",
+        "area": "SJOAA",
+        "node": "MRD17A",
+        "caixa_m": "SJOAA.252.M010",
+        "hps": 12,
+        "data_adicio": "09/11/2026",
+        "equipe": "Paulo Ribaczki",
+        "primeira_visita": "16/10/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
-        "data_interna": "",
-        "data_fusao": "",
+        "obs_vistoria": "ADEQUADO",
+        "data_interna": "16/10/2026",
+        "data_fusao": "06/11/2026",
         "data_baixa": "",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -29.9104108,
+        "lng": -51.1655272,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505827",
