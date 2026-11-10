@@ -22,6 +22,7 @@ resend_schedule_state.json
 # Copia de contingencia da fonte do consolidado executivo JLE
 /executivo_jle_local.xlsx
 /executivo_jle_data.js.tmp
+/financiamentos_local/
 
 # Scripts de teste locais e chaves
 test_*.js

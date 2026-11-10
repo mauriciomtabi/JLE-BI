@@ -8,6 +8,7 @@
     // Estado interno do módulo
     const state = {
         activeTab: 'visao_geral', // 'visao_geral', 'cronograma', 'desembolso'
+        filterEmpresa: 'TODAS', // 'TODAS', 'JLE', 'TECNODRILL'
         filterCategoria: 'TODAS',
         filterInstituicao: 'TODAS',
         filterStatus: 'TODOS',
@@ -34,21 +35,53 @@
     }
 
     // Inicializador do Módulo
-    window.initFinanciamentos = function () {
+    window.initFinanciamentos = function (initialEmpresa) {
         if (!window.FINANCIAMENTOS_DATA) {
             console.warn('[Financiamentos] window.FINANCIAMENTOS_DATA não encontrado.');
             return;
         }
 
-        const data = window.FINANCIAMENTOS_DATA;
-        if (!state.selectedContractId && data.contratos && data.contratos.length > 0) {
-            state.selectedContractId = data.contratos[0].id;
+        if (initialEmpresa && typeof initialEmpresa === 'string') {
+            state.filterEmpresa = initialEmpresa.toUpperCase();
         }
 
+        syncEmpresaUI();
         populateContractDropdown();
         renderOverviewKPIs();
         renderActiveTab();
     };
+
+    window.setFinFilterEmpresa = function (empresa) {
+        state.filterEmpresa = (empresa || 'TODAS').toUpperCase();
+        syncEmpresaUI();
+        populateContractDropdown();
+        renderOverviewKPIs();
+        renderActiveTab();
+    };
+
+    function syncEmpresaUI() {
+        // Atualizar pills de empresa no topo do dashboard
+        document.querySelectorAll('.fin-empresa-pill').forEach(btn => {
+            const empVal = (btn.getAttribute('data-empresa') || '').toUpperCase();
+            btn.classList.toggle('active', empVal === state.filterEmpresa);
+        });
+
+        // Sincronizar subitens do menu lateral
+        const navJle = document.getElementById('nav-financiamentos-jle');
+        const navTec = document.getElementById('nav-financiamentos-tecnodrill');
+        if (navJle) navJle.classList.toggle('active', state.filterEmpresa === 'JLE');
+        if (navTec) navTec.classList.toggle('active', state.filterEmpresa === 'TECNODRILL');
+
+        // Atualizar subtítulo da visão caso container esteja visível
+        const elSubtitle = document.getElementById('view-subtitle');
+        const finContainer = document.getElementById('view-financiamentos-container');
+        if (elSubtitle && finContainer && finContainer.style.display === 'block') {
+            const empBadge = state.filterEmpresa === 'TODAS'
+                ? '<span class="badge-competencia">TODAS AS EMPRESAS</span>'
+                : `<span class="badge-competencia">${state.filterEmpresa}</span>`;
+            elSubtitle.innerHTML = `Acompanhamento de Empréstimos, Máquinas, Veículos, Imóveis e Cronogramas de PMT ${empBadge}`;
+        }
+    }
 
     window.switchFinTab = function (tabId) {
         state.activeTab = tabId;
@@ -85,6 +118,8 @@
         if (!data || !data.contratos) return [];
 
         return data.contratos.filter(c => {
+            const cEmp = (c.empresa || 'JLE').toUpperCase();
+            if (state.filterEmpresa !== 'TODAS' && cEmp !== state.filterEmpresa) return false;
             if (state.filterCategoria !== 'TODAS' && c.categoria !== state.filterCategoria) return false;
             if (state.filterInstituicao !== 'TODAS' && c.instituicao !== state.filterInstituicao) return false;
             if (state.filterStatus === 'PAGO' && c.qtd_pendentes > 0) return false;
@@ -96,7 +131,8 @@
                 const matchNum = (c.contrato || '').toLowerCase().includes(q);
                 const matchProd = (c.produto || '').toLowerCase().includes(q);
                 const matchInst = (c.instituicao || '').toLowerCase().includes(q);
-                if (!matchName && !matchNum && !matchProd && !matchInst) return false;
+                const matchEmp = cEmp.toLowerCase().includes(q);
+                if (!matchName && !matchNum && !matchProd && !matchInst && !matchEmp) return false;
             }
             return true;
         });
@@ -110,7 +146,7 @@
         if (!data || !data.totais_gerais) return;
 
         const filtered = getFilteredContracts();
-        const hasFilters = (state.filterCategoria !== 'TODAS' || state.filterInstituicao !== 'TODAS' || state.filterStatus !== 'TODOS' || state.searchQuery);
+        const hasFilters = (state.filterEmpresa !== 'TODAS' || state.filterCategoria !== 'TODAS' || state.filterInstituicao !== 'TODAS' || state.filterStatus !== 'TODOS' || state.searchQuery);
 
         let totalFin = 0;
         let totalPago = 0;
@@ -208,10 +244,14 @@
         if (!container) return;
 
         const data = window.FINANCIAMENTOS_DATA;
-        if (!data || !data.totais_gerais || !data.totais_gerais.por_categoria) return;
+        if (!data || !data.contratos) return;
 
-        const catData = data.totais_gerais.por_categoria;
-        const totalSaldo = data.totais_gerais.saldo_devedor || 1;
+        // Base de contratos respeitando o filtro de empresa
+        const baseContracts = (state.filterEmpresa !== 'TODAS')
+            ? data.contratos.filter(c => (c.empresa || 'JLE').toUpperCase() === state.filterEmpresa)
+            : data.contratos;
+
+        const totalSaldo = baseContracts.reduce((acc, c) => acc + c.saldo_devedor, 0) || 1;
 
         const categories = [
             {
@@ -242,8 +282,14 @@
 
         let html = '';
         categories.forEach(c => {
-            const info = catData[c.key] || { financiado: 0, pago: 0, saldo_devedor: 0, contratos: 0, total_parcelas: 0, qtd_pagas: 0, pct_quitado: 0 };
-            const pctCarteira = (info.saldo_devedor / totalSaldo * 100.0);
+            const cList = baseContracts.filter(item => item.categoria === c.key);
+            const fin = cList.reduce((acc, item) => acc + item.valor_financiado, 0);
+            const pag = cList.reduce((acc, item) => acc + item.total_pago, 0);
+            const dev = cList.reduce((acc, item) => acc + item.saldo_devedor, 0);
+            const parc = cList.reduce((acc, item) => acc + item.total_parcelas, 0);
+            const pagas = cList.reduce((acc, item) => acc + item.qtd_pagas, 0);
+            const pctQuit = parc > 0 ? (pagas / parc * 100.0) : 0.0;
+            const pctCarteira = (dev / totalSaldo * 100.0);
             const isSelected = state.filterCategoria === c.key;
 
             html += `
@@ -254,19 +300,19 @@
                     </span>
                     <span class="fin-comp-badge ${c.badgeClass}">${formatPct(pctCarteira)} da carteira</span>
                 </div>
-                <div class="fin-comp-saldo" style="color: ${c.color};">${formatMoeda(info.saldo_devedor)}</div>
+                <div class="fin-comp-saldo" style="color: ${c.color};">${formatMoeda(dev)}</div>
                 <div style="font-size: 0.76rem; color: var(--text-secondary); margin-bottom: 8px;">
-                    Saldo restante a amortizar (${info.contratos} contratos)
+                    Saldo restante a amortizar (${cList.length} contratos)
                 </div>
                 <div class="fin-progress-wrapper">
                     <div class="fin-progress-bar-bg">
-                        <div class="fin-progress-bar-fill" style="width: ${info.pct_quitado}%; background: ${c.color};"></div>
+                        <div class="fin-progress-bar-fill" style="width: ${pctQuit.toFixed(1)}%; background: ${c.color};"></div>
                     </div>
-                    <span class="fin-progress-text">${info.pct_quitado}%</span>
+                    <span class="fin-progress-text">${formatPct(pctQuit)}</span>
                 </div>
                 <div class="fin-comp-sub">
-                    <span>Original: <strong>${formatMoeda(info.financiado)}</strong></span>
-                    <span style="color: #10b981;">Pago: <strong>${formatMoeda(info.pago)}</strong></span>
+                    <span>Original: <strong>${formatMoeda(fin)}</strong></span>
+                    <span style="color: #10b981;">Pago: <strong>${formatMoeda(pag)}</strong></span>
                 </div>
             </div>
             `;
@@ -315,7 +361,7 @@
             mapComp[comp] = { maquinas: 0, imoveis: 0, veiculos: 0, total: 0 };
         });
 
-        const hasFilters = (state.filterCategoria !== 'TODAS' || state.filterInstituicao !== 'TODAS' || state.filterStatus !== 'TODOS' || state.searchQuery);
+        const hasFilters = (state.filterEmpresa !== 'TODAS' || state.filterCategoria !== 'TODAS' || state.filterInstituicao !== 'TODAS' || state.filterStatus !== 'TODOS' || state.searchQuery);
 
         if (!hasFilters && data.totais_gerais && data.totais_gerais.fluxo_mensal) {
             data.totais_gerais.fluxo_mensal.forEach(m => {
@@ -544,17 +590,20 @@
 
         const contracts = getFilteredContracts();
         if (contracts.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding: 24px; color: var(--text-secondary);">Nenhum financiamento encontrado com os filtros selecionados.</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="10" style="text-align:center; padding: 24px; color: var(--text-secondary);">Nenhum financiamento encontrado com os filtros selecionados.</td></tr>`;
             return;
         }
 
         let html = '';
         contracts.forEach(c => {
             const catBadgeClass = c.categoria === 'Máquinas' ? 'fin-badge-cat-maquinas' : (c.categoria === 'Veículos' ? 'fin-badge-cat-veiculos' : 'fin-badge-cat-imoveis');
+            const empBadgeClass = (c.empresa === 'TECNODRILL') ? 'fin-badge-empresa-tecnodrill' : 'fin-badge-empresa-jle';
+            const empIcon = (c.empresa === 'TECNODRILL') ? 'fa-person-digging' : 'fa-tower-cell';
             const pct = c.pct_quitado || 0;
 
             html += `
             <tr>
+                <td><span class="fin-badge ${empBadgeClass}"><i class="fa-solid ${empIcon}"></i> ${c.empresa || 'JLE'}</span></td>
                 <td><span class="fin-badge ${catBadgeClass}"><i class="fa-solid fa-tag"></i> ${c.categoria}</span></td>
                 <td>
                     <div style="font-weight: 600; color: var(--text-primary);">${c.nome}</div>
@@ -596,9 +645,22 @@
         const data = window.FINANCIAMENTOS_DATA;
         if (!data || !data.contratos) return;
 
-        select.innerHTML = data.contratos.map(c => `
+        const availableContracts = (state.filterEmpresa !== 'TODAS')
+            ? data.contratos.filter(c => (c.empresa || 'JLE').toUpperCase() === state.filterEmpresa)
+            : data.contratos;
+
+        if (availableContracts.length === 0) {
+            select.innerHTML = '<option value="">Nenhum contrato disponível</option>';
+            return;
+        }
+
+        if (!availableContracts.some(c => c.id === state.selectedContractId)) {
+            state.selectedContractId = availableContracts[0].id;
+        }
+
+        select.innerHTML = availableContracts.map(c => `
             <option value="${c.id}" ${c.id === state.selectedContractId ? 'selected' : ''}>
-                [${c.categoria.toUpperCase()}] ${c.nome} (${c.instituicao})
+                [${c.empresa || 'JLE'}] [${c.categoria.toUpperCase()}] ${c.nome} (${c.instituicao})
             </option>
         `).join('');
 
@@ -631,10 +693,16 @@
         const banner = document.getElementById('fin-contract-banner');
         if (!banner) return;
 
+        const empBadgeClass = (c.empresa === 'TECNODRILL') ? 'fin-badge-empresa-tecnodrill' : 'fin-badge-empresa-jle';
+        const empIcon = (c.empresa === 'TECNODRILL') ? 'fa-person-digging' : 'fa-tower-cell';
+
         banner.innerHTML = `
             <div class="fin-contract-param">
-                <span class="fin-contract-param-label">Contrato / Bem</span>
-                <span class="fin-contract-param-value">${c.nome}</span>
+                <span class="fin-contract-param-label">Empresa & Bem</span>
+                <span class="fin-contract-param-value" style="display: flex; align-items: center; gap: 6px;">
+                    <span class="fin-badge ${empBadgeClass}"><i class="fa-solid ${empIcon}"></i> ${c.empresa || 'JLE'}</span>
+                    ${c.nome}
+                </span>
                 <span style="font-size: 0.74rem; color: var(--text-secondary);">${c.contrato}</span>
             </div>
             <div class="fin-contract-param">
@@ -782,9 +850,34 @@
     // ==========================================
     function renderDesembolsoTab() {
         const data = window.FINANCIAMENTOS_DATA;
-        if (!data || !data.totais_gerais) return;
+        if (!data || !data.contratos) return;
 
-        const anos = data.totais_gerais.desembolso_anual || [];
+        const filtered = (state.filterEmpresa !== 'TODAS')
+            ? data.contratos.filter(c => (c.empresa || 'JLE').toUpperCase() === state.filterEmpresa)
+            : data.contratos;
+
+        let anos = [];
+        if (state.filterEmpresa === 'TODAS' && data.totais_gerais && data.totais_gerais.desembolso_anual) {
+            anos = data.totais_gerais.desembolso_anual;
+        } else {
+            const anosMap = {};
+            filtered.forEach(c => {
+                (c.parcelas || []).forEach(p => {
+                    const ano = p.ano;
+                    if (ano > 0) {
+                        if (!anosMap[ano]) anosMap[ano] = { ano: ano, total_previsto: 0, total_pago: 0, total_pendente: 0 };
+                        anosMap[ano].total_previsto = Math.round((anosMap[ano].total_previsto + (p.prestacao || 0)) * 100) / 100;
+                        if (p.status === 'Pago') {
+                            anosMap[ano].total_pago = Math.round((anosMap[ano].total_pago + (p.valor_pago || 0)) * 100) / 100;
+                        } else {
+                            anosMap[ano].total_pendente = Math.round((anosMap[ano].total_pendente + (p.prestacao || 0)) * 100) / 100;
+                        }
+                    }
+                });
+            });
+            anos = Object.keys(anosMap).sort().map(a => anosMap[a]);
+        }
+
         const container = document.getElementById('fin-anual-cards-grid');
         if (container) {
             container.innerHTML = anos.map(a => `
@@ -914,7 +1007,48 @@
         if (!tbody) return;
 
         const data = window.FINANCIAMENTOS_DATA;
-        const fluxo = data.totais_gerais.fluxo_mensal || [];
+        if (!data || !data.contratos) return;
+
+        let fluxo = [];
+        if (state.filterEmpresa === 'TODAS' && data.totais_gerais && data.totais_gerais.fluxo_mensal) {
+            fluxo = data.totais_gerais.fluxo_mensal;
+        } else {
+            const filtered = data.contratos.filter(c => (c.empresa || 'JLE').toUpperCase() === state.filterEmpresa);
+            const mesesMap = {};
+            filtered.forEach(c => {
+                (c.parcelas || []).forEach(p => {
+                    const dtIso = p.vencimento_iso;
+                    if (dtIso && dtIso.length >= 7) {
+                        const mKey = dtIso.substring(0, 7);
+                        if (!mesesMap[mKey]) {
+                            const parts = mKey.split('-');
+                            mesesMap[mKey] = {
+                                competencia: `${parts[1]}/${parts[0]}`,
+                                ano: parseInt(parts[0]),
+                                mes: parseInt(parts[1]),
+                                total_previsto: 0,
+                                total_pago: 0,
+                                total_pendente: 0,
+                                maquinas: 0,
+                                veiculos: 0,
+                                imoveis: 0
+                            };
+                        }
+                        const val = p.prestacao || 0;
+                        mesesMap[mKey].total_previsto = Math.round((mesesMap[mKey].total_previsto + val) * 100) / 100;
+                        if (c.categoria === 'Máquinas') mesesMap[mKey].maquinas = Math.round((mesesMap[mKey].maquinas + val) * 100) / 100;
+                        else if (c.categoria === 'Veículos') mesesMap[mKey].veiculos = Math.round((mesesMap[mKey].veiculos + val) * 100) / 100;
+                        else if (c.categoria === 'Imóveis') mesesMap[mKey].imoveis = Math.round((mesesMap[mKey].imoveis + val) * 100) / 100;
+                        if (p.status === 'Pago') {
+                            mesesMap[mKey].total_pago = Math.round((mesesMap[mKey].total_pago + (p.valor_pago || 0)) * 100) / 100;
+                        } else {
+                            mesesMap[mKey].total_pendente = Math.round((mesesMap[mKey].total_pendente + val) * 100) / 100;
+                        }
+                    }
+                });
+            });
+            fluxo = Object.keys(mesesMap).sort().map(k => mesesMap[k]);
+        }
 
         let html = '';
         fluxo.forEach(m => {
@@ -950,6 +1084,7 @@
         const wb = XLSX.utils.book_new();
 
         const scheduleRows = (c.parcelas || []).map(p => ({
+            'Empresa': c.empresa || 'JLE',
             'Nº Parcela': `Parcela ${p.numero}/${c.total_parcelas}`,
             'Tipo': p.tipo || 'Mensal',
             'Vencimento': p.vencimento || '',
@@ -966,7 +1101,7 @@
         XLSX.utils.book_append_sheet(wb, ws, "Cronograma PMT");
 
         const safeName = c.nome.replace(/[^a-zA-Z0-9]/g, '_');
-        XLSX.writeFile(wb, `PMT_Financiamento_${safeName}.xlsx`);
+        XLSX.writeFile(wb, `PMT_Financiamento_${c.empresa || 'JLE'}_${safeName}.xlsx`);
     };
 
     window.exportFinOverviewExcel = function () {
@@ -979,6 +1114,7 @@
         const wb = XLSX.utils.book_new();
 
         const contractsRows = (getFilteredContracts() || []).map(c => ({
+            'Empresa': c.empresa || 'JLE',
             'Categoria': c.categoria,
             'Financiamento / Bem': c.nome,
             'Contrato': c.contrato,
@@ -1009,7 +1145,8 @@
         const wsFluxo = XLSX.utils.json_to_sheet(fluxoRows);
         XLSX.utils.book_append_sheet(wb, wsFluxo, "Fluxo Mensal PMTs");
 
-        XLSX.writeFile(wb, "BI_JLE_Financiamentos_Consolidado.xlsx");
+        const prefix = state.filterEmpresa !== 'TODAS' ? `_${state.filterEmpresa}` : '';
+        XLSX.writeFile(wb, `BI_JLE_Financiamentos${prefix}_Consolidado.xlsx`);
     };
 
     // ==========================================
@@ -1037,10 +1174,14 @@
     };
 
     window.clearFinFilters = function () {
+        state.filterEmpresa = 'TODAS';
         state.filterCategoria = 'TODAS';
         state.filterInstituicao = 'TODAS';
         state.filterStatus = 'TODOS';
         state.searchQuery = '';
+
+        syncEmpresaUI();
+        populateContractDropdown();
 
         const selCat = document.getElementById('fin-filter-categoria');
         if (selCat) selCat.value = 'TODAS';

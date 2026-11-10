@@ -30,13 +30,49 @@ CANDIDATE_DIRS = [
 def ensure_cache_dir():
     if not os.path.exists(LOCAL_CACHE_DIR):
         os.makedirs(LOCAL_CACHE_DIR, exist_ok=True)
+    for sub in ["JLE", "TECNODRILL"]:
+        sub_p = os.path.join(LOCAL_CACHE_DIR, sub)
+        if not os.path.exists(sub_p):
+            os.makedirs(sub_p, exist_ok=True)
+
+def load_wb_resilient(fpath):
+    if not fpath or not os.path.exists(fpath):
+        return None
+    try:
+        return openpyxl.load_workbook(fpath, data_only=True)
+    except Exception:
+        try:
+            with open(fpath, "rb") as f:
+                content = f.read()
+                if content.startswith(b"PK\x03\x04"):
+                    import io
+                    return openpyxl.load_workbook(io.BytesIO(content), data_only=True)
+        except Exception as e:
+            print(f"[ETL] Erro ao carregar planilha {fpath}: {e}")
+    return None
+
+def find_contract_file(base_folder, subfolder_name, filename):
+    c1 = os.path.join(base_folder, subfolder_name, filename)
+    if os.path.exists(c1):
+        return c1
+    c2 = os.path.join(base_folder, filename)
+    if os.path.exists(c2):
+        return c2
+    # Tenta no cache local correspondente
+    c3 = os.path.join(LOCAL_CACHE_DIR, subfolder_name, filename)
+    if os.path.exists(c3):
+        return c3
+    c4 = os.path.join(LOCAL_CACHE_DIR, filename)
+    if os.path.exists(c4):
+        return c4
+    return None
 
 def find_network_folder():
     for c_dir in CANDIDATE_DIRS:
         if os.path.exists(c_dir):
             try:
                 files = os.listdir(c_dir)
-                if any("financiamento" in f.lower() for f in files):
+                if any("financiamento" in f.lower() for f in files) or any(sub in files for sub in ["JLE", "TECNODRILL"]):
                     return c_dir
             except Exception:
                 pass
@@ -47,13 +83,56 @@ def sync_network_to_local(net_folder):
     if not net_folder or not os.path.exists(net_folder):
         return
     try:
+        # 1. Sincronizar subpastas JLE e TECNODRILL
+        for sub in ["JLE", "TECNODRILL"]:
+            net_sub = os.path.join(net_folder, sub)
+            loc_sub = os.path.join(LOCAL_CACHE_DIR, sub)
+            if os.path.exists(net_sub) and os.path.isdir(net_sub):
+                os.makedirs(loc_sub, exist_ok=True)
+                for f in os.listdir(net_sub):
+                    if f.startswith("~$") or f.endswith(".tmp"):
+                        continue
+                    src = os.path.join(net_sub, f)
+                    if os.path.isdir(src):
+                        continue
+                    dst = os.path.join(loc_sub, f)
+                    try:
+                        if not os.path.exists(dst) or os.path.getmtime(src) > os.path.getmtime(dst):
+                            shutil.copy2(src, dst)
+                    except Exception as e:
+                        print(f"[ETL] Aviso ao copiar {sub}/{f}: {e}")
+
+                    # Também manter cópia na raiz de financiamentos_local para contingência legada
+                    dst_root = os.path.join(LOCAL_CACHE_DIR, f)
+                    try:
+                        if not os.path.exists(dst_root) or os.path.getmtime(src) > os.path.getmtime(dst_root):
+                            shutil.copy2(src, dst_root)
+                    except Exception:
+                        pass
+
+                    # Se for arquivo XLSX salvo sem extensão (ex: 'Financiamento 4.ª Perfuratriz'), salvar também com .xlsx
+                    if not f.lower().endswith(".xlsx"):
+                        try:
+                            with open(src, "rb") as test_f:
+                                if test_f.read(4) == b"PK\x03\x04":
+                                    dst_xlsx = os.path.join(loc_sub, f + ".xlsx")
+                                    if not os.path.exists(dst_xlsx) or os.path.getmtime(src) > os.path.getmtime(dst_xlsx):
+                                        shutil.copy2(src, dst_xlsx)
+                                    dst_root_xlsx = os.path.join(LOCAL_CACHE_DIR, f + ".xlsx")
+                                    if not os.path.exists(dst_root_xlsx) or os.path.getmtime(src) > os.path.getmtime(dst_root_xlsx):
+                                        shutil.copy2(src, dst_root_xlsx)
+                        except Exception:
+                            pass
+
+        # 2. Sincronizar arquivos que estejam diretamente na raiz de net_folder
         for f in os.listdir(net_folder):
-            if f.startswith("~$") or not f.lower().endswith(".xlsx"):
+            if f.startswith("~$") or f in ["JLE", "TECNODRILL"] or f.endswith(".tmp"):
                 continue
             src = os.path.join(net_folder, f)
+            if os.path.isdir(src):
+                continue
             dst = os.path.join(LOCAL_CACHE_DIR, f)
             try:
-                # Copiar se não existir ou se modificado
                 if not os.path.exists(dst) or os.path.getmtime(src) > os.path.getmtime(dst):
                     shutil.copy2(src, dst)
             except Exception as e:
@@ -140,7 +219,7 @@ def estimate_monthly_rate(pv, pmt, n):
         r = max(0.0001, min(0.15, r_new))
     return round(r * 100.0, 2)
 
-def extract_generic_contract(folder, fname):
+def extract_generic_contract(folder, fname, empresa="JLE"):
     """
     Parser universal e resiliente para qualquer nova planilha de financiamento
     adicionada à pasta de rede da Controladoria. Identifica automaticamente
@@ -149,10 +228,9 @@ def extract_generic_contract(folder, fname):
     fpath = os.path.join(folder, fname)
     if not os.path.exists(fpath):
         return None
-    try:
-        wb = openpyxl.load_workbook(fpath, data_only=True)
-    except Exception as e:
-        print(f"[ETL Dinâmico] Erro ao abrir {fname}: {e}")
+    wb = load_wb_resilient(fpath)
+    if not wb:
+        print(f"[ETL Dinâmico] Erro ao abrir {fname}")
         return None
 
     # Nome limpo e ID
@@ -337,6 +415,7 @@ def extract_generic_contract(folder, fname):
 
     return {
         "id": c_id,
+        "empresa": empresa,
         "nome": clean_name,
         "arquivo": fname,
         "instituicao": instituicao,
@@ -359,6 +438,131 @@ def extract_generic_contract(folder, fname):
         "parcelas": parcelas
     }
 
+def extract_tecnodrill_contract(fpath, fname):
+    """
+    Parser especializado para os contratos da Tecnodrill no Bradesco Financiamentos:
+    - Financiamento Daf Cinza.xlsx (Caminhão)
+    - Financiamento 4.ª Perfuratriz (Máquina XCMG XZ230E)
+    Utiliza as abas 'PMT e parcelas' e 'Pagamentos'.
+    """
+    wb = load_wb_resilient(fpath)
+    if not wb or "PMT e parcelas" not in wb.sheetnames or "Pagamentos" not in wb.sheetnames:
+        return None
+    
+    ws_pmt = wb["PMT e parcelas"]
+    ws_pag = wb["Pagamentos"]
+    
+    header_raw = str(ws_pmt.cell(1, 1).value or "").strip()
+    ccb_num = ""
+    if "CCB" in header_raw:
+        ccb_num = header_raw.split("CCB")[-1].replace("|", "").strip()
+        
+    line2 = str(ws_pmt.cell(2, 1).value or "").strip()
+    parts2 = [p.strip() for p in line2.split("•") if p.strip()]
+    instituicao = parts2[0] if len(parts2) > 0 else "Bradesco Financiamentos"
+    bem_desc = parts2[1] if len(parts2) > 1 else ""
+    
+    if "perfuratriz" in fname.lower() or "perfuratriz" in header_raw.lower() or "xz230e" in line2.lower():
+        categoria = "Máquinas"
+        nome = "4ª Perfuratriz XCMG XZ230E"
+        contrato_id = "tecnodrill_perfuratriz_4"
+        produto = f"Perfuratriz Direcional {bem_desc}".strip()
+    else:
+        categoria = "Veículos"
+        nome = "Caminhão DAF Cinza"
+        contrato_id = "tecnodrill_daf_cinza"
+        produto = f"Caminhão {bem_desc}".strip()
+        
+    v_fin = parse_val(ws_pmt.cell(15, 2).value)
+    v_total_bem = parse_val(ws_pmt.cell(5, 2).value)
+    v_entrada = parse_val(ws_pmt.cell(6, 2).value)
+    pmt_contratual = parse_val(ws_pmt.cell(5, 5).value)
+    
+    raw_taxa = ws_pmt.cell(11, 5).value
+    taxa_divulgada = round(float(raw_taxa) * 100.0, 2) if raw_taxa is not None else 0.0
+    dt_emissao = parse_date(ws_pmt.cell(19, 2).value)
+    
+    cronograma_map = {}
+    for r in range(30, ws_pmt.max_row + 1):
+        p_num = ws_pmt.cell(r, 1).value
+        if p_num is not None and str(p_num).isdigit():
+            cronograma_map[int(p_num)] = {
+                "venc": parse_date(ws_pmt.cell(r, 2).value),
+                "prestacao": parse_val(ws_pmt.cell(r, 3).value),
+            }
+            
+    parcelas = []
+    for r in range(15, ws_pag.max_row + 1):
+        p_num = ws_pag.cell(r, 1).value
+        if p_num is None or not str(p_num).isdigit():
+            continue
+        p_int = int(p_num)
+        dt_venc = parse_date(ws_pag.cell(r, 2).value)
+        if not dt_venc and p_int in cronograma_map:
+            dt_venc = cronograma_map[p_int]["venc"]
+            
+        v_prest = pmt_contratual
+        if p_int in cronograma_map and cronograma_map[p_int]["prestacao"] > 0:
+            v_prest = cronograma_map[p_int]["prestacao"]
+            
+        v_pago = parse_val(ws_pag.cell(r, 3).value)
+        juros_pagos = parse_val(ws_pag.cell(r, 4).value)
+        juros_mes = parse_val(ws_pag.cell(r, 5).value)
+        amortizacao = parse_val(ws_pag.cell(r, 6).value)
+        saldo_princ = parse_val(ws_pag.cell(r, 8).value)
+        
+        is_pago = (v_pago > 0)
+        status = "Pago" if is_pago else "Pendente"
+        
+        parcelas.append({
+            "numero": p_int,
+            "tipo": "Mensal",
+            "vencimento": dt_venc,
+            "vencimento_iso": date_to_iso(dt_venc),
+            "mes_ano": date_to_mes_ano(dt_venc),
+            "ano": date_to_ano(dt_venc),
+            "prestacao": v_prest,
+            "juros": juros_mes or juros_pagos,
+            "amortizacao": amortizacao,
+            "saldo_devedor": 0.0 if is_pago else (saldo_princ or v_prest),
+            "status": status,
+            "data_pagamento": dt_venc if is_pago else "",
+            "valor_pago": v_pago if is_pago else 0.0,
+            "diferenca": round(v_prest - v_pago, 2) if is_pago else 0.0
+        })
+        
+    qtd_pagas = sum(1 for p in parcelas if p["status"] == "Pago")
+    qtd_pend = len(parcelas) - qtd_pagas
+    tot_pago = round(sum(p["valor_pago"] for p in parcelas), 2)
+    tot_aberto = round(sum(p["prestacao"] for p in parcelas if p["status"] == "Pendente"), 2)
+    
+    return {
+        "id": contrato_id,
+        "empresa": "TECNODRILL",
+        "nome": nome,
+        "arquivo": fname,
+        "instituicao": instituicao,
+        "categoria": categoria,
+        "contrato": f"CCB {ccb_num}" if ccb_num else fname,
+        "produto": produto,
+        "sistema": "Tabela Price / CCB",
+        "data_operacao": dt_emissao,
+        "vencimento_final": parcelas[-1]["vencimento"] if parcelas else "",
+        "valor_total_bem": v_total_bem,
+        "valor_entrada": v_entrada,
+        "valor_financiado": v_fin,
+        "valor_liquido": v_fin,
+        "taxa_mensal": taxa_divulgada,
+        "prestacao_mensal": pmt_contratual,
+        "total_parcelas": len(parcelas),
+        "qtd_pagas": qtd_pagas,
+        "qtd_pendentes": qtd_pend,
+        "total_pago": tot_pago,
+        "saldo_devedor": tot_aberto,
+        "pct_quitado": round((qtd_pagas / len(parcelas) * 100.0) if parcelas else 0.0, 1),
+        "parcelas": parcelas
+    }
+
 def extract_all_contracts(folder):
     contratos = []
     processed_files = set()
@@ -367,10 +571,10 @@ def extract_all_contracts(folder):
     # 1. Financiamento 1ª Maquina Senff.xlsx (2 Contratos)
     # ----------------------------------------------------
     processed_files.add("Financiamento 1ª Maquina Senff.xlsx")
-    f_senff = os.path.join(folder, "Financiamento 1ª Maquina Senff.xlsx")
-    if os.path.exists(f_senff):
+    f_senff = find_contract_file(folder, "JLE", "Financiamento 1ª Maquina Senff.xlsx")
+    if f_senff and os.path.exists(f_senff):
         try:
-            wb = openpyxl.load_workbook(f_senff, data_only=True)
+            wb = load_wb_resilient(f_senff)
             senff_configs = [
                 {
                     "sheet": "Contrato 2953975",
@@ -437,6 +641,7 @@ def extract_all_contracts(folder):
                     
                     contratos.append({
                         "id": cfg["id"],
+                        "empresa": "JLE",
                         "nome": cfg["nome"],
                         "arquivo": "Financiamento 1ª Maquina Senff.xlsx",
                         "instituicao": "Banco Senff",
@@ -465,10 +670,10 @@ def extract_all_contracts(folder):
     # 2. Financiamento 2ª Máquina.xlsx
     # ----------------------------------------------------
     processed_files.add("Financiamento 2ª Máquina.xlsx")
-    f_maq2 = os.path.join(folder, "Financiamento 2ª Máquina.xlsx")
-    if os.path.exists(f_maq2):
+    f_maq2 = find_contract_file(folder, "JLE", "Financiamento 2ª Máquina.xlsx")
+    if f_maq2 and os.path.exists(f_maq2):
         try:
-            wb = openpyxl.load_workbook(f_maq2, data_only=True)
+            wb = load_wb_resilient(f_maq2)
             ws_res = wb["Resumo"] if "Resumo" in wb.sheetnames else wb.worksheets[0]
             contrato_num = str(ws_res.cell(5, 2).value or "").strip()
             v_fin = parse_val(ws_res.cell(10, 2).value)
@@ -533,6 +738,7 @@ def extract_all_contracts(folder):
             
             contratos.append({
                 "id": "sicoob_maq2",
+                "empresa": "JLE",
                 "nome": "2ª Perfuratriz Sicoob",
                 "arquivo": "Financiamento 2ª Máquina.xlsx",
                 "instituicao": "SICOOB",
@@ -568,10 +774,10 @@ def extract_all_contracts(folder):
     ]
     for fname, c_id, nome, cat, prod in std_sicoob:
         processed_files.add(fname)
-        fpath = os.path.join(folder, fname)
-        if os.path.exists(fpath):
+        fpath = find_contract_file(folder, "JLE", fname)
+        if fpath and os.path.exists(fpath):
             try:
-                wb = openpyxl.load_workbook(fpath, data_only=True)
+                wb = load_wb_resilient(fpath)
                 ws_par = wb["Parâmetros"] if "Parâmetros" in wb.sheetnames else wb.worksheets[0]
                 contrato_num = str(ws_par.cell(6, 2).value or "").strip()
                 v_fin = parse_val(ws_par.cell(9, 2).value)
@@ -632,6 +838,7 @@ def extract_all_contracts(folder):
                 
                 contratos.append({
                     "id": c_id,
+                    "empresa": "JLE",
                     "nome": nome,
                     "arquivo": fname,
                     "instituicao": "SICOOB",
@@ -660,10 +867,10 @@ def extract_all_contracts(folder):
     # 5. Financiamento Compra Base NH.xlsx
     # ----------------------------------------------------
     processed_files.add("Financiamento Compra Base NH.xlsx")
-    f_nh = os.path.join(folder, "Financiamento Compra Base NH.xlsx")
-    if os.path.exists(f_nh):
+    f_nh = find_contract_file(folder, "JLE", "Financiamento Compra Base NH.xlsx")
+    if f_nh and os.path.exists(f_nh):
         try:
-            wb = openpyxl.load_workbook(f_nh, data_only=True)
+            wb = load_wb_resilient(f_nh)
             ws = wb["PMT Contrato"]
             v_total = parse_val(ws.cell(3, 2).value)
             v_entrada = parse_val(ws.cell(4, 2).value)
@@ -712,6 +919,7 @@ def extract_all_contracts(folder):
             
             contratos.append({
                 "id": "compra_base_nh",
+                "empresa": "JLE",
                 "nome": "Compra Base Novo Hamburgo",
                 "arquivo": "Financiamento Compra Base NH.xlsx",
                 "instituicao": "Pro-Formula",
@@ -744,10 +952,10 @@ def extract_all_contracts(folder):
     # 6. Financiamento Compra Terreno.xlsx
     # ----------------------------------------------------
     processed_files.add("Financiamento Compra Terreno.xlsx")
-    f_ter = os.path.join(folder, "Financiamento Compra Terreno.xlsx")
-    if os.path.exists(f_ter):
+    f_ter = find_contract_file(folder, "JLE", "Financiamento Compra Terreno.xlsx")
+    if f_ter and os.path.exists(f_ter):
         try:
-            wb = openpyxl.load_workbook(f_ter, data_only=True)
+            wb = load_wb_resilient(f_ter)
             ws = wb["PMT Contrato"]
             v_total = parse_val(ws.cell(3, 2).value)
             v_entrada = parse_val(ws.cell(4, 2).value)
@@ -794,6 +1002,7 @@ def extract_all_contracts(folder):
             
             contratos.append({
                 "id": "compra_terreno_sl",
+                "empresa": "JLE",
                 "nome": "Compra Terreno São Leopoldo",
                 "arquivo": "Financiamento Compra Terreno.xlsx",
                 "instituicao": "F. E. Hugentobler",
@@ -821,26 +1030,73 @@ def extract_all_contracts(folder):
             print(f"[ETL] Erro ao ler Financiamento Compra Terreno.xlsx: {e}")
 
     # ----------------------------------------------------
-    # Descoberta e Extração Dinâmica de Qualquer Nova Planilha na Pasta
+    # B. CONTRATOS TECNODRILL (Subpasta TECNODRILL)
     # ----------------------------------------------------
-    try:
-        if os.path.exists(folder):
-            all_entries = sorted(os.listdir(folder))
+    tec_candidates = [os.path.join(folder, "TECNODRILL"), os.path.join(LOCAL_CACHE_DIR, "TECNODRILL")]
+    tec_folder_found = None
+    for tc in tec_candidates:
+        if os.path.exists(tc) and os.path.isdir(tc):
+            tec_folder_found = tc
+            break
+
+    if tec_folder_found:
+        tec_files = sorted(os.listdir(tec_folder_found))
+        for fname in tec_files:
+            if fname.startswith("~$") or fname.endswith(".tmp"):
+                continue
+            fpath = os.path.join(tec_folder_found, fname)
+            if os.path.isdir(fpath):
+                continue
+            base_fname = fname.replace(".xlsx", "")
+            if fname in processed_files or base_fname in processed_files:
+                continue
+            try:
+                c_tec = extract_tecnodrill_contract(fpath, fname)
+                if c_tec:
+                    contratos.append(c_tec)
+                    processed_files.add(fname)
+                    processed_files.add(base_fname)
+                    print(f"[ETL Tecnodrill] Contrato integrado: {c_tec['nome']} (CCB: {c_tec['contrato']}, Saldo: R$ {c_tec['saldo_devedor']:,.2f})")
+                else:
+                    dynamic_c = extract_generic_contract(tec_folder_found, fname, empresa="TECNODRILL")
+                    if dynamic_c:
+                        contratos.append(dynamic_c)
+                        processed_files.add(fname)
+                        processed_files.add(base_fname)
+                        print(f"[ETL Tecnodrill] Contrato dinâmico integrado: {dynamic_c['nome']}")
+            except Exception as e:
+                print(f"[ETL Tecnodrill] Erro ao processar {fname}: {e}")
+
+    # ----------------------------------------------------
+    # C. Descoberta e Extração Dinâmica de Planilhas JLE e Raiz
+    # ----------------------------------------------------
+    jle_candidates = [os.path.join(folder, "JLE"), folder, os.path.join(LOCAL_CACHE_DIR, "JLE"), LOCAL_CACHE_DIR]
+    for j_dir in jle_candidates:
+        if os.path.exists(j_dir) and os.path.isdir(j_dir):
+            all_entries = sorted(os.listdir(j_dir))
             for fname in all_entries:
-                if fname.startswith("~$") or not fname.lower().endswith(".xlsx"):
+                if fname.startswith("~$") or fname in ["JLE", "TECNODRILL"] or fname.endswith(".tmp"):
                     continue
-                if fname in processed_files:
+                fpath = os.path.join(j_dir, fname)
+                if os.path.isdir(fpath):
                     continue
-                print(f"[ETL Dinâmico] Nova planilha detectada: {fname}. Processando contrato...")
-                dynamic_contract = extract_generic_contract(folder, fname)
+                if not fname.lower().endswith(".xlsx") and not fname.lower().startswith("financiamento"):
+                    continue
+                base_fname = fname.replace(".xlsx", "")
+                if fname in processed_files or base_fname in processed_files:
+                    continue
+                
+                # Definir empresa se estiver em pasta ou nome
+                emp_target = "TECNODRILL" if "tecnodrill" in j_dir.lower() or "tecnodrill" in fname.lower() else "JLE"
+                print(f"[ETL Dinâmico {emp_target}] Nova planilha detectada: {fname}. Processando contrato...")
+                dynamic_contract = extract_generic_contract(j_dir, fname, empresa=emp_target)
                 if dynamic_contract:
                     contratos.append(dynamic_contract)
                     processed_files.add(fname)
-                    print(f"[ETL Dinâmico] Sucesso! Contrato integrado: {dynamic_contract['nome']} ({dynamic_contract['total_parcelas']} parcelas, Saldo: R$ {dynamic_contract['saldo_devedor']:,.2f})")
+                    processed_files.add(base_fname)
+                    print(f"[ETL Dinâmico {emp_target}] Sucesso! Contrato integrado: {dynamic_contract['nome']} ({dynamic_contract['total_parcelas']} parcelas, Saldo: R$ {dynamic_contract['saldo_devedor']:,.2f})")
                 else:
-                    print(f"[ETL Dinâmico] Aviso: A planilha {fname} não pôde ser interpretada como cronograma de parcelas.")
-    except Exception as e:
-        print(f"[ETL Dinâmico] Erro ao varrer novas planilhas na pasta: {e}")
+                    print(f"[ETL Dinâmico {emp_target}] Aviso: A planilha {fname} não pôde ser interpretada como cronograma de parcelas.")
 
     return contratos
 
@@ -961,6 +1217,32 @@ def consolidate_data(contratos, source_folder):
                     meses_map[m_key]["total_pendente"] = round(meses_map[m_key]["total_pendente"] + val, 2)
                     
     fluxo_mensal = [meses_map[k] for k in sorted(meses_map.keys())]
+
+    # Totais por Empresa (JLE / TECNODRILL)
+    totais_por_empresa = {}
+    for emp in ["JLE", "TECNODRILL"]:
+        emp_contratos = [c for c in contratos if c.get("empresa", "JLE").upper() == emp]
+        if not emp_contratos:
+            continue
+        emp_fin = round(sum(c["valor_financiado"] for c in emp_contratos), 2)
+        emp_pago = round(sum(c["total_pago"] for c in emp_contratos), 2)
+        emp_saldo = round(sum(c["saldo_devedor"] for c in emp_contratos), 2)
+        emp_parc = sum(c["total_parcelas"] for c in emp_contratos)
+        emp_pagas = sum(c["qtd_pagas"] for c in emp_contratos)
+        emp_pend = sum(c["qtd_pendentes"] for c in emp_contratos)
+        emp_pct = round((emp_pagas / emp_parc * 100.0) if emp_parc else 0.0, 1)
+        emp_comp = round(sum(c.get("prestacao_mensal", 0.0) for c in emp_contratos), 2)
+        totais_por_empresa[emp] = {
+            "total_contratos": len(emp_contratos),
+            "total_financiado": emp_fin,
+            "total_pago": emp_pago,
+            "saldo_devedor": emp_saldo,
+            "total_parcelas": emp_parc,
+            "total_pagas": emp_pagas,
+            "total_pendentes": emp_pend,
+            "pct_quitado": emp_pct,
+            "compromisso_mensal": emp_comp
+        }
     
     now_str = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
     
@@ -984,8 +1266,10 @@ def consolidate_data(contratos, source_folder):
             "por_categoria": por_categoria,
             "por_instituicao": por_instituicao,
             "desembolso_anual": desembolso_anual,
-            "fluxo_mensal": fluxo_mensal
+            "fluxo_mensal": fluxo_mensal,
+            "totais_por_empresa": totais_por_empresa
         },
+        "totais_por_empresa": totais_por_empresa,
         "contratos": contratos
     }
 

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -114,9 +114,21 @@
                     <a class="nav-item nav-subitem" id="nav-parcelamentos" onclick="switchView('parcelamentos')" style="display:none;" title="Impostos">
                         <i class="fa-solid fa-file-invoice"></i> <span>Impostos</span>
                     </a>
-                    <a class="nav-item nav-subitem" id="nav-financiamentos" onclick="switchView('financiamentos')" style="display:none;" title="Financiamentos">
-                        <i class="fa-solid fa-hand-holding-dollar"></i> <span>Financiamentos</span>
-                    </a>
+                    <!-- Subgrupo Financiamentos com Subitens JLE e Tecnodrill -->
+                    <div class="nav-subgroup" id="nav-subgroup-financiamentos" style="display:none;">
+                        <a class="nav-item nav-subitem nav-subgroup-toggle" id="nav-financiamentos" onclick="toggleFinanciamentosSubmenu(event)" title="Financiamentos">
+                            <i class="fa-solid fa-hand-holding-dollar"></i> <span>Financiamentos</span>
+                            <i class="fa-solid fa-chevron-right nav-subgroup-arrow" onclick="toggleFinanciamentosArrow(event)" title="Expandir/Recolher subitens"></i>
+                        </a>
+                        <div class="nav-subgroup-menu open" id="submenu-financiamentos">
+                            <a class="nav-item nav-subitem-child" id="nav-financiamentos-jle" onclick="switchView('financiamentos', 'JLE')" title="Financiamentos JLE">
+                                <i class="fa-solid fa-tower-cell"></i> <span>JLE</span>
+                            </a>
+                            <a class="nav-item nav-subitem-child" id="nav-financiamentos-tecnodrill" onclick="switchView('financiamentos', 'TECNODRILL')" title="Financiamentos Tecnodrill">
+                                <i class="fa-solid fa-person-digging"></i> <span>Tecnodrill</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -3788,6 +3800,21 @@
 
                 <!-- 1. BARRA DE FILTROS SUPERIOR (SEMPRE NO TOPO) -->
                 <div class="fin-filter-bar">
+                    <div class="fin-filter-group" style="flex: 0 0 auto; min-width: auto;">
+                        <label class="fin-filter-label">Empresa</label>
+                        <div class="fin-empresa-pills" id="fin-empresa-pills">
+                            <button type="button" class="fin-empresa-pill active" data-empresa="TODAS" onclick="window.setFinFilterEmpresa('TODAS')">
+                                <i class="fa-solid fa-layer-group"></i> Todas
+                            </button>
+                            <button type="button" class="fin-empresa-pill" data-empresa="JLE" onclick="window.setFinFilterEmpresa('JLE')">
+                                <i class="fa-solid fa-tower-cell"></i> JLE
+                            </button>
+                            <button type="button" class="fin-empresa-pill" data-empresa="TECNODRILL" onclick="window.setFinFilterEmpresa('TECNODRILL')">
+                                <i class="fa-solid fa-person-digging"></i> Tecnodrill
+                            </button>
+                        </div>
+                    </div>
+
                     <div class="fin-filter-group">
                         <label class="fin-filter-label">Categoria do Bem</label>
                         <select id="fin-filter-categoria" class="fin-select" onchange="window.setFinFilterCategoria(this.value)">
@@ -3804,6 +3831,7 @@
                             <option value="TODAS">Todas as Instituições</option>
                             <option value="SICOOB">SICOOB</option>
                             <option value="Banco Senff">Banco Senff</option>
+                            <option value="Bradesco Financiamentos">Bradesco Financiamentos</option>
                             <option value="Pro-Formula">Pro-Formula (Base NH)</option>
                             <option value="F. E. Hugentobler">F. E. Hugentobler (Terreno)</option>
                         </select>
@@ -3926,6 +3954,7 @@
                         <table class="fin-table">
                             <thead>
                                 <tr>
+                                    <th>Empresa</th>
                                     <th>Categoria</th>
                                     <th>Financiamento / Bem</th>
                                     <th>Instituição</th>
@@ -4258,7 +4287,7 @@
     <script src="sar_app.js?v=3.58"></script>
     <script src="manutencao_data.js"></script>
     <script src="manutencao_app.js"></script>
-    <script src="parcelamentos_data.js?v=20261109131116"></script>
+    <script src="parcelamentos_data.js?v=20261110084148"></script>
     <script src="parcelamentos_app.js?v=1.7"></script>
     <script src="financiamentos_data.js?v=20261016084048"></script>
     <script src="financiamentos_app.js?v=1.4"></script>
@@ -5112,6 +5141,13 @@
                     if (toggleFin) toggleFin.classList.add('open');
                 }
 
+                // Gerenciar visibilidade do subgrupo Financiamentos
+                const subgroupFin = document.getElementById('nav-subgroup-financiamentos');
+                if (subgroupFin) {
+                    const canSeeFin = currentUserIsAdmin || allowedPages.includes('financiamentos');
+                    subgroupFin.style.display = canSeeFin ? 'flex' : 'none';
+                }
+
                 // Suporte a abertura direta por parâmetro de URL (?view=parcelamentos ou #parcelamentos)
                 const urlParams = new URLSearchParams(window.location.search);
                 const requestedView = urlParams.get('view') || (window.location.hash ? window.location.hash.replace('#', '') : null);
@@ -5589,8 +5625,33 @@
         }
         window.toggleNavGroup = toggleNavGroup;
 
+        // Controle do Submenu de Financiamentos (JLE & Tecnodrill)
+        function toggleFinanciamentosSubmenu(e) {
+            if (e) e.preventDefault();
+            const submenu = document.getElementById('submenu-financiamentos');
+            const toggle = document.getElementById('nav-financiamentos');
+            if (submenu) submenu.classList.add('open');
+            if (toggle) toggle.classList.add('open');
+            switchView('financiamentos');
+        }
+        window.toggleFinanciamentosSubmenu = toggleFinanciamentosSubmenu;
+
+        function toggleFinanciamentosArrow(e) {
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            const submenu = document.getElementById('submenu-financiamentos');
+            const toggle = document.getElementById('nav-financiamentos');
+            if (submenu && toggle) {
+                submenu.classList.toggle('open');
+                toggle.classList.toggle('open');
+            }
+        }
+        window.toggleFinanciamentosArrow = toggleFinanciamentosArrow;
+
         // Navegação de Telas
-        function switchView(viewName) {
+        function switchView(viewName, subParam) {
             // Fechar gaveta no mobile ao navegar
             if (typeof closeMobileDrawer === 'function') {
                 closeMobileDrawer();
@@ -5762,10 +5823,37 @@
             } else if (viewName === 'financiamentos') {
                 document.getElementById('filters-container').style.display = 'none';
                 if (mobileToggleBtn) mobileToggleBtn.style.display = 'none';
-                document.getElementById('view-title').innerText = 'Financiamentos & PMTs';
-                document.getElementById('view-subtitle').innerHTML = 'Acompanhamento de Empréstimos, Máquinas, Veículos, Imóveis e Cronogramas de PMT';
+
+                // Garantir abertura do submenu financeiro e do subgrupo de financiamentos
+                const submenuFin = document.getElementById('submenu-financeiro');
+                const toggleFin = document.getElementById('nav-financeiro-toggle');
+                if (submenuFin) submenuFin.classList.add('open');
+                if (toggleFin) toggleFin.classList.add('open');
+
+                const subFin = document.getElementById('submenu-financiamentos');
+                const toggleFinGroup = document.getElementById('nav-financiamentos');
+                if (subFin) subFin.classList.add('open');
+                if (toggleFinGroup) toggleFinGroup.classList.add('open');
+
+                const targetEmpresa = subParam ? subParam.toUpperCase() : null;
+
+                // Marcar item filho ativo se aplicável
+                document.querySelectorAll('.nav-subitem-child').forEach(el => el.classList.remove('active'));
+                if (targetEmpresa === 'JLE') {
+                    const elJle = document.getElementById('nav-financiamentos-jle');
+                    if (elJle) elJle.classList.add('active');
+                } else if (targetEmpresa === 'TECNODRILL') {
+                    const elTec = document.getElementById('nav-financiamentos-tecnodrill');
+                    if (elTec) elTec.classList.add('active');
+                }
+
+                const empTitle = targetEmpresa === 'JLE' ? ' — JLE Telecom' : (targetEmpresa === 'TECNODRILL' ? ' — Tecnodrill' : '');
+                document.getElementById('view-title').innerText = `Financiamentos & PMTs${empTitle}`;
+                const empBadge = targetEmpresa ? ` <span class="badge-competencia">${targetEmpresa}</span>` : ' <span class="badge-competencia">TODAS AS EMPRESAS</span>';
+                document.getElementById('view-subtitle').innerHTML = `Acompanhamento de Empréstimos, Máquinas, Veículos, Imóveis e Cronogramas de PMT${empBadge}`;
+
                 if (typeof window.initFinanciamentos === 'function') {
-                    window.initFinanciamentos();
+                    window.initFinanciamentos(targetEmpresa);
                 }
             } else {
                 document.getElementById('filters-container').style.display = 'grid';

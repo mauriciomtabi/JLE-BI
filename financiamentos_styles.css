@@ -457,6 +457,79 @@
     border: 1px solid rgba(139, 92, 246, 0.3);
 }
 
+.fin-badge-empresa-jle {
+    background: rgba(56, 139, 253, 0.15);
+    color: #58a6ff;
+    border: 1px solid rgba(56, 139, 253, 0.35);
+    font-weight: 700;
+    font-size: 0.72rem;
+    padding: 2px 7px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.fin-badge-empresa-tecnodrill {
+    background: rgba(245, 158, 11, 0.15);
+    color: #fbbf24;
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    font-weight: 700;
+    font-size: 0.72rem;
+    padding: 2px 7px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Pills de Empresa no Filtro Superior */
+.fin-empresa-pills {
+    display: inline-flex;
+    background: rgba(22, 27, 34, 0.8);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 3px;
+    gap: 3px;
+    align-items: center;
+}
+
+.fin-empresa-pill {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: 6px 14px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    user-select: none;
+}
+
+.fin-empresa-pill:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.fin-empresa-pill.active {
+    background: var(--color-primary-light, #00d2d3);
+    color: #0b1320;
+    font-weight: 700;
+    box-shadow: 0 0 10px rgba(0, 210, 211, 0.35);
+}
+
+.fin-empresa-pill i {
+    font-size: 11px;
+}
+
 /* Barra de Progresso */
 .fin-progress-wrapper {
     display: flex;
