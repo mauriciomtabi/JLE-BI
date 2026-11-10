@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-11-10 13:00:47
+// Dados MDU Compactados - Gerado em: 2026-11-10 13:14:18
 window.MDU_METADATA = {
-    "generated_at": "2026-11-10 13:00:47",
+    "generated_at": "2026-11-10 13:14:18",
     "total_rows": 6014,
     "geocoded_new": 0
 };
@@ -191528,19 +191528,19 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505844",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
+        "endereco": "AV DOUTOR TIMOTEO 44",
+        "cidade": "PORTO ALEGRE",
         "cluster": "",
-        "aging": "",
+        "aging": "46.336",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
+        "status": "FALTA DADOS",
         "prog": 0,
-        "cod_imovel": "",
-        "area": "",
-        "node": "",
-        "caixa_m": "",
-        "hps": null,
+        "cod_imovel": "610665027",
+        "area": "NAVAA",
+        "node": "NAVAAA",
+        "caixa_m": "NAVAA.112.M080",
+        "hps": 6,
         "data_adicio": "",
         "equipe": "",
         "primeira_visita": "",
@@ -191554,9 +191554,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0242759,
+        "lng": -51.1996875,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505845",
