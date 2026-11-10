@@ -63687,5 +63687,37 @@ const VEICULOS_DATA = [
     "km": 182564,
     "kml": 9.89,
     "transactionId": "1111212579"
+  },
+  {
+    "date": "2026-11-10 15:30:41",
+    "plate": "ATY7I93",
+    "driver": "VALDECIR FRAGOSO",
+    "value": 164.23,
+    "uf": "PR",
+    "month": "NOVEMBRO",
+    "liters": 27.42,
+    "vlLiter": 5.99,
+    "model": "FIORINO",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 377398,
+    "kml": 14.7,
+    "transactionId": "1111257499"
+  },
+  {
+    "date": "2026-11-10 15:33:27",
+    "plate": "IWY8G48",
+    "driver": "CARLOS EDUARDO DOS SANTOS",
+    "value": 207.52,
+    "uf": "SC",
+    "month": "NOVEMBRO",
+    "liters": 34.7,
+    "vlLiter": 5.98,
+    "model": "PALIO",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 209100,
+    "kml": 9.22,
+    "transactionId": "1111258240"
   }
 ];
