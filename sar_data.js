@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-11-10 14:00:32
+// Dados SAR JLE Telecom - Gerado em: 2026-11-10 15:00:32
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1165,
-    "generated_at": "2026-11-10 14:00:32",
+    "generated_at": "2026-11-10 15:00:32",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -766,10 +766,10 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 826394.5,
-        "total_previa_medicao": 1389459.51,
-        "total_classe_l": 345694.5,
-        "total_classe_f": 480700.0
+        "total_terceiros": 827760.9,
+        "total_previa_medicao": 1392593.23,
+        "total_classe_l": 345769.9,
+        "total_classe_f": 481991.0
     },
     "medicao": {
         "total_geral": 1446910.57,
@@ -78558,7 +78558,7 @@ window.SAR_DATA = [
     "cod": "RSCLER1117",
     "area_tecnica": "MNDAC",
     "node": "",
-    "site": "",
+    "site": "PAE CL",
     "cidade": "PORTO ALEGRE",
     "condominio": "",
     "endereco": "R BOTAFOGO 597",
@@ -78567,7 +78567,7 @@ window.SAR_DATA = [
     "classe_f": "CATIA",
     "situacao": "52",
     "relatorio_foto": "52",
-    "servico": "FOI LANÇADO 52 METROS DE CABO DE 12FO, 2 ABERTURA E FECHAMENTO, 2 FUSÕES, 2 TESTES OTDR",
+    "servico": "FOI LANÇADO 52 METROS DE CABO DE 12FO, 13 ABERTURA E FECHAMENTO, 42 FUSÕES, 2 DERIVAÇÕES, 8 TESTES OTDR, 6 TESTES.",
     "data_entrada": "2026-10-14",
     "data_entrada_fmt": "14/10/2026",
     "data_inicio": "2026-10-30",
@@ -78603,25 +78603,25 @@ window.SAR_DATA = [
     "prazo": "NO PRAZO",
     "tempo_dias": 12.0,
     "atraso_dias": 0,
-    "total_terceiros": 185.0,
-    "previa_medicao": 390.06,
+    "total_terceiros": 1551.4,
+    "previa_medicao": 3523.78,
     "valor_medicao": 0.0,
-    "valor_classe_l": 0.0,
-    "valor_classe_f": 185.0,
-    "itens_l_resumo": "-",
-    "itens_f_resumo": "3.15 AB/FE: 2 un, 3.13 FUS/EME: 2 un, 3.14 OTDR: 2 un",
+    "valor_classe_l": 75.4,
+    "valor_classe_f": 1476.0,
+    "itens_l_resumo": "2.15 CB ESP: 52m",
+    "itens_f_resumo": "3.15 AB/FE: 13 un, 3.13 FUS/EME: 42 un, 3.14 OTDR: 8 un, 3.12 DER/INS: 2 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
-      "q_215": 0.0,
+      "q_215": 52.0,
       "q_113": 0.0,
       "q_311": 0.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 2.0,
-      "q_313": 2.0,
-      "q_314": 2.0,
-      "q_312": 0.0
+      "q_315": 13.0,
+      "q_313": 42.0,
+      "q_314": 8.0,
+      "q_312": 2.0
     }
   },
   {
