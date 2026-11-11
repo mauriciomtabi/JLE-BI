@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-11-11 16:45:22
+// Dados SAR JLE Telecom - Gerado em: 2026-11-11 17:00:27
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1165,
-    "generated_at": "2026-11-11 16:45:22",
+    "generated_at": "2026-11-11 17:00:27",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -766,10 +766,10 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 831418.05,
-        "total_previa_medicao": 1399228.03,
+        "total_terceiros": 831724.55,
+        "total_previa_medicao": 1399905.64,
         "total_classe_l": 346969.05,
-        "total_classe_f": 484449.0
+        "total_classe_f": 484755.5
     },
     "medicao": {
         "total_geral": 1446910.57,
@@ -81647,7 +81647,7 @@ window.SAR_DATA = [
     "classe_f": "CATIA",
     "situacao": "137",
     "relatorio_foto": "137",
-    "servico": "FOI LANÇADO 134 METROS DE 12FO,",
+    "servico": "FOI LANÇADO 134 METROS DE 12FO, 3 ABERTURA E FECHAMENTO, 7 FUSÕES, 2 DERIVAÇÕES, 1 TESTE OTDR, 3 TESTES.",
     "data_entrada": "2026-10-28",
     "data_entrada_fmt": "28/10/2026",
     "data_inicio": "2026-11-04",
@@ -81676,20 +81676,20 @@ window.SAR_DATA = [
     "ano_entrega": "2026",
     "mes_entrega": "NOVEMBRO",
     "mes_num_entrega": "11",
-    "status": "RELATÓRIO",
+    "status": "EM MEDIÇÃO",
     "status_relatorio": "11/11/2026",
-    "status_medicao": "",
+    "status_medicao": "11/11/2026",
     "status_obra": "Em Andamento",
     "prazo": "ATRASADO",
     "tempo_dias": 5.0,
     "atraso_dias": 2.0,
-    "total_terceiros": 198.65,
-    "previa_medicao": 152.07,
+    "total_terceiros": 505.15,
+    "previa_medicao": 829.68,
     "valor_medicao": 0.0,
     "valor_classe_l": 198.65,
-    "valor_classe_f": 0.0,
+    "valor_classe_f": 306.5,
     "itens_l_resumo": "2.15 CB ESP: 137m",
-    "itens_f_resumo": "-",
+    "itens_f_resumo": "3.15 AB/FE: 3 un, 3.13 FUS/EME: 7 un, 3.14 OTDR: 1 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
@@ -81698,9 +81698,9 @@ window.SAR_DATA = [
       "q_311": 0.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 0.0,
-      "q_313": 0.0,
-      "q_314": 0.0,
+      "q_315": 3.0,
+      "q_313": 7.0,
+      "q_314": 1.0,
       "q_312": 0.0
     }
   },
