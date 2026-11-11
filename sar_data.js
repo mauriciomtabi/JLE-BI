@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-11-11 12:00:13
+// Dados SAR JLE Telecom - Gerado em: 2026-11-11 12:45:15
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1165,
-    "generated_at": "2026-11-11 12:00:13",
+    "generated_at": "2026-11-11 12:45:15",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -766,10 +766,10 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 829653.65,
-        "total_previa_medicao": 1396150.44,
+        "total_terceiros": 830181.65,
+        "total_previa_medicao": 1397356.81,
         "total_classe_l": 346255.65,
-        "total_classe_f": 483398.0
+        "total_classe_f": 483926.0
     },
     "medicao": {
         "total_geral": 1446910.57,
@@ -81567,8 +81567,8 @@ window.SAR_DATA = [
   {
     "cod": "RSCLER1160",
     "area_tecnica": "UMBAA",
-    "node": "",
-    "site": "",
+    "node": "UMBAL",
+    "site": "RSAVA05",
     "cidade": "ALVORADA",
     "condominio": "Cond. Edifício",
     "endereco": "Av Lourdes Monteiro, 1909",
@@ -81577,13 +81577,13 @@ window.SAR_DATA = [
     "classe_f": "MAURICIO",
     "situacao": "SEM LANÇAMENTO",
     "relatorio_foto": "SEM LANÇAMENTO",
-    "servico": "",
+    "servico": "5 ABERTURA E FECHAMENTO, 11 FUSÕES, 1 DERIVAÇÃO,  2 TESTES, 4 TESTES OTDR.",
     "data_entrada": "2026-10-27",
     "data_entrada_fmt": "27/10/2026",
     "data_inicio": "2026-10-28",
     "data_inicio_fmt": "28/10/2026",
-    "data_previsao": null,
-    "data_previsao_fmt": "-",
+    "data_previsao": "2026-11-11",
+    "data_previsao_fmt": "11/11/2026",
     "data_entrega": "2026-10-28",
     "data_entrega_fmt": "28/10/2026",
     "data_medicao": null,
@@ -81607,19 +81607,19 @@ window.SAR_DATA = [
     "mes_entrega": "OUTUBRO",
     "mes_num_entrega": "10",
     "status": "RELATÓRIO",
-    "status_relatorio": "",
-    "status_medicao": "",
+    "status_relatorio": "11/11/2026",
+    "status_medicao": "11/11/2026",
     "status_obra": "Em Andamento",
     "prazo": "NO PRAZO",
     "tempo_dias": 1.0,
     "atraso_dias": 0,
-    "total_terceiros": 0.0,
-    "previa_medicao": 0.0,
+    "total_terceiros": 528.0,
+    "previa_medicao": 1206.37,
     "valor_medicao": 0.0,
     "valor_classe_l": 0.0,
-    "valor_classe_f": 0.0,
+    "valor_classe_f": 528.0,
     "itens_l_resumo": "-",
-    "itens_f_resumo": "-",
+    "itens_f_resumo": "3.15 AB/FE: 5 un, 3.13 FUS/EME: 11 un, 3.14 OTDR: 4 un, 3.12 DER/INS: 1 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
@@ -81628,10 +81628,10 @@ window.SAR_DATA = [
       "q_311": 0.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 0.0,
-      "q_313": 0.0,
-      "q_314": 0.0,
-      "q_312": 0.0
+      "q_315": 5.0,
+      "q_313": 11.0,
+      "q_314": 4.0,
+      "q_312": 1.0
     }
   },
   {
