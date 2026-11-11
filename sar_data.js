@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-11-11 15:00:17
+// Dados SAR JLE Telecom - Gerado em: 2026-11-11 16:00:17
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1165,
-    "generated_at": "2026-11-11 15:00:17",
+    "generated_at": "2026-11-11 16:00:17",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -766,10 +766,10 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 830181.65,
-        "total_previa_medicao": 1397356.81,
+        "total_terceiros": 830704.65,
+        "total_previa_medicao": 1398681.91,
         "total_classe_l": 346255.65,
-        "total_classe_f": 483926.0
+        "total_classe_f": 484449.0
     },
     "medicao": {
         "total_geral": 1446910.57,
@@ -81365,15 +81365,15 @@ window.SAR_DATA = [
     "caixa_mdu": "RBTAB.032.M040",
     "classe_l": "BRUNO",
     "classe_f": "MAURICIO",
-    "situacao": "344",
-    "relatorio_foto": "",
-    "servico": "",
+    "situacao": "355",
+    "relatorio_foto": "355",
+    "servico": "FOI LANÇADO 260 METROS DE CABO DE 12FO E 95 METROS DE CABO DE 36FO, 3 ABERTURA E FECHAMENTO, 12 FUSÕES, 3 DERIVAÇÕES, 2 CX NOVA, 8 TESTES.",
     "data_entrada": "2026-10-23",
     "data_entrada_fmt": "23/10/2026",
     "data_inicio": "2026-10-29",
     "data_inicio_fmt": "29/10/2026",
-    "data_previsao": null,
-    "data_previsao_fmt": "-",
+    "data_previsao": "2026-11-11",
+    "data_previsao_fmt": "11/11/2026",
     "data_entrega": "2026-10-29",
     "data_entrega_fmt": "29/10/2026",
     "data_medicao": null,
@@ -81397,31 +81397,31 @@ window.SAR_DATA = [
     "mes_entrega": "OUTUBRO",
     "mes_num_entrega": "10",
     "status": "RELATÓRIO",
-    "status_relatorio": "",
+    "status_relatorio": "11/11/2026",
     "status_medicao": "",
     "status_obra": "Em Andamento",
     "prazo": "ATRASADO",
     "tempo_dias": 4.0,
     "atraso_dias": 1.0,
-    "total_terceiros": 0.0,
-    "previa_medicao": 0.0,
+    "total_terceiros": 523.0,
+    "previa_medicao": 1325.1,
     "valor_medicao": 0.0,
     "valor_classe_l": 0.0,
-    "valor_classe_f": 0.0,
+    "valor_classe_f": 523.0,
     "itens_l_resumo": "-",
-    "itens_f_resumo": "-",
+    "itens_f_resumo": "3.11 CX EM: 2 un, 3.15 AB/FE: 3 un, 3.13 FUS/EME: 12 un, 3.12 DER/INS: 3 un",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
       "q_215": 0.0,
       "q_113": 0.0,
-      "q_311": 0.0,
+      "q_311": 2.0,
       "q_317": 0.0,
       "q_318": 0.0,
-      "q_315": 0.0,
-      "q_313": 0.0,
+      "q_315": 3.0,
+      "q_313": 12.0,
       "q_314": 0.0,
-      "q_312": 0.0
+      "q_312": 3.0
     }
   },
   {
@@ -81606,7 +81606,7 @@ window.SAR_DATA = [
     "ano_entrega": "2026",
     "mes_entrega": "OUTUBRO",
     "mes_num_entrega": "10",
-    "status": "RELATÓRIO",
+    "status": "EM MEDIÇÃO",
     "status_relatorio": "11/11/2026",
     "status_medicao": "11/11/2026",
     "status_obra": "Em Andamento",
