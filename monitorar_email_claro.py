@@ -81,6 +81,32 @@ def run_git_sync(report_date):
     except Exception as e:
         write_log(f"Erro na sincronização Git: {e}")
 
+def notify_central_demandas(title, priority="Normal", details="", is_incident=False):
+    try:
+        import urllib.request
+        import json
+        url = os.environ.get("CENTRAL_DEMANDAS_URL", "http://localhost:8080/api/webhook/novo-chamado")
+        payload = {
+            "title": title,
+            "sector": "SAR",
+            "station": "Sistemas JLE",
+            "uf": "PR",
+            "kind": "Incidente" if is_incident else "Operação",
+            "priority": priority,
+            "origem": "BI_JLE",
+            "description": details
+        }
+        req = urllib.request.Request(
+            url,
+            data=json.dumps(payload).encode("utf-8"),
+            headers={"Content-Type": "application/json"},
+            method="POST"
+        )
+        with urllib.request.urlopen(req, timeout=4) as resp:
+            write_log(f"Central de Demandas notificada via Webhook: {resp.status}")
+    except Exception as e:
+        write_log(f"Aviso Central de Demandas: {e}")
+
 def trigger_webhook():
     try:
         import urllib.request
@@ -94,6 +120,7 @@ def trigger_webhook():
             write_log(f"Sincronização em produção disparada: {resp.status}")
     except Exception as e:
         write_log(f"Aviso no webhook Servicos JLE: {e}")
+    notify_central_demandas("Analítico Claro sincronizado no BI", "Normal", "Dados de cobrança e medições SAR atualizados.")
 
 def copy_to_network(file_path):
     fname = os.path.basename(file_path)
@@ -421,6 +448,7 @@ def main():
 
     if not extracted_file_path:
         write_log("ERRO: Nenhum arquivo CSV/XLSX válido encontrado dentro do ZIP.")
+        notify_central_demandas("Erro no arquivo ZIP do Analítico Claro", "Alta", "Nenhum arquivo CSV/XLSX válido encontrado dentro do ZIP.", is_incident=True)
         return 1
 
     # 4. Atualizar cache local
@@ -452,7 +480,9 @@ def main():
         run_git_sync(report_formatted)
         trigger_webhook()
     else:
-        write_log(f"ERRO no ETL Python: {etl_res.stderr.strip() or etl_res.stdout.strip()}")
+        err_msg = etl_res.stderr.strip() or etl_res.stdout.strip()
+        write_log(f"ERRO no ETL Python: {err_msg}")
+        notify_central_demandas("Falha no ETL do Analítico Claro", "Crítica", err_msg[:300], is_incident=True)
         return 1
 
     # 8. Limpeza de temporários
