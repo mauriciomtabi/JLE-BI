@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-11-11 17:00:27
+// Dados SAR JLE Telecom - Gerado em: 2026-11-11 17:42:13
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1165,
-    "generated_at": "2026-11-11 17:00:27",
+    "generated_at": "2026-11-11 17:42:13",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -766,9 +766,9 @@ window.SAR_METADATA = {
         "Dezembro"
     ],
     "financeiro": {
-        "total_terceiros": 831724.55,
-        "total_previa_medicao": 1399905.64,
-        "total_classe_l": 346969.05,
+        "total_terceiros": 831766.6,
+        "total_previa_medicao": 1399937.83,
+        "total_classe_l": 347011.1,
         "total_classe_f": 484755.5
     },
     "medicao": {
@@ -81505,9 +81505,9 @@ window.SAR_DATA = [
     "caixa_mdu": "RBTAB.033.M020",
     "classe_l": "CATIA",
     "classe_f": "CATIA",
-    "situacao": "20",
-    "relatorio_foto": "",
-    "servico": "",
+    "situacao": "29",
+    "relatorio_foto": "29",
+    "servico": "FOI LANÇADO 29 METROS DE CABO DE 48FO,",
     "data_entrada": "2026-10-27",
     "data_entrada_fmt": "27/10/2026",
     "data_inicio": "2026-10-30",
@@ -81543,17 +81543,17 @@ window.SAR_DATA = [
     "prazo": "NO PRAZO",
     "tempo_dias": 3.0,
     "atraso_dias": 0,
-    "total_terceiros": 0.0,
-    "previa_medicao": 0.0,
+    "total_terceiros": 42.05,
+    "previa_medicao": 32.19,
     "valor_medicao": 0.0,
-    "valor_classe_l": 0.0,
+    "valor_classe_l": 42.05,
     "valor_classe_f": 0.0,
-    "itens_l_resumo": "-",
+    "itens_l_resumo": "2.15 CB ESP: 29m",
     "itens_f_resumo": "-",
     "lpu_itens": {
       "q_211": 0.0,
       "q_212": 0.0,
-      "q_215": 0.0,
+      "q_215": 29.0,
       "q_113": 0.0,
       "q_311": 0.0,
       "q_317": 0.0,
