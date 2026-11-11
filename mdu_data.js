@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-11-11 17:00:45
+// Dados MDU Compactados - Gerado em: 2026-11-11 17:41:41
 window.MDU_METADATA = {
-    "generated_at": "2026-11-11 17:00:45",
+    "generated_at": "2026-11-11 17:41:41",
     "total_rows": 6025,
-    "geocoded_new": 1
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -191982,8 +191982,8 @@ window.MDU_DATA = [
         "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610428474",
         "area": "PETAA",
         "node": "PETAX",
@@ -191998,7 +191998,7 @@ window.MDU_DATA = [
         "data_fusao": "10/11/2026",
         "data_baixa": "11/11/2026",
         "obs_baixa": "",
-        "data_relatorio": "",
+        "data_relatorio": "11/11/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
