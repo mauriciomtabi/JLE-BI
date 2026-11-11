@@ -63783,5 +63783,53 @@ const VEICULOS_DATA = [
     "km": 250586,
     "kml": 11.62,
     "transactionId": "1111339780"
+  },
+  {
+    "date": "2026-11-11 09:27:33",
+    "plate": "MIS4573",
+    "driver": "ALEXANDRE ALVES",
+    "value": 200.0,
+    "uf": "SC",
+    "month": "NOVEMBRO",
+    "liters": 33.61,
+    "vlLiter": 5.95,
+    "model": "FIORINO",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 235308,
+    "kml": 9.04,
+    "transactionId": "1111410669"
+  },
+  {
+    "date": "2026-11-11 11:04:07",
+    "plate": "PYD3520",
+    "driver": "KAUE GABRIEL KELLER DE ALMEIDA",
+    "value": 298.1,
+    "uf": "RS",
+    "month": "NOVEMBRO",
+    "liters": 44.69,
+    "vlLiter": 6.67,
+    "model": "MONTANA",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 205769,
+    "kml": 11.68,
+    "transactionId": "1111440262"
+  },
+  {
+    "date": "2026-11-11 11:23:21",
+    "plate": "QHI1I53",
+    "driver": "DANIEL GERSON GELINSKI",
+    "value": 361.86,
+    "uf": "SC",
+    "month": "NOVEMBRO",
+    "liters": 54.09,
+    "vlLiter": 6.69,
+    "model": "DOBLO",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 175922,
+    "kml": 7.56,
+    "transactionId": "1111445257"
   }
 ];
