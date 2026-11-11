@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-11-11 18:00:19
+// Dados SAR JLE Telecom - Gerado em: 2026-11-11 20:53:09
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1165,
-    "generated_at": "2026-11-11 18:00:19",
+    "generated_at": "2026-11-11 20:53:09",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -81497,8 +81497,8 @@ window.SAR_DATA = [
   {
     "cod": "RSCLER1159",
     "area_tecnica": "RBTAB",
-    "node": "",
-    "site": "",
+    "node": "RBTAD",
+    "site": "RSPNO22",
     "cidade": "PORTO ALEGRE",
     "condominio": "",
     "endereco": "R JANDYR MAYA FAILLACE 125",
