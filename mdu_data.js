@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-11-11 08:41:07
+// Dados MDU Compactados - Gerado em: 2026-11-11 09:00:29
 window.MDU_METADATA = {
-    "generated_at": "2026-11-11 08:41:07",
+    "generated_at": "2026-11-11 09:00:29",
     "total_rows": 6025,
-    "geocoded_new": 0
+    "geocoded_new": 1
 };
 
 window.MDU_DATA = [
@@ -191656,13 +191656,13 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505848",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "RUA AURORA 1200 CX 1",
+        "cidade": "CANOAS",
+        "cluster": "PAE",
+        "aging": "46.337",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
+        "status": "FALTA DADOS",
         "prog": 0,
         "cod_imovel": "",
         "area": "",
@@ -191682,9 +191682,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -29.9114597,
+        "lng": -51.157889,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505849",
