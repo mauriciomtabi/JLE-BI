@@ -63831,5 +63831,53 @@ const VEICULOS_DATA = [
     "km": 175922,
     "kml": 7.56,
     "transactionId": "1111445257"
+  },
+  {
+    "date": "2026-11-11 13:39:18",
+    "plate": "PZP2901",
+    "driver": "RODRIGO CRISTIANO MALESKI",
+    "value": 354.5,
+    "uf": "SC",
+    "month": "NOVEMBRO",
+    "liters": 52.99,
+    "vlLiter": 6.69,
+    "model": "FIORINO",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 191290,
+    "kml": 8.23,
+    "transactionId": "1111477494"
+  },
+  {
+    "date": "2026-11-11 15:14:35",
+    "plate": "IRU9400",
+    "driver": "DEIVID PERES CARVALHO",
+    "value": 200.0,
+    "uf": "RS",
+    "month": "NOVEMBRO",
+    "liters": 31.55,
+    "vlLiter": 6.34,
+    "model": "PRISMA",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 203769,
+    "kml": 15.94,
+    "transactionId": "1111501315"
+  },
+  {
+    "date": "2026-11-11 16:03:44",
+    "plate": "IUI8A63",
+    "driver": "VINICIUS SAMPAIO RODRIGUES",
+    "value": 231.28,
+    "uf": "RS",
+    "month": "NOVEMBRO",
+    "liters": 38.87,
+    "vlLiter": 5.95,
+    "model": "UNO",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 116617,
+    "kml": 12.76,
+    "transactionId": "1111515866"
   }
 ];
