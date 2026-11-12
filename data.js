@@ -1,5 +1,5 @@
 ﻿window.CASH_FLOW_DATA = {
-    "generated_at":  "2026-11-12 08:37:39",
+    "generated_at":  "2026-11-12 13:05:52",
     "categories_origin":  {
                               "entradas":  [
 
@@ -187652,8 +187652,8 @@
                              "fluxo":  "Saída",
                              "categoria":  "Manut. De Veículos",
                              "descricao":  "OFICINA MECANICA TIBURCIO LTDA",
-                             "valor_nominal":  960,
-                             "valor_liquido":  -960,
+                             "valor_nominal":  940,
+                             "valor_liquido":  -940,
                              "meio_pagamento":  "Pix",
                              "is_transfer":  false,
                              "is_application":  false
@@ -187975,8 +187975,25 @@
                              "fluxo":  "Saída",
                              "categoria":  "Despesas Diversas",
                              "descricao":  "DEB. CONV. SEGUROS",
-                             "valor_nominal":  163.95,
-                             "valor_liquido":  -163.95,
+                             "valor_nominal":  163.97,
+                             "valor_liquido":  -163.97,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 MAXCREDITO_226",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "NOV_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-11",
+                             "uf":  "SC",
+                             "fluxo":  "Saída",
+                             "categoria":  "Manutenção Predial",
+                             "descricao":  "COM DE TINTAS MAT ELE HID VERGIN - Material fns",
+                             "valor_nominal":  144.5,
+                             "valor_liquido":  -144.5,
                              "meio_pagamento":  "Pix",
                              "is_transfer":  false,
                              "is_application":  false
