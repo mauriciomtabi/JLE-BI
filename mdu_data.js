@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-11-12 13:00:23
+// Dados MDU Compactados - Gerado em: 2026-11-12 13:08:06
 window.MDU_METADATA = {
-    "generated_at": "2026-11-12 13:00:23",
+    "generated_at": "2026-11-12 13:08:06",
     "total_rows": 6025,
-    "geocoded_new": 1
+    "geocoded_new": 5
 };
 
 window.MDU_DATA = [
@@ -192040,13 +192040,13 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505860",
-        "endereco": "",
+        "endereco": "RUA AURORA 1200 CX 6",
         "cidade": "NÃO DEFINIDA",
         "cluster": "",
-        "aging": "",
+        "aging": "46.338",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
+        "status": "FALTA DADOS",
         "prog": 0,
         "cod_imovel": "",
         "area": "",
