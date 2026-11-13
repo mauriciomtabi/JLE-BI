@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-11-13 12:00:33
+// Dados MDU Compactados - Gerado em: 2026-11-13 13:03:36
 window.MDU_METADATA = {
-    "generated_at": "2026-11-13 12:00:33",
+    "generated_at": "2026-11-13 13:03:36",
     "total_rows": 6025,
     "geocoded_new": 0
 };
@@ -190957,9 +190957,9 @@ window.MDU_DATA = [
         "cluster": "PAE",
         "aging": "4",
         "relatorio_por": "",
-        "pendencia": "SIM",
-        "status": "Pendência",
-        "prog": 0.0,
+        "pendencia": "Não",
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "364498374",
         "area": "SJOAA",
         "node": "MRD17A",
@@ -191149,9 +191149,9 @@ window.MDU_DATA = [
         "cluster": "PAE",
         "aging": "4",
         "relatorio_por": "",
-        "pendencia": "SIM",
-        "status": "Pendência",
-        "prog": 0.0,
+        "pendencia": "Não",
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "364498374",
         "area": "SJOAA",
         "node": "MRD17A",
@@ -191437,9 +191437,9 @@ window.MDU_DATA = [
         "cluster": "PAE",
         "aging": "4",
         "relatorio_por": "",
-        "pendencia": "SIM",
-        "status": "Pendência",
-        "prog": 0.0,
+        "pendencia": "Não",
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "364498374",
         "area": "SJOAA",
         "node": "MRD17A",
