@@ -1,43 +1,32 @@
 // BI JLE Telecom - Financiamentos & PMTs Data Source
-// Gerado automaticamente em 12/11/2026 17:47:48
+// Gerado automaticamente em 13/11/2026 08:43:47
 window.FINANCIAMENTOS_DATA = {
   "metadata": {
-    "generated_at": "12/11/2026 17:47:48",
+    "generated_at": "13/11/2026 08:43:47",
     "source_directory": "\\\\10.121.21.252\\controladoria\\Vitor\\FINANCEIRO\\PMTs FINANCIAMENTOS",
     "total_contratos": 12
   },
   "totais_gerais": {
     "total_financiado": 8856970.3,
-    "total_pago": 1387138.94,
-    "saldo_devedor": 10509709.81,
+    "total_pago": 1407694.42,
+    "saldo_devedor": 10489154.25,
     "total_parcelas": 610,
-    "total_pagas": 70,
-    "total_pendentes": 540,
-    "pct_quitado": 11.5,
+    "total_pagas": 71,
+    "total_pendentes": 539,
+    "pct_quitado": 11.6,
     "compromisso_mensal": 236715.32,
     "proxima_parcela": {
-      "contrato_id": "compra_terreno_sl",
-      "contrato_nome": "Compra Terreno São Leopoldo",
+      "contrato_id": "compra_base_nh",
+      "contrato_nome": "Compra Base Novo Hamburgo",
       "categoria": "Imóveis",
-      "instituicao": "F. E. Hugentobler",
-      "numero": 13,
+      "instituicao": "Pro-Formula",
+      "numero": 2,
       "tipo": "Mensal",
-      "vencimento": "10/11/2026",
-      "vencimento_iso": "2026-11-10",
-      "prestacao": 20555.56
+      "vencimento": "15/11/2026",
+      "vencimento_iso": "2026-11-15",
+      "prestacao": 47750.0
     },
     "proximas_parcelas_top10": [
-      {
-        "contrato_id": "compra_terreno_sl",
-        "contrato_nome": "Compra Terreno São Leopoldo",
-        "categoria": "Imóveis",
-        "instituicao": "F. E. Hugentobler",
-        "numero": 13,
-        "tipo": "Mensal",
-        "vencimento": "10/11/2026",
-        "vencimento_iso": "2026-11-10",
-        "prestacao": 20555.56
-      },
       {
         "contrato_id": "compra_base_nh",
         "contrato_nome": "Compra Base Novo Hamburgo",
@@ -136,6 +125,17 @@ window.FINANCIAMENTOS_DATA = {
         "vencimento": "30/11/2026",
         "vencimento_iso": "2026-11-30",
         "prestacao": 32126.34
+      },
+      {
+        "contrato_id": "sicoob_daf",
+        "contrato_nome": "Caminhão DAF Azul JBK",
+        "categoria": "Veículos",
+        "instituicao": "SICOOB",
+        "numero": 10,
+        "tipo": "Mensal",
+        "vencimento": "02/12/2026",
+        "vencimento_iso": "2026-12-02",
+        "prestacao": 8224.07
       }
     ],
     "por_categoria": {
@@ -159,12 +159,12 @@ window.FINANCIAMENTOS_DATA = {
       },
       "Imóveis": {
         "financiado": 2822000.0,
-        "pago": 294415.76,
-        "saldo_devedor": 3007583.36,
+        "pago": 314971.24,
+        "saldo_devedor": 2987027.8,
         "contratos": 2,
         "total_parcelas": 70,
-        "qtd_pagas": 13,
-        "pct_quitado": 18.6
+        "qtd_pagas": 14,
+        "pct_quitado": 20.0
       }
     },
     "por_instituicao": {
@@ -188,8 +188,8 @@ window.FINANCIAMENTOS_DATA = {
       },
       "F. E. Hugentobler": {
         "financiado": 370000.0,
-        "pago": 246665.76,
-        "saldo_devedor": 123333.36,
+        "pago": 267221.24,
+        "saldo_devedor": 102777.8,
         "contratos": 1
       },
       "Bradesco Financiamentos": {
@@ -215,8 +215,8 @@ window.FINANCIAMENTOS_DATA = {
       {
         "ano": 2026,
         "total_previsto": 1666289.58,
-        "total_pago": 1245110.6,
-        "total_pendente": 466926.33
+        "total_pago": 1265666.08,
+        "total_pendente": 446370.77
       },
       {
         "ano": 2027,
@@ -412,8 +412,8 @@ window.FINANCIAMENTOS_DATA = {
         "ano": 2026,
         "mes": 11,
         "total_previsto": 238337.91,
-        "total_pago": 8264.89,
-        "total_pendente": 230113.84,
+        "total_pago": 28820.37,
+        "total_pendente": 209558.28,
         "maquinas": 148202.96,
         "veiculos": 21829.39,
         "imoveis": 68305.56
@@ -1155,12 +1155,12 @@ window.FINANCIAMENTOS_DATA = {
       "JLE": {
         "total_contratos": 10,
         "total_financiado": 7463863.67,
-        "total_pago": 1387138.94,
-        "saldo_devedor": 8356872.01,
+        "total_pago": 1407694.42,
+        "saldo_devedor": 8336316.45,
         "total_parcelas": 490,
-        "total_pagas": 70,
-        "total_pendentes": 420,
-        "pct_quitado": 14.3,
+        "total_pagas": 71,
+        "total_pendentes": 419,
+        "pct_quitado": 14.5,
         "compromisso_mensal": 200834.69
       },
       "TECNODRILL": {
@@ -1180,12 +1180,12 @@ window.FINANCIAMENTOS_DATA = {
     "JLE": {
       "total_contratos": 10,
       "total_financiado": 7463863.67,
-      "total_pago": 1387138.94,
-      "saldo_devedor": 8356872.01,
+      "total_pago": 1407694.42,
+      "saldo_devedor": 8336316.45,
       "total_parcelas": 490,
-      "total_pagas": 70,
-      "total_pendentes": 420,
-      "pct_quitado": 14.3,
+      "total_pagas": 71,
+      "total_pendentes": 419,
+      "pct_quitado": 14.5,
       "compromisso_mensal": 200834.69
     },
     "TECNODRILL": {
@@ -8784,11 +8784,11 @@ window.FINANCIAMENTOS_DATA = {
       "taxa_mensal": 0.0,
       "prestacao_mensal": 20555.56,
       "total_parcelas": 18,
-      "qtd_pagas": 12,
-      "qtd_pendentes": 6,
-      "total_pago": 246665.76,
-      "saldo_devedor": 123333.36,
-      "pct_quitado": 66.7,
+      "qtd_pagas": 13,
+      "qtd_pendentes": 5,
+      "total_pago": 267221.24,
+      "saldo_devedor": 102777.8,
+      "pct_quitado": 72.2,
       "parcelas": [
         {
           "numero": 1,
@@ -8992,11 +8992,11 @@ window.FINANCIAMENTOS_DATA = {
           "prestacao": 20555.56,
           "juros": 0.0,
           "amortizacao": 20555.56,
-          "saldo_devedor": 20555.56,
-          "status": "Pendente",
-          "data_pagamento": "",
-          "valor_pago": 0.0,
-          "diferenca": 0.0
+          "saldo_devedor": 0.0,
+          "status": "Pago",
+          "data_pagamento": "10/11/2026",
+          "valor_pago": 20555.48,
+          "diferenca": 0.08
         },
         {
           "numero": 14,
