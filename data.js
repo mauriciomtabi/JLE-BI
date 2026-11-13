@@ -1,5 +1,5 @@
 ﻿window.CASH_FLOW_DATA = {
-    "generated_at":  "2026-11-13 08:38:51",
+    "generated_at":  "2026-11-13 13:12:42",
     "categories_origin":  {
                               "entradas":  [
 
@@ -188016,9 +188016,162 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_11",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 MAXCREDITO_228",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "NOV_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Transferência entre contas",
+                             "descricao":  "Transferência entre contas",
+                             "valor_nominal":  30000,
+                             "valor_liquido":  -30000,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  true,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 MAXCREDITO_229",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "NOV_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "PR",
+                             "fluxo":  "Saída",
+                             "categoria":  "Locação de Veículos",
+                             "descricao":  "FLASH - ALUGUEL CARRO ANTONIO - PR",
+                             "valor_nominal":  700,
+                             "valor_liquido":  -700,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 MAXCREDITO_230",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "NOV_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "SC",
+                             "fluxo":  "Saída",
+                             "categoria":  "Despesas Operacionais",
+                             "descricao":  "FLASH - REEMBOLSO TERCEIRO",
+                             "valor_nominal":  629.93,
+                             "valor_liquido":  -629.93,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 MAXCREDITO_231",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "NOV_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "SC",
+                             "fluxo":  "Saída",
+                             "categoria":  "Despesas Operacionais",
+                             "descricao":  "FLASH - REEMBOLSO CLT BASE SC",
+                             "valor_nominal":  4616.89,
+                             "valor_liquido":  -4616.89,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 MAXCREDITO_232",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "NOV_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "RS",
+                             "fluxo":  "Entrada",
+                             "categoria":  "Transferência entre contas",
+                             "descricao":  "Transferência entre contas",
+                             "valor_nominal":  50000,
+                             "valor_liquido":  50000,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  true,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 MAXCREDITO_233",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "NOV_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "SC",
+                             "fluxo":  "Saída",
+                             "categoria":  "Manut. De Veículos",
+                             "descricao":  "Comprar fechadura Fiorino Jorge Matheus fns",
+                             "valor_nominal":  249.97,
+                             "valor_liquido":  -249.97,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 MAXCREDITO_234",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "NOV_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "SC",
+                             "fluxo":  "Saída",
+                             "categoria":  "Medicina do Trabalho",
+                             "descricao":  "Enxame adicional Pedro Chapecó",
+                             "valor_nominal":  421,
+                             "valor_liquido":  -421,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 MAXCREDITO_235",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "NOV_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "SC",
+                             "fluxo":  "Saída",
+                             "categoria":  "Despesas Operacionais",
+                             "descricao":  "Cx Evandro pescoço",
+                             "valor_nominal":  1000,
+                             "valor_liquido":  -1000,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 MAXCREDITO_236",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "NOV_2026 MAXCREDITO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "SC",
+                             "fluxo":  "Saída",
+                             "categoria":  "Alimentação",
+                             "descricao":  "PANIFICADORA E CONFEITARIA DONNA DE",
+                             "valor_nominal":  40.3,
+                             "valor_liquido":  -40.3,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 TRES FRONTEIRA_11",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-01",
@@ -188033,9 +188186,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_12",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_12",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-03",
@@ -188050,9 +188203,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_13",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_13",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-03",
@@ -188067,9 +188220,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_14",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_14",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-03",
@@ -188084,9 +188237,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_15",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_15",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-04",
@@ -188101,9 +188254,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_16",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_16",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-05",
@@ -188118,9 +188271,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_17",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_17",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-05",
@@ -188135,9 +188288,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_18",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_18",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-05",
@@ -188152,9 +188305,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_19",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_19",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-05",
@@ -188169,9 +188322,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_20",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_20",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-05",
@@ -188186,9 +188339,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_21",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_21",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-05",
@@ -188203,9 +188356,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_22",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_22",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-05",
@@ -188220,9 +188373,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_23",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_23",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-05",
@@ -188237,9 +188390,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_24",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_24",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-05",
@@ -188254,9 +188407,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_25",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_25",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-05",
@@ -188271,9 +188424,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_26",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_26",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-06",
@@ -188288,9 +188441,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_27",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_27",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-06",
@@ -188305,9 +188458,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_28",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_28",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-09",
@@ -188322,9 +188475,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_29",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_29",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188339,9 +188492,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_30",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_30",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188356,9 +188509,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_31",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_31",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188373,9 +188526,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_32",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_32",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188390,9 +188543,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_33",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_33",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188407,9 +188560,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_34",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_34",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188424,9 +188577,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_35",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_35",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188441,9 +188594,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_36",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_36",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188458,9 +188611,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_37",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_37",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188475,9 +188628,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_38",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_38",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188492,9 +188645,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_39",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_39",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188509,9 +188662,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_40",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_40",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188526,9 +188679,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_41",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_41",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188543,9 +188696,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_42",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_42",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188560,9 +188713,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_43",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_43",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188577,9 +188730,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_44",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_44",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188594,9 +188747,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_45",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_45",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188611,9 +188764,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_46",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_46",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188628,9 +188781,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_47",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_47",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188645,9 +188798,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_48",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_48",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188662,9 +188815,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_49",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_49",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188679,9 +188832,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_50",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_50",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188696,9 +188849,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_51",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_51",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188713,9 +188866,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_52",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_52",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188730,9 +188883,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_53",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_53",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188747,9 +188900,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_54",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_54",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188764,9 +188917,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_55",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_55",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188781,9 +188934,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_56",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_56",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188798,9 +188951,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_57",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_57",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188815,9 +188968,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_58",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_58",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188832,9 +188985,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_59",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_59",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188849,9 +189002,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_60",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_60",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188866,9 +189019,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_61",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_61",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188883,9 +189036,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_62",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_62",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188900,9 +189053,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_63",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_63",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188917,9 +189070,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_64",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_64",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188934,9 +189087,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_65",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_65",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188951,9 +189104,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_66",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_66",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188968,9 +189121,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_67",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_67",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -188985,9 +189138,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_68",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_68",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189002,9 +189155,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_69",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_69",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189019,9 +189172,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_70",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_70",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189036,9 +189189,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_71",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_71",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189053,9 +189206,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_72",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_72",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189070,9 +189223,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_73",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_73",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189087,9 +189240,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_74",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_74",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189104,9 +189257,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_75",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_75",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189121,9 +189274,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_76",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_76",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189138,9 +189291,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_77",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_77",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189155,9 +189308,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_78",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_78",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189172,9 +189325,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_79",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_79",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189189,9 +189342,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_80",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_80",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189206,9 +189359,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_81",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_81",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189223,9 +189376,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_82",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_82",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189240,9 +189393,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_83",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_83",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189257,9 +189410,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_84",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_84",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189274,9 +189427,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_85",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_85",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189291,9 +189444,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_86",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_86",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189308,9 +189461,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_87",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_87",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189325,9 +189478,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_88",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_88",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189342,9 +189495,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_89",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_89",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189359,9 +189512,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_90",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_90",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189376,9 +189529,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_91",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_91",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189393,9 +189546,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_92",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_92",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189410,9 +189563,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_93",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_93",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189427,9 +189580,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_94",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_94",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189444,9 +189597,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_95",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_95",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189461,9 +189614,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_96",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_96",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189478,9 +189631,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_97",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_97",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189495,9 +189648,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_98",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_98",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189512,9 +189665,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_99",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_99",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189529,9 +189682,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_100",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_100",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189546,9 +189699,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_101",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_101",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189563,9 +189716,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_102",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_102",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189580,9 +189733,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_103",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_103",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189597,9 +189750,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_104",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_104",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189614,9 +189767,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_105",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_105",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189631,9 +189784,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_106",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_106",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189648,9 +189801,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_107",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_107",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189665,9 +189818,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_108",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_108",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189682,9 +189835,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_109",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_109",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189699,9 +189852,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_110",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_110",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189716,9 +189869,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_111",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_111",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189733,9 +189886,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_112",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_112",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189750,9 +189903,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_113",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_113",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189767,9 +189920,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_114",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_114",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189784,9 +189937,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_115",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_115",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189801,9 +189954,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_116",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_116",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189818,9 +189971,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_117",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_117",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189835,9 +189988,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_118",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_118",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189852,9 +190005,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_119",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_119",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189869,9 +190022,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_120",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_120",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189886,9 +190039,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_121",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_121",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189903,9 +190056,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_122",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_122",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189920,9 +190073,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_123",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_123",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189937,9 +190090,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_124",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_124",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189954,9 +190107,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_125",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_125",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189971,9 +190124,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_126",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_126",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -189988,9 +190141,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_127",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_127",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -190005,9 +190158,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_128",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_128",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -190022,9 +190175,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_129",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_129",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -190039,9 +190192,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_130",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_130",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -190056,9 +190209,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_131",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_131",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -190073,9 +190226,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_132",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_132",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -190090,9 +190243,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_133",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_133",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -190107,9 +190260,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_134",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_134",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -190124,9 +190277,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_135",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_135",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -190141,9 +190294,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_136",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_136",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -190158,9 +190311,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_137",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_137",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -190175,9 +190328,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_138",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_138",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -190192,9 +190345,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_139",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_139",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -190209,9 +190362,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_140",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_140",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -190226,9 +190379,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_141",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_141",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -190243,9 +190396,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_142",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_142",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -190260,9 +190413,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_143",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_143",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -190277,9 +190430,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_144",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_144",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -190294,9 +190447,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_145",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_145",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -190311,9 +190464,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_146",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_146",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -190328,9 +190481,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_147",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_147",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -190345,9 +190498,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_148",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_148",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -190362,9 +190515,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_149",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_149",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-10",
@@ -190379,9 +190532,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_150",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_150",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-11",
@@ -190396,9 +190549,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_151",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_151",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-11",
@@ -190413,9 +190566,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_152",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_152",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-11",
@@ -190430,9 +190583,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_153",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_153",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-11",
@@ -190447,9 +190600,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_154",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_154",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-11",
@@ -190464,9 +190617,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_155",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_155",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-11",
@@ -190481,9 +190634,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_156",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_156",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-11",
@@ -190498,9 +190651,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_157",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_157",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "REMESSA",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-11",
@@ -190515,9 +190668,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_158",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_158",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-11",
@@ -190532,9 +190685,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_159",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_159",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-11",
@@ -190549,9 +190702,9 @@
                              "is_application":  false
                          },
                          {
-                             "id":  "NOV_2026 CONFIANÇA_160",
-                             "banco":  "Sicoob Confiança",
-                             "aba":  "NOV_2026 CONFIANÇA",
+                             "id":  "NOV_2026 TRES FRONTEIRA_160",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
                              "remessa":  "MANUAL",
                              "competencia":  "NOVEMBRO/2026",
                              "data":  "2026-11-11",
@@ -190561,6 +190714,380 @@
                              "descricao":  "MASTERCARD",
                              "valor_nominal":  15676.55,
                              "valor_liquido":  -15676.55,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 TRES FRONTEIRA_161",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Taxas e Tarifas",
+                             "descricao":  "Pagamento TRT praps 12",
+                             "valor_nominal":  68.17,
+                             "valor_liquido":  -68.17,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 TRES FRONTEIRA_162",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
+                             "remessa":  "REMESSA",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Terceiros",
+                             "descricao":  "MB APOIO ADMINISTRATIVO LTDA",
+                             "valor_nominal":  5400,
+                             "valor_liquido":  -5400,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 TRES FRONTEIRA_163",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
+                             "remessa":  "REMESSA",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Material utilizado em serviços",
+                             "descricao":  "ENVIEL INDUSTRIAL LTDA",
+                             "valor_nominal":  357.84,
+                             "valor_liquido":  -357.84,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 TRES FRONTEIRA_164",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
+                             "remessa":  "REMESSA",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Taxas e Tarifas",
+                             "descricao":  "CONS REG ENGENH.AGRONOMIA RS",
+                             "valor_nominal":  108.39,
+                             "valor_liquido":  -108.39,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 TRES FRONTEIRA_165",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
+                             "remessa":  "REMESSA",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Taxas e Tarifas",
+                             "descricao":  "CONS REG ENGENH.AGRONOMIA RS",
+                             "valor_nominal":  108.39,
+                             "valor_liquido":  -108.39,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 TRES FRONTEIRA_166",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
+                             "remessa":  "REMESSA",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Taxas e Tarifas",
+                             "descricao":  "CONS REG ENGENH.AGRONOMIA RS",
+                             "valor_nominal":  108.39,
+                             "valor_liquido":  -108.39,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 TRES FRONTEIRA_167",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
+                             "remessa":  "REMESSA",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Taxas e Tarifas",
+                             "descricao":  "CONS REG ENGENH.AGRONOMIA RS",
+                             "valor_nominal":  108.39,
+                             "valor_liquido":  -108.39,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 TRES FRONTEIRA_168",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
+                             "remessa":  "REMESSA",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Taxas e Tarifas",
+                             "descricao":  "CONS REG ENGENH.AGRONOMIA RS",
+                             "valor_nominal":  108.39,
+                             "valor_liquido":  -108.39,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 TRES FRONTEIRA_169",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
+                             "remessa":  "REMESSA",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Taxas e Tarifas",
+                             "descricao":  "CONS REG ENGENH.AGRONOMIA RS",
+                             "valor_nominal":  108.39,
+                             "valor_liquido":  -108.39,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 TRES FRONTEIRA_170",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
+                             "remessa":  "REMESSA",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Multas de transito",
+                             "descricao":  "DNT DEPARTAMENTO DE TRANSITO",
+                             "valor_nominal":  156.19,
+                             "valor_liquido":  -156.19,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 TRES FRONTEIRA_171",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "SC",
+                             "fluxo":  "Saída",
+                             "categoria":  "FGTS",
+                             "descricao":  "FGTS RESCISORIO GISELE",
+                             "valor_nominal":  1767.89,
+                             "valor_liquido":  -1767.89,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 TRES FRONTEIRA_172",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "SC",
+                             "fluxo":  "Saída",
+                             "categoria":  "Estacionamento",
+                             "descricao":  "Estacionamento cartório sc",
+                             "valor_nominal":  12,
+                             "valor_liquido":  -12,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 TRES FRONTEIRA_173",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "SC",
+                             "fluxo":  "Saída",
+                             "categoria":  "Rescisão",
+                             "descricao":  "GISELE COELHO",
+                             "valor_nominal":  8427.46,
+                             "valor_liquido":  -8427.46,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 TRES FRONTEIRA_174",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Custas de cartório",
+                             "descricao":  "Cartório SLE",
+                             "valor_nominal":  211.28,
+                             "valor_liquido":  -211.28,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 TRES FRONTEIRA_175",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Custas de cartório",
+                             "descricao":  "Taxa Cartório",
+                             "valor_nominal":  11854.87,
+                             "valor_liquido":  -11854.87,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 TRES FRONTEIRA_176",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "RS",
+                             "fluxo":  "Entrada",
+                             "categoria":  "Outros Recebimentos",
+                             "descricao":  "DEVOLUÇÃO DIFERENÇA VALOR EXAMES TECNODRILL -SIGMAMED",
+                             "valor_nominal":  33,
+                             "valor_liquido":  33,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 TRES FRONTEIRA_177",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
+                             "remessa":  "REMESSA",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "PR",
+                             "fluxo":  "Saída",
+                             "categoria":  "Impostos",
+                             "descricao":  "ESTADO PARANÁ - BOLETO GUIA DE RECOLIMENTO PARANÁ",
+                             "valor_nominal":  51.14,
+                             "valor_liquido":  -51.14,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 TRES FRONTEIRA_178",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
+                             "remessa":  "REMESSA",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "PR",
+                             "fluxo":  "Saída",
+                             "categoria":  "Material utilizado em serviços",
+                             "descricao":  "GSM COMERCIO DE FERRAGENS LTDA",
+                             "valor_nominal":  7489.31,
+                             "valor_liquido":  -7489.31,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 TRES FRONTEIRA_179",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
+                             "remessa":  "REMESSA",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "PR",
+                             "fluxo":  "Saída",
+                             "categoria":  "Terceiros",
+                             "descricao":  "REEMBOLSO JULIANO KLAUS ENGEL",
+                             "valor_nominal":  742.44,
+                             "valor_liquido":  -742.44,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 TRES FRONTEIRA_180",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "RS",
+                             "fluxo":  "Entrada",
+                             "categoria":  "Transferência entre contas",
+                             "descricao":  "Transferência entre contas",
+                             "valor_nominal":  30000,
+                             "valor_liquido":  30000,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  true,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 TRES FRONTEIRA_181",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Material utilizado em serviços",
+                             "descricao":  "Poste Rs",
+                             "valor_nominal":  275.5,
+                             "valor_liquido":  -275.5,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 TRES FRONTEIRA_182",
+                             "banco":  "Outros",
+                             "aba":  "NOV_2026 TRES FRONTEIRA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-12",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Despesas TecnoDrill",
+                             "descricao":  "EXAMES TECNODRIL PAGOU PELA JLE",
+                             "valor_nominal":  391,
+                             "valor_liquido":  -391,
                              "meio_pagamento":  "Pix",
                              "is_transfer":  false,
                              "is_application":  false
@@ -190579,6 +191106,91 @@
                              "valor_nominal":  4212913.01,
                              "valor_liquido":  4212913.01,
                              "meio_pagamento":  "Transferência Bancária",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 BRADESCO_12",
+                             "banco":  "Bradesco",
+                             "aba":  "NOV_2026 BRADESCO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-03",
+                             "uf":  "RS",
+                             "fluxo":  "Entrada",
+                             "categoria":  "Rendimentos de Juros",
+                             "descricao":  "RENTABILIDADE INVEST FACIL",
+                             "valor_nominal":  10.75,
+                             "valor_liquido":  10.75,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 BRADESCO_13",
+                             "banco":  "Bradesco",
+                             "aba":  "NOV_2026 BRADESCO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-03",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Taxas e Tarifas",
+                             "descricao":  "MUNICIPIO DE NOVO HAMBURGO- PAGAMENTO ITBI",
+                             "valor_nominal":  62040,
+                             "valor_liquido":  -62040,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 BRADESCO_14",
+                             "banco":  "Bradesco",
+                             "aba":  "NOV_2026 BRADESCO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-03",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Taxas e Tarifas",
+                             "descricao":  "TARIFA BANCARIA PIX",
+                             "valor_nominal":  12,
+                             "valor_liquido":  -12,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 BRADESCO_15",
+                             "banco":  "Bradesco",
+                             "aba":  "NOV_2026 BRADESCO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-04",
+                             "uf":  "RS",
+                             "fluxo":  "Saída",
+                             "categoria":  "Taxas e Tarifas",
+                             "descricao":  "TARIFA BANCARIA PIX",
+                             "valor_nominal":  0.75,
+                             "valor_liquido":  -0.75,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false,
+                             "is_application":  false
+                         },
+                         {
+                             "id":  "NOV_2026 BRADESCO_16",
+                             "banco":  "Bradesco",
+                             "aba":  "NOV_2026 BRADESCO",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-05",
+                             "uf":  "RS",
+                             "fluxo":  "Entrada",
+                             "categoria":  "Rendimentos de Juros",
+                             "descricao":  "RENTABILIDADE INVEST FACIL",
+                             "valor_nominal":  43.45,
+                             "valor_liquido":  43.45,
+                             "meio_pagamento":  "Pix",
                              "is_transfer":  false,
                              "is_application":  false
                          },
