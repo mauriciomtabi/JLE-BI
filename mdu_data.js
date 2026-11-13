@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-11-13 09:00:55
+// Dados MDU Compactados - Gerado em: 2026-11-13 10:00:30
 window.MDU_METADATA = {
-    "generated_at": "2026-11-13 09:00:55",
+    "generated_at": "2026-11-13 10:00:30",
     "total_rows": 6025,
-    "geocoded_new": 0
+    "geocoded_new": 1
 };
 
 window.MDU_DATA = [
@@ -190024,35 +190024,35 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505797",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "RUA BARÃO DO RIO BRANCO 1049",
+        "cidade": "CRUZ ALTA",
+        "cluster": "PAE",
+        "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
-        "prog": 0,
-        "cod_imovel": "",
-        "area": "",
+        "status": "Relatório",
+        "prog": 75.0,
+        "cod_imovel": "701157289",
+        "area": "GBDAB",
         "node": "",
         "caixa_m": "",
-        "hps": null,
-        "data_adicio": "",
-        "equipe": "",
-        "primeira_visita": "",
+        "hps": 50,
+        "data_adicio": "13/11/2026",
+        "equipe": "ABRAÃO RODRIGUES",
+        "primeira_visita": "11/11/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
-        "data_interna": "",
-        "data_fusao": "",
-        "data_baixa": "",
+        "obs_vistoria": "ADEQUADO",
+        "data_interna": "11/11/2026",
+        "data_fusao": "11/11/2026",
+        "data_baixa": "13/11/2026",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -28.6384864,
+        "lng": -53.6086455,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505798",
