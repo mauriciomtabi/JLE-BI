@@ -1,5 +1,5 @@
 ﻿window.TECNODRILL_DATA = {
-    "generated_at":  "2026-11-13 08:40:45",
+    "generated_at":  "2026-11-13 13:14:56",
     "empresa":  "Tecnodrill",
     "categories_origin":  {
                               "entradas":  [
@@ -20637,7 +20637,7 @@
                          }
                      ],
     "caixa":  {
-                  "gerado_em":  "2026-11-13 08:40:05",
+                  "gerado_em":  "2026-11-13 13:13:55",
                   "carlos":  [
                                  {
                                      "id":  "carlos-1",
