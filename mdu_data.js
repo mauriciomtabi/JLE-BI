@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-11-13 16:00:49
+// Dados MDU Compactados - Gerado em: 2026-11-13 17:01:00
 window.MDU_METADATA = {
-    "generated_at": "2026-11-13 16:00:49",
+    "generated_at": "2026-11-13 17:01:00",
     "total_rows": 6025,
     "geocoded_new": 0
 };
@@ -192332,10 +192332,10 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "0",
-        "relatorio_por": "AGUARDANDO MAURICIO CORRIGIR TEXTO",
+        "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610498757",
         "area": "NAVAA",
         "node": "NAVAB",
@@ -192350,7 +192350,7 @@ window.MDU_DATA = [
         "data_fusao": "12/11/2026",
         "data_baixa": "13/11/2026",
         "obs_baixa": "",
-        "data_relatorio": "",
+        "data_relatorio": "13/11/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
