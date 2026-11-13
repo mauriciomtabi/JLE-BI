@@ -63689,6 +63689,22 @@ const VEICULOS_DATA = [
     "transactionId": "1111212579"
   },
   {
+    "date": "2026-11-10 13:10:15",
+    "plate": "RVY7J50",
+    "driver": "ILMAR FONTES VIEIRA FILHO",
+    "value": 227.66,
+    "uf": "SC",
+    "month": "NOVEMBRO",
+    "liters": 35.74,
+    "vlLiter": 6.37,
+    "model": "HB20S",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 103859,
+    "kml": 75.21,
+    "transactionId": "1111222778"
+  },
+  {
     "date": "2026-11-10 15:30:41",
     "plate": "ATY7I93",
     "driver": "VALDECIR FRAGOSO",
@@ -63785,6 +63801,38 @@ const VEICULOS_DATA = [
     "transactionId": "1111339780"
   },
   {
+    "date": "2026-11-11 06:41:07",
+    "plate": "MMF4B58",
+    "driver": "GREGORY PEREIRA DA SILVA",
+    "value": 242.53,
+    "uf": "RS",
+    "month": "NOVEMBRO",
+    "liters": 42.11,
+    "vlLiter": 5.76,
+    "model": "UNO",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 217345,
+    "kml": 11.09,
+    "transactionId": "1111351472"
+  },
+  {
+    "date": "2026-11-11 07:19:29",
+    "plate": "IUR8522",
+    "driver": "JUAREZ DE MOURA MACHADO",
+    "value": 241.24,
+    "uf": "RS",
+    "month": "NOVEMBRO",
+    "liters": 41.52,
+    "vlLiter": 5.81,
+    "model": "UNO",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 139725,
+    "kml": 14.04,
+    "transactionId": "1111360323"
+  },
+  {
     "date": "2026-11-11 09:27:33",
     "plate": "MIS4573",
     "driver": "ALEXANDRE ALVES",
@@ -63799,6 +63847,22 @@ const VEICULOS_DATA = [
     "km": 235308,
     "kml": 9.04,
     "transactionId": "1111410669"
+  },
+  {
+    "date": "2026-11-11 09:52:46",
+    "plate": "IKX0C42",
+    "driver": "MAYCKON MEIRA DOS SANTOS",
+    "value": 247.54,
+    "uf": "SC",
+    "month": "NOVEMBRO",
+    "liters": 39.99,
+    "vlLiter": 6.19,
+    "model": "UNO",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 246380,
+    "kml": 10.23,
+    "transactionId": "1111418793"
   },
   {
     "date": "2026-11-11 11:04:07",
@@ -64135,5 +64199,37 @@ const VEICULOS_DATA = [
     "km": 209400,
     "kml": 11.21,
     "transactionId": "1111774429"
+  },
+  {
+    "date": "2026-11-12 21:43:45",
+    "plate": "PYD3520",
+    "driver": "KAUE GABRIEL KELLER DE ALMEIDA",
+    "value": 160.5,
+    "uf": "RS",
+    "month": "NOVEMBRO",
+    "liters": 24.73,
+    "vlLiter": 6.49,
+    "model": "MONTANA",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 206049,
+    "kml": 11.32,
+    "transactionId": "1111830345"
+  },
+  {
+    "date": "2026-11-13 05:08:11",
+    "plate": "IKX0C42",
+    "driver": "MAYCKON MEIRA DOS SANTOS",
+    "value": 245.62,
+    "uf": "SC",
+    "month": "NOVEMBRO",
+    "liters": 42.42,
+    "vlLiter": 5.79,
+    "model": "UNO",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 246839,
+    "kml": 10.82,
+    "transactionId": "1111841252"
   }
 ];
