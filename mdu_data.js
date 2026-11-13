@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-11-13 11:00:49
+// Dados MDU Compactados - Gerado em: 2026-11-13 12:00:33
 window.MDU_METADATA = {
-    "generated_at": "2026-11-13 11:00:49",
+    "generated_at": "2026-11-13 12:00:33",
     "total_rows": 6025,
-    "geocoded_new": 1
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -192296,35 +192296,35 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505868",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "AV TOROPI 83",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
+        "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
-        "prog": 0,
-        "cod_imovel": "",
-        "area": "",
-        "node": "",
-        "caixa_m": "",
-        "hps": null,
-        "data_adicio": "",
-        "equipe": "",
-        "primeira_visita": "",
+        "status": "Relatório",
+        "prog": 75.0,
+        "cod_imovel": "700499564",
+        "area": "PETAA",
+        "node": "PETAX",
+        "caixa_m": "PETAA.102.M040",
+        "hps": 13,
+        "data_adicio": "13/11/2026",
+        "equipe": "GUILHERME E RODRIGO",
+        "primeira_visita": "10/11/2026",
         "segunda_visita": "",
         "obs_vistoria": "ADEQUADO",
-        "data_interna": "",
-        "data_fusao": "",
-        "data_baixa": "",
+        "data_interna": "10/11/2026",
+        "data_fusao": "10/11/2026",
+        "data_baixa": "13/11/2026",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0389909,
+        "lng": -51.1797517,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505869",
