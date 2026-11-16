@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-11-16 17:47:26
+// Dados MDU Compactados - Gerado em: 2026-11-16 18:00:18
 window.MDU_METADATA = {
-    "generated_at": "2026-11-16 17:47:26",
+    "generated_at": "2026-11-16 18:00:18",
     "total_rows": 6037,
-    "geocoded_new": 2
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -172018,7 +172018,7 @@ window.MDU_DATA = [
         "prog": 88.0,
         "cod_imovel": "610730350",
         "area": "CNTAA",
-        "node": "",
+        "node": "CNTAA",
         "caixa_m": "CNTAA.033.M050",
         "hps": 40,
         "data_adicio": "13/08/2026",
