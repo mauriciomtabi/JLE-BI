@@ -54,6 +54,162 @@ MONTH_NAMES = {
     12: "DEZEMBRO"
 }
 
+# Mapeamento oficial de Centro de Custo / Lotação de Registro (RS, SC, PR)
+# Baseado nas listas de RH / DP, contratos e grupos de restrição da Ticket Log
+DRIVER_COST_CENTER = {
+    "ADRIANO SANTOS DE PROENCA": "PR",
+    "ALDAIR DE OLIVEIRA RODRIGUES": "RS",
+    "ALESSANDRO MIRANDA DOS SANTOS": "SC",
+    "ALEXANDRE ALVES": "SC",
+    "AMIZAEL ROMILIO DO SANTOS": "RS",
+    "ANDRE KRAEMER": "SC",
+    "ANTONIO CARLOS SCHOARTZ": "SC",
+    "ANTONIO CARLOS VIEIRA": "PR",
+    "APARECIDO CERVANTES JUNIOR": "PR",
+    "BRUNO LUIZ SIQUEIRA OLIVEIRA": "SC",
+    "BRUNO LUIZ SIQUERA OLIVEIRA": "SC",
+    "BRUNO MACIEL SOUSA DA SILVA": "RS",
+    "BRUNO MILLER LOPES DA SILVA": "SC",
+    "BRUNO REMOR NETO": "PR",
+    "CARLOS EDUARDO DOS SANTOS": "SC",
+    "CAUA DIAS OLICHESKI DA SILVA": "RS",
+    "CLAUDIO ANDRE LEVINSKI": "RS",
+    "CLAUDIO DE SOUZA ASSUNCAO": "SC",
+    "CLICEU JOSE VIEIRA DE OLIVEIRA": "PR",
+    "CRISTIAN MEDEIROS SILVEIRA": "SC",
+    "DANIEL GERSON GELINSKI": "SC",
+    "DEIVID PERES CARVALHO": "RS",
+    "DENILSON BARBOSA": "SC",
+    "DIONATAN FERREIRA": "RS",
+    "DJON LENON DA SILVEIRA DAVILA": "RS",
+    "DLAGLAYSCH CORREA CALDEIRA": "SC",
+    "EDISON SILVA CARDOZO": "RS",
+    "EDIVALDO ALEX DE LIMA": "SC",
+    "EDSON SANTOS DE BARROS": "SC",
+    "EDUARDO ROSA DA COSTA": "RS",
+    "EVANDRO MARCOS RAIMUNDI": "SC",
+    "EVERSON LUIS DOS SANTOS": "SC",
+    "EVERTON GOULART ZANIRATI": "RS",
+    "FABIO VITOR VEDOY": "SC",
+    "FELIPE MORANDO": "SC",
+    "FERNANDO GONCALVES": "SC",
+    "GEOVANE AMORAS AMANAJAS JUNIOR": "SC",
+    "GILMAR TONINE": "PR",
+    "GISELE COELHO": "SC",
+    "GREGORY PEREIRA DA SILVA": "RS",
+    "HENRIQUE THAINA DOS SANTOS MATOS": "SC",
+    "HERICKSON JOSE ROCHA TEIXEIRA": "SC",
+    "ILMAR FONTES VIEIRA FILHO": "SC",
+    "JAIRO LOI BRAZ DA SILVA": "SC",
+    "JEAN MARCOS RODRIGUES": "SC",
+    "JOACIR DOS SANTOS": "SC",
+    "JOAO CARLOS DA SILVA RODRIGUES": "RS",
+    "JONATHAN TIAGO VISSOTTO": "SC",
+    "JOSMAR TEIXEIRA": "RS",
+    "JUAREZ DE MOURA MACHADO": "RS",
+    "JULIAN CARLOS LINO": "SC",
+    "JULIANO KLAUS ENGEL": "SC",
+    "JUNIOR CESAR DE OLIVEIRA MUNIZ": "SC",
+    "KAUE GABRIEL KELLER DE ALMEIDA": "RS",
+    "LAURO RODRIGUES DOS SATOS PEREIRA": "SC",
+    "LEANDRO DANIEL DE ALMEIDA DUTRA": "RS",
+    "LEANDRO MARQUES DE OLIVEIRA": "RS",
+    "LUCAS DANIEL GELINSKI": "SC",
+    "LUIZ H. ARANTE": "SC",
+    "MALCOLM FABIANO ALVES SOARES": "RS",
+    "MARCEL DIAS DILLI": "SC",
+    "MARCELO DA SILVA": "RS",
+    "MARCIO JONAS DORNELLES OLIVEIRA": "SC",
+    "MARCO ANTONIO DA SILVA DOS REIS": "RS",
+    "MARCOS ANDRE FONSECA DA LUZ DE MELLOS": "RS",
+    "MARCOS DE OLIVEIRA ANDRADE": "SC",
+    "MARCOS VINICIUS DE ALMEIDA DUTRA": "RS",
+    "MARIO FREIRE TEOFILO": "SC",
+    "MARLON EWALDO ZIMMERMANN": "RS",
+    "MAYCKON MEIRA DOS SANTOS": "SC",
+    "NILTON TALASKA": "RS",
+    "ONOFRE TEODORO JUNIOR": "SC",
+    "PAULO ROBERTO DEGRACIA": "SC",
+    "PAULO VITOR CRUZ MARTINS": "RS",
+    "RAFAEL BARBAGLI": "RS",
+    "RAFAEL KOHLRAUSCH": "RS",
+    "RAUL CHRLLES RODRIGUES DOS SANTOS": "RS",
+    "RENATO JOSE KINAPE": "SC",
+    "RICARDO DA SILVA GUEDES": "RS",
+    "ROBSON CANDIDA DE OLIVEIRA": "SC",
+    "ROBSON PEDROSO DE ALMEIDA JUNIOR": "SC",
+    "RODRIGO CRISTIANO MALESKI": "SC",
+    "RODRIGO MOLINA BRAGA": "SC",
+    "SIDINEI DA SILVA KELLER": "RS",
+    "SILVIO NORONHA DE BARROS": "RS",
+    "TAHYLLER KELLER ALMEIDA": "RS",
+    "TIAGO TORRES BICCA LINDEMAYER": "RS",
+    "VALDECIR FRAGOSO": "PR",
+    "VALDEMAR LUIS STURMER": "RS",
+    "VINICIUS PEREIRA MARQUES": "RS",
+    "VINICIUS SAMPAIO RODRIGUES": "RS",
+    "WARGER RICARDO TEODORO": "SC",
+    "WESLEY DA ROSA": "RS",
+    "WESLEY PEREIRA GUIMARAES": "SC",
+    "WIDSON GONCALVES DOS SANTOS": "PR"
+}
+
+PLATE_COST_CENTER = {
+    "ABJ5E17": "PR", "AFR9H26": "RS", "AOI4F25": "PR", "ARK8H33": "SC",
+    "ASD4998": "PR", "ASL1041": "PR", "ATY7I93": "PR", "AVP5083": "SC",
+    "AWT5141": "PR", "AYL8H92": "SC", "AZW3J83": "SC", "BAM4B79": "RS",
+    "BAV2F37": "SC", "BCT4E50": "RS", "BEE1H52": "SC", "COR0001": "RS",
+    "COR0002": "SC", "COR0003": "RS", "FST1C03": "RS", "HJB8B91": "SC",
+    "HLH1C45": "RS", "IKX0C42": "SC", "IMD6H27": "RS", "IMM4770": "RS",
+    "INJ8B61": "SC", "IPB7E02": "RS", "IRB3F50": "PR", "IRK9908": "RS",
+    "IRU9400": "RS", "ISH0C70": "RS", "ITJ5E67": "SC", "ITW7E02": "SC",
+    "IUI8A63": "RS", "IUR8522": "RS", "IVF2B35": "RS", "IVL0A82": "SC",
+    "IVR1I76": "SC", "IVR2035": "SC", "IWY8G48": "SC", "IXB6183": "PR",
+    "IXR2A86": "RS", "IYJ5I82": "RS", "IYO1713": "RS", "IYT0F70": "SC",
+    "JAZ9A81": "SC", "JDN4D75": "SC", "JDN4D87": "RS", "JDN5D91": "SC",
+    "JDN5E06": "SC", "KWY3F20": "SC", "MDM3E76": "SC", "MDO8383": "SC",
+    "MDV8B14": "SC", "MFS7382": "SC", "MGW9835": "SC", "MHJ8138": "RS",
+    "MIH7E15": "RS", "MIS4573": "SC", "MJV3421": "SC", "MKQ1B69": "SC",
+    "MLY8323": "SC", "MMF4B58": "RS", "MMM5C84": "RS", "NFR8B20": "RS",
+    "NJZ2D60": "RS", "OAL5766": "SC", "OPN1A38": "RS", "PHM1208": "SC",
+    "PYD3520": "RS", "PZP2901": "SC", "QDP7C43": "SC", "QHA7J87": "SC",
+    "QHI1I53": "SC", "QHJ5H03": "SC", "QHT2I74": "SC", "QHY2C33": "SC",
+    "QNZ1F16": "SC", "QNZ1F23": "RS", "QOU3G09": "SC", "QQZ5A70": "SC",
+    "QUS5A22": "SC", "QXB2J54": "SC", "QXB2J58": "SC", "QXP1A56": "RS",
+    "RMR8362": "RS", "RVY7J50": "SC", "SEG3F75": "SC"
+}
+
+
+def resolve_cost_center(driver, plate, restriction_group=None, station_uf=None):
+    """
+    Determina o Centro de Custo / Lotação de Registro do colaborador (RS, SC, PR).
+    Prioridades:
+    1. Nome do motorista mapeado
+    2. Placa do veículo mapeada
+    3. Grupo de restrição da Ticket Log
+    4. Fallback: UF do posto abastecido
+    """
+    if driver and str(driver).strip().upper() in DRIVER_COST_CENTER:
+        return DRIVER_COST_CENTER[str(driver).strip().upper()]
+
+    clean_p = re.sub(r"[^A-Z0-9]", "", str(plate or "").upper())
+    if clean_p and clean_p in PLATE_COST_CENTER:
+        return PLATE_COST_CENTER[clean_p]
+
+    if restriction_group:
+        rg = str(restriction_group).upper()
+        if "SANTA CATARINA" in rg:
+            return "SC"
+        if "PARANA" in rg:
+            return "PR"
+        if "GERAL" in rg or "DIRETORIA" in rg:
+            return "RS"
+
+    if station_uf and str(station_uf).strip().upper() in ("RS", "SC", "PR"):
+        return str(station_uf).strip().upper()
+
+    return "RS"
+
 
 def load_env_file():
     """Carrega variaveis de .env.local se existirem."""
@@ -222,6 +378,8 @@ def normalize_api_items(items):
                 kml = round(diff_km / liters, 2)
 
         uf = str(item.get("codigoUF") or item.get("uf") or item.get("siglaUF") or "").strip().upper()
+        restr_group = item.get("grupoRestricaoVeiculo") or item.get("grupoRestricaoTransacao")
+        cost_center = resolve_cost_center(driver, plate, restr_group, uf)
 
         month_name = MONTH_NAMES.get(dt.month, "N/D")
 
@@ -231,6 +389,7 @@ def normalize_api_items(items):
             "driver": driver,
             "value": val,
             "uf": uf,
+            "costCenter": cost_center,
             "month": month_name,
             "liters": liters,
             "vlLiter": vl_liter,
@@ -343,7 +502,7 @@ def export_contingency_cache(records):
         ws.title = "Transacoes"
         
         headers = [
-            "DATA TRANSACAO", "PLACA", "NOME MOTORISTA", "VALOR EMISSAO", "UF",
+            "DATA TRANSACAO", "PLACA", "NOME MOTORISTA", "CENTRO DE CUSTO", "VALOR EMISSAO", "UF POSTO",
             "LITROS", "VL/LITRO", "MODELO VEICULO", "TIPO COMBUSTIVEL", "TIPO FROTA",
             "HODOMETRO OU HORIMETRO", "KM/LITRO OU LITROS/HORA"
         ]
@@ -354,6 +513,7 @@ def export_contingency_cache(records):
                 r.get("date"),
                 r.get("plate"),
                 r.get("driver"),
+                r.get("costCenter") or r.get("uf"),
                 r.get("value"),
                 r.get("uf"),
                 r.get("liters"),

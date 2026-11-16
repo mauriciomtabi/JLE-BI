@@ -1447,9 +1447,27 @@
                 </div>
                 
                 <div class="filter-group">
-                    <label for="filter-veiculos-uf">UF / Estado</label>
+                    <label for="filter-veiculos-mode">Visão / Agrupamento</label>
+                    <select id="filter-veiculos-mode" onchange="applyVeiculosFilters()">
+                        <option value="costCenter">Centro de Custo (Registro)</option>
+                        <option value="posto">Local do Posto (Abastecimento)</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="filter-veiculos-cost-center">Centro de Custo</label>
+                    <select id="filter-veiculos-cost-center" onchange="applyVeiculosFilters()">
+                        <option value="all">Todos os Centros</option>
+                        <option value="RS">RS (Matriz)</option>
+                        <option value="SC">SC (Filial)</option>
+                        <option value="PR">PR (Filial)</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="filter-veiculos-uf">UF Posto (Abastecimento)</label>
                     <select id="filter-veiculos-uf" onchange="applyVeiculosFilters()">
-                        <option value="all">Todas as UFs</option>
+                        <option value="all">Todas as UFs (Posto)</option>
                         <option value="SC">Santa Catarina (SC)</option>
                         <option value="RS">Rio Grande do Sul (RS)</option>
                         <option value="PR">Paraná (PR)</option>
@@ -1654,7 +1672,7 @@
                         <div class="chart-card vehicles-map-card">
                             <div class="chart-header">
                                 <div class="chart-title">
-                                    <h2>ABASTECIMENTO POR UF</h2>
+                                    <h2 id="veiculos-map-title">Centro de Custo / Registro</h2>
                                 </div>
                             </div>
                             <div class="chart-body map-chart-body" style="overflow:hidden !important;">
@@ -1690,7 +1708,7 @@
                             <p>Visualização de todas as transações registradas</p>
                         </div>
                         <div class="table-search">
-                            <input type="text" id="table-veiculos-search" placeholder="Pesquisar por motorista, placa, UF, combustível...">
+                            <input type="text" id="table-veiculos-search" placeholder="Pesquisar por motorista, placa, centro de custo, UF, combustível...">
                         </div>
                     </div>
                     
@@ -1702,7 +1720,8 @@
                                     <th data-sort="plate">Placa</th>
                                     <th data-sort="model">Modelo</th>
                                     <th data-sort="driver">Motorista</th>
-                                    <th data-sort="uf">UF</th>
+                                    <th data-sort="costCenter">Centro Custo</th>
+                                    <th data-sort="uf">UF Posto</th>
                                     <th data-sort="value" class="text-right">Valor</th>
                                     <th data-sort="liters" class="text-right">Litros</th>
                                     <th data-sort="vlLiter" class="text-right">Preço/L</th>
@@ -4287,7 +4306,7 @@
     <script src="sar_app.js?v=3.58"></script>
     <script src="manutencao_data.js"></script>
     <script src="manutencao_app.js"></script>
-    <script src="parcelamentos_data.js?v=20261113212750"></script>
+    <script src="parcelamentos_data.js?v=20261116174803"></script>
     <script src="parcelamentos_app.js?v=1.7"></script>
     <script src="financiamentos_data.js?v=20261016084048"></script>
     <script src="financiamentos_app.js?v=1.4"></script>

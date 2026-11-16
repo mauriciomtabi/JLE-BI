@@ -8,6 +8,7 @@ let filteredVeiculosData   = [];
 let chartVeiculosInstances = {};
 let veiculosDataLoaded     = false;
 let veiculosEvolutionGranularity = 'mensal'; // 'mensal' | 'semanal' | 'diario'
+let veiculosViewMode             = 'costCenter'; // 'costCenter' (Local de Registro) | 'posto' (Local do Posto)
 
 // Drill-down de condutor
 let driverDrillState = { active: false, driver: null };
@@ -196,10 +197,14 @@ function populateVeiculosFilters() {
 // ── Reset ─────────────────────────────────────────────────────────────────
 function resetVeiculosFilters() {
     try {
-        ['filter-veiculos-month','filter-veiculos-uf','filter-veiculos-fuel'].forEach(id => {
+        ['filter-veiculos-month','filter-veiculos-cost-center','filter-veiculos-uf','filter-veiculos-fuel'].forEach(id => {
             const el = document.getElementById(id);
             if (el) el.value = 'all';
         });
+        const modeEl = document.getElementById('filter-veiculos-mode');
+        if (modeEl) modeEl.value = 'costCenter';
+        veiculosViewMode = 'costCenter';
+
         ['filter-veiculos-driver','filter-veiculos-plate','filter-veiculos-data-inicio','filter-veiculos-data-fim'].forEach(id => {
             const el = document.getElementById(id);
             if (el) el.value = '';
@@ -228,7 +233,10 @@ function resetVeiculosDateFilter() {
 function applyVeiculosFilters() {
     try {
         const month      = document.getElementById('filter-veiculos-month')?.value || 'all';
+        const costCenter = document.getElementById('filter-veiculos-cost-center')?.value || 'all';
         const uf         = document.getElementById('filter-veiculos-uf')?.value    || 'all';
+        const mode       = document.getElementById('filter-veiculos-mode')?.value  || 'costCenter';
+        veiculosViewMode = mode;
         const fuel       = document.getElementById('filter-veiculos-fuel')?.value  || 'all';
         const driver     = (document.getElementById('filter-veiculos-driver')?.value || '').trim().toUpperCase();
         const plate      = (document.getElementById('filter-veiculos-plate')?.value  || '').trim().toUpperCase();
@@ -237,6 +245,8 @@ function applyVeiculosFilters() {
 
         filteredVeiculosData = getBaseVeiculosData().filter(r => {
             if (month !== 'all' && String(r.month || '').toUpperCase() !== month.toUpperCase()) return false;
+            const rCostCenter = r.costCenter || r.uf || '';
+            if (costCenter !== 'all' && String(rCostCenter) !== costCenter) return false;
             if (uf    !== 'all' && String(r.uf || '') !== uf)    return false;
             if (fuel  !== 'all' && String(r.fuel || '') !== fuel)  return false;
             if (driver && !String(r.driver || '').toUpperCase().includes(driver)) return false;
@@ -297,10 +307,11 @@ function updateVeiculosKPIs() {
     set('kpi-veiculos-active-drivers', drivers.size.toLocaleString('pt-BR'));
     set('kpi-veiculos-liters',         totalLiters.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' L');
 
-    // Cards Regionais
+    // Cards Regionais (agrupamento dinâmico por Centro de Custo / Registro ou Posto)
     const regional = { SC:{spent:0,count:0}, RS:{spent:0,count:0}, PR:{spent:0,count:0} };
     filteredVeiculosData.forEach(r => {
-        if (regional[r.uf]) { regional[r.uf].spent += (r.value || 0); regional[r.uf].count++; }
+        const regKey = veiculosViewMode === 'costCenter' ? (r.costCenter || r.uf) : r.uf;
+        if (regional[regKey]) { regional[regKey].spent += (r.value || 0); regional[regKey].count++; }
     });
     ['SC','RS','PR'].forEach(uf => {
         const d   = regional[uf];
@@ -369,6 +380,7 @@ function buildEvolutionData() {
         const buckets = {};
         
         // Ignorar o filtro de competência/mês na evolução mensal
+        const costCenter = document.getElementById('filter-veiculos-cost-center')?.value || 'all';
         const uf         = document.getElementById('filter-veiculos-uf')?.value    || 'all';
         const fuel       = document.getElementById('filter-veiculos-fuel')?.value  || 'all';
         const driver     = (document.getElementById('filter-veiculos-driver')?.value || '').trim().toUpperCase();
@@ -377,6 +389,8 @@ function buildEvolutionData() {
         const dataFim    = document.getElementById('filter-veiculos-data-fim')?.value    || '';
 
         const dataForMensal = getBaseVeiculosData().filter(r => {
+            const rCostCenter = r.costCenter || r.uf || '';
+            if (costCenter !== 'all' && String(rCostCenter) !== costCenter) return false;
             if (uf    !== 'all' && String(r.uf || '') !== uf)    return false;
             if (fuel  !== 'all' && String(r.fuel || '') !== fuel)  return false;
             if (driver && !String(r.driver || '').toUpperCase().includes(driver)) return false;
@@ -392,7 +406,8 @@ function buildEvolutionData() {
         dataForMensal.forEach(r => {
             const key = (r.month || 'N/D').toUpperCase();
             if (!buckets[key]) buckets[key] = { SC:0, RS:0, PR:0 };
-            if (buckets[key][r.uf] !== undefined) buckets[key][r.uf] += (r.value || 0);
+            const regKey = veiculosViewMode === 'costCenter' ? (r.costCenter || r.uf) : r.uf;
+            if (buckets[key][regKey] !== undefined) buckets[key][regKey] += (r.value || 0);
         });
         const sorted = Object.keys(buckets).sort((a, b) => {
             const ia = monthOrder.indexOf(a);
@@ -424,7 +439,8 @@ function buildEvolutionData() {
             const wk = getWeekKey(r.date);
             if (wk) {
                 if (!buckets[wk.key]) buckets[wk.key] = { SC:0, RS:0, PR:0, label: wk.label };
-                if (buckets[wk.key][r.uf] !== undefined) buckets[wk.key][r.uf] += (r.value || 0);
+                const regKey = veiculosViewMode === 'costCenter' ? (r.costCenter || r.uf) : r.uf;
+                if (buckets[wk.key][regKey] !== undefined) buckets[wk.key][regKey] += (r.value || 0);
             }
         });
         const sorted = Object.keys(buckets).sort();
@@ -442,7 +458,8 @@ function buildEvolutionData() {
         const key = (r.date || '').substring(0, 10);
         if (!key) return;
         if (!buckets[key]) buckets[key] = { SC:0, RS:0, PR:0 };
-        if (buckets[key][r.uf] !== undefined) buckets[key][r.uf] += (r.value || 0);
+        const regKey = veiculosViewMode === 'costCenter' ? (r.costCenter || r.uf) : r.uf;
+        if (buckets[key][regKey] !== undefined) buckets[key][regKey] += (r.value || 0);
     });
     const sorted = Object.keys(buckets).sort().slice(-60);
     const fmtDay = k => { const [y,m,d] = k.split('-'); return `${d}/${m}`; };
@@ -632,7 +649,8 @@ function updateVeiculosCharts() {
 
     // Título dinâmico da evolução
     const evoTitle = document.getElementById('veiculos-evolution-title');
-    if (evoTitle) evoTitle.textContent = `Evolução de Gastos de Frota (${granTitle})`;
+    const modeLabel = veiculosViewMode === 'costCenter' ? 'Centro de Custo' : 'Local do Posto';
+    if (evoTitle) evoTitle.textContent = `Evolução de Gastos por ${modeLabel} (${granTitle})`;
 
     // 2. Mapa SVG de distribuição por UF
     renderVeiculosMap(th);
@@ -657,9 +675,10 @@ function renderVeiculosMap(th) {
 
     const ufMetrics = { SC: { spent: 0, count: 0 }, RS: { spent: 0, count: 0 }, PR: { spent: 0, count: 0 } };
     filteredVeiculosData.forEach(r => {
-        if (ufMetrics[r.uf]) {
-            ufMetrics[r.uf].spent += (r.value || 0);
-            ufMetrics[r.uf].count++;
+        const regKey = veiculosViewMode === 'costCenter' ? (r.costCenter || r.uf) : r.uf;
+        if (ufMetrics[regKey]) {
+            ufMetrics[regKey].spent += (r.value || 0);
+            ufMetrics[regKey].count++;
         }
     });
 
@@ -672,10 +691,17 @@ function renderVeiculosMap(th) {
         return `rgba(0, 79, 113, ${opacity.toFixed(2)})`;
     };
 
-    const filterUf  = document.getElementById('filter-veiculos-uf')?.value || 'all';
-    const classOf   = uf => filterUf === uf ? 'active' : (filterUf !== 'all' ? 'dimmed' : '');
+    const activeFilterUf = veiculosViewMode === 'costCenter'
+        ? (document.getElementById('filter-veiculos-cost-center')?.value || 'all')
+        : (document.getElementById('filter-veiculos-uf')?.value || 'all');
+    const classOf   = uf => activeFilterUf === uf ? 'active' : (activeFilterUf !== 'all' ? 'dimmed' : '');
     const stateName = uf => uf === 'PR' ? 'Paraná' : uf === 'SC' ? 'Santa Catarina' : 'Rio Grande do Sul';
     const dotClass  = uf => uf === 'SC' ? 'sc' : uf === 'RS' ? 'rs' : 'pr';
+
+    const mapTitleEl = document.getElementById('veiculos-map-title');
+    if (mapTitleEl) {
+        mapTitleEl.textContent = veiculosViewMode === 'costCenter' ? 'Centro de Custo / Registro' : 'Abastecimento por UF (Posto)';
+    }
 
     const cardHtml = uf => `
         <div class="uf-compact-card ${dotClass(uf)}-card ${classOf(uf)}" id="veic-card-UF-${uf}"
@@ -824,7 +850,8 @@ window.handleVeiculosMapLeave = () => {
     });
 };
 window.toggleVeiculosUFFromMap = uf => {
-    const sel = document.getElementById('filter-veiculos-uf');
+    const selId = veiculosViewMode === 'costCenter' ? 'filter-veiculos-cost-center' : 'filter-veiculos-uf';
+    const sel = document.getElementById(selId);
     if (!sel) return;
     sel.value = sel.value === uf ? 'all' : uf;
     applyVeiculosFilters();
@@ -1143,12 +1170,13 @@ function getVeiculosTableFilteredData() {
     if (tableVeiculosSearchQuery) {
         const q = tableVeiculosSearchQuery.trim().toUpperCase();
         data = data.filter(r =>
-            (r.driver || '').toUpperCase().includes(q) ||
-            (r.plate  || '').toUpperCase().includes(q) ||
-            (r.uf     || '').toUpperCase().includes(q) ||
-            (r.fuel   || '').toUpperCase().includes(q) ||
-            (r.model  || '').toUpperCase().includes(q) ||
-            (r.date   || '').includes(q)
+            (r.driver     || '').toUpperCase().includes(q) ||
+            (r.plate      || '').toUpperCase().includes(q) ||
+            (r.costCenter || '').toUpperCase().includes(q) ||
+            (r.uf         || '').toUpperCase().includes(q) ||
+            (r.fuel       || '').toUpperCase().includes(q) ||
+            (r.model      || '').toUpperCase().includes(q) ||
+            (r.date       || '').includes(q)
         );
     }
     data.sort((a, b) => {
@@ -1179,7 +1207,7 @@ function renderVeiculosTable() {
     set('table-veiculos-row-total', total.toLocaleString('pt-BR'));
 
     if (total === 0) {
-        tbody.innerHTML = `<tr><td colspan="10" style="text-align:center;color:var(--text-secondary);padding:40px 0;">Nenhum lançamento encontrado.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="11" style="text-align:center;color:var(--text-secondary);padding:40px 0;">Nenhum lançamento encontrado.</td></tr>`;
         set('table-veiculos-row-start', '0'); set('table-veiculos-row-end', '0');
         const prevBtn = document.getElementById('btn-veiculos-page-prev');
         const nextBtn = document.getElementById('btn-veiculos-page-next');
@@ -1201,6 +1229,8 @@ function renderVeiculosTable() {
         const dateParts  = (r.date || '').split(' ');
         const dp         = (dateParts[0] || '').split('-');
         const displayDate = dp.length === 3 ? `${dp[2]}/${dp[1]}/${dp[0]} ${(dateParts[1] || '').substring(0, 5)}` : r.date;
+        const ccVal      = r.costCenter || r.uf || '-';
+        const ccBadge    = ccVal !== '-' ? `<span class="badge ${ccVal.toLowerCase()}">${ccVal}</span>` : '-';
         const ufBadge    = r.uf ? `<span class="badge ${(r.uf).toLowerCase()}">${r.uf}</span>` : '-';
         const tr = document.createElement('tr');
         tr.innerHTML = `
@@ -1208,7 +1238,8 @@ function renderVeiculosTable() {
             <td data-label="Placa"><strong>${r.plate || '-'}</strong></td>
             <td data-label="Modelo">${r.model  || '-'}</td>
             <td data-label="Motorista">${r.driver || '-'}</td>
-            <td data-label="UF">${ufBadge}</td>
+            <td data-label="Centro Custo">${ccBadge}</td>
+            <td data-label="UF Posto">${ufBadge}</td>
             <td data-label="Valor" class="text-right"><strong>${fmtBRL(r.value || 0)}</strong></td>
             <td data-label="Litros" class="text-right">${r.liters !== null && r.liters !== undefined ? r.liters.toLocaleString('pt-BR', { minimumFractionDigits: 1 }) + ' L' : '-'}</td>
             <td data-label="Preço/L" class="text-right">${r.vlLiter !== null && r.vlLiter !== undefined ? fmtBRL(r.vlLiter) : '-'}</td>
@@ -1249,7 +1280,7 @@ function renderTop3Consumo() {
             if (!r.driver) return;
             const driver = r.driver.trim();
             if (!driverData[driver]) {
-                driverData[driver] = { spent: 0, count: 0, ufs: new Set() };
+                driverData[driver] = { spent: 0, count: 0, ufs: new Set(), costCenter: r.costCenter || r.uf };
             }
             driverData[driver].spent += (r.value || 0);
             driverData[driver].count += 1;
@@ -1262,7 +1293,8 @@ function renderTop3Consumo() {
                 name,
                 spent: driverData[name].spent,
                 count: driverData[name].count,
-                ufs: Array.from(driverData[name].ufs)
+                ufs: Array.from(driverData[name].ufs),
+                costCenter: driverData[name].costCenter
             }))
             .sort((a, b) => b.spent - a.spent)
             .slice(0, 3);
@@ -1273,7 +1305,7 @@ function renderTop3Consumo() {
             if (!r.plate) return;
             const plate = r.plate.trim();
             if (!vehicleData[plate]) {
-                vehicleData[plate] = { spent: 0, count: 0, ufs: new Set(), model: r.model || '' };
+                vehicleData[plate] = { spent: 0, count: 0, ufs: new Set(), model: r.model || '', costCenter: r.costCenter || r.uf };
             }
             vehicleData[plate].spent += (r.value || 0);
             vehicleData[plate].count += 1;
@@ -1290,7 +1322,8 @@ function renderTop3Consumo() {
                 spent: vehicleData[plate].spent,
                 count: vehicleData[plate].count,
                 ufs: Array.from(vehicleData[plate].ufs),
-                model: vehicleData[plate].model || ''
+                model: vehicleData[plate].model || '',
+                costCenter: vehicleData[plate].costCenter
             }))
             .sort((a, b) => b.spent - a.spent)
             .slice(0, 3);
@@ -1300,14 +1333,18 @@ function renderTop3Consumo() {
             driversContainer.innerHTML = `<div style="font-size: 11px; color: var(--text-secondary); text-align: center; padding: 6px;">Nenhum dado disponível</div>`;
         } else {
             driversContainer.innerHTML = topDrivers.map((d, index) => {
-                const ufsBadges = d.ufs.map(uf => `<span class="badge ${uf.toLowerCase()}" style="margin-left: 3px; padding: 1px 5px; font-size: 8.5px; border-radius: 3px;">${uf}</span>`).join('');
+                const ccBadge = d.costCenter ? `<span class="badge ${d.costCenter.toLowerCase()}" style="margin-right: 4px; padding: 1px 5px; font-size: 8.5px; border-radius: 3px;" title="Centro de Custo: ${d.costCenter}">${d.costCenter}</span>` : '';
+                const ufsBadges = d.ufs.map(uf => `<span class="badge ${uf.toLowerCase()}" style="margin-left: 3px; padding: 1px 5px; font-size: 8.5px; border-radius: 3px;" title="Posto: ${uf}">${uf}</span>`).join('');
                 const avgSpent = d.count > 0 ? (d.spent / d.count) : 0;
                 return `
                     <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 6px; padding: 5px 10px; font-size: 11.5px;">
                         <div style="display: flex; align-items: center; gap: 6px;">
                             <strong style="color: var(--text-primary); font-size: 10.5px;">#${index + 1}</strong>
                             <div>
-                                <div style="font-weight: 600; color: var(--text-primary); max-width: 135px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${d.name}">${shortName(d.name)}</div>
+                                <div style="display: flex; align-items: center;">
+                                    ${ccBadge}
+                                    <span style="font-weight: 600; color: var(--text-primary); max-width: 130px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${d.name}">${shortName(d.name)}</span>
+                                </div>
                                 <div style="font-size: 9.5px; color: var(--text-secondary); margin-top: 1px;">
                                     ${d.count} abast. • Méd. ${fmtBRL(avgSpent)} ${ufsBadges}
                                 </div>
@@ -1325,7 +1362,8 @@ function renderTop3Consumo() {
             vehiclesContainer.innerHTML = `<div style="font-size: 11px; color: var(--text-secondary); text-align: center; padding: 6px;">Nenhum dado disponível</div>`;
         } else {
             vehiclesContainer.innerHTML = topVehicles.map((v, index) => {
-                const ufsBadges = v.ufs.map(uf => `<span class="badge ${uf.toLowerCase()}" style="margin-left: 3px; padding: 1px 5px; font-size: 8.5px; border-radius: 3px;">${uf}</span>`).join('');
+                const ccBadge = v.costCenter ? `<span class="badge ${v.costCenter.toLowerCase()}" style="margin-right: 4px; padding: 1px 5px; font-size: 8.5px; border-radius: 3px;" title="Centro de Custo: ${v.costCenter}">${v.costCenter}</span>` : '';
+                const ufsBadges = v.ufs.map(uf => `<span class="badge ${uf.toLowerCase()}" style="margin-left: 3px; padding: 1px 5px; font-size: 8.5px; border-radius: 3px;" title="Posto: ${uf}">${uf}</span>`).join('');
                 const avgSpent = v.count > 0 ? (v.spent / v.count) : 0;
                 const modelDisplay = v.model ? ` <span style="font-weight: 500; font-size: 10px; color: var(--text-secondary);">(${v.model})</span>` : '';
                 return `
@@ -1333,7 +1371,10 @@ function renderTop3Consumo() {
                         <div style="display: flex; align-items: center; gap: 6px;">
                             <strong style="color: var(--text-primary); font-size: 10.5px;">#${index + 1}</strong>
                             <div>
-                                <div style="font-weight: 700; color: var(--text-primary); letter-spacing: 0.5px;">${v.plate}${modelDisplay}</div>
+                                <div style="display: flex; align-items: center;">
+                                    ${ccBadge}
+                                    <span style="font-weight: 700; color: var(--text-primary); letter-spacing: 0.5px;">${v.plate}${modelDisplay}</span>
+                                </div>
                                 <div style="font-size: 9.5px; color: var(--text-secondary); margin-top: 1px;">
                                     ${v.count} abast. • Méd. ${fmtBRL(avgSpent)} ${ufsBadges}
                                 </div>
