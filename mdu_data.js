@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-11-16 18:00:18
+// Dados MDU Compactados - Gerado em: 2026-11-16 19:14:08
 window.MDU_METADATA = {
-    "generated_at": "2026-11-16 18:00:18",
+    "generated_at": "2026-11-16 19:14:08",
     "total_rows": 6037,
     "geocoded_new": 0
 };
@@ -161389,9 +161389,9 @@ window.MDU_DATA = [
         "cluster": "PAE",
         "aging": "133",
         "relatorio_por": "",
-        "pendencia": "Não",
-        "status": "Fusão",
-        "prog": 50.0,
+        "pendencia": "SIM",
+        "status": "Pendência",
+        "prog": 0.0,
         "cod_imovel": "610341672",
         "area": "BFMAA",
         "node": "FLOAI",
@@ -161401,10 +161401,10 @@ window.MDU_DATA = [
         "equipe": "Murilo Didio",
         "primeira_visita": "30/06/2026",
         "segunda_visita": "",
-        "obs_vistoria": "ADEQUADO, SEM SINAL",
+        "obs_vistoria": "ADEQUADO",
         "data_interna": "30/06",
-        "data_fusao": "",
-        "data_baixa": "",
+        "data_fusao": "12/11",
+        "data_baixa": "12/11",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
