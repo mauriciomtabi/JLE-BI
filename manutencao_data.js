@@ -1,7 +1,7 @@
 // Data generated 100% from Master Excel Controle de Medições (Mnt. Demanda)
 (function() {
     const db = {
-  "generated_at": "2026-11-17 11:00:23",
+  "generated_at": "2026-11-17 12:00:19",
   "lookups": {
     "tipos_of": [
       "TIPO\nOS CLIENTE",
@@ -70423,7 +70423,7 @@
       1,
       1,
       6,
-      2323.0,
+      5798.2,
       7,
       0,
       "-",
@@ -70459,7 +70459,7 @@
       1,
       1,
       6,
-      4425.7,
+      6090.9,
       7,
       0,
       "-",
@@ -70513,7 +70513,7 @@
       1,
       1,
       6,
-      3272.99,
+      5879.39,
       7,
       0,
       "-",
@@ -70639,7 +70639,7 @@
       1,
       1,
       6,
-      3767.9,
+      7098.3,
       7,
       0,
       "-",
@@ -93531,7 +93531,7 @@
     window.MANUTENCAO_METADATA = {
         generated_at: db.generated_at,
         count: db.rows.length,
-        total_medido: 5253971.80
+        total_medido: 5265049.00
     };
     console.log('Base 100% Excel de Manutenção carregada:', window.MANUTENCAO_DATA.length, 'registros.');
 })();
