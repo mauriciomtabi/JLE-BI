@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-11-17 08:00:31
+// Dados MDU Compactados - Gerado em: 2026-11-17 09:00:17
 window.MDU_METADATA = {
-    "generated_at": "2026-11-17 08:00:31",
+    "generated_at": "2026-11-17 09:00:17",
     "total_rows": 6037,
-    "geocoded_new": 0
+    "geocoded_new": 1
 };
 
 window.MDU_DATA = [
@@ -192636,7 +192636,7 @@ window.MDU_DATA = [
         "obs_vistoria": "ADEQUADO",
         "data_interna": "12/11/2026",
         "data_fusao": "12/11/2026",
-        "data_baixa": "16/11",
+        "data_baixa": "17/11/2026",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
@@ -192651,7 +192651,7 @@ window.MDU_DATA = [
         "endereco": "RUA VALPARAÍSO 493",
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
-        "aging": "",
+        "aging": "1",
         "relatorio_por": "",
         "pendencia": "Não",
         "status": "Medição",
@@ -192668,7 +192668,7 @@ window.MDU_DATA = [
         "obs_vistoria": "ADEQUADO",
         "data_interna": "13/11/2026",
         "data_fusao": "13/11/2026",
-        "data_baixa": "16/11/2026",
+        "data_baixa": "18/11/2026",
         "obs_baixa": "",
         "data_relatorio": "16/11/2026",
         "data_medicao": "",
@@ -192732,7 +192732,7 @@ window.MDU_DATA = [
         "obs_vistoria": "ADEQUADO",
         "data_interna": "11/11/2026",
         "data_fusao": "11/11/2026",
-        "data_baixa": "16/11",
+        "data_baixa": "19/11/2026",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
@@ -192764,7 +192764,7 @@ window.MDU_DATA = [
         "obs_vistoria": "ADEQUADO",
         "data_interna": "12/11/2026",
         "data_fusao": "12/11/2026",
-        "data_baixa": "16/11",
+        "data_baixa": "20/11/2026",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
@@ -192776,19 +192776,19 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505883",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "AV VENÂNCIO AIRES 556",
+        "cidade": "CRUZ ALTA",
+        "cluster": "SAN",
+        "aging": "46.343",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
+        "status": "FALTA DADOS",
         "prog": 0,
-        "cod_imovel": "",
-        "area": "",
-        "node": "",
-        "caixa_m": "",
-        "hps": null,
+        "cod_imovel": "366757914",
+        "area": "GBDAB",
+        "node": "GBDAB",
+        "caixa_m": "GBDAB.132.M020",
+        "hps": 6,
         "data_adicio": "",
         "equipe": "",
         "primeira_visita": "",
@@ -192802,9 +192802,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -28.6359841,
+        "lng": -53.6064652,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505884",
