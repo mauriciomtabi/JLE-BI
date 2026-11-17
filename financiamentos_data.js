@@ -1,43 +1,32 @@
 // BI JLE Telecom - Financiamentos & PMTs Data Source
-// Gerado automaticamente em 17/11/2026 08:38:36
+// Gerado automaticamente em 17/11/2026 13:10:25
 window.FINANCIAMENTOS_DATA = {
   "metadata": {
-    "generated_at": "17/11/2026 08:38:36",
-    "source_directory": "C:\\Users\\lenovo\\.antigravity\\BI_JLE\\financiamentos_local",
+    "generated_at": "17/11/2026 13:10:25",
+    "source_directory": "\\\\10.121.21.252\\controladoria\\Vitor\\FINANCEIRO\\PMTs FINANCIAMENTOS",
     "total_contratos": 12
   },
   "totais_gerais": {
     "total_financiado": 8856970.3,
-    "total_pago": 1455444.42,
-    "saldo_devedor": 10441404.25,
+    "total_pago": 1456910.43,
+    "saldo_devedor": 10439937.66,
     "total_parcelas": 610,
-    "total_pagas": 72,
-    "total_pendentes": 538,
-    "pct_quitado": 11.8,
+    "total_pagas": 73,
+    "total_pendentes": 537,
+    "pct_quitado": 12.0,
     "compromisso_mensal": 236715.32,
     "proxima_parcela": {
-      "contrato_id": "sicoob_wilian",
-      "contrato_nome": "Carro Wilian (Osório)",
-      "categoria": "Veículos",
+      "contrato_id": "sicoob_maq3",
+      "contrato_nome": "3ª Perfuratriz Sicoob",
+      "categoria": "Máquinas",
       "instituicao": "SICOOB",
-      "numero": 8,
+      "numero": 5,
       "tipo": "Mensal",
-      "vencimento": "17/11/2026",
-      "vencimento_iso": "2026-11-17",
-      "prestacao": 1466.59
+      "vencimento": "20/11/2026",
+      "vencimento_iso": "2026-11-20",
+      "prestacao": 42021.01
     },
     "proximas_parcelas_top10": [
-      {
-        "contrato_id": "sicoob_wilian",
-        "contrato_nome": "Carro Wilian (Osório)",
-        "categoria": "Veículos",
-        "instituicao": "SICOOB",
-        "numero": 8,
-        "tipo": "Mensal",
-        "vencimento": "17/11/2026",
-        "vencimento_iso": "2026-11-17",
-        "prestacao": 1466.59
-      },
       {
         "contrato_id": "sicoob_maq3",
         "contrato_nome": "3ª Perfuratriz Sicoob",
@@ -136,6 +125,17 @@ window.FINANCIAMENTOS_DATA = {
         "vencimento": "10/12/2026",
         "vencimento_iso": "2026-12-10",
         "prestacao": 20555.56
+      },
+      {
+        "contrato_id": "compra_base_nh",
+        "contrato_nome": "Compra Base Novo Hamburgo",
+        "categoria": "Imóveis",
+        "instituicao": "Pro-Formula",
+        "numero": 3,
+        "tipo": "Mensal",
+        "vencimento": "15/12/2026",
+        "vencimento_iso": "2026-12-15",
+        "prestacao": 47750.0
       }
     ],
     "por_categoria": {
@@ -150,12 +150,12 @@ window.FINANCIAMENTOS_DATA = {
       },
       "Veículos": {
         "financiado": 957567.36,
-        "pago": 133737.08,
-        "saldo_devedor": 1341560.88,
+        "pago": 135203.09,
+        "saldo_devedor": 1340094.29,
         "contratos": 5,
         "total_parcelas": 240,
-        "qtd_pagas": 21,
-        "pct_quitado": 8.8
+        "qtd_pagas": 22,
+        "pct_quitado": 9.2
       },
       "Imóveis": {
         "financiado": 2822000.0,
@@ -176,8 +176,8 @@ window.FINANCIAMENTOS_DATA = {
       },
       "SICOOB": {
         "financiado": 2948809.74,
-        "pago": 499617.8,
-        "saldo_devedor": 4033969.91,
+        "pago": 501083.81,
+        "saldo_devedor": 4032503.32,
         "contratos": 5
       },
       "Pro-Formula": {
@@ -215,8 +215,8 @@ window.FINANCIAMENTOS_DATA = {
       {
         "ano": 2026,
         "total_previsto": 1666289.58,
-        "total_pago": 1313416.08,
-        "total_pendente": 398620.77
+        "total_pago": 1314882.09,
+        "total_pendente": 397154.18
       },
       {
         "ano": 2027,
@@ -412,8 +412,8 @@ window.FINANCIAMENTOS_DATA = {
         "ano": 2026,
         "mes": 11,
         "total_previsto": 238337.91,
-        "total_pago": 76570.37,
-        "total_pendente": 161808.28,
+        "total_pago": 78036.38,
+        "total_pendente": 160341.69,
         "maquinas": 148202.96,
         "veiculos": 21829.39,
         "imoveis": 68305.56
@@ -1155,12 +1155,12 @@ window.FINANCIAMENTOS_DATA = {
       "JLE": {
         "total_contratos": 10,
         "total_financiado": 7463863.67,
-        "total_pago": 1455444.42,
-        "saldo_devedor": 8288566.45,
+        "total_pago": 1456910.43,
+        "saldo_devedor": 8287099.86,
         "total_parcelas": 490,
-        "total_pagas": 72,
-        "total_pendentes": 418,
-        "pct_quitado": 14.7,
+        "total_pagas": 73,
+        "total_pendentes": 417,
+        "pct_quitado": 14.9,
         "compromisso_mensal": 200834.69
       },
       "TECNODRILL": {
@@ -1180,12 +1180,12 @@ window.FINANCIAMENTOS_DATA = {
     "JLE": {
       "total_contratos": 10,
       "total_financiado": 7463863.67,
-      "total_pago": 1455444.42,
-      "saldo_devedor": 8288566.45,
+      "total_pago": 1456910.43,
+      "saldo_devedor": 8287099.86,
       "total_parcelas": 490,
-      "total_pagas": 72,
-      "total_pendentes": 418,
-      "pct_quitado": 14.7,
+      "total_pagas": 73,
+      "total_pendentes": 417,
+      "pct_quitado": 14.9,
       "compromisso_mensal": 200834.69
     },
     "TECNODRILL": {
@@ -5338,11 +5338,11 @@ window.FINANCIAMENTOS_DATA = {
       "taxa_mensal": 2.0,
       "prestacao_mensal": 1466.59,
       "total_parcelas": 12,
-      "qtd_pagas": 7,
-      "qtd_pendentes": 5,
-      "total_pago": 10262.07,
-      "saldo_devedor": 7332.95,
-      "pct_quitado": 58.3,
+      "qtd_pagas": 8,
+      "qtd_pendentes": 4,
+      "total_pago": 11728.08,
+      "saldo_devedor": 5866.36,
+      "pct_quitado": 66.7,
       "parcelas": [
         {
           "numero": 1,
@@ -5488,12 +5488,12 @@ window.FINANCIAMENTOS_DATA = {
           "juros": 118.55,
           "amortizacao": 1348.04,
           "prestacao": 1466.59,
-          "saldo_devedor": 1466.59,
+          "saldo_devedor": 0.0,
           "saldo_final_contrato": 5625.27,
-          "status": "Pendente",
-          "data_pagamento": "",
-          "valor_pago": 0.0,
-          "diferenca": 0.0,
+          "status": "Pago",
+          "data_pagamento": "17/11/2026",
+          "valor_pago": 1466.01,
+          "diferenca": -0.58,
           "dias_atraso": 0
         },
         {
