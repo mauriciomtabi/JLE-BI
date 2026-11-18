@@ -69454,5 +69454,22 @@ const VEICULOS_DATA = [
     "km": 145360,
     "kml": 7.25,
     "transactionId": "1112837486"
+  },
+  {
+    "date": "2026-11-18 07:33:21",
+    "plate": "ITJ5E67",
+    "driver": "CLAUDIO DE SOUZA ASSUNCAO",
+    "value": 299.98,
+    "uf": "SC",
+    "costCenter": "SC",
+    "month": "NOVEMBRO",
+    "liters": 44.84,
+    "vlLiter": 6.69,
+    "model": "UNO",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 116803,
+    "kml": 12.96,
+    "transactionId": "1112876920"
   }
 ];
