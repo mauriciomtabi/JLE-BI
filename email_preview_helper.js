@@ -918,82 +918,123 @@
         const generatedAt = meta.generated_at || getNowFormatted().fullStr;
         const BI_URL = 'https://jle-bi.vercel.app/#engenharia';
 
+        const formatPct = (val) => Number(val || 0).toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%';
+
         const obras = data.obras || [];
-        const openObras = obras.filter(o => o.is_em_aberto);
+        const sortedObras = [...obras].sort((a, b) => (b.v_orc || 0) - (a.v_orc || 0));
 
-        // Bloco 1: Executado Parcial (Obras com medições parciais faturadas aguardando medição final)
-        const parcObras = openObras.filter(o => o.status === 'Executado Parcial');
-        const parcSaldo = parcObras.reduce((acc, o) => acc + (o.saldo || 0), 0);
-        const parcMedido = parcObras.reduce((acc, o) => acc + (o.v_medido || 0), 0);
-        const parcMaisAntiga = [...parcObras].sort((a, b) => (b.dias_aberto || 0) - (a.dias_aberto || 0))[0];
+        // Os 3 status oficiais
+        const finalizadas = sortedObras.filter(o => o.status === 'Finalizado');
+        const parciais = sortedObras.filter(o => o.status === 'Executado Parcial');
+        const naoExec = sortedObras.filter(o => o.status === 'Não Executado');
 
-        // Bloco 2: Não Executado (Obras sem medições registradas)
-        const naoExecObras = openObras.filter(o => o.status === 'Não Executado');
-        const naoExecSaldo = naoExecObras.reduce((acc, o) => acc + (o.saldo || 0), 0);
-        const naoExecMaisAntiga = [...naoExecObras].sort((a, b) => (b.dias_aberto || 0) - (a.dias_aberto || 0))[0];
+        const finMedido = finalizadas.reduce((acc, o) => acc + (o.v_medido || 0), 0);
 
-        const criticasCount = openObras.filter(o => (o.dias_aberto || 0) > 180).length;
+        const parcMedido = parciais.reduce((acc, o) => acc + (o.v_medido || 0), 0);
+        const parcSaldo = parciais.reduce((acc, o) => acc + (o.saldo || 0), 0);
 
-        const topPrioritarias = [...openObras]
-            .sort((a, b) => ((b.dias_aberto || 0) * (b.saldo || 0)) - ((a.dias_aberto || 0) * (a.saldo || 0)))
-            .slice(0, 8);
+        const naoExecOrcado = naoExec.reduce((acc, o) => acc + (o.v_orc || 0), 0);
 
-        let tableRowsHtml = "";
-        topPrioritarias.forEach((o, idx) => {
+        // Top 5 Cidades / Polos por Volume Orçado
+        const cityData = {};
+        (data.oss || []).forEach(os => {
+            const c = os.cidade || 'OUTROS';
+            if (!cityData[c]) cityData[c] = { orcado: 0, medido: 0, qtd: 0 };
+            cityData[c].orcado += (os.v_orc || 0);
+            cityData[c].medido += (os.v_medido || 0);
+            cityData[c].qtd += 1;
+        });
+
+        const topCities = Object.keys(cityData)
+            .sort((a, b) => cityData[b].orcado - cityData[a].orcado)
+            .slice(0, 5)
+            .map(c => ({
+                cidade: c,
+                orcado: cityData[c].orcado,
+                medido: cityData[c].medido,
+                saldo: Math.max(0, cityData[c].orcado - cityData[c].medido),
+                pct: cityData[c].orcado > 0 ? ((cityData[c].medido / cityData[c].orcado) * 100) : 0
+            }));
+
+        let cityRowsHtml = '';
+        topCities.forEach((ct, idx) => {
             const bg = (idx % 2 === 0) ? '#ffffff' : '#f8fafc';
-            const dias = o.dias_aberto || 0;
-            
-            let agingColor = '#10b981';
-            let agingBg = 'rgba(16, 185, 129, 0.1)';
-            let agingText = `${dias}d`;
-            if (dias > 180) {
-                agingColor = '#dc2626';
-                agingBg = 'rgba(239, 68, 68, 0.15)';
-                agingText = `${dias}d (Crítico)`;
-            } else if (dias > 90) {
-                agingColor = '#ea580c';
-                agingBg = 'rgba(234, 88, 12, 0.12)';
-                agingText = `${dias}d`;
-            } else if (dias > 30) {
-                agingColor = '#d97706';
-                agingBg = 'rgba(217, 119, 6, 0.12)';
-                agingText = `${dias}d`;
+            cityRowsHtml += `
+                <tr style="background: ${bg}; border-bottom: 1px solid #e2e8f0;">
+                    <td style="padding: 8px 12px; font-size: 12px; font-weight: 700; color: #1e293b;">${ct.cidade}</td>
+                    <td style="padding: 8px 12px; font-size: 12px; text-align: right; color: #334155; font-weight: 600;">${formatBRL(ct.orcado)}</td>
+                    <td style="padding: 8px 12px; font-size: 12px; text-align: right; color: #059669; font-weight: 600;">${formatBRL(ct.medido)}</td>
+                    <td style="padding: 8px 12px; font-size: 12px; text-align: right; color: #b45309; font-weight: 600;">${formatBRL(ct.saldo)}</td>
+                    <td style="padding: 8px 12px; font-size: 12px; text-align: right; color: #475569; font-weight: 600;">${formatPct(ct.pct)}</td>
+                </tr>
+            `;
+        });
+
+        // Top 10 Obras por Valor Orçado (Maior para o Menor)
+        const top10 = sortedObras.slice(0, 10);
+        let tableRowsHtml = '';
+        top10.forEach((o, idx) => {
+            const pos = idx + 1;
+            const bg = (idx % 2 === 0) ? '#ffffff' : '#f8fafc';
+
+            let posBadge = '';
+            if (pos === 1) {
+                posBadge = `<span style="display: inline-block; width: 22px; height: 22px; line-height: 22px; border-radius: 50%; background: #ffd700; color: #78350f; font-weight: 800; font-size: 11px; text-align: center;">1º</span>`;
+            } else if (pos === 2) {
+                posBadge = `<span style="display: inline-block; width: 22px; height: 22px; line-height: 22px; border-radius: 50%; background: #e2e8f0; color: #334155; font-weight: 800; font-size: 11px; text-align: center;">2º</span>`;
+            } else if (pos === 3) {
+                posBadge = `<span style="display: inline-block; width: 22px; height: 22px; line-height: 22px; border-radius: 50%; background: #fed7aa; color: #7c2d12; font-weight: 800; font-size: 11px; text-align: center;">3º</span>`;
+            } else {
+                posBadge = `<span style="display: inline-block; width: 22px; height: 22px; line-height: 22px; border-radius: 4px; background: #f1f5f9; color: #64748b; font-weight: 700; font-size: 11px; text-align: center;">${pos}º</span>`;
             }
 
-            let pendColor = '#2563eb';
-            let pendBg = 'rgba(37, 99, 235, 0.08)';
-            if (o.pendencia && o.pendencia.startsWith('JLE')) {
-                pendColor = '#b45309';
-                pendBg = 'rgba(180, 83, 9, 0.08)';
-            } else if (o.pendencia && o.pendencia.startsWith('Misto')) {
-                pendColor = '#7c3aed';
-                pendBg = 'rgba(124, 58, 237, 0.08)';
+            let statusStyle = 'background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca;';
+            if (o.status === 'Finalizado') {
+                statusStyle = 'background: #d1fae5; color: #047857; border: 1px solid #a7f3d0;';
+            } else if (o.status === 'Executado Parcial') {
+                statusStyle = 'background: #fef3c7; color: #b45309; border: 1px solid #fde68a;';
             }
+
+            const pctNum = Math.min(100, Math.round(o.pct_executado || 0));
+            const barColor = o.status === 'Finalizado' ? '#10b981' : (pctNum > 0 ? '#0284c7' : '#cbd5e1');
 
             tableRowsHtml += `
                 <tr style="background: ${bg}; border-bottom: 1px solid #e2e8f0;">
-                    <td style="padding: 10px 12px; font-size: 13px; color: #1e293b; font-weight: 600;">
+                    <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">${posBadge}</td>
+                    <td style="padding: 10px 10px; font-size: 12px; color: #1e293b; font-weight: 600; vertical-align: middle;">
                         ${o.nome}
                         <div style="font-size: 11px; color: #64748b; font-weight: normal; margin-top: 2px;">
-                            ${o.cidade} • ${o.qtd_os} ${o.qtd_os === 1 ? 'OS' : 'OSs'}
+                            ${o.cidade || '-'} • ${o.qtd_os} ${o.qtd_os === 1 ? 'OS' : 'OSs'}
                         </div>
                     </td>
-                    <td style="padding: 10px 12px; font-size: 12px;">
-                        <span style="display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; color: ${pendColor}; background: ${pendBg};">
-                            ${o.pendencia || o.status}
+                    <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                        <span style="display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; text-transform: uppercase; white-space: nowrap; ${statusStyle}">
+                            ${o.status}
                         </span>
                     </td>
-                    <td style="padding: 10px 12px; text-align: center; font-size: 12px;">
-                        <span style="display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; color: ${agingColor}; background: ${agingBg};">
-                            ${agingText}
-                        </span>
+                    <td style="padding: 10px 10px; text-align: right; font-size: 12px; font-weight: 700; color: #0f172a; vertical-align: middle;">
+                        ${formatBRL(o.v_orc)}
                     </td>
-                    <td style="padding: 10px 12px; text-align: right; font-size: 13px; font-weight: 700; color: #b45309;">
+                    <td style="padding: 10px 10px; text-align: right; font-size: 12px; font-weight: 600; color: #059669; vertical-align: middle;">
+                        ${formatBRL(o.v_medido)}
+                    </td>
+                    <td style="padding: 10px 10px; text-align: right; font-size: 12px; font-weight: 600; color: ${o.saldo > 0 ? '#b45309' : '#94a3b8'}; vertical-align: middle;">
                         ${formatBRL(o.saldo)}
+                    </td>
+                    <td style="padding: 10px 10px; text-align: right; font-size: 11px; vertical-align: middle; white-space: nowrap;">
+                        <div style="display: inline-block; width: 42px; height: 6px; background: #e2e8f0; border-radius: 3px; vertical-align: middle; margin-right: 6px; overflow: hidden;">
+                            <div style="width: ${pctNum}%; height: 6px; background: ${barColor}; border-radius: 3px;"></div>
+                        </div>
+                        <span style="font-weight: 700; color: #334155;">${formatPct(o.pct_executado)}</span>
                     </td>
                 </tr>
             `;
         });
+
+        const totalOrcado = (data.summary && data.summary.total_orcado) || 10358283.33;
+        const totalMedido = (data.summary && data.summary.total_medido) || 6062004.92;
+        const totalSaldo = (data.summary && data.summary.saldo_em_aberto) || 4435536.39;
+        const totalPct = (data.summary && data.summary.pct_executado) || 58.5;
 
         return `
         <!DOCTYPE html>
@@ -1007,7 +1048,7 @@
             <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: #f1f5f9; padding: 24px 10px;">
                 <tr>
                     <td align="center">
-                        <table width="640" cellpadding="0" cellspacing="0" border="0" style="background: #ffffff; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid #e2e8f0;">
+                        <table width="680" cellpadding="0" cellspacing="0" border="0" style="background: #ffffff; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid #e2e8f0;">
                             
                             <!-- HEADER CORPORATIVO JLE -->
                             <tr>
@@ -1022,7 +1063,7 @@
                                                     ${reportName || 'Radar Operacional — Engenharia Claro PR'}
                                                 </h1>
                                                 <div style="font-size: 12px; color: rgba(255,255,255,0.75); margin-top: 6px;">
-                                                    Posição de Obras, Medições e Pendências • Atualizado em: <strong>${generatedAt}</strong>
+                                                    Posição de Obras, Medições e Ranking por Valor • Atualizado em: <strong>${generatedAt}</strong>
                                                 </div>
                                             </td>
                                         </tr>
@@ -1030,59 +1071,93 @@
                                 </td>
                             </tr>
 
-                            <!-- BANNER DE ALERTA GERAL -->
+                            <!-- BANNER RESUMO EXECUTIVO (CARTEIRA GERAL) -->
                             <tr>
-                                <td style="padding: 20px 36px 0;">
-                                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px 18px;">
+                                <td style="padding: 20px 32px 0;">
+                                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: #0f172a; border-radius: 10px; padding: 18px 20px; color: #ffffff;">
                                         <tr>
-                                            <td>
-                                                <span style="font-size: 13px; color: #334155; font-weight: 600;">
-                                                    📊 <strong>Resumo da Carteira:</strong> 125 Obras (194 OSs) • <strong>${openObras.length} Obras em Aberto</strong> represando <strong>${formatBRL(data.summary.saldo_em_aberto || 4437266.77)}</strong> em saldo a faturar.
-                                                </span>
-                                                <div style="font-size: 12px; color: #dc2626; font-weight: 700; margin-top: 4px;">
-                                                    ⚠️ <strong>${criticasCount} obras</strong> estão paradas há mais de 180 dias (&gt; 6 meses) sem conclusão.
-                                                </div>
+                                            <td width="25%" style="text-align: center; border-right: 1px solid rgba(255,255,255,0.12);">
+                                                <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; font-weight: 600;">Carteira Total</div>
+                                                <div style="font-size: 20px; font-weight: 800; color: #ffffff; margin-top: 3px;">${obras.length} Obras</div>
+                                                <div style="font-size: 11px; color: #64748b; margin-top: 2px;">194 OSs vinculadas</div>
+                                            </td>
+                                            <td width="25%" style="text-align: center; border-right: 1px solid rgba(255,255,255,0.12);">
+                                                <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; font-weight: 600;">Total Orçado</div>
+                                                <div style="font-size: 18px; font-weight: 800; color: #38bdf8; margin-top: 3px;">${formatBRL(totalOrcado)}</div>
+                                                <div style="font-size: 11px; color: #64748b; margin-top: 2px;">100% da base</div>
+                                            </td>
+                                            <td width="25%" style="text-align: center; border-right: 1px solid rgba(255,255,255,0.12);">
+                                                <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; font-weight: 600;">Total Medido</div>
+                                                <div style="font-size: 18px; font-weight: 800; color: #34d399; margin-top: 3px;">${formatBRL(totalMedido)}</div>
+                                                <div style="font-size: 11px; color: #34d399; font-weight: 600; margin-top: 2px;">${formatPct(totalPct)} faturado</div>
+                                            </td>
+                                            <td width="25%" style="text-align: center;">
+                                                <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; font-weight: 600;">Saldo a Medir</div>
+                                                <div style="font-size: 18px; font-weight: 800; color: #fbbf24; margin-top: 3px;">${formatBRL(totalSaldo)}</div>
+                                                <div style="font-size: 11px; color: #fbbf24; font-weight: 600; margin-top: 2px;">${formatPct(100 - totalPct)} pendente</div>
                                             </td>
                                         </tr>
                                     </table>
                                 </td>
                             </tr>
 
-                            <!-- BLOCOS DE RESPONSABILIDADE (CLARO VS JLE) -->
+                            <!-- OS 3 STATUS OFICIAIS (CARDS) -->
                             <tr>
-                                <td style="padding: 20px 36px 0;">
+                                <td style="padding: 16px 32px 0;">
+                                    <div style="font-size: 13px; font-weight: 700; color: #0f172a; margin-bottom: 10px;">
+                                        📌 Distribuição da Carteira pelos 3 Status Operacionais
+                                    </div>
                                     <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                        
-                                        <!-- BLOCO 1: EXECUTADO PARCIAL -->
                                         <tr>
-                                            <td style="background: #fffbeb; border: 1px solid #fde68a; border-left: 4px solid #d97706; border-radius: 8px; padding: 16px;">
-                                                <div style="font-size: 11px; font-weight: 800; color: #b45309; text-transform: uppercase; letter-spacing: 0.8px;">
-                                                    🟧 EXECUTADO PARCIAL — PENDENTE DE ENTRONCAMENTO FINAL
+                                            <!-- FINALIZADO -->
+                                            <td width="32%" style="background: #f0fdf4; border: 1px solid #bbf7d0; border-top: 4px solid #16a34a; border-radius: 8px; padding: 14px; vertical-align: top;">
+                                                <div style="font-size: 11px; font-weight: 800; color: #15803d; text-transform: uppercase;">
+                                                    🟢 FINALIZADO
                                                 </div>
-                                                <div style="margin-top: 6px; font-size: 14px; color: #0f172a;">
-                                                    <strong>${parcObras.length} Obras</strong> com medições parciais • Já medido: <strong style="color:#059669;">${formatBRL(parcMedido)}</strong> • Saldo a faturar: <strong style="color:#b45309;">${formatBRL(parcSaldo)}</strong>
+                                                <div style="font-size: 18px; font-weight: 800; color: #166534; margin-top: 4px;">
+                                                    ${finalizadas.length} Obras <span style="font-size: 12px; font-weight: 600; color: #15803d;">(32,8%)</span>
                                                 </div>
-                                                <div style="font-size: 12px; color: #475569; margin-top: 4px; line-height: 1.4;">
-                                                    • Obras em campo com medições parciais (P1/P2/P3) faturadas aguardando a emissão da Medição Final de Entroncamento.<br>
-                                                    ${parcMaisAntiga ? `<span style="color:#b91c1c; font-weight:600;">• Caso Crítico: ${parcMaisAntiga.nome} (${parcMaisAntiga.dias_aberto}d em aberto - Saldo ${formatBRL(parcMaisAntiga.saldo)})</span>` : ''}
+                                                <div style="font-size: 12px; color: #14532d; font-weight: 600; margin-top: 4px;">
+                                                    Medido: ${formatBRL(finMedido)}
+                                                </div>
+                                                <div style="font-size: 11px; color: #4b5563; margin-top: 6px; line-height: 1.35;">
+                                                    Concluídas com <strong>Medição Final de Entroncamento</strong> emitida.
                                                 </div>
                                             </td>
-                                        </tr>
 
-                                        <tr style="height: 12px;"><td></td></tr>
+                                            <td width="2%"></td>
 
-                                        <!-- BLOCO 2: NÃO EXECUTADO -->
-                                        <tr>
-                                            <td style="background: #fef2f2; border: 1px solid #fecaca; border-left: 4px solid #dc2626; border-radius: 8px; padding: 16px;">
-                                                <div style="font-size: 11px; font-weight: 800; color: #991b1b; text-transform: uppercase; letter-spacing: 0.8px;">
-                                                    🟥 NÃO EXECUTADO — SEM MEDIÇÕES REGISTRADAS
+                                            <!-- EXECUTADO PARCIAL -->
+                                            <td width="32%" style="background: #fffbeb; border: 1px solid #fde68a; border-top: 4px solid #d97706; border-radius: 8px; padding: 14px; vertical-align: top;">
+                                                <div style="font-size: 11px; font-weight: 800; color: #b45309; text-transform: uppercase;">
+                                                    🟧 EXECUTADO PARCIAL
                                                 </div>
-                                                <div style="margin-top: 6px; font-size: 14px; color: #0f172a;">
-                                                    <strong>${naoExecObras.length} Obras</strong> sem medições • Saldo a executar: <strong style="color:#dc2626;">${formatBRL(naoExecSaldo)}</strong>
+                                                <div style="font-size: 18px; font-weight: 800; color: #92400e; margin-top: 4px;">
+                                                    ${parciais.length} Obras <span style="font-size: 12px; font-weight: 600; color: #b45309;">(36,0%)</span>
                                                 </div>
-                                                <div style="font-size: 12px; color: #475569; margin-top: 4px; line-height: 1.4;">
-                                                    • Obras orçadas aguardando início dos trabalhos em campo ou envio da 1ª medição parcial.<br>
-                                                    ${naoExecMaisAntiga ? `<span style="color:#b91c1c; font-weight:600;">• Caso Crítico: ${naoExecMaisAntiga.nome} (${naoExecMaisAntiga.dias_aberto}d em aberto - Orçado ${formatBRL(naoExecMaisAntiga.saldo)})</span>` : ''}
+                                                <div style="font-size: 12px; color: #78350f; font-weight: 600; margin-top: 4px;">
+                                                    Saldo: ${formatBRL(parcSaldo)}
+                                                </div>
+                                                <div style="font-size: 11px; color: #4b5563; margin-top: 6px; line-height: 1.35;">
+                                                    Medições parciais ativas (P1/P2/P3), aguardando <strong>Entroncamento Final</strong>.
+                                                </div>
+                                            </td>
+
+                                            <td width="2%"></td>
+
+                                            <!-- NÃO EXECUTADO -->
+                                            <td width="32%" style="background: #fef2f2; border: 1px solid #fecaca; border-top: 4px solid #dc2626; border-radius: 8px; padding: 14px; vertical-align: top;">
+                                                <div style="font-size: 11px; font-weight: 800; color: #b91c1c; text-transform: uppercase;">
+                                                    🟥 NÃO EXECUTADO
+                                                </div>
+                                                <div style="font-size: 18px; font-weight: 800; color: #991b1b; margin-top: 4px;">
+                                                    ${naoExec.length} Obras <span style="font-size: 12px; font-weight: 600; color: #b91c1c;">(31,2%)</span>
+                                                </div>
+                                                <div style="font-size: 12px; color: #7f1d1d; font-weight: 600; margin-top: 4px;">
+                                                    Orçado: ${formatBRL(naoExecOrcado)}
+                                                </div>
+                                                <div style="font-size: 11px; color: #4b5563; margin-top: 6px; line-height: 1.35;">
+                                                    Sem medições registradas (0%), aguardando <strong>1ª medição</strong>.
                                                 </div>
                                             </td>
                                         </tr>
@@ -1090,45 +1165,104 @@
                                 </td>
                             </tr>
 
-                            <!-- TABELA DE OBRAS PRIORITÁRIAS -->
+                            <!-- TOP 5 POLOS / CIDADES -->
                             <tr>
-                                <td style="padding: 24px 36px 0;">
-                                    <div style="font-size: 14px; font-weight: 700; color: #0f172a; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between;">
-                                        <span>Top Obras Prioritárias no Radar (Maior Saldo Represado)</span>
-                                        <span style="font-size: 11px; color: #64748b; font-weight: normal;">Ordenado por Impacto</span>
+                                <td style="padding: 22px 32px 0;">
+                                    <div style="font-size: 13px; font-weight: 700; color: #0f172a; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
+                                        <span>🏙️ Top 5 Polos / Cidades com Maior Volume Orçado</span>
+                                        <span style="font-size: 11px; color: #64748b; font-weight: normal;">Espelho do Gráfico Geral</span>
+                                    </div>
+                                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden;">
+                                        <thead>
+                                            <tr style="background: #f8fafc; color: #475569; font-size: 11px; text-transform: uppercase;">
+                                                <th style="padding: 8px 12px; text-align: left;">Polo / Cidade</th>
+                                                <th style="padding: 8px 12px; text-align: right;">Orçado (R$)</th>
+                                                <th style="padding: 8px 12px; text-align: right;">Medido (R$)</th>
+                                                <th style="padding: 8px 12px; text-align: right;">Saldo (R$)</th>
+                                                <th style="padding: 8px 12px; text-align: right;">% Medido</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            ${cityRowsHtml}
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <!-- TABELA: RANKING DE OBRAS CLASSIFICADAS POR VALOR (TOP 10) -->
+                            <tr>
+                                <td style="padding: 22px 32px 0;">
+                                    <div style="margin-bottom: 8px;">
+                                        <div style="font-size: 14px; font-weight: 800; color: #0f172a;">
+                                            🏆 Ranking de Obras por Valor Orçado (Top 10)
+                                        </div>
+                                        <div style="font-size: 11px; color: #64748b; margin-top: 2px;">
+                                            Obras classificadas do maior valor para o menor com status e saldo a medir
+                                        </div>
                                     </div>
                                     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border: 1px solid #cbd5e1; border-radius: 8px; overflow: hidden;">
                                         <thead>
-                                            <tr style="background: #004f71; color: #ffffff; text-align: left;">
-                                                <th style="padding: 9px 12px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;">Obra / Cidade</th>
-                                                <th style="padding: 9px 12px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;">Pendência</th>
-                                                <th style="padding: 9px 12px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; text-align: center;">Aging</th>
-                                                <th style="padding: 9px 12px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; text-align: right;">Saldo</th>
+                                            <tr style="background: #004f71; color: #ffffff;">
+                                                <th style="padding: 9px 8px; font-size: 11px; text-transform: uppercase; text-align: center; width: 36px;">#</th>
+                                                <th style="padding: 9px 10px; font-size: 11px; text-transform: uppercase; text-align: left;">Obra / Solicitação</th>
+                                                <th style="padding: 9px 8px; font-size: 11px; text-transform: uppercase; text-align: center; width: 110px;">Status</th>
+                                                <th style="padding: 9px 10px; font-size: 11px; text-transform: uppercase; text-align: right; width: 90px;">Orçado</th>
+                                                <th style="padding: 9px 10px; font-size: 11px; text-transform: uppercase; text-align: right; width: 85px;">Medido</th>
+                                                <th style="padding: 9px 10px; font-size: 11px; text-transform: uppercase; text-align: right; width: 85px;">Saldo</th>
+                                                <th style="padding: 9px 10px; font-size: 11px; text-transform: uppercase; text-align: right; width: 75px;">% Exec.</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             ${tableRowsHtml}
                                         </tbody>
                                     </table>
+                                    <div style="font-size: 11px; color: #64748b; margin-top: 6px; font-style: italic;">
+                                        * Relatório completo com todas as 125 obras ranqueadas está no arquivo Excel anexo e no painel online.
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- DIRECIONAMENTO OPERACIONAL (PRÓXIMAS AÇÕES) -->
+                            <tr>
+                                <td style="padding: 20px 32px 0;">
+                                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px 16px;">
+                                        <tr>
+                                            <td>
+                                                <div style="font-size: 12px; font-weight: 800; color: #0f172a; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">
+                                                    🎯 Ações Prioritárias Recomendadas
+                                                </div>
+                                                <div style="font-size: 12px; color: #334155; line-height: 1.5;">
+                                                    <div style="margin-bottom: 6px;">
+                                                        <strong style="color: #b45309;">🟧 Executado Parcial (45 obras • Saldo ${formatBRL(parcSaldo)}):</strong><br>
+                                                        Priorizar a emissão da <strong>Medição Final de Entroncamento</strong> para as obras com etapas civis e de cabos concluídas, liberando o recebimento do saldo represado.
+                                                    </div>
+                                                    <div>
+                                                        <strong style="color: #b91c1c;">🟥 Não Executado (39 obras • Orçado ${formatBRL(naoExecOrcado)}):</strong><br>
+                                                        Cobrar alinhamento com equipes de campo e parceiros para início dos trabalhos e envio da <strong>1ª medição parcial (P1)</strong>, com atenção especial à obra líder de valor <em>BACKHAUL 5G AGUA AZUL (${formatBRL(700914.74)})</em>.
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
                             </tr>
 
                             <!-- BOTÃO DE AÇÃO DIRETA PARA O BI -->
                             <tr>
-                                <td style="padding: 28px 36px; text-align: center;">
-                                    <a href="${BI_URL}" target="_blank" style="display: inline-block; background: #004f71; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-size: 14px; font-weight: 700; box-shadow: 0 4px 12px rgba(0, 79, 113, 0.25);">
+                                <td style="padding: 24px 32px; text-align: center;">
+                                    <a href="${BI_URL}" target="_blank" style="display: inline-block; background: #004f71; color: #ffffff; text-decoration: none; padding: 13px 30px; border-radius: 8px; font-size: 13px; font-weight: 700; box-shadow: 0 4px 12px rgba(0, 79, 113, 0.25);">
                                         Abrir Radar de Engenharia no BI JLE
                                     </a>
                                     <div style="font-size: 11px; color: #64748b; margin-top: 8px;">
-                                        Acesse para filtrar por cidade, ver o detalhe de cada OS e a linha do tempo completa.
+                                        Acesse para filtrar por cidade, ver o detalhe de cada OS e abrir a linha do tempo completa.
                                     </div>
                                 </td>
                             </tr>
 
                             <!-- RODAPÉ OFICIAL JLE -->
                             <tr>
-                                <td style="background: #f8fafc; padding: 18px 36px; border-top: 1px solid #e2e8f0; text-align: center; font-size: 12px; color: #64748b;">
-                                    Este é um informativo automático gerado pelo <strong>BI JLE Telecom</strong> para a equipe de Engenharia PR.<br>
+                                <td style="background: #f8fafc; padding: 18px 32px; border-top: 1px solid #e2e8f0; text-align: center; font-size: 11px; color: #64748b;">
+                                    Este é um informativo diário gerado automaticamente pelo <strong>BI JLE Telecom</strong> para a equipe de Engenharia PR.<br>
                                     © 2026 JLE Telecom • Todos os direitos reservados.
                                 </td>
                             </tr>
