@@ -4129,20 +4129,30 @@
 
                 <!-- Barra de Filtros Unificada -->
                 <div class="eng-filters-bar">
-                    <div class="eng-filter-group" style="flex: 1; min-width: 220px;">
+                    <div class="eng-filter-group" style="flex: 1; min-width: 200px;">
                         <label><i class="fa-solid fa-magnifying-glass"></i> Busca Rápida</label>
                         <input type="text" id="eng-filter-search" class="eng-filter-input" placeholder="Buscar por Obra, Site, OM ou Cidade..." oninput="applyEngenhariaFilters()">
                     </div>
-                    <div class="eng-filter-group" style="min-width: 170px;">
+                    <div class="eng-filter-group" style="min-width: 150px;">
                         <label><i class="fa-solid fa-location-dot"></i> Cidade / Polo</label>
                         <select id="eng-filter-cidade" class="eng-filter-select" onchange="applyEngenhariaFilters()">
                             <option value="ALL">Todas as Cidades</option>
                         </select>
                     </div>
-                    <div class="eng-filter-group" style="min-width: 180px;">
+                    <div class="eng-filter-group" style="min-width: 160px;">
                         <label><i class="fa-solid fa-filter"></i> Status</label>
                         <select id="eng-filter-status" class="eng-filter-select" onchange="applyEngenhariaFilters()">
                             <option value="ALL">Todos os Status</option>
+                        </select>
+                    </div>
+                    <div class="eng-filter-group" style="min-width: 160px;">
+                        <label><i class="fa-solid fa-stopwatch"></i> Faixa de Aging</label>
+                        <select id="eng-filter-aging" class="eng-filter-select" onchange="applyEngenhariaFilters()">
+                            <option value="ALL">Todas as Idades</option>
+                            <option value="ate_30d">🟢 Até 30 dias</option>
+                            <option value="31_a_90d">🟡 31 a 90 dias</option>
+                            <option value="91_a_180d">🔴 91 a 180 dias</option>
+                            <option value="mais_180d">🚨 Mais de 180 dias</option>
                         </select>
                     </div>
                     <div class="eng-filter-group">
@@ -4156,13 +4166,52 @@
                             </button>
                         </div>
                     </div>
-                    <div style="display: flex; gap: 8px;">
+                    <div style="display: flex; gap: 8px; align-items: flex-end; flex-wrap: wrap;">
+                        <button id="eng-btn-radar" class="eng-btn-action eng-btn-radar" onclick="toggleEngRadarMode()" title="Filtrar instantaneamente somente as obras não concluídas">
+                            <i class="fa-solid fa-crosshairs"></i> Radar: Em Aberto (<span id="eng-radar-count">85</span>)
+                        </button>
                         <button class="eng-btn-action" onclick="clearEngenhariaFilters()" title="Limpar todos os filtros">
                             <i class="fa-solid fa-eraser"></i> Limpar
                         </button>
                         <button class="eng-btn-action eng-btn-excel" onclick="exportEngenhariaExcel()" title="Exportar dados filtrados para Excel">
                             <i class="fa-solid fa-file-excel"></i> Exportar
                         </button>
+                    </div>
+                </div>
+
+                <!-- Painel Rápido de Risco: Faixas de Aging das Obras em Aberto -->
+                <div class="eng-radar-banner" id="eng-radar-banner">
+                    <div class="eng-aging-chip chip-green" id="chip-aging-30" onclick="filterByAgingChip('ate_30d')" title="Clique para filtrar obras com até 30 dias">
+                        <div class="eng-aging-chip-info">
+                            <span class="eng-aging-chip-title">🟢 Até 30 dias</span>
+                            <span class="eng-aging-chip-count" id="chip-count-30">0 Obras</span>
+                            <span class="eng-aging-chip-saldo" id="chip-saldo-30">R$ 0,00</span>
+                        </div>
+                        <i class="fa-solid fa-circle-check" style="color: #10b981; font-size: 1.25rem; opacity: 0.65;"></i>
+                    </div>
+                    <div class="eng-aging-chip chip-yellow" id="chip-aging-90" onclick="filterByAgingChip('31_a_90d')" title="Clique para filtrar obras de 31 a 90 dias">
+                        <div class="eng-aging-chip-info">
+                            <span class="eng-aging-chip-title">🟡 31 a 90 dias</span>
+                            <span class="eng-aging-chip-count" id="chip-count-90">0 Obras</span>
+                            <span class="eng-aging-chip-saldo" id="chip-saldo-90">R$ 0,00</span>
+                        </div>
+                        <i class="fa-solid fa-clock" style="color: #facc15; font-size: 1.25rem; opacity: 0.65;"></i>
+                    </div>
+                    <div class="eng-aging-chip chip-red" id="chip-aging-180" onclick="filterByAgingChip('91_a_180d')" title="Clique para filtrar obras de 91 a 180 dias">
+                        <div class="eng-aging-chip-info">
+                            <span class="eng-aging-chip-title">🔴 91 a 180 dias</span>
+                            <span class="eng-aging-chip-count" id="chip-count-180">0 Obras</span>
+                            <span class="eng-aging-chip-saldo" id="chip-saldo-180">R$ 0,00</span>
+                        </div>
+                        <i class="fa-solid fa-triangle-exclamation" style="color: #f87171; font-size: 1.25rem; opacity: 0.75;"></i>
+                    </div>
+                    <div class="eng-aging-chip chip-critical" id="chip-aging-critical" onclick="filterByAgingChip('mais_180d')" title="Clique para filtrar obras críticas com mais de 180 dias">
+                        <div class="eng-aging-chip-info">
+                            <span class="eng-aging-chip-title">🚨 Mais de 180 dias</span>
+                            <span class="eng-aging-chip-count" id="chip-count-critical">0 Obras</span>
+                            <span class="eng-aging-chip-saldo" id="chip-saldo-critical">R$ 0,00</span>
+                        </div>
+                        <i class="fa-solid fa-fire-flame-curved" style="color: #ef4444; font-size: 1.35rem; opacity: 0.85;"></i>
                     </div>
                 </div>
 
@@ -4259,13 +4308,13 @@
                             </div>
                         </div>
 
-                        <!-- Gráfico 4: Status Workflow Claro -->
+                        <!-- Gráfico 4: Radar de Aging das Obras em Aberto -->
                         <div class="eng-chart-card">
                             <div class="eng-chart-header">
                                 <span class="eng-chart-title">
-                                    <i class="fa-solid fa-clock-rotate-left" style="color: #f59e0b;"></i> Status no Workflow da Claro
+                                    <i class="fa-solid fa-hourglass-half" style="color: #ef4444;"></i> Radar: Aging das Obras em Aberto
                                 </span>
-                                <span style="font-size: 0.75rem; color: var(--text-secondary);">Aprovação das OSs</span>
+                                <span style="font-size: 0.75rem; color: var(--text-secondary);">Faixas de Dias & Saldo Represado</span>
                             </div>
                             <div class="eng-chart-container">
                                 <canvas id="chart-eng-workflow"></canvas>

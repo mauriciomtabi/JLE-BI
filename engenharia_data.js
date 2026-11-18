@@ -1,11 +1,11 @@
 /**
  * BI JLE TELECOM - BASE DE DADOS: ENGENHARIA CLARO PARANÁ
- * Gerado automaticamente via update_engenharia.py em 17/11/2026 22:40:43
+ * Gerado automaticamente via update_engenharia.py em 17/11/2026 23:42:25
  * Fonte: Controle DE OBRAS - PR.xlsx
  */
 
 window.ENGENHARIA_METADATA = {
-  "generated_at": "17/11/2026 22:40:43",
+  "generated_at": "17/11/2026 23:42:25",
   "source_file": "Controle DE OBRAS - PR.xlsx",
   "version": "1.0"
 };
@@ -24,6 +24,33 @@ window.ENGENHARIA_DATA = {
     "pct_executado": 58.5,
     "obras_finalizadas": 40,
     "obras_em_andamento": 85,
+    "obras_em_aberto": 85,
+    "saldo_em_aberto": 4437266.77,
+    "obras_criticas_aging": 73,
+    "obras_mais_180d": 58,
+    "media_dias_aberto": 232,
+    "aging_distribution": {
+      "ate_30d": {
+        "label": "Até 30 dias",
+        "count": 6,
+        "saldo": 222263.51
+      },
+      "31_a_90d": {
+        "label": "31 a 90 dias",
+        "count": 6,
+        "saldo": 184088.43
+      },
+      "91_a_180d": {
+        "label": "91 a 180 dias",
+        "count": 15,
+        "saldo": 793650.87
+      },
+      "mais_180d": {
+        "label": "Mais de 180 dias",
+        "count": 58,
+        "saldo": 3237263.96
+      }
+    },
     "oss_finalizadas": 64,
     "status_obras_counts": {
       "100% Finalizada": 40,
@@ -140,7 +167,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 59892.82,
       "saldo": 0.0,
       "pct_executado": 171.3,
+      "dt_inicio": "2025-11-24",
       "ultima_movimentacao": "2026-08-20",
+      "dias_aberto": 358,
+      "dias_sem_mov": 89,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-3",
@@ -176,7 +209,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 59892.82,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2025-11-24",
+          "ultima_movimentacao": "2026-08-20",
+          "dias_aberto": 358,
+          "dias_sem_mov": 89,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -203,7 +243,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 189202.12,
       "saldo": 51354.52,
       "pct_executado": 78.7,
+      "dt_inicio": "2025-12-15",
       "ultima_movimentacao": "2026-05-27",
+      "dias_aberto": 337,
+      "dias_sem_mov": 174,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-4",
@@ -239,7 +285,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 47300.53,
           "saldo": 12838.63,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2025-12-15",
+          "ultima_movimentacao": "2026-05-26",
+          "dias_aberto": 337,
+          "dias_sem_mov": 175,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-5",
@@ -275,7 +328,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 47300.53,
           "saldo": 12838.63,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2025-12-15",
+          "ultima_movimentacao": "2026-05-26",
+          "dias_aberto": 337,
+          "dias_sem_mov": 175,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-6",
@@ -311,7 +371,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 47300.53,
           "saldo": 12838.63,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2025-12-15",
+          "ultima_movimentacao": "2026-05-25",
+          "dias_aberto": 337,
+          "dias_sem_mov": 176,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-7",
@@ -347,7 +414,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 47300.53,
           "saldo": 12838.63,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2025-12-15",
+          "ultima_movimentacao": "2026-05-27",
+          "dias_aberto": 337,
+          "dias_sem_mov": 174,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -372,7 +446,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 122762.77,
       "saldo": 0.0,
       "pct_executado": 105.1,
+      "dt_inicio": "2025-11-28",
       "ultima_movimentacao": "2026-09-18",
+      "dias_aberto": 354,
+      "dias_sem_mov": 60,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-8",
@@ -408,7 +488,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 60450.23,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2025-11-28",
+          "ultima_movimentacao": "2026-09-18",
+          "dias_aberto": 354,
+          "dias_sem_mov": 60,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         },
         {
           "id": "OS-9",
@@ -444,7 +531,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 62312.54,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2025-11-28",
+          "ultima_movimentacao": "2026-05-26",
+          "dias_aberto": 354,
+          "dias_sem_mov": 175,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -468,7 +562,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 1772.05,
       "pct_executado": 0.0,
+      "dt_inicio": "2025-11-27",
       "ultima_movimentacao": "2026-01-16",
+      "dias_aberto": 355,
+      "dias_sem_mov": 305,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-10",
@@ -504,7 +604,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 1772.05,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "2025-11-27",
+          "ultima_movimentacao": "2026-01-16",
+          "dias_aberto": 355,
+          "dias_sem_mov": 305,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         }
       ]
     },
@@ -530,7 +637,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 126589.26,
       "pct_executado": 0.0,
+      "dt_inicio": "2025-12-18",
       "ultima_movimentacao": "2026-12-23",
+      "dias_aberto": 334,
+      "dias_sem_mov": 0,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-11",
@@ -566,7 +679,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 42046.6,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "2025-12-18",
+          "ultima_movimentacao": "2026-12-23",
+          "dias_aberto": 334,
+          "dias_sem_mov": 0,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         },
         {
           "id": "OS-12",
@@ -602,7 +722,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 42271.33,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "2025-12-18",
+          "ultima_movimentacao": "2026-12-23",
+          "dias_aberto": 334,
+          "dias_sem_mov": 0,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         },
         {
           "id": "OS-13",
@@ -638,7 +765,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 42271.33,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "2025-12-18",
+          "ultima_movimentacao": "2026-12-23",
+          "dias_aberto": 334,
+          "dias_sem_mov": 0,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         }
       ]
     },
@@ -666,7 +800,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 228486.4,
       "saldo": 378004.75,
       "pct_executado": 37.7,
+      "dt_inicio": "2026-02-05",
       "ultima_movimentacao": "ok",
+      "dias_aberto": 285,
+      "dias_sem_mov": 0,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-14",
@@ -702,7 +842,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 45697.28,
           "saldo": 75600.95,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-02-05",
+          "ultima_movimentacao": "ok",
+          "dias_aberto": 285,
+          "dias_sem_mov": 0,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-15",
@@ -738,7 +885,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 45697.28,
           "saldo": 75600.95,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-02-05",
+          "ultima_movimentacao": "ok",
+          "dias_aberto": 285,
+          "dias_sem_mov": 0,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-16",
@@ -774,7 +928,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 45697.28,
           "saldo": 75600.95,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-02-05",
+          "ultima_movimentacao": "ok",
+          "dias_aberto": 285,
+          "dias_sem_mov": 0,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-17",
@@ -810,7 +971,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 45697.28,
           "saldo": 75600.95,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-02-05",
+          "ultima_movimentacao": "ok",
+          "dias_aberto": 285,
+          "dias_sem_mov": 0,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-18",
@@ -846,7 +1014,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 45697.28,
           "saldo": 75600.95,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-02-05",
+          "ultima_movimentacao": "ok",
+          "dias_aberto": 285,
+          "dias_sem_mov": 0,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -871,7 +1046,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 129661.36,
       "saldo": 41838.28,
       "pct_executado": 75.6,
+      "dt_inicio": "2025-12-22",
       "ultima_movimentacao": "2026-09-16",
+      "dias_aberto": 330,
+      "dias_sem_mov": 62,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-19",
@@ -907,7 +1088,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 64830.68,
           "saldo": 20919.14,
-          "status": "Parcial 2 Aprovada"
+          "status": "Parcial 2 Aprovada",
+          "dt_inicio": "2025-12-22",
+          "ultima_movimentacao": "2026-09-16",
+          "dias_aberto": 330,
+          "dias_sem_mov": 62,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-20",
@@ -943,7 +1131,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 64830.68,
           "saldo": 20919.14,
-          "status": "Parcial 2 Aprovada"
+          "status": "Parcial 2 Aprovada",
+          "dt_inicio": "2025-12-22",
+          "ultima_movimentacao": "2026-09-16",
+          "dias_aberto": 330,
+          "dias_sem_mov": 62,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -967,7 +1162,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 230338.27,
       "saldo": 461.09,
       "pct_executado": 99.8,
+      "dt_inicio": "2025-12-22",
       "ultima_movimentacao": "2026-05-27",
+      "dias_aberto": 330,
+      "dias_sem_mov": 174,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-21",
@@ -1003,7 +1204,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 230338.27,
           "saldo": 461.09,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2025-12-22",
+          "ultima_movimentacao": "2026-05-27",
+          "dias_aberto": 330,
+          "dias_sem_mov": 174,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -1027,7 +1235,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 24182.41,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-01-12",
       "ultima_movimentacao": "2026-02-03",
+      "dias_aberto": 309,
+      "dias_sem_mov": 287,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-22",
@@ -1063,7 +1277,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 24182.41,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "2026-01-12",
+          "ultima_movimentacao": "2026-02-03",
+          "dias_aberto": 309,
+          "dias_sem_mov": 287,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         }
       ]
     },
@@ -1087,7 +1308,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 3433.29,
       "pct_executado": 0.0,
+      "dt_inicio": null,
       "ultima_movimentacao": null,
+      "dias_aberto": 0,
+      "dias_sem_mov": 0,
+      "faixa_aging": "Até 30 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-23",
@@ -1123,7 +1350,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 3433.29,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": null,
+          "ultima_movimentacao": null,
+          "dias_aberto": 0,
+          "dias_sem_mov": 0,
+          "faixa_aging": "Até 30 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         }
       ]
     },
@@ -1148,7 +1382,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 103093.49,
       "saldo": 1834.99,
       "pct_executado": 98.3,
+      "dt_inicio": "2025-12-09",
       "ultima_movimentacao": "2026-02-18",
+      "dias_aberto": 343,
+      "dias_sem_mov": 272,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-24",
@@ -1184,7 +1424,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 51546.73,
           "saldo": 917.51,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2025-12-09",
+          "ultima_movimentacao": "2026-02-18",
+          "dias_aberto": 343,
+          "dias_sem_mov": 272,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-25",
@@ -1220,7 +1467,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 51546.76,
           "saldo": 917.48,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2025-12-09",
+          "ultima_movimentacao": "2026-02-18",
+          "dias_aberto": 343,
+          "dias_sem_mov": 272,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -1244,7 +1498,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 29601.17,
       "saldo": 717.49,
       "pct_executado": 97.6,
+      "dt_inicio": "2025-12-18",
       "ultima_movimentacao": "2026-04-28",
+      "dias_aberto": 334,
+      "dias_sem_mov": 203,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-26",
@@ -1280,7 +1540,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 29601.17,
           "saldo": 717.49,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2025-12-18",
+          "ultima_movimentacao": "2026-04-28",
+          "dias_aberto": 334,
+          "dias_sem_mov": 203,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -1305,7 +1572,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 43022.44,
       "saldo": 2642.63,
       "pct_executado": 94.2,
+      "dt_inicio": "2025-12-29",
       "ultima_movimentacao": "2026-07-27",
+      "dias_aberto": 323,
+      "dias_sem_mov": 113,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-27",
@@ -1341,7 +1614,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 21511.22,
           "saldo": 1277.07,
-          "status": "Parcial 1 Enviada"
+          "status": "Parcial 1 Enviada",
+          "dt_inicio": "2025-12-29",
+          "ultima_movimentacao": "2026-07-27",
+          "dias_aberto": 323,
+          "dias_sem_mov": 113,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-28",
@@ -1377,7 +1657,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 21511.22,
           "saldo": 1365.56,
-          "status": "Parcial 1 Enviada"
+          "status": "Parcial 1 Enviada",
+          "dt_inicio": "2025-12-29",
+          "ultima_movimentacao": "2026-07-27",
+          "dias_aberto": 323,
+          "dias_sem_mov": 113,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -1401,7 +1688,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 16910.39,
       "saldo": 116.33,
       "pct_executado": 99.3,
+      "dt_inicio": "2025-12-19",
       "ultima_movimentacao": "2026-09-16",
+      "dias_aberto": 333,
+      "dias_sem_mov": 62,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-29",
@@ -1437,7 +1730,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 16910.39,
           "saldo": 116.33,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2025-12-19",
+          "ultima_movimentacao": "2026-09-16",
+          "dias_aberto": 333,
+          "dias_sem_mov": 62,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -1462,7 +1762,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 25503.34,
       "saldo": 160555.54,
       "pct_executado": 13.7,
+      "dt_inicio": "2026-01-09",
       "ultima_movimentacao": "2026-08-21",
+      "dias_aberto": 312,
+      "dias_sem_mov": 88,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-30",
@@ -1498,7 +1804,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 12751.67,
           "saldo": 80277.77,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-01-09",
+          "ultima_movimentacao": "2026-08-21",
+          "dias_aberto": 312,
+          "dias_sem_mov": 88,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-31",
@@ -1534,7 +1847,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 12751.67,
           "saldo": 80277.77,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-01-09",
+          "ultima_movimentacao": "2026-08-21",
+          "dias_aberto": 312,
+          "dias_sem_mov": 88,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -1558,7 +1878,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 110283.88,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-01-09",
       "ultima_movimentacao": "2026-02-03",
+      "dias_aberto": 312,
+      "dias_sem_mov": 287,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-32",
@@ -1594,7 +1920,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 110283.88,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "2026-01-09",
+          "ultima_movimentacao": "2026-02-03",
+          "dias_aberto": 312,
+          "dias_sem_mov": 287,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         }
       ]
     },
@@ -1618,7 +1951,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 35315.55,
       "saldo": 19468.13,
       "pct_executado": 64.5,
+      "dt_inicio": "2026-01-05",
       "ultima_movimentacao": "2026-06-23",
+      "dias_aberto": 316,
+      "dias_sem_mov": 147,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-33",
@@ -1654,7 +1993,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 35315.55,
           "saldo": 19468.13,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-01-05",
+          "ultima_movimentacao": "2026-06-23",
+          "dias_aberto": 316,
+          "dias_sem_mov": 147,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -1679,7 +2025,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 182207.8,
       "saldo": 23120.96,
       "pct_executado": 88.7,
+      "dt_inicio": "2025-12-29",
       "ultima_movimentacao": "2026-07-28",
+      "dias_aberto": 323,
+      "dias_sem_mov": 112,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-34",
@@ -1715,7 +2067,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 91103.9,
           "saldo": 11560.48,
-          "status": "Parcial 2 Enviada"
+          "status": "Parcial 2 Enviada",
+          "dt_inicio": "2025-12-29",
+          "ultima_movimentacao": "2026-07-28",
+          "dias_aberto": 323,
+          "dias_sem_mov": 112,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-105",
@@ -1751,7 +2110,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 91103.9,
           "saldo": 11560.48,
-          "status": "Parcial 2 Enviada"
+          "status": "Parcial 2 Enviada",
+          "dt_inicio": "2025-12-29",
+          "ultima_movimentacao": "2026-07-28",
+          "dias_aberto": 323,
+          "dias_sem_mov": 112,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -1775,7 +2141,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 21180.1,
       "saldo": 3020.11,
       "pct_executado": 87.5,
+      "dt_inicio": "2026-01-09",
       "ultima_movimentacao": "2026-02-25",
+      "dias_aberto": 312,
+      "dias_sem_mov": 265,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-35",
@@ -1811,7 +2183,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 21180.1,
           "saldo": 3020.11,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-01-09",
+          "ultima_movimentacao": "2026-02-25",
+          "dias_aberto": 312,
+          "dias_sem_mov": 265,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -1835,7 +2214,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 16846.5,
       "saldo": 0.0,
       "pct_executado": 177.8,
+      "dt_inicio": "2026-01-12",
       "ultima_movimentacao": "2026-09-21",
+      "dias_aberto": 309,
+      "dias_sem_mov": 57,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-36",
@@ -1871,7 +2256,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 16846.5,
           "saldo": 0.0,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-01-12",
+          "ultima_movimentacao": "2026-09-21",
+          "dias_aberto": 309,
+          "dias_sem_mov": 57,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -1895,7 +2287,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 15244.21,
       "saldo": 818.75,
       "pct_executado": 94.9,
+      "dt_inicio": "2026-01-12",
       "ultima_movimentacao": "2026-05-21",
+      "dias_aberto": 309,
+      "dias_sem_mov": 180,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-37",
@@ -1931,7 +2329,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 15244.21,
           "saldo": 818.75,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-01-12",
+          "ultima_movimentacao": "2026-05-21",
+          "dias_aberto": 309,
+          "dias_sem_mov": 180,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -1955,7 +2360,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 101941.66,
       "saldo": 434.92,
       "pct_executado": 99.6,
+      "dt_inicio": "2025-12-29",
       "ultima_movimentacao": "2026-04-24",
+      "dias_aberto": 323,
+      "dias_sem_mov": 207,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-38",
@@ -1991,7 +2402,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 101941.66,
           "saldo": 434.92,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2025-12-29",
+          "ultima_movimentacao": "2026-04-24",
+          "dias_aberto": 323,
+          "dias_sem_mov": 207,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -2015,7 +2433,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 9474.12,
       "saldo": 7542.94,
       "pct_executado": 55.7,
+      "dt_inicio": "2025-12-29",
       "ultima_movimentacao": "2026-06-22",
+      "dias_aberto": 323,
+      "dias_sem_mov": 148,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-39",
@@ -2051,7 +2475,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 9474.12,
           "saldo": 7542.94,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2025-12-29",
+          "ultima_movimentacao": "2026-06-22",
+          "dias_aberto": 323,
+          "dias_sem_mov": 148,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -2077,7 +2508,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 15240.96,
       "saldo": 229485.45,
       "pct_executado": 6.2,
+      "dt_inicio": "2026-01-12",
       "ultima_movimentacao": "enviado",
+      "dias_aberto": 309,
+      "dias_sem_mov": 0,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-40",
@@ -2113,7 +2550,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 5080.32,
           "saldo": 76495.15,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-01-12",
+          "ultima_movimentacao": "enviado",
+          "dias_aberto": 309,
+          "dias_sem_mov": 0,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-41",
@@ -2149,7 +2593,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 5080.32,
           "saldo": 76495.15,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-01-12",
+          "ultima_movimentacao": "enviado",
+          "dias_aberto": 309,
+          "dias_sem_mov": 0,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-42",
@@ -2185,7 +2636,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 5080.32,
           "saldo": 76495.15,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-01-12",
+          "ultima_movimentacao": "enviado",
+          "dias_aberto": 309,
+          "dias_sem_mov": 0,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -2209,7 +2667,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 79978.07,
       "saldo": 0.0,
       "pct_executado": 199.9,
+      "dt_inicio": "2026-01-05",
       "ultima_movimentacao": "2026-04-28",
+      "dias_aberto": 316,
+      "dias_sem_mov": 203,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-43",
@@ -2245,7 +2709,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 79978.07,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-01-05",
+          "ultima_movimentacao": "2026-04-28",
+          "dias_aberto": 316,
+          "dias_sem_mov": 203,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -2270,7 +2741,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 483884.84,
       "saldo": 2543.38,
       "pct_executado": 99.5,
+      "dt_inicio": "2026-04-23",
       "ultima_movimentacao": "2026-10-16",
+      "dias_aberto": 208,
+      "dias_sem_mov": 32,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-44",
@@ -2306,7 +2783,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 241942.42,
           "saldo": 1271.69,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-04-23",
+          "ultima_movimentacao": "2026-10-16",
+          "dias_aberto": 208,
+          "dias_sem_mov": 32,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         },
         {
           "id": "OS-45",
@@ -2342,7 +2826,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 241942.42,
           "saldo": 1271.69,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-04-23",
+          "ultima_movimentacao": "2026-10-16",
+          "dias_aberto": 208,
+          "dias_sem_mov": 32,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -2367,7 +2858,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 117367.02,
       "saldo": 0.0,
       "pct_executado": 138.1,
+      "dt_inicio": "2026-01-21",
       "ultima_movimentacao": "2026-08-21",
+      "dias_aberto": 300,
+      "dias_sem_mov": 88,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-46",
@@ -2403,7 +2900,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 58683.51,
           "saldo": 0.0,
-          "status": "Parcial 2 Aprovada"
+          "status": "Parcial 2 Aprovada",
+          "dt_inicio": "2026-01-21",
+          "ultima_movimentacao": "2026-08-21",
+          "dias_aberto": 300,
+          "dias_sem_mov": 88,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-47",
@@ -2439,7 +2943,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 58683.51,
           "saldo": 0.0,
-          "status": "Parcial 2 Aprovada"
+          "status": "Parcial 2 Aprovada",
+          "dt_inicio": "2026-01-21",
+          "ultima_movimentacao": "2026-08-21",
+          "dias_aberto": 300,
+          "dias_sem_mov": 88,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -2463,7 +2974,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 8569.6,
       "saldo": 102197.62,
       "pct_executado": 7.7,
+      "dt_inicio": "2026-01-21",
       "ultima_movimentacao": "2026-05-22",
+      "dias_aberto": 300,
+      "dias_sem_mov": 179,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-48",
@@ -2499,7 +3016,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 8569.6,
           "saldo": 102197.62,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-01-21",
+          "ultima_movimentacao": "2026-05-22",
+          "dias_aberto": 300,
+          "dias_sem_mov": 179,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -2523,7 +3047,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 745.25,
       "saldo": 3549.61,
       "pct_executado": 17.4,
+      "dt_inicio": "2026-01-26",
       "ultima_movimentacao": "2026-08-18",
+      "dias_aberto": 295,
+      "dias_sem_mov": 91,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-49",
@@ -2559,7 +3089,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 745.25,
           "saldo": 3549.61,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-01-26",
+          "ultima_movimentacao": "2026-08-18",
+          "dias_aberto": 295,
+          "dias_sem_mov": 91,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -2584,7 +3121,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 7218.34,
       "saldo": 141863.12,
       "pct_executado": 4.8,
+      "dt_inicio": "2026-01-26",
       "ultima_movimentacao": "2026-08-21",
+      "dias_aberto": 295,
+      "dias_sem_mov": 88,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-50",
@@ -2620,7 +3163,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 3609.17,
           "saldo": 70931.56,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-01-26",
+          "ultima_movimentacao": "2026-08-21",
+          "dias_aberto": 295,
+          "dias_sem_mov": 88,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-51",
@@ -2656,7 +3206,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 3609.17,
           "saldo": 70931.56,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-01-26",
+          "ultima_movimentacao": "2026-08-21",
+          "dias_aberto": 295,
+          "dias_sem_mov": 88,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -2681,7 +3238,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 27749.06,
       "saldo": 170556.52,
       "pct_executado": 14.0,
+      "dt_inicio": "2026-01-30",
       "ultima_movimentacao": "2026-08-19",
+      "dias_aberto": 291,
+      "dias_sem_mov": 90,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-52",
@@ -2717,7 +3280,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 13874.53,
           "saldo": 85278.26,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-01-30",
+          "ultima_movimentacao": "2026-08-19",
+          "dias_aberto": 291,
+          "dias_sem_mov": 90,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-53",
@@ -2753,7 +3323,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 13874.53,
           "saldo": 85278.26,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-01-30",
+          "ultima_movimentacao": "2026-08-19",
+          "dias_aberto": 291,
+          "dias_sem_mov": 90,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -2777,7 +3354,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 11301.35,
       "saldo": 5049.74,
       "pct_executado": 69.1,
+      "dt_inicio": "2026-02-03",
       "ultima_movimentacao": "2026-06-23",
+      "dias_aberto": 287,
+      "dias_sem_mov": 147,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-54",
@@ -2813,7 +3396,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 11301.35,
           "saldo": 5049.74,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-02-03",
+          "ultima_movimentacao": "2026-06-23",
+          "dias_aberto": 287,
+          "dias_sem_mov": 147,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -2837,7 +3427,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 0.0,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-10-15",
       "ultima_movimentacao": "2026-10-15",
+      "dias_aberto": 33,
+      "dias_sem_mov": 33,
+      "faixa_aging": "31 a 90 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-55",
@@ -2873,7 +3469,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 0.0,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "2026-10-15",
+          "ultima_movimentacao": "2026-10-15",
+          "dias_aberto": 33,
+          "dias_sem_mov": 33,
+          "faixa_aging": "31 a 90 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         }
       ]
     },
@@ -2897,7 +3500,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 13558.49,
       "saldo": 5158.44,
       "pct_executado": 72.4,
+      "dt_inicio": "2026-02-03",
       "ultima_movimentacao": "2026-06-23",
+      "dias_aberto": 287,
+      "dias_sem_mov": 147,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-56",
@@ -2933,7 +3542,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 13558.49,
           "saldo": 5158.44,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-02-03",
+          "ultima_movimentacao": "2026-06-23",
+          "dias_aberto": 287,
+          "dias_sem_mov": 147,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -2957,7 +3573,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 37803.08,
       "saldo": 9834.0,
       "pct_executado": 79.4,
+      "dt_inicio": "2026-01-30",
       "ultima_movimentacao": "2026-11-17",
+      "dias_aberto": 291,
+      "dias_sem_mov": 0,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-57",
@@ -2993,7 +3615,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 37803.08,
           "saldo": 9834.0,
-          "status": "Parcial 1 Enviada"
+          "status": "Parcial 1 Enviada",
+          "dt_inicio": "2026-01-30",
+          "ultima_movimentacao": "2026-11-17",
+          "dias_aberto": 291,
+          "dias_sem_mov": 0,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -3017,7 +3646,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 55240.9,
       "saldo": 9045.32,
       "pct_executado": 85.9,
+      "dt_inicio": "2026-02-11",
       "ultima_movimentacao": "2026-09-21",
+      "dias_aberto": 279,
+      "dias_sem_mov": 57,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-58",
@@ -3053,7 +3688,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 55240.9,
           "saldo": 9045.32,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-02-11",
+          "ultima_movimentacao": "2026-09-21",
+          "dias_aberto": 279,
+          "dias_sem_mov": 57,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -3077,7 +3719,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 36845.47,
       "saldo": 0.0,
       "pct_executado": 100.0,
+      "dt_inicio": "2026-02-11",
       "ultima_movimentacao": "2026-08-20",
+      "dias_aberto": 279,
+      "dias_sem_mov": 89,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Claro: Aprovação Medição Final",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-59",
@@ -3113,7 +3761,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 36845.47,
           "saldo": 0.0,
-          "status": "Medição Final Enviada"
+          "status": "Medição Final Enviada",
+          "dt_inicio": "2026-02-11",
+          "ultima_movimentacao": "2026-08-20",
+          "dias_aberto": 279,
+          "dias_sem_mov": 89,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "Claro: Aprovação Medição Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -3139,7 +3794,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 219787.5,
       "saldo": 18829.98,
       "pct_executado": 92.1,
+      "dt_inicio": "2026-02-16",
       "ultima_movimentacao": "2026-07-27",
+      "dias_aberto": 274,
+      "dias_sem_mov": 113,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-60",
@@ -3175,7 +3836,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 73262.5,
           "saldo": 6276.66,
-          "status": "Parcial 1 Enviada"
+          "status": "Parcial 1 Enviada",
+          "dt_inicio": "2026-02-16",
+          "ultima_movimentacao": "2026-07-27",
+          "dias_aberto": 274,
+          "dias_sem_mov": 113,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-61",
@@ -3211,7 +3879,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 73262.5,
           "saldo": 6276.66,
-          "status": "Parcial 1 Enviada"
+          "status": "Parcial 1 Enviada",
+          "dt_inicio": "2026-02-16",
+          "ultima_movimentacao": "2026-07-27",
+          "dias_aberto": 274,
+          "dias_sem_mov": 113,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-62",
@@ -3247,7 +3922,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 73262.5,
           "saldo": 6276.66,
-          "status": "Parcial 1 Enviada"
+          "status": "Parcial 1 Enviada",
+          "dt_inicio": "2026-02-16",
+          "ultima_movimentacao": "2026-07-27",
+          "dias_aberto": 274,
+          "dias_sem_mov": 113,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -3271,7 +3953,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 8811.06,
       "saldo": 9632.69,
       "pct_executado": 47.8,
+      "dt_inicio": "2026-03-06",
       "ultima_movimentacao": "2026-06-23",
+      "dias_aberto": 256,
+      "dias_sem_mov": 147,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-63",
@@ -3307,7 +3995,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 8811.06,
           "saldo": 9632.69,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-03-06",
+          "ultima_movimentacao": "2026-06-23",
+          "dias_aberto": 256,
+          "dias_sem_mov": 147,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -3331,7 +4026,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 22069.42,
       "saldo": 3127.19,
       "pct_executado": 87.6,
+      "dt_inicio": "2026-02-12",
       "ultima_movimentacao": "2026-09-17",
+      "dias_aberto": 278,
+      "dias_sem_mov": 61,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-64",
@@ -3367,7 +4068,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 22069.42,
           "saldo": 3127.19,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-02-12",
+          "ultima_movimentacao": "2026-09-17",
+          "dias_aberto": 278,
+          "dias_sem_mov": 61,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -3391,7 +4099,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 30322.37,
       "saldo": 10687.67,
       "pct_executado": 73.9,
+      "dt_inicio": "2026-02-12",
       "ultima_movimentacao": "2026-09-21",
+      "dias_aberto": 278,
+      "dias_sem_mov": 57,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-65",
@@ -3427,7 +4141,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 30322.37,
           "saldo": 10687.67,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-02-12",
+          "ultima_movimentacao": "2026-09-21",
+          "dias_aberto": 278,
+          "dias_sem_mov": 57,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -3451,7 +4172,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 6377.57,
       "saldo": 19192.84,
       "pct_executado": 24.9,
+      "dt_inicio": "2026-08-04",
       "ultima_movimentacao": "2026-08-21",
+      "dias_aberto": 105,
+      "dias_sem_mov": 88,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-66",
@@ -3487,7 +4214,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 6377.57,
           "saldo": 19192.84,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-08-04",
+          "ultima_movimentacao": "2026-08-21",
+          "dias_aberto": 105,
+          "dias_sem_mov": 88,
+          "faixa_aging": "91 a 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -3511,7 +4245,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 0.0,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-02-18",
       "ultima_movimentacao": "2026-02-19",
+      "dias_aberto": 272,
+      "dias_sem_mov": 271,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-67",
@@ -3547,7 +4287,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 0.0,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "2026-02-18",
+          "ultima_movimentacao": "2026-02-19",
+          "dias_aberto": 272,
+          "dias_sem_mov": 271,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         }
       ]
     },
@@ -3571,7 +4318,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 0.0,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-02-18",
       "ultima_movimentacao": "2026-02-18",
+      "dias_aberto": 272,
+      "dias_sem_mov": 272,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-68",
@@ -3607,7 +4360,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 0.0,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "2026-02-18",
+          "ultima_movimentacao": "2026-02-18",
+          "dias_aberto": 272,
+          "dias_sem_mov": 272,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         }
       ]
     },
@@ -3632,7 +4392,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 146493.42,
       "saldo": 37575.26,
       "pct_executado": 79.6,
+      "dt_inicio": "2026-02-27",
       "ultima_movimentacao": "2026-10-13",
+      "dias_aberto": 263,
+      "dias_sem_mov": 35,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-69",
@@ -3668,7 +4434,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 73246.71,
           "saldo": 18787.63,
-          "status": "Parcial 2 Aprovada"
+          "status": "Parcial 2 Aprovada",
+          "dt_inicio": "2026-02-27",
+          "ultima_movimentacao": "2026-10-13",
+          "dias_aberto": 263,
+          "dias_sem_mov": 35,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-70",
@@ -3704,7 +4477,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 73246.71,
           "saldo": 18787.63,
-          "status": "Parcial 2 Aprovada"
+          "status": "Parcial 2 Aprovada",
+          "dt_inicio": "2026-02-27",
+          "ultima_movimentacao": "2026-10-13",
+          "dias_aberto": 263,
+          "dias_sem_mov": 35,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -3728,7 +4508,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 34967.39,
       "saldo": 29298.85,
       "pct_executado": 54.4,
+      "dt_inicio": "2026-02-27",
       "ultima_movimentacao": "2026-07-27",
+      "dias_aberto": 263,
+      "dias_sem_mov": 113,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-71",
@@ -3764,7 +4550,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 34967.39,
           "saldo": 29298.85,
-          "status": "Parcial 1 Enviada"
+          "status": "Parcial 1 Enviada",
+          "dt_inicio": "2026-02-27",
+          "ultima_movimentacao": "2026-07-27",
+          "dias_aberto": 263,
+          "dias_sem_mov": 113,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -3788,7 +4581,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 2757.31,
       "saldo": 3409.64,
       "pct_executado": 44.7,
+      "dt_inicio": "2026-03-06",
       "ultima_movimentacao": "2026-06-22",
+      "dias_aberto": 256,
+      "dias_sem_mov": 148,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-72",
@@ -3824,7 +4623,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 2757.31,
           "saldo": 3409.64,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-03-06",
+          "ultima_movimentacao": "2026-06-22",
+          "dias_aberto": 256,
+          "dias_sem_mov": 148,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -3848,7 +4654,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 65370.33,
       "saldo": 0.0,
       "pct_executado": 102.6,
+      "dt_inicio": "2026-03-06",
       "ultima_movimentacao": "2026-09-16",
+      "dias_aberto": 256,
+      "dias_sem_mov": 62,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-73",
@@ -3884,7 +4696,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 65370.33,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-03-06",
+          "ultima_movimentacao": "2026-09-16",
+          "dias_aberto": 256,
+          "dias_sem_mov": 62,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -3910,7 +4729,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 50229.6,
       "saldo": 6552.69,
       "pct_executado": 88.5,
+      "dt_inicio": "2026-02-19",
       "ultima_movimentacao": "2026-08-21",
+      "dias_aberto": 271,
+      "dias_sem_mov": 88,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-74",
@@ -3946,7 +4771,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 16743.2,
           "saldo": 2184.23,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-02-19",
+          "ultima_movimentacao": "2026-08-21",
+          "dias_aberto": 271,
+          "dias_sem_mov": 88,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-75",
@@ -3982,7 +4814,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 16743.2,
           "saldo": 2184.23,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-02-19",
+          "ultima_movimentacao": "2026-08-21",
+          "dias_aberto": 271,
+          "dias_sem_mov": 88,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-76",
@@ -4018,7 +4857,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 16743.2,
           "saldo": 2184.23,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-02-19",
+          "ultima_movimentacao": "2026-08-21",
+          "dias_aberto": 271,
+          "dias_sem_mov": 88,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -4042,7 +4888,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 6575.91,
       "saldo": 0.0,
       "pct_executado": 100.0,
+      "dt_inicio": "2026-03-06",
       "ultima_movimentacao": "2026-08-24",
+      "dias_aberto": 256,
+      "dias_sem_mov": 85,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-77",
@@ -4078,7 +4930,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 6575.91,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-03-06",
+          "ultima_movimentacao": "2026-08-24",
+          "dias_aberto": 256,
+          "dias_sem_mov": 85,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -4102,7 +4961,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 4059.6,
       "saldo": 0.0,
       "pct_executado": 100.0,
+      "dt_inicio": "2026-03-02",
       "ultima_movimentacao": "2026-08-14",
+      "dias_aberto": 260,
+      "dias_sem_mov": 95,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-78",
@@ -4138,7 +5003,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 4059.6,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-03-02",
+          "ultima_movimentacao": "2026-08-14",
+          "dias_aberto": 260,
+          "dias_sem_mov": 95,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -4163,7 +5035,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 91770.86,
       "saldo": 58722.1,
       "pct_executado": 61.0,
+      "dt_inicio": "2026-03-02",
       "ultima_movimentacao": "2026-07-24",
+      "dias_aberto": 260,
+      "dias_sem_mov": 116,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-79",
@@ -4199,7 +5077,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 45885.43,
           "saldo": 29361.05,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-03-02",
+          "ultima_movimentacao": "2026-07-24",
+          "dias_aberto": 260,
+          "dias_sem_mov": 116,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-80",
@@ -4235,7 +5120,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 45885.43,
           "saldo": 29361.05,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-03-02",
+          "ultima_movimentacao": "2026-07-24",
+          "dias_aberto": 260,
+          "dias_sem_mov": 116,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -4259,7 +5151,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 95837.19,
       "saldo": 1730.38,
       "pct_executado": 98.2,
+      "dt_inicio": "2026-03-04",
       "ultima_movimentacao": "2026-11-12",
+      "dias_aberto": 258,
+      "dias_sem_mov": 5,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Claro: Aprovação Medição Final",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-81",
@@ -4295,7 +5193,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "orç concluido",
           "v_medido": 95837.19,
           "saldo": 1730.38,
-          "status": "Medição Final Enviada"
+          "status": "Medição Final Enviada",
+          "dt_inicio": "2026-03-04",
+          "ultima_movimentacao": "2026-11-12",
+          "dias_aberto": 258,
+          "dias_sem_mov": 5,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "Claro: Aprovação Medição Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -4319,7 +5224,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 21121.27,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-03-09",
       "ultima_movimentacao": "2026-05-04",
+      "dias_aberto": 253,
+      "dias_sem_mov": 197,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-82",
@@ -4355,7 +5266,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 21121.27,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "2026-03-09",
+          "ultima_movimentacao": "2026-05-04",
+          "dias_aberto": 253,
+          "dias_sem_mov": 197,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         }
       ]
     },
@@ -4379,7 +5297,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 21121.68,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-03-09",
       "ultima_movimentacao": "2026-05-04",
+      "dias_aberto": 253,
+      "dias_sem_mov": 197,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-83",
@@ -4415,7 +5339,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 21121.68,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "2026-03-09",
+          "ultima_movimentacao": "2026-05-04",
+          "dias_aberto": 253,
+          "dias_sem_mov": 197,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         }
       ]
     },
@@ -4439,7 +5370,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 21121.68,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-03-09",
       "ultima_movimentacao": "2026-05-04",
+      "dias_aberto": 253,
+      "dias_sem_mov": 197,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-84",
@@ -4475,7 +5412,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 21121.68,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "2026-03-09",
+          "ultima_movimentacao": "2026-05-04",
+          "dias_aberto": 253,
+          "dias_sem_mov": 197,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         }
       ]
     },
@@ -4499,7 +5443,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 21121.68,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-03-09",
       "ultima_movimentacao": "2026-05-04",
+      "dias_aberto": 253,
+      "dias_sem_mov": 197,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-85",
@@ -4535,7 +5485,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 21121.68,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "2026-03-09",
+          "ultima_movimentacao": "2026-05-04",
+          "dias_aberto": 253,
+          "dias_sem_mov": 197,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         }
       ]
     },
@@ -4559,7 +5516,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 21121.68,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-03-09",
       "ultima_movimentacao": "2026-05-04",
+      "dias_aberto": 253,
+      "dias_sem_mov": 197,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-86",
@@ -4595,7 +5558,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 21121.68,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "2026-03-09",
+          "ultima_movimentacao": "2026-05-04",
+          "dias_aberto": 253,
+          "dias_sem_mov": 197,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         }
       ]
     },
@@ -4619,7 +5589,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 9146.8,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-03-09",
       "ultima_movimentacao": "2026-05-04",
+      "dias_aberto": 253,
+      "dias_sem_mov": 197,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-87",
@@ -4655,7 +5631,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 9146.8,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "2026-03-09",
+          "ultima_movimentacao": "2026-05-04",
+          "dias_aberto": 253,
+          "dias_sem_mov": 197,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         }
       ]
     },
@@ -4690,7 +5673,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 173466.51,
       "saldo": 0.0,
       "pct_executado": 100.0,
+      "dt_inicio": "2026-03-23",
       "ultima_movimentacao": "2026-03-24",
+      "dias_aberto": 239,
+      "dias_sem_mov": 238,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-88",
@@ -4726,7 +5715,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 14833.32,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-03-23",
+          "ultima_movimentacao": "2026-03-24",
+          "dias_aberto": 239,
+          "dias_sem_mov": 238,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         },
         {
           "id": "OS-89",
@@ -4762,7 +5758,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 14833.32,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-03-23",
+          "ultima_movimentacao": "2026-03-24",
+          "dias_aberto": 239,
+          "dias_sem_mov": 238,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         },
         {
           "id": "OS-90",
@@ -4798,7 +5801,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 14833.32,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-03-23",
+          "ultima_movimentacao": "2026-03-24",
+          "dias_aberto": 239,
+          "dias_sem_mov": 238,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         },
         {
           "id": "OS-91",
@@ -4834,7 +5844,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 14833.32,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-03-23",
+          "ultima_movimentacao": "2026-03-24",
+          "dias_aberto": 239,
+          "dias_sem_mov": 238,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         },
         {
           "id": "OS-92",
@@ -4870,7 +5887,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 10299.99,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-03-23",
+          "ultima_movimentacao": "2026-03-24",
+          "dias_aberto": 239,
+          "dias_sem_mov": 238,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         },
         {
           "id": "OS-93",
@@ -4906,7 +5930,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 14833.32,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-03-23",
+          "ultima_movimentacao": "2026-03-24",
+          "dias_aberto": 239,
+          "dias_sem_mov": 238,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         },
         {
           "id": "OS-94",
@@ -4942,7 +5973,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 14833.32,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-03-23",
+          "ultima_movimentacao": "2026-03-24",
+          "dias_aberto": 239,
+          "dias_sem_mov": 238,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         },
         {
           "id": "OS-95",
@@ -4978,7 +6016,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 14833.32,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-03-23",
+          "ultima_movimentacao": "2026-03-24",
+          "dias_aberto": 239,
+          "dias_sem_mov": 238,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         },
         {
           "id": "OS-96",
@@ -5014,7 +6059,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 14833.32,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-03-23",
+          "ultima_movimentacao": "2026-03-24",
+          "dias_aberto": 239,
+          "dias_sem_mov": 238,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         },
         {
           "id": "OS-97",
@@ -5050,7 +6102,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 14833.32,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-03-23",
+          "ultima_movimentacao": "2026-03-24",
+          "dias_aberto": 239,
+          "dias_sem_mov": 238,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         },
         {
           "id": "OS-98",
@@ -5086,7 +6145,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 14833.32,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-03-23",
+          "ultima_movimentacao": "2026-03-24",
+          "dias_aberto": 239,
+          "dias_sem_mov": 238,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         },
         {
           "id": "OS-99",
@@ -5122,7 +6188,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 14833.32,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-03-23",
+          "ultima_movimentacao": "2026-03-24",
+          "dias_aberto": 239,
+          "dias_sem_mov": 238,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -5147,7 +6220,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 435559.19,
       "saldo": 103792.37,
       "pct_executado": 80.8,
+      "dt_inicio": "2025-03-11",
       "ultima_movimentacao": "2026-06-22",
+      "dias_aberto": 616,
+      "dias_sem_mov": 148,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Misto: Validar OSs Pendentes",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-100",
@@ -5183,7 +6262,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 89876.65,
           "saldo": 179799.13,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2025-03-11",
+          "ultima_movimentacao": "2026-03-25",
+          "dias_aberto": 616,
+          "dias_sem_mov": 237,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-101",
@@ -5219,7 +6305,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 121009.44,
           "saldo": 148666.34,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2025-03-11",
+          "ultima_movimentacao": "2026-06-22",
+          "dias_aberto": 616,
+          "dias_sem_mov": 148,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         },
         {
           "id": "OS-102",
@@ -5255,7 +6348,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 89876.15,
           "saldo": 0.0,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-03-24",
+          "ultima_movimentacao": "2026-03-26",
+          "dias_aberto": 238,
+          "dias_sem_mov": 236,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-103",
@@ -5291,7 +6391,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 89876.15,
           "saldo": 0.0,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-03-24",
+          "ultima_movimentacao": "2026-03-26",
+          "dias_aberto": 238,
+          "dias_sem_mov": 236,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-104",
@@ -5327,7 +6434,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 44920.8,
           "saldo": 0.0,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-03-24",
+          "ultima_movimentacao": "2026-03-26",
+          "dias_aberto": 238,
+          "dias_sem_mov": 236,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -5355,7 +6469,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 283390.76,
       "saldo": 244250.04,
       "pct_executado": 53.7,
+      "dt_inicio": "2025-07-05",
       "ultima_movimentacao": "2026-06-22",
+      "dias_aberto": 500,
+      "dias_sem_mov": 148,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Misto: Validar OSs Pendentes",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-106",
@@ -5391,7 +6511,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 36322.03,
           "saldo": 69206.13,
-          "status": "Parcial 2 Aprovada"
+          "status": "Parcial 2 Aprovada",
+          "dt_inicio": "2025-07-05",
+          "ultima_movimentacao": "2026-03-24",
+          "dias_aberto": 500,
+          "dias_sem_mov": 238,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-107",
@@ -5427,7 +6554,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 84292.55,
           "saldo": 21235.61,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2025-07-05",
+          "ultima_movimentacao": "2026-05-26",
+          "dias_aberto": 500,
+          "dias_sem_mov": 175,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         },
         {
           "id": "OS-108",
@@ -5463,7 +6597,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 90132.12,
           "saldo": 15396.04,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2025-07-05",
+          "ultima_movimentacao": "2026-06-22",
+          "dias_aberto": 500,
+          "dias_sem_mov": 148,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         },
         {
           "id": "OS-109",
@@ -5499,7 +6640,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 36322.03,
           "saldo": 69206.13,
-          "status": "Parcial 2 Aprovada"
+          "status": "Parcial 2 Aprovada",
+          "dt_inicio": "2025-07-05",
+          "ultima_movimentacao": "2026-03-24",
+          "dias_aberto": 500,
+          "dias_sem_mov": 238,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-110",
@@ -5535,7 +6683,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 36322.03,
           "saldo": 69206.13,
-          "status": "Parcial 2 Aprovada"
+          "status": "Parcial 2 Aprovada",
+          "dt_inicio": "2025-07-05",
+          "ultima_movimentacao": "2026-03-24",
+          "dias_aberto": 500,
+          "dias_sem_mov": 238,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -5561,7 +6716,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 115902.81,
       "saldo": 341920.5,
       "pct_executado": 25.3,
+      "dt_inicio": "2025-03-26",
       "ultima_movimentacao": "2026-09-16",
+      "dias_aberto": 601,
+      "dias_sem_mov": 62,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Misto: Validar OSs Pendentes",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-111",
@@ -5597,7 +6758,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 34732.03,
           "saldo": 117875.74,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2025-03-26",
+          "ultima_movimentacao": "2025-09-25",
+          "dias_aberto": 601,
+          "dias_sem_mov": 418,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-112",
@@ -5633,7 +6801,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 41292.98,
           "saldo": 111314.79,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2025-03-26",
+          "ultima_movimentacao": "2026-09-16",
+          "dias_aberto": 601,
+          "dias_sem_mov": 62,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         },
         {
           "id": "OS-113",
@@ -5669,7 +6844,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 39877.8,
           "saldo": 112729.97,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2025-03-26",
+          "ultima_movimentacao": "2026-03-24",
+          "dias_aberto": 601,
+          "dias_sem_mov": 238,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -5693,7 +6875,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 4414.04,
       "saldo": 0.0,
       "pct_executado": 100.0,
+      "dt_inicio": "2026-03-20",
       "ultima_movimentacao": "2026-03-24",
+      "dias_aberto": 242,
+      "dias_sem_mov": 238,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-114",
@@ -5729,7 +6917,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 4414.04,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-03-20",
+          "ultima_movimentacao": "2026-03-24",
+          "dias_aberto": 242,
+          "dias_sem_mov": 238,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -5753,7 +6948,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 206096.56,
       "saldo": 0.0,
       "pct_executado": 100.0,
+      "dt_inicio": "2025-11-26",
       "ultima_movimentacao": "2026-03-24",
+      "dias_aberto": 356,
+      "dias_sem_mov": 238,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-115",
@@ -5789,7 +6990,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 103048.28,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2025-11-26",
+          "ultima_movimentacao": "2026-03-24",
+          "dias_aberto": 356,
+          "dias_sem_mov": 238,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         },
         {
           "id": "OS-116",
@@ -5825,7 +7033,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 103048.28,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2025-11-26",
+          "ultima_movimentacao": "2026-03-24",
+          "dias_aberto": 356,
+          "dias_sem_mov": 238,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -5852,7 +7067,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 79767.42,
       "saldo": 110431.7,
       "pct_executado": 41.9,
+      "dt_inicio": "2025-06-13",
       "ultima_movimentacao": "2026-04-29",
+      "dias_aberto": 522,
+      "dias_sem_mov": 202,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Misto: Validar OSs Pendentes",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-117",
@@ -5888,7 +7109,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 47549.72,
           "saldo": 0.06,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2025-06-13",
+          "ultima_movimentacao": "2026-04-29",
+          "dias_aberto": 522,
+          "dias_sem_mov": 202,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         },
         {
           "id": "OS-118",
@@ -5924,7 +7152,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 47549.78,
-          "status": "Parcial 1 Enviada"
+          "status": "Parcial 1 Enviada",
+          "dt_inicio": "2025-06-13",
+          "ultima_movimentacao": "2025-11-19",
+          "dias_aberto": 522,
+          "dias_sem_mov": 363,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-119",
@@ -5960,7 +7195,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 47549.78,
-          "status": "Parcial 1 Enviada"
+          "status": "Parcial 1 Enviada",
+          "dt_inicio": "2025-06-13",
+          "ultima_movimentacao": "2025-11-19",
+          "dias_aberto": 522,
+          "dias_sem_mov": 363,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-120",
@@ -5996,7 +7238,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 32217.7,
           "saldo": 15332.08,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2025-06-13",
+          "ultima_movimentacao": "2025-11-19",
+          "dias_aberto": 522,
+          "dias_sem_mov": 363,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -6020,7 +7269,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 67731.74,
       "saldo": 24490.22,
       "pct_executado": 73.4,
+      "dt_inicio": "2025-06-13",
       "ultima_movimentacao": "2026-04-28",
+      "dias_aberto": 522,
+      "dias_sem_mov": 203,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-121",
@@ -6056,7 +7311,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 67731.74,
           "saldo": 24490.22,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2025-06-13",
+          "ultima_movimentacao": "2026-04-28",
+          "dias_aberto": 522,
+          "dias_sem_mov": 203,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -6082,7 +7344,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 159214.59,
       "saldo": 2810.31,
       "pct_executado": 98.3,
+      "dt_inicio": "2026-04-24",
       "ultima_movimentacao": "2026-06-23",
+      "dias_aberto": 207,
+      "dias_sem_mov": 147,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-122",
@@ -6118,7 +7386,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 53071.53,
           "saldo": 936.77,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-04-24",
+          "ultima_movimentacao": "2026-06-23",
+          "dias_aberto": 207,
+          "dias_sem_mov": 147,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         },
         {
           "id": "OS-123",
@@ -6154,7 +7429,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 53071.53,
           "saldo": 936.77,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-04-24",
+          "ultima_movimentacao": "2026-06-23",
+          "dias_aberto": 207,
+          "dias_sem_mov": 147,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         },
         {
           "id": "OS-124",
@@ -6190,7 +7472,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 53071.53,
           "saldo": 936.77,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-04-24",
+          "ultima_movimentacao": "2026-06-23",
+          "dias_aberto": 207,
+          "dias_sem_mov": 147,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -6214,7 +7503,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 80743.62,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-03-20",
       "ultima_movimentacao": "2026-05-04",
+      "dias_aberto": 242,
+      "dias_sem_mov": 197,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-125",
@@ -6250,7 +7545,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 80743.62,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "2026-03-20",
+          "ultima_movimentacao": "2026-05-04",
+          "dias_aberto": 242,
+          "dias_sem_mov": 197,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         }
       ]
     },
@@ -6274,7 +7576,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 32030.22,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-03-20",
       "ultima_movimentacao": "2026-05-20",
+      "dias_aberto": 242,
+      "dias_sem_mov": 181,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-126",
@@ -6310,7 +7618,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 32030.22,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "2026-03-20",
+          "ultima_movimentacao": "2026-05-20",
+          "dias_aberto": 242,
+          "dias_sem_mov": 181,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         }
       ]
     },
@@ -6334,7 +7649,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 20255.91,
       "saldo": 9014.09,
       "pct_executado": 69.2,
+      "dt_inicio": "2026-03-20",
       "ultima_movimentacao": "2026-08-20",
+      "dias_aberto": 242,
+      "dias_sem_mov": 89,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-127",
@@ -6370,7 +7691,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 20255.91,
           "saldo": 9014.09,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-03-20",
+          "ultima_movimentacao": "2026-08-20",
+          "dias_aberto": 242,
+          "dias_sem_mov": 89,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -6394,7 +7722,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 91804.46,
       "saldo": 0.0,
       "pct_executado": 100.0,
+      "dt_inicio": "2026-04-01",
       "ultima_movimentacao": "2026-10-19",
+      "dias_aberto": 230,
+      "dias_sem_mov": 29,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-128",
@@ -6430,7 +7764,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 91804.46,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-04-01",
+          "ultima_movimentacao": "2026-10-19",
+          "dias_aberto": 230,
+          "dias_sem_mov": 29,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -6454,7 +7795,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 23327.45,
       "saldo": 36108.79,
       "pct_executado": 39.2,
+      "dt_inicio": "2026-04-01",
       "ultima_movimentacao": "2026-08-24",
+      "dias_aberto": 230,
+      "dias_sem_mov": 85,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-129",
@@ -6490,7 +7837,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 23327.45,
           "saldo": 36108.79,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-04-01",
+          "ultima_movimentacao": "2026-08-24",
+          "dias_aberto": 230,
+          "dias_sem_mov": 85,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -6514,7 +7868,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 6778.64,
       "saldo": 0.0,
       "pct_executado": 100.0,
+      "dt_inicio": "2026-04-06",
       "ultima_movimentacao": "2026-05-27",
+      "dias_aberto": 225,
+      "dias_sem_mov": 174,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-130",
@@ -6550,7 +7910,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 6778.64,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-04-06",
+          "ultima_movimentacao": "2026-05-27",
+          "dias_aberto": 225,
+          "dias_sem_mov": 174,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -6574,7 +7941,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 6751.64,
       "saldo": 0.0,
       "pct_executado": 100.0,
+      "dt_inicio": "2026-04-06",
       "ultima_movimentacao": "2026-05-26",
+      "dias_aberto": 225,
+      "dias_sem_mov": 175,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-131",
@@ -6610,7 +7983,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 6751.64,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-04-06",
+          "ultima_movimentacao": "2026-05-26",
+          "dias_aberto": 225,
+          "dias_sem_mov": 175,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -6635,7 +8015,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 13609.1,
       "saldo": 1261.62,
       "pct_executado": 91.5,
+      "dt_inicio": "2026-04-06",
       "ultima_movimentacao": "2026-08-19",
+      "dias_aberto": 225,
+      "dias_sem_mov": 90,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-132",
@@ -6671,7 +8057,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 6804.55,
           "saldo": 630.81,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-04-06",
+          "ultima_movimentacao": "2026-08-19",
+          "dias_aberto": 225,
+          "dias_sem_mov": 90,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-133",
@@ -6707,7 +8100,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 6804.55,
           "saldo": 630.81,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-04-06",
+          "ultima_movimentacao": "2026-08-19",
+          "dias_aberto": 225,
+          "dias_sem_mov": 90,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -6731,7 +8131,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 0.0,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-04-22",
       "ultima_movimentacao": "2026-05-07",
+      "dias_aberto": 209,
+      "dias_sem_mov": 194,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-134",
@@ -6767,7 +8173,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 0.0,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "2026-04-22",
+          "ultima_movimentacao": "2026-05-07",
+          "dias_aberto": 209,
+          "dias_sem_mov": 194,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         }
       ]
     },
@@ -6791,7 +8204,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 99610.39,
       "pct_executado": 0.0,
+      "dt_inicio": "REFAZER",
       "ultima_movimentacao": "REFAZER",
+      "dias_aberto": 0,
+      "dias_sem_mov": 0,
+      "faixa_aging": "Até 30 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-135",
@@ -6827,7 +8246,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 99610.39,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "REFAZER",
+          "ultima_movimentacao": "REFAZER",
+          "dias_aberto": 0,
+          "dias_sem_mov": 0,
+          "faixa_aging": "Até 30 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         }
       ]
     },
@@ -6851,7 +8277,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 61673.73,
       "saldo": 4555.57,
       "pct_executado": 93.1,
+      "dt_inicio": "2026-05-07",
       "ultima_movimentacao": "2026-11-11",
+      "dias_aberto": 194,
+      "dias_sem_mov": 6,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-136",
@@ -6887,7 +8319,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 61673.73,
           "saldo": 4555.57,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-05-07",
+          "ultima_movimentacao": "2026-11-11",
+          "dias_aberto": 194,
+          "dias_sem_mov": 6,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -6913,7 +8352,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 64087.68,
       "saldo": 0.0,
       "pct_executado": 100.0,
+      "dt_inicio": "2026-08-21",
       "ultima_movimentacao": "2026-08-21",
+      "dias_aberto": 88,
+      "dias_sem_mov": 88,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-137",
@@ -6949,7 +8394,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 21362.56,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-08-21",
+          "ultima_movimentacao": "2026-08-21",
+          "dias_aberto": 88,
+          "dias_sem_mov": 88,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         },
         {
           "id": "OS-138",
@@ -6985,7 +8437,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 21362.56,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-08-21",
+          "ultima_movimentacao": "2026-08-21",
+          "dias_aberto": 88,
+          "dias_sem_mov": 88,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         },
         {
           "id": "OS-139",
@@ -7021,7 +8480,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 21362.56,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-08-21",
+          "ultima_movimentacao": "2026-08-21",
+          "dias_aberto": 88,
+          "dias_sem_mov": 88,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -7048,7 +8514,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 240352.88,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-05-05",
       "ultima_movimentacao": "2026-09-02",
+      "dias_aberto": 196,
+      "dias_sem_mov": 76,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-140",
@@ -7084,7 +8556,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 60088.22,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "2026-05-05",
+          "ultima_movimentacao": "2026-09-02",
+          "dias_aberto": 196,
+          "dias_sem_mov": 76,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         },
         {
           "id": "OS-141",
@@ -7120,7 +8599,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 60088.22,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "2026-09-02",
+          "ultima_movimentacao": "2026-09-02",
+          "dias_aberto": 76,
+          "dias_sem_mov": 76,
+          "faixa_aging": "31 a 90 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         },
         {
           "id": "OS-142",
@@ -7156,7 +8642,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 60088.22,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "2026-09-02",
+          "ultima_movimentacao": "2026-09-02",
+          "dias_aberto": 76,
+          "dias_sem_mov": 76,
+          "faixa_aging": "31 a 90 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         },
         {
           "id": "OS-143",
@@ -7192,7 +8685,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 60088.22,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "2026-09-02",
+          "ultima_movimentacao": "2026-09-02",
+          "dias_aberto": 76,
+          "dias_sem_mov": 76,
+          "faixa_aging": "31 a 90 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         }
       ]
     },
@@ -7216,7 +8716,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 27741.84,
       "saldo": 10911.78,
       "pct_executado": 71.8,
+      "dt_inicio": "2026-05-20",
       "ultima_movimentacao": "2026-09-17",
+      "dias_aberto": 181,
+      "dias_sem_mov": 61,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-144",
@@ -7252,7 +8758,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 27741.84,
           "saldo": 10911.78,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-05-20",
+          "ultima_movimentacao": "2026-09-17",
+          "dias_aberto": 181,
+          "dias_sem_mov": 61,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -7277,7 +8790,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 194437.84,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-05-20",
       "ultima_movimentacao": "2026-05-20",
+      "dias_aberto": 181,
+      "dias_sem_mov": 181,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-145",
@@ -7313,7 +8832,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 97218.92,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "2026-05-20",
+          "ultima_movimentacao": "2026-05-20",
+          "dias_aberto": 181,
+          "dias_sem_mov": 181,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         },
         {
           "id": "OS-146",
@@ -7349,7 +8875,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 97218.92,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "2026-05-20",
+          "ultima_movimentacao": "2026-05-20",
+          "dias_aberto": 181,
+          "dias_sem_mov": 181,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         }
       ]
     },
@@ -7373,7 +8906,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 39907.86,
       "saldo": 1273.05,
       "pct_executado": 96.9,
+      "dt_inicio": "2025-09-10",
       "ultima_movimentacao": "2026-05-26",
+      "dias_aberto": 433,
+      "dias_sem_mov": 175,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-147",
@@ -7409,7 +8948,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 39907.86,
           "saldo": 1273.05,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2025-09-10",
+          "ultima_movimentacao": "2026-05-26",
+          "dias_aberto": 433,
+          "dias_sem_mov": 175,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -7433,7 +8979,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 2536.47,
       "saldo": 0.0,
       "pct_executado": 100.0,
+      "dt_inicio": "2026-05-12",
       "ultima_movimentacao": "2026-05-26",
+      "dias_aberto": 189,
+      "dias_sem_mov": 175,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-148",
@@ -7469,7 +9021,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 2536.47,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-05-12",
+          "ultima_movimentacao": "2026-05-26",
+          "dias_aberto": 189,
+          "dias_sem_mov": 175,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -7493,7 +9052,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 700914.74,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-05-21",
       "ultima_movimentacao": "2026-05-21",
+      "dias_aberto": 180,
+      "dias_sem_mov": 180,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-149",
@@ -7529,7 +9094,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 700914.74,
-          "status": "Orçamento Enviado Claro"
+          "status": "Orçamento Enviado Claro",
+          "dt_inicio": "2026-05-21",
+          "ultima_movimentacao": "2026-05-21",
+          "dias_aberto": 180,
+          "dias_sem_mov": 180,
+          "faixa_aging": "91 a 180 dias",
+          "pendencia": "Claro: Aprovação Orçamento",
+          "is_em_aberto": true
         }
       ]
     },
@@ -7553,7 +9125,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 19566.84,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-05-22",
       "ultima_movimentacao": "2026-06-03",
+      "dias_aberto": 179,
+      "dias_sem_mov": 167,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-150",
@@ -7589,7 +9167,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 19566.84,
-          "status": "Orçamento Enviado Claro"
+          "status": "Orçamento Enviado Claro",
+          "dt_inicio": "2026-05-22",
+          "ultima_movimentacao": "2026-06-03",
+          "dias_aberto": 179,
+          "dias_sem_mov": 167,
+          "faixa_aging": "91 a 180 dias",
+          "pendencia": "Claro: Aprovação Orçamento",
+          "is_em_aberto": true
         }
       ]
     },
@@ -7617,7 +9202,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 458894.65,
       "saldo": 0.0,
       "pct_executado": 107.9,
+      "dt_inicio": "2026-05-27",
       "ultima_movimentacao": "2026-09-18",
+      "dias_aberto": 174,
+      "dias_sem_mov": 60,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-151",
@@ -7653,7 +9244,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 137210.31,
           "saldo": 0.0,
-          "status": "Parcial 2 Aprovada"
+          "status": "Parcial 2 Aprovada",
+          "dt_inicio": "2026-05-27",
+          "ultima_movimentacao": "2026-09-18",
+          "dias_aberto": 174,
+          "dias_sem_mov": 60,
+          "faixa_aging": "91 a 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-152",
@@ -7689,7 +9287,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 137210.31,
           "saldo": 0.0,
-          "status": "Parcial 2 Aprovada"
+          "status": "Parcial 2 Aprovada",
+          "dt_inicio": "2026-05-27",
+          "ultima_movimentacao": "2026-09-18",
+          "dias_aberto": 174,
+          "dias_sem_mov": 60,
+          "faixa_aging": "91 a 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-153",
@@ -7725,7 +9330,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 137210.31,
           "saldo": 0.0,
-          "status": "Parcial 2 Aprovada"
+          "status": "Parcial 2 Aprovada",
+          "dt_inicio": "2026-05-27",
+          "ultima_movimentacao": "2026-09-18",
+          "dias_aberto": 174,
+          "dias_sem_mov": 60,
+          "faixa_aging": "91 a 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-154",
@@ -7761,7 +9373,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 47263.72,
           "saldo": 59013.51,
-          "status": "Parcial 2 Aprovada"
+          "status": "Parcial 2 Aprovada",
+          "dt_inicio": "2026-05-27",
+          "ultima_movimentacao": "2026-09-18",
+          "dias_aberto": 174,
+          "dias_sem_mov": 60,
+          "faixa_aging": "91 a 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -7785,7 +9404,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 0.0,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-05-22",
       "ultima_movimentacao": "2026-06-03",
+      "dias_aberto": 179,
+      "dias_sem_mov": 167,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-155",
@@ -7821,7 +9446,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 0.0,
-          "status": "Orçamento Enviado Claro"
+          "status": "Orçamento Enviado Claro",
+          "dt_inicio": "2026-05-22",
+          "ultima_movimentacao": "2026-06-03",
+          "dias_aberto": 179,
+          "dias_sem_mov": 167,
+          "faixa_aging": "91 a 180 dias",
+          "pendencia": "Claro: Aprovação Orçamento",
+          "is_em_aberto": true
         }
       ]
     },
@@ -7845,7 +9477,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 0.0,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-06-03",
       "ultima_movimentacao": "2026-06-03",
+      "dias_aberto": 167,
+      "dias_sem_mov": 167,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-156",
@@ -7881,7 +9519,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 0.0,
-          "status": "Orçamento Enviado Claro"
+          "status": "Orçamento Enviado Claro",
+          "dt_inicio": "2026-06-03",
+          "ultima_movimentacao": "2026-06-03",
+          "dias_aberto": 167,
+          "dias_sem_mov": 167,
+          "faixa_aging": "91 a 180 dias",
+          "pendencia": "Claro: Aprovação Orçamento",
+          "is_em_aberto": true
         }
       ]
     },
@@ -7905,7 +9550,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 16212.66,
       "saldo": 0.0,
       "pct_executado": 100.0,
+      "dt_inicio": "2026-06-03",
       "ultima_movimentacao": "2026-07-29",
+      "dias_aberto": 167,
+      "dias_sem_mov": 111,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-157",
@@ -7941,7 +9592,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "Finalizado",
           "v_medido": 16212.66,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-06-03",
+          "ultima_movimentacao": "2026-07-29",
+          "dias_aberto": 167,
+          "dias_sem_mov": 111,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -7965,7 +9623,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 13357.38,
       "saldo": 5949.13,
       "pct_executado": 69.2,
+      "dt_inicio": "2026-06-03",
       "ultima_movimentacao": "2026-09-21",
+      "dias_aberto": 167,
+      "dias_sem_mov": 57,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-158",
@@ -8001,7 +9665,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 13357.38,
           "saldo": 5949.13,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-06-03",
+          "ultima_movimentacao": "2026-09-21",
+          "dias_aberto": 167,
+          "dias_sem_mov": 57,
+          "faixa_aging": "91 a 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -8025,7 +9696,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 0.0,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-06-08",
       "ultima_movimentacao": "2026-06-08",
+      "dias_aberto": 162,
+      "dias_sem_mov": 162,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-159",
@@ -8061,7 +9738,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 0.0,
-          "status": "Orçamento Enviado Claro"
+          "status": "Orçamento Enviado Claro",
+          "dt_inicio": "2026-06-08",
+          "ultima_movimentacao": "2026-06-08",
+          "dias_aberto": 162,
+          "dias_sem_mov": 162,
+          "faixa_aging": "91 a 180 dias",
+          "pendencia": "Claro: Aprovação Orçamento",
+          "is_em_aberto": true
         }
       ]
     },
@@ -8085,7 +9769,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 0.0,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-06-09",
       "ultima_movimentacao": "2026-06-09",
+      "dias_aberto": 161,
+      "dias_sem_mov": 161,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-160",
@@ -8121,7 +9811,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 0.0,
-          "status": "Orçamento Enviado Claro"
+          "status": "Orçamento Enviado Claro",
+          "dt_inicio": "2026-06-09",
+          "ultima_movimentacao": "2026-06-09",
+          "dias_aberto": 161,
+          "dias_sem_mov": 161,
+          "faixa_aging": "91 a 180 dias",
+          "pendencia": "Claro: Aprovação Orçamento",
+          "is_em_aberto": true
         }
       ]
     },
@@ -8145,7 +9842,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 0.0,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-06-09",
       "ultima_movimentacao": "2026-06-09",
+      "dias_aberto": 161,
+      "dias_sem_mov": 161,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-161",
@@ -8181,7 +9884,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 0.0,
-          "status": "Orçamento Enviado Claro"
+          "status": "Orçamento Enviado Claro",
+          "dt_inicio": "2026-06-09",
+          "ultima_movimentacao": "2026-06-09",
+          "dias_aberto": 161,
+          "dias_sem_mov": 161,
+          "faixa_aging": "91 a 180 dias",
+          "pendencia": "Claro: Aprovação Orçamento",
+          "is_em_aberto": true
         }
       ]
     },
@@ -8205,7 +9915,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 5791.97,
       "saldo": 0.0,
       "pct_executado": 100.0,
+      "dt_inicio": "2026-06-22",
       "ultima_movimentacao": "2026-06-25",
+      "dias_aberto": 148,
+      "dias_sem_mov": 145,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-162",
@@ -8241,7 +9957,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "Finalizado",
           "v_medido": 5791.97,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-06-22",
+          "ultima_movimentacao": "2026-06-25",
+          "dias_aberto": 148,
+          "dias_sem_mov": 145,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -8265,7 +9988,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 10959.06,
       "saldo": 0.0,
       "pct_executado": 100.0,
+      "dt_inicio": "2026-06-22",
       "ultima_movimentacao": "2026-06-25",
+      "dias_aberto": 148,
+      "dias_sem_mov": 145,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-163",
@@ -8301,7 +10030,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "Finalizado",
           "v_medido": 10959.06,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-06-22",
+          "ultima_movimentacao": "2026-06-25",
+          "dias_aberto": 148,
+          "dias_sem_mov": 145,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -8327,7 +10063,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 156998.92,
       "saldo": 30853.68,
       "pct_executado": 83.6,
+      "dt_inicio": "2026-06-24",
       "ultima_movimentacao": "2026-10-13",
+      "dias_aberto": 146,
+      "dias_sem_mov": 35,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-164",
@@ -8363,7 +10105,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 87998.92,
           "saldo": 23341.85,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-06-24",
+          "ultima_movimentacao": "2026-10-13",
+          "dias_aberto": 146,
+          "dias_sem_mov": 35,
+          "faixa_aging": "91 a 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-165",
@@ -8399,7 +10148,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 38900.0,
           "saldo": 3390.33,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-06-24",
+          "ultima_movimentacao": "2026-10-13",
+          "dias_aberto": 146,
+          "dias_sem_mov": 35,
+          "faixa_aging": "91 a 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         },
         {
           "id": "OS-166",
@@ -8435,7 +10191,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 30100.0,
           "saldo": 4121.5,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-06-24",
+          "ultima_movimentacao": "2026-10-13",
+          "dias_aberto": 146,
+          "dias_sem_mov": 35,
+          "faixa_aging": "91 a 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -8459,7 +10222,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 0.0,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-06-25",
       "ultima_movimentacao": "2026-06-25",
+      "dias_aberto": 145,
+      "dias_sem_mov": 145,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-167",
@@ -8495,7 +10264,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 0.0,
-          "status": "Orçamento Enviado Claro"
+          "status": "Orçamento Enviado Claro",
+          "dt_inicio": "2026-06-25",
+          "ultima_movimentacao": "2026-06-25",
+          "dias_aberto": 145,
+          "dias_sem_mov": 145,
+          "faixa_aging": "91 a 180 dias",
+          "pendencia": "Claro: Aprovação Orçamento",
+          "is_em_aberto": true
         }
       ]
     },
@@ -8519,7 +10295,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 2917.81,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-07-01",
       "ultima_movimentacao": "2026-07-01",
+      "dias_aberto": 139,
+      "dias_sem_mov": 139,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-168",
@@ -8555,7 +10337,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 2917.81,
-          "status": "Orçamento Enviado Claro"
+          "status": "Orçamento Enviado Claro",
+          "dt_inicio": "2026-07-01",
+          "ultima_movimentacao": "2026-07-01",
+          "dias_aberto": 139,
+          "dias_sem_mov": 139,
+          "faixa_aging": "91 a 180 dias",
+          "pendencia": "Claro: Aprovação Orçamento",
+          "is_em_aberto": true
         }
       ]
     },
@@ -8579,7 +10368,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 13872.53,
       "saldo": 6379.05,
       "pct_executado": 68.5,
+      "dt_inicio": "2026-05-15",
       "ultima_movimentacao": "2026-08-20",
+      "dias_aberto": 186,
+      "dias_sem_mov": 89,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-169",
@@ -8615,7 +10410,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 13872.53,
           "saldo": 6379.05,
-          "status": "Parcial 1 Aprovada"
+          "status": "Parcial 1 Aprovada",
+          "dt_inicio": "2026-05-15",
+          "ultima_movimentacao": "2026-08-20",
+          "dias_aberto": 186,
+          "dias_sem_mov": 89,
+          "faixa_aging": "Mais de 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     },
@@ -8639,7 +10441,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 5015.4,
       "saldo": 0.0,
       "pct_executado": 100.0,
+      "dt_inicio": "2026-07-28",
       "ultima_movimentacao": "2026-07-28",
+      "dias_aberto": 112,
+      "dias_sem_mov": 112,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-170",
@@ -8675,7 +10483,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 5015.4,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-07-28",
+          "ultima_movimentacao": "2026-07-28",
+          "dias_aberto": 112,
+          "dias_sem_mov": 112,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -8699,7 +10514,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 88556.6,
       "saldo": 1711.5,
       "pct_executado": 98.1,
+      "dt_inicio": "2026-08-11",
       "ultima_movimentacao": "2026-10-13",
+      "dias_aberto": 98,
+      "dias_sem_mov": 35,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-171",
@@ -8735,7 +10556,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 88556.6,
           "saldo": 1711.5,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-08-11",
+          "ultima_movimentacao": "2026-10-13",
+          "dias_aberto": 98,
+          "dias_sem_mov": 35,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -8759,7 +10587,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 2676.47,
       "saldo": 0.0,
       "pct_executado": 100.0,
+      "dt_inicio": "2026-08-14",
       "ultima_movimentacao": "2026-08-14",
+      "dias_aberto": 95,
+      "dias_sem_mov": 95,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-172",
@@ -8795,7 +10629,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 2676.47,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-08-14",
+          "ultima_movimentacao": "2026-08-14",
+          "dias_aberto": 95,
+          "dias_sem_mov": 95,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -8819,7 +10660,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 18509.36,
       "saldo": 0.0,
       "pct_executado": 100.0,
+      "dt_inicio": "2026-08-17",
       "ultima_movimentacao": "2026-08-20",
+      "dias_aberto": 92,
+      "dias_sem_mov": 89,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-173",
@@ -8855,7 +10702,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 18509.36,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-08-17",
+          "ultima_movimentacao": "2026-08-20",
+          "dias_aberto": 92,
+          "dias_sem_mov": 89,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -8879,7 +10733,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 0.0,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-08-28",
       "ultima_movimentacao": "2026-08-28",
+      "dias_aberto": 81,
+      "dias_sem_mov": 81,
+      "faixa_aging": "31 a 90 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-174",
@@ -8915,7 +10775,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 0.0,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "2026-08-28",
+          "ultima_movimentacao": "2026-08-28",
+          "dias_aberto": 81,
+          "dias_sem_mov": 81,
+          "faixa_aging": "31 a 90 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         }
       ]
     },
@@ -8939,7 +10806,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 0.0,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-08-31",
       "ultima_movimentacao": "2026-08-31",
+      "dias_aberto": 78,
+      "dias_sem_mov": 78,
+      "faixa_aging": "31 a 90 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-175",
@@ -8975,7 +10848,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 0.0,
-          "status": "Orçamento Enviado Claro"
+          "status": "Orçamento Enviado Claro",
+          "dt_inicio": "2026-08-31",
+          "ultima_movimentacao": "2026-08-31",
+          "dias_aberto": 78,
+          "dias_sem_mov": 78,
+          "faixa_aging": "31 a 90 dias",
+          "pendencia": "Claro: Aprovação Orçamento",
+          "is_em_aberto": true
         }
       ]
     },
@@ -8999,7 +10879,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 113115.46,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-09-08",
       "ultima_movimentacao": "2026-09-08",
+      "dias_aberto": 70,
+      "dias_sem_mov": 70,
+      "faixa_aging": "31 a 90 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-176",
@@ -9035,7 +10921,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 113115.46,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "2026-09-08",
+          "ultima_movimentacao": "2026-09-08",
+          "dias_aberto": 70,
+          "dias_sem_mov": 70,
+          "faixa_aging": "31 a 90 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         }
       ]
     },
@@ -9059,7 +10952,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 4468.28,
       "saldo": 0.0,
       "pct_executado": 100.0,
+      "dt_inicio": "2026-09-14",
       "ultima_movimentacao": "2026-09-14",
+      "dias_aberto": 64,
+      "dias_sem_mov": 64,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-177",
@@ -9095,7 +10994,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 4468.28,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-09-14",
+          "ultima_movimentacao": "2026-09-14",
+          "dias_aberto": 64,
+          "dias_sem_mov": 64,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -9122,7 +11028,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 0.0,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-07-30",
       "ultima_movimentacao": "2026-07-30",
+      "dias_aberto": 110,
+      "dias_sem_mov": 110,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-178",
@@ -9158,7 +11070,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 0.0,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "2026-07-30",
+          "ultima_movimentacao": "2026-07-30",
+          "dias_aberto": 110,
+          "dias_sem_mov": 110,
+          "faixa_aging": "91 a 180 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         },
         {
           "id": "OS-179",
@@ -9194,7 +11113,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 0.0,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "2026-07-30",
+          "ultima_movimentacao": "2026-07-30",
+          "dias_aberto": 110,
+          "dias_sem_mov": 110,
+          "faixa_aging": "91 a 180 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         },
         {
           "id": "OS-180",
@@ -9230,7 +11156,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 0.0,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "2026-07-30",
+          "ultima_movimentacao": "2026-07-30",
+          "dias_aberto": 110,
+          "dias_sem_mov": 110,
+          "faixa_aging": "91 a 180 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         },
         {
           "id": "OS-181",
@@ -9266,7 +11199,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 0.0,
-          "status": "Orçamento Aprovado"
+          "status": "Orçamento Aprovado",
+          "dt_inicio": "2026-07-30",
+          "ultima_movimentacao": "2026-07-30",
+          "dias_aberto": 110,
+          "dias_sem_mov": 110,
+          "faixa_aging": "91 a 180 dias",
+          "pendencia": "JLE: Iniciar 1ª Medição",
+          "is_em_aberto": true
         }
       ]
     },
@@ -9290,7 +11230,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 35572.99,
       "saldo": 802.44,
       "pct_executado": 97.8,
+      "dt_inicio": "2026-09-17",
       "ultima_movimentacao": "2026-09-17",
+      "dias_aberto": 61,
+      "dias_sem_mov": 61,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-182",
@@ -9326,7 +11272,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 35572.99,
           "saldo": 802.44,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-09-17",
+          "ultima_movimentacao": "2026-09-17",
+          "dias_aberto": 61,
+          "dias_sem_mov": 61,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -9350,7 +11303,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 6080.2,
       "saldo": 0.0,
       "pct_executado": 100.0,
+      "dt_inicio": "2026-10-13",
       "ultima_movimentacao": "2026-10-13",
+      "dias_aberto": 35,
+      "dias_sem_mov": 35,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-183",
@@ -9386,7 +11345,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 6080.2,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-10-13",
+          "ultima_movimentacao": "2026-10-13",
+          "dias_aberto": 35,
+          "dias_sem_mov": 35,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -9410,7 +11376,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 6070.4,
       "saldo": 0.0,
       "pct_executado": 100.0,
+      "dt_inicio": "2026-10-13",
       "ultima_movimentacao": "2026-10-13",
+      "dias_aberto": 35,
+      "dias_sem_mov": 35,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-184",
@@ -9446,7 +11418,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 6070.4,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-10-13",
+          "ultima_movimentacao": "2026-10-13",
+          "dias_aberto": 35,
+          "dias_sem_mov": 35,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -9470,7 +11449,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 17259.38,
       "saldo": 0.0,
       "pct_executado": 100.0,
+      "dt_inicio": "2026-10-13",
       "ultima_movimentacao": "2026-10-16",
+      "dias_aberto": 35,
+      "dias_sem_mov": 32,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-185",
@@ -9506,7 +11491,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 17259.38,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-10-13",
+          "ultima_movimentacao": "2026-10-16",
+          "dias_aberto": 35,
+          "dias_sem_mov": 32,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -9530,7 +11522,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 28777.62,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-10-15",
       "ultima_movimentacao": "2026-10-15",
+      "dias_aberto": 33,
+      "dias_sem_mov": 33,
+      "faixa_aging": "31 a 90 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-186",
@@ -9566,7 +11564,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 28777.62,
-          "status": "Orçamento Enviado Claro"
+          "status": "Orçamento Enviado Claro",
+          "dt_inicio": "2026-10-15",
+          "ultima_movimentacao": "2026-10-15",
+          "dias_aberto": 33,
+          "dias_sem_mov": 33,
+          "faixa_aging": "31 a 90 dias",
+          "pendencia": "Claro: Aprovação Orçamento",
+          "is_em_aberto": true
         }
       ]
     },
@@ -9590,7 +11595,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 42195.35,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-10-15",
       "ultima_movimentacao": "2026-10-15",
+      "dias_aberto": 33,
+      "dias_sem_mov": 33,
+      "faixa_aging": "31 a 90 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-187",
@@ -9626,7 +11637,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 42195.35,
-          "status": "Orçamento Enviado Claro"
+          "status": "Orçamento Enviado Claro",
+          "dt_inicio": "2026-10-15",
+          "ultima_movimentacao": "2026-10-15",
+          "dias_aberto": 33,
+          "dias_sem_mov": 33,
+          "faixa_aging": "31 a 90 dias",
+          "pendencia": "Claro: Aprovação Orçamento",
+          "is_em_aberto": true
         }
       ]
     },
@@ -9650,7 +11668,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 5857.1,
       "saldo": 0.0,
       "pct_executado": 100.0,
+      "dt_inicio": "2026-10-19",
       "ultima_movimentacao": "2026-10-19",
+      "dias_aberto": 29,
+      "dias_sem_mov": 29,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-188",
@@ -9686,7 +11710,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 5857.1,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-10-19",
+          "ultima_movimentacao": "2026-10-19",
+          "dias_aberto": 29,
+          "dias_sem_mov": 29,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -9710,7 +11741,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 5878.55,
       "saldo": 0.0,
       "pct_executado": 100.0,
+      "dt_inicio": "2026-10-19",
       "ultima_movimentacao": "2026-10-19",
+      "dias_aberto": 29,
+      "dias_sem_mov": 29,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-189",
@@ -9746,7 +11783,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 5878.55,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-10-19",
+          "ultima_movimentacao": "2026-10-19",
+          "dias_aberto": 29,
+          "dias_sem_mov": 29,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -9770,7 +11814,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 5928.6,
       "saldo": 0.0,
       "pct_executado": 100.0,
+      "dt_inicio": "2026-10-19",
       "ultima_movimentacao": "2026-10-19",
+      "dias_aberto": 29,
+      "dias_sem_mov": 29,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-190",
@@ -9806,7 +11856,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 5928.6,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-10-19",
+          "ultima_movimentacao": "2026-10-19",
+          "dias_aberto": 29,
+          "dias_sem_mov": 29,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -9830,7 +11887,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 64864.69,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-10-19",
       "ultima_movimentacao": "2026-10-19",
+      "dias_aberto": 29,
+      "dias_sem_mov": 29,
+      "faixa_aging": "Até 30 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-191",
@@ -9866,7 +11929,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 64864.69,
-          "status": "Orçamento Enviado Claro"
+          "status": "Orçamento Enviado Claro",
+          "dt_inicio": "2026-10-19",
+          "ultima_movimentacao": "2026-10-19",
+          "dias_aberto": 29,
+          "dias_sem_mov": 29,
+          "faixa_aging": "Até 30 dias",
+          "pendencia": "Claro: Aprovação Orçamento",
+          "is_em_aberto": true
         }
       ]
     },
@@ -9890,7 +11960,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 5948.1,
       "saldo": 0.0,
       "pct_executado": 100.0,
+      "dt_inicio": "2026-10-19",
       "ultima_movimentacao": "2026-10-19",
+      "dias_aberto": 29,
+      "dias_sem_mov": 29,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false,
       "oss": [
         {
           "id": "OS-192",
@@ -9926,7 +12002,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": "FINALIZADO",
           "v_medido": 5948.1,
           "saldo": 0.0,
-          "status": "Finalizado"
+          "status": "Finalizado",
+          "dt_inicio": "2026-10-19",
+          "ultima_movimentacao": "2026-10-19",
+          "dias_aberto": 29,
+          "dias_sem_mov": 29,
+          "faixa_aging": "Concluída",
+          "pendencia": "Concluída",
+          "is_em_aberto": false
         }
       ]
     },
@@ -9950,7 +12033,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 20710.01,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-10-22",
       "ultima_movimentacao": "2026-10-22",
+      "dias_aberto": 26,
+      "dias_sem_mov": 26,
+      "faixa_aging": "Até 30 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-193",
@@ -9986,7 +12075,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 20710.01,
-          "status": "Orçamento Enviado Claro"
+          "status": "Orçamento Enviado Claro",
+          "dt_inicio": "2026-10-22",
+          "ultima_movimentacao": "2026-10-22",
+          "dias_aberto": 26,
+          "dias_sem_mov": 26,
+          "faixa_aging": "Até 30 dias",
+          "pendencia": "Claro: Aprovação Orçamento",
+          "is_em_aberto": true
         }
       ]
     },
@@ -10010,7 +12106,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 22758.62,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-11-04",
       "ultima_movimentacao": "2026-11-04",
+      "dias_aberto": 13,
+      "dias_sem_mov": 13,
+      "faixa_aging": "Até 30 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-194",
@@ -10046,7 +12148,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 22758.62,
-          "status": "Orçamento Enviado Claro"
+          "status": "Orçamento Enviado Claro",
+          "dt_inicio": "2026-11-04",
+          "ultima_movimentacao": "2026-11-04",
+          "dias_aberto": 13,
+          "dias_sem_mov": 13,
+          "faixa_aging": "Até 30 dias",
+          "pendencia": "Claro: Aprovação Orçamento",
+          "is_em_aberto": true
         }
       ]
     },
@@ -10070,7 +12179,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 0.0,
       "saldo": 10886.51,
       "pct_executado": 0.0,
+      "dt_inicio": "2026-11-04",
       "ultima_movimentacao": "2026-11-04",
+      "dias_aberto": 13,
+      "dias_sem_mov": 13,
+      "faixa_aging": "Até 30 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-195",
@@ -10106,7 +12221,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 0.0,
           "saldo": 10886.51,
-          "status": "Orçamento Enviado Claro"
+          "status": "Orçamento Enviado Claro",
+          "dt_inicio": "2026-11-04",
+          "ultima_movimentacao": "2026-11-04",
+          "dias_aberto": 13,
+          "dias_sem_mov": 13,
+          "faixa_aging": "Até 30 dias",
+          "pendencia": "Claro: Aprovação Orçamento",
+          "is_em_aberto": true
         }
       ]
     },
@@ -10130,7 +12252,13 @@ window.ENGENHARIA_DATA = {
       "v_medido": 52461.45,
       "saldo": 14255.83,
       "pct_executado": 78.6,
+      "dt_inicio": "2026-06-22",
       "ultima_movimentacao": "2026-11-16",
+      "dias_aberto": 148,
+      "dias_sem_mov": 1,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "Em Execução / Acompanhamento",
+      "is_em_aberto": true,
       "oss": [
         {
           "id": "OS-196",
@@ -10166,7 +12294,14 @@ window.ENGENHARIA_DATA = {
           "st_wf": null,
           "v_medido": 52461.45,
           "saldo": 14255.83,
-          "status": "Parcial 1 Enviada"
+          "status": "Parcial 1 Enviada",
+          "dt_inicio": "2026-06-22",
+          "ultima_movimentacao": "2026-11-16",
+          "dias_aberto": 148,
+          "dias_sem_mov": 1,
+          "faixa_aging": "91 a 180 dias",
+          "pendencia": "JLE: Próxima Parcial / Final",
+          "is_em_aberto": true
         }
       ]
     }
@@ -10206,7 +12341,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 59892.82,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2025-11-24",
+      "ultima_movimentacao": "2026-08-20",
+      "dias_aberto": 358,
+      "dias_sem_mov": 89,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-4",
@@ -10242,7 +12384,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 47300.53,
       "saldo": 12838.63,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2025-12-15",
+      "ultima_movimentacao": "2026-05-26",
+      "dias_aberto": 337,
+      "dias_sem_mov": 175,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-5",
@@ -10278,7 +12427,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 47300.53,
       "saldo": 12838.63,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2025-12-15",
+      "ultima_movimentacao": "2026-05-26",
+      "dias_aberto": 337,
+      "dias_sem_mov": 175,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-6",
@@ -10314,7 +12470,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 47300.53,
       "saldo": 12838.63,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2025-12-15",
+      "ultima_movimentacao": "2026-05-25",
+      "dias_aberto": 337,
+      "dias_sem_mov": 176,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-7",
@@ -10350,7 +12513,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 47300.53,
       "saldo": 12838.63,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2025-12-15",
+      "ultima_movimentacao": "2026-05-27",
+      "dias_aberto": 337,
+      "dias_sem_mov": 174,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-8",
@@ -10386,7 +12556,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 60450.23,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2025-11-28",
+      "ultima_movimentacao": "2026-09-18",
+      "dias_aberto": 354,
+      "dias_sem_mov": 60,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-9",
@@ -10422,7 +12599,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 62312.54,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2025-11-28",
+      "ultima_movimentacao": "2026-05-26",
+      "dias_aberto": 354,
+      "dias_sem_mov": 175,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-10",
@@ -10458,7 +12642,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 1772.05,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "2025-11-27",
+      "ultima_movimentacao": "2026-01-16",
+      "dias_aberto": 355,
+      "dias_sem_mov": 305,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-11",
@@ -10494,7 +12685,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 42046.6,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "2025-12-18",
+      "ultima_movimentacao": "2026-12-23",
+      "dias_aberto": 334,
+      "dias_sem_mov": 0,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-12",
@@ -10530,7 +12728,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 42271.33,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "2025-12-18",
+      "ultima_movimentacao": "2026-12-23",
+      "dias_aberto": 334,
+      "dias_sem_mov": 0,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-13",
@@ -10566,7 +12771,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 42271.33,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "2025-12-18",
+      "ultima_movimentacao": "2026-12-23",
+      "dias_aberto": 334,
+      "dias_sem_mov": 0,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-14",
@@ -10602,7 +12814,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 45697.28,
       "saldo": 75600.95,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-02-05",
+      "ultima_movimentacao": "ok",
+      "dias_aberto": 285,
+      "dias_sem_mov": 0,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-15",
@@ -10638,7 +12857,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 45697.28,
       "saldo": 75600.95,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-02-05",
+      "ultima_movimentacao": "ok",
+      "dias_aberto": 285,
+      "dias_sem_mov": 0,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-16",
@@ -10674,7 +12900,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 45697.28,
       "saldo": 75600.95,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-02-05",
+      "ultima_movimentacao": "ok",
+      "dias_aberto": 285,
+      "dias_sem_mov": 0,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-17",
@@ -10710,7 +12943,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 45697.28,
       "saldo": 75600.95,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-02-05",
+      "ultima_movimentacao": "ok",
+      "dias_aberto": 285,
+      "dias_sem_mov": 0,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-18",
@@ -10746,7 +12986,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 45697.28,
       "saldo": 75600.95,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-02-05",
+      "ultima_movimentacao": "ok",
+      "dias_aberto": 285,
+      "dias_sem_mov": 0,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-19",
@@ -10782,7 +13029,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 64830.68,
       "saldo": 20919.14,
-      "status": "Parcial 2 Aprovada"
+      "status": "Parcial 2 Aprovada",
+      "dt_inicio": "2025-12-22",
+      "ultima_movimentacao": "2026-09-16",
+      "dias_aberto": 330,
+      "dias_sem_mov": 62,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-20",
@@ -10818,7 +13072,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 64830.68,
       "saldo": 20919.14,
-      "status": "Parcial 2 Aprovada"
+      "status": "Parcial 2 Aprovada",
+      "dt_inicio": "2025-12-22",
+      "ultima_movimentacao": "2026-09-16",
+      "dias_aberto": 330,
+      "dias_sem_mov": 62,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-21",
@@ -10854,7 +13115,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 230338.27,
       "saldo": 461.09,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2025-12-22",
+      "ultima_movimentacao": "2026-05-27",
+      "dias_aberto": 330,
+      "dias_sem_mov": 174,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-22",
@@ -10890,7 +13158,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 24182.41,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "2026-01-12",
+      "ultima_movimentacao": "2026-02-03",
+      "dias_aberto": 309,
+      "dias_sem_mov": 287,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-23",
@@ -10926,7 +13201,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 3433.29,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": null,
+      "ultima_movimentacao": null,
+      "dias_aberto": 0,
+      "dias_sem_mov": 0,
+      "faixa_aging": "Até 30 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-24",
@@ -10962,7 +13244,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 51546.73,
       "saldo": 917.51,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2025-12-09",
+      "ultima_movimentacao": "2026-02-18",
+      "dias_aberto": 343,
+      "dias_sem_mov": 272,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-25",
@@ -10998,7 +13287,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 51546.76,
       "saldo": 917.48,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2025-12-09",
+      "ultima_movimentacao": "2026-02-18",
+      "dias_aberto": 343,
+      "dias_sem_mov": 272,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-26",
@@ -11034,7 +13330,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 29601.17,
       "saldo": 717.49,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2025-12-18",
+      "ultima_movimentacao": "2026-04-28",
+      "dias_aberto": 334,
+      "dias_sem_mov": 203,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-27",
@@ -11070,7 +13373,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 21511.22,
       "saldo": 1277.07,
-      "status": "Parcial 1 Enviada"
+      "status": "Parcial 1 Enviada",
+      "dt_inicio": "2025-12-29",
+      "ultima_movimentacao": "2026-07-27",
+      "dias_aberto": 323,
+      "dias_sem_mov": 113,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-28",
@@ -11106,7 +13416,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 21511.22,
       "saldo": 1365.56,
-      "status": "Parcial 1 Enviada"
+      "status": "Parcial 1 Enviada",
+      "dt_inicio": "2025-12-29",
+      "ultima_movimentacao": "2026-07-27",
+      "dias_aberto": 323,
+      "dias_sem_mov": 113,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-29",
@@ -11142,7 +13459,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 16910.39,
       "saldo": 116.33,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2025-12-19",
+      "ultima_movimentacao": "2026-09-16",
+      "dias_aberto": 333,
+      "dias_sem_mov": 62,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-30",
@@ -11178,7 +13502,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 12751.67,
       "saldo": 80277.77,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-01-09",
+      "ultima_movimentacao": "2026-08-21",
+      "dias_aberto": 312,
+      "dias_sem_mov": 88,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-31",
@@ -11214,7 +13545,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 12751.67,
       "saldo": 80277.77,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-01-09",
+      "ultima_movimentacao": "2026-08-21",
+      "dias_aberto": 312,
+      "dias_sem_mov": 88,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-32",
@@ -11250,7 +13588,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 110283.88,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "2026-01-09",
+      "ultima_movimentacao": "2026-02-03",
+      "dias_aberto": 312,
+      "dias_sem_mov": 287,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-33",
@@ -11286,7 +13631,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 35315.55,
       "saldo": 19468.13,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-01-05",
+      "ultima_movimentacao": "2026-06-23",
+      "dias_aberto": 316,
+      "dias_sem_mov": 147,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-34",
@@ -11322,7 +13674,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 91103.9,
       "saldo": 11560.48,
-      "status": "Parcial 2 Enviada"
+      "status": "Parcial 2 Enviada",
+      "dt_inicio": "2025-12-29",
+      "ultima_movimentacao": "2026-07-28",
+      "dias_aberto": 323,
+      "dias_sem_mov": 112,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-35",
@@ -11358,7 +13717,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 21180.1,
       "saldo": 3020.11,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-01-09",
+      "ultima_movimentacao": "2026-02-25",
+      "dias_aberto": 312,
+      "dias_sem_mov": 265,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-36",
@@ -11394,7 +13760,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 16846.5,
       "saldo": 0.0,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-01-12",
+      "ultima_movimentacao": "2026-09-21",
+      "dias_aberto": 309,
+      "dias_sem_mov": 57,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-37",
@@ -11430,7 +13803,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 15244.21,
       "saldo": 818.75,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-01-12",
+      "ultima_movimentacao": "2026-05-21",
+      "dias_aberto": 309,
+      "dias_sem_mov": 180,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-38",
@@ -11466,7 +13846,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 101941.66,
       "saldo": 434.92,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2025-12-29",
+      "ultima_movimentacao": "2026-04-24",
+      "dias_aberto": 323,
+      "dias_sem_mov": 207,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-39",
@@ -11502,7 +13889,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 9474.12,
       "saldo": 7542.94,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2025-12-29",
+      "ultima_movimentacao": "2026-06-22",
+      "dias_aberto": 323,
+      "dias_sem_mov": 148,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-40",
@@ -11538,7 +13932,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 5080.32,
       "saldo": 76495.15,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-01-12",
+      "ultima_movimentacao": "enviado",
+      "dias_aberto": 309,
+      "dias_sem_mov": 0,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-41",
@@ -11574,7 +13975,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 5080.32,
       "saldo": 76495.15,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-01-12",
+      "ultima_movimentacao": "enviado",
+      "dias_aberto": 309,
+      "dias_sem_mov": 0,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-42",
@@ -11610,7 +14018,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 5080.32,
       "saldo": 76495.15,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-01-12",
+      "ultima_movimentacao": "enviado",
+      "dias_aberto": 309,
+      "dias_sem_mov": 0,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-43",
@@ -11646,7 +14061,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 79978.07,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-01-05",
+      "ultima_movimentacao": "2026-04-28",
+      "dias_aberto": 316,
+      "dias_sem_mov": 203,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-44",
@@ -11682,7 +14104,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 241942.42,
       "saldo": 1271.69,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-04-23",
+      "ultima_movimentacao": "2026-10-16",
+      "dias_aberto": 208,
+      "dias_sem_mov": 32,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-45",
@@ -11718,7 +14147,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 241942.42,
       "saldo": 1271.69,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-04-23",
+      "ultima_movimentacao": "2026-10-16",
+      "dias_aberto": 208,
+      "dias_sem_mov": 32,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-46",
@@ -11754,7 +14190,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 58683.51,
       "saldo": 0.0,
-      "status": "Parcial 2 Aprovada"
+      "status": "Parcial 2 Aprovada",
+      "dt_inicio": "2026-01-21",
+      "ultima_movimentacao": "2026-08-21",
+      "dias_aberto": 300,
+      "dias_sem_mov": 88,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-47",
@@ -11790,7 +14233,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 58683.51,
       "saldo": 0.0,
-      "status": "Parcial 2 Aprovada"
+      "status": "Parcial 2 Aprovada",
+      "dt_inicio": "2026-01-21",
+      "ultima_movimentacao": "2026-08-21",
+      "dias_aberto": 300,
+      "dias_sem_mov": 88,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-48",
@@ -11826,7 +14276,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 8569.6,
       "saldo": 102197.62,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-01-21",
+      "ultima_movimentacao": "2026-05-22",
+      "dias_aberto": 300,
+      "dias_sem_mov": 179,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-49",
@@ -11862,7 +14319,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 745.25,
       "saldo": 3549.61,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-01-26",
+      "ultima_movimentacao": "2026-08-18",
+      "dias_aberto": 295,
+      "dias_sem_mov": 91,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-50",
@@ -11898,7 +14362,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 3609.17,
       "saldo": 70931.56,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-01-26",
+      "ultima_movimentacao": "2026-08-21",
+      "dias_aberto": 295,
+      "dias_sem_mov": 88,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-51",
@@ -11934,7 +14405,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 3609.17,
       "saldo": 70931.56,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-01-26",
+      "ultima_movimentacao": "2026-08-21",
+      "dias_aberto": 295,
+      "dias_sem_mov": 88,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-52",
@@ -11970,7 +14448,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 13874.53,
       "saldo": 85278.26,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-01-30",
+      "ultima_movimentacao": "2026-08-19",
+      "dias_aberto": 291,
+      "dias_sem_mov": 90,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-53",
@@ -12006,7 +14491,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 13874.53,
       "saldo": 85278.26,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-01-30",
+      "ultima_movimentacao": "2026-08-19",
+      "dias_aberto": 291,
+      "dias_sem_mov": 90,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-54",
@@ -12042,7 +14534,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 11301.35,
       "saldo": 5049.74,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-02-03",
+      "ultima_movimentacao": "2026-06-23",
+      "dias_aberto": 287,
+      "dias_sem_mov": 147,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-55",
@@ -12078,7 +14577,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 0.0,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "2026-10-15",
+      "ultima_movimentacao": "2026-10-15",
+      "dias_aberto": 33,
+      "dias_sem_mov": 33,
+      "faixa_aging": "31 a 90 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-56",
@@ -12114,7 +14620,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 13558.49,
       "saldo": 5158.44,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-02-03",
+      "ultima_movimentacao": "2026-06-23",
+      "dias_aberto": 287,
+      "dias_sem_mov": 147,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-57",
@@ -12150,7 +14663,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 37803.08,
       "saldo": 9834.0,
-      "status": "Parcial 1 Enviada"
+      "status": "Parcial 1 Enviada",
+      "dt_inicio": "2026-01-30",
+      "ultima_movimentacao": "2026-11-17",
+      "dias_aberto": 291,
+      "dias_sem_mov": 0,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-58",
@@ -12186,7 +14706,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 55240.9,
       "saldo": 9045.32,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-02-11",
+      "ultima_movimentacao": "2026-09-21",
+      "dias_aberto": 279,
+      "dias_sem_mov": 57,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-59",
@@ -12222,7 +14749,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 36845.47,
       "saldo": 0.0,
-      "status": "Medição Final Enviada"
+      "status": "Medição Final Enviada",
+      "dt_inicio": "2026-02-11",
+      "ultima_movimentacao": "2026-08-20",
+      "dias_aberto": 279,
+      "dias_sem_mov": 89,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Claro: Aprovação Medição Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-60",
@@ -12258,7 +14792,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 73262.5,
       "saldo": 6276.66,
-      "status": "Parcial 1 Enviada"
+      "status": "Parcial 1 Enviada",
+      "dt_inicio": "2026-02-16",
+      "ultima_movimentacao": "2026-07-27",
+      "dias_aberto": 274,
+      "dias_sem_mov": 113,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-61",
@@ -12294,7 +14835,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 73262.5,
       "saldo": 6276.66,
-      "status": "Parcial 1 Enviada"
+      "status": "Parcial 1 Enviada",
+      "dt_inicio": "2026-02-16",
+      "ultima_movimentacao": "2026-07-27",
+      "dias_aberto": 274,
+      "dias_sem_mov": 113,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-62",
@@ -12330,7 +14878,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 73262.5,
       "saldo": 6276.66,
-      "status": "Parcial 1 Enviada"
+      "status": "Parcial 1 Enviada",
+      "dt_inicio": "2026-02-16",
+      "ultima_movimentacao": "2026-07-27",
+      "dias_aberto": 274,
+      "dias_sem_mov": 113,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-63",
@@ -12366,7 +14921,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 8811.06,
       "saldo": 9632.69,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-03-06",
+      "ultima_movimentacao": "2026-06-23",
+      "dias_aberto": 256,
+      "dias_sem_mov": 147,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-64",
@@ -12402,7 +14964,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 22069.42,
       "saldo": 3127.19,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-02-12",
+      "ultima_movimentacao": "2026-09-17",
+      "dias_aberto": 278,
+      "dias_sem_mov": 61,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-65",
@@ -12438,7 +15007,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 30322.37,
       "saldo": 10687.67,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-02-12",
+      "ultima_movimentacao": "2026-09-21",
+      "dias_aberto": 278,
+      "dias_sem_mov": 57,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-66",
@@ -12474,7 +15050,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 6377.57,
       "saldo": 19192.84,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-08-04",
+      "ultima_movimentacao": "2026-08-21",
+      "dias_aberto": 105,
+      "dias_sem_mov": 88,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-67",
@@ -12510,7 +15093,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 0.0,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "2026-02-18",
+      "ultima_movimentacao": "2026-02-19",
+      "dias_aberto": 272,
+      "dias_sem_mov": 271,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-68",
@@ -12546,7 +15136,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 0.0,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "2026-02-18",
+      "ultima_movimentacao": "2026-02-18",
+      "dias_aberto": 272,
+      "dias_sem_mov": 272,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-69",
@@ -12582,7 +15179,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 73246.71,
       "saldo": 18787.63,
-      "status": "Parcial 2 Aprovada"
+      "status": "Parcial 2 Aprovada",
+      "dt_inicio": "2026-02-27",
+      "ultima_movimentacao": "2026-10-13",
+      "dias_aberto": 263,
+      "dias_sem_mov": 35,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-70",
@@ -12618,7 +15222,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 73246.71,
       "saldo": 18787.63,
-      "status": "Parcial 2 Aprovada"
+      "status": "Parcial 2 Aprovada",
+      "dt_inicio": "2026-02-27",
+      "ultima_movimentacao": "2026-10-13",
+      "dias_aberto": 263,
+      "dias_sem_mov": 35,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-71",
@@ -12654,7 +15265,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 34967.39,
       "saldo": 29298.85,
-      "status": "Parcial 1 Enviada"
+      "status": "Parcial 1 Enviada",
+      "dt_inicio": "2026-02-27",
+      "ultima_movimentacao": "2026-07-27",
+      "dias_aberto": 263,
+      "dias_sem_mov": 113,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-72",
@@ -12690,7 +15308,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 2757.31,
       "saldo": 3409.64,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-03-06",
+      "ultima_movimentacao": "2026-06-22",
+      "dias_aberto": 256,
+      "dias_sem_mov": 148,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-73",
@@ -12726,7 +15351,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 65370.33,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-03-06",
+      "ultima_movimentacao": "2026-09-16",
+      "dias_aberto": 256,
+      "dias_sem_mov": 62,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-74",
@@ -12762,7 +15394,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 16743.2,
       "saldo": 2184.23,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-02-19",
+      "ultima_movimentacao": "2026-08-21",
+      "dias_aberto": 271,
+      "dias_sem_mov": 88,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-75",
@@ -12798,7 +15437,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 16743.2,
       "saldo": 2184.23,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-02-19",
+      "ultima_movimentacao": "2026-08-21",
+      "dias_aberto": 271,
+      "dias_sem_mov": 88,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-76",
@@ -12834,7 +15480,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 16743.2,
       "saldo": 2184.23,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-02-19",
+      "ultima_movimentacao": "2026-08-21",
+      "dias_aberto": 271,
+      "dias_sem_mov": 88,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-77",
@@ -12870,7 +15523,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 6575.91,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-03-06",
+      "ultima_movimentacao": "2026-08-24",
+      "dias_aberto": 256,
+      "dias_sem_mov": 85,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-78",
@@ -12906,7 +15566,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 4059.6,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-03-02",
+      "ultima_movimentacao": "2026-08-14",
+      "dias_aberto": 260,
+      "dias_sem_mov": 95,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-79",
@@ -12942,7 +15609,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 45885.43,
       "saldo": 29361.05,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-03-02",
+      "ultima_movimentacao": "2026-07-24",
+      "dias_aberto": 260,
+      "dias_sem_mov": 116,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-80",
@@ -12978,7 +15652,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 45885.43,
       "saldo": 29361.05,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-03-02",
+      "ultima_movimentacao": "2026-07-24",
+      "dias_aberto": 260,
+      "dias_sem_mov": 116,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-81",
@@ -13014,7 +15695,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "orç concluido",
       "v_medido": 95837.19,
       "saldo": 1730.38,
-      "status": "Medição Final Enviada"
+      "status": "Medição Final Enviada",
+      "dt_inicio": "2026-03-04",
+      "ultima_movimentacao": "2026-11-12",
+      "dias_aberto": 258,
+      "dias_sem_mov": 5,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "Claro: Aprovação Medição Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-82",
@@ -13050,7 +15738,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 21121.27,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "2026-03-09",
+      "ultima_movimentacao": "2026-05-04",
+      "dias_aberto": 253,
+      "dias_sem_mov": 197,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-83",
@@ -13086,7 +15781,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 21121.68,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "2026-03-09",
+      "ultima_movimentacao": "2026-05-04",
+      "dias_aberto": 253,
+      "dias_sem_mov": 197,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-84",
@@ -13122,7 +15824,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 21121.68,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "2026-03-09",
+      "ultima_movimentacao": "2026-05-04",
+      "dias_aberto": 253,
+      "dias_sem_mov": 197,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-85",
@@ -13158,7 +15867,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 21121.68,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "2026-03-09",
+      "ultima_movimentacao": "2026-05-04",
+      "dias_aberto": 253,
+      "dias_sem_mov": 197,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-86",
@@ -13194,7 +15910,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 21121.68,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "2026-03-09",
+      "ultima_movimentacao": "2026-05-04",
+      "dias_aberto": 253,
+      "dias_sem_mov": 197,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-87",
@@ -13230,7 +15953,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 9146.8,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "2026-03-09",
+      "ultima_movimentacao": "2026-05-04",
+      "dias_aberto": 253,
+      "dias_sem_mov": 197,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-88",
@@ -13266,7 +15996,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 14833.32,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-03-23",
+      "ultima_movimentacao": "2026-03-24",
+      "dias_aberto": 239,
+      "dias_sem_mov": 238,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-89",
@@ -13302,7 +16039,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 14833.32,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-03-23",
+      "ultima_movimentacao": "2026-03-24",
+      "dias_aberto": 239,
+      "dias_sem_mov": 238,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-90",
@@ -13338,7 +16082,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 14833.32,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-03-23",
+      "ultima_movimentacao": "2026-03-24",
+      "dias_aberto": 239,
+      "dias_sem_mov": 238,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-91",
@@ -13374,7 +16125,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 14833.32,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-03-23",
+      "ultima_movimentacao": "2026-03-24",
+      "dias_aberto": 239,
+      "dias_sem_mov": 238,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-92",
@@ -13410,7 +16168,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 10299.99,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-03-23",
+      "ultima_movimentacao": "2026-03-24",
+      "dias_aberto": 239,
+      "dias_sem_mov": 238,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-93",
@@ -13446,7 +16211,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 14833.32,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-03-23",
+      "ultima_movimentacao": "2026-03-24",
+      "dias_aberto": 239,
+      "dias_sem_mov": 238,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-94",
@@ -13482,7 +16254,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 14833.32,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-03-23",
+      "ultima_movimentacao": "2026-03-24",
+      "dias_aberto": 239,
+      "dias_sem_mov": 238,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-95",
@@ -13518,7 +16297,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 14833.32,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-03-23",
+      "ultima_movimentacao": "2026-03-24",
+      "dias_aberto": 239,
+      "dias_sem_mov": 238,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-96",
@@ -13554,7 +16340,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 14833.32,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-03-23",
+      "ultima_movimentacao": "2026-03-24",
+      "dias_aberto": 239,
+      "dias_sem_mov": 238,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-97",
@@ -13590,7 +16383,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 14833.32,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-03-23",
+      "ultima_movimentacao": "2026-03-24",
+      "dias_aberto": 239,
+      "dias_sem_mov": 238,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-98",
@@ -13626,7 +16426,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 14833.32,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-03-23",
+      "ultima_movimentacao": "2026-03-24",
+      "dias_aberto": 239,
+      "dias_sem_mov": 238,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-99",
@@ -13662,7 +16469,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 14833.32,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-03-23",
+      "ultima_movimentacao": "2026-03-24",
+      "dias_aberto": 239,
+      "dias_sem_mov": 238,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-100",
@@ -13698,7 +16512,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 89876.65,
       "saldo": 179799.13,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2025-03-11",
+      "ultima_movimentacao": "2026-03-25",
+      "dias_aberto": 616,
+      "dias_sem_mov": 237,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-101",
@@ -13734,7 +16555,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 121009.44,
       "saldo": 148666.34,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2025-03-11",
+      "ultima_movimentacao": "2026-06-22",
+      "dias_aberto": 616,
+      "dias_sem_mov": 148,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-102",
@@ -13770,7 +16598,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 89876.15,
       "saldo": 0.0,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-03-24",
+      "ultima_movimentacao": "2026-03-26",
+      "dias_aberto": 238,
+      "dias_sem_mov": 236,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-103",
@@ -13806,7 +16641,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 89876.15,
       "saldo": 0.0,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-03-24",
+      "ultima_movimentacao": "2026-03-26",
+      "dias_aberto": 238,
+      "dias_sem_mov": 236,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-104",
@@ -13842,7 +16684,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 44920.8,
       "saldo": 0.0,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-03-24",
+      "ultima_movimentacao": "2026-03-26",
+      "dias_aberto": 238,
+      "dias_sem_mov": 236,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-105",
@@ -13878,7 +16727,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 91103.9,
       "saldo": 11560.48,
-      "status": "Parcial 2 Enviada"
+      "status": "Parcial 2 Enviada",
+      "dt_inicio": "2025-12-29",
+      "ultima_movimentacao": "2026-07-28",
+      "dias_aberto": 323,
+      "dias_sem_mov": 112,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-106",
@@ -13914,7 +16770,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 36322.03,
       "saldo": 69206.13,
-      "status": "Parcial 2 Aprovada"
+      "status": "Parcial 2 Aprovada",
+      "dt_inicio": "2025-07-05",
+      "ultima_movimentacao": "2026-03-24",
+      "dias_aberto": 500,
+      "dias_sem_mov": 238,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-107",
@@ -13950,7 +16813,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 84292.55,
       "saldo": 21235.61,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2025-07-05",
+      "ultima_movimentacao": "2026-05-26",
+      "dias_aberto": 500,
+      "dias_sem_mov": 175,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-108",
@@ -13986,7 +16856,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 90132.12,
       "saldo": 15396.04,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2025-07-05",
+      "ultima_movimentacao": "2026-06-22",
+      "dias_aberto": 500,
+      "dias_sem_mov": 148,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-109",
@@ -14022,7 +16899,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 36322.03,
       "saldo": 69206.13,
-      "status": "Parcial 2 Aprovada"
+      "status": "Parcial 2 Aprovada",
+      "dt_inicio": "2025-07-05",
+      "ultima_movimentacao": "2026-03-24",
+      "dias_aberto": 500,
+      "dias_sem_mov": 238,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-110",
@@ -14058,7 +16942,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 36322.03,
       "saldo": 69206.13,
-      "status": "Parcial 2 Aprovada"
+      "status": "Parcial 2 Aprovada",
+      "dt_inicio": "2025-07-05",
+      "ultima_movimentacao": "2026-03-24",
+      "dias_aberto": 500,
+      "dias_sem_mov": 238,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-111",
@@ -14094,7 +16985,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 34732.03,
       "saldo": 117875.74,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2025-03-26",
+      "ultima_movimentacao": "2025-09-25",
+      "dias_aberto": 601,
+      "dias_sem_mov": 418,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-112",
@@ -14130,7 +17028,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 41292.98,
       "saldo": 111314.79,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2025-03-26",
+      "ultima_movimentacao": "2026-09-16",
+      "dias_aberto": 601,
+      "dias_sem_mov": 62,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-113",
@@ -14166,7 +17071,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 39877.8,
       "saldo": 112729.97,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2025-03-26",
+      "ultima_movimentacao": "2026-03-24",
+      "dias_aberto": 601,
+      "dias_sem_mov": 238,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-114",
@@ -14202,7 +17114,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 4414.04,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-03-20",
+      "ultima_movimentacao": "2026-03-24",
+      "dias_aberto": 242,
+      "dias_sem_mov": 238,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-115",
@@ -14238,7 +17157,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 103048.28,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2025-11-26",
+      "ultima_movimentacao": "2026-03-24",
+      "dias_aberto": 356,
+      "dias_sem_mov": 238,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-116",
@@ -14274,7 +17200,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 103048.28,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2025-11-26",
+      "ultima_movimentacao": "2026-03-24",
+      "dias_aberto": 356,
+      "dias_sem_mov": 238,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-117",
@@ -14310,7 +17243,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 47549.72,
       "saldo": 0.06,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2025-06-13",
+      "ultima_movimentacao": "2026-04-29",
+      "dias_aberto": 522,
+      "dias_sem_mov": 202,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-118",
@@ -14346,7 +17286,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 47549.78,
-      "status": "Parcial 1 Enviada"
+      "status": "Parcial 1 Enviada",
+      "dt_inicio": "2025-06-13",
+      "ultima_movimentacao": "2025-11-19",
+      "dias_aberto": 522,
+      "dias_sem_mov": 363,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-119",
@@ -14382,7 +17329,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 47549.78,
-      "status": "Parcial 1 Enviada"
+      "status": "Parcial 1 Enviada",
+      "dt_inicio": "2025-06-13",
+      "ultima_movimentacao": "2025-11-19",
+      "dias_aberto": 522,
+      "dias_sem_mov": 363,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-120",
@@ -14418,7 +17372,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 32217.7,
       "saldo": 15332.08,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2025-06-13",
+      "ultima_movimentacao": "2025-11-19",
+      "dias_aberto": 522,
+      "dias_sem_mov": 363,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-121",
@@ -14454,7 +17415,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 67731.74,
       "saldo": 24490.22,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2025-06-13",
+      "ultima_movimentacao": "2026-04-28",
+      "dias_aberto": 522,
+      "dias_sem_mov": 203,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-122",
@@ -14490,7 +17458,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 53071.53,
       "saldo": 936.77,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-04-24",
+      "ultima_movimentacao": "2026-06-23",
+      "dias_aberto": 207,
+      "dias_sem_mov": 147,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-123",
@@ -14526,7 +17501,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 53071.53,
       "saldo": 936.77,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-04-24",
+      "ultima_movimentacao": "2026-06-23",
+      "dias_aberto": 207,
+      "dias_sem_mov": 147,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-124",
@@ -14562,7 +17544,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 53071.53,
       "saldo": 936.77,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-04-24",
+      "ultima_movimentacao": "2026-06-23",
+      "dias_aberto": 207,
+      "dias_sem_mov": 147,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-125",
@@ -14598,7 +17587,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 80743.62,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "2026-03-20",
+      "ultima_movimentacao": "2026-05-04",
+      "dias_aberto": 242,
+      "dias_sem_mov": 197,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-126",
@@ -14634,7 +17630,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 32030.22,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "2026-03-20",
+      "ultima_movimentacao": "2026-05-20",
+      "dias_aberto": 242,
+      "dias_sem_mov": 181,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-127",
@@ -14670,7 +17673,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 20255.91,
       "saldo": 9014.09,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-03-20",
+      "ultima_movimentacao": "2026-08-20",
+      "dias_aberto": 242,
+      "dias_sem_mov": 89,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-128",
@@ -14706,7 +17716,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 91804.46,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-04-01",
+      "ultima_movimentacao": "2026-10-19",
+      "dias_aberto": 230,
+      "dias_sem_mov": 29,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-129",
@@ -14742,7 +17759,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 23327.45,
       "saldo": 36108.79,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-04-01",
+      "ultima_movimentacao": "2026-08-24",
+      "dias_aberto": 230,
+      "dias_sem_mov": 85,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-130",
@@ -14778,7 +17802,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 6778.64,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-04-06",
+      "ultima_movimentacao": "2026-05-27",
+      "dias_aberto": 225,
+      "dias_sem_mov": 174,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-131",
@@ -14814,7 +17845,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 6751.64,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-04-06",
+      "ultima_movimentacao": "2026-05-26",
+      "dias_aberto": 225,
+      "dias_sem_mov": 175,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-132",
@@ -14850,7 +17888,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 6804.55,
       "saldo": 630.81,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-04-06",
+      "ultima_movimentacao": "2026-08-19",
+      "dias_aberto": 225,
+      "dias_sem_mov": 90,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-133",
@@ -14886,7 +17931,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 6804.55,
       "saldo": 630.81,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-04-06",
+      "ultima_movimentacao": "2026-08-19",
+      "dias_aberto": 225,
+      "dias_sem_mov": 90,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-134",
@@ -14922,7 +17974,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 0.0,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "2026-04-22",
+      "ultima_movimentacao": "2026-05-07",
+      "dias_aberto": 209,
+      "dias_sem_mov": 194,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-135",
@@ -14958,7 +18017,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 99610.39,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "REFAZER",
+      "ultima_movimentacao": "REFAZER",
+      "dias_aberto": 0,
+      "dias_sem_mov": 0,
+      "faixa_aging": "Até 30 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-136",
@@ -14994,7 +18060,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 61673.73,
       "saldo": 4555.57,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-05-07",
+      "ultima_movimentacao": "2026-11-11",
+      "dias_aberto": 194,
+      "dias_sem_mov": 6,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-137",
@@ -15030,7 +18103,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 21362.56,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-08-21",
+      "ultima_movimentacao": "2026-08-21",
+      "dias_aberto": 88,
+      "dias_sem_mov": 88,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-138",
@@ -15066,7 +18146,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 21362.56,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-08-21",
+      "ultima_movimentacao": "2026-08-21",
+      "dias_aberto": 88,
+      "dias_sem_mov": 88,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-139",
@@ -15102,7 +18189,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 21362.56,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-08-21",
+      "ultima_movimentacao": "2026-08-21",
+      "dias_aberto": 88,
+      "dias_sem_mov": 88,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-140",
@@ -15138,7 +18232,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 60088.22,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "2026-05-05",
+      "ultima_movimentacao": "2026-09-02",
+      "dias_aberto": 196,
+      "dias_sem_mov": 76,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-141",
@@ -15174,7 +18275,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 60088.22,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "2026-09-02",
+      "ultima_movimentacao": "2026-09-02",
+      "dias_aberto": 76,
+      "dias_sem_mov": 76,
+      "faixa_aging": "31 a 90 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-142",
@@ -15210,7 +18318,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 60088.22,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "2026-09-02",
+      "ultima_movimentacao": "2026-09-02",
+      "dias_aberto": 76,
+      "dias_sem_mov": 76,
+      "faixa_aging": "31 a 90 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-143",
@@ -15246,7 +18361,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 60088.22,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "2026-09-02",
+      "ultima_movimentacao": "2026-09-02",
+      "dias_aberto": 76,
+      "dias_sem_mov": 76,
+      "faixa_aging": "31 a 90 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-144",
@@ -15282,7 +18404,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 27741.84,
       "saldo": 10911.78,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-05-20",
+      "ultima_movimentacao": "2026-09-17",
+      "dias_aberto": 181,
+      "dias_sem_mov": 61,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-145",
@@ -15318,7 +18447,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 97218.92,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "2026-05-20",
+      "ultima_movimentacao": "2026-05-20",
+      "dias_aberto": 181,
+      "dias_sem_mov": 181,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-146",
@@ -15354,7 +18490,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 97218.92,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "2026-05-20",
+      "ultima_movimentacao": "2026-05-20",
+      "dias_aberto": 181,
+      "dias_sem_mov": 181,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-147",
@@ -15390,7 +18533,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 39907.86,
       "saldo": 1273.05,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2025-09-10",
+      "ultima_movimentacao": "2026-05-26",
+      "dias_aberto": 433,
+      "dias_sem_mov": 175,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-148",
@@ -15426,7 +18576,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 2536.47,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-05-12",
+      "ultima_movimentacao": "2026-05-26",
+      "dias_aberto": 189,
+      "dias_sem_mov": 175,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-149",
@@ -15462,7 +18619,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 700914.74,
-      "status": "Orçamento Enviado Claro"
+      "status": "Orçamento Enviado Claro",
+      "dt_inicio": "2026-05-21",
+      "ultima_movimentacao": "2026-05-21",
+      "dias_aberto": 180,
+      "dias_sem_mov": 180,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true
     },
     {
       "id": "OS-150",
@@ -15498,7 +18662,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 19566.84,
-      "status": "Orçamento Enviado Claro"
+      "status": "Orçamento Enviado Claro",
+      "dt_inicio": "2026-05-22",
+      "ultima_movimentacao": "2026-06-03",
+      "dias_aberto": 179,
+      "dias_sem_mov": 167,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true
     },
     {
       "id": "OS-151",
@@ -15534,7 +18705,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 137210.31,
       "saldo": 0.0,
-      "status": "Parcial 2 Aprovada"
+      "status": "Parcial 2 Aprovada",
+      "dt_inicio": "2026-05-27",
+      "ultima_movimentacao": "2026-09-18",
+      "dias_aberto": 174,
+      "dias_sem_mov": 60,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-152",
@@ -15570,7 +18748,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 137210.31,
       "saldo": 0.0,
-      "status": "Parcial 2 Aprovada"
+      "status": "Parcial 2 Aprovada",
+      "dt_inicio": "2026-05-27",
+      "ultima_movimentacao": "2026-09-18",
+      "dias_aberto": 174,
+      "dias_sem_mov": 60,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-153",
@@ -15606,7 +18791,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 137210.31,
       "saldo": 0.0,
-      "status": "Parcial 2 Aprovada"
+      "status": "Parcial 2 Aprovada",
+      "dt_inicio": "2026-05-27",
+      "ultima_movimentacao": "2026-09-18",
+      "dias_aberto": 174,
+      "dias_sem_mov": 60,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-154",
@@ -15642,7 +18834,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 47263.72,
       "saldo": 59013.51,
-      "status": "Parcial 2 Aprovada"
+      "status": "Parcial 2 Aprovada",
+      "dt_inicio": "2026-05-27",
+      "ultima_movimentacao": "2026-09-18",
+      "dias_aberto": 174,
+      "dias_sem_mov": 60,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-155",
@@ -15678,7 +18877,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 0.0,
-      "status": "Orçamento Enviado Claro"
+      "status": "Orçamento Enviado Claro",
+      "dt_inicio": "2026-05-22",
+      "ultima_movimentacao": "2026-06-03",
+      "dias_aberto": 179,
+      "dias_sem_mov": 167,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true
     },
     {
       "id": "OS-156",
@@ -15714,7 +18920,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 0.0,
-      "status": "Orçamento Enviado Claro"
+      "status": "Orçamento Enviado Claro",
+      "dt_inicio": "2026-06-03",
+      "ultima_movimentacao": "2026-06-03",
+      "dias_aberto": 167,
+      "dias_sem_mov": 167,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true
     },
     {
       "id": "OS-157",
@@ -15750,7 +18963,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "Finalizado",
       "v_medido": 16212.66,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-06-03",
+      "ultima_movimentacao": "2026-07-29",
+      "dias_aberto": 167,
+      "dias_sem_mov": 111,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-158",
@@ -15786,7 +19006,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 13357.38,
       "saldo": 5949.13,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-06-03",
+      "ultima_movimentacao": "2026-09-21",
+      "dias_aberto": 167,
+      "dias_sem_mov": 57,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-159",
@@ -15822,7 +19049,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 0.0,
-      "status": "Orçamento Enviado Claro"
+      "status": "Orçamento Enviado Claro",
+      "dt_inicio": "2026-06-08",
+      "ultima_movimentacao": "2026-06-08",
+      "dias_aberto": 162,
+      "dias_sem_mov": 162,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true
     },
     {
       "id": "OS-160",
@@ -15858,7 +19092,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 0.0,
-      "status": "Orçamento Enviado Claro"
+      "status": "Orçamento Enviado Claro",
+      "dt_inicio": "2026-06-09",
+      "ultima_movimentacao": "2026-06-09",
+      "dias_aberto": 161,
+      "dias_sem_mov": 161,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true
     },
     {
       "id": "OS-161",
@@ -15894,7 +19135,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 0.0,
-      "status": "Orçamento Enviado Claro"
+      "status": "Orçamento Enviado Claro",
+      "dt_inicio": "2026-06-09",
+      "ultima_movimentacao": "2026-06-09",
+      "dias_aberto": 161,
+      "dias_sem_mov": 161,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true
     },
     {
       "id": "OS-162",
@@ -15930,7 +19178,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "Finalizado",
       "v_medido": 5791.97,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-06-22",
+      "ultima_movimentacao": "2026-06-25",
+      "dias_aberto": 148,
+      "dias_sem_mov": 145,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-163",
@@ -15966,7 +19221,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "Finalizado",
       "v_medido": 10959.06,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-06-22",
+      "ultima_movimentacao": "2026-06-25",
+      "dias_aberto": 148,
+      "dias_sem_mov": 145,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-164",
@@ -16002,7 +19264,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 87998.92,
       "saldo": 23341.85,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-06-24",
+      "ultima_movimentacao": "2026-10-13",
+      "dias_aberto": 146,
+      "dias_sem_mov": 35,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-165",
@@ -16038,7 +19307,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 38900.0,
       "saldo": 3390.33,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-06-24",
+      "ultima_movimentacao": "2026-10-13",
+      "dias_aberto": 146,
+      "dias_sem_mov": 35,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-166",
@@ -16074,7 +19350,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 30100.0,
       "saldo": 4121.5,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-06-24",
+      "ultima_movimentacao": "2026-10-13",
+      "dias_aberto": 146,
+      "dias_sem_mov": 35,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-167",
@@ -16110,7 +19393,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 0.0,
-      "status": "Orçamento Enviado Claro"
+      "status": "Orçamento Enviado Claro",
+      "dt_inicio": "2026-06-25",
+      "ultima_movimentacao": "2026-06-25",
+      "dias_aberto": 145,
+      "dias_sem_mov": 145,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true
     },
     {
       "id": "OS-168",
@@ -16146,7 +19436,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 2917.81,
-      "status": "Orçamento Enviado Claro"
+      "status": "Orçamento Enviado Claro",
+      "dt_inicio": "2026-07-01",
+      "ultima_movimentacao": "2026-07-01",
+      "dias_aberto": 139,
+      "dias_sem_mov": 139,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true
     },
     {
       "id": "OS-169",
@@ -16182,7 +19479,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 13872.53,
       "saldo": 6379.05,
-      "status": "Parcial 1 Aprovada"
+      "status": "Parcial 1 Aprovada",
+      "dt_inicio": "2026-05-15",
+      "ultima_movimentacao": "2026-08-20",
+      "dias_aberto": 186,
+      "dias_sem_mov": 89,
+      "faixa_aging": "Mais de 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     },
     {
       "id": "OS-170",
@@ -16218,7 +19522,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 5015.4,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-07-28",
+      "ultima_movimentacao": "2026-07-28",
+      "dias_aberto": 112,
+      "dias_sem_mov": 112,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-171",
@@ -16254,7 +19565,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 88556.6,
       "saldo": 1711.5,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-08-11",
+      "ultima_movimentacao": "2026-10-13",
+      "dias_aberto": 98,
+      "dias_sem_mov": 35,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-172",
@@ -16290,7 +19608,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 2676.47,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-08-14",
+      "ultima_movimentacao": "2026-08-14",
+      "dias_aberto": 95,
+      "dias_sem_mov": 95,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-173",
@@ -16326,7 +19651,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 18509.36,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-08-17",
+      "ultima_movimentacao": "2026-08-20",
+      "dias_aberto": 92,
+      "dias_sem_mov": 89,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-174",
@@ -16362,7 +19694,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 0.0,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "2026-08-28",
+      "ultima_movimentacao": "2026-08-28",
+      "dias_aberto": 81,
+      "dias_sem_mov": 81,
+      "faixa_aging": "31 a 90 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-175",
@@ -16398,7 +19737,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 0.0,
-      "status": "Orçamento Enviado Claro"
+      "status": "Orçamento Enviado Claro",
+      "dt_inicio": "2026-08-31",
+      "ultima_movimentacao": "2026-08-31",
+      "dias_aberto": 78,
+      "dias_sem_mov": 78,
+      "faixa_aging": "31 a 90 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true
     },
     {
       "id": "OS-176",
@@ -16434,7 +19780,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 113115.46,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "2026-09-08",
+      "ultima_movimentacao": "2026-09-08",
+      "dias_aberto": 70,
+      "dias_sem_mov": 70,
+      "faixa_aging": "31 a 90 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-177",
@@ -16470,7 +19823,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 4468.28,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-09-14",
+      "ultima_movimentacao": "2026-09-14",
+      "dias_aberto": 64,
+      "dias_sem_mov": 64,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-178",
@@ -16506,7 +19866,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 0.0,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "2026-07-30",
+      "ultima_movimentacao": "2026-07-30",
+      "dias_aberto": 110,
+      "dias_sem_mov": 110,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-179",
@@ -16542,7 +19909,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 0.0,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "2026-07-30",
+      "ultima_movimentacao": "2026-07-30",
+      "dias_aberto": 110,
+      "dias_sem_mov": 110,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-180",
@@ -16578,7 +19952,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 0.0,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "2026-07-30",
+      "ultima_movimentacao": "2026-07-30",
+      "dias_aberto": 110,
+      "dias_sem_mov": 110,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-181",
@@ -16614,7 +19995,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 0.0,
-      "status": "Orçamento Aprovado"
+      "status": "Orçamento Aprovado",
+      "dt_inicio": "2026-07-30",
+      "ultima_movimentacao": "2026-07-30",
+      "dias_aberto": 110,
+      "dias_sem_mov": 110,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "JLE: Iniciar 1ª Medição",
+      "is_em_aberto": true
     },
     {
       "id": "OS-182",
@@ -16650,7 +20038,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 35572.99,
       "saldo": 802.44,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-09-17",
+      "ultima_movimentacao": "2026-09-17",
+      "dias_aberto": 61,
+      "dias_sem_mov": 61,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-183",
@@ -16686,7 +20081,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 6080.2,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-10-13",
+      "ultima_movimentacao": "2026-10-13",
+      "dias_aberto": 35,
+      "dias_sem_mov": 35,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-184",
@@ -16722,7 +20124,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 6070.4,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-10-13",
+      "ultima_movimentacao": "2026-10-13",
+      "dias_aberto": 35,
+      "dias_sem_mov": 35,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-185",
@@ -16758,7 +20167,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 17259.38,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-10-13",
+      "ultima_movimentacao": "2026-10-16",
+      "dias_aberto": 35,
+      "dias_sem_mov": 32,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-186",
@@ -16794,7 +20210,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 28777.62,
-      "status": "Orçamento Enviado Claro"
+      "status": "Orçamento Enviado Claro",
+      "dt_inicio": "2026-10-15",
+      "ultima_movimentacao": "2026-10-15",
+      "dias_aberto": 33,
+      "dias_sem_mov": 33,
+      "faixa_aging": "31 a 90 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true
     },
     {
       "id": "OS-187",
@@ -16830,7 +20253,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 42195.35,
-      "status": "Orçamento Enviado Claro"
+      "status": "Orçamento Enviado Claro",
+      "dt_inicio": "2026-10-15",
+      "ultima_movimentacao": "2026-10-15",
+      "dias_aberto": 33,
+      "dias_sem_mov": 33,
+      "faixa_aging": "31 a 90 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true
     },
     {
       "id": "OS-188",
@@ -16866,7 +20296,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 5857.1,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-10-19",
+      "ultima_movimentacao": "2026-10-19",
+      "dias_aberto": 29,
+      "dias_sem_mov": 29,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-189",
@@ -16902,7 +20339,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 5878.55,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-10-19",
+      "ultima_movimentacao": "2026-10-19",
+      "dias_aberto": 29,
+      "dias_sem_mov": 29,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-190",
@@ -16938,7 +20382,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 5928.6,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-10-19",
+      "ultima_movimentacao": "2026-10-19",
+      "dias_aberto": 29,
+      "dias_sem_mov": 29,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-191",
@@ -16974,7 +20425,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 64864.69,
-      "status": "Orçamento Enviado Claro"
+      "status": "Orçamento Enviado Claro",
+      "dt_inicio": "2026-10-19",
+      "ultima_movimentacao": "2026-10-19",
+      "dias_aberto": 29,
+      "dias_sem_mov": 29,
+      "faixa_aging": "Até 30 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true
     },
     {
       "id": "OS-192",
@@ -17010,7 +20468,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": "FINALIZADO",
       "v_medido": 5948.1,
       "saldo": 0.0,
-      "status": "Finalizado"
+      "status": "Finalizado",
+      "dt_inicio": "2026-10-19",
+      "ultima_movimentacao": "2026-10-19",
+      "dias_aberto": 29,
+      "dias_sem_mov": 29,
+      "faixa_aging": "Concluída",
+      "pendencia": "Concluída",
+      "is_em_aberto": false
     },
     {
       "id": "OS-193",
@@ -17046,7 +20511,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 20710.01,
-      "status": "Orçamento Enviado Claro"
+      "status": "Orçamento Enviado Claro",
+      "dt_inicio": "2026-10-22",
+      "ultima_movimentacao": "2026-10-22",
+      "dias_aberto": 26,
+      "dias_sem_mov": 26,
+      "faixa_aging": "Até 30 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true
     },
     {
       "id": "OS-194",
@@ -17082,7 +20554,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 22758.62,
-      "status": "Orçamento Enviado Claro"
+      "status": "Orçamento Enviado Claro",
+      "dt_inicio": "2026-11-04",
+      "ultima_movimentacao": "2026-11-04",
+      "dias_aberto": 13,
+      "dias_sem_mov": 13,
+      "faixa_aging": "Até 30 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true
     },
     {
       "id": "OS-195",
@@ -17118,7 +20597,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 0.0,
       "saldo": 10886.51,
-      "status": "Orçamento Enviado Claro"
+      "status": "Orçamento Enviado Claro",
+      "dt_inicio": "2026-11-04",
+      "ultima_movimentacao": "2026-11-04",
+      "dias_aberto": 13,
+      "dias_sem_mov": 13,
+      "faixa_aging": "Até 30 dias",
+      "pendencia": "Claro: Aprovação Orçamento",
+      "is_em_aberto": true
     },
     {
       "id": "OS-196",
@@ -17154,7 +20640,14 @@ window.ENGENHARIA_DATA = {
       "st_wf": null,
       "v_medido": 52461.45,
       "saldo": 14255.83,
-      "status": "Parcial 1 Enviada"
+      "status": "Parcial 1 Enviada",
+      "dt_inicio": "2026-06-22",
+      "ultima_movimentacao": "2026-11-16",
+      "dias_aberto": 148,
+      "dias_sem_mov": 1,
+      "faixa_aging": "91 a 180 dias",
+      "pendencia": "JLE: Próxima Parcial / Final",
+      "is_em_aberto": true
     }
   ]
 };

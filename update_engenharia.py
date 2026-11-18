@@ -217,6 +217,58 @@ def classify_obra_status(os_list):
         return "Orçamento Enviado Claro"
     return "Em Orçamento"
 
+def calculate_aging_and_pendencia(dt_inicio, dt_ultima, status, is_os=False):
+    """Calcula dias em aberto, dias sem movimentação, faixa de aging e próxima pendência/ação."""
+    today = datetime.date.today()
+    dias_aberto = 0
+    dias_sem_mov = 0
+    
+    if dt_inicio:
+        try:
+            d_init = datetime.datetime.strptime(str(dt_inicio)[:10], "%Y-%m-%d").date()
+            dias_aberto = max(0, (today - d_init).days)
+        except:
+            pass
+            
+    if dt_ultima:
+        try:
+            d_last = datetime.datetime.strptime(str(dt_ultima)[:10], "%Y-%m-%d").date()
+            dias_sem_mov = max(0, (today - d_last).days)
+        except:
+            pass
+
+    is_finalizada = ("Finalizad" in status)
+    
+    if is_finalizada:
+        faixa = "Concluída"
+        pendencia = "Concluída"
+    elif dias_aberto <= 30:
+        faixa = "Até 30 dias"
+    elif dias_aberto <= 90:
+        faixa = "31 a 90 dias"
+    elif dias_aberto <= 180:
+        faixa = "91 a 180 dias"
+    else:
+        faixa = "Mais de 180 dias"
+
+    if not is_finalizada:
+        if "Medição Final" in status:
+            pendencia = "Claro: Aprovação Medição Final"
+        elif "Orçamento Enviado" in status:
+            pendencia = "Claro: Aprovação Orçamento"
+        elif "Orçamento Aprovado" in status:
+            pendencia = "JLE: Iniciar 1ª Medição"
+        elif "Parcial" in status and "Concluída" not in status:
+            pendencia = "JLE: Próxima Parcial / Final"
+        elif "Parcialmente Concluída" in status:
+            pendencia = "Misto: Validar OSs Pendentes"
+        elif "Em Orçamento" in status:
+            pendencia = "JLE: Enviar Orçamento Claro"
+        else:
+            pendencia = "Em Execução / Acompanhamento"
+
+    return dias_aberto, dias_sem_mov, faixa, pendencia
+
 def process_engenharia():
     source_file = find_source_file()
     print(f"[ETL Engenharia] Carregando dados de: {source_file}")
@@ -333,7 +385,24 @@ def process_engenharia():
             'saldo': saldo_os
         }
         
-        os_item['status'] = classify_os_status(os_item)
+        os_st = classify_os_status(os_item)
+        os_item['status'] = os_st
+        
+        # Datas de início e movimentação da OS
+        os_start_dates = [d for d in (dt_solic_orc, dt_env_orc, dt_aprov_orc, dt_env_p1, dt_env_p2, dt_env_p3, dt_env_fn) if d]
+        os_all_dates = os_start_dates + [d for d in (dt_wf_p1, dt_wf_p2, dt_wf_p3, dt_wf_fn) if d]
+        dt_inicio_os = min(os_start_dates) if os_start_dates else None
+        dt_ultima_os = max(os_all_dates) if os_all_dates else None
+        
+        d_aberto_os, d_sem_mov_os, faixa_os, pend_os = calculate_aging_and_pendencia(dt_inicio_os, dt_ultima_os, os_st, is_os=True)
+        os_item['dt_inicio'] = dt_inicio_os
+        os_item['ultima_movimentacao'] = dt_ultima_os
+        os_item['dias_aberto'] = d_aberto_os
+        os_item['dias_sem_mov'] = d_sem_mov_os
+        os_item['faixa_aging'] = faixa_os
+        os_item['pendencia'] = pend_os
+        os_item['is_em_aberto'] = (os_st != 'Finalizado')
+
         os_list.append(os_item)
         obras_dict[solic].append(os_item)
 
@@ -374,14 +443,14 @@ def process_engenharia():
         for it in items:
             all_status_oss.add(it['status'])
 
-        # Última data de movimentação
-        all_dates = []
-        for it in items:
-            for d_field in ('dt_solic_orc', 'dt_env_orc', 'dt_aprov_orc', 'dt_env_p1', 'dt_wf_p1', 'dt_env_p2', 'dt_wf_p2', 'dt_env_p3', 'dt_wf_p3', 'dt_env_fn', 'dt_wf_fn'):
-                val_d = it.get(d_field)
-                if val_d:
-                    all_dates.append(val_d)
-        ultima_data = max(all_dates) if all_dates else None
+        # Datas consolidadas da Obra
+        all_start_dates = [it['dt_inicio'] for it in items if it.get('dt_inicio')]
+        all_activity_dates = [it['ultima_movimentacao'] for it in items if it.get('ultima_movimentacao')]
+        dt_inicio_obra = min(all_start_dates) if all_start_dates else None
+        dt_ultima_obra = max(all_activity_dates) if all_activity_dates else None
+        
+        d_aberto_ob, d_sem_mov_ob, faixa_ob, pend_ob = calculate_aging_and_pendencia(dt_inicio_obra, dt_ultima_obra, status_consolidado, is_os=False)
+        is_em_aberto_obra = (status_consolidado != '100% Finalizada')
 
         total_orcado_global += v_orc_total
         total_medido_global += v_medido_total
@@ -406,7 +475,13 @@ def process_engenharia():
             'v_medido': v_medido_total,
             'saldo': saldo_total,
             'pct_executado': pct_executado,
-            'ultima_movimentacao': ultima_data,
+            'dt_inicio': dt_inicio_obra,
+            'ultima_movimentacao': dt_ultima_obra,
+            'dias_aberto': d_aberto_ob,
+            'dias_sem_mov': d_sem_mov_ob,
+            'faixa_aging': faixa_ob,
+            'pendencia': pend_ob,
+            'is_em_aberto': is_em_aberto_obra,
             'oss': items
         })
 
@@ -418,6 +493,34 @@ def process_engenharia():
     # Contagem de status
     status_obras_counter = Counter(o['status'] for o in obras_consolidated)
     status_oss_counter = Counter(os_i['status'] for os_i in os_list)
+
+    # Estatísticas de Aging e Obras em Aberto (Radar)
+    open_obras_list = [o for o in obras_consolidated if o['is_em_aberto']]
+    aging_dist = {
+        'ate_30d': {
+            'label': 'Até 30 dias',
+            'count': len([o for o in open_obras_list if o['dias_aberto'] <= 30]),
+            'saldo': round(sum(o['saldo'] for o in open_obras_list if o['dias_aberto'] <= 30), 2)
+        },
+        '31_a_90d': {
+            'label': '31 a 90 dias',
+            'count': len([o for o in open_obras_list if 30 < o['dias_aberto'] <= 90]),
+            'saldo': round(sum(o['saldo'] for o in open_obras_list if 30 < o['dias_aberto'] <= 90), 2)
+        },
+        '91_a_180d': {
+            'label': '91 a 180 dias',
+            'count': len([o for o in open_obras_list if 90 < o['dias_aberto'] <= 180]),
+            'saldo': round(sum(o['saldo'] for o in open_obras_list if 90 < o['dias_aberto'] <= 180), 2)
+        },
+        'mais_180d': {
+            'label': 'Mais de 180 dias',
+            'count': len([o for o in open_obras_list if o['dias_aberto'] > 180]),
+            'saldo': round(sum(o['saldo'] for o in open_obras_list if o['dias_aberto'] > 180), 2)
+        }
+    }
+    saldo_em_aberto = round(sum(o['saldo'] for o in open_obras_list), 2)
+    media_dias_aberto = round(sum(o['dias_aberto'] for o in open_obras_list) / len(open_obras_list), 0) if open_obras_list else 0
+    obras_criticas_aging = len([o for o in open_obras_list if o['dias_aberto'] > 90])
 
     summary = {
         'total_obras': len(obras_consolidated),
@@ -432,6 +535,12 @@ def process_engenharia():
         'pct_executado': pct_global,
         'obras_finalizadas': status_obras_counter.get('100% Finalizada', 0),
         'obras_em_andamento': len(obras_consolidated) - status_obras_counter.get('100% Finalizada', 0),
+        'obras_em_aberto': len(open_obras_list),
+        'saldo_em_aberto': saldo_em_aberto,
+        'obras_criticas_aging': obras_criticas_aging,
+        'obras_mais_180d': len([o for o in open_obras_list if o['dias_aberto'] > 180]),
+        'media_dias_aberto': int(media_dias_aberto),
+        'aging_distribution': aging_dist,
         'oss_finalizadas': status_oss_counter.get('Finalizado', 0),
         'status_obras_counts': dict(status_obras_counter),
         'status_oss_counts': dict(status_oss_counter)

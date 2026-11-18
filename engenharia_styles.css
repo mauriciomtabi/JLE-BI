@@ -606,3 +606,192 @@ tr.expanded .eng-expand-icon {
     font-size: 0.78rem;
     color: var(--text-secondary);
 }
+
+/* ==========================================================================
+   RADAR DE PENDÊNCIAS & AGING DE OBRAS
+   ========================================================================== */
+
+/* Botão de Destaque Radar de Pendências */
+.eng-btn-radar {
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    color: #f87171;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.eng-btn-radar:hover {
+    background: rgba(239, 68, 68, 0.22);
+    border-color: #ef4444;
+    color: #ffffff;
+}
+
+.eng-btn-radar.active {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.45), rgba(185, 28, 28, 0.25));
+    border-color: #ef4444;
+    color: #ffffff;
+    box-shadow: 0 0 16px rgba(239, 68, 68, 0.35);
+}
+
+/* Banner de Faixas de Aging (Painel Rápido de Risco) */
+.eng-radar-banner {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 900px) {
+    .eng-radar-banner {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 550px) {
+    .eng-radar-banner {
+        grid-template-columns: 1fr;
+    }
+}
+
+.eng-aging-chip {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.eng-aging-chip:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.eng-aging-chip.active {
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
+    border-width: 2px;
+}
+
+.eng-aging-chip.chip-green { border-left: 4px solid #10b981; }
+.eng-aging-chip.chip-green.active { border-color: #10b981; background: rgba(16, 185, 129, 0.12); }
+
+.eng-aging-chip.chip-yellow { border-left: 4px solid #facc15; }
+.eng-aging-chip.chip-yellow.active { border-color: #facc15; background: rgba(250, 204, 21, 0.12); }
+
+.eng-aging-chip.chip-red { border-left: 4px solid #f87171; }
+.eng-aging-chip.chip-red.active { border-color: #f87171; background: rgba(248, 113, 113, 0.12); }
+
+.eng-aging-chip.chip-critical { border-left: 4px solid #ef4444; }
+.eng-aging-chip.chip-critical.active { border-color: #ef4444; background: rgba(239, 68, 68, 0.15); }
+
+.eng-aging-chip-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.eng-aging-chip-title {
+    font-size: 0.74rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    letter-spacing: 0.5px;
+}
+
+.eng-aging-chip-count {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.eng-aging-chip-saldo {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+}
+
+/* Badges de Aging na Tabela */
+.eng-aging-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.aging-green {
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+.aging-yellow {
+    background: rgba(250, 204, 21, 0.15);
+    color: #facc15;
+    border: 1px solid rgba(250, 204, 21, 0.35);
+}
+
+.aging-red {
+    background: rgba(248, 113, 113, 0.18);
+    color: #f87171;
+    border: 1px solid rgba(248, 113, 113, 0.4);
+}
+
+.aging-critical {
+    background: rgba(239, 68, 68, 0.25);
+    color: #fca5a5;
+    border: 1px solid rgba(239, 68, 68, 0.55);
+    font-weight: 700;
+    animation: engPulseCritical 2s infinite ease-in-out;
+}
+
+@keyframes engPulseCritical {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    50% { box-shadow: 0 0 8px rgba(239, 68, 68, 0.4); }
+}
+
+/* Badges de Pendência / Ação */
+.eng-pendencia-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    white-space: nowrap;
+    max-width: 175px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pendencia-claro {
+    background: rgba(56, 189, 248, 0.15);
+    color: #38bdf8;
+    border: 1px solid rgba(56, 189, 248, 0.35);
+}
+
+.pendencia-jle {
+    background: rgba(251, 191, 36, 0.15);
+    color: #fbbf24;
+    border: 1px solid rgba(251, 191, 36, 0.35);
+}
+
+.pendencia-misto {
+    background: rgba(192, 132, 252, 0.15);
+    color: #c084fc;
+    border: 1px solid rgba(192, 132, 252, 0.35);
+}
+
+.pendencia-ok {
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.35);
+}
