@@ -1268,7 +1268,8 @@
                         <option value="mdu">📡 MDU — Status em Andamento</option>
                         <option value="sar">📦 SAR — Status das OSs</option>
                         <option value="claro">📊 Analítico Claro — Sem Aprovação e Aguardando Pedido</option>
-                        <option value="engenharia">👷 Engenharia Claro PR — Radar Operacional & Pendências</option>
+                        <option value="engenharia">👷 Engenharia Claro PR — Radar Operacional & Pendências (Completo)</option>
+                        <option value="engenharia_sem_valores">👷 Engenharia Claro PR — Operacional (Sem Valores Financeiros)</option>
                         <option value="manutencao">🛠️ Manutenção — Resumo de Pendências e Aprovados</option>
                         <option value="tecnodrill">🏭 Tecnodrill — Resumo Financeiro</option>
                         <option value="troca_poste">⚡ Troca de Postes — TELEMONT (Acompanhamento e Produtividade)</option>
@@ -1362,6 +1363,7 @@
                             <button class="preview-type-btn" onclick="switchPreviewReportType('sar')" id="preview-btn-sar">SAR</button>
                             <button class="preview-type-btn" onclick="switchPreviewReportType('claro')" id="preview-btn-claro">Claro</button>
                             <button class="preview-type-btn" onclick="switchPreviewReportType('engenharia')" id="preview-btn-engenharia">Engenharia</button>
+                            <button class="preview-type-btn" onclick="switchPreviewReportType('engenharia_sem_valores')" id="preview-btn-engenharia_sem_valores">Engenharia (Sem Valores)</button>
                             <button class="preview-type-btn" onclick="switchPreviewReportType('manutencao')" id="preview-btn-manutencao">Manutenção</button>
                             <button class="preview-type-btn" onclick="switchPreviewReportType('tecnodrill')" id="preview-btn-tecnodrill">Tecnodrill</button>
                             <button class="preview-type-btn" onclick="switchPreviewReportType('troca_poste')" id="preview-btn-troca_poste">Troca de Postes</button>
@@ -6318,7 +6320,7 @@
             });
 
             const dayLabels = { MON:'Seg', TUE:'Ter', WED:'Qua', THU:'Qui', FRI:'Sex', SAT:'Sáb', SUN:'Dom' };
-            const typeLabels = { mdu: '📡 MDU', sar: '📦 SAR', claro: '📊 Analítico Claro', manutencao: '🛠️ Manutenção', tecnodrill: '🏭 Tecnodrill', troca_poste: '⚡ Troca de Postes TELEMONT' };
+            const typeLabels = { mdu: '📡 MDU', sar: '📦 SAR', claro: '📊 Analítico Claro', engenharia: '👷 Engenharia PR', engenharia_sem_valores: '👷 Engenharia PR (Sem Valores)', manutencao: '🛠️ Manutenção', tecnodrill: '🏭 Tecnodrill', troca_poste: '⚡ Troca de Postes TELEMONT' };
 
             tbody.innerHTML = data.map(r => {
                 const days = (r.schedule_days || []).map(d => dayLabels[d] || d).join(', ');

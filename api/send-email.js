@@ -538,11 +538,15 @@ module.exports = async (req, res) => {
             const sarHelper = require('./sar-report-helper');
             const sarData = await sarHelper.loadSarDataAsync();
             emailHtml = sarHelper.buildSarEmailHtml(config.report_name || config.report, sarData);
-        } else if (reportType === 'engenharia') {
-                        const engHelper = require('./engenharia-report-helper');
-                        const engData = await engHelper.loadEngenhariaDataAsync();
-                        attachments = engHelper.generateExcelAttachments(engData);
-                        emailHtml = engHelper.buildEngenhariaEmailHtml(config.report_name || config.report || 'Radar Operacional — Engenharia Claro PR', engData);
+        } else if (reportType === 'engenharia' || reportType === 'engenharia_sem_valores') {
+            const engHelper = require('./engenharia-report-helper');
+            const engData = await engHelper.loadEngenhariaDataAsync();
+            const isSemValores = reportType === 'engenharia_sem_valores' || 
+                                 reportNameLower.includes('sem valor') || 
+                                 reportNameLower.includes('operacional') || 
+                                 reportNameLower.includes('gilmar');
+            attachments = engHelper.generateExcelAttachments(engData, { hideValues: isSemValores });
+            emailHtml = engHelper.buildEngenhariaEmailHtml(config.report_name || config.report || (isSemValores ? 'Radar Operacional — Engenharia Claro PR' : 'Radar Executivo — Engenharia Claro PR'), engData, { hideValues: isSemValores });
                     } else if (reportType === 'claro') {
             const claroHelper = require('./claro-report-helper');
             const claroData = await claroHelper.loadClaroDataAsync();
