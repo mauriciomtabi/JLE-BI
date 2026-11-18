@@ -526,7 +526,8 @@ module.exports = async (req, res) => {
         const reportNameLower = (config.report_name || config.report || '').toLowerCase();
         const reportType = config.report_type || 
             (reportNameLower.includes('sar') ? 'sar' :
-             reportNameLower.includes('manut') ? 'manutencao' : 
+             reportNameLower.includes('manut') ? 'manutencao' :
+                     reportNameLower.includes('engenharia') ? 'engenharia' : 
              reportNameLower.includes('claro') ? 'claro' : 
              reportNameLower.includes('tecnodrill') ? 'tecnodrill' : reportNameLower.includes('poste') || reportNameLower.includes('troca') ? 'troca_poste' : 'mdu');
 
@@ -537,7 +538,12 @@ module.exports = async (req, res) => {
             const sarHelper = require('./sar-report-helper');
             const sarData = await sarHelper.loadSarDataAsync();
             emailHtml = sarHelper.buildSarEmailHtml(config.report_name || config.report, sarData);
-        } else if (reportType === 'claro') {
+        } else if (reportType === 'engenharia') {
+                        const engHelper = require('./engenharia-report-helper');
+                        const engData = await engHelper.loadEngenhariaDataAsync();
+                        attachments = engHelper.generateExcelAttachments(engData);
+                        emailHtml = engHelper.buildEngenhariaEmailHtml(config.report_name || config.report || 'Radar Operacional — Engenharia Claro PR', engData);
+                    } else if (reportType === 'claro') {
             const claroHelper = require('./claro-report-helper');
             const claroData = await claroHelper.loadClaroDataAsync();
             const excelRes = claroHelper.generateExcelAttachments(claroData);
