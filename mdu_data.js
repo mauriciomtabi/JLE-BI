@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-11-18 17:46:39
+// Dados MDU Compactados - Gerado em: 2026-11-18 18:00:32
 window.MDU_METADATA = {
-    "generated_at": "2026-11-18 17:46:39",
+    "generated_at": "2026-11-18 18:00:32",
     "total_rows": 6046,
     "geocoded_new": 0
 };
@@ -187918,8 +187918,8 @@ window.MDU_DATA = [
         "aging": "14",
         "relatorio_por": "JENIFFER",
         "pendencia": "Não",
-        "status": "Medição",
-        "prog": 88.0,
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "610511067",
         "area": "SSOAA",
         "node": "SSOAG",
@@ -187934,7 +187934,7 @@ window.MDU_DATA = [
         "data_fusao": "25/09/2026",
         "data_baixa": "04/11/2026",
         "obs_baixa": "",
-        "data_relatorio": "18/11/2026",
+        "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
