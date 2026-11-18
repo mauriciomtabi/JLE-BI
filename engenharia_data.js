@@ -1,11 +1,11 @@
 /**
  * BI JLE TELECOM - BASE DE DADOS: ENGENHARIA CLARO PARANÁ
- * Gerado automaticamente via update_engenharia.py em 18/11/2026 09:38:31
+ * Gerado automaticamente via update_engenharia.py em 18/11/2026 13:10:35
  * Fonte: Controle DE OBRAS - PR.xlsx
  */
 
 window.ENGENHARIA_METADATA = {
-  "generated_at": "18/11/2026 09:38:31",
+  "generated_at": "18/11/2026 13:10:35",
   "source_file": "Controle DE OBRAS - PR.xlsx",
   "version": "1.0"
 };

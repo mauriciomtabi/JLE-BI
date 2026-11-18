@@ -930,6 +930,7 @@
 
         const finMedido = finalizadas.reduce((acc, o) => acc + (o.v_medido || 0), 0);
 
+        const parcOrcado = parciais.reduce((acc, o) => acc + (o.v_orc || 0), 0);
         const parcMedido = parciais.reduce((acc, o) => acc + (o.v_medido || 0), 0);
         const parcSaldo = parciais.reduce((acc, o) => acc + (o.saldo || 0), 0);
 
@@ -961,11 +962,11 @@
             const bg = (idx % 2 === 0) ? '#ffffff' : '#f8fafc';
             cityRowsHtml += `
                 <tr style="background: ${bg}; border-bottom: 1px solid #e2e8f0;">
-                    <td style="padding: 7px 10px; font-size: 11px; font-weight: 700; color: #1e293b;">${ct.cidade}</td>
-                    <td style="padding: 7px 10px; font-size: 11px; text-align: right; color: #334155; font-weight: 600;">${formatBRL(ct.orcado)}</td>
-                    <td style="padding: 7px 10px; font-size: 11px; text-align: right; color: #059669; font-weight: 600;">${formatBRL(ct.medido)}</td>
-                    <td style="padding: 7px 10px; font-size: 11px; text-align: right; color: #b45309; font-weight: 600;">${formatBRL(ct.saldo)}</td>
-                    <td style="padding: 7px 10px; font-size: 11px; text-align: right; color: #0f172a; font-weight: 700;">${formatPct(ct.pct)}</td>
+                    <td style="padding: 7px 12px; font-size: 11px; font-weight: 600; color: #1e293b;">${ct.cidade}</td>
+                    <td style="padding: 7px 12px; font-size: 11px; text-align: right; color: #0f172a; font-weight: 600;">${formatBRL(ct.orcado)}</td>
+                    <td style="padding: 7px 12px; font-size: 11px; text-align: right; color: #334155;">${formatBRL(ct.medido)}</td>
+                    <td style="padding: 7px 12px; font-size: 11px; text-align: right; color: #334155;">${formatBRL(ct.saldo)}</td>
+                    <td style="padding: 7px 12px; font-size: 11px; text-align: right; color: #0f172a; font-weight: 700;">${formatPct(ct.pct)}</td>
                 </tr>
             `;
         });
@@ -979,44 +980,44 @@
 
             let posBadge = '';
             if (pos === 1) {
-                posBadge = `<span style="display:inline-block; width:20px; height:20px; line-height:20px; border-radius:50%; background:#ffd700; color:#78350f; font-weight:800; font-size:10px; text-align:center;">1º</span>`;
+                posBadge = `<span style="display:inline-block; min-width:18px; padding:1px 5px; border-radius:3px; background:#0f172a; color:#ffffff; font-weight:700; font-size:10px; text-align:center;">1º</span>`;
             } else if (pos === 2) {
-                posBadge = `<span style="display:inline-block; width:20px; height:20px; line-height:20px; border-radius:50%; background:#e2e8f0; color:#334155; font-weight:800; font-size:10px; text-align:center;">2º</span>`;
+                posBadge = `<span style="display:inline-block; min-width:18px; padding:1px 5px; border-radius:3px; background:#475569; color:#ffffff; font-weight:700; font-size:10px; text-align:center;">2º</span>`;
             } else if (pos === 3) {
-                posBadge = `<span style="display:inline-block; width:20px; height:20px; line-height:20px; border-radius:50%; background:#fed7aa; color:#7c2d12; font-weight:800; font-size:10px; text-align:center;">3º</span>`;
+                posBadge = `<span style="display:inline-block; min-width:18px; padding:1px 5px; border-radius:3px; background:#64748b; color:#ffffff; font-weight:700; font-size:10px; text-align:center;">3º</span>`;
             } else {
-                posBadge = `<span style="display:inline-block; width:20px; height:20px; line-height:20px; border-radius:4px; background:#f1f5f9; color:#64748b; font-weight:700; font-size:10px; text-align:center;">${pos}º</span>`;
+                posBadge = `<span style="font-weight:600; font-size:11px; color:#64748b;">${pos}º</span>`;
             }
 
             let statusBadge = '';
             if (o.status === 'Finalizado') {
-                statusBadge = `<span style="display:inline-block; padding:2px 6px; border-radius:4px; font-size:10px; font-weight:700; background:#d1fae5; color:#047857;">Finalizado</span>`;
+                statusBadge = `<span style="display:inline-block; padding:2px 7px; border-radius:3px; font-size:10px; font-weight:600; background:#f0fdf4; color:#15803d; border:1px solid #bbf7d0;">Finalizado</span>`;
             } else if (o.status === 'Executado Parcial') {
-                statusBadge = `<span style="display:inline-block; padding:2px 6px; border-radius:4px; font-size:10px; font-weight:700; background:#fef3c7; color:#b45309;">Exec. Parcial</span>`;
+                statusBadge = `<span style="display:inline-block; padding:2px 7px; border-radius:3px; font-size:10px; font-weight:600; background:#fffbeb; color:#b45309; border:1px solid #fde68a;">Exec. Parcial</span>`;
             } else {
-                statusBadge = `<span style="display:inline-block; padding:2px 6px; border-radius:4px; font-size:10px; font-weight:700; background:#fee2e2; color:#b91c1c;">Não Executado</span>`;
+                statusBadge = `<span style="display:inline-block; padding:2px 7px; border-radius:3px; font-size:10px; font-weight:600; background:#f8fafc; color:#64748b; border:1px solid #e2e8f0;">Não Executado</span>`;
             }
 
             tableRowsHtml += `
                 <tr style="background: ${bg}; border-bottom: 1px solid #e2e8f0;">
-                    <td style="padding: 8px 6px; text-align: center; vertical-align: middle;">${posBadge}</td>
-                    <td style="padding: 8px 8px; font-size: 11px; color: #0f172a; font-weight: 600; vertical-align: middle;">
+                    <td style="padding: 7px 6px; text-align: center; vertical-align: middle;">${posBadge}</td>
+                    <td style="padding: 7px 10px; font-size: 11px; color: #0f172a; font-weight: 600; vertical-align: middle;">
                         ${o.nome}
-                        <div style="font-size: 10px; color: #64748b; font-weight: normal;">${o.cidade || '-'}</div>
+                        <div style="font-size: 10px; color: #64748b; font-weight: normal; margin-top: 1px;">${o.cidade || '-'} • ${o.qtd_os} ${o.qtd_os === 1 ? 'OS' : 'OSs'}</div>
                     </td>
-                    <td style="padding: 8px 6px; text-align: center; vertical-align: middle;">
+                    <td style="padding: 7px 6px; text-align: center; vertical-align: middle;">
                         ${statusBadge}
                     </td>
-                    <td style="padding: 8px 8px; text-align: right; font-size: 11px; font-weight: 700; color: #0f172a; vertical-align: middle;">
+                    <td style="padding: 7px 10px; text-align: right; font-size: 11px; font-weight: 700; color: #0f172a; vertical-align: middle;">
                         ${formatBRL(o.v_orc)}
                     </td>
-                    <td style="padding: 8px 8px; text-align: right; font-size: 11px; font-weight: 600; color: #059669; vertical-align: middle;">
+                    <td style="padding: 7px 10px; text-align: right; font-size: 11px; color: #334155; vertical-align: middle;">
                         ${formatBRL(o.v_medido)}
                     </td>
-                    <td style="padding: 8px 8px; text-align: right; font-size: 11px; font-weight: 600; color: ${o.saldo > 0 ? '#b45309' : '#94a3b8'}; vertical-align: middle;">
+                    <td style="padding: 7px 10px; text-align: right; font-size: 11px; color: #334155; vertical-align: middle;">
                         ${formatBRL(o.saldo)}
                     </td>
-                    <td style="padding: 8px 8px; text-align: right; font-size: 11px; font-weight: 700; color: #334155; vertical-align: middle;">
+                    <td style="padding: 7px 10px; text-align: right; font-size: 11px; font-weight: 700; color: #0f172a; vertical-align: middle;">
                         ${formatPct(o.pct_executado)}
                     </td>
                 </tr>
@@ -1036,26 +1037,26 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>${reportName}</title>
         </head>
-        <body style="margin: 0; padding: 0; background: #f1f5f9; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: #f1f5f9; padding: 20px 10px;">
+        <body style="margin: 0; padding: 0; background: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: #f8fafc; padding: 24px 10px;">
                 <tr>
                     <td align="center">
-                        <table width="660" cellpadding="0" cellspacing="0" border="0" style="background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid #e2e8f0;">
+                        <table width="660" cellpadding="0" cellspacing="0" border="0" style="background: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.08); border: 1px solid #e2e8f0;">
                             
-                            <!-- HEADER LIMPO E DIRETO -->
+                            <!-- HEADER CORPORATIVO SÓBRIO -->
                             <tr>
-                                <td style="background: #004f71; padding: 20px 28px; border-bottom: 3px solid #f59e0b;">
+                                <td style="background: #004f71; padding: 22px 28px; border-bottom: 3px solid #0f172a;">
                                     <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                         <tr>
                                             <td>
-                                                <div style="font-size: 10px; font-weight: 700; color: #f59e0b; text-transform: uppercase; letter-spacing: 1.2px;">
-                                                    BI JLE TELECOM
+                                                <div style="font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 1.2px;">
+                                                    BI JLE TELECOM • ENGENHARIA PARANÁ
                                                 </div>
-                                                <h1 style="margin: 2px 0 0; font-size: 20px; font-weight: 800; color: #ffffff; line-height: 1.2;">
-                                                    ${reportName || 'Radar Engenharia Claro PR'}
+                                                <h1 style="margin: 3px 0 0; font-size: 20px; font-weight: 700; color: #ffffff; letter-spacing: -0.3px;">
+                                                    Relatório Operacional de Obras
                                                 </h1>
-                                                <div style="font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 3px;">
-                                                    Posição Atualizada • <strong>${generatedAt}</strong>
+                                                <div style="font-size: 11px; color: rgba(255,255,255,0.65); margin-top: 4px;">
+                                                    Posição Atualizada em <strong>${generatedAt}</strong>
                                                 </div>
                                             </td>
                                         </tr>
@@ -1063,51 +1064,51 @@
                                 </td>
                             </tr>
 
-                            <!-- CARDS DE STATUS (BATER O OLHO E ENTENDER) -->
+                            <!-- CARDS DE STATUS EXECUTIVOS (SÓBRIOS, FUNDO BRANCO) -->
                             <tr>
-                                <td style="padding: 16px 24px 0;">
+                                <td style="padding: 20px 24px 0;">
                                     <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                         <tr>
                                             <!-- FINALIZADO -->
-                                            <td width="32%" style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 12px 14px; text-align: center;">
-                                                <div style="font-size: 10px; font-weight: 800; color: #15803d; text-transform: uppercase; letter-spacing: 0.5px;">
-                                                    🟢 FINALIZADO
+                                            <td width="32%" style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 3px solid #0f766e; border-radius: 6px; padding: 14px 12px; text-align: center;">
+                                                <div style="font-size: 10px; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.6px;">
+                                                    FINALIZADO
                                                 </div>
-                                                <div style="font-size: 22px; font-weight: 900; color: #166534; margin: 4px 0 2px;">
-                                                    ${finalizadas.length} Obras
+                                                <div style="font-size: 24px; font-weight: 800; color: #0f172a; margin: 4px 0 2px; letter-spacing: -0.5px;">
+                                                    ${finalizadas.length} <span style="font-size: 13px; font-weight: 500; color: #64748b;">obras</span>
                                                 </div>
-                                                <div style="font-size: 11px; font-weight: 700; color: #15803d;">
-                                                    Medido: ${formatBRL(finMedido)}
+                                                <div style="font-size: 11px; color: #475569; font-weight: 500;">
+                                                    Medido: <strong>${formatBRL(finMedido)}</strong>
                                                 </div>
                                             </td>
 
                                             <td width="2%"></td>
 
                                             <!-- EXECUTADO PARCIAL -->
-                                            <td width="32%" style="background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 12px 14px; text-align: center;">
-                                                <div style="font-size: 10px; font-weight: 800; color: #b45309; text-transform: uppercase; letter-spacing: 0.5px;">
-                                                    🟧 EXEC. PARCIAL
+                                            <td width="32%" style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 3px solid #b45309; border-radius: 6px; padding: 14px 12px; text-align: center;">
+                                                <div style="font-size: 10px; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.6px;">
+                                                    EXEC. PARCIAL
                                                 </div>
-                                                <div style="font-size: 22px; font-weight: 900; color: #92400e; margin: 4px 0 2px;">
-                                                    ${parciais.length} Obras
+                                                <div style="font-size: 24px; font-weight: 800; color: #0f172a; margin: 4px 0 2px; letter-spacing: -0.5px;">
+                                                    ${parciais.length} <span style="font-size: 13px; font-weight: 500; color: #64748b;">obras</span>
                                                 </div>
-                                                <div style="font-size: 11px; font-weight: 700; color: #b45309;">
-                                                    Saldo: ${formatBRL(parcSaldo)}
+                                                <div style="font-size: 11px; color: #475569; font-weight: 500;">
+                                                    Saldo: <strong>${formatBRL(parcSaldo)}</strong>
                                                 </div>
                                             </td>
 
                                             <td width="2%"></td>
 
                                             <!-- NÃO EXECUTADO -->
-                                            <td width="32%" style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 12px 14px; text-align: center;">
-                                                <div style="font-size: 10px; font-weight: 800; color: #b91c1c; text-transform: uppercase; letter-spacing: 0.5px;">
-                                                    🟥 NÃO EXECUTADO
+                                            <td width="32%" style="background: #ffffff; border: 1px solid #cbd5e1; border-top: 3px solid #64748b; border-radius: 6px; padding: 14px 12px; text-align: center;">
+                                                <div style="font-size: 10px; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.6px;">
+                                                    NÃO EXECUTADO
                                                 </div>
-                                                <div style="font-size: 22px; font-weight: 900; color: #991b1b; margin: 4px 0 2px;">
-                                                    ${naoExec.length} Obras
+                                                <div style="font-size: 24px; font-weight: 800; color: #0f172a; margin: 4px 0 2px; letter-spacing: -0.5px;">
+                                                    ${naoExec.length} <span style="font-size: 13px; font-weight: 500; color: #64748b;">obras</span>
                                                 </div>
-                                                <div style="font-size: 11px; font-weight: 700; color: #b91c1c;">
-                                                    Orçado: ${formatBRL(naoExecOrcado)}
+                                                <div style="font-size: 11px; color: #475569; font-weight: 500;">
+                                                    Orçado: <strong>${formatBRL(naoExecOrcado)}</strong>
                                                 </div>
                                             </td>
                                         </tr>
@@ -1115,13 +1116,13 @@
                                 </td>
                             </tr>
 
-                            <!-- TOTAL GERAL EM 1 LINHA -->
+                            <!-- TOTAL GERAL EM 1 LINHA SÓBRIA -->
                             <tr>
                                 <td style="padding: 12px 24px 0;">
-                                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px 14px;">
+                                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 8px 14px;">
                                         <tr>
-                                            <td style="font-size: 12px; color: #334155; text-align: center;">
-                                                <strong>Total da Carteira:</strong> 125 Obras • Orçado: <strong>${formatBRL(totalOrcado)}</strong> • Medido: <strong style="color: #059669;">${formatBRL(totalMedido)} (${formatPct(totalPct)})</strong> • Saldo a Medir: <strong style="color: #b45309;">${formatBRL(totalSaldo)}</strong>
+                                            <td style="font-size: 11px; color: #475569; text-align: center;">
+                                                <strong style="color: #0f172a;">Carteira Geral:</strong> 125 Obras (194 OSs) &nbsp;|&nbsp; Orçado: <strong style="color: #0f172a;">${formatBRL(totalOrcado)}</strong> &nbsp;|&nbsp; Medido: <strong style="color: #0f172a;">${formatBRL(totalMedido)} (${formatPct(totalPct)})</strong> &nbsp;|&nbsp; Saldo: <strong style="color: #0f172a;">${formatBRL(totalSaldo)}</strong>
                                             </td>
                                         </tr>
                                     </table>
@@ -1130,18 +1131,18 @@
 
                             <!-- TOP 5 POLOS / CIDADES -->
                             <tr>
-                                <td style="padding: 16px 24px 0;">
-                                    <div style="font-size: 12px; font-weight: 800; color: #0f172a; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">
-                                        🏙️ Top 5 Cidades / Polos por Valor
+                                <td style="padding: 20px 24px 0;">
+                                    <div style="font-size: 11px; font-weight: 700; color: #334155; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px;">
+                                        Top 5 Cidades / Polos por Valor Orçado
                                     </div>
                                     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border: 1px solid #e2e8f0; border-radius: 6px; overflow: hidden;">
                                         <thead>
-                                            <tr style="background: #004f71; color: #ffffff; font-size: 10px; text-transform: uppercase;">
-                                                <th style="padding: 6px 10px; text-align: left;">Cidade / Polo</th>
-                                                <th style="padding: 6px 10px; text-align: right;">Orçado</th>
-                                                <th style="padding: 6px 10px; text-align: right;">Medido</th>
-                                                <th style="padding: 6px 10px; text-align: right;">Saldo</th>
-                                                <th style="padding: 6px 10px; text-align: right;">% Medido</th>
+                                            <tr style="background: #f1f5f9; color: #475569; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #cbd5e1;">
+                                                <th style="padding: 7px 12px; text-align: left; font-weight: 700;">Cidade / Polo</th>
+                                                <th style="padding: 7px 12px; text-align: right; font-weight: 700;">Orçado</th>
+                                                <th style="padding: 7px 12px; text-align: right; font-weight: 700;">Medido</th>
+                                                <th style="padding: 7px 12px; text-align: right; font-weight: 700;">Saldo</th>
+                                                <th style="padding: 7px 12px; text-align: right; font-weight: 700;">% Medido</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -1153,20 +1154,20 @@
 
                             <!-- TABELA: RANKING DE OBRAS (MAIOR VALOR PARA O MENOR) -->
                             <tr>
-                                <td style="padding: 16px 24px 0;">
-                                    <div style="font-size: 12px; font-weight: 800; color: #0f172a; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">
-                                        🏆 Ranking de Obras por Valor (Top 10)
+                                <td style="padding: 20px 24px 0;">
+                                    <div style="font-size: 11px; font-weight: 700; color: #334155; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px;">
+                                        Ranking de Obras por Valor (Top 10)
                                     </div>
-                                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden;">
+                                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border: 1px solid #e2e8f0; border-radius: 6px; overflow: hidden;">
                                         <thead>
-                                            <tr style="background: #004f71; color: #ffffff; font-size: 10px; text-transform: uppercase;">
-                                                <th style="padding: 7px 6px; text-align: center; width: 28px;">#</th>
-                                                <th style="padding: 7px 8px; text-align: left;">Obra / Cidade</th>
-                                                <th style="padding: 7px 6px; text-align: center; width: 95px;">Status</th>
-                                                <th style="padding: 7px 8px; text-align: right; width: 85px;">Orçado</th>
-                                                <th style="padding: 7px 8px; text-align: right; width: 80px;">Medido</th>
-                                                <th style="padding: 7px 8px; text-align: right; width: 80px;">Saldo</th>
-                                                <th style="padding: 7px 8px; text-align: right; width: 45px;">%</th>
+                                            <tr style="background: #004f71; color: #ffffff; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px;">
+                                                <th style="padding: 8px 6px; text-align: center; width: 32px; font-weight: 700;">#</th>
+                                                <th style="padding: 8px 10px; text-align: left; font-weight: 700;">Obra / Cidade</th>
+                                                <th style="padding: 8px 6px; text-align: center; width: 95px; font-weight: 700;">Status</th>
+                                                <th style="padding: 8px 10px; text-align: right; width: 90px; font-weight: 700;">Orçado</th>
+                                                <th style="padding: 8px 10px; text-align: right; width: 85px; font-weight: 700;">Medido</th>
+                                                <th style="padding: 8px 10px; text-align: right; width: 85px; font-weight: 700;">Saldo</th>
+                                                <th style="padding: 8px 10px; text-align: right; width: 45px; font-weight: 700;">%</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -1179,19 +1180,19 @@
                                 </td>
                             </tr>
 
-                            <!-- BOTÃO DIRETO PRO BI -->
+                            <!-- BOTÃO DISCRETO E CORPORATIVO -->
                             <tr>
-                                <td style="padding: 18px 24px; text-align: center;">
-                                    <a href="${BI_URL}" target="_blank" style="display: inline-block; background: #004f71; color: #ffffff; text-decoration: none; padding: 11px 26px; border-radius: 6px; font-size: 12px; font-weight: 700;">
-                                        Abrir Radar Completo no BI JLE
+                                <td style="padding: 20px 24px 24px; text-align: center;">
+                                    <a href="${BI_URL}" target="_blank" style="display: inline-block; background: #004f71; color: #ffffff; text-decoration: none; padding: 10px 24px; border-radius: 5px; font-size: 12px; font-weight: 600; letter-spacing: 0.2px;">
+                                        Acessar Radar Completo no BI JLE
                                     </a>
                                 </td>
                             </tr>
 
-                            <!-- RODAPÉ COMPACTO -->
+                            <!-- RODAPÉ INSTITUCIONAL -->
                             <tr>
                                 <td style="background: #f8fafc; padding: 12px 24px; border-top: 1px solid #e2e8f0; text-align: center; font-size: 10px; color: #94a3b8;">
-                                    BI JLE Telecom • Relatório Automático • Engenharia Claro PR
+                                    JLE Telecomunicações • Informativo Gerencial Interno
                                 </td>
                             </tr>
                         </table>
