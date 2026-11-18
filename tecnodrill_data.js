@@ -1,5 +1,5 @@
 ﻿window.TECNODRILL_DATA = {
-    "generated_at":  "2026-11-17 13:08:42",
+    "generated_at":  "2026-11-17 21:11:52",
     "empresa":  "Tecnodrill",
     "categories_origin":  {
                               "entradas":  [
@@ -21098,10 +21098,26 @@
                              "valor_liquido":  -6.3,
                              "meio_pagamento":  "Pix",
                              "is_transfer":  false
+                         },
+                         {
+                             "id":  "NOV__2026_TECNODRILL_MAX_47",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "NOV _2026 TECNODRILL MAX",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-16",
+                             "uf":  "NOVEMBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Pedágio",
+                             "descricao":  "PEDAGIO",
+                             "valor_nominal":  104.31,
+                             "valor_liquido":  -104.31,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
                          }
                      ],
     "caixa":  {
-                  "gerado_em":  "2026-11-17 13:08:14",
+                  "gerado_em":  "2026-11-17 21:11:23",
                   "carlos":  [
                                  {
                                      "id":  "carlos-1",
