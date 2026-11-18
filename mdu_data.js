@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-11-18 15:00:24
+// Dados MDU Compactados - Gerado em: 2026-11-18 16:00:31
 window.MDU_METADATA = {
-    "generated_at": "2026-11-18 15:00:24",
+    "generated_at": "2026-11-18 16:00:31",
     "total_rows": 6046,
     "geocoded_new": 0
 };
@@ -44108,10 +44108,10 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "493",
-        "relatorio_por": "",
+        "relatorio_por": "JENIFFER",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610489194",
         "area": "TRZAA",
         "node": "TRZAIA",
@@ -44126,7 +44126,7 @@ window.MDU_DATA = [
         "data_fusao": "06/08",
         "data_baixa": "06/08",
         "obs_baixa": "ADEQUADO",
-        "data_relatorio": "",
+        "data_relatorio": "18/11/2026",
         "data_medicao": "",
         "valor_medicao": 810.04,
         "valor_repasse": 520.0,
@@ -184078,8 +184078,8 @@ window.MDU_DATA = [
         "aging": "9",
         "relatorio_por": "JENIFFER",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "364498374",
         "area": "SJOAA",
         "node": "MRD17A",
@@ -184094,7 +184094,7 @@ window.MDU_DATA = [
         "data_fusao": "06/11/2026",
         "data_baixa": "09/11/2026",
         "obs_baixa": "",
-        "data_relatorio": "",
+        "data_relatorio": "18/11/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 620.0,
