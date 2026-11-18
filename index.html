@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -53,6 +53,7 @@
     <link rel="stylesheet" href="sar_styles.css?v=3.57">
     <link rel="stylesheet" href="parcelamentos_styles.css?v=1.3">
     <link rel="stylesheet" href="financiamentos_styles.css?v=1.2">
+    <link rel="stylesheet" href="engenharia_styles.css?v=1.0">
     <link rel="stylesheet" href="executivo_jle_styles.css?v=3.3">
     
     <!-- Leaflet Map CSS & JS CDNs -->
@@ -93,6 +94,9 @@
             </a>
             <a class="nav-item" id="nav-manutencao" onclick="switchView('manutencao')" style="display:none;" title="Manutenção">
                 <i class="fa-solid fa-wrench"></i> <span>Manutenção</span>
+            </a>
+            <a class="nav-item" id="nav-engenharia" onclick="switchView('engenharia')" style="display:none;" title="Engenharia PR">
+                <i class="fa-solid fa-helmet-safety"></i> <span>Engenharia PR</span>
             </a>
             <!-- Accordion Financeiro -->
             <div class="nav-group" id="nav-group-financeiro">
@@ -4110,6 +4114,184 @@
                 </div>
             </div>
 
+            <!-- VIEW: ENGENHARIA CLARO PARANÁ -->
+            <div id="view-engenharia-container" class="view-panel" style="display: none;">
+                <!-- Sub-Abas do Módulo -->
+                <div class="eng-nav-tabs">
+                    <button class="eng-tab-btn active" data-tab="indicadores" onclick="switchEngTab('indicadores')">
+                        <i class="fa-solid fa-chart-pie"></i> Indicadores & Funil
+                    </button>
+                    <button class="eng-tab-btn" data-tab="relatorio" onclick="switchEngTab('relatorio')">
+                        <i class="fa-solid fa-table-list"></i> Relatório de Obras & OSs
+                    </button>
+                </div>
+
+                <!-- Barra de Filtros Unificada -->
+                <div class="eng-filters-bar">
+                    <div class="eng-filter-group" style="flex: 1; min-width: 220px;">
+                        <label><i class="fa-solid fa-magnifying-glass"></i> Busca Rápida</label>
+                        <input type="text" id="eng-filter-search" class="eng-filter-input" placeholder="Buscar por Obra, Site, OM ou Cidade..." oninput="applyEngenhariaFilters()">
+                    </div>
+                    <div class="eng-filter-group" style="min-width: 170px;">
+                        <label><i class="fa-solid fa-location-dot"></i> Cidade / Polo</label>
+                        <select id="eng-filter-cidade" class="eng-filter-select" onchange="applyEngenhariaFilters()">
+                            <option value="ALL">Todas as Cidades</option>
+                        </select>
+                    </div>
+                    <div class="eng-filter-group" style="min-width: 180px;">
+                        <label><i class="fa-solid fa-filter"></i> Status</label>
+                        <select id="eng-filter-status" class="eng-filter-select" onchange="applyEngenhariaFilters()">
+                            <option value="ALL">Todos os Status</option>
+                        </select>
+                    </div>
+                    <div class="eng-filter-group">
+                        <label><i class="fa-solid fa-layer-group"></i> Modo de Visão</label>
+                        <div class="eng-view-mode-toggle">
+                            <button class="eng-toggle-btn active" data-mode="obras" onclick="switchEngViewMode('obras')">
+                                <i class="fa-solid fa-diagram-project"></i> Obras (125)
+                            </button>
+                            <button class="eng-toggle-btn" data-mode="oss" onclick="switchEngViewMode('oss')">
+                                <i class="fa-solid fa-list-check"></i> OSs (194)
+                            </button>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="eng-btn-action" onclick="clearEngenhariaFilters()" title="Limpar todos os filtros">
+                            <i class="fa-solid fa-eraser"></i> Limpar
+                        </button>
+                        <button class="eng-btn-action eng-btn-excel" onclick="exportEngenhariaExcel()" title="Exportar dados filtrados para Excel">
+                            <i class="fa-solid fa-file-excel"></i> Exportar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Grid de KPIs (4 Cards) -->
+                <div class="eng-kpi-grid">
+                    <div class="eng-kpi-card kpi-blue">
+                        <div class="eng-kpi-header">
+                            <span class="eng-kpi-title">Carteira de Obras</span>
+                            <i class="fa-solid fa-diagram-project eng-kpi-icon" style="color: #388bfd;"></i>
+                        </div>
+                        <div class="eng-kpi-value" id="eng-kpi-carteira">125 Obras</div>
+                        <div class="eng-kpi-footer">
+                            <span id="eng-kpi-carteira-sub">194 OSs vinculadas</span>
+                            <span class="eng-badge eng-badge-os-count">PR</span>
+                        </div>
+                    </div>
+
+                    <div class="eng-kpi-card kpi-purple">
+                        <div class="eng-kpi-header">
+                            <span class="eng-kpi-title">Valor Total Orçado</span>
+                            <i class="fa-solid fa-file-invoice-dollar eng-kpi-icon" style="color: #8b5cf6;"></i>
+                        </div>
+                        <div class="eng-kpi-value" id="eng-kpi-orcado">R$ 0,00</div>
+                        <div class="eng-kpi-footer">
+                            <span>Cotações aprovadas e enviadas</span>
+                            <i class="fa-solid fa-chart-line" style="color: #8b5cf6;"></i>
+                        </div>
+                    </div>
+
+                    <div class="eng-kpi-card kpi-green">
+                        <div class="eng-kpi-header">
+                            <span class="eng-kpi-title">Total Medido Acumulado</span>
+                            <i class="fa-solid fa-circle-check eng-kpi-icon" style="color: #10b981;"></i>
+                        </div>
+                        <div class="eng-kpi-value" id="eng-kpi-medido" style="color: #10b981;">R$ 0,00</div>
+                        <div class="eng-kpi-footer">
+                            <span id="eng-kpi-medido-sub">0,0% faturado</span>
+                            <span class="eng-badge status-finalizado">Faturado</span>
+                        </div>
+                    </div>
+
+                    <div class="eng-kpi-card kpi-amber">
+                        <div class="eng-kpi-header">
+                            <span class="eng-kpi-title">Saldo a Medir</span>
+                            <i class="fa-solid fa-hourglass-half eng-kpi-icon" style="color: #f59e0b;"></i>
+                        </div>
+                        <div class="eng-kpi-value" id="eng-kpi-saldo" style="color: #f59e0b;">R$ 0,00</div>
+                        <div class="eng-kpi-footer">
+                            <span id="eng-kpi-saldo-sub">0,0% em carteira</span>
+                            <span id="eng-kpi-finalizadas-sub">64 OSs concluídas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conteúdo da Aba 1: Indicadores & Funil -->
+                <div id="eng-tab-indicadores" class="eng-tab-content">
+                    <div class="eng-charts-grid">
+                        <!-- Gráfico 1: Funil de Ciclo de Vida -->
+                        <div class="eng-chart-card">
+                            <div class="eng-chart-header">
+                                <span class="eng-chart-title">
+                                    <i class="fa-solid fa-filter" style="color: #388bfd;"></i> Funil do Ciclo de Vida da Carteira
+                                </span>
+                                <span style="font-size: 0.75rem; color: var(--text-secondary);">Obras por Etapa</span>
+                            </div>
+                            <div class="eng-chart-container">
+                                <canvas id="chart-eng-funil"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Gráfico 2: Evolução de Medições -->
+                        <div class="eng-chart-card">
+                            <div class="eng-chart-header">
+                                <span class="eng-chart-title">
+                                    <i class="fa-solid fa-arrow-trend-up" style="color: #10b981;"></i> Evolução de Medições Mensais
+                                </span>
+                                <span style="font-size: 0.75rem; color: var(--text-secondary);">Parciais & Finais</span>
+                            </div>
+                            <div class="eng-chart-container">
+                                <canvas id="chart-eng-evolucao"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Gráfico 3: Top Cidades -->
+                        <div class="eng-chart-card">
+                            <div class="eng-chart-header">
+                                <span class="eng-chart-title">
+                                    <i class="fa-solid fa-city" style="color: #8b5cf6;"></i> Top 10 Cidades / Polos
+                                </span>
+                                <span style="font-size: 0.75rem; color: var(--text-secondary);">Orçado vs Medido</span>
+                            </div>
+                            <div class="eng-chart-container">
+                                <canvas id="chart-eng-cidades"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Gráfico 4: Status Workflow Claro -->
+                        <div class="eng-chart-card">
+                            <div class="eng-chart-header">
+                                <span class="eng-chart-title">
+                                    <i class="fa-solid fa-clock-rotate-left" style="color: #f59e0b;"></i> Status no Workflow da Claro
+                                </span>
+                                <span style="font-size: 0.75rem; color: var(--text-secondary);">Aprovação das OSs</span>
+                            </div>
+                            <div class="eng-chart-container">
+                                <canvas id="chart-eng-workflow"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conteúdo da Aba 2: Relatório de Obras & OSs -->
+                <div id="eng-tab-relatorio" class="eng-tab-content" style="display: none;">
+                    <div class="eng-table-card">
+                        <div class="eng-table-header">
+                            <div style="font-size: 0.95rem; font-weight: 600; color: #ffffff; display: flex; align-items: center; gap: 8px;">
+                                <i class="fa-solid fa-table-list" style="color: #388bfd;"></i>
+                                <span>Detalhamento Analítico</span>
+                            </div>
+                        </div>
+                        <div id="eng-table-content">
+                            <!-- Tabela renderizada dinamicamente via JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Container para Linha do Tempo -->
+                <div id="eng-modal-container"></div>
+            </div>
+
         </div>
     </main>
 
@@ -4310,6 +4492,8 @@
     <script src="parcelamentos_app.js?v=1.7"></script>
     <script src="financiamentos_data.js?v=20261016084048"></script>
     <script src="financiamentos_app.js?v=1.4"></script>
+    <script src="engenharia_data.js?v=1.0"></script>
+    <script src="engenharia_app.js?v=1.0"></script>
     <script src="email_preview_helper.js?v=1.3"></script>
 
     <!-- Logica de UI Autônoma (Sem Dependências de CDNs) -->
@@ -4970,6 +5154,7 @@
             { id: 'mdu',          label: 'MDU',                     icon: 'fa-building',          navId: 'nav-mdu' },
             { id: 'sar',          label: 'SAR',                     icon: 'fa-network-wired',     navId: 'nav-sar' },
             { id: 'manutencao',   label: 'Manutenção',              icon: 'fa-wrench',            navId: 'nav-manutencao' },
+            { id: 'engenharia',   label: 'Engenharia PR',           icon: 'fa-helmet-safety',     navId: 'nav-engenharia' },
             { id: 'parcelamentos', label: 'Impostos',               icon: 'fa-file-invoice',      navId: 'nav-parcelamentos' },
             { id: 'financiamentos', label: 'Financiamentos',        icon: 'fa-hand-holding-dollar', navId: 'nav-financiamentos' },
             { id: 'admin',        label: 'Painel Admin',            icon: 'fa-shield-halved',    navId: 'nav-admin',        adminOnly: true },
@@ -5437,6 +5622,12 @@
                 } else {
                     timestampEl.innerText = 'Desconhecido';
                 }
+            } else if (viewName === 'engenharia') {
+                if (typeof window.ENGENHARIA_METADATA !== 'undefined' && window.ENGENHARIA_METADATA.generated_at) {
+                    timestampEl.innerText = formatTimestamp(window.ENGENHARIA_METADATA.generated_at);
+                } else {
+                    timestampEl.innerText = 'Desconhecido';
+                }
             } else if (viewName === 'dashboard') {
                 if (typeof window.CASH_FLOW_DATA !== 'undefined' && window.CASH_FLOW_DATA.generated_at) {
                     timestampEl.innerText = formatTimestamp(window.CASH_FLOW_DATA.generated_at);
@@ -5811,6 +6002,14 @@
                 document.getElementById('view-subtitle').innerHTML = 'Análise de ordens de manutenção e atendimento de campo — Claro RS';
                 if (typeof window.initManutencaoModule === 'function') {
                     window.initManutencaoModule();
+                }
+            } else if (viewName === 'engenharia') {
+                document.getElementById('filters-container').style.display = 'none';
+                if (mobileToggleBtn) mobileToggleBtn.style.display = 'none';
+                document.getElementById('view-title').innerText = 'Engenharia Claro PR';
+                document.getElementById('view-subtitle').innerHTML = 'Acompanhamento Diário de Obras, Cotações, Medições Parciais e Workflow — Paraná';
+                if (typeof window.initEngenhariaModule === 'function') {
+                    window.initEngenhariaModule();
                 }
             } else if (viewName === 'tecnodrill') {
                 document.getElementById('filters-container').style.display = 'none';

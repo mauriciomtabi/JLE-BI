@@ -98,7 +98,7 @@ if (Test-Path "$workingDir\update_parcelamentos.ps1") {
 Write-Output ""
 
 # 9. Atualizar Financiamentos & PMTs
-Write-Output "--- [9/9] Atualizando Financiamentos & PMTs ---"
+Write-Output "--- [9/10] Atualizando Financiamentos & PMTs ---"
 if (Test-Path "$workingDir\update_financiamentos.ps1") {
     try {
         & "$workingDir\update_financiamentos.ps1" -Force
@@ -108,11 +108,22 @@ if (Test-Path "$workingDir\update_financiamentos.ps1") {
 }
 Write-Output ""
 
+# 10. Atualizar Engenharia Claro PR
+Write-Output "--- [10/10] Atualizando Engenharia Claro PR ---"
+if (Test-Path "$workingDir\update_engenharia.ps1") {
+    try {
+        & "$workingDir\update_engenharia.ps1"
+    } catch {
+        Write-Warning "Falha na atualizacao de Engenharia Claro PR: $($_.Exception.Message)"
+    }
+}
+Write-Output ""
+
 # Sincronização Consolidada no Git / PWA Cache
 Write-Output "--- Sincronizacao Consolidada com GitHub / PWA ---"
 $gitPath = if (Test-Path "C:\Program Files\Git\cmd\git.exe") { "C:\Program Files\Git\cmd\git.exe" } elseif (Test-Path "$env:LOCALAPPDATA\Programs\Git\cmd\git.exe") { "$env:LOCALAPPDATA\Programs\Git\cmd\git.exe" } else { (Get-Command git -ErrorAction SilentlyContinue).Source }
 if (Test-Path $gitPath) {
-    $dataFiles = @("data.js", "executivo_jle_data.js", "tecnodrill_data.js", "cobranca_data.js", "veiculos_data.js", "manutencao_data.js", "mdu_data.js", "sar_data.js", "parcelamentos_data.js", "financiamentos_data.js")
+    $dataFiles = @("data.js", "executivo_jle_data.js", "tecnodrill_data.js", "cobranca_data.js", "veiculos_data.js", "manutencao_data.js", "mdu_data.js", "sar_data.js", "parcelamentos_data.js", "financiamentos_data.js", "engenharia_data.js")
     $hasChanges = $false
     foreach ($df in $dataFiles) {
         $st = & $gitPath status --porcelain $df

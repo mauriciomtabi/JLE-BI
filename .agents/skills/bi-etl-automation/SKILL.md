@@ -24,6 +24,7 @@ Este documento estabelece as diretrizes obrigatórias para manipulação, extra�
 | **SAR Operacional** | `update_sar.ps1` | `\\10.121.21.252\operacao\SAR\` / GSheets | `sar_local.csv` | `sar_data.js` (`window.SAR_DATA`) |
 | **Gestão Tributária & Impostos** | `update_parcelamentos.ps1` | `\\10.121.21.252\controladoria\Vitor\TRIBUTARIO\` | `parcelamentos_local.xlsx` | `parcelamentos_data.js` (`window.PARCELAMENTOS_DATA`) |
 | **Financiamentos & PMTs** | `update_financiamentos.ps1` | `\\10.121.21.252\controladoria\Vitor\FINANCEIRO\PMTs FINANCIAMENTOS\` | `financiamentos_local/` | `financiamentos_data.js` (`window.FINANCIAMENTOS_DATA`) |
+| **Engenharia Claro PR** | `update_engenharia.ps1` | `\\10.121.21.252\medicoes\Filial PR\Claro\Engenharia\MEDIÇOES ORÇAMENTOS ENGENHARIA PR\` | `engenharia_local.xlsx` | `engenharia_data.js` (`window.ENGENHARIA_DATA`) |
 | **Orquestrador Mestre** | `update_all.ps1` | Executa todos os módulos acima em sequência e sincroniza git/PWA | - | Todos os arquivos `*_data.js` |
 
 ---
