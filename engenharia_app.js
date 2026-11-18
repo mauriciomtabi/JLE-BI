@@ -21,12 +21,13 @@
         rowsPerPage: 50,
         sortCol: 'dias_aberto',  // Padrão: ordenar por tempo em aberto (maior risco primeiro)
         sortAsc: false,
+        rankingSortField: 'v_orc',
+        rankingSortDir: 'desc',
         expandedObras: new Set(),
         charts: {
             funil: null,
             evolucao: null,
-            cidades: null,
-            workflow: null
+            cidades: null
         }
     };
 
@@ -655,12 +656,12 @@
         renderTable();
     };
 
-    // Gráficos Chart.js
+    // Gráficos Chart.js & Ranking
     function renderCharts() {
         renderFunilChart();
         renderEvolucaoChart();
         renderCidadesChart();
-        renderWorkflowChart();
+        renderRankingTable();
     }
 
     // Gráfico 1: Funil de Status Operacional
@@ -970,103 +971,111 @@
         });
     }
 
-    // Gráfico 4: Radar de Aging das Obras em Aberto (Donut com Faixas de Dias e Saldo Represado)
-    function renderWorkflowChart() {
-        const canvas = document.getElementById('chart-eng-workflow');
-        if (!canvas) return;
-
-        if (state.charts.workflow) {
-            state.charts.workflow.destroy();
-            state.charts.workflow = null;
+    // Ordenação do Ranking de Obras
+    window.sortRankingTable = function (field) {
+        if (state.rankingSortField === field) {
+            state.rankingSortDir = (state.rankingSortDir === 'desc') ? 'asc' : 'desc';
+        } else {
+            state.rankingSortField = field;
+            state.rankingSortDir = 'desc';
         }
+        renderRankingTable();
+    };
 
-        const data = window.ENGENHARIA_DATA;
-        if (!data) return;
+    // Renderização do Ranking de Obras por Valor (Maior para o Menor)
+    function renderRankingTable() {
+        const tbody = document.getElementById('eng-ranking-table-body');
+        const countEl = document.getElementById('eng-ranking-count');
+        if (!tbody) return;
 
         const { obras } = getFilteredData();
-        // Foco nas obras em aberto para visualização do Radar de Aging
-        const openObras = obras.filter(o => o.is_em_aberto);
+        const field = state.rankingSortField || 'v_orc';
+        const dir = state.rankingSortDir || 'desc';
 
-        let c30 = 0, c90 = 0, c180 = 0, ccrit = 0;
-        let s30 = 0, s90 = 0, s180 = 0, scrit = 0;
+        const sorted = [...obras].sort((a, b) => {
+            let va = a[field] ?? 0;
+            let vb = b[field] ?? 0;
+            if (typeof va === 'string') va = va.toLowerCase();
+            if (typeof vb === 'string') vb = vb.toLowerCase();
+            if (va < vb) return dir === 'asc' ? -1 : 1;
+            if (va > vb) return dir === 'asc' ? 1 : -1;
+            return 0;
+        });
 
-        openObras.forEach(o => {
-            const d = o.dias_aberto || 0;
-            const s = o.saldo || 0;
-            if (d <= 30) {
-                c30++;
-                s30 += s;
-            } else if (d <= 90) {
-                c90++;
-                s90 += s;
-            } else if (d <= 180) {
-                c180++;
-                s180 += s;
+        if (countEl) countEl.textContent = `${sorted.length} ${sorted.length === 1 ? 'Obra' : 'Obras'}`;
+
+        // Atualiza ícones dos cabeçalhos
+        ['v_orc', 'v_medido', 'saldo', 'pct_executado'].forEach(f => {
+            const icon = document.getElementById(`rank-icon-${f}`);
+            if (icon) {
+                if (f === field) {
+                    icon.className = dir === 'desc' ? 'fa-solid fa-sort-down' : 'fa-solid fa-sort-up';
+                    icon.style.color = '#f59e0b';
+                } else {
+                    icon.className = 'fa-solid fa-sort';
+                    icon.style.color = '';
+                }
+            }
+        });
+
+        if (sorted.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding: 30px; color: var(--text-secondary);">Nenhuma obra encontrada para os filtros selecionados.</td></tr>`;
+            return;
+        }
+
+        let html = '';
+        sorted.forEach((o, idx) => {
+            const pos = idx + 1;
+            let posBadge = '';
+            if (pos === 1) {
+                posBadge = `<span style="display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:linear-gradient(135deg, #ffd700, #b8860b); color:#000; font-weight:800; font-size:11px; box-shadow:0 0 8px rgba(255,215,0,0.5);" title="1º Maior Valor"><i class="fa-solid fa-crown" style="font-size:10px;"></i></span>`;
+            } else if (pos === 2) {
+                posBadge = `<span style="display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:linear-gradient(135deg, #e0e0e0, #9e9e9e); color:#000; font-weight:800; font-size:11px;" title="2º Maior Valor">2º</span>`;
+            } else if (pos === 3) {
+                posBadge = `<span style="display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:linear-gradient(135deg, #cd7f32, #8b4513); color:#fff; font-weight:800; font-size:11px;" title="3º Maior Valor">3º</span>`;
             } else {
-                ccrit++;
-                scrit += s;
+                posBadge = `<span style="display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:6px; background:rgba(255,255,255,0.06); color:var(--text-secondary); font-size:11px; font-weight:600;">${pos}º</span>`;
             }
+
+            const sitesBadges = (o.sites || []).slice(0, 3).map(s => `<span class="eng-site-badge">${s}</span>`).join('');
+            const extraSites = (o.sites && o.sites.length > 3) ? `<span class="eng-site-badge" style="background:rgba(255,255,255,0.06);">+${o.sites.length - 3}</span>` : '';
+            const statusCls = getStatusClass(o.status);
+
+            html += `
+                <tr style="transition: background 0.15s ease;">
+                    <td style="text-align: center;">${posBadge}</td>
+                    <td>
+                        <strong style="color: var(--text-primary); cursor: pointer;" onclick="window.openObraModal('${o.id}')" title="Clique para ver detalhes">${o.nome}</strong>
+                        <div style="font-size:0.72rem; color:var(--text-secondary); margin-top:2px;">
+                            <i class="fa-solid fa-layer-group"></i> ${o.qtd_os} ${o.qtd_os === 1 ? 'OS vinculada' : 'OSs vinculadas'}
+                        </div>
+                    </td>
+                    <td>
+                        <div style="font-weight: 600; color: #ffffff; font-size: 0.85rem;">${o.cidade || '-'}</div>
+                        <div style="margin-top: 3px; display: flex; flex-wrap: wrap; gap: 4px;">${sitesBadges}${extraSites}</div>
+                    </td>
+                    <td><span class="eng-badge ${statusCls}">${o.status}</span></td>
+                    <td style="text-align: right; font-weight: 700; color: #ffffff;">${formatMoeda(o.v_orc)}</td>
+                    <td style="text-align: right; color: #10b981; font-weight: 600;">${formatMoeda(o.v_medido)}</td>
+                    <td style="text-align: right; color: #f59e0b; font-weight: 600;">${formatMoeda(o.saldo)}</td>
+                    <td>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <div class="eng-progress-bar-bg" style="flex: 1;">
+                                <div class="eng-progress-bar-fill" style="width: ${Math.min(100, o.pct_executado || 0)}%;"></div>
+                            </div>
+                            <span style="font-size: 0.75rem; color: var(--text-secondary); min-width: 38px; text-align: right;">${(o.pct_executado || 0).toFixed(1)}%</span>
+                        </div>
+                    </td>
+                    <td style="text-align: center;">
+                        <button class="eng-btn-action" style="padding: 5px 9px; font-size: 0.75rem; border-radius: 6px;" onclick="window.openObraModal('${o.id}')" title="Ver Detalhes">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </td>
+                </tr>
+            `;
         });
 
-        const labels = ['Até 30 dias', '31 a 90 dias', '91 a 180 dias', 'Mais de 180 dias'];
-        const counts = [c30, c90, c180, ccrit];
-        const saldos = [s30, s90, s180, scrit];
-        const totalOpen = counts.reduce((a, b) => a + b, 0);
-
-        const pluginList = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
-
-        state.charts.workflow = new Chart(canvas, {
-            type: 'doughnut',
-            data: {
-                labels: labels,
-                datasets: [{
-                    data: counts,
-                    backgroundColor: ['#10b981', '#facc15', '#f87171', '#ef4444'],
-                    borderColor: '#161b22',
-                    borderWidth: 2
-                }]
-            },
-            plugins: pluginList,
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: { color: '#c9d1d9', boxWidth: 12, padding: 12 }
-                    },
-                    tooltip: {
-                        backgroundColor: '#161b22',
-                        borderColor: 'rgba(255,255,255,0.1)',
-                        borderWidth: 1,
-                        callbacks: {
-                            label: (ctx) => {
-                                const idx = ctx.dataIndex;
-                                const cnt = counts[idx];
-                                const sld = saldos[idx];
-                                const pct = totalOpen > 0 ? formatPct(cnt / totalOpen * 100) : '0%';
-                                return ` ${labels[idx]}: ${cnt} Obras (${pct})`;
-                            },
-                            afterLabel: (ctx) => {
-                                return `Saldo Represado: ${formatMoeda(saldos[ctx.dataIndex])}`;
-                            }
-                        }
-                    },
-                    datalabels: {
-                        display: (ctx) => ctx.dataset.data[ctx.dataIndex] > 0,
-                        color: '#ffffff',
-                        font: { family: 'Outfit, Inter, sans-serif', weight: 'bold', size: 11 },
-                        formatter: (val, ctx) => {
-                            if (!val || totalOpen <= 0) return '';
-                            const pct = ((val / totalOpen) * 100).toFixed(0);
-                            return `${val}\n(${pct}%)`;
-                        },
-                        textAlign: 'center'
-                    }
-                },
-                cutout: '60%'
-            }
-        });
+        tbody.innerHTML = html;
     }
 
     // Modal de Detalhes da Obra

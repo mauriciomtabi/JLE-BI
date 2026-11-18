@@ -4261,30 +4261,53 @@
                             </div>
                         </div>
 
-                        <!-- Gráfico 3: Top Cidades -->
-                        <div class="eng-chart-card">
+                        <!-- Gráfico 3: Top Cidades (Toda a extensão horizontal) -->
+                        <div class="eng-chart-card" style="grid-column: 1 / -1;">
                             <div class="eng-chart-header">
                                 <span class="eng-chart-title">
                                     <i class="fa-solid fa-city" style="color: #8b5cf6;"></i> Top 10 Cidades / Polos
                                 </span>
                                 <span style="font-size: 0.75rem; color: var(--text-secondary);">Orçado vs Medido</span>
                             </div>
-                            <div class="eng-chart-container">
+                            <div class="eng-chart-container" style="height: 320px;">
                                 <canvas id="chart-eng-cidades"></canvas>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Gráfico 4: Radar de Aging das Obras em Aberto -->
-                        <div class="eng-chart-card">
-                            <div class="eng-chart-header">
-                                <span class="eng-chart-title">
-                                    <i class="fa-solid fa-hourglass-half" style="color: #ef4444;"></i> Radar: Aging das Obras em Aberto
+                    <!-- Ranking de Obras por Valor (Classificadas do Maior para o Menor) -->
+                    <div class="eng-table-card" style="margin-top: 20px;">
+                        <div class="eng-table-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                            <div style="font-size: 0.95rem; font-weight: 700; color: #ffffff; display: flex; align-items: center; gap: 8px;">
+                                <i class="fa-solid fa-ranking-star" style="color: #f59e0b; font-size: 1.15rem;"></i>
+                                <span>Ranking de Obras por Valor</span>
+                                <span style="font-size: 0.75rem; color: var(--text-secondary); font-weight: normal; margin-left: 6px;">(Classificadas do maior para o menor)</span>
+                            </div>
+                            <div style="display: flex; gap: 8px; align-items: center;">
+                                <span class="eng-badge" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3);">
+                                    <i class="fa-solid fa-arrow-down-wide-short"></i> <span id="eng-ranking-count">125 Obras</span>
                                 </span>
-                                <span style="font-size: 0.75rem; color: var(--text-secondary);">Faixas de Dias & Saldo Represado</span>
                             </div>
-                            <div class="eng-chart-container">
-                                <canvas id="chart-eng-workflow"></canvas>
-                            </div>
+                        </div>
+                        <div class="eng-table-container" style="max-height: 580px; overflow-y: auto;">
+                            <table class="eng-table" id="eng-ranking-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 55px; text-align: center;">Posição</th>
+                                        <th>Obra / Solicitação</th>
+                                        <th>Cidade / Sites</th>
+                                        <th>Status</th>
+                                        <th style="text-align: right; cursor: pointer;" onclick="window.sortRankingTable('v_orc')">Vlr Orçado <i id="rank-icon-v_orc" class="fa-solid fa-sort-down" style="color:#f59e0b;"></i></th>
+                                        <th style="text-align: right; cursor: pointer;" onclick="window.sortRankingTable('v_medido')">Total Medido <i id="rank-icon-v_medido" class="fa-solid fa-sort"></i></th>
+                                        <th style="text-align: right; cursor: pointer;" onclick="window.sortRankingTable('saldo')">Saldo a Medir <i id="rank-icon-saldo" class="fa-solid fa-sort"></i></th>
+                                        <th style="width: 140px; cursor: pointer;" onclick="window.sortRankingTable('pct_executado')">% Executado <i id="rank-icon-pct_executado" class="fa-solid fa-sort"></i></th>
+                                        <th style="width: 70px; text-align: center;">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="eng-ranking-table-body">
+                                    <!-- Preenchido dinamicamente via JS -->
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
