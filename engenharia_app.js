@@ -227,43 +227,16 @@
         renderActiveTab();
     };
 
-    // Renderização do Banner de Chips de Aging
+    // Atualização dos Indicadores de Radar
     function renderRadarBanner() {
         const data = window.ENGENHARIA_DATA;
         if (!data) return;
 
         const summary = data.summary || {};
-        const dist = summary.aging_distribution || {};
-
-        const d30 = dist.ate_30d || { count: 6, saldo: 222263.51 };
-        const d90 = dist['31_a_90d'] || { count: 6, saldo: 184088.43 };
-        const d180 = dist['91_a_180d'] || { count: 15, saldo: 793650.87 };
-        const dcrit = dist.mais_180d || { count: 58, saldo: 3237263.96 };
-
-        const setChip = (idCount, idSaldo, count, saldo) => {
-            const elC = document.getElementById(idCount);
-            const elS = document.getElementById(idSaldo);
-            if (elC) elC.textContent = `${count} ${count === 1 ? 'Obra' : 'Obras'}`;
-            if (elS) elS.textContent = formatMoeda(saldo);
-        };
-
-        setChip('chip-count-30', 'chip-saldo-30', d30.count, d30.saldo);
-        setChip('chip-count-90', 'chip-saldo-90', d90.count, d90.saldo);
-        setChip('chip-count-180', 'chip-saldo-180', d180.count, d180.saldo);
-        setChip('chip-count-critical', 'chip-saldo-critical', dcrit.count, dcrit.saldo);
-
-        // Atualiza contagem do botão de radar
         const radarBtnCount = document.getElementById('eng-radar-count');
         if (radarBtnCount) {
-            radarBtnCount.textContent = summary.obras_em_aberto || 85;
+            radarBtnCount.textContent = summary.obras_em_aberto || 84;
         }
-
-        // Atualiza estado ativo dos chips
-        document.querySelectorAll('.eng-aging-chip').forEach(c => c.classList.remove('active'));
-        if (state.filterAging === 'ate_30d') document.getElementById('chip-aging-30')?.classList.add('active');
-        if (state.filterAging === '31_a_90d') document.getElementById('chip-aging-90')?.classList.add('active');
-        if (state.filterAging === '91_a_180d') document.getElementById('chip-aging-180')?.classList.add('active');
-        if (state.filterAging === 'mais_180d') document.getElementById('chip-aging-critical')?.classList.add('active');
     }
 
     // Renderização da Aba Ativa
