@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-11-18 08:07:41
+// Dados MDU Compactados - Gerado em: 2026-11-18 08:38:50
 window.MDU_METADATA = {
-    "generated_at": "2026-11-18 08:07:41",
+    "generated_at": "2026-11-18 08:38:50",
     "total_rows": 6046,
-    "geocoded_new": 0
+    "geocoded_new": 1
 };
 
 window.MDU_DATA = [
@@ -106120,7 +106120,7 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2503148",
-        "endereco": "R VINTE E UATRO DE MAIO 1342",
+        "endereco": "R VINTE E QUATRO DE MAIO 1342",
         "cidade": "NOVO HAMBURGO",
         "cluster": "NHO",
         "aging": "301",
@@ -106146,8 +106146,8 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 680.0,
-        "lat": -29.6800618,
-        "lng": -51.1392844,
+        "lat": -29.6777999,
+        "lng": -51.1411323,
         "geocodificado": true
     },
     {
