@@ -69556,5 +69556,22 @@ const VEICULOS_DATA = [
     "km": 209790,
     "kml": 10.34,
     "transactionId": "1112936282"
+  },
+  {
+    "date": "2026-11-18 15:46:20",
+    "plate": "MDO8383",
+    "driver": "JULIANO KLAUS ENGEL",
+    "value": 199.94,
+    "uf": "SC",
+    "costCenter": "SC",
+    "month": "NOVEMBRO",
+    "liters": 31.29,
+    "vlLiter": 6.39,
+    "model": "PARATI",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 316066,
+    "kml": 10.8,
+    "transactionId": "1113021465"
   }
 ];
