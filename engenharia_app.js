@@ -51,14 +51,13 @@
         return str;
     }
 
-    // Helper para classes semânticas de status
+    // Helper para classes semânticas de status (somente 3 status)
     function getStatusClass(status) {
         if (!status) return '';
         const s = status.toLowerCase();
         if (s.includes('finalizad')) return 'status-finalizado';
-        if (s.includes('parcial') || s.includes('andamento')) return 'status-parcial';
-        if (s.includes('aprovado')) return 'status-aprovado';
-        return 'status-orcamento';
+        if (s.includes('parcial')) return 'status-parcial';
+        return 'status-nao-executado';
     }
 
     // Badges de Aging (Tempo em Aberto)
@@ -81,20 +80,14 @@
 
     // Badges de Pendência / Próxima Ação
     function getPendenciaBadge(pendencia, status) {
-        if (!pendencia || status === '100% Finalizada' || status === 'Finalizado' || pendencia === 'Concluída') {
+        if (!pendencia || status === 'Finalizado' || pendencia === 'Concluída') {
             return `<span class="eng-pendencia-badge pendencia-ok"><i class="fa-solid fa-circle-check"></i> Concluída</span>`;
         }
         const p = String(pendencia);
-        if (p.startsWith('Claro')) {
-            return `<span class="eng-pendencia-badge pendencia-claro" title="${p}"><i class="fa-solid fa-tower-broadcast"></i> ${p}</span>`;
+        if (status === 'Executado Parcial') {
+            return `<span class="eng-pendencia-badge pendencia-jle" title="${p}"><i class="fa-solid fa-hourglass-half"></i> Medição Parcial — Pendente Final</span>`;
         }
-        if (p.startsWith('JLE')) {
-            return `<span class="eng-pendencia-badge pendencia-jle" title="${p}"><i class="fa-solid fa-helmet-safety"></i> ${p}</span>`;
-        }
-        if (p.startsWith('Misto')) {
-            return `<span class="eng-pendencia-badge pendencia-misto" title="${p}"><i class="fa-solid fa-code-fork"></i> ${p}</span>`;
-        }
-        return `<span class="eng-pendencia-badge pendencia-jle" title="${p}"><i class="fa-solid fa-wrench"></i> ${p}</span>`;
+        return `<span class="eng-pendencia-badge pendencia-claro" title="${p}"><i class="fa-solid fa-play"></i> Iniciar Execução</span>`;
     }
 
     // Inicialização do Módulo
@@ -361,7 +354,7 @@
         const saldoMedir = Math.max(0, totalOrcado - totalMedido);
         const pctMedido = totalOrcado > 0 ? (totalMedido / totalOrcado * 100) : 0;
 
-        const obrasFinalizadas = obras.filter(o => o.status === '100% Finalizada').length;
+        const obrasFinalizadas = obras.filter(o => o.status === 'Finalizado').length;
         const ossFinalizadas = oss.filter(os => os.status === 'Finalizado').length;
         const obrasCriticas = obras.filter(o => o.is_em_aberto && (o.dias_aberto || 0) > 90).length;
 
@@ -460,7 +453,7 @@
                 const isExpanded = state.expandedObras.has(obra.id);
                 const statusCls = getStatusClass(obra.status);
                 const sitesBadges = obra.sites.map(s => `<span class="eng-site-badge">${s}</span>`).join('');
-                const agingBadge = getAgingBadge(obra.dias_aberto, obra.status === '100% Finalizada');
+                const agingBadge = getAgingBadge(obra.dias_aberto, obra.status === 'Finalizado');
                 const pendBadge = getPendenciaBadge(obra.pendencia, obra.status);
 
                 html += `
@@ -515,7 +508,7 @@
                                                 <th>Parcial 2 (OM / Valor / Status)</th>
                                                 <th>Medição Final / Entroncamento</th>
                                                 <th>Aging OS</th>
-                                                <th>Status Workflow Claro</th>
+                                                <th>Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -590,7 +583,7 @@
                             <th onclick="window.sortEngTable('site')">Site <i class="fa-solid fa-sort"></i></th>
                             <th onclick="window.sortEngTable('obra')">Obra de Origem <i class="fa-solid fa-sort"></i></th>
                             <th onclick="window.sortEngTable('cidade')">Cidade <i class="fa-solid fa-sort"></i></th>
-                            <th onclick="window.sortEngTable('status')">Status Workflow <i class="fa-solid fa-sort"></i></th>
+                            <th onclick="window.sortEngTable('status')">Status <i class="fa-solid fa-sort"></i></th>
                             <th onclick="window.sortEngTable('dias_aberto')" style="text-align:center;">Tempo Aberto (Aging) <i class="fa-solid fa-sort"></i></th>
                             <th onclick="window.sortEngTable('pendencia')">Pendência / Ação <i class="fa-solid fa-sort"></i></th>
                             <th onclick="window.sortEngTable('om_orc')">OM Orçamento <i class="fa-solid fa-sort"></i></th>
@@ -721,6 +714,12 @@
 
         const labels = Object.keys(counts);
         const dataCounts = labels.map(l => counts[l]);
+        const statusColors = {
+            'Finalizado': '#10b981',
+            'Executado Parcial': '#f59e0b',
+            'Não Executado': '#ef4444'
+        };
+        const bgColors = labels.map(l => statusColors[l] || '#388bfd');
         const pluginList = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
 
         state.charts.funil = new Chart(canvas, {
@@ -730,9 +729,7 @@
                 datasets: [{
                     label: 'Quantidade de Obras',
                     data: dataCounts,
-                    backgroundColor: [
-                        '#10b981', '#388bfd', '#8b5cf6', '#f59e0b', '#ec4899', '#06b6d4'
-                    ],
+                    backgroundColor: bgColors,
                     borderRadius: 6
                 }]
             },

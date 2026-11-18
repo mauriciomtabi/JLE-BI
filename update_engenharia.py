@@ -148,74 +148,54 @@ def infer_city(site, city_val):
     return "OUTROS - PR"
 
 def classify_os_status(row_dict):
-    """Classifica o status operacional exato de uma OS."""
-    st_wf = str(row_dict.get('st_wf') or "").strip().upper()
-    dt_wf_fn = row_dict.get('dt_wf_fn')
-    dt_env_fn = row_dict.get('dt_env_fn')
+    """
+    Classifica o status operacional exato de uma OS conforme regra estrita:
+    - Se tem OM/data na coluna OM MEDIÇÃO ENTRONCAMENTO (FINAL) -> 'Finalizado'
+    - Se não tem data no entroncamento final, mas possui medições parciais -> 'Executado Parcial'
+    - Se não tem data no entroncamento final e não possui medições parciais -> 'Não Executado'
+    Somente esses 3 status são utilizados.
+    """
     om_fn = str(row_dict.get('om_fn') or "").strip()
-    v_fn = row_dict.get('v_fn', 0.0)
+    dt_env_fn = row_dict.get('dt_env_fn')
+    dt_wf_fn = row_dict.get('dt_wf_fn')
 
-    # Parcial 3
-    st_p3 = str(row_dict.get('st_p3') or "").strip().upper()
-    dt_wf_p3 = row_dict.get('dt_wf_p3')
-    om_p3 = str(row_dict.get('om_p3') or "").strip()
-    v_p3 = row_dict.get('v_p3', 0.0)
-
-    # Parcial 2
-    st_p2 = str(row_dict.get('st_p2') or "").strip().upper()
-    dt_wf_p2 = row_dict.get('dt_wf_p2')
-    om_p2 = str(row_dict.get('om_p2') or "").strip()
-    v_p2 = row_dict.get('v_p2', 0.0)
-
-    # Parcial 1
-    st_p1 = str(row_dict.get('st_p1') or "").strip().upper()
-    dt_wf_p1 = row_dict.get('dt_wf_p1')
-    om_p1 = str(row_dict.get('om_p1') or "").strip()
-    v_p1 = row_dict.get('v_p1', 0.0)
-
-    # Orçamento
-    om_orc = str(row_dict.get('om_orc') or "").strip()
-    dt_aprov_orc = row_dict.get('dt_aprov_orc')
-    aprov_orc = str(row_dict.get('aprov_orc') or "").strip().lower()
-    dt_env_orc = row_dict.get('dt_env_orc')
-    dt_solic_orc = row_dict.get('dt_solic_orc')
-
-    # Regras hierárquicas da esteira de aprovação
-    if "FINALIZAD" in st_wf or dt_wf_fn:
+    # Final / Entroncamento preenchido
+    if om_fn or dt_env_fn or dt_wf_fn:
         return "Finalizado"
-    if om_fn or dt_env_fn or v_fn > 0:
-        return "Medição Final Enviada"
-    if om_p3 or v_p3 > 0:
-        return "Parcial 3 Aprovada" if ("FINALIZAD" in st_p3 or dt_wf_p3) else "Parcial 3 Enviada"
-    if om_p2 or v_p2 > 0:
-        return "Parcial 2 Aprovada" if ("FINALIZAD" in st_p2 or dt_wf_p2) else "Parcial 2 Enviada"
-    if om_p1 or v_p1 > 0:
-        return "Parcial 1 Aprovada" if ("FINALIZAD" in st_p1 or dt_wf_p1) else "Parcial 1 Enviada"
-    if om_orc or dt_aprov_orc or (aprov_orc and "solicitad" not in aprov_orc and aprov_orc != "-"):
-        return "Orçamento Aprovado"
-    if dt_env_orc:
-        return "Orçamento Enviado Claro"
-    if dt_solic_orc:
-        return "Em Orçamento"
-    return "Em Cadastro"
+
+    # Parciais (P1, P2 ou P3)
+    om_p1 = str(row_dict.get('om_p1') or "").strip()
+    dt_env_p1 = row_dict.get('dt_env_p1')
+    v_p1 = row_dict.get('v_p1', 0.0) or 0.0
+
+    om_p2 = str(row_dict.get('om_p2') or "").strip()
+    dt_env_p2 = row_dict.get('dt_env_p2')
+    v_p2 = row_dict.get('v_p2', 0.0) or 0.0
+
+    om_p3 = str(row_dict.get('om_p3') or "").strip()
+    dt_env_p3 = row_dict.get('dt_env_p3')
+    v_p3 = row_dict.get('v_p3', 0.0) or 0.0
+
+    has_partial = bool(om_p1 or dt_env_p1 or v_p1 > 0 or om_p2 or dt_env_p2 or v_p2 > 0 or om_p3 or dt_env_p3 or v_p3 > 0)
+    if has_partial:
+        return "Executado Parcial"
+
+    return "Não Executado"
 
 def classify_obra_status(os_list):
-    """Calcula o status consolidado de uma Obra com base em todas as suas OSs."""
+    """
+    Calcula o status consolidado de uma Obra usando estritamente os 3 status:
+    - Se todas as OSs estiverem 'Finalizado' -> 'Finalizado'
+    - Se qualquer OS estiver 'Finalizado' ou 'Executado Parcial' (mas nem todas finalizadas) -> 'Executado Parcial'
+    - Se nenhuma OS tiver medições executadas (todas 'Não Executado') -> 'Não Executado'
+    """
     statuses = set(os_item['status'] for os_item in os_list)
     
     if statuses == {'Finalizado'}:
-        return "100% Finalizada"
-    if 'Finalizado' in statuses:
-        return "Parcialmente Concluída"
-    if 'Medição Final Enviada' in statuses:
-        return "Medição Final em Aprovação"
-    if any(s.startswith('Parcial') for s in statuses):
-        return "Em Andamento (Parciais)"
-    if 'Orçamento Aprovado' in statuses:
-        return "Orçamento Aprovado"
-    if 'Orçamento Enviado Claro' in statuses:
-        return "Orçamento Enviado Claro"
-    return "Em Orçamento"
+        return "Finalizado"
+    if 'Finalizado' in statuses or 'Executado Parcial' in statuses:
+        return "Executado Parcial"
+    return "Não Executado"
 
 def calculate_aging_and_pendencia(dt_inicio, dt_ultima, status, is_os=False):
     """Calcula dias em aberto, dias sem movimentação, faixa de aging e próxima pendência/ação."""
@@ -237,7 +217,7 @@ def calculate_aging_and_pendencia(dt_inicio, dt_ultima, status, is_os=False):
         except:
             pass
 
-    is_finalizada = ("Finalizad" in status)
+    is_finalizada = (status == "Finalizado")
     
     if is_finalizada:
         faixa = "Concluída"
@@ -252,20 +232,10 @@ def calculate_aging_and_pendencia(dt_inicio, dt_ultima, status, is_os=False):
         faixa = "Mais de 180 dias"
 
     if not is_finalizada:
-        if "Medição Final" in status:
-            pendencia = "Claro: Aprovação Medição Final"
-        elif "Orçamento Enviado" in status:
-            pendencia = "Claro: Aprovação Orçamento"
-        elif "Orçamento Aprovado" in status:
-            pendencia = "JLE: Iniciar 1ª Medição"
-        elif "Parcial" in status and "Concluída" not in status:
-            pendencia = "JLE: Próxima Parcial / Final"
-        elif "Parcialmente Concluída" in status:
-            pendencia = "Misto: Validar OSs Pendentes"
-        elif "Em Orçamento" in status:
-            pendencia = "JLE: Enviar Orçamento Claro"
+        if status == "Executado Parcial":
+            pendencia = "Medição Parcial em Andamento — Emitir Medição Final de Entroncamento"
         else:
-            pendencia = "Em Execução / Acompanhamento"
+            pendencia = "Sem Medições Registradas — Iniciar Execução em Campo"
 
     return dias_aberto, dias_sem_mov, faixa, pendencia
 
@@ -450,7 +420,7 @@ def process_engenharia():
         dt_ultima_obra = max(all_activity_dates) if all_activity_dates else None
         
         d_aberto_ob, d_sem_mov_ob, faixa_ob, pend_ob = calculate_aging_and_pendencia(dt_inicio_obra, dt_ultima_obra, status_consolidado, is_os=False)
-        is_em_aberto_obra = (status_consolidado != '100% Finalizada')
+        is_em_aberto_obra = (status_consolidado != 'Finalizado')
 
         total_orcado_global += v_orc_total
         total_medido_global += v_medido_total
@@ -533,8 +503,8 @@ def process_engenharia():
         'total_final': round(total_fn_global, 2),
         'saldo_a_medir': saldo_global,
         'pct_executado': pct_global,
-        'obras_finalizadas': status_obras_counter.get('100% Finalizada', 0),
-        'obras_em_andamento': len(obras_consolidated) - status_obras_counter.get('100% Finalizada', 0),
+        'obras_finalizadas': status_obras_counter.get('Finalizado', 0),
+        'obras_em_andamento': len(obras_consolidated) - status_obras_counter.get('Finalizado', 0),
         'obras_em_aberto': len(open_obras_list),
         'saldo_em_aberto': saldo_em_aberto,
         'obras_criticas_aging': obras_criticas_aging,

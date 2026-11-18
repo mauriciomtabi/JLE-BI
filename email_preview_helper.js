@@ -921,24 +921,16 @@
         const obras = data.obras || [];
         const openObras = obras.filter(o => o.is_em_aberto);
 
-        // Bloco 1: Claro
-        const claroObras = openObras.filter(o => o.status === 'Orçamento Enviado Claro' || o.status === 'Medição Final em Aprovação');
-        const claroSaldo = claroObras.reduce((acc, o) => acc + (o.saldo || 0), 0);
-        const claroMaisAntiga = [...claroObras].sort((a, b) => (b.dias_aberto || 0) - (a.dias_aberto || 0))[0];
+        // Bloco 1: Executado Parcial (Obras com medições parciais faturadas aguardando medição final)
+        const parcObras = openObras.filter(o => o.status === 'Executado Parcial');
+        const parcSaldo = parcObras.reduce((acc, o) => acc + (o.saldo || 0), 0);
+        const parcMedido = parcObras.reduce((acc, o) => acc + (o.v_medido || 0), 0);
+        const parcMaisAntiga = [...parcObras].sort((a, b) => (b.dias_aberto || 0) - (a.dias_aberto || 0))[0];
 
-        // Bloco 2: JLE
-        const jleObrasAprov = openObras.filter(o => o.status === 'Orçamento Aprovado');
-        const jleSaldoAprov = jleObrasAprov.reduce((acc, o) => acc + (o.saldo || 0), 0);
-
-        const jleObrasParc = openObras.filter(o => o.status === 'Em Andamento (Parciais)');
-        const jleSaldoParc = jleObrasParc.reduce((acc, o) => acc + (o.saldo || 0), 0);
-
-        const jleTotalObras = jleObrasAprov.length + jleObrasParc.length;
-        const jleTotalSaldo = jleSaldoAprov + jleSaldoParc;
-
-        // Bloco 3: Misto
-        const mistoObras = openObras.filter(o => o.status === 'Parcialmente Concluída');
-        const mistoSaldo = mistoObras.reduce((acc, o) => acc + (o.saldo || 0), 0);
+        // Bloco 2: Não Executado (Obras sem medições registradas)
+        const naoExecObras = openObras.filter(o => o.status === 'Não Executado');
+        const naoExecSaldo = naoExecObras.reduce((acc, o) => acc + (o.saldo || 0), 0);
+        const naoExecMaisAntiga = [...naoExecObras].sort((a, b) => (b.dias_aberto || 0) - (a.dias_aberto || 0))[0];
 
         const criticasCount = openObras.filter(o => (o.dias_aberto || 0) > 180).length;
 
@@ -1061,51 +1053,36 @@
                                 <td style="padding: 20px 36px 0;">
                                     <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                         
-                                        <!-- BLOCO 1: PENDÊNCIA CLARO -->
-                                        <tr>
-                                            <td style="background: #f0f9ff; border: 1px solid #bae6fd; border-left: 4px solid #0284c7; border-radius: 8px; padding: 16px;">
-                                                <div style="font-size: 11px; font-weight: 800; color: #0369a1; text-transform: uppercase; letter-spacing: 0.8px;">
-                                                    🟦 AGUARDANDO RETORNO / APROVAÇÃO DA CLARO
-                                                </div>
-                                                <div style="margin-top: 6px; font-size: 14px; color: #0f172a;">
-                                                    <strong>${claroObras.length} Obras</strong> aguardando pedido ou aceite • Saldo represado: <strong style="color:#0369a1;">${formatBRL(claroSaldo)}</strong>
-                                                </div>
-                                                <div style="font-size: 12px; color: #475569; margin-top: 4px; line-height: 1.4;">
-                                                    • 16 obras com orçamento enviado aguardando aprovação/pedido da Claro.<br>
-                                                    • 2 obras com medição final enviada aguardando encerramento no Workflow.<br>
-                                                    ${claroMaisAntiga ? `<span style="color:#b91c1c; font-weight:600;">• Caso Crítico: ${claroMaisAntiga.nome} (${claroMaisAntiga.dias_aberto}d em aberto - ${formatBRL(claroMaisAntiga.saldo)})</span>` : ''}
-                                                </div>
-                                            </td>
-                                        </tr>
-
-                                        <tr style="height: 12px;"><td></td></tr>
-
-                                        <!-- BLOCO 2: PENDÊNCIA OPERAÇÃO JLE -->
+                                        <!-- BLOCO 1: EXECUTADO PARCIAL -->
                                         <tr>
                                             <td style="background: #fffbeb; border: 1px solid #fde68a; border-left: 4px solid #d97706; border-radius: 8px; padding: 16px;">
                                                 <div style="font-size: 11px; font-weight: 800; color: #b45309; text-transform: uppercase; letter-spacing: 0.8px;">
-                                                    🟧 AÇÃO DA OPERAÇÃO & MEDIÇÃO JLE
+                                                    🟧 EXECUTADO PARCIAL — PENDENTE DE ENTRONCAMENTO FINAL
                                                 </div>
                                                 <div style="margin-top: 6px; font-size: 14px; color: #0f172a;">
-                                                    <strong>${jleTotalObras} Obras</strong> em andamento de campo • Saldo a medir: <strong style="color:#b45309;">${formatBRL(jleTotalSaldo)}</strong>
+                                                    <strong>${parcObras.length} Obras</strong> com medições parciais • Já medido: <strong style="color:#059669;">${formatBRL(parcMedido)}</strong> • Saldo a faturar: <strong style="color:#b45309;">${formatBRL(parcSaldo)}</strong>
                                                 </div>
                                                 <div style="font-size: 12px; color: #475569; margin-top: 4px; line-height: 1.4;">
-                                                    • <strong>${jleObrasAprov.length} Obras com Orçamento Aprovado</strong> pela Claro liberadas para emissão da 1ª medição parcial (${formatBRL(jleSaldoAprov)}).<br>
-                                                    • <strong>${jleObrasParc.length} Obras com Parciais em Andamento</strong> aguardando envio de P2, P3 ou Medição Final (${formatBRL(jleSaldoParc)}).
+                                                    • Obras em campo com medições parciais (P1/P2/P3) faturadas aguardando a emissão da Medição Final de Entroncamento.<br>
+                                                    ${parcMaisAntiga ? `<span style="color:#b91c1c; font-weight:600;">• Caso Crítico: ${parcMaisAntiga.nome} (${parcMaisAntiga.dias_aberto}d em aberto - Saldo ${formatBRL(parcMaisAntiga.saldo)})</span>` : ''}
                                                 </div>
                                             </td>
                                         </tr>
 
                                         <tr style="height: 12px;"><td></td></tr>
 
-                                        <!-- BLOCO 3: MULTI-OS EM ANEL -->
+                                        <!-- BLOCO 2: NÃO EXECUTADO -->
                                         <tr>
-                                            <td style="background: #faf5ff; border: 1px solid #e9d5ff; border-left: 4px solid #9333ea; border-radius: 8px; padding: 14px 16px;">
-                                                <div style="font-size: 11px; font-weight: 800; color: #7e22ce; text-transform: uppercase; letter-spacing: 0.8px;">
-                                                    🟪 OBRAS EM ANEL / MULTI-OS DIVERGENTES
+                                            <td style="background: #fef2f2; border: 1px solid #fecaca; border-left: 4px solid #dc2626; border-radius: 8px; padding: 16px;">
+                                                <div style="font-size: 11px; font-weight: 800; color: #991b1b; text-transform: uppercase; letter-spacing: 0.8px;">
+                                                    🟥 NÃO EXECUTADO — SEM MEDIÇÕES REGISTRADAS
                                                 </div>
-                                                <div style="margin-top: 4px; font-size: 13px; color: #334155;">
-                                                    <strong>${mistoObras.length} Obras</strong> com OSs parcialmente finalizadas e outras travadas • Saldo: <strong style="color:#7e22ce;">${formatBRL(mistoSaldo)}</strong>
+                                                <div style="margin-top: 6px; font-size: 14px; color: #0f172a;">
+                                                    <strong>${naoExecObras.length} Obras</strong> sem medições • Saldo a executar: <strong style="color:#dc2626;">${formatBRL(naoExecSaldo)}</strong>
+                                                </div>
+                                                <div style="font-size: 12px; color: #475569; margin-top: 4px; line-height: 1.4;">
+                                                    • Obras orçadas aguardando início dos trabalhos em campo ou envio da 1ª medição parcial.<br>
+                                                    ${naoExecMaisAntiga ? `<span style="color:#b91c1c; font-weight:600;">• Caso Crítico: ${naoExecMaisAntiga.nome} (${naoExecMaisAntiga.dias_aberto}d em aberto - Orçado ${formatBRL(naoExecMaisAntiga.saldo)})</span>` : ''}
                                                 </div>
                                             </td>
                                         </tr>
