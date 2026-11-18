@@ -59,6 +59,14 @@
         updateMetadataBadge();
         renderKPIs();
         renderActiveTab();
+        renderTable(); // Pre-renderiza a tabela em background
+
+        // Garante renderização dos gráficos com dimensões calculadas do DOM
+        setTimeout(() => {
+            if (state.activeTab === 'indicadores') {
+                renderCharts();
+            }
+        }, 60);
     };
 
     function updateMetadataBadge() {
@@ -158,7 +166,7 @@
                 const matchNome = obra.nome.toLowerCase().includes(q);
                 const matchSites = obra.sites.some(s => s.toLowerCase().includes(q));
                 const matchCidade = obra.cidade.toLowerCase().includes(q);
-                const matchOM = obra.oss.some(os => (os.om_orc && os.om_orc.includes(q)) || (os.om_p1 && os.om_p1.includes(q)) || (os.om_fn && os.om_fn.includes(q)));
+                const matchOM = obra.oss.some(os => (os.om_orc && String(os.om_orc).toLowerCase().includes(q)) || (os.om_p1 && String(os.om_p1).toLowerCase().includes(q)) || (os.om_fn && String(os.om_fn).toLowerCase().includes(q)));
                 if (!matchNome && !matchSites && !matchCidade && !matchOM) return false;
             }
             return true;
@@ -172,7 +180,7 @@
                 const matchObra = os.obra.toLowerCase().includes(q);
                 const matchSite = os.site.toLowerCase().includes(q);
                 const matchCidade = os.cidade.toLowerCase().includes(q);
-                const matchOM = (os.om_orc && os.om_orc.includes(q)) || (os.om_p1 && os.om_p1.includes(q)) || (os.om_fn && os.om_fn.includes(q));
+                const matchOM = (os.om_orc && String(os.om_orc).toLowerCase().includes(q)) || (os.om_p1 && String(os.om_p1).toLowerCase().includes(q)) || (os.om_fn && String(os.om_fn).toLowerCase().includes(q));
                 if (!matchObra && !matchSite && !matchCidade && !matchOM) return false;
             }
             return true;
@@ -205,7 +213,6 @@
         const elMedSub = document.getElementById('eng-kpi-medido-sub');
         const elSaldo = document.getElementById('eng-kpi-saldo');
         const elSaldoSub = document.getElementById('eng-kpi-saldo-sub');
-        const elFin = document.getElementById('eng-kpi-finalizadas');
         const elFinSub = document.getElementById('eng-kpi-finalizadas-sub');
 
         if (elQtd) elQtd.textContent = `${totalObras} Obras`;
@@ -219,8 +226,7 @@
         if (elSaldo) elSaldo.textContent = formatMoeda(saldoMedir);
         if (elSaldoSub) elSaldoSub.innerHTML = `<span style="color:#f59e0b; font-weight:600;">${formatPct(100 - pctMedido)}</span> em carteira`;
 
-        if (elFin) elFin.textContent = `${obrasFinalizadas} Obras`;
-        if (elFinSub) elFinSub.textContent = `${ossFinalizadas} OSs concluídas`;
+        if (elFinSub) elFinSub.textContent = `${obrasFinalizadas} Obras / ${ossFinalizadas} OSs concluídas`;
     }
 
     // Helper para classes semânticas de status
@@ -565,6 +571,7 @@
                 maintainAspectRatio: false,
                 indexAxis: 'y',
                 plugins: {
+                    datalabels: { display: false },
                     legend: { display: false },
                     tooltip: {
                         backgroundColor: '#161b22',
@@ -654,6 +661,7 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
+                    datalabels: { display: false },
                     legend: { display: false },
                     tooltip: {
                         backgroundColor: '#161b22',
@@ -734,6 +742,7 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
+                    datalabels: { display: false },
                     legend: {
                         position: 'top',
                         labels: { color: '#c9d1d9', boxWidth: 12 }
@@ -804,6 +813,7 @@
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
+                    datalabels: { display: false },
                     legend: {
                         position: 'bottom',
                         labels: { color: '#c9d1d9', boxWidth: 12, padding: 14 }
