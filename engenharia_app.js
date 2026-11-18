@@ -552,6 +552,7 @@
 
         const labels = Object.keys(counts);
         const dataCounts = labels.map(l => counts[l]);
+        const pluginList = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
 
         state.charts.funil = new Chart(canvas, {
             type: 'bar',
@@ -566,12 +567,15 @@
                     borderRadius: 6
                 }]
             },
+            plugins: pluginList,
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
                 indexAxis: 'y',
+                layout: {
+                    padding: { right: 55 }
+                },
                 plugins: {
-                    datalabels: { display: false },
                     legend: { display: false },
                     tooltip: {
                         backgroundColor: '#161b22',
@@ -583,12 +587,22 @@
                                 return `Volume Orçado: ${formatMoeda(valores[st] || 0)}`;
                             }
                         }
+                    },
+                    datalabels: {
+                        display: true,
+                        anchor: 'end',
+                        align: 'right',
+                        offset: 6,
+                        color: '#ffffff',
+                        font: { family: 'Outfit, Inter, sans-serif', weight: 'bold', size: 11 },
+                        formatter: (val) => val > 0 ? `${val} ${val === 1 ? 'Obra' : 'Obras'}` : ''
                     }
                 },
                 scales: {
                     x: {
                         grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                        ticks: { color: '#8b949e', stepSize: 1 }
+                        ticks: { color: '#8b949e', stepSize: 1 },
+                        grace: '15%'
                     },
                     y: {
                         grid: { display: false },
@@ -641,6 +655,7 @@
             return `${monthNames[m] || m}/${y.slice(2)}`;
         });
         const values = sortedMonths.map(ym => monthlyMedicoes[ym]);
+        const pluginList = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
 
         state.charts.evolucao = new Chart(canvas, {
             type: 'line',
@@ -654,14 +669,18 @@
                     fill: true,
                     tension: 0.35,
                     pointBackgroundColor: '#388bfd',
-                    pointRadius: 4
+                    pointRadius: 4,
+                    pointHoverRadius: 6
                 }]
             },
+            plugins: pluginList,
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                layout: {
+                    padding: { top: 25, right: 20 }
+                },
                 plugins: {
-                    datalabels: { display: false },
                     legend: { display: false },
                     tooltip: {
                         backgroundColor: '#161b22',
@@ -669,6 +688,25 @@
                         borderWidth: 1,
                         callbacks: {
                             label: (ctx) => `Medido: ${formatMoeda(ctx.raw)}`
+                        }
+                    },
+                    datalabels: {
+                        display: (ctx) => ctx.dataset.data[ctx.dataIndex] > 0,
+                        anchor: 'end',
+                        align: 'top',
+                        offset: 4,
+                        color: '#58a6ff',
+                        backgroundColor: 'rgba(13, 17, 23, 0.85)',
+                        borderColor: 'rgba(56, 139, 253, 0.4)',
+                        borderWidth: 1,
+                        borderRadius: 4,
+                        padding: { top: 2, bottom: 2, left: 5, right: 5 },
+                        font: { family: 'Outfit, Inter, sans-serif', weight: 'bold', size: 10 },
+                        formatter: (val) => {
+                            if (!val || val <= 0) return '';
+                            if (val >= 1000000) return 'R$ ' + (val / 1000000).toFixed(2).replace('.', ',') + 'M';
+                            if (val >= 1000) return 'R$ ' + (val / 1000).toFixed(0) + 'k';
+                            return 'R$ ' + Math.round(val);
                         }
                     }
                 },
@@ -678,7 +716,8 @@
                         ticks: {
                             color: '#8b949e',
                             callback: (v) => 'R$ ' + (v / 1000).toFixed(0) + 'k'
-                        }
+                        },
+                        grace: '15%'
                     },
                     x: {
                         grid: { color: 'rgba(255, 255, 255, 0.05)' },
@@ -718,6 +757,7 @@
         const labels = sortedCities;
         const orcados = sortedCities.map(c => cityData[c].orcado);
         const medidos = sortedCities.map(c => cityData[c].medido);
+        const pluginList = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
 
         state.charts.cidades = new Chart(canvas, {
             type: 'bar',
@@ -727,22 +767,25 @@
                     {
                         label: 'Orçado (R$)',
                         data: orcados,
-                        backgroundColor: 'rgba(56, 139, 253, 0.75)',
+                        backgroundColor: 'rgba(56, 139, 253, 0.85)',
                         borderRadius: 4
                     },
                     {
                         label: 'Medido (R$)',
                         data: medidos,
-                        backgroundColor: 'rgba(16, 185, 129, 0.75)',
+                        backgroundColor: 'rgba(16, 185, 129, 0.85)',
                         borderRadius: 4
                     }
                 ]
             },
+            plugins: pluginList,
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                layout: {
+                    padding: { top: 25 }
+                },
                 plugins: {
-                    datalabels: { display: false },
                     legend: {
                         position: 'top',
                         labels: { color: '#c9d1d9', boxWidth: 12 }
@@ -754,6 +797,20 @@
                         callbacks: {
                             label: (ctx) => `${ctx.dataset.label}: ${formatMoeda(ctx.raw)}`
                         }
+                    },
+                    datalabels: {
+                        display: (ctx) => ctx.dataset.data[ctx.dataIndex] > 0,
+                        anchor: 'end',
+                        align: 'top',
+                        offset: 2,
+                        color: '#ffffff',
+                        font: { family: 'Outfit, Inter, sans-serif', weight: 'bold', size: 9 },
+                        formatter: (val) => {
+                            if (!val || val <= 0) return '';
+                            if (val >= 1000000) return (val / 1000000).toFixed(1).replace('.', ',') + 'M';
+                            if (val >= 1000) return (val / 1000).toFixed(0) + 'k';
+                            return String(Math.round(val));
+                        }
                     }
                 },
                 scales: {
@@ -762,7 +819,8 @@
                         ticks: {
                             color: '#8b949e',
                             callback: (v) => 'R$ ' + (v / 1000).toFixed(0) + 'k'
-                        }
+                        },
+                        grace: '15%'
                     },
                     x: {
                         grid: { display: false },
@@ -798,6 +856,8 @@
             }
         });
 
+        const pluginList = (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : [];
+
         state.charts.workflow = new Chart(canvas, {
             type: 'doughnut',
             data: {
@@ -809,11 +869,11 @@
                     borderWidth: 2
                 }]
             },
+            plugins: pluginList,
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    datalabels: { display: false },
                     legend: {
                         position: 'bottom',
                         labels: { color: '#c9d1d9', boxWidth: 12, padding: 14 }
@@ -823,11 +883,23 @@
                         borderColor: 'rgba(255,255,255,0.1)',
                         borderWidth: 1,
                         callbacks: {
-                            label: (ctx) => ` ${ctx.label}: ${ctx.raw} OSs (${formatPct(ctx.raw / oss.length * 100)})`
+                            label: (ctx) => ` ${ctx.label}: ${ctx.raw} OSs (${formatPct(ctx.raw / (oss.length || 1) * 100)})`
                         }
+                    },
+                    datalabels: {
+                        display: (ctx) => ctx.dataset.data[ctx.dataIndex] > 0,
+                        color: '#ffffff',
+                        font: { family: 'Outfit, Inter, sans-serif', weight: 'bold', size: 12 },
+                        formatter: (val, ctx) => {
+                            const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                            if (!val || total <= 0) return '';
+                            const pct = ((val / total) * 100).toFixed(0);
+                            return `${val}\n(${pct}%)`;
+                        },
+                        textAlign: 'center'
                     }
                 },
-                cutout: '65%'
+                cutout: '60%'
             }
         });
     }
