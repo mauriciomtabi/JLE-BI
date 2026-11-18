@@ -5826,6 +5826,13 @@
                     init: () => { 
                         if (typeof initFinanciamentos === 'function') initFinanciamentos(); 
                     } 
+                },
+                'engenharia': { 
+                    file: 'engenharia_data.js', 
+                    name: 'Engenharia PR', 
+                    init: () => { 
+                        if (typeof initEngenhariaModule === 'function') initEngenhariaModule(); 
+                    } 
                 }
             };
 
@@ -6156,6 +6163,7 @@
             { id: 'mdu',          label: 'MDU',                      icon: 'fa-building' },
             { id: 'sar',          label: 'SAR',                      icon: 'fa-network-wired' },
             { id: 'manutencao',   label: 'Manutenção',              icon: 'fa-wrench' },
+            { id: 'engenharia',   label: 'Engenharia PR',           icon: 'fa-helmet-safety' },
             { id: 'parcelamentos', label: 'Impostos',               icon: 'fa-file-invoice' },
             { id: 'financiamentos', label: 'Financiamentos & PMTs', icon: 'fa-hand-holding-dollar' },
         ];
