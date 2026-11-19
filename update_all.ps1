@@ -1,4 +1,4 @@
-﻿# Script unificado para atualizar todos os dados do BI (Financeiro JLE, Financeiro Tecnodrill, Claro, Veículos, Manutenção e MDU)
+# Script unificado para atualizar todos os dados do BI (Financeiro JLE, Financeiro Tecnodrill, Claro, Veículos, Manutenção e MDU)
 $workingDir = $PSScriptRoot
 $userPath = [System.Environment]::GetEnvironmentVariable("PATH", "User")
 $sysPath = [System.Environment]::GetEnvironmentVariable("PATH", "Machine")

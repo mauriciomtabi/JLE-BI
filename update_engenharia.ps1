@@ -1,4 +1,4 @@
-﻿# update_engenharia.ps1
+# update_engenharia.ps1
 # Script de orquestração de ETL para Engenharia Claro PR - JLE Telecom
 # Executa o processador Python, atualiza o cache do Service Worker e envia ao GitHub para deploy na Vercel.
 
