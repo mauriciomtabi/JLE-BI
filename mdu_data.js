@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-11-19 13:13:51
+// Dados MDU Compactados - Gerado em: 2026-11-19 14:01:04
 window.MDU_METADATA = {
-    "generated_at": "2026-11-19 13:13:51",
+    "generated_at": "2026-11-19 14:01:04",
     "total_rows": 6081,
-    "geocoded_new": 0
+    "geocoded_new": 1
 };
 
 window.MDU_DATA = [
@@ -193608,18 +193608,18 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505909",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "AV VENÂNCIO AIRES 451",
+        "cidade": "CRUZ ALTA",
+        "cluster": "SAN",
+        "aging": "46.345",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
+        "status": "FALTA DADOS",
         "prog": 0,
-        "cod_imovel": "",
-        "area": "",
-        "node": "",
-        "caixa_m": "",
+        "cod_imovel": "610592165",
+        "area": "GBDAB",
+        "node": "GBDAB",
+        "caixa_m": "GBDAB.131.M020",
         "hps": null,
         "data_adicio": "",
         "equipe": "",
@@ -193634,9 +193634,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -28.6350778,
+        "lng": -53.6067987,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505910",
