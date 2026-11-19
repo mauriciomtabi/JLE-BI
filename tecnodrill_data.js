@@ -1,5 +1,5 @@
 ﻿window.TECNODRILL_DATA = {
-    "generated_at":  "2026-11-19 08:39:06",
+    "generated_at":  "2026-11-19 13:12:42",
     "empresa":  "Tecnodrill",
     "categories_origin":  {
                               "entradas":  [
@@ -20492,6 +20492,22 @@
                              "is_transfer":  false
                          },
                          {
+                             "id":  "NOV__2026_TECNODRILL_CONFIA_41",
+                             "banco":  "Sicoob Confiança",
+                             "aba":  "NOV _2026 TECNODRILL CONFIA",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-18",
+                             "uf":  "NOVEMBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Material utilizado em serviços",
+                             "descricao":  "Comprar moto bomba",
+                             "valor_nominal":  1234.05,
+                             "valor_liquido":  -1234.05,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
                              "id":  "NOV__2026_TECNODRILL_BRADES_11",
                              "banco":  "Sicoob MaxiCrédito",
                              "aba":  "NOV _2026 TECNODRILL BRADES",
@@ -21242,10 +21258,90 @@
                              "valor_liquido":  -68.99,
                              "meio_pagamento":  "Pix",
                              "is_transfer":  false
+                         },
+                         {
+                             "id":  "NOV__2026_TECNODRILL_MAX_49",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "NOV _2026 TECNODRILL MAX",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-18",
+                             "uf":  "NOVEMBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Locação de Equipamentos",
+                             "descricao":  "Aluguel caminhão máquina",
+                             "valor_nominal":  25000,
+                             "valor_liquido":  -25000,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "NOV__2026_TECNODRILL_MAX_50",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "NOV _2026 TECNODRILL MAX",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-18",
+                             "uf":  "NOVEMBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Manutenção Predial",
+                             "descricao":  "Postes base nova NH",
+                             "valor_nominal":  2561.2,
+                             "valor_liquido":  -2561.2,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "NOV__2026_TECNODRILL_MAX_51",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "NOV _2026 TECNODRILL MAX",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-18",
+                             "uf":  "NOVEMBRO",
+                             "fluxo":  "Entrada",
+                             "categoria":  "Transferência entre contas",
+                             "descricao":  "Transferência entre contas JLE",
+                             "valor_nominal":  40000,
+                             "valor_liquido":  40000,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  true
+                         },
+                         {
+                             "id":  "NOV__2026_TECNODRILL_MAX_52",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "NOV _2026 TECNODRILL MAX",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-18",
+                             "uf":  "NOVEMBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Medicina do Trabalho",
+                             "descricao":  "Exames Fabrício",
+                             "valor_nominal":  290,
+                             "valor_liquido":  -290,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
+                         },
+                         {
+                             "id":  "NOV__2026_TECNODRILL_MAX_53",
+                             "banco":  "Sicoob MaxiCrédito",
+                             "aba":  "NOV _2026 TECNODRILL MAX",
+                             "remessa":  "MANUAL",
+                             "competencia":  "NOVEMBRO/2026",
+                             "data":  "2026-11-18",
+                             "uf":  "NOVEMBRO",
+                             "fluxo":  "Saída",
+                             "categoria":  "Pedágio",
+                             "descricao":  "PEDAGIO",
+                             "valor_nominal":  23.7,
+                             "valor_liquido":  -23.7,
+                             "meio_pagamento":  "Pix",
+                             "is_transfer":  false
                          }
                      ],
     "caixa":  {
-                  "gerado_em":  "2026-11-19 08:38:37",
+                  "gerado_em":  "2026-11-19 13:12:05",
                   "carlos":  [
                                  {
                                      "id":  "carlos-1",
