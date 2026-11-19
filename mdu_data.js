@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-11-19 08:40:27
+// Dados MDU Compactados - Gerado em: 2026-11-19 09:00:22
 window.MDU_METADATA = {
-    "generated_at": "2026-11-19 08:40:27",
+    "generated_at": "2026-11-19 09:00:22",
     "total_rows": 6081,
-    "geocoded_new": 2
+    "geocoded_new": 0
 };
 
 window.MDU_DATA = [
@@ -178060,7 +178060,7 @@ window.MDU_DATA = [
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "544",
-        "relatorio_por": "DUDA",
+        "relatorio_por": "SEM PROJETO",
         "pendencia": "Não",
         "status": "Relatório",
         "prog": 75.0,
@@ -193419,24 +193419,24 @@ window.MDU_DATA = [
         "endereco": "AV LAGEADO 1173",
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
-        "aging": "46.345",
+        "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "FALTA DADOS",
-        "prog": 0,
-        "cod_imovel": "",
+        "status": "Relatório",
+        "prog": 75.0,
+        "cod_imovel": "704067474",
         "area": "PETAA",
         "node": "PETAZ",
-        "caixa_m": "",
-        "hps": null,
-        "data_adicio": "",
-        "equipe": "",
-        "primeira_visita": "",
+        "caixa_m": "PETAA.036.M010",
+        "hps": 24,
+        "data_adicio": "19/11/2026",
+        "equipe": "GUILHERME E ROGRIGO",
+        "primeira_visita": "17/11/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
-        "data_interna": "",
-        "data_fusao": "",
-        "data_baixa": "",
+        "obs_vistoria": "ADEQUADO",
+        "data_interna": "17/11/2026",
+        "data_fusao": "17/11/2026",
+        "data_baixa": "19/11/2026",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
