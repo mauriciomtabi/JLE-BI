@@ -1,4 +1,4 @@
-# Script unificado para atualizar todos os dados do BI (Financeiro JLE, Financeiro Tecnodrill, Claro, Veículos, Manutenção e MDU)
+﻿# Script unificado para atualizar todos os dados do BI (Financeiro JLE, Financeiro Tecnodrill, Claro, Veículos, Manutenção e MDU)
 $workingDir = $PSScriptRoot
 $userPath = [System.Environment]::GetEnvironmentVariable("PATH", "User")
 $sysPath = [System.Environment]::GetEnvironmentVariable("PATH", "Machine")
@@ -151,7 +151,7 @@ if (Test-Path $gitPath) {
         }
 
         Write-Output "Enviando alteracoes consolidadas para o repositorio remoto..."
-        & $gitPath add data.js executivo_jle_data.js tecnodrill_data.js cobranca_data.js veiculos_data.js manutencao_data.js mdu_data.js sar_data.js sar_app.js sar_styles.css parcelamentos_data.js parcelamentos_app.js parcelamentos_styles.css index.html sw.js update_all.ps1 update_sar.ps1 update_sar.py atualizar_sar.bat update_parcelamentos.ps1 update_parcelamentos.py atualizar_parcelamentos.bat BI_LAYOUT_STANDARD.md .gitignore .agents/skills/bi-ui-preservation/SKILL.md
+        & $gitPath add data.js executivo_jle_data.js tecnodrill_data.js cobranca_data.js veiculos_data.js manutencao_data.js mdu_data.js sar_data.js sar_app.js sar_styles.css parcelamentos_data.js parcelamentos_app.js parcelamentos_styles.css engenharia_data.js engenharia_app.js engenharia_styles.css index.html sw.js update_all.ps1 update_sar.ps1 update_sar.py atualizar_sar.bat update_parcelamentos.ps1 update_parcelamentos.py atualizar_parcelamentos.bat update_engenharia.ps1 update_engenharia.py atualizar_engenharia.bat BI_LAYOUT_STANDARD.md .gitignore .agents/skills/bi-ui-preservation/SKILL.md
         $commitDate = Get-Date -Format 'dd/MM/yyyy HH:mm'
         & $gitPath commit -m "data(auto): atualizacao consolidada dos dados do BI ($commitDate)"
         & $gitPath pull --rebase --autostash origin main
