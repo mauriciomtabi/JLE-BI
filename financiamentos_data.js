@@ -1,43 +1,32 @@
 // BI JLE Telecom - Financiamentos & PMTs Data Source
-// Gerado automaticamente em 19/11/2026 08:41:27
+// Gerado automaticamente em 19/11/2026 13:14:46
 window.FINANCIAMENTOS_DATA = {
   "metadata": {
-    "generated_at": "19/11/2026 08:41:27",
+    "generated_at": "19/11/2026 13:14:46",
     "source_directory": "\\\\10.121.21.252\\controladoria\\Vitor\\FINANCEIRO\\PMTs FINANCIAMENTOS",
     "total_contratos": 12
   },
   "totais_gerais": {
     "total_financiado": 8856970.3,
-    "total_pago": 1456910.43,
-    "saldo_devedor": 10439937.66,
+    "total_pago": 1499054.1,
+    "saldo_devedor": 10397916.65,
     "total_parcelas": 610,
-    "total_pagas": 73,
-    "total_pendentes": 537,
-    "pct_quitado": 12.0,
+    "total_pagas": 74,
+    "total_pendentes": 536,
+    "pct_quitado": 12.1,
     "compromisso_mensal": 236715.32,
     "proxima_parcela": {
-      "contrato_id": "sicoob_maq3",
-      "contrato_nome": "3ª Perfuratriz Sicoob",
+      "contrato_id": "tecnodrill_perfuratriz_4",
+      "contrato_nome": "4ª Perfuratriz XCMG XZ230E",
       "categoria": "Máquinas",
-      "instituicao": "SICOOB",
-      "numero": 5,
+      "instituicao": "Bradesco Financiamentos",
+      "numero": 1,
       "tipo": "Mensal",
-      "vencimento": "20/11/2026",
-      "vencimento_iso": "2026-11-20",
-      "prestacao": 42021.01
+      "vencimento": "21/11/2026",
+      "vencimento_iso": "2026-11-21",
+      "prestacao": 29867.97
     },
     "proximas_parcelas_top10": [
-      {
-        "contrato_id": "sicoob_maq3",
-        "contrato_nome": "3ª Perfuratriz Sicoob",
-        "categoria": "Máquinas",
-        "instituicao": "SICOOB",
-        "numero": 5,
-        "tipo": "Mensal",
-        "vencimento": "20/11/2026",
-        "vencimento_iso": "2026-11-20",
-        "prestacao": 42021.01
-      },
       {
         "contrato_id": "tecnodrill_perfuratriz_4",
         "contrato_nome": "4ª Perfuratriz XCMG XZ230E",
@@ -136,17 +125,28 @@ window.FINANCIAMENTOS_DATA = {
         "vencimento": "15/12/2026",
         "vencimento_iso": "2026-12-15",
         "prestacao": 47750.0
+      },
+      {
+        "contrato_id": "sicoob_wilian",
+        "contrato_nome": "Carro Wilian (Osório)",
+        "categoria": "Veículos",
+        "instituicao": "SICOOB",
+        "numero": 9,
+        "tipo": "Mensal",
+        "vencimento": "17/12/2026",
+        "vencimento_iso": "2026-12-17",
+        "prestacao": 1466.59
       }
     ],
     "por_categoria": {
       "Máquinas": {
         "financiado": 5077402.94,
-        "pago": 958986.1,
-        "saldo_devedor": 6160565.57,
+        "pago": 1001129.77,
+        "saldo_devedor": 6118544.56,
         "contratos": 5,
         "total_parcelas": 300,
-        "qtd_pagas": 36,
-        "pct_quitado": 12.0
+        "qtd_pagas": 37,
+        "pct_quitado": 12.3
       },
       "Veículos": {
         "financiado": 957567.36,
@@ -176,8 +176,8 @@ window.FINANCIAMENTOS_DATA = {
       },
       "SICOOB": {
         "financiado": 2948809.74,
-        "pago": 501083.81,
-        "saldo_devedor": 4032503.32,
+        "pago": 543227.48,
+        "saldo_devedor": 3990482.31,
         "contratos": 5
       },
       "Pro-Formula": {
@@ -215,8 +215,8 @@ window.FINANCIAMENTOS_DATA = {
       {
         "ano": 2026,
         "total_previsto": 1666289.58,
-        "total_pago": 1314882.09,
-        "total_pendente": 397154.18
+        "total_pago": 1357025.76,
+        "total_pendente": 355133.17
       },
       {
         "ano": 2027,
@@ -412,8 +412,8 @@ window.FINANCIAMENTOS_DATA = {
         "ano": 2026,
         "mes": 11,
         "total_previsto": 238337.91,
-        "total_pago": 78036.38,
-        "total_pendente": 160341.69,
+        "total_pago": 120180.05,
+        "total_pendente": 118320.68,
         "maquinas": 148202.96,
         "veiculos": 21829.39,
         "imoveis": 68305.56
@@ -1155,12 +1155,12 @@ window.FINANCIAMENTOS_DATA = {
       "JLE": {
         "total_contratos": 10,
         "total_financiado": 7463863.67,
-        "total_pago": 1456910.43,
-        "saldo_devedor": 8287099.86,
+        "total_pago": 1499054.1,
+        "saldo_devedor": 8245078.85,
         "total_parcelas": 490,
-        "total_pagas": 73,
-        "total_pendentes": 417,
-        "pct_quitado": 14.9,
+        "total_pagas": 74,
+        "total_pendentes": 416,
+        "pct_quitado": 15.1,
         "compromisso_mensal": 200834.69
       },
       "TECNODRILL": {
@@ -1180,12 +1180,12 @@ window.FINANCIAMENTOS_DATA = {
     "JLE": {
       "total_contratos": 10,
       "total_financiado": 7463863.67,
-      "total_pago": 1456910.43,
-      "saldo_devedor": 8287099.86,
+      "total_pago": 1499054.1,
+      "saldo_devedor": 8245078.85,
       "total_parcelas": 490,
-      "total_pagas": 73,
-      "total_pendentes": 417,
-      "pct_quitado": 14.9,
+      "total_pagas": 74,
+      "total_pendentes": 416,
+      "pct_quitado": 15.1,
       "compromisso_mensal": 200834.69
     },
     "TECNODRILL": {
@@ -4173,11 +4173,11 @@ window.FINANCIAMENTOS_DATA = {
       "taxa_mensal": 2.0,
       "prestacao_mensal": 42021.01,
       "total_parcelas": 60,
-      "qtd_pagas": 4,
-      "qtd_pendentes": 56,
-      "total_pago": 168574.38,
-      "saldo_devedor": 1848924.44,
-      "pct_quitado": 6.7,
+      "qtd_pagas": 5,
+      "qtd_pendentes": 55,
+      "total_pago": 210718.05,
+      "saldo_devedor": 1806903.43,
+      "pct_quitado": 8.3,
       "parcelas": [
         {
           "numero": 1,
@@ -4266,12 +4266,12 @@ window.FINANCIAMENTOS_DATA = {
           "juros": 22092.92,
           "amortizacao": 19928.09,
           "prestacao": 42021.01,
-          "saldo_devedor": 42021.01,
+          "saldo_devedor": 0.0,
           "saldo_final_contrato": 1272055.33,
-          "status": "Pendente",
-          "data_pagamento": "",
-          "valor_pago": 0.0,
-          "diferenca": 0.0,
+          "status": "Pago",
+          "data_pagamento": "19/11/2026",
+          "valor_pago": 42143.67,
+          "diferenca": 122.66,
           "dias_atraso": 0
         },
         {
