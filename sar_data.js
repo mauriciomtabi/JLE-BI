@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-11-19 11:00:42
+// Dados SAR JLE Telecom - Gerado em: 2026-11-19 12:00:17
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1170,
-    "generated_at": "2026-11-19 11:00:42",
+    "generated_at": "2026-11-19 12:00:17",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -81010,7 +81010,7 @@ window.SAR_DATA = [
   {
     "cod": "RSCLER1152",
     "area_tecnica": "TRLAA",
-    "node": "",
+    "node": "TRLAB",
     "site": "PAE HZS",
     "cidade": "PORTO ALEGRE",
     "condominio": "Ed. Jardim das Paineiras",
