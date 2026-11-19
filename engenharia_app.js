@@ -115,9 +115,9 @@
 
     function updateMetadataBadge() {
         const meta = window.ENGENHARIA_METADATA;
-        const badge = document.querySelector('.last-update-badge');
-        if (badge && meta && meta.generated_at) {
-            badge.innerHTML = `<i class="fa-solid fa-arrows-rotate"></i> Atualizado: ${meta.generated_at}`;
+        const tsEl = document.getElementById('data-timestamp');
+        if (tsEl && meta && meta.generated_at) {
+            tsEl.innerText = meta.generated_at;
         }
     }
 
