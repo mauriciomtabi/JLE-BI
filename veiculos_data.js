@@ -70049,5 +70049,39 @@ const VEICULOS_DATA = [
     "km": 150073,
     "kml": 10.41,
     "transactionId": "1113408144"
+  },
+  {
+    "date": "2026-11-20 15:56:21",
+    "plate": "QNZ1F23",
+    "driver": "WESLEY DA ROSA",
+    "value": 289.73,
+    "uf": "RS",
+    "costCenter": "RS",
+    "month": "NOVEMBRO",
+    "liters": 51.1,
+    "vlLiter": 5.67,
+    "model": "STRADA",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 133300,
+    "kml": 12.09,
+    "transactionId": "1113459369"
+  },
+  {
+    "date": "2026-11-20 16:46:49",
+    "plate": "MDO8383",
+    "driver": "JULIANO KLAUS ENGEL",
+    "value": 228.12,
+    "uf": "SC",
+    "costCenter": "SC",
+    "month": "NOVEMBRO",
+    "liters": 35.7,
+    "vlLiter": 6.39,
+    "model": "PARATI",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 316371,
+    "kml": 8.54,
+    "transactionId": "1113464372"
   }
 ];
