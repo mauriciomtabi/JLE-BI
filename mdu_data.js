@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-11-20 21:00:19
+// Dados MDU Compactados - Gerado em: 2026-11-20 22:00:21
 window.MDU_METADATA = {
-    "generated_at": "2026-11-20 21:00:19",
+    "generated_at": "2026-11-20 22:00:21",
     "total_rows": 6081,
     "geocoded_new": 0
 };
@@ -112624,7 +112624,7 @@ window.MDU_DATA = [
         "pendencia": "Não",
         "status": "2º Vistoria",
         "prog": 13.0,
-        "cod_imovel": "610042954#610042954#610042954#610042954#610042954#610042954#610042954",
+        "cod_imovel": "610042954",
         "area": "SANAA",
         "node": "SANALC",
         "caixa_m": "",
@@ -112784,7 +112784,7 @@ window.MDU_DATA = [
         "pendencia": "Não",
         "status": "2º Vistoria",
         "prog": 13.0,
-        "cod_imovel": "610472051#6",
+        "cod_imovel": "610472051",
         "area": "SANAA",
         "node": "SANALC",
         "caixa_m": "",
@@ -114450,7 +114450,7 @@ window.MDU_DATA = [
         "prog": 100.0,
         "cod_imovel": "61211367",
         "area": "CNTAB",
-        "node": "",
+        "node": "CNTAD",
         "caixa_m": "CNTAB.051.M020",
         "hps": 7,
         "data_adicio": "13/08/2026",
@@ -130280,7 +130280,7 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505153",
-        "endereco": "R JOAQUIM G CAMPOS 34",
+        "endereco": "R JOAQUIM G DE CAMPOS NETO 34",
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "113",
@@ -144968,7 +144968,7 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2503555",
-        "endereco": "R MQ DE SAPUCAI 101",
+        "endereco": "R MQ DE SAPUCAI 100",
         "cidade": "NOVO HAMBURGO",
         "cluster": "NHO",
         "aging": "270",
@@ -188232,7 +188232,7 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505790",
-        "endereco": "RUA GUADALUPE 5",
+        "endereco": "RUA GUADALUPE 05",
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
         "aging": "16",
@@ -188258,8 +188258,8 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -29.9998169,
-        "lng": -51.1508558,
+        "lat": -29.9999866,
+        "lng": -51.1542456,
         "geocodificado": true
     },
     {
