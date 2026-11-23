@@ -1,7 +1,7 @@
 // Data generated 100% from Master Excel Controle de Medições (Mnt. Demanda)
 (function() {
     const db = {
-  "generated_at": "2026-11-23 16:00:12",
+  "generated_at": "2026-11-23 17:00:14",
   "lookups": {
     "tipos_of": [
       "TIPO\nOS CLIENTE",
@@ -175,7 +175,8 @@
     ],
     "statuses": [
       "PEDIDO_GERADO",
-      "AGUARD_APROVACAO"
+      "AGUARD_APROVACAO",
+      "APROVADO"
     ],
     "tipos_defeito": [
       "TIPO DE ATIVIDADE",
@@ -67628,7 +67629,7 @@
       "ROMPIMENTO - RUP NODEB RSPWW01-RMP01",
       1,
       77,
-      1,
+      2,
       "09/10/2026",
       3,
       1,
@@ -67636,9 +67637,9 @@
       953.89,
       7,
       0,
+      "5836398",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3745",
@@ -67754,7 +67755,7 @@
       "ROMPIMENTO - ISOLADA RSTES17",
       1,
       49,
-      1,
+      2,
       "09/10/2026",
       3,
       1,
@@ -67762,9 +67763,9 @@
       1367.35,
       7,
       0,
+      "5836410",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3752",
@@ -67790,7 +67791,7 @@
       "GERADORES - MÊS DE SETEMBRO - PORTO ALEGRE",
       18,
       1,
-      1,
+      2,
       "21/09/2026",
       1,
       18,
@@ -67798,9 +67799,9 @@
       12325.29,
       7,
       0,
+      "5838362",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3754",
@@ -67880,7 +67881,7 @@
       "ROMPIMENTO - RUP NODE B RSTCCR1-RMP01",
       1,
       53,
-      1,
+      2,
       "10/10/2026",
       3,
       1,
@@ -67888,9 +67889,9 @@
       1481.12,
       7,
       0,
+      "5836423",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3759",
@@ -67898,7 +67899,7 @@
       "ROMPIMENTO - NODE B RSTCCR1 X RSTCC03 PROBL",
       1,
       53,
-      1,
+      2,
       "10/10/2026",
       3,
       1,
@@ -67906,9 +67907,9 @@
       328.9,
       7,
       0,
+      "5836430",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3760",
@@ -68240,7 +68241,7 @@
       "ROMPIMENTO - NODE B RSKDK17 X RSKDK05",
       1,
       13,
-      1,
+      2,
       "11/10/2026",
       3,
       1,
@@ -68248,9 +68249,9 @@
       1153.79,
       7,
       0,
+      "5836439",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3779",
@@ -69284,7 +69285,7 @@
       "ROMPIMENTO - ISOLADO RSMPT02",
       1,
       48,
-      1,
+      2,
       "19/10/2026",
       3,
       1,
@@ -69292,9 +69293,9 @@
       2065.19,
       7,
       0,
+      "5836459",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.3837",
@@ -72776,7 +72777,7 @@
       "ROMPIMENTO - RUP IP RAN/RS GLI01/RS SON01",
       1,
       14,
-      1,
+      2,
       "02/11/2026",
       3,
       1,
@@ -72784,9 +72785,9 @@
       1658.74,
       7,
       0,
+      "5836468",
       "-",
-      "-",
-      "AGUARD_APROVACAO"
+      "APROVADO"
     ],
     [
       "RS.4031",
