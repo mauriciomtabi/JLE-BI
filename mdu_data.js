@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-11-23 15:00:14
+// Dados MDU Compactados - Gerado em: 2026-11-23 16:00:14
 window.MDU_METADATA = {
-    "generated_at": "2026-11-23 15:00:14",
+    "generated_at": "2026-11-23 16:00:14",
     "total_rows": 6110,
     "geocoded_new": 30
 };
@@ -37346,9 +37346,9 @@ window.MDU_DATA = [
         "data_medicao": "agosto/26",
         "valor_medicao": 1180.91,
         "valor_repasse": 680.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0665591,
+        "lng": -51.1706026,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505626",
@@ -40610,9 +40610,9 @@ window.MDU_DATA = [
         "data_medicao": "setembro/26",
         "valor_medicao": 324.03,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0289662,
+        "lng": -51.2295564,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504407",
@@ -40642,9 +40642,9 @@ window.MDU_DATA = [
         "data_medicao": "setembro/26",
         "valor_medicao": 345.44,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0289662,
+        "lng": -51.2295564,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504408",
@@ -40674,9 +40674,9 @@ window.MDU_DATA = [
         "data_medicao": "setembro/26",
         "valor_medicao": 345.44,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0289662,
+        "lng": -51.2295564,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504409",
@@ -40706,9 +40706,9 @@ window.MDU_DATA = [
         "data_medicao": "outubro/26",
         "valor_medicao": 345.44,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0289662,
+        "lng": -51.2295564,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504410",
@@ -40738,9 +40738,9 @@ window.MDU_DATA = [
         "data_medicao": "outubro/26",
         "valor_medicao": 345.44,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0289662,
+        "lng": -51.2295564,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504411",
@@ -40770,9 +40770,9 @@ window.MDU_DATA = [
         "data_medicao": "outubro/26",
         "valor_medicao": 345.44,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0289662,
+        "lng": -51.2295564,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504412",
@@ -40802,9 +40802,9 @@ window.MDU_DATA = [
         "data_medicao": "outubro/26",
         "valor_medicao": 345.44,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0289662,
+        "lng": -51.2295564,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504413",
@@ -40834,9 +40834,9 @@ window.MDU_DATA = [
         "data_medicao": "outubro/26",
         "valor_medicao": 345.44,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0289662,
+        "lng": -51.2295564,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504414",
@@ -40866,9 +40866,9 @@ window.MDU_DATA = [
         "data_medicao": "outubro/26",
         "valor_medicao": 345.44,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0289662,
+        "lng": -51.2295564,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504415",
@@ -40898,9 +40898,9 @@ window.MDU_DATA = [
         "data_medicao": "outubro/26",
         "valor_medicao": 345.44,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0289662,
+        "lng": -51.2295564,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504416",
@@ -40930,9 +40930,9 @@ window.MDU_DATA = [
         "data_medicao": "outubro/26",
         "valor_medicao": 345.44,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0289662,
+        "lng": -51.2295564,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504399",
@@ -40962,9 +40962,9 @@ window.MDU_DATA = [
         "data_medicao": "outubro/26",
         "valor_medicao": 345.44,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0289662,
+        "lng": -51.2295564,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504417",
@@ -40994,9 +40994,9 @@ window.MDU_DATA = [
         "data_medicao": "outubro/26",
         "valor_medicao": 345.44,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0289662,
+        "lng": -51.2295564,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504418",
@@ -41026,9 +41026,9 @@ window.MDU_DATA = [
         "data_medicao": "outubro/26",
         "valor_medicao": 345.44,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0289662,
+        "lng": -51.2295564,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504419",
@@ -41058,9 +41058,9 @@ window.MDU_DATA = [
         "data_medicao": "outubro/26",
         "valor_medicao": 345.44,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0289662,
+        "lng": -51.2295564,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504420",
@@ -41090,9 +41090,9 @@ window.MDU_DATA = [
         "data_medicao": "outubro/26",
         "valor_medicao": 351.28,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0289662,
+        "lng": -51.2295564,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504421",
@@ -41122,9 +41122,9 @@ window.MDU_DATA = [
         "data_medicao": "outubro/26",
         "valor_medicao": 345.44,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0289662,
+        "lng": -51.2295564,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504400",
@@ -41154,9 +41154,9 @@ window.MDU_DATA = [
         "data_medicao": "setembro/26",
         "valor_medicao": 324.03,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0289662,
+        "lng": -51.2295564,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504401",
@@ -41186,9 +41186,9 @@ window.MDU_DATA = [
         "data_medicao": "setembro/26",
         "valor_medicao": 345.44,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0289662,
+        "lng": -51.2295564,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504402",
@@ -41218,9 +41218,9 @@ window.MDU_DATA = [
         "data_medicao": "setembro/26",
         "valor_medicao": 345.44,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0289662,
+        "lng": -51.2295564,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504403",
@@ -41250,9 +41250,9 @@ window.MDU_DATA = [
         "data_medicao": "setembro/26",
         "valor_medicao": 345.44,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0289662,
+        "lng": -51.2295564,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504404",
@@ -41282,9 +41282,9 @@ window.MDU_DATA = [
         "data_medicao": "setembro/26",
         "valor_medicao": 345.44,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0289662,
+        "lng": -51.2295564,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504405",
@@ -41314,9 +41314,9 @@ window.MDU_DATA = [
         "data_medicao": "setembro/26",
         "valor_medicao": 2490.42,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0289662,
+        "lng": -51.2295564,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504406",
@@ -41346,9 +41346,9 @@ window.MDU_DATA = [
         "data_medicao": "setembro/26",
         "valor_medicao": 345.44,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0289662,
+        "lng": -51.2295564,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505747",
@@ -43650,9 +43650,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.040099,
+        "lng": -51.2144377,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505908",
@@ -43682,9 +43682,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0411415,
+        "lng": -51.2163964,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505116",
@@ -43746,9 +43746,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0403786,
+        "lng": -51.215085,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505883",
@@ -194382,19 +194382,19 @@ window.MDU_DATA = [
         "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "2º Vistoria",
-        "prog": 13.0,
+        "status": "Fusão",
+        "prog": 50.0,
         "cod_imovel": "610497884",
         "area": "TRZAB",
         "node": "CMQAA",
-        "caixa_m": "",
-        "hps": null,
+        "caixa_m": "TRZAB.012.M020",
+        "hps": 12,
         "data_adicio": "23/11/2026",
         "equipe": "LUIZ FERNANDO",
-        "primeira_visita": "",
+        "primeira_visita": "06/11/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
-        "data_interna": "",
+        "obs_vistoria": "ADEQUADO, AGUARDANDO NODE",
+        "data_interna": "06/11/2026",
         "data_fusao": "",
         "data_baixa": "",
         "obs_baixa": "",
@@ -194414,19 +194414,19 @@ window.MDU_DATA = [
         "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "2º Vistoria",
-        "prog": 13.0,
+        "status": "Fusão",
+        "prog": 50.0,
         "cod_imovel": "610497097",
         "area": "TRZAB",
         "node": "CMQAA",
-        "caixa_m": "",
-        "hps": null,
+        "caixa_m": "TRZAB.012.M020",
+        "hps": 12,
         "data_adicio": "23/11/2026",
         "equipe": "LUIZ FERNANDO",
-        "primeira_visita": "",
+        "primeira_visita": "06/11/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
-        "data_interna": "",
+        "obs_vistoria": "ADEQUADO, AGUARDANDO NODE",
+        "data_interna": "06/11/2026",
         "data_fusao": "",
         "data_baixa": "",
         "obs_baixa": "",
@@ -194446,19 +194446,19 @@ window.MDU_DATA = [
         "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "2º Vistoria",
-        "prog": 13.0,
+        "status": "Fusão",
+        "prog": 50.0,
         "cod_imovel": "610497596",
         "area": "TRZAB",
         "node": "CMQAA",
-        "caixa_m": "",
-        "hps": null,
+        "caixa_m": "TRZAB.012.M020",
+        "hps": 12,
         "data_adicio": "23/11/2026",
         "equipe": "LUIZ FERNANDO",
-        "primeira_visita": "",
+        "primeira_visita": "04/11/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
-        "data_interna": "",
+        "obs_vistoria": "ADEQUADO, AGUARDANDO NODE",
+        "data_interna": "04/11/2026",
         "data_fusao": "",
         "data_baixa": "",
         "obs_baixa": "",
@@ -194478,19 +194478,19 @@ window.MDU_DATA = [
         "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "2º Vistoria",
-        "prog": 13.0,
+        "status": "Fusão",
+        "prog": 50.0,
         "cod_imovel": "610497210",
         "area": "TRZAB",
         "node": "CMQAA",
-        "caixa_m": "",
-        "hps": null,
+        "caixa_m": "TRZAB.012.M020",
+        "hps": 12,
         "data_adicio": "23/11/2026",
         "equipe": "LUIZ FERNANDO",
-        "primeira_visita": "",
+        "primeira_visita": "05/11/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
-        "data_interna": "",
+        "obs_vistoria": "ADEQUADO, AGUARDANDO NODE",
+        "data_interna": "05/11/2026",
         "data_fusao": "",
         "data_baixa": "",
         "obs_baixa": "",
@@ -194510,19 +194510,19 @@ window.MDU_DATA = [
         "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "2º Vistoria",
-        "prog": 13.0,
+        "status": "Fusão",
+        "prog": 50.0,
         "cod_imovel": "610497513",
         "area": "TRZAB",
         "node": "CMQAA",
-        "caixa_m": "",
-        "hps": null,
+        "caixa_m": "TRZAB.012.M020",
+        "hps": 12,
         "data_adicio": "23/11/2026",
         "equipe": "LUIZ FERNANDO",
-        "primeira_visita": "",
+        "primeira_visita": "05/11/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
-        "data_interna": "",
+        "obs_vistoria": "ADEQUADO, AGUARDANDO NODE",
+        "data_interna": "05/11/2026",
         "data_fusao": "",
         "data_baixa": "",
         "obs_baixa": "",
@@ -194542,19 +194542,19 @@ window.MDU_DATA = [
         "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Projeto",
-        "prog": 25.0,
+        "status": "Fusão",
+        "prog": 50.0,
         "cod_imovel": "610629804",
         "area": "TRZAB",
         "node": "CMQAA",
-        "caixa_m": "",
-        "hps": null,
+        "caixa_m": "TRZAB.012.M020",
+        "hps": 12,
         "data_adicio": "23/11/2026",
         "equipe": "LUIZ FERNANDO",
-        "primeira_visita": "",
+        "primeira_visita": "05/11/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
-        "data_interna": "",
+        "obs_vistoria": "ADEQUADO, AGUARDANDO NODE",
+        "data_interna": "05/11/2026",
         "data_fusao": "",
         "data_baixa": "",
         "obs_baixa": "",
@@ -194667,26 +194667,26 @@ window.MDU_DATA = [
         "endereco": "RUA PANAMERICANA 1170",
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
-        "aging": "46.349",
+        "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "FALTA DADOS",
-        "prog": 0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610490446",
         "area": "SSOAA",
         "node": "SSOAG",
         "caixa_m": "SSOAA.062.M20",
-        "hps": null,
-        "data_adicio": "",
-        "equipe": "",
-        "primeira_visita": "",
+        "hps": 10,
+        "data_adicio": "23/11/2026",
+        "equipe": "INOIR SANTOS",
+        "primeira_visita": "17/11/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
-        "data_interna": "",
-        "data_fusao": "",
-        "data_baixa": "",
+        "obs_vistoria": "ADEQUADO",
+        "data_interna": "17/11/2026",
+        "data_fusao": "17/11/2026",
+        "data_baixa": "23/11/2026",
         "obs_baixa": "",
-        "data_relatorio": "",
+        "data_relatorio": "23/11/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
@@ -194696,19 +194696,19 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505943",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
-        "relatorio_por": "",
+        "endereco": "RUA TV ACYLINO DE CARVALHO 67",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
+        "aging": "46.349",
+        "relatorio_por": "SEM COD GED",
         "pendencia": "Não",
-        "status": "",
+        "status": "FALTA DADOS",
         "prog": 0,
         "cod_imovel": "",
-        "area": "",
+        "area": "CNTAB",
         "node": "",
-        "caixa_m": "",
-        "hps": null,
+        "caixa_m": "CNTAB.521.M510",
+        "hps": 49,
         "data_adicio": "",
         "equipe": "",
         "primeira_visita": "",
@@ -194722,19 +194722,19 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0305894,
+        "lng": -51.2282704,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505944",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "ALFREDO BRENNER 226 BL C",
+        "cidade": "CRUZ ALTA",
+        "cluster": "SAN",
+        "aging": "46.349",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
+        "status": "FALTA DADOS",
         "prog": 0,
         "cod_imovel": "",
         "area": "",
