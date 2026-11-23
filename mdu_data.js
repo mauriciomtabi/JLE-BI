@@ -1,8 +1,8 @@
-// Dados MDU Compactados - Gerado em: 2026-11-23 07:00:19
+// Dados MDU Compactados - Gerado em: 2026-11-23 08:43:13
 window.MDU_METADATA = {
-    "generated_at": "2026-11-23 07:00:19",
+    "generated_at": "2026-11-23 08:43:13",
     "total_rows": 6081,
-    "geocoded_new": 0
+    "geocoded_new": 1
 };
 
 window.MDU_DATA = [
@@ -44320,7 +44320,7 @@ window.MDU_DATA = [
         "obs_baixa": "ADEQUADO",
         "data_relatorio": "18/11/2026",
         "data_medicao": "",
-        "valor_medicao": 810.04,
+        "valor_medicao": 0,
         "valor_repasse": 520.0,
         "lat": -30.0980065,
         "lng": -51.2481052,
@@ -193672,19 +193672,19 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505828",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
+        "endereco": "AV LAGEADO 1333",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
         "aging": "",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
+        "status": "FALTA DADOS",
         "prog": 0,
-        "cod_imovel": "",
-        "area": "",
-        "node": "",
-        "caixa_m": "",
-        "hps": null,
+        "cod_imovel": "610486260",
+        "area": "PETAA",
+        "node": "PETAA",
+        "caixa_m": "PETAA.013.M010",
+        "hps": 10,
         "data_adicio": "",
         "equipe": "",
         "primeira_visita": "",
@@ -193698,9 +193698,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0351004,
+        "lng": -51.1795574,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505912",
