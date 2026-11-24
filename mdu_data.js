@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-11-24 12:00:14
+// Dados MDU Compactados - Gerado em: 2026-11-24 13:00:25
 window.MDU_METADATA = {
-    "generated_at": "2026-11-24 12:00:14",
+    "generated_at": "2026-11-24 13:00:25",
     "total_rows": 6110,
     "geocoded_new": 30
 };
@@ -110946,9 +110946,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0469052,
+        "lng": -51.1698918,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2500182",
@@ -110978,9 +110978,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0469052,
+        "lng": -51.1698918,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2503926",
