@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-11-24 11:00:27
+// Dados MDU Compactados - Gerado em: 2026-11-24 12:00:14
 window.MDU_METADATA = {
-    "generated_at": "2026-11-24 11:00:27",
+    "generated_at": "2026-11-24 12:00:14",
     "total_rows": 6110,
     "geocoded_new": 30
 };
@@ -96066,9 +96066,9 @@ window.MDU_DATA = [
         "data_medicao": "junho/26",
         "valor_medicao": 1198.04,
         "valor_repasse": 680.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0003488,
+        "lng": -51.1366313,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2500840",
@@ -96130,9 +96130,9 @@ window.MDU_DATA = [
         "data_medicao": "13/08",
         "valor_medicao": 1071.04,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.1356453,
+        "lng": -51.2080978,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2500185",
@@ -96162,9 +96162,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.1356453,
+        "lng": -51.2080978,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2500186",
@@ -96194,9 +96194,9 @@ window.MDU_DATA = [
         "data_medicao": "2025",
         "valor_medicao": 1716.04,
         "valor_repasse": 780.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.1356453,
+        "lng": -51.2080978,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2500187",
@@ -96226,9 +96226,9 @@ window.MDU_DATA = [
         "data_medicao": "2025",
         "valor_medicao": 449.78,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.1356453,
+        "lng": -51.2080978,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2500188",
@@ -96258,9 +96258,9 @@ window.MDU_DATA = [
         "data_medicao": "2025",
         "valor_medicao": 326.82,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.1356453,
+        "lng": -51.2080978,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2500189",
@@ -96290,9 +96290,9 @@ window.MDU_DATA = [
         "data_medicao": "2025",
         "valor_medicao": 315.96,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.1356453,
+        "lng": -51.2080978,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2500192",
@@ -96322,9 +96322,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.1356453,
+        "lng": -51.2080978,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2500190",
@@ -96354,9 +96354,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.1356453,
+        "lng": -51.2080978,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2500826",
@@ -96386,9 +96386,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 514.52,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.1356453,
+        "lng": -51.2080978,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2500827",
@@ -96418,9 +96418,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 449.96,
         "valor_repasse": 520.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.1356453,
+        "lng": -51.2080978,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2502161",
@@ -100930,9 +100930,9 @@ window.MDU_DATA = [
         "data_medicao": "agosto/26",
         "valor_medicao": 261.66,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -29.998083,
+        "lng": -51.0909616,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504510",
@@ -100962,9 +100962,9 @@ window.MDU_DATA = [
         "data_medicao": "agosto/26",
         "valor_medicao": 261.66,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -29.998083,
+        "lng": -51.0909616,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504511",
@@ -100994,9 +100994,9 @@ window.MDU_DATA = [
         "data_medicao": "agosto/26",
         "valor_medicao": 1020.24,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -29.998083,
+        "lng": -51.0909616,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504512",
@@ -101026,9 +101026,9 @@ window.MDU_DATA = [
         "data_medicao": "agosto/26",
         "valor_medicao": 261.66,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -29.998083,
+        "lng": -51.0909616,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504513",
@@ -101058,9 +101058,9 @@ window.MDU_DATA = [
         "data_medicao": "agosto/26",
         "valor_medicao": 261.66,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -29.998083,
+        "lng": -51.0909616,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504514",
@@ -101090,9 +101090,9 @@ window.MDU_DATA = [
         "data_medicao": "agosto/26",
         "valor_medicao": 982.62,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -29.998083,
+        "lng": -51.0909616,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504515",
@@ -101122,9 +101122,9 @@ window.MDU_DATA = [
         "data_medicao": "agosto/26",
         "valor_medicao": 261.66,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -29.998083,
+        "lng": -51.0909616,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504516",
@@ -101154,9 +101154,9 @@ window.MDU_DATA = [
         "data_medicao": "agosto/26",
         "valor_medicao": 261.66,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -29.998083,
+        "lng": -51.0909616,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504517",
@@ -101186,9 +101186,9 @@ window.MDU_DATA = [
         "data_medicao": "junho/26",
         "valor_medicao": 261.66,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -29.998083,
+        "lng": -51.0909616,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504518",
@@ -101218,9 +101218,9 @@ window.MDU_DATA = [
         "data_medicao": "junho/26",
         "valor_medicao": 934.2,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -29.998083,
+        "lng": -51.0909616,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504519",
@@ -101250,9 +101250,9 @@ window.MDU_DATA = [
         "data_medicao": "junho/26",
         "valor_medicao": 261.66,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -29.998083,
+        "lng": -51.0909616,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504520",
@@ -101282,9 +101282,9 @@ window.MDU_DATA = [
         "data_medicao": "junho/26",
         "valor_medicao": 261.66,
         "valor_repasse": 620.0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -29.998083,
+        "lng": -51.0909616,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505451",
@@ -183915,11 +183915,11 @@ window.MDU_DATA = [
         "endereco": "RUA ANTÔNIO FONSECA BARCELOS 200",
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
-        "aging": "5",
+        "aging": "15",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Medição",
-        "prog": 88.0,
+        "status": "Finalizado",
+        "prog": 100.0,
         "cod_imovel": "367418954",
         "area": "SJOAA",
         "node": "MRD17A",
@@ -183935,8 +183935,8 @@ window.MDU_DATA = [
         "data_baixa": "19/11/2026",
         "obs_baixa": "",
         "data_relatorio": "23/11/2026",
-        "data_medicao": "",
-        "valor_medicao": 0,
+        "data_medicao": "42",
+        "valor_medicao": 1211.67,
         "valor_repasse": 0,
         "lat": -30.0346,
         "lng": -51.2177,
@@ -193771,11 +193771,11 @@ window.MDU_DATA = [
         "endereco": "AV LAGEADO 1360",
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
-        "aging": "1",
+        "aging": "5",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Medição",
-        "prog": 88.0,
+        "status": "Finalizado",
+        "prog": 100.0,
         "cod_imovel": "610441869",
         "area": "PETAA",
         "node": "PETAA",
@@ -193791,8 +193791,8 @@ window.MDU_DATA = [
         "data_baixa": "23/11/2026",
         "obs_baixa": "ADEQUADO",
         "data_relatorio": "23/11/2026",
-        "data_medicao": "",
-        "valor_medicao": 0,
+        "data_medicao": "42",
+        "valor_medicao": 766.49,
         "valor_repasse": 0,
         "lat": -30.0351004,
         "lng": -51.1795574,
@@ -193835,11 +193835,11 @@ window.MDU_DATA = [
         "endereco": "AV LAGEADO 1355",
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
-        "aging": "1",
+        "aging": "5",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Medição",
-        "prog": 88.0,
+        "status": "Finalizado",
+        "prog": 100.0,
         "cod_imovel": "610513127",
         "area": "PETAA",
         "node": "PETAA",
@@ -193855,8 +193855,8 @@ window.MDU_DATA = [
         "data_baixa": "23/11/2026",
         "obs_baixa": "ADEQUADO",
         "data_relatorio": "23/11/2026",
-        "data_medicao": "",
-        "valor_medicao": 0,
+        "data_medicao": "42",
+        "valor_medicao": 783.35,
         "valor_repasse": 0,
         "lat": -30.0397368,
         "lng": -51.1854359,
@@ -193867,11 +193867,11 @@ window.MDU_DATA = [
         "endereco": "AV LAGEADO 1255",
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
-        "aging": "1",
+        "aging": "5",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Medição",
-        "prog": 88.0,
+        "status": "Finalizado",
+        "prog": 100.0,
         "cod_imovel": "610450037",
         "area": "PETAA",
         "node": "PETAA",
@@ -193887,8 +193887,8 @@ window.MDU_DATA = [
         "data_baixa": "23/11/2026",
         "obs_baixa": "ADEQUADO",
         "data_relatorio": "23/11/2026",
-        "data_medicao": "",
-        "valor_medicao": 0,
+        "data_medicao": "42",
+        "valor_medicao": 870.95,
         "valor_repasse": 0,
         "lat": -30.0397368,
         "lng": -51.1854359,
@@ -193963,11 +193963,11 @@ window.MDU_DATA = [
         "endereco": "RUA FRANCISCO FERRER 221",
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
-        "aging": "1",
+        "aging": "10",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Medição",
-        "prog": 88.0,
+        "status": "Finalizado",
+        "prog": 100.0,
         "cod_imovel": "610429208",
         "area": "BFMAA",
         "node": "BFMAI",
@@ -193983,8 +193983,8 @@ window.MDU_DATA = [
         "data_baixa": "23/11/2026",
         "obs_baixa": "",
         "data_relatorio": "23/11/2026",
-        "data_medicao": "",
-        "valor_medicao": 0,
+        "data_medicao": "42",
+        "valor_medicao": 838.57,
         "valor_repasse": 0,
         "lat": -30.0351211,
         "lng": -51.2072801,
@@ -194782,7 +194782,7 @@ window.MDU_DATA = [
         "data_fusao": "19/11/2026",
         "data_baixa": "24/11/2026",
         "obs_baixa": "",
-        "data_relatorio": "23/11/2026",
+        "data_relatorio": "24/11/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
@@ -194795,11 +194795,11 @@ window.MDU_DATA = [
         "endereco": "AV SOLEDADE 288",
         "cidade": "PORTO ALEGRE",
         "cluster": "PAE",
-        "aging": "0",
+        "aging": "1",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Medição",
-        "prog": 88.0,
+        "status": "Finalizado",
+        "prog": 100.0,
         "cod_imovel": "611103459",
         "area": "PETAA",
         "node": "PETAZ",
@@ -194815,8 +194815,8 @@ window.MDU_DATA = [
         "data_baixa": "24/11/2026",
         "obs_baixa": "",
         "data_relatorio": "24/11/2026",
-        "data_medicao": "",
-        "valor_medicao": 0,
+        "data_medicao": "42",
+        "valor_medicao": 1269.41,
         "valor_repasse": 0,
         "lat": -30.0346,
         "lng": -51.2177,
@@ -194824,31 +194824,31 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505947",
-        "endereco": "",
-        "cidade": "NÃO DEFINIDA",
-        "cluster": "",
-        "aging": "",
+        "endereco": "AV SOLEDADE 270",
+        "cidade": "PORTO ALEGRE",
+        "cluster": "PAE",
+        "aging": "1",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "",
-        "prog": 0,
-        "cod_imovel": "",
-        "area": "",
-        "node": "",
-        "caixa_m": "",
-        "hps": null,
-        "data_adicio": "",
-        "equipe": "",
-        "primeira_visita": "",
+        "status": "Finalizado",
+        "prog": 100.0,
+        "cod_imovel": "610028798",
+        "area": "PETAA",
+        "node": "PETAZ",
+        "caixa_m": "PETAA.033.M010",
+        "hps": 14,
+        "data_adicio": "24/11/2026",
+        "equipe": "GUILHERME E RODRIGO",
+        "primeira_visita": "23/11/2026",
         "segunda_visita": "",
-        "obs_vistoria": "",
-        "data_interna": "",
-        "data_fusao": "",
-        "data_baixa": "",
+        "obs_vistoria": "ADEQUADO",
+        "data_interna": "23/11/2026",
+        "data_fusao": "23/11/2026",
+        "data_baixa": "24/11/2026",
         "obs_baixa": "",
-        "data_relatorio": "",
-        "data_medicao": "",
-        "valor_medicao": 0,
+        "data_relatorio": "24/11/2026",
+        "data_medicao": "42",
+        "valor_medicao": 913.83,
         "valor_repasse": 0,
         "lat": -30.0346,
         "lng": -51.2177,
