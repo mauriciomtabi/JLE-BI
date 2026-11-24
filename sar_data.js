@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-11-24 10:00:13
+// Dados SAR JLE Telecom - Gerado em: 2026-11-24 11:00:18
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1173,
-    "generated_at": "2026-11-24 10:00:13",
+    "generated_at": "2026-11-24 11:00:18",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -777,9 +777,9 @@ window.SAR_METADATA = {
         "total_classe_f": 488224.0
     },
     "medicao": {
-        "total_geral": 1560994.46,
+        "total_geral": 1532200.1,
         "qtd_geral": 690,
-        "total_medicao_enviada": 422838.83,
+        "total_medicao_enviada": 394044.47,
         "qtd_medicao_enviada": 130,
         "total_finalizado": 134048.54,
         "qtd_finalizado": 91,
@@ -53340,7 +53340,7 @@ window.SAR_DATA = [
     "atraso_dias": 0,
     "total_terceiros": 16719.35,
     "previa_medicao": 33550.57,
-    "valor_medicao": 39791.12,
+    "valor_medicao": 29605.36,
     "valor_classe_l": 3339.35,
     "valor_classe_f": 13380.0,
     "itens_l_resumo": "2.15 CB ESP: 2303m",
@@ -53410,7 +53410,7 @@ window.SAR_DATA = [
     "atraso_dias": 0,
     "total_terceiros": 6012.1,
     "previa_medicao": 10402.88,
-    "valor_medicao": 22041.62,
+    "valor_medicao": 15479.64,
     "valor_classe_l": 2251.1,
     "valor_classe_f": 3761.0,
     "itens_l_resumo": "2.11 CB AS: 1772m, 2.15 CB ESP: 86m",
@@ -53620,7 +53620,7 @@ window.SAR_DATA = [
     "atraso_dias": 0,
     "total_terceiros": 15116.75,
     "previa_medicao": 29339.21,
-    "valor_medicao": 37074.24,
+    "valor_medicao": 29532.86,
     "valor_classe_l": 3864.25,
     "valor_classe_f": 11252.5,
     "itens_l_resumo": "2.15 CB ESP: 2665m",
@@ -53830,7 +53830,7 @@ window.SAR_DATA = [
     "atraso_dias": 0,
     "total_terceiros": 15462.3,
     "previa_medicao": 21863.63,
-    "valor_medicao": 34590.03,
+    "valor_medicao": 30574.49,
     "valor_classe_l": 8672.3,
     "valor_classe_f": 6790.0,
     "itens_l_resumo": "2.15 CB ESP: 5774m, 1.13 CORD: 400m",
@@ -54670,7 +54670,7 @@ window.SAR_DATA = [
     "atraso_dias": 0,
     "total_terceiros": 1069.5,
     "previa_medicao": 2421.2,
-    "valor_medicao": 2421.2,
+    "valor_medicao": 1931.5,
     "valor_classe_l": 0.0,
     "valor_classe_f": 1069.5,
     "itens_l_resumo": "-",
