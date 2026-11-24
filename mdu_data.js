@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-11-24 14:00:32
+// Dados MDU Compactados - Gerado em: 2026-11-24 15:00:30
 window.MDU_METADATA = {
-    "generated_at": "2026-11-24 14:00:32",
+    "generated_at": "2026-11-24 15:00:30",
     "total_rows": 6110,
     "geocoded_new": 30
 };
@@ -46894,8 +46894,8 @@ window.MDU_DATA = [
         "aging": "76",
         "relatorio_por": "jeniffer",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610476718",
         "area": "FLOAA",
         "node": "FLOAPA",
@@ -46910,7 +46910,7 @@ window.MDU_DATA = [
         "data_fusao": "09/11/2026",
         "data_baixa": "23/11",
         "obs_baixa": "",
-        "data_relatorio": "",
+        "data_relatorio": "24/11/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
