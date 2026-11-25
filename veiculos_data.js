@@ -70780,5 +70780,22 @@ const VEICULOS_DATA = [
     "km": 252076,
     "kml": 9.58,
     "transactionId": "1114319354"
+  },
+  {
+    "date": "2026-11-25 14:33:08",
+    "plate": "AFR9H26",
+    "driver": "VINICIUS PEREIRA MARQUES",
+    "value": 312.42,
+    "uf": "RS",
+    "costCenter": "RS",
+    "month": "NOVEMBRO",
+    "liters": 53.77,
+    "vlLiter": 5.81,
+    "model": "NOVA SAVEIRO",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 144201,
+    "kml": 10.32,
+    "transactionId": "1114398738"
   }
 ];
