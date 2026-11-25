@@ -7,7 +7,11 @@ import zipfile
 import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta
 
-excel_path = r"\\10.121.21.252\medicoes\Matriz RS\Claro\Manutenção\Controle de Medições - Manutenção Claro RS 2026 NOVA.xlsm"
+excel_path = (
+    r"\\10.121.21.252\medicoes\Matriz RS\Claro\Manutenção\Controle de Medições - Manutenção Claro RS 2026 NOVA.xlsm"
+    if os.name == "nt"
+    else "/mnt/jle/medicoes/Matriz RS/Claro/Manutenção/Controle de Medições - Manutenção Claro RS 2026 NOVA.xlsm"
+)
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 js_path = os.path.join(base_dir, "manutencao_data.js")

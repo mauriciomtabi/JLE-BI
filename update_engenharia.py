@@ -23,6 +23,8 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CANDIDATE_DIRS = [
     r"\\10.121.21.252\medicoes\Filial PR\Claro\Engenharia\MEDIÇOES ORÇAMENTOS ENGENHARIA PR",
     r"\\10.121.21.252\medicoes\Filial PR\Claro\Engenharia",
+    "/mnt/jle/medicoes/Filial PR/Claro/Engenharia/MEDIÇOES ORÇAMENTOS ENGENHARIA PR",
+    "/mnt/jle/medicoes/Filial PR/Claro/Engenharia",
     BASE_DIR
 ]
 

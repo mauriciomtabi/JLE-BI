@@ -18,6 +18,9 @@ FOLDERS = [
     Path(r'\\10.121.21.252\financeiro\Angelita\2026\FLUXO DIARIO'),
     Path(r'\\10.121.21.252\financeiro\Angelita\2026'),
     Path(r'\\10.121.21.252\financeiro\Angelita\2026\FLUXO DIARIO\PLANILHAS ANTIGAS'),
+    Path('/mnt/jle/financeiro/Angelita/2026/FLUXO DIARIO'),
+    Path('/mnt/jle/financeiro/Angelita/2026'),
+    Path('/mnt/jle/financeiro/Angelita/2026/FLUXO DIARIO/PLANILHAS ANTIGAS'),
 ]
 MONTHS = ['janeiro','fevereiro','marco','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro']
 

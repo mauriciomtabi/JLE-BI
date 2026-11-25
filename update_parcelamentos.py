@@ -21,7 +21,10 @@ CANDIDATE_DIRS = [
     r"\\10.121.21.252\controladoria\Vitor\TRIBUTARIO",
     r"\\10.121.21.252\controladoria\Vitor",
     r"\\10.121.21.252\controladoria\TRIBUTARIO",
-    r"\\10.121.21.252\controladoria"
+    r"\\10.121.21.252\controladoria",
+    "/mnt/jle/controladoria/Vitor/TRIBUTARIO",
+    "/mnt/jle/controladoria/Vitor",
+    "/mnt/jle/controladoria",
 ]
 
 def find_latest_network_file():

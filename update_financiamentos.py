@@ -24,7 +24,10 @@ CANDIDATE_DIRS = [
     r"\\10.121.21.252\controladoria\Vitor\FINANCEIRO\PMTs FINANCIAMENTOS",
     r"\\10.121.21.252\controladoria\Vitor\FINANCEIRO",
     r"\\10.121.21.252\controladoria\FINANCEIRO\PMTs FINANCIAMENTOS",
-    r"\\10.121.21.252\controladoria"
+    r"\\10.121.21.252\controladoria",
+    "/mnt/jle/controladoria/Vitor/FINANCEIRO/PMTs FINANCIAMENTOS",
+    "/mnt/jle/controladoria/Vitor/FINANCEIRO",
+    "/mnt/jle/controladoria",
 ]
 
 def ensure_cache_dir():
