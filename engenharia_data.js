@@ -1,39 +1,39 @@
 /**
  * BI JLE TELECOM - BASE DE DADOS: ENGENHARIA CLARO PARANÁ
- * Gerado automaticamente via update_engenharia.py em 25/11/2026 15:26:44
+ * Gerado automaticamente via update_engenharia.py em 25/11/2026 17:31:31
  * Fonte: Controle DE OBRAS - PR.xlsx
  */
 
 window.ENGENHARIA_METADATA = {
-  "generated_at": "25/11/2026 15:26:44",
+  "generated_at": "25/11/2026 17:31:31",
   "source_file": "Controle DE OBRAS - PR.xlsx",
   "version": "1.0"
 };
 
 window.ENGENHARIA_DATA = {
   "summary": {
-    "total_obras": 126,
-    "total_oss": 195,
-    "total_orcado": 10364658.02,
+    "total_obras": 128,
+    "total_oss": 197,
+    "total_orcado": 10367538.92,
     "total_medido": 6624899.44,
     "total_p1": 3754401.01,
     "total_p2": 1142024.25,
     "total_p3": 44974.14,
     "total_final": 1683500.04,
-    "saldo_a_medir": 3739758.58,
+    "saldo_a_medir": 3742639.48,
     "pct_executado": 63.9,
     "obras_finalizadas": 47,
-    "obras_em_andamento": 79,
-    "obras_em_aberto": 79,
-    "saldo_em_aberto": 4009647.52,
+    "obras_em_andamento": 81,
+    "obras_em_aberto": 81,
+    "saldo_em_aberto": 4012528.42,
     "obras_criticas_aging": 68,
     "obras_mais_180d": 58,
-    "media_dias_aberto": 241,
+    "media_dias_aberto": 235,
     "aging_distribution": {
       "ate_30d": {
         "label": "Até 30 dias",
-        "count": 4,
-        "saldo": 136688.81
+        "count": 6,
+        "saldo": 139569.71
       },
       "31_a_90d": {
         "label": "31 a 90 dias",
@@ -55,12 +55,12 @@ window.ENGENHARIA_DATA = {
     "status_obras_counts": {
       "Finalizado": 47,
       "Executado Parcial": 42,
-      "Não Executado": 37
+      "Não Executado": 39
     },
     "status_oss_counts": {
       "Finalizado": 80,
       "Executado Parcial": 72,
-      "Não Executado": 43
+      "Não Executado": 45
     }
   },
   "cidades": [
@@ -12361,6 +12361,152 @@ window.ENGENHARIA_DATA = {
           "is_em_aberto": false
         }
       ]
+    },
+    {
+      "id": "OBRA-127",
+      "nome": "PRLDAA3",
+      "qtd_os": 1,
+      "sites": [
+        "PRLDAA3"
+      ],
+      "cidade": "LONDRINA",
+      "cidades": [
+        "LONDRINA"
+      ],
+      "status": "Não Executado",
+      "v_orc": 0.0,
+      "v_p1": 0.0,
+      "v_p2": 0.0,
+      "v_p3": 0.0,
+      "v_fn": 0.0,
+      "v_medido": 0.0,
+      "saldo": 0.0,
+      "pct_executado": 0.0,
+      "dt_inicio": "2026-11-25",
+      "ultima_movimentacao": "2026-11-25",
+      "dias_aberto": 0,
+      "dias_sem_mov": 0,
+      "faixa_aging": "Até 30 dias",
+      "pendencia": "Sem Medições Registradas — Iniciar Execução em Campo",
+      "is_em_aberto": true,
+      "oss": [
+        {
+          "id": "OS-198",
+          "row_num": 198,
+          "obra": "PRLDAA3",
+          "site": "PRLDAA3",
+          "cidade": "LONDRINA",
+          "dt_solic_orc": null,
+          "dt_env_orc": "2026-11-25",
+          "aprov_orc": null,
+          "om_orc": null,
+          "v_orc": 0.0,
+          "dt_aprov_orc": null,
+          "om_p1": null,
+          "dt_env_p1": null,
+          "v_p1": 0.0,
+          "dt_wf_p1": null,
+          "st_p1": null,
+          "om_p2": null,
+          "dt_env_p2": null,
+          "v_p2": 0.0,
+          "dt_wf_p2": null,
+          "st_p2": null,
+          "om_p3": null,
+          "dt_env_p3": null,
+          "v_p3": 0.0,
+          "dt_wf_p3": null,
+          "st_p3": null,
+          "om_fn": null,
+          "dt_env_fn": null,
+          "v_fn": 0.0,
+          "dt_wf_fn": null,
+          "st_wf": null,
+          "v_medido": 0.0,
+          "saldo": 0.0,
+          "status": "Não Executado",
+          "dt_inicio": "2026-11-25",
+          "ultima_movimentacao": "2026-11-25",
+          "dias_aberto": 0,
+          "dias_sem_mov": 0,
+          "faixa_aging": "Até 30 dias",
+          "pendencia": "Sem Medições Registradas — Iniciar Execução em Campo",
+          "is_em_aberto": true
+        }
+      ]
+    },
+    {
+      "id": "OBRA-128",
+      "nome": "REMANEJAMENTO PRPNS04_PRPNS25",
+      "qtd_os": 1,
+      "sites": [
+        "PRPNS25"
+      ],
+      "cidade": "PINHAIS",
+      "cidades": [
+        "PINHAIS"
+      ],
+      "status": "Não Executado",
+      "v_orc": 2880.9,
+      "v_p1": 0.0,
+      "v_p2": 0.0,
+      "v_p3": 0.0,
+      "v_fn": 0.0,
+      "v_medido": 0.0,
+      "saldo": 2880.9,
+      "pct_executado": 0.0,
+      "dt_inicio": "2026-11-25",
+      "ultima_movimentacao": "2026-11-25",
+      "dias_aberto": 0,
+      "dias_sem_mov": 0,
+      "faixa_aging": "Até 30 dias",
+      "pendencia": "Sem Medições Registradas — Iniciar Execução em Campo",
+      "is_em_aberto": true,
+      "oss": [
+        {
+          "id": "OS-199",
+          "row_num": 199,
+          "obra": "REMANEJAMENTO PRPNS04_PRPNS25",
+          "site": "PRPNS25",
+          "cidade": "PINHAIS",
+          "dt_solic_orc": null,
+          "dt_env_orc": "2026-11-25",
+          "aprov_orc": null,
+          "om_orc": null,
+          "v_orc": 2880.9,
+          "dt_aprov_orc": null,
+          "om_p1": null,
+          "dt_env_p1": null,
+          "v_p1": 0.0,
+          "dt_wf_p1": null,
+          "st_p1": null,
+          "om_p2": null,
+          "dt_env_p2": null,
+          "v_p2": 0.0,
+          "dt_wf_p2": null,
+          "st_p2": null,
+          "om_p3": null,
+          "dt_env_p3": null,
+          "v_p3": 0.0,
+          "dt_wf_p3": null,
+          "st_p3": null,
+          "om_fn": null,
+          "dt_env_fn": null,
+          "v_fn": 0.0,
+          "dt_wf_fn": null,
+          "st_wf": null,
+          "v_medido": 0.0,
+          "saldo": 2880.9,
+          "status": "Não Executado",
+          "dt_inicio": "2026-11-25",
+          "ultima_movimentacao": "2026-11-25",
+          "dias_aberto": 0,
+          "dias_sem_mov": 0,
+          "faixa_aging": "Até 30 dias",
+          "pendencia": "Sem Medições Registradas — Iniciar Execução em Campo",
+          "is_em_aberto": true
+        }
+      ]
     }
   ],
   "oss": [
@@ -20748,6 +20894,92 @@ window.ENGENHARIA_DATA = {
       "faixa_aging": "Concluída",
       "pendencia": "Concluída",
       "is_em_aberto": false
+    },
+    {
+      "id": "OS-198",
+      "row_num": 198,
+      "obra": "PRLDAA3",
+      "site": "PRLDAA3",
+      "cidade": "LONDRINA",
+      "dt_solic_orc": null,
+      "dt_env_orc": "2026-11-25",
+      "aprov_orc": null,
+      "om_orc": null,
+      "v_orc": 0.0,
+      "dt_aprov_orc": null,
+      "om_p1": null,
+      "dt_env_p1": null,
+      "v_p1": 0.0,
+      "dt_wf_p1": null,
+      "st_p1": null,
+      "om_p2": null,
+      "dt_env_p2": null,
+      "v_p2": 0.0,
+      "dt_wf_p2": null,
+      "st_p2": null,
+      "om_p3": null,
+      "dt_env_p3": null,
+      "v_p3": 0.0,
+      "dt_wf_p3": null,
+      "st_p3": null,
+      "om_fn": null,
+      "dt_env_fn": null,
+      "v_fn": 0.0,
+      "dt_wf_fn": null,
+      "st_wf": null,
+      "v_medido": 0.0,
+      "saldo": 0.0,
+      "status": "Não Executado",
+      "dt_inicio": "2026-11-25",
+      "ultima_movimentacao": "2026-11-25",
+      "dias_aberto": 0,
+      "dias_sem_mov": 0,
+      "faixa_aging": "Até 30 dias",
+      "pendencia": "Sem Medições Registradas — Iniciar Execução em Campo",
+      "is_em_aberto": true
+    },
+    {
+      "id": "OS-199",
+      "row_num": 199,
+      "obra": "REMANEJAMENTO PRPNS04_PRPNS25",
+      "site": "PRPNS25",
+      "cidade": "PINHAIS",
+      "dt_solic_orc": null,
+      "dt_env_orc": "2026-11-25",
+      "aprov_orc": null,
+      "om_orc": null,
+      "v_orc": 2880.9,
+      "dt_aprov_orc": null,
+      "om_p1": null,
+      "dt_env_p1": null,
+      "v_p1": 0.0,
+      "dt_wf_p1": null,
+      "st_p1": null,
+      "om_p2": null,
+      "dt_env_p2": null,
+      "v_p2": 0.0,
+      "dt_wf_p2": null,
+      "st_p2": null,
+      "om_p3": null,
+      "dt_env_p3": null,
+      "v_p3": 0.0,
+      "dt_wf_p3": null,
+      "st_p3": null,
+      "om_fn": null,
+      "dt_env_fn": null,
+      "v_fn": 0.0,
+      "dt_wf_fn": null,
+      "st_wf": null,
+      "v_medido": 0.0,
+      "saldo": 2880.9,
+      "status": "Não Executado",
+      "dt_inicio": "2026-11-25",
+      "ultima_movimentacao": "2026-11-25",
+      "dias_aberto": 0,
+      "dias_sem_mov": 0,
+      "faixa_aging": "Até 30 dias",
+      "pendencia": "Sem Medições Registradas — Iniciar Execução em Campo",
+      "is_em_aberto": true
     }
   ]
 };
