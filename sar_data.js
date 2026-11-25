@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-11-25 12:00:16
+// Dados SAR JLE Telecom - Gerado em: 2026-11-25 12:45:14
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1173,
-    "generated_at": "2026-11-25 12:00:16",
+    "generated_at": "2026-11-25 12:45:14",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -81862,7 +81862,7 @@ window.SAR_DATA = [
     "classe_f": "CATIA",
     "situacao": "360",
     "relatorio_foto": "",
-    "servico": "",
+    "servico": "20 ABERTURA E FECHAMENTO, 1 CX NOVA",
     "data_entrada": "2026-10-29",
     "data_entrada_fmt": "29/10/2026",
     "data_inicio": "2026-11-06",
