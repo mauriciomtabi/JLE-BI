@@ -1,6 +1,6 @@
-// Dados MDU Compactados - Gerado em: 2026-11-26 10:00:02
+// Dados MDU Compactados - Gerado em: 2026-11-26 11:00:04
 window.MDU_METADATA = {
-    "generated_at": "2026-11-26 10:00:02",
+    "generated_at": "2026-11-26 11:00:04",
     "total_rows": 6110,
     "geocoded_new": 30
 };
@@ -12610,8 +12610,8 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0265986,
-        "lng": -51.2142302,
+        "lat": -30.017657,
+        "lng": -51.1983922,
         "geocodificado": true
     },
     {
@@ -12642,8 +12642,8 @@ window.MDU_DATA = [
         "data_medicao": "15",
         "valor_medicao": 653.41,
         "valor_repasse": 520.0,
-        "lat": -30.0265986,
-        "lng": -51.2142302,
+        "lat": -30.0270366,
+        "lng": -51.2148394,
         "geocodificado": true
     },
     {
@@ -12706,8 +12706,8 @@ window.MDU_DATA = [
         "data_medicao": "12",
         "valor_medicao": 662.67,
         "valor_repasse": 520.0,
-        "lat": -30.0265986,
-        "lng": -51.2142302,
+        "lat": -30.0270366,
+        "lng": -51.2148394,
         "geocodificado": true
     },
     {
@@ -12770,8 +12770,8 @@ window.MDU_DATA = [
         "data_medicao": "13/08",
         "valor_medicao": 1113.73,
         "valor_repasse": 520.0,
-        "lat": -30.0265986,
-        "lng": -51.2142302,
+        "lat": -30.0174531,
+        "lng": -51.1884371,
         "geocodificado": true
     },
     {
@@ -12802,8 +12802,8 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0265986,
-        "lng": -51.2142302,
+        "lat": -30.0172633,
+        "lng": -51.1883997,
         "geocodificado": true
     },
     {
@@ -12834,9 +12834,9 @@ window.MDU_DATA = [
         "data_medicao": "36",
         "valor_medicao": 1118.89,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0270366,
+        "lng": -51.2148394,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2500020",
@@ -12898,9 +12898,9 @@ window.MDU_DATA = [
         "data_medicao": "29",
         "valor_medicao": 466.1,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0187044,
+        "lng": -51.177227,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2500021",
@@ -12930,8 +12930,8 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 940.0,
-        "lat": -30.0265986,
-        "lng": -51.2142302,
+        "lat": -30.0270366,
+        "lng": -51.2148394,
         "geocodificado": true
     },
     {
@@ -12962,8 +12962,8 @@ window.MDU_DATA = [
         "data_medicao": "31",
         "valor_medicao": 1881.51,
         "valor_repasse": 940.0,
-        "lat": -30.0265986,
-        "lng": -51.2142302,
+        "lat": -30.0270366,
+        "lng": -51.2148394,
         "geocodificado": true
     },
     {
@@ -12994,8 +12994,8 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0265986,
-        "lng": -51.2142302,
+        "lat": -30.0262167,
+        "lng": -51.2123437,
         "geocodificado": true
     },
     {
@@ -13026,8 +13026,8 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0265986,
-        "lng": -51.2142302,
+        "lat": -30.0262167,
+        "lng": -51.2123437,
         "geocodificado": true
     },
     {
@@ -13058,8 +13058,8 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0265986,
-        "lng": -51.2142302,
+        "lat": -30.0262167,
+        "lng": -51.2123437,
         "geocodificado": true
     },
     {
@@ -13090,9 +13090,9 @@ window.MDU_DATA = [
         "data_medicao": "40",
         "valor_medicao": 960.55,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0270366,
+        "lng": -51.2148394,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2504967",
@@ -13122,9 +13122,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0233941,
+        "lng": -51.2104988,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505383",
@@ -13154,9 +13154,9 @@ window.MDU_DATA = [
         "data_medicao": "34",
         "valor_medicao": 1153.97,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0265986,
+        "lng": -51.2142302,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505591",
@@ -13186,9 +13186,9 @@ window.MDU_DATA = [
         "data_medicao": "36",
         "valor_medicao": 1556.23,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -29.9816865,
+        "lng": -51.1951802,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505589",
@@ -13218,9 +13218,9 @@ window.MDU_DATA = [
         "data_medicao": "36",
         "valor_medicao": 1369.35,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -29.9816865,
+        "lng": -51.1951802,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2505590",
@@ -13250,9 +13250,9 @@ window.MDU_DATA = [
         "data_medicao": "36",
         "valor_medicao": 1789.83,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -29.9816865,
+        "lng": -51.1951802,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2503459",
@@ -13282,9 +13282,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0473836,
+        "lng": -51.2137746,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2503466",
@@ -13314,9 +13314,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0473836,
+        "lng": -51.2137746,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2503467",
@@ -13346,9 +13346,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0475534,
+        "lng": -51.2136093,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2503462",
@@ -13378,9 +13378,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0475534,
+        "lng": -51.2136093,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2503463",
@@ -13410,9 +13410,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0475534,
+        "lng": -51.2136093,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2503468",
@@ -13442,9 +13442,9 @@ window.MDU_DATA = [
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -30.0346,
-        "lng": -51.2177,
-        "geocodificado": false
+        "lat": -30.0473836,
+        "lng": -51.2137746,
+        "geocodificado": true
     },
     {
         "os": "RS.CLR.PRD.2503460",
@@ -118542,26 +118542,26 @@ window.MDU_DATA = [
         "aging": "2.230",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "2º Vistoria",
-        "prog": 13.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "703873105",
         "area": "JBOAA",
         "node": "JBOAE",
-        "caixa_m": "",
-        "hps": 10,
+        "caixa_m": "JBOAA.123.M020",
+        "hps": 6,
         "data_adicio": "18/10/2020",
-        "equipe": "?",
+        "equipe": "LUIZ FERNANDO",
         "primeira_visita": "18/11/2025",
-        "segunda_visita": "",
-        "obs_vistoria": "SEM CONTATO COM O SINDICO",
-        "data_interna": "",
-        "data_fusao": "",
-        "data_baixa": "",
+        "segunda_visita": "17/11/2026",
+        "obs_vistoria": "ADEQUADO",
+        "data_interna": "17/11/2026",
+        "data_fusao": "17/11/2026",
+        "data_baixa": "26/11/2026",
         "obs_baixa": "",
-        "data_relatorio": "",
+        "data_relatorio": "26/11/2026",
         "data_medicao": "",
         "valor_medicao": 0,
-        "valor_repasse": 0,
+        "valor_repasse": 520.0,
         "lat": -30.0346,
         "lng": -51.2177,
         "geocodificado": false
@@ -144939,29 +144939,29 @@ window.MDU_DATA = [
         "endereco": "R MQ DE SAPUCAI 100",
         "cidade": "NOVO HAMBURGO",
         "cluster": "NHO",
-        "aging": "188",
+        "aging": "0",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Fusão",
-        "prog": 50.0,
+        "status": "Relatório",
+        "prog": 75.0,
         "cod_imovel": "610380567",
         "area": "IDLAA",
         "node": "IDLAH",
         "caixa_m": "",
-        "hps": 98,
-        "data_adicio": "22/05/2026",
-        "equipe": "Vinicius de Brito",
+        "hps": 96,
+        "data_adicio": "26/11/2026",
+        "equipe": "PAULO KEIBER",
         "primeira_visita": "19/05/2026",
         "segunda_visita": "",
-        "obs_vistoria": "AGUARDANDO SAR",
+        "obs_vistoria": "ADEQUADO",
         "data_interna": "19/05",
-        "data_fusao": "",
-        "data_baixa": "",
+        "data_fusao": "31/08",
+        "data_baixa": "26/11",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
-        "valor_repasse": 0,
+        "valor_repasse": 1040.0,
         "lat": -29.6842,
         "lng": -51.1306,
         "geocodificado": false
@@ -188456,34 +188456,34 @@ window.MDU_DATA = [
     },
     {
         "os": "RS.CLR.PRD.2505881",
-        "endereco": "RUA ESPINILHO 33",
-        "cidade": "NOVO HAMBURGO",
-        "cluster": "NHO",
-        "aging": "10",
+        "endereco": "",
+        "cidade": "NÃO DEFINIDA",
+        "cluster": "",
+        "aging": "",
         "relatorio_por": "",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
-        "cod_imovel": "610380584",
-        "area": "GRIAA",
-        "node": "GRIAAA",
-        "caixa_m": "GRIAA.052.M020",
-        "hps": 8,
-        "data_adicio": "16/11/2026",
-        "equipe": "LUIZ FERNANDO",
-        "primeira_visita": "11/11/2026",
+        "status": "",
+        "prog": 0,
+        "cod_imovel": "",
+        "area": "",
+        "node": "",
+        "caixa_m": "",
+        "hps": null,
+        "data_adicio": "",
+        "equipe": "",
+        "primeira_visita": "",
         "segunda_visita": "",
-        "obs_vistoria": "ADEQUADO",
-        "data_interna": "11/11/2026",
-        "data_fusao": "11/11/2026",
-        "data_baixa": "16/11/2026",
+        "obs_vistoria": "",
+        "data_interna": "",
+        "data_fusao": "",
+        "data_baixa": "",
         "obs_baixa": "",
         "data_relatorio": "",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
-        "lat": -29.6842,
-        "lng": -51.1306,
+        "lat": -30.0346,
+        "lng": -51.2177,
         "geocodificado": false
     },
     {
@@ -195086,8 +195086,8 @@ window.MDU_DATA = [
         "aging": "1",
         "relatorio_por": "JENIFFER",
         "pendencia": "Não",
-        "status": "Relatório",
-        "prog": 75.0,
+        "status": "Medição",
+        "prog": 88.0,
         "cod_imovel": "610460096",
         "area": "JBOAA",
         "node": "JBOAE",
@@ -195102,7 +195102,7 @@ window.MDU_DATA = [
         "data_fusao": "17/11/2026",
         "data_baixa": "25/11/2026",
         "obs_baixa": "",
-        "data_relatorio": "",
+        "data_relatorio": "26/11/2026",
         "data_medicao": "",
         "valor_medicao": 0,
         "valor_repasse": 0,
