@@ -1,8 +1,8 @@
-// Dados SAR JLE Telecom - Gerado em: 2026-11-27 17:05:26
+// Dados SAR JLE Telecom - Gerado em: 2026-11-27 18:05:27
 // Fonte: Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)
 window.SAR_METADATA = {
     "total_records": 1198,
-    "generated_at": "2026-11-27 17:05:26",
+    "generated_at": "2026-11-27 18:05:27",
     "source_file": "Google Sheets (1kQyIsIDmsnunTbHU46n_3FmeL8ddbGGHnXHo6FXAfq4)",
     "cidades": [
         "ALVORADA",
@@ -84606,7 +84606,7 @@ window.SAR_DATA = [
     "node": "VIPAA",
     "site": "RSPNO019",
     "cidade": "PORTO ALEGRE",
-    "condominio": "AV DO FORTE 958,980, 1062",
+    "condominio": "AV DO FORTE 958,980, 1062-FASE 2",
     "endereco": "AV DO FORTE 958,980, 1062",
     "caixa_mdu": "VIPAA.017.M050",
     "classe_l": "JEFERSOM",
