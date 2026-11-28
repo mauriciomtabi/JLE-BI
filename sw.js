@@ -1,6 +1,6 @@
 // sw.js - Service Worker de AutodestruiÃ§Ã£o
 // Remove a si mesmo e limpa todos os caches para resolver problemas de cache persistente no BI.
-// Versao: 2026-11-28 13:15:09
+// Versao: 2026-11-28 13:30:56
 
 self.addEventListener('install', event => {
   self.skipWaiting();
