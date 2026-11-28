@@ -71477,5 +71477,22 @@ const VEICULOS_DATA = [
     "km": 204041,
     "kml": 10.67,
     "transactionId": "1115100539"
+  },
+  {
+    "date": "2026-11-28 15:11:12",
+    "plate": "IYJ5I82",
+    "driver": "KAUE GABRIEL KELLER DE ALMEIDA",
+    "value": 200.0,
+    "uf": "RS",
+    "costCenter": "RS",
+    "month": "NOVEMBRO",
+    "liters": 33.55,
+    "vlLiter": 5.96,
+    "model": "MONTANA",
+    "fuel": "GASOLINA COMUM",
+    "fleet": "PROPRIA",
+    "km": 231370,
+    "kml": 12.01,
+    "transactionId": "1115123546"
   }
 ];
